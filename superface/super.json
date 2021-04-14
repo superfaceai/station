@@ -1,10 +1,10 @@
 {
   "profiles": {
     "communication/send-message": {
-      "file": "../profiles/communication/send-message.supr",
+      "file": "../capabilities/communication/send-message/profile.supr",
       "providers": {
         "twilio": {
-          "file": "../maps/communication/send-message.twilio.suma",
+          "file": "../capabilities/communication/send-message/maps/twilio.suma",
           "defaults": {
             "SendMessage": {
               "input": {
@@ -15,7 +15,7 @@
           }
         },
         "tyntec": {
-          "file": "../maps/communication/send-message.tyntec.suma",
+          "file": "../capabilities/communication/send-message/maps/tyntec.suma",
           "defaults": {
             "SendMessage": {
               "input": {
