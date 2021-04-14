@@ -1,0 +1,77 @@
+"
+Send Message
+Send a single conversation message
+"
+
+name = "communication/send-message"
+version = "1.0.0"
+
+"
+Send Message
+Send single conversation message
+"
+usecase SendMessage unsafe {
+  input {
+    "Recepient of the message"
+    to
+
+    "Sender of the message"
+    from
+
+    "The text of the message"
+    text
+
+    "Over-the-top channel"
+    channel
+  }
+
+  result {
+    messageId
+  }
+
+
+  error {
+    problem
+    detail
+    instance
+  }
+}
+
+"
+Message Status
+
+Retrieve status of a sent message
+"
+usecase RetrieveMessageStatus safe {
+  input {
+    messageId
+  }
+
+  result {
+    deliveryStatus
+  }
+}
+
+"
+Identifier of Message
+The identifier is channel-specific and not unique. It should be treated as an opaque value and only used in subsequent calls
+"
+field messageId string
+
+"
+Delivery Status of Message
+Status of a sent message. Harmonized across different channels.
+"
+field deliveryStatus enum {
+  accepted
+  delivered
+  seen
+}
+
+"
+Channel
+Over-the-air channel for the communication
+"
+field channel enum {
+  sms
+}

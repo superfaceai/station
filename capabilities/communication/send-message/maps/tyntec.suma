@@ -1,0 +1,46 @@
+profile = "communication/send-message@1.0"
+provider = "tyntec"
+
+// Tyntec API documentation available at:
+//  https://api.tyntec.com/reference/#conversations-send-messages-send-a-message
+
+map SendMessage {
+  http POST "/chat-api/v2/messages" {
+    security apikey header {
+      name = "apikey"
+    }
+    
+    request "application/json" {
+
+      body {
+        to = input.to
+        channels = [input.channel]
+        sms.from = input.from
+        sms.contentType = 'text'
+        sms.text = input.text
+      }
+    }
+
+    response 202 "application/json" {
+      map result {
+        messageId = body.messageId
+      }
+    }
+  }
+}
+
+map RetrieveMessageStatus {
+  messageId = input.messageId
+
+  http GET "/chat-api/v2/messages/{messageId}/history" {
+    security apikey header {
+      name = "apikey"
+    }
+
+    response 200 "application/json" {
+      map result {
+        deliveryStatus = body.history[0].state
+      }
+    }
+  }
+}
