@@ -6,9 +6,7 @@ provider = "tyntec"
 
 map SendMessage {
   http POST "/chat-api/v2/messages" {
-    security apikey header {
-      name = "apikey"
-    }
+    security "apikey"
     
     request "application/json" {
 
@@ -33,9 +31,7 @@ map RetrieveMessageStatus {
   messageId = input.messageId
 
   http GET "/chat-api/v2/messages/{messageId}/history" {
-    security apikey header {
-      name = "apikey"
-    }
+    security "apikey"
 
     response 200 "application/json" {
       map result {

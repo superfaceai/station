@@ -1,0 +1,15 @@
+name = "vcs/user-repos"
+version = "1.0"
+
+usecase GetUserRepos {
+  input {
+    user
+  }
+
+  result {
+    repos [{
+      name
+      description
+    }]
+  }
+}

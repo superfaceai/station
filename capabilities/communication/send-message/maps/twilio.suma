@@ -8,7 +8,8 @@ map SendMessage {
   accountSid = input.TWILIO_SID
 
   http POST "/2010-04-01/Accounts/{accountSid}/Messages.json" {
-    security basic
+    security "basic"
+    
     request "application/x-www-form-urlencoded" {
       body {
         To = input.to,

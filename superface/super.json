@@ -1,10 +1,10 @@
 {
   "profiles": {
     "communication/send-message": {
-      "file": "./build/profiles/communication/send-message/profile.supr",
+      "file": "./grid/communication/send-message/profile.supr",
       "providers": {
         "twilio": {
-          "file": "../build/maps/communication/send-message/maps/twilio.suma",
+          "file": "./grid/communication/send-message/maps/twilio.suma",
           "defaults": {
             "SendMessage": {
               "input": {
@@ -15,7 +15,7 @@
           }
         },
         "tyntec": {
-          "file": "../build/maps/communication/send-message/maps/tyntec.suma",
+          "file": "./grid/communication/send-message/maps/tyntec.suma",
           "defaults": {
             "SendMessage": {
               "input": {
@@ -25,9 +25,21 @@
           }
         }
       }
+    },
+    "vcs/user-repos": {
+      "file": "./grid/vcs/user-repos/profile.supr",
+      "providers": {
+        "github": {
+          "file": "./grid/vcs/user-repos/maps/github.suma"
+        }
+      }
     }
   },
   "providers": {
+    "github": {
+      "file": "../providers/github.json",
+      "security": []
+    },
     "twilio": {
       "file": "../providers/twilio.json",
       "security": [
@@ -43,7 +55,7 @@
       "security": [
         {
           "id": "apikey",
-          "value": "$TYNTEC_API_KEY"
+          "apikey": "$TYNTEC_API_KEY"
         }
       ]
     }

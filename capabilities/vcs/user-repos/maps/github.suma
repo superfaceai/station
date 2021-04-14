@@ -1,0 +1,19 @@
+profile = "vcs/user-repos@1.0"
+provider = "github"
+
+map GetUserRepos {
+  username = input.user
+
+  http GET "/users/{username}/repos" {
+    response 200 "application/json" {
+      map result {
+        repos = body.map((r) => {
+          return {
+            name: r.name,
+            description: r.description
+          }
+        })
+      }
+    }
+  }
+}
