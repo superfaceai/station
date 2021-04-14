@@ -1,0 +1,51 @@
+{
+  "profiles": {
+    "communication/send-message": {
+      "file": "../profiles/communication/send-message.supr",
+      "providers": {
+        "twilio": {
+          "file": "../maps/communication/send-message.twilio.suma",
+          "defaults": {
+            "SendMessage": {
+              "input": {
+                "from": "+13345090396",
+                "TWILIO_SID": "$TWILIO_USERNAME"
+              }
+            }
+          }
+        },
+        "tyntec": {
+          "file": "../maps/communication/send-message.tyntec.suma",
+          "defaults": {
+            "SendMessage": {
+              "input": {
+                "from": "tyntec"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "providers": {
+    "twilio": {
+      "file": "../providers/twilio.json",
+      "security": [
+        {
+          "id": "basic",
+          "username": "$TWILIO_USERNAME",
+          "password": "$TWILIO_PASSWORD"
+        }
+      ]
+    },
+    "tyntec": {
+      "file": "../providers/tyntec.json",
+      "security": [
+        {
+          "id": "apikey",
+          "value": "$TYNTEC_API_KEY"
+        }
+      ]
+    }
+  }
+}
