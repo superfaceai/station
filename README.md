@@ -77,3 +77,6 @@ Test created capability
  yarn test
 ```
 
+## Enviroment variables
+
+Secretes used for authentication are stored in `.env.capabilities` and loaded using dotenv.

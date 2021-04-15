@@ -14,8 +14,8 @@
     "create:profile": "node dist/create-profile.js",
     "create:provider": "node dist/create-provider.js",
     "create:map": "node dist/create-map.js",
-    "test": "jest",
-    "test:clean": "jest --clear-cache && jest",
+    "test": "dotenv -e .env.capabilities -- jest",
+    "test:clean": "dotenv -e .env.capabilities -- jest --clear-cache && jest",
     "lint": "eslint ./",
     "lint:fix": "yarn lint --fix",
     "format": "prettier -c ./",
@@ -43,6 +43,7 @@
     "@superfaceai/ast": "0.0.22",
     "@superfaceai/parser": "0.0.15",
     "@superfaceai/sdk": "0.0.14",
+    "dotenv-cli": "^4.0.0",
     "rimraf": "^3.0.2"
   }
 }
