@@ -33,6 +33,14 @@
           "file": "./grid/vcs/user-repos/maps/github.suma"
         }
       }
+    },
+    "vcs/pull-requests": {
+      "version": "1.0.0",
+      "providers": {
+        "gitlab": {
+          "file": "./grid/vcs/pull-requests/maps/gitlab.suma"
+        }
+      }
     }
   },
   "providers": {
@@ -58,6 +66,10 @@
           "apikey": "$TYNTEC_API_KEY"
         }
       ]
+    },
+    "gitlab": {
+      "file": "../providers/gitlab.json",
+      "security": []
     }
   }
 }

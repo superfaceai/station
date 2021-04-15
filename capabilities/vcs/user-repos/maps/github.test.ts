@@ -1,6 +1,6 @@
 import { SuperfaceClient, ok } from '@superfaceai/sdk';
 
-describe('github', () => {
+describe('vcs/user-repos/github', () => {
     it('performs correctly', async () => {
         const client = new SuperfaceClient;
         const profile = await client.getProfile('vcs/user-repos');

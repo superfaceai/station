@@ -18,7 +18,7 @@ async function compileFile(path: string) {
         }
         await writeFile(`${path}.ast.json`, JSON.stringify(ast, null, 2));
     } catch (error) {
-        console.log('Error during compilation', error)
+        console.log(`Error during compilation of file: ${path}`, error)
     }
 }
 
@@ -60,17 +60,22 @@ async function compile() {
                 }
             })
             //Compile maps
-            maps = await getFiles(`./${CAPABILITIES_DIR}/${scope}/${useCase}/maps`)
-            maps.forEach(async (file: string) => {
-                if (file.endsWith('js') || file.endsWith('ts')) {
-                    console.log(`Skipping file: ${file}`)
-                } else {
-                    console.log(`${file} --> ${file}${EXTENSIONS.map.build}`)
-                    //This file shoud be map
-                    await copyFile(`./${CAPABILITIES_DIR}/${scope}/${useCase}/maps/${file}`, `./${PROFILE_BUILD_PATH}/${scope}/${useCase}/maps/${file}`);
-                    await compileFile(`./${PROFILE_BUILD_PATH}/${scope}/${useCase}/maps/${file}`)
-                }
-            })
+            if (!await exists(`./${CAPABILITIES_DIR}/${scope}/${useCase}/maps`)) {
+                console.log(`Maps folder ./${CAPABILITIES_DIR}/${scope}/${useCase}/maps does not exist`)
+            }
+            else {
+                maps = await getFiles(`./${CAPABILITIES_DIR}/${scope}/${useCase}/maps`)
+                maps.forEach(async (file: string) => {
+                    if (file.endsWith('js') || file.endsWith('ts')) {
+                        console.log(`Skipping file: ${file}`)
+                    } else {
+                        console.log(`${file} --> ${file}${EXTENSIONS.map.build}`)
+                        //This file shoud be map
+                        await copyFile(`./${CAPABILITIES_DIR}/${scope}/${useCase}/maps/${file}`, `./${PROFILE_BUILD_PATH}/${scope}/${useCase}/maps/${file}`);
+                        await compileFile(`./${PROFILE_BUILD_PATH}/${scope}/${useCase}/maps/${file}`)
+                    }
+                })
+            }
         })
     })
 }
