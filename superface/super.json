@@ -31,14 +31,40 @@
       "providers": {
         "github": {
           "file": "./grid/vcs/user-repos/maps/github.suma"
+        },
+        "gitlab": {
+          "file": "./grid/vcs/user-repos/maps/gitlab.suma"
+        },
+        "bitbucket": {
+          "file": "./grid/vcs/user-repos/maps/bitbucket.suma"
         }
       }
     },
     "vcs/pull-requests": {
-      "version": "1.0.0",
+      "file": "./grid/vcs/pull-requests/profile.supr",
       "providers": {
         "gitlab": {
           "file": "./grid/vcs/pull-requests/maps/gitlab.suma"
+        },
+        "bitbucket": {
+          "file": "./grid/vcs/pull-requests/maps/bitbucket.suma"
+        },
+        "github": {
+          "file": "./grid/vcs/pull-requests/maps/github.suma"
+        }
+      }
+    },
+    "vcs/single-file-content": {
+      "file": "./grid/vcs/single-file-content/profile.supr",
+      "providers": {
+        "github": {
+          "file": "./grid/vcs/single-file-content/maps/github.suma"
+        },
+        "gitlab": {
+          "file": "./grid/vcs/single-file-content/maps/gitlab.suma"
+        },
+        "bitbucket": {
+          "file": "./grid/vcs/single-file-content/maps/bitbucket.suma"
         }
       }
     }
@@ -70,6 +96,16 @@
     "gitlab": {
       "file": "../providers/gitlab.json",
       "security": []
+    },
+    "bitbucket": {
+      "file": "../providers/bitbucket.json",
+      "security": [
+        {
+          "id": "basic",
+          "username": "$BITBUCKET_USERNAME",
+          "password": "$BITBUCKET_PASSWORD"
+        }
+      ]
     }
   }
 }

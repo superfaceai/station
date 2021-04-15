@@ -1,0 +1,21 @@
+profile = "vcs/single-file-content@1.0"
+  provider = "bitbucket"
+  
+  map singleFileContent{
+  owner = input.owner
+  repo = input.repo
+  path = input.path
+  ref = input.ref
+
+  http GET "/2.0/repositories/{owner}/{repo}/src/{ref}/{path}" {
+    response 200 "text/plain" {
+      //map returned values to result object
+      map result {
+        size = body.length
+        content = body
+        encoding = "utf-8"
+      }
+    }
+  }
+}
+  

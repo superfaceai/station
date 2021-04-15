@@ -1,10 +1,10 @@
-import { ok,SuperfaceClient } from '@superfaceai/sdk';
+import { ok, SuperfaceClient } from '@superfaceai/sdk';
 
 describe('vcs/user-repos/github', () => {
   it('performs correctly', async () => {
     const client = new SuperfaceClient();
     const profile = await client.getProfile('vcs/user-repos');
-    const useCase = profile.getUseCase('GetUserRepos');
+    const useCase = profile.getUseCase('userRepos');
     const provider = await client.getProvider('github');
     await expect(
       useCase.perform({ user: 'jakub-vacek' }, { provider })

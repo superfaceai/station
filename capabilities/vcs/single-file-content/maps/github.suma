@@ -1,0 +1,20 @@
+profile = "vcs/single-file-content@1.0"
+  provider = "github"
+  
+  map singleFileContent{
+  owner = input.owner
+  repo = input.repo
+  path = input.path
+
+  http GET "/repos/{owner}/{repo}/contents/{path}" {
+    response 200 "application/json" {
+      //map returned values to result object
+      map result {
+        size = body.size
+        content = body.content
+        encoding = body.encoding
+      }
+    }
+  }
+}
+  

@@ -1,0 +1,22 @@
+name = "vcs/single-file-content"
+version = "1.0"
+
+"""
+single-file-content usecase
+"""
+usecase singleFileContent {
+  //define input properties
+  input {
+    owner
+    repo
+    path
+    ref
+  }
+
+  //define result object
+  result {
+    size
+    content
+    encoding
+  }
+}

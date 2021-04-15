@@ -1,12 +1,13 @@
 profile = "vcs/user-repos@1.0"
-provider = "github"
-
-map userRepos {
+  provider = "gitlab"
+  
+  map userRepos{
   username = input.user
 
-  http GET "/users/{username}/repos" {
+  http GET "/users/{username}/projects" {
     response 200 "application/json" {
       map result {
+        //map returned values to result object
         repos = body.map((r) => {
           return {
             name: r.name,
@@ -17,3 +18,4 @@ map userRepos {
     }
   }
 }
+  
