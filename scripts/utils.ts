@@ -3,7 +3,7 @@ export function kebabToCamelCase(input: string): string {
     .split('-')
     .map((word: string, index: number) => {
       if (index > 0) {
-        return word.charAt(0).toUpperCase() + word.substring(0, word.length);
+        return word.charAt(0).toUpperCase() + word.substring(1, word.length);
       }
 
       return word;

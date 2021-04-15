@@ -3,7 +3,7 @@ import { SuperJson } from '@superfaceai/sdk';
 import {
   CAPABILITIES_DIR,
   EXTENSIONS,
-  PROFILE_BUILD_PATH,
+  PROFILE_BUILD_DIR,
   SUPER_JSON,
 } from './constants';
 import { exists, mkdir, writeFile } from './io';
@@ -42,9 +42,7 @@ async function createProfile() {
   );
 
   const newProfile = {
-    id: profileName,
-    version: '1.0.0',
-    file: `./${PROFILE_BUILD_PATH}/${scope}/${usecase}/profile${EXTENSIONS.profile.build}`,
+    file: `./${PROFILE_BUILD_DIR}/${scope}/${usecase}/profile${EXTENSIONS.profile.source}`,
   };
   superJson.addProfile(profileName, newProfile);
 
