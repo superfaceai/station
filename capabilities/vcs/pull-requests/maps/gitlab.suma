@@ -1,0 +1,24 @@
+profile = "vcs/pull-requests@1.0"
+  provider = "gitlab"
+  
+  map pullRrequests{
+   //encodeURIComponent comes from JavaScript core library and you can use it here!
+  id = encodeURIComponent(input.owner + '/' + input.repo)
+
+  http GET "/projects/{id}/merge_requests" {
+    response 200 "application/json" {
+      map result {
+        //maps returned values to result object
+        repos = body.map((r) => {
+          return {
+            title: r.title,
+            id: r.iid,
+            url: r.web_url,
+            sha: r.sha,
+          }
+        })
+      }
+    }
+  }
+}
+  
