@@ -9,7 +9,7 @@ import {
 import { exists, mkdir, writeFile } from './io';
 import { mapTemplate, mapTestTemplate } from './templates';
 
-async function createMap() {
+export async function createMap(): Promise<void> {
   const profileName = process.argv[2];
   const [scope, usecase] = profileName.split('/');
   const mapName = process.argv[3];

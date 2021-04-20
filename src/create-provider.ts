@@ -4,7 +4,7 @@ import { EXTENSIONS, PROVIDERS_DIR, SUPER_JSON } from './constants';
 import { exists, mkdir, writeFile } from './io';
 import { providerTemplate } from './templates';
 
-async function createProvider() {
+export async function createProvider(): Promise<void> {
   const providerName = process.argv[2];
 
   //Create folder structure if it doesn't exist
