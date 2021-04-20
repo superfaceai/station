@@ -9,7 +9,7 @@ import {
 import { exists, mkdir, writeFile } from './io';
 import { profileTemplate } from './templates';
 
-async function createProfile() {
+export async function createProfile(): Promise<void> {
   const profileName = process.argv[2];
   const [scope, usecase] = profileName.split('/');
 

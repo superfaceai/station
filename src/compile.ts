@@ -12,7 +12,7 @@ import {
   writeFile,
 } from './io';
 
-async function compileFile(path: string) {
+export async function compileFile(path: string): Promise<void> {
   try {
     const body = await readFile(path);
     const source = new Source(body, path);
