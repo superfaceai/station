@@ -3,42 +3,73 @@ Capabilities
 
 ## Install
 
+Install dependencies: 
 ```
 yarn install
 ```
 
-## Usage
-
-Build TS files
+Build TS files:
 ```
 yarn build
 ```
-set .env variables from .env.example
+set .env variables from .env.example. For publishing you need to set SUPERFACE_STORE_REFRESH_TOKEN you can obtain it on https://superface.dev/auth/github
 
-Compile maps and profiles
+## Usage
+
+**Compile maps and profiles**
+
+Compiles files into `superface/grid` folder.
+
 ```
 yarn compile
 ```
 
-Create profile
+**Create profile**
+
+Creates scope and usecae folders, creates `profile.supr` file (with basic template) and adds profile to `super.json`.
+
 ```
 yarn create:profile {scope}/{usecase} 
 ```
 
-Create provider
+**Create provider**
+
+Creates provider.json, adds it to super.json
+
 ```
  yarn create:provider {provider}
 ```
 
-Create map
+**Create map**
+
+Create sa map file, test file and adds newly created map to to super.json
+
 ```
  yarn create:map {scope}/{usecase} {provider}
 ```
 
-Test
+**Test**
+
+Runs all test files.
+
 ```
 yarn test
 ```
+
+To run single test use: 
+
+```
+yarn test {path to test}
+```
+
+**Upload:**
+
+Uploads map/profile/provider to Store - use paths to `.supr` file for profiles, `.suma` for maps and `.json` form providers. Do not use path ending with `.ast.json` (compiled files).
+
+```
+yarn upload {path}
+```
+
 
 ## Adding new capability
 
@@ -74,9 +105,9 @@ Compile created files:
 Test created capability
 
 ```
- yarn test
+ yarn test {path to test file}
 ```
 
 ## Enviroment variables
 
-Secretes used for authentication are stored in `.env.capabilities` and loaded using dotenv.
+Secretes used for authentication during tests are stored in `.env.capabilities` and loaded using dotenv.
