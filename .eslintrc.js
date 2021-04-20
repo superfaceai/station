@@ -17,7 +17,6 @@ module.exports = {
     'plugin:@typescript-eslint/recommended-requiring-type-checking',
     'plugin:import/errors',
     'plugin:import/warnings',
-    'prettier/@typescript-eslint',
     'plugin:jest/recommended',
   ],
   rules: {
@@ -31,7 +30,8 @@ module.exports = {
     'no-multiple-empty-lines': 'error',
     'lines-between-class-members': 'off',
     '@typescript-eslint/lines-between-class-members': ['error', 'always', { exceptAfterSingleLine: true, exceptAfterOverload: true }],
-    '@typescript-eslint/require-await': 'off',
+    '@typescript-eslint/no-empty-function': 'off',
+    '@typescript-eslint/require-await': 'off'
   },
   settings: {
     'import/parsers': {
@@ -54,8 +54,7 @@ module.exports = {
     rules: {
       '@typescript-eslint/no-explicit-any': 'off',
       '@typescript-eslint/no-unsafe-assignment': 'off',
-      '@typescript-eslint/no-non-null-assertion': 'off',
-      '@typescript-eslint/unbound-method': 'off',
+      '@typescript-eslint/no-unsafe-member-access': 'off'
     }
   }],
 };
