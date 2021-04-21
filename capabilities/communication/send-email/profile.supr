@@ -1,0 +1,29 @@
+"
+Send E-Mail
+"
+
+name = "communication/send-email"
+version = "1.0.0"
+
+usecase SendEmail unsafe {
+  input {
+    from!
+    to!
+    subject!
+    text
+    html
+  }
+
+  result {
+    messageId
+  }
+
+  "
+  Based on https://tools.ietf.org/html/rfc7807
+  "
+  error {
+    title
+    detail
+    instance
+  }
+}
