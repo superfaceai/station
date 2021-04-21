@@ -50,13 +50,14 @@ Create sa map file, test file and adds newly created map to to super.json
 
 **Test**
 
-Runs all test files.
-
+Most of the test need some sort of secrets so running all test files:
 ```
+//This will probably fail
 yarn test
 ```
+will probably fail.
 
-To run single test use: 
+To test single map/usecase set secrets to `.env.capabilities` and run: 
 
 ```
 yarn test {path to test}
@@ -64,7 +65,7 @@ yarn test {path to test}
 
 **Upload:**
 
-Uploads map/profile/provider to Store - use paths to `.supr` file for profiles, `.suma` for maps and `.json` form providers. Do not use path ending with `.ast.json` (compiled files).
+Uploads map/profile/provider to Store - use paths to `.supr` file for profiles, `.suma` for maps and `.json` for providers. Do not use path ending with `.ast.json` (compiled files).
 
 ```
 yarn upload {path}
@@ -106,6 +107,13 @@ Test created capability
 
 ```
  yarn test {path to test file}
+```
+
+Upload newly created files
+```
+yarn upload {path to profile}
+yarn upload {path to map}
+yarn upload {path to provider}
 ```
 
 ## Enviroment variables
