@@ -118,4 +118,4 @@ yarn upload {path to provider}
 
 ## Enviroment variables
 
-Secretes used for authentication during tests are stored in `.env.capabilities` and loaded using dotenv.
+Secretes used for authentication during tests are stored in `.env.capabilities` and loaded using dotenv. Run `cp .env.capabilities.example .env.capabilities` to start from the template.
