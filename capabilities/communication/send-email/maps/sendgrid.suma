@@ -1,0 +1,45 @@
+"""
+## Documentation needed to implement this Map
+
++ SendGrid API Reference: https://sendgrid.com/docs/api-reference/"
++ Errors: https://sendgrid.api-docs.io/v3.0/mail-send/mail-send-errors
+"""
+
+profile = "communication/send-email@1.0"
+provider = "sendgrid"
+
+map SendEmail {
+  set {
+    content = []
+  }
+
+  set if (input.text) {
+    content = content.concat([{ type: 'text/plain', value: input.text }])
+  }
+
+  set if (input.html) {
+    content = content.concat([{ type: 'text/html', value: input.html }])
+  }
+
+  http POST "/mail/send" {
+    security "bearer_token"
+    
+    request {
+      body = {
+        from: { email: input.from },
+        subject: input.subject,
+        content: content,
+        personalizations: [{
+          to: [{ email: input.to }], 
+        }]
+      }
+    }
+    
+    response 202 "*" {
+      map result {
+        messageId = headers['x-message-id']
+      }
+    }
+  }
+}
+
