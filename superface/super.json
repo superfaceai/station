@@ -17,7 +17,7 @@
                 "from": "$TWILIO_COMMUNICATION_SENDMESSAGE_FROM",
                 "TWILIO_SID": "$TWILIO_USERNAME"
               }
-            }            
+            }
           }
         },
         "tyntec": {
@@ -29,6 +29,23 @@
               }
             }
           }
+        },
+        "vonage-nexmo": {
+          "file": "./grid/communication/send-message/maps/vonage-nexmo.suma",
+          "defaults": {
+            "SendMessage": {
+              "input": {
+                "NEXMO_API_KEY": "$NEXMO_API_KEY",
+                "NEXMO_API_SECRET": "$NEXMO_API_SECRET"
+              }
+            },
+            "RetrieveMessageStatus": {
+              "input": {
+                "NEXMO_API_KEY": "$NEXMO_API_KEY",
+                "NEXMO_API_SECRET": "$NEXMO_API_SECRET"
+              }
+            }
+          }          
         }
       }
     },
@@ -112,6 +129,10 @@
           "password": "$BITBUCKET_PASSWORD"
         }
       ]
+    },
+    "vonage-nexmo": {
+      "file": "../providers/vonage-nexmo.json",
+      "security": []
     }
   }
 }

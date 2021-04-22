@@ -1,0 +1,28 @@
+profile = "communication/send-message@1.0"
+provider = "vonage-nexmo"
+  
+// Vonage API documentation available at:
+//  https://dashboard.nexmo.com/getting-started/sms
+//  https://developer.nexmo.com/messaging/sms/overview
+//  https://developer.nexmo.com/api/sms 
+
+map SendMessage {
+  http POST "/sms/json" {
+    request "application/x-www-form-urlencoded" {
+      body {
+        api_key = input.NEXMO_API_KEY,
+        api_secret = input.NEXMO_API_SECRET,
+        from = input.from,
+        to = input.to,
+        text = input.text
+      }
+    }
+
+    response 200 "application/json" {
+      map result {
+        messageId = body.messages[0]['message-id']
+      }
+    }
+  }
+}
+  
