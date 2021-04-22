@@ -50,17 +50,17 @@ export function mapTestTemplate(
   return `import { SuperfaceClient } from '@superfaceai/sdk';
 
 describe('${scope}/${usecase}/${provider}', () => {
-    it('performs correctly', async () => {
-        const client = new SuperfaceClient;
-        const profile = await client.getProfile('${scope}/${usecase}');
-        const useCase = profile.getUseCase('${kebabToCamelCase(usecase)}');
-        const provider = await client.getProvider('${provider}');
+  it('performs correctly', async () => {
+    const client = new SuperfaceClient;
+    const profile = await client.getProfile('${scope}/${usecase}');
+    const useCase = profile.getUseCase('${kebabToCamelCase(usecase)}');
+    const provider = await client.getProvider('${provider}');
 
-        expect(useCase).not.toBeUndefined()
-        expect(provider).not.toBeUndefined()
-        //Edit expected value
-        //await expect(useCase.perform({}, { provider })).resolves.toEqual()
-    })
+    expect(useCase).not.toBeUndefined()
+    expect(provider).not.toBeUndefined()
+    //Edit expected value
+    //await expect(useCase.perform({}, { provider })).resolves.toEqual()
+  })
 })
 `;
 }
