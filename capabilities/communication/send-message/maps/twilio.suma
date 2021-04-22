@@ -3,6 +3,7 @@ provider = "twilio"
 
 // Twilio API documentation available at:
 //  https://www.twilio.com/docs/sms/send-messages#send-an-sms-with-twilios-api
+//  https://www.twilio.com/docs/sms/api/message-resource#message-properties
 
 map SendMessage {
   accountSid = input.TWILIO_SID
@@ -31,9 +32,27 @@ map RetrieveMessageStatus {
   sid = input.messageId
 
   http GET "/2010-04-01/Accounts/{accountSid}/Messages/{sid}.json" {
+    security "basic"
+
     response 200 "application/json" {
       map result {
-        deliveryStatus = body.status
+        deliveryStatus = (() => { 
+          switch (body.status) {
+            case 'sent':
+            case 'sending':
+            case 'sent':
+              return 'accepted';
+          
+            case 'delivered':
+              return 'delivered';
+
+            case 'failed':
+              return 'failed'
+
+            default:
+              return 'unknown';
+          }
+        })()
       }
     }
   }

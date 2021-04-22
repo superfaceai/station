@@ -8,10 +8,16 @@
           "defaults": {
             "SendMessage": {
               "input": {
-                "from": "+13345090396",
+                "from": "$TWILIO_COMMUNICATION_SENDMESSAGE_FROM",
                 "TWILIO_SID": "$TWILIO_USERNAME"
               }
-            }
+            },
+            "RetrieveMessageStatus": {
+              "input": {
+                "from": "$TWILIO_COMMUNICATION_SENDMESSAGE_FROM",
+                "TWILIO_SID": "$TWILIO_USERNAME"
+              }
+            }            
           }
         },
         "tyntec": {
