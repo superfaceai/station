@@ -63,6 +63,12 @@ To test single map/usecase set secrets to `.env.capabilities` and run:
 yarn test {path to test}
 ```
 
+To enable debugging to see what's going on inside the SDK, use:
+
+```
+yarn test:debug
+```
+
 **Upload:**
 
 Uploads map/profile/provider to Store - use paths to `.supr` file for profiles, `.suma` for maps and `.json` for providers. Do not use path ending with `.ast.json` (compiled files).
