@@ -26,10 +26,7 @@ describe('communication/send-message/twilio', () => {
 
     const useCase = profile.getUseCase('RetrieveMessageStatus');
     const result = await useCase.perform({ messageId: messageId }, { provider });
-
-    if (result.isErr()) {
-      console.log('error', result.error)
-    }    
+    
     expect(result.isOk()).toBeTruthy();
     expect(typeof(result.unwrap() as any).deliveryStatus).toBe('string');
   });  
