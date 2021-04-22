@@ -36,10 +36,10 @@ export function mapTemplate(
   const variantAssignment = variant ? `variant = "${variant}"\n` : '';
 
   return `profile = "${scope}/${usecase}@${version}"
-  provider = "${provider}"
-  ${variantAssignment}
-  map ${kebabToCamelCase(usecase)}{}
-  `;
+provider = "${provider}"
+${variantAssignment}
+map ${kebabToCamelCase(usecase)}{}
+`;
 }
 
 export function mapTestTemplate(
