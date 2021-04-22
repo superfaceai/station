@@ -34,8 +34,26 @@ map RetrieveMessageStatus {
     security "apikey"
 
     response 200 "application/json" {
+      // sanity check
+      return map error if (!body.history.length) {
+        message = 'no history available'
+      }
+
+      // harmonize the latest state
+      latestState = body.history[body.history.length-1].state
+      latestState = (() => {
+        switch (latestState) {
+          case 'message-routing-success':
+          case 'message-accepted':
+            return 'accepted'
+          default:
+            return 'unknown';
+        }
+      })()
+
+      // map the result
       map result {
-        deliveryStatus = body.history[0].state
+        deliveryStatus = latestState
       }
     }
   }
