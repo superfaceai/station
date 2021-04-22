@@ -16,12 +16,17 @@ describe('communication/send-message/vonage-nexmo', () => {
     const result = await useCase.perform({ to: recipient, from: 'Vonage APIs', text: 'Hello World!', channel: 'sms' }, { provider });
 
     // if (result.isErr()) {
-    //   console.log('ERR >', result.error);
+    //   console.log('Error >', result.error);
     // }
-
     expect(result.isOk()).toBeTruthy();
     expect(typeof(result.unwrap() as any).messageId).toBe('string');
-
     // console.log('Result >', result.value)
   });
+
+  it('does not retrieves message status', async () => {
+    const useCase = profile.getUseCase('RetrieveMessageStatus');
+    const result = await useCase.perform({ messageId: '' }, { provider });
+    
+    expect(result.isErr()).toBeTruthy();
+  });  
 })
