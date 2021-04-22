@@ -1,8 +1,6 @@
 module.exports = {
   preset: 'ts-jest',
   testEnvironment: 'node',
-  testPathIgnorePatterns: ["superface"],
-  coveragePathIgnorePatterns: [
-    "/dist/", "/superface/"
-  ]
+  testPathIgnorePatterns: ['<rootDir>/superface/'],
+  coveragePathIgnorePatterns: ['/dist/', '/superface/'],
 };

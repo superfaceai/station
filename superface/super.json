@@ -17,7 +17,7 @@
                 "from": "$TWILIO_COMMUNICATION_SENDMESSAGE_FROM",
                 "TWILIO_SID": "$TWILIO_USERNAME"
               }
-            }            
+            }
           }
         },
         "tyntec": {
@@ -73,6 +73,21 @@
           "file": "./grid/vcs/single-file-content/maps/bitbucket.suma"
         }
       }
+    },
+    "address/clean-address": {
+      "file": "./grid/address/clean-address/profile.supr",
+      "providers": {
+        "smartystreets": {
+          "file": "./grid/address/clean-address/maps/smartystreets.suma",
+          "defaults": {
+            "CleanAddress": {
+              "input": {
+                "SMARTYSTREETS_AUTH_ID": "$SMARTYSTREETS_AUTH_ID"
+              }
+            }
+          }
+        }
+      }
     }
   },
   "providers": {
@@ -110,6 +125,15 @@
           "id": "basic",
           "username": "$BITBUCKET_USERNAME",
           "password": "$BITBUCKET_PASSWORD"
+        }
+      ]
+    },
+    "smartystreets": {
+      "file": "../providers/smartystreets.json",
+      "security": [
+        {
+          "id": "auth-token",
+          "apikey": "$SMARTYSTREETS_API_KEY"
         }
       ]
     }
