@@ -1,7 +1,7 @@
 import { isMapDocumentNode, isProfileDocumentNode } from '@superfaceai/ast';
 import { BrainClient } from '@superfaceai/brain-client';
+import { isProviderJson } from '@superfaceai/one-sdk';
 import { parseMap, parseProfile, Source } from '@superfaceai/parser';
-import { isProviderJson } from '@superfaceai/sdk';
 
 import { EXTENSIONS } from './constants';
 import { exists, readFile } from './io';
