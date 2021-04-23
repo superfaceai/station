@@ -13,7 +13,7 @@ describe('communication/send-message/vonage-nexmo', () => {
 
   it('sends a message', async () => {
     const useCase = profile.getUseCase('SendMessage');
-    const result = await useCase.perform({ to: recipient, from: 'Vonage APIs', text: 'Hello World!', channel: 'sms' }, { provider });
+    const result = await useCase.perform({ to: recipient, from: 'Vonage APIs', text: 'Hello World!' }, { provider });
 
     // if (result.isErr()) {
     //   console.log('Error >', result.error);
