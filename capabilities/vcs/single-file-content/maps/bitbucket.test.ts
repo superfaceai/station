@@ -1,4 +1,4 @@
-import { ok, SuperfaceClient } from '@superfaceai/sdk';
+import { SuperfaceClient } from '@superfaceai/one-sdk';
 
 describe('vcs/single-file-content/bitbucket', () => {
   it('performs correctly', async () => {
@@ -6,23 +6,21 @@ describe('vcs/single-file-content/bitbucket', () => {
     const profile = await client.getProfile('vcs/single-file-content');
     const useCase = profile.getUseCase('singleFileContent');
     const provider = await client.getProvider('bitbucket');
-
-    await expect(
-      useCase.perform(
-        {
-          owner: 'jakuvacek',
-          repo: 'testrepository',
-          path: 'README.md',
-          ref: 'master',
-        },
-        { provider }
-      )
-    ).resolves.toEqual(
-      ok({
-        content: expect.stringContaining('README'),
-        encoding: 'utf-8',
-        size: expect.any(Number),
-      })
+    const result = await useCase.perform(
+      {
+        owner: 'jakuvacek',
+        repo: 'testrepository',
+        path: 'README.md',
+        ref: 'master',
+      },
+      { provider }
     );
+    const value = result.unwrap();
+
+    expect(value).toEqual({
+      content: expect.stringContaining('README'),
+      encoding: 'utf-8',
+      size: expect.any(Number),
+    });
   });
 });
