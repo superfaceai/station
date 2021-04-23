@@ -9,9 +9,13 @@ profile = "communication/send-email@1.0"
 provider = "sendgrid"
 
 map SendEmail {
-  set {
-    content = []
+  INPUTS_MAP = {
+    'personalizations.0.to.0.email': 'to',
+    'from.email': 'from',
+    'subject': 'subject',
   }
+
+  content = []
 
   set if (input.text) {
     content = content.concat([{ type: 'text/plain', value: input.text }])
@@ -40,6 +44,40 @@ map SendEmail {
         messageId = headers['x-message-id']
       }
     }
+
+    response 400 "application/json" {
+      map error {
+        title = "Invalid inputs"
+        detail = body.errors.map((err) => `Input '${INPUTS_MAP[err.field] || err.field}': ${err.message}`).join(' ')
+      }
+    }
+
+    response 413 "application/json" {
+      map error {
+        title = "Payload Too Large"
+        detail = body.errors.map((err) => err.message).join(' ')
+      }
+    }
+
+    response 401 "application/json" {
+      map error {
+        title = "Unauthorized"
+        detail = body.errors.map((err) => err.message).join(' ')
+      }
+    }
+
+    response 403 "application/json" {
+      map error {
+        title = "Forbidden"
+        detail = body.errors.map((err) => err.message).join(' ')
+      }
+    }
+
+    response 500 "application/json" {
+      map error {
+        title = "Internal server Error"
+        detail = body.errors.map((err) => err.message).join(' ')
+      }
+    }
   }
 }
-
