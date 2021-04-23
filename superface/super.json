@@ -48,7 +48,21 @@
           }
         },
         "plivo": {
-          "file": "./grid/communication/send-message/maps/plivo.suma"
+          "file": "./grid/communication/send-message/maps/plivo.suma",
+          "defaults": {
+            "SendMessage": {
+              "input": {
+                "PLIVO_AUTH_ID": "$PLIVO_AUTH_ID",
+                "PLIVO_AUTH_TOKEN": "$PLIVO_AUTH_TOKEN"
+              }
+            },
+            "RetrieveMessageStatus": {
+              "input": {
+                "PLIVO_AUTH_ID": "$PLIVO_AUTH_ID",
+                "PLIVO_AUTH_TOKEN": "$PLIVO_AUTH_TOKEN"
+              }
+            }
+          }
         }
       }
     },
@@ -139,7 +153,13 @@
     },
     "plivo": {
       "file": "../providers/plivo.json",
-      "security": []
+      "security": [
+        {
+          "id": "basic",
+          "username": "$PLIVO_AUTH_ID",
+          "password": "$PLIVO_AUTH_TOKEN"
+        }
+      ]
     }
   }
 }

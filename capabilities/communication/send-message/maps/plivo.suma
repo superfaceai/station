@@ -6,5 +6,23 @@ provider = "plivo"
 //  https://www.plivo.com/docs/sms/api/message/
   
 map SendMessage { 
+  authId = input.PLIVO_AUTH_ID
 
+  // note the trailing `/` is important per plivo design
+  http POST "/v1/Account/{authId}/Message/" {
+    security "basic"
+    request "application/json" {
+      body {
+        src = input.from
+        dst = input.to
+        text = input.text
+      }
+    }
+
+    response 202 "application/json" {
+      map result {
+        messageId = body.message_uuid[0]
+      }
+    }
+  }
 }
