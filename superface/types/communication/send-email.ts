@@ -1,4 +1,4 @@
-import { typeHelper } from '@superfaceai/one-sdk';
+import { typeHelper, TypedProfile } from '@superfaceai/one-sdk';
 export interface SendEmailInput {
     from: unknown;
     to: unknown;
@@ -9,8 +9,10 @@ export interface SendEmailInput {
 export interface SendEmailResult {
     messageId?: unknown;
 }
+export const profile = {
+    "SendEmail": typeHelper<SendEmailInput, SendEmailResult>()
+};
+export type CommunicationSendEmailProfile = TypedProfile<typeof profile>;
 export const communicationSendEmail = {
-    "communication/send-email": {
-        "SendEmail": typeHelper<SendEmailInput, SendEmailResult>()
-    }
+    "communication/send-email": profile
 };

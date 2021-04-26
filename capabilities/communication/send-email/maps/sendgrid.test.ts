@@ -1,21 +1,20 @@
-import { MappedHTTPError } from '@superfaceai/one-sdk';
-import { SuperfaceClient } from '../../../../superface/sdk';
+import { MappedHTTPError, Provider } from '@superfaceai/one-sdk';
+
+import {
+  CommunicationSendEmailProfile,
+  SuperfaceClient,
+} from '../../../../superface/sdk';
 
 describe('communication/send-email/sendgrid', () => {
-  /*
-  // Can't use this, as I am not able to specify types for client, profile and useCase
-
-  let client: SuperfaceClient;
-  let profile: Profile;
-  let useCase: UseCase;
+  let client: InstanceType<typeof SuperfaceClient>;
+  let profile: CommunicationSendEmailProfile;
   let provider: Provider;
 
   beforeEach(async () => {
-   client = new SuperfaceClient();
-   profile = await client.getProfile('communication/send-email');
-   provider = await client.getProvider('sendgrid'); 
+    client = new SuperfaceClient();
+    profile = await client.getProfile('communication/send-email');
+    provider = await client.getProvider('sendgrid');
   });
-  */
 
   it('should find provider', async () => {
     const client = new SuperfaceClient();
@@ -26,10 +25,6 @@ describe('communication/send-email/sendgrid', () => {
 
   describe('when all inputs are correct', () => {
     it('should return messagaId as result', async () => {
-      const client = new SuperfaceClient();
-      const profile = await client.getProfile('communication/send-email');
-      const provider = await client.getProvider('sendgrid');
-
       /*
       // Typed SDK kind of break concept of defaults in super.json
       // This is complaining about missing from and to
