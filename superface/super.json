@@ -107,6 +107,24 @@
           "file": "./grid/vcs/single-file-content/maps/bitbucket.suma"
         }
       }
+    },
+    "storefront/product": {
+      "file": "./grid/storefront/product/profile.supr",
+      "providers": {
+        "stripe": {
+          "file": "./grid/storefront/product/maps/stripe.suma"
+        },
+        "shopify": {
+          "file": "./grid/storefront/product/maps/shopify.suma",
+          "defaults": {
+            "RetrieveProduct": {
+              "input": {
+                "shop": "$SHOPIFY_SHOP_DOMAIN"
+              }
+            }
+          }
+        }
+      }
     }
   },
   "providers": {
@@ -158,6 +176,25 @@
           "id": "basic",
           "username": "$PLIVO_AUTH_ID",
           "password": "$PLIVO_AUTH_TOKEN"
+        }
+      ]
+    },
+    "stripe": {
+      "file": "../providers/stripe.json",
+      "security": [
+        {
+          "id": "stripe_authentication",
+          "username": "$STRIPE_API_KEY",
+          "password": ""
+        }
+      ]
+    },
+    "shopify": {
+      "file": "../providers/shopify.json",
+      "security": [
+        {
+          "id": "shopify_storefront_access",
+          "apikey": "$SHOPIFY_STOREFRONT_ACCESS_TOKEN"
         }
       ]
     }

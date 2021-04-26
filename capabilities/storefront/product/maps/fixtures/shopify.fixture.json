@@ -1,0 +1,229 @@
+{
+  "API_RESPONSE": {
+    "data": {
+      "node": {
+        "id": "Z2lkOi8vc2hvcGlmeS9Qcm9kdWN0LzY1ODYyNjExNDM3NjA=",
+        "title": "Test Product Title",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus vel neque ex. Sed eleifend nisi velit, nec dictum ex condimentum tempor.",
+        "descriptionHtml": "<span>Lorem ipsum dolor sit amet,<strong> consectetur adipiscing elit</strong>. Phasellus vel neque ex. Sed eleifend nisi velit, nec dictum ex condimentum tempor.</span>",
+        "images": {
+          "edges": [
+            {
+              "node": {
+                "transformedSrc": "https://cdn.shopify.com/s/files/1/0564/1610/8752/products/Screenshot2020-10-27at12.20.58.png?v=1619188031"
+              }
+            },
+            {
+              "node": {
+                "transformedSrc": "https://cdn.shopify.com/s/files/1/0564/1610/8752/products/Screenshot2021-02-06at13.49.26.png?v=1619188031"
+              }
+            }
+          ]
+        },
+        "vendor": "Some Brand",
+        "availableForSale": true,
+        "totalInventory": 1947,
+        "tags": [
+          "test"
+        ],
+        "variants": {
+          "edges": [
+            {
+              "node": {
+                "availableForSale": true,
+                "quantityAvailable": 999,
+                "selectedOptions": [
+                  {
+                    "name": "Size",
+                    "value": "S"
+                  }
+                ],
+                "title": "S",
+                "sku": "SKU_ONE-1",
+                "weight": 2,
+                "weightUnit": "KILOGRAMS",
+                "requiresShipping": true,
+                "priceV2": {
+                  "amount": "2000.0",
+                  "currencyCode": "CZK"
+                },
+                "image": {
+                  "transformedSrc": "https://cdn.shopify.com/s/files/1/0564/1610/8752/products/Screenshot2020-10-27at12.20.58.png?v=1619188031"
+                }
+              }
+            },
+            {
+              "node": {
+                "availableForSale": true,
+                "quantityAvailable": 876,
+                "selectedOptions": [
+                  {
+                    "name": "Size",
+                    "value": "M"
+                  }
+                ],
+                "title": "M",
+                "sku": "SKU_ONE-2",
+                "weight": 2,
+                "weightUnit": "KILOGRAMS",
+                "requiresShipping": true,
+                "priceV2": {
+                  "amount": "2000.0",
+                  "currencyCode": "CZK"
+                },
+                "image": {
+                  "transformedSrc": "https://cdn.shopify.com/s/files/1/0564/1610/8752/products/Screenshot2020-10-27at12.20.58.png?v=1619188031"
+                }
+              }
+            },
+            {
+              "node": {
+                "availableForSale": true,
+                "quantityAvailable": 72,
+                "selectedOptions": [
+                  {
+                    "name": "Size",
+                    "value": "L"
+                  }
+                ],
+                "title": "L",
+                "sku": "SKU_ONE-3",
+                "weight": 2,
+                "weightUnit": "KILOGRAMS",
+                "requiresShipping": false,
+                "priceV2": {
+                  "amount": "2000.0",
+                  "currencyCode": "CZK"
+                },
+                "image": {
+                  "transformedSrc": "https://cdn.shopify.com/s/files/1/0564/1610/8752/products/Screenshot2020-10-27at12.20.58.png?v=1619188031"
+                }
+              }
+            }
+          ]
+        },
+        "createdAt": "2021-04-22T21:04:02Z",
+        "updatedAt": "2021-04-23T21:37:18Z"
+      }
+    }
+  },
+  "API_RESPONSE_ERROR": {
+    "errors": [
+      {
+        "message": "Invalid global id `random-id`",
+        "locations": [
+          {
+            "line": 31,
+            "column": 3
+          }
+        ],
+        "path": [
+          "query",
+          "node",
+          "id"
+        ],
+        "extensions": {
+          "code": "argumentLiteralsIncompatible",
+          "typeName": "CoercionError"
+        }
+      }
+    ]
+  },
+  "EXPECTED_PRODUCT": {
+    "id": "Z2lkOi8vc2hvcGlmeS9Qcm9kdWN0LzY1ODYyNjExNDM3NjA=",
+    "active": true,
+    "title": "Test Product Title",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus vel neque ex. Sed eleifend nisi velit, nec dictum ex condimentum tempor.",
+    "richDescription": "<span>Lorem ipsum dolor sit amet,<strong> consectetur adipiscing elit</strong>. Phasellus vel neque ex. Sed eleifend nisi velit, nec dictum ex condimentum tempor.</span>",
+    "images": [
+      "https://cdn.shopify.com/s/files/1/0564/1610/8752/products/Screenshot2020-10-27at12.20.58.png?v=1619188031",
+      "https://cdn.shopify.com/s/files/1/0564/1610/8752/products/Screenshot2021-02-06at13.49.26.png?v=1619188031"
+    ],
+    "shippable": true,
+    "brand": "Some Brand",
+    "createdAt": 1619125442,
+    "updatedAt": 1619213838,
+    "tags": [
+      "test"
+    ],
+    "inventory": {
+      "isInStock": true,
+      "inStockCount": 1947
+    },
+    "variants": [
+      {
+        "sku": "SKU_ONE-1",
+        "active": true,
+        "title": "S",
+        "images": [
+          "https://cdn.shopify.com/s/files/1/0564/1610/8752/products/Screenshot2020-10-27at12.20.58.png?v=1619188031"
+        ],
+        "shippable": true,
+        "prices": [
+          {
+            "amount": 2000,
+            "currencyCode": "CZK"
+          }
+        ],
+        "productDimensions": {
+          "weight": 2,
+          "weightUnit": "kg"
+        },
+        "inventory": {
+          "isInStock": true,
+          "inStockCount": 999
+        }
+      },
+      {
+        "sku": "SKU_ONE-2",
+        "active": true,
+        "title": "M",
+        "images": [
+          "https://cdn.shopify.com/s/files/1/0564/1610/8752/products/Screenshot2020-10-27at12.20.58.png?v=1619188031"
+        ],
+        "shippable": true,
+        "prices": [
+          {
+            "amount": 2000,
+            "currencyCode": "CZK"
+          }
+        ],
+        "productDimensions": {
+          "weight": 2,
+          "weightUnit": "kg"
+        },
+        "inventory": {
+          "isInStock": true,
+          "inStockCount": 876
+        }
+      },
+      {
+        "sku": "SKU_ONE-3",
+        "active": true,
+        "title": "L",
+        "images": [
+          "https://cdn.shopify.com/s/files/1/0564/1610/8752/products/Screenshot2020-10-27at12.20.58.png?v=1619188031"
+        ],
+        "shippable": false,
+        "prices": [
+          {
+            "amount": 2000,
+            "currencyCode": "CZK"
+          }
+        ],
+        "productDimensions": {
+          "weight": 2,
+          "weightUnit": "kg"
+        },
+        "inventory": {
+          "isInStock": true,
+          "inStockCount": 72
+        }
+      }
+    ]
+  },
+  "EXPECTED_ERROR": {
+    "problem":"Couldn't retrieve product",
+    "details": "Invalid global id `random-id`"
+  }
+}
