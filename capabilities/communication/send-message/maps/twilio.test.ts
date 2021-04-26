@@ -14,28 +14,28 @@ describe('communication/send-message/twilio', () => {
   it('sends a message', async () => {
     const useCase = profile.getUseCase('SendMessage');
     // note: `from` input is configured in super.json
-    const result = await useCase.perform(
-      { to: recipient, text: 'Hello World!', channel: 'sms' },
+    const result = await useCase.perform<any, { messageId: string }>(
+      { to: recipient, text: 'Hello World!' },
       { provider }
     );
     expect(result.isOk()).toBeTruthy();
-    expect(typeof (result.unwrap() as any).messageId).toBe('string');
+    expect(typeof result.unwrap().messageId).toBe('string');
   });
 
   it('retrieves message status', async () => {
     const sendMessageUseCase = profile.getUseCase('SendMessage');
     const sendMessageResult = await sendMessageUseCase.perform<
-      { to: string | undefined; text: string; channel: string },
+      any,
       { messageId: string }
-    >({ to: recipient, text: 'Hello World!', channel: 'sms' }, { provider });
+    >({ to: recipient, text: 'Hello World!' }, { provider });
     const messageId = sendMessageResult.unwrap().messageId;
 
     const useCase = profile.getUseCase('RetrieveMessageStatus');
-    const result = await useCase.perform({ messageId }, { provider });
+    const result = await useCase.perform(
+      { messageId: messageId },
+      { provider }
+    );
 
-    if (result.isErr()) {
-      console.log('error', result.error);
-    }
     expect(result.isOk()).toBeTruthy();
     expect(typeof (result.unwrap() as any).deliveryStatus).toBe('string');
   });
