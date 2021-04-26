@@ -158,6 +158,9 @@
       "providers": {
         "dhl-unified": {
           "file": "./grid/delivery-tracking/shipment-info/maps/dhl-unified.suma"
+        },
+        "shippo": {
+          "file": "./grid/delivery-tracking/shipment-info/maps/shippo.suma"
         }
       }
     }
@@ -237,6 +240,15 @@
         {
           "id": "bearer_token",
           "token": "$SENDGRID_API_KEY"
+        }
+      ]
+    },
+    "shippo": {
+      "file": "../providers/shippo.json",
+      "security": [
+        {
+          "id": "shippo_api_token",
+          "apikey": "$SHIPPO_TOKEN"
         }
       ]
     }
