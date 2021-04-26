@@ -20,6 +20,7 @@
     "upload": "dotenv -e .env -- node dist/publish.js",
     "test": "yarn compile && dotenv -e .env.capabilities -- jest",
     "test:clean": "dotenv -e .env.capabilities -- jest --clear-cache && jest",
+    "test:debug": "DEBUG=* yarn test",
     "lint": "eslint ./",
     "lint:fix": "yarn lint --fix",
     "format": "prettier -c ./",
