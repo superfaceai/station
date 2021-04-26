@@ -25,4 +25,22 @@ describe('communication/send-message/plivo', () => {
     expect(typeof result.unwrap().messageId).toBe('string');
     // console.log('Result >', result.value)
   });
+
+  it('retrieves message status', async () => {
+    const sendMessageUseCase = profile.getUseCase('SendMessage');
+    const sendMessageResult = await sendMessageUseCase.perform<
+      any,
+      { messageId: string }
+    >({ to: recipient, from: 'plivotest', text: 'Hello World!' }, { provider });
+    const messageId = sendMessageResult.unwrap().messageId;
+
+    const useCase = profile.getUseCase('RetrieveMessageStatus');
+    const result = await useCase.perform<any, any>(
+      { messageId: messageId },
+      { provider }
+    );
+
+    expect(result.isOk()).toBeTruthy();
+    expect(typeof (result.unwrap() as any).deliveryStatus).toBe('string');
+  });
 });

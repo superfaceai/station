@@ -8,10 +8,7 @@ describe('communication/send-message/twilio', () => {
     const client = new SuperfaceClient();
     const profile = await client.getProfile('communication/send-message');
     const provider = await client.getProvider('twilio');
-    const result = await profile.useCases.SendMessage.perform({ 
-      to: recipient,
-      text: 'Hello from typed!'
-    }, { provider })
+    const result = await profile.useCases.SendMessage.perform({ to: recipient, text: "blabla"}, { provider })
 
     expect(result.isOk()).toBeTruthy();
     expect(typeof result.unwrap().messageId).toBe('string');

@@ -26,3 +26,33 @@ map SendMessage {
     }
   }
 }
+
+map RetrieveMessageStatus {
+  authId = input.PLIVO_AUTH_ID
+
+  http GET "/v1/Account/{authId}/Message/{input.messageId}" {
+    security "basic"
+
+    response 200 "application/json" {
+      map result {
+        deliveryStatus = (() => { 
+          switch (body.message_state) {
+            case 'sending':
+            case 'sent':
+            case 'accepted':
+              return 'accepted';
+          
+            case 'delivered':
+              return 'delivered';
+
+            case 'failed':
+              return 'failed'
+
+            default:
+              return 'unknown';
+          }
+        })()
+      }
+    }
+  }
+}

@@ -38,7 +38,6 @@ map RetrieveMessageStatus {
       map result {
         deliveryStatus = (() => { 
           switch (body.status) {
-            case 'sent':
             case 'sending':
             case 'sent':
               return 'accepted';
