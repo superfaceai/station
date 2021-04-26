@@ -8,7 +8,7 @@ version = "1.0.0"
 
 "
 Send Message
-Send single conversation message
+Send single text message
 "
 usecase SendMessage unsafe {
   input {
@@ -20,15 +20,11 @@ usecase SendMessage unsafe {
 
     "The text of the message"
     text
-
-    "Over-the-top channel"
-    channel
   }
 
   result {
     messageId
   }
-
 
   error {
     problem
@@ -54,13 +50,13 @@ usecase RetrieveMessageStatus safe {
 
 "
 Identifier of Message
-The identifier is channel-specific and not unique. It should be treated as an opaque value and only used in subsequent calls
+The identifier is provider-specific and not unique. It should be treated as an opaque value and only used in subsequent calls
 "
 field messageId string
 
 "
 Delivery Status of Message
-Status of a sent message. Harmonized across different channels.
+Status of a sent message. Harmonized across different providers.
 "
 field deliveryStatus enum {
   accepted
@@ -68,12 +64,4 @@ field deliveryStatus enum {
   seen
   unknown
   failed
-}
-
-"
-Channel
-Over-the-air channel for the communication
-"
-field channel enum {
-  sms
 }

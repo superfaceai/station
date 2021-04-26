@@ -12,7 +12,7 @@ map SendMessage {
 
       body {
         to = input.to
-        channels = [input.channel]
+        channels = ['sms']
         sms.from = input.from
         sms.contentType = 'text'
         sms.text = input.text

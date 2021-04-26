@@ -37,15 +37,15 @@ yarn create:profile {scope}/{usecase}
 Creates provider.json, adds it to super.json
 
 ```
- yarn create:provider {provider}
+yarn create:provider {provider}
 ```
 
 **Create map**
 
-Create sa map file, test file and adds newly created map to to super.json
+Create a map file, test file and adds newly created map to to super.json
 
 ```
- yarn create:map {scope}/{usecase} {provider}
+yarn create:map {scope}/{usecase} {provider}
 ```
 
 **Test**

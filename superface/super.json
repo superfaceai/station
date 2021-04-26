@@ -29,6 +29,40 @@
               }
             }
           }
+        },
+        "vonage-nexmo": {
+          "file": "./grid/communication/send-message/maps/vonage-nexmo.suma",
+          "defaults": {
+            "SendMessage": {
+              "input": {
+                "NEXMO_API_KEY": "$NEXMO_API_KEY",
+                "NEXMO_API_SECRET": "$NEXMO_API_SECRET"
+              }
+            },
+            "RetrieveMessageStatus": {
+              "input": {
+                "NEXMO_API_KEY": "$NEXMO_API_KEY",
+                "NEXMO_API_SECRET": "$NEXMO_API_SECRET"
+              }
+            }
+          }
+        },
+        "plivo": {
+          "file": "./grid/communication/send-message/maps/plivo.suma",
+          "defaults": {
+            "SendMessage": {
+              "input": {
+                "PLIVO_AUTH_ID": "$PLIVO_AUTH_ID",
+                "PLIVO_AUTH_TOKEN": "$PLIVO_AUTH_TOKEN"
+              }
+            },
+            "RetrieveMessageStatus": {
+              "input": {
+                "PLIVO_AUTH_ID": "$PLIVO_AUTH_ID",
+                "PLIVO_AUTH_TOKEN": "$PLIVO_AUTH_TOKEN"
+              }
+            }
+          }
         }
       }
     },
@@ -134,6 +168,20 @@
         {
           "id": "auth-token",
           "apikey": "$SMARTYSTREETS_API_KEY"
+        }
+      ]
+    },
+    "vonage-nexmo": {
+      "file": "../providers/vonage-nexmo.json",
+      "security": []
+    },
+    "plivo": {
+      "file": "../providers/plivo.json",
+      "security": [
+        {
+          "id": "basic",
+          "username": "$PLIVO_AUTH_ID",
+          "password": "$PLIVO_AUTH_TOKEN"
         }
       ]
     }

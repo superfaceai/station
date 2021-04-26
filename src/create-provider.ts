@@ -1,4 +1,4 @@
-import { SuperJson } from '@superfaceai/sdk';
+import { SuperJson } from '@superfaceai/one-sdk';
 
 import { EXTENSIONS, PROVIDERS_DIR, SUPER_JSON } from './constants';
 import { exists, mkdir, writeFile } from './io';
