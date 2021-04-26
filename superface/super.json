@@ -152,6 +152,14 @@
           "file": "./grid/vcs/pull-request/maps/bitbucket.suma"
         }
       }
+    },
+    "delivery-tracking/shipment-info": {
+      "file": "./grid/delivery-tracking/shipment-info/profile.supr",
+      "providers": {
+        "dhl-unified": {
+          "file": "./grid/delivery-tracking/shipment-info/maps/dhl-unified.suma"
+        }
+      }
     }
   },
   "providers": {
@@ -212,6 +220,14 @@
           "id": "basic",
           "username": "$PLIVO_AUTH_ID",
           "password": "$PLIVO_AUTH_TOKEN"
+        }]
+    },
+    "dhl-unified": {
+      "file": "../providers/dhl-unified.json",
+      "security": [
+        {
+          "id": "dhl_api_key",
+          "apikey": "$DHL_API_KEY"
         }
       ]
     },
