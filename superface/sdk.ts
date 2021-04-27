@@ -3,6 +3,7 @@ import { createTypedClient } from "@superfaceai/one-sdk";
 import { addressCleanAddress } from "./types/address/clean-address";
 import { communicationSendEmail } from "./types/communication/send-email";
 import { communicationSendMessage } from "./types/communication/send-message";
+import { deliveryTrackingShipmentInfo } from './types/delivery-tracking/shipment-info';
 import { vcsPullRequest } from "./types/vcs/pull-request";
 import { vcsPullRequests } from "./types/vcs/pull-requests";
 import { vcsSingleFileContent } from "./types/vcs/single-file-content";
@@ -19,6 +20,7 @@ export const typeDefinitions = {
     ...addressCleanAddress,
     ...communicationSendEmail,
     ...communicationSendMessage,
+    ...deliveryTrackingShipmentInfo,
     ...vcsPullRequests,
     ...vcsSingleFileContent,
     ...vcsUserRepos,
