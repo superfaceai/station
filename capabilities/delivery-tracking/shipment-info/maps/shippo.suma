@@ -82,25 +82,13 @@ operation MapLocation {
 }
 
 operation MapTrackingStatusToEvent {
-  set {
-    statusCode = "unknown"
-  }
-  set if(args.trackingStatus.status === "PRE_TRANSIT") {
-    statusCode = "pre_transit"
-  }
-  set if(args.trackingStatus.status === "TRANSIT") {
-    statusCode = "transit"
-  }
-  set if(args.trackingStatus.status === "DELIVERED") {
-    statusCode = "delivered"
-  }
-  set if(args.trackingStatus.status === "FAILURE") {
-    statusCode = "failure"
-  }
+  
+  statusCode = call MapTrackingStatusCode(status = args.trackingStatus.status)
 
   set {
     location = undefined
   }
+
   set if(args.trackingStatus.location) {
     location = call MapLocation(address = args.trackingStatus.location)
   }
@@ -110,6 +98,25 @@ operation MapTrackingStatusToEvent {
     statusCode = statusCode
     statusText = args.trackingStatus.status_details
     location = location
+  }
+}
+
+operation MapTrackingStatusCode {
+  switch (args.status) {
+    case 'PRE_TRANSIT':
+      return 'pre_transit'
+  
+    case 'TRANSIT':
+      statusCode = 'transit'
+
+    case 'DELIVERED':
+      return 'delivered'
+
+    case 'FAILURE':
+      return 'failure'
+
+    default:
+      return 'unknown'
   }
 }
 
