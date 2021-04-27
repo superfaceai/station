@@ -100,21 +100,27 @@ operation MapTrackingStatusToEvent {
 }
 
 operation MapTrackingStatusCode {
-  switch (args.status) {
-    case 'PRE_TRANSIT':
-      return 'pre_transit'
-  
-    case 'TRANSIT':
-      statusCode = 'transit'
+  set {
+    result = (() => {
+      switch (args.status) {
+        case 'PRE_TRANSIT':
+          return 'pre_transit'
+      
+        case 'TRANSIT':
+          return 'transit'
 
-    case 'DELIVERED':
-      return 'delivered'
+        case 'DELIVERED':
+          return 'delivered'
 
-    case 'FAILURE':
-      return 'failure'
+        case 'FAILURE':
+          return 'failure'
 
-    default:
-      return 'unknown'
+        default:
+          return 'unknown'
+      }
+    })()
   }
+
+  return result
 }
 
