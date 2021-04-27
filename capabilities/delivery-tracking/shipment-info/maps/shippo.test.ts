@@ -1,4 +1,4 @@
-import { SuperfaceClient } from '@superfaceai/one-sdk';
+import { SuperfaceClient } from '../../../../superface/sdk';
 
 describe('delivery-tracking/shipment-info/shippo', () => {
   it('should define use-case and provider', async () => {
@@ -18,12 +18,8 @@ describe('delivery-tracking/shipment-info/shippo', () => {
       const profile = await client.getProfile(
         'delivery-tracking/shipment-info'
       );
-      const shipmentInfo = profile.getUseCase('shipmentInfo');
       const shippo = await client.getProvider('shippo');
-      const result = await shipmentInfo.perform<
-        { carrier: string; trackingNumber: string },
-        any
-      >(
+      const result = await profile.useCases.shipmentInfo.perform(
         { carrier: 'shippo', trackingNumber: 'SHIPPO_PRE_TRANSIT' },
         { provider: shippo }
       );
@@ -68,12 +64,8 @@ describe('delivery-tracking/shipment-info/shippo', () => {
       const profile = await client.getProfile(
         'delivery-tracking/shipment-info'
       );
-      const shipmentInfo = profile.getUseCase('shipmentInfo');
       const shippo = await client.getProvider('shippo');
-      const result = await shipmentInfo.perform<
-        { carrier: string; trackingNumber: string },
-        any
-      >(
+      const result = await profile.useCases.shipmentInfo.perform(
         { carrier: 'shippo', trackingNumber: 'SHIPPO_TRANSIT' },
         { provider: shippo }
       );
