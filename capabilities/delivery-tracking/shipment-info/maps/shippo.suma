@@ -21,9 +21,7 @@ operation FetchShipment {
     security "shippo_api_token"
     response 200 "application/json" {
 
-      set {
-        shipment = call MapShipment(shipment = body)
-      }
+      shipment = call MapShipment(shipment = body)
 
       return [shipment]
     }
