@@ -1,4 +1,4 @@
-import { SuperfaceClient } from '@superfaceai/sdk';
+import { SuperfaceClient } from '@superfaceai/one-sdk';
 
 describe('address/clean-address/smartystreets', () => {
   it('performs correctly', async () => {

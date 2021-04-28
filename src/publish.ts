@@ -1,7 +1,7 @@
 import { isMapDocumentNode, isProfileDocumentNode } from '@superfaceai/ast';
-import { BrainClient } from '@superfaceai/brain-client';
 import { isProviderJson } from '@superfaceai/one-sdk';
 import { parseMap, parseProfile, Source } from '@superfaceai/parser';
+import { ServiceClient } from '@superfaceai/service-client';
 
 import { EXTENSIONS } from './constants';
 import { exists, readFile } from './io';
@@ -20,7 +20,7 @@ export async function publish(): Promise<void> {
   ) {
     throw new Error('Do not use compiled files! Use .supr or .suma files :)');
   }
-  const client = new BrainClient({
+  const client = new ServiceClient({
     baseUrl: 'https://superface.dev',
     refreshToken: process.env.SUPERFACE_STORE_REFRESH_TOKEN,
   });

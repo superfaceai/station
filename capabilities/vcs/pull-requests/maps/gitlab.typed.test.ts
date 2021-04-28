@@ -1,18 +1,15 @@
-import { SuperfaceClient } from '@superfaceai/one-sdk';
+import { SuperfaceClient } from '../../../../superface/sdk';
 
-describe('vcs/pull-requests/gitlab', () => {
-  it('performs correctly', async () => {
+describe('vcs/pull-requests/gitlab-typed', () => {
+
+  it('sends a message', async () => {
     const client = new SuperfaceClient();
     const profile = await client.getProfile('vcs/pull-requests');
-    const useCase = profile.getUseCase('PullRequests');
     const provider = await client.getProvider('gitlab');
-    const result = await useCase.perform(
-      { owner: 'Jakub-Vacek', repo: 'empty-test' },
-      { provider }
-    );
-    const value = result.unwrap();
+    const result = await profile.useCases.PullRequests.perform({ owner: 'Jakub-Vacek', repo: 'empty-test' }, { provider })
 
-    expect(value).toEqual({
+    expect(result.isOk()).toBeTruthy();
+    expect(result.unwrap()).toEqual({
       repos: [
         {
           id: 1,
