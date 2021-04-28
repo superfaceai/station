@@ -1,0 +1,39 @@
+profile = "communication/send-email@1.0"
+provider = "mailgun"
+
+"
+API Reference: https://documentation.mailgun.com/en/latest/api_reference.html
+"
+
+map SendEmail {
+  // TODO: make this input visible
+  domain = input.domain
+  
+  body = {
+    from: input.from,
+    to: input.to,
+    subject: input.subject,
+  }
+
+  set if (input.text) {
+    body.text = input.text
+  }
+  
+  set if (input.html) {
+    body.html = input.html
+  }
+
+  http POST "/{domain}/messages" {
+    security "basic"
+
+    request "application/x-www-form-urlencoded" {
+      body = body
+    }
+
+    response 200 {
+      map result {
+        messageId = body.id
+      }
+    }
+  }
+}
