@@ -127,9 +127,10 @@ async function compile() {
               `./${CAPABILITIES_DIR}/${scope}/${useCase}/maps/${file}`,
               `./${PROFILE_BUILD_PATH}/${scope}/${useCase}/maps/${file}`
             );
-            await compileMap(
+            const ast = await compileMap(
               `./${PROFILE_BUILD_PATH}/${scope}/${useCase}/maps/${file}`
             );
+            await writeFile(`./${PROFILE_BUILD_PATH}/${scope}/${useCase}/maps/${file}.ast.json`, JSON.stringify(ast, null, 2));
           }
         }
       }
