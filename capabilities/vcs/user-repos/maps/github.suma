@@ -1,7 +1,7 @@
 profile = "vcs/user-repos@1.0"
 provider = "github"
 
-map userRepos {
+map UserRepos {
   username = input.user
 
   http GET "/users/{username}/repos" {

@@ -1,7 +1,8 @@
 import { MapDocumentNode, ProfileDocumentNode } from '@superfaceai/ast';
+import { generateTypesFile, generateTypingsForProfile } from '@superfaceai/cli/dist/logic/generate';
 import { parseMap, parseProfile, Source } from '@superfaceai/parser';
 
-import { CAPABILITIES_DIR, EXTENSIONS, PROFILE_BUILD_PATH } from './constants';
+import { CAPABILITIES_DIR, EXTENSIONS, PROFILE_BUILD_PATH, TYPE_DEFINITIONS_FILE, TYPES_FILE_PATH, TYPES_PATH } from './constants';
 import {
   copyFile,
   exists,
@@ -11,26 +12,34 @@ import {
   readFile,
   writeFile,
 } from './io';
+import { exportTypeTemplate } from './templates';
 
-export async function compileFile(path: string): Promise<void> {
-  try {
+
+export async function compileProfile(path: string): Promise<ProfileDocumentNode> {
+  if (!path.endsWith(EXTENSIONS.profile.source)) {
+    throw new Error(`Invalid profile suffix:${path}`);
+  } else {
     const body = await readFile(path);
     const source = new Source(body, path);
-    let ast: MapDocumentNode | ProfileDocumentNode;
-    if (path.endsWith(EXTENSIONS.map.source)) {
-      ast = parseMap(source);
-    } else if (path.endsWith(EXTENSIONS.profile.source)) {
-      ast = parseProfile(source);
-    } else {
-      throw new Error(`Invalid suffix:${path}`);
-    }
-    await writeFile(`${path}.ast.json`, JSON.stringify(ast, null, 2));
-  } catch (error) {
-    console.log(`Error during compilation of file: ${path}`, error);
+
+    return parseProfile(source);
+  }
+}
+
+export async function compileMap(path: string): Promise<MapDocumentNode> {
+  if (!path.endsWith(EXTENSIONS.map.source)) {
+    throw new Error(`Invalid map suffix:${path}`);
+  } else {
+    const body = await readFile(path);
+    const source = new Source(body, path);
+
+    return parseMap(source);
   }
 }
 
 async function compile() {
+  const generateFlag = process.argv[2] ? process.argv[2].trim() : undefined;
+
   //Get capabilities directories
   const scopes = await getDirectories(`./${CAPABILITIES_DIR}`);
   let profiles: string[];
@@ -69,9 +78,36 @@ async function compile() {
             `./${CAPABILITIES_DIR}/${scope}/${useCase}/${file}`,
             `./${PROFILE_BUILD_PATH}/${scope}/${useCase}/${file}`
           );
-          await compileFile(
-            `./${PROFILE_BUILD_PATH}/${scope}/${useCase}/${file}`
-          );
+          //Compile AST
+          const path = `./${PROFILE_BUILD_PATH}/${scope}/${useCase}/${file}`;
+          const ast = await compileProfile(path);
+          await writeFile(`${path}.ast.json`, JSON.stringify(ast, null, 2));
+
+          if (generateFlag === '-g') {
+            //Generate profile types
+            const typing = generateTypingsForProfile(
+              `${scope}/${useCase}`, ast
+            );
+            //Create folder structure if it doesn't exist
+            if (!(await exists(`./${TYPES_PATH}`))) {
+              await mkdir(`./${TYPES_PATH}`);
+            }
+            if (!(await exists(`./${TYPES_PATH}/${scope}`))) {
+              await mkdir(`./${TYPES_PATH}/${scope}`);
+            }
+            await writeFile(`./${TYPES_PATH}/${scope}/${useCase}${EXTENSIONS.typescript}`, typing);
+
+            //Create/update.d.ts index
+            let typeDefinitions = ''
+            if (await exists(`./${TYPES_PATH}/${scope}/${TYPE_DEFINITIONS_FILE}`)) {
+              typeDefinitions = await readFile(`./${TYPES_PATH}/${scope}/${TYPE_DEFINITIONS_FILE}`)
+            }
+            const addition = exportTypeTemplate(useCase);
+            if (!typeDefinitions.includes(addition)) {
+              typeDefinitions = typeDefinitions + exportTypeTemplate(useCase)
+              await writeFile(`./${TYPES_PATH}/${scope}/${TYPE_DEFINITIONS_FILE}`, typeDefinitions)
+            }
+          }
         }
       }
       //Compile maps
@@ -91,12 +127,25 @@ async function compile() {
               `./${CAPABILITIES_DIR}/${scope}/${useCase}/maps/${file}`,
               `./${PROFILE_BUILD_PATH}/${scope}/${useCase}/maps/${file}`
             );
-            await compileFile(
+            await compileMap(
               `./${PROFILE_BUILD_PATH}/${scope}/${useCase}/maps/${file}`
             );
           }
         }
       }
+    }
+    if (generateFlag === '-g') {
+      //Generate types file
+      const sdkPath = `./${TYPES_FILE_PATH}`
+      if (!(await exists(sdkPath))) {
+        await writeFile(sdkPath, '');
+      }
+      const paths = useCases.map(useCase => `${scope}/${useCase}`)
+      const typesFile = generateTypesFile(
+        paths,
+        await readFile(sdkPath)
+      );
+      await writeFile(sdkPath, typesFile);
     }
   }
 }
