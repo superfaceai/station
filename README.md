@@ -31,7 +31,7 @@ Compiles files into `superface/grid` folder.
 yarn compile
 ```
 
-You can use `-g` flag to generate TypeScript types for **every** compiled file
+You can use `-g` flag to generate TypeScript types for **every** compiled file. For now it's safer to use `generate` command.
 
 ```
 yarn compile -g
