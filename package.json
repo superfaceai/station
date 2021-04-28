@@ -18,7 +18,7 @@
     "create:profile": "node dist/src/create-profile.js",
     "create:provider": "node dist/src/create-provider.js",
     "create:map": "node dist/src/create-map.js",
-    "upload": "dotenv -e .env -- node dist/src/publish.js",
+    "upload": "dotenv -e .env -- node dist/publish.js",
     "test": "yarn compile && dotenv -e .env.capabilities -- jest",
     "test:clean": "dotenv -e .env.capabilities -- jest --clear-cache && jest",
     "test:debug": "DEBUG=* yarn test",
