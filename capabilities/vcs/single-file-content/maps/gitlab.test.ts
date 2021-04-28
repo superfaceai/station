@@ -4,7 +4,7 @@ describe('vcs/single-file-content/gitlab', () => {
   it('performs correctly', async () => {
     const client = new SuperfaceClient();
     const profile = await client.getProfile('vcs/single-file-content');
-    const useCase = profile.getUseCase('singleFileContent');
+    const useCase = profile.getUseCase('SingleFileContent');
     const provider = await client.getProvider('gitlab');
     const result = await useCase.perform(
       {

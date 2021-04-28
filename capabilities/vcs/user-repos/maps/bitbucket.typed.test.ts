@@ -1,15 +1,15 @@
-import { SuperfaceClient } from '@superfaceai/one-sdk';
+import { SuperfaceClient } from '../../../../superface/sdk';
 
-describe('vcs/user-repos/bitbucket', () => {
+describe('vcs/user-repos/bitbucket-typed', () => {
+
   it('performs correctly', async () => {
     const client = new SuperfaceClient();
     const profile = await client.getProfile('vcs/user-repos');
-    const useCase = profile.getUseCase('UserRepos');
     const provider = await client.getProvider('bitbucket');
-    const result = await useCase.perform({}, { provider });
-    const value = result.unwrap();
+    const result = await profile.useCases.UserRepos.perform({}, { provider })
 
-    expect(value).toEqual({
+    expect(result.isOk()).toBeTruthy();
+    expect(result.unwrap()).toEqual({
       repos: [
         { name: 'testRepository', description: '' },
         { name: 'Private', description: '' },

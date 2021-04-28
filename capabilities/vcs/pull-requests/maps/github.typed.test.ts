@@ -1,18 +1,15 @@
-import { SuperfaceClient } from '@superfaceai/one-sdk';
+import { SuperfaceClient } from '../../../../superface/sdk';
 
-describe('vcs/pull-requests/github', () => {
-  it('performs correctly', async () => {
+describe('vcs/pull-requests/github-typed', () => {
+
+  it('sends a message', async () => {
     const client = new SuperfaceClient();
     const profile = await client.getProfile('vcs/pull-requests');
-    const useCase = profile.getUseCase('PullRequests');
     const provider = await client.getProvider('github');
-    const result = await useCase.perform(
-      { owner: 'superfaceai', repo: 'astexplorer' },
-      { provider }
-    );
-    const value = result.unwrap();
+    const result = await profile.useCases.PullRequests.perform({ owner: 'superfaceai', repo: 'astexplorer' }, { provider })
 
-    expect(value).toEqual({
+    expect(result.isOk()).toBeTruthy();
+    expect(result.unwrap()).toEqual({
       repos: [
         {
           id: 567476468,
