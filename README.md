@@ -92,12 +92,15 @@ yarn test:debug
 
 ### Upload
 
+**note**: Do not upload to production unless you are 100% sure
+
 Uploads map/profile/provider to Store - use paths to `.supr` file for profiles, `.suma` for maps and `.json` for providers. Do not use path ending with `.ast.json` (compiled files).
 
 ```
 yarn upload {path}
 ```
 
+Url is by default set to: `https://superface.dev` if you want to upload files to production (`https://superface.ai`) you can use `-P` flag.
 
 ## Adding new capability
 

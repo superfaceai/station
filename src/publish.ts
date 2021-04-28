@@ -2,12 +2,30 @@ import { isMapDocumentNode, isProfileDocumentNode } from '@superfaceai/ast';
 import { isProviderJson } from '@superfaceai/one-sdk';
 import { parseMap, parseProfile, Source } from '@superfaceai/parser';
 import { ServiceClient } from '@superfaceai/service-client';
+import inquirer from 'inquirer';
 
 import { EXTENSIONS } from './constants';
 import { exists, readFile } from './io';
 
 export async function publish(): Promise<void> {
+
   const path = process.argv[2];
+  const enviromentFlag = process.argv[3] ? process.argv[3].trim() : undefined;
+  let baseUrl = 'https://superface.dev';
+
+  if (enviromentFlag === '-P') {
+    const response: { upload: boolean } = await inquirer.prompt({
+      name: 'upload',
+      message: 'Are you sure that you want to upload data to PRODUCTION server?',
+      type: 'confirm',
+    });
+    if (response.upload) {
+      baseUrl = 'https://superface.ai';
+    } else {
+      process.exit(0)
+    }
+  }
+
   if (!(await exists(path))) {
     throw new Error('Path does not exist');
   }
@@ -20,8 +38,9 @@ export async function publish(): Promise<void> {
   ) {
     throw new Error('Do not use compiled files! Use .supr or .suma files :)');
   }
+
   const client = new ServiceClient({
-    baseUrl: 'https://superface.dev',
+    baseUrl,
     refreshToken: process.env.SUPERFACE_STORE_REFRESH_TOKEN,
   });
 
