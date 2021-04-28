@@ -20,7 +20,6 @@ operation FetchShipment {
   http GET "/tracks/{args.carrier}/{args.trackingNumber}" {
     security "shippo_api_token"
     response 200 "application/json" {
-
       shipment = call MapShipment(shipment = body)
 
       return [shipment]
@@ -50,16 +49,15 @@ operation MapShipment {
   set if (shipment.eta) {
     estimatedDeliveryDate = shipment.eta
   }
-  set {
-    status = call MapTrackingStatusToEvent(
-      trackingStatus = shipment.tracking_status
-    )
-  }
-  set {
-    events = call foreach(trackingStatus of shipment.tracking_history) MapTrackingStatusToEvent(
-      trackingStatus = trackingStatus
-    )
-  }
+  
+  status = call MapTrackingStatusToEvent(
+    trackingStatus = shipment.tracking_status
+  )
+
+  events = call foreach(trackingStatus of shipment.tracking_history) MapTrackingStatusToEvent(
+    trackingStatus = trackingStatus
+  )
+
   return {
     trackingNumber = args.trackingNumber
     origin = call MapLocation(address = shipment.address_from)
@@ -81,12 +79,8 @@ operation MapLocation {
 }
 
 operation MapTrackingStatusToEvent {
-  
   statusCode = call MapTrackingStatusCode(status = args.trackingStatus.status)
-
-  set {
-    location = undefined
-  }
+  location = undefined
 
   set if(args.trackingStatus.location) {
     location = call MapLocation(address = args.trackingStatus.location)
