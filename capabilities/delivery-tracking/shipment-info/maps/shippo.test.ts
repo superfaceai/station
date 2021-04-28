@@ -57,6 +57,7 @@ describe('delivery-tracking/shipment-info/shippo', () => {
       expect(shipment.events.length).toBe(1);
     });
   });
+
   describe('for tracking number in transit', () => {
     let shipment: any;
     beforeAll(async () => {
@@ -71,14 +72,20 @@ describe('delivery-tracking/shipment-info/shippo', () => {
       );
       shipment = result.unwrap()[0];
     });
+
     it('should return valid status', () => {
       expect(shipment.status.statusCode).toBe('transit');
       expect(shipment.status.statusText).toBe(
         'Your shipment has departed from the origin.'
       );
     });
+
     it('should return events', () => {
       expect(shipment.events.length).toBe(2);
+    });
+
+    it('should return estimated delivery date', () => {
+      expect(shipment.estimatedDeliveryDate).toBeDefined();
     });
   });
 });

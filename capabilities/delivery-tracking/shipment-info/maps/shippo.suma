@@ -47,7 +47,7 @@ operation MapShipment {
   estimatedDeliveryDate = undefined
   shipment = args.shipment
 
-  set if (shipment.estimatedDeliveryDate) {
+  set if (shipment.eta) {
     estimatedDeliveryDate = shipment.eta
   }
   set {
@@ -66,6 +66,7 @@ operation MapShipment {
     destination = call MapLocation(address = shipment.address_to)
     status = status
     events = events
+    estimatedDeliveryDate = estimatedDeliveryDate
   }
 }
 
