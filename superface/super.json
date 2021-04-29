@@ -138,6 +138,14 @@
           }
         }
       }
+    },
+    "vcs/pull-request": {
+      "file": "./grid/vcs/pull-request/profile.supr",
+      "providers": {
+        "github": {
+          "file": "./grid/vcs/pull-request/maps/github.suma"
+        }
+      }
     }
   },
   "providers": {
@@ -209,6 +217,10 @@
           "token": "$SENDGRID_API_KEY"
         }
       ]
+    },
+    "provider": {
+      "file": "../providers/provider.json",
+      "security": []
     }
   }
 }

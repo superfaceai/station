@@ -1,0 +1,20 @@
+name = "vcs/pull-request"
+version = "1.0"
+
+"""
+pull-request usecase
+"""
+usecase PullRequest {
+  input {
+    owner
+    repo
+    identifier
+  }
+
+  result {
+    title
+    id
+    url
+    sha
+  }
+}
