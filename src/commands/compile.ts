@@ -28,7 +28,7 @@ export default class Compile extends Command {
     '$ station compile --generate',
   ];
 
-  private logCallback?= (message: string) => this.log(grey(message));
+  private logCallback? = (message: string) => this.log(grey(message));
 
   async run(): Promise<void> {
     const { flags } = this.parse(Compile);

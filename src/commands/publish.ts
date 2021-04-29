@@ -33,7 +33,7 @@ export default class Publish extends Command {
     '$ station publish capabilities/vcs/user-repos/maps/bitbucket.suma -q',
   ];
 
-  private logCallback?= (message: string) => this.log(grey(message));
+  private logCallback? = (message: string) => this.log(grey(message));
 
   async run(): Promise<void> {
     const { argv, flags } = this.parse(Publish);

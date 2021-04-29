@@ -30,7 +30,7 @@ export default class Create extends Command {
     '$ station create provider twilio',
   ];
 
-  private logCallback?= (message: string) => this.log(grey(message));
+  private logCallback? = (message: string) => this.log(grey(message));
 
   async run(): Promise<void> {
     const { argv, flags } = this.parse(Create);
@@ -49,7 +49,7 @@ export default class Create extends Command {
       const [scope, usecase] = documentName.split('/');
       await createProfile(scope, usecase, { logCb: this.logCallback });
     } else if (type === 'map') {
-      const mapName = argv[3];
+      const mapName = argv[2];
       const documentName = argv[1] ?? argv[0];
       const [scope, usecase] = documentName.split('/');
       if (!mapName) {
@@ -57,7 +57,7 @@ export default class Create extends Command {
       }
       await createMap(scope, usecase, mapName, { logCb: this.logCallback });
     } else if (type === 'provider') {
-      const providerName = argv[0];
+      const providerName = argv[1];
       await createProvider(providerName, { logCb: this.logCallback });
     }
   }

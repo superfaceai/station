@@ -19,7 +19,7 @@ export default class Compile extends Command {
   ];
 
   static flags = {
-    ...Command.flags
+    ...Command.flags,
   };
 
   static examples = [
@@ -27,7 +27,7 @@ export default class Compile extends Command {
     '$ station generate sms/service -q',
   ];
 
-  private logCallback?= (message: string) => this.log(grey(message));
+  private logCallback? = (message: string) => this.log(grey(message));
 
   async run(): Promise<void> {
     const { argv, flags } = this.parse(Compile);

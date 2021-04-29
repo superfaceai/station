@@ -12,8 +12,8 @@ export async function createProvider(
   }
 ): Promise<void> {
   //Create folder structure if it doesn't exist
-  if (!(await exists(`./$${PROVIDERS_DIR}`))) {
-    await mkdir(`./$${PROVIDERS_DIR}`);
+  if (!(await exists(`./${PROVIDERS_DIR}`))) {
+    await mkdir(`./${PROVIDERS_DIR}`);
   }
 
   //Create provider file
