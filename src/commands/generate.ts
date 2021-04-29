@@ -23,8 +23,8 @@ export default class Compile extends Command {
   };
 
   static examples = [
-    '$ yarn generate sms/service',
-    '$ yarn generate sms/service -q',
+    '$ station generate sms/service',
+    '$ station generate sms/service -q',
   ];
 
   private logCallback?= (message: string) => this.log(grey(message));

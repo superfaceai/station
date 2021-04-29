@@ -28,9 +28,9 @@ export default class Publish extends Command {
   };
 
   static examples = [
-    '$ yarn upload capabilities/vcs/user-repos/maps/bitbucket.suma',
-    '$ yarn upload capabilities/vcs/user-repos/maps/bitbucket.suma -p',
-    '$ yarn upload capabilities/vcs/user-repos/maps/bitbucket.suma -q',
+    '$ station publish capabilities/vcs/user-repos/maps/bitbucket.suma',
+    '$ station publish capabilities/vcs/user-repos/maps/bitbucket.suma -p',
+    '$ station publish capabilities/vcs/user-repos/maps/bitbucket.suma -q',
   ];
 
   private logCallback?= (message: string) => this.log(grey(message));

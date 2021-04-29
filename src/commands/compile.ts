@@ -22,10 +22,10 @@ export default class Compile extends Command {
   };
 
   static examples = [
-    '$ yarn compile',
-    '$ yarn compile -q',
-    '$ yarn compile -g',
-    '$ yarn compile --generate',
+    '$ station compile',
+    '$ station compile -q',
+    '$ station compile -g',
+    '$ station compile --generate',
   ];
 
   private logCallback?= (message: string) => this.log(grey(message));

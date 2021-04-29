@@ -24,10 +24,10 @@ export default class Create extends Command {
   };
 
   static examples = [
-    '$ yarn create profile sms/service',
-    '$ yarn create profile sms/service -q',
-    '$ yarn create map sms/service twilio',
-    '$ yarn create provider twilio',
+    '$ station create profile sms/service',
+    '$ station create map sms/service twilio',
+    '$ station create profile sms/service -q',
+    '$ station create provider twilio',
   ];
 
   private logCallback?= (message: string) => this.log(grey(message));
