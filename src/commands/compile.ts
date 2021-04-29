@@ -8,7 +8,7 @@ export default class Compile extends Command {
   static strict = false;
 
   static description =
-    'Compiles every profile and map from capabilities directory to superface/grid directory';
+    'Compiles every profile and map from capabilities directory to superface/grid directory. For now it is safer to use generate command.';
 
   static args = [];
 
@@ -17,17 +17,15 @@ export default class Compile extends Command {
     generate: flags.boolean({
       char: 'g',
       default: false,
-      description: 'Generate types for every compiled file.',
+      description: 'Generate types for compiled files.',
     }),
   };
 
   static examples = [
-    '$ superface create profile sms/service',
-    '$ superface create profile sms/service -u SendSMS ReceiveSMS',
-    '$ superface create map sms/service -p twilio',
-    '$ superface create map sms/service -p twilio -u SendSMS ReceiveSMS',
-    '$ superface create sms/service -p twilio -u SendSMS ReceiveSMS',
-    '$ superface create sms/service -p twilio -t bugfix -v 1.1-rev133 -u SendSMS ReceiveSMS',
+    '$ yarn compile',
+    '$ yarn compile -q',
+    '$ yarn compile -g',
+    '$ yarn compile --generate',
   ];
 
   private logCallback?= (message: string) => this.log(grey(message));

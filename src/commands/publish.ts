@@ -8,7 +8,7 @@ export default class Publish extends Command {
   static strict = false;
 
   static description =
-    'Creates empty map, profile or provider on a local filesystem.';
+    'Uploads map/profile/provider to Store - use paths to `.supr` file for profiles, `.suma` for maps and `.json` for providers. Do not use path ending with `.ast.json` (compiled files).';
 
   static args = [
     {
@@ -28,15 +28,12 @@ export default class Publish extends Command {
   };
 
   static examples = [
-    '$ superface create profile sms/service',
-    '$ superface create profile sms/service -u SendSMS ReceiveSMS',
-    '$ superface create map sms/service -p twilio',
-    '$ superface create map sms/service -p twilio -u SendSMS ReceiveSMS',
-    '$ superface create sms/service -p twilio -u SendSMS ReceiveSMS',
-    '$ superface create sms/service -p twilio -t bugfix -v 1.1-rev133 -u SendSMS ReceiveSMS',
+    '$ yarn upload capabilities/vcs/user-repos/maps/bitbucket.suma',
+    '$ yarn upload capabilities/vcs/user-repos/maps/bitbucket.suma -p',
+    '$ yarn upload capabilities/vcs/user-repos/maps/bitbucket.suma -q',
   ];
 
-  private logCallback? = (message: string) => this.log(grey(message));
+  private logCallback?= (message: string) => this.log(grey(message));
 
   async run(): Promise<void> {
     const { argv, flags } = this.parse(Publish);

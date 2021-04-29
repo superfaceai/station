@@ -1,5 +1,5 @@
 # station
-Capabilities
+Where capabilities are born.
 
 **note**: we are now using public superface packages. Only private Station dependency is `service-client` so please update your `.npmrc` to use superface private registry only for `service-client`:
 
@@ -21,97 +21,137 @@ yarn build
 ```
 set .env variables from .env.example. For publishing you need to set SUPERFACE_STORE_REFRESH_TOKEN you can obtain it on https://superface.dev/auth/github
 
-## Usage
+## Commands
+  <!-- commands -->
+* [`yarn compile`](#station-compile)
+* [`yarn create DOCUMENTINFO`](#station-create-documentinfo)
+* [`yarn generate PROFILENAME`](#station-generate-profilename)
+* [`yarn publish PATH`](#station-publish-path)
 
-### Compile maps and profiles
+## `yarn compile`
 
-Compiles files into `superface/grid` folder.
+Compiles every profile and map from capabilities directory to superface/grid directory. For now it is safer to use generate command.
 
 ```
-yarn compile
+USAGE
+  $ yarn compile
+
+OPTIONS
+  -g, --generate  Generate types for compiled files.
+  -h, --help      show CLI help
+  -q, --quiet     When set to true, disables the shell echo output of action.
+
+EXAMPLES
+  $ yarn compile
+  $ yarn compile -q
+  $ yarn compile -g
+  $ yarn compile --generate
 ```
 
-You can use `-g` flag to generate TypeScript types for **every** compiled file. For now it's safer to use `generate` command.
+_See code: [dist/src/commands/compile.ts](src)_
+
+## `yarn create DOCUMENTINFO`
+
+Creates map, profile or provider file with basic template on a local filesystem.
 
 ```
-yarn compile -g
+USAGE
+  $ yarn create DOCUMENTINFO
+
+ARGUMENTS
+  DOCUMENTINFO  Two arguments containing informations about the document.
+                1. Document Type - type of document that will be created (profile or map or provider).
+                2. Document Name - name of a file that will be created
+
+OPTIONS
+  -h, --help   show CLI help
+  -q, --quiet  When set to true, disables the shell echo output of action.
+
+EXAMPLES
+  $ yarn create profile sms/service
+  $ yarn create profile sms/service -q
+  $ yarn create map sms/service twilio
+  $ yarn create provider twilio
 ```
 
-### Generate profile types
+_See code: [dist/src/commands/create.ts](src)_
+
+## `yarn generate PROFILENAME`
 
 Generates .ts files into `superface/types/{scope}` folder, creates or updates `superface/sdk.ts` file and creates or updates `superface/types/{scope}/index.d.ts` file.
 
 ```
- yarn generate {scope}/{usecase}
+USAGE
+  $ yarn generate PROFILENAME
+
+ARGUMENTS
+  PROFILENAME  Profile name in {scope}/{usecase} shape
+
+OPTIONS
+  -h, --help   show CLI help
+  -q, --quiet  When set to true, disables the shell echo output of action.
+
+EXAMPLES
+  $ yarn generate sms/service
+  $ yarn generate sms/service -q
 ```
 
-### Create profile
+_See code: [dist/src/commands/generate.ts](src)_
 
-Creates scope and usecae folders, creates `profile.supr` file (with basic template) and adds profile to `super.json`.
-
-```
-yarn create:profile {scope}/{usecase} 
-```
-
-### Create provider
-
-Creates provider.json, adds it to super.json
-
-```
-yarn create:provider {provider}
-```
-
-### Create map
-
-Create a map file, test file and adds newly created map to to super.json
-
-```
-yarn create:map {scope}/{usecase} {provider}
-```
-
-### Test
-
-Most of the test need some sort of secrets so running all test files:
-```
-//This will probably fail
-yarn test
-```
-will probably fail.
-
-To test single map/usecase set secrets to `.env.capabilities` and run: 
-
-```
-yarn test {path to test}
-```
-
-To enable debugging to see what's going on inside the SDK, use:
-
-```
-yarn test:debug
-```
-
-### Upload
+## `yarn publish PATH`
 
 Uploads map/profile/provider to Store - use paths to `.supr` file for profiles, `.suma` for maps and `.json` for providers. Do not use path ending with `.ast.json` (compiled files).
 
 ```
-yarn upload {path}
+USAGE
+  $ yarn publish PATH
+
+ARGUMENTS
+  PATH  Path to profile, map or provider
+
+OPTIONS
+  -h, --help        show CLI help
+  -p, --production  Publish to production server.
+  -q, --quiet       When set to true, disables the shell echo output of action.
+
+EXAMPLES
+  $ yarn upload capabilities/vcs/user-repos/maps/bitbucket.suma
+  $ yarn upload capabilities/vcs/user-repos/maps/bitbucket.suma -p
+  $ yarn upload capabilities/vcs/user-repos/maps/bitbucket.suma -q
 ```
 
+_See code: [dist/src/commands/publish.ts](src)_
+<!-- commandsstop -->
+
+## `yarn test PATH`
+
+Runs test files with suffix `.test.ts`. Running `yarn test` without path will run all test files and will probably fail.
+
+```
+USAGE
+  $ yarn test PATH
+
+ARGUMENTS
+  PATH  Path to test file
+
+
+EXAMPLES
+  $ yarn test capabilities/vcs/user-repos/maps/bitbucket
+```
 
 ## Adding new capability
 
 First, create new profile:
 
 ```
- yarn create:profile {scope}/{usecase}
+ yarn create profile {scope}/{usecase}
 ```
 Edit created .supr file
 
 Secondly, create new provider:
 
 ```
- yarn create:provider {provider}
+ yarn create provider {provider}
 ```
 
 Edit created .json file
@@ -119,7 +159,7 @@ Edit created .json file
 Next, create map for created profile and provider
 
 ```
- yarn create:map {scope}/{usecase} {provider}
+ yarn create map {scope}/{usecase} {provider}
 ```
 
 Edit created .suma file and test file (.test.ts)

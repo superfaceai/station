@@ -1,4 +1,3 @@
-import { flags } from '@oclif/command';
 import { CLIError } from '@oclif/errors';
 import { grey } from 'chalk';
 
@@ -9,7 +8,7 @@ export default class Compile extends Command {
   static strict = false;
 
   static description =
-    'Creates empty map, profile or provider on a local filesystem.';
+    'Generates .ts files into `superface/types/{scope}` folder, creates or updates `superface/sdk.ts` file and creates or updates `superface/types/{scope}/index.d.ts` file.';
 
   static args = [
     {
@@ -20,24 +19,15 @@ export default class Compile extends Command {
   ];
 
   static flags = {
-    ...Command.flags,
-    generate: flags.boolean({
-      char: 'g',
-      default: false,
-      description: 'Generate types for every compiled file.',
-    }),
+    ...Command.flags
   };
 
   static examples = [
-    '$ superface create profile sms/service',
-    '$ superface create profile sms/service -u SendSMS ReceiveSMS',
-    '$ superface create map sms/service -p twilio',
-    '$ superface create map sms/service -p twilio -u SendSMS ReceiveSMS',
-    '$ superface create sms/service -p twilio -u SendSMS ReceiveSMS',
-    '$ superface create sms/service -p twilio -t bugfix -v 1.1-rev133 -u SendSMS ReceiveSMS',
+    '$ yarn generate sms/service',
+    '$ yarn generate sms/service -q',
   ];
 
-  private logCallback? = (message: string) => this.log(grey(message));
+  private logCallback?= (message: string) => this.log(grey(message));
 
   async run(): Promise<void> {
     const { argv, flags } = this.parse(Compile);
