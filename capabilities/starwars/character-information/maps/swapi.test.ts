@@ -1,11 +1,10 @@
-
-import { SuperfaceClient } from '@superfaceai/one-sdk';
+import { SuperfaceClient } from '../../../../superface/sdk';
 
 describe('starwars/character-information/swapi', () => {
   it('performs correctly', async () => {
     const client = new SuperfaceClient();
     const profile = await client.getProfile('starwars/character-information');
-    const useCase = profile.getUseCase('RetrieveCharacterInformation');
+    const useCase = profile.useCases.RetrieveCharacterInformation;
     const provider = await client.getProvider('swapi');
 
     expect(useCase).not.toBeUndefined();
