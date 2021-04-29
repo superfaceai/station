@@ -6,19 +6,22 @@
   "repository": "git@github.com:superfaceai/station.git",
   "author": "Superface Team",
   "private": true,
+  "bin": {
+    "station": "bin/station",
+    "st": "bin/station"
+  },
   "files": [
-    "dist/**/*"
+    "bin/",
+    "dist/"
   ],
   "scripts": {
+    "create": "./bin/station create",
+    "compile": "./bin/station create compile.",
+    "generate": "node dist/src/generate.js",
+    "upload": "dotenv -e .env -- ./bin/station publish",
     "build": "tsc -p tsconfig.release.json --outDir dist",
     "clean": "rimraf dist/",
     "prebuild": "yarn clean",
-    "compile": "node dist/src/compile.js",
-    "generate": "node dist/src/generate.js",
-    "create:profile": "node dist/src/create-profile.js",
-    "create:provider": "node dist/src/create-provider.js",
-    "create:map": "node dist/src/create-map.js",
-    "upload": "dotenv -e .env -- node dist/publish.js",
     "test": "yarn compile && dotenv -e .env.capabilities -- jest",
     "test:clean": "dotenv -e .env.capabilities -- jest --clear-cache && jest",
     "test:debug": "DEBUG=* yarn test",
@@ -51,7 +54,14 @@
     "@superfaceai/one-sdk": "0.0.22",
     "@superfaceai/parser": "0.0.16",
     "@superfaceai/service-client": "^0.0.9",
+    "@oclif/command": "^1.8.0",
+    "chalk": "^4.1.0",
+    "@oclif/config": "^1.17.0",
     "dotenv-cli": "^4.0.0",
     "rimraf": "^3.0.2"
+  },
+  "oclif": {
+    "commands": "dist/src/commands",
+    "bin": "station"
   }
 }

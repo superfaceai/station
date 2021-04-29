@@ -1,9 +1,7 @@
 import { kebabToCamelCase } from './utils';
 
-export function exportTypeTemplate(
-  usecase: string,
-): string {
-  return `export * from './${usecase}'\n`
+export function exportTypeTemplate(usecase: string): string {
+  return `export * from './${usecase}'\n`;
 }
 export function profileTemplate(
   usecase: string,

@@ -1,18 +1,22 @@
 import { SuperJson } from '@superfaceai/one-sdk';
 
+import { LogCallback } from '../common';
 import {
   CAPABILITIES_DIR,
   EXTENSIONS,
   PROFILE_BUILD_DIR,
   SUPER_JSON,
-} from './constants';
-import { exists, mkdir, writeFile } from './io';
-import { profileTemplate } from './templates';
+} from '../common/constants';
+import { exists, mkdir, writeFile } from '../common/io';
+import { profileTemplate } from '../common/templates';
 
-export async function createProfile(): Promise<void> {
-  const profileName = process.argv[2];
-  const [scope, usecase] = profileName.split('/');
-
+export async function createProfile(
+  scope: string,
+  usecase: string,
+  options?: {
+    logCb?: LogCallback;
+  }
+): Promise<void> {
   //Create folder structure if it doesn't exist
   if (!(await exists(`./$${CAPABILITIES_DIR}`))) {
     await mkdir(`./$${CAPABILITIES_DIR}`);
@@ -32,6 +36,10 @@ export async function createProfile(): Promise<void> {
     profileTemplate(usecase, scope)
   );
 
+  options?.logCb?.(
+    `Creating: "profile${EXTENSIONS.profile.source}" file at: "./${CAPABILITIES_DIR}/${scope}/${usecase}/"`
+  );
+
   //Add profile to super.json
   const loadedResult = await SuperJson.load(SUPER_JSON);
   const superJson = loadedResult.match(
@@ -44,8 +52,10 @@ export async function createProfile(): Promise<void> {
   const newProfile = {
     file: `./${PROFILE_BUILD_DIR}/${scope}/${usecase}/profile${EXTENSIONS.profile.source}`,
   };
-  superJson.addProfile(profileName, newProfile);
+  superJson.addProfile(`${scope}/${usecase}`, newProfile);
 
   await writeFile(SUPER_JSON, superJson.stringified);
+  options?.logCb?.(
+    `Adding profile: "${scope}/${usecase}" to superface/super.json`
+  );
 }
-createProfile().catch(e => console.log('Error: ', e));

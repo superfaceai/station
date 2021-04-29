@@ -41,6 +41,6 @@ describe('communication/send-message/plivo', () => {
     );
 
     expect(result.isOk()).toBeTruthy();
-    expect(typeof (result.unwrap() as any).deliveryStatus).toBe('string');
+    expect(typeof result.unwrap().deliveryStatus).toBe('string');
   });
 });

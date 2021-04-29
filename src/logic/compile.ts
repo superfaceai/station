@@ -1,8 +1,20 @@
+import { CLIError } from '@oclif/errors';
 import { MapDocumentNode, ProfileDocumentNode } from '@superfaceai/ast';
-import { generateTypesFile, generateTypingsForProfile } from '@superfaceai/cli/dist/logic/generate';
+import {
+  generateTypesFile,
+  generateTypingsForProfile,
+} from '@superfaceai/cli/dist/logic/generate';
 import { parseMap, parseProfile, Source } from '@superfaceai/parser';
 
-import { CAPABILITIES_DIR, EXTENSIONS, PROFILE_BUILD_PATH, TYPE_DEFINITIONS_FILE, TYPES_FILE_PATH, TYPES_PATH } from './constants';
+import { LogCallback } from '../common';
+import {
+  CAPABILITIES_DIR,
+  EXTENSIONS,
+  PROFILE_BUILD_PATH,
+  TYPE_DEFINITIONS_FILE,
+  TYPES_FILE_PATH,
+  TYPES_PATH,
+} from '../common/constants';
 import {
   copyFile,
   exists,
@@ -11,13 +23,14 @@ import {
   mkdir,
   readFile,
   writeFile,
-} from './io';
-import { exportTypeTemplate } from './templates';
+} from '../common/io';
+import { exportTypeTemplate } from '../common/templates';
 
-
-export async function compileProfile(path: string): Promise<ProfileDocumentNode> {
+export async function compileProfile(
+  path: string
+): Promise<ProfileDocumentNode> {
   if (!path.endsWith(EXTENSIONS.profile.source)) {
-    throw new Error(`Invalid profile suffix:${path}`);
+    throw new CLIError(`Invalid profile suffix:${path}`, { exit: 1 });
   } else {
     const body = await readFile(path);
     const source = new Source(body, path);
@@ -28,7 +41,7 @@ export async function compileProfile(path: string): Promise<ProfileDocumentNode>
 
 export async function compileMap(path: string): Promise<MapDocumentNode> {
   if (!path.endsWith(EXTENSIONS.map.source)) {
-    throw new Error(`Invalid map suffix:${path}`);
+    throw new CLIError(`Invalid map suffix:${path}`, { exit: 1 });
   } else {
     const body = await readFile(path);
     const source = new Source(body, path);
@@ -37,9 +50,12 @@ export async function compileMap(path: string): Promise<MapDocumentNode> {
   }
 }
 
-async function compile() {
-  const generateFlag = process.argv[2] ? process.argv[2].trim() : undefined;
-
+export async function compile(
+  generateFlag: boolean,
+  options?: {
+    logCb?: LogCallback;
+  }
+): Promise<void> {
   //Get capabilities directories
   const scopes = await getDirectories(`./${CAPABILITIES_DIR}`);
   let profiles: string[];
@@ -49,7 +65,7 @@ async function compile() {
   for (const scope of scopes) {
     useCases = await getDirectories(`./${CAPABILITIES_DIR}/${scope}`);
     for (const useCase of useCases) {
-      console.log(
+      options?.logCb?.(
         `Coping content of ${CAPABILITIES_DIR}/${scope}/${useCase} to ./${PROFILE_BUILD_PATH}/${scope}/${useCase}`
       );
 
@@ -70,9 +86,11 @@ async function compile() {
       profiles = await getFiles(`./${CAPABILITIES_DIR}/${scope}/${useCase}`);
       for (const file of profiles) {
         if (file.endsWith('js') || file.endsWith('ts')) {
-          console.log(`Skipping profile file: ${file}`);
+          options?.logCb?.(`Skipping file: "${file}"`);
         } else {
-          console.log(`${file} --> ${file}${EXTENSIONS.profile.build}`);
+          options?.logCb?.(
+            `Compiling "${file}" to "${file}${EXTENSIONS.profile.build}"`
+          );
           //This file shoud be profile
           await copyFile(
             `./${CAPABILITIES_DIR}/${scope}/${useCase}/${file}`,
@@ -83,10 +101,11 @@ async function compile() {
           const ast = await compileProfile(path);
           await writeFile(`${path}.ast.json`, JSON.stringify(ast, null, 2));
 
-          if (generateFlag === '-g') {
+          if (generateFlag) {
             //Generate profile types
             const typing = generateTypingsForProfile(
-              `${scope}/${useCase}`, ast
+              `${scope}/${useCase}`,
+              ast
             );
             //Create folder structure if it doesn't exist
             if (!(await exists(`./${TYPES_PATH}`))) {
@@ -95,17 +114,31 @@ async function compile() {
             if (!(await exists(`./${TYPES_PATH}/${scope}`))) {
               await mkdir(`./${TYPES_PATH}/${scope}`);
             }
-            await writeFile(`./${TYPES_PATH}/${scope}/${useCase}${EXTENSIONS.typescript}`, typing);
+            await writeFile(
+              `./${TYPES_PATH}/${scope}/${useCase}${EXTENSIONS.typescript}`,
+              typing
+            );
+            options?.logCb?.(
+              `Writing generated types to "./${TYPES_PATH}/${scope}/${useCase}${EXTENSIONS.typescript}"`
+            );
 
             //Create/update.d.ts index
-            let typeDefinitions = ''
-            if (await exists(`./${TYPES_PATH}/${scope}/${TYPE_DEFINITIONS_FILE}`)) {
-              typeDefinitions = await readFile(`./${TYPES_PATH}/${scope}/${TYPE_DEFINITIONS_FILE}`)
+            let typeDefinitions = '';
+            if (
+              await exists(`./${TYPES_PATH}/${scope}/${TYPE_DEFINITIONS_FILE}`)
+            ) {
+              typeDefinitions = await readFile(
+                `./${TYPES_PATH}/${scope}/${TYPE_DEFINITIONS_FILE}`
+              );
             }
             const addition = exportTypeTemplate(useCase);
             if (!typeDefinitions.includes(addition)) {
-              typeDefinitions = typeDefinitions + exportTypeTemplate(useCase)
-              await writeFile(`./${TYPES_PATH}/${scope}/${TYPE_DEFINITIONS_FILE}`, typeDefinitions)
+              typeDefinitions = typeDefinitions + addition;
+              options?.logCb?.(`Updating index.d.ts with "${addition}"`);
+              await writeFile(
+                `./${TYPES_PATH}/${scope}/${TYPE_DEFINITIONS_FILE}`,
+                typeDefinitions
+              );
             }
           }
         }
@@ -119,9 +152,11 @@ async function compile() {
         maps = await getFiles(`./${CAPABILITIES_DIR}/${scope}/${useCase}/maps`);
         for (const file of maps) {
           if (file.endsWith('js') || file.endsWith('ts')) {
-            console.log(`Skipping file: ${file}`);
+            options?.logCb?.(`Skipping file: "${file}"`);
           } else {
-            console.log(`${file} --> ${file}${EXTENSIONS.map.build}`);
+            options?.logCb?.(
+              `Compiling "${file}" to "${file}${EXTENSIONS.map.build}"`
+            );
             //This file shoud be map
             await copyFile(
               `./${CAPABILITIES_DIR}/${scope}/${useCase}/maps/${file}`,
@@ -130,25 +165,25 @@ async function compile() {
             const ast = await compileMap(
               `./${PROFILE_BUILD_PATH}/${scope}/${useCase}/maps/${file}`
             );
-            await writeFile(`./${PROFILE_BUILD_PATH}/${scope}/${useCase}/maps/${file}.ast.json`, JSON.stringify(ast, null, 2));
+            await writeFile(
+              `./${PROFILE_BUILD_PATH}/${scope}/${useCase}/maps/${file}.ast.json`,
+              JSON.stringify(ast, null, 2)
+            );
           }
         }
       }
     }
-    if (generateFlag === '-g') {
+    if (generateFlag) {
       //Generate types file
-      const sdkPath = `./${TYPES_FILE_PATH}`
+      const sdkPath = `./${TYPES_FILE_PATH}`;
       if (!(await exists(sdkPath))) {
         await writeFile(sdkPath, '');
       }
-      const paths = useCases.map(useCase => `${scope}/${useCase}`)
-      const typesFile = generateTypesFile(
-        paths,
-        await readFile(sdkPath)
-      );
+      const paths = useCases.map(useCase => `${scope}/${useCase}`);
+      const typesFile = generateTypesFile(paths, await readFile(sdkPath));
       await writeFile(sdkPath, typesFile);
+
+      options?.logCb?.(`Updating "sdk.ts" file with types for: "${scope}"`);
     }
   }
 }
-
-compile().catch(e => console.log('Error: ', e));
