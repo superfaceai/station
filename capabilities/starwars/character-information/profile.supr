@@ -1,0 +1,21 @@
+name = "starwars/character-information"
+version = "1.0.1"
+
+"""
+Retrieve information about Star Wars characters from the Star Wars API.
+"""
+usecase RetrieveCharacterInformation safe {
+  input {
+    characterName
+  }
+
+  result {
+    height
+    weight
+    yearOfBirth
+  }
+
+  error {
+    message
+  }
+}
