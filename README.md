@@ -48,7 +48,7 @@ EXAMPLES
   $ yarn compile --generate
 ```
 
-_See code: [dist/src/commands/compile.ts](src)_
+_See code: [dist/src/commands/compile.ts](https://github.com/superfaceai/station/blob/v0.0.1/dist/src/commands/compile.ts)_
 
 ## `yarn create DOCUMENTINFO`
 
@@ -74,7 +74,7 @@ EXAMPLES
   $ yarn create provider twilio
 ```
 
-_See code: [dist/src/commands/create.ts](src)_
+_See code: [dist/src/commands/create.ts](https://github.com/superfaceai/station/blob/v0.0.1/dist/src/commands/create.ts)_
 
 ## `yarn generate PROFILENAME`
 
@@ -96,7 +96,7 @@ EXAMPLES
   $ yarn generate sms/service -q
 ```
 
-_See code: [dist/src/commands/generate.ts](src)_
+_See code: [dist/src/commands/generate.ts](https://github.com/superfaceai/station/blob/v0.0.1/dist/src/commands/generate.ts)_
 
 ## `yarn publish PATH`
 
@@ -120,7 +120,7 @@ EXAMPLES
   $ yarn upload capabilities/vcs/user-repos/maps/bitbucket.suma -q
 ```
 
-_See code: [dist/src/commands/publish.ts](src)_
+_See code: [dist/src/commands/publish.ts](https://github.com/superfaceai/station/blob/v0.0.1/dist/src/commands/publish.ts)_
 <!-- commandsstop -->
 
 ## `yarn test PATH`
