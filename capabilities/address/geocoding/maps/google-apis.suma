@@ -1,0 +1,17 @@
+profile = "address/geocoding@1.0"
+provider = "google-apis"
+
+map Gecode {
+  http GET "/maps/api/geocode/json" {
+          
+    request {
+      query {
+        address = ""
+      }
+    }
+
+    response 200 "application/json" {
+
+    }
+  }
+}

@@ -152,6 +152,14 @@
           "file": "./grid/vcs/pull-request/maps/bitbucket.suma"
         }
       }
+    },
+    "address/geocoding": {
+      "file": "./grid/address/geocoding/profile.supr",
+      "providers": {
+        "google-apis": {
+          "file": "./grid/address/geocoding/maps/google-apis.suma"
+        }
+      }
     }
   },
   "providers": {
@@ -221,6 +229,15 @@
         {
           "id": "bearer_token",
           "token": "$SENDGRID_API_KEY"
+        }
+      ]
+    },
+    "google-apis": {
+      "file": "../providers/google-apis.json",
+      "security": [
+        {
+          "id": "apikey",
+          "apikey": "$GOOGLE_MAPS_API_KEY"
         }
       ]
     }
