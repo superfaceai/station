@@ -12,7 +12,7 @@ describe('vcs/pull-requests/github-typed', () => {
 
     expect(result.isOk()).toBeTruthy();
     expect(result.unwrap()).toEqual({
-      repos: [
+      pullRequests: [
         {
           id: 567476468,
           sha: 'a8e318f2f5f14504a2f0da049d26cbc80d35fa9d',

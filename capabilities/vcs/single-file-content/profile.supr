@@ -7,16 +7,16 @@ single-file-content usecase
 usecase SingleFileContent {
   //define input properties
   input {
-    owner
-    repo
-    path
-    ref
+    owner string
+    repo string
+    path string
+    ref string
   }
 
   //define result object
   result {
-    size
-    content
-    encoding
+    size number
+    content string
+    encoding string
   }
 }

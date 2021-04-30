@@ -12,7 +12,7 @@ describe('vcs/pull-requests/bitbucket-typed', () => {
 
     expect(result.isOk()).toBeTruthy();
     expect(result.unwrap()).toEqual({
-      repos: [
+      pullRequests: [
         {
           id: 1,
           sha: 'd1d6bab92584',

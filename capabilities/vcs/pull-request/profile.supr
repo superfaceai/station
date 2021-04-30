@@ -6,15 +6,15 @@ pull-request usecase
 """
 usecase PullRequest {
   input {
-    owner
-    repo
-    identifier
+    owner string
+    repo string
+    identifier number
   }
 
   result {
-    title
-    id
-    url
-    sha
+    title string
+    id number
+    url string
+    sha string
   }
 }
