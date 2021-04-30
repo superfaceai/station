@@ -7,6 +7,7 @@ Where capabilities are born.
 @superfaceai/service-client:registry=https://npm.pkg.github.com/
 //npm.pkg.github.com/:_authToken=xxxxx
 ```
+Also, check `.npmrc` in "home" directory.
 
 ## Install
 
