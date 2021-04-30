@@ -3,15 +3,23 @@ provider = "google-apis"
 
 map Gecode {
   http GET "/maps/api/geocode/json" {
-          
+    security "apikey"
     request {
       query {
-        address = ""
+        address = (`${input.streetAddress || ""}, ${input.addressLocality || ""}, ${input.addressRegion || ""}, ${input.postalCode || ""}, ${input.addressCountry || ""}`)
       }
     }
 
     response 200 "application/json" {
+      return map error if (body.status !== "OK") {
+        title = "Error geocoding address"
+        detail = body.status
+      }
 
+      map result {
+        latitude = body.results[0].geometry.location.lat
+        longitude = body.results[0].geometry.location.lng
+      }
     }
   }
 }

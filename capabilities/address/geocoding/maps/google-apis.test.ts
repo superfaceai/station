@@ -1,16 +1,20 @@
 
-import { SuperfaceClient } from '@superfaceai/one-sdk';
+import { SuperfaceClient } from '../../../../superface/sdk';
 
 describe('address/geocoding/google-apis', () => {
-  it('performs correctly', async () => {
+  it('Geocode address', async () => {
     const client = new SuperfaceClient();
     const profile = await client.getProfile('address/geocoding');
-    const useCase = profile.getUseCase('geocoding');
     const provider = await client.getProvider('google-apis');
+    const result = await profile.useCases.Gecode.perform({
+      streetAddress: "1600 Amphitheatre Parkway",
+      addressLocality: "Mountain View",
+      addressRegion: "CA",
+      addressCountry: "USA"
+    }, { provider })
 
-    expect(useCase).not.toBeUndefined();
-    expect(provider).not.toBeUndefined();
-    //Edit expected value
-    //await expect(useCase.perform({}, { provider })).resolves.toEqual()
+    expect(result.isOk()).toBeTruthy();
+    expect(result.unwrap().latitude).toBe(37.4305);
+    expect(result.unwrap().longitude).toBe(-122.0769661);
   })
 })
