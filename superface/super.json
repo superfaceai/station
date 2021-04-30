@@ -125,6 +125,37 @@
           }
         }
       }
+    },
+    "address/clean-address": {
+      "file": "./grid/address/clean-address/profile.supr",
+      "providers": {
+        "smartystreets": {
+          "file": "./grid/address/clean-address/maps/smartystreets.suma",
+          "defaults": {
+            "CleanAddress": {
+              "input": {
+                "SMARTYSTREETS_AUTH_ID": "$SMARTYSTREETS_AUTH_ID"
+              }
+            }
+          }
+        }
+      }
+    },
+    "communication/send-email": {
+      "file": "./grid/communication/send-email/profile.supr",
+      "providers": {
+        "sendgrid": {
+          "file": "./grid/communication/send-email/maps/sendgrid.suma",
+          "defaults": {
+            "SendEmail": {
+              "input": {
+                "from": "$SENDGRID_COMMUNICATION_SENDEMAIL_FROM",
+                "to": "$COMMUNICATION_SENDEMAIL_TO"
+              }
+            }
+          }
+        }
+      }
     }
   },
   "providers": {
@@ -165,6 +196,15 @@
         }
       ]
     },
+    "smartystreets": {
+      "file": "../providers/smartystreets.json",
+      "security": [
+        {
+          "id": "auth-token",
+          "apikey": "$SMARTYSTREETS_API_KEY"
+        }
+      ]
+    },
     "vonage-nexmo": {
       "file": "../providers/vonage-nexmo.json",
       "security": []
@@ -195,6 +235,15 @@
         {
           "id": "shopify_storefront_access",
           "apikey": "$SHOPIFY_STOREFRONT_ACCESS_TOKEN"
+        }
+      ]
+    },
+    "sendgrid": {
+      "file": "../providers/sendgrid.json",
+      "security": [
+        {
+          "id": "bearer_token",
+          "token": "$SENDGRID_API_KEY"
         }
       ]
     }

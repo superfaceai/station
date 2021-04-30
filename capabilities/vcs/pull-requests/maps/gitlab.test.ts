@@ -4,7 +4,7 @@ describe('vcs/pull-requests/gitlab', () => {
   it('performs correctly', async () => {
     const client = new SuperfaceClient();
     const profile = await client.getProfile('vcs/pull-requests');
-    const useCase = profile.getUseCase('pullRequests');
+    const useCase = profile.getUseCase('PullRequests');
     const provider = await client.getProvider('gitlab');
     const result = await useCase.perform(
       { owner: 'Jakub-Vacek', repo: 'empty-test' },
