@@ -10,6 +10,7 @@ import { exists, readFile } from '../common/io';
 
 export async function publish(
   path: string,
+  baseUrl: string,
   options?: {
     logCb?: LogCallback;
   }
@@ -31,8 +32,9 @@ export async function publish(
       exit: 1,
     });
   }
+
   const client = new ServiceClient({
-    baseUrl: 'https://superface.dev',
+    baseUrl,
     refreshToken: process.env.SUPERFACE_STORE_REFRESH_TOKEN,
   });
   const file = await readFile(path);

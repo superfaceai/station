@@ -106,6 +106,8 @@ _See code: [dist/src/commands/generate.ts](https://github.com/superfaceai/statio
 
 ## `station publish PATH`
 
+**note**: Do not upload to production unless you are 100% sure
+
 Uploads map/profile/provider to Store - use paths to `.supr` file for profiles, `.suma` for maps and `.json` for providers. Do not use path ending with `.ast.json` (compiled files).
 
 ```

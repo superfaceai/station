@@ -1,5 +1,6 @@
 import { flags } from '@oclif/command';
 import { grey } from 'chalk';
+import inquirer from 'inquirer';
 
 import { Command } from '../common';
 import { publish } from '../logic';
@@ -42,7 +43,23 @@ export default class Publish extends Command {
       this.logCallback = undefined;
     }
 
+    let baseUrl = 'https://superface.dev';
+
+    if (flags.production) {
+      const response: { upload: boolean } = await inquirer.prompt({
+        name: 'upload',
+        message:
+          'Are you sure that you want to upload data to PRODUCTION server?',
+        type: 'confirm',
+      });
+      if (response.upload) {
+        baseUrl = 'https://superface.ai';
+      } else {
+        process.exit(0);
+      }
+    }
+
     const path = argv[0];
-    await publish(path, { logCb: this.logCallback });
+    await publish(path, baseUrl, { logCb: this.logCallback });
   }
 }
