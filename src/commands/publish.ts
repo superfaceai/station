@@ -55,7 +55,7 @@ export default class Publish extends Command {
       if (response.upload) {
         baseUrl = 'https://superface.ai';
       } else {
-        process.exit(0);
+        this.exit(0);
       }
     }
 

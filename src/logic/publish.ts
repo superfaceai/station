@@ -3,6 +3,7 @@ import { isMapDocumentNode, isProfileDocumentNode } from '@superfaceai/ast';
 import { isProviderJson } from '@superfaceai/one-sdk';
 import { parseMap, parseProfile, Source } from '@superfaceai/parser';
 import { ServiceClient } from '@superfaceai/service-client';
+import { config } from 'dotenv';
 
 import { LogCallback } from '../common';
 import { EXTENSIONS } from '../common/constants';
@@ -15,6 +16,8 @@ export async function publish(
     logCb?: LogCallback;
   }
 ): Promise<void> {
+  config();
+
   if (!(await exists(path))) {
     throw new CLIError('Path does not exist', { exit: 1 });
   }
