@@ -1,0 +1,186 @@
+"
+Retrieve a Product
+Retrieve a product displayable in the storefront. A product represents any
+offered product or service. For example: a pair of shoes; a concert ticket;
+the rental of a car; a haircut; or an episode of a TV show streamed online.
+"
+
+name = "storefront/product"
+version = "1.0.0"
+
+"
+Retrieve a Product by ID
+"
+usecase RetrieveProduct safe {
+  input {
+    "Unique product identifier"
+    id!
+  }
+
+  result {
+    "Unique product identifier"
+    id! string
+  
+    "Indicator of whether the product is currently for sale"
+    active boolean
+  
+    "Product title (customer facing)"
+    title! string
+  
+    "Product description (customer facing). In plain text"
+    description! string
+  
+    "Rich product description (customer facing). May include HTML code"
+    richDescription string
+  
+    "List of images of the product (customer facing)"
+    images [string]
+  
+    "Representation of product units (e.g. piece, liter, seat)"
+    unit string
+  
+    "Indicator of whether the product can be physically shipped"
+    shippable boolean
+  
+    "Dimensions of the product"
+    productDimensions Dimensions
+  
+    "Dimensions of the product incl. packaging, if applicable"
+    packageDimensions Dimensions
+  
+    "The brand associated with the product"
+    brand string
+  
+    "Pricing options for the product"
+    prices [Price]
+  
+    "Date the product was first added to inventory (UNIX time)"
+    createdAt number
+  
+    "Date the product was last updated (UNIX time)"
+    updatedAt number
+  
+    "Details about the product's inventory"
+    inventory Inventory
+  
+    "Product Tags"
+    tags [string]
+  
+    "Product variants (e.g. different sizes or colors)"
+    variants [ProductVariant]
+    
+    // Ideas for next versions:
+    // - Category
+    // - Product Options
+    // - Availability (available | preorder | unavailable etc)
+    // - Min & max purchase quantity
+  }
+
+  error {
+    problem!
+    details
+  }
+}
+
+model ProductVariant {
+  "Unique stock keeping unit"
+  sku! string
+
+  "Indicator of whether the product is currently for sale"
+  active boolean
+
+  "Variant title (customer facing)" title! string
+
+  "List of images of the variant (customer facing)"
+  images [string]
+
+  "Representation of product variant units (e.g. piece, liter, seat)"
+  unit string
+
+  "Indicator of whether the variant can be physically shipped"
+  shippable boolean
+
+  "Dimensions of the variant"
+  productDimensions Dimensions
+
+  "Dimensions of the variant incl. packaging, if applicable"
+  packageDimensions Dimensions
+
+  "Pricing options for the product variant"
+  prices [Price]
+
+  "Details about the product variant's inventory"
+  inventory Inventory
+}
+
+model Dimensions {
+    height
+    length
+    width
+    weight
+
+    "Unit of height, length & width"
+    lengthUnit LengthUnit
+
+    "Unit of weight"
+    weightUnit WeightUnit
+}
+
+model LengthUnit enum {
+    "Inch"
+    in
+    "Centimeter"
+    cm
+}
+
+model WeightUnit enum {
+    "Ounce"
+    oz
+    "Pound"
+    lb
+    "Gram"
+    g
+    "Kilogram"
+    kg
+}
+
+model Price {
+  "Indicator of whether the price is currently applicable for new purchases"
+  active boolean
+
+  "One-time or subscription purchase"
+  type PriceType
+
+  "Chargable amount"
+  amount! number
+
+  "ISO 4217 compliant currency code"
+  currencyCode! CurrencyCode
+
+  "Date the price was first added to the product (UNIX time)"
+  createdAt number
+
+  "Date the price was last updated (UNIX time)"
+  updatedAt number
+}
+
+model PriceType enum {
+  "Product can be bought for a one-time payment"
+  ONETIME
+
+  "Product is paid on a subscription basis"
+  SUBSCRIPTION
+}
+
+"Currency Code (ISO 4217 compliant)"
+model CurrencyCode enum {
+  AED, AFN, ALL, AMD, ANG, AOA, ARS, AUD, AWG, AZN, BAM, BBD, BDT, BGN, BHD, BIF, BMD, BND, BOB, BOV, BRL, BSD, BTN, BWP, BYN, BZD, CAD, CDF, CHE, CHF, CHW, CLF, CLP, CNY, COP, COU, CRC, CUC, CUP, CVE, CZK, DJF, DKK, DOP, DZD, EGP, ERN, ETB, EUR, FJD, FKP, GBP, GEL, GHS, GIP, GMD, GNF, GTQ, GYD, HKD, HNL, HRK, HTG, HUF, IDR, ILS, INR, IQD, IRR, ISK, JMD, JOD, JPY, KES, KGS, KHR, KMF, KPW, KRW, KWD, KYD, KZT, LAK, LBP, LKR, LRD, LSL, LYD, MAD, MDL, MGA, MKD, MMK, MNT, MOP, MRU, MUR, MVR, MWK, MXN, MXV, MYR, MZN, NAD, NGN, NIO, NOK, NPR, NZD, OMR, PAB, PEN, PGK, PHP, PKR, PLN, PYG, QAR, RON, RSD, RUB, RWF, SAR, SBD, SCR, SDG, SEK, SGD, SHP, SLL, SOS, SRD, SSP, STN, SVC, SYP, SZL, THB, TJS, TMT, TND, TOP, TRY, TTD, TWD, TZS, UAH, UGX, USD, USN, UYI, UYU, UYW, UZS, VES, VND, VUV, WST, XAF, XAG, XAU, XBA, XBB, XBC, XBD, XCD, XDR, XOF, XPD, XPF, XPT, XSU, XTS, XUA, XXX, YER, ZAR, ZMW, ZWL
+}
+
+model Inventory {
+  "Indicator of whether at least one piece is in stock"
+  isInStock boolean
+
+  "Total number of pieces in stock"
+  inStockCount number
+}

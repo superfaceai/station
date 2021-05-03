@@ -1,0 +1,18 @@
+{
+  "name": "shopify",
+  "services": [
+    {
+      "id": "default",
+      "baseUrl": "https://{shop}.myshopify.com"
+    }
+  ],
+  "securitySchemes": [
+    {
+      "id": "shopify_storefront_access",
+      "type": "apiKey",
+      "in": "header",
+      "name": "X-Shopify-Storefront-Access-Token"
+    }
+  ],
+  "defaultService": "default"
+}

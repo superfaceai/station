@@ -1,0 +1,187 @@
+profile = "storefront/product@1.0.0"
+provider = "stripe"
+
+map RetrieveProduct {
+  productDetails = call FetchProduct(productId = input.id)
+  productPricings = call FetchPrices(productId = input.id)
+
+  results = [productDetails, productPricings]
+
+  failure = results.find(result => result.problem)
+
+  map error if (failure) {
+    problem = failure.problem
+    details = failure.details || undefined
+  }
+
+  map result results.reduce(
+    (result, current) => Object.assign(result, current), {}
+  )
+}
+
+"Fetches product details from Stripe"
+operation FetchProduct {
+  http GET "/v1/products/{args.productId}" {
+    security "stripe_authentication"
+
+    request {
+      headers {
+        'Stripe-Version' = '2020-08-27'
+      }
+    }
+
+    response 200 "application/json" {
+      return {
+        id = body.id
+        active = body.active
+        title = body.name || undefined
+        description = body.description || undefined
+        images = body.images && body.images.length ? body.images : []
+        unit = body.unit_label || undefined
+        shippable = String(body.shippable) !== "undefined" ? Boolean(body.shippable) : undefined
+        packageDimensions = call MapDimensions(dimensions = body.package_dimensions || {})
+        createdAt = body.created
+        updatedAt = body.updated
+        inventory = {
+          isInStock: body.active
+        }
+      }
+    }
+
+    response 400 {
+      fail {
+        problem = "The mapping to RetrieveProduct is invalid"
+      }
+    }
+
+    response 401 {
+      fail {
+        problem = "Unauthenticated"
+        details = "Please make sure you're providing a valid Stripe API key via 'super.json' or environmental variable."
+      }
+    }
+
+    response 404 {
+      fail {
+        problem = "Product doesn't exist"
+        details = "Make sure you're retrieving an existing product by a valid ID"
+      }
+    }
+
+    response 500 {
+      fail {
+        problem = "Error on Stripe's side"
+        details = "It looks like Stripe is temporarily having difficulties processing your request. Please try again or contact Stripe's support."
+      }
+    }
+  }
+}
+
+"Recursively fetches all prices for a given `productId`"
+operation FetchPrices {
+  limit = Number(args.limit) || 100 
+  pagination = args.startingAfter ? `starting_after=${args.startingAfter}` : ""
+  body = {}
+
+  http GET "/v1/prices?product={args.productId}&limit={limit}&{pagination}" {
+    security "stripe_authentication"
+
+    request {
+      headers {
+        'Stripe-Version' = '2020-08-27'
+      }
+    }
+
+    response 200 "application/json" {
+      set {
+        body = body
+      }
+    }
+
+    response 400 {
+      fail {
+        problem = "The mapping to RetrieveProduct is invalid"
+      }
+    }
+
+    response 401 {
+      fail {
+        problem = "Unauthenticated"
+        details = "Please make sure you're providing a valid Stripe API key via 'super.json' or environmental variable."
+      }
+    }
+
+    response 500 {
+      fail {
+        problem = "Error on Stripe's side"
+        details = "It looks like Stripe is temporarily having difficulties processing your request. Please try again or contact Stripe's support."
+      }
+    }
+  }
+
+  set {
+    prices = call foreach(stripePrice of body.data) MapPrice(price = stripePrice)
+  }
+
+  return if (!body.has_more) {
+    prices = prices
+  }
+
+  set if (body.has_more) {
+    nextPage = call FetchPrices(
+      productId = args.productId,
+      startingAfter = body.data[body.data.length - 1].id
+    )
+  }
+
+  return if (body.has_more) {
+    prices = prices.concat(nextPage.prices)
+  }
+
+}
+
+operation MapPrice {
+  currencyCode = String(args.price.currency).toUpperCase()
+
+  return {
+    active = args.price.active
+    type = args.price.type === 'one_time' ? 'ONETIME' : 'SUBSCRIPTION'
+    amount = call MapPriceAmount(amount = Number(args.price.unit_amount_decimal), currency = currencyCode) 
+    currencyCode = currencyCode
+    createdAt = args.price.created
+    updatedAt = args.price.updated
+  }
+}
+
+"
+Stripe works with monetary amounts in currency's smallest units
+(e.g. USD 10.00 is represented as 1000). Because of that we want to divide
+amounts by 100.
+
+However there are few exceptional zero-decimal currencies that should not be
+divided. This operation facilitates the correct amount handling.
+
+For more information, visit https://stripe.com/docs/currencies
+"
+operation MapPriceAmount {
+  zeroDecimalCurrencies = [
+    "BIF", "CLP", "DJF", "GNF", "JPY", "KMF", "KRW", "MGA",
+    "PYG", "RWF", "UGX", "VND", "VUV", "XAF", "XOF", "XPF"
+  ]
+
+  return zeroDecimalCurrencies.includes(args.currency) ? args.amount : args.amount / 100
+}
+
+operation MapDimensions {
+  return if (Object.keys(args.dimensions).length === 0) undefined
+
+  return {
+    height = args.dimensions.height
+    length = args.dimensions.length
+    width = args.dimensions.width
+    weight = args.dimensions.weight
+    lengthUnit = "in"
+    weightUnit = "oz"
+  }
+
+}

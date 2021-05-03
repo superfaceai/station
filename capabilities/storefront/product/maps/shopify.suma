@@ -1,0 +1,161 @@
+profile = "storefront/product@1.0.0"
+provider = "shopify"
+
+map RetrieveProduct {
+  shop = input.shop // necessary for base URL
+  GQL_QUERY = call makeGQLQuery()
+
+  http POST "/api/2021-04/graphql.json" {
+    security "shopify_storefront_access"
+
+    request "application/json" { 
+      body = {
+        query: GQL_QUERY,
+        variables: { id: input.id }
+      } 
+    }
+
+    response 200 "application/json" {
+      map error if (body.errors) {
+        problem = "Couldn't retrieve product"
+        details = body.errors.map(e => e.message).join(', ')
+      }
+
+      map result if (body.data) {
+        id = body.data.node.id
+        active = true
+        title = body.data.node.title
+        description = body.data.node.description
+        richDescription = body.data.node.descriptionHtml
+        images = call foreach (image of body.data.node.images.edges || []) MapImage(image = image)
+        shippable = body.data.node.variants.edges.some(variant => variant.node.requiresShipping)
+        brand = body.data.node.vendor || undefined
+        createdAt = Date.parse(body.data.node.createdAt) / 1000
+        updatedAt = Date.parse(body.data.node.updatedAt) / 1000
+        tags = body.data.node.tags && body.data.node.tags.length ? body.data.node.tags : []
+        inventory = {
+          isInStock: body.data.node.availableForSale,
+          inStockCount: body.data.node.totalInventory
+        }
+        variants = call foreach (variant of body.data.node.variants.edges || []) 
+          MapProductVariant(variant = variant)
+      }
+    }
+
+    response 400 {
+      map error {
+        problem = "The mapping to RetrieveProduct is invalid"
+        details = body.errors
+      }
+    }
+
+    response 415 {
+      map error {
+        problem = "The mapping to RetrieveProduct is invalid"
+      }
+    }
+  }
+}
+
+operation makeGQLQuery {
+  return `query findProduct($id: ID!) {
+    node(id: $id) {
+      ...on Product {
+        id 
+        title
+        description
+        descriptionHtml
+        images(first: 100) {
+          edges {
+            node {
+              ...on Image {
+                transformedSrc
+              }
+            }
+          }
+        }
+        vendor
+        availableForSale
+        totalInventory
+        tags
+        variants(first: 100) {
+          edges {
+            node {
+              ...on ProductVariant {
+                availableForSale
+                quantityAvailable
+                selectedOptions {
+                  name
+                  value
+                }
+                title
+                sku
+                weight
+                weightUnit
+                requiresShipping
+                priceV2 {
+                  amount
+                  currencyCode
+                }
+                image {
+                  transformedSrc
+                }
+              }
+            }
+          }
+        }
+        createdAt
+        updatedAt
+      }
+    }
+  }`
+}
+
+operation MapImage {
+  return if (!args.image.node.transformedSrc) undefined
+  return args.image.node.transformedSrc
+}
+
+operation MapProductVariant {
+  return {
+    sku = args.variant.node.sku
+    active = true
+    title = args.variant.node.title
+    images = [args.variant.node.image.transformedSrc]
+    shippable = args.variant.node.requiresShipping
+    prices = [{
+      amount: Number(args.variant.node.priceV2.amount),
+      currencyCode: args.variant.node.priceV2.currencyCode
+    }]
+    productDimensions = call MapVariantDimensions(
+      weight = args.variant.node.weight,
+      weightUnit = args.variant.node.weightUnit
+    )
+    inventory = {
+      isInStock: args.variant.node.availableForSale,
+      inStockCount: args.variant.node.quantityAvailable
+    }
+  }
+}
+
+operation MapVariantDimensions {
+  return if (!args.weight || !args.weight) undefined
+
+  weightUnit = call MapWeightUnit(unit = args.weightUnit)
+
+  return {
+    weight: Number(args.weight),
+    weightUnit: weightUnit
+  }
+}
+
+operation MapWeightUnit {
+  UNITS_MAP = {
+    'GRAMS': 'g',
+    'KILOGRAMS': 'kg',
+    'OUNCES': 'oz',
+    'POUNDS': 'lb',
+  }
+
+  return UNITS_MAP[args.unit]
+}
