@@ -18,7 +18,7 @@
     "build": "tsc -p tsconfig.release.json --outDir dist",
     "clean": "rimraf dist/",
     "prebuild": "yarn clean",
-    "test": "dotenv -e .env.capabilities -- jest",
+    "test": "station compile && dotenv -e .env.capabilities -- jest",
     "test:clean": "dotenv -e .env.capabilities -- jest --clear-cache && jest",
     "test:debug": "DEBUG=* yarn test",
     "lint": "eslint ./",
