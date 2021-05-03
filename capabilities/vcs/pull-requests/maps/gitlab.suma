@@ -9,7 +9,7 @@ profile = "vcs/pull-requests@1.0"
     response 200 "application/json" {
       map result {
         //maps returned values to result object
-        repos = body.map((r) => {
+        pullRequests = body.map((r) => {
           return {
             title: r.title,
             id: r.iid,

@@ -117,7 +117,6 @@
             "CleanAddress": {
               "input": {
                 "SMARTYSTREETS_AUTH_ID": "$SMARTYSTREETS_AUTH_ID"
-
               }
             }
           }
@@ -129,7 +128,7 @@
       "providers": {
         "sendgrid": {
           "file": "./grid/communication/send-email/maps/sendgrid.suma",
-           "defaults": {
+          "defaults": {
             "SendEmail": {
               "input": {
                 "from": "$SENDGRID_COMMUNICATION_SENDEMAIL_FROM",
@@ -137,6 +136,20 @@
               }
             }
           }
+        }
+      }
+    },
+    "vcs/pull-request": {
+      "file": "./grid/vcs/pull-request/profile.supr",
+      "providers": {
+        "github": {
+          "file": "./grid/vcs/pull-request/maps/github.suma"
+        },
+        "gitlab": {
+          "file": "./grid/vcs/pull-request/maps/gitlab.suma"
+        },
+        "bitbucket": {
+          "file": "./grid/vcs/pull-request/maps/bitbucket.suma"
         }
       }
     }
@@ -210,6 +223,10 @@
           "token": "$SENDGRID_API_KEY"
         }
       ]
+    },
+    "provider": {
+      "file": "../providers/provider.json",
+      "security": []
     }
   }
 }
