@@ -163,6 +163,16 @@
         },
         "mock": {
           "file": "./grid/communication/send-email/maps/mock.suma"
+        },
+        "mailchimp": {
+          "file": "./grid/communication/send-email/maps/mailchimp.suma",
+          "defaults": {
+            "SendEmail": {
+              "input": {
+                "mailchimp_api_key": "$MAILCHIMP_API_KEY"
+              }
+            }
+          }
         }
       }
     },
@@ -347,6 +357,9 @@
           "password": "$MAILGUN_PASSWORD"
         }
       ]
+    },
+    "mailchimp": {
+      "file": "../providers/mailchimp.json"
     }
   }
 }
