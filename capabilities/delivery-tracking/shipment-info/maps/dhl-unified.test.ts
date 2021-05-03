@@ -43,12 +43,11 @@ describe('delivery-tracking/shipment-info/dhl-unified', () => {
       });
     });
     it('should return valid status', () => {
-      expect(shipment.status).toEqual({
-        statusCode: 'pre_transit',
-        statusText:
-          'The instruction data for this shipment have been provided by the sender to DHL electronically',
-        timestamp: '2021-01-11T20:34:00',
-      });
+      expect(shipment.status.statusCode).toEqual('pre_transit');
+      expect(shipment.status.statusText).toEqual(
+        'The instruction data for this shipment have been provided by the sender to DHL electronically'
+      );
+      expect(shipment.status.timestamp).toBeDefined();
     });
     it('should return events', () => {
       expect(shipment.events.length).toBe(1);
