@@ -1,0 +1,121 @@
+profile = "delivery-tracking/shipment-info@1.0"
+  provider = "shippo"
+  
+"""
+shipmentInfo map
+"""
+map shipmentInfo {
+  fetchShipmentOutcome = call FetchShipment(
+    carrier = input.carrier,
+    trackingNumber = input.trackingNumber)
+
+  map error if (fetchShipmentOutcome.errorMessage) {
+    title = fetchShipmentOutcome.errorMessage
+  }
+  
+  map result fetchShipmentOutcome
+}
+
+operation FetchShipment {
+  http GET "/tracks/{args.carrier}/{args.trackingNumber}" {
+    security "shippo_api_token"
+    response 200 "application/json" {
+      shipment = call MapShipment(shipment = body)
+
+      return [shipment]
+    }
+    response 404 {
+      fail {
+        errorMessage = "No shipment with given tracking number found"
+      }
+    }
+    response 401 {
+      fail {
+        errorMessage = "Invalid api token"
+      }
+    }
+    response 429 {
+      fail {
+        errorMessage = "Too many requests within defined time period"
+      }
+    }
+  }
+}
+
+operation MapShipment {
+  estimatedDeliveryDate = undefined
+  shipment = args.shipment
+
+  set if (shipment.eta) {
+    estimatedDeliveryDate = shipment.eta
+  }
+  
+  status = call MapTrackingStatusToEvent(
+    trackingStatus = shipment.tracking_status
+  )
+
+  events = call foreach(trackingStatus of shipment.tracking_history) MapTrackingStatusToEvent(
+    trackingStatus = trackingStatus
+  )
+
+  return {
+    trackingNumber = args.trackingNumber
+    origin = call MapLocation(address = shipment.address_from)
+    destination = call MapLocation(address = shipment.address_to)
+    status = status
+    events = events
+    estimatedDeliveryDate = estimatedDeliveryDate
+  }
+}
+
+operation MapLocation {
+  return {
+    address: {
+      countryCode: args.address.country,
+      postalCode: args.address.zip,
+      addressLocality: args.address.city
+    }
+  }
+}
+
+operation MapTrackingStatusToEvent {
+  statusCode = call MapTrackingStatusCode(status = args.trackingStatus.status)
+  location = undefined
+
+  set if(args.trackingStatus.location) {
+    location = call MapLocation(address = args.trackingStatus.location)
+  }
+  
+  return {
+    timestamp = args.trackingStatus.status_date
+    statusCode = statusCode
+    statusText = args.trackingStatus.status_details
+    location = location
+  }
+}
+
+operation MapTrackingStatusCode {
+  set {
+    result = (() => {
+      switch (args.status) {
+        case 'PRE_TRANSIT':
+          return 'pre_transit'
+      
+        case 'TRANSIT':
+          return 'transit'
+
+        case 'DELIVERED':
+          return 'delivered'
+
+        case 'FAILURE':
+          return 'failure'
+
+        default:
+          return 'unknown'
+      }
+    })()
+  }
+
+  return result
+}
+
