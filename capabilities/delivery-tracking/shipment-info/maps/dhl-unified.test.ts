@@ -20,13 +20,13 @@ describe('delivery-tracking/shipment-info/dhl-unified', () => {
       );
       const dhl = await client.getProvider('dhl-unified');
       const result = await profile.useCases.shipmentInfo.perform(
-        { trackingNumber: '00340434292135100124' },
+        { trackingNumber: '00340434292135100131' },
         { provider: dhl }
       );
       shipment = result.unwrap()[0];
     });
     it('should return valid tracking number', () => {
-      expect(shipment.trackingNumber).toBe('00340434292135100124');
+      expect(shipment.trackingNumber).toBe('00340434292135100131');
     });
     it('should return valid origin location', () => {
       expect(shipment.origin).toEqual({
