@@ -62,6 +62,19 @@ export interface ReverseGeocodeInput {
      **/
     longitude: unknown;
 }
+/**
+ * Reverse geocode
+ * Decodes geographical coordinates (latitude and longitude) into an address
+ **/
+export interface ReverseGeocodeResult {
+    addresses?: {
+        addressCountry?: unknown;
+        addressLocality?: unknown;
+        addressRegion?: unknown;
+        postalCode?: unknown;
+        streetAddress?: unknown;
+    }[];
+}
 export const profile = {
     "Gecode": typeHelper<GecodeInput, GecodeResult>(),
     "ReverseGeocode": typeHelper<ReverseGeocodeInput, ReverseGeocodeResult>()

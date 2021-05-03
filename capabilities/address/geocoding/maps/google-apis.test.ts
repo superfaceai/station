@@ -28,11 +28,9 @@ describe('address/geocoding/google-apis', () => {
     }, { provider })
 
     const value = result.unwrap()
+
     expect(result.isOk()).toBeTruthy();
-    expect(value.length()).toBeGreaterThan(0);
-    // expect(value.streetAddress).toBe("");
-    // expect(value.addressLocality).toBe("");
-    // expect(value.addressRegion).toBe("");
-    // expect(value.addressCountry).toBe("");
+    expect(value.addresses).toBeDefined();
+    expect(value.addresses?.length).toBeGreaterThan(0);
   })  
 })

@@ -9,7 +9,7 @@ version = "1.0"
 """
 Geocode address
 
-Geocode address into geographical coordinates (latitude and longitude)
+Geocode postal address into geographical coordinates (latitude and longitude)
 """
 usecase Gecode {
   input {
@@ -29,7 +29,7 @@ usecase Gecode {
 """
 Reverse geocode
 
-Decodes geographical coordinates (latitude and longitude) into an address
+Decodes geographical coordinates (latitude and longitude) into postal addresses
 """
 usecase ReverseGeocode {
   input {
@@ -37,13 +37,15 @@ usecase ReverseGeocode {
     longitude!
   }
 
-  result [{
-    addressCountry
-    addressLocality
-    addressRegion
-    postalCode
-    streetAddress
-  }]
+  result {
+    addresses [{
+      addressCountry
+      addressLocality
+      addressRegion
+      postalCode
+      streetAddress
+    }]
+  }
 }
 
 "Country
