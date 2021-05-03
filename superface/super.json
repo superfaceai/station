@@ -146,6 +146,32 @@
           "file": "./grid/starwars/character-information/maps/swapi.suma"
         }
       }
+    },
+    "vcs/pull-request": {
+      "file": "./grid/vcs/pull-request/profile.supr",
+      "providers": {
+        "github": {
+          "file": "./grid/vcs/pull-request/maps/github.suma"
+        },
+        "gitlab": {
+          "file": "./grid/vcs/pull-request/maps/gitlab.suma"
+        },
+        "bitbucket": {
+          "file": "./grid/vcs/pull-request/maps/bitbucket.suma"
+        }
+      }
+    },
+    "delivery-tracking/shipment-info": {
+      "file": "grid/delivery-tracking/shipment-info/profile.supr",
+      "defaults": {},
+      "providers": {
+        "dhl-unified": {
+          "file": "./grid/delivery-tracking/shipment-info/maps/dhl-unified.suma"
+        },
+        "shippo": {
+          "file": "./grid/delivery-tracking/shipment-info/maps/shippo.suma"
+        }
+      }
     }
   },
   "providers": {
@@ -209,6 +235,15 @@
         }
       ]
     },
+    "dhl-unified": {
+      "file": "../providers/dhl-unified.json",
+      "security": [
+        {
+          "id": "dhl_api_key",
+          "apikey": "$DHL_API_KEY"
+        }
+      ]
+    },
     "sendgrid": {
       "file": "../providers/sendgrid.json",
       "security": [
@@ -221,6 +256,15 @@
     "swapi": {
       "file": "../providers/swapi.json",
       "security": []
+    },
+    "shippo": {
+      "file": "../providers/shippo.json",
+      "security": [
+        {
+          "id": "shippo_api_token",
+          "apikey": "$SHIPPO_TOKEN"
+        }
+      ]
     }
   }
 }

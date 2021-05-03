@@ -1,0 +1,20 @@
+profile = "vcs/pull-request@1.0"
+provider = "bitbucket"
+
+map PullRequest{
+  owner = input.owner
+  repo = input.repo
+  identifier = input.identifier
+
+  http GET "/2.0/repositories/{owner}/{repo}/pullrequests/{identifier}" {
+    response 200 "application/json" {
+      //maps returned values to result object
+      map result {
+        title: body.title,
+        id: body.id,
+        url: body.links.html.href,
+        sha: body.source.commit.hash,
+      }
+    }
+  }
+}

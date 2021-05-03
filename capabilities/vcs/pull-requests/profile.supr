@@ -6,16 +6,16 @@ pull-requests usecase
 """
 usecase PullRequests {
   input {
-    owner
-    repo
+    owner string
+    repo string
   }
 
   result {
-    repos [{
-        title
-        id
-        url
-        sha
+    pullRequests [{
+        title string
+        id number
+        url string
+        sha string
     }]
   }
 }

@@ -1,9 +1,7 @@
-import { kebabToCamelCase } from './utils';
+import { kebabToPascalCase } from './utils';
 
-export function exportTypeTemplate(
-  usecase: string,
-): string {
-  return `export * from './${usecase}'\n`
+export function exportTypeTemplate(usecase: string): string {
+  return `export * from './${usecase}'\n`;
 }
 export function profileTemplate(
   usecase: string,
@@ -12,7 +10,7 @@ export function profileTemplate(
 ): string {
   const name: string = scope ? `${scope}/${usecase}` : `/${usecase}`;
 
-  return `name = "${name}"\nversion = "${version}"\n\n"""\n${usecase} usecase\n"""\nusecase ${kebabToCamelCase(
+  return `name = "${name}"\nversion = "${version}"\n\n"""\n${usecase} usecase\n"""\nusecase ${kebabToPascalCase(
     usecase
   )} {}`;
 }
@@ -43,7 +41,7 @@ export function mapTemplate(
   return `profile = "${scope}/${usecase}@${version}"
 provider = "${provider}"
 ${variantAssignment}
-map ${kebabToCamelCase(usecase)}{}
+map ${kebabToPascalCase(usecase)}{}
 `;
 }
 
@@ -52,21 +50,21 @@ export function mapTestTemplate(
   usecase: string,
   provider: string
 ): string {
-  return `
-import { SuperfaceClient } from '@superfaceai/one-sdk';
+  return `import { SuperfaceClient } from '../../../../superface/sdk';
 
-describe('${scope}/${usecase}/${provider}', () => {
+describe('${scope}/${usecase}/${provider}-typed', () => {
   it('performs correctly', async () => {
     const client = new SuperfaceClient();
     const profile = await client.getProfile('${scope}/${usecase}');
-    const useCase = profile.getUseCase('${kebabToCamelCase(usecase)}');
     const provider = await client.getProvider('${provider}');
+    const usecase = profile.useCases.${kebabToPascalCase(usecase)};
 
-    expect(useCase).not.toBeUndefined();
     expect(provider).not.toBeUndefined();
-    //Edit expected value
-    //await expect(useCase.perform({}, { provider })).resolves.toEqual()
-  })
-})
-`;
+    expect(usecase).not.toBeUndefined();
+
+    //Edit input values and expected result
+    //const result = await usecase.perform({}, { provider });
+    //expect(result.unwrap()).toEqual();
+  });
+});`;
 }
