@@ -3,7 +3,7 @@ import { grey } from 'chalk';
 import inquirer from 'inquirer';
 
 import { Command } from '../common';
-import { publish } from '../logic';
+import { check, publish } from '../logic';
 
 export default class Publish extends Command {
   static strict = false;
@@ -34,7 +34,7 @@ export default class Publish extends Command {
     '$ station publish capabilities/vcs/user-repos/maps/bitbucket.suma -q',
   ];
 
-  private logCallback? = (message: string) => this.log(grey(message));
+  private logCallback?= (message: string) => this.log(grey(message));
 
   async run(): Promise<void> {
     const { argv, flags } = this.parse(Publish);
@@ -42,6 +42,8 @@ export default class Publish extends Command {
     if (flags.quiet) {
       this.logCallback = undefined;
     }
+
+    await check({ logCb: this.logCallback });
 
     let baseUrl = 'https://superface.dev';
 
