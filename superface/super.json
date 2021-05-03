@@ -158,6 +158,9 @@
       "providers": {
         "google-apis": {
           "file": "./grid/address/geocoding/maps/google-apis.suma"
+        },
+        "opencage": {
+          "file": "./grid/address/geocoding/maps/opencage.suma"
         }
       }
     }
@@ -238,6 +241,15 @@
         {
           "id": "apikey",
           "apikey": "$GOOGLE_MAPS_API_KEY"
+        }
+      ]
+    },
+    "opencage": {
+      "file": "../providers/opencage.json",
+      "security": [
+        {
+          "id": "apikey",
+          "apikey": "$OPENCAGE_API_KEY"
         }
       ]
     }
