@@ -2,21 +2,22 @@ import { SuperfaceClient } from '../../../../superface/sdk';
 
 describe('address/geocoding/opencage-typed', () => {
 
-  // it('Geocode address', async () => {
-  //   const client = new SuperfaceClient();
-  //   const profile = await client.getProfile('address/geocoding');
-  //   const provider = await client.getProvider('opencage');
-  //   const result = await profile.useCases.Gecode.perform({
-  //     streetAddress: "1600 Amphitheatre Parkway",
-  //     addressLocality: "Mountain View",
-  //     addressRegion: "CA",
-  //     addressCountry: "USA"
-  //   }, { provider })
+  it('Geocode address', async () => {
+    const client = new SuperfaceClient();
+    const profile = await client.getProfile('address/geocoding');
+    const provider = await client.getProvider('opencage');
+    const result = await profile.useCases.Gecode.perform({
+      streetAddress: "1600 Amphitheatre Parkway",
+      addressLocality: "Mountain View",
+      addressRegion: "CA",
+      addressCountry: "USA"
+    }, { provider })
 
-  //   expect(result.isOk()).toBeTruthy();
-  //   expect(result.unwrap().latitude).toBe(37.4305);
-  //   expect(result.unwrap().longitude).toBe(-122.0769661);
-  // })
+    const value = result.unwrap()
+    expect(result.isOk()).toBeTruthy();
+    expect(value.latitude).toBe(37.4224857);
+    expect(value.longitude).toBe(-122.0855846);
+  })
 
   it('Reverse geocode geographical coordingates', async () => {
     const client = new SuperfaceClient();
@@ -28,9 +29,14 @@ describe('address/geocoding/opencage-typed', () => {
     }, { provider })
 
     const value = result.unwrap()
-
     expect(result.isOk()).toBeTruthy();
-    expect(value.addresses).toBeDefined();
-    expect(value.addresses?.length).toBeGreaterThan(0);
+    expect(value).toEqual([{
+      addressCountry: 'US',
+      streetAddress: '281 Bedford Avenue',
+      postalCode: '11211',
+      addressRegion: 'NY',
+      addressLocality: 'New York',
+      formattedAddress: '281 Bedford Avenue, New York, NY 11211, United States of America'
+    }])
   })
 })

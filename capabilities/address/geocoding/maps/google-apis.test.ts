@@ -28,9 +28,14 @@ describe('address/geocoding/google-apis', () => {
     }, { provider })
 
     const value = result.unwrap()
-
     expect(result.isOk()).toBeTruthy();
-    expect(value.addresses).toBeDefined();
-    expect(value.addresses?.length).toBeGreaterThan(0);
-  })  
+    expect(value).toEqual([{
+      streetAddress: '277 Bedford Ave',
+      addressLocality: 'Brooklyn',
+      addressRegion: 'Kings County, NY',
+      addressCountry: 'US',
+      postalCode: '11211',
+      formattedAddress: '277 Bedford Ave, Brooklyn, NY 11211, USA'
+    }])
+  })
 })
