@@ -19,7 +19,7 @@ export async function createMap(
   }
 ): Promise<void> {
   //Create folder structure if it doesn't exist
-  if (!(await exists(`./$${CAPABILITIES_DIR}`))) {
+  if (!(await exists(`./${CAPABILITIES_DIR}`))) {
     await mkdir(`./$${CAPABILITIES_DIR}`);
   }
 

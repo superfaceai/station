@@ -66,7 +66,7 @@ export async function compile(
     useCases = await getDirectories(`./${CAPABILITIES_DIR}/${scope}`);
     for (const useCase of useCases) {
       options?.logCb?.(
-        `Coping content of ${CAPABILITIES_DIR}/${scope}/${useCase} to ./${PROFILE_BUILD_PATH}/${scope}/${useCase}`
+        `Copying content of ${CAPABILITIES_DIR}/${scope}/${useCase} to ./${PROFILE_BUILD_PATH}/${scope}/${useCase}`
       );
 
       //Create folder structure if it doesn't exist
