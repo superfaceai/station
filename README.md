@@ -1,12 +1,8 @@
 # station
 Where capabilities are born.
 
-**note**: we are now using public superface packages. Only private Station dependency is `service-client` so please update your `.npmrc` to use superface private registry only for `service-client`:
+**note**: we are now using public superface packages so please update (or delete) your `.npmrc` not to use superface private registry.
 
-```
-@superfaceai/service-client:registry=https://npm.pkg.github.com/
-//npm.pkg.github.com/:_authToken=xxxxx
-```
 Also, check `.npmrc` in "home" directory.
 
 ## Install
