@@ -12,15 +12,12 @@ export default class Check extends Command {
   static args = [];
 
   static flags = {
-    ...Command.flags
+    ...Command.flags,
   };
 
-  static examples = [
-    '$ station check',
-    '$ station check -q',
-  ];
+  static examples = ['$ station check', '$ station check -q'];
 
-  private logCallback?= (message: string) => this.log(grey(message));
+  private logCallback? = (message: string) => this.log(grey(message));
 
   async run(): Promise<void> {
     const { flags } = this.parse(Check);
