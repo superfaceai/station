@@ -153,6 +153,17 @@
         }
       }
     },
+    "address/geocoding": {
+      "file": "./grid/address/geocoding/profile.supr",
+      "providers": {
+        "google-apis": {
+          "file": "./grid/address/geocoding/maps/google-apis.suma"
+        },
+        "opencage": {
+          "file": "./grid/address/geocoding/maps/opencage.suma"
+        }
+      }
+    },
     "delivery-tracking/shipment-info": {
       "file": "grid/delivery-tracking/shipment-info/profile.supr",
       "defaults": {},
@@ -242,6 +253,24 @@
         {
           "id": "bearer_token",
           "token": "$SENDGRID_API_KEY"
+        }
+      ]
+    },
+    "google-apis": {
+      "file": "../providers/google-apis.json",
+      "security": [
+        {
+          "id": "apikey",
+          "apikey": "$GOOGLE_MAPS_API_KEY"
+        }
+      ]
+    },
+    "opencage": {
+      "file": "../providers/opencage.json",
+      "security": [
+        {
+          "id": "apikey",
+          "apikey": "$OPENCAGE_API_KEY"
         }
       ]
     },
