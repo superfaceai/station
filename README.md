@@ -25,10 +25,30 @@ yarn link
 
 ## Commands
   <!-- commands -->
+* [`station check`](#station-check)
 * [`station compile`](#station-compile)
 * [`station create DOCUMENTINFO`](#station-create-documentinfo)
 * [`station generate PROFILENAME`](#station-generate-profilename)
 * [`station publish PATH`](#station-publish-path)
+
+## `station check`
+
+Checks if all profiles have maps with coresponding version, scope, name, usecase definitions and providers
+
+```
+USAGE
+  $ station check
+
+OPTIONS
+  -h, --help   show CLI help
+  -q, --quiet  When set to true, disables the shell echo output of action.
+
+EXAMPLES
+  $ station check
+  $ station check -q
+```
+
+_See code: [dist/src/commands/check.ts](https://github.com/superfaceai/station/blob/v0.0.1/dist/src/commands/check.ts)_
 
 ## `station compile`
 
@@ -101,8 +121,6 @@ EXAMPLES
 _See code: [dist/src/commands/generate.ts](https://github.com/superfaceai/station/blob/v0.0.1/dist/src/commands/generate.ts)_
 
 ## `station publish PATH`
-
-**note**: Do not upload to production unless you are 100% sure
 
 Uploads map/profile/provider to Store - use paths to `.supr` file for profiles, `.suma` for maps and `.json` for providers. Do not use path ending with `.ast.json` (compiled files).
 

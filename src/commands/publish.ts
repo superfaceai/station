@@ -3,7 +3,7 @@ import { grey } from 'chalk';
 import inquirer from 'inquirer';
 
 import { Command } from '../common';
-import { publish } from '../logic';
+import { check, publish } from '../logic';
 
 export default class Publish extends Command {
   static strict = false;
@@ -42,6 +42,8 @@ export default class Publish extends Command {
     if (flags.quiet) {
       this.logCallback = undefined;
     }
+
+    await check({ logCb: this.logCallback });
 
     let baseUrl = 'https://superface.dev';
 

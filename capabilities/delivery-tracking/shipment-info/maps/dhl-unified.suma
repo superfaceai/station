@@ -1,0 +1,96 @@
+profile = "delivery-tracking/shipment-info@1.0"
+provider = "dhl-unified"
+
+"""
+shipmentInfo map
+"""
+map shipmentInfo {
+  fetchShipmentOutcome = call FetchShipment(
+    trackingNumber = input.trackingNumber,
+    carrier = input.carrier)
+
+  map error if (fetchShipmentOutcome.errorMessage) {
+    title = fetchShipmentOutcome.errorMessage
+  }
+  
+  map result fetchShipmentOutcome
+}
+
+operation FetchShipment {
+  http GET "/track/shipments" {
+    security "dhl_api_key"
+    request {
+      query {
+        trackingNumber = args.trackingNumber
+        service = args.carrier
+      }
+    }
+    response 200 "application/json" {
+      
+      shipments = call foreach(shipment of body.shipments) MapShipment(
+        shipment = shipment
+      )
+
+      return shipments
+    }
+    response 404 {
+      fail {
+        errorMessage = "No shipment with given tracking number found"
+      }
+    }
+    response 401 {
+      fail {
+        errorMessage = "Invalid api key"
+      }
+    }
+    response 429 {
+      fail {
+        errorMessage = "Too many requests within defined time period"
+      }
+    }
+  }
+}
+
+operation MapShipment {
+  estimatedDeliveryDate = undefined
+  shipment = args.shipment
+
+  set if (shipment.estimatedDeliveryDate) {
+    estimatedDeliveryDate = shipment.estimatedDeliveryDate
+  }
+  set {
+    status = call MapEvent(
+      event = shipment.status
+    )
+  }
+  set {
+    events = call foreach(event of shipment.events) MapEvent(
+      event = event
+    )
+  }
+
+  return {
+    trackingNumber = args.trackingNumber
+    origin = shipment.origin
+    destination = shipment.destination
+    status = status
+    events = events
+    estimatedDeliveryDate = estimatedDeliveryDate
+  }
+}
+
+operation MapEvent {
+  set if(args.event.statusCode === "pre-transit") {
+    statusCode = "pre_transit"
+  }
+  set if(args.event.statusCode !== "pre-transit") {
+    statusCode = args.event.statusCode
+  }
+  
+  return {
+    timestamp = args.event.timestamp
+    statusCode = statusCode
+    statusText = args.event.status
+    location = args.event.location
+  }
+}

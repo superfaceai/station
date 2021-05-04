@@ -3,6 +3,7 @@ import { addressCleanAddress } from "./types/address/clean-address";
 import { addressGeocoding } from "./types/address/geocoding";
 import { communicationSendEmail } from "./types/communication/send-email";
 import { communicationSendMessage } from "./types/communication/send-message";
+import { deliveryTrackingShipmentInfo } from './types/delivery-tracking/shipment-info';
 import { vcsPullRequest } from "./types/vcs/pull-request";
 import { vcsPullRequests } from "./types/vcs/pull-requests";
 import { vcsSingleFileContent } from "./types/vcs/single-file-content";
@@ -20,7 +21,8 @@ export const typeDefinitions = {
     ...addressGeocoding,
     ...communicationSendEmail,
     ...communicationSendMessage,
-    ...vcsPullRequest,
+    ...vcsPullRequest,  
+    ...deliveryTrackingShipmentInfo,
     ...vcsPullRequests,
     ...vcsSingleFileContent,
     ...vcsUserRepos

@@ -163,6 +163,18 @@
           "file": "./grid/address/geocoding/maps/opencage.suma"
         }
       }
+    },
+    "delivery-tracking/shipment-info": {
+      "file": "grid/delivery-tracking/shipment-info/profile.supr",
+      "defaults": {},
+      "providers": {
+        "dhl-unified": {
+          "file": "./grid/delivery-tracking/shipment-info/maps/dhl-unified.suma"
+        },
+        "shippo": {
+          "file": "./grid/delivery-tracking/shipment-info/maps/shippo.suma"
+        }
+      }
     }
   },
   "providers": {
@@ -226,6 +238,15 @@
         }
       ]
     },
+    "dhl-unified": {
+      "file": "../providers/dhl-unified.json",
+      "security": [
+        {
+          "id": "dhl_api_key",
+          "apikey": "$DHL_API_KEY"
+        }
+      ]
+    },
     "sendgrid": {
       "file": "../providers/sendgrid.json",
       "security": [
@@ -250,6 +271,15 @@
         {
           "id": "apikey",
           "apikey": "$OPENCAGE_API_KEY"
+        }
+      ]
+    },
+    "shippo": {
+      "file": "../providers/shippo.json",
+      "security": [
+        {
+          "id": "shippo_api_token",
+          "apikey": "$SHIPPO_TOKEN"
         }
       ]
     }
