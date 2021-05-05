@@ -1,0 +1,29 @@
+name = "weather/will-it-rain"
+version = "1.0"
+
+"""
+will-it-rain usecase
+"""
+usecase WillItRain {
+  input {
+    city
+    date
+    units
+  }
+
+  result {
+    chance
+    precipitation
+    type
+  }
+}
+
+field  type enum {
+            Rain
+            Snow
+        }
+
+field  units enum {
+            Imperial
+            Metric
+        }

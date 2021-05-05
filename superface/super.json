@@ -208,6 +208,14 @@
           "file": "./grid/delivery-tracking/shipment-info/maps/mock.suma"
         }
       }
+    },
+    "weather/will-it-rain": {
+      "file": "./grid/weather/will-it-rain/profile.supr",
+      "providers": {
+        "accuweather": {
+          "file": "./grid/weather/will-it-rain/maps/accuweather.suma"
+        }
+      }
     }
   },
   "providers": {
@@ -327,6 +335,15 @@
           "id": "basic",
           "username": "$MAILGUN_USERNAME",
           "password": "$MAILGUN_PASSWORD"
+        }
+      ]
+    },
+    "accuweather": {
+      "file": "../providers/accuweather.json",
+      "security": [
+        {
+          "id": "accuweather_apikey",
+          "apikey": "$ACCUWEATHER_KEY"
         }
       ]
     }

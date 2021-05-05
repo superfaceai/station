@@ -10,6 +10,7 @@ import { vcsPullRequest } from "./types/vcs/pull-request";
 import { vcsPullRequests } from "./types/vcs/pull-requests";
 import { vcsSingleFileContent } from "./types/vcs/single-file-content";
 import { vcsUserRepos } from "./types/vcs/user-repos";
+import { weatherWillItRain } from './types/weather/will-it-rain';
 
 export { AddressCleanAddressProfile } from "./types/address/clean-address";
 export { AddressGeocodingProfile } from "./types/address/geocoding";
@@ -21,6 +22,8 @@ export { VcsSingleFileContentProfile } from "./types/vcs/single-file-content";
 export { VcsUserReposProfile } from "./types/vcs/user-repos";
 export { DeliveryTrackingShipmentInfoProfile } from "./types/delivery-tracking/shipment-info";
 export { CommunicationSendSmsProfile } from "./types/communication/send-sms";
+export { WeatherWillItRainProfile } from "./types/weather/will-it-rain";
+
 export const typeDefinitions = {
     ...addressCleanAddress,
     ...addressGeocoding,
@@ -31,7 +34,8 @@ export const typeDefinitions = {
     ...vcsPullRequests,
     ...vcsSingleFileContent,
     ...vcsUserRepos,
-    ...communicationSendSms
+    ...communicationSendSms,
+    ...weatherWillItRain
 };
 export const SuperfaceClient = createTypedClient(typeDefinitions);
 export type SuperfaceClient = InstanceType<typeof SuperfaceClient>;

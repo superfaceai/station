@@ -1,0 +1,70 @@
+profile = "weather/will-it-rain@1.0"
+provider = "accuweather"
+
+map WillItRain {
+  // TODO: Not sure how to reasonably map this to the API structure
+  date = input.date
+
+  // call operation to get location code - it is cleaner so separate it like this
+  locationCode = call GetLocationCode(city = input.city)
+
+  dailyForecasts = []
+
+  http GET "/forecasts/v1/daily/1day/{locationCode}" {
+    security "accuweather_apikey"
+
+    request {
+      query {
+        // input.units will have a value of "Metric" if the metric variant is chosen
+        // so we compare it and this comparison will return a boolean
+        metric = input.units === "Metric"
+        // requests details to get the percipitation chances and volumes
+        details = true
+      }
+    }
+
+    response 200 "application/json" {
+      dailyForecasts = body["DailyForecasts"]
+    }
+  }
+
+  // TODO: Choose the right forecast
+  forecast = dailyForecasts[0]["Day"]
+
+  set if (forecast["PrecipitationType"] === "Snow") {
+    percType = "Snow"
+    percVolume = (`${forecast["Snow"]["Value"]} ${forecast["Snow"]["Unit"]}`)
+    percChance = forecast["SnowProbability"]
+  }
+  set if (forecast["PrecipitationType"] === "Rain") {
+    percType = "Rain"
+    percVolume = (`${forecast["Rain"]["Value"]} ${forecast["Rain"]["Unit"]}`)
+    percChance = forecast["RainProbability"]
+  }
+
+  map result {
+    chance = percChance
+    precipitation = percVolume
+    type = percType
+  }
+}
+
+operation GetLocationCode {
+  http GET "/locations/v1/cities/search" {
+    security "accuweather_apikey"
+
+    request {
+      query {
+        q = args.city
+      }
+    }
+
+    response 200 "application/json" {
+      // return the location key of the first result
+      // maybe later this could filter the responses or something
+      return body[0].Key
+    }
+  }
+
+  // return 213490
+}
