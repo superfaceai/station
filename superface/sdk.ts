@@ -3,7 +3,7 @@ import { addressCleanAddress } from "./types/address/clean-address";
 import { addressGeocoding } from "./types/address/geocoding";
 import { communicationSendEmail } from "./types/communication/send-email";
 import { communicationSendMessage } from "./types/communication/send-message";
-import { deliveryTrackingShipmentInfo } from './types/delivery-tracking/shipment-info';
+import { deliveryTrackingShipmentInfo } from "./types/delivery-tracking/shipment-info";
 import { vcsPullRequest } from "./types/vcs/pull-request";
 import { vcsPullRequests } from "./types/vcs/pull-requests";
 import { vcsSingleFileContent } from "./types/vcs/single-file-content";
@@ -16,16 +16,19 @@ export { VcsPullRequestProfile } from "./types/vcs/pull-request";
 export { VcsPullRequestsProfile } from "./types/vcs/pull-requests";
 export { VcsSingleFileContentProfile } from "./types/vcs/single-file-content";
 export { VcsUserReposProfile } from "./types/vcs/user-repos";
+import { weatherWillItRain } from './types/weather/will-it-rain';
+export { WeatherWillItRainProfile } from "./types/weather/will-it-rain";
 export const typeDefinitions = {
     ...addressCleanAddress,
     ...addressGeocoding,
     ...communicationSendEmail,
     ...communicationSendMessage,
-    ...vcsPullRequest,  
+    ...vcsPullRequest,
     ...deliveryTrackingShipmentInfo,
     ...vcsPullRequests,
     ...vcsSingleFileContent,
-    ...vcsUserRepos
+    ...vcsUserRepos,
+    ...weatherWillItRain
 };
 export const SuperfaceClient = createTypedClient(typeDefinitions);
 export type SuperfaceClient = InstanceType<typeof SuperfaceClient>;
