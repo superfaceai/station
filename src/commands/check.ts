@@ -25,6 +25,7 @@ export default class Check extends Command {
     if (flags.quiet) {
       this.logCallback = undefined;
     }
+    //TODO: Compile before check
     await check({ logCb: this.logCallback });
   }
 }

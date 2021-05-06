@@ -25,7 +25,7 @@
     "lint:fix": "yarn lint --fix",
     "format": "prettier -c ./",
     "format:fix": "prettier --write ./",
-    "prepush": "yarn build && yarn lint:fix && yarn format:fix"
+    "prepush": "yarn build && station compile && station check && yarn lint && yarn format"
   },
   "devDependencies": {
     "@types/debug": "^4.1.5",
@@ -46,11 +46,11 @@
     "typescript": "^4.0.5"
   },
   "dependencies": {
-    "@superfaceai/ast": "0.0.23",
-    "@superfaceai/cli": "0.0.12",
-    "@superfaceai/one-sdk": "0.0.22",
-    "@superfaceai/parser": "0.0.16",
-    "@superfaceai/service-client": "0.0.11",
+    "@superfaceai/ast": "0.0.24",
+    "@superfaceai/cli": "0.0.13",
+    "@superfaceai/one-sdk": "0.0.25",
+    "@superfaceai/parser": "0.0.17",
+    "@superfaceai/service-client": "0.0.12",
     "@oclif/command": "^1.8.0",
     "chalk": "^4.1.0",
     "@oclif/config": "^1.17.0",

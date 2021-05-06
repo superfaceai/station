@@ -6,7 +6,7 @@ export function exportTypeTemplate(usecase: string): string {
 export function profileTemplate(
   usecase: string,
   scope?: string,
-  version = '1.0'
+  version = '1.0.0'
 ): string {
   const name: string = scope ? `${scope}/${usecase}` : `/${usecase}`;
 
@@ -33,7 +33,7 @@ export function mapTemplate(
   scope: string,
   usecase: string,
   provider: string,
-  version = '1.0',
+  version = '1.0.0',
   variant?: string
 ): string {
   const variantAssignment = variant ? `variant = "${variant}"\n` : '';

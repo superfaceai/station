@@ -4,28 +4,30 @@ import {
   isMapDocumentNode,
   isProfileDocumentNode,
   isUseCaseDefinitionNode,
+  isValidDocumentName,
   MapDocumentNode,
   ProfileASTNode,
   ProfileDocumentNode,
 } from '@superfaceai/ast';
-import { parseProviderJson } from '@superfaceai/one-sdk';
+import { isValidProviderName, parseProviderJson } from '@superfaceai/one-sdk';
 
 import {
   exists,
   EXTENSIONS,
+  extractVersion,
+  extractVersionString,
   getDirectories,
   getFiles,
   LogCallback,
   PROFILE_BUILD_PATH,
   PROVIDERS_DIR,
   readFile,
+  versionDiffers,
 } from '../common';
 
 async function loadProfileAst(path: string): Promise<ProfileDocumentNode> {
   if (!(await exists(path))) {
-    throw new CLIError(`File: "${path}" not found - forgot to compile?`, {
-      exit: 1,
-    });
+    throw new CLIError(`File: "${path}" not found - forgot to compile?`, {});
   }
   const astFile = await readFile(path);
   let astJson: ProfileASTNode;
@@ -61,50 +63,104 @@ async function loadMapAst(path: string): Promise<MapDocumentNode> {
   return astJson;
 }
 
+/**
+ * Checks differences between map and profile
+ */
 function checkMapAndProfile(
   profile: ProfileDocumentNode,
   map: MapDocumentNode,
+  mapFileVersionStr: string,
+  profileFileVersionStr: string,
   options?: {
     logCb?: LogCallback;
   }
 ): void {
+  options?.logCb?.(`Checking if version in header and in filename matches`);
+  const mapFileVersion = extractVersion(mapFileVersionStr);
+  const profileFileVersion = extractVersion(profileFileVersionStr);
+
+  //Version in header and in filename should match
+  const profileVersionDiff = versionDiffers(
+    profileFileVersion,
+    profile.header.version
+  );
+  if (profileVersionDiff) {
+    throw new CLIError(
+      `Profile with version "${profileFileVersionStr}" has different version in header than in file name. Differs in ${profileVersionDiff}`,
+      { exit: 1 }
+    );
+  }
+
+  const mapVersionDiff = versionDiffers(
+    mapFileVersion,
+    map.header.profile.version
+  );
+  if (mapVersionDiff) {
+    throw new CLIError(
+      `Map "${map.header.provider}@${mapFileVersionStr}" has different version in header than in file name. Differs in ${mapVersionDiff}`,
+      { exit: 1 }
+    );
+  }
+
   options?.logCb?.(
     `Checking versions of profile: "${profile.header.name}" and map for provider: ""${map.header.provider}`
   );
+
+  //Map ast version & profile ast version
+  const astVersionDiff = versionDiffers(
+    profile.header.version,
+    map.header.profile.version
+  );
+  if (astVersionDiff) {
+    throw new CLIError(
+      `Map "${map.header.provider}@${mapFileVersionStr}" has different version in header than coresponfing profile "${profile.header.name}@${profileFileVersionStr}". Differs in ${astVersionDiff}`,
+      { exit: 1 }
+    );
+  }
+  options?.logCb?.(`Checking scope`);
+
   //Header
+  //acopes should match
   if (profile.header.scope !== map.header.profile.scope) {
     throw new CLIError(
       `Profile "${profile.header.name}" has map for provider "${map.header.provider}" with different scope`,
       { exit: 1 }
     );
   }
+  //check if scope is valid document name
+  if (profile.header.scope && map.header.profile.scope) {
+    if (!isValidDocumentName(profile.header.scope)) {
+      throw new CLIError(
+        `Profile "${profile.header.name}@${profileFileVersionStr}" has invalid scope "${profile.header.scope}"`,
+        { exit: 1 }
+      );
+    }
+
+    if (!isValidDocumentName(map.header.profile.scope)) {
+      throw new CLIError(
+        `Map for provider "${map.header.provider}" in version "${mapFileVersionStr}" has invalid profile scope "${map.header.profile.scope}"`,
+        { exit: 1 }
+      );
+    }
+  }
+  //check if names are valid document name
+  if (!isValidDocumentName(profile.header.name)) {
+    throw new CLIError(
+      `Profile "${profile.header.name}@${profileFileVersionStr}" has invalid name "${profile.header.name}"`,
+      { exit: 1 }
+    );
+  }
+
+  if (!isValidDocumentName(map.header.profile.name)) {
+    throw new CLIError(
+      `Map for provider "${map.header.provider}" in version "${mapFileVersionStr}" has invalid profile name "${map.header.profile.name}"`,
+      { exit: 1 }
+    );
+  }
+  //Names should match
   if (profile.header.name !== map.header.profile.name) {
     throw new CLIError(
       `Profile "${profile.header.name}" has map for provider "${map.header.provider}" with different name`,
-      { exit: 1 }
-    );
-  }
-  if (profile.header.version.major !== map.header.profile.version.major) {
-    throw new CLIError(
-      `Profile "${profile.header.name}" has map for provider "${map.header.provider}" with different MAJOR version`,
-      { exit: 1 }
-    );
-  }
-  if (profile.header.version.minor !== map.header.profile.version.minor) {
-    throw new CLIError(
-      `Profile "${profile.header.name}" has map for provider "${map.header.provider}" with different MINOR version`,
-      { exit: 1 }
-    );
-  }
-  if (profile.header.version.patch !== map.header.profile.version.patch) {
-    throw new CLIError(
-      `Profile "${profile.header.name}" has map for provider "${map.header.provider}" with different PATCH version`,
-      { exit: 1 }
-    );
-  }
-  if (profile.header.version.label !== map.header.profile.version.label) {
-    throw new CLIError(
-      `Profile "${profile.header.name}" has map for provider "${map.header.provider}" with different LABEL version`,
       { exit: 1 }
     );
   }
@@ -141,23 +197,48 @@ function checkMapAndProfile(
   }
 }
 
+/**
+ * Checks basic logical consistency in compiled files
+ */
 export async function check(options?: { logCb?: LogCallback }): Promise<void> {
   const scopes = await getDirectories(`./${PROFILE_BUILD_PATH}`);
-  let profileAst: ProfileDocumentNode;
+  let ast: ProfileDocumentNode;
   let mapAst: MapDocumentNode;
   let useCases: string[];
+  let profileNames: string[];
   let maps: string[];
+  const profiles: {
+    name: string;
+    ast: ProfileDocumentNode;
+    version: string;
+  }[] = [];
 
   for (const scope of scopes) {
     useCases = await getDirectories(`./${PROFILE_BUILD_PATH}/${scope}`);
     for (const useCase of useCases) {
-      //Load profile
-      options?.logCb?.(
-        `Checking profile: "./${PROFILE_BUILD_PATH}/${scope}/${useCase}/profile${EXTENSIONS.profile.build}"`
-      );
-      profileAst = await loadProfileAst(
-        `./${PROFILE_BUILD_PATH}/${scope}/${useCase}/profile${EXTENSIONS.profile.build}`
-      );
+      //Load profiles
+      profileNames = (
+        await getFiles(`./${PROFILE_BUILD_PATH}/${scope}/${useCase}`)
+      ).filter(p => p.endsWith(EXTENSIONS.profile.build));
+      for (const name of profileNames) {
+        options?.logCb?.(
+          `Checking profile: "./${PROFILE_BUILD_PATH}/${scope}/${useCase}/${name}"`
+        );
+        ast = await loadProfileAst(
+          `./${PROFILE_BUILD_PATH}/${scope}/${useCase}/${name}`
+        );
+        profiles.push({ name, ast, version: extractVersionString(name) });
+      }
+
+      //Check duplicite versions
+      profiles.forEach(profile => {
+        //There is more profiles with same version
+        if (profiles.filter(p => p.version === profile.version).length > 1) {
+          throw new CLIError(
+            `There is more than one profile with version "${profile.version}" at path ./${PROFILE_BUILD_PATH}/${scope}/${useCase}`
+          );
+        }
+      });
 
       if (!(await exists(`./${PROFILE_BUILD_PATH}/${scope}/${useCase}/maps`))) {
         throw new CLIError(
@@ -165,6 +246,8 @@ export async function check(options?: { logCb?: LogCallback }): Promise<void> {
           { exit: 1 }
         );
       }
+
+      //Load maps
       maps = (
         await getFiles(`./${PROFILE_BUILD_PATH}/${scope}/${useCase}/maps`)
       ).filter(map => map.endsWith(EXTENSIONS.map.build));
@@ -183,10 +266,33 @@ export async function check(options?: { logCb?: LogCallback }): Promise<void> {
         mapAst = await loadMapAst(
           `./${PROFILE_BUILD_PATH}/${scope}/${useCase}/maps/${file}`
         );
+
+        //Find coresponding version of profile
+        const mapVersion = extractVersionString(file);
+        const corespondingProfile = profiles.find(
+          profile => profile.version === mapVersion
+        );
+        if (!corespondingProfile) {
+          throw new CLIError(
+            `Profile with version "${mapVersion}" for map "./${PROFILE_BUILD_PATH}/${scope}/${useCase}/maps/${file}" not found`
+          );
+        }
+
         //Check map and profile
-        checkMapAndProfile(profileAst, mapAst);
+        checkMapAndProfile(
+          corespondingProfile.ast,
+          mapAst,
+          mapVersion,
+          corespondingProfile.version,
+          options
+        );
 
         //Check provider
+        if (!isValidProviderName(mapAst.header.provider)) {
+          throw new CLIError(`Provider "${mapAst.header.provider}" not found`, {
+            exit: 1,
+          });
+        }
         if (
           !(await exists(
             `./${PROVIDERS_DIR}/${mapAst.header.provider}${EXTENSIONS.provider}`
