@@ -1,0 +1,38 @@
+{
+  "profiles": {
+    "vcs/pull-requests": {
+      "file": "./grid/vcs/pull-requests/1.0.0/profile.supr",
+      "providers": {
+        "bitbucket": {
+          "file": "./grid/vcs/pull-requests/1.0.0/maps/bitbucket.suma"
+        },
+        "github": {
+          "file": "./grid/vcs/pull-requests/1.0.0/maps/github.suma"
+        },
+        "gitlab": {
+          "file": "./grid/vcs/pull-requests/1.0.0/maps/gitlab.suma"
+        }
+      }
+    }
+  },
+  "providers": {
+    "bitbucket": {
+      "file": "../providers/bitbucket.json",
+      "security": [
+        {
+          "id": "basic",
+          "username": "$BITBUCKET_USERNAME",
+          "password": "$BITBUCKET_PASSWORD"
+        }
+      ]
+    },
+    "github": {
+      "file": "../providers/github.json",
+      "security": []
+    },
+    "gitlab": {
+      "file": "../providers/gitlab.json",
+      "security": []
+    }
+  }
+}

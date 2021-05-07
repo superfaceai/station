@@ -1,7 +1,7 @@
 import { CLIError } from '@oclif/errors';
 import { grey } from 'chalk';
 
-import { Command } from '../common';
+import { Command, parseCommandInput } from '../common';
 import { generate } from '../logic';
 
 export default class Compile extends Command {
@@ -23,8 +23,8 @@ export default class Compile extends Command {
   };
 
   static examples = [
-    '$ station generate sms/service',
-    '$ station generate sms/service -q',
+    '$ station generate sms/service@1.2.3',
+    '$ station generate sms/service@1.2.3 -q',
   ];
 
   private logCallback? = (message: string) => this.log(grey(message));
@@ -40,8 +40,8 @@ export default class Compile extends Command {
       throw new CLIError('Invalid number of arguments', { exit: 1 });
     }
 
-    const profileName = argv[0];
-    const [scope, profile] = profileName.split('/');
-    await generate(scope, profile, { logCb: this.logCallback });
+    const { scope, usecase, version } = parseCommandInput(argv[0]);
+
+    await generate(scope, usecase, version, { logCb: this.logCallback });
   }
 }

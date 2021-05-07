@@ -1,6 +1,7 @@
 import * as fs from 'fs';
 import { promisify } from 'util';
 
+export const rm = promisify(fs.rm);
 export const readdir = promisify(fs.readdir);
 export const copyFile = promisify(fs.copyFile);
 export const access = promisify(fs.access);

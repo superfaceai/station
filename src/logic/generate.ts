@@ -4,13 +4,11 @@ import {
   ProfileASTNode,
   ProfileDocumentNode,
 } from '@superfaceai/ast';
-import {
-  generateTypesFile,
-  generateTypingsForProfile,
-} from '@superfaceai/cli/dist/logic/generate';
+import { generateTypesFile, generateTypingsForProfile } from '@superfaceai/cli';
 
 import { LogCallback } from '../common';
 import {
+  CAPABILITIES_DIR,
   EXTENSIONS,
   PROFILE_BUILD_PATH,
   TYPE_DEFINITIONS_FILE,
@@ -23,12 +21,13 @@ import { exportTypeTemplate } from '../common/templates';
 export async function generate(
   scope: string,
   profile: string,
+  version: string,
   options?: {
     logCb?: LogCallback;
   }
 ): Promise<void> {
   //Get ATS
-  const astPath = `./${PROFILE_BUILD_PATH}/${scope}/${profile}/profile${EXTENSIONS.profile.build}`;
+  const astPath = `./${PROFILE_BUILD_PATH}/${scope}/${profile}/${version}/profile${EXTENSIONS.profile.build}`;
   if (!(await exists(astPath))) {
     throw new CLIError(
       `AST file not found at "${astPath}". You need to run compile command first`,
@@ -47,12 +46,12 @@ export async function generate(
     throw new CLIError(`File "${astPath}" has unknown structure`, { exit: 1 });
   }
   options?.logCb?.(
-    `AST file found. Generating types for: "${scope}/${profile}"`
+    `AST file found. Generating types for: "${scope}/${profile}/${version}"`
   );
-  await generateProfileTypes(scope, profile, astJson);
+  await generateProfileTypes(scope, profile, version, astJson);
 
   //Generate types file
-  const sdkPath = `./${TYPES_FILE_PATH}`;
+  const sdkPath = `./${CAPABILITIES_DIR}/${scope}/${profile}/${version}/${TYPES_FILE_PATH}`;
   if (!(await exists(sdkPath))) {
     await writeFile(sdkPath, '');
   }
@@ -63,13 +62,14 @@ export async function generate(
   await writeFile(sdkPath, typesFile);
 
   options?.logCb?.(
-    `Updating "sdk.ts" file with types for: "${scope}/${profile}"`
+    `Updating "sdk.ts" file with types for: "${scope}/${profile}/${version}"`
   );
 }
 
 export async function generateProfileTypes(
   scope: string,
   profile: string,
+  version: string,
   ast: ProfileDocumentNode,
   options?: {
     logCb?: LogCallback;
@@ -78,25 +78,41 @@ export async function generateProfileTypes(
   //Generate profile types
   const typing = generateTypingsForProfile(`${scope}/${profile}`, ast);
   //Create folder structure if it doesn't exist
-  if (!(await exists(`./${TYPES_PATH}`))) {
-    await mkdir(`./${TYPES_PATH}`);
+  if (
+    !(await exists(
+      `./${CAPABILITIES_DIR}/${scope}/${profile}/${version}/${TYPES_PATH}`
+    ))
+  ) {
+    await mkdir(
+      `./${CAPABILITIES_DIR}/${scope}/${profile}/${version}/${TYPES_PATH}`
+    );
   }
-  if (!(await exists(`./${TYPES_PATH}/${scope}`))) {
-    await mkdir(`./${TYPES_PATH}/${scope}`);
+  if (
+    !(await exists(
+      `./${CAPABILITIES_DIR}/${scope}/${profile}/${version}/${TYPES_PATH}/${scope}`
+    ))
+  ) {
+    await mkdir(
+      `./${CAPABILITIES_DIR}/${scope}/${profile}/${version}/${TYPES_PATH}/${scope}`
+    );
   }
   options?.logCb?.(
-    `Writing generated types to "./${TYPES_PATH}/${scope}/${profile}${EXTENSIONS.typescript}"`
+    `Writing generated types to "./${CAPABILITIES_DIR}/${scope}/${profile}/${version}/${TYPES_PATH}/${scope}/${profile}${EXTENSIONS.typescript}"`
   );
   await writeFile(
-    `./${TYPES_PATH}/${scope}/${profile}${EXTENSIONS.typescript}`,
+    `./${CAPABILITIES_DIR}/${scope}/${profile}/${version}/${TYPES_PATH}/${scope}/${profile}${EXTENSIONS.typescript}`,
     typing
   );
 
   //Create/update.d.ts index
   let typeDefinitions = '';
-  if (await exists(`./${TYPES_PATH}/${scope}/${TYPE_DEFINITIONS_FILE}`)) {
+  if (
+    await exists(
+      `./${CAPABILITIES_DIR}/${scope}/${profile}/${version}/${TYPES_PATH}/${scope}/${TYPE_DEFINITIONS_FILE}`
+    )
+  ) {
     typeDefinitions = await readFile(
-      `./${TYPES_PATH}/${scope}/${TYPE_DEFINITIONS_FILE}`
+      `./${CAPABILITIES_DIR}/${scope}/${profile}/${version}/${TYPES_PATH}/${scope}/${TYPE_DEFINITIONS_FILE}`
     );
   }
   const addition = exportTypeTemplate(profile);
@@ -105,7 +121,7 @@ export async function generateProfileTypes(
 
     options?.logCb?.(`Updating index.d.ts with "${addition}"`);
     await writeFile(
-      `./${TYPES_PATH}/${scope}/${TYPE_DEFINITIONS_FILE}`,
+      `./${CAPABILITIES_DIR}/${scope}/${profile}/${version}/${TYPES_PATH}/${scope}/${TYPE_DEFINITIONS_FILE}`,
       typeDefinitions
     );
   }

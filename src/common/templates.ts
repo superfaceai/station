@@ -1,3 +1,4 @@
+import { CAPABILITIES_DIR, SUPER_JSON } from './constants';
 import { kebabToPascalCase } from './utils';
 
 export function exportTypeTemplate(usecase: string): string {
@@ -6,7 +7,7 @@ export function exportTypeTemplate(usecase: string): string {
 export function profileTemplate(
   usecase: string,
   scope?: string,
-  version = '1.0.0'
+  version = '1.0'
 ): string {
   const name: string = scope ? `${scope}/${usecase}` : `/${usecase}`;
 
@@ -33,7 +34,7 @@ export function mapTemplate(
   scope: string,
   usecase: string,
   provider: string,
-  version = '1.0.0',
+  version: string,
   variant?: string
 ): string {
   const variantAssignment = variant ? `variant = "${variant}"\n` : '';
@@ -48,11 +49,20 @@ map ${kebabToPascalCase(usecase)}{}
 export function mapTestTemplate(
   scope: string,
   usecase: string,
-  provider: string
+  provider: string,
+  version: string
 ): string {
-  return `import { SuperfaceClient } from '../../../../superface/sdk';
+  return `import { copyFile, rm } from '../../../../../src';
+  import { SuperfaceClient } from '../../../../../superface/sdk';
 
-describe('${scope}/${usecase}/${provider}-typed', () => {
+describe('${scope}/${usecase}/${version}/${provider}-typed', () => {
+  beforeAll(async () => {
+    await copyFile('./${CAPABILITIES_DIR}/${scope}/${usecase}/${version}/${SUPER_JSON}', './superface/super.json');
+  });
+
+  afterAll(async () => {
+    await rm('./superface/super.json')
+  })
   it('performs correctly', async () => {
     const client = new SuperfaceClient();
     const profile = await client.getProfile('${scope}/${usecase}');

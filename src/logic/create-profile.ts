@@ -1,6 +1,6 @@
 import { SuperJson } from '@superfaceai/one-sdk';
 
-import { LogCallback } from '../common';
+import { extractVersion, LogCallback } from '../common';
 import {
   CAPABILITIES_DIR,
   EXTENSIONS,
@@ -13,6 +13,7 @@ import { profileTemplate } from '../common/templates';
 export async function createProfile(
   scope: string,
   usecase: string,
+  version: string,
   options?: {
     logCb?: LogCallback;
   }
@@ -30,32 +31,56 @@ export async function createProfile(
     await mkdir(`./${CAPABILITIES_DIR}/${scope}/${usecase}`);
   }
 
+  if (!(await exists(`./${CAPABILITIES_DIR}/${scope}/${usecase}/${version}`))) {
+    await mkdir(`./${CAPABILITIES_DIR}/${scope}/${usecase}/${version}`);
+  }
+  //Parse version
+  const parsedVersion = extractVersion(version);
   //Create profile file
   await writeFile(
-    `./${CAPABILITIES_DIR}/${scope}/${usecase}/profile${EXTENSIONS.profile.source}`,
-    profileTemplate(usecase, scope)
+    `./${CAPABILITIES_DIR}/${scope}/${usecase}/${version}/profile${EXTENSIONS.profile.source}`,
+    profileTemplate(
+      usecase,
+      scope,
+      `${parsedVersion.major}.${parsedVersion.minor ?? 0}`
+    )
   );
 
   options?.logCb?.(
-    `Creating: "profile${EXTENSIONS.profile.source}" file at: "./${CAPABILITIES_DIR}/${scope}/${usecase}/"`
+    `Creating: "profile${EXTENSIONS.profile.source}" file at: "./${CAPABILITIES_DIR}/${scope}/${usecase}/${version}/"`
   );
 
+  if (
+    !(await exists(
+      `./${CAPABILITIES_DIR}/${scope}/${usecase}/${version}/superface`
+    ))
+  ) {
+    await mkdir(
+      `./${CAPABILITIES_DIR}/${scope}/${usecase}/${version}/superface`
+    );
+  }
+
   //Add profile to super.json
-  const loadedResult = await SuperJson.load(SUPER_JSON);
+  const loadedResult = await SuperJson.load(
+    `./${CAPABILITIES_DIR}/${scope}/${usecase}/${version}/${SUPER_JSON}`
+  );
   const superJson = loadedResult.match(
     v => v,
-    err => {
-      throw err;
+    _err => {
+      return new SuperJson();
     }
   );
 
   const newProfile = {
-    file: `./${PROFILE_BUILD_DIR}/${scope}/${usecase}/profile${EXTENSIONS.profile.source}`,
+    file: `./${PROFILE_BUILD_DIR}/${scope}/${usecase}/${version}/profile${EXTENSIONS.profile.source}`,
   };
   superJson.addProfile(`${scope}/${usecase}`, newProfile);
 
-  await writeFile(SUPER_JSON, superJson.stringified);
+  await writeFile(
+    `./${CAPABILITIES_DIR}/${scope}/${usecase}/${version}/${SUPER_JSON}`,
+    superJson.stringified
+  );
   options?.logCb?.(
-    `Adding profile: "${scope}/${usecase}" to superface/super.json`
+    `Adding profile: "${scope}/${usecase}" to ./${CAPABILITIES_DIR}/${scope}/${usecase}/${version}/${SUPER_JSON}`
   );
 }

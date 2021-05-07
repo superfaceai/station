@@ -1,12 +1,20 @@
 import { SuperJson } from '@superfaceai/one-sdk';
 
 import { LogCallback } from '../common';
-import { EXTENSIONS, PROVIDERS_DIR, SUPER_JSON } from '../common/constants';
+import {
+  CAPABILITIES_DIR,
+  EXTENSIONS,
+  PROVIDERS_DIR,
+  SUPER_JSON,
+} from '../common/constants';
 import { exists, mkdir, writeFile } from '../common/io';
 import { providerTemplate } from '../common/templates';
 
 export async function createProvider(
   providerName: string,
+  scope: string,
+  usecase: string,
+  version: string,
   options?: {
     logCb?: LogCallback;
   }
@@ -17,21 +25,40 @@ export async function createProvider(
   }
 
   //Create provider file
-  await writeFile(
-    `./${PROVIDERS_DIR}/${providerName}${EXTENSIONS.provider}`,
-    providerTemplate(providerName)
-  );
+  if (
+    await exists(`./${PROVIDERS_DIR}/${providerName}${EXTENSIONS.provider}`)
+  ) {
+    options?.logCb?.(
+      `File: "${providerName}${EXTENSIONS.provider}" file at: "./${PROVIDERS_DIR}" already exists - reusing it`
+    );
+  } else {
+    options?.logCb?.(
+      `Creating: "${providerName}${EXTENSIONS.provider}" file at: "./${PROVIDERS_DIR}"`
+    );
+    await writeFile(
+      `./${PROVIDERS_DIR}/${providerName}${EXTENSIONS.provider}`,
+      providerTemplate(providerName)
+    );
+  }
 
-  options?.logCb?.(
-    `Creating: "${providerName}${EXTENSIONS.provider}" file at: "./${PROVIDERS_DIR}"`
-  );
+  if (
+    !(await exists(
+      `./${CAPABILITIES_DIR}/${scope}/${usecase}/${version}/superface`
+    ))
+  ) {
+    await mkdir(
+      `./${CAPABILITIES_DIR}/${scope}/${usecase}/${version}/superface`
+    );
+  }
 
   //Add provider to super.json
-  const loadedResult = await SuperJson.load(SUPER_JSON);
+  const loadedResult = await SuperJson.load(
+    `./${CAPABILITIES_DIR}/${scope}/${usecase}/${version}/${SUPER_JSON}`
+  );
   const superJson = loadedResult.match(
     v => v,
-    err => {
-      throw err;
+    _err => {
+      return new SuperJson();
     }
   );
 
@@ -41,7 +68,10 @@ export async function createProvider(
   };
   superJson.addProvider(providerName, newProvider);
 
-  await writeFile(SUPER_JSON, superJson.stringified);
+  await writeFile(
+    `./${CAPABILITIES_DIR}/${scope}/${usecase}/${version}/${SUPER_JSON}`,
+    superJson.stringified
+  );
   options?.logCb?.(
     `Adding provider: "${providerName}" to superface/super.json`
   );

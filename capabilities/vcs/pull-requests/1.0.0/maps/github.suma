@@ -1,0 +1,23 @@
+profile = "vcs/pull-requests@1.0"
+provider = "github"
+
+map PullRequests{
+  owner = input.owner
+  repo = input.repo
+
+  http GET "/repos/{owner}/{repo}/pulls" {
+    response 200 "application/json" {
+      map result {
+        //maps returned values to result object
+        pullRequests = body.map((r) => {
+          return {
+            title: r.title,
+            id: r.id,
+            url: r.url,
+            sha: r.head.sha,
+          }
+        })
+      }
+    }
+  }
+}
