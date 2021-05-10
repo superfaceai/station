@@ -12,6 +12,7 @@ import {
 import { isValidProviderName, parseProviderJson } from '@superfaceai/one-sdk';
 
 import {
+  CAPABILITIES_DIR,
   exists,
   EXTENSIONS,
   extractVersion,
@@ -198,7 +199,7 @@ function checkMapAndProfile(
  * Checks basic logical consistency in compiled files
  */
 export async function check(options?: { logCb?: LogCallback }): Promise<void> {
-  const scopes = await getDirectories(`./${PROFILE_BUILD_PATH}`);
+  const scopes = await getDirectories(`./${CAPABILITIES_DIR}`);
   let profileAst: ProfileDocumentNode;
   let mapAst: MapDocumentNode;
   let useCases: string[];
@@ -206,10 +207,10 @@ export async function check(options?: { logCb?: LogCallback }): Promise<void> {
   let maps: string[];
 
   for (const scope of scopes) {
-    useCases = await getDirectories(`./${PROFILE_BUILD_PATH}/${scope}`);
+    useCases = await getDirectories(`./${CAPABILITIES_DIR}/${scope}`);
     for (const useCase of useCases) {
       versions = await getDirectories(
-        `./${PROFILE_BUILD_PATH}/${scope}/${useCase}`
+        `./${CAPABILITIES_DIR}/${scope}/${useCase}`
       );
 
       //Check duplicite versions
@@ -224,19 +225,19 @@ export async function check(options?: { logCb?: LogCallback }): Promise<void> {
       for (const version of versions) {
         //Load profile
         options?.logCb?.(
-          `Checking profile: "./${PROFILE_BUILD_PATH}/${scope}/${useCase}/${version}/profile${EXTENSIONS.profile.source}"`
+          `Checking profile: "./${CAPABILITIES_DIR}/${scope}/${useCase}/${version}/${PROFILE_BUILD_PATH}/profile${EXTENSIONS.profile.source}"`
         );
         profileAst = await loadProfileAst(
-          `./${PROFILE_BUILD_PATH}/${scope}/${useCase}/${version}/profile${EXTENSIONS.profile.build}`
+          `./${CAPABILITIES_DIR}/${scope}/${useCase}/${version}/${PROFILE_BUILD_PATH}/profile${EXTENSIONS.profile.build}`
         );
 
         if (
           !(await exists(
-            `./${PROFILE_BUILD_PATH}/${scope}/${useCase}/${version}/maps`
+            `./${CAPABILITIES_DIR}/${scope}/${useCase}/${version}/${PROFILE_BUILD_PATH}/maps`
           ))
         ) {
           throw new CLIError(
-            `Folder: "./${PROFILE_BUILD_PATH}/${scope}/${useCase}/maps" not found - forgot to compile?`,
+            `Folder: "./${CAPABILITIES_DIR}/${scope}/${useCase}/${version}/${PROFILE_BUILD_PATH}/maps" not found - forgot to compile?`,
             { exit: 1 }
           );
         }
@@ -244,23 +245,23 @@ export async function check(options?: { logCb?: LogCallback }): Promise<void> {
         //Load maps
         maps = (
           await getFiles(
-            `./${PROFILE_BUILD_PATH}/${scope}/${useCase}/${version}/maps`
+            `./${CAPABILITIES_DIR}/${scope}/${useCase}/${version}/${PROFILE_BUILD_PATH}/maps`
           )
         ).filter(map => map.endsWith(EXTENSIONS.map.build));
         if (maps.length === 0) {
           throw new CLIError(
-            `Folder "./${PROFILE_BUILD_PATH}/${scope}/${useCase}/${version}/maps" does not contain any built maps - forgot to compile?`,
+            `Folder "./${CAPABILITIES_DIR}/${scope}/${useCase}/${version}/${PROFILE_BUILD_PATH}/maps" does not contain any built maps - forgot to compile?`,
             { exit: 1 }
           );
         }
 
         for (const file of maps) {
           options?.logCb?.(
-            `Checking map: "./${PROFILE_BUILD_PATH}/${scope}/${useCase}/${version}/maps/${file}"`
+            `Checking map: "./${CAPABILITIES_DIR}/${scope}/${useCase}/${version}/${PROFILE_BUILD_PATH}/maps/${file}"`
           );
 
           mapAst = await loadMapAst(
-            `./${PROFILE_BUILD_PATH}/${scope}/${useCase}/${version}/maps/${file}`
+            `./${CAPABILITIES_DIR}/${scope}/${useCase}/${version}/${PROFILE_BUILD_PATH}/maps/${file}`
           );
 
           //Check map and profile

@@ -10,7 +10,8 @@ import { LogCallback } from '../common';
 import {
   CAPABILITIES_DIR,
   EXTENSIONS,
-  PROFILE_BUILD_PATH,
+  PROFILE_BUILD_DIR,
+  SUPERFACE_DIR,
   TYPE_DEFINITIONS_FILE,
   TYPES_FILE_PATH,
   TYPES_PATH,
@@ -27,7 +28,7 @@ export async function generate(
   }
 ): Promise<void> {
   //Get ATS
-  const astPath = `./${PROFILE_BUILD_PATH}/${scope}/${profile}/${version}/profile${EXTENSIONS.profile.build}`;
+  const astPath = `./${CAPABILITIES_DIR}/${scope}/${profile}/${version}/${SUPERFACE_DIR}/${PROFILE_BUILD_DIR}/profile${EXTENSIONS.profile.build}`;
   if (!(await exists(astPath))) {
     throw new CLIError(
       `AST file not found at "${astPath}". You need to run compile command first`,

@@ -52,17 +52,16 @@ export function mapTestTemplate(
   provider: string,
   version: string
 ): string {
-  return `import { copyFile, rm } from '../../../../../src';
-  import { SuperfaceClient } from '../../../../../superface/sdk';
+  return `import { SuperfaceClient } from '../superface/sdk';
 
 describe('${scope}/${usecase}/${version}/${provider}-typed', () => {
+
+  //Load super.json for tested usecase
   beforeAll(async () => {
-    await copyFile('./${CAPABILITIES_DIR}/${scope}/${usecase}/${version}/${SUPER_JSON}', './superface/super.json');
+    process.env.SUPERFACE_PATH =
+      './${CAPABILITIES_DIR}/${scope}/${usecase}/${version}/${SUPER_JSON}';
   });
 
-  afterAll(async () => {
-    await rm('./superface/super.json')
-  })
   it('performs correctly', async () => {
     const client = new SuperfaceClient();
     const profile = await client.getProfile('${scope}/${usecase}');

@@ -10,7 +10,9 @@ import { LogCallback } from '../common';
 import {
   CAPABILITIES_DIR,
   EXTENSIONS,
+  PROFILE_BUILD_DIR,
   PROFILE_BUILD_PATH,
+  SUPERFACE_DIR,
   TYPE_DEFINITIONS_FILE,
   TYPES_FILE_PATH,
   TYPES_PATH,
@@ -71,33 +73,35 @@ export async function compile(
       );
       for (const version of versions) {
         options?.logCb?.(
-          `Copying content of ${CAPABILITIES_DIR}/${scope}/${useCase}/${version} to ./${PROFILE_BUILD_PATH}/${scope}/${useCase}/${version}`
+          `Copying content of ${CAPABILITIES_DIR}/${scope}/${useCase}/${version} to ./${CAPABILITIES_DIR}/${scope}/${useCase}/${version}/${PROFILE_BUILD_PATH}`
         );
 
         //Create folder structure if it doesn't exist
-        if (!(await exists(`./${PROFILE_BUILD_PATH}`))) {
-          await mkdir(`./${PROFILE_BUILD_PATH}`);
-        }
-        if (!(await exists(`./${PROFILE_BUILD_PATH}/${scope}`))) {
-          await mkdir(`./${PROFILE_BUILD_PATH}/${scope}`);
-        }
-        if (!(await exists(`./${PROFILE_BUILD_PATH}/${scope}/${useCase}`))) {
-          await mkdir(`./${PROFILE_BUILD_PATH}/${scope}/${useCase}`);
-        }
         if (
           !(await exists(
-            `./${PROFILE_BUILD_PATH}/${scope}/${useCase}/${version}`
-          ))
-        ) {
-          await mkdir(`./${PROFILE_BUILD_PATH}/${scope}/${useCase}/${version}`);
-        }
-        if (
-          !(await exists(
-            `./${PROFILE_BUILD_PATH}/${scope}/${useCase}/${version}/maps`
+            `./${CAPABILITIES_DIR}/${scope}/${useCase}/${version}/${SUPERFACE_DIR}`
           ))
         ) {
           await mkdir(
-            `./${PROFILE_BUILD_PATH}/${scope}/${useCase}/${version}/maps`
+            `./${CAPABILITIES_DIR}/${scope}/${useCase}/${version}/${SUPERFACE_DIR}`
+          );
+        }
+        if (
+          !(await exists(
+            `./${CAPABILITIES_DIR}/${scope}/${useCase}/${version}/${SUPERFACE_DIR}/${PROFILE_BUILD_DIR}`
+          ))
+        ) {
+          await mkdir(
+            `./${CAPABILITIES_DIR}/${scope}/${useCase}/${version}/${SUPERFACE_DIR}/${PROFILE_BUILD_DIR}`
+          );
+        }
+        if (
+          !(await exists(
+            `./${CAPABILITIES_DIR}/${scope}/${useCase}/${version}/${SUPERFACE_DIR}/${PROFILE_BUILD_DIR}/maps`
+          ))
+        ) {
+          await mkdir(
+            `./${CAPABILITIES_DIR}/${scope}/${useCase}/${version}/${SUPERFACE_DIR}/${PROFILE_BUILD_DIR}/maps`
           );
         }
         //Compile profiles
@@ -114,12 +118,15 @@ export async function compile(
             //This file shoud be profile
             await copyFile(
               `./${CAPABILITIES_DIR}/${scope}/${useCase}/${version}/${file}`,
-              `./${PROFILE_BUILD_PATH}/${scope}/${useCase}/${version}/${file}`
+              `./${CAPABILITIES_DIR}/${scope}/${useCase}/${version}/${SUPERFACE_DIR}/${PROFILE_BUILD_DIR}/${file}`
             );
             //Compile AST
-            const path = `./${PROFILE_BUILD_PATH}/${scope}/${useCase}/${version}/${file}`;
+            const path = `./${CAPABILITIES_DIR}/${scope}/${useCase}/${version}/${SUPERFACE_DIR}/${PROFILE_BUILD_DIR}/${file}`;
             const ast = await compileProfile(path);
             await writeFile(`${path}.ast.json`, JSON.stringify(ast, null, 2));
+
+            // //Remove copied .suma file
+            // await rm(path)
 
             //FIX: work with new structure
             if (generateFlag) {
@@ -169,11 +176,11 @@ export async function compile(
         //Compile maps
         if (
           !(await exists(
-            `./${CAPABILITIES_DIR}/${scope}/${useCase}/${version}/maps`
+            `./${CAPABILITIES_DIR}/${scope}/${useCase}/${version}/${SUPERFACE_DIR}/${PROFILE_BUILD_DIR}/maps`
           ))
         ) {
           options?.logCb?.(
-            `Maps folder ./${CAPABILITIES_DIR}/${scope}/${useCase}/${version}/maps does not exist`
+            `Maps folder ./${CAPABILITIES_DIR}/${scope}/${useCase}/${version}/${SUPERFACE_DIR}/${PROFILE_BUILD_DIR}/maps does not exist`
           );
         } else {
           maps = await getFiles(
@@ -189,15 +196,17 @@ export async function compile(
               //This file shoud be map
               await copyFile(
                 `./${CAPABILITIES_DIR}/${scope}/${useCase}/${version}/maps/${file}`,
-                `./${PROFILE_BUILD_PATH}/${scope}/${useCase}/${version}/maps/${file}`
+                `./${CAPABILITIES_DIR}/${scope}/${useCase}/${version}/${SUPERFACE_DIR}/${PROFILE_BUILD_DIR}/maps/${file}`
               );
               const ast = await compileMap(
-                `./${PROFILE_BUILD_PATH}/${scope}/${useCase}/${version}/maps/${file}`
+                `./${CAPABILITIES_DIR}/${scope}/${useCase}/${version}/${SUPERFACE_DIR}/${PROFILE_BUILD_DIR}/maps/${file}`
               );
               await writeFile(
-                `./${PROFILE_BUILD_PATH}/${scope}/${useCase}/${version}/maps/${file}.ast.json`,
+                `./${CAPABILITIES_DIR}/${scope}/${useCase}/${version}/${SUPERFACE_DIR}/${PROFILE_BUILD_DIR}/maps/${file}.ast.json`,
                 JSON.stringify(ast, null, 2)
               );
+              // //Remove copied .supr file
+              // await rm(`./${CAPABILITIES_DIR}/${scope}/${useCase}/${version}/${SUPERFACE_DIR}/${PROFILE_BUILD_DIR}/maps/${file}`)
             }
           }
         }

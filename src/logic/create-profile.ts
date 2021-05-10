@@ -72,7 +72,7 @@ export async function createProfile(
   );
 
   const newProfile = {
-    file: `./${PROFILE_BUILD_DIR}/${scope}/${usecase}/${version}/profile${EXTENSIONS.profile.source}`,
+    file: `./${PROFILE_BUILD_DIR}/profile${EXTENSIONS.profile.source}`,
   };
   superJson.addProfile(`${scope}/${usecase}`, newProfile);
 

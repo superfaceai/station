@@ -1,6 +1,7 @@
 export const CAPABILITIES_DIR = 'capabilities';
 export const PROVIDERS_DIR = 'providers';
 export const PROFILE_BUILD_PATH = 'superface/grid';
+export const SUPERFACE_DIR = 'superface';
 export const PROFILE_BUILD_DIR = 'grid';
 export const TYPES_DIR = 'types';
 export const TYPES_PATH = 'superface/types';

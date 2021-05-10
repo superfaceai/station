@@ -63,7 +63,7 @@ export async function createProvider(
   );
 
   const newProvider = {
-    file: `../${PROVIDERS_DIR}/${providerName}${EXTENSIONS.provider}`,
+    file: `../../../../../${PROVIDERS_DIR}/${providerName}${EXTENSIONS.provider}`,
     security: [],
   };
   superJson.addProvider(providerName, newProvider);

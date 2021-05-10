@@ -88,7 +88,7 @@ export async function createMap(
   );
 
   const newProfileProvider = {
-    file: `./${PROFILE_BUILD_DIR}/${scope}/${usecase}/${version}/maps/${mapName}${EXTENSIONS.map.source}`,
+    file: `./${PROFILE_BUILD_DIR}/maps/${mapName}${EXTENSIONS.map.source}`,
   };
   superJson.addProfileProvider(
     `${scope}/${usecase}`,
