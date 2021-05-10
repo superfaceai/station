@@ -1,10 +1,10 @@
 import { createTypedClient } from "@superfaceai/one-sdk";
 
-import { vcsSingleFileContent } from "./types/vcs/single-file-content";
+import { addressGeocoding } from "./types/address/geocoding";
 
-export { VcsSingleFileContentProfile } from "./types/vcs/single-file-content";
+export { AddressGeocodingProfile } from "./types/address/geocoding";
 export const typeDefinitions = {
-    ...vcsSingleFileContent
+    ...addressGeocoding
 };
 export const SuperfaceClient = createTypedClient(typeDefinitions);
 export type SuperfaceClient = InstanceType<typeof SuperfaceClient>;

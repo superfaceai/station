@@ -1,0 +1,58 @@
+profile = "communication/send-message@1.0"
+provider = "plivo"
+
+// Plivo API documentation available at:
+//  https://www.plivo.com/docs/sms/api/message#send-a-message
+//  https://www.plivo.com/docs/sms/api/message/
+  
+map SendMessage { 
+  authId = input.PLIVO_AUTH_ID
+
+  // note the trailing `/` is important per plivo design
+  http POST "/v1/Account/{authId}/Message/" {
+    security "basic"
+    request "application/json" {
+      body {
+        src = input.from
+        dst = input.to
+        text = input.text
+      }
+    }
+
+    response 202 "application/json" {
+      map result {
+        messageId = body.message_uuid[0]
+      }
+    }
+  }
+}
+
+map RetrieveMessageStatus {
+  authId = input.PLIVO_AUTH_ID
+
+  http GET "/v1/Account/{authId}/Message/{input.messageId}" {
+    security "basic"
+
+    response 200 "application/json" {
+      map result {
+        deliveryStatus = (() => { 
+          switch (body.message_state) {
+            case 'sending':
+            case 'sent':
+            case 'accepted':
+              return 'accepted';
+          
+            case 'delivered':
+              return 'delivered';
+
+            case 'failed':
+              return 'failed'
+
+            default:
+              return 'unknown';
+          }
+        })()
+      }
+    }
+  }
+}

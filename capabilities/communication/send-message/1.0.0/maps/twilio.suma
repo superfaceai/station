@@ -1,0 +1,58 @@
+profile = "communication/send-message@1.0"
+provider = "twilio"
+
+// Twilio API documentation available at:
+//  https://www.twilio.com/docs/sms/send-messages#send-an-sms-with-twilios-api
+//  https://www.twilio.com/docs/sms/api/message-resource#message-properties
+
+map SendMessage {
+  accountSid = input.TWILIO_SID
+
+  http POST "/2010-04-01/Accounts/{accountSid}/Messages.json" {
+    security "basic"
+    
+    request "application/x-www-form-urlencoded" {
+      body {
+        To = input.to,
+        From = input.from,
+        Body = input.text
+      }
+    }
+
+    response 201 "application/json" {
+      map result {
+        messageId = body.sid
+      }
+    }
+  }
+}
+
+map RetrieveMessageStatus {
+  accountSid = input.TWILIO_SID
+  sid = input.messageId
+
+  http GET "/2010-04-01/Accounts/{accountSid}/Messages/{sid}.json" {
+    security "basic"
+
+    response 200 "application/json" {
+      map result {
+        deliveryStatus = (() => { 
+          switch (body.status) {
+            case 'sending':
+            case 'sent':
+              return 'accepted';
+          
+            case 'delivered':
+              return 'delivered';
+
+            case 'failed':
+              return 'failed'
+
+            default:
+              return 'unknown';
+          }
+        })()
+      }
+    }
+  }
+}

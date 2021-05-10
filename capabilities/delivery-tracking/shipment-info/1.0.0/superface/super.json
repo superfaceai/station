@@ -1,0 +1,25 @@
+{
+  "profiles": {
+    "delivery-tracking/shipment-info": {
+      "file": "./grid/profile.supr",
+      "providers": {
+        "shippo": {
+          "file": "./grid/maps/shippo.suma"
+        },
+        "dhl-unified": {
+          "file": "./grid/maps/dhl-unified.suma"
+        }
+      }
+    }
+  },
+  "providers": {
+    "shippo": {
+      "file": "../../../../../providers/shippo.json",
+      "security": []
+    },
+    "dhl-unified": {
+      "file": "../../../../../providers/dhl-unified.json",
+      "security": []
+    }
+  }
+}

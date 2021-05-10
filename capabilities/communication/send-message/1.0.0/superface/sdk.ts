@@ -1,10 +1,10 @@
 import { createTypedClient } from "@superfaceai/one-sdk";
 
-import { vcsSingleFileContent } from "./types/vcs/single-file-content";
+import { communicationSendMessage } from "./types/communication/send-message";
 
-export { VcsSingleFileContentProfile } from "./types/vcs/single-file-content";
+export { CommunicationSendMessageProfile } from "./types/communication/send-message";
 export const typeDefinitions = {
-    ...vcsSingleFileContent
+    ...communicationSendMessage
 };
 export const SuperfaceClient = createTypedClient(typeDefinitions);
 export type SuperfaceClient = InstanceType<typeof SuperfaceClient>;

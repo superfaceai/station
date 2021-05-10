@@ -1,0 +1,39 @@
+{
+  "profiles": {
+    "communication/send-message": {
+      "file": "./grid/profile.supr",
+      "providers": {
+        "plivo": {
+          "file": "./grid/maps/plivo.suma"
+        },
+        "twilio": {
+          "file": "./grid/maps/twilio.suma"
+        },
+        "tyntec": {
+          "file": "./grid/maps/tyntec.suma"
+        },
+        "vonage-nexmo": {
+          "file": "./grid/maps/vonage-nexmo.suma"
+        }
+      }
+    }
+  },
+  "providers": {
+    "plivo": {
+      "file": "../../../../../providers/plivo.json",
+      "security": []
+    },
+    "twilio": {
+      "file": "../../../../../providers/twilio.json",
+      "security": []
+    },
+    "tyntec": {
+      "file": "../../../../../providers/tyntec.json",
+      "security": []
+    },
+    "vonage-nexmo": {
+      "file": "../../../../../providers/vonage-nexmo.json",
+      "security": []
+    }
+  }
+}
