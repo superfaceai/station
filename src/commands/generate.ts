@@ -8,13 +8,13 @@ export default class Compile extends Command {
   static strict = false;
 
   static description =
-    'Generates .ts files into `superface/types/{scope}` folder, creates or updates `superface/sdk.ts` file and creates or updates `superface/types/{scope}/index.d.ts` file.';
+    'Generates .ts files into `capabilities/{scope}/{usecase}/{version}/superface/types/{scope}` folder, creates or updates `sdk.ts` file and creates or updates `index.d.ts` file.';
 
   static args = [
     {
       name: 'profileName',
       required: true,
-      description: 'Profile name in {scope}/{usecase} shape',
+      description: 'Profile name in {scope}/{usecase}@{version} shape',
     },
   ];
 

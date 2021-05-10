@@ -22,6 +22,76 @@ Repository is not released to NPM so to use it link it locally:
 ```
 yarn link
 ```
+## Naming conventions
+
+* scope directory name must be valid [document name](https://spec.superface.dev/2021.04.26/profile-spec.html#DocumentNameIdentifier). We use kebab case eg. `delivery-tracking`.
+
+* usecase directory name must be valid [document name](https://spec.superface.dev/2021.04.26/profile-spec.html#DocumentNameIdentifier). We use kebab case eg. `pull-request`. For usecase name in .suma or .supr files we use camel case eg. `PullRequest`.
+
+* version directory name must be valid [semantic version](https://spec.superface.dev/2021.04.26/profile-spec.html#SemanticVersion) eg. `1.0.0`.
+
+* provider file name must be valid [provider](https://spec.superface.dev/2021.04.26/provider-spec.yaml). We use kebab case eg. `dhl-unified`.
+
+
+## Directory structure 
+
+Folder of each capability is structured according to its scope, usecase and version. Every version of a usecase has own superface directory with super.json, types definitions a grid (gitignored). To make tests work environment variable `SUPERFACE_PATH` must contain path pointing to super.json file of tested file. This is prepared for you when you run create map command.
+
+Provider folder is shared amongst capabilities.
+
+## Adding new capability
+
+First, create new profile:
+
+```
+ station create profile {scope}/{usecase}/{version}
+```
+Edit created .supr file
+
+Secondly, create new provider:
+
+```
+ station create provider {scope}/{usecase}/{version} {provider}
+```
+
+Edit created .json file
+
+Next, create map for created profile and provider
+
+```
+ station create map {scope}/{usecase}/{version} {provider}
+```
+
+Edit created .suma file and test file (.test.ts)
+
+Compile created files:
+
+```
+ station compile
+```
+
+Generate types if needed:
+
+```
+ station generate {scope}/{usecase}/{version}
+```
+
+Test created capability
+
+```
+ yarn test {path to test file}
+```
+
+Upload newly created files
+```
+station publish profile {scope}/{usecase}/{version}
+station publish map {scope}/{usecase}/{version} {provider}
+station publish provider {provider}
+```
+
+## Enviroment variables
+
+Secretes used for authentication during tests are stored in `.env.capabilities` and loaded using dotenv. Run `cp .env.capabilities.example .env.capabilities` to start from the template.
 
 ## Commands
   <!-- commands -->
@@ -29,7 +99,7 @@ yarn link
 * [`station compile`](#station-compile)
 * [`station create DOCUMENTINFO`](#station-create-documentinfo)
 * [`station generate PROFILENAME`](#station-generate-profilename)
-* [`station publish PATH`](#station-publish-path)
+* [`station publish DOCUMENTINFO`](#station-publish-documentinfo)
 
 ## `station check`
 
@@ -52,7 +122,7 @@ _See code: [dist/src/commands/check.ts](https://github.com/superfaceai/station/b
 
 ## `station compile`
 
-Compiles every profile and map from capabilities directory to superface/grid directory. For now it is safer to use generate command.
+Compiles every profile and map from capabilities directory.
 
 ```
 USAGE
@@ -90,46 +160,48 @@ OPTIONS
   -q, --quiet  When set to true, disables the shell echo output of action.
 
 EXAMPLES
-  $ station create profile sms/service
-  $ station create map sms/service twilio
-  $ station create profile sms/service -q
-  $ station create provider twilio
+  $ station create profile sms/service@1.2.3
+  $ station create map sms/service@1.2.3 twilio
+  $ station create profile sms/service@1.2.3 -q
+  $ station create provider sms/service@1.2.3 twilio
 ```
 
 _See code: [dist/src/commands/create.ts](https://github.com/superfaceai/station/blob/v0.0.1/dist/src/commands/create.ts)_
 
 ## `station generate PROFILENAME`
 
-Generates .ts files into `superface/types/{scope}` folder, creates or updates `superface/sdk.ts` file and creates or updates `superface/types/{scope}/index.d.ts` file.
+Generates .ts files into `capabilities/{scope}/{usecase}/{version}/superface/types/{scope}` folder, creates or updates `sdk.ts` file and creates or updates `index.d.ts` file.
 
 ```
 USAGE
   $ station generate PROFILENAME
 
 ARGUMENTS
-  PROFILENAME  Profile name in {scope}/{usecase} shape
+  PROFILENAME  Profile name in {scope}/{usecase}@{version} shape
 
 OPTIONS
   -h, --help   show CLI help
   -q, --quiet  When set to true, disables the shell echo output of action.
 
 EXAMPLES
-  $ station generate sms/service
-  $ station generate sms/service -q
+  $ station generate sms/service@1.2.3
+  $ station generate sms/service@1.2.3 -q
 ```
 
 _See code: [dist/src/commands/generate.ts](https://github.com/superfaceai/station/blob/v0.0.1/dist/src/commands/generate.ts)_
 
-## `station publish PATH`
+## `station publish DOCUMENTINFO`
 
-Uploads map/profile/provider to Store - use paths to `.supr` file for profiles, `.suma` for maps and `.json` for providers. Do not use path ending with `.ast.json` (compiled files).
+Uploads map/profile/provider to Store - use paths to `.supr` file for profiles.
 
 ```
 USAGE
-  $ station publish PATH
+  $ station publish DOCUMENTINFO
 
 ARGUMENTS
-  PATH  Path to profile, map or provider
+  DOCUMENTINFO  Two arguments containing informations about the document.
+                1. Document Type - type of document that will be published (profile or map or provider).
+                2. Document Name - name of a file that will be published
 
 OPTIONS
   -h, --help        show CLI help
@@ -137,9 +209,10 @@ OPTIONS
   -q, --quiet       When set to true, disables the shell echo output of action.
 
 EXAMPLES
-  $ station publish capabilities/vcs/user-repos/maps/bitbucket.suma
-  $ station publish capabilities/vcs/user-repos/maps/bitbucket.suma -p
-  $ station publish capabilities/vcs/user-repos/maps/bitbucket.suma -q
+  $ station publish profile sms/service@1.2.3
+  $ station publish map sms/service@1.2.3 twilio
+  $ station publish profile sms/service@1.2.3 -p
+  $ station publish provider twilio
 ```
 
 _See code: [dist/src/commands/publish.ts](https://github.com/superfaceai/station/blob/v0.0.1/dist/src/commands/publish.ts)_
@@ -158,59 +231,6 @@ ARGUMENTS
 
 
 EXAMPLES
-  $ yarn test capabilities/vcs/user-repos/maps/bitbucket
+  $ yarn test capabilities/vcs/user-repos/1.0.0/maps/bitbucket
 ```
 
-## Adding new capability
-
-First, create new profile:
-
-```
- station create profile {scope}/{usecase}
-```
-Edit created .supr file
-
-Secondly, create new provider:
-
-```
- station create provider {provider}
-```
-
-Edit created .json file
-
-Next, create map for created profile and provider
-
-```
- station create map {scope}/{usecase} {provider}
-```
-
-Edit created .suma file and test file (.test.ts)
-
-Compile created files:
-
-```
- station compile
-```
-
-Generate types if needed:
-
-```
- station generate {scope}/{usecase}
-```
-
-Test created capability
-
-```
- yarn test {path to test file}
-```
-
-Upload newly created files
-```
-station publish {path to profile}
-station publish {path to map}
-station publish {path to provider}
-```
-
-## Enviroment variables
-
-Secretes used for authentication during tests are stored in `.env.capabilities` and loaded using dotenv. Run `cp .env.capabilities.example .env.capabilities` to start from the template.

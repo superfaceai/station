@@ -8,7 +8,7 @@ export default class Compile extends Command {
   static strict = false;
 
   static description =
-    'Compiles every profile and map from capabilities directory to superface/grid directory. For now it is safer to use generate command.';
+    'Compiles every profile and map from capabilities directory.';
 
   static args = [];
 
