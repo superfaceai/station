@@ -6,11 +6,11 @@ import { ServiceClient } from '@superfaceai/service-client';
 import { config } from 'dotenv';
 
 import { LogCallback } from '../common';
-import { EXTENSIONS } from '../common/constants';
 import { exists, readFile } from '../common/io';
 
 export async function publish(
-  path: string,
+  type: 'profile' | 'map' | 'provider',
+  filePath: string,
   baseUrl: string,
   options?: {
     logCb?: LogCallback;
@@ -18,7 +18,7 @@ export async function publish(
 ): Promise<void> {
   config();
 
-  if (!(await exists(path))) {
+  if (!(await exists(filePath))) {
     throw new CLIError('Path does not exist', { exit: 1 });
   }
   if (!process.env.SUPERFACE_STORE_REFRESH_TOKEN) {
@@ -27,53 +27,77 @@ export async function publish(
       { exit: 1 }
     );
   }
-  if (
-    path.endsWith(EXTENSIONS.map.build) ||
-    path.endsWith(EXTENSIONS.profile.build)
-  ) {
-    throw new CLIError('Do not use compiled files! Use .supr or .suma files', {
-      exit: 1,
-    });
-  }
 
   const client = new ServiceClient({
     baseUrl,
     refreshToken: process.env.SUPERFACE_STORE_REFRESH_TOKEN,
   });
-  const file = await readFile(path);
+  const file = await readFile(filePath);
 
-  if (path.endsWith(EXTENSIONS.provider)) {
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-    const parsedFile = JSON.parse(file);
-    if (isProviderJson(parsedFile)) {
-      options?.logCb?.(`Publishing provider from: ${path}`);
-      await client.createProvider(file);
-    } else {
-      throw new CLIError('File does not have provider json structure', {
-        exit: 1,
-      });
-    }
-  } else if (path.endsWith(EXTENSIONS.profile.source)) {
-    const parsedFile = parseProfile(new Source(file, path));
-    if (isProfileDocumentNode(parsedFile)) {
-      options?.logCb?.(
-        `Publishing profile "${parsedFile.header.name}" from: ${path}`
-      );
-      await client.createProfile(file);
-    } else {
-      throw new CLIError('Unknown profile file structure', { exit: 1 });
-    }
-  } else if (path.endsWith(EXTENSIONS.map.source)) {
-    const parsedFile = parseMap(new Source(file, path));
-    if (isMapDocumentNode(parsedFile)) {
-      options?.logCb?.(
-        `Publishing map for profile "${parsedFile.header.profile.name}" and provider "${parsedFile.header.provider}" from: ${path}`
-      );
-      await client.createMap(file);
-    } else {
-      throw new CLIError('Unknown map file structure', { exit: 1 });
-    }
+  if (type === 'provider') {
+    await publishProvider(client, file, filePath, options);
+  } else if (type === 'profile') {
+    await publishProfile(client, file, filePath, options);
+  } else if (type === 'map') {
+    await publishMap(client, file, filePath, options);
   } else {
     throw new CLIError('Unknown file suffix', { exit: 1 });
+  }
+}
+export async function publishProvider(
+  client: ServiceClient,
+  file: string,
+  path: string,
+  options?: {
+    logCb?: LogCallback;
+  }
+): Promise<void> {
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+  const parsedFile = JSON.parse(file);
+  if (isProviderJson(parsedFile)) {
+    options?.logCb?.(`Publishing provider from: ${path}`);
+    await client.createProvider(file);
+  } else {
+    throw new CLIError('File does not have provider json structure', {
+      exit: 1,
+    });
+  }
+}
+
+export async function publishProfile(
+  client: ServiceClient,
+  file: string,
+  path: string,
+  options?: {
+    logCb?: LogCallback;
+  }
+): Promise<void> {
+  const parsedFile = parseProfile(new Source(file, path));
+  if (isProfileDocumentNode(parsedFile)) {
+    options?.logCb?.(
+      `Publishing profile "${parsedFile.header.name}" from: ${path}`
+    );
+    await client.createProfile(file);
+  } else {
+    throw new CLIError('Unknown profile file structure', { exit: 1 });
+  }
+}
+
+export async function publishMap(
+  client: ServiceClient,
+  file: string,
+  path: string,
+  options?: {
+    logCb?: LogCallback;
+  }
+): Promise<void> {
+  const parsedFile = parseMap(new Source(file, path));
+  if (isMapDocumentNode(parsedFile)) {
+    options?.logCb?.(
+      `Publishing map for profile "${parsedFile.header.profile.name}" and provider "${parsedFile.header.provider}" from: ${path}`
+    );
+    await client.createMap(file);
+  } else {
+    throw new CLIError('Unknown map file structure', { exit: 1 });
   }
 }

@@ -70,7 +70,7 @@ export default class Create extends Command {
       const { scope, usecase, version } = parseCommandInput(documentName);
 
       if (!providerName) {
-        throw new CLIError('Missing map name argument', { exit: 1 });
+        throw new CLIError('Missing provider name argument', { exit: 1 });
       }
       if (!isValidProviderName(providerName)) {
         throw new CLIError(`Invalid provider name: "${providerName}"`, {
