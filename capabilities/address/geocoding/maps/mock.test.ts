@@ -1,6 +1,6 @@
 import { SuperfaceClient } from '../../../../superface/sdk';
 
-describe('address/geocoding/opencage-typed', () => {
+describe('address/geocoding/mock-typed', () => {
 
   it('Geocode address', async () => {
     const client = new SuperfaceClient();
