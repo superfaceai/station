@@ -178,6 +178,20 @@
           "file": "./grid/delivery-tracking/shipment-info/maps/shippo.suma"
         }
       }
+    },
+    "fintech/exchange-rate": {
+      "file": "./grid/fintech/exchange-rate/profile.supr",
+      "providers": {
+        "fixer": {
+          "file": "./grid/fintech/exchange-rate/maps/fixer.suma"
+        },
+        "openexchangerates": {
+          "file": "./grid/fintech/exchange-rate/maps/openexchangerates.suma"
+        },
+        "mock": {
+          "file": "./grid/fintech/exchange-rate/maps/mock.suma"
+        }
+      }
     }
   },
   "providers": {
@@ -289,6 +303,24 @@
     "mock": {
       "file": "../providers/mock.json",
       "security": []
+    },
+    "fixer": {
+      "file": "../providers/fixer.json",
+      "security": [
+        {
+          "id": "apikey_auth",
+          "apikey": "$FIXER_API_KEY"
+        }
+      ]
+    },
+    "openexchangerates": {
+      "file": "../providers/openexchangerates.json",
+      "security": [
+        {
+          "id": "apikey_auth",
+          "apikey": "$OE_API_KEY"
+        }
+      ]
     }
   }
 }

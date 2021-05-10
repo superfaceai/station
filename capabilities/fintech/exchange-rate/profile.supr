@@ -1,0 +1,43 @@
+"""
+Exchange Rate
+
+Use cases for working with historical currency exchange rates
+"""
+name = "fintech/exchange-rate"
+version = "1.0"
+
+"""
+Get Rates
+
+Get currency exchange rate from source currency to multiple currencies at given date
+"""
+usecase GetRates {
+  input {
+    "Source currency
+    Identifier of source currency, usually in 3-letter format"
+    from string
+    "Destination currencies
+    List of identifiers of destination currencies, usually in 3-letter format"
+    to [string]
+    "Date
+    Date of the currency exchange rate"
+    date
+  }
+
+  result {
+    "Source currency
+    Identifier of source currency, usually in 3-letter format"
+    base string
+    "Date
+    Date of the currency exchange rate"
+    date
+    "Destination currencies
+    List of identifiers of destination currencies, usually in 3-letter format"
+    rates [Rate]
+  }
+}
+
+model Rate {
+  key string
+  value number
+}

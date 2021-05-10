@@ -1,0 +1,32 @@
+profile = "fintech/exchange-rate@1.0"
+provider = "fixer"
+
+map GetRates {
+  http GET "/{input.date}" {
+    security "apikey_auth"
+    request "application/json" {
+      query {
+        symbols = input.to.join(',')
+        base = input.from
+      }
+    }
+    response 200 "application/json" {
+      rates = call foreach(key of Object.entries(body.rates)) ConvertRate(
+        key = key
+      )
+
+      map result {
+        base = body.base
+        date = body.date
+        rates = rates
+      }
+    }
+  }
+}
+
+operation ConvertRate {
+  return {
+    key: args.key[0],
+    value: args.key[1],
+  }
+}

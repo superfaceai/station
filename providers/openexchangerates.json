@@ -1,0 +1,18 @@
+{
+  "name": "openexchangerates",
+  "services": [
+    {
+      "id": "default",
+      "baseUrl": "https://openexchangerates.org/api/"
+    }
+  ],
+  "securitySchemes": [
+    {
+      "id": "apikey_auth",
+      "type": "apiKey",
+      "in": "query",
+      "name": "app_id"
+    }
+  ],
+  "defaultService": "default"
+}
