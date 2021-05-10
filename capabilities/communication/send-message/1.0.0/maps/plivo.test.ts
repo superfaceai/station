@@ -1,9 +1,21 @@
-import { Profile, Provider, SuperfaceClient } from '@superfaceai/one-sdk';
+import { Provider, TypedProfile } from '@superfaceai/one-sdk';
 
 import { SuperfaceClient } from '../superface/sdk';
+import {
+  RetrieveMessageStatusInput,
+  RetrieveMessageStatusResult,
+  SendMessageInput,
+  SendMessageResult,
+} from '../superface/types/communication';
 
 const recipient = process.env.COMMUNICATION_SENDMESSAGE_TO;
-let profile: Profile;
+let profile: TypedProfile<{
+  SendMessage: [SendMessageInput, SendMessageResult];
+  RetrieveMessageStatus: [
+    RetrieveMessageStatusInput,
+    RetrieveMessageStatusResult
+  ];
+}>;
 let provider: Provider;
 
 describe('communication/send-message/1.0.0/plivo-typed', () => {
@@ -18,7 +30,7 @@ describe('communication/send-message/1.0.0/plivo-typed', () => {
 
   it('sends a message', async () => {
     const useCase = profile.getUseCase('SendMessage');
-    const result = await useCase.perform<any, { messageId: string }>(
+    const result = await useCase.perform(
       { to: recipient, from: 'plivotest', text: 'Hello World!' },
       { provider }
     );
@@ -33,14 +45,14 @@ describe('communication/send-message/1.0.0/plivo-typed', () => {
 
   it('retrieves message status', async () => {
     const sendMessageUseCase = profile.getUseCase('SendMessage');
-    const sendMessageResult = await sendMessageUseCase.perform<
-      any,
-      { messageId: string }
-    >({ to: recipient, from: 'plivotest', text: 'Hello World!' }, { provider });
+    const sendMessageResult = await sendMessageUseCase.perform(
+      { to: recipient, from: 'plivotest', text: 'Hello World!' },
+      { provider }
+    );
     const messageId = sendMessageResult.unwrap().messageId;
 
     const useCase = profile.getUseCase('RetrieveMessageStatus');
-    const result = await useCase.perform<any, any>(
+    const result = await useCase.perform(
       { messageId: messageId },
       { provider }
     );
