@@ -9,7 +9,7 @@ describe('address/clean-address/smartystreets', () => {
     expect(useCase).not.toBeUndefined();
     expect(provider).not.toBeUndefined();
     const result = await useCase.perform({
-      street: '3301 South Greenfield Rd',
+      street: '3301 South Greenfield Road',
       city: 'Gilbert',
       state: 'AZ',
       zipcode: '85297',
