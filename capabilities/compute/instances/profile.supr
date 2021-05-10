@@ -1,0 +1,96 @@
+name = "compute/instances"
+version = "1.0"
+
+"""
+Create Server Instance
+
+Allows to craete server instance in given region, shape and image.
+Optionally public ssh keys can be provided to access instance.
+"""
+usecase CreateInstance unsafe {
+  input {
+    name!
+    region!
+    shape!
+    image!
+    sshKeys
+  }
+
+  result Instance
+}
+
+usecase InstanceInfo safe {
+  input {
+    id
+  }
+
+  result Instance
+}
+
+// ----------------------------------------------------------------------------
+
+"
+Unique Instance identifier
+This is crated automatical during instance creation
+"
+field id string
+
+"
+Status string indicating the state of the instance
+"
+field status enum {
+  new
+  provisioning
+  active
+  rebooting
+  shuttingOff
+  off
+}
+
+"
+Human-readable name of the instance
+"
+field name string
+
+"
+Public keys to allow access to instance
+"
+field sshKeys array
+
+"
+List of IPv4 and IPv6 addresses
+"
+field publicIps array
+
+"
+Unique identifier for the region that you wish create instance in
+"
+field region string
+
+"
+Unique identifier of the shape (CPU, Memory, ...) of the instance
+"
+field shape string
+
+"
+Unique identifier of the image to start new instance with
+"
+field image name
+
+"
+Datetime string in ISO 8601 representation
+"
+field createdAt string
+
+// ----------------------------------------------------------------------------
+
+model Instance {
+  id
+  name
+  status
+  publicIps
+  region
+  shape
+  image
+  createdAt
+}
