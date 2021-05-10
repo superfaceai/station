@@ -1,10 +1,10 @@
-profile = "address/geocoding@1.0"
+profile = "address/geocoding@3.0"
 provider = "opencage"
 
 // Opencage API documentation
 //  https://opencagedata.com/api
 
-map Gecode {
+map Geocode {
   http GET "/geocode/v1/json" {
     security "apikey"
     request {

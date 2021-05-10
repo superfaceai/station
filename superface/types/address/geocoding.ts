@@ -1,5 +1,5 @@
 import { typeHelper, TypedProfile } from '@superfaceai/one-sdk';
-export type GecodeInput = {
+export type GeocodeInput = {
     /**
      * Country
      * The country. For example, USA. You can also provide the two-letter ISO 3166-1 alpha-2 country code.
@@ -26,7 +26,7 @@ export type GecodeInput = {
      **/
     streetAddress?: unknown;
 };
-export type GecodeResult = {
+export type GeocodeResult = {
     /**
      * Latitude
      * The latitude of a location. For example 37.42242 (WGS 84).
@@ -87,7 +87,7 @@ const profile = {
      * Geocode address
      * Geocode postal address into geographical coordinates (latitude and longitude)
      **/
-    "Gecode": typeHelper<GecodeInput, GecodeResult>(),
+    "Geocode": typeHelper<GeocodeInput, GeocodeResult>(),
     /**
      * Reverse geocode
      * Decodes geographical coordinates (latitude and longitude) into postal addresses
