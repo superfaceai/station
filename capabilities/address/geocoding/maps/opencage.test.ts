@@ -6,7 +6,7 @@ describe('address/geocoding/opencage-typed', () => {
     const client = new SuperfaceClient();
     const profile = await client.getProfile('address/geocoding');
     const provider = await client.getProvider('opencage');
-    const result = await profile.useCases.Gecode.perform({
+    const result = await profile.useCases.Geocode.perform({
       streetAddress: "1600 Amphitheatre Parkway",
       addressLocality: "Mountain View",
       addressRegion: "CA",

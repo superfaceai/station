@@ -6,7 +6,7 @@ describe('address/geocoding/mock-typed', () => {
     const client = new SuperfaceClient();
     const profile = await client.getProfile('address/geocoding');
     const provider = await client.getProvider('mock');
-    const result = await profile.useCases.Gecode.perform({
+    const result = await profile.useCases.Geocode.perform({
       streetAddress: "",
       addressLocality: "",
       addressRegion: "",
