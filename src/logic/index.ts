@@ -5,3 +5,4 @@ export * from './generate';
 export * from './compile';
 export * from './publish';
 export * from './check';
+export * from './prepare-e2e';

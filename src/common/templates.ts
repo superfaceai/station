@@ -72,3 +72,31 @@ describe('${scope}/${usecase}/${provider}-typed', () => {
   });
 });`;
 }
+
+export function e2eTestTemplate(
+  scope: string,
+  usecase: string,
+  provider: string
+): string {
+  return `import { SuperfaceClient } from './superface/sdk';
+
+describe('${scope}/${usecase}/${provider}-e2e', () => {
+  beforeAll(() => {
+    jest.setTimeout(10000)
+  })
+  
+  it('performs correctly', async () => {
+    const client = new SuperfaceClient();
+    const profile = await client.getProfile('${scope}/${usecase}');
+    const provider = await client.getProvider('${provider}');
+    const usecase = profile.useCases.${kebabToPascalCase(usecase)};
+
+    expect(provider).not.toBeUndefined();
+    expect(usecase).not.toBeUndefined();
+
+    //Edit input values and expected result
+    //const result = await usecase.perform({}, { provider });
+    //expect(result.unwrap()).toEqual();
+  });
+});`;
+}

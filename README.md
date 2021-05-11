@@ -28,6 +28,7 @@ yarn link
 * [`station check`](#station-check)
 * [`station compile`](#station-compile)
 * [`station create DOCUMENTINFO`](#station-create-documentinfo)
+* [`station e2e DOCUMENTINFO MAP`](#station-e2e-documentinfo-map)
 * [`station generate PROFILENAME`](#station-generate-profilename)
 * [`station publish PATH`](#station-publish-path)
 
@@ -97,6 +98,29 @@ EXAMPLES
 ```
 
 _See code: [dist/src/commands/create.ts](https://github.com/superfaceai/station/blob/v0.0.1/dist/src/commands/create.ts)_
+
+## `station e2e DOCUMENTINFO MAP`
+
+Prepares file structure for e2e testing of specified profile and map
+
+```
+USAGE
+  $ station e2e DOCUMENTINFO MAP
+
+ARGUMENTS
+  DOCUMENTINFO  Profile name in {scope}/{usecase} shape
+  MAP           Map name
+
+OPTIONS
+  -h, --help   show CLI help
+  -q, --quiet  When set to true, disables the shell echo output of action.
+
+EXAMPLES
+  $ station e2e sms/service twilio
+  $ station e2e sms/service twilio -q
+```
+
+_See code: [dist/src/commands/e2e.ts](https://github.com/superfaceai/station/blob/v0.0.1/dist/src/commands/e2e.ts)_
 
 ## `station generate PROFILENAME`
 
@@ -198,18 +222,50 @@ Generate types if needed:
  station generate {scope}/{usecase}
 ```
 
-Test created capability
+Test created capability:
 
 ```
  yarn test {path to test file}
 ```
 
-Upload newly created files
+Upload newly created files to staging:
+
 ```
 station publish {path to profile}
 station publish {path to map}
 station publish {path to provider}
 ```
+
+Set enviroment to downolad files from staging
+
+```
+SUPERFACE_API_URL=https://superface.dev
+```
+
+Prepare E2E test file structure:
+
+```
+station e2e {scope}/{usecase} {provider}
+```
+
+Edit created test file in `/test/e2e` folder and run it.
+
+
+If it's passing upload files to staging:
+
+```
+station publish {path to profile} -p
+station publish {path to map} -p
+station publish {path to provider} -p
+```
+
+Set enviroment to downolad files from production
+
+```
+unset SUPERFACE_API_URL
+```
+
+Run E2E test file again.
 
 ## Enviroment variables
 

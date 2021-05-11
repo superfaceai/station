@@ -7,6 +7,7 @@ export const TYPES_PATH = 'superface/types';
 export const TYPES_FILE_PATH = 'superface/sdk.ts';
 export const SUPER_JSON = './superface/super.json';
 export const TYPE_DEFINITIONS_FILE = 'index.d.ts';
+export const E2E_DIR = 'e2e';
 
 export const EXTENSIONS = {
   profile: {
@@ -19,4 +20,5 @@ export const EXTENSIONS = {
   },
   provider: '.json',
   typescript: '.ts',
+  e2e: '.e2e.test.ts',
 };

@@ -20,15 +20,15 @@ export { VcsSingleFileContentProfile } from "./types/vcs/single-file-content";
 export { VcsUserReposProfile } from "./types/vcs/user-repos";
 export { DeliveryTrackingShipmentInfoProfile } from "./types/delivery-tracking/shipment-info";
 export const typeDefinitions = {
-    ...addressCleanAddress,
-    ...addressGeocoding,
-    ...communicationSendEmail,
-    ...communicationSendMessage,
-    ...vcsPullRequest,
-    ...deliveryTrackingShipmentInfo,
-    ...vcsPullRequests,
-    ...vcsSingleFileContent,
-    ...vcsUserRepos
+  ...addressCleanAddress,
+  ...addressGeocoding,
+  ...communicationSendEmail,
+  ...communicationSendMessage,
+  ...vcsPullRequest,
+  ...deliveryTrackingShipmentInfo,
+  ...vcsPullRequests,
+  ...vcsSingleFileContent,
+  ...vcsUserRepos
 };
 export const SuperfaceClient = createTypedClient(typeDefinitions);
 export type SuperfaceClient = InstanceType<typeof SuperfaceClient>;
