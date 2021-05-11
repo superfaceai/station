@@ -65,6 +65,6 @@ describe('${scope}/${usecase}/${provider}-typed', () => {
     //Edit input values and expected result
     //const result = await usecase.perform({}, { provider });
     //expect(result.unwrap()).toEqual();
-  });
+  }, 10000);
 });`;
 }
