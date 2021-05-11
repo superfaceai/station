@@ -1,5 +1,4 @@
 import { createTypedClient } from "@superfaceai/one-sdk";
-
 import { addressCleanAddress } from "./types/address/clean-address";
 import { addressGeocoding } from "./types/address/geocoding";
 import { communicationSendEmail } from "./types/communication/send-email";
@@ -9,7 +8,7 @@ import { vcsPullRequest } from "./types/vcs/pull-request";
 import { vcsPullRequests } from "./types/vcs/pull-requests";
 import { vcsSingleFileContent } from "./types/vcs/single-file-content";
 import { vcsUserRepos } from "./types/vcs/user-repos";
-
+import { communicationSendSms } from "./types/communication/send-sms";
 export { AddressCleanAddressProfile } from "./types/address/clean-address";
 export { AddressGeocodingProfile } from "./types/address/geocoding";
 export { CommunicationSendEmailProfile } from "./types/communication/send-email";
@@ -19,6 +18,7 @@ export { VcsPullRequestsProfile } from "./types/vcs/pull-requests";
 export { VcsSingleFileContentProfile } from "./types/vcs/single-file-content";
 export { VcsUserReposProfile } from "./types/vcs/user-repos";
 export { DeliveryTrackingShipmentInfoProfile } from "./types/delivery-tracking/shipment-info";
+export { CommunicationSendSmsProfile } from "./types/communication/send-sms";
 export const typeDefinitions = {
     ...addressCleanAddress,
     ...addressGeocoding,
@@ -28,7 +28,8 @@ export const typeDefinitions = {
     ...deliveryTrackingShipmentInfo,
     ...vcsPullRequests,
     ...vcsSingleFileContent,
-    ...vcsUserRepos
+    ...vcsUserRepos,
+    ...communicationSendSms
 };
 export const SuperfaceClient = createTypedClient(typeDefinitions);
 export type SuperfaceClient = InstanceType<typeof SuperfaceClient>;

@@ -1,5 +1,4 @@
-import { TypedProfile,typeHelper } from '@superfaceai/one-sdk';
-
+import { typeHelper, TypedProfile } from '@superfaceai/one-sdk';
 export type CleanAddressInput = {
     street?: unknown;
     city?: unknown;
