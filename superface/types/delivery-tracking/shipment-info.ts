@@ -141,7 +141,7 @@ export type ShipmentInfoResult = {
 }[];
 const profile = {
     /** Get shipment state **/
-    "shipmentInfo": typeHelper<ShipmentInfoInput, ShipmentInfoResult>()
+    "ShipmentInfo": typeHelper<ShipmentInfoInput, ShipmentInfoResult>()
 };
 export type DeliveryTrackingShipmentInfoProfile = TypedProfile<typeof profile>;
 export const deliveryTrackingShipmentInfo = {

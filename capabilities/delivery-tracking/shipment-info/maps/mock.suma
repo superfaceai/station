@@ -1,0 +1,56 @@
+profile = "delivery-tracking/shipment-info@1.0"
+provider = "mock"
+
+map ShipmentInfo {
+
+  map result [{
+    carrier: 'Mocked carrier',
+    trackingNumber: input.trackingNumber,
+    origin: {
+      address: {
+        countryCode: 'US',
+        postalCode: '94103',
+        addressLocality: 'San Francisco'
+      }
+    },
+    destination: {
+      address: {
+        countryCode: 'US',
+        postalCode: '60611',
+        addressLocality: 'Chicago'
+      }
+    },
+    status: {
+      timestamp: '2021-05-04T22:49:23.204Z',
+      statusCode: 'transit',
+      statusText: 'Your shipment has departed from the origin.',
+      location: {
+        address: {
+          countryCode: 'US',
+          postalCode: '94103',
+          addressLocality: 'San Francisco'
+        }
+      }
+    },
+    events: [
+      {
+        timestamp: '2021-05-04T22:49:23.204Z',
+        statusCode: 'transit',
+        statusText: 'Your shipment has departed from the origin.',
+        location: {
+          address: {
+            countryCode: 'US',
+            postalCode: '94103',
+            addressLocality: 'San Francisco'
+          }
+        }
+      },
+      {
+        timestamp: '2021-05-03T18:49:23.204Z',
+        statusCode: 'pre_transit',
+        statusText: 'The carrier has received the electronic shipment information.'
+      }
+    ],
+    estimatedDeliveryDate: '2021-05-11T05:44:01.431Z'
+  }]
+}

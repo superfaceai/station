@@ -19,7 +19,7 @@ describe('delivery-tracking/shipment-info/dhl-unified', () => {
         'delivery-tracking/shipment-info'
       );
       const dhl = await client.getProvider('dhl-unified');
-      const result = await profile.useCases.shipmentInfo.perform(
+      const result = await profile.useCases.ShipmentInfo.perform(
         { trackingNumber: '00340434292135100131' },
         { provider: dhl }
       );
@@ -58,7 +58,7 @@ describe('delivery-tracking/shipment-info/dhl-unified', () => {
     const client = new SuperfaceClient();
     const profile = await client.getProfile('delivery-tracking/shipment-info');
     const dhl = await client.getProvider('dhl-unified');
-    const result = await profile.useCases.shipmentInfo.perform(
+    const result = await profile.useCases.ShipmentInfo.perform(
       { trackingNumber: 'NOT_EXISTING_TRACKING_NUMBER' },
       { provider: dhl }
     );

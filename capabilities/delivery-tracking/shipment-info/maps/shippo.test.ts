@@ -19,7 +19,7 @@ describe('delivery-tracking/shipment-info/shippo', () => {
         'delivery-tracking/shipment-info'
       );
       const shippo = await client.getProvider('shippo');
-      const result = await profile.useCases.shipmentInfo.perform(
+      const result = await profile.useCases.ShipmentInfo.perform(
         { carrier: 'shippo', trackingNumber: 'SHIPPO_PRE_TRANSIT' },
         { provider: shippo }
       );
@@ -66,7 +66,7 @@ describe('delivery-tracking/shipment-info/shippo', () => {
         'delivery-tracking/shipment-info'
       );
       const shippo = await client.getProvider('shippo');
-      const result = await profile.useCases.shipmentInfo.perform(
+      const result = await profile.useCases.ShipmentInfo.perform(
         { carrier: 'shippo', trackingNumber: 'SHIPPO_TRANSIT' },
         { provider: shippo }
       );
