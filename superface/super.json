@@ -145,6 +145,18 @@
               }
             }
           }
+        },
+        "mailgun": {
+          "file": "./grid/communication/send-email/maps/mailgun.suma",
+          "defaults": {
+            "SendEmail": {
+              "input": {
+                "from": "$MAILGUN_COMMUNICATION_SENDEMAIL_FROM",
+                "to": "$COMMUNICATION_SENDEMAIL_TO",
+                "domain": "$MAILGUN_COMMUNICATION_DOMAIN"
+              }
+            }
+          }
         }
       }
     },
@@ -304,6 +316,16 @@
     "mock": {
       "file": "../providers/mock.json",
       "security": []
+    },
+    "mailgun": {
+      "file": "../providers/mailgun.json",
+      "security": [
+        {
+          "id": "basic",
+          "username": "$MAILGUN_USERNAME",
+          "password": "$MAILGUN_PASSWORD"
+        }
+      ]
     }
   }
 }
