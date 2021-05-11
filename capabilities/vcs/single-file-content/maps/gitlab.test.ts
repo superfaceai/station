@@ -1,6 +1,10 @@
 import { SuperfaceClient } from '@superfaceai/one-sdk';
 
 describe('vcs/single-file-content/gitlab', () => {
+  beforeAll(() => {
+    jest.setTimeout(10000);
+  });
+
   it('performs correctly', async () => {
     const client = new SuperfaceClient();
     const profile = await client.getProfile('vcs/single-file-content');
@@ -22,5 +26,5 @@ describe('vcs/single-file-content/gitlab', () => {
       encoding: 'base64',
       size: expect.any(Number),
     });
-  }, 10000);
+  });
 });

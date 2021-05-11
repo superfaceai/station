@@ -1,6 +1,10 @@
 import { SuperfaceClient } from '@superfaceai/one-sdk';
 
 describe('vcs/user-repos/gitlab', () => {
+  beforeAll(() => {
+    jest.setTimeout(10000);
+  });
+
   it('performs correctly', async () => {
     const client = new SuperfaceClient();
     const profile = await client.getProfile('vcs/user-repos');
@@ -12,5 +16,5 @@ describe('vcs/user-repos/gitlab', () => {
     expect(value).toEqual({
       repos: [{ name: 'test', description: 'Hello World!' }],
     });
-  }, 10000);
+  });
 });

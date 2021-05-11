@@ -1,6 +1,10 @@
 import { SuperfaceClient } from '../../../../superface/sdk';
 
 describe('vcs/pull-request/github-typed', () => {
+  beforeAll(() => {
+    jest.setTimeout(10000);
+  });
+
   it('performs correctly', async () => {
     const client = new SuperfaceClient();
     const profile = await client.getProfile('vcs/pull-request');
@@ -21,5 +25,5 @@ describe('vcs/pull-request/github-typed', () => {
       title: 'chore: Bump parser version',
       url: 'https://api.github.com/repos/superfaceai/astexplorer/pulls/3',
     });
-  }, 10000);
+  });
 });

@@ -1,6 +1,10 @@
 import { SuperfaceClient } from '../../../../superface/sdk';
 
 describe('vcs/pull-request/gitlab-typed', () => {
+  beforeAll(() => {
+    jest.setTimeout(10000);
+  });
+
   it('performs correctly', async () => {
     const client = new SuperfaceClient();
     const profile = await client.getProfile('vcs/pull-request');
@@ -21,5 +25,5 @@ describe('vcs/pull-request/gitlab-typed', () => {
       title: 'Update README.md',
       url: 'https://gitlab.com/Jakub-Vacek/empty-test/-/merge_requests/1',
     });
-  }, 10000);
+  });
 });

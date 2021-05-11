@@ -1,6 +1,10 @@
 import { SuperfaceClient } from '@superfaceai/one-sdk';
 
 describe('vcs/user-repos/github', () => {
+  beforeAll(() => {
+    jest.setTimeout(10000);
+  });
+
   it('performs correctly', async () => {
     const client = new SuperfaceClient();
     const profile = await client.getProfile('vcs/user-repos');
@@ -27,5 +31,5 @@ describe('vcs/user-repos/github', () => {
         },
       ],
     });
-  }, 10000);
+  });
 });

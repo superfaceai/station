@@ -1,6 +1,10 @@
 import { SuperfaceClient } from '@superfaceai/one-sdk';
 
 describe('vcs/pull-requests/bitbucket', () => {
+  beforeAll(() => {
+    jest.setTimeout(10000);
+  });
+
   it('performs correctly', async () => {
     const client = new SuperfaceClient();
     const profile = await client.getProfile('vcs/pull-requests');
@@ -21,5 +25,5 @@ describe('vcs/pull-requests/bitbucket', () => {
         },
       ],
     });
-  }, 10000);
+  });
 });
