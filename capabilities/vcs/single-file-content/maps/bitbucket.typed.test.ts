@@ -21,5 +21,5 @@ describe('vcs/single-file-content/bitbucket-typed', () => {
       encoding: 'utf-8',
       size: expect.any(Number),
     });
-  });
+  }, 10000);
 });

@@ -12,5 +12,5 @@ describe('vcs/user-repos/gitlab', () => {
     expect(value).toEqual({
       repos: [{ name: 'test', description: 'Hello World!' }],
     });
-  });
+  }, 10000);
 });

@@ -27,5 +27,5 @@ describe('vcs/user-repos/github', () => {
         },
       ],
     });
-  });
+  }, 10000);
 });

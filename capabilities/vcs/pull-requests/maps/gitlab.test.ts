@@ -22,5 +22,5 @@ describe('vcs/pull-requests/gitlab', () => {
         },
       ],
     });
-  });
+  }, 10000);
 });

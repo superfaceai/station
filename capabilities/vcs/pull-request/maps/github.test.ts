@@ -21,5 +21,5 @@ describe('vcs/pull-request/github-typed', () => {
       title: 'chore: Bump parser version',
       url: 'https://api.github.com/repos/superfaceai/astexplorer/pulls/3',
     });
-  });
+  }, 10000);
 });

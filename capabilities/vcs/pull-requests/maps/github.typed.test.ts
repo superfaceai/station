@@ -21,5 +21,5 @@ describe('vcs/pull-requests/github-typed', () => {
         },
       ],
     });
-  });
+  }, 10000);
 });

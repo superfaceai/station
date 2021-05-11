@@ -15,5 +15,5 @@ describe('vcs/user-repos/bitbucket-typed', () => {
         { name: 'dx-scanner', description: '' },
       ],
     });
-  });
+  }, 10000);
 });

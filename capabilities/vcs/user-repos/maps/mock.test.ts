@@ -1,12 +1,12 @@
 import { SuperfaceClient } from '../../../../superface/sdk';
 
-describe('vcs/user-repos/github-typed', () => {
+describe('vcs/user-repos/mock-typed', () => {
   it('performs correctly', async () => {
     const client = new SuperfaceClient();
     const profile = await client.getProfile('vcs/user-repos');
-    const provider = await client.getProvider('gitlab');
+    const provider = await client.getProvider('mock');
     const result = await profile.useCases.UserRepos.perform(
-      { user: 'zdne' },
+      { user: 'test' },
       { provider }
     );
 

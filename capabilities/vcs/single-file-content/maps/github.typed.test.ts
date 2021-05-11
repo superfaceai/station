@@ -16,5 +16,5 @@ describe('vcs/single-file-content/github-typed', () => {
       encoding: 'base64',
       size: expect.any(Number),
     });
-  });
+  }, 10000);
 });

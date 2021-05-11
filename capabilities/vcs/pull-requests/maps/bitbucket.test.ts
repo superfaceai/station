@@ -21,5 +21,5 @@ describe('vcs/pull-requests/bitbucket', () => {
         },
       ],
     });
-  });
+  }, 10000);
 });

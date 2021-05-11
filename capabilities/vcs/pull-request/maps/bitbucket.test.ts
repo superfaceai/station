@@ -21,5 +21,5 @@ describe('vcs/pull-request/bitbucket-typed', () => {
       title: 'README.md edited online with Bitbucket',
       url: 'https://bitbucket.org/jakuvacek/testrepository/pull-requests/1',
     });
-  });
+  }, 10000);
 });

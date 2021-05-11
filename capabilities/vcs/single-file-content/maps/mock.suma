@@ -1,0 +1,10 @@
+profile = "vcs/single-file-content@1.0"
+provider = "mock"
+
+map SingleFileContent{
+        map result {
+        size = Math.floor(Math.random() * 10) + 1
+        content = Math.random().toString(16)
+        encoding = 'base64'
+      }
+}

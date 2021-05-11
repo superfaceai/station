@@ -22,5 +22,5 @@ describe('vcs/single-file-content/gitlab', () => {
       encoding: 'base64',
       size: expect.any(Number),
     });
-  });
+  }, 10000);
 });

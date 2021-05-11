@@ -22,5 +22,5 @@ describe('vcs/pull-requests/github', () => {
         },
       ],
     });
-  });
+  }, 10000);
 });

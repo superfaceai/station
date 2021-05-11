@@ -29,5 +29,5 @@ describe('vcs/user-repos/github-typed', () => {
         },
       ],
     });
-  });
+  }, 10000);
 });
