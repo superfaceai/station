@@ -16,7 +16,7 @@ import {
   TYPES_FILE_PATH,
   TYPES_PATH,
 } from '../common/constants';
-import { exists, mkdir, readFile, writeFile } from '../common/io';
+import { exists, mkdirQuiet, readFile, writeFile } from '../common/io';
 import { exportTypeTemplate } from '../common/templates';
 
 export async function generate(
@@ -79,24 +79,13 @@ export async function generateProfileTypes(
   //Generate profile types
   const typing = generateTypingsForProfile(`${scope}/${profile}`, ast);
   //Create folder structure if it doesn't exist
-  if (
-    !(await exists(
-      `./${CAPABILITIES_DIR}/${scope}/${profile}/${version}/${TYPES_PATH}`
-    ))
-  ) {
-    await mkdir(
-      `./${CAPABILITIES_DIR}/${scope}/${profile}/${version}/${TYPES_PATH}`
-    );
-  }
-  if (
-    !(await exists(
-      `./${CAPABILITIES_DIR}/${scope}/${profile}/${version}/${TYPES_PATH}/${scope}`
-    ))
-  ) {
-    await mkdir(
-      `./${CAPABILITIES_DIR}/${scope}/${profile}/${version}/${TYPES_PATH}/${scope}`
-    );
-  }
+
+  await mkdirQuiet(
+    `./${CAPABILITIES_DIR}/${scope}/${profile}/${version}/${TYPES_PATH}`
+  );
+  await mkdirQuiet(
+    `./${CAPABILITIES_DIR}/${scope}/${profile}/${version}/${TYPES_PATH}/${scope}`
+  );
   options?.logCb?.(
     `Writing generated types to "./${CAPABILITIES_DIR}/${scope}/${profile}/${version}/${TYPES_PATH}/${scope}/${profile}${EXTENSIONS.typescript}"`
   );

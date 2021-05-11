@@ -17,7 +17,7 @@ import {
   exists,
   getDirectories,
   getFiles,
-  mkdir,
+  mkdirQuiet,
   readFile,
   writeFile,
 } from '../common/io';
@@ -72,33 +72,16 @@ export async function compile(
         );
 
         //Create folder structure if it doesn't exist
-        if (
-          !(await exists(
-            `./${CAPABILITIES_DIR}/${scope}/${useCase}/${version}/${SUPERFACE_DIR}`
-          ))
-        ) {
-          await mkdir(
-            `./${CAPABILITIES_DIR}/${scope}/${useCase}/${version}/${SUPERFACE_DIR}`
-          );
-        }
-        if (
-          !(await exists(
-            `./${CAPABILITIES_DIR}/${scope}/${useCase}/${version}/${SUPERFACE_DIR}/${PROFILE_BUILD_DIR}`
-          ))
-        ) {
-          await mkdir(
-            `./${CAPABILITIES_DIR}/${scope}/${useCase}/${version}/${SUPERFACE_DIR}/${PROFILE_BUILD_DIR}`
-          );
-        }
-        if (
-          !(await exists(
-            `./${CAPABILITIES_DIR}/${scope}/${useCase}/${version}/${SUPERFACE_DIR}/${PROFILE_BUILD_DIR}/maps`
-          ))
-        ) {
-          await mkdir(
-            `./${CAPABILITIES_DIR}/${scope}/${useCase}/${version}/${SUPERFACE_DIR}/${PROFILE_BUILD_DIR}/maps`
-          );
-        }
+        await mkdirQuiet(
+          `./${CAPABILITIES_DIR}/${scope}/${useCase}/${version}/${SUPERFACE_DIR}`
+        );
+        await mkdirQuiet(
+          `./${CAPABILITIES_DIR}/${scope}/${useCase}/${version}/${SUPERFACE_DIR}/${PROFILE_BUILD_DIR}`
+        );
+        await mkdirQuiet(
+          `./${CAPABILITIES_DIR}/${scope}/${useCase}/${version}/${SUPERFACE_DIR}/${PROFILE_BUILD_DIR}/maps`
+        );
+
         //Compile profiles
         profiles = await getFiles(
           `./${CAPABILITIES_DIR}/${scope}/${useCase}/${version}`

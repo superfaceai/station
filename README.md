@@ -44,14 +44,14 @@ Provider folder is shared amongst capabilities.
 First, create new profile:
 
 ```
- station create profile {scope}/{usecase}/{version}
+ station create profile {scope}/{usecase}@{version}
 ```
 Edit created .supr file
 
 Secondly, create new provider:
 
 ```
- station create provider {scope}/{usecase}/{version} {provider}
+ station create provider {scope}/{usecase}@{version} {provider}
 ```
 
 Edit created .json file
@@ -59,7 +59,7 @@ Edit created .json file
 Next, create map for created profile and provider
 
 ```
- station create map {scope}/{usecase}/{version} {provider}
+ station create map {scope}/{usecase}@{version} {provider}
 ```
 
 Edit created .suma file and test file (.test.ts)
@@ -73,7 +73,7 @@ Compile created files:
 Generate types if needed:
 
 ```
- station generate {scope}/{usecase}/{version}
+ station generate {scope}/{usecase}@{version}
 ```
 
 Test created capability
@@ -84,14 +84,14 @@ Test created capability
 
 Upload newly created files
 ```
-station publish profile {scope}/{usecase}/{version}
-station publish map {scope}/{usecase}/{version} {provider}
+station publish profile {scope}/{usecase}@{version}
+station publish map {scope}/{usecase}@{version} {provider}
 station publish provider {provider}
 ```
 
 ## Enviroment variables
 
-Secretes used for authentication during tests are stored in `.env.capabilities` and loaded using dotenv. Run `cp .env.capabilities.example .env.capabilities` to start from the template.
+Secrets used for authentication during tests are stored in `.env.capabilities` and loaded using dotenv. Run `cp .env.capabilities.example .env.capabilities` to start from the template.
 
 ## Commands
   <!-- commands -->

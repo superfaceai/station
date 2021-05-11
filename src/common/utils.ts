@@ -49,7 +49,7 @@ export function extractVersionString(input: string): string {
 export function parseVersionNumber(str: string): number {
   const value = str.trim();
   if (!VERSION_NUMBER_RE.test(value)) {
-    throw new CLIError(`Unalbe to parse version string "${str}"`);
+    throw new CLIError(`Unable to parse version string "${str}"`);
   }
 
   return parseInt(value, 10);

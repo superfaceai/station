@@ -31,6 +31,29 @@ export async function exists(path: string): Promise<boolean> {
   return true;
 }
 
+/**
+ * Creates a directory without erroring if it already exists.
+ * Returns `true` if the directory was created.
+ */
+export async function mkdirQuiet(path: string): Promise<boolean> {
+  try {
+    await mkdir(path);
+  } catch (err: unknown) {
+    if (typeof err === 'object' && err !== null && 'code' in err) {
+      // Allow `EEXIST` because scope directory already exists.
+      const ioErr = err as { code: string };
+      if (ioErr.code === 'EEXIST') {
+        return false;
+      }
+    }
+
+    // Rethrow other errors.
+    throw err;
+  }
+
+  return true;
+}
+
 export const getDirectories = async (source: string): Promise<string[]> =>
   (await readdir(source, { withFileTypes: true }))
     .filter((dirent: fs.Dirent) => dirent.isDirectory())

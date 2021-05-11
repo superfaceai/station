@@ -7,7 +7,7 @@ import {
   PROFILE_BUILD_DIR,
   SUPER_JSON,
 } from '../common/constants';
-import { exists, mkdir, writeFile } from '../common/io';
+import { exists, mkdir, mkdirQuiet, writeFile } from '../common/io';
 import { mapTemplate, mapTestTemplate } from '../common/templates';
 
 export async function createMap(
@@ -20,27 +20,12 @@ export async function createMap(
   }
 ): Promise<void> {
   //Create folder structure if it doesn't exist
-  if (!(await exists(`./${CAPABILITIES_DIR}`))) {
-    await mkdir(`./${CAPABILITIES_DIR}`);
-  }
+  await mkdirQuiet(`./${CAPABILITIES_DIR}`);
+  await mkdirQuiet(`./${CAPABILITIES_DIR}/${scope}`);
+  await mkdirQuiet(`./${CAPABILITIES_DIR}/${scope}/${usecase}`);
+  await mkdirQuiet(`./${CAPABILITIES_DIR}/${scope}/${usecase}/${version}`);
+  await mkdirQuiet(`./${CAPABILITIES_DIR}/${scope}/${usecase}/${version}/maps`);
 
-  if (!(await exists(`./${CAPABILITIES_DIR}/${scope}`))) {
-    await mkdir(`./${CAPABILITIES_DIR}/${scope}`);
-  }
-
-  if (!(await exists(`./${CAPABILITIES_DIR}/${scope}/${usecase}`))) {
-    await mkdir(`./${CAPABILITIES_DIR}/${scope}/${usecase}`);
-  }
-
-  if (!(await exists(`./${CAPABILITIES_DIR}/${scope}/${usecase}/${version}`))) {
-    await mkdir(`./${CAPABILITIES_DIR}/${scope}/${usecase}/${version}`);
-  }
-
-  if (
-    !(await exists(`./${CAPABILITIES_DIR}/${scope}/${usecase}/${version}/maps`))
-  ) {
-    await mkdir(`./${CAPABILITIES_DIR}/${scope}/${usecase}/${version}/maps`);
-  }
   //Parse version
   const parsedVersion = extractVersion(version);
   //Create map file

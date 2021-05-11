@@ -7,7 +7,7 @@ import {
   PROFILE_BUILD_DIR,
   SUPER_JSON,
 } from '../common/constants';
-import { exists, mkdir, writeFile } from '../common/io';
+import { mkdirQuiet, writeFile } from '../common/io';
 import { profileTemplate } from '../common/templates';
 
 export async function createProfile(
@@ -19,21 +19,11 @@ export async function createProfile(
   }
 ): Promise<void> {
   //Create folder structure if it doesn't exist
-  if (!(await exists(`./${CAPABILITIES_DIR}`))) {
-    await mkdir(`./${CAPABILITIES_DIR}`);
-  }
+  await mkdirQuiet(`./${CAPABILITIES_DIR}`);
+  await mkdirQuiet(`./${CAPABILITIES_DIR}/${scope}`);
+  await mkdirQuiet(`./${CAPABILITIES_DIR}/${scope}/${usecase}`);
+  await mkdirQuiet(`./${CAPABILITIES_DIR}/${scope}/${usecase}/${version}`);
 
-  if (!(await exists(`./${CAPABILITIES_DIR}/${scope}`))) {
-    await mkdir(`./${CAPABILITIES_DIR}/${scope}`);
-  }
-
-  if (!(await exists(`./${CAPABILITIES_DIR}/${scope}/${usecase}`))) {
-    await mkdir(`./${CAPABILITIES_DIR}/${scope}/${usecase}`);
-  }
-
-  if (!(await exists(`./${CAPABILITIES_DIR}/${scope}/${usecase}/${version}`))) {
-    await mkdir(`./${CAPABILITIES_DIR}/${scope}/${usecase}/${version}`);
-  }
   //Parse version
   const parsedVersion = extractVersion(version);
   //Create profile file
@@ -50,15 +40,9 @@ export async function createProfile(
     `Creating: "profile${EXTENSIONS.profile.source}" file at: "./${CAPABILITIES_DIR}/${scope}/${usecase}/${version}/"`
   );
 
-  if (
-    !(await exists(
-      `./${CAPABILITIES_DIR}/${scope}/${usecase}/${version}/superface`
-    ))
-  ) {
-    await mkdir(
-      `./${CAPABILITIES_DIR}/${scope}/${usecase}/${version}/superface`
-    );
-  }
+  await mkdirQuiet(
+    `./${CAPABILITIES_DIR}/${scope}/${usecase}/${version}/superface`
+  );
 
   //Add profile to super.json
   const loadedResult = await SuperJson.load(

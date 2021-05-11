@@ -7,7 +7,7 @@ import {
   PROVIDERS_DIR,
   SUPER_JSON,
 } from '../common/constants';
-import { exists, mkdir, writeFile } from '../common/io';
+import { exists, mkdirQuiet, writeFile } from '../common/io';
 import { providerTemplate } from '../common/templates';
 
 export async function createProvider(
@@ -20,9 +20,7 @@ export async function createProvider(
   }
 ): Promise<void> {
   //Create folder structure if it doesn't exist
-  if (!(await exists(`./${PROVIDERS_DIR}`))) {
-    await mkdir(`./${PROVIDERS_DIR}`);
-  }
+  await mkdirQuiet(`./${PROVIDERS_DIR}`);
 
   //Create provider file
   if (
@@ -41,15 +39,9 @@ export async function createProvider(
     );
   }
 
-  if (
-    !(await exists(
-      `./${CAPABILITIES_DIR}/${scope}/${usecase}/${version}/superface`
-    ))
-  ) {
-    await mkdir(
-      `./${CAPABILITIES_DIR}/${scope}/${usecase}/${version}/superface`
-    );
-  }
+  await mkdirQuiet(
+    `./${CAPABILITIES_DIR}/${scope}/${usecase}/${version}/superface`
+  );
 
   //Add provider to super.json
   const loadedResult = await SuperJson.load(
