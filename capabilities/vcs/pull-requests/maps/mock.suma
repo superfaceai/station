@@ -1,0 +1,13 @@
+profile = "vcs/pull-requests@1.0"
+provider = "mock"
+
+map PullRequests{
+    identifier = Math.floor(Math.random() * 10) + 1
+    map result {pullRequests: [{
+        title: 'Test',
+        id: identifier,
+        url: `https://gitlab.com/${input.owner}/${input.repo}/-/merge_requests/${identifier}`,
+        sha: Math.random().toString(16),
+      }]
+    }
+}

@@ -1,6 +1,10 @@
 import { SuperfaceClient } from '../../../../superface/sdk';
 
 describe('vcs/single-file-content/gitlab-typed', () => {
+  beforeAll(() => {
+    jest.setTimeout(10000);
+  });
+
   it('performs correctly', async () => {
     const client = new SuperfaceClient();
     const profile = await client.getProfile('vcs/single-file-content');

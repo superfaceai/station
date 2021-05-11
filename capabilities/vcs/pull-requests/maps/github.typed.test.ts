@@ -1,6 +1,10 @@
 import { SuperfaceClient } from '../../../../superface/sdk';
 
 describe('vcs/pull-requests/github-typed', () => {
+  beforeAll(() => {
+    jest.setTimeout(10000);
+  });
+
   it('sends a message', async () => {
     const client = new SuperfaceClient();
     const profile = await client.getProfile('vcs/pull-requests');
