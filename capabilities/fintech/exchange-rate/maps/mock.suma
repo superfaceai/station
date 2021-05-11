@@ -1,0 +1,23 @@
+profile = "fintech/exchange-rate@1.0"
+provider = "mock"
+
+map GetRates {
+  map result {
+    base: 'USD',
+    date: '2021-01-01',
+    rates: [
+      {
+        'key': 'CZK',
+        'value': 1.2,
+      },
+      {
+        'key': 'USD',
+        'value': 2.3,
+      },
+      {
+        'key': 'EUR',
+        'value': 3.4,
+      },
+    ]
+  }
+}

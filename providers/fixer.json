@@ -1,0 +1,18 @@
+{
+  "name": "fixer",
+  "services": [
+    {
+      "id": "default",
+      "baseUrl": "http://data.fixer.io/api"
+    }
+  ],
+  "securitySchemes": [
+    {
+      "id": "apikey_auth",
+      "type": "apiKey",
+      "in": "query",
+      "name": "access_key"
+    }
+  ],
+  "defaultService": "default"
+}
