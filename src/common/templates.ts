@@ -1,7 +1,7 @@
 import { kebabToPascalCase } from './utils';
 
 export function exportTypeTemplate(usecase: string): string {
-  return `export * from './${usecase}'\n`;
+  return `export * from './${usecase}';\n`;
 }
 export function profileTemplate(
   usecase: string,
