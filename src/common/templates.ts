@@ -53,6 +53,10 @@ export function mapTestTemplate(
   return `import { SuperfaceClient } from '../../../../superface/sdk';
 
 describe('${scope}/${usecase}/${provider}-typed', () => {
+  beforeAll(() => {
+    jest.setTimeout(10000)
+  })
+  
   it('performs correctly', async () => {
     const client = new SuperfaceClient();
     const profile = await client.getProfile('${scope}/${usecase}');
@@ -65,6 +69,6 @@ describe('${scope}/${usecase}/${provider}-typed', () => {
     //Edit input values and expected result
     //const result = await usecase.perform({}, { provider });
     //expect(result.unwrap()).toEqual();
-  }, 10000);
+  });
 });`;
 }
