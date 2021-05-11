@@ -2,9 +2,9 @@ profile = "delivery-tracking/shipment-info@1.0"
   provider = "shippo"
   
 """
-shipmentInfo map
+ShipmentInfo map
 """
-map shipmentInfo {
+map ShipmentInfo {
   fetchShipmentOutcome = call FetchShipment(
     carrier = input.carrier,
     trackingNumber = input.trackingNumber)
