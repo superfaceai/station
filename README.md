@@ -251,7 +251,7 @@ station e2e {scope}/{usecase} {provider}
 Edit created test file in `/test/e2e` folder and run it.
 
 
-If it's passing upload files to staging:
+If it's passing you can upload files to production:
 
 ```
 station publish {path to profile} -p
