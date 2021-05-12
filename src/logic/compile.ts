@@ -119,29 +119,31 @@ export async function compile(
             `Maps folder ./${CAPABILITIES_DIR}/${scope}/${useCase}/${version}/${SUPERFACE_DIR}/${PROFILE_BUILD_DIR}/maps does not exist`
           );
         } else {
-          maps = await getFiles(
-            `./${CAPABILITIES_DIR}/${scope}/${useCase}/${version}/maps`
+          maps = (
+            await getFiles(
+              `./${CAPABILITIES_DIR}/${scope}/${useCase}/${version}/maps`
+            )
+          ).filter(
+            map =>
+              map.endsWith(EXTENSIONS.map.source) ||
+              map.endsWith(EXTENSIONS.profile.source)
           );
           for (const file of maps) {
-            if (file.endsWith('js') || file.endsWith('ts')) {
-              options?.logCb?.(`Skipping file: "${file}"`);
-            } else {
-              options?.logCb?.(
-                `Compiling "${file}" to "${file}${EXTENSIONS.map.build}"`
-              );
-              //This file shoud be map
-              await copyFile(
-                `./${CAPABILITIES_DIR}/${scope}/${useCase}/${version}/maps/${file}`,
-                `./${CAPABILITIES_DIR}/${scope}/${useCase}/${version}/${SUPERFACE_DIR}/${PROFILE_BUILD_DIR}/maps/${file}`
-              );
-              const ast = await compileMap(
-                `./${CAPABILITIES_DIR}/${scope}/${useCase}/${version}/${SUPERFACE_DIR}/${PROFILE_BUILD_DIR}/maps/${file}`
-              );
-              await writeFile(
-                `./${CAPABILITIES_DIR}/${scope}/${useCase}/${version}/${SUPERFACE_DIR}/${PROFILE_BUILD_DIR}/maps/${file}.ast.json`,
-                JSON.stringify(ast, null, 2)
-              );
-            }
+            options?.logCb?.(
+              `Compiling "${file}" to "${file}${EXTENSIONS.map.build}"`
+            );
+            //This file shoud be map
+            await copyFile(
+              `./${CAPABILITIES_DIR}/${scope}/${useCase}/${version}/maps/${file}`,
+              `./${CAPABILITIES_DIR}/${scope}/${useCase}/${version}/${SUPERFACE_DIR}/${PROFILE_BUILD_DIR}/maps/${file}`
+            );
+            const ast = await compileMap(
+              `./${CAPABILITIES_DIR}/${scope}/${useCase}/${version}/${SUPERFACE_DIR}/${PROFILE_BUILD_DIR}/maps/${file}`
+            );
+            await writeFile(
+              `./${CAPABILITIES_DIR}/${scope}/${useCase}/${version}/${SUPERFACE_DIR}/${PROFILE_BUILD_DIR}/maps/${file}.ast.json`,
+              JSON.stringify(ast, null, 2)
+            );
           }
         }
         if (generateFlag) {

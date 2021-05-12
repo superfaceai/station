@@ -213,15 +213,6 @@ export async function check(options?: { logCb?: LogCallback }): Promise<void> {
         `./${CAPABILITIES_DIR}/${scope}/${useCase}`
       );
 
-      //Check duplicite versions
-      versions.forEach(version => {
-        //There is more folders with same version
-        if (versions.filter(v => v === version).length > 1) {
-          throw new CLIError(
-            `There is more than one folder with version "${version}" at path ./${PROFILE_BUILD_PATH}/${scope}/${useCase}`
-          );
-        }
-      });
       for (const version of versions) {
         //Load profile
         options?.logCb?.(

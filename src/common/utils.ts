@@ -1,8 +1,5 @@
 import { CLIError } from '@oclif/errors';
-import {
-  isValidDocumentName,
-  isValidVersionString,
-} from '@superfaceai/ast';
+import { isValidDocumentName, isValidVersionString } from '@superfaceai/ast';
 
 //Case utils
 export function kebabToCamelCase(input: string): string {
