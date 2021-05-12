@@ -1,4 +1,73 @@
 profile = "compute/instances@1.0"
 provider = "digitalocean"
 
-map Instances{}
+// API Reference: https://docs.digitalocean.com/reference/api/
+
+map CreateInstance {
+  http POST "/droplets" {
+    security "digitalocean_access_token"
+
+    request {
+      body = {
+        name: input.name,
+        region: input.region,
+        size: input.shape,
+        image: input.image,
+        ssh_keys: input.sshKeys
+      }
+    }
+
+    response 202 {
+      map result {
+
+      }
+    }
+  }
+}
+
+map InstanceInfo {
+  
+}
+
+operation MapShape {
+  SHAPES_MAP = {
+    tiny_intel: 's-1vcpu-1gb-intel',
+    tiny_amd: 's-1vcpu-1gb-amd',
+    small_intel: 's-1vcpu-2gb-intel',
+    small_amd: 's-1vcpu-2gb-amd',
+    medium_intel: 's-2vcpu-4gb-intel',
+    medium_amd: 's-2vcpu-4gb-amd',
+    large_intel: 's-4vcpu-8gb-intel',
+    large_amd: 's-4vcpu-8gb-amd',
+  }
+
+  return SHAPES_MAP[args.shape]
+}
+
+operation MapRegion {
+  REGIONS_MAP = {
+    EU: 'fra1',
+    US: 'sfo1',
+  }
+
+  return REGIONS_MAP[args.region]
+}
+
+operation MapImage {
+  IMAGES_MAP = {
+    ubuntu_lts: 72067660,
+    ubuntu_latest: 83803119,
+    debian_9: 69440042,
+    debian_10: 69440038,
+    fedora_33: 72465092,
+    fedora_34: 83513143,
+    centos_7: 69535713,
+    centos_8: 74885442,
+  }
+
+  return IMAGES_MAP[args.image]
+}
+
+operation MapStatus {
+
+}

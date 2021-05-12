@@ -1,5 +1,5 @@
 name = "compute/instances"
-version = "1.0"
+version = "1.0.0"
 
 """
 Create Server Instance
@@ -10,9 +10,9 @@ Optionally public ssh keys can be provided to access instance.
 usecase CreateInstance unsafe {
   input {
     name!
-    region!
     shape!
     image!
+    region!
     sshKeys
   }
 
@@ -42,7 +42,7 @@ This is crated automatical during instance creation
 field id string
 
 "
-Status string indicating the state of the instance
+Status indicating the state of the instance
 "
 field status enum {
   new
@@ -69,19 +69,62 @@ List of IPv4 and IPv6 addresses
 field publicIps [string]
 
 "
-Unique identifier for the region that you wish create instance in
+Region in which the instance should be created
+
+For each region datacenter location is selected according to folowing table:
+
+| region | Prefered location | Fallback location |
+|--------|-------------------|-------------------|
+|   EU   |     Frankfurt     |      Ireland      |
+|   US   |   San Francisco   |      New York     |
 "
-field region string
+field region enum {
+  EU
+  US
+}
 
 "
-Unique identifier of the shape (CPU, Memory, ...) of the instance
+Shape representing CPU, CPU manufacturer and memory
 "
-field shape string
+field shape enum {
+  "
+  1vcpu and 1gb memory
+  "
+  tiny_intel
+  tiny_amd
+
+  "
+  1vcpu and 2gb memory
+  "
+  small_intel
+  small_amd
+
+  "
+  2vcpu and 4gb memory
+  "
+  medium_intel
+  medium_amd
+
+  "
+  4vcpu and 8gb memory
+  "
+  large_intel
+  large_amd
+}
 
 "
-Unique identifier of the image to start new instance with
+Image with operating system to create intance with
 "
-field image string
+field image enum {
+  ubuntu_lts
+  ubuntu_latest
+  debian_9
+  debian_10
+  fedora_33
+  fedora_34
+  centos_7
+  centos_8
+}
 
 "
 Datetime string in ISO 8601 representation

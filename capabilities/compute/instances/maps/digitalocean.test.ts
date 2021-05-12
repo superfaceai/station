@@ -1,17 +1,53 @@
-import { SuperfaceClient } from '../../../../superface/sdk';
+import { Provider } from '@superfaceai/one-sdk';
+import { TypedUseCase } from '@superfaceai/one-sdk/dist/client/public/usecase';
+
+import {
+  ComputeInstancesProfile,
+  SuperfaceClient,
+} from '../../../../superface/sdk';
+import {
+  CreateInstanceInput,
+  CreateInstanceResult,
+  InstanceInfoInput,
+  InstanceInfoResult,
+} from '../../../../superface/types/compute';
 
 describe('compute/instances/digitalocean-typed', () => {
-  it('performs correctly', async () => {
-    const client = new SuperfaceClient();
-    const profile = await client.getProfile('compute/instances');
-    const provider = await client.getProvider('digitalocean');
-    const usecase = profile.useCases.Instances;
+  let client: SuperfaceClient;
+  let profile: ComputeInstancesProfile;
+  let provider: Provider;
 
-    expect(provider).not.toBeUndefined();
-    expect(usecase).not.toBeUndefined();
+  beforeEach(async () => {
+    client = new SuperfaceClient();
+    profile = await client.getProfile('compute/instances');
+    provider = await client.getProvider('digitalocean');
+  });
 
-    //Edit input values and expected result
-    //const result = await usecase.perform({}, { provider });
-    //expect(result.unwrap()).toEqual();
+  it('should have provider defined', () => {
+    expect(provider).toBeDefined();
+  });
+
+  describe('CreateInstance', () => {
+    let usecase: TypedUseCase<CreateInstanceInput, CreateInstanceResult>;
+
+    beforeEach(() => {
+      usecase = profile.useCases.CreateInstance;
+    });
+
+    it('should be defined usecase', () => {
+      expect(usecase).toBeDefined();
+    });
+  });
+
+  describe('InstanceInfo', () => {
+    let usecase: TypedUseCase<InstanceInfoInput, InstanceInfoResult>;
+
+    beforeEach(() => {
+      usecase = profile.useCases.InstanceInfo;
+    });
+
+    it('should be defined usecase', () => {
+      expect(usecase).toBeDefined();
+    });
   });
 });
