@@ -82,7 +82,9 @@ export function e2eTestTemplate(
 
 describe('${scope}/${usecase}/${provider}-e2e', () => {
   beforeAll(() => {
-    jest.setTimeout(10000)
+    jest.setTimeout(10000);
+    //Load super.json for tested usecase
+    process.env.SUPERFACE_PATH ='./superface/super.json';
   })
   
   it('performs correctly', async () => {
