@@ -1,10 +1,10 @@
 {
   "profiles": {
-    "communication/send-message": {
-      "file": "./grid/communication/send-message/profile.supr",
+    "communication/send-sms": {
+      "file": "./grid/communication/send-sms/profile.supr",
       "providers": {
         "twilio": {
-          "file": "./grid/communication/send-message/maps/twilio.suma",
+          "file": "./grid/communication/send-sms/maps/twilio.suma",
           "defaults": {
             "SendMessage": {
               "input": {
@@ -21,7 +21,7 @@
           }
         },
         "tyntec": {
-          "file": "./grid/communication/send-message/maps/tyntec.suma",
+          "file": "./grid/communication/send-sms/maps/tyntec.suma",
           "defaults": {
             "SendMessage": {
               "input": {
@@ -31,7 +31,7 @@
           }
         },
         "vonage-nexmo": {
-          "file": "./grid/communication/send-message/maps/vonage-nexmo.suma",
+          "file": "./grid/communication/send-sms/maps/vonage-nexmo.suma",
           "defaults": {
             "SendMessage": {
               "input": {
@@ -48,7 +48,7 @@
           }
         },
         "plivo": {
-          "file": "./grid/communication/send-message/maps/plivo.suma",
+          "file": "./grid/communication/send-sms/maps/plivo.suma",
           "defaults": {
             "SendMessage": {
               "input": {
@@ -63,6 +63,9 @@
               }
             }
           }
+        },
+        "mock": {
+          "file": "./grid/communication/send-sms/maps/mock.suma"
         }
       }
     },

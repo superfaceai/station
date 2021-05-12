@@ -40,7 +40,7 @@ const profile = {
      **/
     "RetrieveMessageStatus": typeHelper<RetrieveMessageStatusInput, RetrieveMessageStatusResult>()
 };
-export type CommunicationSendMessageProfile = TypedProfile<typeof profile>;
-export const communicationSendMessage = {
-    "communication/send-message": profile
+export type CommunicationSendSmsProfile = TypedProfile<typeof profile>;
+export const communicationSendSms = {
+    "communication/send-sms": profile
 };
