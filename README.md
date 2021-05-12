@@ -259,7 +259,7 @@ station publish {path to map} -p
 station publish {path to provider} -p
 ```
 
-Set enviroment to downolad files from production
+Set environment to downolad files from production
 
 ```
 unset SUPERFACE_API_URL
@@ -267,6 +267,6 @@ unset SUPERFACE_API_URL
 
 Run E2E test file again.
 
-## Enviroment variables
+## Environment variables
 
 Secretes used for authentication during tests are stored in `.env.capabilities` and loaded using dotenv. Run `cp .env.capabilities.example .env.capabilities` to start from the template.

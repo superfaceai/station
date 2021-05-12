@@ -3,11 +3,21 @@
     "vcs/pull-request": {
       "version": "1.0.0",
       "providers": {
+        "bitbucket": {},
         "github": {}
       }
     }
   },
   "providers": {
+    "bitbucket": {
+      "security": [
+        {
+          "id": "basic",
+          "username": "$BITBUCKET_USERNAME",
+          "password": "$BITBUCKET_PASSWORD"
+        }
+      ]
+    },
     "github": {
       "security": []
     }
