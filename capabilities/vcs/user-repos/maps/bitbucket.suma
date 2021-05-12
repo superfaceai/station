@@ -1,7 +1,10 @@
 profile = "vcs/user-repos@1.0"
-  provider = "bitbucket"
-  
-  map UserRepos{
+provider = "bitbucket"
+
+"""
+UserRepos map
+"""
+map UserRepos{
     http GET "/2.0/repositories?role=member" {
     security "basic"
 

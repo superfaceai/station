@@ -1,20 +1,33 @@
+"""
+Pull Request
+Get single pull request
+"""
 name = "vcs/pull-request"
 version = "1.0"
 
-"""
-pull-request usecase
-"""
 usecase PullRequest {
   input {
-    owner string
-    repo string
-    identifier number
+    "Owner of the repository"
+    owner! string
+
+    "Repository name"
+    repo! string
+
+    "Id of pull request"
+    identifier! number
   }
 
   result {
+    "Title of pull request"
     title string
+
+    "Pull request Id"
     id number
+
+    "Web url of pull request"
     url string
+
+    "Pull request sha"
     sha string
   }
 }

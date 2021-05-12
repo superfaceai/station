@@ -1,14 +1,22 @@
+"""
+User Repos
+Get repositories of specified user
+"""
 name = "vcs/user-repos"
 version = "1.0"
 
 usecase UserRepos {
   input {
-    user
+    "Existing user"
+    user! string
   }
 
   result {
     repos [{
+      "Name of the repository"
       name string
+
+      "Description of the repository"
       description
     }]
   }

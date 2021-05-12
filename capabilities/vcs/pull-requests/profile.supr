@@ -1,21 +1,32 @@
+"""
+Pull Requests
+Get pull requests of specified repository
+"""
 name = "vcs/pull-requests"
 version = "1.0"
 
-"""
-pull-requests usecase
-"""
 usecase PullRequests {
   input {
-    owner string
-    repo string
+    "Owner of the repository"
+    owner! string
+
+    "Repository name"
+    repo! string
   }
 
   result {
     pullRequests [{
-        title string
-        id number
-        url string
-        sha string
+      "Title of pull request"
+      title string
+
+      "Pull request Id"
+      id number
+
+      "Web url of pull request"
+      url string
+
+      "Pull request sha"
+      sha string
     }]
   }
 }
