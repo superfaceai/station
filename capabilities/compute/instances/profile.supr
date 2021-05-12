@@ -61,12 +61,12 @@ field name string
 "
 Public keys to allow access to instance
 "
-field sshKeys array
+field sshKeys [string]
 
 "
 List of IPv4 and IPv6 addresses
 "
-field publicIps array
+field publicIps [string]
 
 "
 Unique identifier for the region that you wish create instance in
@@ -81,7 +81,7 @@ field shape string
 "
 Unique identifier of the image to start new instance with
 "
-field image name
+field image string
 
 "
 Datetime string in ISO 8601 representation
