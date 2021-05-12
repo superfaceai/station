@@ -8,6 +8,7 @@ import { vcsPullRequest } from "./types/vcs/pull-request";
 import { vcsPullRequests } from "./types/vcs/pull-requests";
 import { vcsSingleFileContent } from "./types/vcs/single-file-content";
 import { vcsUserRepos } from "./types/vcs/user-repos";
+import { weatherWillItRain } from "./types/weather/will-it-rain";
 export { AddressCleanAddressProfile } from "./types/address/clean-address";
 export { AddressGeocodingProfile } from "./types/address/geocoding";
 export { CommunicationSendEmailProfile } from "./types/communication/send-email";
@@ -16,7 +17,6 @@ export { VcsPullRequestProfile } from "./types/vcs/pull-request";
 export { VcsPullRequestsProfile } from "./types/vcs/pull-requests";
 export { VcsSingleFileContentProfile } from "./types/vcs/single-file-content";
 export { VcsUserReposProfile } from "./types/vcs/user-repos";
-import { weatherWillItRain } from './types/weather/will-it-rain';
 export { WeatherWillItRainProfile } from "./types/weather/will-it-rain";
 export const typeDefinitions = {
     ...addressCleanAddress,

@@ -4,10 +4,9 @@ version = "1.0"
 """
 will-it-rain usecase
 """
-usecase WillItRain {
+usecase Now {
   input {
-    city
-    date
+    coordinates! Coordinates
     units
   }
 
@@ -27,3 +26,14 @@ field  units enum {
             Imperial
             Metric
         }
+
+model Coordinates {
+  """
+  Use degrees.minutes format. E.g. 50.0948541
+  """
+  longitude! number
+  """
+  Use degrees.minutes format. E.q. 14.4481567
+  """
+  latitude! number
+}
