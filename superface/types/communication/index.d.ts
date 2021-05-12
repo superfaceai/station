@@ -1,5 +1,2 @@
 export * from './send-email';
-export * from './send-message';
-export * from './send-email'
-export * from './send-message'
-export * from './send-sms'
+export * from './send-sms';

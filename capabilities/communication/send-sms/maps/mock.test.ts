@@ -20,10 +20,10 @@ describe('communication/send-sms/mock', () => {
     const profile = await client.getProfile('communication/send-sms');
     const provider = await client.getProvider('mock');
     const result = await profile.useCases.RetrieveMessageStatus.perform(
-      { messageId: "1234"},
+      { messageId: '1234' },
       { provider }
     );
     expect(result.isOk()).toBeTruthy();
-    expect(typeof result.unwrap().deliveryStatus).toBe("string")
-  });  
+    expect(typeof result.unwrap().deliveryStatus).toBe('string');
+  });
 });

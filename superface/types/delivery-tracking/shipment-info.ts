@@ -1,4 +1,5 @@
-import { typeHelper, TypedProfile } from '@superfaceai/one-sdk';
+import { TypedProfile,typeHelper } from '@superfaceai/one-sdk';
+
 export type ShipmentInfoInput = {
     /**
      * Shipment tracking number
