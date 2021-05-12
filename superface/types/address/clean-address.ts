@@ -1,4 +1,5 @@
-import { typeHelper, TypedProfile } from '@superfaceai/one-sdk';
+import { TypedProfile,typeHelper } from '@superfaceai/one-sdk';
+
 export type CleanAddressInput = {
     street?: unknown;
     city?: unknown;
@@ -12,7 +13,28 @@ export type CleanAddressResult = {
     zipcode?: unknown;
 };
 const profile = {
-    /** clean-address usecase **/
+    /**
+     * clean-address usecase
+     * This use case will take an address like:
+     *
+     * {
+     *   street: '3301 South Greenfield Road',
+     *   city: 'Gilbert',
+     *   state: 'AZ',
+     *   zipcode: '85297',
+     * }
+     *
+     * And convert it to:
+     *
+     * {
+     *   city: 'Gilbert',
+     *   state: 'AZ',
+     *   street: '3301 S Greenfield Rd',
+     *   zipcode: '85297',
+     * }
+     *
+     * This is useful for cleaning up addresses input by users.
+     **/
     "CleanAddress": typeHelper<CleanAddressInput, CleanAddressResult>()
 };
 export type AddressCleanAddressProfile = TypedProfile<typeof profile>;

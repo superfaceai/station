@@ -5,45 +5,25 @@ map Now {
   // call operation to get location code - it is cleaner so separate it like this
   locationCode = call GetLocationCode(coordinates = input.coordinates)
 
-  dailyForecasts = []
-
-  http GET "/forecasts/v1/daily/1day/{locationCode}" {
+  http GET "/currentconditions/v1/{locationCode}" {
     security "accuweather_apikey"
 
     request {
       query {
-        // input.units will have a value of "Metric" if the metric variant is chosen
-        // so we compare it and this comparison will return a boolean
-        metric = input.units === "Metric"
-        // requests details to get the percipitation chances and volumes
         details = true
       }
     }
 
     response 200 "application/json" {
-      dailyForecasts = body["DailyForecasts"]
+      weatherCondition = body[0]
+      map result {
+        precipitation = weatherCondition.HasPrecipitation
+        precipitationType = call MapPrecipitationType(precipitationType = weatherCondition.PrecipitationType)
+        precipitationLastHour = call GetLastHourPrecipitation(units = input.units, weatherCondition = weatherCondition)
+      }
     }
   }
 
-  // TODO: Choose the right forecast
-  forecast = dailyForecasts[0]["Day"]
-
-  set if (forecast["PrecipitationType"] === "Snow") {
-    percType = "Snow"
-    percVolume = (`${forecast["Snow"]["Value"]} ${forecast["Snow"]["Unit"]}`)
-    percChance = forecast["SnowProbability"]
-  }
-  set if (forecast["PrecipitationType"] === "Rain") {
-    percType = "Rain"
-    percVolume = (`${forecast["Rain"]["Value"]} ${forecast["Rain"]["Unit"]}`)
-    percChance = forecast["RainProbability"]
-  }
-
-  map result {
-    chance = percChance
-    precipitation = percVolume
-    type = percType
-  }
 }
 
 operation GetLocationCode {
@@ -59,9 +39,48 @@ operation GetLocationCode {
     response 200 "application/json" {
       // return the location key of the first result
       // maybe later this could filter the responses or something
-      return body[0].Key
+      return body.Key
     }
   }
+}
 
-  // return 213490
+operation MapPrecipitationType {
+  set {
+    result = (() => {
+      switch (args.precipitationType) {
+        case 'Rain':
+          return 'rain'
+      
+        case 'Snow':
+          return 'show'
+
+        case 'Ice':
+          return 'ice'
+
+        case 'Mixed':
+          return 'mixed'
+
+        default:
+          return undefined
+      }
+    })()
+  }
+
+  return result
+}
+
+operation GetLastHourPrecipitation {
+  weatherCondition = args.weatherCondition
+
+  result = undefined
+
+  set if(args.units === 'metric' && weatherCondition.Precip1hr && weatherCondition.Precip1hr.Metric) {
+    result = weatherCondition.Precip1hr.Metric.Value
+  }
+
+  set if(args.units === 'imperial' && weatherCondition.Precip1hr && weatherCondition.Precip1hr.Imperial) {
+    result = weatherCondition.Precip1hr.Imperial.Value
+  }
+
+  return result
 }

@@ -2,9 +2,9 @@ profile = "delivery-tracking/shipment-info@1.0"
 provider = "dhl-unified"
 
 """
-shipmentInfo map
+ShipmentInfo map
 """
-map shipmentInfo {
+map ShipmentInfo {
   fetchShipmentOutcome = call FetchShipment(
     trackingNumber = input.trackingNumber,
     carrier = input.carrier)

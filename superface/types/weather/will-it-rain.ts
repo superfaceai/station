@@ -6,12 +6,15 @@ export type NowInput = {
         /** Use degrees.minutes format. E.q. 14.4481567 **/
         latitude: number;
     };
-    units?: 'Imperial' | 'Metric';
+    units?: 'imperial' | 'metric';
 };
 export type NowResult = {
-    chance?: unknown;
-    precipitation?: unknown;
-    type?: 'Rain' | 'Snow';
+    /** Flag indicating the presence or absence of precipitation. True indicates the presence of precipitation, false indicates the absence of precipitation. **/
+    precipitation?: boolean;
+    /** The amount of precipitation (liquid equivalent) that has fallen in the past hour. Depending on units input the value is in millimeters (metric units) or inches (imperial units). **/
+    precipitationLastHour?: number;
+    /** If precipitation is present, the type of precipitation will be returned. Possible values are rain, snow, ice, or mixed. **/
+    precipitationType?: 'rain' | 'snow' | 'ice' | 'mixed';
 };
 const profile = {
     /** will-it-rain usecase **/

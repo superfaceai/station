@@ -1,7 +1,7 @@
 import { kebabToPascalCase } from './utils';
 
 export function exportTypeTemplate(usecase: string): string {
-  return `export * from './${usecase}'\n`;
+  return `export * from './${usecase}';\n`;
 }
 export function profileTemplate(
   usecase: string,
@@ -53,6 +53,10 @@ export function mapTestTemplate(
   return `import { SuperfaceClient } from '../../../../superface/sdk';
 
 describe('${scope}/${usecase}/${provider}-typed', () => {
+  beforeAll(() => {
+    jest.setTimeout(10000)
+  })
+  
   it('performs correctly', async () => {
     const client = new SuperfaceClient();
     const profile = await client.getProfile('${scope}/${usecase}');

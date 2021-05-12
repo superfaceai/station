@@ -1,10 +1,10 @@
-profile = "address/geocoding@1.0"
+profile = "address/geocoding@3.0"
 provider = "google-apis"
 
 // Google Geocoding API documentation
 //   https://developers.google.com/maps/documentation/geocoding/start
 
-map Gecode {
+map Geocode {
   http GET "/maps/api/geocode/json" {
     security "apikey"
     request {
