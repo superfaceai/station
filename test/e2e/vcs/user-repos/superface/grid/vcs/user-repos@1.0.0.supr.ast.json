@@ -1,0 +1,167 @@
+{
+  "kind": "ProfileDocument",
+  "header": {
+    "kind": "ProfileHeader",
+    "scope": "vcs",
+    "name": "user-repos",
+    "version": {
+      "major": 1,
+      "minor": 0,
+      "patch": 0
+    },
+    "location": {
+      "line": 1,
+      "column": 1
+    },
+    "span": {
+      "start": 0,
+      "end": 39
+    }
+  },
+  "definitions": [
+    {
+      "kind": "UseCaseDefinition",
+      "useCaseName": "GetUserRepos",
+      "input": {
+        "kind": "UseCaseSlotDefinition",
+        "type": {
+          "kind": "ObjectDefinition",
+          "fields": [
+            {
+              "kind": "FieldDefinition",
+              "fieldName": "user",
+              "required": false,
+              "location": {
+                "line": 6,
+                "column": 5
+              },
+              "span": {
+                "start": 78,
+                "end": 82
+              }
+            }
+          ],
+          "location": {
+            "line": 5,
+            "column": 9
+          },
+          "span": {
+            "start": 72,
+            "end": 86
+          }
+        },
+        "location": {
+          "line": 5,
+          "column": 3
+        },
+        "span": {
+          "start": 66,
+          "end": 86
+        }
+      },
+      "result": {
+        "kind": "UseCaseSlotDefinition",
+        "type": {
+          "kind": "ObjectDefinition",
+          "fields": [
+            {
+              "kind": "FieldDefinition",
+              "fieldName": "repos",
+              "required": false,
+              "type": {
+                "kind": "ListDefinition",
+                "elementType": {
+                  "kind": "ObjectDefinition",
+                  "fields": [
+                    {
+                      "kind": "FieldDefinition",
+                      "fieldName": "name",
+                      "required": false,
+                      "location": {
+                        "line": 11,
+                        "column": 7
+                      },
+                      "span": {
+                        "start": 118,
+                        "end": 122
+                      }
+                    },
+                    {
+                      "kind": "FieldDefinition",
+                      "fieldName": "description",
+                      "required": false,
+                      "location": {
+                        "line": 12,
+                        "column": 7
+                      },
+                      "span": {
+                        "start": 129,
+                        "end": 140
+                      }
+                    }
+                  ],
+                  "location": {
+                    "line": 10,
+                    "column": 12
+                  },
+                  "span": {
+                    "start": 110,
+                    "end": 146
+                  }
+                },
+                "location": {
+                  "line": 10,
+                  "column": 11
+                },
+                "span": {
+                  "start": 109,
+                  "end": 147
+                }
+              },
+              "location": {
+                "line": 10,
+                "column": 5
+              },
+              "span": {
+                "start": 103,
+                "end": 147
+              }
+            }
+          ],
+          "location": {
+            "line": 9,
+            "column": 10
+          },
+          "span": {
+            "start": 97,
+            "end": 151
+          }
+        },
+        "location": {
+          "line": 9,
+          "column": 3
+        },
+        "span": {
+          "start": 90,
+          "end": 151
+        }
+      },
+      "location": {
+        "line": 4,
+        "column": 1
+      },
+      "span": {
+        "start": 41,
+        "end": 153
+      }
+    }
+  ],
+  "location": {
+    "line": 1,
+    "column": 1
+  },
+  "span": {
+    "start": 0,
+    "end": 153
+  }
+}
