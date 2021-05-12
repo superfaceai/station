@@ -1,5 +1,4 @@
 import { SuperfaceClient } from '../../../../superface/sdk';
-import { weatherWillItRain } from '../../../../superface/types/weather';
 
 describe('weather/will-it-rain/accuweather-typed', () => {
   it('should define provider and usecase', async () => {
@@ -21,14 +20,15 @@ describe('weather/will-it-rain/accuweather-typed', () => {
       {
         coordinates: {
           latitude: 50.0948541,
-          longitude: 14.4481567
+          longitude: 14.4481567,
         },
-        units: "Metric"
+        units: 'metric',
       },
       { provider }
     );
 
     console.debug(result);
     expect(result.isOk()).toBeTruthy();
+    expect(result.unwrap().precipitation).toBeDefined();
   });
 });
