@@ -1,5 +1,6 @@
 import { CLIError } from '@oclif/errors';
 import {
+  extractVersion,
   isMapDefinitionNode,
   isMapDocumentNode,
   isProfileDocumentNode,
@@ -15,7 +16,6 @@ import {
   CAPABILITIES_DIR,
   exists,
   EXTENSIONS,
-  extractVersion,
   getDirectories,
   getFiles,
   LogCallback,

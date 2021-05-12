@@ -1,6 +1,7 @@
+import { extractVersion } from '@superfaceai/ast';
 import { SuperJson } from '@superfaceai/one-sdk';
 
-import { extractVersion, LogCallback } from '../common';
+import { LogCallback } from '../common';
 import {
   CAPABILITIES_DIR,
   EXTENSIONS,

@@ -2,9 +2,7 @@ import { CLIError } from '@oclif/errors';
 import {
   isValidDocumentName,
   isValidVersionString,
-  VERSION_NUMBER_RE,
 } from '@superfaceai/ast';
-import { trimExtension } from '@superfaceai/cli';
 
 //Case utils
 export function kebabToCamelCase(input: string): string {
@@ -31,48 +29,10 @@ export function kebabToPascalCase(input: string): string {
 //Version utils
 export type Version = {
   major: number;
-  minor: number | undefined;
-  patch?: number | undefined;
-  label?: string | undefined;
+  minor?: number;
+  patch?: number;
+  label?: string;
 };
-
-export function extractVersionString(input: string): string {
-  const trimed = trimExtension(input);
-  const [, version] = trimed.split('@');
-  if (!isValidVersionString(version)) {
-    throw new CLIError(`Invalid version string in "${input}"`, { exit: 1 });
-  }
-
-  return version;
-}
-
-export function parseVersionNumber(str: string): number {
-  const value = str.trim();
-  if (!VERSION_NUMBER_RE.test(value)) {
-    throw new CLIError(`Unable to parse version string "${str}"`);
-  }
-
-  return parseInt(value, 10);
-}
-
-export function extractVersion(versionString: string): Version {
-  const [version, label] = versionString.split('-');
-  const [majorStr, minorStr, patchStr] = version.split('.');
-
-  const major = parseVersionNumber(majorStr);
-
-  let minor = undefined;
-  if (minorStr !== undefined) {
-    minor = parseVersionNumber(minorStr);
-  }
-
-  let patch = undefined;
-  if (patchStr !== undefined) {
-    patch = parseVersionNumber(patchStr);
-  }
-
-  return { major, minor, patch, label };
-}
 
 export function versionDiffers(
   versionA: Version,
