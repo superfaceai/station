@@ -2,25 +2,33 @@ import { SuperfaceClient } from '../../../../superface/sdk';
 import { weatherWillItRain } from '../../../../superface/types/weather';
 
 describe('weather/will-it-rain/accuweather-typed', () => {
+  it('should define provider and usecase', async () => {
+    const client = new SuperfaceClient();
+    const profile = await client.getProfile('weather/will-it-rain');
+    const provider = await client.getProvider('accuweather');
+    const usecase = profile.useCases.Now;
+
+    expect(provider).not.toBeUndefined();
+    expect(usecase).not.toBeUndefined();
+  });
+
   it('performs correctly', async () => {
     const client = new SuperfaceClient();
     const profile = await client.getProfile('weather/will-it-rain');
     const provider = await client.getProvider('accuweather');
-    const usecase = profile.useCases.WillItRain;
+    const usecase = profile.useCases.Now;
     const result = await usecase.perform(
       {
-        city: "Prague",
-        date: "TODO",
+        coordinates: {
+          latitude: 50.0948541,
+          longitude: 14.4481567
+        },
         units: "Metric"
       },
       { provider }
     );
 
-    expect(provider).not.toBeUndefined();
-    expect(usecase).not.toBeUndefined();
-
-    //Edit input values and expected result
-    //const result = await usecase.perform({}, { provider });
-    //expect(result.unwrap()).toEqual();
+    console.debug(result);
+    expect(result.isOk()).toBeTruthy();
   });
 });

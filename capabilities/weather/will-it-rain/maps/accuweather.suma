@@ -1,12 +1,9 @@
 profile = "weather/will-it-rain@1.0"
 provider = "accuweather"
 
-map WillItRain {
-  // TODO: Not sure how to reasonably map this to the API structure
-  date = input.date
-
+map Now {
   // call operation to get location code - it is cleaner so separate it like this
-  locationCode = call GetLocationCode(city = input.city)
+  locationCode = call GetLocationCode(coordinates = input.coordinates)
 
   dailyForecasts = []
 
@@ -50,12 +47,12 @@ map WillItRain {
 }
 
 operation GetLocationCode {
-  http GET "/locations/v1/cities/search" {
+  http GET "/locations/v1/cities/geoposition/search" {
     security "accuweather_apikey"
 
     request {
       query {
-        q = args.city
+        q = args.coordinates.latitude + ',' + args.coordinates.longitude
       }
     }
 
