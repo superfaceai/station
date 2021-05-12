@@ -8,6 +8,8 @@ export const TYPES_FILE_PATH = 'superface/sdk.ts';
 export const SUPER_JSON = './superface/super.json';
 export const TYPE_DEFINITIONS_FILE = 'index.d.ts';
 export const E2E_DIR = 'e2e';
+export const SF_API_URL_VARIABLE = 'SUPERFACE_API_URL';
+export const SF_PRODUCTION = 'https://superface.ai';
 
 export const EXTENSIONS = {
   profile: {

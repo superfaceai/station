@@ -7,6 +7,8 @@ import {
   EXTENSIONS,
   LogCallback,
   mkdir,
+  SF_API_URL_VARIABLE,
+  SF_PRODUCTION,
   writeFile,
 } from '../common';
 
@@ -37,6 +39,23 @@ export async function prepareE2e(
   const testPath = `./test/${E2E_DIR}/${scope}/${profile}/${provider}${EXTENSIONS.e2e}`;
   //Create test file
   await writeFile(testPath, e2eTestTemplate(scope, profile, provider));
+
+  //Resolve api url
+  const envUrl = process.env[SF_API_URL_VARIABLE];
+
+  if (!envUrl) {
+    options?.warnCb?.(
+      `Url in ${SF_API_URL_VARIABLE} not found. Downloading profile "${scope}/${profile}" from PRODUCTION url "${SF_PRODUCTION}"`
+    );
+  } else if (envUrl === SF_PRODUCTION) {
+    options?.warnCb?.(
+      `Url in ${SF_API_URL_VARIABLE} is set to production.Downloading profile "${scope}/${profile}" from PRODUCTION url "${envUrl}"`
+    );
+  } else {
+    options?.warnCb?.(
+      `Found url in ${SF_API_URL_VARIABLE} env. variable. Downloading profile "${scope}/${profile}" from url "${envUrl}"`
+    );
+  }
 
   //Switch cwd and install capability
   process.chdir(`${cwd}/test/${E2E_DIR}/${scope}/${profile}`);

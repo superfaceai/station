@@ -1,5 +1,7 @@
 import { createTypedClient } from "@superfaceai/one-sdk";
+
 import { vcsPullRequest } from "./types/vcs/pull-request";
+
 export { VcsPullRequestProfile } from "./types/vcs/pull-request";
 export const typeDefinitions = {
     ...vcsPullRequest

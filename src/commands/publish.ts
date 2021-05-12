@@ -1,8 +1,7 @@
-import { flags } from '@oclif/command';
 import { grey } from 'chalk';
 import inquirer from 'inquirer';
 
-import { Command } from '../common';
+import { Command, SF_API_URL_VARIABLE, SF_PRODUCTION } from '../common';
 import { check, publish } from '../logic';
 
 export default class Publish extends Command {
@@ -21,16 +20,10 @@ export default class Publish extends Command {
 
   static flags = {
     ...Command.flags,
-    production: flags.boolean({
-      char: 'p',
-      default: false,
-      description: 'Publish to production server.',
-    }),
   };
 
   static examples = [
     '$ station publish capabilities/vcs/user-repos/maps/bitbucket.suma',
-    '$ station publish capabilities/vcs/user-repos/maps/bitbucket.suma -p',
     '$ station publish capabilities/vcs/user-repos/maps/bitbucket.suma -q',
   ];
 
@@ -45,9 +38,9 @@ export default class Publish extends Command {
 
     await check({ logCb: this.logCallback });
 
-    let baseUrl = 'https://superface.dev';
+    let baseUrl = process.env[SF_API_URL_VARIABLE];
 
-    if (flags.production) {
+    if (baseUrl === SF_PRODUCTION || !baseUrl) {
       const response: { upload: boolean } = await inquirer.prompt({
         name: 'upload',
         message:
@@ -55,7 +48,7 @@ export default class Publish extends Command {
         type: 'confirm',
       });
       if (response.upload) {
-        baseUrl = 'https://superface.ai';
+        baseUrl = SF_PRODUCTION;
       } else {
         this.exit(0);
       }

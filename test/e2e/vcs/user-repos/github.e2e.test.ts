@@ -5,7 +5,7 @@ describe('vcs/user-repos/github-e2e', () => {
     jest.setTimeout(10000);
     //Load super.json for tested usecase
     process.env.SUPERFACE_PATH = './superface/super.json';
-  })
+  });
 
   it('performs correctly', async () => {
     const client = new SuperfaceClient();
