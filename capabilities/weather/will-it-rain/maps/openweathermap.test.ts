@@ -5,7 +5,7 @@ describe('weather/will-it-rain/openweathermap-typed', () => {
     const client = new SuperfaceClient();
     const profile = await client.getProfile('weather/will-it-rain');
     const provider = await client.getProvider('openweathermap');
-    const usecase = profile.useCases.WillItRain;
+    const usecase = profile.useCases.Now;
 
     expect(provider).not.toBeUndefined();
     expect(usecase).not.toBeUndefined();

@@ -1,4 +1,56 @@
 profile = "weather/will-it-rain@1.0"
 provider = "openweathermap"
 
-map WillItRain{}
+map Now {
+  http GET "/data/2.5/onecall" {
+    security "apikey"
+    request {
+      query {
+        lat = input.coordinates.latitude
+        lon = input.coordinates.longitude
+        exclude = 'minutely,hourly,daily,alerts'
+        units = input.units
+      }
+    }
+
+    response 200 {
+      weather = body.current.weather[0]
+      precipitation = false
+      set if(weather.main === 'Rain' || weather.main === 'Snow') {
+        precipitation = true
+      }
+
+      return map result {
+            precipitation = precipitation,
+            precipitationType = call MapPrecipitationType(weather = weather)
+            precipitationLastHour = call GetPrecipitationLastHour(weatherConditions = body)
+      }
+    }
+  }
+}
+
+operation MapPrecipitationType {
+  weather = args.weather
+  result = undefined
+  set if(weather.main === 'Rain') {
+    result = 'rain'
+  }
+  set if(weather.main === 'Show') {
+    result = 'snow'
+  }
+
+  return result
+}
+
+operation GetPrecipitationLastHour {
+  weatherConditions = args.weatherConditions
+  result = 0
+  set if(weatherConditions.current.rain) {
+    result = result + weatherConditions.current.rain['1h']
+  }
+  set if(weatherConditions.current.snow) {
+    rresult = result + weatherConditions.current.snow['1h']
+  }
+
+  return result
+}
