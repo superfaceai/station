@@ -1,3 +1,6 @@
+export const PRODUCTION_URL = 'https://superface.ai';
+export const STAGING_URL = 'https://superface.dev';
+
 export const CAPABILITIES_DIR = 'capabilities';
 export const PROVIDERS_DIR = 'providers';
 export const PROFILE_BUILD_PATH = 'superface/grid';

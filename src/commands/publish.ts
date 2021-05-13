@@ -2,8 +2,8 @@ import { flags } from '@oclif/command';
 import { grey } from 'chalk';
 import inquirer from 'inquirer';
 
-import { Command } from '../common';
-import { check, publish } from '../logic';
+import { Command, PRODUCTION_URL, STAGING_URL } from '../common';
+import { check, publish, publishAll } from '../logic';
 
 export default class Publish extends Command {
   static strict = false;
@@ -14,13 +14,21 @@ export default class Publish extends Command {
   static args = [
     {
       name: 'path',
-      required: true,
       description: 'Path to profile, map or provider',
     },
   ];
 
   static flags = {
     ...Command.flags,
+    'dry-run': flags.boolean({
+      default: false,
+      description: 'Runs without sending actual request.',
+    }),
+    force: flags.boolean({
+      char: 'f',
+      default: false,
+      description: 'Publishes without asking any confirmation.',
+    }),
     production: flags.boolean({
       char: 'p',
       default: false,
@@ -29,6 +37,10 @@ export default class Publish extends Command {
   };
 
   static examples = [
+    '$ station publish',
+    '$ station publish --dry-run',
+    '$ station publish --force',
+    '$ station publish --production --force',
     '$ station publish capabilities/vcs/user-repos/maps/bitbucket.suma',
     '$ station publish capabilities/vcs/user-repos/maps/bitbucket.suma -p',
     '$ station publish capabilities/vcs/user-repos/maps/bitbucket.suma -q',
@@ -45,23 +57,37 @@ export default class Publish extends Command {
 
     await check({ logCb: this.logCallback });
 
-    let baseUrl = 'https://superface.dev';
+    let baseUrl = STAGING_URL;
 
     if (flags.production) {
-      const response: { upload: boolean } = await inquirer.prompt({
-        name: 'upload',
-        message:
-          'Are you sure that you want to upload data to PRODUCTION server?',
-        type: 'confirm',
-      });
-      if (response.upload) {
-        baseUrl = 'https://superface.ai';
+      if (flags.force) {
+        baseUrl = PRODUCTION_URL;
       } else {
-        this.exit(0);
+        const response: { upload: boolean } = await inquirer.prompt({
+          name: 'upload',
+          message:
+            'Are you sure that you want to upload data to PRODUCTION server?',
+          type: 'confirm',
+        });
+
+        if (response.upload) {
+          baseUrl = PRODUCTION_URL;
+        } else {
+          this.exit(0);
+        }
       }
     }
 
     const path = argv[0];
-    await publish(path, baseUrl, { logCb: this.logCallback });
+    const options = {
+      logCb: this.logCallback,
+      dryRun: flags['dry-run'],
+    };
+
+    if (path) {
+      await publish(path, baseUrl, options);
+    } else {
+      await publishAll(baseUrl, options);
+    }
   }
 }
