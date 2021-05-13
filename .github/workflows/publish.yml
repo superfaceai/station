@@ -1,0 +1,23 @@
+name: Publish
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  publish_all:
+    name: Publish Profiles, Maps & Providers
+    runs-on: ubuntu-latests
+    needs: setup
+    steps:
+      - uses: actions/checkout@v2
+      - name: install dependencies
+        run: yarn install
+      - name: build TypeScript files
+        run: yarn build
+      - name: link binaries
+        run: yarn link
+      - name: Check
+        run: station check
+      - name: Publish
+        run: station publish --production --force
