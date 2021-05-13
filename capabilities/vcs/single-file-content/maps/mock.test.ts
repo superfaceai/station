@@ -1,6 +1,6 @@
 import { SuperfaceClient } from '../../../../superface/sdk';
 
-describe('vcs/single-file-content/bitbucket-typed', () => {
+describe('vcs/single-file-content/mock-typed', () => {
   beforeAll(() => {
     jest.setTimeout(10000);
   });
@@ -8,12 +8,16 @@ describe('vcs/single-file-content/bitbucket-typed', () => {
   it('performs correctly', async () => {
     const client = new SuperfaceClient();
     const profile = await client.getProfile('vcs/single-file-content');
-    const provider = await client.getProvider('bitbucket');
+    const provider = await client.getProvider('mock');
+    const usecase = profile.useCases.SingleFileContent;
+
+    expect(provider).not.toBeUndefined();
+    expect(usecase).not.toBeUndefined();
     const result = await profile.useCases.SingleFileContent.perform(
       {
-        owner: 'jakuvacek',
-        repo: 'testrepository',
-        path: 'README.md',
+        owner: 'test',
+        repo: 'test',
+        path: 'test',
         ref: 'master',
       },
       { provider }
@@ -21,8 +25,8 @@ describe('vcs/single-file-content/bitbucket-typed', () => {
 
     expect(result.isOk()).toBeTruthy();
     expect(result.unwrap()).toEqual({
-      content: expect.stringContaining('README'),
-      encoding: 'utf-8',
+      content: expect.any(String),
+      encoding: 'base64',
       size: expect.any(Number),
     });
   });

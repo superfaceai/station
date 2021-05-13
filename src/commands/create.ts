@@ -48,6 +48,9 @@ export default class Create extends Command {
       const documentName = argv[1] ?? argv[0];
       const [scope, usecase] = documentName.split('/');
       await createProfile(scope, usecase, { logCb: this.logCallback });
+
+      // Create map for mock provider
+      await createMap(scope, usecase, 'mock', { logCb: this.logCallback });
     } else if (type === 'map') {
       const mapName = argv[2];
       const documentName = argv[1] ?? argv[0];

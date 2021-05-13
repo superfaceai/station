@@ -1,6 +1,6 @@
 import { SuperfaceClient } from '../../../../superface/sdk';
 
-describe('vcs/pull-request/gitlab-typed', () => {
+describe('vcs/pull-request/mock-typed', () => {
   beforeAll(() => {
     jest.setTimeout(10000);
   });
@@ -8,22 +8,24 @@ describe('vcs/pull-request/gitlab-typed', () => {
   it('performs correctly', async () => {
     const client = new SuperfaceClient();
     const profile = await client.getProfile('vcs/pull-request');
-    const provider = await client.getProvider('gitlab');
+    const provider = await client.getProvider('mock');
     const usecase = profile.useCases.PullRequest;
 
     expect(provider).not.toBeUndefined();
     expect(usecase).not.toBeUndefined();
 
-    //Edit input values and expected result
+    const owner = 'test';
+    const repo = 'empty';
+    const identifier = 1;
     const result = await usecase.perform(
-      { owner: 'Jakub-Vacek', repo: 'empty-test', identifier: 1 },
+      { owner, repo, identifier },
       { provider }
     );
     expect(result.unwrap()).toEqual({
-      id: 1,
-      sha: '8c64ce23d626c5bf345ce90fa5af329569d62c9a',
-      title: 'Update README.md',
-      url: 'https://gitlab.com/Jakub-Vacek/empty-test/-/merge_requests/1',
+      id: identifier,
+      sha: expect.any(String),
+      title: expect.any(String),
+      url: `https://gitlab.com/${owner}/${repo}/-/merge_requests/${identifier}`,
     });
   });
 });
