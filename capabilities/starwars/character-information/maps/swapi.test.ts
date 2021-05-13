@@ -14,7 +14,6 @@ describe('starwars/character-information/swapi', () => {
     }, { provider });
     expect(result.unwrap()).toEqual({
       height: "172",
-      name: "Luke Skywalker",
       weight: "77",
       yearOfBirth: "19BBY",
     });
