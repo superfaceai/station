@@ -228,18 +228,18 @@ Test created capability:
  yarn test {path to test file}
 ```
 
+Set SUPERFACE_API_URL enviroment variable to staging
+
+```
+SUPERFACE_API_URL=https://superface.dev 
+```
+
 Upload newly created files to staging:
 
 ```
 station publish {path to profile}
 station publish {path to map}
 station publish {path to provider}
-```
-
-Set enviroment to downolad files from staging
-
-```
-SUPERFACE_API_URL=https://superface.dev
 ```
 
 Prepare E2E test file structure:
@@ -251,22 +251,22 @@ station e2e {scope}/{usecase} {provider}
 Edit created test file in `/test/e2e` folder and run it.
 
 
-If it's passing you can upload files to production:
+If it's passing you can upload files to production by seting SUPERFACE_API_URL to production
 
 ```
-station publish {path to profile} -p
-station publish {path to map} -p
-station publish {path to provider} -p
+SUPERFACE_API_URL=https://superface.ai
 ```
 
-Set environment to downolad files from production
+and publishing files:
 
 ```
-unset SUPERFACE_API_URL
+station publish {path to profile}
+station publish {path to map}
+station publish {path to provider}
 ```
-
-Run E2E test file again.
 
 ## Environment variables
 
 Secretes used for authentication during tests are stored in `.env.capabilities` and loaded using dotenv. Run `cp .env.capabilities.example .env.capabilities` to start from the template.
+
+Variable SUPERFACE_API_URL is used for switching between staging and production.
