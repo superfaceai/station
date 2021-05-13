@@ -20,6 +20,8 @@ export { VcsPullRequestsProfile } from "./types/vcs/pull-requests";
 export { VcsSingleFileContentProfile } from "./types/vcs/single-file-content";
 export { VcsUserReposProfile } from "./types/vcs/user-repos";
 export { DeliveryTrackingShipmentInfoProfile } from "./types/delivery-tracking/shipment-info";
+import { starwarsCharacterInformation } from './types/starwars/character-information';
+export { StarwarsCharacterInformationProfile } from "./types/starwars/character-information";
 export { CommunicationSendSmsProfile } from "./types/communication/send-sms";
 export const typeDefinitions = {
     ...addressCleanAddress,
@@ -31,7 +33,8 @@ export const typeDefinitions = {
     ...vcsPullRequests,
     ...vcsSingleFileContent,
     ...vcsUserRepos,
-    ...communicationSendSms
+    ...starwarsCharacterInformation,
+    ...communicationSendSms,
 };
 export const SuperfaceClient = createTypedClient(typeDefinitions);
 export type SuperfaceClient = InstanceType<typeof SuperfaceClient>;

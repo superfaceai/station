@@ -163,6 +163,17 @@
         }
       }
     },
+    "starwars/character-information": {
+      "file": "./grid/starwars/character-information/profile.supr",
+      "providers": {
+        "swapi": {
+          "file": "./grid/starwars/character-information/maps/swapi.suma"
+        },
+        "mock": {
+          "file": "./grid/starwars/character-information/maps/mock.suma"
+        }
+      }
+    },
     "vcs/pull-request": {
       "file": "./grid/vcs/pull-request/profile.supr",
       "providers": {
@@ -288,6 +299,10 @@
           "token": "$SENDGRID_API_KEY"
         }
       ]
+    },
+    "swapi": {
+      "file": "../providers/swapi.json",
+      "security": []
     },
     "google-apis": {
       "file": "../providers/google-apis.json",
