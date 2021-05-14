@@ -29,7 +29,7 @@ yarn link
 * [`station compile`](#station-compile)
 * [`station create DOCUMENTINFO`](#station-create-documentinfo)
 * [`station generate PROFILENAME`](#station-generate-profilename)
-* [`station publish PATH`](#station-publish-path)
+* [`station publish [PATH]`](#station-publish-path)
 
 ## `station check`
 
@@ -120,25 +120,29 @@ EXAMPLES
 
 _See code: [dist/src/commands/generate.ts](https://github.com/superfaceai/station/blob/v0.0.1/dist/src/commands/generate.ts)_
 
-## `station publish PATH`
+## `station publish [PATH]`
 
 Uploads map/profile/provider to Store - use paths to `.supr` file for profiles, `.suma` for maps and `.json` for providers. Do not use path ending with `.ast.json` (compiled files).
 
 ```
 USAGE
-  $ station publish PATH
+  $ station publish [PATH]
 
 ARGUMENTS
   PATH  Path to profile, map or provider
 
 OPTIONS
-  -h, --help        show CLI help
-  -p, --production  Publish to production server.
-  -q, --quiet       When set to true, disables the shell echo output of action.
+  -f, --force  Publishes without asking any confirmation.
+  -h, --help   show CLI help
+  -q, --quiet  When set to true, disables the shell echo output of action.
+  --all        Publish all profiles, maps and providers
+  --dry-run    Runs without sending actual request.
 
 EXAMPLES
+  $ station publish
+  $ station publish --dry-run
+  $ station publish --force
   $ station publish capabilities/vcs/user-repos/maps/bitbucket.suma
-  $ station publish capabilities/vcs/user-repos/maps/bitbucket.suma -p
   $ station publish capabilities/vcs/user-repos/maps/bitbucket.suma -q
 ```
 
