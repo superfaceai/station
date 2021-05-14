@@ -1,5 +1,5 @@
-export const PRODUCTION_URL = 'https://superface.ai';
-export const STAGING_URL = 'https://superface.dev';
+export const SF_API_URL_VARIABLE = 'SUPERFACE_API_URL';
+export const SF_PRODUCTION = 'https://superface.ai';
 
 export const CAPABILITIES_DIR = 'capabilities';
 export const PROVIDERS_DIR = 'providers';

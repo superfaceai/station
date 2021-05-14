@@ -2,7 +2,7 @@ import { flags } from '@oclif/command';
 import { grey } from 'chalk';
 import inquirer from 'inquirer';
 
-import { Command, PRODUCTION_URL, STAGING_URL } from '../common';
+import { Command, SF_API_URL_VARIABLE, SF_PRODUCTION } from '../common';
 import { check, publish, publishAll } from '../logic';
 
 export default class Publish extends Command {
@@ -29,20 +29,13 @@ export default class Publish extends Command {
       default: false,
       description: 'Publishes without asking any confirmation.',
     }),
-    production: flags.boolean({
-      char: 'p',
-      default: false,
-      description: 'Publish to production server.',
-    }),
   };
 
   static examples = [
     '$ station publish',
     '$ station publish --dry-run',
     '$ station publish --force',
-    '$ station publish --production --force',
     '$ station publish capabilities/vcs/user-repos/maps/bitbucket.suma',
-    '$ station publish capabilities/vcs/user-repos/maps/bitbucket.suma -p',
     '$ station publish capabilities/vcs/user-repos/maps/bitbucket.suma -q',
   ];
 
@@ -57,24 +50,18 @@ export default class Publish extends Command {
 
     await check({ logCb: this.logCallback });
 
-    let baseUrl = STAGING_URL;
+    const baseUrl = process.env[SF_API_URL_VARIABLE] || SF_PRODUCTION;
 
-    if (flags.production) {
-      if (flags.force) {
-        baseUrl = PRODUCTION_URL;
-      } else {
-        const response: { upload: boolean } = await inquirer.prompt({
-          name: 'upload',
-          message:
-            'Are you sure that you want to upload data to PRODUCTION server?',
-          type: 'confirm',
-        });
+    if (baseUrl === SF_PRODUCTION && !flags.force) {
+      const response: { upload: boolean } = await inquirer.prompt({
+        name: 'upload',
+        message:
+          'Are you sure that you want to upload data to PRODUCTION server?',
+        type: 'confirm',
+      });
 
-        if (response.upload) {
-          baseUrl = PRODUCTION_URL;
-        } else {
-          this.exit(0);
-        }
+      if (!response.upload) {
+        this.exit(0);
       }
     }
 
