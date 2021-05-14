@@ -1,4 +1,5 @@
 import { flags } from '@oclif/command';
+import { CLIError } from '@oclif/errors';
 import { grey } from 'chalk';
 import inquirer from 'inquirer';
 
@@ -20,6 +21,10 @@ export default class Publish extends Command {
 
   static flags = {
     ...Command.flags,
+    all: flags.boolean({
+      default: false,
+      description: 'Publish all profiles, maps and providers',
+    }),
     'dry-run': flags.boolean({
       default: false,
       description: 'Runs without sending actual request.',
@@ -32,17 +37,26 @@ export default class Publish extends Command {
   };
 
   static examples = [
-    '$ station publish',
-    '$ station publish --dry-run',
-    '$ station publish --force',
+    '$ station publish --all',
+    '$ station publish --all --dry-run',
+    '$ station publish --all --force',
     '$ station publish capabilities/vcs/user-repos/maps/bitbucket.suma',
     '$ station publish capabilities/vcs/user-repos/maps/bitbucket.suma -q',
+    '$ station publish capabilities/vcs/user-repos/maps/bitbucket.suma --dry-run',
   ];
 
   private logCallback? = (message: string) => this.log(grey(message));
 
   async run(): Promise<void> {
     const { argv, flags } = this.parse(Publish);
+
+    const path = argv[0];
+
+    if (!path && !flags.all) {
+      throw new CLIError('PATH argument or --all flag must be specified', {
+        exit: 1,
+      });
+    }
 
     if (flags.quiet) {
       this.logCallback = undefined;
@@ -65,7 +79,6 @@ export default class Publish extends Command {
       }
     }
 
-    const path = argv[0];
     const options = {
       logCb: this.logCallback,
       dryRun: flags['dry-run'],
