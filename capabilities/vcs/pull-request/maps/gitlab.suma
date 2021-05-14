@@ -1,6 +1,9 @@
 profile = "vcs/pull-request@1.0"
 provider = "gitlab"
 
+"""
+PullRequest map
+"""
 map PullRequest{
   //encodeURIComponent comes from JavaScript core library and you can use it here!
   id = encodeURIComponent(input.owner + '/' + input.repo)

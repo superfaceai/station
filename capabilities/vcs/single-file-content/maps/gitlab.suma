@@ -1,7 +1,10 @@
 profile = "vcs/single-file-content@1.0"
-  provider = "gitlab"
-  
-  map SingleFileContent{
+provider = "gitlab"
+
+"""
+SingleFileContent map
+"""
+map SingleFileContent{
   id = encodeURIComponent(input.owner + '/' + input.repo)
   path = input.path
   ref = input.ref

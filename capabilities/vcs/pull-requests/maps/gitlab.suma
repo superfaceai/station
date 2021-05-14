@@ -1,7 +1,10 @@
 profile = "vcs/pull-requests@1.0"
-  provider = "gitlab"
-  
-  map PullRequests{
+provider = "gitlab"
+
+"""
+PullRequests map
+"""
+map PullRequests{
    //encodeURIComponent comes from JavaScript core library and you can use it here!
   id = encodeURIComponent(input.owner + '/' + input.repo)
 
