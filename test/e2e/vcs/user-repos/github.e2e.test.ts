@@ -4,7 +4,7 @@ describe('vcs/user-repos/github-e2e', () => {
   beforeAll(() => {
     jest.setTimeout(10000);
     //Load super.json for tested usecase
-    process.env.SUPERFACE_PATH = './superface/super.json';
+    process.env.SUPERFACE_PATH = './test/e2e/vcs/user-repos/superface/super.json';
   });
 
   it('performs correctly', async () => {

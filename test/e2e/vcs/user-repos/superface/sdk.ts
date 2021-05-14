@@ -1,7 +1,5 @@
-import { createTypedClient } from '@superfaceai/one-sdk';
-
-import { vcsUserRepos } from './types/vcs/user-repos';
-
+import { createTypedClient } from "@superfaceai/one-sdk";
+import { vcsUserRepos } from "./types/vcs/user-repos";
 export { VcsUserReposProfile } from "./types/vcs/user-repos";
 export const typeDefinitions = {
     ...vcsUserRepos
