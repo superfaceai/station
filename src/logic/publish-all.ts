@@ -1,3 +1,4 @@
+import { CLIError } from '@oclif/errors';
 import { ServiceApiError } from '@superfaceai/service-client';
 import { glob } from 'glob';
 
@@ -38,7 +39,15 @@ export async function publishAll(
     }
   }
 
-  options?.logCb?.(
-    `FINISHED publishing of ${toPublish.length} resources with ${errors.length} errors`
-  );
+  if (errors.length === 0) {
+    options?.logCb?.(`FINISHED publishing of ${toPublish.length} resources`);
+  } else {
+    options?.logCb?.(
+      `FINISHED publishing of ${toPublish.length} resources with ${errors.length} errors`
+    );
+
+    throw new CLIError(`Publishing finished with ${errors.length} errors`, {
+      exit: 1,
+    });
+  }
 }
