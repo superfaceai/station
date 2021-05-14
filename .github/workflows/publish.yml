@@ -5,10 +5,12 @@ on:
       - main
 
 jobs:
-  publish_all:
-    name: Publish Profiles, Maps & Providers
+  publish_to_produciton:
+    name: Publish Profiles, Maps & Providers to superface.ai
     runs-on: ubuntu-latests
     needs: setup
+    env:
+      SUPERFACE_API_URL: https://superface.ai
     steps:
       - uses: actions/checkout@v2
       - name: install dependencies
@@ -20,4 +22,4 @@ jobs:
       - name: Check
         run: station check
       - name: Publish
-        run: station publish --production --force
+        run: station publish --all --force
