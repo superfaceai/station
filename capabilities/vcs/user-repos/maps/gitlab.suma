@@ -14,7 +14,7 @@ map UserRepos{
         repos = body.map((r) => {
           return {
             name: r.name,
-            description: r.description
+            description: r.description === "" ? r.name_with_namespace : r.description
           }
         })
       }
