@@ -50,6 +50,9 @@ describe('communication/send-email/mailchimp', () => {
 
       try {
         result.unwrap();
+
+        // To ensure test continues in catch branch even if unwrap doesn't throw
+        throw new Error('Unwrap should throw');
       } catch (error) {
         expect(error).toBeInstanceOf(MappedHTTPError);
         expect(error.properties.title).toBe('Invalid inputs');
