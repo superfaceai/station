@@ -4,7 +4,7 @@ describe('delivery-tracking/shipment-info/shippo', () => {
   it('should define use-case and provider', async () => {
     const client = new SuperfaceClient();
     const profile = await client.getProfile('delivery-tracking/shipment-info');
-    const useCase = profile.getUseCase('shipmentInfo');
+    const useCase = profile.getUseCase('ShipmentInfo');
     const provider = await client.getProvider('shippo');
 
     expect(useCase).not.toBeUndefined();
