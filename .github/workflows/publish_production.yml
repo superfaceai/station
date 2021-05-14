@@ -1,0 +1,24 @@
+name: Publish to Superface.ai
+on: workflow_dispatch
+jobs:
+  check:
+    name: Compile and Check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Prepare
+        uses: ./.github/actions/prepare
+      - name: Check
+        uses: ./.github/actions/check
+  publish_production:
+    name: Publish to Production
+    runs-on: ubuntu-latest
+    env:
+      SUPERFACE_API_URL: https://superface.ai
+      SUPERFACE_STORE_REFRESH_TOKEN: ${{ secrets.PRODUCTION_SUPERFACE_STORE_REFRESH_TOKEN }}
+    steps:
+      - uses: actions/checkout@v2
+      - name: Prepare
+        uses: ./.github/actions/prepare
+      - name: Publish
+        run: ./bin/station publish --all --force

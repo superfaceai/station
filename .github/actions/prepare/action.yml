@@ -1,0 +1,8 @@
+name: 'Prepare repository'
+runs:
+  using: 'composite'
+  steps:
+    - run: yarn install
+      shell: bash
+    - run: yarn build
+      shell: bash
