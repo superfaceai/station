@@ -14,10 +14,10 @@ describe('vcs/user-repos/bitbucket-typed', () => {
     expect(result.isOk()).toBeTruthy();
     expect(result.unwrap()).toEqual({
       repos: [
-        { name: 'testRepository', description: 'jakuvacek/testrepository' },
-        { name: 'Private', description: 'jakuvacek/private' },
-        { name: 'dx-scanner', description: 'jakuvacek/dx-scanner' },
-        { name: 'empty', description: 'jakuvacek/empty' },
+        { name: 'testRepository', description: undefined },
+        { name: 'Private', description: undefined },
+        { name: 'dx-scanner', description: undefined },
+        { name: 'empty', description: undefined },
       ],
     });
   });

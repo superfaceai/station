@@ -13,7 +13,7 @@ map UserRepos {
         repos = body.map((r) => {
           return {
             name: r.name,
-            description: r.description === null ? r.full_name : r.description
+            description: r.description === null ? undefined : r.description
           }
         })
       }

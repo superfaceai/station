@@ -32,8 +32,8 @@ describe('vcs/user-repos/github-typed', () => {
     expect(result.isOk()).toBeTruthy();
     expect(result.unwrap()).toEqual({
       repos: [
-        { name: 'empty-test', description: 'Jakub Vacek / empty-test' },
-        { name: 'ChatApp', description: 'Jakub Vacek / ChatApp' },
+        { name: 'empty-test', description: undefined },
+        { name: 'ChatApp', description: undefined },
       ],
     });
   });
