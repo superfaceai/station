@@ -11,7 +11,12 @@ describe('vcs/single-file-content/github', () => {
     const useCase = profile.getUseCase('SingleFileContent');
     const provider = await client.getProvider('github');
     const result = await useCase.perform(
-      { owner: 'superfaceai', repo: 'astexplorer', path: 'README.md' },
+      {
+        owner: 'superfaceai',
+        repo: 'astexplorer',
+        path: 'README.md',
+        ref: 'master',
+      },
       { provider }
     );
     const value = result.unwrap();

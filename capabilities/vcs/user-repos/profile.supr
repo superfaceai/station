@@ -1,10 +1,13 @@
 """
-User Repos
+Profile for working with user repositories
 Get repositories of specified user
 """
 name = "vcs/user-repos"
 version = "1.0"
 
+"""
+Get repositories of specified user
+"""
 usecase UserRepos {
   input {
     "User identifier for whom to list repositories"
@@ -17,7 +20,7 @@ usecase UserRepos {
       name string
 
       "Description of the repository"
-      description
+      description string
     }]
   }
 }

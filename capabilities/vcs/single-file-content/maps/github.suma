@@ -8,8 +8,9 @@ map SingleFileContent{
   owner = input.owner
   repo = input.repo
   path = input.path
+  ref = input.ref
 
-  http GET "/repos/{owner}/{repo}/contents/{path}" {
+  http GET "/repos/{owner}/{repo}/contents/{path}?ref={ref}" {
     response 200 "application/json" {
       //map returned values to result object
       map result {

@@ -18,15 +18,15 @@ describe('vcs/user-repos/github-typed', () => {
     expect(result.unwrap()).toEqual({
       repos: [
         { name: 'BcAppClient', description: 'Client for BcAppServer' },
-        { name: 'BcAppServer', description: null },
+        { name: 'BcAppServer', description: 'Jakub-Vacek/BcAppServer' },
         {
           name: 'docucheck',
           description: "Tool for validating Wultra's documentation ",
         },
         { name: 'ICT', description: 'ICT Node.js project' },
         { name: 'JenkinsTest', description: 'Test repo for Jenkins' },
-        { name: 'linterTest', description: null },
-        { name: 'MonitorService', description: null },
+        { name: 'linterTest', description: 'Jakub-Vacek/linterTest' },
+        { name: 'MonitorService', description: 'Jakub-Vacek/MonitorService' },
         {
           name: 'standard-readme',
           description: 'A standard style for README files',

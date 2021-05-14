@@ -1,7 +1,7 @@
 import { TypedProfile,typeHelper } from '@superfaceai/one-sdk';
 
 export type UserReposInput = {
-    /** Existing user **/
+    /** User identifier for whom to list repositories **/
     user: string;
 };
 export type UserReposResult = {
@@ -9,7 +9,7 @@ export type UserReposResult = {
         /** Name of the repository **/
         name?: string;
         /** Description of the repository **/
-        description?: unknown;
+        description?: string;
     }[];
 };
 const profile = {
