@@ -265,6 +265,14 @@ station publish {path to map}
 station publish {path to provider}
 ```
 
+Affter publishing to production you can E2E test uploaded files. SUPERFACE_API_URL must be set to production url. By running:
+
+```
+station e2e {scope}/{usecase} {provider}
+```
+
+It will download files from production and reuse already created test.
+
 ## Environment variables
 
 Secretes used for authentication during tests are stored in `.env.capabilities` and loaded using dotenv. Run `cp .env.capabilities.example .env.capabilities` to start from the template.

@@ -1,4 +1,5 @@
 import { kebabToPascalCase } from './utils';
+import { E2E_DIR } from './constants';
 
 export function exportTypeTemplate(usecase: string): string {
   return `export * from './${usecase}'\n`;
@@ -66,6 +67,7 @@ describe('${scope}/${usecase}/${provider}-typed', () => {
     expect(provider).not.toBeUndefined();
     expect(usecase).not.toBeUndefined();
 
+    fail('Empty test template')
     //Edit input values and expected result
     //const result = await usecase.perform({}, { provider });
     //expect(result.unwrap()).toEqual();
@@ -84,7 +86,7 @@ describe('${scope}/${usecase}/${provider}-e2e', () => {
   beforeAll(() => {
     jest.setTimeout(10000);
     //Load super.json for tested usecase
-    process.env.SUPERFACE_PATH ='./superface/super.json';
+    process.env.SUPERFACE_PATH ='./test/${E2E_DIR}/${scope}/${usecase}/superface/super.json';
   })
   
   it('performs correctly', async () => {
@@ -96,6 +98,7 @@ describe('${scope}/${usecase}/${provider}-e2e', () => {
     expect(provider).not.toBeUndefined();
     expect(usecase).not.toBeUndefined();
 
+    fail('Empty E2E test template')
     //Edit input values and expected result
     //const result = await usecase.perform({}, { provider });
     //expect(result.unwrap()).toEqual();
