@@ -1,1 +1,1 @@
-export * from './character-information'
+export * from './character-information';
