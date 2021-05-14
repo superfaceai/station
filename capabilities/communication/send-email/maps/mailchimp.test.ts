@@ -32,7 +32,7 @@ describe('communication/send-email/mailchimp', () => {
         { provider }
       );
 
-      expect(typeof (result.unwrap() as any).messageId).toBe('string');
+      expect(typeof result.unwrap().messageId).toBe('string');
     });
   });
 
