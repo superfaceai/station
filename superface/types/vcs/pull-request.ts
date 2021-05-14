@@ -19,6 +19,7 @@ export type PullRequestResult = {
     sha?: string;
 };
 const profile = {
+    /** Get single pull request **/
     "PullRequest": typeHelper<PullRequestInput, PullRequestResult>()
 };
 export type VcsPullRequestProfile = TypedProfile<typeof profile>;

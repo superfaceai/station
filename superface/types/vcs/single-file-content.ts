@@ -4,11 +4,11 @@ export type SingleFileContentInput = {
     /** Owner of the repository **/
     owner: string;
     /** Repository name **/
-    repo?: string;
+    repo: string;
     /** Path to file at repository **/
     path: string;
     /** Branch eg. main **/
-    ref?: string;
+    ref: string;
 };
 export type SingleFileContentResult = {
     /** Size of content according to used provider **/

@@ -1,8 +1,8 @@
 import { TypedProfile,typeHelper } from '@superfaceai/one-sdk';
 
 export type UserReposInput = {
-    /** User identifier for whom to list repositories **/
-    user: string;
+    /** User identifier for whom to list repositories. Some providers use authenticated user instead **/
+    user?: string;
 };
 export type UserReposResult = {
     repos?: {
@@ -13,6 +13,7 @@ export type UserReposResult = {
     }[];
 };
 const profile = {
+    /** Get repositories of specified user **/
     "UserRepos": typeHelper<UserReposInput, UserReposResult>()
 };
 export type VcsUserReposProfile = TypedProfile<typeof profile>;
