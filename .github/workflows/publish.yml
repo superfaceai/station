@@ -19,6 +19,8 @@ jobs:
         run: yarn build
       - name: link binaries
         run: yarn link
+      - name: Compile
+        run: station compile
       - name: Check
         run: station check
       - name: Publish
