@@ -25,6 +25,7 @@ import {
   writeFile,
 } from '../common/io';
 import { exportTypeTemplate } from '../common/templates';
+import { cleanBuildFolder } from './clean-build-folder';
 
 export async function compileProfile(
   path: string
@@ -56,6 +57,9 @@ export async function compile(
     logCb?: LogCallback;
   }
 ): Promise<void> {
+  //Clean build folder (./superface/grid)
+  await cleanBuildFolder(options);
+
   //Get capabilities directories
   const scopes = await getDirectories(`./${CAPABILITIES_DIR}`);
   let profiles: string[];
