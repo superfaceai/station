@@ -218,3 +218,11 @@ station publish {path to provider}
 ## Enviroment variables
 
 Secretes used for authentication during tests are stored in `.env.capabilities` and loaded using dotenv. Run `cp .env.capabilities.example .env.capabilities` to start from the template.
+
+## Automated publishing
+
+Station have two Workflows to automate capabilities publishing [Publish to Production](https://github.com/superfaceai/station/blob/main/.github/workflows/publish_production.yml) and [Publish to Staging](https://github.com/superfaceai/station/blob/main/.github/workflows/publish_staging.yml).
+
+**Publish to Staging** is triggered everytime change is pushed to `main` branch. 
+
+**Publish to Production** is triggered manually from [Workflow detail](https://github.com/superfaceai/station/actions/workflows/publish_production.yml).
