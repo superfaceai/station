@@ -1,15 +1,6 @@
 name: Publish to Superface.ai
 on: workflow_dispatch
 jobs:
-  check:
-    name: Compile and Check
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - name: Prepare
-        uses: ./.github/actions/prepare
-      - name: Check
-        uses: ./.github/actions/check
   publish_production:
     name: Publish to Production
     runs-on: ubuntu-latest
@@ -20,6 +11,9 @@ jobs:
       - uses: actions/checkout@v2
       - name: Prepare
         uses: ./.github/actions/prepare
+      - name: Compile
+        run: ./bin/station compile
+        shell: bash
       - name: Publish
         run: ./bin/station publish --all --force
         shell: bash
