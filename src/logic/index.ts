@@ -4,4 +4,5 @@ export * from './create-provider';
 export * from './generate';
 export * from './compile';
 export * from './publish';
+export * from './publish-all';
 export * from './check';

@@ -1,0 +1,28 @@
+name: Publish to Superface.dev
+on:
+  push:
+    branches:
+      - main
+jobs:
+  check:
+    name: Compile and Check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Prepare
+        uses: ./.github/actions/prepare
+      - name: Check
+        uses: ./.github/actions/check
+  publish_stage:
+    name: Publish to Staging
+    runs-on: ubuntu-latest
+    needs: check
+    env:
+      SUPERFACE_API_URL: https://superface.dev
+      SUPERFACE_STORE_REFRESH_TOKEN: ${{ secrets.STAGING_SUPERFACE_STORE_REFRESH_TOKEN }}
+    steps:
+      - uses: actions/checkout@v2
+      - name: Prepare
+        uses: ./.github/actions/prepare
+      - name: Publish
+        run: ./bin/station publish --all
