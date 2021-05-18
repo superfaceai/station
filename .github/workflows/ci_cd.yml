@@ -1,0 +1,12 @@
+name: CI / CD
+on: push
+jobs:
+  check:
+    name: Compile and Check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Prepare
+        uses: ./.github/actions/prepare
+      - name: Check
+        uses: ./.github/actions/check

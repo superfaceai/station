@@ -1,7 +1,10 @@
 profile = "vcs/single-file-content@1.0"
-  provider = "bitbucket"
-  
-  map SingleFileContent{
+provider = "bitbucket"
+
+"""
+SingleFileContent map
+"""
+map SingleFileContent{
   owner = input.owner
   repo = input.repo
   path = input.path

@@ -1,20 +1,21 @@
-import { Profile, Provider, SuperfaceClient } from '@superfaceai/one-sdk';
+import { Profile, SuperfaceClient } from '@superfaceai/one-sdk';
 
 const recipient = process.env.COMMUNICATION_SENDMESSAGE_TO;
 let profile: Profile;
-let provider: Provider;
+let provider: any;
 
-describe('communication/send-message/tyntec', () => {
+describe('communication/send-sms/twilio', () => {
   beforeAll(async () => {
     const client = new SuperfaceClient();
-    profile = await client.getProfile('communication/send-message');
-    provider = await client.getProvider('tyntec');
+    profile = await client.getProfile('communication/send-sms');
+    provider = await client.getProvider('twilio');
   });
 
   it('sends a message', async () => {
     const useCase = profile.getUseCase('SendMessage');
+    // note: `from` input is configured in super.json
     const result = await useCase.perform<any, { messageId: string }>(
-      { to: recipient, from: 'tyntec', text: 'Hello World!' },
+      { to: recipient, text: 'Hello World!' },
       { provider }
     );
     expect(result.isOk()).toBeTruthy();
@@ -26,20 +27,16 @@ describe('communication/send-message/tyntec', () => {
     const sendMessageResult = await sendMessageUseCase.perform<
       any,
       { messageId: string }
-    >({ to: recipient, from: 'tyntec', text: 'Hello World!' }, { provider });
+    >({ to: recipient, text: 'Hello World!' }, { provider });
     const messageId = sendMessageResult.unwrap().messageId;
 
     const useCase = profile.getUseCase('RetrieveMessageStatus');
-    const result = await useCase.perform<
-      { messageId: string },
-      { deliveryStatus: string }
-    >({ messageId }, { provider });
-
-    // if (result.isErr()) {
-    //   console.log('error', result.error)
-    // }
+    const result = await useCase.perform(
+      { messageId: messageId },
+      { provider }
+    );
 
     expect(result.isOk()).toBeTruthy();
-    expect(typeof result.unwrap().deliveryStatus).toBe('string');
+    expect(typeof (result.unwrap() as any).deliveryStatus).toBe('string');
   });
 });

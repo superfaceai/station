@@ -4,8 +4,9 @@ describe('vcs/single-file-content/bitbucket-e2e', () => {
   beforeAll(() => {
     jest.setTimeout(10000);
     //Load super.json for tested usecase
-    process.env.SUPERFACE_PATH = './test/e2e/vcs/single-file-content/superface/super.json';
-  })
+    process.env.SUPERFACE_PATH =
+      './test/e2e/vcs/single-file-content/superface/super.json';
+  });
 
   it('performs correctly', async () => {
     const client = new SuperfaceClient();

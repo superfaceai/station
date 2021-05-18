@@ -15,13 +15,15 @@
     },
     "span": {
       "start": 0,
-      "end": 39
-    }
+      "end": 125
+    },
+    "title": "Profile for working with user repositories",
+    "description": "Get repositories of specified user"
   },
   "definitions": [
     {
       "kind": "UseCaseDefinition",
-      "useCaseName": "GetUserRepos",
+      "useCaseName": "UserRepos",
       "input": {
         "kind": "UseCaseSlotDefinition",
         "type": {
@@ -31,32 +33,45 @@
               "kind": "FieldDefinition",
               "fieldName": "user",
               "required": false,
+              "type": {
+                "kind": "PrimitiveTypeName",
+                "name": "string",
+                "span": {
+                  "start": 308,
+                  "end": 314
+                },
+                "location": {
+                  "line": 14,
+                  "column": 10
+                }
+              },
               "location": {
-                "line": 6,
+                "line": 13,
                 "column": 5
               },
               "span": {
-                "start": 78,
-                "end": 82
-              }
+                "start": 204,
+                "end": 314
+              },
+              "title": "User identifier for whom to list repositories. Some providers use authenticated user instead"
             }
           ],
           "location": {
-            "line": 5,
+            "line": 12,
             "column": 9
           },
           "span": {
-            "start": 72,
-            "end": 86
+            "start": 198,
+            "end": 318
           }
         },
         "location": {
-          "line": 5,
+          "line": 12,
           "column": 3
         },
         "span": {
-          "start": 66,
-          "end": 86
+          "start": 192,
+          "end": 318
         }
       },
       "result": {
@@ -77,83 +92,110 @@
                       "kind": "FieldDefinition",
                       "fieldName": "name",
                       "required": false,
+                      "type": {
+                        "kind": "PrimitiveTypeName",
+                        "name": "string",
+                        "span": {
+                          "start": 386,
+                          "end": 392
+                        },
+                        "location": {
+                          "line": 20,
+                          "column": 12
+                        }
+                      },
                       "location": {
-                        "line": 11,
+                        "line": 19,
                         "column": 7
                       },
                       "span": {
-                        "start": 118,
-                        "end": 122
-                      }
+                        "start": 350,
+                        "end": 392
+                      },
+                      "title": "Name of the repository"
                     },
                     {
                       "kind": "FieldDefinition",
                       "fieldName": "description",
                       "required": false,
+                      "type": {
+                        "kind": "PrimitiveTypeName",
+                        "name": "string",
+                        "span": {
+                          "start": 450,
+                          "end": 456
+                        },
+                        "location": {
+                          "line": 23,
+                          "column": 19
+                        }
+                      },
                       "location": {
-                        "line": 12,
+                        "line": 22,
                         "column": 7
                       },
                       "span": {
-                        "start": 129,
-                        "end": 140
-                      }
+                        "start": 400,
+                        "end": 456
+                      },
+                      "title": "Description of the repository"
                     }
                   ],
                   "location": {
-                    "line": 10,
+                    "line": 18,
                     "column": 12
                   },
                   "span": {
-                    "start": 110,
-                    "end": 146
+                    "start": 342,
+                    "end": 462
                   }
                 },
                 "location": {
-                  "line": 10,
+                  "line": 18,
                   "column": 11
                 },
                 "span": {
-                  "start": 109,
-                  "end": 147
+                  "start": 341,
+                  "end": 463
                 }
               },
               "location": {
-                "line": 10,
+                "line": 18,
                 "column": 5
               },
               "span": {
-                "start": 103,
-                "end": 147
+                "start": 335,
+                "end": 463
               }
             }
           ],
           "location": {
-            "line": 9,
+            "line": 17,
             "column": 10
           },
           "span": {
-            "start": 97,
-            "end": 151
+            "start": 329,
+            "end": 467
           }
         },
         "location": {
-          "line": 9,
+          "line": 17,
           "column": 3
         },
         "span": {
-          "start": 90,
-          "end": 151
+          "start": 322,
+          "end": 467
         }
       },
       "location": {
-        "line": 4,
+        "line": 8,
         "column": 1
       },
       "span": {
-        "start": 41,
-        "end": 153
-      }
+        "start": 127,
+        "end": 469
+      },
+      "title": "Get repositories of specified user"
     }
   ],
   "location": {
@@ -162,6 +204,6 @@
   },
   "span": {
     "start": 0,
-    "end": 153
+    "end": 469
   }
 }

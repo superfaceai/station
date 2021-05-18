@@ -39,9 +39,11 @@ export async function prepareE2e(
   const testPath = `./test/${E2E_DIR}/${scope}/${profile}/${provider}${EXTENSIONS.e2e}`;
   //Reuse existing test file - so we can E2E test both staging and production.
   if (await exists(testPath)) {
-    options?.warnCb?.(`E2E test file "${testPath}" already exists - reusing it`)
+    options?.warnCb?.(
+      `E2E test file "${testPath}" already exists - reusing it`
+    );
   } else {
-    options?.logCb?.(`Creating test file "${testPath}"`)
+    options?.logCb?.(`Creating test file "${testPath}"`);
     await writeFile(testPath, e2eTestTemplate(scope, profile, provider));
   }
 

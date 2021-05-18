@@ -30,7 +30,7 @@ yarn link
 * [`station create DOCUMENTINFO`](#station-create-documentinfo)
 * [`station e2e DOCUMENTINFO MAP`](#station-e2e-documentinfo-map)
 * [`station generate PROFILENAME`](#station-generate-profilename)
-* [`station publish PATH`](#station-publish-path)
+* [`station publish [PATH]`](#station-publish-path)
 
 ## `station check`
 
@@ -144,25 +144,29 @@ EXAMPLES
 
 _See code: [dist/src/commands/generate.ts](https://github.com/superfaceai/station/blob/v0.0.1/dist/src/commands/generate.ts)_
 
-## `station publish PATH`
+## `station publish [PATH]`
 
 Uploads map/profile/provider to Store - use paths to `.supr` file for profiles, `.suma` for maps and `.json` for providers. Do not use path ending with `.ast.json` (compiled files).
 
 ```
 USAGE
-  $ station publish PATH
+  $ station publish [PATH]
 
 ARGUMENTS
   PATH  Path to profile, map or provider
 
 OPTIONS
-  -h, --help        show CLI help
-  -p, --production  Publish to production server.
-  -q, --quiet       When set to true, disables the shell echo output of action.
+  -f, --force  Publishes without asking any confirmation.
+  -h, --help   show CLI help
+  -q, --quiet  When set to true, disables the shell echo output of action.
+  --all        Publish all profiles, maps and providers
+  --dry-run    Runs without sending actual request.
 
 EXAMPLES
+  $ station publish
+  $ station publish --dry-run
+  $ station publish --force
   $ station publish capabilities/vcs/user-repos/maps/bitbucket.suma
-  $ station publish capabilities/vcs/user-repos/maps/bitbucket.suma -p
   $ station publish capabilities/vcs/user-repos/maps/bitbucket.suma -q
 ```
 
@@ -278,3 +282,11 @@ It will download files from production and reuse already created test.
 Secretes used for authentication during tests are stored in `.env.capabilities` and loaded using dotenv. Run `cp .env.capabilities.example .env.capabilities` to start from the template.
 
 Variable SUPERFACE_API_URL is used for switching between staging and production.
+
+## Automated publishing
+
+Station have two Workflows to automate capabilities publishing [Publish to Production](https://github.com/superfaceai/station/blob/main/.github/workflows/publish_production.yml) and [Publish to Staging](https://github.com/superfaceai/station/blob/main/.github/workflows/publish_staging.yml).
+
+**Publish to Staging** is triggered everytime change is pushed to `main` branch. 
+
+**Publish to Production** is triggered manually from [Workflow detail](https://github.com/superfaceai/station/actions/workflows/publish_production.yml).

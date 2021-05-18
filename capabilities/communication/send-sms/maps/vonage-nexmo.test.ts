@@ -4,10 +4,10 @@ const recipient = process.env.COMMUNICATION_SENDMESSAGE_TO;
 let profile: Profile;
 let provider: Provider;
 
-describe('communication/send-message/vonage-nexmo', () => {
+describe('communication/send-sms/vonage-nexmo', () => {
   beforeAll(async () => {
     const client = new SuperfaceClient();
-    profile = await client.getProfile('communication/send-message');
+    profile = await client.getProfile('communication/send-sms');
     provider = await client.getProvider('vonage-nexmo');
   });
 

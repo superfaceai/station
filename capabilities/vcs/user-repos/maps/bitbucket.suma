@@ -1,7 +1,10 @@
 profile = "vcs/user-repos@1.0"
-  provider = "bitbucket"
-  
-  map UserRepos{
+provider = "bitbucket"
+
+"""
+UserRepos map. Returns repositories of authenticated user
+"""
+map UserRepos{
     http GET "/2.0/repositories?role=member" {
     security "basic"
 
@@ -11,7 +14,7 @@ profile = "vcs/user-repos@1.0"
         repos = body.values.map((r) => {
           return {
             name: r.name,
-            description: r.description
+            description: r.description === "" ? undefined : r.description
           }
         })
       }

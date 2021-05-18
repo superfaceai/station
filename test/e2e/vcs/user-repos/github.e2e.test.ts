@@ -4,14 +4,15 @@ describe('vcs/user-repos/github-e2e', () => {
   beforeAll(() => {
     jest.setTimeout(10000);
     //Load super.json for tested usecase
-    process.env.SUPERFACE_PATH = './test/e2e/vcs/user-repos/superface/super.json';
+    process.env.SUPERFACE_PATH =
+      './test/e2e/vcs/user-repos/superface/super.json';
   });
 
   it('performs correctly', async () => {
     const client = new SuperfaceClient();
     const profile = await client.getProfile('vcs/user-repos');
     const provider = await client.getProvider('github');
-    const usecase = profile.useCases.GetUserRepos;
+    const usecase = profile.useCases.UserRepos;
 
     expect(provider).not.toBeUndefined();
     expect(usecase).not.toBeUndefined();
@@ -22,15 +23,15 @@ describe('vcs/user-repos/github-e2e', () => {
     expect(value).toEqual({
       repos: [
         { name: 'BcAppClient', description: 'Client for BcAppServer' },
-        { name: 'BcAppServer', description: null },
+        { name: 'BcAppServer', description: undefined },
         {
           name: 'docucheck',
           description: "Tool for validating Wultra's documentation ",
         },
         { name: 'ICT', description: 'ICT Node.js project' },
         { name: 'JenkinsTest', description: 'Test repo for Jenkins' },
-        { name: 'linterTest', description: null },
-        { name: 'MonitorService', description: null },
+        { name: 'linterTest', description: undefined },
+        { name: 'MonitorService', description: undefined },
         {
           name: 'standard-readme',
           description: 'A standard style for README files',

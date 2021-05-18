@@ -1,8 +1,8 @@
-import { kebabToPascalCase } from './utils';
 import { E2E_DIR } from './constants';
+import { kebabToPascalCase } from './utils';
 
 export function exportTypeTemplate(usecase: string): string {
-  return `export * from './${usecase}'\n`;
+  return `export * from './${usecase}';\n`;
 }
 export function profileTemplate(
   usecase: string,

@@ -4,8 +4,9 @@ describe('vcs/pull-requests/gitlab-e2e', () => {
   beforeAll(() => {
     jest.setTimeout(10000);
     //Load super.json for tested usecase
-    process.env.SUPERFACE_PATH = './test/e2e/vcs/pull-requests/superface/super.json';
-  })
+    process.env.SUPERFACE_PATH =
+      './test/e2e/vcs/pull-requests/superface/super.json';
+  });
 
   it('performs correctly', async () => {
     const client = new SuperfaceClient();

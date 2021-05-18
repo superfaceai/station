@@ -1,10 +1,10 @@
 {
   "profiles": {
-    "communication/send-message": {
-      "file": "./grid/communication/send-message/profile.supr",
+    "communication/send-sms": {
+      "file": "./grid/communication/send-sms/profile.supr",
       "providers": {
         "twilio": {
-          "file": "./grid/communication/send-message/maps/twilio.suma",
+          "file": "./grid/communication/send-sms/maps/twilio.suma",
           "defaults": {
             "SendMessage": {
               "input": {
@@ -21,7 +21,7 @@
           }
         },
         "tyntec": {
-          "file": "./grid/communication/send-message/maps/tyntec.suma",
+          "file": "./grid/communication/send-sms/maps/tyntec.suma",
           "defaults": {
             "SendMessage": {
               "input": {
@@ -31,7 +31,7 @@
           }
         },
         "vonage-nexmo": {
-          "file": "./grid/communication/send-message/maps/vonage-nexmo.suma",
+          "file": "./grid/communication/send-sms/maps/vonage-nexmo.suma",
           "defaults": {
             "SendMessage": {
               "input": {
@@ -48,7 +48,7 @@
           }
         },
         "plivo": {
-          "file": "./grid/communication/send-message/maps/plivo.suma",
+          "file": "./grid/communication/send-sms/maps/plivo.suma",
           "defaults": {
             "SendMessage": {
               "input": {
@@ -63,6 +63,9 @@
               }
             }
           }
+        },
+        "mock": {
+          "file": "./grid/communication/send-sms/maps/mock.suma"
         }
       }
     },
@@ -157,6 +160,30 @@
               }
             }
           }
+        },
+        "mock": {
+          "file": "./grid/communication/send-email/maps/mock.suma"
+        },
+        "mailchimp": {
+          "file": "./grid/communication/send-email/maps/mailchimp.suma",
+          "defaults": {
+            "SendEmail": {
+              "input": {
+                "mailchimp_api_key": "$MAILCHIMP_API_KEY"
+              }
+            }
+          }
+        }
+      }
+    },
+    "starwars/character-information": {
+      "file": "./grid/starwars/character-information/profile.supr",
+      "providers": {
+        "swapi": {
+          "file": "./grid/starwars/character-information/maps/swapi.suma"
+        },
+        "mock": {
+          "file": "./grid/starwars/character-information/maps/mock.suma"
         }
       }
     },
@@ -195,8 +222,8 @@
       "file": "grid/delivery-tracking/shipment-info/profile.supr",
       "defaults": {},
       "providers": {
-        "dhl-unified": {
-          "file": "./grid/delivery-tracking/shipment-info/maps/dhl-unified.suma"
+        "dhl": {
+          "file": "./grid/delivery-tracking/shipment-info/maps/dhl.suma"
         },
         "shippo": {
           "file": "./grid/delivery-tracking/shipment-info/maps/shippo.suma"
@@ -268,8 +295,8 @@
         }
       ]
     },
-    "dhl-unified": {
-      "file": "../providers/dhl-unified.json",
+    "dhl": {
+      "file": "../providers/dhl.json",
       "security": [
         {
           "id": "dhl_api_key",
@@ -285,6 +312,10 @@
           "token": "$SENDGRID_API_KEY"
         }
       ]
+    },
+    "swapi": {
+      "file": "../providers/swapi.json",
+      "security": []
     },
     "google-apis": {
       "file": "../providers/google-apis.json",
@@ -326,6 +357,9 @@
           "password": "$MAILGUN_PASSWORD"
         }
       ]
+    },
+    "mailchimp": {
+      "file": "../providers/mailchimp.json"
     }
   }
 }

@@ -1,15 +1,26 @@
+"""
+Profile for working with user repositories
+Get repositories of specified user
+"""
 name = "vcs/user-repos"
 version = "1.0"
 
-usecase GetUserRepos {
+"""
+Get repositories of specified user
+"""
+usecase UserRepos {
   input {
-    user
+    "User identifier for whom to list repositories. Some providers use authenticated user instead"
+    user string
   }
 
   result {
     repos [{
-      name
-      description
+      "Name of the repository"
+      name string
+
+      "Description of the repository"
+      description string
     }]
   }
 }

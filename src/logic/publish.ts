@@ -14,6 +14,7 @@ export async function publish(
   baseUrl: string,
   options?: {
     logCb?: LogCallback;
+    dryRun?: boolean;
   }
 ): Promise<void> {
   config();
@@ -46,8 +47,11 @@ export async function publish(
     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     const parsedFile = JSON.parse(file);
     if (isProviderJson(parsedFile)) {
-      options?.logCb?.(`Publishing provider from: ${path}`);
-      await client.createProvider(file);
+      options?.logCb?.(`Publishing provider ${parsedFile.name} from: ${path}`);
+
+      if (!options?.dryRun) {
+        await client.createProvider(file);
+      }
     } else {
       throw new CLIError('File does not have provider json structure', {
         exit: 1,
@@ -59,7 +63,9 @@ export async function publish(
       options?.logCb?.(
         `Publishing profile "${parsedFile.header.name}" from: ${path}`
       );
-      await client.createProfile(file);
+      if (!options?.dryRun) {
+        await client.createProfile(file);
+      }
     } else {
       throw new CLIError('Unknown profile file structure', { exit: 1 });
     }
@@ -69,7 +75,10 @@ export async function publish(
       options?.logCb?.(
         `Publishing map for profile "${parsedFile.header.profile.name}" and provider "${parsedFile.header.provider}" from: ${path}`
       );
-      await client.createMap(file);
+
+      if (!options?.dryRun) {
+        await client.createMap(file);
+      }
     } else {
       throw new CLIError('Unknown map file structure', { exit: 1 });
     }

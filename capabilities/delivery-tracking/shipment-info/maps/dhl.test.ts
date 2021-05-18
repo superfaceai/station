@@ -1,11 +1,11 @@
 import { SuperfaceClient } from '../../../../superface/sdk';
 
-describe('delivery-tracking/shipment-info/dhl-unified', () => {
+describe('delivery-tracking/shipment-info/dhl', () => {
   it('should define use-case and provider', async () => {
     const client = new SuperfaceClient();
     const profile = await client.getProfile('delivery-tracking/shipment-info');
-    const useCase = profile.getUseCase('shipmentInfo');
-    const provider = await client.getProvider('dhl-unified');
+    const useCase = profile.getUseCase('ShipmentInfo');
+    const provider = await client.getProvider('dhl');
 
     expect(useCase).not.toBeUndefined();
     expect(provider).not.toBeUndefined();
@@ -18,7 +18,7 @@ describe('delivery-tracking/shipment-info/dhl-unified', () => {
       const profile = await client.getProfile(
         'delivery-tracking/shipment-info'
       );
-      const dhl = await client.getProvider('dhl-unified');
+      const dhl = await client.getProvider('dhl');
       const result = await profile.useCases.ShipmentInfo.perform(
         { trackingNumber: '00340434292135100131' },
         { provider: dhl }
@@ -57,7 +57,7 @@ describe('delivery-tracking/shipment-info/dhl-unified', () => {
   it('should return error for not existing tracking number', async () => {
     const client = new SuperfaceClient();
     const profile = await client.getProfile('delivery-tracking/shipment-info');
-    const dhl = await client.getProvider('dhl-unified');
+    const dhl = await client.getProvider('dhl');
     const result = await profile.useCases.ShipmentInfo.perform(
       { trackingNumber: 'NOT_EXISTING_TRACKING_NUMBER' },
       { provider: dhl }
