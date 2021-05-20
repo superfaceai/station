@@ -1,15 +1,15 @@
-"
-Send Message
-Send a single conversation message
-"
+"""
+Send SMS Message
+Send a single SMS message or retieve its status.
+"""
 
 name = "communication/send-sms"
-version = "1.0.0"
+version = "1.0.1"
 
-"
-Send Message
+"""
+Send SMS Message
 Send single text message
-"
+"""
 usecase SendMessage unsafe {
   input {
     "Recepient of the message"
@@ -36,7 +36,7 @@ usecase SendMessage unsafe {
 "
 Message Status
 
-Retrieve status of a sent message
+Retrieve status of a sent SMS message
 "
 usecase RetrieveMessageStatus safe {
   input {
