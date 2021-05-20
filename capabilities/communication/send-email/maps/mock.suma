@@ -1,0 +1,17 @@
+profile = "communication/send-email@1.1"
+provider = "mock"
+
+"""
+Mock map returning random string as message id
+"""
+map SendEmail{
+  map result {
+    messageId = Math.random().toString(16).substr(2, 14)
+  }
+}
+
+map SendTemplatedEmail {
+  map result {
+    messageId = Math.random().toString(16).substr(2, 14)
+  }
+}

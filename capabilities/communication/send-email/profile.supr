@@ -1,0 +1,59 @@
+"""
+Send Email
+Send one transactional email
+"""
+
+name = "communication/send-email"
+version = "1.1.0"
+
+"""
+Send transactional email to one recipient
+
+Email can contain text and/or html representation
+"""
+usecase SendEmail unsafe {
+  input {
+    from!
+    to!
+    subject!
+    text
+    html
+  }
+
+  result {
+    messageId
+  }
+
+  error Error
+}
+
+"""
+Send templated transactional email to one recipient
+
+Requires template defined on provider side. 
+"""
+usecase SendTemplatedEmail unsafe {
+  input {
+    from!
+    to!
+    templateId!
+    templateData!
+  }
+
+  result {
+    messageId
+  }
+
+  error Error
+}
+
+model Error {
+  "
+  A short, human-readable summary of the problem type.
+  "
+  title
+  "
+  A human-readable explanation specific to this occurrence of the problem.
+  "
+  detail
+}
