@@ -1,16 +1,20 @@
 """
-Profile for working with user repositories
-Get repositories of specified user
+VCS User Repositories
+Retrieve the version control system repositories of specified user.
 """
 name = "vcs/user-repos"
-version = "1.0"
+version = "1.0.1"
 
 """
-Get repositories of specified user
+Get User Repositories
+Get repositories of the specified user.
 """
 usecase UserRepos {
   input {
-    "User identifier for whom to list repositories. Some providers use authenticated user instead"
+    "
+    User name 
+    User identifier for whom to list repositories. Some providers use authenticated user instead
+    "
     user string
   }
 
