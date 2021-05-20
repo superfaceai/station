@@ -96,12 +96,8 @@ function checkMapAndProfile(
       { exit: 1 }
     );
   }
-  if (profile.header.version.patch !== map.header.profile.version.patch) {
-    throw new CLIError(
-      `Profile "${profile.header.name}" has map for provider "${map.header.provider}" with different PATCH version`,
-      { exit: 1 }
-    );
-  }
+  //Map and profile can differ in patch.
+
   if (profile.header.version.label !== map.header.profile.version.label) {
     throw new CLIError(
       `Profile "${profile.header.name}" has map for provider "${map.header.provider}" with different LABEL version`,
