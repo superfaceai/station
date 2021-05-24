@@ -9,13 +9,14 @@ describe('vcs/user-repos/bitbucket-typed', () => {
     const client = new SuperfaceClient();
     const profile = await client.getProfile('vcs/user-repos');
     const provider = await client.getProvider('bitbucket');
-    const result = await profile.useCases.UserRepos.perform({ user: 'jakuvacek' }, { provider });
+    const result = await profile.useCases.UserRepos.perform(
+      { user: 'jakuvacek' },
+      { provider }
+    );
 
     expect(result.isOk()).toBeTruthy();
     expect(result.unwrap()).toEqual({
-      repos: [
-        { name: 'testRepository', description: undefined },
-      ],
+      repos: [{ name: 'testRepository', description: undefined }],
     });
   });
 });
