@@ -19,7 +19,10 @@ export type PullRequestsResult = {
     }[];
 };
 const profile = {
-    /** Get pull requests of specified repository **/
+    /**
+     * Get Pull Requests
+     * Get pull requests of the specified repository.
+     **/
     "PullRequests": typeHelper<PullRequestsInput, PullRequestsResult>()
 };
 export type VcsPullRequestsProfile = TypedProfile<typeof profile>;

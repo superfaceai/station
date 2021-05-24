@@ -19,6 +19,10 @@ export type SingleFileContentResult = {
     encoding?: string;
 };
 const profile = {
+    /**
+     * Get Single File Content
+     * Get the content of the specified file.
+     **/
     "SingleFileContent": typeHelper<SingleFileContentInput, SingleFileContentResult>()
 };
 export type VcsSingleFileContentProfile = TypedProfile<typeof profile>;
