@@ -5,8 +5,9 @@ provider = "bitbucket"
 UserRepos map. Returns repositories of authenticated user
 """
 map UserRepos{
-    http GET "/2.0/repositories?role=member" {
-    security "basic"
+    username = input.user
+
+    http GET "/2.0/repositories/{username}" {
 
     response 200 "application/json" {
       map result {

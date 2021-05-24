@@ -9,9 +9,12 @@ describe('starwars/character-information/mock-typed', () => {
 
     expect(useCase).not.toBeUndefined();
     expect(provider).not.toBeUndefined();
-    const result = await useCase.perform({
-      characterName: 'Luke Skywalker',
-    }, { provider });
+    const result = await useCase.perform(
+      {
+        characterName: 'Luke Skywalker',
+      },
+      { provider }
+    );
     expect(result.unwrap()).toEqual({
       height: '172',
       weight: '77',

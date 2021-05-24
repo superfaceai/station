@@ -141,7 +141,10 @@ export type ShipmentInfoResult = {
     estimatedDeliveryDate?: string;
 }[];
 const profile = {
-    /** Get shipment state **/
+    /**
+     * Retrieve Shipment Status
+     * Get the actual shipment status.
+     **/
     "ShipmentInfo": typeHelper<ShipmentInfoInput, ShipmentInfoResult>()
 };
 export type DeliveryTrackingShipmentInfoProfile = TypedProfile<typeof profile>;

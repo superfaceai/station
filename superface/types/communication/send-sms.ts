@@ -31,13 +31,13 @@ export type RetrieveMessageStatusResult = {
 };
 const profile = {
     /**
-     * Send Message
+     * Send SMS Message
      * Send single text message
      **/
     "SendMessage": typeHelper<SendMessageInput, SendMessageResult>(),
     /**
      * Message Status
-     * Retrieve status of a sent message
+     * Retrieve status of a sent SMS message
      **/
     "RetrieveMessageStatus": typeHelper<RetrieveMessageStatusInput, RetrieveMessageStatusResult>()
 };

@@ -14,7 +14,7 @@ export type CleanAddressResult = {
 };
 const profile = {
     /**
-     * clean-address usecase
+     * Clean Address
      * This use case will take an address like:
      *
      * {
