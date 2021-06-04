@@ -1,0 +1,107 @@
+"""
+API Reference: https://postmarkapp.com/developer/api/overview
+"""
+
+profile = "communication/send-email@1.1"
+provider = "postmark"
+
+map SendEmail {
+
+  http POST "/email" {
+    security "server_token"
+    
+    request "application/json" {
+      body {
+        From = input.from
+        To = input.to
+        Subject= input.subject
+        TextBody = input.text
+        HtmlBody = input.html
+      }
+    }
+    
+    response 200 "application/json" {
+      map result {
+        messageId = body.MessageID
+      }
+    }
+
+    response 422 "application/json" {
+      map error {
+        title = "Invalid inputs"
+        detail = body.Message
+      }
+    }
+
+    response 401 "application/json" {
+      map error {
+        title = "Unauthorized"
+        detail = body.Message
+      }
+    }
+
+    response 403 "application/json" {
+      map error {
+        title = "Forbidden"
+        detail = body.Message
+      }
+    }
+
+    response 500 "application/json" {
+      map error {
+        title = "Internal server Error"
+        detail = body.Message
+      }
+    }
+  }
+}
+
+map SendTemplatedEmail {
+  http POST "/email/withTemplate" {
+    security "server_token"
+
+    request "application/json" {
+      body {
+        From = input.from
+        To = input.to
+        Subject = input.subject
+        TemplateId = input.templateId
+        TemplateModel = input.templateData
+      }
+    }
+
+    response 200 "application/json" {
+      map result {
+        messageId = body.MessageID
+      }
+    }
+    
+    response 422 "application/json" {
+      map error {
+        title = "Invalid inputs"
+        detail = body.Message
+      }
+    }
+
+    response 401 "application/json" {
+      map error {
+        title = "Unauthorized"
+        detail = body.Message
+      }
+    }
+
+    response 403 "application/json" {
+      map error {
+        title = "Forbidden"
+        detail = body.Message
+      }
+    }
+
+    response 500 "application/json" {
+      map error {
+        title = "Internal server Error"
+        detail = body.Message
+      }
+    }
+  }
+}

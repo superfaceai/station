@@ -31,10 +31,13 @@ export const sendEmailTest = (providerName: string): void => {
         it('should return messageId as result', async () => {
           const result = await profile.useCases.SendEmail.perform(
             {
-              from: process.env.SENDGRID_COMMUNICATION_SENDEMAIL_FROM,
+              from:
+                process.env[
+                  `${providerName.toUpperCase()}_COMMUNICATION_SENDEMAIL_FROM`
+                ],
               to: process.env.COMMUNICATION_SENDEMAIL_TO,
               subject: 'Station test',
-              text: 'Station test',
+              text: `Station test - ${providerName}`,
             },
             { provider }
           );
@@ -44,10 +47,10 @@ export const sendEmailTest = (providerName: string): void => {
       });
 
       describe('when inputs are invalid', () => {
-        it('should throw error on unwrap', async () => {
+        it('should throw on unwrap', async () => {
           const client = new SuperfaceClient();
           const profile = await client.getProfile('communication/send-email');
-          const provider = await client.getProvider('sendgrid');
+          const provider = await client.getProvider(providerName);
 
           const result = await profile.useCases.SendEmail.perform(
             {
@@ -64,12 +67,7 @@ export const sendEmailTest = (providerName: string): void => {
             throw new Error('must throw something');
           } catch (error) {
             expect(error).toBeInstanceOf(MappedHTTPError);
-            expect(error.statusCode).toBe(400);
             expect(error.properties.title).toBe('Invalid inputs');
-            expect(error.properties.detail).toContain("Input 'to'");
-            expect(error.properties.detail).toContain("Input 'from'");
-            expect(error.properties.detail).toContain("Input 'subject'");
-            expect(error.properties.detail).toContain("Input 'content'");
           }
         });
       });
@@ -80,12 +78,20 @@ export const sendEmailTest = (providerName: string): void => {
         it('should return messagaId as result', async () => {
           const result = await profile.useCases.SendTemplatedEmail.perform(
             {
-              from: process.env.SENDGRID_COMMUNICATION_SENDEMAIL_FROM,
+              from:
+                process.env[
+                  `${providerName.toUpperCase()}_COMMUNICATION_SENDEMAIL_FROM`
+                ],
               to: process.env.COMMUNICATION_SENDEMAIL_TO,
               templateId:
-                process.env.SENDGRID_COMMUNICATION_SENDEMAIL_TEMPLATE_ID,
+                process.env[
+                  `${providerName.toUpperCase()}_COMMUNICATION_SENDEMAIL_TEMPLATE_ID`
+                ],
               templateData: {
-                from: process.env.SENDGRID_COMMUNICATION_SENDEMAIL_FROM,
+                from:
+                  process.env[
+                    `${providerName.toUpperCase()}_COMMUNICATION_SENDEMAIL_FROM`
+                  ],
                 to: process.env.COMMUNICATION_SENDEMAIL_TO,
               },
             },
@@ -100,7 +106,7 @@ export const sendEmailTest = (providerName: string): void => {
         it('should throw error on unwrap', async () => {
           const client = new SuperfaceClient();
           const profile = await client.getProfile('communication/send-email');
-          const provider = await client.getProvider('sendgrid');
+          const provider = await client.getProvider(providerName);
 
           const result = await profile.useCases.SendTemplatedEmail.perform(
             {
@@ -117,12 +123,7 @@ export const sendEmailTest = (providerName: string): void => {
             throw new Error('must throw something');
           } catch (error) {
             expect(error).toBeInstanceOf(MappedHTTPError);
-            expect(error.statusCode).toBe(400);
             expect(error.properties.title).toBe('Invalid inputs');
-            expect(error.properties.detail).toContain("Input 'to'");
-            expect(error.properties.detail).toContain("Input 'from'");
-            expect(error.properties.detail).toContain("Input 'subject'");
-            expect(error.properties.detail).toContain("Input 'templateId'");
           }
         });
       });

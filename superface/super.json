@@ -173,6 +173,17 @@
               }
             }
           }
+        },
+        "postmark": {
+          "file": "./grid/communication/send-email/maps/postmark.suma",
+          "defaults": {
+            "SendEmail": {
+              "input": {
+                "from": "$POSTMARK_COMMUNICATION_SENDEMAIL_FROM",
+                "to": "$COMMUNICATION_SENDEMAIL_TO"
+              }
+            }
+          }
         }
       }
     },
@@ -354,6 +365,13 @@
     },
     "mailchimp": {
       "file": "../providers/mailchimp.json"
+    },
+    "postmark": {
+      "file": "../providers/postmark.json",
+      "security": [{
+        "id": "server_token",
+        "apikey": "$POSTMARK_API_TOKEN"
+      }]
     }
   }
 }
