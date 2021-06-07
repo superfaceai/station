@@ -1,0 +1,121 @@
+"
+Documentation needed to implement the map
+
++ Transactional API Quick Start: https://mailchimp.com/developer/transactional/guides/quick-start/
++ API Reference: https://mailchimp.com/developer/transactional/api/messages/send-new-message/
+"
+
+profile = "communication/send-email@1.1"
+provider = "mailchimp"
+
+map SendEmail {
+  body = {
+    key: input.mailchimp_api_key,
+    message: {
+      from_email: input.from,
+      to: [
+        {
+          email: input.to,
+          type: "to"
+        }
+      ],
+      subject: input.subject
+    }
+  }
+
+  set if (input.text) {
+    body.text = input.text
+  }
+
+  set if (input.html) {
+    body.html = input.html
+  }
+
+  http POST "/messages/send" {
+    request {
+      body = body
+    }
+
+    response 200 {
+      map result if (body[0].status === "sent") {
+        messageId = body[0]._id
+      }
+
+      map error if (body[0].status !== "sent") {
+        title = "Send Email Failed",
+        detail = (`${body[0].status}: ${body[0].reject_reason}`)
+      }
+    }
+
+    response 500 {
+      map error if (body) {
+        title = "Internal server Error"
+      }
+
+      map error if (body.name === "ValidationError") {
+        title = "Invalid inputs"
+        detail = body.message
+      } 
+
+      map error if (body.name === "Invalid_Key") {
+        title = "Unauthorized"
+        detail = "Invalid key"
+      }
+    }
+  }
+}
+
+operation FormatTemplateData {
+  return {
+    name = args.name
+    content = args.templateData[args.name]
+  }
+}
+
+map SendTemplatedEmail {
+  http POST "/messages/send-template" {
+    request {
+      body {
+        key = input.mailchimp_api_key
+        template_name = input.templateId
+        template_content = Object.entries(input.templateData || {}).map(([name, content]) => ({ name: name, content: content }))
+        message = {
+          from_email: input.from,
+          to: [
+            {
+              email: input.to,
+              type: "to"
+            }
+          ]
+        }
+      }
+    }
+
+    response 200 {
+      map result if (body[0].status === "sent") {
+        messageId = body[0]._id
+      }
+
+      map error if (body[0].status !== "sent") {
+        title = "Send Email Failed",
+        detail = (`${body[0].status}: ${body[0].reject_reason}`)
+      }
+    }
+
+    response 500 {
+      map error if (body) {
+        title = "Internal server Error"
+      }
+
+      map error if (body.name === "ValidationError") {
+        title = "Invalid inputs"
+        detail = body.message
+      } 
+
+      map error if (body.name === "Invalid_Key") {
+        title = "Unauthorized"
+        detail = "Invalid key"
+      }
+    }
+  }
+}
