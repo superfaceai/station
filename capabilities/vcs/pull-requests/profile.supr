@@ -3,7 +3,7 @@ VCS Repository Pull Requests
 Retrive version control system's pull requests for a repository.
 """
 name = "vcs/pull-requests"
-version = "1.0.1"
+version = "1.0.2"
 
 """
 Get Pull Requests
@@ -12,25 +12,25 @@ Get pull requests of the specified repository.
 usecase PullRequests {
   input {
     "Owner of the repository"
-    owner! string
+    owner! string!
 
     "Repository name"
-    repo! string
+    repo! string!
   }
 
   result {
     pullRequests [{
       "Title of pull request"
-      title string
+      title! string!
 
       "Pull request Id"
-      id number
+      id! number!
 
       "Web url of pull request"
-      url string
+      url! string!
 
       "Pull request sha"
-      sha string
+      sha! string!
     }]
   }
 }

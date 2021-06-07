@@ -5,46 +5,46 @@ export type ShipmentInfoInput = {
      * Shipment tracking number
      * Identifier of shipment
      **/
-    trackingNumber: string;
+    trackingNumber: string | null;
     /**
      * Carrier
      * Shipment carrier identification
      **/
-    carrier?: string;
+    carrier?: string | null;
 };
 export type ShipmentInfoResult = {
     /**
      * Carrier
      * Shipment carrier identification
      **/
-    carrier: string;
+    carrier: string | null;
     /**
      * Shipment tracking number
      * Identifier of shipment
      **/
-    trackingNumber: string;
+    trackingNumber: string | null;
     origin: {
         address: {
             /**
              * Country code
              * A short text string code (ISO 3166-1 alpha-2 country code) specifying the country.
              **/
-            countryCode?: string;
+            countryCode?: string | null;
             /**
              * Postal code
              * Text specifying the postal code for an address.
              **/
-            postalCode?: string;
+            postalCode?: string | null;
             /**
              * Address locality
              * Text specifying the name of the locality, for example a city.
              **/
-            addressLocality?: string;
+            addressLocality?: string | null;
             /**
              * Street address
              * The street address expressed as free form text. The street address is printed on paper as the first lines below the name.
              **/
-            streetAddress?: string;
+            streetAddress?: string | null;
         };
     };
     destination: {
@@ -53,92 +53,92 @@ export type ShipmentInfoResult = {
              * Country code
              * A short text string code (ISO 3166-1 alpha-2 country code) specifying the country.
              **/
-            countryCode?: string;
+            countryCode?: string | null;
             /**
              * Postal code
              * Text specifying the postal code for an address.
              **/
-            postalCode?: string;
+            postalCode?: string | null;
             /**
              * Address locality
              * Text specifying the name of the locality, for example a city.
              **/
-            addressLocality?: string;
+            addressLocality?: string | null;
             /**
              * Street address
              * The street address expressed as free form text. The street address is printed on paper as the first lines below the name.
              **/
-            streetAddress?: string;
+            streetAddress?: string | null;
         };
     };
     status?: {
-        timestamp: string;
+        timestamp: string | null;
         /**
          * Shipment status
          * Status of a shipment. Harmonized across different carriers.
          **/
         statusCode: 'pre_transit' | 'transit' | 'delivered' | 'failure' | 'unknown';
-        statusText: string;
+        statusText: string | null;
         location?: {
             address: {
                 /**
                  * Country code
                  * A short text string code (ISO 3166-1 alpha-2 country code) specifying the country.
                  **/
-                countryCode?: string;
+                countryCode?: string | null;
                 /**
                  * Postal code
                  * Text specifying the postal code for an address.
                  **/
-                postalCode?: string;
+                postalCode?: string | null;
                 /**
                  * Address locality
                  * Text specifying the name of the locality, for example a city.
                  **/
-                addressLocality?: string;
+                addressLocality?: string | null;
                 /**
                  * Street address
                  * The street address expressed as free form text. The street address is printed on paper as the first lines below the name.
                  **/
-                streetAddress?: string;
+                streetAddress?: string | null;
             };
         };
     };
     events: {
-        timestamp: string;
+        timestamp: string | null;
         /**
          * Shipment status
          * Status of a shipment. Harmonized across different carriers.
          **/
         statusCode: 'pre_transit' | 'transit' | 'delivered' | 'failure' | 'unknown';
-        statusText: string;
+        statusText: string | null;
         location?: {
             address: {
                 /**
                  * Country code
                  * A short text string code (ISO 3166-1 alpha-2 country code) specifying the country.
                  **/
-                countryCode?: string;
+                countryCode?: string | null;
                 /**
                  * Postal code
                  * Text specifying the postal code for an address.
                  **/
-                postalCode?: string;
+                postalCode?: string | null;
                 /**
                  * Address locality
                  * Text specifying the name of the locality, for example a city.
                  **/
-                addressLocality?: string;
+                addressLocality?: string | null;
                 /**
                  * Street address
                  * The street address expressed as free form text. The street address is printed on paper as the first lines below the name.
                  **/
-                streetAddress?: string;
+                streetAddress?: string | null;
             };
         };
     }[];
     /** Estimated date and time of delivery **/
-    estimatedDeliveryDate?: string;
+    estimatedDeliveryDate?: string | null;
 }[];
 const profile = {
     /**

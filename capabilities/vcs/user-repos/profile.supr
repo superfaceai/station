@@ -15,16 +15,16 @@ usecase UserRepos {
     User name 
     User identifier for whom to list repositories. Some providers use authenticated user instead
     "
-    user! string
+    user! string!
   }
 
   result {
     repos [{
       "Name of the repository"
-      name! string
+      name! string!
 
       "Description of the repository"
-      description string
+      description string!
     }]
   }
 }
