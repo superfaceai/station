@@ -12,11 +12,11 @@ export type SingleFileContentInput = {
 };
 export type SingleFileContentResult = {
     /** Size of content according to used provider **/
-    size?: number;
+    size: number;
     /** Content of file **/
-    content?: string;
+    content: string;
     /** Used encoding **/
-    encoding?: string;
+    encoding: string;
 };
 const profile = {
     /**

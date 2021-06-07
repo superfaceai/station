@@ -4,7 +4,7 @@ VCS Pull Request
   Retrieve information about a pull request in a version control system repository.
 """
 name = "vcs/pull-request"
-version = "1.0.1"
+version = "1.0.2"
 
 """
 Get Pull Request Details
@@ -14,26 +14,26 @@ Get details of the specified pull request.
 usecase PullRequest {
   input {
     "Owner of the repository"
-    owner! string
+    owner! string!
 
     "Repository name"
-    repo! string
+    repo! string!
 
     "Id of pull request"
-    identifier! number
+    identifier! number!
   }
 
   result {
     "Title of pull request"
-    title string
+    title! string!
 
     "Pull request Id"
-    id number
+    id! number!
 
     "Web url of pull request"
-    url string
+    url! string!
 
     "Pull request sha"
-    sha string
+    sha! string!
   }
 }

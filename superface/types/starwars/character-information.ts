@@ -5,24 +5,24 @@ export type RetrieveCharacterInformationInput = {
      * Character name
      * The character name to use when looking up character information
      **/
-    characterName?: string;
+    characterName?: string | null;
 };
 export type RetrieveCharacterInformationResult = {
     /**
      * Height
      * The height of the character
      **/
-    height?: string;
+    height?: string | null;
     /**
      * Weight
      * The weight of the character
      **/
-    weight?: string;
+    weight?: string | null;
     /**
      * Year of birth
      * The year of birth of the character
      **/
-    yearOfBirth?: string;
+    yearOfBirth?: string | null;
 };
 const profile = {
     /**

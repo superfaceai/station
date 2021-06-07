@@ -13,14 +13,14 @@ export type SendMessageResult = {
      * Identifier of Message
      * The identifier is provider-specific and not unique. It should be treated as an opaque value and only used in subsequent calls
      **/
-    messageId?: string;
+    messageId?: string | null;
 };
 export type RetrieveMessageStatusInput = {
     /**
      * Identifier of Message
      * The identifier is provider-specific and not unique. It should be treated as an opaque value and only used in subsequent calls
      **/
-    messageId?: string;
+    messageId?: string | null;
 };
 export type RetrieveMessageStatusResult = {
     /**

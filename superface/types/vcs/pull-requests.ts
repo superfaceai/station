@@ -9,13 +9,13 @@ export type PullRequestsInput = {
 export type PullRequestsResult = {
     pullRequests?: {
         /** Title of pull request **/
-        title?: string;
+        title: string;
         /** Pull request Id **/
-        id?: number;
+        id: number;
         /** Web url of pull request **/
-        url?: string;
+        url: string;
         /** Pull request sha **/
-        sha?: string;
+        sha: string;
     }[];
 };
 const profile = {

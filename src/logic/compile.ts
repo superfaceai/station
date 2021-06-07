@@ -65,6 +65,7 @@ export async function compile(
   let profiles: string[];
   let useCases: string[];
   let maps: string[];
+  const profileIds: string[] = [];
 
   for (const scope of scopes) {
     useCases = await getDirectories(`./${CAPABILITIES_DIR}/${scope}`);
@@ -107,10 +108,7 @@ export async function compile(
 
           if (generateFlag) {
             //Generate profile types
-            const typing = generateTypingsForProfile(
-              `${scope}/${useCase}`,
-              ast
-            );
+            const typing = generateTypingsForProfile(ast);
             //Create folder structure if it doesn't exist
             if (!(await exists(`./${TYPES_PATH}`))) {
               await mkdir(`./${TYPES_PATH}`);
@@ -176,18 +174,14 @@ export async function compile(
           }
         }
       }
+      profileIds.push(`${scope}/${useCase}`);
     }
-    if (generateFlag) {
-      //Generate types file
-      const sdkPath = `./${TYPES_FILE_PATH}`;
-      if (!(await exists(sdkPath))) {
-        await writeFile(sdkPath, '');
-      }
-      const paths = useCases.map(useCase => `${scope}/${useCase}`);
-      const typesFile = generateTypesFile(paths, await readFile(sdkPath));
-      await writeFile(sdkPath, typesFile);
+  }
+  if (generateFlag) {
+    //Generate types file
+    const sdkPath = `./${TYPES_FILE_PATH}`;
+    const typesFile = generateTypesFile(profileIds);
 
-      options?.logCb?.(`Updating "sdk.ts" file with types for: "${scope}"`);
-    }
+    await writeFile(sdkPath, typesFile);
   }
 }
