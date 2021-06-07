@@ -154,9 +154,15 @@
           "defaults": {
             "SendEmail": {
               "input": {
-                "from": "$MAILGUN_COMMUNICATION_SENDEMAIL_FROM",
-                "to": "$COMMUNICATION_SENDEMAIL_TO",
                 "domain": "$MAILGUN_COMMUNICATION_DOMAIN"
+              }
+            },
+            "SendTemplatedEmail": {
+              "input": {
+                "domain": "$MAILGUN_COMMUNICATION_DOMAIN",
+                "templateData": {
+                  "subject": "Station test - mailgun"
+                }
               }
             }
           }
