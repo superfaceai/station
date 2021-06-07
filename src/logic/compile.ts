@@ -180,9 +180,6 @@ export async function compile(
   if (generateFlag) {
     //Generate types file
     const sdkPath = `./${TYPES_FILE_PATH}`;
-    if (!(await exists(sdkPath))) {
-      await writeFile(sdkPath, '');
-    }
     const typesFile = generateTypesFile(profileIds);
 
     await writeFile(sdkPath, typesFile);
