@@ -11,13 +11,20 @@ import {
 
 import { LogCallback } from '../common';
 import {
+  CAPABILITIES_DIR,
   EXTENSIONS,
   PROFILE_BUILD_PATH,
   TYPE_DEFINITIONS_FILE,
   TYPES_FILE_PATH,
   TYPES_PATH,
 } from '../common/constants';
-import { exists, mkdir, readFile, writeFile } from '../common/io';
+import {
+  exists,
+  getDirectories,
+  mkdir,
+  readFile,
+  writeFile,
+} from '../common/io';
 import { exportTypeTemplate } from '../common/templates';
 
 export async function generate(
@@ -52,14 +59,20 @@ export async function generate(
   await generateProfileTypes(scope, profile, astJson);
 
   //Generate types file
+  const profileIds: string[] = [];
   const sdkPath = `./${TYPES_FILE_PATH}`;
   if (!(await exists(sdkPath))) {
     await writeFile(sdkPath, '');
   }
-  const typesFile = generateTypesFile(
-    [`${scope}/${profile}`],
-    await readFile(sdkPath)
-  );
+  //We need to pass all existing profileIds
+  for (const scope of await getDirectories(`./${CAPABILITIES_DIR}`)) {
+    for (const useCase of await getDirectories(
+      `./${CAPABILITIES_DIR}/${scope}`
+    )) {
+      profileIds.push(`${scope}/${useCase}`);
+    }
+  }
+  const typesFile = generateTypesFile(profileIds);
   await writeFile(sdkPath, typesFile);
 
   options?.logCb?.(
@@ -76,7 +89,7 @@ export async function generateProfileTypes(
   }
 ): Promise<void> {
   //Generate profile types
-  const typing = generateTypingsForProfile(`${scope}/${profile}`, ast);
+  const typing = generateTypingsForProfile(ast);
   //Create folder structure if it doesn't exist
   if (!(await exists(`./${TYPES_PATH}`))) {
     await mkdir(`./${TYPES_PATH}`);
