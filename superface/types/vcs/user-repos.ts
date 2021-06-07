@@ -5,12 +5,12 @@ export type UserReposInput = {
      * User name
      * User identifier for whom to list repositories. Some providers use authenticated user instead
      **/
-    user?: string;
+    user: string;
 };
 export type UserReposResult = {
     repos?: {
         /** Name of the repository **/
-        name?: string;
+        name: string;
         /** Description of the repository **/
         description?: string;
     }[];
