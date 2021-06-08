@@ -3,8 +3,11 @@ import { MapDocumentNode, ProfileDocumentNode } from '@superfaceai/ast';
 import {
   generateTypesFile,
   generateTypingsForProfile,
+  transpileFiles,
 } from '@superfaceai/cli/dist/logic/generate';
+import { SUPERFACE_DIR, SuperJson } from '@superfaceai/one-sdk';
 import { parseMap, parseProfile, Source } from '@superfaceai/parser';
+import { join } from 'path';
 
 import { LogCallback } from '../common';
 import {
@@ -14,6 +17,7 @@ import {
   TYPE_DEFINITIONS_FILE,
   TYPES_FILE_PATH,
   TYPES_PATH,
+  UNCOMPILED_SDK_FILE,
 } from '../common/constants';
 import {
   copyFile,
@@ -66,6 +70,7 @@ export async function compile(
   let useCases: string[];
   let maps: string[];
   const profileIds: string[] = [];
+  const sources: Record<string, string> = {};
 
   for (const scope of scopes) {
     useCases = await getDirectories(`./${CAPABILITIES_DIR}/${scope}`);
@@ -123,6 +128,9 @@ export async function compile(
             options?.logCb?.(
               `Writing generated types to "./${TYPES_PATH}/${scope}/${useCase}${EXTENSIONS.typescript}"`
             );
+            sources[
+              join('types', `${scope}/${useCase}${EXTENSIONS.typescript}`)
+            ] = typing;
 
             //Create/update.d.ts index
             let typeDefinitions = '';
@@ -147,7 +155,7 @@ export async function compile(
       }
       //Compile maps
       if (!(await exists(`./${CAPABILITIES_DIR}/${scope}/${useCase}/maps`))) {
-        console.log(
+        options?.logCb?.(
           `Maps folder ./${CAPABILITIES_DIR}/${scope}/${useCase}/maps does not exist`
         );
       } else {
@@ -183,5 +191,12 @@ export async function compile(
     const typesFile = generateTypesFile(profileIds);
 
     await writeFile(sdkPath, typesFile);
+
+    //Load super.json for transpilation
+    const superJson = (
+      await SuperJson.load(`./${SUPERFACE_DIR}/super.json`)
+    ).unwrap();
+    sources[UNCOMPILED_SDK_FILE] = typesFile;
+    await transpileFiles(sources, superJson);
   }
 }

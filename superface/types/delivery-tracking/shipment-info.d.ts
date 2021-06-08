@@ -1,6 +1,6 @@
-import { TypedProfile,typeHelper } from '@superfaceai/one-sdk';
+import { TypedProfile } from '@superfaceai/one-sdk';
 
-export type DeliveryTrackingShipmentInfoShipmentInfoInput = {
+export declare type DeliveryTrackingShipmentInfoShipmentInfoInput = {
     /**
      * Shipment tracking number
      * Identifier of shipment
@@ -12,7 +12,7 @@ export type DeliveryTrackingShipmentInfoShipmentInfoInput = {
      **/
     carrier?: string | null;
 };
-export type DeliveryTrackingShipmentInfoShipmentInfoResult = {
+export declare type DeliveryTrackingShipmentInfoShipmentInfoResult = {
     /**
      * Carrier
      * Shipment carrier identification
@@ -140,14 +140,21 @@ export type DeliveryTrackingShipmentInfoShipmentInfoResult = {
     /** Estimated date and time of delivery **/
     estimatedDeliveryDate?: string | null;
 }[];
-const profile = {
+declare const profile: {
     /**
      * Retrieve Shipment Status
      * Get the actual shipment status.
      **/
-    "ShipmentInfo": typeHelper<DeliveryTrackingShipmentInfoShipmentInfoInput, DeliveryTrackingShipmentInfoShipmentInfoResult>()
+    ShipmentInfo: [DeliveryTrackingShipmentInfoShipmentInfoInput, DeliveryTrackingShipmentInfoShipmentInfoResult];
 };
-export type DeliveryTrackingShipmentInfoProfile = TypedProfile<typeof profile>;
-export const deliveryTrackingShipmentInfo = {
-    "delivery-tracking/shipment-info": profile
+export declare type DeliveryTrackingShipmentInfoProfile = TypedProfile<typeof profile>;
+export declare const deliveryTrackingShipmentInfo: {
+    "delivery-tracking/shipment-info": {
+        /**
+         * Retrieve Shipment Status
+         * Get the actual shipment status.
+         **/
+        ShipmentInfo: [DeliveryTrackingShipmentInfoShipmentInfoInput, DeliveryTrackingShipmentInfoShipmentInfoResult];
+    };
 };
+export {};

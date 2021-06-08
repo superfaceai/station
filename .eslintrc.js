@@ -5,6 +5,7 @@ module.exports = {
     tsconfigRootDir: __dirname,
     project: ['./tsconfig.json'],
   },
+  ignorePatterns: ["superface/**/*.js"],
   plugins: [
     '@typescript-eslint',
     'jest',
