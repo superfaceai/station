@@ -1,6 +1,6 @@
 import { TypedProfile,typeHelper } from '@superfaceai/one-sdk';
 
-export type GeocodeInput = {
+export type AddressGeocodingGeocodeInput = {
     /**
      * Country
      * The country. For example, USA. You can also provide the two-letter ISO 3166-1 alpha-2 country code.
@@ -27,7 +27,7 @@ export type GeocodeInput = {
      **/
     streetAddress?: unknown;
 };
-export type GeocodeResult = {
+export type AddressGeocodingGeocodeResult = {
     /**
      * Latitude
      * The latitude of a location. For example 37.42242 (WGS 84).
@@ -39,7 +39,7 @@ export type GeocodeResult = {
      **/
     longitude: unknown;
 };
-export type ReverseGeocodeInput = {
+export type AddressGeocodingReverseGeocodeInput = {
     /**
      * Latitude
      * The latitude of a location. For example 37.42242 (WGS 84).
@@ -51,7 +51,7 @@ export type ReverseGeocodeInput = {
      **/
     longitude: unknown;
 };
-export type ReverseGeocodeResult = {
+export type AddressGeocodingReverseGeocodeResult = {
     /**
      * Country
      * The country. For example, USA. You can also provide the two-letter ISO 3166-1 alpha-2 country code.
@@ -88,12 +88,12 @@ const profile = {
      * Geocode address
      * Geocode postal address into geographical coordinates (latitude and longitude)
      **/
-    "Geocode": typeHelper<GeocodeInput, GeocodeResult>(),
+    "Geocode": typeHelper<AddressGeocodingGeocodeInput, AddressGeocodingGeocodeResult>(),
     /**
      * Reverse geocode
      * Decodes geographical coordinates (latitude and longitude) into postal addresses
      **/
-    "ReverseGeocode": typeHelper<ReverseGeocodeInput, ReverseGeocodeResult>()
+    "ReverseGeocode": typeHelper<AddressGeocodingReverseGeocodeInput, AddressGeocodingReverseGeocodeResult>()
 };
 export type AddressGeocodingProfile = TypedProfile<typeof profile>;
 export const addressGeocoding = {

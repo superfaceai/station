@@ -1,13 +1,13 @@
 import { TypedProfile,typeHelper } from '@superfaceai/one-sdk';
 
-export type RetrieveCharacterInformationInput = {
+export type StarwarsCharacterInformationRetrieveCharacterInformationInput = {
     /**
      * Character name
      * The character name to use when looking up character information
      **/
     characterName?: string | null;
 };
-export type RetrieveCharacterInformationResult = {
+export type StarwarsCharacterInformationRetrieveCharacterInformationResult = {
     /**
      * Height
      * The height of the character
@@ -29,7 +29,7 @@ const profile = {
      * Retrieve Character Info
      * Retrieve information about a Star Wars character.
      **/
-    "RetrieveCharacterInformation": typeHelper<RetrieveCharacterInformationInput, RetrieveCharacterInformationResult>()
+    "RetrieveCharacterInformation": typeHelper<StarwarsCharacterInformationRetrieveCharacterInformationInput, StarwarsCharacterInformationRetrieveCharacterInformationResult>()
 };
 export type StarwarsCharacterInformationProfile = TypedProfile<typeof profile>;
 export const starwarsCharacterInformation = {

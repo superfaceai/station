@@ -1,13 +1,13 @@
 import { TypedProfile,typeHelper } from '@superfaceai/one-sdk';
 
-export type SendEmailInput = {
+export type CommunicationSendEmailSendEmailInput = {
     from: unknown;
     to: unknown;
     subject: unknown;
     text?: unknown;
     html?: unknown;
 };
-export type SendEmailResult = {
+export type CommunicationSendEmailSendEmailResult = {
     messageId?: unknown;
 };
 const profile = {
@@ -15,7 +15,7 @@ const profile = {
      * Send transactional email to one recipient
      * Email can contain text and/or html representation
      **/
-    "SendEmail": typeHelper<SendEmailInput, SendEmailResult>()
+    "SendEmail": typeHelper<CommunicationSendEmailSendEmailInput, CommunicationSendEmailSendEmailResult>()
 };
 export type CommunicationSendEmailProfile = TypedProfile<typeof profile>;
 export const communicationSendEmail = {

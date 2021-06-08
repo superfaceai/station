@@ -1,12 +1,12 @@
 import { TypedProfile,typeHelper } from '@superfaceai/one-sdk';
 
-export type CleanAddressInput = {
+export type AddressCleanAddressCleanAddressInput = {
     street?: unknown;
     city?: unknown;
     state?: unknown;
     zipcode?: unknown;
 };
-export type CleanAddressResult = {
+export type AddressCleanAddressCleanAddressResult = {
     street?: unknown;
     city?: unknown;
     state?: unknown;
@@ -35,7 +35,7 @@ const profile = {
      *
      * This is useful for cleaning up addresses input by users.
      **/
-    "CleanAddress": typeHelper<CleanAddressInput, CleanAddressResult>()
+    "CleanAddress": typeHelper<AddressCleanAddressCleanAddressInput, AddressCleanAddressCleanAddressResult>()
 };
 export type AddressCleanAddressProfile = TypedProfile<typeof profile>;
 export const addressCleanAddress = {

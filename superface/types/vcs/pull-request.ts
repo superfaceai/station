@@ -1,6 +1,6 @@
 import { TypedProfile,typeHelper } from '@superfaceai/one-sdk';
 
-export type PullRequestInput = {
+export type VcsPullRequestPullRequestInput = {
     /** Owner of the repository **/
     owner: string;
     /** Repository name **/
@@ -8,7 +8,7 @@ export type PullRequestInput = {
     /** Id of pull request **/
     identifier: number;
 };
-export type PullRequestResult = {
+export type VcsPullRequestPullRequestResult = {
     /** Title of pull request **/
     title: string;
     /** Pull request Id **/
@@ -23,7 +23,7 @@ const profile = {
      * Get Pull Request Details
      * Get details of the specified pull request.
      **/
-    "PullRequest": typeHelper<PullRequestInput, PullRequestResult>()
+    "PullRequest": typeHelper<VcsPullRequestPullRequestInput, VcsPullRequestPullRequestResult>()
 };
 export type VcsPullRequestProfile = TypedProfile<typeof profile>;
 export const vcsPullRequest = {

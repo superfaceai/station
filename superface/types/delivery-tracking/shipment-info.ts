@@ -1,6 +1,6 @@
 import { TypedProfile,typeHelper } from '@superfaceai/one-sdk';
 
-export type ShipmentInfoInput = {
+export type DeliveryTrackingShipmentInfoShipmentInfoInput = {
     /**
      * Shipment tracking number
      * Identifier of shipment
@@ -12,7 +12,7 @@ export type ShipmentInfoInput = {
      **/
     carrier?: string | null;
 };
-export type ShipmentInfoResult = {
+export type DeliveryTrackingShipmentInfoShipmentInfoResult = {
     /**
      * Carrier
      * Shipment carrier identification
@@ -145,7 +145,7 @@ const profile = {
      * Retrieve Shipment Status
      * Get the actual shipment status.
      **/
-    "ShipmentInfo": typeHelper<ShipmentInfoInput, ShipmentInfoResult>()
+    "ShipmentInfo": typeHelper<DeliveryTrackingShipmentInfoShipmentInfoInput, DeliveryTrackingShipmentInfoShipmentInfoResult>()
 };
 export type DeliveryTrackingShipmentInfoProfile = TypedProfile<typeof profile>;
 export const deliveryTrackingShipmentInfo = {

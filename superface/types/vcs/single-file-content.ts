@@ -1,6 +1,6 @@
 import { TypedProfile,typeHelper } from '@superfaceai/one-sdk';
 
-export type SingleFileContentInput = {
+export type VcsSingleFileContentSingleFileContentInput = {
     /** Owner of the repository **/
     owner: string;
     /** Repository name **/
@@ -10,7 +10,7 @@ export type SingleFileContentInput = {
     /** Branch eg. main **/
     ref: string;
 };
-export type SingleFileContentResult = {
+export type VcsSingleFileContentSingleFileContentResult = {
     /** Size of content according to used provider **/
     size: number;
     /** Content of file **/
@@ -23,7 +23,7 @@ const profile = {
      * Get Single File Content
      * Get the content of the specified file.
      **/
-    "SingleFileContent": typeHelper<SingleFileContentInput, SingleFileContentResult>()
+    "SingleFileContent": typeHelper<VcsSingleFileContentSingleFileContentInput, VcsSingleFileContentSingleFileContentResult>()
 };
 export type VcsSingleFileContentProfile = TypedProfile<typeof profile>;
 export const vcsSingleFileContent = {
