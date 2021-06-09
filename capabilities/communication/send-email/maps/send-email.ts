@@ -48,10 +48,6 @@ export const sendEmailTest = (providerName: string): void => {
 
       describe('when inputs are invalid', () => {
         it('should throw on unwrap', async () => {
-          const client = new SuperfaceClient();
-          const profile = await client.getProfile('communication/send-email');
-          const provider = await client.getProvider(providerName);
-
           const result = await profile.useCases.SendEmail.perform(
             {
               to: 'invalidemail',
@@ -104,10 +100,6 @@ export const sendEmailTest = (providerName: string): void => {
 
       describe('when inputs are invalid', () => {
         it('should throw error on unwrap', async () => {
-          const client = new SuperfaceClient();
-          const profile = await client.getProfile('communication/send-email');
-          const provider = await client.getProvider(providerName);
-
           const result = await profile.useCases.SendTemplatedEmail.perform(
             {
               to: 'invalidemail',
