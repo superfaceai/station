@@ -1,18 +1,8 @@
-import { TypedProfile,typeHelper } from '@superfaceai/one-sdk';
-
-export type CleanAddressInput = {
-    street?: unknown;
-    city?: unknown;
-    state?: unknown;
-    zipcode?: unknown;
-};
-export type CleanAddressResult = {
-    street?: unknown;
-    city?: unknown;
-    state?: unknown;
-    zipcode?: unknown;
-};
-const profile = {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.addressCleanAddress = void 0;
+var one_sdk_1 = require("@superfaceai/one-sdk");
+var profile = {
     /**
      * Clean Address
      * This use case will take an address like:
@@ -35,9 +25,8 @@ const profile = {
      *
      * This is useful for cleaning up addresses input by users.
      **/
-    "CleanAddress": typeHelper<CleanAddressInput, CleanAddressResult>()
+    "CleanAddress": one_sdk_1.typeHelper()
 };
-export type AddressCleanAddressProfile = TypedProfile<typeof profile>;
-export const addressCleanAddress = {
+exports.addressCleanAddress = {
     "address/clean-address": profile
 };

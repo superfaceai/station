@@ -1,6 +1,6 @@
-import { TypedProfile,typeHelper } from '@superfaceai/one-sdk';
+import { TypedProfile } from '@superfaceai/one-sdk';
 
-export type GeocodeInput = {
+export declare type AddressGeocodingGeocodeInput = {
     /**
      * Country
      * The country. For example, USA. You can also provide the two-letter ISO 3166-1 alpha-2 country code.
@@ -27,7 +27,7 @@ export type GeocodeInput = {
      **/
     streetAddress?: unknown;
 };
-export type GeocodeResult = {
+export declare type AddressGeocodingGeocodeResult = {
     /**
      * Latitude
      * The latitude of a location. For example 37.42242 (WGS 84).
@@ -39,7 +39,7 @@ export type GeocodeResult = {
      **/
     longitude: unknown;
 };
-export type ReverseGeocodeInput = {
+export declare type AddressGeocodingReverseGeocodeInput = {
     /**
      * Latitude
      * The latitude of a location. For example 37.42242 (WGS 84).
@@ -51,7 +51,7 @@ export type ReverseGeocodeInput = {
      **/
     longitude: unknown;
 };
-export type ReverseGeocodeResult = {
+export declare type AddressGeocodingReverseGeocodeResult = {
     /**
      * Country
      * The country. For example, USA. You can also provide the two-letter ISO 3166-1 alpha-2 country code.
@@ -83,19 +83,31 @@ export type ReverseGeocodeResult = {
      **/
     formattedAddress?: unknown;
 }[];
-const profile = {
+declare const profile: {
     /**
      * Geocode address
      * Geocode postal address into geographical coordinates (latitude and longitude)
      **/
-    "Geocode": typeHelper<GeocodeInput, GeocodeResult>(),
+    Geocode: [AddressGeocodingGeocodeInput, AddressGeocodingGeocodeResult];
     /**
      * Reverse geocode
      * Decodes geographical coordinates (latitude and longitude) into postal addresses
      **/
-    "ReverseGeocode": typeHelper<ReverseGeocodeInput, ReverseGeocodeResult>()
+    ReverseGeocode: [AddressGeocodingReverseGeocodeInput, AddressGeocodingReverseGeocodeResult];
 };
-export type AddressGeocodingProfile = TypedProfile<typeof profile>;
-export const addressGeocoding = {
-    "address/geocoding": profile
+export declare type AddressGeocodingProfile = TypedProfile<typeof profile>;
+export declare const addressGeocoding: {
+    "address/geocoding": {
+        /**
+         * Geocode address
+         * Geocode postal address into geographical coordinates (latitude and longitude)
+         **/
+        Geocode: [AddressGeocodingGeocodeInput, AddressGeocodingGeocodeResult];
+        /**
+         * Reverse geocode
+         * Decodes geographical coordinates (latitude and longitude) into postal addresses
+         **/
+        ReverseGeocode: [AddressGeocodingReverseGeocodeInput, AddressGeocodingReverseGeocodeResult];
+    };
 };
+export {};

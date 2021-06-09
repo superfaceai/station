@@ -7,7 +7,10 @@ import {
 import {
   generateTypesFile,
   generateTypingsForProfile,
+  transpileFiles,
 } from '@superfaceai/cli/dist/logic/generate';
+import { SUPERFACE_DIR, SuperJson } from '@superfaceai/one-sdk';
+import { join } from 'path';
 
 import { LogCallback } from '../common';
 import {
@@ -17,6 +20,7 @@ import {
   TYPE_DEFINITIONS_FILE,
   TYPES_FILE_PATH,
   TYPES_PATH,
+  UNCOMPILED_SDK_FILE,
 } from '../common/constants';
 import {
   exists,
@@ -34,6 +38,8 @@ export async function generate(
     logCb?: LogCallback;
   }
 ): Promise<void> {
+  const sources: Record<string, string> = {};
+
   //Get ATS
   const astPath = `./${PROFILE_BUILD_PATH}/${scope}/${profile}/profile${EXTENSIONS.profile.build}`;
   if (!(await exists(astPath))) {
@@ -56,7 +62,11 @@ export async function generate(
   options?.logCb?.(
     `AST file found. Generating types for: "${scope}/${profile}"`
   );
-  await generateProfileTypes(scope, profile, astJson);
+  const typing = await generateProfileTypes(scope, profile, astJson);
+
+  sources[
+    join('types', `${scope}/${profile}${EXTENSIONS.typescript}`)
+  ] = typing;
 
   //Generate types file
   const profileIds: string[] = [];
@@ -75,9 +85,17 @@ export async function generate(
   const typesFile = generateTypesFile(profileIds);
   await writeFile(sdkPath, typesFile);
 
+  sources[UNCOMPILED_SDK_FILE] = typesFile;
+
   options?.logCb?.(
     `Updating "sdk.ts" file with types for: "${scope}/${profile}"`
   );
+
+  //Load super.json for transpilation
+  const superJson = (
+    await SuperJson.load(`./${SUPERFACE_DIR}/super.json`)
+  ).unwrap();
+  await transpileFiles(sources, superJson);
 }
 
 export async function generateProfileTypes(
@@ -87,7 +105,7 @@ export async function generateProfileTypes(
   options?: {
     logCb?: LogCallback;
   }
-): Promise<void> {
+): Promise<string> {
   //Generate profile types
   const typing = generateTypingsForProfile(ast);
   //Create folder structure if it doesn't exist
@@ -122,4 +140,6 @@ export async function generateProfileTypes(
       typeDefinitions
     );
   }
+
+  return typing;
 }
