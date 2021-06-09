@@ -36,12 +36,12 @@ describe('address/geocoding/nominatim', () => {
     expect(result.isOk()).toBeTruthy();
     expect(value).toEqual([
       {
-        streetAddress: '277 Bedford Ave',
-        addressLocality: 'Brooklyn',
-        addressRegion: 'Kings County, NY',
-        addressCountry: 'US',
-        postalCode: '11211',
-        formattedAddress: '277 Bedford Ave, Brooklyn, NY 11211, USA',
+        addressCountry: 'United States',
+        addressRegion: 'New York',
+        addressCityDistrict: 'Kings County',
+        addressLocality: 'New York Brooklyn',
+        streetAddress: '281 Bedford Avenue',
+        postalCode: '11211'
       },
     ]);
   });

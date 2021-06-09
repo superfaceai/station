@@ -39,7 +39,6 @@ map ReverseGeocode {
     response 200 "application/json" {
       return map error if (statusCode !== 200) {
         title = "Error reverse geocoding coordinates"
-        detail = 'soms'
       }
 
       mappedAddress = {};
@@ -51,7 +50,7 @@ map ReverseGeocode {
       }
 
       // country code
-      set if(!keys.includes('country') && keys.includes('country_code')) {
+      set if (!keys.includes('country') && keys.includes('country_code')) {
         mappedAddress.addressCountry = body.address.country_code;
       }
 
@@ -71,8 +70,11 @@ map ReverseGeocode {
       }
 
       // locality - city
-      set if(keys.includes('city')) {
+      set if (keys.includes('city')) {
           mappedAddress.addressLocality = body.address.city;
+      }
+      set if (keys.includes('city') && keys.includes('borough')) {
+        mappedAddress.addressLocality = body.address.city + ' ' + body.address.borough;
       }
 
       // locality - town
@@ -82,25 +84,25 @@ map ReverseGeocode {
 
       // locality - village
       set if (!keys.includes('town') && keys.includes('village')) {
-          mappedAddress.addressLocality = body.address.town;
+          mappedAddress.addressLocality = body.address.village;
       }
 
       // street address
-      set if(keys.includes('road')) {
+      set if (keys.includes('road')) {
         mappedAddress.streetAddress = body.address.road;
       }
       set if (keys.includes('house_number')) {
-          mappedAddress.streetAddress = mappedAddress.streetAddress + ' ' + body.address.house_number
+          mappedAddress.streetAddress = body.address.house_number  + ' ' + mappedAddress.streetAddress;
       }
 
-      // postcode
+      // postal code
       set if (keys.includes('postcode')) {
         mappedAddress.postalCode = body.address.postcode;
       }
         
       // formatted address
       set if (keys.includes('display_name')) {  
-        mappedAddress.formattedAddress = body.display_name
+        mappedAddress.formattedAddress = body.display_name;
       }
 
       map result [mappedAddress] 
