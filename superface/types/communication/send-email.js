@@ -7,7 +7,12 @@ var profile = {
      * Send transactional email to one recipient
      * Email can contain text and/or html representation
      **/
-    "SendEmail": one_sdk_1.typeHelper()
+    "SendEmail": one_sdk_1.typeHelper(),
+    /**
+     * Send templated transactional email to one recipient
+     * Requires template defined on provider side.
+     **/
+    "SendTemplatedEmail": one_sdk_1.typeHelper()
 };
 exports.communicationSendEmail = {
     "communication/send-email": profile

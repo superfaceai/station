@@ -33,6 +33,7 @@ export declare const SuperfaceClient: new () => import("@superfaceai/one-sdk/dis
     };
     "communication/send-email": {
         SendEmail: [import("./types/communication/send-email").CommunicationSendEmailSendEmailInput, import("./types/communication/send-email").CommunicationSendEmailSendEmailResult];
+        SendTemplatedEmail: [import("./types/communication/send-email").CommunicationSendEmailSendTemplatedEmailInput, import("./types/communication/send-email").CommunicationSendEmailSendTemplatedEmailResult];
     };
     "address/geocoding": {
         Geocode: [import("./types/address/geocoding").AddressGeocodingGeocodeInput, import("./types/address/geocoding").AddressGeocodingGeocodeResult];
