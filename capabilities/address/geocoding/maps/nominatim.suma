@@ -101,9 +101,7 @@ map ReverseGeocode {
       }
         
       // formatted address
-      set if (keys.includes('display_name')) {  
-        mappedAddress.formattedAddress = body.display_name;
-      }
+      mappedAddress.formattedAddress = body.display_name;
 
       map result [mappedAddress] 
     }

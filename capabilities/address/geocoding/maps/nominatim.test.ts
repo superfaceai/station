@@ -41,7 +41,9 @@ describe('address/geocoding/nominatim', () => {
         addressCityDistrict: 'Kings County',
         addressLocality: 'New York Brooklyn',
         streetAddress: '281 Bedford Avenue',
-        postalCode: '11211'
+        postalCode: '11211',
+        formattedAddress:
+          '281, Bedford Avenue, Williamsburg, Brooklyn, Kings County, New York, 11211, United States',
       },
     ]);
   });
