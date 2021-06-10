@@ -139,24 +139,22 @@
       "file": "./grid/communication/send-email/profile.supr",
       "providers": {
         "sendgrid": {
-          "file": "./grid/communication/send-email/maps/sendgrid.suma",
-          "defaults": {
-            "SendEmail": {
-              "input": {
-                "from": "$SENDGRID_COMMUNICATION_SENDEMAIL_FROM",
-                "to": "$COMMUNICATION_SENDEMAIL_TO"
-              }
-            }
-          }
+          "file": "./grid/communication/send-email/maps/sendgrid.suma"
         },
         "mailgun": {
           "file": "./grid/communication/send-email/maps/mailgun.suma",
           "defaults": {
             "SendEmail": {
               "input": {
-                "from": "$MAILGUN_COMMUNICATION_SENDEMAIL_FROM",
-                "to": "$COMMUNICATION_SENDEMAIL_TO",
                 "domain": "$MAILGUN_COMMUNICATION_DOMAIN"
+              }
+            },
+            "SendTemplatedEmail": {
+              "input": {
+                "domain": "$MAILGUN_COMMUNICATION_DOMAIN",
+                "templateData": {
+                  "subject": "Station test - mailgun"
+                }
               }
             }
           }
@@ -171,8 +169,16 @@
               "input": {
                 "mailchimp_api_key": "$MAILCHIMP_API_KEY"
               }
+            },
+            "SendTemplatedEmail": {
+              "input": {
+                "mailchimp_api_key": "$MAILCHIMP_API_KEY"
+              }
             }
           }
+        },
+        "postmark": {
+          "file": "./grid/communication/send-email/maps/postmark.suma"
         }
       }
     },
@@ -354,6 +360,13 @@
     },
     "mailchimp": {
       "file": "../providers/mailchimp.json"
+    },
+    "postmark": {
+      "file": "../providers/postmark.json",
+      "security": [{
+        "id": "server_token",
+        "apikey": "$POSTMARK_API_TOKEN"
+      }]
     }
   }
 }

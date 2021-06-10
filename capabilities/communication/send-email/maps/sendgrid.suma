@@ -1,11 +1,7 @@
-"""
-## Documentation needed to implement this Map
+// SendGrid API Reference: https://sendgrid.com/docs/api-reference/"
+// Errors: https://sendgrid.api-docs.io/v3.0/mail-send/mail-send-errors
 
-+ SendGrid API Reference: https://sendgrid.com/docs/api-reference/"
-+ Errors: https://sendgrid.api-docs.io/v3.0/mail-send/mail-send-errors
-"""
-
-profile = "communication/send-email@1.0"
+profile = "communication/send-email@1.1"
 provider = "sendgrid"
 
 map SendEmail {
@@ -39,6 +35,70 @@ map SendEmail {
       }
     }
     
+    response 202 "*" {
+      map result {
+        messageId = headers['x-message-id']
+      }
+    }
+
+    response 400 "application/json" {
+      map error {
+        title = "Invalid inputs"
+        detail = body.errors.map((err) => `Input '${INPUTS_MAP[err.field] || err.field}': ${err.message}`).join(' ')
+      }
+    }
+
+    response 413 "application/json" {
+      map error {
+        title = "Payload Too Large"
+        detail = body.errors.map((err) => err.message).join(' ')
+      }
+    }
+
+    response 401 "application/json" {
+      map error {
+        title = "Unauthorized"
+        detail = body.errors.map((err) => err.message).join(' ')
+      }
+    }
+
+    response 403 "application/json" {
+      map error {
+        title = "Forbidden"
+        detail = body.errors.map((err) => err.message).join(' ')
+      }
+    }
+
+    response 500 "application/json" {
+      map error {
+        title = "Internal server Error"
+        detail = body.errors.map((err) => err.message).join(' ')
+      }
+    }
+  }
+}
+
+map SendTemplatedEmail {
+  INPUTS_MAP = {
+    'personalizations.0.to.0.email': 'to',
+    'from.email': 'from',
+    'template_id': 'templateId',
+  }
+
+  http POST "/mail/send" {
+    security "bearer_token"
+
+    request {
+      body = {
+        template_id: input.templateId,
+        from: { email: input.from },
+        personalizations: [{
+          to: [{ email: input.to }],
+          dynamic_template_data: input.templateData,
+        }]
+      }
+    }
+
     response 202 "*" {
       map result {
         messageId = headers['x-message-id']
