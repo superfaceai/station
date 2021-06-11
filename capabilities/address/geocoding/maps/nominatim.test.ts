@@ -1,7 +1,7 @@
 import { SuperfaceClient } from '../../../../superface/sdk';
 
 describe('address/geocoding/nominatim', () => {
-  it.skip('Geocode address', async () => {
+  it('Geocode address', async () => {
     const client = new SuperfaceClient();
     const profile = await client.getProfile('address/geocoding');
     const provider = await client.getProvider('nominatim');
@@ -16,8 +16,8 @@ describe('address/geocoding/nominatim', () => {
     );
 
     expect(result.isOk()).toBeTruthy();
-    expect(result.unwrap().latitude).toBe(37.4220972);
-    expect(result.unwrap().longitude).toBe(-122.0840909);
+    expect(result.unwrap().latitude).toBe("37.42248575");
+    expect(result.unwrap().longitude).toBe("-122.08558456613565");
   });
 
   it('Reverse geocode geographical coordingates', async () => {

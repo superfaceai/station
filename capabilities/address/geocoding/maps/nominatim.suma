@@ -8,19 +8,25 @@ map Geocode {
   http GET "/search" {
     request {
       query {
-        address = (`${input.streetAddress || ""}, ${input.addressLocality || ""}, ${input.addressRegion || ""}, ${input.postalCode || ""}, ${input.addressCountry || ""}`)
+        format = 'json'
+        q = input.query
+        street = input.streetAddress
+        city = input.addressLocality
+        county = input.addressDistrict
+        state = input.addressRegion
+        country = input.addressCountry
+        postalcode = input.postalCode
       }
     }
 
     response 200 "application/json" {
-      return map error if (body.status !== "OK") {
+      return map error if (statusCode !== 200) {
         title = "Error geocoding address"
-        detail = body.status
       }
 
       map result {
-        latitude = body.results[0].geometry.location.lat
-        longitude = body.results[0].geometry.location.lng
+        latitude = body[0].lat
+        longitude = body[0].lon
       }
     }
   }
@@ -30,9 +36,9 @@ map ReverseGeocode {
   http GET "/reverse" {
     request {
       query {
-        format = 'json',
-        lat = (`${input.latitude || ""}`),
-        lon = (`${input.longitude || ""}`),
+        format = 'json'
+        lat = input.latitude
+        lon = input.longitude
       }
     }
 
