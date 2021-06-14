@@ -1,0 +1,44 @@
+profile = "address/geocoding@3.0"
+provider = "azure-maps"
+
+// Google Geocoding API documentation
+//   https://developers.google.com/maps/documentation/geocoding/start
+
+map Geocode {
+  http GET "/json" {
+    request {
+      query {
+        'subscription-key' = input.subscriptionKey
+        'api-version' = '1.0'
+        query = input.query
+      }
+    }
+
+    response 200 "application/json" {
+      return map error if (body.results.length === 0) {
+        title = "Error geocoding address"
+      }
+
+      map result body.results[0].position
+    }
+  }
+}
+
+map ReverseGeocode {
+  http GET "/reverse/json?" {
+    request {
+      query {
+        'api-version' = '1.0'
+        'subscription-key' = input.subscriptionKey
+      }
+    }
+
+    response 200 "application/json" {
+      return map error if (body.results.length === 0) {
+        title = "Error reverse geocoding coordinates"
+      }
+
+      map error "Not implemented"
+    }
+  }
+}
