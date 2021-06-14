@@ -16,8 +16,8 @@ describe('address/geocoding/nominatim', () => {
     );
 
     expect(result.isOk()).toBeTruthy();
-    expect(result.unwrap().latitude).toBe("37.42248575");
-    expect(result.unwrap().longitude).toBe("-122.08558456613565");
+    expect(result.unwrap().latitude).toBe('37.42248575');
+    expect(result.unwrap().longitude).toBe('-122.08558456613565');
   });
 
   it('Reverse geocode geographical coordingates', async () => {
