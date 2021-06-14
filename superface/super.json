@@ -221,6 +221,16 @@
         },
         "mock": {
           "file": "./grid/address/geocoding/maps/mock.suma"
+        },
+        "azure-maps": {
+          "file": "./grid/address/geocoding/maps/azure-maps.suma",
+          "defaults": {
+            "Geocode": {
+              "input": {
+                "subscriptionKey": "$SUBSCRIPTION_KEY"
+              }
+            }
+          }
         }
       }
     },
@@ -363,10 +373,16 @@
     },
     "postmark": {
       "file": "../providers/postmark.json",
-      "security": [{
-        "id": "server_token",
-        "apikey": "$POSTMARK_API_TOKEN"
-      }]
+      "security": [
+        {
+          "id": "server_token",
+          "apikey": "$POSTMARK_API_TOKEN"
+        }
+      ]
+    },
+    "azure-maps": {
+      "file": "../providers/azure-maps.json",
+      "security": []
     }
   }
 }
