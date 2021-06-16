@@ -1,9 +1,6 @@
 profile = "address/geocoding@3.0"
 provider = "azure-maps"
 
-// Google Geocoding API documentation
-//   https://developers.google.com/maps/documentation/geocoding/start
-
 map Geocode {
   http GET "/json" {
     request {
@@ -25,20 +22,23 @@ map Geocode {
 }
 
 map ReverseGeocode {
-  http GET "/reverse/json?" {
+  http GET "/reverse/json" {
     request {
       query {
-        'api-version' = '1.0'
         'subscription-key' = input.subscriptionKey
+        'api-version' = '1.0'
+        query = input.latitude + ',' + input.longitude
       }
     }
 
     response 200 "application/json" {
-      return map error if (body.results.length === 0) {
+      return map error if (body.addresses.length === 0) {
         title = "Error reverse geocoding coordinates"
       }
 
-      map error "Not implemented"
+      addresses = body.addresses.map(item => item.address);
+
+      map result addresses;
     }
   }
 }
