@@ -1,4 +1,4 @@
-profile = "starwars/character-information@1.0.1"
+profile = "starwars/character-information@1.0"
 provider = "swapi"
 
 map RetrieveCharacterInformation {
@@ -11,13 +11,14 @@ map RetrieveCharacterInformation {
 
     response 200 "application/json" {
       return map error if (body.count === 0) {
-        message = "no character found"
+        message = "No character found"
       }
 
-      entries = body.results.filter((result) => result.name === input.characterName)
+      entries = body.results.filter(result => result.name.toLowerCase() === input.characterName.toLowerCase())
 
-      map error if (entries === undefined || entries.length === 0) {
-        message = "not found"
+      return map error if (entries.length === 0) {
+        message = "Specified character name is incorrect, did you mean to enter one of following?"
+        characters = body.results.map(result => result.name)
       }
       
       character = entries[0]

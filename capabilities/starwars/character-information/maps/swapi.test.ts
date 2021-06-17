@@ -9,12 +9,14 @@ describe('starwars/character-information/swapi', () => {
 
     expect(useCase).not.toBeUndefined();
     expect(provider).not.toBeUndefined();
+
     const result = await useCase.perform(
       {
         characterName: 'Luke Skywalker',
       },
       { provider }
     );
+
     expect(result.unwrap()).toEqual({
       height: '172',
       weight: '77',
