@@ -1,5 +1,6 @@
 export { AddressCleanAddressProfile } from "./types/address/clean-address";
 export { AddressGeocodingProfile } from "./types/address/geocoding";
+export { CommunicationEmailTemplatesProfile } from "./types/communication/email-templates";
 export { CommunicationSendEmailProfile } from "./types/communication/send-email";
 export { CommunicationSendSmsProfile } from "./types/communication/send-sms";
 export { DeliveryTrackingShipmentInfoProfile } from "./types/delivery-tracking/shipment-info";
@@ -34,6 +35,11 @@ export declare const SuperfaceClient: new () => import("@superfaceai/one-sdk/dis
     "communication/send-email": {
         SendEmail: [import("./types/communication/send-email").CommunicationSendEmailSendEmailInput, import("./types/communication/send-email").CommunicationSendEmailSendEmailResult];
         SendTemplatedEmail: [import("./types/communication/send-email").CommunicationSendEmailSendTemplatedEmailInput, import("./types/communication/send-email").CommunicationSendEmailSendTemplatedEmailResult];
+    };
+    "communication/email-templates": {
+        ListTemplates: [any, import("./types/communication/email-templates").CommunicationEmailTemplatesListTemplatesResult];
+        GetTemplateData: [import("./types/communication/email-templates").CommunicationEmailTemplatesGetTemplateDataInput, import("./types/communication/email-templates").CommunicationEmailTemplatesGetTemplateDataResult];
+        CreateTemplate: [import("./types/communication/email-templates").CommunicationEmailTemplatesCreateTemplateInput, import("./types/communication/email-templates").CommunicationEmailTemplatesCreateTemplateResult];
     };
     "address/geocoding": {
         Geocode: [import("./types/address/geocoding").AddressGeocodingGeocodeInput, import("./types/address/geocoding").AddressGeocodingGeocodeResult];

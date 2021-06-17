@@ -1,0 +1,34 @@
+name = "communication/email-templates"
+version = "1.0"
+
+usecase ListTemplates safe {
+  result [Template]
+}
+
+usecase GetTemplateData safe {
+  input {
+    id!
+  }
+
+  result {
+    subject
+    text
+    html
+  }
+}
+
+usecase CreateTemplate unsafe {
+  input {
+    name!
+    subject!
+    text!
+    html!
+  }
+
+  result Template
+}
+
+model Template {
+  id
+  name
+}

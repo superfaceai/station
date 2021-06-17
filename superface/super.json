@@ -238,6 +238,14 @@
           "file": "./grid/delivery-tracking/shipment-info/maps/mock.suma"
         }
       }
+    },
+    "communication/email-templates": {
+      "file": "./grid/communication/email-templates/profile.supr",
+      "providers": {
+        "mock": {
+          "file": "./grid/communication/email-templates/maps/mock.suma"
+        }
+      }
     }
   },
   "providers": {
@@ -363,10 +371,12 @@
     },
     "postmark": {
       "file": "../providers/postmark.json",
-      "security": [{
-        "id": "server_token",
-        "apikey": "$POSTMARK_API_TOKEN"
-      }]
+      "security": [
+        {
+          "id": "server_token",
+          "apikey": "$POSTMARK_API_TOKEN"
+        }
+      ]
     }
   }
 }
