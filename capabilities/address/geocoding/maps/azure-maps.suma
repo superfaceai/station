@@ -36,9 +36,59 @@ map ReverseGeocode {
         title = "Error reverse geocoding coordinates"
       }
 
-      addresses = body.addresses.map(item => item.address);
+      addresses = body.addresses.map(item => item.address).filter(item => item.countryCode || item.freeformAddress);
 
-      map result addresses;
+      return map error if (addresses.length === 0) {
+          title = "Could not find any information about address."
+      }
+      
+      map result addresses.map(address => {
+        result = {}
+        
+        // country code
+        if (address.countryCode || address.countryCodeISO3) {
+            result.addressCountry = address.countryCodeISO3 || address.countryCode;
+        }
+
+        // region
+        if (address.countrySubdivision) {
+            result.addressRegion = address.countrySubdivision;
+        }
+
+        // district
+        // city district
+        if (address.countrySecondarySubdivision) {
+            result.addressCityDistrict = address.countrySecondarySubdivision;
+        }
+
+        // locality
+        if (address.countrySubdivisionName) {
+            result.addressLocality = 
+                address.localName 
+                ? `${address.countrySubdivisionName} ${address.localName}` 
+                : address.countrySubdivisionName
+        }
+
+        // street address
+        if (address.streetName || address.streetNameAndNumber) {
+            result.streetAddress = address.streetNameAndNumber || address.streetName;
+        }
+
+        // postal code
+        if (address.postalCode || address.extendedPostalCode) {
+            result.postalCode = address.postalCode || address.extendedPostalCode
+        }
+
+        // formatted address
+        if (address.freeformAddress) {
+            result.formattedAddress = 
+                address.country 
+                ? `${address.freeformAddress}, ${address.country}` 
+                : address.freeformAddress
+        }
+
+        return result
+      });
     }
   }
 }

@@ -28,7 +28,7 @@ describe('address/geocoding/azure-maps-typed', () => {
     });
   });
 
-  it.skip('Reverse geocode geographical coordingates', async () => {
+  it('Reverse geocode geographical coordinates', async () => {
     const client = new SuperfaceClient();
     const profile = await client.getProfile('address/geocoding');
     const provider = await client.getProvider('azure-maps');
@@ -39,8 +39,8 @@ describe('address/geocoding/azure-maps-typed', () => {
     
     const result = await usecase.perform(
       {
-        latitude: 50.0593325,
-        longitude: 14.1854451,
+        latitude: 40.714224,
+        longitude: -73.961452,
       },
       { provider }
     );
@@ -48,13 +48,14 @@ describe('address/geocoding/azure-maps-typed', () => {
     expect(result.isOk()).toBeTruthy();
     expect(result.unwrap()).toEqual([
       {
-        addressCountry: 'US',
-        streetAddress: '281 Bedford Avenue',
-        postalCode: '11211',
+        addressCountry: 'USA',
         addressRegion: 'NY',
-        addressLocality: 'New York',
+        addressCityDistrict: "Kings",
+        addressLocality: 'New York Brooklyn',
+        streetAddress: '279 Bedford Avenue',
+        postalCode: '11211',
         formattedAddress:
-          '281 Bedford Avenue, New York, NY 11211, United States of America',
+          '279 Bedford Avenue, Brooklyn, NY 11211, United States',
       },
     ]);
   });
