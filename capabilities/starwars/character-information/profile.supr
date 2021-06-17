@@ -3,7 +3,7 @@ Star Wars Character Information
 Retrive information about Star Wars characters.
 """
 name = "starwars/character-information"
-version = "1.0.2"
+version = "1.0.3"
 
 """
 Retrieve Character Info
@@ -22,6 +22,7 @@ usecase RetrieveCharacterInformation safe {
 
   error {
     message
+    characters
   }
 }
 
@@ -54,3 +55,9 @@ Message
 The message for when an error occurs looking up character information
 "
 field message string
+
+"
+Characters
+List of characters which might correspond to entered character name.
+"
+field characters [string]
