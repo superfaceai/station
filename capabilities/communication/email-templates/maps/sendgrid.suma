@@ -1,0 +1,89 @@
+profile = "communication/email-templates@1.0"
+provider = "sendgrid"
+
+map ListTemplates {
+  http GET "/templates" {
+    security "bearer_token"
+
+    request {
+      query {
+        generations = "legacy,dynamic"
+      }
+    }
+
+    response 200 "application/json" {
+      map result body.templates.map((template) => ({
+        id: template.id,
+        name: template.name,
+      }))
+    } 
+  }
+}
+
+map GetTemplateData {
+  http GET "/templates/{input.id}" {
+    security "bearer_token"
+
+    response 200 "application/json" {
+      activeTemplate = body.versions.filter((version) => version.active === 1)[0]
+
+      map result if (activeTemplate) {
+        subject = activeTemplate.subject
+        text = activeTemplate.plain_content
+        html = activeTemplate.html_content
+      }
+
+      map error if (!activeTemplate) {
+        title = (`Template not found`)
+        detail = (`Template with id ${input.id} not found`)
+      }
+    }
+  }
+}
+
+map CreateTemplate {
+  template = call CreateTemplate(name = input.name)
+  templateVersion = call CreateTemplateVersion(templateId = template.id, subject = input.subject, text = input.text, html = input.html)
+
+  map result {
+    id = template.id
+    name = template.name
+  }
+}
+
+operation CreateTemplate {
+  http POST "/templates" {
+    security "bearer_token"
+
+    request {
+      body {
+        name = args.name
+        generation = "dynamic"
+      }
+    }
+
+    response 201 "application/json" {
+      return body
+    }
+  }
+}
+
+operation CreateTemplateVersion {
+  http POST "/templates/{args.templateId}/versions" {
+    security "bearer_token"
+
+    request {
+      body {
+        name = "v1"
+        subject = args.subject
+        plain_content = args.text
+        html_content = args.html
+        active = 1
+      }
+    }
+
+    response 201 "application/json" {
+      return body
+    }
+  }
+}
