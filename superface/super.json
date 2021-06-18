@@ -258,6 +258,9 @@
       "providers": {
         "mock": {
           "file": "./grid/communication/send-message/maps/mock.suma"
+        },
+        "slack": {
+          "file": "./grid/communication/send-message/maps/slack.suma"
         }
       }
     }
@@ -389,6 +392,15 @@
         {
           "id": "server_token",
           "apikey": "$POSTMARK_API_TOKEN"
+        }
+      ]
+    },
+    "slack": {
+      "file": "../providers/slack.json",
+      "security": [
+        {
+          "id": "bearer_token",
+          "token": "$SLACK_ACCESS_TOKEN"
         }
       ]
     }
