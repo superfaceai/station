@@ -1,6 +1,9 @@
 profile = "communication/email-templates@1.0"
 provider = "sendgrid"
 
+"""
+Not paginated, if you have more than 200 templates result might be incomplete
+"""
 map ListTemplates {
   http GET "/templates" {
     security "bearer_token"
@@ -8,6 +11,7 @@ map ListTemplates {
     request {
       query {
         generations = "legacy,dynamic"
+        page_size = 200
       }
     }
 
