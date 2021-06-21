@@ -67,9 +67,9 @@ export const emailTemplatestTest = (providerName: string): void => {
       });
     });
 
-    describe('usecase GetTemplateData', () => {
+    describe('usecase GetTemplateContent', () => {
       it('should perform correctly', async () => {
-        const usecase = profile.useCases.GetTemplateData;
+        const usecase = profile.useCases.GetTemplateContent;
         expect(usecase).not.toBeUndefined();
 
         const templates = (

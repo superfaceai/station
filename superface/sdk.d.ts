@@ -38,7 +38,7 @@ export declare const SuperfaceClient: new () => import("@superfaceai/one-sdk/dis
     };
     "communication/email-templates": {
         ListTemplates: [any, import("./types/communication/email-templates").CommunicationEmailTemplatesListTemplatesResult];
-        GetTemplateData: [import("./types/communication/email-templates").CommunicationEmailTemplatesGetTemplateDataInput, import("./types/communication/email-templates").CommunicationEmailTemplatesGetTemplateDataResult];
+        GetTemplateContent: [import("./types/communication/email-templates").CommunicationEmailTemplatesGetTemplateContentInput, import("./types/communication/email-templates").CommunicationEmailTemplatesGetTemplateContentResult];
         CreateTemplate: [import("./types/communication/email-templates").CommunicationEmailTemplatesCreateTemplateInput, import("./types/communication/email-templates").CommunicationEmailTemplatesCreateTemplateResult];
     };
     "address/geocoding": {
