@@ -27,6 +27,23 @@ This template is used by integration tests only
 </html>
 `;
 
+const htmlTemplateUpdated = `
+<!doctype html>
+<html>
+
+<head>
+  <meta name="viewport" content="width=device-width">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>Integration Test Email #1</title>
+</head>
+
+<body class="">
+This template is used by integration tests only 2
+</body>
+
+</html>
+`;
+
 export const emailTemplatestTest = (providerName: string): void => {
   describe(`communication/email-templates/${providerName}`, () => {
     let client: SuperfaceClient;
@@ -113,6 +130,41 @@ export const emailTemplatestTest = (providerName: string): void => {
         expect(typeof data.id).toBe('string');
         expect(typeof data.name).toBe('string');
         expect(data.name).toBe('Station test template');
+      });
+    });
+
+    describe('usecase UpdateTemplate', () => {
+      it('should perform correctly', async () => {
+        const createResult = await profile.useCases.CreateTemplate.perform(
+          {
+            name: 'Station test template',
+            subject: 'Integration Test Email #1',
+            text: 'This template is used by integration tests only',
+            html: htmlTemplate,
+          },
+          { provider }
+        );
+
+        expect(createResult.isOk()).toBeTruthy();
+
+        const templateId = createResult.unwrap().id;
+
+        const usecase = profile.useCases.UpdateTemplate;
+        expect(usecase).not.toBeUndefined();
+
+        const patch = {
+          id: templateId,
+          name: 'Station test template 2',
+          subject: 'Integration Test Email #2',
+          text: 'This template is used by integration tests only 2',
+          html: htmlTemplateUpdated,
+        };
+
+        const result = await usecase.perform(patch, { provider });
+        const data = result.unwrap();
+
+        expect(data.id).toBe(templateId);
+        expect(data.name).toBe('Station test template 2');
       });
     });
   });

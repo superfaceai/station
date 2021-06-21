@@ -61,3 +61,25 @@ map CreateTemplate {
     }
   }
 }
+
+map UpdateTemplate {
+  http PUT "/templates/{input.id}" {
+    security "server_token"
+
+    request "application/json" {
+      body {
+        Name = input.name
+        Subject = input.subject
+        TextBody = input.text
+        HtmlBody = input.html
+      }
+    }
+
+    response 200 "application/json" {
+      map result {
+        id = `${body.TemplateId}`
+        name = body.Name
+      }
+    }
+  }
+}

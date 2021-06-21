@@ -33,6 +33,24 @@ export declare type CommunicationEmailTemplatesCreateTemplateResult = {
     /** Name of the template **/
     name?: unknown;
 };
+export declare type CommunicationEmailTemplatesUpdateTemplateInput = {
+    /** Unique template identifier **/
+    id: unknown;
+    /** Name of the template **/
+    name?: unknown;
+    /** Subject of the email **/
+    subject?: unknown;
+    /** Text content **/
+    text?: unknown;
+    /** HTML Content **/
+    html?: unknown;
+};
+export declare type CommunicationEmailTemplatesUpdateTemplateResult = {
+    /** Unique template identifier **/
+    id?: unknown;
+    /** Name of the template **/
+    name?: unknown;
+};
 declare const profile: {
     /**
      * List all Templates
@@ -43,6 +61,8 @@ declare const profile: {
     GetTemplateContent: [CommunicationEmailTemplatesGetTemplateContentInput, CommunicationEmailTemplatesGetTemplateContentResult];
     /** Create new template **/
     CreateTemplate: [CommunicationEmailTemplatesCreateTemplateInput, CommunicationEmailTemplatesCreateTemplateResult];
+    /** Update template **/
+    UpdateTemplate: [CommunicationEmailTemplatesUpdateTemplateInput, CommunicationEmailTemplatesUpdateTemplateResult];
 };
 export declare type CommunicationEmailTemplatesProfile = TypedProfile<typeof profile>;
 export declare const communicationEmailTemplates: {
@@ -56,6 +76,8 @@ export declare const communicationEmailTemplates: {
         GetTemplateContent: [CommunicationEmailTemplatesGetTemplateContentInput, CommunicationEmailTemplatesGetTemplateContentResult];
         /** Create new template **/
         CreateTemplate: [CommunicationEmailTemplatesCreateTemplateInput, CommunicationEmailTemplatesCreateTemplateResult];
+        /** Update template **/
+        UpdateTemplate: [CommunicationEmailTemplatesUpdateTemplateInput, CommunicationEmailTemplatesUpdateTemplateResult];
     };
 };
 export {};

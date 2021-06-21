@@ -12,6 +12,8 @@ var profile = {
     "GetTemplateContent": one_sdk_1.typeHelper(),
     /** Create new template **/
     "CreateTemplate": one_sdk_1.typeHelper(),
+    /** Update template **/
+    "UpdateTemplate": one_sdk_1.typeHelper()
 };
 exports.communicationEmailTemplates = {
     "communication/email-templates": profile

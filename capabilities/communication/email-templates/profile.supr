@@ -42,6 +42,21 @@ usecase CreateTemplate unsafe {
   result Template
 }
 
+"""
+Update template
+"""
+usecase UpdateTemplate unsafe {
+  input {
+    id!
+    name
+    subject
+    text
+    html
+  }
+
+  result Template
+}
+
 model Template {
   id
   name
