@@ -16,7 +16,7 @@ map ListTemplates {
     }
 
     response 200 "application/json" {
-      map result body.templates.map((template) => ({
+      map result body.result.map((template) => ({
         id: template.id,
         name: template.name,
       }))
