@@ -1,0 +1,31 @@
+profile = "communication/email-templates@1.0"
+provider = "mock"
+
+map ListTemplates {
+  map result [
+    { id: '123456789', name: 'Station test template' },
+    { id: 'qwertyuiop', name: 'Station test template #2' }
+  ]
+}
+
+map GetTemplateContent {
+  map result {
+    subject: 'Integration Test Email #1',
+    text: 'This template is used by integration tests only',
+    html: '<!doctype html><html> <head>  <meta name="viewport" content="width=device-width">  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">  <title>Integration Test Email #1</title></head><body class="">This template is used by integration tests only</body></html>',
+  }
+}
+
+map CreateTemplate {
+  map result {
+    id: '123456789',
+    name: 'Station test template',
+  }
+}
+
+map UpdateTemplate {
+  map result {
+    id: '123456789',
+    name: 'Station test template 2',
+  }
+}

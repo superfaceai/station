@@ -1,0 +1,78 @@
+"""
+Manage email templates
+List, create or get template content
+"""
+name = "communication/email-templates"
+version = "1.0"
+
+"""
+List all Templates
+Result isn't paginated, amount of returned templates depenends on provider.
+"""
+usecase ListTemplates safe {
+  result [Template]
+}
+
+"""
+Obtain template content
+"""
+usecase GetTemplateContent safe {
+  input {
+    id!
+  }
+
+  result {
+    subject
+    text
+    html
+  }
+}
+
+"""
+Create new template
+"""
+usecase CreateTemplate unsafe {
+  input {
+    name!
+    subject!
+    text!
+    html!
+  }
+
+  result Template
+}
+
+"""
+Update template
+"""
+usecase UpdateTemplate unsafe {
+  input {
+    id!
+    name
+    subject
+    text
+    html
+  }
+
+  result Template
+}
+
+model Template {
+  id
+  name
+}
+
+"Unique template identifier"
+field id
+
+"Name of the template"
+field name
+
+"Subject of the email"
+field subject
+
+"Text content"
+field text
+
+"HTML Content"
+field html
