@@ -23,8 +23,8 @@ describe('address/geocoding/azure-maps-typed', () => {
     );
 
     expect(result.unwrap()).toEqual({
-      lat: 50.08781,
-      lon: 14.42046,
+      latitude: 50.08781,
+      longitude: 14.42046,
     });
   });
 
