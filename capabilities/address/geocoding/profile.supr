@@ -3,7 +3,7 @@ Geocoding
 Code or decode an postal address to or from geographical coordinates.
 """
 name = "address/geocoding"
-version = "3.0.1"
+version = "3.0.2"
 
 """
 Geocode address
@@ -12,11 +12,13 @@ Geocode postal address into geographical coordinates (latitude and longitude)
 """
 usecase Geocode {
   input {
-    addressCountry
-    addressLocality
-    addressRegion
-    postalCode
+    query
     streetAddress
+    addressLocality
+    addressDistrict
+    addressRegion
+    addressCountry
+    postalCode
   }
 
   result {
@@ -38,25 +40,39 @@ usecase ReverseGeocode {
 
   result [{
     addressCountry
-    addressLocality
     addressRegion
-    postalCode
+    addressDistrict
+    addressCityDistrict
+    addressLocality
     streetAddress
+    postalCode
     formattedAddress
   }]  
 }
+
+"Query
+  Free-form query string to search for."
+field query
 
 "Country
   The country. For example, USA. You can also provide the two-letter ISO 3166-1 alpha-2 country code."
 field addressCountry
 
+"Region
+  The region in which the district or locality is, and which is in the country. For example, California or another appropriate first-level Administrative division"
+field addressRegion
+
+"District
+  The district in which locality is, and which is in the region. For example Santa Clara County."
+field addressDistrict
+
 "Locality
-  The locality in which the street address is, and which is in the region. For example, Mountain View."
+  The locality in which the street address is, and which is in the district. For example, Mountain View."
 field addressLocality
 
-"Region
-  The region in which the locality is, and which is in the country. For example, California or another appropriate first-level Administrative division"
-field addressRegion
+"City district
+  The city district in which the street address is, and which is in adress locality. For example, Kings County."
+field addressCityDistrict
 
 "Postal code
   The postal code. For example, 94043."
