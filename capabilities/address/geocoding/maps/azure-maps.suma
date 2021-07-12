@@ -16,7 +16,10 @@ map Geocode {
         title = "Error geocoding address"
       }
 
-      map result body.results[0].position
+      map result {
+        latitude = body.results[0].position.lat
+        longitude = body.results[0].position.lon
+      }
     }
   }
 }
