@@ -5,11 +5,13 @@ provider = "opencage"
 //  https://opencagedata.com/api
 
 map Geocode {
+  payload = input.query || `${input.streetAddress || ""} ${input.addressLocality || ""} ${input.addressDistrict || ""} ${input.addressRegion || ""} ${input.postalCode || ""} ${input.addressCountry || ""}`
+  
   http GET "/geocode/v1/json" {
     security "apikey"
     request {
       query {
-        q = (`${input.streetAddress || ""}, ${input.addressLocality || ""}, ${input.addressRegion || ""}, ${input.postalCode || ""}, ${input.addressCountry || ""}`)
+        q = payload
       }
     }
 
@@ -29,11 +31,13 @@ map Geocode {
 
 
 map ReverseGeocode {
+  payload = `${input.latitude}+${input.longitude}`
+
   http GET "/geocode/v1/json" {
     security "apikey"
     request {
       query {
-        q = (`${input.latitude || ""}+${input.longitude || ""}`)
+        q = payload
       }
     }
 
@@ -43,41 +47,58 @@ map ReverseGeocode {
         detail = body.status.message
       }
 
-      filteredResults = body.results.filter(r => r.components._type === "building" )
-
-      map result filteredResults.map(r => {
+      map result body.results.map(result => {
         let mappedAddress = {};
 
-        if (r.components.hasOwnProperty('ISO_3166-1_alpha-2')) {
-          mappedAddress['addressCountry'] = r.components['ISO_3166-1_alpha-2'];
-        }
-        else if (r.components.hasOwnProperty('country_code')) {
-          mappedAddress['addressCountry'] = r.components['country_code'];
-        }
-
-        if (r.components.hasOwnProperty('road')) {
-          if (r.components.hasOwnProperty('house_number')) {
-            mappedAddress['streetAddress'] = r.components['house_number'] + " " + r.components['road'];
-          }
-          else {
-            mappedAddress['streetAddress'] = r.components['road'];
-          }
+        // country code
+        if (result.components['ISO_3166-1_alpha-2']) {
+          mappedAddress.addressCountry = result.components['ISO_3166-1_alpha-2'];
+        } else if (result.components.country_code) {
+          mappedAddress.addressCountry = result.components.country_code;
         }
 
-        if (r.components.hasOwnProperty('postcode')) {
-          mappedAddress['postalCode'] = r.components['postcode'];
+        // region
+        if (result.components.state_code) {
+          mappedAddress.addressRegion = 
+            result.components.city_district
+            ? `${result.components.city_district}, ${result.components.state_code}`
+            : result.components.state_code;
         }
 
-        if (r.components.hasOwnProperty('state_code')) {
-          mappedAddress['addressRegion'] = r.components['state_code'];
+        // district
+        if (result.components.city_district) {
+          mappedAddress.addressCityDistrict = result.components.city_district;
+        }
+        
+        // locality
+        if (result.components.city) {
+          mappedAddress.addressLocality = 
+            result.components.borough 
+            ? `${result.components.borough}, ${result.components.city}`
+            : result.components.city;
         }
 
-        if (r.components.hasOwnProperty('city')) {
-          mappedAddress['addressLocality'] = r.components['city'];
+        // street number
+        if (result.components.house_number) {
+          mappedAddress.streetAddress = result.components.house_number
         }
 
-        if (r.hasOwnProperty('formatted')) {
-          mappedAddress['formattedAddress'] = r['formatted'];
+        // street address
+        if (result.components.road) {
+          mappedAddress.streetAddress = 
+            mappedAddress.streetAddress
+            ? `${mappedAddress.streetAddress} ${result.components.road}`
+            : result.components.road;
+        }
+
+        // postal code
+        if (result.components.postcode) {
+          mappedAddress.postalCode = result.components.postcode;
+        }
+
+        // formatted address
+        if (result.formatted) {
+          mappedAddress.formattedAddress = result.formatted;
         }
 
         return mappedAddress;
