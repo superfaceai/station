@@ -5,11 +5,13 @@ provider = "google-apis"
 //   https://developers.google.com/maps/documentation/geocoding/start
 
 map Geocode {
+  composedAddress = `${input.streetAddress || ""} ${input.addressLocality || ""} ${input.addressDistrict || ""} ${input.addressRegion || ""} ${input.postalCode || ""} ${input.addressCountry || ""}`
+
   http GET "/maps/api/geocode/json" {
     security "apikey"
     request {
       query {
-        address = (`${input.streetAddress || ""}, ${input.addressLocality || ""}, ${input.addressRegion || ""}, ${input.postalCode || ""}, ${input.addressCountry || ""}`)
+        address = input.query || composedAddress
       }
     }
 
@@ -28,11 +30,13 @@ map Geocode {
 }
 
 map ReverseGeocode {
+  payload = `${input.latitude},${input.longitude}`
+
   http GET "/maps/api/geocode/json" {
     security "apikey"
     request {
       query {
-        latlng = (`${input.latitude || ""},${input.longitude || ""}`)
+        latlng = payload
       }
     }
 
@@ -42,44 +46,72 @@ map ReverseGeocode {
         detail = body.status
       }
 
-      filteredResults = body.results.filter(r => r.types.includes("street_address") )
+      filteredResults = body.results.filter(result => result.types.includes("street_address") )
 
-      map result filteredResults.map(r => {
-        let mappedAddress = {};
-        for (let component of r.address_components) {
-          if (component.types.includes("street_number")) {
-            mappedAddress['streetAddress'] = component.short_name;
-          }
+      map result filteredResults.map(result => {
+        const mappedAddress = {};
 
-          if (component.types.includes("route")) {
-            mappedAddress['streetAddress'] = mappedAddress['streetAddress'] ? `${mappedAddress['streetAddress']} ${component.short_name}` : component.short_name;
-          }
-
-          if (component.types.includes("locality")) {
-            mappedAddress['addressLocality'] = mappedAddress['addressLocality'] ? `${mappedAddress['addressLocality']}, ${component.short_name}` : component.short_name;
-          }
-
-          if (component.types.includes("sublocality_level_1")) {
-            mappedAddress['addressLocality'] = mappedAddress['addressLocality'] ? `${component.short_name}, ${mappedAddress['addressLocality']}` : component.short_name;
-          }
-
-          if (component.types.includes("administrative_area_level_1")) {
-            mappedAddress['addressRegion'] = mappedAddress['addressRegion'] ? `${mappedAddress['addressRegion']}, ${component.short_name}` : component.short_name;
-          }
-
-          if (component.types.includes("administrative_area_level_2")) {
-            mappedAddress['addressRegion'] = mappedAddress['addressRegion'] ? `${component.short_name}, ${mappedAddress['addressRegion']}` : component.short_name;
-          }
-
+        for (const component of result.address_components) {
+          // country code
           if (component.types.includes("country")) {
-            mappedAddress['addressCountry'] = component.short_name;
+            mappedAddress.addressCountry = component.short_name;
           }
 
+          // region
+          if (component.types.includes("administrative_area_level_1")) {
+            mappedAddress.addressRegion = 
+              mappedAddress.addressRegion 
+              ? `${mappedAddress.addressRegion}, ${component.short_name}` 
+              : component.short_name;
+          }
+          if (component.types.includes("administrative_area_level_2")) {
+            mappedAddress.addressRegion = 
+              mappedAddress.addressRegion 
+              ? `${component.short_name}, ${mappedAddress.addressRegion}` 
+              : component.short_name;
+          }
+
+          // locality
+          if (component.types.includes("locality")) {
+            mappedAddress.addressLocality = component.short_name;
+          }
+          if (component.types.includes("sublocality_level_1")) {
+            mappedAddress.addressLocality = 
+              mappedAddress.addressLocality 
+              ? `${component.short_name}, ${mappedAddress.addressLocality}` 
+              : component.short_name;
+          }
+          if (component.types.includes("sublocality_level_2")) {
+            mappedAddress.addressLocality = 
+              mappedAddress.addressLocality 
+              ? `${component.short_name}, ${mappedAddress.addressLocality}` 
+              : component.short_name;
+          }
+          
+          // street number
+          if (component.types.includes("street_number")) {
+            mappedAddress.streetAddress = component.short_name;
+          }
+
+          // street address
+          if (component.types.includes("route")) {
+            mappedAddress.streetAddress = 
+              mappedAddress.streetAddress 
+              ? `${mappedAddress.streetAddress} ${component.short_name}` 
+              : component.short_name;
+          }
+
+          // postal code
           if (component.types.includes("postal_code")) {
-            mappedAddress['postalCode'] = component.short_name;
+            mappedAddress.postalCode = component.short_name;
           }
         }
-        mappedAddress['formattedAddress'] = r.formatted_address
+
+        // formatted address
+        if (result.formatted_address) {
+          mappedAddress.formattedAddress = result.formatted_address
+        }
+        
         return mappedAddress
       }) 
     }
