@@ -2,6 +2,11 @@ import { TypedProfile } from '@superfaceai/one-sdk';
 
 export declare type AddressGeocodingGeocodeInput = {
     /**
+     * Query
+     * Free-form query string to search for.
+     */
+    query?: string;
+    /**
      * Country
      * The country. For example, USA. You can also provide the two-letter ISO 3166-1 alpha-2 country code.
      **/
@@ -11,6 +16,11 @@ export declare type AddressGeocodingGeocodeInput = {
      * The locality in which the street address is, and which is in the region. For example, Mountain View.
      **/
     addressLocality?: unknown;
+    /**
+     * District
+     * The district in which locality is, and which is in the region. For example Santa Clara County.
+     */
+    addressDistrict?: unknown;
     /**
      * Region
      * The region in which the locality is, and which is in the country. For example, California or another appropriate first-level Administrative division
