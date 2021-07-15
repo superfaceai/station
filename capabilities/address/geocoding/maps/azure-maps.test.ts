@@ -48,10 +48,10 @@ describe('address/geocoding/azure-maps-typed', () => {
     expect(result.isOk()).toBeTruthy();
     expect(result.unwrap()).toEqual([
       {
-        addressCountry: 'USA',
-        addressRegion: 'NY',
+        addressCountry: 'US',
+        addressRegion: 'Kings, NY',
         addressCityDistrict: "Kings",
-        addressLocality: 'New York Brooklyn',
+        addressLocality: 'Brooklyn, New York',
         streetAddress: '279 Bedford Avenue',
         postalCode: '11211',
         formattedAddress:

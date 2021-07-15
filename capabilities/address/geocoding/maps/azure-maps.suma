@@ -50,12 +50,15 @@ map ReverseGeocode {
         
         // country code
         if (address.countryCode || address.countryCodeISO3) {
-            result.addressCountry = address.countryCodeISO3 || address.countryCode;
+            result.addressCountry = address.countryCode || address.countryCodeISO3;
         }
 
         // region
         if (address.countrySubdivision) {
-            result.addressRegion = address.countrySubdivision;
+            result.addressRegion = 
+              address.countrySecondarySubdivision
+              ? `${address.countrySecondarySubdivision}, ${address.countrySubdivision}`
+              : address.countrySubdivision;
         }
 
         // district
@@ -68,7 +71,7 @@ map ReverseGeocode {
         if (address.countrySubdivisionName) {
             result.addressLocality = 
                 address.localName 
-                ? `${address.countrySubdivisionName} ${address.localName}` 
+                ? `${address.localName}, ${address.countrySubdivisionName}` 
                 : address.countrySubdivisionName
         }
 
