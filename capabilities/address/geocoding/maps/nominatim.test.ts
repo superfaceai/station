@@ -48,9 +48,8 @@ describe('address/geocoding/nominatim', () => {
     expect(value).toEqual([
       {
         addressCountry: 'us',
-        addressRegion: 'New York',
-        addressCityDistrict: 'Kings County',
-        addressLocality: 'New York Brooklyn',
+        addressRegion: 'Kings County, New York',
+        addressLocality: 'Brooklyn, New York',
         streetAddress: '281 Bedford Avenue',
         postalCode: '11211',
         formattedAddress:
