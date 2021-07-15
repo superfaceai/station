@@ -5,7 +5,7 @@ describe('address/geocoding/google-apis', () => {
     const client = new SuperfaceClient();
     const profile = await client.getProfile('address/geocoding');
     const provider = await client.getProvider('google-apis');
-    const result = await profile.useCases.Geocode.perform(
+    const result1 = await profile.useCases.Geocode.perform(
       {
         streetAddress: '1600 Amphitheatre Parkway',
         addressLocality: 'Mountain View',
@@ -15,9 +15,20 @@ describe('address/geocoding/google-apis', () => {
       { provider }
     );
 
-    expect(result.isOk()).toBeTruthy();
-    expect(result.unwrap().latitude).toBe(37.4220972);
-    expect(result.unwrap().longitude).toBe(-122.0840909);
+    expect(result1.isOk()).toBeTruthy();
+    expect(result1.unwrap().latitude).toBe(37.42200500000001);
+    expect(result1.unwrap().longitude).toBe(-122.0841058);
+
+    const result2 = await profile.useCases.Geocode.perform(
+      {
+        query: '1600 Amphitheatre Parkway Mountain View CA',
+      },
+      { provider }
+    );
+
+    expect(result2.isOk()).toBeTruthy();
+    expect(result2.unwrap().latitude).toBe(37.42200500000001);
+    expect(result2.unwrap().longitude).toBe(-122.0841058);
   });
 
   it('Reverse geocode geographical coordingates', async () => {
