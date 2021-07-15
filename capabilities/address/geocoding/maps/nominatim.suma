@@ -50,13 +50,8 @@ map ReverseGeocode {
       mappedAddress = {};
       keys = Object.keys(body.address);
 
-      // country  
-      set if (keys.includes('country')) {
-        mappedAddress.addressCountry = body.address.country;
-      }
-
       // country code
-      set if (!keys.includes('country') && keys.includes('country_code')) {
+      set if (keys.includes('country_code')) {
         mappedAddress.addressCountry = body.address.country_code;
       }
 

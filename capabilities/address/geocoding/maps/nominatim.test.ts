@@ -36,7 +36,7 @@ describe('address/geocoding/nominatim', () => {
     expect(result.isOk()).toBeTruthy();
     expect(value).toEqual([
       {
-        addressCountry: 'United States',
+        addressCountry: 'us',
         addressRegion: 'New York',
         addressCityDistrict: 'Kings County',
         addressLocality: 'New York Brooklyn',
