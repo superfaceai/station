@@ -5,7 +5,7 @@ describe('address/geocoding/nominatim', () => {
     const client = new SuperfaceClient();
     const profile = await client.getProfile('address/geocoding');
     const provider = await client.getProvider('nominatim');
-    const result = await profile.useCases.Geocode.perform(
+    const result1 = await profile.useCases.Geocode.perform(
       {
         streetAddress: '1600 Amphitheatre Parkway',
         addressLocality: 'Mountain View',
@@ -15,9 +15,20 @@ describe('address/geocoding/nominatim', () => {
       { provider }
     );
 
-    expect(result.isOk()).toBeTruthy();
-    expect(result.unwrap().latitude).toBe('37.42248575');
-    expect(result.unwrap().longitude).toBe('-122.08558456613565');
+    expect(result1.isOk()).toBeTruthy();
+    expect(result1.unwrap().latitude).toBe('37.42248575');
+    expect(result1.unwrap().longitude).toBe('-122.08558456613565');
+
+    const result2 = await profile.useCases.Geocode.perform(
+      {
+        query: '1600 Amphitheatre Parkway, Mountain View, CA'
+      },
+      { provider }
+    );
+
+    expect(result2.isOk()).toBeTruthy();
+    expect(result2.unwrap().latitude).toBe('37.42248575');
+    expect(result2.unwrap().longitude).toBe('-122.08558456613565');
   });
 
   it('Reverse geocode geographical coordingates', async () => {
