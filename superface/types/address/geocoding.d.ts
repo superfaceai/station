@@ -3,7 +3,7 @@ import { TypedProfile } from '@superfaceai/one-sdk';
 export declare type AddressGeocodingGeocodeInput = {
     /**
      * Query
-     * Free-form query string to search for.
+     * Free-form query string to search for. For example, '1600 Amphitheatre Parkway, Mountain View, CA' or just 'Mountain View'
      **/
     query?: unknown;
     /**
