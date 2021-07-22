@@ -48,11 +48,10 @@ describe('address/geocoding/opencage-typed', () => {
     expect(result.isOk()).toBeTruthy();
     expect(value).toEqual([
       {
-        addressCountry: 'US',
+        addressCountry: 'USA',
         streetAddress: '281 Bedford Avenue',
         postalCode: '11211',
         addressRegion: 'Kings County, NY',
-        addressCityDistrict: 'Kings County',
         addressLocality: 'Brooklyn, New York',
         formattedAddress:
           '281 Bedford Avenue, New York, NY 11211, United States of America',

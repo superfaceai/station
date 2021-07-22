@@ -5,7 +5,7 @@ provider = "google-apis"
 //   https://developers.google.com/maps/documentation/geocoding/start
 
 map Geocode {
-  payload = input.query || `${input.streetAddress || ""} ${input.addressLocality || ""} ${input.addressDistrict || ""} ${input.addressRegion || ""} ${input.postalCode || ""} ${input.addressCountry || ""}`;
+  payload = input.query || `${input.streetAddress || ""} ${input.addressLocality || ""} ${input.addressRegion || ""} ${input.postalCode || ""} ${input.addressCountry || ""}`;
 
   http GET "/maps/api/geocode/json" {
     security "apikey"

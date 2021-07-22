@@ -5,7 +5,7 @@ provider = "opencage"
 //  https://opencagedata.com/api
 
 map Geocode {
-  payload = input.query || `${input.streetAddress || ""} ${input.addressLocality || ""} ${input.addressDistrict || ""} ${input.addressRegion || ""} ${input.postalCode || ""} ${input.addressCountry || ""}`
+  payload = input.query || `${input.streetAddress || ""} ${input.addressLocality || ""} ${input.addressRegion || ""} ${input.postalCode || ""} ${input.addressCountry || ""}`
   
   http GET "/geocode/v1/json" {
     security "apikey"
@@ -51,10 +51,10 @@ map ReverseGeocode {
         let mappedAddress = {};
 
         // country code
-        if (result.components['ISO_3166-1_alpha-2']) {
-          mappedAddress.addressCountry = result.components['ISO_3166-1_alpha-2'];
-        } else if (result.components.country_code) {
+        if (result.components.country_code) {
           mappedAddress.addressCountry = result.components.country_code;
+        } else if (result.components['ISO_3166-1_alpha-2']) {
+          mappedAddress.addressCountry = result.components['ISO_3166-1_alpha-2'];
         }
 
         // region
@@ -63,11 +63,6 @@ map ReverseGeocode {
             result.components.city_district
             ? `${result.components.city_district}, ${result.components.state_code}`
             : result.components.state_code;
-        }
-
-        // district
-        if (result.components.city_district) {
-          mappedAddress.addressCityDistrict = result.components.city_district;
         }
         
         // locality
