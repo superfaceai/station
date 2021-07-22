@@ -2,12 +2,14 @@ profile = "address/geocoding@3.0"
 provider = "azure-maps"
 
 map Geocode {
+  payload = input.query || `${input.streetAddress || ""} ${input.addressLocality || ""} ${input.addressRegion || ""} ${input.postalCode || ""} ${input.addressCountry || ""}`;
+
   http GET "/json" {
     request {
       query {
         'subscription-key' = input.subscriptionKey
         'api-version' = '1.0'
-        query = input.query
+        query = payload
       }
     }
 
@@ -25,12 +27,14 @@ map Geocode {
 }
 
 map ReverseGeocode {
+  payload = `${input.latitude},${input.longitude}`;
+
   http GET "/reverse/json" {
     request {
       query {
         'subscription-key' = input.subscriptionKey
         'api-version' = '1.0'
-        query = input.latitude + ',' + input.longitude
+        query = payload
       }
     }
 
@@ -49,8 +53,8 @@ map ReverseGeocode {
         result = {}
         
         // country code
-        if (address.countryCode || address.countryCodeISO3) {
-            result.addressCountry = address.countryCode || address.countryCodeISO3;
+        if (address.countryCodeISO3 || address.countryCode) {
+            result.addressCountry = address.countryCodeISO3 || address.countryCode;
         }
 
         // region
@@ -59,12 +63,6 @@ map ReverseGeocode {
               address.countrySecondarySubdivision
               ? `${address.countrySecondarySubdivision}, ${address.countrySubdivision}`
               : address.countrySubdivision;
-        }
-
-        // district
-        // city district
-        if (address.countrySecondarySubdivision) {
-            result.addressCityDistrict = address.countrySecondarySubdivision;
         }
 
         // locality

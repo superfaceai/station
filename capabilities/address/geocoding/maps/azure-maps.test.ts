@@ -48,9 +48,8 @@ describe('address/geocoding/azure-maps-typed', () => {
     expect(result.isOk()).toBeTruthy();
     expect(result.unwrap()).toEqual([
       {
-        addressCountry: 'US',
+        addressCountry: 'USA',
         addressRegion: 'Kings, NY',
-        addressCityDistrict: "Kings",
         addressLocality: 'Brooklyn, New York',
         streetAddress: '279 Bedford Avenue',
         postalCode: '11211',
