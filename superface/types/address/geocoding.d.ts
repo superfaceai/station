@@ -13,17 +13,12 @@ export declare type AddressGeocodingGeocodeInput = {
     streetAddress?: unknown;
     /**
      * Locality
-     * The locality in which the street address is, and which is in the district. For example, Mountain View.
+     * The locality in which the street address is, and which is in the region. For example, Mountain View.
      **/
     addressLocality?: unknown;
     /**
-     * District
-     * The district in which locality is, and which is in the region. For example Santa Clara County.
-     **/
-    addressDistrict?: unknown;
-    /**
      * Region
-     * The region in which the district or locality is, and which is in the country. For example, California or another appropriate first-level Administrative division
+     * The region in which the locality is, and which is in the country. For example, California or another appropriate first-level Administrative division
      **/
     addressRegion?: unknown;
     /**
@@ -69,22 +64,12 @@ export declare type AddressGeocodingReverseGeocodeResult = {
     addressCountry?: unknown;
     /**
      * Region
-     * The region in which the district or locality is, and which is in the country. For example, California or another appropriate first-level Administrative division
+     * The region in which the locality is, and which is in the country. For example, California or another appropriate first-level Administrative division
      **/
     addressRegion?: unknown;
     /**
-     * District
-     * The district in which locality is, and which is in the region. For example Santa Clara County.
-     **/
-    addressDistrict?: unknown;
-    /**
-     * City district
-     * The city district in which the street address is, and which is in adress locality. For example, Kings County.
-     **/
-    addressCityDistrict?: unknown;
-    /**
      * Locality
-     * The locality in which the street address is, and which is in the district. For example, Mountain View.
+     * The locality in which the street address is, and which is in the region. For example, Mountain View.
      **/
     addressLocality?: unknown;
     /**
