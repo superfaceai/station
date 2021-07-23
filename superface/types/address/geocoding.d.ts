@@ -17,11 +17,6 @@ export declare type AddressGeocodingGeocodeInput = {
      **/
     addressLocality?: unknown;
     /**
-     * District
-     * The district in which locality is, and which is in the region. For example Santa Clara County.
-     */
-    addressDistrict?: unknown;
-    /**
      * Region
      * The region in which the locality is, and which is in the country. For example, California or another appropriate first-level Administrative division
      **/
