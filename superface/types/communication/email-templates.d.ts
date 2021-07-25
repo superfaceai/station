@@ -1,4 +1,5 @@
 import { TypedProfile } from '@superfaceai/one-sdk';
+
 export declare type CommunicationEmailTemplatesListTemplatesResult = {
     /** Unique template identifier **/
     id?: unknown;
