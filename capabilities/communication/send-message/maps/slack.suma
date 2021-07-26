@@ -1,0 +1,26 @@
+profile = "communication/send-message@1.0"
+provider = "slack"
+
+map SendMessage {
+  http POST "/chat.postMessage" {
+    security "bearer_token"
+
+    request {
+      body {
+        channel = input.destination
+        text = input.text
+      }
+    }
+
+    response 200 {
+      map result if (body.ok) {
+        destinationId = body.channel
+        messageId = body.ts
+      }
+
+      map error if (!body.ok) {
+        title = body.error
+      }
+    }
+  }
+}
