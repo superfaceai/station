@@ -4,7 +4,7 @@ Send one transactional email
 """
 
 name = "communication/send-email"
-version = "1.1.0"
+version = "1.1.1"
 
 """
 Send transactional email to one recipient
@@ -57,3 +57,33 @@ model Error {
   "
   detail
 }
+
+"From
+  The sender's email address."
+field from
+
+"To
+  The recipient's email address."
+field to
+
+"Subject
+  The subject of your email. See character length requirements according to RFC 2822."
+field subject
+
+"Text
+  The plain text email message."
+field text
+
+"HTML
+  The HTML email message"
+field html
+
+"Template ID
+  The template to use when sending email message."
+field templateId
+
+"Template Data
+  Template data to be applied to the specified template to generate html, test, and subject.
+  This field is a collection of key/value pairs following the pattern `variable_name`: `value to insert`.
+  This field should be used in combination with `templateId` to identify what template to use."
+field templateData
