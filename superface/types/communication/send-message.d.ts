@@ -1,4 +1,5 @@
 import { TypedProfile } from '@superfaceai/one-sdk';
+
 export declare type CommunicationSendMessageSendMessageInput = {
     /** Representation of a messaging destionation. Can be ID or channel name, depending on the provider capability. **/
     destination: string;

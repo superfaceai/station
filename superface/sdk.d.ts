@@ -10,7 +10,7 @@ export { AddressGeocodingProfile } from "./types/address/geocoding";
 export { DeliveryTrackingShipmentInfoProfile } from "./types/delivery-tracking/shipment-info";
 export { CommunicationEmailTemplatesProfile } from "./types/communication/email-templates";
 export { CommunicationSendMessageProfile } from "./types/communication/send-message";
-export declare const SuperfaceClient: new () => import("@superfaceai/one-sdk/dist/client/public/client").TypedSuperfaceClient<{
+export declare const SuperfaceClient: new () => import("@superfaceai/one-sdk/dist/client/client").TypedSuperfaceClient<{
     "communication/send-message": {
         SendMessage: [import("./types/communication/send-message").CommunicationSendMessageSendMessageInput, import("./types/communication/send-message").CommunicationSendMessageSendMessageResult];
     };
