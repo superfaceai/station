@@ -1,9 +1,14 @@
 # station
-Where capabilities are born.
 
-**note**: we are now using public superface packages so please update (or delete) your `.npmrc` not to use superface private registry.
+![GitHub Workflow Status](https://img.shields.io/github/workflow/status/superfaceai/station/CI)
+![NPM](https://img.shields.io/npm/v/@superfaceai/station)
+![[NPM](https://img.shields.io/npm/l/@superfaceai/station)](LICENSE)
+![TypeScript](https://img.shields.io/badge/%3C%2F%3E-Typescript-blue)
 
-Also, check `.npmrc` in "home" directory.
+<img src="https://github.com/superfaceai/station/blob/main/docs/LogoGreen.png" alt="superface logo" width="150" height="150">
+
+Where capabilities are born. In this repository we build curated capabilities. Examples in this repository are ideal staring point for writing your own capability.
+
 
 ## Install
 
@@ -16,12 +21,7 @@ Build TS files:
 ```
 yarn build
 ```
-set .env variables from .env.example. For publishing you need to set SUPERFACE_STORE_REFRESH_TOKEN you can obtain it on https://superface.dev/auth/github
-
-Repository is not released to NPM so to use it link it locally:
-```
-yarn link
-```
+set .env variables from .env.example. For publishing you need to set SUPERFACE_STORE_REFRESH_TOKEN (Possilbe onyl for SuperFace emlpoyes for now)
 
 ## Commands
   <!-- commands -->
