@@ -1,5 +1,5 @@
 name = "communication/send-message"
-version = "1.0.1"
+version = "1.1.0"
 
 """
 Send Message
@@ -7,22 +7,24 @@ Send Message
 """
 usecase SendMessage {
   input {
-    "Destination
-      Representation of a messaging destination. Can be ID or channel name, depending on the provider capability."
     destination! string!
-
-    "Text
-      Text of the message"
     text! string!
   }
 
   result {
-    "Destination ID
-      Identifier of the destination where the message was sent."
-    destinationId
-
-    "Message ID
-      Identifier of the message that was sent"
+    destination
     messageId
   }
 }
+
+"Text
+  Text of the message"
+field text
+
+"Destination
+  Representation of a messaging destination. Can be ID or channel name, depending on the provider capability."
+field destination
+
+"Message ID
+  Identifier of the message that was sent"
+field messageId

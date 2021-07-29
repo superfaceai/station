@@ -20,7 +20,7 @@ describe('communication/send-message', () => {
       );
 
       expect(result.unwrap()).toEqual({
-        destinationId: 'C1MOCKED',
+        destination: 'C1MOCKED',
         messageId: '1503435956.000247',
       });
     });

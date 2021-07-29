@@ -1,5 +1,4 @@
 import { TypedProfile } from '@superfaceai/one-sdk';
-
 export declare type AddressCleanAddressCleanAddressInput = {
     street?: unknown;
     city?: unknown;

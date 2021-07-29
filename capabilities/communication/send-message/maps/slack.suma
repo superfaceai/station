@@ -1,4 +1,4 @@
-profile = "communication/send-message@1.0"
+profile = "communication/send-message@1.1"
 provider = "slack"
 
 map SendMessage {
@@ -14,7 +14,7 @@ map SendMessage {
 
     response 200 {
       map result if (body.ok) {
-        destinationId = body.channel
+        destination = body.channel
         messageId = body.ts
       }
 

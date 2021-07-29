@@ -24,7 +24,7 @@ describe('communication/send-message/slack', () => {
 
     const data = result.unwrap();
 
-    expect(data.destinationId).toMatch(/c.+/i);
+    expect(data.destination).toMatch(/c.+/i);
     expect(data.messageId).toMatch(/\d+\.\d+/);
   });
 });
