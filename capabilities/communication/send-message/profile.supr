@@ -1,11 +1,16 @@
+"""
+Send Message
+  Sends message via IM such as Messanger, Slack or MS Teams...
+"""
+
 name = "communication/send-message"
 version = "1.1.0"
 
 """
 Send Message
-  Sends message via IM such as Messanger, Slack or MS Teams...
+  Sends message with text content to one destination
 """
-usecase SendMessage {
+usecase SendMessage unsafe {
   input {
     destination! string!
     text! string!
