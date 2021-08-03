@@ -213,7 +213,7 @@ The `package.json` also contains scripts (runnable by calling `yarn <script-name
 
 Lastly, to build a local artifact run `yarn build` or `npm run build`.
 
-To install a local artifact globally, symlink the binary (`ln -s bin/superface <target>`) into one of the following folders:
+To install a local artifact globally, symlink the binary (`ln -s bin/station <target>`) into one of the following folders:
 
 - `~/.local/bin` - local binaries for your user only (may not be in `PATH` yet)
 - `/usr/local/bin` - system-wide binaries installed by the system administrator
