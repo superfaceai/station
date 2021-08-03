@@ -8,7 +8,7 @@ export default class Compile extends Command {
   static strict = false;
 
   static description =
-    'Generates .ts files into `superface/types/{scope}` folder, creates or updates `superface/sdk.ts` file and creates or updates `superface/types/{scope}/index.d.ts` file.';
+    'Generates d.ts and js files into `superface/types/{scope}` folder, creates or updates `superface/sdk.ts` file and creates or updates `superface/types/{scope}/index.d.ts` file.';
 
   static args = [
     {
@@ -27,7 +27,7 @@ export default class Compile extends Command {
     '$ station generate sms/service -q',
   ];
 
-  private logCallback? = (message: string) => this.log(grey(message));
+  private logCallback?= (message: string) => this.log(grey(message));
 
   async run(): Promise<void> {
     const { argv, flags } = this.parse(Compile);

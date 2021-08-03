@@ -1,8 +1,6 @@
 # station
 
 ![GitHub Workflow Status](https://img.shields.io/github/workflow/status/superfaceai/station/CI)
-![NPM](https://img.shields.io/npm/v/@superfaceai/station)
-![[NPM](https://img.shields.io/npm/l/@superfaceai/station)](LICENSE)
 ![TypeScript](https://img.shields.io/badge/%3C%2F%3E-Typescript-blue)
 
 <img src="https://github.com/superfaceai/station/blob/main/docs/LogoGreen.png" alt="superface logo" width="150" height="150">
@@ -44,7 +42,7 @@ Build TS files:
 ```
 yarn build
 ```
-set .env variables from .env.example. For publishing you need to set SUPERFACE_STORE_REFRESH_TOKEN (Possilbe onyl for SuperFace emlpoyes for now)
+set .env variables from .env.example. For publishing you need to set SUPERFACE_STORE_REFRESH_TOKEN ((Possible only for SuperFace employees for now)
 
 ## Usage
 
@@ -57,7 +55,7 @@ set .env variables from .env.example. For publishing you need to set SUPERFACE_S
 
 ## `station check`
 
-Checks if all profiles have maps with coresponding version, scope, name, usecase definitions and providers
+Checks if all profiles have maps with corresponding version, scope, name, use case definitions and providers
 
 ```
 USAGE
@@ -72,7 +70,7 @@ EXAMPLES
   $ station check -q
 ```
 
-_See code: [dist/src/commands/check.ts](https://github.com/superfaceai/station/blob/v0.0.1/dist/src/commands/check.ts)_
+_See code: [src/commands/check.ts](https://github.com/superfaceai/station/tree/main/src/commands/check.ts)_
 
 ## `station compile`
 
@@ -94,7 +92,7 @@ EXAMPLES
   $ station compile --generate
 ```
 
-_See code: [dist/src/commands/compile.ts](https://github.com/superfaceai/station/blob/v0.0.1/dist/src/commands/compile.ts)_
+_See code: [src/commands/compile.ts](https://github.com/superfaceai/station/tree/main/src/commands/compile.ts)_
 
 ## `station create DOCUMENTINFO`
 
@@ -120,11 +118,11 @@ EXAMPLES
   $ station create provider twilio
 ```
 
-_See code: [dist/src/commands/create.ts](https://github.com/superfaceai/station/blob/v0.0.1/dist/src/commands/create.ts)_
+_See code: [src/commands/create.ts](https://github.com/superfaceai/station/tree/main/src/commands/create.ts)_
 
 ## `station generate PROFILENAME`
 
-Generates .ts files into `superface/types/{scope}` folder, creates or updates `superface/sdk.ts` file and creates or updates `superface/types/{scope}/index.d.ts` file.
+Generates d.ts and js files into `superface/types/{scope}` folder, creates or updates `superface/sdk.ts` file and creates or updates `superface/types/{scope}/index.d.ts` file.
 
 ```
 USAGE
@@ -142,7 +140,7 @@ EXAMPLES
   $ station generate sms/service -q
 ```
 
-_See code: [dist/src/commands/generate.ts](https://github.com/superfaceai/station/blob/v0.0.1/dist/src/commands/generate.ts)_
+_See code: [src/commands/generate.ts](https://github.com/superfaceai/station/tree/main/src/commands/generate.ts)_
 
 ## `station publish [PATH]`
 
@@ -163,14 +161,15 @@ OPTIONS
   --dry-run    Runs without sending actual request.
 
 EXAMPLES
-  $ station publish
-  $ station publish --dry-run
-  $ station publish --force
+  $ station publish --all
+  $ station publish --all --dry-run
+  $ station publish --all --force
   $ station publish capabilities/vcs/user-repos/maps/bitbucket.suma
   $ station publish capabilities/vcs/user-repos/maps/bitbucket.suma -q
+  $ station publish capabilities/vcs/user-repos/maps/bitbucket.suma --dry-run
 ```
 
-_See code: [dist/src/commands/publish.ts](https://github.com/superfaceai/station/blob/v0.0.1/dist/src/commands/publish.ts)_
+_See code: [src/commands/publish.ts](https://github.com/superfaceai/station/tree/main/src/commands/publish.ts)_
 <!-- commandsstop -->
 
 ## `yarn test PATH`
@@ -231,7 +230,8 @@ First, create new profile:
 ```
  station create profile {scope}/{usecase}
 ```
-Edit created .supr file
+
+Edit created .supr file:
 
 Secondly, create new provider:
 
@@ -241,7 +241,7 @@ Secondly, create new provider:
 
 Edit created .json file
 
-Next, create map for created profile and provider
+Next, create map for created profile and provider:
 
 ```
  station create map {scope}/{usecase} {provider}
@@ -261,7 +261,8 @@ Generate types if needed:
  station generate {scope}/{usecase}
 ```
 
-Test created capability
+Create tests for created capability. You can use existing tests as a starting point.
+Test created capability:
 
 ```
  yarn test {path to test file}
@@ -280,13 +281,15 @@ Secretes used for authentication during tests are stored in `.env.capabilities` 
 
 ### Automated publishing
 
-Station have two Workflows to automate capabilities publishing [Publish to Production](https://github.com/superfaceai/station/blob/main/.github/workflows/publish_production.yml) and [Publish to Staging](https://github.com/superfaceai/station/blob/main/.github/workflows/publish_staging.yml).
+Station have Workflow to automate capabilities publishing [Publish to Production](https://github.com/superfaceai/station/blob/main/.github/workflows/publish_production.yml).
 
 **Publish to Production** is triggered manually from [Workflow detail](https://github.com/superfaceai/station/actions/workflows/publish_production.yml).
 
 
 ## Maintainers
 
+- [@Jakub Vacek](https://github.com/Jakub-Vacek)
+- [@Edward](https://github.com/TheEdward162)
 - [@Lukáš Valenta](https://github.com/lukas-valenta)
 
 ## Contributing
