@@ -42,7 +42,7 @@ Build TS files:
 ```
 yarn build
 ```
-set .env variables from .env.example. For publishing you need to set SUPERFACE_STORE_REFRESH_TOKEN ((Possible only for SuperFace employees for now)
+set .env variables from .env.example. For publishing you need to set SUPERFACE_STORE_REFRESH_TOKEN (Possible only for SuperFace employees for now)
 
 ## Usage
 
