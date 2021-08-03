@@ -48,4 +48,4 @@ Help us improve Superface documentation, you can report typos, improve examples.
 
 ## Copyright and Licensing
 
-The Superface CLI open source project is licensed under the [MIT License](LICENSE).
+The Superface Station open source project is licensed under the [MIT License](LICENSE).
