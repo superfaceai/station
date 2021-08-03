@@ -23,7 +23,7 @@ If you have any question about this project (for example, how to use it) or if y
 Follow these steps:
 
 1. **Fork & Clone** the repository  
-2. **Setup** the Superface CLI
+2. **Setup** the Superface Station
    - Install packages with `yarn install` or `npm install`
    - Build with `yarn build` or `npm run build`
    - Lint code with `yarn lint:fix` or `npm run lint:fix`
