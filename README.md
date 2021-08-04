@@ -213,12 +213,6 @@ The `package.json` also contains scripts (runnable by calling `yarn <script-name
 
 Lastly, to build a local artifact run `yarn build` or `npm run build`.
 
-To install a local artifact globally, symlink the binary (`ln -s bin/station <target>`) into one of the following folders:
-
-- `~/.local/bin` - local binaries for your user only (may not be in `PATH` yet)
-- `/usr/local/bin` - system-wide binaries installed by the system administrator
-- output of `yarn global bin` - usually the same as `/use/local/bin`
-
 **Note**: The project needs to be built (into the `dist` folder) to run cli commands.
 
 **Note**: You can change url of API requests by setting `SUPERFACE_API_URL` environment variable to desired base url.
