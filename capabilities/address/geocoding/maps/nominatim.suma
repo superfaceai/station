@@ -61,25 +61,25 @@ map ReverseGeocode {
         mappedAddress.addressRegion = `${mappedAddress.addressRegion}, ${body.address.county}`;
       }
       set if (body.address.state) {
-         mappedAddress.addressRegion = `${mappedAddress.addressRegion}, ${body.address.state}`
+        mappedAddress.addressRegion = `${mappedAddress.addressRegion}, ${body.address.state}`
       }
 
       // locality - city
       set if (body.address.city) {
-          mappedAddress.addressLocality = body.address.city;
+        mappedAddress.addressLocality = body.address.city;
       }
       set if (body.address.city && body.address.borough) {
-        mappedAddress.addressLocality = body.address.borough + ', ' + body.address.city;
+        mappedAddress.addressLocality = `${body.address.borough}, ${body.address.city}`;
       }
 
       // locality - town
       set if (!body.address.city && body.address.town) {
-          mappedAddress.addressLocality = body.address.town;
+        mappedAddress.addressLocality = body.address.town;
       }
 
       // locality - village
       set if (!body.address.town && body.address.village) {
-          mappedAddress.addressLocality = body.address.village;
+        mappedAddress.addressLocality = body.address.village;
       }
 
       // street address
@@ -87,7 +87,7 @@ map ReverseGeocode {
         mappedAddress.streetAddress = body.address.road;
       }
       set if (body.address.house_number) {
-          mappedAddress.streetAddress = body.address.house_number  + ' ' + mappedAddress.streetAddress;
+        mappedAddress.streetAddress = `${body.address.house_number} ${mappedAddress.streetAddress}`;
       }
 
       // postal code
