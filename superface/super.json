@@ -253,6 +253,31 @@
           "file": "./grid/delivery-tracking/shipment-info/maps/mock.suma"
         }
       }
+    },
+    "communication/email-templates": {
+      "file": "./grid/communication/email-templates/profile.supr",
+      "providers": {
+        "mock": {
+          "file": "./grid/communication/email-templates/maps/mock.suma"
+        },
+        "sendgrid": {
+          "file": "./grid/communication/email-templates/maps/sendgrid.suma"
+        },
+        "postmark": {
+          "file": "./grid/communication/email-templates/maps/postmark.suma"
+        }
+      }
+    },
+    "communication/send-message": {
+      "file": "./grid/communication/send-message/profile.supr",
+      "providers": {
+        "mock": {
+          "file": "./grid/communication/send-message/maps/mock.suma"
+        },
+        "slack": {
+          "file": "./grid/communication/send-message/maps/slack.suma"
+        }
+      }
     }
   },
   "providers": {
@@ -388,6 +413,15 @@
     "azure-maps": {
       "file": "../providers/azure-maps.json",
       "security": []
+    },
+    "slack": {
+      "file": "../providers/slack.json",
+      "security": [
+        {
+          "id": "bearer_token",
+          "token": "$SLACK_ACCESS_TOKEN"
+        }
+      ]
     }
   }
 }
