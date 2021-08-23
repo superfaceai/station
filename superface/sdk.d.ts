@@ -8,7 +8,18 @@ export { StarwarsCharacterInformationProfile } from "./types/starwars/character-
 export { VcsPullRequestProfile } from "./types/vcs/pull-request";
 export { AddressGeocodingProfile } from "./types/address/geocoding";
 export { DeliveryTrackingShipmentInfoProfile } from "./types/delivery-tracking/shipment-info";
+export { CommunicationEmailTemplatesProfile } from "./types/communication/email-templates";
+export { CommunicationSendMessageProfile } from "./types/communication/send-message";
 export declare const SuperfaceClient: new () => import("@superfaceai/one-sdk/dist/client/public/client").TypedSuperfaceClient<{
+    "communication/send-message": {
+        SendMessage: [import("./types/communication/send-message").CommunicationSendMessageSendMessageInput, import("./types/communication/send-message").CommunicationSendMessageSendMessageResult];
+    };
+    "communication/email-templates": {
+        ListTemplates: [any, import("./types/communication/email-templates").CommunicationEmailTemplatesListTemplatesResult];
+        GetTemplateContent: [import("./types/communication/email-templates").CommunicationEmailTemplatesGetTemplateContentInput, import("./types/communication/email-templates").CommunicationEmailTemplatesGetTemplateContentResult];
+        CreateTemplate: [import("./types/communication/email-templates").CommunicationEmailTemplatesCreateTemplateInput, import("./types/communication/email-templates").CommunicationEmailTemplatesCreateTemplateResult];
+        UpdateTemplate: [import("./types/communication/email-templates").CommunicationEmailTemplatesUpdateTemplateInput, import("./types/communication/email-templates").CommunicationEmailTemplatesUpdateTemplateResult];
+    };
     "delivery-tracking/shipment-info": {
         ShipmentInfo: [import("./types/delivery-tracking/shipment-info").DeliveryTrackingShipmentInfoShipmentInfoInput, import("./types/delivery-tracking/shipment-info").DeliveryTrackingShipmentInfoShipmentInfoResult];
     };

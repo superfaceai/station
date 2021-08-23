@@ -1,0 +1,140 @@
+profile = "communication/email-templates@1.0"
+provider = "sendgrid"
+
+"""
+Not paginated, if you have more than 200 templates result might be incomplete
+"""
+map ListTemplates {
+  http GET "/templates" {
+    security "bearer_token"
+
+    request {
+      query {
+        generations = "legacy,dynamic"
+        page_size = 200
+      }
+    }
+
+    response 200 "application/json" {
+      map result body.result.map((template) => ({
+        id: template.id,
+        name: template.name,
+      }))
+    } 
+  }
+}
+
+map GetTemplateContent {
+  http GET "/templates/{input.id}" {
+    security "bearer_token"
+
+    response 200 "application/json" {
+      activeTemplate = body.versions.filter((version) => version.active === 1)[0]
+
+      map result if (activeTemplate) {
+        subject = activeTemplate.subject
+        text = activeTemplate.plain_content
+        html = activeTemplate.html_content
+      }
+
+      map error if (!activeTemplate) {
+        title = (`Template not found`)
+        detail = (`Template with id ${input.id} not found`)
+      }
+    }
+  }
+}
+
+map CreateTemplate {
+  template = call CreateTemplateCall(name = input.name)
+  templateVersion = call CreateTemplateVersionCall(templateId = template.id, subject = input.subject, text = input.text, html = input.html)
+
+  map result {
+    id = template.id
+    name = template.name
+  }
+}
+
+map UpdateTemplate {
+  template = call FetchTemplateCall(templateId = input.id)
+  template = call UpdateTemplateCall(templateId = template.id, name = input.name) if (input.name)
+
+  subject = input.subject || template.subject
+  text = input.text || template.text
+  html = input.html || template.html
+
+  templateVersion = call CreateTemplateVersionCall(templateId = template.id, subject = subject, text = text, html = html) if (subject || text || html)
+
+  map error if (!template) {
+    title = 'Template not found'
+    detail = (`Template with id: ${input.id} doesn't exists`)
+  }
+
+  map result {
+    id = template.id
+    name = template.name
+  }
+}
+
+operation FetchTemplateCall {
+  http GET "/templates/{args.templateId}" {
+    security "bearer_token"
+
+    response 200 "application/json" {
+      return body
+    }
+  }
+}
+
+operation CreateTemplateCall {
+  http POST "/templates" {
+    security "bearer_token"
+
+    request {
+      body {
+        name = args.name
+        generation = "dynamic"
+      }
+    }
+
+    response 201 "application/json" {
+      return body
+    }
+  }
+}
+
+operation CreateTemplateVersionCall {
+  http POST "/templates/{args.templateId}/versions" {
+    security "bearer_token"
+
+    request {
+      body {
+        name = `v${Date.now()}`
+        subject = args.subject
+        plain_content = args.text
+        html_content = args.html
+        active = 1
+      }
+    }
+
+    response 201 "application/json" {
+      return body
+    }
+  }
+}
+
+operation UpdateTemplateCall {
+  http PATCH "/templates/{args.templateId}" {
+    security "bearer_token"
+
+    request {
+      body {
+        name = args.name
+      }
+    }
+
+    response 200 "application/json" {
+      return body
+    }
+  }
+}

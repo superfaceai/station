@@ -1,0 +1,85 @@
+profile = "communication/email-templates@1.0"
+provider = "postmark"
+
+"""
+Not paginated, if you have more than 500 templates result might be incomplete
+"""
+map ListTemplates {
+  http GET "/templates" {
+    security "server_token"
+    
+    request "application/json" {
+      query {
+        Count = 500
+        Offset = 0
+      }
+    }
+    
+    response 200 "application/json" {
+      map result body.Templates.map((template) => ({
+        id: `${template.TemplateId}`,
+        name: template.Name,
+      }))
+    }
+  }
+}
+
+map GetTemplateContent {
+  http GET "/templates/{input.id}" {
+    security "server_token"
+
+    request "application/json" {}
+
+    response 200 "application/json" {
+      map result {
+        subject = body.Subject
+        text = body.TextBody
+        html = body.HtmlBody
+      }
+    }
+  }
+}
+
+map CreateTemplate {
+  http POST "/templates" {
+    security "server_token"
+
+    request "application/json" {
+      body {
+        Name = input.name
+        Subject = input.subject
+        TextBody = input.text
+        HtmlBody = input.html
+      }
+    }
+
+    response 200 "application/json" {
+      map result {
+        id = `${body.TemplateId}`
+        name = body.Name
+      }
+    }
+  }
+}
+
+map UpdateTemplate {
+  http PUT "/templates/{input.id}" {
+    security "server_token"
+
+    request "application/json" {
+      body {
+        Name = input.name
+        Subject = input.subject
+        TextBody = input.text
+        HtmlBody = input.html
+      }
+    }
+
+    response 200 "application/json" {
+      map result {
+        id = `${body.TemplateId}`
+        name = body.Name
+      }
+    }
+  }
+}
