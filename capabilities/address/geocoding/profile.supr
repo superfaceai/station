@@ -3,7 +3,7 @@ Geocoding
 Code or decode an postal address to or from geographical coordinates.
 """
 name = "address/geocoding"
-version = "3.0.1"
+version = "3.1.0"
 
 """
 Geocode address
@@ -12,11 +12,12 @@ Geocode postal address into geographical coordinates (latitude and longitude)
 """
 usecase Geocode {
   input {
-    addressCountry
+    query
+    streetAddress
     addressLocality
     addressRegion
+    addressCountry
     postalCode
-    streetAddress
   }
 
   result {
@@ -38,13 +39,17 @@ usecase ReverseGeocode {
 
   result [{
     addressCountry
-    addressLocality
     addressRegion
-    postalCode
+    addressLocality
     streetAddress
+    postalCode
     formattedAddress
   }]  
 }
+
+"Query
+  Free-form query string to search for. For example, '1600 Amphitheatre Parkway, Mountain View, CA' or just 'Mountain View'"
+field query
 
 "Country
   The country. For example, USA. You can also provide the two-letter ISO 3166-1 alpha-2 country code."

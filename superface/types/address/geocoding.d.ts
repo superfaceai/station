@@ -2,6 +2,11 @@ import { TypedProfile } from '@superfaceai/one-sdk';
 
 export declare type AddressGeocodingGeocodeInput = {
     /**
+     * Query
+     * Free-form query string to search for.
+     */
+    query?: string;
+    /**
      * Country
      * The country. For example, USA. You can also provide the two-letter ISO 3166-1 alpha-2 country code.
      **/
