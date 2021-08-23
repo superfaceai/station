@@ -21,7 +21,7 @@ describe('address/geocoding/nominatim', () => {
 
     const result2 = await profile.useCases.Geocode.perform(
       {
-        query: '1600 Amphitheatre Parkway, Mountain View, CA'
+        query: '1600 Amphitheatre Parkway, Mountain View, CA',
       },
       { provider }
     );

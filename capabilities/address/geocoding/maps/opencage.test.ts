@@ -29,7 +29,6 @@ describe('address/geocoding/opencage-typed', () => {
     expect(result2.isOk()).toBeTruthy();
     expect(result2.unwrap().latitude).toBe(37.4224857);
     expect(result2.unwrap().longitude).toBe(-122.0855846);
-
   });
 
   it('Reverse geocode geographical coordingates', async () => {
