@@ -8,7 +8,7 @@ export { StarwarsCharacterInformationProfile } from "./types/starwars/character-
 export { VcsPullRequestProfile } from "./types/vcs/pull-request";
 export { AddressGeocodingProfile } from "./types/address/geocoding";
 export { DeliveryTrackingShipmentInfoProfile } from "./types/delivery-tracking/shipment-info";
-export declare const SuperfaceClient: new () => import("@superfaceai/one-sdk/dist/client/client").TypedSuperfaceClient<{
+export declare const SuperfaceClient: new () => import("@superfaceai/one-sdk/dist/client/public/client").TypedSuperfaceClient<{
     "delivery-tracking/shipment-info": {
         ShipmentInfo: [import("./types/delivery-tracking/shipment-info").DeliveryTrackingShipmentInfoShipmentInfoInput, import("./types/delivery-tracking/shipment-info").DeliveryTrackingShipmentInfoShipmentInfoResult];
     };
