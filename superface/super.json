@@ -224,6 +224,21 @@
         },
         "nominatim": {
           "file": "./grid/address/geocoding/maps/nominatim.suma"
+        },
+        "azure-maps": {
+          "file": "./grid/address/geocoding/maps/azure-maps.suma",
+          "defaults": {
+            "Geocode": {
+              "input": {
+                "subscriptionKey": "$SUBSCRIPTION_KEY"
+              }
+            },
+            "ReverseGeocode": {
+              "input": {
+                "subscriptionKey": "$SUBSCRIPTION_KEY"
+              }
+            }
+          }
         }
       }
     },
@@ -400,6 +415,10 @@
     },
     "nominatim": {
       "file": "../providers/nominatim.json"
+    },
+    "azure-maps": {
+      "file": "../providers/azure-maps.json",
+      "security": []
     },
     "slack": {
       "file": "../providers/slack.json",
