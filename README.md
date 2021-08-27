@@ -48,11 +48,10 @@ yarn build
 ## Usage
 
   <!-- commands -->
-
-- [`station check`](#station-check)
-- [`station compile`](#station-compile)
-- [`station create DOCUMENTINFO`](#station-create-documentinfo)
-- [`station generate PROFILENAME`](#station-generate-profilename)
+* [`station check`](#station-check)
+* [`station compile`](#station-compile)
+* [`station create DOCUMENTINFO`](#station-create-documentinfo)
+* [`station generate PROFILENAME`](#station-generate-profilename)
 
 ## `station check`
 
@@ -71,7 +70,7 @@ EXAMPLES
   $ station check -q
 ```
 
-_See code: [src/commands/check.ts](https://github.com/superfaceai/station/tree/main/src/commands/check.ts)_
+_See code: [dist/src/commands/check.ts](https://github.com/superfaceai/station/blob/v0.0.0/dist/src/commands/check.ts)_
 
 ## `station compile`
 
@@ -93,7 +92,7 @@ EXAMPLES
   $ station compile --generate
 ```
 
-_See code: [src/commands/compile.ts](https://github.com/superfaceai/station/tree/main/src/commands/compile.ts)_
+_See code: [dist/src/commands/compile.ts](https://github.com/superfaceai/station/blob/v0.0.0/dist/src/commands/compile.ts)_
 
 ## `station create DOCUMENTINFO`
 
@@ -119,7 +118,7 @@ EXAMPLES
   $ station create provider twilio
 ```
 
-_See code: [src/commands/create.ts](https://github.com/superfaceai/station/tree/main/src/commands/create.ts)_
+_See code: [dist/src/commands/create.ts](https://github.com/superfaceai/station/blob/v0.0.0/dist/src/commands/create.ts)_
 
 ## `station generate PROFILENAME`
 
@@ -141,37 +140,7 @@ EXAMPLES
   $ station generate sms/service -q
 ```
 
-_See code: [src/commands/generate.ts](https://github.com/superfaceai/station/tree/main/src/commands/generate.ts)_
-
-## `station publish [PATH]`
-
-Uploads map/profile/provider to Store - use paths to `.supr` file for profiles, `.suma` for maps and `.json` for providers. Do not use path ending with `.ast.json` (compiled files).
-
-```
-USAGE
-  $ station publish [PATH]
-
-ARGUMENTS
-  PATH  Path to profile, map or provider
-
-OPTIONS
-  -f, --force  Publishes without asking any confirmation.
-  -h, --help   show CLI help
-  -q, --quiet  When set to true, disables the shell echo output of action.
-  --all        Publish all profiles, maps and providers
-  --dry-run    Runs without sending actual request.
-
-EXAMPLES
-  $ station publish --all
-  $ station publish --all --dry-run
-  $ station publish --all --force
-  $ station publish capabilities/vcs/user-repos/maps/bitbucket.suma
-  $ station publish capabilities/vcs/user-repos/maps/bitbucket.suma -q
-  $ station publish capabilities/vcs/user-repos/maps/bitbucket.suma --dry-run
-```
-
-_See code: [src/commands/publish.ts](https://github.com/superfaceai/station/tree/main/src/commands/publish.ts)_
-
+_See code: [dist/src/commands/generate.ts](https://github.com/superfaceai/station/blob/v0.0.0/dist/src/commands/generate.ts)_
 <!-- commandsstop -->
 
 ## `yarn test PATH`
