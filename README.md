@@ -21,9 +21,9 @@ Where capabilities are born. In this repository we build curated capabilities. E
 
 ## Background
 
-Superface (super-interface) is a higher-order API, an abstraction on top of the modern APIs like GraphQL and REST. Superface is one interface to discover, connect, and query any capabilities available via conventional APIs. 
+Superface (super-interface) is a higher-order API, an abstraction on top of the modern APIs like GraphQL and REST. Superface is one interface to discover, connect, and query any capabilities available via conventional APIs.
 
-Through its focus on application-level semantics, Superface decouples the clients from servers, enabling fully autonomous evolution. As such it minimizes the code base as well as errors and downtimes while providing unmatched resiliency and redundancy. 
+Through its focus on application-level semantics, Superface decouples the clients from servers, enabling fully autonomous evolution. As such it minimizes the code base as well as errors and downtimes while providing unmatched resiliency and redundancy.
 
 Superface allows for switching capability providers without development at a runtime in milliseconds. Furthermore, Superface decentralizes the composition and aggregation, and thus creates an Autonomous Integration Mesh.
 
@@ -33,25 +33,26 @@ You can get more information at https://superface.ai and https://superface.ai/do
 
 ## Install
 
-Install dependencies: 
+Install dependencies:
+
 ```
 yarn install
 ```
 
 Build TS files:
+
 ```
 yarn build
 ```
-set .env variables from .env.example. For publishing you need to set SUPERFACE_STORE_REFRESH_TOKEN (Possible only for SuperFace employees for now)
 
 ## Usage
 
   <!-- commands -->
-* [`station check`](#station-check)
-* [`station compile`](#station-compile)
-* [`station create DOCUMENTINFO`](#station-create-documentinfo)
-* [`station generate PROFILENAME`](#station-generate-profilename)
-* [`station publish [PATH]`](#station-publish-path)
+
+- [`station check`](#station-check)
+- [`station compile`](#station-compile)
+- [`station create DOCUMENTINFO`](#station-create-documentinfo)
+- [`station generate PROFILENAME`](#station-generate-profilename)
 
 ## `station check`
 
@@ -170,6 +171,7 @@ EXAMPLES
 ```
 
 _See code: [src/commands/publish.ts](https://github.com/superfaceai/station/tree/main/src/commands/publish.ts)_
+
 <!-- commandsstop -->
 
 ## `yarn test PATH`
@@ -196,7 +198,7 @@ You can find more information in [OneSDK repository](https://github.com/superfac
 
 ## Support
 
-If you need any additional support, have any questions or you just want to talk you can do that through our [documentation page](https://superface.ai/docs). 
+If you need any additional support, have any questions or you just want to talk you can do that through our [documentation page](https://superface.ai/docs).
 
 ## Development
 
@@ -207,6 +209,7 @@ After cloning, the dependencies must be downloaded using `yarn install` or `npm 
 Now the repository is ready for code changes.
 
 The `package.json` also contains scripts (runnable by calling `yarn <script-name>` or `npm run <script-name>`):
+
 - `lint` - lint the code (use `lint --fix` to run autofix)
 - `format` - check the code formatting (use `firmat:fix` to autoformat)
 - `prepush` - run `test`, `lint` and `format` checks. This should run without errors before you push anything to git.
@@ -263,6 +266,7 @@ Test created capability:
 ```
 
 Upload newly created files
+
 ```
 station publish {path to profile}
 station publish {path to map}
@@ -278,7 +282,6 @@ Secretes used for authentication during tests are stored in `.env.capabilities` 
 Station have Workflow to automate capabilities publishing [Publish to Production](https://github.com/superfaceai/station/blob/main/.github/workflows/publish_production.yml).
 
 **Publish to Production** is triggered manually from [Workflow detail](https://github.com/superfaceai/station/actions/workflows/publish_production.yml).
-
 
 ## Maintainers
 
