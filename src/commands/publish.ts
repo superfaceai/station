@@ -9,6 +9,8 @@ import { check, publish, publishAll } from '../logic';
 export default class Publish extends Command {
   static strict = false;
 
+  static hidden = true;
+
   static description =
     'Uploads map/profile/provider to Store - use paths to `.supr` file for profiles, `.suma` for maps and `.json` for providers. Do not use path ending with `.ast.json` (compiled files).';
 

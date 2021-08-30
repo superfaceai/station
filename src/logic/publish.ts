@@ -22,11 +22,10 @@ export async function publish(
   if (!(await exists(path))) {
     throw new CLIError('Path does not exist', { exit: 1 });
   }
-  if (!process.env.SUPERFACE_STORE_REFRESH_TOKEN) {
-    throw new CLIError(
-      'Env variable SUPERFACE_STORE_REFRESH_TOKEN is missing',
-      { exit: 1 }
-    );
+  if (!process.env.SUPERFACE_REFRESH_TOKEN) {
+    throw new CLIError('Env variable SUPERFACE_REFRESH_TOKEN is missing', {
+      exit: 1,
+    });
   }
   if (
     path.endsWith(EXTENSIONS.map.build) ||
@@ -39,7 +38,7 @@ export async function publish(
 
   const client = new ServiceClient({
     baseUrl,
-    refreshToken: process.env.SUPERFACE_STORE_REFRESH_TOKEN,
+    refreshToken: process.env.SUPERFACE_REFRESH_TOKEN,
   });
   const file = await readFile(path);
 
