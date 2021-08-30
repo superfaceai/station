@@ -1,6 +1,6 @@
 # station
 
-![GitHub Workflow Status](https://img.shields.io/github/workflow/status/superfaceai/station/CI)
+[![CI / CD](https://github.com/superfaceai/station/actions/workflows/ci_cd.yml/badge.svg)](https://github.com/superfaceai/station/actions/workflows/ci_cd.yml)
 ![TypeScript](https://img.shields.io/badge/%3C%2F%3E-Typescript-blue)
 
 <img src="https://github.com/superfaceai/station/blob/main/docs/LogoGreen.png" alt="superface logo" width="150" height="150">
@@ -48,10 +48,11 @@ yarn build
 ## Usage
 
   <!-- commands -->
-* [`station check`](#station-check)
-* [`station compile`](#station-compile)
-* [`station create DOCUMENTINFO`](#station-create-documentinfo)
-* [`station generate PROFILENAME`](#station-generate-profilename)
+
+- [`station check`](#station-check)
+- [`station compile`](#station-compile)
+- [`station create DOCUMENTINFO`](#station-create-documentinfo)
+- [`station generate PROFILENAME`](#station-generate-profilename)
 
 ## `station check`
 
@@ -141,6 +142,7 @@ EXAMPLES
 ```
 
 _See code: [dist/src/commands/generate.ts](https://github.com/superfaceai/station/blob/v0.0.0/dist/src/commands/generate.ts)_
+
 <!-- commandsstop -->
 
 ## `yarn test PATH`
