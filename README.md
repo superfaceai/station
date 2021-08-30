@@ -3,7 +3,7 @@
 [![CI / CD](https://github.com/superfaceai/station/actions/workflows/ci_cd.yml/badge.svg)](https://github.com/superfaceai/station/actions/workflows/ci_cd.yml)
 ![TypeScript](https://img.shields.io/badge/%3C%2F%3E-Typescript-blue)
 
-<img src="https://github.com/superfaceai/station/blob/main/docs/LogoGreen.png" alt="superface logo" width="150" height="150">
+<img src="https://github.com/superfaceai/station/blob/main/.github/docs/LogoGreen.png" alt="superface logo" width="150" height="150">
 
 Where capabilities are born. In this repository we build curated capabilities. Examples in this repository are ideal staring point for writing your own capability.
 
