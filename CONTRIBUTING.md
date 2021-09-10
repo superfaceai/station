@@ -1,4 +1,4 @@
-# Contributing to Superface
+# How to contribute to Superface Station
 
 We welcome contributions to our [open source project on GitHub](https://github.com/superfaceai/station).
 
@@ -10,9 +10,9 @@ We are glad that you are interested in Superface in the way of contributing. We 
 
 ## Help the community
 
-1) Report an Error or a Bug
-2) Contribute to the Documentation
-3) Provide Support on Issues
+1. Report an Error or a Bug
+2. Contribute to the Documentation
+3. Provide Support on Issues
 
 ## Need help?
 
@@ -22,19 +22,23 @@ If you have any question about this project (for example, how to use it) or if y
 
 Follow these steps:
 
-1. **Fork & Clone** the repository  
-2. **Setup** the Superface Station
-   - Install packages with `yarn install` or `npm install`
-   - Build with `yarn build` or `npm run build`
-   - Lint code with `yarn lint:fix` or `npm run lint:fix`
-3. **Update** [CHANGELOG](CHANGELOG.md). See https://keepachangelog.com/en/1.0.0/
-4. **Commit** changes to your own branch by convention. See https://www.conventionalcommits.org/en/v1.0.0/
-5. **Push** your work back up to your fork  
-6. Submit a **Pull Request** so that we can review your changes
+1. **Fork & Clone** the repository
+2. **Setup** the Station
+   - [Installation](README.md#install)
+   - [Usage](README.md#usage)
+3. **Commit** changes to your own branch by convention. See https://www.conventionalcommits.org/en/v1.0.0/
+4. **Push** your work back up to your fork
+5. Submit a **Pull Request** so that we can review your changes
 
 **NOTE: Be sure to merge the latest from "upstream" before making a pull request.**
 
 **NOTE: Please open an issue first if you want to make larger changes**
+
+### Contribute by adding capability
+
+For help with authoring new capability see [Superface documentation](https://superface.ai/docs/guides/create-new-capability).
+
+In Station we want to keep capabilities which are consistent and in great quality. To achieve it, set of [convetions](CONVENTIONS) were created.
 
 ### Contribute by reporting bugs
 
