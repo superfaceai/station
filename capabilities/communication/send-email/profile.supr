@@ -1,110 +1,69 @@
 """
 Send Email
-Send one transactional email
+Send transactional email.
 """
 
 name = "communication/send-email"
-version = "1.1.2"
+version = "2.0.0"
 
 """
-Send transactional email to one recipient
-Email can contain text and/or html representation
+Send Email
+Send transactional email to one recipient.
+Email can contain text and/or html representation.
 """
 usecase SendEmail unsafe {
   input {
+    """
+    From
+    The sender's email address.
+    """
     from!
+
+
+    """
+    To
+    The recipient's email address.
+    """
     to!
+
+    """
+    Subject
+    The subject of your email. See character length requirements according to RFC 2822.
+    """
     subject!
+
+    """
+    Text
+    The plain text email message.
+    """
     text
+
+    """
+    HTML
+    The HTML email message.
+    """
     html
+
   }
 
   result {
-    messageId
+    """
+    Message Identifier
+    The identifier is provider-specific and not unique.
+    """
+    messageId!
   }
 
-  error Error
-}
+  error {
+    """
+    Title
+    A short, human-readable summary of the problem type.
+    """
+    title!
 
-"""
-Send Templated Email
-Send templated transactional email to one recipient.
-Requires template defined on provider side. 
-"""
-usecase SendTemplatedEmail unsafe {
-  input {
-    from!
-    to!
-    templateId!
-    templateData!
+    """
+    A human-readable explanation specific to this occurrence of the problem.
+    """
+    detail
   }
-
-  result {
-    messageId
-  }
-
-  error Error
 }
-
-model Error {
-  """
-  Title
-  A short, human-readable summary of the problem type.
-  """
-  title
-
-  """
-  A human-readable explanation specific to this occurrence of the problem.
-  """
-  detail
-}
-
-"""
-From
-The sender's email address.
-"""
-field from
-
-"""
-To
-The recipient's email address.
-"""
-field to
-
-"""
-Subject
-The subject of your email. See character length requirements according to RFC 2822.
-"""
-field subject
-
-"""
-Text
-The plain text email message.
-"""
-field text
-
-"""
-HTML
-The HTML email message.
-"""
-field html
-
-"""
-Template Identifier
-The template to use when sending email message.
-"""
-field templateId
-
-"""
-Template Data
-Template data to be applied to the specified template to generate html, test, and subject.
-The value is a collection of key/value pairs following the pattern `variable_name`: `value to insert`.
-This field should be used in combination with `templateId` to identify what template to use.
-"""
-field templateData
-
-"""
-Message Identifier
-The identifier is provider-specific and not unique.
-"""
-field messageId
