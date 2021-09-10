@@ -27,7 +27,7 @@ usecase SendEmail unsafe {
 }
 
 """
-Send Teamplated Email
+Send Templated Email
 Send templated transactional email to one recipient.
 Requires template defined on provider side. 
 """
@@ -98,7 +98,7 @@ field templateId
 """
 Template Data
 Template data to be applied to the specified template to generate html, test, and subject.
-his field is a collection of key/value pairs following the pattern `variable_name`: `value to insert`.
+The value is a collection of key/value pairs following the pattern `variable_name`: `value to insert`.
 This field should be used in combination with `templateId` to identify what template to use.
 """
 field templateData
