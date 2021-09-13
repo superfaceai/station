@@ -169,11 +169,6 @@
               "input": {
                 "mailchimp_api_key": "$MAILCHIMP_API_KEY"
               }
-            },
-            "SendTemplatedEmail": {
-              "input": {
-                "mailchimp_api_key": "$MAILCHIMP_API_KEY"
-              }
             }
           }
         },
@@ -302,6 +297,16 @@
       "providers": {
         "mock": {
           "file": "./grid/communication/send-templated-email/maps/mock.suma"
+        },
+        "mailchimp": {
+          "file": "./grid/communication/send-templated-email/maps/mailchimp.suma",
+          "defaults": {
+            "SendTemplatedEmail": {
+              "input": {
+                "mailchimp_api_key": "$MAILCHIMP_API_KEY"
+              }
+            }
+          }
         }
       }
     }
