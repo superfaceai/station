@@ -1,0 +1,34 @@
+name = "weather/get-weather"
+version = "1.0"
+
+"""
+GetWeather usecase
+Get the current weeather
+"""
+usecase GetWeather safe {
+  input {
+    "City
+    Name of the city"
+    city! string!
+    "Units
+    Units used to represent temperature - Fahrenheit, Celsius, Kelvin
+    Celsius by default"
+    units enum {F, C, K}
+  }
+
+  result {
+    "Temperature
+    Temperature in specified units"
+    temperature! number!
+    "Feels Like
+    Subjective temperature in specified units"
+    feels_like number!
+    "Description
+    Description of weather"
+    description string!
+  }
+
+  error {
+    // todo
+  }
+}

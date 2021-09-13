@@ -281,6 +281,17 @@
           "file": "./grid/communication/send-message/maps/slack.suma"
         }
       }
+    },
+    "weather/get-weather": {
+      "file": "./grid/weather/get-weather/profile.supr",
+      "priority": [
+        "mock"
+      ],
+      "providers": {
+        "mock": {
+          "file": "./grid/weather/get-weather/maps/mock.suma"
+        }
+      }
     }
   },
   "providers": {
@@ -428,6 +439,10 @@
           "token": "$SLACK_ACCESS_TOKEN"
         }
       ]
+    },
+    "wttr-in": {
+      "file": "../providers/wttr-in.json",
+      "security": []
     }
   }
 }
