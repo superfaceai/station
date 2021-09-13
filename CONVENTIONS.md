@@ -28,7 +28,9 @@ This document gives coding conventions for the Superface capabilities created in
 
 ### Map
 
-There are no particular conventions right now.
+- Use 2 spaces per indentation level.
+
+There are no other conventions right now.
 We want first gather more content to understand how Comlink maps are written to decide what conventions would make sense.
 
 ### Provider
