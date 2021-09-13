@@ -1,40 +1,29 @@
 // SendGrid API Reference: https://sendgrid.com/docs/api-reference/"
 // Errors: https://sendgrid.api-docs.io/v3.0/mail-send/mail-send-errors
 
-profile = "communication/send-email@2.0"
+profile = "communication/send-templated-email@1.0"
 provider = "sendgrid"
-
-map SendEmail {
+map SendTemplatedEmail {
   INPUTS_MAP = {
     'personalizations.0.to.0.email': 'to',
     'from.email': 'from',
-    'subject': 'subject',
-  }
-
-  content = []
-
-  set if (input.text) {
-    content = content.concat([{ type: 'text/plain', value: input.text }])
-  }
-
-  set if (input.html) {
-    content = content.concat([{ type: 'text/html', value: input.html }])
+    'template_id': 'templateId',
   }
 
   http POST "/mail/send" {
     security "bearer_token"
-    
+
     request {
       body = {
+        template_id: input.templateId,
         from: { email: input.from },
-        subject: input.subject,
-        content: content,
         personalizations: [{
-          to: [{ email: input.to }], 
+          to: [{ email: input.to }],
+          dynamic_template_data: input.templateData,
         }]
       }
     }
-    
+
     response 202 "*" {
       map result {
         messageId = headers['x-message-id']
@@ -77,3 +66,4 @@ map SendEmail {
     }
   }
 }
+
