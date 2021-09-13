@@ -1,28 +1,27 @@
 // API Reference: https://postmarkapp.com/developer/api/overview
 
-profile = "communication/send-email@2.0"
+profile = "communication/send-templated-email@1.0"
 provider = "postmark"
 
-map SendEmail {
-  http POST "/email" {
+map SendTemplatedEmail {
+  http POST "/email/withTemplate" {
     security "server_token"
-    
+
     request "application/json" {
       body {
         From = input.from
         To = input.to
-        Subject= input.subject
-        TextBody = input.text
-        HtmlBody = input.html
+        TemplateId = input.templateId
+        TemplateModel = input.templateData
       }
     }
-    
+
     response 200 "application/json" {
       map result {
         messageId = body.MessageID
       }
     }
-
+    
     response 422 "application/json" {
       map error {
         title = "Invalid inputs"
