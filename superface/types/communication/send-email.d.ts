@@ -1,49 +1,55 @@
 import { TypedProfile } from '@superfaceai/one-sdk';
-
 export declare type CommunicationSendEmailSendEmailInput = {
+    /**
+     * From
+     * The sender's email address.
+     **/
     from: unknown;
+    /**
+     * To
+     * The recipient's email address.
+     **/
     to: unknown;
+    /**
+     * Subject
+     * The subject of your email. See character length requirements according to RFC 2822.
+     **/
     subject: unknown;
+    /**
+     * Text
+     * The plain text email message.
+     **/
     text?: unknown;
+    /**
+     * HTML
+     * The HTML email message.
+     **/
     html?: unknown;
 };
 export declare type CommunicationSendEmailSendEmailResult = {
-    messageId?: unknown;
-};
-export declare type CommunicationSendEmailSendTemplatedEmailInput = {
-    from: unknown;
-    to: unknown;
-    templateId: unknown;
-    templateData: unknown;
-};
-export declare type CommunicationSendEmailSendTemplatedEmailResult = {
-    messageId?: unknown;
+    /**
+     * Message Identifier
+     * The identifier is provider-specific and not unique.
+     **/
+    messageId: unknown;
 };
 declare const profile: {
     /**
-     * Send transactional email to one recipient
-     * Email can contain text and/or html representation
+     * Send Email
+     * Send transactional email to one recipient.
+     * Email can contain text and/or html representation.
      **/
     SendEmail: [CommunicationSendEmailSendEmailInput, CommunicationSendEmailSendEmailResult];
-    /**
-     * Send templated transactional email to one recipient
-     * Requires template defined on provider side.
-     **/
-    SendTemplatedEmail: [CommunicationSendEmailSendTemplatedEmailInput, CommunicationSendEmailSendTemplatedEmailResult];
 };
 export declare type CommunicationSendEmailProfile = TypedProfile<typeof profile>;
 export declare const communicationSendEmail: {
     "communication/send-email": {
         /**
-         * Send transactional email to one recipient
-         * Email can contain text and/or html representation
+         * Send Email
+         * Send transactional email to one recipient.
+         * Email can contain text and/or html representation.
          **/
         SendEmail: [CommunicationSendEmailSendEmailInput, CommunicationSendEmailSendEmailResult];
-        /**
-         * Send templated transactional email to one recipient
-         * Requires template defined on provider side.
-         **/
-        SendTemplatedEmail: [CommunicationSendEmailSendTemplatedEmailInput, CommunicationSendEmailSendTemplatedEmailResult];
     };
 };
 export {};
