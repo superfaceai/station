@@ -7,28 +7,24 @@ Get the current weeather
 """
 usecase GetWeather safe {
   input {
-    "City
+    "city
     Name of the city"
     city! string!
-    "Units
+    "units
     Units used to represent temperature - Fahrenheit, Celsius, Kelvin
     Celsius by default"
-    units enum {F, C, K}
+    units enum {C, F, K}
   }
 
   result {
-    "Temperature
+    "temperature
     Temperature in specified units"
     temperature! number!
-    "Feels Like
+    "feels_like
     Subjective temperature in specified units"
     feels_like number!
-    "Description
+    "description
     Description of weather"
     description string!
-  }
-
-  error {
-    // todo
   }
 }

@@ -285,11 +285,15 @@
     "weather/get-weather": {
       "file": "./grid/weather/get-weather/profile.supr",
       "priority": [
-        "mock"
+        "mock",
+        "wttr-in"
       ],
       "providers": {
         "mock": {
           "file": "./grid/weather/get-weather/maps/mock.suma"
+        },
+        "wttr-in": {
+          "file": "./grid/weather/get-weather/maps/wttr-in.suma"
         }
       }
     }

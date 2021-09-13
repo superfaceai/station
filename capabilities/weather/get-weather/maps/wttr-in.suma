@@ -1,0 +1,43 @@
+profile = "weather/get-weather@1.0"
+provider = "wttr-in"
+
+map GetWeather {
+  set {
+    units = input.units
+  }
+
+  http GET "/{input.city}" {
+    security none
+
+    request {
+      query {
+        // request JSON for response
+        format = 'j1'
+      }
+    }
+
+    response 200 "application/json" {
+      temperatureWrapper = call pickTemperatures(weather = body.current_condition[0], units = units)
+      map result {
+        temperature = temperatureWrapper.temperature
+        feels_like = temperatureWrapper.feels_like
+        description = body.current_condition[0].weatherDesc[0].value
+      }
+    }
+  }
+}
+
+operation pickTemperatures {
+  return if (args.units === 'F') {
+    temperature = Number(args.weather.temp_F)
+    feels_like = Number(args.weather.FeelsLikeF)
+  }
+  return if (args.units === 'K') {
+    temperature = Number(args.weather.temp_C) + 273.15
+    feels_like = Number(args.weather.FeelsLikeC)  + 273.15
+  }
+  return {
+    temperature = Number(args.weather.temp_C)
+    feels_like = Number(args.weather.FeelsLikeC)
+  }
+}
