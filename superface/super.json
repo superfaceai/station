@@ -148,14 +148,6 @@
               "input": {
                 "domain": "$MAILGUN_COMMUNICATION_DOMAIN"
               }
-            },
-            "SendTemplatedEmail": {
-              "input": {
-                "domain": "$MAILGUN_COMMUNICATION_DOMAIN",
-                "templateData": {
-                  "subject": "Station test - mailgun"
-                }
-              }
             }
           }
         },
@@ -174,6 +166,37 @@
         },
         "postmark": {
           "file": "./grid/communication/send-email/maps/postmark.suma"
+        }
+      }
+    },
+    "communication/send-templated-email": {
+      "file": "./grid/communication/send-templated-email/profile.supr",
+      "providers": {
+        "mock": {
+          "file": "./grid/communication/send-templated-email/maps/mock.suma"
+        },
+        "mailchimp": {
+          "file": "./grid/communication/send-templated-email/maps/mailchimp.suma",
+          "defaults": {
+            "SendTemplatedEmail": {
+              "input": {
+                "mailchimp_api_key": "$MAILCHIMP_API_KEY"
+              }
+            }
+          }
+        },
+        "mailgun": {
+          "file": "./grid/communication/send-templated-email/maps/mailgun.suma",
+          "defaults": {
+            "SendTemplatedEmail": {
+              "input": {
+                "domain": "$MAILGUN_COMMUNICATION_DOMAIN",
+                "templateData": {
+                  "subject": "Station test - mailgun"
+                }
+              }
+            }
+          }
         }
       }
     },
@@ -289,24 +312,6 @@
         },
         "wttr-in": {
           "file": "./grid/weather/current-city/maps/wttr-in.suma"
-        }
-      }
-    },
-    "communication/send-templated-email": {
-      "file": "./grid/communication/send-templated-email/profile.supr",
-      "providers": {
-        "mock": {
-          "file": "./grid/communication/send-templated-email/maps/mock.suma"
-        },
-        "mailchimp": {
-          "file": "./grid/communication/send-templated-email/maps/mailchimp.suma",
-          "defaults": {
-            "SendTemplatedEmail": {
-              "input": {
-                "mailchimp_api_key": "$MAILCHIMP_API_KEY"
-              }
-            }
-          }
         }
       }
     }
