@@ -34,7 +34,7 @@ operation pickTemperatures {
   }
   return if (args.units === 'K') {
     temperature = Number(args.weather.temp_C) + 273.15
-    feels_like = Number(args.weather.FeelsLikeC)  + 273.15
+    feels_like = Number(args.weather.FeelsLikeC) + 273.15
   }
   return {
     temperature = Number(args.weather.temp_C)

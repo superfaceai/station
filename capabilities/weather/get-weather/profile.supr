@@ -1,30 +1,48 @@
+"""
+Get Weather
+Get weather information for selected location
+"""
+
 name = "weather/get-weather"
 version = "1.0"
 
 """
-GetWeather usecase
-Get the current weeather
+Get Weather
+Get Current weather for the city and in chosen units.
 """
 usecase GetWeather safe {
   input {
-    "city
-    Name of the city"
+    """
+    city
+    Name of the city
+    """
     city! string!
-    "units
+    
+    """
+    units
     Units used to represent temperature - Fahrenheit, Celsius, Kelvin
-    Celsius by default"
+    Celsius by default
+    """
     units enum {C, F, K}
   }
 
   result {
-    "temperature
-    Temperature in specified units"
+    """
+    temperature
+    Temperature in specified units
+    """
     temperature! number!
-    "feels_like
-    Subjective temperature in specified units"
+    
+    """
+    feels_like
+    Subjective temperature in specified units
+    """
     feels_like number!
-    "description
-    Description of weather"
+    
+    """
+    description
+    Description of weather
+    """
     description string!
   }
 }
