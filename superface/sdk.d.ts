@@ -10,10 +10,10 @@ export { VcsPullRequestProfile } from "./types/vcs/pull-request";
 export { VcsPullRequestsProfile } from "./types/vcs/pull-requests";
 export { VcsSingleFileContentProfile } from "./types/vcs/single-file-content";
 export { VcsUserReposProfile } from "./types/vcs/user-repos";
-export { WeatherGetWeatherProfile } from "./types/weather/get-weather";
+export { WeatherCurrentCityProfile } from "./types/weather/current-city";
 export declare const SuperfaceClient: new () => import("@superfaceai/one-sdk/dist/client/client").TypedSuperfaceClient<{
-    "weather/get-weather": {
-        GetWeather: [import("./types/weather/get-weather").WeatherGetWeatherGetWeatherInput, import("./types/weather/get-weather").WeatherGetWeatherGetWeatherResult];
+    "weather/current-city": {
+        GetCurrentWeatherInCity: [import("./types/weather/current-city").WeatherCurrentCityGetCurrentWeatherInCityInput, import("./types/weather/current-city").WeatherCurrentCityGetCurrentWeatherInCityResult];
     };
     "vcs/user-repos": {
         UserRepos: [import("./types/vcs/user-repos").VcsUserReposUserReposInput, import("./types/vcs/user-repos").VcsUserReposUserReposResult];
