@@ -1,0 +1,71 @@
+"""
+Forecast City
+Get weather forecast for the city
+"""
+name = "weather/forecast-city"
+version = "1.0.0"
+
+"""
+Get Weather Forecast In City
+Get weather forecast for the city in chosen units
+"""
+usecase GetWeatherForecastInCity {
+  input {
+  """
+  city
+  Name of the city
+  """
+  city! string!
+  
+  """
+  units
+  Units used to represent temperature - Fahrenheit, Celsius, Kelvin
+  Celsius by default
+  """
+  units enum {C, F, K}
+  }
+
+  result [
+      {
+        """
+        temperature
+        Temperature in specified units
+        """
+        temperature! number!
+
+        """
+        date
+        Date of the forecast
+        """
+        date! string!
+
+        """
+        maxTemperature
+        Daily maximal Temperature
+        """
+        maxTemperature number!
+
+        """
+        minTemperature
+        Datily minimal temperature
+        """
+        minTemperature number!
+        
+        """
+        feelsLike
+        Subjective temperature in specified units
+        """
+        feelsLike number!
+        
+        """
+        description
+        Description of weather
+        """
+        description string!
+      }
+    ]
+
+  error {
+    title! string!
+  }
+}

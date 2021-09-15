@@ -296,6 +296,21 @@
           "file": "./grid/weather/current-city/maps/wttr-in.suma"
         }
       }
+    },
+    "weather/forecast-city": {
+      "file": "./grid/weather/forecast-city/profile.supr",
+      "priority": [
+        "mock",
+        "wttr-in"
+      ],
+      "providers": {
+        "mock": {
+          "file": "./grid/weather/forecast-city/maps/mock.suma"
+        },
+        "wttr-in": {
+          "file": "./grid/weather/forecast-city/maps/wttr-in.suma"
+        }
+      }
     }
   },
   "providers": {

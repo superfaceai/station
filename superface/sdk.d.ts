@@ -11,7 +11,11 @@ export { VcsPullRequestsProfile } from "./types/vcs/pull-requests";
 export { VcsSingleFileContentProfile } from "./types/vcs/single-file-content";
 export { VcsUserReposProfile } from "./types/vcs/user-repos";
 export { WeatherCurrentCityProfile } from "./types/weather/current-city";
+export { WeatherForecastCityProfile } from "./types/weather/forecast-city";
 export declare const SuperfaceClient: new () => import("@superfaceai/one-sdk/dist/client/client").TypedSuperfaceClient<{
+    "weather/forecast-city": {
+        GetWeatherForecastInCity: [import("./types/weather/forecast-city").WeatherForecastCityGetWeatherForecastInCityInput, import("./types/weather/forecast-city").WeatherForecastCityGetWeatherForecastInCityResult];
+    };
     "weather/current-city": {
         GetCurrentWeatherInCity: [import("./types/weather/current-city").WeatherCurrentCityGetCurrentWeatherInCityInput, import("./types/weather/current-city").WeatherCurrentCityGetCurrentWeatherInCityResult];
     };
