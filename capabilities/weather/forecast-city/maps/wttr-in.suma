@@ -27,7 +27,7 @@ map GetWeatherForecastInCity {
   }
 }
 
-operation pickTemperature {
+operation pickTemperatures {
   return if (args.units === 'F') {
     temperature = Number(args.weather.avgtempF)
     maxTemp = Number(args.weather.maxtempF)
@@ -47,7 +47,7 @@ operation pickTemperature {
 
 operation mapWeather {
   set {
-    temperatureWrapper = call pickTemperature(units = args.units, weather = args.weather)
+    temperatureWrapper = call pickTemperatures(units = args.units, weather = args.weather)
   }
   return {
     temperature = temperatureWrapper.temperature
