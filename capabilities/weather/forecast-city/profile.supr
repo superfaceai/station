@@ -1,71 +1,55 @@
 """
-Forecast City
+Weather Forecast For City
 Get weather forecast for the city
 """
 name = "weather/forecast-city"
 version = "1.0.0"
 
 """
-Get Weather Forecast In City
+Get Weather Forecast For City
 Get weather forecast for the city in chosen units
 """
 usecase GetWeatherForecastInCity {
   input {
   """
   city
-  Name of the city
+  Name of the city including state and country, e.g.: "Prague, Czech Republic" or "New York City, NY, USA"
   """
   city! string!
   
   """
   units
-  Units used to represent temperature - Fahrenheit, Celsius, Kelvin
+  Units used to represent temperature - Fahrenheit, Celsius, Kelvin;
   Celsius by default
   """
   units enum {C, F, K}
   }
 
   result [
-      {
-        """
-        temperature
-        Temperature in specified units
-        """
-        temperature! number!
+    {
+      """
+      temperature
+      Temperature in specified units
+      """
+      temperature! number!
 
-        """
-        date
-        Date of the forecast
-        """
-        date! string!
+      """
+      date
+      Date of the weather forecast
+      """
+      date! string!
 
-        """
-        maxTemperature
-        Daily maximal Temperature
-        """
-        maxTemperature number!
+      """
+      maxTemperature
+      Daily maximal temperature in specified units
+      """
+      maxTemperature number!
 
-        """
-        minTemperature
-        Datily minimal temperature
-        """
-        minTemperature number!
-        
-        """
-        feelsLike
-        Subjective temperature in specified units
-        """
-        feelsLike number!
-        
-        """
-        description
-        Description of weather
-        """
-        description string!
-      }
-    ]
-
-  error {
-    title! string!
-  }
+      """
+      minTemperature
+      Datily minimal temperature in specified units
+      """
+      minTemperature number!
+    }
+  ]
 }
