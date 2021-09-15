@@ -4,6 +4,7 @@ export { CommunicationEmailTemplatesProfile } from "./types/communication/email-
 export { CommunicationSendEmailProfile } from "./types/communication/send-email";
 export { CommunicationSendMessageProfile } from "./types/communication/send-message";
 export { CommunicationSendSmsProfile } from "./types/communication/send-sms";
+export { CommunicationSendTemplatedEmailProfile } from "./types/communication/send-templated-email";
 export { DeliveryTrackingShipmentInfoProfile } from "./types/delivery-tracking/shipment-info";
 export { StarwarsCharacterInformationProfile } from "./types/starwars/character-information";
 export { VcsPullRequestProfile } from "./types/vcs/pull-request";
@@ -33,6 +34,9 @@ export declare const SuperfaceClient: new () => import("@superfaceai/one-sdk/dis
     "delivery-tracking/shipment-info": {
         ShipmentInfo: [import("./types/delivery-tracking/shipment-info").DeliveryTrackingShipmentInfoShipmentInfoInput, import("./types/delivery-tracking/shipment-info").DeliveryTrackingShipmentInfoShipmentInfoResult];
     };
+    "communication/send-templated-email": {
+        SendTemplatedEmail: [import("./types/communication/send-templated-email").CommunicationSendTemplatedEmailSendTemplatedEmailInput, import("./types/communication/send-templated-email").CommunicationSendTemplatedEmailSendTemplatedEmailResult];
+    };
     "communication/send-sms": {
         SendMessage: [import("./types/communication/send-sms").CommunicationSendSmsSendMessageInput, import("./types/communication/send-sms").CommunicationSendSmsSendMessageResult];
         RetrieveMessageStatus: [import("./types/communication/send-sms").CommunicationSendSmsRetrieveMessageStatusInput, import("./types/communication/send-sms").CommunicationSendSmsRetrieveMessageStatusResult];
@@ -42,7 +46,6 @@ export declare const SuperfaceClient: new () => import("@superfaceai/one-sdk/dis
     };
     "communication/send-email": {
         SendEmail: [import("./types/communication/send-email").CommunicationSendEmailSendEmailInput, import("./types/communication/send-email").CommunicationSendEmailSendEmailResult];
-        SendTemplatedEmail: [import("./types/communication/send-email").CommunicationSendEmailSendTemplatedEmailInput, import("./types/communication/send-email").CommunicationSendEmailSendTemplatedEmailResult];
     };
     "communication/email-templates": {
         ListTemplates: [any, import("./types/communication/email-templates").CommunicationEmailTemplatesListTemplatesResult];

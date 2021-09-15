@@ -1,31 +1,23 @@
 // Mailgun API Reference: https://documentation.mailgun.com/en/latest/api_reference.html
 
-profile = "communication/send-email@2.0"
+profile = "communication/send-templated-email@1.0"
 provider = "mailgun"
 
-map SendEmail {
+map SendTemplatedEmail {
   // TODO: make this input visible
   domain = input.domain
-  
-  body = {
-    from: input.from,
-    to: input.to,
-    subject: input.subject,
-  }
-
-  set if (input.text) {
-    body.text = input.text
-  }
-  
-  set if (input.html) {
-    body.html = input.html
-  }
 
   http POST "/{domain}/messages" {
     security "basic"
 
     request "application/x-www-form-urlencoded" {
-      body = body
+      body {
+        from = input.from
+        to = input.to
+        template = input.templateId
+        subject = (input.templateData || {}).subject // this is provider specific as mailgun doesn't have default subject in templates
+        "h:x-mailgun-variables" = input.templateData
+      }
     }
 
     response 200 {
@@ -42,3 +34,4 @@ map SendEmail {
     }
   }
 }
+

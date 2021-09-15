@@ -6,19 +6,19 @@
 import { MappedHTTPError, Provider } from '@superfaceai/one-sdk';
 
 import {
-  CommunicationSendEmailProfile,
+  CommunicationSendTemplatedEmailProfile,
   SuperfaceClient,
 } from '../../../../superface/sdk';
 
-export const sendEmailTest = (providerName: string): void => {
-  describe(`communication/send-email/${providerName}`, () => {
+export const sendTemplatedEmailTest = (providerName: string): void => {
+  describe(`communication/send-templated-email/${providerName}`, () => {
     let client: InstanceType<typeof SuperfaceClient>;
-    let profile: CommunicationSendEmailProfile;
+    let profile: CommunicationSendTemplatedEmailProfile;
     let provider: Provider;
 
     beforeEach(async () => {
       client = new SuperfaceClient();
-      profile = await client.getProfile('communication/send-email');
+      profile = await client.getProfile('communication/send-templated-email');
       provider = await client.getProvider(providerName);
     });
 
@@ -26,18 +26,27 @@ export const sendEmailTest = (providerName: string): void => {
       expect(provider).not.toBeUndefined();
     });
 
-    describe('SendEmail', () => {
+    describe('SendTemplatedEmail', () => {
       describe('when all inputs are correct', () => {
-        it('should return messageId as result', async () => {
-          const result = await profile.useCases.SendEmail.perform(
+        it('should return messagaId as result', async () => {
+          const result = await profile.useCases.SendTemplatedEmail.perform(
             {
               from:
                 process.env[
                   `${providerName.toUpperCase()}_COMMUNICATION_SENDEMAIL_FROM`
                 ],
               to: process.env.COMMUNICATION_SENDEMAIL_TO,
-              subject: 'Station test',
-              text: `Station test - ${providerName}`,
+              templateId:
+                process.env[
+                  `${providerName.toUpperCase()}_COMMUNICATION_SENDEMAIL_TEMPLATE_ID`
+                ],
+              templateData: {
+                from:
+                  process.env[
+                    `${providerName.toUpperCase()}_COMMUNICATION_SENDEMAIL_FROM`
+                  ],
+                to: process.env.COMMUNICATION_SENDEMAIL_TO,
+              },
             },
             { provider }
           );
@@ -47,20 +56,19 @@ export const sendEmailTest = (providerName: string): void => {
       });
 
       describe('when inputs are invalid', () => {
-        it('should throw on unwrap', async () => {
-          const result = await profile.useCases.SendEmail.perform(
+        it('should throw error on unwrap', async () => {
+          const result = await profile.useCases.SendTemplatedEmail.perform(
             {
               to: 'invalidemail',
               from: 'invalidemail',
-              subject: '',
-              text: '',
+              templateId: 'invalid',
+              templateData: null,
             },
             { provider }
           );
 
           try {
             result.unwrap();
-
             throw new Error('must throw something');
           } catch (error) {
             expect(error).toBeInstanceOf(MappedHTTPError);

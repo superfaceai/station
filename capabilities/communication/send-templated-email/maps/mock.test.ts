@@ -1,12 +1,14 @@
 import { SuperfaceClient } from '../../../../superface/sdk';
 
-describe('communication/send-email/mock', () => {
-  describe('SendEmail', () => {
+describe('communication/send-templated-email/mock', () => {
+  describe('SendTemplatedEmail', () => {
     it('performs correctly', async () => {
       const client = new SuperfaceClient();
-      const profile = await client.getProfile('communication/send-email');
+      const profile = await client.getProfile(
+        'communication/send-templated-email'
+      );
       const provider = await client.getProvider('mock');
-      const usecase = profile.useCases.SendEmail;
+      const usecase = profile.useCases.SendTemplatedEmail;
 
       expect(provider).not.toBeUndefined();
       expect(usecase).not.toBeUndefined();
@@ -15,8 +17,8 @@ describe('communication/send-email/mock', () => {
         {
           from: '',
           to: '',
-          subject: '',
-          text: '',
+          templateId: '',
+          templateData: {},
         },
         { provider }
       );

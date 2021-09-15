@@ -1,7 +1,7 @@
-profile = "communication/send-email@2.0"
+profile = "communication/send-templated-email@1.0"
 provider = "mock"
 
-map SendEmail{
+map SendTemplatedEmail {
   map result {
     messageId = Math.random().toString(16).substr(2, 14)
   }
