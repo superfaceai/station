@@ -26,6 +26,27 @@ map GetCurrentWeatherInCity {
         description = body.weather[0].description
       }
     }
+
+    response 400 {
+      map error {
+        title = '400 - Bad Request'
+        detail = body.message
+      }
+    }
+
+    response 401 {
+      map error {
+        title = '401 - Unauthorized'
+        detail = body.message
+      }
+    }
+
+    response 404 {
+      map error {
+        title = '404 - Not Found'
+        detail = body.message
+      }
+    }
   }
 }
 
