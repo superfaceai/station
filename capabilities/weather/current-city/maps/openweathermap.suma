@@ -1,0 +1,41 @@
+profile = "weather/current-city@1.0"
+provider = "openweathermap"
+
+map GetCurrentWeatherInCity {
+  set {
+    mappedUnits = null
+  }
+  call mapUnits(units = input.units) {
+    set {
+      mappedUnits = outcome.data.result
+    }
+  }
+  http GET "/data/2.5/weather" {
+    security "apikey"
+    request {
+      query {
+        zip = input.city
+        units = mappedUnits
+      }
+    }
+
+    response 200 "application/json" {
+      map result {
+        temperature = body.main.temp
+        feelsLike = body.main.feels_like
+      }
+    }
+  }
+}
+
+operation mapUnits {
+  return if (args.units === 'F') {
+    result = "imperial"
+  }
+  return if (args.units === 'K') {
+    result = "standard"
+  }
+  return {
+    result = "metric"
+  }
+}
