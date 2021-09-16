@@ -14,7 +14,7 @@ map GetCurrentWeatherInCity {
     security "apikey"
     request {
       query {
-        zip = input.city
+        q = input.city
         units = mappedUnits
       }
     }
@@ -23,6 +23,7 @@ map GetCurrentWeatherInCity {
       map result {
         temperature = body.main.temp
         feelsLike = body.main.feels_like
+        description = body.weather[0].description
       }
     }
   }
