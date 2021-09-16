@@ -471,6 +471,15 @@
     "wttr-in": {
       "file": "../providers/wttr-in.json",
       "security": []
+    },
+    "openweathermap": {
+      "file": "../providers/openweathermap.json",
+      "security": [
+        {
+          "id": "apikey",
+          "apikey": "$OPENWEATHERMAP_API_KEY"
+        }
+      ]
     }
   }
 }
