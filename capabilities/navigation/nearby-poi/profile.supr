@@ -4,7 +4,7 @@ Find nearby points of interest.
 Find points of interest near the given location using map services.
 """
 name = "navigation/nearby-poi"
-version = "1.0"
+version = "1.0.0"
 
 """
 Find nearby points of interest
@@ -13,13 +13,21 @@ Find points of interest near the given location.
 """
 usecase NearbyPoi {
 	input {
-		"Center of the search"
-		center! Coordinates!
-		"Radius of the search"
-		radius! number!
 		"""
+		center
+		Center of the search
+		"""
+		center! Coordinates!
+		
+		"""
+		radius
+		Radius of the search
+		"""
+		radius! number!
+		
+		"""
+		categories
 		Optional categories filter
-
 		Points belonging to at least one of these categories are returned
 		"""
 		categories [InterestCategory!]
