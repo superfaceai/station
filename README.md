@@ -153,7 +153,7 @@ Station have Workflow to automate capabilities publishing [Publish to Production
 
 **Please open an issue first if you want to make larger changes**
 
-Feel free to contribute! Please follow the [Contribution Guide](CONTRIBUTION_GUIDE.md).
+Feel free to contribute! Please follow the [Contribution Guide](CONTRIBUTING.md).
 
 Licenses of node_modules are checked during CI/CD for every commit. Only the following licenses are allowed:
 
