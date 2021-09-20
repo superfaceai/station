@@ -38,24 +38,6 @@ Install dependencies:
 yarn install
 ```
 
-## Usage
-
-## `yarn test PATH`
-
-Runs test files with suffix `.test.ts`. Running `yarn test` without path will run all test files and will probably fail.
-
-```
-USAGE
-  $ yarn test PATH
-
-ARGUMENTS
-  PATH  Path to test file
-
-
-EXAMPLES
-  $ yarn test capabilities/vcs/user-repos/maps/bitbucket
-```
-
 ## Security
 
 Superface is not man-in-the-middle so it does not require any access to secrets that are needed to communicate with provider API. Superface CLI only prepares super.json file with authorization fields in form of environment variable. You just set correct variables and communicate directly with provider API.
@@ -76,67 +58,44 @@ Now the repository is ready for code changes.
 
 The `package.json` also contains scripts (runnable by calling `yarn <script-name>` or `npm run <script-name>`):
 
-- `lint` - lint the code (use `lint --fix` to run autofix)
-- `format` - check the code formatting (use `firmat:fix` to autoformat)
-- `prepush` - run `test`, `lint` and `format` checks. This should run without errors before you push anything to git.
-
-Lastly, to build a local artifact run `yarn build` or `npm run build`.
-
-**Note**: The project needs to be built (into the `dist` folder) to run cli commands.
-
-**Note**: You can change url of API requests by setting `SUPERFACE_API_URL` environment variable to desired base url.
+- `lint` - lint the code (use `lint:fix` to run autofix)
+- `format` - check the code formatting (use `format:fix` to autoformat)
+- `prepush` - run `lint` and `format` checks. This should run without errors before you push anything to git.
 
 ### Adding new capability
 
-First, create new profile:
+#### Create new profile
 
-```
- station create profile {scope}/{usecase}
-```
-
-Edit created .supr file:
-
-Secondly, create new provider:
-
-```
- station create provider {provider}
+```shell
+yarn superface create --profileId [scope](optional)/[name] --profile --profileFileName capabilities/[scope]/[name]/profile.supr
 ```
 
-Edit created .json file
+#### Create new provider
 
-Next, create map for created profile and provider:
-
-```
- station create map {scope}/{usecase} {provider}
+```shell
+yarn superface create --providerName [provider_name] --provider --providerFileName providers/[provider_name].json
 ```
 
-Edit created .suma file and test file (.test.ts)
+#### Create map for profile and provider
 
-Compile created files:
-
-```
- station compile
+```shell
+yarn superface create --profileId [scope](optional)/[name] --providerName [provider_name] --map --mapFileName capabilities/[scope]/[name]/maps/[provider_name].suma
 ```
 
-Generate types if needed:
+#### Test the map
 
-```
- station generate {scope}/{usecase}
-```
+TODO
 
-Create tests for created capability. You can use existing tests as a starting point.
-Test created capability:
+### Check all parts are interlinked
 
-```
- yarn test {path to test file}
+```shell
+yarn superface check
 ```
 
-Upload newly created files
+### Verify capabilities can be compiled
 
-```
-station publish {path to profile}
-station publish {path to map}
-station publish {path to provider}
+```shell
+yarn superface compile
 ```
 
 ### Enviroment variables
