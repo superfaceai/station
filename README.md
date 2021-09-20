@@ -145,9 +145,7 @@ Secretes used for authentication during tests are stored in `.env.capabilities` 
 
 ### Automated publishing
 
-Station have Workflow to automate capabilities publishing [Publish to Production](https://github.com/superfaceai/station/blob/main/.github/workflows/publish_production.yml).
-
-**Publish to Production** is triggered manually from [Workflow detail](https://github.com/superfaceai/station/actions/workflows/publish_production.yml).
+Station have Workflow to automate capabilities publishing. For details see [CI / CD](https://github.com/superfaceai/station/blob/main/.github/workflows/ci_cd.yml) workflow.
 
 ## Contributing
 
