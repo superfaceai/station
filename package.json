@@ -14,24 +14,19 @@
     "dist/"
   ],
   "scripts": {
-    "build": "tsc -p tsconfig.release.json --outDir dist",
-    "clean": "rimraf dist/",
-    "prebuild": "yarn clean",
     "test": "dotenv -e .env.capabilities -- jest",
-    "test:compile": "station compile && station check && yarn test",
+    "test:compile": "superface compile && superface check && yarn test",
     "test:clean": "dotenv -e .env.capabilities -- jest --clear-cache && jest",
     "test:debug": "DEBUG=* yarn test",
     "lint": "eslint ./",
     "lint:fix": "yarn lint --fix",
     "format": "prettier -c ./",
     "format:fix": "prettier --write ./",
-    "prepush": "yarn build && yarn lint:fix && yarn format:fix"
+    "prepush": "yarn lint:fix && yarn format:fix",
+    "publish": "node ./github/workflows/publish.js"
   },
   "devDependencies": {
-    "@types/debug": "^4.1.5",
-    "@types/inquirer": "^7.3.1",
     "@types/jest": "^26.0.15",
-    "@types/rimraf": "^3.0.0",
     "@typescript-eslint/eslint-plugin": "^4.17.0",
     "@typescript-eslint/parser": "^4.17.0",
     "eslint": "^7.22.0",
@@ -46,21 +41,7 @@
     "typescript": "^4.0.5"
   },
   "dependencies": {
-    "@oclif/command": "^1.8.0",
-    "@oclif/config": "^1.17.0",
-    "@superfaceai/ast": "0.0.25",
     "@superfaceai/cli": "^0.0.20",
-    "@superfaceai/one-sdk": "^0.0.29",
-    "@superfaceai/parser": "0.0.17",
-    "@superfaceai/service-client": "^0.0.14",
-    "chalk": "^4.1.0",
-    "dotenv-cli": "^4.0.0",
-    "glob": "^7.1.7",
-    "inquirer": "^7.3.3",
-    "rimraf": "^3.0.2"
-  },
-  "oclif": {
-    "commands": "dist/src/commands",
-    "bin": "station"
+    "dotenv-cli": "^4.0.0"
   }
 }

@@ -1,8 +1,8 @@
 name: CI / CD
 on: push
 jobs:
-  compile_and_check:
-    name: Compile and Check
+  check:
+    name: Check
     runs-on: ubuntu-latest
     steps:
       - name: Setup Node.js
@@ -24,9 +24,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-yarn-
       - run: yarn install
-      - run: yarn build
-      - run: ./bin/station compile
-      - run: ./bin/station check
+      - run: yarn superface check
 
   license_check:
     name: License check
@@ -62,7 +60,7 @@ jobs:
   publish:
     name: Publish Capabilities to Superface.ai
     runs-on: ubuntu-latest
-    needs: ['compile_and_check', 'license_check']
+    needs: ['check', 'license_check']
     if: ${{ github.ref == 'refs/heads/main' }}
     env:
       SUPERFACE_REFRESH_TOKEN: ${{ secrets.SUPERFACE_REFRESH_TOKEN }}
@@ -86,7 +84,6 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-yarn-
       - run: yarn install
-      - run: yarn build
-      - run: ./bin/station compile
+      - run: yarn superface check
       - name: Publish
-        run: ./bin/station publish --all --force
+        run: yarn publish

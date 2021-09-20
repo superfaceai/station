@@ -15,7 +15,6 @@ Where capabilities are born. In this repository we build curated capabilities. E
 - [Security](#security)
 - [Support](#support)
 - [Development](#development)
-- [Maintainers](#maintainers)
 - [Contributing](#contributing)
 - [License](#license)
 
@@ -39,111 +38,7 @@ Install dependencies:
 yarn install
 ```
 
-Build TS files:
-
-```
-yarn build
-```
-
 ## Usage
-
-  <!-- commands -->
-
-- [`station check`](#station-check)
-- [`station compile`](#station-compile)
-- [`station create DOCUMENTINFO`](#station-create-documentinfo)
-- [`station generate PROFILENAME`](#station-generate-profilename)
-
-## `station check`
-
-Checks if all profiles have maps with corresponding version, scope, name, use case definitions and providers
-
-```
-USAGE
-  $ station check
-
-OPTIONS
-  -h, --help   show CLI help
-  -q, --quiet  When set to true, disables the shell echo output of action.
-
-EXAMPLES
-  $ station check
-  $ station check -q
-```
-
-_See code: [dist/src/commands/check.ts](https://github.com/superfaceai/station/blob/v0.0.0/dist/src/commands/check.ts)_
-
-## `station compile`
-
-Compiles every profile and map from capabilities directory to superface/grid directory. For now it is safer to use generate command.
-
-```
-USAGE
-  $ station compile
-
-OPTIONS
-  -g, --generate  Generate types for compiled files.
-  -h, --help      show CLI help
-  -q, --quiet     When set to true, disables the shell echo output of action.
-
-EXAMPLES
-  $ station compile
-  $ station compile -q
-  $ station compile -g
-  $ station compile --generate
-```
-
-_See code: [dist/src/commands/compile.ts](https://github.com/superfaceai/station/blob/v0.0.0/dist/src/commands/compile.ts)_
-
-## `station create DOCUMENTINFO`
-
-Creates map, profile or provider file with basic template on a local filesystem.
-
-```
-USAGE
-  $ station create DOCUMENTINFO
-
-ARGUMENTS
-  DOCUMENTINFO  Two arguments containing informations about the document.
-                1. Document Type - type of document that will be created (profile or map or provider).
-                2. Document Name - name of a file that will be created
-
-OPTIONS
-  -h, --help   show CLI help
-  -q, --quiet  When set to true, disables the shell echo output of action.
-
-EXAMPLES
-  $ station create profile sms/service
-  $ station create map sms/service twilio
-  $ station create profile sms/service -q
-  $ station create provider twilio
-```
-
-_See code: [dist/src/commands/create.ts](https://github.com/superfaceai/station/blob/v0.0.0/dist/src/commands/create.ts)_
-
-## `station generate PROFILENAME`
-
-Generates d.ts and js files into `superface/types/{scope}` folder, creates or updates `superface/sdk.ts` file and creates or updates `superface/types/{scope}/index.d.ts` file.
-
-```
-USAGE
-  $ station generate PROFILENAME
-
-ARGUMENTS
-  PROFILENAME  Profile name in {scope}/{usecase} shape
-
-OPTIONS
-  -h, --help   show CLI help
-  -q, --quiet  When set to true, disables the shell echo output of action.
-
-EXAMPLES
-  $ station generate sms/service
-  $ station generate sms/service -q
-```
-
-_See code: [dist/src/commands/generate.ts](https://github.com/superfaceai/station/blob/v0.0.0/dist/src/commands/generate.ts)_
-
-<!-- commandsstop -->
 
 ## `yarn test PATH`
 
@@ -253,12 +148,6 @@ Secretes used for authentication during tests are stored in `.env.capabilities` 
 Station have Workflow to automate capabilities publishing [Publish to Production](https://github.com/superfaceai/station/blob/main/.github/workflows/publish_production.yml).
 
 **Publish to Production** is triggered manually from [Workflow detail](https://github.com/superfaceai/station/actions/workflows/publish_production.yml).
-
-## Maintainers
-
-- [@Jakub Vacek](https://github.com/Jakub-Vacek)
-- [@Edward](https://github.com/TheEdward162)
-- [@Lukáš Valenta](https://github.com/lukas-valenta)
 
 ## Contributing
 
