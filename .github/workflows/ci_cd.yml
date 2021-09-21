@@ -1,8 +1,8 @@
 name: CI / CD
 on: push
 jobs:
-  check:
-    name: Check
+  test:
+    name: Test Station Scripts
     runs-on: ubuntu-latest
     steps:
       - name: Setup Node.js
@@ -24,7 +24,35 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-yarn-
       - run: yarn install
-      - run: yarn superface check
+      - run: yarn test
+
+  test_capabilities:
+    name: Test Capabilities
+    runs-on: ubuntu-latest
+    needs: ['test']
+    steps:
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          registry-url: https://registry.npmjs.org/
+          scope: '@superfaceai'
+          node-version: '14'
+      - name: Checkout
+        uses: actions/checkout@v2.3.4
+      - name: Get yarn cache directory path
+        id: yarn-cache-dir-path
+        run: echo "::set-output name=dir::$(yarn cache dir)"
+      - uses: actions/cache@v2.1.3
+        id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
+        with:
+          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+      - run: yarn install
+      - run: yarn validate
+      # not ready
+      #- run: yarn test:capabilities
 
   license_check:
     name: License check
@@ -60,7 +88,7 @@ jobs:
   publish:
     name: Publish Capabilities to Superface.ai
     runs-on: ubuntu-latest
-    needs: ['check', 'license_check']
+    needs: ['test', 'test_capabilities', 'license_check']
     if: ${{ github.ref == 'refs/heads/main' }}
     env:
       SUPERFACE_REFRESH_TOKEN: ${{ secrets.SUPERFACE_REFRESH_TOKEN }}
@@ -84,6 +112,4 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-yarn-
       - run: yarn install
-      - run: yarn superface check
-      - name: Publish
-        run: yarn publish
+      - run: yarn publish
