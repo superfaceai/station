@@ -86,16 +86,10 @@ yarn superface create --profileId [scope](optional)/[name] --providerName [provi
 
 TODO
 
-### Check all parts are interlinked
+### Validate all parts are interlinked
 
 ```shell
-yarn superface check
-```
-
-### Verify capabilities can be compiled
-
-```shell
-yarn superface compile
+yarn validate
 ```
 
 ### Enviroment variables
