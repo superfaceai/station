@@ -38,7 +38,7 @@ Follow these steps:
 
 For help with authoring new capability see [Superface documentation](https://superface.ai/docs/guides/create-new-capability).
 
-In Station we want to keep capabilities which are consistent and in great quality. To achieve it, set of [convetions](CONVENTIONS) were created.
+In Station we want to keep capabilities which are consistent and in great quality. To achieve it, set of [conventions](CONVENTIONS.md) were created.
 
 ### Contribute by reporting bugs
 
