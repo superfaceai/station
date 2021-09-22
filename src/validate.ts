@@ -21,11 +21,7 @@ export async function checkCapabilities(): Promise<CheckResult[]> {
         map
       );
 
-      if (checkResults.length > 0) {
-        checkResults.forEach(result => {
-          results.push(result);
-        });
-      }
+      results.push(...checkResults);
     } catch (err) {
       if (err instanceof Error) {
         results.push({ kind: 'error', message: err.message });

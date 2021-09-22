@@ -1,5 +1,6 @@
 import { check } from '@superfaceai/cli/dist/logic/check';
 import { SuperJson } from '@superfaceai/one-sdk';
+import { mocked } from 'ts-jest/utils';
 
 import * as util from './util';
 import * as validate from './validate';
@@ -9,8 +10,8 @@ jest.mock('./util');
 
 describe('validate', () => {
   beforeEach(() => {
-    (util.loadSuperJson as jest.Mock).mockReturnValue(new SuperJson({}));
-    (util.allProfileProviderCombinations as jest.Mock).mockReturnValue([
+    mocked(util.loadSuperJson).mockReturnValue(new SuperJson({}));
+    mocked(util.allProfileProviderCombinations).mockReturnValue([
       {
         profile: { scope: 'scope', name: 'name' },
         provider: 'provider',
@@ -46,7 +47,7 @@ describe('validate', () => {
     });
 
     it('should catch Error and return it as CheckResult', async () => {
-      (check as jest.Mock).mockRejectedValue(new Error('Test error'));
+      mocked(check).mockRejectedValue(new Error('Test error'));
 
       const result = await validate.checkCapabilities();
 
@@ -54,7 +55,7 @@ describe('validate', () => {
     });
 
     it('should catch not error instance and return it as CheckResult', async () => {
-      (check as jest.Mock).mockRejectedValue('error as string');
+      mocked(check).mockRejectedValue('error as string');
 
       const result = await validate.checkCapabilities();
 
@@ -76,7 +77,7 @@ describe('validate', () => {
     });
 
     it('should print No issues for passing validate', async () => {
-      (check as jest.Mock).mockResolvedValue([]);
+      mocked(check).mockResolvedValue([]);
 
       await validate.run(print);
 
@@ -84,7 +85,7 @@ describe('validate', () => {
     });
 
     it('should print `error: test message` for failed validate', async () => {
-      (check as jest.Mock).mockResolvedValue([
+      mocked(check).mockResolvedValue([
         { kind: 'error', message: 'test message' },
       ]);
 

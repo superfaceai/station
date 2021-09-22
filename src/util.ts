@@ -1,5 +1,4 @@
 import { SuperJson } from '@superfaceai/one-sdk';
-import { NormalizedProfileSettings } from '@superfaceai/one-sdk/dist/internal/superjson';
 import { parseDocumentId } from '@superfaceai/parser';
 
 export type CheckCombination = {
@@ -35,7 +34,7 @@ export function allProfileProviderCombinations(
       scope: parseResult.value.scope,
     };
 
-    const profileSettings = profiles[profileId] as NormalizedProfileSettings;
+    const profileSettings = profiles[profileId];
     for (const provider in profileSettings.providers) {
       checkCombinations.push({ profile, provider });
     }
