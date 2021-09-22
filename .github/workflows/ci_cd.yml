@@ -50,9 +50,9 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-yarn-
       - run: yarn install
-      - run: yarn validate
+      - run: yarn capabilities:validate
       # not ready
-      #- run: yarn test:capabilities
+      #- run: yarn capabilities:test
 
   license_check:
     name: License check
@@ -112,4 +112,4 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-yarn-
       - run: yarn install
-      - run: yarn publish
+      - run: yarn capabilities:publish

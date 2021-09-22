@@ -15,14 +15,14 @@
   ],
   "scripts": {
     "test": "jest",
-    "test:capabilities": "dotenv -e .env.capabilities -- jest -c jest.capabilities.config.js",
     "lint": "eslint ./",
     "lint:fix": "yarn lint --fix",
     "format": "prettier -c ./",
     "format:fix": "prettier --write ./",
     "prepush": "yarn lint:fix && yarn format:fix",
-    "validate": "ts-node ./src/validate.ts",
-    "publish": "ts-node ./src/publish/ts"
+    "capabilities:test": "dotenv -e .env.capabilities -- jest -c jest.capabilities.config.js",
+    "capabilities:validate": "ts-node ./src/validate.ts",
+    "capabilities:publish": "ts-node ./src/publish.ts"
   },
   "devDependencies": {
     "@superfaceai/cli": "^0.0.23",
