@@ -1,13 +1,13 @@
 import { check, CheckResult } from '@superfaceai/cli/dist/logic/check';
-import { SuperJson } from '@superfaceai/one-sdk';
-import * as glob from 'glob';
 
 import {
   allProfileProviderCombinations,
   arrayDiff,
   loadSuperJson,
+  localMaps,
+  localProfiles,
+  localProviders,
   mapsFiles,
-  normalizePath,
   profilesFiles,
   providersFiles,
 } from './util';
@@ -45,31 +45,15 @@ export async function checkCapabilities(): Promise<CheckResult[]> {
 }
 
 export async function checkFiles(): Promise<CheckResult[]> {
-  const cwd = await SuperJson.detectSuperJson(process.cwd());
-
   const localFiles: string[] = [];
-
-  localFiles.push(
-    ...glob
-      .sync('../capabilities/**/*.supr', {
-        cwd,
-      })
-      .map(i => normalizePath(i))
-  );
-  localFiles.push(
-    ...glob.sync('../providers/*.json', { cwd }).map(i => normalizePath(i))
-  );
-  localFiles.push(
-    ...glob
-      .sync('../capabilities/**/*.suma', { cwd })
-      .map(i => normalizePath(i))
-  );
+  localFiles.push(...(await localProviders()));
+  localFiles.push(...(await localProfiles()));
+  localFiles.push(...(await localMaps()));
 
   const superJsonFiles: string[] = [];
-
+  superJsonFiles.push(...providersFiles());
   superJsonFiles.push(...profilesFiles());
   superJsonFiles.push(...mapsFiles());
-  superJsonFiles.push(...providersFiles());
 
   const notLinkedInSuperJson = arrayDiff(localFiles, superJsonFiles);
   const missingFiles = arrayDiff(superJsonFiles, localFiles);

@@ -1,5 +1,19 @@
 import { SuperJson } from '@superfaceai/one-sdk';
 import { parseDocumentId } from '@superfaceai/parser';
+import * as fs from 'fs';
+import * as glob from 'glob';
+import { promisify } from 'util';
+
+export const access = promisify(fs.access);
+const read = promisify(fs.readFile);
+
+export type PrintFn = (message: string) => void;
+
+export const EXTENSIONS = {
+  provider: 'json',
+  profile: 'supr',
+  map: 'suma',
+};
 
 export type CheckCombination = {
   profile: { scope?: string; name: string };
@@ -48,6 +62,29 @@ export function normalizePath(
   superJson: SuperJson = loadSuperJson()
 ): string {
   return superJson.resolvePath(path);
+}
+
+export async function exists(path: string): Promise<boolean> {
+  try {
+    await access(path);
+  } catch (err) {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+    if (err.code === 'ENOENT') {
+      return false;
+    }
+    throw err;
+  }
+
+  return true;
+}
+
+export async function readFile(path: string): Promise<string> {
+  const data = await read(path);
+  if (Buffer.isBuffer(data)) {
+    return data.toString('utf8');
+  } else {
+    return data;
+  }
 }
 
 export function profilesFiles(
@@ -104,6 +141,30 @@ export function providersFiles(
   }
 
   return files;
+}
+
+export async function localProviders(): Promise<string[]> {
+  const cwd = await SuperJson.detectSuperJson(process.cwd());
+
+  return glob.sync('../providers/*.json', { cwd }).map(i => normalizePath(i));
+}
+
+export async function localProfiles(): Promise<string[]> {
+  const cwd = await SuperJson.detectSuperJson(process.cwd());
+
+  return glob
+    .sync('../capabilities/**/*.supr', {
+      cwd,
+    })
+    .map(i => normalizePath(i));
+}
+
+export async function localMaps(): Promise<string[]> {
+  const cwd = await SuperJson.detectSuperJson(process.cwd());
+
+  return glob
+    .sync('../capabilities/**/*.suma', { cwd })
+    .map(i => normalizePath(i));
 }
 
 export function arrayDiff<T>(a: T[], b: T[]): T[] {
