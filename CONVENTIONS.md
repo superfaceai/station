@@ -38,7 +38,7 @@ We want first gather more content to understand how Comlink maps are written to 
 - Provider name MUST use `-` (dash) as delimiter.
 - Provider Id SHOULD be short and descriptive.
 - Provider Id MUST NOT be misleading.
-- Default service Id for versioned APIs SHOULD match the version.
+- Service base URL MUST NOT contain API version.
 - Security Scheme Id MUST use `-` (dash) as delimiter.
 - Security Scheme Id SHOULD be named same as in provider documentation.
 
