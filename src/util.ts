@@ -20,14 +20,14 @@ export type CheckCombination = {
   provider: string;
 };
 
-let superJson: SuperJson;
+let _superJson: SuperJson;
 
 export function loadSuperJson(): SuperJson {
-  if (!superJson) {
-    superJson = SuperJson.loadSync().unwrap();
+  if (!_superJson) {
+    _superJson = SuperJson.loadSync().unwrap();
   }
 
-  return superJson;
+  return _superJson;
 }
 
 export function allProfileProviderCombinations(
@@ -96,7 +96,7 @@ export function profilesFiles(
     const profileSettings = superJson.normalized.profiles[profileId];
 
     if (profileSettings !== undefined && 'file' in profileSettings) {
-      files.push(normalizePath(profileSettings.file));
+      files.push(normalizePath(profileSettings.file, superJson));
     } else {
       // explode?
     }
@@ -115,7 +115,7 @@ export function mapsFiles(superJson: SuperJson = loadSuperJson()): string[] {
       const map = profileSettings.providers[providerId];
 
       if (map !== undefined && 'file' in map) {
-        files.push(normalizePath(map.file));
+        files.push(normalizePath(map.file, superJson));
       } else {
         // explode?
       }
@@ -134,7 +134,7 @@ export function providersFiles(
     const providerSettings = superJson.normalized.providers[provider];
 
     if (providerSettings !== undefined && !!providerSettings.file) {
-      files.push(normalizePath(providerSettings.file));
+      files.push(normalizePath(providerSettings.file, superJson));
     } else {
       // explode?
     }
@@ -143,28 +143,38 @@ export function providersFiles(
   return files;
 }
 
-export async function localProviders(): Promise<string[]> {
+export async function localProviders(
+  superJson = loadSuperJson()
+): Promise<string[]> {
   const cwd = await SuperJson.detectSuperJson(process.cwd());
 
-  return glob.sync('../providers/*.json', { cwd }).map(i => normalizePath(i));
+  return glob
+    .sync('../providers/*.json', { cwd })
+    .map(i => normalizePath(i, superJson));
 }
 
-export async function localProfiles(): Promise<string[]> {
+export async function localProfiles(
+  superJson = loadSuperJson()
+): Promise<string[]> {
   const cwd = await SuperJson.detectSuperJson(process.cwd());
 
   return glob
     .sync('../capabilities/**/*.supr', {
       cwd,
     })
-    .map(i => normalizePath(i));
+    .map(i => normalizePath(i, superJson));
 }
 
-export async function localMaps(): Promise<string[]> {
+export async function localMaps(
+  superJson = loadSuperJson()
+): Promise<string[]> {
   const cwd = await SuperJson.detectSuperJson(process.cwd());
 
   return glob
-    .sync('../capabilities/**/*.suma', { cwd })
-    .map(i => normalizePath(i));
+    .sync('../capabilities/**/*.suma', {
+      cwd,
+    })
+    .map(i => normalizePath(i, superJson));
 }
 
 export function arrayDiff<T>(a: T[], b: T[]): T[] {
