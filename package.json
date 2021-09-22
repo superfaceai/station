@@ -2,17 +2,8 @@
   "name": "@superfaceai/station",
   "version": "0.0.0",
   "description": "Superface Station utility",
-  "main": "dist/src/index.js",
   "repository": "git@github.com:superfaceai/station.git",
   "author": "Superface Team",
-  "bin": {
-    "station": "bin/station",
-    "st": "bin/station"
-  },
-  "files": [
-    "bin/",
-    "dist/"
-  ],
   "scripts": {
     "test": "jest",
     "lint": "eslint ./",
@@ -21,7 +12,7 @@
     "format:fix": "prettier --write ./",
     "prepush": "yarn lint:fix && yarn format:fix",
     "capabilities:test": "dotenv -e .env.capabilities -- jest -c jest.capabilities.config.js",
-    "capabilities:test:record": "SUPERFACE_LIVE_API='*' yarn capabilities:test",
+    "capabilities:test:record": "SUPERFACE_LIVE_API='*' yarn capabilities:test -u",
     "capabilities:validate": "ts-node ./src/validate.ts",
     "capabilities:publish": "ts-node ./src/publish.ts"
   },
@@ -32,8 +23,10 @@
     "@superfaceai/testing-lib": "^0.0.3-beta.3",
     "@types/glob": "^7.1.4",
     "@types/jest": "^26.0.15",
+    "@types/node": "^16.9.6",
     "@typescript-eslint/eslint-plugin": "^4.17.0",
     "@typescript-eslint/parser": "^4.17.0",
+    "dotenv-cli": "^4.0.0",
     "eslint": "^7.22.0",
     "eslint-config-prettier": "^8.1.0",
     "eslint-import-resolver-typescript": "^2.4.0",
@@ -47,7 +40,5 @@
     "ts-node": "^10.2.1",
     "typescript": "^4.0.5"
   },
-  "dependencies": {
-    "dotenv-cli": "^4.0.0"
-  }
+  "dependencies": {}
 }
