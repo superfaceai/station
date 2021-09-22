@@ -1,6 +1,16 @@
 import { check, CheckResult } from '@superfaceai/cli/dist/logic/check';
+import { SuperJson } from '@superfaceai/one-sdk';
+import * as glob from 'glob';
 
-import { allProfileProviderCombinations, loadSuperJson } from './util';
+import {
+  allProfileProviderCombinations,
+  arrayDiff,
+  loadSuperJson,
+  mapsFiles,
+  normalizePath,
+  profilesFiles,
+  providersFiles,
+} from './util';
 
 export async function checkCapabilities(): Promise<CheckResult[]> {
   const checkCombinations = allProfileProviderCombinations();
@@ -34,11 +44,60 @@ export async function checkCapabilities(): Promise<CheckResult[]> {
   return results;
 }
 
-export async function run(print = console.log): Promise<void> {
-  let results: CheckResult[] = [];
+export async function checkFiles(): Promise<CheckResult[]> {
+  const cwd = await SuperJson.detectSuperJson(process.cwd());
 
-  results = results.concat(await checkCapabilities());
-  // TODO: check files and structure
+  const localFiles: string[] = [];
+
+  localFiles.push(
+    ...glob
+      .sync('../capabilities/**/*.supr', {
+        cwd,
+      })
+      .map(i => normalizePath(i))
+  );
+  localFiles.push(
+    ...glob.sync('../providers/*.json', { cwd }).map(i => normalizePath(i))
+  );
+  localFiles.push(
+    ...glob
+      .sync('../capabilities/**/*.suma', { cwd })
+      .map(i => normalizePath(i))
+  );
+
+  const superJsonFiles: string[] = [];
+
+  superJsonFiles.push(...profilesFiles());
+  superJsonFiles.push(...mapsFiles());
+  superJsonFiles.push(...providersFiles());
+
+  const notLinkedInSuperJson = arrayDiff(localFiles, superJsonFiles);
+  const missingFiles = arrayDiff(superJsonFiles, localFiles);
+
+  const result: CheckResult[] = [];
+
+  notLinkedInSuperJson.forEach(file => {
+    result.push({
+      kind: 'warn',
+      message: `${file} isn't linked in super.json`,
+    });
+  });
+
+  missingFiles.forEach(file => {
+    result.push({
+      kind: 'error',
+      message: `${file} linked in super.json doesn't exists`,
+    });
+  });
+
+  return result;
+}
+
+export async function run(print = console.log): Promise<void> {
+  const results: CheckResult[] = [];
+
+  results.push(...(await checkCapabilities()));
+  results.push(...(await checkFiles()));
   // TODO: check test is present
 
   if (results.length === 0) {
