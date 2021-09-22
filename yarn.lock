@@ -665,6 +665,20 @@
     vm2 "^3.9.2"
     zod "^2.0.0-beta.30"
 
+"@superfaceai/one-sdk@^0.0.34-beta.1":
+  version "0.0.34-beta.1"
+  resolved "https://registry.yarnpkg.com/@superfaceai/one-sdk/-/one-sdk-0.0.34-beta.1.tgz#1c7b50f02250462bc7347dbf6341a8ef2f129781"
+  integrity sha512-BAMjnOxo2vBRimjlP+L80i9ZuOehd5zvUSJe1hPY3z8qGGudb7g1ZQph0xVTHJ95mnv8siyVgEMHFVbHghZVfg==
+  dependencies:
+    "@superfaceai/ast" "^0.0.28"
+    "@superfaceai/parser" "^0.0.19"
+    abort-controller "^3.0.0"
+    cross-fetch "^3.0.5"
+    debug "^4.3.2"
+    isomorphic-form-data "^2.0.0"
+    vm2 "^3.9.2"
+    zod "^2.0.0-beta.30"
+
 "@superfaceai/parser@0.0.21", "@superfaceai/parser@^0.0.21":
   version "0.0.21"
   resolved "https://registry.yarnpkg.com/@superfaceai/parser/-/parser-0.0.21.tgz#ff7c0b5f2d22d83ebc14eab1d15838467bd54f96"
@@ -691,6 +705,15 @@
   integrity sha512-2SCy12wTqlfJja5Y2am3UK2vW9+oCJUgwrEze4SH6KqAwEFkj+USuLyATa4wk0uT2two4ySLsxuCucLn/9TSeA==
   dependencies:
     cross-fetch "^3.1.0"
+
+"@superfaceai/testing-lib@^0.0.3-beta.3":
+  version "0.0.3-beta.3"
+  resolved "https://registry.yarnpkg.com/@superfaceai/testing-lib/-/testing-lib-0.0.3-beta.3.tgz#9da58e973419c49bab4d1cc957dab2ebb94e98ec"
+  integrity sha512-WwUgu8ZfwRqU4uQAW7XhX4QCbrLFj09AAhyCVJVWP42dOJ3uYLA0ctHcMgKuj6FA1xpsY+k+Ww0qVtHIUPI5SA==
+  dependencies:
+    "@superfaceai/one-sdk" "^0.0.34-beta.1"
+    debug "^4.3.2"
+    nock "^13.1.1"
 
 "@tsconfig/node10@^1.0.7":
   version "1.0.8"
@@ -3378,7 +3401,7 @@ json-stable-stringify-without-jsonify@^1.0.1:
   resolved "https://registry.yarnpkg.com/json-stable-stringify-without-jsonify/-/json-stable-stringify-without-jsonify-1.0.1.tgz#9db7b59496ad3f3cfef30a75142d2d930ad72651"
   integrity sha1-nbe1lJatPzz+8wp1FC0tkwrXJlE=
 
-json-stringify-safe@~5.0.1:
+json-stringify-safe@^5.0.1, json-stringify-safe@~5.0.1:
   version "5.0.1"
   resolved "https://registry.yarnpkg.com/json-stringify-safe/-/json-stringify-safe-5.0.1.tgz#1296a2d58fd45f19a0f6ce01d65701e2c735b6eb"
   integrity sha1-Epai1Y/UXxmg9s4B1lcB4sc1tus=
@@ -3508,6 +3531,11 @@ lodash.flatten@^4.4.0:
   version "4.4.0"
   resolved "https://registry.yarnpkg.com/lodash.flatten/-/lodash.flatten-4.4.0.tgz#f31c22225a9632d2bbf8e4addbef240aa765a61f"
   integrity sha1-8xwiIlqWMtK7+OSt2+8kCqdlph8=
+
+lodash.set@^4.3.2:
+  version "4.3.2"
+  resolved "https://registry.yarnpkg.com/lodash.set/-/lodash.set-4.3.2.tgz#d8757b1da807dde24816b0d6a84bea1a76230b23"
+  integrity sha1-2HV7HagH3eJIFrDWqEvqGnYjCyM=
 
 lodash.template@^4.4.0:
   version "4.5.0"
@@ -3710,6 +3738,16 @@ nice-try@^1.0.4:
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/nice-try/-/nice-try-1.0.5.tgz#a3378a7696ce7d223e88fc9b764bd7ef1089e366"
   integrity sha512-1nh45deeb5olNY7eX82BkPO7SSxR5SSYJiPTrTdFUVYwAl8CKMA5N9PjTYkHiRjisVcxcQ1HXdLhx2qxxJzLNQ==
+
+nock@^13.1.1:
+  version "13.1.3"
+  resolved "https://registry.yarnpkg.com/nock/-/nock-13.1.3.tgz#110b005965654a8ffb798e87bad18b467bff15f9"
+  integrity sha512-YKj0rKQWMGiiIO+Y65Ut8OEgYM3PplLU2+GAhnPmqZdBd6z5IskgdBqWmjzA6lH3RF0S2a3wiAlrMOF5Iv2Jeg==
+  dependencies:
+    debug "^4.1.0"
+    json-stringify-safe "^5.0.1"
+    lodash.set "^4.3.2"
+    propagate "^2.0.0"
 
 node-fetch@2.6.1:
   version "2.6.1"
@@ -4096,6 +4134,11 @@ prompts@^2.0.1:
   dependencies:
     kleur "^3.0.3"
     sisteransi "^1.0.5"
+
+propagate@^2.0.0:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/propagate/-/propagate-2.0.1.tgz#40cdedab18085c792334e64f0ac17256d38f9a45"
+  integrity sha512-vGrhOavPSTz4QVNuBNdcNXePNdNMaO1xj9yBeH1ScQPjk/rhg9sSlCXPhMkFuaNNW/syTvYqsnbIJxMBfRbbag==
 
 psl@^1.1.28, psl@^1.1.33:
   version "1.8.0"

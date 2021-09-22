@@ -21,6 +21,7 @@
     "format:fix": "prettier --write ./",
     "prepush": "yarn lint:fix && yarn format:fix",
     "capabilities:test": "dotenv -e .env.capabilities -- jest -c jest.capabilities.config.js",
+    "capabilities:test:record": "SUPERFACE_LIVE_API='*' yarn capabilities:test",
     "capabilities:validate": "ts-node ./src/validate.ts",
     "capabilities:publish": "ts-node ./src/publish.ts"
   },
@@ -28,6 +29,7 @@
     "@superfaceai/cli": "^0.0.23",
     "@superfaceai/one-sdk": "^0.0.33",
     "@superfaceai/parser": "^0.0.21",
+    "@superfaceai/testing-lib": "^0.0.3-beta.3",
     "@types/glob": "^7.1.4",
     "@types/jest": "^26.0.15",
     "@typescript-eslint/eslint-plugin": "^4.17.0",
