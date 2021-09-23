@@ -19,7 +19,9 @@ const SUPER_JSON_DOCUMENT: SuperJsonDocument = {
     two: {
       file: './two.supr',
       providers: {
-        two: {},
+        two: {
+          file: './two.suma',
+        },
       },
     },
   },
@@ -27,7 +29,9 @@ const SUPER_JSON_DOCUMENT: SuperJsonDocument = {
     one: {
       file: './one.json',
     },
-    two: {},
+    two: {
+      file: './two.json',
+    },
   },
 };
 
@@ -143,6 +147,21 @@ describe('util', () => {
         util.normalizePath('./two.supr', superJson),
       ]);
     });
+
+    it("should throw if profile settings doesn't point to local file", () => {
+      expect(() =>
+        util.profilesFiles(
+          new SuperJson({
+            profiles: {
+              profile: {
+                version: '1.0.0',
+                providers: {},
+              },
+            },
+          })
+        )
+      ).toThrowError();
+    });
   });
 
   describe('mapsFiles', () => {
@@ -155,7 +174,28 @@ describe('util', () => {
     it('should return map with local file', () => {
       expect(util.mapsFiles(superJson)).toEqual([
         util.normalizePath('./one.suma', superJson),
+        util.normalizePath('./two.suma', superJson),
       ]);
+    });
+
+    it("should throw if map doesn't point to local file", () => {
+      expect(() =>
+        util.mapsFiles(
+          new SuperJson({
+            profiles: {
+              profile: {
+                file: './profile.supr',
+                providers: {
+                  provider: {},
+                },
+              },
+            },
+            providers: {
+              provider: {},
+            },
+          })
+        )
+      ).toThrowError();
     });
   });
 
@@ -169,7 +209,20 @@ describe('util', () => {
     it('should return provider with local file', () => {
       expect(util.providersFiles(superJson)).toEqual([
         util.normalizePath('./one.json', superJson),
+        util.normalizePath('./two.json', superJson),
       ]);
+    });
+
+    it("should throw if provider settings doesn't point to local file", () => {
+      expect(() =>
+        util.providersFiles(
+          new SuperJson({
+            providers: {
+              provider: {},
+            },
+          })
+        )
+      ).toThrowError();
     });
   });
 

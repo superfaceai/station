@@ -93,7 +93,9 @@ export function profilesFiles(
     if (profileSettings !== undefined && 'file' in profileSettings) {
       files.push(normalizePath(profileSettings.file, superJson));
     } else {
-      // explode?
+      throw new Error(
+        `${profileId} settings must be defined and lead to local file`
+      );
     }
   }
 
@@ -112,7 +114,7 @@ export function mapsFiles(superJson: SuperJson = loadSuperJson()): string[] {
       if (map !== undefined && 'file' in map) {
         files.push(normalizePath(map.file, superJson));
       } else {
-        // explode?
+        throw new Error(`Map ${providerId} must lead to local file`);
       }
     }
   }
@@ -131,7 +133,9 @@ export function providersFiles(
     if (providerSettings !== undefined && !!providerSettings.file) {
       files.push(normalizePath(providerSettings.file, superJson));
     } else {
-      // explode?
+      throw new Error(
+        `${provider} settings must be defined and lead to local file`
+      );
     }
   }
 
