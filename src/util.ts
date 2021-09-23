@@ -79,12 +79,7 @@ export async function exists(path: string): Promise<boolean> {
 }
 
 export async function readFile(path: string): Promise<string> {
-  const data = await read(path);
-  if (Buffer.isBuffer(data)) {
-    return data.toString('utf8');
-  } else {
-    return data;
-  }
+  return await read(path, { encoding: 'utf8' });
 }
 
 export function profilesFiles(
