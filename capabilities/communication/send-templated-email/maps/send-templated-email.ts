@@ -1,79 +1,55 @@
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
-/* eslint-disable jest/no-try-expect */
-/* eslint-disable jest/no-conditional-expect */
 /* eslint-disable jest/no-export */
 
-import { MappedHTTPError, Provider } from '@superfaceai/one-sdk';
+import { SuperfaceTest } from '@superfaceai/testing-lib';
 
-import {
-  CommunicationSendTemplatedEmailProfile,
-  SuperfaceClient,
-} from '../../../../superface/sdk';
-
-export const sendTemplatedEmailTest = (providerName: string): void => {
-  describe(`communication/send-templated-email/${providerName}`, () => {
-    let client: InstanceType<typeof SuperfaceClient>;
-    let profile: CommunicationSendTemplatedEmailProfile;
-    let provider: Provider;
+export const sendTemplatedEmailTest = (
+  provider: string,
+  params: { from: string; to: string; templateId: string; [key: string]: any }
+): void => {
+  describe(`communication/send-templated-email/${provider}`, () => {
+    let superface: SuperfaceTest;
 
     beforeEach(async () => {
-      client = new SuperfaceClient();
-      profile = await client.getProfile('communication/send-templated-email');
-      provider = await client.getProvider(providerName);
-    });
-
-    it('should find provider', async () => {
-      expect(provider).not.toBeUndefined();
+      superface = new SuperfaceTest();
     });
 
     describe('SendTemplatedEmail', () => {
       describe('when all inputs are correct', () => {
-        it('should return messagaId as result', async () => {
-          const result = await profile.useCases.SendTemplatedEmail.perform(
-            {
-              from:
-                process.env[
-                  `${providerName.toUpperCase()}_COMMUNICATION_SENDEMAIL_FROM`
-                ],
-              to: process.env.COMMUNICATION_SENDEMAIL_TO,
-              templateId:
-                process.env[
-                  `${providerName.toUpperCase()}_COMMUNICATION_SENDEMAIL_TEMPLATE_ID`
-                ],
-              templateData: {
-                from:
-                  process.env[
-                    `${providerName.toUpperCase()}_COMMUNICATION_SENDEMAIL_FROM`
-                  ],
-                to: process.env.COMMUNICATION_SENDEMAIL_TO,
-              },
-            },
-            { provider }
-          );
+        it('should return messageId as result', async () => {
+          const input = {
+            ...params,
+            templateData: params,
+          };
 
-          expect(typeof result.unwrap().messageId).toBe('string');
+          await expect(
+            superface.run({
+              profile: 'communication/send-templated-email',
+              provider,
+              useCase: 'SendTemplatedEmail',
+              input,
+            })
+          ).resolves.toMatchSnapshot();
         });
       });
 
       describe('when inputs are invalid', () => {
-        it('should throw error on unwrap', async () => {
-          const result = await profile.useCases.SendTemplatedEmail.perform(
-            {
-              to: 'invalidemail',
-              from: 'invalidemail',
-              templateId: 'invalid',
-              templateData: null,
-            },
-            { provider }
-          );
+        it('should throw error', async () => {
+          const input = {
+            ...params,
+            to: 'invalidemail',
+            from: 'invalidemail',
+            templateId: 'invalid',
+            templateData: undefined,
+          };
 
-          try {
-            result.unwrap();
-            throw new Error('must throw something');
-          } catch (error) {
-            expect(error).toBeInstanceOf(MappedHTTPError);
-            expect(error.properties.title).toBe('Invalid inputs');
-          }
+          await expect(
+            superface.run({
+              profile: 'communication/send-templated-email',
+              provider,
+              useCase: 'SendTemplatedEmail',
+              input,
+            })
+          ).resolves.toMatchSnapshot();
         });
       });
     });
