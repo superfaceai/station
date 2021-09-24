@@ -1,90 +1,178 @@
 """
 Shipment information
-
 Track your shipment. Get the latest information on your shipment status. 
 """
 
 name = "delivery-tracking/shipment-info"
-version = "1.0.1"
+version = "1.0.2"
 
 """
 Retrieve Shipment Status
-
-Get the actual shipment status.
+Get the current shipment status.
 """
 usecase ShipmentInfo safe {
   input {
-    "Shipment tracking number
-    Identifier of shipment"
+    """
+    Shipment tracking number
+    The identifier of shipment.
+    """
     trackingNumber! string
 
-    "Carrier
-    Shipment carrier identification"
+    """
+    Carrier
+    The shipment carrier identification to narrow down the results.
+    """
     carrier string
   }
 
   result [{
-    "Carrier
-    Shipment carrier identification"
+    """
+    Carrier
+    The name of the carrier responsible for delivery.
+    """
     carrier! string
 
-    "Shipment tracking number
-    Identifier of shipment"
-    trackingNumber! string
-
-    origin! Location
-    destination! Location
+    """
+    Status
+    The latest shipment event.
+    """
     status ShipmentEvent
+
+    """
+    Origin
+    A postal address with the origin of the shipment.
+    """
+    origin! Location
+
+    """
+    Shipment tracking number
+    The identifier of shipment.
+    """
+    trackingNumber! string
+    
+    """
+    Destination
+    A postal shipping address.
+    """
+    destination! Location
+
+    """
+    Events
+    A list of delivery tracking events.
+    """
     events! [ShipmentEvent]
 
-    "Estimated date and time of delivery"
+    """
+    Estimated delivery date
+    Estimated date and time of delivery.
+    """
     estimatedDeliveryDate string
   }]
 
   error {
-    title! string
+    """
+    Title
+    A short, human-readable summary of the problem type.
+    """
+    title!
+
+    """
+    A human-readable explanation specific to this occurrence of the problem.
+    """
+    detail
   }
 }
 
-"
+"""
 Shipment status
-Status of a shipment. Harmonized across different carriers.
-"
+The status of the shipment. Harmonized across different carriers.
+"""
 model ShipmentStatus enum {
+  """
+  Pre-Transit
+  Carrier has received information about the package but it has not yet been scanned and picked up.
+  """
   pre_transit
+  """
+  Transit
+  A package is traveling to its destination.
+  """
   transit
+  """
+  Delivered
+  The package has been delivered.
+  """
   delivered
+  """
+  Failure
+  The package encountered an error during transit.
+  """
   failure
+  """
+  Unknown
+  The shipment status is unknown.
+  """
   unknown
 }
 
+"""
+Shipment event
+The shipment event information.
+"""
 model ShipmentEvent {
+  """
+  Timestamp
+  The date and time in ISO 8601 format of the event.
+  """
   timestamp! string
+
+  """
+  Shipment status
+  The shipment status of the event.
+  """
   statusCode! ShipmentStatus
+
+  """
+  Status
+  A description of the current shipment status.
+  """
   statusText! string
+
+  """
+  Location
+  The location of the shipment.
+  """
   location Location
 }
 
+"""
+Location
+A shipment location.
+"""
 model Location {
-  address! Address
-}
-
-model Address {
-
-  "Country code
-   A short text string code (ISO 3166-1 alpha-2 country code) specifying the country."
+  address! {
+  """
+  Country code
+   A short text string code (ISO 3166-1 alpha-2 country code) specifying the country.
+  """
   countryCode string
 
-  "Postal code
-   Text specifying the postal code for an address."
+  """
+  Postal code
+  Text specifying the postal code for an address.
+  """
   postalCode string
 
-  "Address locality
-   Text specifying the name of the locality, for example a city."
+  """
+  Address locality
+  Text specifying the name of the locality, for example a city.
+  """
   addressLocality string
 
-  "Street address
-   The street address expressed as free form text. The street address is printed on paper as the first lines below the name."
+  """
+  Street address
+  The street address expressed as free form text. The street address is printed on paper as the first lines below the name.
+  """
   streetAddress string
-
+  }
 }
