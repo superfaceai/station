@@ -123,6 +123,35 @@ describe('validate', () => {
     });
   });
 
+  describe('checkMockMap', () => {
+    beforeEach(() => {
+      mocked(util.loadSuperJson)
+        .mockReset()
+        .mockReturnValue(
+          new SuperJson({
+            profiles: {
+              one: {
+                file: './one.supr',
+                providers: {
+                  mock: {},
+                },
+              },
+              two: {
+                file: './two.supr',
+                providers: {},
+              },
+            },
+          })
+        );
+    });
+
+    it('should return error check result for missing mock map', async () => {
+      await expect(validate.checkMockMap()).resolves.toEqual([
+        { kind: 'error', message: 'two is missing mock map' },
+      ]);
+    });
+  });
+
   describe('run', () => {
     let print: jest.Mock;
 

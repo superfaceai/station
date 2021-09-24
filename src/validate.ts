@@ -77,11 +77,32 @@ export async function checkFiles(): Promise<CheckResult[]> {
   return result;
 }
 
+export async function checkMockMap(): Promise<CheckResult[]> {
+  const superJson = loadSuperJson();
+  const results: CheckResult[] = [];
+
+  for (const profileId in superJson.normalized.profiles) {
+    const profileSettings = superJson.normalized.profiles[profileId];
+
+    const mockProvider = profileSettings.providers.mock;
+
+    if (!mockProvider) {
+      results.push({
+        kind: 'error',
+        message: `${profileId} is missing mock map`,
+      });
+    }
+  }
+
+  return results;
+}
+
 export async function run(print = console.log): Promise<void> {
   const results: CheckResult[] = [];
 
   results.push(...(await checkCapabilities()));
   results.push(...(await checkFiles()));
+  results.push(...(await checkMockMap()));
   // TODO: check test is present
 
   if (results.length === 0) {
