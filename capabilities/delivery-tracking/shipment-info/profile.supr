@@ -16,13 +16,13 @@ usecase ShipmentInfo safe {
     Shipment tracking number
     The identifier of shipment.
     """
-    trackingNumber! string
+    trackingNumber! string!
 
     """
     Carrier
     The shipment carrier identification to narrow down the results.
     """
-    carrier string
+    carrier string!
   }
 
   result [{
