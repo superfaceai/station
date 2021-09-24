@@ -14,7 +14,6 @@ Where capabilities are born. In this repository we build curated capabilities. E
 - [Usage](#usage)
 - [Security](#security)
 - [Support](#support)
-- [Development](#development)
 - [Contributing](#contributing)
 - [License](#license)
 
@@ -38,6 +37,19 @@ Install dependencies:
 yarn install
 ```
 
+## Usage
+
+```shell
+# Validate capabilities are correctly linked and ahve all requirements
+$ yarn capabilities:validate
+
+# Run tests
+$ yarn capabilities:test
+
+# Record new trafic with live API calls
+$ yarn capabilities:test:record capabilites/path/to/test.ts
+```
+
 ## Security
 
 Superface is not man-in-the-middle so it does not require any access to secrets that are needed to communicate with provider API. Superface CLI only prepares super.json file with authorization fields in form of environment variable. You just set correct variables and communicate directly with provider API.
@@ -46,23 +58,13 @@ You can find more information in [OneSDK repository](https://github.com/superfac
 
 ## Support
 
-If you need any additional support, have any questions or you just want to talk you can do that through our [documentation page](https://superface.ai/docs).
-
-## Development
-
-When developing, start with cloning the repository using `git clone https://github.com/superfaceai/station.git` (or `git clone git@github.com:superfaceai/station.git` if you have repository access).
-
-After cloning, the dependencies must be downloaded using `yarn install` or `npm install`.
-
-Now the repository is ready for code changes.
-
-The `package.json` also contains scripts (runnable by calling `yarn <script-name>` or `npm run <script-name>`):
-
-- `lint` - lint the code (use `lint:fix` to run autofix)
-- `format` - check the code formatting (use `format:fix` to autoformat)
-- `prepush` - run `lint` and `format` checks. This should run without errors before you push anything to git.
+If you need any additional support, have any questions or you just want to talk you can do that through our [documentation page](https://superface.ai/docs/support).
 
 ### Adding new capability
+
+If you are starting with Capabilities authoring check our [guide](https://superface.ai/docs/guides/how-to-create).
+
+Station repository has defined structure, here are commands for [Superface CLI](https://github.com/superfaceai/cli#superface-create) how to create profiles, maps and providers.
 
 #### Create new profile
 
@@ -84,12 +86,64 @@ yarn superface create --profileId [scope](optional)/[name] --providerName [provi
 
 #### Test the map
 
-TODO
+We encourage to use [Superface Testing](https://github.com/superfaceai/testing-lib) to write tests.
 
-### Validate all parts are interlinked
+**1. Create test file**
+
+Alongside `.suma` file create `.test.ts` and use this template.
+
+```ts
+import { SuperfaceTest } from '@superfaceai/testing-lib';
+
+describe(`scope/name/provider_name}`, () => {
+  let superface: SuperfaceTest;
+
+  beforeEach(() => {
+    superface = new SuperfaceTest();
+  });
+
+  describe('UseCase', () => {
+    it('should perform successfully', async () => {
+      await expect(
+        superface.run({
+          profile: 'scope/name',
+          provider: 'provider_name',
+          useCase: 'UseCase',
+          input: {
+            field1: '',
+            field2: '',
+          },
+        })
+      ).resolves.toMatchSnapshot();
+    });
+  });
+});
+```
+
+_All inputs should be written directly to the test file and shouldn't use environment variables._
+
+**2. Do call against live API to record traffic and create snapshot**
 
 ```shell
-yarn validate
+$ yarn capabilities:test:record capabilities/scope/name/maps/example.test.ts
+```
+
+**3. Check result in snapshot**
+
+Snapshot for test run should be created in location:
+
+```
+capabilities/scope/name/maps/__snapshots__/example.test.ts.snap
+```
+
+**4. Do post processing for traffic recording**
+
+We try to sanitize recordings and remove any sensitive data. But you should still look at the recording and make sure it doesn't contain in sensitive data such as credentials or personal information, that shouldn't be public.
+
+**5. Run tests with recorded traffic**
+
+```shell
+$ yarn capabilities:test capabilities/scope/name/maps/example.test.ts
 ```
 
 ### Enviroment variables
