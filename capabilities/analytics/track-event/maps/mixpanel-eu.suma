@@ -1,0 +1,41 @@
+// API Reference: https://developer.mixpanel.com/reference/events
+
+profile = "analytics/track-event@1.0"
+provider = "mixpanel-eu"
+
+map TrackEvent {
+  http POST "/track" {
+    security none
+  
+    request "application/x-www-form-urlencoded" {
+      body {
+        data = {
+          event: input.eventName,
+          properties: { token: input.token, ...input.eventProperties }
+        }
+      }
+    }
+  
+    response 200 "*" {
+      return map result if (body === 1) "OK"
+
+      map error {
+        title = "Invalid Data"
+      }
+    }
+
+    response 401 {
+      map error {
+        title = "Unauthorized"
+        detail = body.error
+      }
+    }
+
+    response 403 {
+      map error {
+        title = "Forbidden"
+        detail = body.error
+      }
+    }
+  }
+}
