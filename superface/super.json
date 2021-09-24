@@ -342,6 +342,20 @@
           "file": "../capabilities/crm/contacts/maps/hubspot.suma"
         }
       }
+    },
+    "analytics/track-event": {
+      "file": "../capabilities/analytics/track-event/profile.supr",
+      "providers": {
+        "mixpanel-eu": {
+          "file": "../capabilities/analytics/track-event/maps/mixpanel-eu.suma"
+        },
+        "mock": {
+          "file": "../capabilities/analytics/track-event/maps/mock.suma"
+        }
+      },
+      "priority": [
+        "mock"
+      ]
     }
   },
   "providers": {
@@ -534,6 +548,9 @@
           "apikey": "$HUBSPOT_API_KEY"
         }
       ]
+    },
+    "mixpanel-eu": {
+      "file": "../providers/mixpanel-eu.json"
     }
   }
 }
