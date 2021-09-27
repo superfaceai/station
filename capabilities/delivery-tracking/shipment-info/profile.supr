@@ -36,7 +36,7 @@ usecase ShipmentInfo safe {
     Status
     The latest shipment event.
     """
-    status ShipmentEvent
+    status! ShipmentEvent
 
     """
     Origin
@@ -60,13 +60,13 @@ usecase ShipmentInfo safe {
     Events
     A list of delivery tracking events.
     """
-    events! [ShipmentEvent]
+    events! [ShipmentEvent!]!
 
     """
     Estimated delivery date
     Estimated date and time of delivery.
     """
-    estimatedDeliveryDate string
+    estimatedDeliveryDate! string
   }]
 
   error {

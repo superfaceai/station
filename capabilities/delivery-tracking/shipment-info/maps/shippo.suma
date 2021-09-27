@@ -42,7 +42,7 @@ operation FetchShipment {
 }
 
 operation MapShipment {
-  estimatedDeliveryDate = undefined
+  estimatedDeliveryDate = null
   shipment = args.shipment
 
   set if (shipment.eta) {
