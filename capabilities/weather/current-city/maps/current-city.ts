@@ -3,10 +3,13 @@
 /* eslint-disable jest/no-conditional-expect */
 /* eslint-disable jest/no-export */
 
-import {describe, expect} from "@jest/globals";
-import {Provider} from '@superfaceai/one-sdk';
+import { describe, expect } from '@jest/globals';
+import { Provider } from '@superfaceai/one-sdk';
 
-import {SuperfaceClient, WeatherCurrentCityProfile} from '../../../../superface/sdk';
+import {
+  SuperfaceClient,
+  WeatherCurrentCityProfile,
+} from '../../../../superface/sdk';
 
 export const currentCityTest = (providerName: string): void => {
   describe(`weather/current-city/${providerName}`, () => {
@@ -28,8 +31,8 @@ export const currentCityTest = (providerName: string): void => {
       describe('when all inputs are correct', () => {
         it('should return weather object', async () => {
           const result = await profile.useCases.GetCurrentWeatherInCity.perform(
-            {city: 'Prague,CZ'},
-            {provider}
+            { city: 'Prague,CZ' },
+            { provider }
           );
 
           expect(typeof result.unwrap().temperature).toBe('number');
@@ -39,4 +42,4 @@ export const currentCityTest = (providerName: string): void => {
       });
     });
   });
-}
+};
