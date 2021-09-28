@@ -1,39 +1,77 @@
 """
-VCS Pull Request
-
-  Retrieve information about a pull request in a version control system repository.
+Pull Request
+Retrieve information about a pull request in a version control system repository.
 """
+
 name = "vcs/pull-request"
 version = "1.0.2"
 
 """
-Get Pull Request Details
-
+PullRequest
 Get details of the specified pull request.
 """
-usecase PullRequest {
+usecase PullRequest safe {
   input {
-    "Owner of the repository"
+    """
+    Owner
+    Owner of the repository
+    """
     owner! string!
 
-    "Repository name"
+    """
+    Repo
+    Repository name
+    """
     repo! string!
 
-    "Id of pull request"
+    """
+    Identifier
+    Id of pull request
+    """
     identifier! number!
   }
 
   result {
-    "Title of pull request"
+    """
+    Tittle
+    Title of pull request
+    """
     title! string!
 
-    "Pull request Id"
+    """
+    Id
+    Pull request Id
+    """
     id! number!
 
-    "Web url of pull request"
+    """
+    Url
+    Web url of pull request
+    """
     url! string!
 
-    "Pull request sha"
+    """
+    Sha
+    Pull request sha
+    """
     sha! string!
+  }
+
+  error {
+    """
+    Message
+    A short, human-readable summary of the problem.
+    """
+    message! string!
+    """
+    Status code
+    Usually a HTTP status code connected to occured problem.
+    """
+    statusCode!
+    """
+    Description
+    A optional, human-readable explanation specific to this occurrence of the problem.
+    """
+    description string!
   }
 }

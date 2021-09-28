@@ -10,12 +10,17 @@ map PullRequest{
   identifier = input.identifier
 
   http GET "/repos/{owner}/{repo}/pulls/{identifier}" {
-    response 200 "application/json" {
-       map result {
+    response {
+      map result if(statusCode === 200){
         title: body.title,
         id: body.id,
         url: body.url,
         sha: body.head.sha,
+      }
+      map error if(statusCode !== 200) {
+        message: body.message,
+        description: body.documentation_url,
+        statusCode: statusCode
       }
     }
   }
