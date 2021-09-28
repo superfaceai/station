@@ -1,20 +1,24 @@
-import { SuperfaceClient } from '@superfaceai/one-sdk';
+import { SuperfaceTest } from '@superfaceai/testing-lib';
 
-describe('vcs/user-repos/bitbucket', () => {
-  beforeAll(() => {
-    jest.setTimeout(10000);
+describe(`scope/name/provider_name}`, () => {
+  let superface: SuperfaceTest;
+
+  beforeEach(() => {
+    superface = new SuperfaceTest();
   });
 
-  it('performs correctly', async () => {
-    const client = new SuperfaceClient();
-    const profile = await client.getProfile('vcs/user-repos');
-    const useCase = profile.getUseCase('UserRepos');
-    const provider = await client.getProvider('bitbucket');
-    const result = await useCase.perform({ user: 'jakuvacek' }, { provider });
-    const value = result.unwrap();
-
-    expect(value).toEqual({
-      repos: [{ name: 'testRepository', description: undefined }],
+  describe('UseCase', () => {
+    it('should perform successfully', async () => {
+      await expect(
+        superface.run({
+          profile: 'vcs/user-repos',
+          provider: 'bitbucket',
+          useCase: 'UserRepos',
+          input: {
+            user: 'jakuvacek',
+          },
+        })
+      ).resolves.toMatchSnapshot();
     });
   });
 });

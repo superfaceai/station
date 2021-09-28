@@ -12,7 +12,7 @@ map UserRepos {
     maximumPagesNumber = input.maximumRequestsNumber
   ) {
     return map error if (outcome.data.statusCode !== 200) outcome.data
-    return map result { repos = outcome.data }
+    return map result { repos = outcome.data.repositories }
   }
 }
 
