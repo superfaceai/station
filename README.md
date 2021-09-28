@@ -14,8 +14,6 @@ Where capabilities are born. In this repository we build curated capabilities. E
 - [Usage](#usage)
 - [Security](#security)
 - [Support](#support)
-- [Development](#development)
-- [Maintainers](#maintainers)
 - [Contributing](#contributing)
 - [License](#license)
 
@@ -39,126 +37,17 @@ Install dependencies:
 yarn install
 ```
 
-Build TS files:
-
-```
-yarn build
-```
-
 ## Usage
 
-  <!-- commands -->
+```shell
+# Validate capabilities are correctly linked and ahve all requirements
+$ yarn capabilities:validate
 
-- [`station check`](#station-check)
-- [`station compile`](#station-compile)
-- [`station create DOCUMENTINFO`](#station-create-documentinfo)
-- [`station generate PROFILENAME`](#station-generate-profilename)
+# Run tests
+$ yarn capabilities:test
 
-## `station check`
-
-Checks if all profiles have maps with corresponding version, scope, name, use case definitions and providers
-
-```
-USAGE
-  $ station check
-
-OPTIONS
-  -h, --help   show CLI help
-  -q, --quiet  When set to true, disables the shell echo output of action.
-
-EXAMPLES
-  $ station check
-  $ station check -q
-```
-
-_See code: [dist/src/commands/check.ts](https://github.com/superfaceai/station/blob/v0.0.0/dist/src/commands/check.ts)_
-
-## `station compile`
-
-Compiles every profile and map from capabilities directory to superface/grid directory. For now it is safer to use generate command.
-
-```
-USAGE
-  $ station compile
-
-OPTIONS
-  -g, --generate  Generate types for compiled files.
-  -h, --help      show CLI help
-  -q, --quiet     When set to true, disables the shell echo output of action.
-
-EXAMPLES
-  $ station compile
-  $ station compile -q
-  $ station compile -g
-  $ station compile --generate
-```
-
-_See code: [dist/src/commands/compile.ts](https://github.com/superfaceai/station/blob/v0.0.0/dist/src/commands/compile.ts)_
-
-## `station create DOCUMENTINFO`
-
-Creates map, profile or provider file with basic template on a local filesystem.
-
-```
-USAGE
-  $ station create DOCUMENTINFO
-
-ARGUMENTS
-  DOCUMENTINFO  Two arguments containing informations about the document.
-                1. Document Type - type of document that will be created (profile or map or provider).
-                2. Document Name - name of a file that will be created
-
-OPTIONS
-  -h, --help   show CLI help
-  -q, --quiet  When set to true, disables the shell echo output of action.
-
-EXAMPLES
-  $ station create profile sms/service
-  $ station create map sms/service twilio
-  $ station create profile sms/service -q
-  $ station create provider twilio
-```
-
-_See code: [dist/src/commands/create.ts](https://github.com/superfaceai/station/blob/v0.0.0/dist/src/commands/create.ts)_
-
-## `station generate PROFILENAME`
-
-Generates d.ts and js files into `superface/types/{scope}` folder, creates or updates `superface/sdk.ts` file and creates or updates `superface/types/{scope}/index.d.ts` file.
-
-```
-USAGE
-  $ station generate PROFILENAME
-
-ARGUMENTS
-  PROFILENAME  Profile name in {scope}/{usecase} shape
-
-OPTIONS
-  -h, --help   show CLI help
-  -q, --quiet  When set to true, disables the shell echo output of action.
-
-EXAMPLES
-  $ station generate sms/service
-  $ station generate sms/service -q
-```
-
-_See code: [dist/src/commands/generate.ts](https://github.com/superfaceai/station/blob/v0.0.0/dist/src/commands/generate.ts)_
-
-<!-- commandsstop -->
-
-## `yarn test PATH`
-
-Runs test files with suffix `.test.ts`. Running `yarn test` without path will run all test files and will probably fail.
-
-```
-USAGE
-  $ yarn test PATH
-
-ARGUMENTS
-  PATH  Path to test file
-
-
-EXAMPLES
-  $ yarn test capabilities/vcs/user-repos/maps/bitbucket
+# Record new trafic with live API calls
+$ yarn capabilities:test:record capabilites/path/to/test.ts
 ```
 
 ## Security
@@ -169,79 +58,92 @@ You can find more information in [OneSDK repository](https://github.com/superfac
 
 ## Support
 
-If you need any additional support, have any questions or you just want to talk you can do that through our [documentation page](https://superface.ai/docs).
-
-## Development
-
-When developing, start with cloning the repository using `git clone https://github.com/superfaceai/station.git` (or `git clone git@github.com:superfaceai/station.git` if you have repository access).
-
-After cloning, the dependencies must be downloaded using `yarn install` or `npm install`.
-
-Now the repository is ready for code changes.
-
-The `package.json` also contains scripts (runnable by calling `yarn <script-name>` or `npm run <script-name>`):
-
-- `lint` - lint the code (use `lint --fix` to run autofix)
-- `format` - check the code formatting (use `firmat:fix` to autoformat)
-- `prepush` - run `test`, `lint` and `format` checks. This should run without errors before you push anything to git.
-
-Lastly, to build a local artifact run `yarn build` or `npm run build`.
-
-**Note**: The project needs to be built (into the `dist` folder) to run cli commands.
-
-**Note**: You can change url of API requests by setting `SUPERFACE_API_URL` environment variable to desired base url.
+If you need any additional support, have any questions or you just want to talk you can do that through our [documentation page](https://superface.ai/docs/support).
 
 ### Adding new capability
 
-First, create new profile:
+If you are starting with Capabilities authoring check our [guide](https://superface.ai/docs/guides/how-to-create).
 
-```
- station create profile {scope}/{usecase}
-```
+Station repository has defined structure, here are commands for [Superface CLI](https://github.com/superfaceai/cli#superface-create) how to create profiles, maps and providers.
 
-Edit created .supr file:
+#### Create new profile
 
-Secondly, create new provider:
-
-```
- station create provider {provider}
+```shell
+yarn superface create --profileId [scope](optional)/[name] --profile --profileFileName capabilities/[scope]/[name]/profile.supr
 ```
 
-Edit created .json file
+#### Create new provider
 
-Next, create map for created profile and provider:
-
-```
- station create map {scope}/{usecase} {provider}
+```shell
+yarn superface create --providerName [provider_name] --provider --providerFileName providers/[provider_name].json
 ```
 
-Edit created .suma file and test file (.test.ts)
+#### Create map for profile and provider
 
-Compile created files:
-
-```
- station compile
+```shell
+yarn superface create --profileId [scope](optional)/[name] --providerName [provider_name] --map --mapFileName capabilities/[scope]/[name]/maps/[provider_name].suma
 ```
 
-Generate types if needed:
+#### Test the map
+
+We encourage to use [Superface Testing](https://github.com/superfaceai/testing-lib) to write tests.
+
+**1. Create test file**
+
+Alongside `.suma` file create `.test.ts` and use this template.
+
+```ts
+import { SuperfaceTest } from '@superfaceai/testing-lib';
+
+describe(`scope/name/provider_name}`, () => {
+  let superface: SuperfaceTest;
+
+  beforeEach(() => {
+    superface = new SuperfaceTest();
+  });
+
+  describe('UseCase', () => {
+    it('should perform successfully', async () => {
+      await expect(
+        superface.run({
+          profile: 'scope/name',
+          provider: 'provider_name',
+          useCase: 'UseCase',
+          input: {
+            field1: '',
+            field2: '',
+          },
+        })
+      ).resolves.toMatchSnapshot();
+    });
+  });
+});
+```
+
+_All inputs should be written directly to the test file and shouldn't use environment variables._
+
+**2. Do call against live API to record traffic and create snapshot**
+
+```shell
+$ yarn capabilities:test:record capabilities/scope/name/maps/example.test.ts
+```
+
+**3. Check result in snapshot**
+
+Snapshot for test run should be created in location:
 
 ```
- station generate {scope}/{usecase}
+capabilities/scope/name/maps/__snapshots__/example.test.ts.snap
 ```
 
-Create tests for created capability. You can use existing tests as a starting point.
-Test created capability:
+**4. Do post processing for traffic recording**
 
-```
- yarn test {path to test file}
-```
+We try to sanitize recordings and remove any sensitive data. But you should still look at the recording and make sure it doesn't contain in sensitive data such as credentials or personal information, that shouldn't be public.
 
-Upload newly created files
+**5. Run tests with recorded traffic**
 
-```
-station publish {path to profile}
-station publish {path to map}
-station publish {path to provider}
+```shell
+$ yarn capabilities:test capabilities/scope/name/maps/example.test.ts
 ```
 
 ### Enviroment variables
@@ -250,21 +152,13 @@ Secretes used for authentication during tests are stored in `.env.capabilities` 
 
 ### Automated publishing
 
-Station have Workflow to automate capabilities publishing [Publish to Production](https://github.com/superfaceai/station/blob/main/.github/workflows/publish_production.yml).
-
-**Publish to Production** is triggered manually from [Workflow detail](https://github.com/superfaceai/station/actions/workflows/publish_production.yml).
-
-## Maintainers
-
-- [@Jakub Vacek](https://github.com/Jakub-Vacek)
-- [@Edward](https://github.com/TheEdward162)
-- [@Lukáš Valenta](https://github.com/lukas-valenta)
+Station have Workflow to automate capabilities publishing. For details see [CI / CD](https://github.com/superfaceai/station/blob/main/.github/workflows/ci_cd.yml) workflow.
 
 ## Contributing
 
 **Please open an issue first if you want to make larger changes**
 
-Feel free to contribute! Please follow the [Contribution Guide](CONTRIBUTION_GUIDE.md).
+Feel free to contribute! Please follow the [Contribution Guide](CONTRIBUTING.md).
 
 Licenses of node_modules are checked during CI/CD for every commit. Only the following licenses are allowed:
 

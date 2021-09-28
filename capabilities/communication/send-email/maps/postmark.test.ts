@@ -1,3 +1,6 @@
 import { sendEmailTest } from './send-email';
 
-sendEmailTest('postmark');
+sendEmailTest('postmark', {
+  from: 'hello@superface.org',
+  to: 'hello@superface.ai',
+});

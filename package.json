@@ -2,65 +2,43 @@
   "name": "@superfaceai/station",
   "version": "0.0.0",
   "description": "Superface Station utility",
-  "main": "dist/src/index.js",
   "repository": "git@github.com:superfaceai/station.git",
   "author": "Superface Team",
-  "bin": {
-    "station": "bin/station",
-    "st": "bin/station"
-  },
-  "files": [
-    "bin/",
-    "dist/"
-  ],
   "scripts": {
-    "build": "tsc -p tsconfig.release.json --outDir dist",
-    "clean": "rimraf dist/",
-    "prebuild": "yarn clean",
-    "test": "dotenv -e .env.capabilities -- jest",
-    "test:compile": "station compile && station check && yarn test",
-    "test:clean": "dotenv -e .env.capabilities -- jest --clear-cache && jest",
-    "test:debug": "DEBUG=* yarn test",
+    "test": "jest",
     "lint": "eslint ./",
     "lint:fix": "yarn lint --fix",
     "format": "prettier -c ./",
     "format:fix": "prettier --write ./",
-    "prepush": "yarn build && yarn lint:fix && yarn format:fix"
+    "prepush": "yarn lint:fix && yarn format:fix",
+    "capabilities:test": "dotenv -e .env.capabilities -- jest -c jest.capabilities.config.js",
+    "capabilities:test:record": "SUPERFACE_LIVE_API='*' yarn capabilities:test -u",
+    "capabilities:validate": "ts-node ./src/validate.ts",
+    "capabilities:publish": "ts-node ./src/publish.ts"
   },
   "devDependencies": {
-    "@types/debug": "^4.1.5",
-    "@types/inquirer": "^7.3.1",
+    "@superfaceai/cli": "^0.0.24",
+    "@superfaceai/one-sdk": "^0.0.33",
+    "@superfaceai/parser": "^0.0.21",
+    "@superfaceai/testing-lib": "^0.0.3-beta.3",
+    "@types/glob": "^7.1.4",
     "@types/jest": "^26.0.15",
-    "@types/rimraf": "^3.0.0",
+    "@types/node": "^16.9.6",
     "@typescript-eslint/eslint-plugin": "^4.17.0",
     "@typescript-eslint/parser": "^4.17.0",
+    "dotenv-cli": "^4.0.0",
     "eslint": "^7.22.0",
     "eslint-config-prettier": "^8.1.0",
     "eslint-import-resolver-typescript": "^2.4.0",
     "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-jest": "^24.3.1",
     "eslint-plugin-simple-import-sort": "^7.0.0",
+    "glob": "^7.1.7",
     "jest": "^26.6.3",
     "prettier": "^2.2.0",
     "ts-jest": "^26.4.4",
+    "ts-node": "^10.2.1",
     "typescript": "^4.0.5"
   },
-  "dependencies": {
-    "@oclif/command": "^1.8.0",
-    "@oclif/config": "^1.17.0",
-    "@superfaceai/ast": "0.0.25",
-    "@superfaceai/cli": "^0.0.20",
-    "@superfaceai/one-sdk": "^0.0.29",
-    "@superfaceai/parser": "0.0.17",
-    "@superfaceai/service-client": "^0.0.14",
-    "chalk": "^4.1.0",
-    "dotenv-cli": "^4.0.0",
-    "glob": "^7.1.7",
-    "inquirer": "^7.3.3",
-    "rimraf": "^3.0.2"
-  },
-  "oclif": {
-    "commands": "dist/src/commands",
-    "bin": "station"
-  }
+  "dependencies": {}
 }
