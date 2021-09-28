@@ -1,23 +1,68 @@
-profile = "vcs/user-repos@1.0"
+profile = "vcs/user-repos@2.0"
 provider = "gitlab"
 
 """
 UserRepos map. Returns gitlab repositories of specified user
 """
 map UserRepos{
-  username = input.user
+  call Paginate(
+    user = input.user,
+    perPage = input.perPage,
+    maximumPagesNumber = input.maximumRequestsNumber
+  ) {
+    return map error if (outcome.data.statusCode !== 200) outcome.data
+    return map result { repos = outcome.data }
+  }
+  
+}
 
-  http GET "/users/{username}/projects" {
-    response 200 "application/json" {
-      map result {
-        //map returned values to result object
-        repos = body.map((r) => {
+operation Paginate {
+  //20 is max allowed number 
+  perPage = args.perPage || 20
+
+  maximumPagesNumber = args.maximumPagesNumber || 2
+
+  data = []
+  page = 1
+  //Hack to ceate a while with maximum loop count
+    call foreach(_x of Array(maximumPagesNumber)) FetchRepos(user = args.user, page = page, perPage = perPage) {
+      fail if (outcome.data.statusCode !== 200) outcome.data
+
+      data = [...data, ...outcome.data.repositories]
+
+      page = page + 1
+      return if (outcome.data.isLastPage) data
+    }
+  
+  return data
+}
+
+
+operation FetchRepos {
+  http GET "/users/{args.user}/projects" {
+    request {
+      query {
+        page = args.page
+        per_page = args.perPage 
+      }
+    }
+    response {
+      fail if (statusCode !== 200){
+        message: body.message,
+        statusCode: statusCode
+      }
+
+      return {
+        repositories: body.map((r) => {
           return {
             name: r.name,
             description: r.description === "" ? undefined : r.description
           }
-        })
+        }),
+        isLastPage: headers['x-next-page'] === ""
       }
     }
+
+
   }
 }

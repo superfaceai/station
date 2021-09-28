@@ -1,21 +1,68 @@
-profile = "vcs/user-repos@1.0"
+profile = "vcs/user-repos@2.0"
 provider = "github"
 
 """
-UserRepos map. Returns github repositories of specified user
+UserRepos map. Returns all github repositories of specified user
 """
 map UserRepos {
-  username = input.user
 
-  http GET "/users/{username}/repos" {
-    response 200 "application/json" {
-      map result {
-        repos = body.map((r) => {
+  call Paginate(
+    user = input.user,
+    perPage = input.perPage,
+    maximumPagesNumber = input.maximumRequestsNumber
+  ) {
+    return map error if (outcome.data.statusCode !== 200) outcome.data
+    return map result { repos = outcome.data }
+  }
+}
+
+operation Paginate {
+  perPage = args.perPage
+
+  maximumPagesNumber = args.maximumPagesNumber || (2**32 -1)
+
+  data = []
+  page = 1
+  //Hack to ceate a while with maximum loop count
+    call foreach(_x of Array(maximumPagesNumber)) FetchRepos(user = args.user, page = page, perPage = perPage) {
+      fail if (outcome.data.statusCode !== 200) outcome.data
+      data = [...data, ...outcome.data.repositories]
+    
+      page = page + 1
+      return if (outcome.data.repositories.length === 0) {
+        repositories: data,
+        statusCode: 200
+      }
+    }
+    return {
+      repositories: data,
+      statusCode: 200
+    }
+}
+
+
+operation FetchRepos {
+  http GET "/users/{args.user}/repos" {
+    request {
+      query {
+        page = args.page
+        per_page = args.perPage 
+      }
+    }
+    response {
+       fail if(statusCode !== 200){
+        message: body.message,
+        description: body.documentation_url,
+        statusCode: statusCode
+      }
+      return {
+        repositories: body.map((r) => {
           return {
             name: r.name,
             description: r.description === null ? undefined : r.description
           }
-        })
+        }),
+        statusCode: statusCode
       }
     }
   }
