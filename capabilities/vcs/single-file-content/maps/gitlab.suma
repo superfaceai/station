@@ -10,12 +10,15 @@ map SingleFileContent{
   ref = input.ref
 
   http GET "/projects/{id}/repository/files/{path}?ref={ref}" {
-    response 200 "application/json" {
-      //map returned values to result object
-      map result {
+     response  {
+      map result if(statusCode === 200){
         size = body.size
         content = body.content
         encoding = body.encoding
+      }
+      map error if(statusCode !== 200) {
+        message: body.message,
+        statusCode: statusCode
       }
     }
   }

@@ -11,12 +11,15 @@ map SingleFileContent{
   ref = input.ref
 
   http GET "/2.0/repositories/{owner}/{repo}/src/{ref}/{path}" {
-    response 200 "text/plain" {
-      //map returned values to result object
-      map result {
+    response  {
+      map result if(statusCode === 200){
         size = body.length
         content = body
         encoding = "utf-8"
+      }
+      map error if(statusCode !== 200) {
+        message: body.error.message,
+        statusCode: statusCode
       }
     }
   }
