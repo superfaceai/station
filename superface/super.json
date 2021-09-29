@@ -302,6 +302,9 @@
       "providers": {
         "mock": {
           "file": "../capabilities/speech/synthesis/maps/mock.suma"
+        },
+        "google-apis-text-to-speech": {
+          "file": "../capabilities/speech/synthesis/maps/google-apis-text-to-speech.suma"
         }
       }
     }
@@ -385,6 +388,15 @@
     },
     "google-apis": {
       "file": "../providers/google-apis.json",
+      "security": [
+        {
+          "id": "apikey",
+          "apikey": "$GOOGLE_APIS_API_KEY"
+        }
+      ]
+    },
+    "google-apis-text-to-speech": {
+      "file": "../providers/google-apis-text-to-speech.json",
       "security": [
         {
           "id": "apikey",
