@@ -6,6 +6,7 @@ export { CommunicationSendMessageProfile } from "./types/communication/send-mess
 export { CommunicationSendSmsProfile } from "./types/communication/send-sms";
 export { CommunicationSendTemplatedEmailProfile } from "./types/communication/send-templated-email";
 export { DeliveryTrackingShipmentInfoProfile } from "./types/delivery-tracking/shipment-info";
+export { SpeechSynthesisProfile } from "./types/speech/synthesis";
 export { StarwarsCharacterInformationProfile } from "./types/starwars/character-information";
 export { VcsPullRequestProfile } from "./types/vcs/pull-request";
 export { VcsPullRequestsProfile } from "./types/vcs/pull-requests";
@@ -30,6 +31,9 @@ export declare const SuperfaceClient: new () => import("@superfaceai/one-sdk/dis
     };
     "starwars/character-information": {
         RetrieveCharacterInformation: [import("./types/starwars/character-information").StarwarsCharacterInformationRetrieveCharacterInformationInput, import("./types/starwars/character-information").StarwarsCharacterInformationRetrieveCharacterInformationResult];
+    };
+    "speech/synthesis": {
+        TextToSpeechSynthesis: [import("./types/speech/synthesis").SpeechSynthesisTextToSpeechSynthesisInput, import("./types/speech/synthesis").SpeechSynthesisTextToSpeechSynthesisResult];
     };
     "delivery-tracking/shipment-info": {
         ShipmentInfo: [import("./types/delivery-tracking/shipment-info").DeliveryTrackingShipmentInfoShipmentInfoInput, import("./types/delivery-tracking/shipment-info").DeliveryTrackingShipmentInfoShipmentInfoResult];
