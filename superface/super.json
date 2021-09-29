@@ -305,6 +305,16 @@
         },
         "google-apis-text-to-speech": {
           "file": "../capabilities/speech/synthesis/maps/google-apis-text-to-speech.suma"
+        },
+        "ibm-cloud-text-to-speech-eu-de": {
+          "file": "../capabilities/speech/synthesis/maps/ibm-cloud-text-to-speech-eu-de.suma",
+          "defaults": {
+            "TextToSpeechSynthesis": {
+              "input": {
+                "instance": "$IBM_CLOUD_TEXT_TO_SPEECH_EU_DE_INSTANCE"
+              }
+            }
+          }
         }
       }
     }
@@ -474,6 +484,16 @@
         {
           "id": "apikey",
           "apikey": "$OPENWEATHERMAP_API_KEY"
+        }
+      ]
+    },
+    "ibm-cloud-text-to-speech-eu-de": {
+      "file": "../providers/ibm-cloud-text-to-speech-eu-de.json",
+      "security": [
+        {
+          "id": "basic",
+          "username": "apikey",
+          "password": "$IBM_CLOUD_TEST_TO_SPEECH_EU_DE_KEY"
         }
       ]
     }
