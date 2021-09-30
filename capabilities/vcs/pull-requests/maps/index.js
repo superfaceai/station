@@ -15,8 +15,7 @@ async function main() {
       // user: 'redhat',
       // user: 'pawelbanasik',
       owner: 'JakubVacek',
-      repo: 'test',
-      perPage: 10,
+      repo: 'made-up'
     },
     { provider: 'bitbucket' }
   );

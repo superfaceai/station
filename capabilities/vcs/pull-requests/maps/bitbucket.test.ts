@@ -1,29 +1,39 @@
-import { SuperfaceClient } from '@superfaceai/one-sdk';
+import { SuperfaceTest } from '@superfaceai/testing-lib';
 
-describe('vcs/pull-requests/bitbucket', () => {
-  beforeAll(() => {
-    jest.setTimeout(10000);
+describe(`vcs/pull-requests/bitbucket}`, () => {
+  let superface: SuperfaceTest;
+
+  beforeEach(() => {
+    superface = new SuperfaceTest();
   });
 
-  it('performs correctly', async () => {
-    const client = new SuperfaceClient();
-    const profile = await client.getProfile('vcs/pull-requests');
-    const useCase = profile.getUseCase('PullRequests');
-    const provider = await client.getProvider('bitbucket');
-    const result = await useCase.perform(
-      { owner: 'jakuvacek', repo: 'testrepository' },
-      { provider }
-    );
-    const value = result.unwrap();
-    expect(value).toEqual({
-      pullRequests: [
-        {
-          id: 1,
-          sha: 'd1d6bab92584',
-          title: 'README.md edited online with Bitbucket',
-          url: 'https://bitbucket.org/jakuvacek/testrepository/pull-requests/1',
-        },
-      ],
+  describe('PullRequests', () => {
+    it('should perform successfully', async () => {
+      await expect(
+        superface.run({
+          profile: 'vcs/pull-requests',
+          provider: 'bitbucket',
+          useCase: 'PullRequests',
+          input: {
+            owner: 'JakubVacek',
+            repo: 'test'
+          },
+        })
+      ).resolves.toMatchSnapshot();
     });
   });
+  //FIX: this does not finish in 10 seconds, something borked in testing lib/sdk?
+  it('should handle error', async () => {
+    await expect(
+      superface.run({
+        profile: 'vcs/pull-requests',
+        provider: 'bitbucket',
+        useCase: 'PullRequests',
+        input: {
+          owner: 'JakubVacek',
+          repo: 'made-up'
+        },
+      })
+    ).resolves.toMatchSnapshot();
+  }, 10000);
 });
