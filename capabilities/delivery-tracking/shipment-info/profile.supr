@@ -156,28 +156,28 @@ A shipment location.
 """
 model Location {
   address! {
-  """
-  Country code
-A short text string code (ISO 3166-1 alpha-2 country code) specifying the country.
-  """
-  countryCode string
+    """
+    Country code
+    A short text string code (ISO 3166-1 alpha-2 country code) specifying the country.
+    """
+    countryCode string
 
-  """
-  Postal code
-  Text specifying the postal code for an address.
-  """
-  postalCode string
+    """
+    Postal code
+    Text specifying the postal code for an address.
+    """
+    postalCode string
 
-  """
-  Address locality
-  Text specifying the name of the locality, for example a city.
-  """
-  addressLocality string
+    """
+    Address locality
+    Text specifying the name of the locality, for example a city.
+    """
+    addressLocality string
 
-  """
-  Street address
-  The street address expressed as free form text. The street address is printed on paper as the first lines below the name.
-  """
-  streetAddress string
+    """
+    Street address
+    The street address expressed as free form text. The street address is printed on paper as the first lines below the name.
+    """
+    streetAddress string
   }
 }
