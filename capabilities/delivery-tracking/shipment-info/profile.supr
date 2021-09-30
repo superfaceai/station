@@ -94,21 +94,25 @@ model ShipmentStatus enum {
   Carrier has received information about the package but it has not yet been scanned and picked up.
   """
   pre_transit
+
   """
   Transit
   A package is traveling to its destination.
   """
   transit
+
   """
   Delivered
   The package has been delivered.
   """
   delivered
+
   """
   Failure
   The package encountered an error during transit.
   """
   failure
+
   """
   Unknown
   The shipment status is unknown.
