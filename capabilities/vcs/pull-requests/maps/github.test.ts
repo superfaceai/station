@@ -1,30 +1,38 @@
-import { SuperfaceClient } from '@superfaceai/one-sdk';
+import { SuperfaceTest } from '@superfaceai/testing-lib';
 
-describe('vcs/pull-requests/github', () => {
-  beforeAll(() => {
-    jest.setTimeout(10000);
+describe(`vcs/pull-requests/github`, () => {
+  let superface: SuperfaceTest;
+
+  beforeEach(() => {
+    superface = new SuperfaceTest();
   });
 
-  it('performs correctly', async () => {
-    const client = new SuperfaceClient();
-    const profile = await client.getProfile('vcs/pull-requests');
-    const useCase = profile.getUseCase('PullRequests');
-    const provider = await client.getProvider('github');
-    const result = await useCase.perform(
-      { owner: 'superfaceai', repo: 'astexplorer' },
-      { provider }
-    );
-    const value = result.unwrap();
-
-    expect(value).toEqual({
-      pullRequests: [
-        {
-          id: 567476468,
-          sha: 'a8e318f2f5f14504a2f0da049d26cbc80d35fa9d',
-          title: 'chore: Bump parser version',
-          url: 'https://api.github.com/repos/superfaceai/astexplorer/pulls/3',
-        },
-      ],
+  describe('PullRequests', () => {
+    it('should perform successfully', async () => {
+      await expect(
+        superface.run({
+          profile: 'vcs/pull-requests',
+          provider: 'github',
+          useCase: 'PullRequests',
+          input: {
+            owner: 'DXHeroes',
+            repo: 'pipeliner',
+          },
+        })
+      ).resolves.toMatchSnapshot();
     });
   });
+  it('should handle error', async () => {
+    await expect(
+      superface.run({
+        profile: 'vcs/pull-requests',
+        provider: 'github',
+        useCase: 'PullRequests',
+        input: {
+          owner: 'DXHeroes',
+          repo: 'made-up',
+        },
+      })
+    ).resolves.toMatchSnapshot();
+  }, 10000);
 });

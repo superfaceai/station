@@ -2,7 +2,7 @@ profile = "vcs/pull-requests@2.0"
 provider = "bitbucket"
 
 """
-PullRequests map
+PullRequests map. Retruns all pull requests from specified repository od specified user
 """
 map PullRequests{
   owner = input.owner
@@ -21,7 +21,6 @@ operation Paginate {
   data = []
   page = 1
   //Hack to create a while loop
-  //FIX: if this is is more then 10 (eg 1000) testing lib is not able finish the snapshot recording. Looks like fail is not terminating the loop
   call foreach(_x of Array(10)) FetchPullRequests(owner = args.owner, repo = args.repo, page = page) {
     fail if (outcome.data.statusCode !== 200) outcome.data
 

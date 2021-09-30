@@ -1,27 +1,71 @@
-profile = "vcs/pull-requests@1.0"
+profile = "vcs/pull-requests@2.0"
 provider = "gitlab"
 
 """
-PullRequests map
+PullRequests map. Retruns all pull requests from specified repository od specified user
 """
 map PullRequests{
+call Paginate(
    //encodeURIComponent comes from JavaScript core library and you can use it here!
   id = encodeURIComponent(input.owner + '/' + input.repo)
-
-  http GET "/projects/{id}/merge_requests" {
-    response 200 "application/json" {
-      map result {
-        //maps returned values to result object
-        pullRequests = body.map((r) => {
-          return {
-            title: r.title,
-            id: r.iid,
-            url: r.web_url,
-            sha: r.sha,
-          }
-        })
-      }
-    }
+  ) {
+    return map error if (outcome.data.statusCode !== 200) outcome.data
+    return map result { pullRequests = outcome.data.pullRequests }
   }
 }
+operation Paginate {
+
+  data = []
+  page = 1
+  //Hack to ceate a while with maximum loop count
+  call foreach(_x of Array(5)) FetchPullRequests(id = args.id, page = page) {
+    fail if (outcome.data.statusCode !== 200) outcome.data
+
+    data = [...data, ...outcome.data.pullRequests]
+
+    page = page + 1
+    return if (outcome.data.isLastPage) {
+      pullRequests: data,
+      statusCode: 200
+    }
+  }
+
+  return {
+    pullRequests: data,
+    statusCode: 200
+  }
+}
+
+operation FetchPullRequests {
+  http GET "/projects/{args.id}/merge_requests" {
+    request {
+      query {
+        //Get PRs of all users
+        scope = 'all',
+        //Get PRs in every state
+        state = 'all',
+        page = args.page
+      }
+    }
+    response {
+      fail if (statusCode !== 200){
+        message: body.message,
+        statusCode: statusCode
+      }
+
+      return {
+        pullRequests: body.map((pr) => {
+          return {
+            title: pr.title,
+            id: pr.iid,
+            url: pr.web_url,
+            sha: pr.sha,
+          }
+        }),
+        statusCode: statusCode,
+        isLastPage: headers['x-next-page'] === ""
+      }
+    }
+   }
+ }
   

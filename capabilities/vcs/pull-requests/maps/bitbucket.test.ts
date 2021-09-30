@@ -1,6 +1,6 @@
 import { SuperfaceTest } from '@superfaceai/testing-lib';
 
-describe(`vcs/pull-requests/bitbucket}`, () => {
+describe(`vcs/pull-requests/bitbucket`, () => {
   let superface: SuperfaceTest;
 
   beforeEach(() => {
@@ -16,13 +16,12 @@ describe(`vcs/pull-requests/bitbucket}`, () => {
           useCase: 'PullRequests',
           input: {
             owner: 'JakubVacek',
-            repo: 'test'
+            repo: 'test',
           },
         })
       ).resolves.toMatchSnapshot();
     });
   });
-  //FIX: this does not finish in 10 seconds, something borked in testing lib/sdk?
   it('should handle error', async () => {
     await expect(
       superface.run({
@@ -31,7 +30,7 @@ describe(`vcs/pull-requests/bitbucket}`, () => {
         useCase: 'PullRequests',
         input: {
           owner: 'JakubVacek',
-          repo: 'made-up'
+          repo: 'made-up',
         },
       })
     ).resolves.toMatchSnapshot();
