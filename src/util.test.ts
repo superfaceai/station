@@ -84,15 +84,21 @@ describe('util', () => {
       expect(result).toEqual([
         {
           profile: {
-            scope: 'scope',
-            name: 'name',
+            id: {
+              id: 'scope/name',
+              scope: 'scope',
+              name: 'name',
+            },
           },
           provider: 'providerOne',
         },
         {
           profile: {
-            scope: 'scope',
-            name: 'name',
+            id: {
+              id: 'scope/name',
+              scope: 'scope',
+              name: 'name',
+            },
           },
           provider: 'providerTwo',
         },
