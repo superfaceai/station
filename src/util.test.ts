@@ -1,4 +1,5 @@
-import { SuperJson, SuperJsonDocument } from '@superfaceai/one-sdk';
+import { SuperJsonDocument } from '@superfaceai/ast';
+import { SuperJson } from '@superfaceai/one-sdk';
 import * as glob from 'glob';
 import { mocked } from 'ts-jest/utils';
 
@@ -84,15 +85,21 @@ describe('util', () => {
       expect(result).toEqual([
         {
           profile: {
-            scope: 'scope',
-            name: 'name',
+            id: {
+              id: 'scope/name',
+              scope: 'scope',
+              name: 'name',
+            },
           },
           provider: 'providerOne',
         },
         {
           profile: {
-            scope: 'scope',
-            name: 'name',
+            id: {
+              id: 'scope/name',
+              scope: 'scope',
+              name: 'name',
+            },
           },
           provider: 'providerTwo',
         },
