@@ -1,0 +1,78 @@
+"""
+Create Contact
+Create contact in Customer Relation Mangement service
+"""
+
+name = "crm/create-contact"
+version = "1.0.0"
+
+"""
+Create Contact
+Create single contact in CRM
+"""
+usecase CreateContact unsafe {
+  input {
+    """
+    E-mail
+    The contact's primary email
+    """
+    email
+
+    """
+    Phone
+    The contact's primary phone number
+    """
+    phone
+
+    """
+    First name
+    The contact's personal name
+    """
+    firstName
+
+    """
+    Last name
+    The contact's family name
+    """
+    lastName
+
+    """
+    Company
+    The contact's company
+    """
+    company
+
+    """
+    Country
+    The contact's country
+    """
+    country
+
+    """
+    Custom fieldsproperties
+    Additional properties about the contact
+    """
+    customProperties
+  }
+
+  result {
+    """
+    Identifier
+    The contact's identifier
+    """
+    id!
+  }
+
+  error {
+    """
+    Title
+    A short, human-readable summary of the problem type
+    """
+    title!
+
+    """
+    A human-readable explanation specific to this occurrence of the problem
+    """
+    detail
+  }
+}
