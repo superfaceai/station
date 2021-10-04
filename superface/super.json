@@ -330,7 +330,15 @@
       }
     },
     "crm/create-contact": {
-      "file": "../capabilities/crm/create-contact/profile.supr"
+      "file": "../capabilities/crm/create-contact/profile.supr",
+      "providers": {
+        "mock": {
+          "file": "../capabilities/crm/create-contact/maps/mock.suma"
+        }
+      },
+      "priority": [
+        "mock"
+      ]
     }
   },
   "providers": {
