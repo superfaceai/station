@@ -637,6 +637,13 @@
   dependencies:
     typescript-is "^0.18.3"
 
+"@superfaceai/ast@^0.0.31":
+  version "0.0.31"
+  resolved "https://registry.yarnpkg.com/@superfaceai/ast/-/ast-0.0.31.tgz#b0ee6db7757d94f1e03bb8b27789ad921ac99f91"
+  integrity sha512-hEnr1LeCKorzR3U12M8q6PIBIS9JLUmmAnKIG+suL1djgxzUegEYcMDE1PX+mlByv/YzSb+7wJ5DGnJspip8eg==
+  dependencies:
+    typescript-is "^0.18.3"
+
 "@superfaceai/cli@^0.0.24":
   version "0.0.24"
   resolved "https://registry.yarnpkg.com/@superfaceai/cli/-/cli-0.0.24.tgz#09762b2e272290e233e1d986b1e9ed4e13ba9a01"
@@ -672,12 +679,12 @@
     vm2 "^3.9.2"
     zod "^2.0.0-beta.30"
 
-"@superfaceai/one-sdk@^0.0.35-beta.0":
-  version "0.0.35-beta.0"
-  resolved "https://registry.yarnpkg.com/@superfaceai/one-sdk/-/one-sdk-0.0.35-beta.0.tgz#751cac56c519b38940b4945e370fb81f641099c7"
-  integrity sha512-+OJKlO2D8C1v+ROUw7gZPe6NNtV71TctRqB3p0LFkojkDyS7FbZqRCK7F9WD+qvE5LCQjSME/zc3pIir0+R8iQ==
+"@superfaceai/one-sdk@^0.0.37-beta.0":
+  version "0.0.37-beta.0"
+  resolved "https://registry.yarnpkg.com/@superfaceai/one-sdk/-/one-sdk-0.0.37-beta.0.tgz#f79243dd9d633ba119e1eec5ede568ac24a7689a"
+  integrity sha512-xVBdVXmROQvR6QDM4ihYMyddLxaf6qocNKV6mAd3sNQNv8tB9b5xdKLL0P7gwb0PN6T6PqTAryf5RON5tI1jaw==
   dependencies:
-    "@superfaceai/ast" "^0.0.28"
+    "@superfaceai/ast" "^0.0.31"
     "@superfaceai/parser" "^0.0.19"
     abort-controller "^3.0.0"
     cross-fetch "^3.0.5"
@@ -713,12 +720,13 @@
   dependencies:
     cross-fetch "^3.1.0"
 
-"@superfaceai/testing-lib@^0.0.3-beta.5":
-  version "0.0.3-beta.5"
-  resolved "https://registry.yarnpkg.com/@superfaceai/testing-lib/-/testing-lib-0.0.3-beta.5.tgz#093c19d1e410bb6948f05cd4cdf1dc9930a3efd4"
-  integrity sha512-0jyJGLnwAcdR8sAWp1pIHhBpACDwOySeamuihGZjMEmi6h7Iih/HwcR+wf14NHJGF7RwhFQaNO1GLlDpJ+cQxg==
+"@superfaceai/testing-lib@^0.0.3-beta.6":
+  version "0.0.3-beta.6"
+  resolved "https://registry.yarnpkg.com/@superfaceai/testing-lib/-/testing-lib-0.0.3-beta.6.tgz#02dfdaf57ad2e25ba0227f26ec71d8c60ac26754"
+  integrity sha512-EALECaSDGEPIvFFAZ7toTIWQLDfzyNhfP/H8foujlBqUWfWW2A5KUzMv7/KCk5RqUpg1R4BRyeqROta5cUCcSA==
   dependencies:
-    "@superfaceai/one-sdk" "^0.0.35-beta.0"
+    "@superfaceai/ast" "^0.0.31"
+    "@superfaceai/one-sdk" "^0.0.37-beta.0"
     debug "^4.3.2"
     nock "^13.1.1"
 
