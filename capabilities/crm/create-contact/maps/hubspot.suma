@@ -1,0 +1,42 @@
+profile = "crm/create-contact@1.0"
+provider = "hubspot"
+
+map CreateContact {
+  http POST "/crm/v3/objects/contacts" {
+    security "apiKey"
+
+    request {
+      body = {
+        properties: {
+          ...input.customProperties,
+          firstname: input.firstName,
+          lastname: input.lastName,
+          email: input.email,
+          phone: input.phone,
+          company: input.company,
+          country: input.country,
+        }
+      }
+    }
+
+    response 201 "application/json" {
+      map result {
+        id = body.id
+      }
+    }
+
+    response 400 "application/json" {
+      map error {
+        title = body.category,
+        detail = body.message,
+      }
+    }
+
+    response 401 "application/json" {
+      map error {
+        title = body.category,
+        detail = body.message,
+      }
+    }
+  }
+}
