@@ -292,6 +292,17 @@
           "file": "../capabilities/weather/current-city/maps/wttr-in.suma"
         }
       }
+    },
+    "crypto/exchange-rate": {
+      "file": "../capabilities/crypto/exchange-rate/exchange-rate.supr",
+      "providers": {
+        "binance": {
+          "file": "../capabilities/crypto/exchange-rate/maps/binance.suma"
+        }
+      },
+      "priority": [
+        "binance"
+      ]
     }
   },
   "providers": {
@@ -443,6 +454,9 @@
     "wttr-in": {
       "file": "../providers/wttr-in.json",
       "security": []
+    },
+    "binance": {
+      "file": "../providers/binance.json"
     }
   }
 }

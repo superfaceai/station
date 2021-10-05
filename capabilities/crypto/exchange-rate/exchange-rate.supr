@@ -1,0 +1,41 @@
+"""
+Exchange Rate
+Get exchange rate of two currencies
+"""
+name = "crypto/exchange-rate"
+version = "1.0.0"
+
+"""
+Get Exchange Rate
+Get exchange rate of two currencies.
+"""
+usecase GetExchangeRate safe {
+    input {
+        """
+        from
+        Source currency
+        """
+        from! string!
+        """
+        to
+        Target currency
+        """
+        to! string!
+    }
+
+    result {
+        """
+        rate
+        Exchange rate
+        """
+        rate! string!
+    }
+
+    error {
+        """
+        title
+        Human readable error description
+        """
+        title! string!
+    }
+}
