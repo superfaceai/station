@@ -59,8 +59,10 @@ usecase CreateContact unsafe {
     """
     Identifier
     The contact's identifier
+
+    If contact is created asynchronously it may be missing
     """
-    id!
+    id
   }
 
   error {
