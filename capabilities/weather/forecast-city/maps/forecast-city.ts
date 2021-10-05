@@ -31,12 +31,13 @@ export const forecastCityTest = (providerName: string): void => {
             {city: 'Prague,CZ'},
             {provider}
           );
-
-          expect(typeof result.unwrap()).toBe('object')
-          expect(typeof result.unwrap()[0].temperature).toBe('number');
-          expect(typeof result.unwrap()[0].date).toBe('string');
-          expect(typeof result.unwrap()[0].maxTemperature).toBe('number');
-          expect(typeof result.unwrap()[0].minTemperature).toBe('number');
+          expect(Array.isArray(result.unwrap())).toEqual(true)
+          expect(result.unwrap()[0]).toEqual({
+            temperature: expect.any(Number),
+            date: expect.any(String),
+            maxTemperature: expect.any(Number),
+            minTemperature: expect.any(Number)
+          })
         });
       });
     });
