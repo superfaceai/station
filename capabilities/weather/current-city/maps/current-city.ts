@@ -31,10 +31,11 @@ export const currentCityTest = (providerName: string): void => {
             {city: 'Prague,CZ'},
             {provider}
           );
-
-          expect(typeof result.unwrap().temperature).toBe('number');
-          expect(typeof result.unwrap().feelsLike).toBe('number');
-          expect(typeof result.unwrap().description).toBe('string');
+          expect(result.unwrap()).toEqual({
+            temperature: expect.any(Number),
+            feelsLike: expect.any(Number),
+            description: expect.any(String)
+          })
         });
       });
     });
