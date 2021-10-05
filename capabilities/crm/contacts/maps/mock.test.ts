@@ -1,19 +1,19 @@
 import { SuperfaceClient } from '@superfaceai/one-sdk';
 
-describe(`crm/create-contact/mock`, () => {
+describe(`crm/contacts/mock`, () => {
   let superface: SuperfaceClient;
 
   beforeEach(() => {
     superface = new SuperfaceClient();
   });
 
-  describe('UseCase', () => {
+  describe('Create', () => {
     it('should perform successfully', async () => {
-      const profile = await superface.getProfile('crm/create-contact');
+      const profile = await superface.getProfile('crm/contacts');
       const provider = await superface.getProvider('mock');
 
       const result = await profile
-        .getUseCase('CreateContact')
+        .getUseCase('Create')
         .perform({ email: 'test@example.com' }, { provider });
 
       expect(result.unwrap()).toEqual({ id: 'mocked@example.com' });

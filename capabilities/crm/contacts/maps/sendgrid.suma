@@ -1,7 +1,7 @@
-profile = "crm/create-contact@1.0"
+profile = "crm/contacts@1.0"
 provider = "sendgrid"
 
-map CreateContact {
+map Create {
   return map error if (input.email === undefined || input.email === null) {
     title = "Missing field"
     detail = "SendGrid requires email on contact"

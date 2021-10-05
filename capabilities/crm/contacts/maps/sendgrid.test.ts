@@ -1,19 +1,19 @@
 import { SuperfaceTest } from '@superfaceai/testing-lib';
 
-describe(`crm/create-contact/sendgrid`, () => {
+describe(`crm/contacts/sendgrid`, () => {
   let superface: SuperfaceTest;
 
   beforeEach(() => {
     superface = new SuperfaceTest();
   });
 
-  describe('CreateContact', () => {
+  describe('Create', () => {
     it('should return error if email is missing', async () => {
       await expect(
         superface.run({
-          profile: 'crm/create-contact',
+          profile: 'crm/contacts',
           provider: 'sendgrid',
-          useCase: 'CreateContact',
+          useCase: 'Create',
           input: {},
         })
       ).resolves.toMatchSnapshot();
@@ -22,9 +22,9 @@ describe(`crm/create-contact/sendgrid`, () => {
     it('should perform successfully', async () => {
       await expect(
         superface.run({
-          profile: 'crm/create-contact',
+          profile: 'crm/contacts',
           provider: 'sendgrid',
-          useCase: 'CreateContact',
+          useCase: 'Create',
           input: {
             email: 'TEST@example.com',
             customProperties: {

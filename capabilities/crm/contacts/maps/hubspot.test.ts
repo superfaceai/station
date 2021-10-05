@@ -1,19 +1,19 @@
 import { SuperfaceTest } from '@superfaceai/testing-lib';
 
-describe(`crm/create-contact.hubspot`, () => {
+describe(`crm/contacts/hubspot`, () => {
   let superface: SuperfaceTest;
 
   beforeEach(() => {
     superface = new SuperfaceTest();
   });
 
-  describe('CreateContact', () => {
+  describe('Create', () => {
     it('should perform successfully', async () => {
       await expect(
         superface.run({
-          profile: 'crm/create-contact',
+          profile: 'crm/contacts',
           provider: 'hubspot',
-          useCase: 'CreateContact',
+          useCase: 'Create',
           input: {
             email: 'test@example.com',
             firstName: 'Test',
