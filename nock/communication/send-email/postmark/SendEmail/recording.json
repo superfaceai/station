@@ -1,0 +1,84 @@
+[
+  {
+    "scope": "https://api.postmarkapp.com:443",
+    "method": "POST",
+    "path": "/email",
+    "body": {
+      "From": "hello@superface.org",
+      "To": "hello@superface.ai",
+      "Subject": "Station test",
+      "TextBody": "Station test - postmark"
+    },
+    "status": 200,
+    "response": [
+      "1f8b08000000000004033ccc390ec2301040d1bb4c8da3f1be5420a0400851908ace89271029c8c8492ac4dd7145fffeff409b21c093a6296fe7f54d65883d3571840ddcd6ee352e0ba5dd528940c1197a26548b2ea00c1a1b6b8df0dedc2bbed03cc7079d0e956a2fa5ec936266d082299b38eb7a850c290a72a4ac235e936329b9ec732208f81fd4fc7a86ef0f0000ffff",
+      "03009747bf8e98000000"
+    ],
+    "rawHeaders": [
+      "cache-control",
+      "private",
+      "content-type",
+      "application/json; charset=utf-8",
+      "x-postmark-account",
+      "211969",
+      "x-postmark-server",
+      "6513030",
+      "server",
+      "unicorns-double-rainbow",
+      "x-powered-by",
+      "ASP.NET",
+      "date",
+      "Fri, 24 Sep 2021 08:03:49 GMT",
+      "strict-transport-security",
+      "max-age=16000000;",
+      "content-encoding",
+      "gzip",
+      "transfer-encoding",
+      "chunked",
+      "vary",
+      "Accept-Encoding",
+      "connection",
+      "close"
+    ],
+    "responseIsBinary": false
+  },
+  {
+    "scope": "https://api.postmarkapp.com:443",
+    "method": "POST",
+    "path": "/email",
+    "body": {
+      "From": "invalidemail",
+      "To": "invalidemail",
+      "Subject": "",
+      "TextBody": ""
+    },
+    "status": 422,
+    "response": {
+      "ErrorCode": 300,
+      "Message": "Error parsing 'To': Illegal email address 'invalidemail'. It must contain the '@' symbol."
+    },
+    "rawHeaders": [
+      "cache-control",
+      "private",
+      "content-type",
+      "application/json; charset=utf-8",
+      "x-postmark-account",
+      "211969",
+      "x-postmark-server",
+      "6513030",
+      "server",
+      "unicorns-double-rainbow",
+      "x-powered-by",
+      "ASP.NET",
+      "date",
+      "Fri, 24 Sep 2021 08:03:50 GMT",
+      "content-length",
+      "119",
+      "strict-transport-security",
+      "max-age=16000000;",
+      "connection",
+      "close"
+    ],
+    "responseIsBinary": false
+  }
+]

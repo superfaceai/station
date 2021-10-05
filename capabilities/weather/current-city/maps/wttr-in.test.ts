@@ -1,3 +1,3 @@
-import {currentCityTest} from "./current-city";
+import { currentCityTest } from './current-city';
 
-currentCityTest('wttr-in')
+currentCityTest('wttr-in');

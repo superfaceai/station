@@ -36,7 +36,7 @@ describe('address/geocoding/azure-maps-typed', () => {
 
     expect(provider).not.toBeUndefined();
     expect(usecase).not.toBeUndefined();
-    
+
     const result = await usecase.perform(
       {
         latitude: 40.714224,

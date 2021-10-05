@@ -1,0 +1,89 @@
+[
+  {
+    "scope": "https://api.postmarkapp.com:443",
+    "method": "POST",
+    "path": "/email/withTemplate",
+    "body": {
+      "From": "hello@superface.ai",
+      "To": "hello@superface.ai",
+      "TemplateId": "23783943",
+      "TemplateModel": {
+        "from": "hello@superface.ai",
+        "to": "hello@superface.ai",
+        "templateId": "23783943"
+      }
+    },
+    "status": 200,
+    "response": [
+      "1f8b08000000000004033cccb10ec2201485e177b9b33470a1a53069d4c118e36027370a176d5283817632bebb4c2e67fafef38121818527cd73da96f54d393a4f8d9b6003b7757c4dcb4261b754821c05e386a11a786f515aa51ba15b293b71aff842a5b8079d0e952af4c174a367cae158473866a244a6b5ee49476a8d8b3539e69cf23e0502cbff0735bf9ee1fb030000ffff",
+      "0300cf7aadbf98000000"
+    ],
+    "rawHeaders": [
+      "cache-control",
+      "private",
+      "content-type",
+      "application/json; charset=utf-8",
+      "x-postmark-account",
+      "211969",
+      "x-postmark-server",
+      "6513030",
+      "server",
+      "unicorns-double-rainbow",
+      "x-powered-by",
+      "ASP.NET",
+      "date",
+      "Fri, 24 Sep 2021 08:23:46 GMT",
+      "strict-transport-security",
+      "max-age=16000000;",
+      "content-encoding",
+      "gzip",
+      "transfer-encoding",
+      "chunked",
+      "vary",
+      "Accept-Encoding",
+      "connection",
+      "close"
+    ],
+    "responseIsBinary": false
+  },
+  {
+    "scope": "https://api.postmarkapp.com:443",
+    "method": "POST",
+    "path": "/email/withTemplate",
+    "body": {
+      "From": "invalidemail",
+      "To": "invalidemail",
+      "TemplateId": "invalid"
+    },
+    "status": 422,
+    "response": {
+      "ErrorCode": 403,
+      "Message": "Received valid, but incompatible JSON input."
+    },
+    "rawHeaders": [
+      "cache-control",
+      "private",
+      "content-type",
+      "application/json; charset=utf-8",
+      "x-postmark-account",
+      "211969",
+      "x-postmark-server",
+      "6513030",
+      "x-pm-apierrorcode",
+      "403",
+      "server",
+      "unicorns-double-rainbow",
+      "x-powered-by",
+      "ASP.NET",
+      "date",
+      "Fri, 24 Sep 2021 08:23:47 GMT",
+      "content-length",
+      "74",
+      "strict-transport-security",
+      "max-age=16000000;",
+      "connection",
+      "close"
+    ],
+    "responseIsBinary": false
+  }
+]
