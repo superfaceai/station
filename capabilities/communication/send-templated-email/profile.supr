@@ -1,0 +1,63 @@
+"""
+Send Templated Email
+Send templated transactional email to one recipient.
+"""
+
+name = "communication/send-templated-email"
+version = "1.0.0"
+
+"""
+Send Templated Email
+Send templated transactional email to one recipient.
+Requires template defined on provider side. 
+"""
+usecase SendTemplatedEmail unsafe {
+  input {
+    """
+    From
+    The sender's email address.
+    """
+    from!
+
+    """
+    To
+    The recipient's email address.
+    """
+    to!
+
+    """
+    Template Identifier
+    The template to use when sending email message.
+    """
+    templateId!
+
+    """
+    Template Data
+    Template data to be applied to the specified template to generate html, test, and subject.
+    The value is a collection of key/value pairs following the pattern `variable_name`: `value to insert`.
+    This field should be used in combination with `templateId` to identify what template to use.
+    """
+    templateData!
+  }
+
+  result {
+    """
+    Message Identifier
+    The identifier is provider-specific and not unique.
+    """
+    messageId!
+  }
+
+  error {
+    """
+    Title
+    A short, human-readable summary of the problem type.
+    """
+    title!
+
+    """
+    A human-readable explanation specific to this occurrence of the problem.
+    """
+    detail
+  }
+}

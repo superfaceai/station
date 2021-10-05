@@ -19,6 +19,7 @@ var email_templates_1 = require("./types/communication/email-templates");
 var send_email_1 = require("./types/communication/send-email");
 var send_message_1 = require("./types/communication/send-message");
 var send_sms_1 = require("./types/communication/send-sms");
+var send_templated_email_1 = require("./types/communication/send-templated-email");
 var shipment_info_1 = require("./types/delivery-tracking/shipment-info");
 var character_information_1 = require("./types/starwars/character-information");
 var pull_request_1 = require("./types/vcs/pull-request");
@@ -27,5 +28,6 @@ var single_file_content_1 = require("./types/vcs/single-file-content");
 var user_repos_1 = require("./types/vcs/user-repos");
 var current_city_1 = require("./types/weather/current-city");
 var forecast_city_1 = require("./types/weather/forecast-city");
-var typeDefinitions = __assign(__assign(__assign(__assign(__assign(__assign(__assign(__assign(__assign(__assign(__assign(__assign(__assign(__assign({}, clean_address_1.addressCleanAddress), geocoding_1.addressGeocoding), email_templates_1.communicationEmailTemplates), send_email_1.communicationSendEmail), send_message_1.communicationSendMessage), send_sms_1.communicationSendSms), shipment_info_1.deliveryTrackingShipmentInfo), character_information_1.starwarsCharacterInformation), pull_request_1.vcsPullRequest), pull_requests_1.vcsPullRequests), single_file_content_1.vcsSingleFileContent), user_repos_1.vcsUserRepos), current_city_1.weatherCurrentCity), forecast_city_1.weatherForecastCity);
+var typeDefinitions = __assign(__assign(__assign(__assign(__assign(__assign(__assign(__assign(__assign(__assign(__assign(__assign(__assign(__assign(__assign({}, clean_address_1.addressCleanAddress), geocoding_1.addressGeocoding), email_templates_1.communicationEmailTemplates), send_email_1.communicationSendEmail), send_message_1.communicationSendMessage), send_sms_1.communicationSendSms), send_templated_email_1.communicationSendTemplatedEmail), shipment_info_1.deliveryTrackingShipmentInfo), character_information_1.starwarsCharacterInformation), pull_request_1.vcsPullRequest), pull_requests_1.vcsPullRequests), single_file_content_1.vcsSingleFileContent), user_repos_1.vcsUserRepos), current_city_1.weatherCurrentCity), forecast_city_1.forecast_city_1.weatherForecastCity);
+
 exports.SuperfaceClient = one_sdk_1.createTypedClient(typeDefinitions);

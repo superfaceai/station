@@ -1,0 +1,8 @@
+profile = "communication/send-templated-email@1.0"
+provider = "mock"
+
+map SendTemplatedEmail {
+  map result {
+    messageId = Math.random().toString(16).substr(2, 14)
+  }
+}
