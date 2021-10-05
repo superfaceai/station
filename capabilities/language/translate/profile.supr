@@ -1,0 +1,29 @@
+name = "language/translate"
+version = "1.0.0"
+
+
+// TODO: add more languages
+model Language enum {
+    EN, SK, CZ
+}
+
+
+"""
+Translate text usecase
+"""
+usecase TranslateText {
+    input {
+        text string
+        targetLanguage Language 
+    }
+
+    result {
+        text string
+        language
+    } 
+
+    error {
+        title string
+        detail string
+    }
+}

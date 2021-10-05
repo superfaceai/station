@@ -280,16 +280,29 @@
     },
     "weather/current-city": {
       "file": "../capabilities/weather/current-city/profile.supr",
-      "priority": [
-        "mock",
-        "wttr-in"
-      ],
+      "priority": ["mock", "wttr-in"],
       "providers": {
         "mock": {
           "file": "../capabilities/weather/current-city/maps/mock.suma"
         },
         "wttr-in": {
           "file": "../capabilities/weather/current-city/maps/wttr-in.suma"
+        }
+      }
+    },
+    "language/translate": {
+      "file": "../capabilities/language/translate/profile.supr",
+      "priority": ["deepl"],
+      "providers": {
+        "deepl": {
+          "file": "../capabilities/language/translate/maps/deepl.suma",
+          "defaults": {
+            "TranslateText": {
+              "input": {
+                "authKey": "$DEEPL_API_KEY"
+              }
+            }
+          }
         }
       }
     }
@@ -442,6 +455,10 @@
     },
     "wttr-in": {
       "file": "../providers/wttr-in.json",
+      "security": []
+    },
+    "deepl": {
+      "file": "../providers/deepl.json",
       "security": []
     }
   }
