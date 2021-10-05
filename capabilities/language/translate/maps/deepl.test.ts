@@ -1,8 +1,8 @@
-import { SuperfaceTest } from '@superfaceai/testing-lib';
+import { RecordingDefinitions, SuperfaceTest } from '@superfaceai/testing-lib';
 
 const superface = new SuperfaceTest();
 
-const transformRecording = (recordings: any) => {
+const transformRecording = (recordings: RecordingDefinitions) => {
   for (const recording of recordings) {
     recording.path = recording.path.replace(
       /auth_key=.{41}/g,
