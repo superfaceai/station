@@ -292,7 +292,7 @@
     },
     "language/translate": {
       "file": "../capabilities/language/translate/profile.supr",
-      "priority": ["deepl"],
+      "priority": ["deepl", "mock"],
       "providers": {
         "deepl": {
           "file": "../capabilities/language/translate/maps/deepl.suma",
@@ -303,6 +303,9 @@
               }
             }
           }
+        },
+        "mock": {
+          "file": "../capabilities/language/translate/maps/mock.suma"
         }
       }
     }
