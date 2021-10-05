@@ -1,3 +1,4 @@
+import { ProfileId } from '@superfaceai/cli/dist/common/profile';
 import { check } from '@superfaceai/cli/dist/logic/check';
 import { SuperJson } from '@superfaceai/one-sdk';
 import { mocked } from 'ts-jest/utils';
@@ -13,7 +14,7 @@ describe('validate', () => {
     mocked(util.loadSuperJson).mockReturnValue(new SuperJson({}));
     mocked(util.allProfileProviderCombinations).mockReturnValue([
       {
-        profile: { scope: 'scope', name: 'name' },
+        profile: { id: ProfileId.fromScopeName('scope', 'name') },
         provider: 'provider',
       },
     ]);
@@ -47,7 +48,13 @@ describe('validate', () => {
       expect(check).toBeCalledTimes(1);
       expect(check).toBeCalledWith(
         new SuperJson({}),
-        { scope: 'scope', name: 'name' },
+        {
+          id: {
+            id: 'scope/name',
+            scope: 'scope',
+            name: 'name',
+          },
+        },
         'provider',
         {}
       );
