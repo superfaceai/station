@@ -1,8 +1,11 @@
 /* eslint-disable jest/no-export */
 
-import { SuperfaceTest } from '@superfaceai/testing-lib';
+import { AfterLoadFunction, SuperfaceTest } from '@superfaceai/testing-lib';
 
-export const analyzePlainTextSentimentTests = (provider: string): void => {
+export const analyzePlainTextSentimentTests = (
+  provider: string,
+  afterRecordingLoadHook?: AfterLoadFunction
+): void => {
   describe(`language/analyze-plain-text-sentiment/${provider}`, () => {
     let superface: SuperfaceTest;
 
@@ -19,12 +22,17 @@ export const analyzePlainTextSentimentTests = (provider: string): void => {
           };
 
           await expect(
-            superface.run({
-              profile: 'language/analyze-plain-text-sentiment',
-              provider,
-              useCase: 'AnalyzePlainTextSentiment',
-              input,
-            })
+            superface.run(
+              {
+                profile: 'language/analyze-plain-text-sentiment',
+                provider,
+                useCase: 'AnalyzePlainTextSentiment',
+                input,
+              },
+              {
+                afterRecordingLoad: afterRecordingLoadHook,
+              }
+            )
           ).resolves.toMatchSnapshot();
         });
 
@@ -35,12 +43,17 @@ export const analyzePlainTextSentimentTests = (provider: string): void => {
           };
 
           await expect(
-            superface.run({
-              profile: 'language/analyze-plain-text-sentiment',
-              provider,
-              useCase: 'AnalyzePlainTextSentiment',
-              input,
-            })
+            superface.run(
+              {
+                profile: 'language/analyze-plain-text-sentiment',
+                provider,
+                useCase: 'AnalyzePlainTextSentiment',
+                input,
+              },
+              {
+                afterRecordingLoad: afterRecordingLoadHook,
+              }
+            )
           ).resolves.toMatchSnapshot();
         });
 
@@ -51,12 +64,17 @@ export const analyzePlainTextSentimentTests = (provider: string): void => {
           };
 
           await expect(
-            superface.run({
-              profile: 'language/analyze-plain-text-sentiment',
-              provider,
-              useCase: 'AnalyzePlainTextSentiment',
-              input,
-            })
+            superface.run(
+              {
+                profile: 'language/analyze-plain-text-sentiment',
+                provider,
+                useCase: 'AnalyzePlainTextSentiment',
+                input,
+              },
+              {
+                afterRecordingLoad: afterRecordingLoadHook,
+              }
+            )
           ).resolves.toMatchSnapshot();
         });
       });
@@ -69,12 +87,17 @@ export const analyzePlainTextSentimentTests = (provider: string): void => {
           };
 
           await expect(
-            superface.run({
-              profile: 'language/analyze-plain-text-sentiment',
-              provider,
-              useCase: 'AnalyzePlainTextSentiment',
-              input,
-            })
+            superface.run(
+              {
+                profile: 'language/analyze-plain-text-sentiment',
+                provider,
+                useCase: 'AnalyzePlainTextSentiment',
+                input,
+              },
+              {
+                afterRecordingLoad: afterRecordingLoadHook,
+              }
+            )
           ).resolves.toMatchSnapshot();
         });
       });
