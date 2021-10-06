@@ -76,7 +76,8 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-yarn-
       - run: yarn install
-      - run: yarn capabilities:check
+      # requires change in CLI to run for all capabilities
+      #- run: yarn capabilities:check
       - run: yarn capabilities:lint
       - run: yarn capabilities:structure
       # not ready
