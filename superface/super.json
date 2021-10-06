@@ -295,14 +295,7 @@
       "priority": ["deepl", "mock"],
       "providers": {
         "deepl": {
-          "file": "../capabilities/language/translate/maps/deepl.suma",
-          "defaults": {
-            "TranslateText": {
-              "input": {
-                "authKey": "$DEEPL_API_KEY"
-              }
-            }
-          }
+          "file": "../capabilities/language/translate/maps/deepl.suma"
         },
         "mock": {
           "file": "../capabilities/language/translate/maps/mock.suma"
@@ -462,7 +455,12 @@
     },
     "deepl": {
       "file": "../providers/deepl.json",
-      "security": []
+      "security": [
+        {
+          "id": "apikey",
+          "apikey": "$DEEPL_API_KEY"
+        }
+      ]
     }
   }
 }
