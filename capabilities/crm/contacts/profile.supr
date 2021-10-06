@@ -12,69 +12,21 @@ Create single contact in CRM
 """
 usecase Create unsafe {
   input {
-    """
-    E-mail
-    The contact's primary email
-    """
     email
-
-    """
-    Phone
-    The contact's primary phone number
-    """
     phone
-
-    """
-    First name
-    The contact's personal name
-    """
     firstName
-
-    """
-    Last name
-    The contact's family name
-    """
     lastName
-
-    """
-    Company
-    The contact's company
-    """
     company
-
-    """
-    Country
-    The contact's country
-    """
     country
-
-    """
-    Custom fieldsproperties
-    Additional properties about the contact
-    """
     customProperties
   }
 
   result {
-    """
-    Identifier
-    The contact's identifier
-
-    If contact is created asynchronously it may be missing
-    """
     id
   }
 
   error {
-    """
-    Title
-    A short, human-readable summary of the problem type
-    """
     title!
-
-    """
-    A human-readable explanation specific to this occurrence of the problem
-    """
     detail
   }
 
@@ -107,3 +59,64 @@ usecase Create unsafe {
   // }
 }
 
+"""
+Identifier
+The contact's identifier
+
+If contact is created asynchronously it may be missing
+"""
+field id
+
+"""
+E-mail
+The contact's primary email
+"""
+field email
+
+"""
+Phone
+The contact's primary phone number
+"""
+field phone
+
+"""
+First name
+The contact's personal name
+"""
+field firstName
+
+"""
+Last name
+The contact's family name
+"""
+field lastName
+
+"""
+Company
+The contact's company
+"""
+field company
+
+"""
+Country
+The contact's country
+"""
+field country
+
+"""
+Custom fieldsproperties
+Additional properties about the contact
+"""
+field customProperties
+
+"""
+Title
+A short, human-readable summary of the problem type
+"""
+field title
+
+"""
+Detail
+A human-readable explanation specific to this occurrence of the problem
+"""
+field detail
