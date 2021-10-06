@@ -32,6 +32,13 @@ map Create {
       }
     }
 
+    response 409 "application/json" {
+      map error {
+        title = body.category,
+        detail = body.message,
+      }
+    }
+
     response 401 "application/json" {
       map error {
         title = body.category,
