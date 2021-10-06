@@ -1,4 +1,13 @@
-import { SuperfaceTest } from '@superfaceai/testing-lib';
+import { RecordingScopes, SuperfaceTest } from '@superfaceai/testing-lib';
+
+function afterRecordingLoad(scopes: RecordingScopes) {
+  scopes.forEach(scope => {
+    scope.filteringPath(
+      /hapikey=[^&]*/g,
+      'hapikey=credentials-removed-to-keep-them-secure'
+    );
+  });
+}
 
 describe(`crm/contacts/hubspot`, () => {
   let superface: SuperfaceTest;
@@ -27,14 +36,7 @@ describe(`crm/contacts/hubspot`, () => {
             },
           },
           {
-            afterRecordingLoad: scopes => {
-              scopes.forEach(scope => {
-                scope.filteringPath(
-                  /hapikey=[^&]*/g,
-                  'hapikey=credentials-removed-to-keep-them-secure'
-                );
-              });
-            },
+            afterRecordingLoad,
           }
         )
       ).resolves.toMatchSnapshot();
