@@ -5,7 +5,7 @@ describe(`crypto/exchange-rate/binance}`, () => {
   let superface: SuperfaceTest;
 
   beforeEach(() => {
-  superface = new SuperfaceTest();
+    superface = new SuperfaceTest();
   });
 
   describe('GetExchangeRate', () => {
@@ -18,10 +18,12 @@ describe(`crypto/exchange-rate/binance}`, () => {
           input: {
             from: 'BTC',
             to: 'USDT',
-          }
+          },
         })
-      ).resolves
-      .toHaveProperty('value.rate', expect.stringMatching(/^\d{1,}\.?\d{0,}$/));
+      ).resolves.toHaveProperty(
+        'value.rate',
+        expect.stringMatching(/^\d{1,}\.?\d{0,}$/)
+      );
     });
 
     // todo currently fails
