@@ -11,7 +11,7 @@ map SingleFileContent{
   ref = input.ref
 
   http GET "/2.0/repositories/{owner}/{repo}/src/{ref}/{path}" {
-    response  {
+    response {
       map result if(statusCode === 200){
         size = body.length
         content = body
