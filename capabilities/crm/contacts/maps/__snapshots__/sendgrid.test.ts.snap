@@ -15,3 +15,19 @@ AST Path: definitions[0].statements[0]
 Original Map Location: Line 5, column 3",
 }
 `;
+
+exports[`crm/contacts/sendgrid Update should perform successfully 1`] = `
+Object {
+  "value": Object {
+    "id": "test@example.com",
+  },
+}
+`;
+
+exports[`crm/contacts/sendgrid Update should return error if email is missing 1`] = `
+Object {
+  "error": "HTTPError: Expected HTTP error
+AST Path: definitions[1].statements[0]
+Original Map Location: Line 73, column 3",
+}
+`;

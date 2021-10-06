@@ -68,3 +68,73 @@ map Create {
     }
   }
 }
+
+map Update {
+  return map error if (
+    (input.id === undefined || input.id === null) && (input.email === undefined || input.email === null)
+  ) {
+    title = "Missing field"
+    detail = "You must specify id or email to identify contact"
+  }
+
+  http PUT "/marketing/contacts" {
+    security "bearer_token"
+
+    request {
+      body = {
+        contacts: [{
+          email: input.id || input.email ,
+          first_name: input.firstName,
+          last_name: input.lastName,
+          country: input.country,
+          custom_fields: {
+            ...input.customProperties,
+            phone: input.phone,
+            company: input.company
+          }
+        }]
+      }
+    }
+
+    response 202 {
+      map result {
+        id = input.id
+      }
+    }
+
+    response 400 "application/json" {
+      map error {
+        title = "Invalid inputs"
+        detail = body.errors.map((err) => `${err.field}: ${err.message}`).join(' ')
+      }
+    }
+
+    response 413 "application/json" {
+      map error {
+        title = "Payload Too Large"
+        detail = body.errors.map((err) => err.message).join(' ')
+      }
+    }
+
+    response 401 "application/json" {
+      map error {
+        title = "Unauthorized"
+        detail = body.errors.map((err) => err.message).join(' ')
+      }
+    }
+
+    response 403 "application/json" {
+      map error {
+        title = "Forbidden"
+        detail = body.errors.map((err) => err.message).join(' ')
+      }
+    }
+
+    response 500 "application/json" {
+      map error {
+        title = "Internal server Error"
+        detail = body.errors.map((err) => err.message).join(' ')
+      }
+    }
+  }
+}

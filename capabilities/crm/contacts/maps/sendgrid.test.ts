@@ -35,4 +35,31 @@ describe(`crm/contacts/sendgrid`, () => {
       ).resolves.toMatchSnapshot();
     });
   });
+
+  describe('Update', () => {
+    it('should return error if email is missing', async () => {
+      await expect(
+        superface.run({
+          profile: 'crm/contacts',
+          provider: 'sendgrid',
+          useCase: 'Update',
+          input: {},
+        })
+      ).resolves.toMatchSnapshot();
+    });
+
+    it('should perform successfully', async () => {
+      await expect(
+        superface.run({
+          profile: 'crm/contacts',
+          provider: 'sendgrid',
+          useCase: 'Update',
+          input: {
+            id: 'test@example.com',
+            firstName: 'test',
+          },
+        })
+      ).resolves.toMatchSnapshot();
+    });
+  });
 });
