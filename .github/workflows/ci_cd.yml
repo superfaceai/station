@@ -76,12 +76,13 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-yarn-
       - run: yarn install
-      # requires change in CLI to run for all capabilities
-      #- run: yarn capabilities:check
+      - run: yarn capabilities:check
+        continue-on-error: true
       - run: yarn capabilities:lint
+        continue-on-error: true
       - run: yarn capabilities:structure
-      # not ready
-      #- run: yarn capabilities:test
+        continue-on-error: true
+      # - run: yarn capabilities:test
 
   license_check:
     name: License check
