@@ -1,4 +1,4 @@
-profile = "vcs/single-file-content@1.0"
+profile = "vcs/single-file-content@1.1"
 provider = "github"
 
 """
@@ -11,7 +11,7 @@ map SingleFileContent{
   ref = input.ref
 
   http GET "/repos/{owner}/{repo}/contents/{path}?ref={ref}" {
-   response  {
+   response {
       map result if(statusCode === 200){
         size = body.size
         content = body.content
