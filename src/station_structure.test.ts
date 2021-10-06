@@ -1,15 +1,13 @@
 import { ProfileId } from '@superfaceai/cli/dist/common/profile';
-import { check } from '@superfaceai/cli/dist/logic/check';
 import { SuperJson } from '@superfaceai/one-sdk';
 import { mocked } from 'ts-jest/utils';
 
+import * as stationStructure from './station_structure';
 import * as util from './util';
-import * as validate from './validate';
 
-jest.mock('@superfaceai/cli/dist/logic/check');
 jest.mock('./util');
 
-describe('validate', () => {
+describe('Station Structure', () => {
   beforeEach(() => {
     mocked(util.loadSuperJson).mockReturnValue(new SuperJson({}));
     mocked(util.allProfileProviderCombinations).mockReturnValue([
@@ -31,55 +29,9 @@ describe('validate', () => {
     jest.resetAllMocks();
   });
 
-  describe('checkCapabilities', () => {
-    it('should call allProfileProviderCombinations', async () => {
-      await validate.checkCapabilities();
-      expect(util.allProfileProviderCombinations).toBeCalled();
-    });
-
-    it('should call loadSuperJson', async () => {
-      await validate.checkCapabilities();
-      expect(util.loadSuperJson).toBeCalled();
-    });
-
-    it('should call CLI check', async () => {
-      await validate.checkCapabilities();
-
-      expect(check).toBeCalledTimes(1);
-      expect(check).toBeCalledWith(
-        new SuperJson({}),
-        {
-          id: {
-            id: 'scope/name',
-            scope: 'scope',
-            name: 'name',
-          },
-        },
-        'provider',
-        {}
-      );
-    });
-
-    it('should catch Error and return it as CheckResult', async () => {
-      mocked(check).mockRejectedValue(new Error('Test error'));
-
-      const result = await validate.checkCapabilities();
-
-      expect(result).toEqual([{ kind: 'error', message: 'Test error' }]);
-    });
-
-    it('should catch not error instance and return it as CheckResult', async () => {
-      mocked(check).mockRejectedValue('error as string');
-
-      const result = await validate.checkCapabilities();
-
-      expect(result).toEqual([{ kind: 'error', message: 'Unknown error' }]);
-    });
-  });
-
   describe('checkFiles', () => {
     it('should get all local files', async () => {
-      await validate.checkFiles();
+      await stationStructure.checkFiles();
 
       expect(util.localProviders).toBeCalled();
       expect(util.localProfiles).toBeCalled();
@@ -87,7 +39,7 @@ describe('validate', () => {
     });
 
     it('should get all files from super.json', async () => {
-      await validate.checkFiles();
+      await stationStructure.checkFiles();
 
       expect(util.providersFiles).toBeCalled();
       expect(util.profilesFiles).toBeCalled();
@@ -95,7 +47,7 @@ describe('validate', () => {
     });
 
     it('should call arrayDiff twice', async () => {
-      await validate.checkFiles();
+      await stationStructure.checkFiles();
 
       expect(util.arrayDiff).toBeCalledTimes(2);
     });
@@ -106,7 +58,7 @@ describe('validate', () => {
         .mockReturnValueOnce(['./provider.json'])
         .mockReturnValueOnce([]);
 
-      const result = await validate.checkFiles();
+      const result = await stationStructure.checkFiles();
 
       expect(result).toEqual([
         { kind: 'warn', message: `./provider.json isn't linked in super.json` },
@@ -119,7 +71,7 @@ describe('validate', () => {
         .mockReturnValueOnce([])
         .mockReturnValueOnce(['./provider.json']);
 
-      const result = await validate.checkFiles();
+      const result = await stationStructure.checkFiles();
 
       expect(result).toEqual([
         {
@@ -153,47 +105,9 @@ describe('validate', () => {
     });
 
     it('should return error check result for missing mock map', async () => {
-      await expect(validate.checkMockMap()).resolves.toEqual([
+      await expect(stationStructure.checkMockMap()).resolves.toEqual([
         { kind: 'error', message: 'two is missing mock map' },
       ]);
-    });
-  });
-
-  describe('run', () => {
-    let print: jest.Mock;
-
-    beforeEach(() => {
-      print = jest.fn();
-    });
-
-    it('should call checkCapabilities', async () => {
-      await validate.run(print);
-
-      expect(check).toBeCalled();
-    });
-
-    it('should call checkFiles', async () => {
-      await validate.run(print);
-
-      expect(util.arrayDiff).toBeCalled();
-    });
-
-    it('should print No issues for passing validate', async () => {
-      mocked(check).mockResolvedValue([]);
-
-      await validate.run(print);
-
-      expect(print).toBeCalledWith('No issues');
-    });
-
-    it('should print `error: test message` for failed validate', async () => {
-      mocked(check).mockResolvedValue([
-        { kind: 'error', message: 'test message' },
-      ]);
-
-      await validate.run(print);
-
-      expect(print).toBeCalledWith('error: test message');
     });
   });
 });
