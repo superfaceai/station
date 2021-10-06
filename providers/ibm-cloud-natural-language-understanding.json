@@ -1,0 +1,27 @@
+{
+  "name": "ibm-cloud-natural-language-understanding",
+  "services": [
+    {
+      "id": "default",
+      "baseUrl": "https://api.{REGION}.natural-language-understanding.watson.cloud.ibm.com"
+    }
+  ],
+  "securitySchemes": [
+    {
+      "id": "basic",
+      "type": "http",
+      "scheme": "basic"
+    }
+  ],
+  "defaultService": "default",
+  "parameters": [
+    {
+      "name": "REGION",
+      "description": "Your natural language understanding instance region (eu-de, us-east, ...)"
+    },
+    {
+      "name": "INSTANCE_ID",
+      "description": "Your natural language understanding instance id"
+    }
+  ]
+}

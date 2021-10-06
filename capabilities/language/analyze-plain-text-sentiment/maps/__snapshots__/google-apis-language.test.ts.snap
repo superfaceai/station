@@ -1,0 +1,36 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`language/analyze-plain-text-sentiment/google-apis-language AnalyzePlainTextSentiment when all inputs are correct should return negative sentiment 1`] = `
+Object {
+  "value": Object {
+    "score": -0.8,
+    "sentiment": "negative",
+  },
+}
+`;
+
+exports[`language/analyze-plain-text-sentiment/google-apis-language AnalyzePlainTextSentiment when all inputs are correct should return neutral sentiment 1`] = `
+Object {
+  "value": Object {
+    "score": 0,
+    "sentiment": "neutral",
+  },
+}
+`;
+
+exports[`language/analyze-plain-text-sentiment/google-apis-language AnalyzePlainTextSentiment when all inputs are correct should return positive sentiment 1`] = `
+Object {
+  "value": Object {
+    "score": 0.9,
+    "sentiment": "positive",
+  },
+}
+`;
+
+exports[`language/analyze-plain-text-sentiment/google-apis-language AnalyzePlainTextSentiment when inputs are invalid should throw an exception 1`] = `
+Object {
+  "error": "HTTPError: Expected HTTP error
+AST Path: definitions[0].statements[0].responseHandlers[1].statements[0]
+Original Map Location: Line 27, column 7",
+}
+`;

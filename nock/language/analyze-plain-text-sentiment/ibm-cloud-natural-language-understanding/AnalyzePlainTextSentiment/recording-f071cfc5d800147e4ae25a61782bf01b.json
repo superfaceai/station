@@ -1,0 +1,70 @@
+[
+  {
+    "scope": "https://api.eu-de.natural-language-understanding.watson.cloud.ibm.com:443",
+    "method": "POST",
+    "path": "/instances/parameters-removed-to-keep-them-secure/v1/analyze?version=2021-08-01",
+    "body": {
+      "text": "There is a book on the desk.",
+      "language": "en",
+      "features": {
+        "sentiment": {
+          "document": true
+        }
+      }
+    },
+    "status": 200,
+    "response": {
+      "usage": {
+        "text_units": 1,
+        "text_characters": 28,
+        "features": 1
+      },
+      "sentiment": {
+        "document": {
+          "score": 0,
+          "label": "neutral"
+        }
+      },
+      "language": "en"
+    },
+    "rawHeaders": [
+      "Server",
+      "watson-gateway",
+      "Content-Length",
+      "195",
+      "Content-Type",
+      "application/json; charset=utf-8",
+      "Cache-Control",
+      "no-cache, no-store",
+      "x-dp-watson-tran-id",
+      "ad57e7f3-3c85-4d8a-91a3-ffdc17614e0d",
+      "Content-Security-Policy",
+      "default-src 'none'",
+      "Pragma",
+      "no-cache",
+      "x-content-type-options",
+      "nosniff",
+      "x-frame-options",
+      "DENY",
+      "x-xss-protection",
+      "1; mode=block",
+      "strict-transport-security",
+      "max-age=31536000; includeSubDomains;",
+      "x-dp-watson-tran-id",
+      "ad57e7f3-3c85-4d8a-91a3-ffdc17614e0d",
+      "x-request-id",
+      "ad57e7f3-3c85-4d8a-91a3-ffdc17614e0d",
+      "x-global-transaction-id",
+      "ad57e7f3-3c85-4d8a-91a3-ffdc17614e0d",
+      "X-EdgeConnect-MidMile-RTT",
+      "5",
+      "X-EdgeConnect-Origin-MEX-Latency",
+      "197",
+      "Date",
+      "Mon, 08 Nov 2021 15:20:13 GMT",
+      "Connection",
+      "close"
+    ],
+    "responseIsBinary": false
+  }
+]

@@ -1,0 +1,70 @@
+[
+  {
+    "scope": "https://api.eu-de.natural-language-understanding.watson.cloud.ibm.com:443",
+    "method": "POST",
+    "path": "/instances/parameters-removed-to-keep-them-secure/v1/analyze?version=2021-08-01",
+    "body": {
+      "text": "I feel tired this morning.",
+      "language": "en",
+      "features": {
+        "sentiment": {
+          "document": true
+        }
+      }
+    },
+    "status": 200,
+    "response": {
+      "usage": {
+        "text_units": 1,
+        "text_characters": 26,
+        "features": 1
+      },
+      "sentiment": {
+        "document": {
+          "score": -0.924742,
+          "label": "negative"
+        }
+      },
+      "language": "en"
+    },
+    "rawHeaders": [
+      "Server",
+      "watson-gateway",
+      "Content-Length",
+      "204",
+      "Content-Type",
+      "application/json; charset=utf-8",
+      "Cache-Control",
+      "no-cache, no-store",
+      "x-dp-watson-tran-id",
+      "caa0ae28-760d-45ef-a7e9-fdee45a81ef7",
+      "Content-Security-Policy",
+      "default-src 'none'",
+      "Pragma",
+      "no-cache",
+      "x-content-type-options",
+      "nosniff",
+      "x-frame-options",
+      "DENY",
+      "x-xss-protection",
+      "1; mode=block",
+      "strict-transport-security",
+      "max-age=31536000; includeSubDomains;",
+      "x-dp-watson-tran-id",
+      "caa0ae28-760d-45ef-a7e9-fdee45a81ef7",
+      "x-request-id",
+      "caa0ae28-760d-45ef-a7e9-fdee45a81ef7",
+      "x-global-transaction-id",
+      "caa0ae28-760d-45ef-a7e9-fdee45a81ef7",
+      "X-EdgeConnect-MidMile-RTT",
+      "5",
+      "X-EdgeConnect-Origin-MEX-Latency",
+      "156",
+      "Date",
+      "Mon, 08 Nov 2021 15:20:14 GMT",
+      "Connection",
+      "close"
+    ],
+    "responseIsBinary": false
+  }
+]

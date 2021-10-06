@@ -317,6 +317,12 @@
       "providers": {
         "mock": {
           "file": "../capabilities/language/analyze-plain-text-sentiment/maps/mock.suma"
+        },
+        "google-apis-language": {
+          "file": "../capabilities/language/analyze-plain-text-sentiment/maps/google-apis-language.suma"
+        },
+        "ibm-cloud-natural-language-understanding": {
+          "file": "../capabilities/language/analyze-plain-text-sentiment/maps/ibm-cloud-natural-language-understanding.suma"
         }
       }
     }
@@ -478,6 +484,15 @@
         }
       ]
     },
+    "google-apis-language": {
+      "file": "../providers/google-apis-language.json",
+      "security": [
+        {
+          "id": "apikey",
+          "apikey": "$GOOGLE_MAPS_API_KEY"
+        }
+      ]
+    },
     "opencage": {
       "file": "../providers/opencage.json",
       "security": [
@@ -581,11 +596,24 @@
           "id": "basic",
           "username": "apikey",
           "password": "$IBM_CLOUD_TEXT_TO_SPEECH_KEY"
-        }
-      ],
+        }],
       "parameters": {
         "REGION": "$IBM_CLOUD_TEXT_TO_SPEECH_REGION",
         "INSTANCE_ID": "$IBM_CLOUD_TEXT_TO_SPEECH_INSTANCE_ID"
+      }
+    },
+    "ibm-cloud-natural-language-understanding": {
+      "file": "../providers/ibm-cloud-natural-language-understanding.json",
+      "security": [
+        {
+          "id": "basic",
+          "username": "apikey",
+          "password": "$IBM_CLOUD_NATURAL_LANGUAGE_UNDERSTANDING_KEY"
+        }
+      ],
+      "parameters": {
+        "REGION": "$IBM_CLOUD_NATURAL_LANGUAGE_UNDERSTANDING_REGION",
+        "INSTANCE_ID": "$IBM_CLOUD_NATURAL_LANGUAGE_UNDERSTANDING_INSTANCE_ID"
       }
     },
     "binance": {
