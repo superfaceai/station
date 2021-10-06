@@ -6,9 +6,10 @@ Translate text
 """
 map TranslateText {
     http GET "/v2/translate" {
+        security 'apikey'
+
         request {
             query {
-                auth_key = input.authKey
                 text = input.text
                 target_lang = input.targetLanguage
             }
