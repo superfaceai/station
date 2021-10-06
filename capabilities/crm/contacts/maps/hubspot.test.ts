@@ -10,21 +10,33 @@ describe(`crm/contacts/hubspot`, () => {
   describe('Create', () => {
     it('should perform successfully', async () => {
       await expect(
-        superface.run({
-          profile: 'crm/contacts',
-          provider: 'hubspot',
-          useCase: 'Create',
-          input: {
-            email: 'test@example.com',
-            firstName: 'Test',
-            lastName: 'User',
-            company: 'Station Test',
-            country: 'USA',
-            customProperties: {
-              myproperty: 'value',
+        superface.run(
+          {
+            profile: 'crm/contacts',
+            provider: 'hubspot',
+            useCase: 'Create',
+            input: {
+              email: 'test@example.com',
+              firstName: 'Test',
+              lastName: 'User',
+              company: 'Station Test',
+              country: 'USA',
+              customProperties: {
+                myproperty: 'value',
+              },
             },
           },
-        })
+          {
+            afterRecordingLoad: scopes => {
+              scopes.forEach(scope => {
+                scope.filteringPath(
+                  /hapikey=[^&]*/g,
+                  'hapikey=credentials-removed-to-keep-them-secure'
+                );
+              });
+            },
+          }
+        )
       ).resolves.toMatchSnapshot();
     });
   });
