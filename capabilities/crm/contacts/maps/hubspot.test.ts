@@ -42,4 +42,43 @@ describe(`crm/contacts/hubspot`, () => {
       ).resolves.toMatchSnapshot();
     });
   });
+
+  describe('Update', () => {
+    it('should return error if id is missing', async () => {
+      await expect(
+        superface.run(
+          {
+            profile: 'crm/contacts',
+            provider: 'hubspot',
+            useCase: 'Update',
+            input: {
+              email: 'test@example.com',
+            },
+          },
+          {
+            afterRecordingLoad,
+          }
+        )
+      ).resolves.toMatchSnapshot();
+    });
+
+    it('should perform successfully', async () => {
+      await expect(
+        superface.run(
+          {
+            profile: 'crm/contacts',
+            provider: 'hubspot',
+            useCase: 'Update',
+            input: {
+              id: '401',
+              firstName: 'Updated first name',
+            },
+          },
+          {
+            afterRecordingLoad,
+          }
+        )
+      ).resolves.toMatchSnapshot();
+    });
+  });
 });

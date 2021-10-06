@@ -47,3 +47,55 @@ map Create {
     }
   }
 }
+
+map Update {
+  return map error if (input.id === null || input.id === undefined) {
+    title = "Missing field"
+    detail = "ID is missing in input values"
+  }
+
+  http PATCH "/crm/v3/objects/contacts/{input.id}" {
+    security "apiKey"
+
+    request {
+      body = {
+        properties: {
+          ...input.customProperties,
+          firstname: input.firstName,
+          lastname: input.lastName,
+          email: input.email,
+          phone: input.phone,
+          company: input.company,
+          country: input.country,
+        }
+      }
+    }
+
+    response 200 "application/json" {
+      map result {
+        id = body.id
+      }
+    }
+
+    response 400 "application/json" {
+      map error {
+        title = body.category,
+        detail = body.message,
+      }
+    }
+
+    response 409 "application/json" {
+      map error {
+        title = body.category,
+        detail = body.message,
+      }
+    }
+
+    response 401 "application/json" {
+      map error {
+        title = body.category,
+        detail = body.message,
+      }
+    }
+  }
+}
