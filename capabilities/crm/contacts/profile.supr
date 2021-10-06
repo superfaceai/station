@@ -38,7 +38,62 @@ usecase Create unsafe {
   //     company = "Superface"
   //     country = "USA"
   //     customProperties = {
-  //       myField = "field value",
+  //       myproperty = "field value",
+  //     }
+  //   }
+
+  //   result {
+  //     id = "512"
+  //   }
+  // }
+  
+  // example error {
+  //   input {
+  //     email = "johndoe@example.com"
+  //   }
+
+  //   error {
+  //     title = "Unauthorized"
+  //     detail = "The API key provided is invalid"
+  //   }
+  // }
+}
+
+"""
+Update Contact
+Update single contact matched by id or email
+"""
+usecase Update unsafe {
+  input {
+    id
+    email
+    phone
+    firstName
+    lastName
+    company
+    country
+    customProperties
+  }
+
+  result {
+    id
+  }
+
+  error {
+    title!
+    detail
+  }
+
+  // example success {
+  //   input {
+  //     id = "512"
+  //     email = "johndoe@example.com"
+  //     firstName = "John"
+  //     lastName = "Doe"
+  //     company = "Superface"
+  //     country = "USA"
+  //     customProperties = {
+  //       myproperty = "field value",
   //     }
   //   }
 
@@ -63,7 +118,7 @@ usecase Create unsafe {
 Identifier
 The contact's identifier
 
-If contact is created asynchronously it may be missing
+If contact is created or up dated asynchronously it may be missing
 """
 field id
 
