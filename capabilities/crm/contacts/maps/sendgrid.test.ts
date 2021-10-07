@@ -62,4 +62,36 @@ describe(`crm/contacts/sendgrid`, () => {
       ).resolves.toMatchSnapshot();
     });
   });
+
+  describe('Search', () => {
+    it('should return error if unknow operator is used', async () => {
+      await expect(
+        superface.run({
+          profile: 'crm/contacts',
+          provider: 'sendgrid',
+          useCase: 'Search',
+          input: {
+            property: 'firstName',
+            operator: '%',
+            value: 'test',
+          },
+        })
+      ).resolves.toMatchSnapshot();
+    });
+
+    it('should perform successfully', async () => {
+      await expect(
+        superface.run({
+          profile: 'crm/contacts',
+          provider: 'sendgrid',
+          useCase: 'Search',
+          input: {
+            property: 'firstName',
+            operator: '=',
+            value: 'test',
+          },
+        })
+      ).resolves.toMatchSnapshot();
+    });
+  });
 });
