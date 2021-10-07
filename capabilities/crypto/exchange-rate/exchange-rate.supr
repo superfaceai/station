@@ -10,32 +10,38 @@ Get Exchange Rate
 Get exchange rate of two currencies.
 """
 usecase GetExchangeRate safe {
-    input {
-        """
-        from
-        Source currency
-        """
-        from! string!
-        """
-        to
-        Target currency
-        """
-        to! string!
-    }
+  input {
+    """
+    from
+    Source currency
+    """
+    from! string!
+    """
+    to
+    Target currency
+    """
+    to! string!
+  }
 
-    result {
-        """
-        rate
-        Exchange rate
-        """
-        rate! string!
-    }
+  result {
+    """
+    rate
+    Exchange rate
+    """
+    rate! string!
+  }
 
-    error {
-        """
-        title
-        Human readable error description
-        """
-        title! string!
-    }
+  error {
+  """
+  title
+  A short, human-readable summary of the problem type
+  """
+  title! string!
+
+  """
+  detail
+  A human-readable explanation specific to this occurrence of the problem
+  """
+  detail
+  }
 }
