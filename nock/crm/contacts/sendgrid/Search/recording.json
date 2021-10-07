@@ -1,6 +1,120 @@
 [
   {
     "scope": "https://api.sendgrid.com:443",
+    "method": "PUT",
+    "path": "/v3/marketing/contacts",
+    "body": {
+      "contacts": [
+        {
+          "email": "TEST@example.com",
+          "custom_fields": {
+            "e1_T": "value"
+          }
+        }
+      ]
+    },
+    "status": 202,
+    "response": {
+      "job_id": "842ef7e2-78d0-43d5-b168-5c9cc10ebacd"
+    },
+    "rawHeaders": [
+      "Server",
+      "nginx",
+      "Date",
+      "Thu, 07 Oct 2021 12:06:15 GMT",
+      "Content-Type",
+      "application/json",
+      "Content-Length",
+      "50",
+      "Connection",
+      "close",
+      "x-amzn-requestid",
+      "8d703771-d8d6-4042-b22e-617e035c2f27",
+      "access-control-allow-origin",
+      "*",
+      "access-control-allow-headers",
+      "AUTHORIZATION, Content-Type, On-behalf-of, x-sg-elas-acl, X-Recaptcha, X-Request-Source",
+      "x-amz-apigw-id",
+      "G1hcnENZPHcFcgQ=",
+      "access-control-allow-methods",
+      "PUT,OPTIONS,DELETE,OPTIONS",
+      "access-control-expose-headers",
+      "Link, Location",
+      "x-amzn-trace-id",
+      "Root=1-615ee2b6-4c63222c1990f7971fb1cd7f;Sampled=0",
+      "x-envoy-upstream-service-time",
+      "558",
+      "referrer-policy",
+      "strict-origin-when-cross-origin",
+      "x-content-type-options",
+      "nosniff",
+      "x-ratelimit-limit",
+      "200",
+      "x-ratelimit-remaining",
+      "199",
+      "x-ratelimit-reset",
+      "46"
+    ],
+    "responseIsBinary": false
+  },
+  {
+    "scope": "https://api.sendgrid.com:443",
+    "method": "PUT",
+    "path": "/v3/marketing/contacts",
+    "body": {
+      "contacts": [
+        {
+          "email": "test@example.com",
+          "first_name": "test"
+        }
+      ]
+    },
+    "status": 202,
+    "response": {
+      "job_id": "b56eeb3d-ff77-4726-8903-46eb76856fbf"
+    },
+    "rawHeaders": [
+      "Server",
+      "nginx",
+      "Date",
+      "Thu, 07 Oct 2021 12:06:16 GMT",
+      "Content-Type",
+      "application/json",
+      "Content-Length",
+      "50",
+      "Connection",
+      "close",
+      "x-amzn-requestid",
+      "e4c29319-75bc-40c3-a82c-b613deb18cf4",
+      "access-control-allow-origin",
+      "*",
+      "access-control-allow-headers",
+      "AUTHORIZATION, Content-Type, On-behalf-of, x-sg-elas-acl, X-Recaptcha, X-Request-Source",
+      "x-amz-apigw-id",
+      "G1hcyHHyvHcFWRg=",
+      "access-control-allow-methods",
+      "PUT,OPTIONS,DELETE,OPTIONS",
+      "access-control-expose-headers",
+      "Link, Location",
+      "x-amzn-trace-id",
+      "Root=1-615ee2b8-20c74a092690f8f81f5d65ea;Sampled=0",
+      "x-envoy-upstream-service-time",
+      "634",
+      "referrer-policy",
+      "strict-origin-when-cross-origin",
+      "x-content-type-options",
+      "nosniff",
+      "x-ratelimit-limit",
+      "200",
+      "x-ratelimit-remaining",
+      "198",
+      "x-ratelimit-reset",
+      "44"
+    ],
+    "responseIsBinary": false
+  },
+  {
+    "scope": "https://api.sendgrid.com:443",
     "method": "POST",
     "path": "/v3/marketing/contacts/search",
     "body": {
@@ -46,7 +160,7 @@
       "Server",
       "nginx",
       "Date",
-      "Thu, 07 Oct 2021 11:22:50 GMT",
+      "Thu, 07 Oct 2021 12:06:17 GMT",
       "Content-Type",
       "application/json",
       "Content-Length",
@@ -54,13 +168,13 @@
       "Connection",
       "close",
       "x-amzn-requestid",
-      "c30e5672-c89f-4626-8637-377ea8e7cf98",
+      "e2055cfe-0669-4bdd-a98c-a1ab69b3276d",
       "x-amz-apigw-id",
-      "G1bFmEQXPHcFiuA=",
+      "G1hc_EqiPHcFSJg=",
       "x-amzn-trace-id",
-      "Root=1-615ed889-2a780f463db150041e764206;Sampled=0",
+      "Root=1-615ee2b9-788197836632c01929f3d715;Sampled=0",
       "x-envoy-upstream-service-time",
-      "753",
+      "454",
       "referrer-policy",
       "strict-origin-when-cross-origin",
       "x-content-type-options",
@@ -70,7 +184,7 @@
       "x-ratelimit-remaining",
       "199",
       "x-ratelimit-reset",
-      "10",
+      "43",
       "Powered-By",
       "SGGateway"
     ],
