@@ -115,6 +115,118 @@ usecase Update unsafe {
 }
 
 """
+Search contact
+Search contact by it's property value
+"""
+usecase Search safe {
+  input {
+    """
+    Property
+    Property name to compare value with
+    """
+    property
+
+    """
+    Operator
+    Comparison operation
+    """
+    operator
+
+    """
+    Value
+    Value to compare against values in property
+    """
+    value
+  }
+
+  result [{
+    id
+    email
+    phone
+    firstName
+    lastName
+    company
+    country
+    customProperties
+  }]
+
+  error {
+    title!
+    detail
+  }
+
+  // example SearchByEmail {
+  //   input {
+  //     property = "email"
+  //     operator = "="
+  //     value = "johndoe@example.com"
+  //   }
+
+  //   result [{
+  //     id = "512"
+  //     email = "johndoe@example.com"
+  //     firstName = "John"
+  //     lastName = "Doe"
+  //     company = "Superface"
+  //     country = "USA"
+  //     customProperties = {
+  //       myproperty = "field value"
+  //     }
+  //   }]
+  // }
+
+  // example SearchById {
+  //   input {
+  //     property = "id"
+  //     operator = "="
+  //     value = "512"
+  //   }
+
+  //   result [{
+  //     id = "512"
+  //     email = "johndoe@example.com"
+  //     firstName = "John"
+  //     lastName = "Doe"
+  //     company = "Superface"
+  //     country = "USA"
+  //     customProperties = {
+  //       myproperty = "field value"
+  //     }
+  //   }]
+  // }
+
+  // example SearchByPartialName {
+  //   input {
+  //     property = "firstName"
+  //     operator = "LIKE"
+  //     value = "Smi"
+  //   }
+
+  //   result [{
+  //     id = "512"
+  //     email = "johnsmith@example.com"
+  //     firstName = "John"
+  //     lastName = "Smiths"
+  //     company = "Example"
+  //     country = "USA"
+  //   }]
+  // }
+
+  // example UnknowOperator {
+  //   input {
+  //     property = "email"
+  //     operator = "%"
+  //     value "example.com"
+  //   }
+
+  //   error {
+  //     title = "Unknown operator"
+  //     detail = "Operator \"%\" is not recognized"
+  //   }
+  // }
+}
+
+"""
 Identifier
 The contact's identifier
 
