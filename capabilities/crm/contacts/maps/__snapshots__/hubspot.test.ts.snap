@@ -8,6 +8,30 @@ Object {
 }
 `;
 
+exports[`crm/contacts/hubspot Search should perform successfully 1`] = `
+Object {
+  "value": Array [
+    Object {
+      "company": undefined,
+      "country": undefined,
+      "email": "test@example.com",
+      "firstName": "Test",
+      "id": "601",
+      "lastName": "User",
+      "phone": undefined,
+    },
+  ],
+}
+`;
+
+exports[`crm/contacts/hubspot Search should return error for unknown operator 1`] = `
+Object {
+  "error": "HTTPError: Expected HTTP error
+AST Path: definitions[2].statements[1]
+Original Map Location: Line 115, column 3",
+}
+`;
+
 exports[`crm/contacts/hubspot Update should perform successfully 1`] = `
 Object {
   "value": Object {

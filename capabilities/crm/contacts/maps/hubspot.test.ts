@@ -81,4 +81,46 @@ describe(`crm/contacts/hubspot`, () => {
       ).resolves.toMatchSnapshot();
     });
   });
+
+  describe('Search', () => {
+    it('should return error for unknown operator', async () => {
+      await expect(
+        superface.run(
+          {
+            profile: 'crm/contacts',
+            provider: 'hubspot',
+            useCase: 'Search',
+            input: {
+              property: 'firstname',
+              operator: '%',
+              value: 'John',
+            },
+          },
+          {
+            afterRecordingLoad,
+          }
+        )
+      ).resolves.toMatchSnapshot();
+    });
+
+    it('should perform successfully', async () => {
+      await expect(
+        superface.run(
+          {
+            profile: 'crm/contacts',
+            provider: 'hubspot',
+            useCase: 'Search',
+            input: {
+              property: 'firstname',
+              operator: '=',
+              value: 'Test',
+            },
+          },
+          {
+            afterRecordingLoad,
+          }
+        )
+      ).resolves.toMatchSnapshot();
+    });
+  });
 });
