@@ -54,18 +54,12 @@ map AnalyzePlainTextSentiment {
 }
 
 operation MapScoreToSentiment {
-  set {
-    result = (() => {
-      if (args.score >= 0.25) {
-        return 'positive'
-      }
-
-      if (args.score <= -0.25) {
-        return 'negative'
-      }
-
-      return 'neutral'
-    })()
+  result = 'neutral'
+  set if (args.score <= -0.25) {
+    result = 'negative'
+  }
+  set if (args.score >= 0.25) {
+    result = 'positive'
   }
 
   return result
