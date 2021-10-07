@@ -1,10 +1,14 @@
 /* eslint-disable jest/no-export */
 
-import { SuperfaceTest } from '@superfaceai/testing-lib';
+import {
+  RecordingProcessFunctions,
+  SuperfaceTest,
+} from '@superfaceai/testing-lib';
 
 export const textToSpeechTest = (
   provider: string,
-  params: { text: string; voice: { languageCode: string } }
+  params: { text: string; voice: { languageCode: string } },
+  hooks?: RecordingProcessFunctions
 ): void => {
   describe(`speech/synthesis/${provider}`, () => {
     let superface: SuperfaceTest;
@@ -24,12 +28,15 @@ export const textToSpeechTest = (
           };
 
           await expect(
-            superface.run({
-              profile: 'speech/synthesis',
-              provider,
-              useCase: 'TextToSpeechSynthesis',
-              input,
-            })
+            superface.run(
+              {
+                profile: 'speech/synthesis',
+                provider,
+                useCase: 'TextToSpeechSynthesis',
+                input,
+              },
+              hooks
+            )
           ).resolves.toMatchSnapshot();
         });
 
@@ -42,12 +49,15 @@ export const textToSpeechTest = (
           };
 
           await expect(
-            superface.run({
-              profile: 'speech/synthesis',
-              provider,
-              useCase: 'TextToSpeechSynthesis',
-              input,
-            })
+            superface.run(
+              {
+                profile: 'speech/synthesis',
+                provider,
+                useCase: 'TextToSpeechSynthesis',
+                input,
+              },
+              hooks
+            )
           ).resolves.toMatchSnapshot();
         });
       });
@@ -63,12 +73,15 @@ export const textToSpeechTest = (
           };
 
           await expect(
-            superface.run({
-              profile: 'speech/synthesis',
-              provider,
-              useCase: 'TextToSpeechSynthesis',
-              input,
-            })
+            superface.run(
+              {
+                profile: 'speech/synthesis',
+                provider,
+                useCase: 'TextToSpeechSynthesis',
+                input,
+              },
+              hooks
+            )
           ).resolves.toMatchSnapshot();
         });
       });
