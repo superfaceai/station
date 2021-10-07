@@ -54,7 +54,11 @@ map Update {
     detail = "ID is missing in input values"
   }
 
-  http PATCH "/crm/v3/objects/contacts/{input.id}" {
+  set {
+    strId = `${input.id}`
+  } 
+
+  http PATCH "/crm/v3/objects/contacts/{strId}" {
     security "apiKey"
 
     request {
