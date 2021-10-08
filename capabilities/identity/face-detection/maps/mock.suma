@@ -1,0 +1,114 @@
+profile = "identity/face-detection@1.0"
+provider = "mock"
+
+"""
+FaceDetection map
+"""
+map FaceDetection {
+  map result [{
+    faces: [{
+      faceRectangle:{
+        topLeft: {
+          x: 1,
+          y: 1
+        },
+        topRight: {
+          x: 2,
+          y: 1
+        },
+        bottomLeft: {
+          x: 1,
+          y: 2
+        },
+        bottomRight: {
+          x: 2,
+          y: 2
+        }
+      },
+      landmarks: [
+        {
+          kind: 'eyebrowLeftOuter',
+          x: 1,
+          y: 2
+        },{
+          kind: 'eyebrowLeftInner',
+          x: 1,
+          y: 2
+        },{
+          kind: 'eyebrowRightOuter',
+          x: 1,
+          y: 2
+        },{
+          kind: 'eyebrowRightInner',
+          x: 1,
+          y: 2
+        },{
+          kind: 'mouthLeft',
+          x: 1,
+          y: 2
+        },{
+          kind: 'mouthRight',
+          x: 1,
+          y: 2
+        },{
+          kind: 'noseRootLeft',
+          x: 1,
+          y: 2
+        }, {
+          kind: 'noseRootRight',
+          x: 1,
+          y: 2
+        }, {
+          kind: 'noseTip',
+          x: 1,
+          y: 2
+        },{
+          kind: 'leftPupil',
+          x: 1,
+          y: 2
+        },{
+          kind: 'eyeLeftTop',
+          x: 1,
+          y: 2
+        },{
+          kind: 'eyeLeftInner',
+          x: 1,
+          y: 2
+        }, {
+          kind: 'eyeLeftOuter',
+          x: 1,
+          y: 2
+        }, {
+          kind: 'eyeLeftBottom',
+          x: 1,
+          y: 2
+        }, {
+          kind: 'rightPupil',
+          x: 1,
+          y: 2
+        }, {
+          kind: 'eyeRightTop',
+          x: 1,
+          y: 2
+        }, {
+          kind: 'eyeRightInner',
+          x: 1,
+          y: 2
+        },{
+          kind: 'eyeRightOuter',
+          x: 1,
+          y: 2
+        },{
+          kind: 'eyeRightBottom',
+          x: 1,
+          y: 2
+      }],
+      emotions: {
+        happiness: 'possible',
+        anger: 'possible',
+        sadness: 'possible',
+        surprise: 'possible',
+      }
+    }]
+  }]
+}

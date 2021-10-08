@@ -1,0 +1,112 @@
+profile = "identity/face-detection@1.0"
+provider = "azure-cognitive-services"
+
+"""
+FaceDetection map
+"""
+map FaceDetection {
+  instance = input.instance 
+  imageUrl = input.imageUrl 
+
+  http POST "/face/v1.0/detect" {
+    security "azure-subscription-key"
+
+    request {
+        query {
+          'detectionModel' = "detection_01"
+          'returnFaceLandmarks' = true
+          'returnFaceAttributes'='emotion'
+        }
+        headers {
+          "Content-Type" = "application/json"
+        }
+        body {
+            url = imageUrl
+        }
+    }
+
+    response {
+        return map error if (statusCode !== 200) {
+        code = body.error.code
+        message = body.error.message
+        }
+
+        faces = body.map((r) => {
+          const resolveLikelihood = (value) => {
+            if(value >= 0 && value <= 0.2) {
+                return 'veryUnlikely'
+            }
+
+            if(value > 0.2 && value <= 0.4) {
+                return 'unlikely'
+            }
+
+            if(value > 0.4 && value <= 0.6) {
+                return 'possible'
+            }
+
+            if(value > 0.6 && value <= 0.8) {
+                return 'likely'
+            }
+
+            if(value > 0.8 && value <= 1) {
+                return 'verylikely'
+            }
+
+          return 'unknown'                
+        }
+
+        return {
+          faceRectangle: {
+            topLeft: {
+                x: r.faceRectangle.left,
+                y: r.faceRectangle.top,
+            },
+            topRight: {
+              x: r.faceRectangle.left + r.faceRectangle.width,
+                y: r.faceRectangle.top,
+            },
+            bottomLeft: {
+                x: r.faceRectangle.left,
+                y: r.faceRectangle.top + r.faceRectangle.height
+            },
+            bottomRight: {
+              x: r.faceRectangle.left + r.faceRectangle.width,
+                y: r.faceRectangle.top + r.faceRectangle.height
+            }
+          },
+          landmarks: [
+            {kind: 'leftPupil', x: r.faceLandmarks.pupilLeft.x, y: r.faceLandmarks.pupilLeft.y },
+            {kind: 'rightPupil', x: r.faceLandmarks.pupilRight.x, y: r.faceLandmarks.pupilRight.y },
+            {kind: 'noseTip', x: r.faceLandmarks.noseTip.x, y: r.faceLandmarks.noseTip.y },
+            {kind: 'mouthLeft', x: r.faceLandmarks.mouthLeft.x, y: r.faceLandmarks.mouthLeft.y },
+            {kind: 'mouthRight', x: r.faceLandmarks.mouthRight.x, y: r.faceLandmarks.mouthRight.y },
+            {kind: 'eyebrowLeftOuter', x: r.faceLandmarks.eyebrowLeftOuter.x, y: r.faceLandmarks.eyebrowLeftOuter.y },
+            {kind: 'eyebrowLeftInner', x: r.faceLandmarks.eyebrowLeftInner.x, y: r.faceLandmarks.eyebrowLeftInner.y },
+            {kind: 'eyeLeftOuter', x: r.faceLandmarks.eyeLeftOuter.x, y: r.faceLandmarks.eyeLeftOuter.y },
+            {kind: 'eyeLeftTop', x: r.faceLandmarks.eyeLeftTop.x, y: r.faceLandmarks.eyeLeftTop.y },
+            {kind: 'eyeLeftBottom', x: r.faceLandmarks.eyeLeftBottom.x, y: r.faceLandmarks.eyeLeftBottom.y },
+            {kind: 'eyeLeftInner', x: r.faceLandmarks.eyeLeftInner.x, y: r.faceLandmarks.eyeLeftInner.y },
+            {kind: 'eyebrowRightInner', x: r.faceLandmarks.eyebrowRightInner.x, y: r.faceLandmarks.eyebrowRightInner.y },
+            {kind: 'eyebrowRightOuter', x: r.faceLandmarks.eyebrowRightOuter.x, y: r.faceLandmarks.eyebrowRightOuter.y },
+            {kind: 'eyeRightInner', x: r.faceLandmarks.eyeRightInner.x, y: r.faceLandmarks.eyeRightInner.y },
+            {kind: 'eyeRightTop', x: r.faceLandmarks.eyeRightTop.x, y: r.faceLandmarks.eyeRightTop.y },
+            {kind: 'eyeRightBottom', x: r.faceLandmarks.eyeRightBottom.x, y: r.faceLandmarks.eyeRightBottom.y },
+            {kind: 'eyeRightOuter', x: r.faceLandmarks.eyeRightOuter.x, y: r.faceLandmarks.eyeRightOuter.y },
+            {kind: 'noseRootLeft', x: r.faceLandmarks.noseRootLeft.x, y: r.faceLandmarks.noseRootLeft.y },
+            {kind: 'noseRootRight', x: r.faceLandmarks.noseRootRight.x, y: r.faceLandmarks.noseRootRight.y },
+          ],
+          emotions: {
+            happiness: resolveLikelihood(r.faceAttributes.emotion.happiness),
+            anger: resolveLikelihood(r.faceAttributes.emotion.anger),
+            sadness: resolveLikelihood(r.faceAttributes.emotion.sadness),
+            surprise: resolveLikelihood(r.faceAttributes.emotion.surprise)
+          }
+        }
+      })
+      return map result [{ faces: faces }]
+    }
+  }
+}
+
+
