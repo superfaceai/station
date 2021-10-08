@@ -40,5 +40,22 @@ describe(`crypto/exchange-rate/binance}`, () => {
     //   ).resolves
     //   .toHaveProperty('value.rate', expect.stringMatching(/^\d{1,}\.?\d{0,}$/))
     // });
+
+    // todo currently fails
+    // same reason as test above. Will also require recording of snapshot once bug is fixed
+    // it ('should fail on non-existing coins', async () => {
+    //   await expect(
+    //     superface.run({
+    //       profile: 'crypto/exchange-rate',
+    //       provider: 'binance',
+    //       useCase: 'GetExchangeRate',
+    //       input: {
+    //         from: 'FOO',
+    //         to: 'BAR'
+    //       }
+    //     })
+    //   ).resolves
+    //   .toMatchSnapshot();
+    // });
   });
 });
