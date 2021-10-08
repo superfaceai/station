@@ -21,7 +21,7 @@ describe(`crypto/exchange-rate/binance}`, () => {
           }
         })
       ).resolves
-      .toHaveProperty('value.rate', expect.stringMatching(/^\d{1,}\.?\d{0,}$/))
+      .toHaveProperty('value.rate', expect.stringMatching(/^\d{1,}\.?\d{0,}$/));
     });
 
     // todo currently fails
@@ -38,7 +38,7 @@ describe(`crypto/exchange-rate/binance}`, () => {
     //       }
     //     })
     //   ).resolves
-    //   .toHaveProperty('value.rate', expect.stringMatching(/^\d{1,}\.?\d{0,}$/))
+    //   .toHaveProperty('value.rate', expect.stringMatching(/^\d{1,}\.?\d{0,}$/));
     // });
 
     // todo currently fails
