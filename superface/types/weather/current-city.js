@@ -5,7 +5,7 @@ var one_sdk_1 = require("@superfaceai/one-sdk");
 var profile = {
     /**
      * Get Current Weather In City
-     * Get current weather for the city and in chosen units.
+     * Get current weather in the city in chosen units.
      **/
     "GetCurrentWeatherInCity": one_sdk_1.typeHelper()
 };
