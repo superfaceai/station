@@ -1,0 +1,98 @@
+"""
+Text to speech synthesis
+Turn text into natural-sounding speech.
+"""
+
+name = "speech/synthesis"
+version = "1.0"
+
+"""
+Text to speech synthesis
+Convert text into speech synchronously.
+"""
+usecase TextToSpeechSynthesis {
+  input {
+    """
+    Text
+    The text input to be synthesized.
+    """
+    text! string!
+
+    """
+    Voice
+    Voice selection options.
+    """
+    voice! VoiceOptions!
+
+    """
+    Audio
+    Audio format options.
+    """
+    audio! AudioOptions!
+  }
+
+  result {
+    """
+    Audio content
+    Synthesised audio data bytes encoded as specified in the audio options input.
+    """
+    audioContent!
+  }
+
+  error {
+    """
+    Title
+    A short, human-readable summary of the problem type.
+    """
+    title!
+
+    """
+    Detail
+    A human-readable explanation specific to this occurrence of the problem.
+    """
+    detail
+  }
+
+}
+
+model AudioEncoding enum {
+  """
+  MP3
+  MP3 encoding.
+  """
+  mp3
+
+  """
+  Linear PCM encoding
+  Uncompressed 16-bit signed little-endian samples with WAV header.
+  """
+  linear_pcm
+}
+
+model AudioOptions {
+  """
+  Audio encoding
+  The format of the audio byte stream.
+  """
+  encoding! AudioEncoding
+
+  """
+  Sample rate
+  The synthesis sample rate in hertz for the audio. Selected sample rate has to be supported by selected audio encoding format.
+  """
+  sampleRateHertz number!
+}
+
+model VoiceOptions {
+  """
+  Language code
+  The language (and potentially also the region) of the voice expressed as a BCP-47 language tag, e.g. 'en-US'.
+  """
+  languageCode! string
+
+  """
+  Voice name
+  The name of the voice.
+  """
+  name string!
+}
