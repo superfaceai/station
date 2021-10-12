@@ -12,12 +12,12 @@ usecase FaceDetection {
     }
 
   result [{
-    faces [{
+    faces! [{
       faceRectangle! faceRectangle!
       landmarks! [landmark]!
       emotions! emotions!
-    }]
-  }]
+    }]!
+  }]!
 
   error {
     message! string!
@@ -32,11 +32,11 @@ model emotions {
 }
 
 model faceRectangle {
-    topLeft! point!
-    topRight! point!
-    bottomLeft! point!
-    bottomRight! point!
-}!
+  topLeft! point!
+  topRight! point!
+  bottomLeft! point!
+  bottomRight! point!
+}
 
 model likelihood enum {
   unknown
@@ -82,6 +82,6 @@ model landmarkKind enum {
 }
 
 model point {
-  x! number!
-  y! number!
+  x number
+  y number
 }
