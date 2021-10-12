@@ -1,0 +1,89 @@
+profile = "speech/synthesis@1.0"
+provider = "google-apis-text-to-speech"
+
+map TextToSpeechSynthesis {
+  encoding = call MapAudioEncoding(encoding = input.audio.encoding)
+
+  http POST "/v1/text:synthesize" {
+    security "apikey"
+    request {
+      body {
+        input = {
+          text: input.text
+        },
+        voice = {
+          languageCode: input.voice.languageCode,
+          name: input.voice.name
+        },
+        audioConfig = {
+          audioEncoding: encoding,
+          sampleRateHertz: input.audio.sampleRateHertz
+        }
+      }
+    }
+
+    response 200 "application/json" {
+      map result {
+        audioContent = call Base64StringToBuffer(input = body.audioContent)
+      }
+    }
+
+    response 400 "application/json" {
+      map error {
+        title = (body.error.status === "INVALID_ARGUMENT") ? "Invalid argument" : "Bad request"
+        detail = body.error.message
+      }
+    }
+
+    response 401 "application/json" {
+      map error {
+        title = "Unauthorized"
+        detail = body.error.message
+      }
+    }
+
+    response 403 "application/json" {
+      map error {
+        title = "Forbidden"
+        detail = body.error.message
+      }
+    }
+
+    response 500 "application/json" {
+      map error {
+        title = "Internal server Error"
+        detail = body.error.message
+      }
+    }
+  }
+}
+
+operation MapAudioEncoding {
+  set {
+    result = (() => {
+      switch (args.encoding) {
+        case 'mp3':
+          return 'MP3'
+
+        case 'linear_pcm':
+          return 'LINEAR16'
+
+        default:
+          return 'unknown'
+      }
+    })()
+  }
+
+  return result
+}
+
+operation Base64StringToBuffer {
+  set {
+      result = (() => {
+      return Buffer.from(args.input, 'base64')
+    })()
+  }
+
+  return result
+}
+
