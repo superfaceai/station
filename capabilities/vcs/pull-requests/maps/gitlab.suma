@@ -18,7 +18,7 @@ operation Paginate {
   data = []
   page = 1
   //Hack to ceate a while with maximum loop count
-  call foreach(_x of Array(5)) FetchPullRequests(id = args.id, page = page) {
+  call foreach(_x of Array(2**32-1)) FetchPullRequests(id = args.id, page = page) {
     fail if (outcome.data.statusCode !== 200) outcome.data
 
     data = [...data, ...outcome.data.pullRequests]

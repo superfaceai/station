@@ -637,6 +637,13 @@
   dependencies:
     typescript-is "^0.18.3"
 
+"@superfaceai/ast@^0.0.29":
+  version "0.0.29"
+  resolved "https://registry.yarnpkg.com/@superfaceai/ast/-/ast-0.0.29.tgz#944de20d615029cef666cfe3dfb8511946f471f4"
+  integrity sha512-buUBbk7gX6/E7sTvw9LBANbqAwKTEkH7ptbc4zgOB7caAf08TXpkNgknbTpbvsE7ySnh0nvI2n7RHAeXHO3CWQ==
+  dependencies:
+    typescript-is "^0.18.3"
+
 "@superfaceai/cli@^0.0.25":
   version "0.0.25"
   resolved "https://registry.yarnpkg.com/@superfaceai/cli/-/cli-0.0.25.tgz#4ecf3e6bdaa123734229bf80aaa510d6e63e05be"
@@ -658,7 +665,7 @@
     rimraf "^3.0.2"
     typescript "^4.0.5"
 
-"@superfaceai/one-sdk@0.0.36", "@superfaceai/one-sdk@^0.0.36":
+"@superfaceai/one-sdk@0.0.36":
   version "0.0.36"
   resolved "https://registry.yarnpkg.com/@superfaceai/one-sdk/-/one-sdk-0.0.36.tgz#082d37e8de4a2b9e8afcca3eb9c6ffbe187e4a18"
   integrity sha512-7KdMe9Su1VCsmN5l/a2DFZE0b2/XutUrFGK4rsMe2hE91Nl6BvZJgO4dBI2g8o8kBnvU7rIJr2VUBNtss1No/w==
@@ -686,12 +693,36 @@
     vm2 "^3.9.2"
     zod "^2.0.0-beta.30"
 
+"@superfaceai/one-sdk@^0.0.38-beta.0":
+  version "0.0.38-beta.0"
+  resolved "https://registry.yarnpkg.com/@superfaceai/one-sdk/-/one-sdk-0.0.38-beta.0.tgz#3818c9b4828a610a9f3cca46f24e62528b0ec68a"
+  integrity sha512-c4+KWSgoAZWTQC/CgJSJjogwyqJq3IzIZakMRe8d1ipSE0wtlpRVQsvIbaydatfvH5cR0lmSkDyU6Oa854hnQg==
+  dependencies:
+    "@superfaceai/ast" "^0.0.31"
+    "@superfaceai/parser" "0.0.22"
+    abort-controller "^3.0.0"
+    cross-fetch "^3.0.5"
+    debug "^4.3.2"
+    isomorphic-form-data "^2.0.0"
+    vm2 "^3.9.2"
+    zod "^2.0.0-beta.30"
+
 "@superfaceai/parser@0.0.21", "@superfaceai/parser@^0.0.21":
   version "0.0.21"
   resolved "https://registry.yarnpkg.com/@superfaceai/parser/-/parser-0.0.21.tgz#ff7c0b5f2d22d83ebc14eab1d15838467bd54f96"
   integrity sha512-dFuzulFKyKXvj6iBolINrIECALCZOwmHlDMR88VU6Whn7+lYJ2ygutnOmZsicWsF/otLfK0Fcd9bpRpM7lOwBg==
   dependencies:
     "@superfaceai/ast" "^0.0.28"
+    "@types/debug" "^4.1.5"
+    debug "^4.3.1"
+    typescript "^4"
+
+"@superfaceai/parser@0.0.22":
+  version "0.0.22"
+  resolved "https://registry.yarnpkg.com/@superfaceai/parser/-/parser-0.0.22.tgz#38bca4a3b6c9c7741c245ce1a5e02de8534f384e"
+  integrity sha512-mWKBi0b0bQjmSyLvI92AP7KFwcG2q9w8MYtXu+wDJE5dnwcPtg/qfVaawyUYzC1DWu5Oe4Bt8khDAayenD6o6g==
+  dependencies:
+    "@superfaceai/ast" "^0.0.29"
     "@types/debug" "^4.1.5"
     debug "^4.3.1"
     typescript "^4"
@@ -5014,7 +5045,6 @@ typescript-is@^0.18.3:
   integrity sha512-kBgZIJt3AKrtye1H2GYf9bWu1YS0Z9AZZl4OZG4z2Ps2jPMZuycilP9RkxPLP+tPxCUjXfmaJti9TNGoz5schA==
   dependencies:
     nested-error-stacks "^2"
-    reflect-metadata ">=0.1.12"
     tsutils "^3.17.1"
   optionalDependencies:
     reflect-metadata ">=0.1.12"
