@@ -1,26 +1,25 @@
 import { TypedProfile } from '@superfaceai/one-sdk';
 export declare type IdentityFaceDetectionFaceDetectionInput = {
     imageUrl: string;
-    instance?: string;
 };
 export declare type IdentityFaceDetectionFaceDetectionResult = {
-    faces?: {
+    faces: {
         faceRectangle: {
             topLeft: {
-                x: number;
-                y: number;
+                x?: number | null;
+                y?: number | null;
             };
             topRight: {
-                x: number;
-                y: number;
+                x?: number | null;
+                y?: number | null;
             };
             bottomLeft: {
-                x: number;
-                y: number;
+                x?: number | null;
+                y?: number | null;
             };
             bottomRight: {
-                x: number;
-                y: number;
+                x?: number | null;
+                y?: number | null;
             };
         };
         landmarks: {
