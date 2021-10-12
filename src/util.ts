@@ -1,3 +1,4 @@
+import { ProfileId } from '@superfaceai/cli/dist/common/profile';
 import { SuperJson } from '@superfaceai/one-sdk';
 import { parseDocumentId } from '@superfaceai/parser';
 import * as fs from 'fs';
@@ -16,7 +17,7 @@ export const EXTENSIONS = {
 };
 
 export type CheckCombination = {
-  profile: { scope?: string; name: string };
+  profile: { id: ProfileId };
   provider: string;
 };
 
@@ -44,8 +45,10 @@ export function allProfileProviderCombinations(
     }
 
     const profile = {
-      name: parseResult.value.middle[0],
-      scope: parseResult.value.scope,
+      id: ProfileId.fromScopeName(
+        parseResult.value.scope,
+        parseResult.value.middle[0]
+      ),
     };
 
     const profileSettings = profiles[profileId];

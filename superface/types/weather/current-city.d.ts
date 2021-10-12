@@ -1,9 +1,8 @@
 import { TypedProfile } from '@superfaceai/one-sdk';
-
 export declare type WeatherCurrentCityGetCurrentWeatherInCityInput = {
     /**
      * city
-     * Name of the city
+     * Name of the city including state and country, e.g.: "Prague, Czech Republic" or "New York City, NY, USA"
      **/
     city: string;
     /**
@@ -26,14 +25,14 @@ export declare type WeatherCurrentCityGetCurrentWeatherInCityResult = {
     feelsLike?: number;
     /**
      * description
-     * Description of weather
+     * Text description of weather, e.g. "Partly cloudy"
      **/
     description?: string;
 };
 declare const profile: {
     /**
      * Get Current Weather In City
-     * Get current weather for the city and in chosen units.
+     * Get current weather in the city in chosen units.
      **/
     GetCurrentWeatherInCity: [WeatherCurrentCityGetCurrentWeatherInCityInput, WeatherCurrentCityGetCurrentWeatherInCityResult];
 };
@@ -42,7 +41,7 @@ export declare const weatherCurrentCity: {
     "weather/current-city": {
         /**
          * Get Current Weather In City
-         * Get current weather for the city and in chosen units.
+         * Get current weather in the city in chosen units.
          **/
         GetCurrentWeatherInCity: [WeatherCurrentCityGetCurrentWeatherInCityInput, WeatherCurrentCityGetCurrentWeatherInCityResult];
     };
