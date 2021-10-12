@@ -1,30 +1,43 @@
-import { SuperfaceClient } from '@superfaceai/one-sdk';
+import { SuperfaceTest } from '@superfaceai/testing-lib';
 
-describe('vcs/single-file-content/gitlab', () => {
-  beforeAll(() => {
-    jest.setTimeout(10000);
+describe(`vcs/single-file-content/gitlab`, () => {
+  let superface: SuperfaceTest;
+
+  beforeEach(() => {
+    superface = new SuperfaceTest();
   });
 
-  it('performs correctly', async () => {
-    const client = new SuperfaceClient();
-    const profile = await client.getProfile('vcs/single-file-content');
-    const useCase = profile.getUseCase('SingleFileContent');
-    const provider = await client.getProvider('gitlab');
-    const result = await useCase.perform(
-      {
-        owner: 'Jakub-Vacek',
-        repo: 'empty-test',
-        path: 'README.md',
-        ref: 'master',
-      },
-      { provider }
-    );
-    const value = result.unwrap();
+  describe('SingleFileContent', () => {
+    it('should perform successfully', async () => {
+      await expect(
+        superface.run({
+          profile: 'vcs/single-file-content',
+          provider: 'gitlab',
+          useCase: 'SingleFileContent',
+          input: {
+            owner: 'Jakub-Vacek',
+            repo: 'empty-test',
+            path: 'README.md',
+            ref: 'master',
+          },
+        })
+      ).resolves.toMatchSnapshot();
+    });
 
-    expect(value).toEqual({
-      content: expect.any(String),
-      encoding: 'base64',
-      size: expect.any(Number),
+    it('should map error', async () => {
+      await expect(
+        superface.run({
+          profile: 'vcs/single-file-content',
+          provider: 'gitlab',
+          useCase: 'SingleFileContent',
+          input: {
+            owner: 'Jakub-Vacek',
+            repo: 'empty-test',
+            path: 'README.md',
+            ref: 'made-up',
+          },
+        })
+      ).resolves.toMatchSnapshot();
     });
   });
 });

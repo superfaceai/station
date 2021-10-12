@@ -1,0 +1,150 @@
+profile = "speech/synthesis@1.0"
+provider = "ibm-cloud-text-to-speech-eu-de"
+
+map TextToSpeechSynthesis {
+  http POST "/instances/{input.instance}/v1/synthesize" {
+    security "basic"
+    request {
+      query {
+        voice = call mapVoiceOptionsToVoiceQueryParameter(voice = input.voice)
+      }
+      headers {
+        Accept = call mapEncodingToMimeType(audio = input.audio)
+      }
+      body {
+        text = input.text
+      }
+    }
+
+    response 200 {
+      audioContent = call arrayBufferToBuffer(arrayBuffer = body)
+      map result {
+        audioContent = audioContent
+      }
+    }
+
+    response 400 {
+       map error {
+        title = "Bad request"
+        detail = body.error
+      }
+    }
+
+    response 401 "application/json" {
+      map error {
+        title = "Unauthorized"
+        detail = body.error
+      }
+    }
+
+    response 403 "application/json" {
+      map error {
+        title = "Forbidden"
+        detail = body.error
+      }
+    }
+
+    response 404 {
+       map error {
+        title = body.code_description
+        detail = body.error
+      }
+    }
+
+    response 500 "application/json" {
+      map error {
+        title = "Internal server Error"
+        detail = body.error
+      }
+    }
+  }
+}
+
+operation mapEncodingToMimeType {
+  rate = args.audio.sampleRateHertz
+
+  set {
+    result = (() => {
+      switch (args.audio.encoding) {
+        case 'mp3':
+          if(!rate) rate = 22050
+          return 'audio/mp3;rate=' + rate
+
+        case 'linear_pcm':
+        if(!rate) rate = 8000
+          return 'audio/wav;rate=' + rate
+
+        default:
+          return 'audio/wav'
+      }
+    })()
+  }
+
+  return result
+}
+
+operation mapVoiceOptionsToVoiceQueryParameter {
+  languageCode = (() => {
+    if(args.voice.languageCode.length > 2) return args.voice.languageCode
+    const defaultFullLanguageCodes = {
+      ar: 'ar-MS',
+      pt: 'pt-BR',
+      cn: 'zh-CN',
+      nl: 'nl-NL',
+      en: 'en-US',
+      es: 'es-ES',
+      fr: 'fr-FR',
+      de: 'de-DE',
+      it: 'it-IT',
+      jp: 'ja-JP',
+      ko: 'ko-KR'
+    }
+    if(!defaultFullLanguageCodes[args.voice.languageCode]) return 'en-US'
+
+    return defaultFullLanguageCodes[args.voice.languageCode]
+  })()
+
+  name = args.voice.name
+  set if(!name) {
+    name = call getDefaultVoiceName(languageCode = languageCode)
+  }
+
+  return languageCode + '_' + name
+}
+
+operation getDefaultVoiceName {
+  name = (() => {
+    const defaultLanguageCodeVoiceNames = {
+      'ar-MS': 'OmarVoice',
+      'pt-BR': 'IsabelaV3Voice',
+      'zh-CN': 'LiNaVoice',
+      'nl-NL': 'EmmaVoice',
+      'en-AU': 'CraigVoice',
+      'en-GB': 'CharlotteV3Voice',
+      'en-US': 'AllisonV3Voice',
+      'es-ES': 'EnriqueV3Voice',
+      'es-LA': 'SofiaV3Voice',
+      'es-US': 'SofiaV3Voice',
+      'fr-FR': 'NicolasV3Voice',
+      'de-DE': 'BirgitV3Voice',
+      'it-IT': 'FrancescaV3Voice',
+      'ja-JP': 'EmiV3Voice',
+      'ko-KR': 'HyunjunVoice'
+    }
+    if(!defaultLanguageCodeVoiceNames[args.languageCode]) return ''
+
+    return defaultLanguageCodeVoiceNames[args.languageCode]
+  })()
+
+  return name
+}
+
+operation arrayBufferToBuffer {
+  set {
+      result = (() => {
+      return Buffer.from(args.arrayBuffer)
+    })()
+  }
+
+  return result
+}
