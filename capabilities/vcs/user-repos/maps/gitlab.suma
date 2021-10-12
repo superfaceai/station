@@ -7,34 +7,33 @@ UserRepos map. Returns gitlab repositories of specified user
 map UserRepos{
   call Paginate(
     user = input.user,
-    perPage = input.perPage,
-    maximumPagesNumber = input.maximumRequestsNumber
   ) {
     return map error if (outcome.data.statusCode !== 200) outcome.data
-    return map result { repos = outcome.data }
+    return map result { repos = outcome.data.repositories }
   }
   
 }
 
 operation Paginate {
-  //20 is max allowed number 
-  perPage = args.perPage || 20
-
-  maximumPagesNumber = args.maximumPagesNumber || 2
-
   data = []
   page = 1
-  //Hack to ceate a while with maximum loop count
-    call foreach(_x of Array(maximumPagesNumber)) FetchRepos(user = args.user, page = page, perPage = perPage) {
-      fail if (outcome.data.statusCode !== 200) outcome.data
+  //Hack to create a while with maximum loop count - use Superface stdlib instead
+  call foreach(_x of Array(10)) FetchRepos(user = args.user, page = page) {
+    fail if (outcome.data.statusCode !== 200) outcome.data
 
-      data = [...data, ...outcome.data.repositories]
+    data = [...data, ...outcome.data.repositories]
 
-      page = page + 1
-      return if (outcome.data.isLastPage) data
+    page = page + 1
+    return if (outcome.data.isLastPage) {
+      repositories: data,
+      statusCode: 200
     }
+  }
   
-  return data
+  return {
+    repositories: data,
+    statusCode: 200
+  }
 }
 
 
@@ -43,7 +42,6 @@ operation FetchRepos {
     request {
       query {
         page = args.page
-        per_page = args.perPage 
       }
     }
     response {

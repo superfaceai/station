@@ -8,8 +8,6 @@ map UserRepos {
 
   call Paginate(
     user = input.user,
-    perPage = input.perPage,
-    maximumPagesNumber = input.maximumRequestsNumber
   ) {
     return map error if (outcome.data.statusCode !== 200) outcome.data
     return map result { repos = outcome.data.repositories }
@@ -17,23 +15,19 @@ map UserRepos {
 }
 
 operation Paginate {
-  perPage = args.perPage
-
-  maximumPagesNumber = args.maximumPagesNumber || (2**32 -1)
-
   data = []
   page = 1
-  //Hack to ceate a while with maximum loop count
-    call foreach(_x of Array(maximumPagesNumber)) FetchRepos(user = args.user, page = page, perPage = perPage) {
-      fail if (outcome.data.statusCode !== 200) outcome.data
-      data = [...data, ...outcome.data.repositories]
-    
-      page = page + 1
-      return if (outcome.data.repositories.length === 0) {
-        repositories: data,
-        statusCode: 200
-      }
+  //Hack to create a while with maximum loop count - use Superface stdlib instead
+  call foreach(_x of Array(2**32 -1)) FetchRepos(user = args.user, page = page) {
+    fail if (outcome.data.statusCode !== 200) outcome.data
+    data = [...data, ...outcome.data.repositories]
+  
+    page = page + 1
+    return if (outcome.data.repositories.length === 0) {
+      repositories: data,
+      statusCode: 200
     }
+  }
     return {
       repositories: data,
       statusCode: 200
@@ -46,7 +40,6 @@ operation FetchRepos {
     request {
       query {
         page = args.page
-        per_page = args.perPage 
       }
     }
     response {
