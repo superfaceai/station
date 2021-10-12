@@ -5,11 +5,9 @@ version = "1.0.0"
 FaceDetection usecase
 """
 usecase FaceDetection {
-   input {
+  input {
     imageUrl! string!
-     //Azure specific instance - should be resolved as integration parameters
-    instance string!
-    }
+  }
 
   result [{
     faces! [{
