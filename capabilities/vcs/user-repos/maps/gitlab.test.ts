@@ -12,7 +12,7 @@ describe(`scope/name/provider_name}`, () => {
       await expect(
         superface.run({
           profile: 'vcs/user-repos',
-          provider: 'github',
+          provider: 'gitlab',
           useCase: 'UserRepos',
           input: {
             user: 'superfaceai',

@@ -57,10 +57,9 @@ operation FetchRepos {
             description: r.description === "" ? undefined : r.description
           }
         }),
+        statusCode: statusCode,
         isLastPage: headers['x-next-page'] === ""
       }
     }
-
-
   }
 }
