@@ -13,7 +13,6 @@ describe('identity/face-detection/mock', () => {
     const result = await usecase.perform(
       {
         imageUrl: 'mock',
-        instance: 'mock',
       },
       { provider: 'mock' }
     );
