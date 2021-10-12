@@ -37,8 +37,8 @@ export const currentCityTest = (providerName: string): void => {
           expect(result.unwrap()).toEqual({
             temperature: expect.any(Number),
             feelsLike: expect.any(Number),
-            description: expect.any(String)
-          })
+            description: expect.any(String),
+          });
         });
       });
     });

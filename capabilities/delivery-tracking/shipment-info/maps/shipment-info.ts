@@ -1,3 +1,4 @@
+/* eslint-disable jest/valid-title */
 /* eslint-disable jest/no-export */
 
 import { SuperfaceTest } from '@superfaceai/testing-lib';
