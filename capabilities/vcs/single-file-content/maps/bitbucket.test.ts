@@ -1,30 +1,43 @@
-import { SuperfaceClient } from '@superfaceai/one-sdk';
+import { SuperfaceTest } from '@superfaceai/testing-lib';
 
-describe('vcs/single-file-content/bitbucket', () => {
-  beforeAll(() => {
-    jest.setTimeout(10000);
+describe(`vcs/single-file-content/bitbucket`, () => {
+  let superface: SuperfaceTest;
+
+  beforeEach(() => {
+    superface = new SuperfaceTest();
   });
 
-  it('performs correctly', async () => {
-    const client = new SuperfaceClient();
-    const profile = await client.getProfile('vcs/single-file-content');
-    const useCase = profile.getUseCase('SingleFileContent');
-    const provider = await client.getProvider('bitbucket');
-    const result = await useCase.perform(
-      {
-        owner: 'jakuvacek',
-        repo: 'testrepository',
-        path: 'README.md',
-        ref: 'master',
-      },
-      { provider }
-    );
-    const value = result.unwrap();
+  describe('SingleFileContent', () => {
+    it('should perform successfully', async () => {
+      await expect(
+        superface.run({
+          profile: 'vcs/single-file-content',
+          provider: 'bitbucket',
+          useCase: 'SingleFileContent',
+          input: {
+            owner: 'jakuvacek',
+            repo: 'testrepository',
+            path: 'README.md',
+            ref: 'master',
+          },
+        })
+      ).resolves.toMatchSnapshot();
+    });
 
-    expect(value).toEqual({
-      content: expect.stringContaining('README'),
-      encoding: 'utf-8',
-      size: expect.any(Number),
+    it('should map error', async () => {
+      await expect(
+        superface.run({
+          profile: 'vcs/single-file-content',
+          provider: 'bitbucket',
+          useCase: 'SingleFileContent',
+          input: {
+            owner: 'jakuvacek',
+            repo: 'testrepository',
+            path: 'README.md',
+            ref: 'made-up',
+          },
+        })
+      ).resolves.toMatchSnapshot();
     });
   });
 });
