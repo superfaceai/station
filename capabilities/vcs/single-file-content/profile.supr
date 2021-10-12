@@ -1,37 +1,75 @@
 """
-VCS File Content
+Single File Content
 Retrieve the raw content of single file from a version control system repository.
 """
 name = "vcs/single-file-content"
-version = "1.0.2"
+version = "1.1.0"
 
 """
-Get Single File Content
+Single File Content
 Get the content of the specified file.
 """
 usecase SingleFileContent {
   input {
-    "Owner of the repository"
+    """
+    Owner
+    Owner of the repository
+    """
     owner! string!
 
-    "Repository name"
+    """
+    Repo
+    Repository name
+    """
     repo! string!
 
-    "Path to file at repository"
+    """
+    Path
+    Path to file at repository
+    """
     path! string!
 
-    "Branch eg. main"
+    """
+    Ref
+    Branch eg. main
+    """
     ref! string!
   }
 
   result {
-    "Size of content according to used provider"
+    """
+    Size
+    Size of content according to used provider
+    """
     size! number!
 
-    "Content of file"
+    """
+    Content
+    Content of file
+    """
     content! string!
 
-    "Used encoding"
+    """
+    Encoding
+    Used encoding
+    """
     encoding! string!
   }
+  error {
+    """
+    Message
+    A short, human-readable summary of the problem.
+    """
+    message! string!
+    """
+    Status code
+    Usually a HTTP status code connected to occured problem.
+    """
+    statusCode!
+    """
+    Description
+    A optional, human-readable explanation specific to this occurrence of the problem.
+    """
+    description string!
+   }
 }

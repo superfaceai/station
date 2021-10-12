@@ -5,9 +5,10 @@ provider = "mock"
 PullRequest mock map
 """
 map PullRequest{
+  identifier = input.identifier
   map result {
         title: 'Test',
-        id: input.identifier,
+        id: identifier,
         url: `https://gitlab.com/${input.owner}/${input.repo}/-/merge_requests/${input.identifier}`,
         sha: Math.random().toString(16),
       }
