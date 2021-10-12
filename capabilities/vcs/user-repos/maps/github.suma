@@ -5,7 +5,6 @@ provider = "github"
 UserRepos map. Returns all github repositories of specified user
 """
 map UserRepos {
-
   call Paginate(
     user = input.user,
   ) {
@@ -43,10 +42,10 @@ operation FetchRepos {
       }
     }
     response {
-       fail if(statusCode !== 200){
-        message: body.message,
-        description: body.documentation_url,
-        statusCode: statusCode
+      fail if(statusCode !== 200){
+      message: body.message,
+      description: body.documentation_url,
+      statusCode: statusCode
       }
       return {
         repositories: body.map((r) => {

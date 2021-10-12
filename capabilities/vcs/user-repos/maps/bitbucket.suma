@@ -5,12 +5,12 @@ provider = "bitbucket"
 UserRepos map. Returns repositories of specified user
 """
 map UserRepos{
-    call Paginate(
-    user = input.user,
-    ) {
-        return map error if (outcome.data.statusCode !== 200) outcome.data
-        return map result { repos = outcome.data.repositories }
-    }
+  call Paginate(
+  user = input.user,
+  ) {
+    return map error if (outcome.data.statusCode !== 200) outcome.data
+    return map result { repos = outcome.data.repositories }
+  }
 }
 
 operation Paginate {
@@ -36,7 +36,7 @@ operation Paginate {
 
 
 operation FetchRepos {
-    http GET "/2.0/repositories/{args.user}" {
+  http GET "/2.0/repositories/{args.user}" {
     request {
       query {
         page = args.page
@@ -44,11 +44,11 @@ operation FetchRepos {
     }
 
     response {
-        fail if (statusCode !== 200){
-            message: body.error.message,
-            statusCode: statusCode
-        }
-       return {
+      fail if (statusCode !== 200){
+        message: body.error.message,
+        statusCode: statusCode
+      }
+      return {
         repositories: body.values.map((r) => {
           return {
             name: r.name,
