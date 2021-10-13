@@ -1,0 +1,315 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`delivery-tracking/shipment-info/shippo ShipmentInfo when shipment is delivered should return valid shipment info as result 1`] = `
+Object {
+  "value": Array [
+    Object {
+      "carrier": "shippo",
+      "destination": Object {
+        "address": Object {
+          "addressLocality": "Chicago",
+          "countryCode": "US",
+          "postalCode": "60611",
+        },
+      },
+      "estimatedDeliveryDate": "2021-09-24T16:40:10.049Z",
+      "events": Array [
+        Object {
+          "location": undefined,
+          "statusCode": "unknown",
+          "statusText": "The carrier has received the electronic shipment information.",
+          "timestamp": "2021-09-20T20:18:46.892Z",
+        },
+        Object {
+          "location": Object {
+            "address": Object {
+              "addressLocality": "San Francisco",
+              "countryCode": "US",
+              "postalCode": "94103",
+            },
+          },
+          "statusCode": "transit",
+          "statusText": "Your shipment has departed from the origin.",
+          "timestamp": "2021-09-22T00:18:46.892Z",
+        },
+        Object {
+          "location": Object {
+            "address": Object {
+              "addressLocality": "Memphis",
+              "countryCode": "US",
+              "postalCode": "37501",
+            },
+          },
+          "statusCode": "failure",
+          "statusText": "The Postal Service has identified a problem with the processing of this item and you should contact support to get further information.",
+          "timestamp": "2021-09-23T12:18:46.892Z",
+        },
+        Object {
+          "location": Object {
+            "address": Object {
+              "addressLocality": "Chicago",
+              "countryCode": "US",
+              "postalCode": "60611",
+            },
+          },
+          "statusCode": "delivered",
+          "statusText": "Your shipment has been delivered.",
+          "timestamp": "2021-09-23T00:18:46.892Z",
+        },
+      ],
+      "origin": Object {
+        "address": Object {
+          "addressLocality": "San Francisco",
+          "countryCode": "US",
+          "postalCode": "94103",
+        },
+      },
+      "status": Object {
+        "location": Object {
+          "address": Object {
+            "addressLocality": "Chicago",
+            "countryCode": "US",
+            "postalCode": "60611",
+          },
+        },
+        "statusCode": "delivered",
+        "statusText": "Your shipment has been delivered.",
+        "timestamp": "2021-09-23T00:18:46.892Z",
+      },
+      "trackingNumber": "SHIPPO_DELIVERED",
+    },
+  ],
+}
+`;
+
+exports[`delivery-tracking/shipment-info/shippo ShipmentInfo when shipment is in pre transit should return valid shipment info as result 1`] = `
+Object {
+  "value": Array [
+    Object {
+      "carrier": "shippo",
+      "destination": Object {
+        "address": Object {
+          "addressLocality": "Chicago",
+          "countryCode": "US",
+          "postalCode": "60611",
+        },
+      },
+      "estimatedDeliveryDate": "2021-09-24T16:40:09.232Z",
+      "events": Array [
+        Object {
+          "location": undefined,
+          "statusCode": "pre_transit",
+          "statusText": "The carrier has received the electronic shipment information.",
+          "timestamp": "2021-09-20T20:18:39.827Z",
+        },
+      ],
+      "origin": Object {
+        "address": Object {
+          "addressLocality": "San Francisco",
+          "countryCode": "US",
+          "postalCode": "94103",
+        },
+      },
+      "status": Object {
+        "location": undefined,
+        "statusCode": "pre_transit",
+        "statusText": "The carrier has received the electronic shipment information.",
+        "timestamp": "2021-09-20T20:18:39.827Z",
+      },
+      "trackingNumber": "SHIPPO_PRE_TRANSIT",
+    },
+  ],
+}
+`;
+
+exports[`delivery-tracking/shipment-info/shippo ShipmentInfo when shipment is in transit should return valid shipment info as result 1`] = `
+Object {
+  "value": Array [
+    Object {
+      "carrier": "shippo",
+      "destination": Object {
+        "address": Object {
+          "addressLocality": "Chicago",
+          "countryCode": "US",
+          "postalCode": "60611",
+        },
+      },
+      "estimatedDeliveryDate": "2021-09-24T16:40:09.639Z",
+      "events": Array [
+        Object {
+          "location": undefined,
+          "statusCode": "unknown",
+          "statusText": "The carrier has received the electronic shipment information.",
+          "timestamp": "2021-09-20T20:19:04.084Z",
+        },
+        Object {
+          "location": Object {
+            "address": Object {
+              "addressLocality": "San Francisco",
+              "countryCode": "US",
+              "postalCode": "94103",
+            },
+          },
+          "statusCode": "transit",
+          "statusText": "Your shipment has departed from the origin.",
+          "timestamp": "2021-09-22T00:19:04.084Z",
+        },
+      ],
+      "origin": Object {
+        "address": Object {
+          "addressLocality": "San Francisco",
+          "countryCode": "US",
+          "postalCode": "94103",
+        },
+      },
+      "status": Object {
+        "location": Object {
+          "address": Object {
+            "addressLocality": "San Francisco",
+            "countryCode": "US",
+            "postalCode": "94103",
+          },
+        },
+        "statusCode": "transit",
+        "statusText": "Your shipment has departed from the origin.",
+        "timestamp": "2021-09-22T00:19:04.084Z",
+      },
+      "trackingNumber": "SHIPPO_TRANSIT",
+    },
+  ],
+}
+`;
+
+exports[`delivery-tracking/shipment-info/shippo ShipmentInfo when shipment is returned should return valid shipment info as result 1`] = `
+Object {
+  "value": Array [
+    Object {
+      "carrier": "shippo",
+      "destination": Object {
+        "address": Object {
+          "addressLocality": "Chicago",
+          "countryCode": "US",
+          "postalCode": "60611",
+        },
+      },
+      "estimatedDeliveryDate": "2021-09-24T16:40:10.6Z",
+      "events": Array [
+        Object {
+          "location": undefined,
+          "statusCode": "unknown",
+          "statusText": "The carrier has received the electronic shipment information.",
+          "timestamp": "2021-09-20T20:19:04.084Z",
+        },
+        Object {
+          "location": Object {
+            "address": Object {
+              "addressLocality": "San Francisco",
+              "countryCode": "US",
+              "postalCode": "94103",
+            },
+          },
+          "statusCode": "transit",
+          "statusText": "Your shipment has departed from the origin.",
+          "timestamp": "2021-09-22T00:19:04.084Z",
+        },
+        Object {
+          "location": Object {
+            "address": Object {
+              "addressLocality": "Memphis",
+              "countryCode": "US",
+              "postalCode": "37501",
+            },
+          },
+          "statusCode": "failure",
+          "statusText": "The Postal Service has identified a problem with the processing of this item and you should contact support to get further information.",
+          "timestamp": "2021-09-23T12:19:04.084Z",
+        },
+        Object {
+          "location": Object {
+            "address": Object {
+              "addressLocality": "Chicago",
+              "countryCode": "US",
+              "postalCode": "60611",
+            },
+          },
+          "statusCode": "delivered",
+          "statusText": "Your shipment has been delivered.",
+          "timestamp": "2021-09-23T00:19:04.084Z",
+        },
+        Object {
+          "location": Object {
+            "address": Object {
+              "addressLocality": "San Francisco",
+              "countryCode": "US",
+              "postalCode": "94103",
+            },
+          },
+          "statusCode": "unknown",
+          "statusText": "Your shipment has been returned to the original sender.",
+          "timestamp": "2021-09-23T20:19:04.084Z",
+        },
+      ],
+      "origin": Object {
+        "address": Object {
+          "addressLocality": "San Francisco",
+          "countryCode": "US",
+          "postalCode": "94103",
+        },
+      },
+      "status": Object {
+        "location": Object {
+          "address": Object {
+            "addressLocality": "San Francisco",
+            "countryCode": "US",
+            "postalCode": "94103",
+          },
+        },
+        "statusCode": "unknown",
+        "statusText": "Your shipment has been returned to the original sender.",
+        "timestamp": "2021-09-23T20:19:04.084Z",
+      },
+      "trackingNumber": "SHIPPO_RETURNED",
+    },
+  ],
+}
+`;
+
+exports[`delivery-tracking/shipment-info/shippo ShipmentInfo when shipment status is unknown should return valid shipment info as result 1`] = `
+Object {
+  "value": Array [
+    Object {
+      "carrier": "shippo",
+      "destination": Object {
+        "address": Object {
+          "addressLocality": "Chicago",
+          "countryCode": "US",
+          "postalCode": "60611",
+        },
+      },
+      "estimatedDeliveryDate": "2021-09-24T16:40:11.038Z",
+      "events": Array [
+        Object {
+          "location": undefined,
+          "statusCode": "unknown",
+          "statusText": "The carrier has received the electronic shipment information.",
+          "timestamp": "2021-09-20T20:19:08.242Z",
+        },
+      ],
+      "origin": Object {
+        "address": Object {
+          "addressLocality": "San Francisco",
+          "countryCode": "US",
+          "postalCode": "94103",
+        },
+      },
+      "status": Object {
+        "location": undefined,
+        "statusCode": "unknown",
+        "statusText": "The carrier has received the electronic shipment information.",
+        "timestamp": "2021-09-20T20:19:08.242Z",
+      },
+      "trackingNumber": "SHIPPO_UNKNOWN",
+    },
+  ],
+}
+`;

@@ -1,9 +1,8 @@
-profile = "delivery-tracking/shipment-info@1.0"
+//DHL API reference: https://developer.dhl.com/api-reference/shipment-tracking
+
+profile = "delivery-tracking/shipment-info@1.1"
 provider = "dhl"
 
-"""
-ShipmentInfo map
-"""
 map ShipmentInfo {
   fetchShipmentOutcome = call FetchShipment(
     trackingNumber = input.trackingNumber,
@@ -52,7 +51,7 @@ operation FetchShipment {
 }
 
 operation MapShipment {
-  estimatedDeliveryDate = undefined
+  estimatedDeliveryDate = null
   shipment = args.shipment
 
   set if (shipment.estimatedDeliveryDate) {
@@ -76,6 +75,7 @@ operation MapShipment {
     status = status
     events = events
     estimatedDeliveryDate = estimatedDeliveryDate
+    carrier = shipment.service
   }
 }
 

@@ -45,4 +45,18 @@ usecase GetCurrentWeatherInCity safe {
     """
     description string!
   }
+
+  error {
+    """
+    title
+    A short, human-readable summary of the problem type
+    """
+    title!
+
+    """
+    detail
+    A human-readable explanation specific to this occurrence of the problem
+    """
+    detail
+  }
 }
