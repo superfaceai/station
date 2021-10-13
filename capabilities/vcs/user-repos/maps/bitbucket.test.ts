@@ -20,5 +20,17 @@ describe(`scope/name/provider_name}`, () => {
         })
       ).resolves.toMatchSnapshot();
     });
+    it('should map error successfully', async () => {
+      await expect(
+        superface.run({
+          profile: 'vcs/user-repos',
+          provider: 'bitbucket',
+          useCase: 'UserRepos',
+          input: {
+            user: '!!',
+          },
+        })
+      ).resolves.toMatchSnapshot();
+    });
   });
 });
