@@ -8,7 +8,7 @@ map UserRepos {
   call Paginate(
     user = input.user,
   ) {
-    return map error if (outcome.data.statusCode !== 200) outcome.data
+    return map error if (outcome.error) outcome.error
     return map result { repos = outcome.data.repositories }
   }
 }
@@ -42,7 +42,7 @@ operation FetchRepos {
       }
     }
     response {
-      fail if(statusCode !== 200){
+      return if(statusCode !== 200){
       message: body.message,
       description: body.documentation_url,
       statusCode: statusCode
