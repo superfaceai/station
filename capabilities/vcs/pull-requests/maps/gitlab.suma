@@ -9,15 +9,15 @@ call Paginate(
    //encodeURIComponent comes from JavaScript core library and you can use it here!
   id = encodeURIComponent(input.owner + '/' + input.repo)
   ) {
-    return map error if (outcome.data.statusCode !== 200) outcome.data
-    return map result { pullRequests = outcome.data.pullRequests }
+    return map error if (outcome.error) outcome.error
+    return map result outcome.data
   }
 }
 operation Paginate {
 
   data = []
   page = 1
-  //Hack to ceate a while with maximum loop count
+  //Hack to create a while loop. Use Superface stdlib instead
   call foreach(_x of Array(2**32-1)) FetchPullRequests(id = args.id, page = page) {
     fail if (outcome.data.statusCode !== 200) outcome.data
 
@@ -48,7 +48,7 @@ operation FetchPullRequests {
       }
     }
     response {
-      fail if (statusCode !== 200){
+      return if (statusCode !== 200){
         message: body.message,
         statusCode: statusCode
       }

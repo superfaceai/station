@@ -12,15 +12,15 @@ map PullRequests{
   owner = input.owner,
   repo = input.repo,
   ) {
-      return map error if (outcome.data.statusCode !== 200) outcome.data
-      return map result { pullRequests = outcome.data.pullRequests }
+      return map error if (outcome.error) outcome.error
+      return map result outcome.data
     }
 }
 
 operation Paginate {
   data = []
   page = 1
-  //Hack to create a while loop
+  //Hack to create a while loop. Use Superface stdlib instead
   call foreach(_x of Array(2**32-1)) FetchPullRequests(owner = args.owner, repo = args.repo, page = page) {
     fail if (outcome.data.statusCode !== 200) outcome.data
 
@@ -46,7 +46,7 @@ operation FetchPullRequests {
       }
     }
     response  {
-      fail if(statusCode !== 200) {
+      return if(statusCode !== 200) {
         message: body.error.message,
         statusCode: statusCode
       }
