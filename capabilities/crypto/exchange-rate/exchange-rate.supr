@@ -13,12 +13,12 @@ usecase GetExchangeRate safe {
   input {
     """
     From
-    Source currency
+    Code of the source currency, e.g.: "ETH"
     """
     from! string!
     """
     To
-    Target currency
+    Code of the target currency, e.g.: "BTC"
     """
     to! string!
   }
@@ -26,7 +26,7 @@ usecase GetExchangeRate safe {
   result {
     """
     Rate
-    Exchange rate
+    Exchange rate, e.g.: "0.06249100"
     """
     rate! string!
   }
