@@ -33,9 +33,9 @@ map FaceDetection {
     }
 
     response {
-      return map error if (statusCode !== 200) {
-      code = body.error.code
-      message = body.error.message
+      return map error if (body.responses.length === 1 && body.responses[0].error) {
+        code = body.responses[0].error.code
+        message = body.responses[0].error.message
       }
 
       map result body.responses.map((res) => {
