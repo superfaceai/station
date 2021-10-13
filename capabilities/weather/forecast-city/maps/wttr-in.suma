@@ -50,7 +50,7 @@ operation mapWeather {
     temperatureWrapper = call pickTemperatures(units = args.units, weather = args.weather)
   }
   return {
-    avgTemperature = temperatureWrapper.avgTemp
+    averageTemperature = temperatureWrapper.avgTemp
     date = args.weather.date
     maxTemperature = temperatureWrapper.maxTemp
     minTemperature = temperatureWrapper.minTemp
