@@ -637,6 +637,13 @@
   dependencies:
     typescript-is "^0.18.3"
 
+"@superfaceai/ast@^0.0.29":
+  version "0.0.29"
+  resolved "https://registry.yarnpkg.com/@superfaceai/ast/-/ast-0.0.29.tgz#944de20d615029cef666cfe3dfb8511946f471f4"
+  integrity sha512-buUBbk7gX6/E7sTvw9LBANbqAwKTEkH7ptbc4zgOB7caAf08TXpkNgknbTpbvsE7ySnh0nvI2n7RHAeXHO3CWQ==
+  dependencies:
+    typescript-is "^0.18.3"
+
 "@superfaceai/cli@^0.0.25":
   version "0.0.25"
   resolved "https://registry.yarnpkg.com/@superfaceai/cli/-/cli-0.0.25.tgz#4ecf3e6bdaa123734229bf80aaa510d6e63e05be"
@@ -672,13 +679,13 @@
     vm2 "^3.9.2"
     zod "^2.0.0-beta.30"
 
-"@superfaceai/one-sdk@^0.0.37-beta.0":
-  version "0.0.37-beta.0"
-  resolved "https://registry.yarnpkg.com/@superfaceai/one-sdk/-/one-sdk-0.0.37-beta.0.tgz#f79243dd9d633ba119e1eec5ede568ac24a7689a"
-  integrity sha512-xVBdVXmROQvR6QDM4ihYMyddLxaf6qocNKV6mAd3sNQNv8tB9b5xdKLL0P7gwb0PN6T6PqTAryf5RON5tI1jaw==
+"@superfaceai/one-sdk@^0.0.38-beta.0":
+  version "0.0.38-beta.0"
+  resolved "https://registry.yarnpkg.com/@superfaceai/one-sdk/-/one-sdk-0.0.38-beta.0.tgz#3818c9b4828a610a9f3cca46f24e62528b0ec68a"
+  integrity sha512-c4+KWSgoAZWTQC/CgJSJjogwyqJq3IzIZakMRe8d1ipSE0wtlpRVQsvIbaydatfvH5cR0lmSkDyU6Oa854hnQg==
   dependencies:
     "@superfaceai/ast" "^0.0.31"
-    "@superfaceai/parser" "^0.0.19"
+    "@superfaceai/parser" "0.0.22"
     abort-controller "^3.0.0"
     cross-fetch "^3.0.5"
     debug "^4.3.2"
@@ -692,6 +699,16 @@
   integrity sha512-dFuzulFKyKXvj6iBolINrIECALCZOwmHlDMR88VU6Whn7+lYJ2ygutnOmZsicWsF/otLfK0Fcd9bpRpM7lOwBg==
   dependencies:
     "@superfaceai/ast" "^0.0.28"
+    "@types/debug" "^4.1.5"
+    debug "^4.3.1"
+    typescript "^4"
+
+"@superfaceai/parser@0.0.22":
+  version "0.0.22"
+  resolved "https://registry.yarnpkg.com/@superfaceai/parser/-/parser-0.0.22.tgz#38bca4a3b6c9c7741c245ce1a5e02de8534f384e"
+  integrity sha512-mWKBi0b0bQjmSyLvI92AP7KFwcG2q9w8MYtXu+wDJE5dnwcPtg/qfVaawyUYzC1DWu5Oe4Bt8khDAayenD6o6g==
+  dependencies:
+    "@superfaceai/ast" "^0.0.29"
     "@types/debug" "^4.1.5"
     debug "^4.3.1"
     typescript "^4"
@@ -713,13 +730,13 @@
   dependencies:
     cross-fetch "^3.1.0"
 
-"@superfaceai/testing-lib@^0.0.3-beta.7":
-  version "0.0.3-beta.7"
-  resolved "https://registry.yarnpkg.com/@superfaceai/testing-lib/-/testing-lib-0.0.3-beta.7.tgz#348720fdadb8982263a5a034da671df2721ae74d"
-  integrity sha512-gfKo2y2fMPzp4AVOA3e2SE8+vtLR/jJDOK1GaAXs9gfL79Njg6nI2SXTRObeN33XS1ngXq3Oe4hCYVYxE9vLEA==
+"@superfaceai/testing-lib@^0.0.3-beta.8":
+  version "0.0.3-beta.8"
+  resolved "https://registry.yarnpkg.com/@superfaceai/testing-lib/-/testing-lib-0.0.3-beta.8.tgz#80783c3c08e8a1f3c116ae96433567eaf0e2702d"
+  integrity sha512-vrwhEoB9O5Hvb5wYpjIkyfL0gY99Dl45vfUiNiLRSxTYJDle3TkcxquHGbq0LqGKqUMIHvUHzf1zqemUZt6FrQ==
   dependencies:
     "@superfaceai/ast" "^0.0.31"
-    "@superfaceai/one-sdk" "^0.0.37-beta.0"
+    "@superfaceai/one-sdk" "^0.0.38-beta.0"
     debug "^4.3.2"
     nock "^13.1.1"
 
