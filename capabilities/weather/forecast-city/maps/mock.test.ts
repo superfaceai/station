@@ -21,7 +21,7 @@ describe('weather/forecast-city/mock-typed', () => {
 
     expect(result.unwrap()).toEqual([
       {
-        temperature: -1,
+        avgTemperature: -1,
         date: 'today'
       }
     ]);

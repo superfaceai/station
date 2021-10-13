@@ -12,13 +12,13 @@ Get weather forecast for the city in chosen units
 usecase GetWeatherForecastInCity {
   input {
   """
-  city
+  City
   Name of the city including state and country, e.g.: "Prague, Czech Republic" or "New York City, NY, USA"
   """
   city! string!
   
   """
-  units
+  Units
   Units used to represent temperature - Fahrenheit, Celsius, Kelvin;
   Celsius by default
   """
@@ -28,25 +28,25 @@ usecase GetWeatherForecastInCity {
   result [
     {
       """
-      temperature
-      Temperature in specified units
+      AvgTemperature
+      Daily average Temperature in specified units
       """
-      temperature! number!
+      avgTemperature! number!
 
       """
-      date
+      Date
       Date of the weather forecast
       """
       date! string!
 
       """
-      maxTemperature
+      MaxTemperature
       Daily maximal temperature in specified units
       """
       maxTemperature number!
 
       """
-      minTemperature
+      MinTemperature
       Datily minimal temperature in specified units
       """
       minTemperature number!

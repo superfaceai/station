@@ -33,7 +33,7 @@ export const forecastCityTest = (providerName: string): void => {
           );
           expect(Array.isArray(result.unwrap())).toEqual(true)
           expect(result.unwrap()[0]).toEqual({
-            temperature: expect.any(Number),
+            avgTemperature: expect.any(Number),
             date: expect.any(String),
             maxTemperature: expect.any(Number),
             minTemperature: expect.any(Number)

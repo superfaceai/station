@@ -29,17 +29,17 @@ map GetWeatherForecastInCity {
 
 operation pickTemperatures {
   return if (args.units === 'F') {
-    temperature = Number(args.weather.avgtempF)
+    avgTemp = Number(args.weather.avgtempF)
     maxTemp = Number(args.weather.maxtempF)
     minTemp = Number(args.weather.mintempF)
   }
   return if (args.units === 'K') {
-    temperature = Number(args.weather.avgtempC) + 273
+    avgTemp = Number(args.weather.avgtempC) + 273
     maxTemp = Number(args.weather.maxtempC) + 273
     minTemp = Number(args.weather.mintempC) + 273
   }
   return {
-    temperature = Number(args.weather.avgtempC)
+    avgTemp = Number(args.weather.avgtempC)
     maxTemp = Number(args.weather.maxtempC)
     minTemp = Number(args.weather.mintempC)
   }
@@ -50,7 +50,7 @@ operation mapWeather {
     temperatureWrapper = call pickTemperatures(units = args.units, weather = args.weather)
   }
   return {
-    temperature = temperatureWrapper.temperature
+    avgTemperature = temperatureWrapper.avgTemp
     date = args.weather.date
     maxTemperature = temperatureWrapper.maxTemp
     minTemperature = temperatureWrapper.minTemp
