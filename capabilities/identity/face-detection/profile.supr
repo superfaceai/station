@@ -1,11 +1,21 @@
+"""
+Face Detection
+Detect faces and their emotions on picture
+"""
+
 name = "identity/face-detection"
 version = "1.0.0"
 
 """
-FaceDetection usecase
+Face Detection
+Detects faces on publicly-accessible image URL
 """
 usecase FaceDetection {
   input {
+    """
+    Image URL
+    Publicly-accessible image URL
+    """
     imageUrl! string!
   }
 
