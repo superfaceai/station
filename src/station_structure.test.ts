@@ -1,4 +1,3 @@
-import { ProfileId } from '@superfaceai/cli/dist/common/profile';
 import { SuperJson } from '@superfaceai/one-sdk';
 import { mocked } from 'ts-jest/utils';
 
@@ -10,12 +9,6 @@ jest.mock('./util');
 describe('Station Structure', () => {
   beforeEach(() => {
     mocked(util.loadSuperJson).mockReturnValue(new SuperJson({}));
-    mocked(util.allProfileProviderCombinations).mockReturnValue([
-      {
-        profile: { id: ProfileId.fromScopeName('scope', 'name') },
-        provider: 'provider',
-      },
-    ]);
     mocked(util.localMaps).mockResolvedValue([]);
     mocked(util.localProfiles).mockResolvedValue([]);
     mocked(util.localProviders).mockResolvedValue([]);
