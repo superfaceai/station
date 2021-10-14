@@ -5,9 +5,6 @@ provider = "google-vision-api"
 FaceDetection map
 """
 map FaceDetection {
-  imageUrl = input.imageUrl
-
-
   http POST "/v1/images:annotate" {
     security "google-api-key"
 
@@ -25,7 +22,7 @@ map FaceDetection {
             ],
             image: {
               source: {
-              imageUri: imageUrl
+              imageUri: input.imageUrl
               }
             }
           }]
