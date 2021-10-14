@@ -77,7 +77,6 @@ jobs:
             ${{ runner.os }}-yarn-
       - run: yarn install
       - run: yarn capabilities:check
-        continue-on-error: true
       - run: yarn capabilities:lint
         continue-on-error: true
       - run: yarn capabilities:structure
