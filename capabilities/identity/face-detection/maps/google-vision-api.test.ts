@@ -10,28 +10,33 @@ describe(`identity/face-detection/google-vision-api`, () => {
   describe('FaceDetection', () => {
     it('should perform successfully', async () => {
       await expect(
-        superface.run({
-          profile: 'identity/face-detection',
-          provider: 'google-vision-api',
-          useCase: 'FaceDetection',
-          input: {
-            imageUrl:
-              'https://upload.wikimedia.org/wikipedia/commons/c/c3/RH_Louise_Lillian_Gish.jpg',
+        superface.run(
+          {
+            profile: 'identity/face-detection',
+            provider: 'google-vision-api',
+            useCase: 'FaceDetection',
+            input: {
+              imageUrl:
+                'https://upload.wikimedia.org/wikipedia/commons/c/c3/RH_Louise_Lillian_Gish.jpg',
+            },
           },
-        }, { afterRecordingLoad })
+          { afterRecordingLoad }
+        )
       ).resolves.toMatchSnapshot();
     });
     it('should map error correctly', async () => {
       await expect(
-        superface.run({
-          profile: 'identity/face-detection',
-          provider: 'google-vision-api',
-          useCase: 'FaceDetection',
-          input: {
-            imageUrl:
-              'https://upload.wikimedia.org',
+        superface.run(
+          {
+            profile: 'identity/face-detection',
+            provider: 'google-vision-api',
+            useCase: 'FaceDetection',
+            input: {
+              imageUrl: 'https://upload.wikimedia.org',
+            },
           },
-        }, { afterRecordingLoad })
+          { afterRecordingLoad }
+        )
       ).resolves.toMatchSnapshot();
     });
   });
