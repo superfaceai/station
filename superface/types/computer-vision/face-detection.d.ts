@@ -1,8 +1,12 @@
 import { TypedProfile } from '@superfaceai/one-sdk';
-export declare type IdentityFaceDetectionFaceDetectionInput = {
+export declare type ComputerVisionFaceDetectionFaceDetectionInput = {
+    /**
+     * Image URL
+     * Publicly-accessible image URL
+     **/
     imageUrl: string;
 };
-export declare type IdentityFaceDetectionFaceDetectionResult = {
+export declare type ComputerVisionFaceDetectionFaceDetectionResult = {
     faces: {
         faceRectangle: {
             topLeft: {
@@ -36,14 +40,20 @@ export declare type IdentityFaceDetectionFaceDetectionResult = {
     }[];
 }[];
 declare const profile: {
-    /** FaceDetection usecase **/
-    FaceDetection: [IdentityFaceDetectionFaceDetectionInput, IdentityFaceDetectionFaceDetectionResult];
+    /**
+     * Face Detection
+     * Detects faces on publicly-accessible image URL
+     **/
+    FaceDetection: [ComputerVisionFaceDetectionFaceDetectionInput, ComputerVisionFaceDetectionFaceDetectionResult];
 };
-export declare type IdentityFaceDetectionProfile = TypedProfile<typeof profile>;
-export declare const identityFaceDetection: {
-    "identity/face-detection": {
-        /** FaceDetection usecase **/
-        FaceDetection: [IdentityFaceDetectionFaceDetectionInput, IdentityFaceDetectionFaceDetectionResult];
+export declare type ComputerVisionFaceDetectionProfile = TypedProfile<typeof profile>;
+export declare const computerVisionFaceDetection: {
+    "computer-vision/face-detection": {
+        /**
+         * Face Detection
+         * Detects faces on publicly-accessible image URL
+         **/
+        FaceDetection: [ComputerVisionFaceDetectionFaceDetectionInput, ComputerVisionFaceDetectionFaceDetectionResult];
     };
 };
 export {};

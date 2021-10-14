@@ -1,6 +1,6 @@
 import { RecordingScopes, SuperfaceTest } from '@superfaceai/testing-lib';
 
-describe(`identity/face-detection/google-vision-api`, () => {
+describe(`computer-vision/face-detection/google-vision-api`, () => {
   let superface: SuperfaceTest;
 
   beforeEach(() => {
@@ -12,7 +12,7 @@ describe(`identity/face-detection/google-vision-api`, () => {
       await expect(
         superface.run(
           {
-            profile: 'identity/face-detection',
+            profile: 'computer-vision/face-detection',
             provider: 'google-vision-api',
             useCase: 'FaceDetection',
             input: {
@@ -28,7 +28,7 @@ describe(`identity/face-detection/google-vision-api`, () => {
       await expect(
         superface.run(
           {
-            profile: 'identity/face-detection',
+            profile: 'computer-vision/face-detection',
             provider: 'google-vision-api',
             useCase: 'FaceDetection',
             input: {

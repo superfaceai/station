@@ -13,10 +13,10 @@ export { CommunicationEmailTemplatesProfile } from "./types/communication/email-
 export { CommunicationSendMessageProfile } from "./types/communication/send-message";
 export { WeatherCurrentCityProfile } from "./types/weather/current-city";
 export { SpeechSynthesisProfile } from "./types/speech/synthesis";
-export { IdentityFaceDetectionProfile } from "./types/identity/face-detection";
+export { ComputerVisionFaceDetectionProfile } from "./types/computer-vision/face-detection";
 export declare const SuperfaceClient: new () => import("@superfaceai/one-sdk/dist/client/client").TypedSuperfaceClient<{
-    "identity/face-detection": {
-        FaceDetection: [import("./types/identity/face-detection").IdentityFaceDetectionFaceDetectionInput, import("./types/identity/face-detection").IdentityFaceDetectionFaceDetectionResult];
+    "computer-vision/face-detection": {
+        FaceDetection: [import("./types/computer-vision/face-detection").ComputerVisionFaceDetectionFaceDetectionInput, import("./types/computer-vision/face-detection").ComputerVisionFaceDetectionFaceDetectionResult];
     };
     "speech/synthesis": {
         TextToSpeechSynthesis: [import("./types/speech/synthesis").SpeechSynthesisTextToSpeechSynthesisInput, import("./types/speech/synthesis").SpeechSynthesisTextToSpeechSynthesisResult];

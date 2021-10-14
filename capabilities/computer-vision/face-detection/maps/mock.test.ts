@@ -1,9 +1,9 @@
 import { SuperfaceClient } from '../../../../superface/sdk';
 
-describe('identity/face-detection/mock', () => {
+describe('computer-vision/face-detection/mock', () => {
   it('should return mock data', async () => {
     const client = new SuperfaceClient();
-    const profile = await client.getProfile('identity/face-detection');
+    const profile = await client.getProfile('computer-vision/face-detection');
     const provider = await client.getProvider('mock');
     const usecase = profile.useCases.FaceDetection;
 
