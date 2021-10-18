@@ -1,0 +1,57 @@
+"""
+Find nearby points of interest.
+
+Find points of interest near the given location using map services.
+"""
+name = "navigation/nearby-poi"
+version = "1.0"
+
+"""
+Find nearby points of interest
+
+Find points of interest near the given location.
+"""
+usecase NearbyPoi {
+	input {
+		"Center of the search"
+		center! Coordinates!
+		"Radius of the search"
+		radius! number!
+		"""
+		Optional categories filter
+
+		Points belonging to at least one of these categories are returned
+		"""
+		categories [InterestCategory!]
+	}
+
+	result [
+		{
+			"Coordinates of this point"
+			coordinates! Coordinates!
+			"Name of the point of interest"
+			name! string!
+			"Categories this point belongs to"
+			categories! [InterestCategory!]
+		}
+	]
+
+	error {
+		"Human-readable status description"
+		status! string!
+		"Human-readable error message"
+		message! string!
+	}
+}
+
+model Coordinates {
+	latitude! number!
+	longitude! number!
+}
+
+model InterestCategory enum {
+	RESTAURANT,
+	CAFE,
+	BAR
+	// TODO: More categories
+}

@@ -317,6 +317,25 @@
           }
         }
       }
+    },
+    "navigation/nearby-poi": {
+      "file": "./grid/navigation/nearby-poi/profile.supr",
+      "priority": [
+        "mock",
+        "overpass-de",
+        "google-apis"
+      ],
+      "providers": {
+        "mock": {
+          "file": "./grid/navigation/nearby-poi/maps/mock.suma"
+        },
+        "overpass-de": {
+          "file": "./grid/navigation/nearby-poi/maps/overpass-de.suma"
+        },
+        "google-apis": {
+          "file": "./grid/navigation/nearby-poi/maps/google-apis.suma"
+        }
+      }
     }
   },
   "providers": {
@@ -496,6 +515,10 @@
           "password": "$IBM_CLOUD_TEXT_TO_SPEECH_EU_DE_KEY"
         }
       ]
+	},
+    "overpass-de": {
+      "file": "../providers/overpass-de.json",
+      "security": []
     }
   }
 }
