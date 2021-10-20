@@ -317,6 +317,17 @@
           }
         }
       }
+    },
+    "crypto/exchange-rate": {
+      "file": "../capabilities/crypto/exchange-rate/exchange-rate.supr",
+      "providers": {
+        "binance": {
+          "file": "../capabilities/crypto/exchange-rate/maps/binance.suma"
+        }
+      },
+      "priority": [
+        "binance"
+      ]
     }
   },
   "providers": {
@@ -496,6 +507,10 @@
           "password": "$IBM_CLOUD_TEXT_TO_SPEECH_EU_DE_KEY"
         }
       ]
+    },
+    "binance": {
+      "file": "../providers/binance.json",
+      "security": []
     }
   }
 }
