@@ -297,6 +297,21 @@
         }
       }
     },
+    "identity/face-detection": {
+      "file": "../capabilities/identity/face-detection/profile.supr",
+      "providers": {
+        "azure-cognitive-services": {
+          "file": "../capabilities/identity/face-detection/maps/azure-cognitive-services.suma"
+        },
+        "mock": {
+          "file": "../capabilities/identity/face-detection/maps/mock.suma"
+        }
+      },
+      "priority": [
+        "azure-cognitive-services",
+        "mock"
+      ]
+    },
     "speech/synthesis": {
       "file": "../capabilities/speech/synthesis/profile.supr",
       "providers": {
@@ -488,6 +503,18 @@
     "wttr-in": {
       "file": "../providers/wttr-in.json",
       "security": []
+    },
+    "azure-cognitive-services": {
+      "file": "../providers/azure-cognitive-services.json",
+      "security": [
+        {
+          "id": "azure-subscription-key",
+          "apikey": "$AZURE_SUBSCRIPTION_KEY"
+        }
+      ],
+      "parameters": {
+        "instance": "jakubface"
+      }
     },
     "openweathermap": {
       "file": "../providers/openweathermap.json",

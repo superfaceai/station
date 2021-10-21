@@ -1,0 +1,86 @@
+name = "identity/face-detection"
+version = "1.0.0"
+
+"""
+FaceDetection usecase
+"""
+usecase FaceDetection {
+   input {
+    imageUrl! string!
+     //Azure specific instance - should be resolved as integration parameters
+    }
+
+  result [{
+    faces! [{
+      faceRectangle! faceRectangle!
+      landmarks! [landmark]!
+      emotions! emotions!
+    }]!
+  }]!
+
+  error {
+    message! string!
+    code! string!
+  }
+}
+model emotions {
+  happiness! likelihood!
+  anger! likelihood!
+  sadness! likelihood!
+  surprise! likelihood!
+}
+
+model faceRectangle {
+  topLeft! point!
+  topRight! point!
+  bottomLeft! point!
+  bottomRight! point!
+}
+
+model likelihood enum {
+  unknown
+  veryUnlikely
+  unlikely
+  possible
+  likely
+  veryLikely
+}
+
+model landmark {
+  kind! landmarkKind!
+  x! number!
+  y! number!
+}
+
+model landmarkKind enum {
+  //Left eye
+  leftPupil
+  eyeLeftOuter
+  eyeLeftTop
+  eyeLeftBottom
+  eyeLeftInner
+  //Right eye
+  rightPupil
+  eyeRightOuter
+  eyeRightTop
+  eyeRightBottom
+  eyeRightInner
+  //Left eyebrow
+  eyebrowLeftOuter
+  eyebrowLeftInner
+  //Right eyebrow
+  eyebrowRightInner
+  eyebrowRightOuter
+  //Nose
+  noseTip
+  noseRootLeft
+  noseRootRight
+  //Mouth
+  mouthLeft
+  mouthRight
+}
+
+model point {
+  x number
+  y number
+}
