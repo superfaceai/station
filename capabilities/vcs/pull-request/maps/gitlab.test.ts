@@ -1,29 +1,41 @@
-import { SuperfaceClient } from '../../../../superface/sdk';
+import { SuperfaceTest } from '@superfaceai/testing-lib';
 
-describe('vcs/pull-request/gitlab-typed', () => {
-  beforeAll(() => {
-    jest.setTimeout(10000);
+describe(`vcs/pull-request/gitlab}`, () => {
+  let superface: SuperfaceTest;
+
+  beforeEach(() => {
+    superface = new SuperfaceTest();
   });
 
-  it('performs correctly', async () => {
-    const client = new SuperfaceClient();
-    const profile = await client.getProfile('vcs/pull-request');
-    const provider = await client.getProvider('gitlab');
-    const usecase = profile.useCases.PullRequest;
+  describe('PullRequest', () => {
+    it('should perform successfully', async () => {
+      await expect(
+        superface.run({
+          profile: 'vcs/pull-request',
+          provider: 'gitlab',
+          useCase: 'PullRequest',
+          input: {
+            owner: 'Jakub-Vacek',
+            repo: 'empty-test',
+            identifier: 1,
+          },
+        })
+      ).resolves.toMatchSnapshot();
+    });
 
-    expect(provider).not.toBeUndefined();
-    expect(usecase).not.toBeUndefined();
-
-    //Edit input values and expected result
-    const result = await usecase.perform(
-      { owner: 'Jakub-Vacek', repo: 'empty-test', identifier: 1 },
-      { provider }
-    );
-    expect(result.unwrap()).toEqual({
-      id: 1,
-      sha: '8c64ce23d626c5bf345ce90fa5af329569d62c9a',
-      title: 'Update README.md',
-      url: 'https://gitlab.com/Jakub-Vacek/empty-test/-/merge_requests/1',
+    it('should map error', async () => {
+      await expect(
+        superface.run({
+          profile: 'vcs/pull-request',
+          provider: 'gitlab',
+          useCase: 'PullRequest',
+          input: {
+            owner: 'Jakub-Vacek',
+            repo: 'empty-test',
+            identifier: 9999,
+          },
+        })
+      ).resolves.toMatchSnapshot();
     });
   });
 });

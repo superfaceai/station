@@ -282,7 +282,8 @@
       "file": "../capabilities/weather/current-city/profile.supr",
       "priority": [
         "mock",
-        "wttr-in"
+        "wttr-in",
+        "openweathermap"
       ],
       "providers": {
         "mock": {
@@ -290,6 +291,9 @@
         },
         "wttr-in": {
           "file": "../capabilities/weather/current-city/maps/wttr-in.suma"
+        },
+        "openweathermap": {
+          "file": "../capabilities/weather/current-city/maps/openweathermap.suma"
         }
       }
     },
@@ -310,6 +314,38 @@
         "azure-cognitive-services",
         "google-vision-api",
         "mock"
+      ]
+    },
+    "speech/synthesis": {
+      "file": "../capabilities/speech/synthesis/profile.supr",
+      "providers": {
+        "mock": {
+          "file": "../capabilities/speech/synthesis/maps/mock.suma"
+        },
+        "google-apis-text-to-speech": {
+          "file": "../capabilities/speech/synthesis/maps/google-apis-text-to-speech.suma"
+        },
+        "ibm-cloud-text-to-speech-eu-de": {
+          "file": "../capabilities/speech/synthesis/maps/ibm-cloud-text-to-speech-eu-de.suma",
+          "defaults": {
+            "TextToSpeechSynthesis": {
+              "input": {
+                "instance": "$IBM_CLOUD_TEXT_TO_SPEECH_EU_DE_INSTANCE"
+              }
+            }
+          }
+        }
+      }
+    },
+    "crypto/exchange-rate": {
+      "file": "../capabilities/crypto/exchange-rate/exchange-rate.supr",
+      "providers": {
+        "binance": {
+          "file": "../capabilities/crypto/exchange-rate/maps/binance.suma"
+        }
+      },
+      "priority": [
+        "binance"
       ]
     }
   },
@@ -395,7 +431,16 @@
       "security": [
         {
           "id": "apikey",
-          "apikey": "$GOOGLE_MAPS_API_KEY"
+          "apikey": "$GOOGLE_APIS_API_KEY"
+        }
+      ]
+    },
+    "google-apis-text-to-speech": {
+      "file": "../providers/google-apis-text-to-speech.json",
+      "security": [
+        {
+          "id": "apikey",
+          "apikey": "$GOOGLE_APIS_API_KEY"
         }
       ]
     },
@@ -480,6 +525,29 @@
           "apikey": "$AZURE_SUBSCRIPTION_KEY"
         }
       ]
+    },
+    "openweathermap": {
+      "file": "../providers/openweathermap.json",
+      "security": [
+        {
+          "id": "apikey",
+          "apikey": "$OPENWEATHERMAP_API_KEY"
+        }
+      ]
+    },
+    "ibm-cloud-text-to-speech-eu-de": {
+      "file": "../providers/ibm-cloud-text-to-speech-eu-de.json",
+      "security": [
+        {
+          "id": "basic",
+          "username": "apikey",
+          "password": "$IBM_CLOUD_TEXT_TO_SPEECH_EU_DE_KEY"
+        }
+      ]
+    },
+    "binance": {
+      "file": "../providers/binance.json",
+      "security": []
     }
   }
 }

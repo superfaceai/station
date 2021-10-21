@@ -1,4 +1,4 @@
-profile = "vcs/pull-request@1.0"
+profile = "vcs/pull-request@1.1"
 provider = "gitlab"
 
 """
@@ -10,12 +10,16 @@ map PullRequest{
   identifier = input.identifier
 
   http GET "/projects/{id}/merge_requests/{identifier}" {
-    response 200 "application/json" {
-      map result {
+    response {
+      map result if(statusCode === 200){
         title: body.title,
         id: body.iid,
         url: body.web_url,
         sha: body.sha,
+      }
+      map error if(statusCode !== 200) {
+        message: body.message,
+        statusCode: statusCode
       }
     }
   }
