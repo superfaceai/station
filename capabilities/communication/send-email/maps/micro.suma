@@ -1,0 +1,43 @@
+// API Reference: https://m3o.com/email/api
+
+profile = "communication/send-email@2.0"
+provider = "micro"
+
+map SendEmail {
+  http POST "/v1/email/Send" {
+    security "bearer_token"
+    
+    request "application/json" {
+      body {
+        // FIXME: map doesn't have an explicit field for "fromName", but m3o requires from (which specifies only name)
+        from = input.from
+        replyTo = input.from
+        to = input.to
+        subject = input.subject
+        textBody = input.text
+        htmlBody = input.html
+      }
+    }
+    
+    response 200 "application/json" {
+      map result {
+        messageId = "N/A"
+      }
+    }
+
+    response 400 "application/json" {
+      map error {
+        title = "Bad Request"
+        detail = body.Detail
+      }
+    }
+
+    response 500 "application/json" {
+      map error {
+        title = "Internal Server Error"
+        detail = body.Message
+      }
+    }
+  }
+}
+
