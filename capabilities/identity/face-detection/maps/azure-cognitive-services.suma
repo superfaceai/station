@@ -5,7 +5,6 @@ provider = "azure-cognitive-services"
 FaceDetection map
 """
 map FaceDetection {
-  instance = input.instance 
   imageUrl = input.imageUrl 
 
   http POST "/face/v1.0/detect" {

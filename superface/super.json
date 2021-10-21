@@ -303,16 +303,12 @@
         "azure-cognitive-services": {
           "file": "../capabilities/identity/face-detection/maps/azure-cognitive-services.suma"
         },
-        "google-vision-api": {
-          "file": "../capabilities/identity/face-detection/maps/google-vision-api.suma"
-        },
         "mock": {
           "file": "../capabilities/identity/face-detection/maps/mock.suma"
         }
       },
       "priority": [
         "azure-cognitive-services",
-        "google-vision-api",
         "mock"
       ]
     },
@@ -508,15 +504,6 @@
       "file": "../providers/wttr-in.json",
       "security": []
     },
-    "google-vision-api": {
-      "file": "../providers/google-vision-api.json",
-      "security": [
-        {
-          "id": "google-api-key",
-          "apikey": "$GOOGLE_API_KEY"
-        }
-      ]
-    },
     "azure-cognitive-services": {
       "file": "../providers/azure-cognitive-services.json",
       "security": [
@@ -524,7 +511,10 @@
           "id": "azure-subscription-key",
           "apikey": "$AZURE_SUBSCRIPTION_KEY"
         }
-      ]
+      ],
+      "parameters": {
+        "instance": "jakubface"
+      }
     },
     "openweathermap": {
       "file": "../providers/openweathermap.json",
