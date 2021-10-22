@@ -63,6 +63,32 @@ describe('hosts', () => {
       .mockReturnValueOnce(JSON.stringify(providerTwo));
   });
 
+  describe('#updateHosts', () => {
+    it('should remove original section if urls are empty string', () => {
+      expect(hosts.updateHosts(hostsWithSection, [])).toBe(hostsWithoutSection);
+    });
+
+    it('should add section with service urls', () => {
+      expect(hosts.updateHosts(hostsWithoutSection, ['example.com'])).toBe(
+        hostsWithSection
+      );
+    });
+
+    it('should replace section with service urls', () => {
+      expect(
+        hosts.updateHosts(hostsWithoutSection, ['example.com', 'example.org'])
+      ).toBe(
+        `
+${hostsWithoutSection}
+
+# section superface
+127.0.0.1 example.com example.org
+# end section superface
+      `.trim()
+      );
+    });
+  });
+
   describe('#getServiceUrls', () => {
     it('should return all urls from services', () => {
       expect(getServiceUrls()).toEqual([

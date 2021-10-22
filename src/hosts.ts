@@ -4,9 +4,41 @@ import { URL } from 'url';
 
 import { providersFiles } from './util';
 
-export function blockAll() {}
+export const SECTION_START = '# section superface';
+export const SECTION_END = '# end section superface';
+export const TEMPLATE = `
+${SECTION_START}
+127.0.0.1 %s
+${SECTION_END}
+`.trim();
 
-export function allowAll() {}
+export function updateHosts(hosts: string, serviceUrls: string[]): string {
+  const sectionStart = hosts.indexOf(SECTION_START);
+  const sectionEnd = hosts.indexOf(SECTION_END) + SECTION_END.length;
+
+  let cleanHosts: string;
+
+  if (sectionStart > -1 && sectionEnd > -1) {
+    const head = hosts.substr(0, sectionStart);
+    const tail = hosts.substr(sectionEnd);
+
+    cleanHosts = head + tail;
+  } else {
+    cleanHosts = hosts;
+  }
+
+  cleanHosts = cleanHosts.trim();
+
+  if (serviceUrls.length === 0) {
+    return cleanHosts;
+  }
+
+  return `
+${cleanHosts}
+
+${formatTemplate(TEMPLATE, serviceUrls.join(' '))}
+  `.trim();
+}
 
 export function getServiceUrls(): string[] {
   const providerPaths = providersFiles();
