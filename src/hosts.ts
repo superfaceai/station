@@ -66,7 +66,7 @@ ${formatTemplate(TEMPLATE, serviceUrls.join(' '))}
   `.trim();
 }
 
-export function getServiceUrls(): string[] {
+export function getServiceUrls(print = console.log): string[] {
   const providerPaths = providersFiles();
 
   const urls: string[] = [];
@@ -77,7 +77,7 @@ export function getServiceUrls(): string[] {
     );
 
     if (!isProviderJson(providerJson)) {
-      console.log(`${providerPath} isn't valid provider definitions`);
+      print(`WARN: ${providerPath} isn't valid provider definitions`);
       continue;
     }
 
@@ -86,8 +86,8 @@ export function getServiceUrls(): string[] {
         const url = new URL(service.baseUrl);
         urls.push(url.host);
       } catch (e) {
-        console.error(
-          `Invalid url "${service.baseUrl}" for profile "${providerJson.name}" service "${service.id}"`
+        print(
+          `WARN: Invalid url "${service.baseUrl}" for profile "${providerJson.name}" service "${service.id}"`
         );
       }
     }
