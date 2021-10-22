@@ -1,6 +1,7 @@
 import { isProviderJson } from '@superfaceai/ast';
-import { readFileSync as readFile } from 'fs';
+import { readFileSync as readFile, writeFileSync as writeFile } from 'fs';
 import { URL } from 'url';
+import { format as formatTemplate } from 'util';
 
 import { providersFiles } from './util';
 
@@ -18,6 +19,23 @@ export function load(): string {
 
 export function save(hosts: string): void {
   writeFile('/etc/hosts', hosts);
+}
+
+export function block(): void {
+  const hosts = load();
+
+  const serviceUrls = getServiceUrls();
+  const updatedHosts = updateHosts(hosts, serviceUrls);
+
+  save(updatedHosts);
+}
+
+export function allow(): void {
+  const hosts = load();
+
+  const updatedHosts = updateHosts(hosts, []);
+
+  save(updatedHosts);
 }
 
 export function updateHosts(hosts: string, serviceUrls: string[]): string {
@@ -76,4 +94,25 @@ export function getServiceUrls(): string[] {
   }
 
   return urls;
+}
+
+export function run(print = console.log): void {
+  const action = process.argv[2];
+
+  if (action === 'block') {
+    block();
+  } else if (action === 'allow') {
+    allow();
+  } else {
+    print(`
+    hosts.ts <action>
+
+    action:
+    - block
+  `);
+  }
+}
+
+if (require.main === module) {
+  void run();
 }

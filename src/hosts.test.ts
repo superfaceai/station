@@ -1,10 +1,9 @@
-import { SuperJson } from '@superfaceai/one-sdk';
-import { mocked } from 'ts-jest/utils';
-import * as fs from 'fs';
-
-import * as util from './util';
 import { ProviderJson } from '@superfaceai/ast';
-import { getServiceUrls } from './hosts';
+import * as fs from 'fs';
+import { mocked } from 'ts-jest/utils';
+
+import * as hosts from './hosts';
+import * as util from './util';
 
 jest.mock('./util');
 jest.mock('fs');
@@ -39,29 +38,28 @@ const providerTwo: ProviderJson = {
   defaultService: 'default',
 };
 
+const hostsWithoutSection = `
+127.0.0.1	localhost
+255.255.255.255	broadcasthost
+::1             localhost
+`.trim();
+
+const hostsWithSection = `
+127.0.0.1	localhost
+255.255.255.255	broadcasthost
+::1             localhost
+
+# section superface
+127.0.0.1 example.com
+# end section superface
+`.trim();
+
 describe('hosts', () => {
   beforeEach(() => {
     mocked(util.providersFiles).mockReturnValue(['./one.json', './two.json']);
-
-    mocked(util.loadSuperJson)
-      .mockReset()
-      .mockReturnValue(
-        new SuperJson({
-          providers: {
-            one: {
-              file: './one.json',
-            },
-            two: {
-              file: './two.json',
-            },
-          },
-        })
-      );
-
-    mocked(fs.readFileSync)
-      .mockReturnValueOnce(JSON.stringify(providerOne))
-      .mockReturnValueOnce(JSON.stringify(providerTwo));
   });
+
+  describe('#allow', () => {});
 
   describe('#updateHosts', () => {
     it('should remove original section if urls are empty string', () => {
@@ -76,13 +74,13 @@ describe('hosts', () => {
 
     it('should replace section with service urls', () => {
       expect(
-        hosts.updateHosts(hostsWithoutSection, ['example.com', 'example.org'])
+        hosts.updateHosts(hostsWithoutSection, ['example.com', 'example.net'])
       ).toBe(
         `
 ${hostsWithoutSection}
 
 # section superface
-127.0.0.1 example.com example.org
+127.0.0.1 example.com example.net
 # end section superface
       `.trim()
       );
@@ -90,8 +88,14 @@ ${hostsWithoutSection}
   });
 
   describe('#getServiceUrls', () => {
+    beforeEach(() => {
+      mocked(fs.readFileSync)
+        .mockReturnValueOnce(JSON.stringify(providerOne))
+        .mockReturnValueOnce(JSON.stringify(providerTwo));
+    });
+
     it('should return all urls from services', () => {
-      expect(getServiceUrls()).toEqual([
+      expect(hosts.getServiceUrls()).toEqual([
         'example.com',
         'example.coffee',
         'example.net',
