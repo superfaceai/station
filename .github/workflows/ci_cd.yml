@@ -76,11 +76,14 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-yarn-
       - run: yarn install
+      - run: sudo yarn capabilities:hosts:block
+      - run: cat /etc/hosts
       - run: yarn capabilities:check
       - run: yarn capabilities:lint
         continue-on-error: true
       - run: yarn capabilities:structure
-      # - run: yarn capabilities:test
+      - run: yarn capabilities:test
+        continue-on-error: true
 
   license_check:
     name: License check
