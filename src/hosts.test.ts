@@ -98,4 +98,26 @@ ${hostsWithoutSection}
       ]);
     });
   });
+
+  describe('#load', () => {
+    beforeEach(() => {
+      hosts.load();
+    });
+
+    it('should call readFileSync', () => {
+      expect(fs.readFileSync).toBeCalledWith('/etc/hosts', {
+        encoding: 'utf8',
+      });
+    });
+  });
+
+  describe('#save', () => {
+    beforeEach(() => {
+      hosts.save('');
+    });
+
+    it('should call writeFileSync', () => {
+      expect(fs.writeFileSync).toBeCalledWith('/etc/hosts', '');
+    });
+  });
 });

@@ -12,6 +12,14 @@ ${SECTION_START}
 ${SECTION_END}
 `.trim();
 
+export function load(): string {
+  return readFile('/etc/hosts', { encoding: 'utf8' });
+}
+
+export function save(hosts: string): void {
+  writeFile('/etc/hosts', hosts);
+}
+
 export function updateHosts(hosts: string, serviceUrls: string[]): string {
   const sectionStart = hosts.indexOf(SECTION_START);
   const sectionEnd = hosts.indexOf(SECTION_END) + SECTION_END.length;
