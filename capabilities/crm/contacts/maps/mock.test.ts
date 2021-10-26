@@ -44,7 +44,7 @@ describe(`crm/contacts/mock`, () => {
       const result = await profile
         .getUseCase('Search')
         .perform(
-          { property: 'company', operator: '=', value: 'Example' },
+          { property: 'company', operator: 'EQ', value: 'Example' },
           { provider }
         );
 

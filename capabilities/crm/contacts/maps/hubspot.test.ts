@@ -112,7 +112,7 @@ describe(`crm/contacts/hubspot`, () => {
             useCase: 'Search',
             input: {
               property: 'firstname',
-              operator: '=',
+              operator: 'EQ',
               value: 'Test',
             },
           },

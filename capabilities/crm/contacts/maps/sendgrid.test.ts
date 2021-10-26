@@ -87,7 +87,7 @@ describe(`crm/contacts/sendgrid`, () => {
           useCase: 'Search',
           input: {
             property: 'firstName',
-            operator: '=',
+            operator: 'EQ',
             value: 'test',
           },
         })

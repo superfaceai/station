@@ -135,6 +135,13 @@ map Update {
 
 map Search {
   set {
+    OPERATOR_MAP = {
+      'EQ': '=',
+      'NEQ': '!=',
+    }
+  }
+
+  set {
     FIELD_MAP = {
       phone: 'phone_number',
       firstName: 'first_name',
@@ -143,18 +150,12 @@ map Search {
     }
   }
 
-  // validate operator
-  return map error if (["=", "!="].includes(input.operator) === false) {
-    title = "Unknown operator"
-    detail = `Operator ${input.operator} is not recognized`
-  }
-
   http POST "/marketing/contacts/search" {
     security "bearer_token"
 
     request {
       body {
-        query = `${FIELD_MAP[input.property] || input.property} ${input.operator} "${input.value}"`
+        query = `${FIELD_MAP[input.property] || input.property} ${OPERATOR_MAP[input.operator]} "${input.value}"`
       }
     }
 

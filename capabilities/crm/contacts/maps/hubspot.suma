@@ -106,18 +106,6 @@ map Update {
 
 map Search {
   set {
-    OPERATOR_MAP = {
-      '=': 'EQ',
-      '!=': 'NEQ',
-    }
-  }
-
-  return map error if (OPERATOR_MAP[input.operator] === undefined) {
-    title = "Unknown operator"
-    detail = `Operator ${input.operator} is not recognized`
-  }
-
-  set {
     FIELD_MAP = {
       firstName: 'firstname',
       lastName: 'lastname',
@@ -134,7 +122,7 @@ map Search {
             filters: [
               {
                 propertyName: FIELD_MAP[input.property] || input.property,
-                operator: OPERATOR_MAP[input.operator],
+                operator: input.operator,
                 value: input.value,
               },
             ],
