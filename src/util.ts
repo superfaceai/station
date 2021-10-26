@@ -1,6 +1,4 @@
-import { ProfileId } from '@superfaceai/cli/dist/common/profile';
 import { SuperJson } from '@superfaceai/one-sdk';
-import { parseDocumentId } from '@superfaceai/parser';
 import * as fs from 'fs';
 import * as glob from 'glob';
 import { promisify } from 'util';
@@ -16,11 +14,6 @@ export const EXTENSIONS = {
   map: 'suma',
 };
 
-export type CheckCombination = {
-  profile: { id: ProfileId };
-  provider: string;
-};
-
 let _superJson: SuperJson;
 
 export function loadSuperJson(): SuperJson {
@@ -29,35 +22,6 @@ export function loadSuperJson(): SuperJson {
   }
 
   return _superJson;
-}
-
-export function allProfileProviderCombinations(
-  superJson: SuperJson = loadSuperJson()
-): CheckCombination[] {
-  const profiles = superJson.normalized.profiles;
-  const checkCombinations: CheckCombination[] = [];
-
-  for (const profileId in profiles) {
-    const parseResult = parseDocumentId(profileId);
-
-    if (parseResult.kind === 'error') {
-      throw new Error(`Invalid profile id: ${parseResult.message}`);
-    }
-
-    const profile = {
-      id: ProfileId.fromScopeName(
-        parseResult.value.scope,
-        parseResult.value.middle[0]
-      ),
-    };
-
-    const profileSettings = profiles[profileId];
-    for (const provider in profileSettings.providers) {
-      checkCombinations.push({ profile, provider });
-    }
-  }
-
-  return checkCombinations;
 }
 
 export function normalizePath(
