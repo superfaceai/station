@@ -87,7 +87,7 @@ export function getServiceUrls(print = console.log): string[] {
         urls.push(url.host);
       } catch (e) {
         print(
-          `WARN: Invalid url "${service.baseUrl}" for profile "${providerJson.name}" service "${service.id}"`
+          `WARN: Invalid url "${service.baseUrl}" for provider "${providerJson.name}" and service "${service.id}"`
         );
       }
     }
@@ -109,6 +109,7 @@ export function run(print = console.log): void {
 
     action:
     - block
+    - allow
   `);
   }
 }

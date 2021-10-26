@@ -59,8 +59,6 @@ describe('hosts', () => {
     mocked(util.providersFiles).mockReturnValue(['./one.json', './two.json']);
   });
 
-  describe('#allow', () => {});
-
   describe('#updateHosts', () => {
     it('should remove original section if urls are empty string', () => {
       expect(hosts.updateHosts(hostsWithSection, [])).toBe(hostsWithoutSection);

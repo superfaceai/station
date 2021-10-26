@@ -47,7 +47,6 @@ describe('Station Structure', () => {
 
     it('should return not linked files as warning', async () => {
       mocked(util.arrayDiff)
-        .mockReset()
         .mockReturnValueOnce(['./provider.json'])
         .mockReturnValueOnce([]);
 
