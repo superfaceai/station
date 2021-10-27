@@ -328,6 +328,20 @@
           "file": "../capabilities/crypto/exchange-rate/maps/mock.suma"
         }
       }
+    },
+    "crm/contacts": {
+      "file": "../capabilities/crm/contacts/profile.supr",
+      "providers": {
+        "mock": {
+          "file": "../capabilities/crm/contacts/maps/mock.suma"
+        },
+        "sendgrid": {
+          "file": "../capabilities/crm/contacts/maps/sendgrid.suma"
+        },
+        "hubspot": {
+          "file": "../capabilities/crm/contacts/maps/hubspot.suma"
+        }
+      }
     }
   },
   "providers": {
@@ -511,6 +525,15 @@
     "binance": {
       "file": "../providers/binance.json",
       "security": []
+    },
+    "hubspot": {
+      "file": "../providers/hubspot.json",
+      "security": [
+        {
+          "id": "apiKey",
+          "apikey": "$HUBSPOT_API_KEY"
+        }
+      ]
     }
   }
 }
