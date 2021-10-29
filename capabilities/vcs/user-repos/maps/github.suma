@@ -18,7 +18,7 @@ operation Paginate {
   page = 1
   //Hack to create a while with maximum loop count - use Superface stdlib instead
   call foreach(_x of Array(2**32 -1)) FetchRepos(user = args.user, page = page) {
-    fail if (outcome.data.statusCode !== 200) outcome.data
+    fail if (outcome.error) outcome.error
     data = [...data, ...outcome.data.repositories]
   
     page = page + 1
@@ -42,7 +42,7 @@ operation FetchRepos {
       }
     }
     response {
-      return if(statusCode !== 200){
+      fail if(statusCode !== 200){
       message: body.message,
       description: body.documentation_url,
       statusCode: statusCode
