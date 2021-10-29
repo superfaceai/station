@@ -22,7 +22,7 @@ operation Paginate {
   page = 1
   //Hack to create a while loop. Use Superface stdlib instead
   call foreach(_x of Array(2**32-1)) FetchPullRequests(owner = args.owner, repo = args.repo, page = page) {
-    fail if (outcome.data.statusCode !== 200) outcome.data
+    fail if (outcome.error) outcome.error
 
     data = [...data, ...outcome.data.pullRequests]
 
@@ -46,7 +46,7 @@ operation FetchPullRequests {
       }
     }
     response  {
-      return if(statusCode !== 200) {
+      fail if(statusCode !== 200) {
         message: body.error.message,
         statusCode: statusCode
       }
