@@ -321,15 +321,15 @@
     "computer-vision/face-detection": {
       "file": "../capabilities/computer-vision/face-detection/profile.supr",
       "providers": {
-        "google-vision-api": {
-          "file": "../capabilities/computer-vision/face-detection/maps/google-vision-api.suma"
+        "google-apis-computer-vision": {
+          "file": "../capabilities/computer-vision/face-detection/maps/google-apis-computer-vision.suma"
         },
         "mock": {
           "file": "../capabilities/computer-vision/face-detection/maps/mock.suma"
         }
       },
       "priority": [
-        "google-vision-api",
+        "google-apis-computer-vision",
         "mock"
       ]
     },
@@ -518,8 +518,8 @@
       "file": "../providers/wttr-in.json",
       "security": []
     },
-    "google-vision-api": {
-      "file": "../providers/google-vision-api.json",
+    "google-apis-computer-vision": {
+      "file": "../providers/google-apis-computer-vision.json",
       "security": [
         {
           "id": "google-api-key",

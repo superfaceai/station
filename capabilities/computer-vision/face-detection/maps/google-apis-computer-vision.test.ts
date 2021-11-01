@@ -1,6 +1,6 @@
 import { RecordingScopes, SuperfaceTest } from '@superfaceai/testing-lib';
 
-describe(`computer-vision/face-detection/google-vision-api`, () => {
+describe(`computer-vision/face-detection/google-apis-computer-vision`, () => {
   let superface: SuperfaceTest;
 
   beforeEach(() => {
@@ -13,7 +13,7 @@ describe(`computer-vision/face-detection/google-vision-api`, () => {
         superface.run(
           {
             profile: 'computer-vision/face-detection',
-            provider: 'google-vision-api',
+            provider: 'google-apis-computer-vision',
             useCase: 'FaceDetection',
             input: {
               imageUrl:
@@ -29,7 +29,7 @@ describe(`computer-vision/face-detection/google-vision-api`, () => {
         superface.run(
           {
             profile: 'computer-vision/face-detection',
-            provider: 'google-vision-api',
+            provider: 'google-apis-computer-vision',
             useCase: 'FaceDetection',
             input: {
               imageUrl: 'https://upload.wikimedia.org',
