@@ -1,5 +1,8 @@
-import { isMapDocumentNode, isProfileDocumentNode } from '@superfaceai/ast';
-import { isProviderJson } from '@superfaceai/one-sdk';
+import {
+  isMapDocumentNode,
+  isProfileDocumentNode,
+  isProviderJson,
+} from '@superfaceai/ast';
 import { parseMap, parseProfile, Source } from '@superfaceai/parser';
 import { ServiceApiError, ServiceClient } from '@superfaceai/service-client';
 

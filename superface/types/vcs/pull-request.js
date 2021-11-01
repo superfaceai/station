@@ -4,7 +4,7 @@ exports.vcsPullRequest = void 0;
 var one_sdk_1 = require("@superfaceai/one-sdk");
 var profile = {
     /**
-     * Get Pull Request Details
+     * PullRequest
      * Get details of the specified pull request.
      **/
     "PullRequest": one_sdk_1.typeHelper()

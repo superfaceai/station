@@ -332,6 +332,31 @@
         "google-vision-api",
         "mock"
       ]
+    },
+    "crypto/exchange-rate": {
+      "file": "../capabilities/crypto/exchange-rate/exchange-rate.supr",
+      "providers": {
+        "binance": {
+          "file": "../capabilities/crypto/exchange-rate/maps/binance.suma"
+        },
+        "mock": {
+          "file": "../capabilities/crypto/exchange-rate/maps/mock.suma"
+        }
+      }
+    },
+    "crm/contacts": {
+      "file": "../capabilities/crm/contacts/profile.supr",
+      "providers": {
+        "mock": {
+          "file": "../capabilities/crm/contacts/maps/mock.suma"
+        },
+        "sendgrid": {
+          "file": "../capabilities/crm/contacts/maps/sendgrid.suma"
+        },
+        "hubspot": {
+          "file": "../capabilities/crm/contacts/maps/hubspot.suma"
+        }
+      }
     }
   },
   "providers": {
@@ -518,6 +543,19 @@
           "id": "basic",
           "username": "apikey",
           "password": "$IBM_CLOUD_TEXT_TO_SPEECH_EU_DE_KEY"
+        }
+      ]
+    },
+    "binance": {
+      "file": "../providers/binance.json",
+      "security": []
+    },
+    "hubspot": {
+      "file": "../providers/hubspot.json",
+      "security": [
+        {
+          "id": "apiKey",
+          "apikey": "$HUBSPOT_API_KEY"
         }
       ]
     }

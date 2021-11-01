@@ -1,0 +1,45 @@
+profile = "crypto/exchange-rate@1.0"
+provider = "binance"
+
+"""
+ExchangeRate map
+"""
+map GetExchangeRate {
+  call sendExchangeRateRequest(from = input.from, to = input.to) {
+    return map result if (!outcome.error) {
+      rate = outcome.data
+    }
+  }
+
+  call sendExchangeRateRequest(from = input.to, to = input.from) {
+    return map result if (!outcome.error) {
+      rate = String((1 / outcome.data).toFixed(8))
+    }
+    return map error {
+      title = outcome.error.title
+      detail = outcome.error.detail
+    }
+  }
+}
+
+operation sendExchangeRateRequest {
+  http GET "/api/v3/ticker/price" {
+    security none
+    request {
+      query {
+        symbol = args.from + args.to
+      }
+    }
+
+    response 200 "application/json" {
+      return body.price
+    }
+
+    response 400 "application/json" {
+      fail {
+        title = "400 - Bad Request"
+        detail = body.msg
+      }
+    }
+  }
+}

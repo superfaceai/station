@@ -1,7 +1,4 @@
-import { check, CheckResult } from '@superfaceai/cli/dist/logic/check';
-
 import {
-  allProfileProviderCombinations,
   arrayDiff,
   loadSuperJson,
   localMaps,
@@ -12,37 +9,10 @@ import {
   providersFiles,
 } from './util';
 
-export async function checkCapabilities(): Promise<CheckResult[]> {
-  const checkCombinations = allProfileProviderCombinations();
-  const superJson = loadSuperJson();
-
-  const results: CheckResult[] = [];
-
-  const map: {
-    variant?: string; // no reason for variants in Station
-  } = {};
-
-  for (const checkCombination of checkCombinations) {
-    try {
-      const checkResults = await check(
-        superJson,
-        checkCombination.profile,
-        checkCombination.provider,
-        map
-      );
-
-      results.push(...checkResults);
-    } catch (err) {
-      if (err instanceof Error) {
-        results.push({ kind: 'error', message: err.message });
-      } else {
-        results.push({ kind: 'error', message: 'Unknown error' });
-      }
-    }
-  }
-
-  return results;
-}
+export type CheckResult = {
+  kind: 'error' | 'warn';
+  message: string;
+};
 
 export async function checkFiles(): Promise<CheckResult[]> {
   const localFiles: string[] = [];
@@ -100,7 +70,6 @@ export async function checkMockMap(): Promise<CheckResult[]> {
 export async function run(print = console.log): Promise<void> {
   const results: CheckResult[] = [];
 
-  results.push(...(await checkCapabilities()));
   results.push(...(await checkFiles()));
   results.push(...(await checkMockMap()));
   // TODO: check test is present

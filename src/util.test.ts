@@ -54,59 +54,6 @@ describe('util', () => {
     });
   });
 
-  describe('allProfileProviderCombinations', () => {
-    let mockSuperJson: SuperJson;
-
-    beforeEach(() => {
-      mockSuperJson = new SuperJson({
-        profiles: {
-          'scope/name': {
-            file: '',
-            providers: {
-              providerOne: {},
-              providerTwo: {},
-            },
-          },
-        },
-        providers: {
-          providerOne: {
-            file: '',
-          },
-          providerTwo: {
-            file: '',
-          },
-        },
-      });
-    });
-
-    it('should return all profile + provider combinations', () => {
-      const result = util.allProfileProviderCombinations(mockSuperJson);
-
-      expect(result).toEqual([
-        {
-          profile: {
-            id: {
-              id: 'scope/name',
-              scope: 'scope',
-              name: 'name',
-            },
-          },
-          provider: 'providerOne',
-        },
-        {
-          profile: {
-            id: {
-              id: 'scope/name',
-              scope: 'scope',
-              name: 'name',
-            },
-          },
-          provider: 'providerTwo',
-        },
-      ]);
-    });
-  });
-
   describe('normalizePath', () => {
     let superJson: SuperJson;
 

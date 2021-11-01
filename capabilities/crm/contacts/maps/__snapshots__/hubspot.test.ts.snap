@@ -1,0 +1,51 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`crm/contacts/hubspot Create should perform successfully 1`] = `
+Object {
+  "value": Object {
+    "id": "601",
+  },
+}
+`;
+
+exports[`crm/contacts/hubspot Search should perform successfully 1`] = `
+Object {
+  "value": Array [
+    Object {
+      "company": undefined,
+      "country": undefined,
+      "email": "test@example.com",
+      "firstName": "Test",
+      "id": "601",
+      "lastName": "User",
+      "phone": undefined,
+    },
+  ],
+}
+`;
+
+exports[`crm/contacts/hubspot Search should return error for unknown operator 1`] = `
+Object {
+  "error": "Input validation failed:
+Path: input.operator
+Error: Invalid enum value: \\"%\\"
+Path: input.operator
+Error: Invalid enum value: \\"%\\"",
+}
+`;
+
+exports[`crm/contacts/hubspot Update should perform successfully 1`] = `
+Object {
+  "value": Object {
+    "id": "401",
+  },
+}
+`;
+
+exports[`crm/contacts/hubspot Update should return error if id is missing 1`] = `
+Object {
+  "error": "HTTPError: Expected HTTP error
+AST Path: definitions[1].statements[0]
+Original Map Location: Line 52, column 3",
+}
+`;

@@ -1,0 +1,41 @@
+profile = "crm/contacts@1.0"
+provider = "mock"
+
+map Create {
+  map result {
+    id = "john@example.com"
+  }
+}
+
+map Update {
+  map result {
+    id = "john@example.com"
+  }  
+}
+
+map Search {
+  map result [
+    {
+      id: "john@example.com",
+      email: "john@example.com",
+      phone: "+420 123 456 789",
+      firstName: "John",
+      lastName: "Doe",
+      company: "Example",
+      country: "Czech republic",
+      customProperties: {
+        waitlist: true
+      }
+    },
+    {
+      id: "alice@example.com",
+      email: "alice@example.com",
+      phone: "+1 (415) 111-2222",
+      firstName: "Alice",
+      lastName: "Cooper",
+      company: "Example",
+      country: "United States",
+      customProperties: {}
+    }
+  ]
+}
