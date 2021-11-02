@@ -25,7 +25,7 @@ map ListTemplates {
 }
 
 map GetTemplateContent {
-  http GET "/templates/{input.id}" {
+  http GET "/templates/{input.id.toString()}" {
     security "server_token"
 
     request "application/json" {}
@@ -63,7 +63,7 @@ map CreateTemplate {
 }
 
 map UpdateTemplate {
-  http PUT "/templates/{input.id}" {
+  http PUT "/templates/{input.id.toString()}" {
     security "server_token"
 
     request "application/json" {
