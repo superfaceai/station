@@ -7,7 +7,7 @@ map Create {
     detail = "SendGrid requires email on contact"
   }
 
-  http PUT "/marketing/contacts" {
+  http PUT "/v3/marketing/contacts" {
     security "bearer_token"
 
     request {
@@ -74,7 +74,7 @@ map Update {
     detail = "You must specify id or email to identify contact"
   }
 
-  http PUT "/marketing/contacts" {
+  http PUT "/v3/marketing/contacts" {
     security "bearer_token"
 
     request {
@@ -150,7 +150,7 @@ map Search {
     }
   }
 
-  http POST "/marketing/contacts/search" {
+  http POST "/v3/marketing/contacts/search" {
     security "bearer_token"
 
     request {

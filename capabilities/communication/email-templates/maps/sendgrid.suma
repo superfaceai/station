@@ -2,10 +2,11 @@ profile = "communication/email-templates@1.0"
 provider = "sendgrid"
 
 """
-Not paginated, if you have more than 200 templates result might be incomplete
+Not paginated
+If you have more than 200 templates result might be incomplete
 """
 map ListTemplates {
-  http GET "/templates" {
+  http GET "/v3/templates" {
     security "bearer_token"
 
     request {
@@ -25,7 +26,7 @@ map ListTemplates {
 }
 
 map GetTemplateContent {
-  http GET "/templates/{input.id}" {
+  http GET "/v3/templates/{input.id}" {
     security "bearer_token"
 
     response 200 "application/json" {
@@ -77,7 +78,7 @@ map UpdateTemplate {
 }
 
 operation FetchTemplateCall {
-  http GET "/templates/{args.templateId}" {
+  http GET "/v3/templates/{args.templateId}" {
     security "bearer_token"
 
     response 200 "application/json" {
@@ -87,7 +88,7 @@ operation FetchTemplateCall {
 }
 
 operation CreateTemplateCall {
-  http POST "/templates" {
+  http POST "/v3/templates" {
     security "bearer_token"
 
     request {
@@ -104,7 +105,7 @@ operation CreateTemplateCall {
 }
 
 operation CreateTemplateVersionCall {
-  http POST "/templates/{args.templateId}/versions" {
+  http POST "/v3/templates/{args.templateId}/versions" {
     security "bearer_token"
 
     request {
@@ -124,7 +125,7 @@ operation CreateTemplateVersionCall {
 }
 
 operation UpdateTemplateCall {
-  http PATCH "/templates/{args.templateId}" {
+  http PATCH "/v3/templates/{args.templateId}" {
     security "bearer_token"
 
     request {

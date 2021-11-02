@@ -10,7 +10,11 @@ Object {
 
 exports[`crm/contacts/sendgrid Create should return error if email is missing 1`] = `
 Object {
-  "error": "HTTPError: Expected HTTP error
+  "error": "MappedError: Expected error
+Properites: {
+  \\"title\\": \\"Missing field\\",
+  \\"detail\\": \\"SendGrid requires email on contact\\"
+}
 AST Path: definitions[0].statements[0]
 Original Map Location: Line 5, column 3",
 }
@@ -22,11 +26,11 @@ Object {
     Object {
       "country": "",
       "customProperties": Object {
-        "existingField": "value",
+        "test": "value",
       },
       "email": "test@example.com",
       "firstName": "test",
-      "id": "9fd2a571-2f57-4410-8974-ddae6a4fb134",
+      "id": "ed62c84e-59fe-4bb5-8a96-323b1b5db10b",
       "lastName": "",
       "phone": "",
     },
@@ -54,7 +58,11 @@ Object {
 
 exports[`crm/contacts/sendgrid Update should return error if email is missing 1`] = `
 Object {
-  "error": "HTTPError: Expected HTTP error
+  "error": "MappedError: Expected error
+Properites: {
+  \\"title\\": \\"Missing field\\",
+  \\"detail\\": \\"You must specify id or email to identify contact\\"
+}
 AST Path: definitions[1].statements[0]
 Original Map Location: Line 70, column 3",
 }
