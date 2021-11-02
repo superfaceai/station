@@ -53,7 +53,7 @@ map ReverseGeocode {
       }
       
       map result addresses.map(address => {
-        result = {}
+        let result = {}
         
         // country code
         if (address.countryCodeISO3 || address.countryCode) {
