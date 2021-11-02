@@ -14,7 +14,7 @@ usecase SendMessage {
   input {
     """
     Destination
-    Representation of a messaging destination. Can be ID or channel name, depending on the provider capability."
+    Representation of a messaging destination. Can be ID or channel name, depending on the provider capability.
     """
     destination! string!
 
@@ -27,10 +27,10 @@ usecase SendMessage {
 
   result {
     """"
-    Destination ID
+    Destination
     Identifier of the destination where the message was sent.
     """
-    destinationId
+    destination
 
     """
     Message ID
