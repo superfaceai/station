@@ -1,3 +1,5 @@
 import { emailTemplatestTest } from './email-templates';
 
-emailTemplatestTest('mock');
+emailTemplatestTest('mock', {
+  id: 'mocked',
+});
