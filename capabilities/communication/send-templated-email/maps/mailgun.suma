@@ -4,10 +4,7 @@ profile = "communication/send-templated-email@1.0"
 provider = "mailgun"
 
 map SendTemplatedEmail {
-  // TODO: make this input visible
-  domain = input.domain
-
-  http POST "/{domain}/messages" {
+  http POST "/v3/{parameters.DOMAIN}/messages" {
     security "basic"
 
     request "application/x-www-form-urlencoded" {

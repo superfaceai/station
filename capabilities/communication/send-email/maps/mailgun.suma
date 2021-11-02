@@ -3,10 +3,7 @@
 profile = "communication/send-email@2.0"
 provider = "mailgun"
 
-map SendEmail {
-  // TODO: make this input visible
-  domain = input.domain
-  
+map SendEmail {  
   body = {
     from: input.from,
     to: input.to,
@@ -21,7 +18,7 @@ map SendEmail {
     body.html = input.html
   }
 
-  http POST "/{domain}/messages" {
+  http POST "/v3/{parameters.DOMAIN}/messages" {
     security "basic"
 
     request "application/x-www-form-urlencoded" {
