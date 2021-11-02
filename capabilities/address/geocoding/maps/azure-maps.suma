@@ -10,7 +10,7 @@ map Geocode {
   http GET "/json" {
     request {
       query {
-        'subscription-key' = input.subscriptionKey
+        'subscription-key' = parameters.SUBSCRIPTION_KEY
         'api-version' = '1.0'
         query = payload
       }
@@ -35,7 +35,7 @@ map ReverseGeocode {
   http GET "/reverse/json" {
     request {
       query {
-        'subscription-key' = input.subscriptionKey
+        'subscription-key' = parameters.SUBSCRIPTION_KEY
         'api-version' = '1.0'
         query = payload
       }
