@@ -476,10 +476,12 @@
     },
     "azure-maps": {
       "file": "../providers/azure-maps.json",
-      "security": [],
-      "parameters": {
-        "SUBSCRIPTION_KEY": "$AZURE_MAPS_SUBSCRIPTION_KEY"
-      }
+      "security": [
+        {
+          "id": "subscription-key",
+          "apikey": "$AZURE_MAPS_SUBSCRIPTION_KEY"
+        }
+      ]
     },
     "slack": {
       "file": "../providers/slack.json",

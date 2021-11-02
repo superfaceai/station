@@ -7,10 +7,12 @@
     }
   ],
   "defaultService": "default",
-  "parameters": [
+  "securitySchemes": [
     {
-      "name": "SUBSCRIPTION_KEY",
-      "description": "Your subscription key"
+      "id": "subscription-key",
+      "type": "apiKey",
+      "in": "query",
+      "name": "subscription-key"
     }
   ]
 }

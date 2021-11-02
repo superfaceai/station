@@ -8,9 +8,9 @@ map Geocode {
   payload = input.query || `${input.streetAddress || ""} ${input.addressLocality || ""} ${input.addressRegion || ""} ${input.postalCode || ""} ${input.addressCountry || ""}`;
 
   http GET "/search/address/json" {
+    security "subscription-key"
     request {
       query {
-        'subscription-key' = parameters.SUBSCRIPTION_KEY
         'api-version' = '1.0'
         query = payload
       }
@@ -61,9 +61,9 @@ map ReverseGeocode {
   payload = `${input.latitude},${input.longitude}`;
 
   http GET "/search/address/reverse/json" {
+    security "subscription-key"
     request {
       query {
-        'subscription-key' = parameters.SUBSCRIPTION_KEY
         'api-version' = '1.0'
         query = payload
       }
