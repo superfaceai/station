@@ -7,7 +7,7 @@ provider = "azure-maps"
 map Geocode {
   payload = input.query || `${input.streetAddress || ""} ${input.addressLocality || ""} ${input.addressRegion || ""} ${input.postalCode || ""} ${input.addressCountry || ""}`;
 
-  http GET "/json" {
+  http GET "/search/address/json" {
     request {
       query {
         'subscription-key' = parameters.SUBSCRIPTION_KEY
@@ -32,7 +32,7 @@ map Geocode {
 map ReverseGeocode {
   payload = `${input.latitude},${input.longitude}`;
 
-  http GET "/reverse/json" {
+  http GET "/search/address/reverse/json" {
     request {
       query {
         'subscription-key' = parameters.SUBSCRIPTION_KEY
