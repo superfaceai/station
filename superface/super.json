@@ -472,7 +472,13 @@
       ]
     },
     "mailchimp": {
-      "file": "../providers/mailchimp.json"
+      "file": "../providers/mailchimp.json",
+      "security": [
+        {
+          "id": "api_key",
+          "apikey": "$MAILCHIMP_API_KEY"
+        }
+      ]
     },
     "postmark": {
       "file": "../providers/postmark.json",
