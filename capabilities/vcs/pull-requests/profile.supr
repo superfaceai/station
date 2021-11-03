@@ -1,36 +1,72 @@
 """
-VCS Repository Pull Requests
+PullRequests
 Retrive version control system's pull requests for a repository.
 """
 name = "vcs/pull-requests"
-version = "1.0.2"
+version = "2.0.0"
 
 """
-Get Pull Requests
+PullRequests
 Get pull requests of the specified repository.
 """
-usecase PullRequests {
+usecase PullRequests safe {
   input {
-    "Owner of the repository"
+    """
+    Owner
+    Owner of the repository
+    """
     owner! string!
 
-    "Repository name"
+    """
+    Repo
+    Repository name
+    """
     repo! string!
   }
 
   result {
     pullRequests [{
-      "Title of pull request"
+      """
+      Tittle
+      Title of pull request
+      """
       title! string!
 
-      "Pull request Id"
+      """
+      Id
+      Pull request Id
+      """
       id! number!
 
-      "Web url of pull request"
+      """
+      Url
+      Web url of pull request
+      """
       url! string!
 
-      "Pull request sha"
+      """
+      Sha
+      Pull request sha
+      """
       sha! string!
     }]
+  }
+
+  error {
+    """
+    Message
+    A short, human-readable summary of the problem.
+    """
+    message! string!
+    """
+    Status code
+    Usually a HTTP status code connected to occured problem.
+    """
+    statusCode!
+    """
+    Description
+    A optional, human-readable explanation specific to this occurrence of the problem.
+    """
+    description string!
   }
 }

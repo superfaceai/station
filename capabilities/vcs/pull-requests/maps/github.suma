@@ -1,25 +1,69 @@
-profile = "vcs/pull-requests@1.0"
+profile = "vcs/pull-requests@2.0"
 provider = "github"
   
 """
-PullRequests map
+PullRequests map. Retruns all pull requests from specified repository od specified user
 """
 map PullRequests{
   owner = input.owner
   repo = input.repo
 
-  http GET "/repos/{owner}/{repo}/pulls" {
-    response 200 "application/json" {
-      map result {
-        //maps returned values to result object
-        pullRequests = body.map((r) => {
+  call Paginate(
+  owner = input.owner,
+  repo = input.repo,
+  ) {
+    return map error if (outcome.error) outcome.error
+    return map result outcome.data
+  }
+}
+
+operation Paginate {
+  data = []
+  page = 1
+  //Hack to create a while loop. Use Superface stdlib instead
+  call foreach(_x of Array(2**32-1)) FetchPullRequests(owner = args.owner, repo = args.repo, page = page) {
+    fail if (outcome.error) outcome.error
+
+    data = [...data, ...outcome.data.pullRequests]
+
+    page = page + 1
+    return if (outcome.data.isLastPage) {
+      pullRequests: data,
+      statusCode: 200
+    }
+  }
+  return {
+    pullRequests: data,
+    statusCode: 200
+  }
+}
+operation FetchPullRequests {
+  http GET "/repos/{args.owner}/{args.repo}/pulls" {
+    request {
+      query {
+        page = args.page,
+        state = 'all',
+        per_page = 3
+      }
+    }
+    response {
+      fail if(statusCode !== 200){
+        message: body.message,
+        description: body.documentation_url,
+        statusCode: statusCode
+      }
+
+      return {
+        pullRequests: body.map((pr) => {
           return {
-            title: r.title,
-            id: r.id,
-            url: r.url,
-            sha: r.head.sha,
+            title: pr.title,
+            id: pr.id,
+            url: pr.url,
+            sha: pr.head.sha,
           }
-        })
+        }),
+        statusCode: statusCode,
+        isLastPage: !headers.link.includes('rel="next"')
       }
     }
   }
