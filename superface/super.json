@@ -124,14 +124,7 @@
       "file": "../capabilities/address/clean-address/profile.supr",
       "providers": {
         "smartystreets": {
-          "file": "../capabilities/address/clean-address/maps/smartystreets.suma",
-          "defaults": {
-            "CleanAddress": {
-              "input": {
-                "SMARTYSTREETS_AUTH_ID": "$SMARTYSTREETS_AUTH_ID"
-              }
-            }
-          }
+          "file": "../capabilities/address/clean-address/maps/smartystreets.suma"
         },
         "mock": {
           "file": "../capabilities/address/clean-address/maps/mock.suma"
@@ -416,7 +409,10 @@
           "id": "auth-token",
           "apikey": "$SMARTYSTREETS_API_KEY"
         }
-      ]
+      ],
+      "parameters": {
+        "AUTH_ID": "$SMARTYSTREETS_AUTH_ID"
+      }
     },
     "vonage-nexmo": {
       "file": "../providers/vonage-nexmo.json",

@@ -1,8 +1,8 @@
 profile = "address/clean-address@1.0"
 provider = "smartystreets"
 
-map CleanAddress{
-  authId = input.SMARTYSTREETS_AUTH_ID
+map CleanAddress {
+  authId = parameters.AUTH_ID
 
   http POST "/street-address" {
     security "auth-token"
@@ -24,6 +24,30 @@ map CleanAddress{
         city = body[0].components.city_name
         state = body[0].components.state_abbreviation
         zipcode = body[0].components.zipcode
+      }
+    }
+
+    response 400 {
+      map error {
+        title = "Bad request"
+      }
+    }
+
+    response 401 {
+      map error {
+        title = "Unauthorized"
+      }
+    }
+
+    response 403 {
+      map error {
+        title = "Forbidden"
+      }
+    }
+
+    response 500 {
+      map error {
+        title = "Internal server Error"
       }
     }
   }
