@@ -42,4 +42,42 @@ usecase CleanAddress {
     state
     zipcode
   }
+
+  error {
+    """
+    Title
+    A short, human-readable summary of the problem type.
+    """
+    title!
+
+    """
+    Detail
+    A human-readable explanation specific to this occurrence of the problem.
+    """
+    detail
+  }
 }
+
+"""
+Street
+Street Address
+"""
+field street
+
+"""
+City
+City or Town
+"""
+field city
+
+"""
+State
+State or Province
+"""
+field state
+
+"""
+ZIP code
+Zip or Postal code
+"""
+field zipcode
