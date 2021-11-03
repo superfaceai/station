@@ -76,9 +76,7 @@ export const geocodingTest = (
 
       describe('when inputs are invalid', () => {
         it('should throw an exception', async () => {
-          const input = {
-            longitude: 0,
-          };
+          const input = {};
           await expect(
             superface.run(
               {
