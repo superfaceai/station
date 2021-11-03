@@ -2,11 +2,11 @@
   {
     "scope": "https://api.mailgun.net:443",
     "method": "POST",
-    "path": "/v3/demo.superface.org/messages",
+    "path": "/v3/example.com/messages",
     "body": "from=demo%40demo.superface.org&to=demo%40superface.ai&template=station-test&h%3Ax-mailgun-variables=%7B%22from%22%3A%22demo%40demo.superface.org%22%2C%22to%22%3A%22demo%40superface.ai%22%2C%22templateId%22%3A%22station-test%22%7D",
     "status": 200,
     "response": {
-      "id": "<20211102125545.f8229ce00efac109@demo.superface.org>",
+      "id": "<20211103112326.1.701865F1F9FD7C61@demo.superface.org>",
       "message": "Queued. Thank you."
     },
     "rawHeaders": [
@@ -22,10 +22,12 @@
       "600",
       "Cache-Control",
       "no-store",
+      "Content-Disposition",
+      "inline",
       "Content-Type",
-      "application/json; charset=utf-8",
+      "application/json",
       "Date",
-      "Tue, 02 Nov 2021 12:55:45 GMT",
+      "Wed, 03 Nov 2021 11:23:26 GMT",
       "Server",
       "nginx",
       "Strict-Transport-Security",
@@ -35,15 +37,15 @@
       "X-Ratelimit-Remaining",
       "1999999",
       "X-Ratelimit-Reset",
-      "1635857755223",
+      "1635938616434",
       "X-Recipient-Limit",
       "1000000",
       "X-Recipient-Remaining",
       "999999",
       "X-Recipient-Reset",
-      "1635857755225",
+      "1635938616435",
       "Content-Length",
-      "93",
+      "103",
       "Connection",
       "Close"
     ],
@@ -52,11 +54,11 @@
   {
     "scope": "https://api.mailgun.net:443",
     "method": "POST",
-    "path": "/v3/demo.superface.org/messages",
+    "path": "/v3/example.com/messages",
     "body": "from=invalidemail&to=invalidemail&template=invalid",
     "status": 400,
     "response": {
-      "message": "from parameter is not a valid address. please check documentation"
+      "message": "'from' parameter is not a valid address. please check documentation"
     },
     "rawHeaders": [
       "Access-Control-Allow-Headers",
@@ -70,13 +72,13 @@
       "Cache-Control",
       "no-store",
       "Content-Type",
-      "application/json; charset=utf-8",
+      "application/json",
       "Date",
-      "Tue, 02 Nov 2021 12:55:45 GMT",
+      "Wed, 03 Nov 2021 11:23:27 GMT",
       "Server",
       "nginx",
       "Content-Length",
-      "80",
+      "86",
       "Connection",
       "Close"
     ],
