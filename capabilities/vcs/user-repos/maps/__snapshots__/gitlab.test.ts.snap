@@ -1,0 +1,43 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`vcs/user-repos/gitlab UserRepos should map eror successfully 1`] = `
+Object {
+  "error": "MappedError: Expected error
+Properites: {
+  \\"message\\": \\"404 User Not Found\\",
+  \\"statusCode\\": 404
+}
+AST Path: definitions[0].statements[0].statements[0]
+Original Map Location: Line 11, column 5",
+}
+`;
+
+exports[`vcs/user-repos/gitlab UserRepos should perform successfully 1`] = `
+Object {
+  "value": Object {
+    "repos": Array [
+      Object {
+        "description": "Hello World!",
+        "name": "test",
+      },
+    ],
+  },
+}
+`;
+
+exports[`vcs/user-repos/gitlab UserRepos should perform successfully on repositories with empty descriptions 1`] = `
+Object {
+  "value": Object {
+    "repos": Array [
+      Object {
+        "description": undefined,
+        "name": "empty-test",
+      },
+      Object {
+        "description": undefined,
+        "name": "ChatApp",
+      },
+    ],
+  },
+}
+`;

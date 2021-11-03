@@ -1,20 +1,48 @@
-import { SuperfaceClient } from '@superfaceai/one-sdk';
+import { SuperfaceTest } from '@superfaceai/testing-lib';
 
-describe('vcs/user-repos/gitlab', () => {
-  beforeAll(() => {
-    jest.setTimeout(10000);
+describe(`vcs/user-repos/gitlab`, () => {
+  let superface: SuperfaceTest;
+
+  beforeEach(() => {
+    superface = new SuperfaceTest();
   });
 
-  it('performs correctly', async () => {
-    const client = new SuperfaceClient();
-    const profile = await client.getProfile('vcs/user-repos');
-    const useCase = profile.getUseCase('UserRepos');
-    const provider = await client.getProvider('gitlab');
-    const result = await useCase.perform({ user: 'zdne' }, { provider });
-    const value = result.unwrap();
-
-    expect(value).toEqual({
-      repos: [{ name: 'test', description: 'Hello World!' }],
+  describe('UserRepos', () => {
+    it('should perform successfully', async () => {
+      await expect(
+        superface.run({
+          profile: 'vcs/user-repos',
+          provider: 'gitlab',
+          useCase: 'UserRepos',
+          input: {
+            user: 'zdne',
+          },
+        })
+      ).resolves.toMatchSnapshot();
+    });
+    it('should perform successfully on repositories with empty descriptions', async () => {
+      await expect(
+        superface.run({
+          profile: 'vcs/user-repos',
+          provider: 'gitlab',
+          useCase: 'UserRepos',
+          input: {
+            user: 'Jakub-Vacek',
+          },
+        })
+      ).resolves.toMatchSnapshot();
+    });
+    it('should map eror successfully', async () => {
+      await expect(
+        superface.run({
+          profile: 'vcs/user-repos',
+          provider: 'gitlab',
+          useCase: 'UserRepos',
+          input: {
+            user: 'madeup',
+          },
+        })
+      ).resolves.toMatchSnapshot();
     });
   });
 });
