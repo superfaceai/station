@@ -3,6 +3,11 @@
 exports[`vcs/pull-request/github} PullRequest should map error 1`] = `
 Object {
   "error": "HTTPError: Expected HTTP error
+Properites: {
+  \\"message\\": \\"API rate limit exceeded for 78.80.97.139. (But here's the good news: Authenticated requests get a higher rate limit. Check out the documentation for more details.)\\",
+  \\"description\\": \\"https://docs.github.com/rest/overview/resources-in-the-rest-api#rate-limiting\\",
+  \\"statusCode\\": 403
+}
 AST Path: definitions[0].statements[3].responseHandlers[0].statements[1]
 Original Map Location: Line 20, column 7",
 }
@@ -10,11 +15,13 @@ Original Map Location: Line 20, column 7",
 
 exports[`vcs/pull-request/github} PullRequest should perform successfully 1`] = `
 Object {
-  "value": Object {
-    "id": 567476468,
-    "sha": "a8e318f2f5f14504a2f0da049d26cbc80d35fa9d",
-    "title": "chore: Bump parser version",
-    "url": "https://api.github.com/repos/superfaceai/astexplorer/pulls/3",
-  },
+  "error": "HTTPError: Expected HTTP error
+Properites: {
+  \\"message\\": \\"API rate limit exceeded for 78.80.97.139. (But here's the good news: Authenticated requests get a higher rate limit. Check out the documentation for more details.)\\",
+  \\"description\\": \\"https://docs.github.com/rest/overview/resources-in-the-rest-api#rate-limiting\\",
+  \\"statusCode\\": 403
+}
+AST Path: definitions[0].statements[3].responseHandlers[0].statements[1]
+Original Map Location: Line 20, column 7",
 }
 `;

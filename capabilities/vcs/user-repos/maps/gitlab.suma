@@ -37,7 +37,7 @@ operation Paginate {
 
 
 operation FetchRepos {
-  http GET "/users/{args.user}/projects" {
+  http GET "/v4/users/{args.user}/projects" {
     request {
       query {
         page = args.page

@@ -37,7 +37,7 @@ operation Paginate {
 }
 
 operation FetchPullRequests {
-  http GET "/projects/{args.id}/merge_requests" {
+  http GET "/v4/projects/{args.id}/merge_requests" {
     request {
       query {
         //Get PRs of all users

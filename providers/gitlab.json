@@ -3,7 +3,7 @@
   "services": [
     {
       "id": "default",
-      "baseUrl": "https://gitlab.com/api/{version}"
+      "baseUrl": "https://gitlab.com/api"
     }
   ],
   "securitySchemes": [
@@ -29,13 +29,6 @@
       "type": "apiKey",
       "in": "query",
       "name": "private_token"
-    }
-  ],
-  "parameters": [
-    {
-      "name": "version",
-      "description": "Version of used GitLab api",
-      "default": "v4"
     }
   ],
   "defaultService": "default"

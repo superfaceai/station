@@ -9,7 +9,7 @@ map SingleFileContent{
   path = input.path
   ref = input.ref
 
-  http GET "/projects/{id}/repository/files/{path}?ref={ref}" {
+  http GET "/v4/projects/{id}/repository/files/{path}?ref={ref}" {
      response {
       map result if(statusCode === 200){
         size = body.size
