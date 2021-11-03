@@ -24,8 +24,10 @@ map ListTemplates {
   }
 }
 
-map GetTemplateContent {
-  http GET "/templates/{input.id.toString()}" {
+map GetTemplateContent {  
+  inputId = `${input.id}`
+
+  http GET "/templates/{inputId}" {
     security "server_token"
 
     request "application/json" {}
@@ -63,7 +65,9 @@ map CreateTemplate {
 }
 
 map UpdateTemplate {
-  http PUT "/templates/{input.id.toString()}" {
+  inputId = `${input.id}`
+
+  http PUT "/templates/{inputId}" {
     security "server_token"
 
     request "application/json" {
