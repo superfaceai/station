@@ -5,10 +5,11 @@ profile = "communication/send-templated-email@1.0"
 provider = "mailchimp"
 
 map SendTemplatedEmail {
-  http POST "/messages/send-template" {
+  http POST "/api/1.0/messages/send-template" {
+    security "api_key"
+
     request {
       body {
-        key = input.mailchimp_api_key
         template_name = input.templateId
         template_content = Object.entries(input.templateData || {}).map(([name, content]) => ({ name: name, content: content }))
         message = {

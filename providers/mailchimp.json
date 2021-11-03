@@ -3,8 +3,16 @@
   "services": [
     {
       "id": "mandrill",
-      "baseUrl": "https://mandrillapp.com/api/1.0"
+      "baseUrl": "https://mandrillapp.com"
     }
   ],
-  "defaultService": "mandrill"
+  "defaultService": "mandrill",
+  "securitySchemes": [
+    {
+      "id": "api_key",
+      "type": "apiKey",
+      "in": "body",
+      "name": "key"
+    }
+  ]
 }
