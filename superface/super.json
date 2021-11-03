@@ -222,19 +222,7 @@
           "file": "../capabilities/address/geocoding/maps/nominatim.suma"
         },
         "azure-maps": {
-          "file": "../capabilities/address/geocoding/maps/azure-maps.suma",
-          "defaults": {
-            "Geocode": {
-              "input": {
-                "subscriptionKey": "$SUBSCRIPTION_KEY"
-              }
-            },
-            "ReverseGeocode": {
-              "input": {
-                "subscriptionKey": "$SUBSCRIPTION_KEY"
-              }
-            }
-          }
+          "file": "../capabilities/address/geocoding/maps/azure-maps.suma"
         }
       }
     },
@@ -488,7 +476,12 @@
     },
     "azure-maps": {
       "file": "../providers/azure-maps.json",
-      "security": []
+      "security": [
+        {
+          "id": "subscription-key",
+          "apikey": "$AZURE_MAPS_SUBSCRIPTION_KEY"
+        }
+      ]
     },
     "slack": {
       "file": "../providers/slack.json",
