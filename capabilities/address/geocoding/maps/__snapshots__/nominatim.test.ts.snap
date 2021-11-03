@@ -1,0 +1,48 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`address/geocoding/nominatim Geocode when all inputs are correct should geocode address to geographical coordinates 1`] = `
+Object {
+  "value": Object {
+    "latitude": "50.0874654",
+    "longitude": "14.4212535",
+  },
+}
+`;
+
+exports[`address/geocoding/nominatim Geocode when inputs are invalid should throw an exception 1`] = `
+Object {
+  "error": "HTTPError: Expected HTTP error
+Properites: {
+  \\"title\\": \\"Error geocoding address\\"
+}
+AST Path: definitions[0].statements[0].responseHandlers[0].statements[0]
+Original Map Location: Line 22, column 7",
+}
+`;
+
+exports[`address/geocoding/nominatim ReverseGeocode when all inputs are correct should reverse geocode geographical coordinates 1`] = `
+Object {
+  "value": Array [
+    Object {
+      "addressCountry": "us",
+      "addressLocality": "New York",
+      "addressRegion": "Kings County, New York",
+      "formattedAddress": "281, Bedford Avenue, Williamsburg, Brooklyn, Kings County, New York, 11211, United States",
+      "postalCode": "11211",
+      "streetAddress": "281 Bedford Avenue",
+    },
+  ],
+}
+`;
+
+exports[`address/geocoding/nominatim ReverseGeocode when inputs are invalid should throw an exception 1`] = `
+Object {
+  "error": "HTTPError: Expected HTTP error
+Properites: {
+  \\"title\\": \\"Bad request\\",
+  \\"detail\\": \\"Need coordinates or OSM object to lookup.\\"
+}
+AST Path: definitions[1].statements[0].responseHandlers[1].statements[0]
+Original Map Location: Line 135, column 7",
+}
+`;
