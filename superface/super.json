@@ -386,15 +386,15 @@
           "token": "$GITLAB_TOKEN"
         },
         {
-          "id": "access_token_in_header",
+          "id": "personal_access_token_in_header",
+          "apikey": "$GITLAB_TOKEN"
+        },
+        {
+          "id": "personal_access_token_in_query",
           "apikey": "$GITLAB_TOKEN"
         },
         {
           "id": "access_token_in_query",
-          "apikey": "$GITLAB_TOKEN"
-        },
-        {
-          "id": "o_auth_token_in_query",
           "apikey": "$GITLAB_TOKEN"
         }
       ],
@@ -406,15 +406,15 @@
       "file": "../providers/bitbucket.json",
       "security": [
         {
-          "id": "o_auth_bearer_token",
+          "id": "access_token",
           "token": "$BITBUCKET_TOKEN"
         },
         {
-          "id": "o_auth_token_in_query",
+          "id": "access_token_in_query",
           "apikey": "$BITBUCKET_TOKEN"
         },
         {
-          "id": "o_auth_token_in_body",
+          "id": "access_token_in_body",
           "apikey": "$BITBUCKET_TOKEN"
         },
         {
