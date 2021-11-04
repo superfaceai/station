@@ -13,10 +13,11 @@ export declare type CommunicationSendMessageSendMessageInput = {
 };
 export declare type CommunicationSendMessageSendMessageResult = {
     /**
-     * Destination ID
-     * Identifier of the destination where the message was sent.
+     * "
+     * Destination
+     *     Identifier of the destination where the message was sent.
      **/
-    destinationId?: unknown;
+    destination?: unknown;
     /**
      * Message ID
      * Identifier of the message that was sent
@@ -26,7 +27,7 @@ export declare type CommunicationSendMessageSendMessageResult = {
 declare const profile: {
     /**
      * Send Message
-     * Sends message via IM such as Messanger, Slack or MS Teams...
+     * Sends message to one destination
      **/
     SendMessage: [CommunicationSendMessageSendMessageInput, CommunicationSendMessageSendMessageResult];
 };
@@ -35,7 +36,7 @@ export declare const communicationSendMessage: {
     "communication/send-message": {
         /**
          * Send Message
-         * Sends message via IM such as Messanger, Slack or MS Teams...
+         * Sends message to one destination
          **/
         SendMessage: [CommunicationSendMessageSendMessageInput, CommunicationSendMessageSendMessageResult];
     };

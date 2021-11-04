@@ -5,7 +5,7 @@ var one_sdk_1 = require("@superfaceai/one-sdk");
 var profile = {
     /**
      * Send Message
-     * Sends message via IM such as Messanger, Slack or MS Teams...
+     * Sends message to one destination
      **/
     "SendMessage": one_sdk_1.typeHelper()
 };
