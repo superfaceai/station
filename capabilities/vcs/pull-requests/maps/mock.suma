@@ -6,7 +6,8 @@ PullRequests mock map
 """
 map PullRequests{
   identifier = Math.floor(Math.random() * 10) + 1
-  map result {pullRequests: [{
+  map result {
+    pullRequests: [{
       title: 'Test',
       id: identifier,
       url: `https://gitlab.com/${input.owner}/${input.repo}/-/merge_requests/${identifier}`,
