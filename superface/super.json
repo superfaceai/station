@@ -34,21 +34,7 @@
           "file": "../capabilities/communication/send-sms/maps/vonage-nexmo.suma"
         },
         "plivo": {
-          "file": "../capabilities/communication/send-sms/maps/plivo.suma",
-          "defaults": {
-            "SendMessage": {
-              "input": {
-                "PLIVO_AUTH_ID": "$PLIVO_AUTH_ID",
-                "PLIVO_AUTH_TOKEN": "$PLIVO_AUTH_TOKEN"
-              }
-            },
-            "RetrieveMessageStatus": {
-              "input": {
-                "PLIVO_AUTH_ID": "$PLIVO_AUTH_ID",
-                "PLIVO_AUTH_TOKEN": "$PLIVO_AUTH_TOKEN"
-              }
-            }
-          }
+          "file": "../capabilities/communication/send-sms/maps/plivo.suma"
         },
         "mock": {
           "file": "../capabilities/communication/send-sms/maps/mock.suma"
@@ -420,7 +406,10 @@
           "username": "$PLIVO_AUTH_ID",
           "password": "$PLIVO_AUTH_TOKEN"
         }
-      ]
+      ],
+      "parameters": {
+        "authId": "$PLIVO_AUTH_ID"
+      }
     },
     "dhl": {
       "file": "../providers/dhl.json",
