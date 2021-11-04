@@ -1,4 +1,4 @@
-profile = "communication/send-sms@1.0"
+profile = "communication/send-sms@2.0"
 provider = "vonage-nexmo"
   
 // Vonage API documentation available at:
@@ -8,10 +8,11 @@ provider = "vonage-nexmo"
 
 map SendMessage {
   http POST "/sms/json" {
+    security "apiKey"
+
     request "application/x-www-form-urlencoded" {
       body {
-        api_key = input.NEXMO_API_KEY,
-        api_secret = input.NEXMO_API_SECRET,
+        api_secret = parameters.apiSecret,
         from = input.from,
         to = input.to,
         text = input.text
@@ -28,6 +29,7 @@ map SendMessage {
 
 map RetrieveMessageStatus {
   map error {
-    message = "This usecase is not supported by provider"
+    title = "Not supported"
+    detail = "This usecase is not supported by provider"
   }
 }

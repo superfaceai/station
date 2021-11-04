@@ -31,21 +31,7 @@
           }
         },
         "vonage-nexmo": {
-          "file": "../capabilities/communication/send-sms/maps/vonage-nexmo.suma",
-          "defaults": {
-            "SendMessage": {
-              "input": {
-                "NEXMO_API_KEY": "$NEXMO_API_KEY",
-                "NEXMO_API_SECRET": "$NEXMO_API_SECRET"
-              }
-            },
-            "RetrieveMessageStatus": {
-              "input": {
-                "NEXMO_API_KEY": "$NEXMO_API_KEY",
-                "NEXMO_API_SECRET": "$NEXMO_API_SECRET"
-              }
-            }
-          }
+          "file": "../capabilities/communication/send-sms/maps/vonage-nexmo.suma"
         },
         "plivo": {
           "file": "../capabilities/communication/send-sms/maps/plivo.suma",
@@ -416,7 +402,15 @@
     },
     "vonage-nexmo": {
       "file": "../providers/vonage-nexmo.json",
-      "security": []
+      "security": [
+        {
+          "id": "apiKey",
+          "apikey": "$NEXMO_API_KEY"
+        }
+      ],
+      "parameters": {
+        "apiSecret": "$NEXMO_API_SECRET"
+      }
     },
     "plivo": {
       "file": "../providers/plivo.json",
