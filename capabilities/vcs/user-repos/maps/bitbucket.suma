@@ -6,7 +6,7 @@ UserRepos map. Returns repositories of specified user
 """
 map UserRepos{
   call Paginate(
-  user = input.user,
+    user = input.user,
   ) {
     return map error if (outcome.error) outcome.error
     return map result { repos = outcome.data.repositories }
