@@ -1,7 +1,7 @@
 //Shippo API reference: https://goshippo.com/docs/reference#tracks-retrieve
 
 profile = "delivery-tracking/shipment-info@1.1"
-  provider = "shippo"
+provider = "shippo"
   
 map ShipmentInfo {
   fetchShipmentOutcome = call FetchShipment(
@@ -19,7 +19,7 @@ operation FetchShipment {
   http GET "/tracks/{args.carrier}/{args.trackingNumber}" {
     security "shippo_api_token"
     response 200 "application/json" {
-      shipment = call MapShipment(shipment = body)
+      shipment = call MapShipment(shipment = body, trackingNumber = args.trackingNumber)
 
       return [shipment]
     }
