@@ -335,7 +335,17 @@
   "providers": {
     "github": {
       "file": "../providers/github.json",
-      "security": []
+      "security": [
+        {
+          "id": "basic",
+          "username": "$GITHUB_USERNAME",
+          "password": "$GITHUB_TOKEN"
+        },
+        {
+          "id": "bearer_token",
+          "token": "$GITHUB_TOKEN"
+        }
+      ]
     },
     "twilio": {
       "file": "../providers/twilio.json",
@@ -358,11 +368,46 @@
     },
     "gitlab": {
       "file": "../providers/gitlab.json",
-      "security": []
+      "security": [
+        {
+          "id": "bearer_token",
+          "token": "$GITLAB_TOKEN"
+        },
+        {
+          "id": "personal_access_token_in_header",
+          "apikey": "$GITLAB_TOKEN"
+        },
+        {
+          "id": "personal_access_token_in_query",
+          "apikey": "$GITLAB_TOKEN"
+        },
+        {
+          "id": "access_token_in_query",
+          "apikey": "$GITLAB_TOKEN"
+        }
+      ]
     },
     "bitbucket": {
       "file": "../providers/bitbucket.json",
-      "security": []
+      "security": [
+        {
+          "id": "access_token",
+          "token": "$BITBUCKET_TOKEN"
+        },
+        {
+          "id": "access_token_in_query",
+          "apikey": "$BITBUCKET_TOKEN"
+        },
+        {
+          "id": "access_token_in_body",
+          "apikey": "$BITBUCKET_TOKEN"
+        },
+        {
+          "id": "basic",
+          "username": "$BITBUCKET_USERNAME",
+          "password": "$BITBUCKET_TOKEN"
+        }
+      ]
     },
     "smartystreets": {
       "file": "../providers/smartystreets.json",

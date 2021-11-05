@@ -9,7 +9,7 @@ map PullRequest{
   id = encodeURIComponent(input.owner + '/' + input.repo)
   identifier = input.identifier
 
-  http GET "/projects/{id}/merge_requests/{identifier}" {
+  http GET "/v4/projects/{id}/merge_requests/{identifier}" {
     response {
       map result if(statusCode === 200){
         title: body.title,
