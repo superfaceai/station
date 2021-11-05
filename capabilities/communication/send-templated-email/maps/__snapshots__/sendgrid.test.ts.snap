@@ -1,17 +1,17 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`communication/send-templated-email/sendgrid SendTemplatedEmail when all inputs are correct should return messageId as result 1`] = `
-Object {
+Ok {
   "value": Object {
-    "messageId": "h0o34XCETjaLjnHkJMVUtw",
+    "messageId": "gyax6ce9QLKQ80VOqsRX2g",
   },
 }
 `;
 
 exports[`communication/send-templated-email/sendgrid SendTemplatedEmail when inputs are invalid should throw error 1`] = `
-Object {
+Err {
   "error": "HTTPError: Expected HTTP error
-Properites: {
+Properties: {
   \\"title\\": \\"Invalid inputs\\",
   \\"detail\\": \\"Input 'from': The from email does not contain a valid address. Input 'to': Does not contain a valid address. Input 'templateId': The template_id must be a valid GUID, you provided 'invalid'. Input 'subject': The subject is required. You can get around this requirement if you use a template with a subject defined or if every personalization has a subject defined. Input 'content': Unless a valid template_id is provided, the content parameter is required. There must be at least one defined content block. We typically suggest both text/plain and text/html blocks are included, but only one block is required.\\"
 }

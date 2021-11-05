@@ -4,62 +4,11 @@
     "method": "POST",
     "path": "/v3/mail/send",
     "body": {
-      "template_id": "d-ef6d417300f74f96a9f722050edae85f",
-      "from": {
-        "email": "demo@demo.superface.org"
-      },
-      "personalizations": [
-        {
-          "to": [
-            {
-              "email": "demo@demo.superface.org"
-            }
-          ],
-          "dynamic_template_data": {
-            "from": "demo@demo.superface.org",
-            "to": "demo@demo.superface.org",
-            "templateId": "d-ef6d417300f74f96a9f722050edae85f"
-          }
-        }
-      ]
-    },
-    "status": 202,
-    "response": "",
-    "rawHeaders": [
-      "Server",
-      "nginx",
-      "Date",
-      "Tue, 02 Nov 2021 13:17:55 GMT",
-      "Content-Length",
-      "0",
-      "Connection",
-      "close",
-      "X-Message-Id",
-      "h0o34XCETjaLjnHkJMVUtw",
-      "Access-Control-Allow-Origin",
-      "https://sendgrid.api-docs.io",
-      "Access-Control-Allow-Methods",
-      "POST",
-      "Access-Control-Allow-Headers",
-      "Authorization, Content-Type, On-behalf-of, x-sg-elas-acl",
-      "Access-Control-Max-Age",
-      "600",
-      "X-No-CORS-Reason",
-      "https://sendgrid.com/docs/Classroom/Basics/API/cors.html",
-      "Strict-Transport-Security",
-      "max-age=600; includeSubDomains"
-    ],
-    "responseIsBinary": false
-  },
-  {
-    "scope": "https://api.sendgrid.com:443",
-    "method": "POST",
-    "path": "/v3/mail/send",
-    "body": {
-      "template_id": "invalid",
       "from": {
         "email": "invalidemail"
       },
+      "subject": "",
+      "content": [],
       "personalizations": [
         {
           "to": [
@@ -84,11 +33,6 @@
           "help": "http://sendgrid.com/docs/API_Reference/Web_API_v3/Mail/errors.html#message.personalizations.to"
         },
         {
-          "message": "The template_id must be a valid GUID, you provided 'invalid'.",
-          "field": "template_id",
-          "help": "http://sendgrid.com/docs/API_Reference/Web_API_v3/Mail/errors.html#message.template_id"
-        },
-        {
           "message": "The subject is required. You can get around this requirement if you use a template with a subject defined or if every personalization has a subject defined.",
           "field": "subject",
           "help": "http://sendgrid.com/docs/API_Reference/Web_API_v3/Mail/errors.html#message.subject"
@@ -104,11 +48,11 @@
       "Server",
       "nginx",
       "Date",
-      "Tue, 02 Nov 2021 13:17:56 GMT",
+      "Fri, 05 Nov 2021 14:34:42 GMT",
       "Content-Type",
       "application/json",
       "Content-Length",
-      "1205",
+      "1011",
       "Connection",
       "close",
       "Access-Control-Allow-Origin",
