@@ -2,26 +2,21 @@
   {
     "scope": "https://api-free.deepl.com:443",
     "method": "GET",
-    "path": "/v2/translate?text=Testovanie&target_lang=EN&auth_key=credentials-removed-to-keep-them-secure",
+    "path": "/v2/translate?target_lang=EN&auth_key=credentials-removed-to-keep-them-secure",
     "body": "",
-    "status": 200,
+    "status": 400,
     "response": {
-      "translations": [
-        {
-          "detected_source_language": "SK",
-          "text": "Testing"
-        }
-      ]
+      "message": "\"Parameter 'text' not specified.\""
     },
     "rawHeaders": [
       "Server",
       "nginx",
       "Date",
-      "Wed, 06 Oct 2021 09:08:25 GMT",
+      "Fri, 05 Nov 2021 15:30:57 GMT",
       "Content-Type",
       "application/json",
       "Content-Length",
-      "69",
+      "49",
       "Connection",
       "close",
       "Access-Control-Allow-Origin",

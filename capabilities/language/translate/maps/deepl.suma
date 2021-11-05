@@ -11,6 +11,7 @@ map TranslateText {
         request {
             query {
                 text = input.text
+                source_lang = input.sourceLanguage
                 target_lang = input.targetLanguage
             }
         }
@@ -18,7 +19,7 @@ map TranslateText {
         response 200 "application/json" {
             return map result {
                 text = body.translations[0].text
-                language = body.translations[0].detected_source_language
+                sourceLanguage = body.translations[0].detected_source_language
             }
         }
 

@@ -1,22 +1,25 @@
-import { SuperfaceTest } from '@superfaceai/testing-lib';
-
-const superface = new SuperfaceTest();
+import { SuperfaceTest } from '@superfaceai/testing';
 
 describe('mock', () => {
+  let superface: SuperfaceTest;
+
+  beforeEach(() => {
+    superface = new SuperfaceTest({
+      profile: 'language/translate',
+      provider: 'mock',
+    });
+  });
+
   describe('TranslateText', () => {
     it('performs correctly', async () => {
       await expect(
-        superface.run(
-          {
-            profile: 'language/translate',
-            provider: 'mock',
-            useCase: 'TranslateText',
-            input: {
-              text: '',
-              targetLanguage: '',
-            },
+        superface.run({
+          useCase: 'TranslateText',
+          input: {
+            text: 'Testovanie',
+            targetLanguage: 'EN',
           },
-        )
+        })
       ).resolves.toMatchSnapshot();
     });
   });
