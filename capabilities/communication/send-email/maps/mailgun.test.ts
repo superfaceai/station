@@ -9,18 +9,12 @@ sendEmailTest(
   {
     beforeRecordingSave: recordings => {
       recordings.forEach(recording => {
-        recording.path = recording.path.replace(
-          process.env.MAILGUN_DOMAIN as string,
-          'example.com'
-        );
-      });
-    },
-    afterRecordingLoad: scopes => {
-      scopes.forEach(scope => {
-        scope.filteringPath(
-          new RegExp(process.env.MAILGUN_DOMAIN as string, 'g'),
-          'example.com'
-        );
+        if (typeof recording.body === 'string') {
+          recording.body = recording.body.replace(
+            /parameters-removed-to-keep-them-secure/g,
+            process.env.MAILGUN_DOMAIN as string
+          );
+        }
       });
     },
   }

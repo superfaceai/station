@@ -2,11 +2,11 @@
   {
     "scope": "https://api.mailgun.net:443",
     "method": "POST",
-    "path": "/v3/example.com/messages",
+    "path": "/v3/parameters-removed-to-keep-them-secure/messages",
     "body": "from=demo%40demo.superface.org&to=demo%40superface.ai&subject=Station+test&text=Station+test+-+mailgun",
     "status": 200,
     "response": {
-      "id": "<20211103112237.1.4BF44DCD2AB860D7@demo.superface.org>",
+      "id": "<20211105141438.1.2B56C6F5FB790249@demo.superface.org>",
       "message": "Queued. Thank you."
     },
     "rawHeaders": [
@@ -27,7 +27,7 @@
       "Content-Type",
       "application/json",
       "Date",
-      "Wed, 03 Nov 2021 11:22:37 GMT",
+      "Fri, 05 Nov 2021 14:14:38 GMT",
       "Server",
       "nginx",
       "Strict-Transport-Security",
@@ -37,48 +37,15 @@
       "X-Ratelimit-Remaining",
       "1999999",
       "X-Ratelimit-Reset",
-      "1635938567353",
+      "1636121688491",
       "X-Recipient-Limit",
       "1000000",
       "X-Recipient-Remaining",
       "999999",
       "X-Recipient-Reset",
-      "1635938567354",
+      "1636121688493",
       "Content-Length",
       "103",
-      "Connection",
-      "Close"
-    ],
-    "responseIsBinary": false
-  },
-  {
-    "scope": "https://api.mailgun.net:443",
-    "method": "POST",
-    "path": "/v3/example.com/messages",
-    "body": "from=invalidemail&to=invalidemail&subject=",
-    "status": 400,
-    "response": {
-      "message": "'from' parameter is not a valid address. please check documentation"
-    },
-    "rawHeaders": [
-      "Access-Control-Allow-Headers",
-      "Content-Type, x-requested-with, Authorization",
-      "Access-Control-Allow-Methods",
-      "GET, POST, PUT, DELETE, OPTIONS",
-      "Access-Control-Allow-Origin",
-      "*",
-      "Access-Control-Max-Age",
-      "600",
-      "Cache-Control",
-      "no-store",
-      "Content-Type",
-      "application/json",
-      "Date",
-      "Wed, 03 Nov 2021 11:22:38 GMT",
-      "Server",
-      "nginx",
-      "Content-Length",
-      "86",
       "Connection",
       "Close"
     ],
