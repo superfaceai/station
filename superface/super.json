@@ -317,10 +317,13 @@
       "security": [
         {
           "id": "basic",
-          "username": "$TWILIO_USERNAME",
-          "password": "$TWILIO_PASSWORD"
+          "username": "$TWILIO_ACCOUNT_SID",
+          "password": "$TWILIO_AUTH_TOKEN"
         }
-      ]
+      ],
+      "parameters": {
+        "accountSid": "$TWILIO_ACCOUNT_SID"
+      }
     },
     "tyntec": {
       "file": "../providers/tyntec.json",
