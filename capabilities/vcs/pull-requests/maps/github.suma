@@ -42,8 +42,7 @@ operation FetchPullRequests {
     request {
       query {
         page = args.page,
-        state = 'all',
-        per_page = 3
+        state = 'all'
       }
     }
     response {
@@ -63,7 +62,7 @@ operation FetchPullRequests {
           }
         }),
         statusCode: statusCode,
-        isLastPage: !headers.link.includes('rel="next"')
+        isLastPage:  !headers.link || !headers.link.includes('rel="next"')
       }
     }
   }

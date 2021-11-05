@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`vcs/pull-requests/bitbucket PullRequests should perform successfully 1`] = `
+exports[`vcs/pull-requests/bitbucket PullRequests should perform successfully - multiple pages of PRs 1`] = `
 Ok {
   "value": Object {
     "pullRequests": Array [
@@ -135,6 +135,22 @@ Ok {
         "sha": "631e67580509",
         "title": "README.md edited online with Bitbucket",
         "url": "https://bitbucket.org/JakubVacek/test/pull-requests/1",
+      },
+    ],
+    "statusCode": 200,
+  },
+}
+`;
+
+exports[`vcs/pull-requests/bitbucket PullRequests should perform successfully - only one page of PRs 1`] = `
+Ok {
+  "value": Object {
+    "pullRequests": Array [
+      Object {
+        "id": 1,
+        "sha": "cdde01d0dfeb",
+        "title": "README.md edited online with Bitbucket",
+        "url": "https://bitbucket.org/JakubVacek/singlepr/pull-requests/1",
       },
     ],
     "statusCode": 200,

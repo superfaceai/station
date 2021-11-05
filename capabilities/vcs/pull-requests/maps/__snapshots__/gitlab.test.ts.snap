@@ -1,6 +1,18 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`vcs/pull-requests/gitlab PullRequests should perform successfully 1`] = `
+exports[`vcs/pull-requests/gitlab PullRequests should handle error 1`] = `
+Err {
+  "error": "MappedError: Expected error
+Properites: {
+  \\"message\\": \\"404 Project Not Found\\",
+  \\"statusCode\\": 404
+}
+AST Path: definitions[0].statements[0].statements[0]
+Original Map Location: Line 12, column 5",
+}
+`;
+
+exports[`vcs/pull-requests/gitlab PullRequests should perform successfully - multiple pages of PRs 1`] = `
 Ok {
   "value": Object {
     "pullRequests": Array [
@@ -136,14 +148,18 @@ Ok {
 }
 `;
 
-exports[`vcs/pull-requests/gitlab should handle error 1`] = `
-Err {
-  "error": "MappedError: Expected error
-Properites: {
-  \\"message\\": \\"404 Project Not Found\\",
-  \\"statusCode\\": 404
-}
-AST Path: definitions[0].statements[0].statements[0]
-Original Map Location: Line 12, column 5",
+exports[`vcs/pull-requests/gitlab PullRequests should perform successfully - only one page of PRs 1`] = `
+Ok {
+  "value": Object {
+    "pullRequests": Array [
+      Object {
+        "id": 1,
+        "sha": "ece012d5c06d592cd231ef077d7bf8108fbd7808",
+        "title": "Update README.md",
+        "url": "https://gitlab.com/Jakub-Vacek/single-pr/-/merge_requests/1",
+      },
+    ],
+    "statusCode": 200,
+  },
 }
 `;
