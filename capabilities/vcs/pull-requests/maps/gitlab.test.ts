@@ -34,5 +34,5 @@ describe(`vcs/pull-requests/gitlab`, () => {
         },
       })
     ).resolves.toMatchSnapshot();
-  }, 10000);
+  });
 });

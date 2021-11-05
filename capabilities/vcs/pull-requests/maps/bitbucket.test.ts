@@ -34,5 +34,5 @@ describe(`vcs/pull-requests/bitbucket`, () => {
         },
       })
     ).resolves.toMatchSnapshot();
-  }, 10000);
+  });
 });

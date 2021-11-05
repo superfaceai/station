@@ -34,5 +34,5 @@ describe(`vcs/pull-requests/github`, () => {
         },
       })
     ).resolves.toMatchSnapshot();
-  }, 10000);
+  });
 });
