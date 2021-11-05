@@ -20,7 +20,7 @@ describe(`vcs/user-repos/gitlab`, () => {
         })
       ).resolves.toMatchSnapshot();
     });
-    it('should perform successfully on repositories with empty descriptions', async () => {
+    it('should perform successfully - user with multiple repos', async () => {
       await expect(
         superface.run({
           profile: 'vcs/user-repos',
