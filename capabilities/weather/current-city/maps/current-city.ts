@@ -10,25 +10,22 @@ export const currentCityTest = (providerName: string): void => {
     let superface: SuperfaceTest;
 
     beforeEach(() => {
-      superface = new SuperfaceTest();
+      superface = new SuperfaceTest({
+        profile: 'weather/current-city',
+        provider: providerName,
+      });
     });
 
     describe('GetCurrentWeatherInCity', () => {
       describe('when all inputs are correct', () => {
         it('returns a weather data', async () => {
           const result = await superface.run({
-            profile: 'weather/current-city',
-            provider: providerName,
             useCase: 'GetCurrentWeatherInCity',
             input: { city: 'Prague,CZ' },
           });
           const weatherData = result.unwrap();
 
-          expect(weatherData).toEqual({
-            temperature: expect.any(Number),
-            feelsLike: expect.any(Number),
-            description: expect.any(String),
-          });
+          expect(weatherData).toMatchSnapshot();
         });
       });
     });
