@@ -1,7 +1,11 @@
-profile = "address/clean-address@1.0"
+profile = "address/clean-address@1.1"
 provider = "mock"
 
-map CleanAddress{
+map CleanAddress {
+  return map error if (!input.street && !input.city && !input.state && !input.zipcode) {
+    title = "Bad request"
+  }
+
   map result {
     street = "270 7th Street"
     city = "San Francisco"
