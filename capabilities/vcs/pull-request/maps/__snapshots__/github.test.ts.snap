@@ -1,15 +1,20 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`vcs/pull-request/github} PullRequest should map error 1`] = `
-Object {
+Err {
   "error": "HTTPError: Expected HTTP error
+Properties: {
+  \\"message\\": \\"Not Found\\",
+  \\"description\\": \\"https://docs.github.com/rest/reference/pulls#get-a-pull-request\\",
+  \\"statusCode\\": 404
+}
 AST Path: definitions[0].statements[3].responseHandlers[0].statements[1]
 Original Map Location: Line 20, column 7",
 }
 `;
 
 exports[`vcs/pull-request/github} PullRequest should perform successfully 1`] = `
-Object {
+Ok {
   "value": Object {
     "id": 567476468,
     "sha": "a8e318f2f5f14504a2f0da049d26cbc80d35fa9d",

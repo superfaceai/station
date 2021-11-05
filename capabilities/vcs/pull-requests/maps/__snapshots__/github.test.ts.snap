@@ -1,0 +1,238 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`vcs/pull-requests/github PullRequests should handle error 1`] = `
+Err {
+  "error": "MappedError: Expected error
+Properties: {
+  \\"message\\": \\"Not Found\\",
+  \\"description\\": \\"https://docs.github.com/rest/reference/pulls#list-pull-requests\\",
+  \\"statusCode\\": 404
+}
+AST Path: definitions[0].statements[2].statements[0]
+Original Map Location: Line 15, column 5",
+}
+`;
+
+exports[`vcs/pull-requests/github PullRequests should perform successfully - only one page of PRs 1`] = `
+Ok {
+  "value": Object {
+    "pullRequests": Array [
+      Object {
+        "id": 449981783,
+        "sha": "c3b69a430c2cc5e4e53e8c6a8b6d1acd7d854c97",
+        "title": "Second PR",
+        "url": "https://api.github.com/repos/Jakub-Vacek/BcAppServer/pulls/2",
+      },
+      Object {
+        "id": 449655869,
+        "sha": "bad0ee6715726524fd2037676e30b0781971bfc8",
+        "title": "Update README.md",
+        "url": "https://api.github.com/repos/Jakub-Vacek/BcAppServer/pulls/1",
+      },
+    ],
+    "statusCode": 200,
+  },
+}
+`;
+
+exports[`vcs/pull-requests/github PullRequests should perform successfully - two pages of PRs 1`] = `
+Ok {
+  "value": Object {
+    "pullRequests": Array [
+      Object {
+        "id": 773956724,
+        "sha": "8c7fa938f995f3ad2aea7e4cff59f8775bc91f6e",
+        "title": "Update README.md",
+        "url": "https://api.github.com/repos/Jakub-Vacek/JenkinsTest/pulls/32",
+      },
+      Object {
+        "id": 773956603,
+        "sha": "86835cf271442e47eb0954fa52ac2067c93864a5",
+        "title": "Update README.md",
+        "url": "https://api.github.com/repos/Jakub-Vacek/JenkinsTest/pulls/31",
+      },
+      Object {
+        "id": 773956522,
+        "sha": "3d961e8814d67f274a44bf0357980bc71e5472f7",
+        "title": "Update README.md",
+        "url": "https://api.github.com/repos/Jakub-Vacek/JenkinsTest/pulls/30",
+      },
+      Object {
+        "id": 773956418,
+        "sha": "72936a843ea4a46bbd8a79b90875e7a42d3831fd",
+        "title": "Update README.md",
+        "url": "https://api.github.com/repos/Jakub-Vacek/JenkinsTest/pulls/29",
+      },
+      Object {
+        "id": 773956332,
+        "sha": "0aed26b41eab638b00f59213f13ce8bd873ad8a1",
+        "title": "Update README.md",
+        "url": "https://api.github.com/repos/Jakub-Vacek/JenkinsTest/pulls/28",
+      },
+      Object {
+        "id": 773956240,
+        "sha": "e8a9c768833b15a52d468311fb13304b5092a76b",
+        "title": "Update README.md",
+        "url": "https://api.github.com/repos/Jakub-Vacek/JenkinsTest/pulls/27",
+      },
+      Object {
+        "id": 773956116,
+        "sha": "179a2641d8f7c618b2a333c43ea80ccf9bc14a1b",
+        "title": "Update README.md",
+        "url": "https://api.github.com/repos/Jakub-Vacek/JenkinsTest/pulls/26",
+      },
+      Object {
+        "id": 773955998,
+        "sha": "4e113728ba61f37a167a6cb92fb68be7bd891c60",
+        "title": "Update README.md",
+        "url": "https://api.github.com/repos/Jakub-Vacek/JenkinsTest/pulls/25",
+      },
+      Object {
+        "id": 773954825,
+        "sha": "1379ed25ee16a4440b4dd679a27653d7428c6998",
+        "title": "Update README.md",
+        "url": "https://api.github.com/repos/Jakub-Vacek/JenkinsTest/pulls/24",
+      },
+      Object {
+        "id": 773954473,
+        "sha": "9a867e86b32f758f7ec116105e2416c15b1fb440",
+        "title": "Update README.md",
+        "url": "https://api.github.com/repos/Jakub-Vacek/JenkinsTest/pulls/23",
+      },
+      Object {
+        "id": 773954309,
+        "sha": "3303fe0ca70c0618cc51ff0b08f5386d97ea9752",
+        "title": "Update README.md",
+        "url": "https://api.github.com/repos/Jakub-Vacek/JenkinsTest/pulls/22",
+      },
+      Object {
+        "id": 773954188,
+        "sha": "120a539e82a1a21598f1b6e706902d182b604618",
+        "title": "Update README.md",
+        "url": "https://api.github.com/repos/Jakub-Vacek/JenkinsTest/pulls/21",
+      },
+      Object {
+        "id": 773954045,
+        "sha": "0aa4db3590b10788967307048e4905da46013b39",
+        "title": "Update README.md",
+        "url": "https://api.github.com/repos/Jakub-Vacek/JenkinsTest/pulls/20",
+      },
+      Object {
+        "id": 773953897,
+        "sha": "389c04b8c4a53aea2d4aafc3b1ea85311b38598d",
+        "title": "Update README.md",
+        "url": "https://api.github.com/repos/Jakub-Vacek/JenkinsTest/pulls/19",
+      },
+      Object {
+        "id": 773951869,
+        "sha": "5f91d68fa2f4b6c7be4d8ffe1879c1d1544498b0",
+        "title": "Update README.md",
+        "url": "https://api.github.com/repos/Jakub-Vacek/JenkinsTest/pulls/18",
+      },
+      Object {
+        "id": 773951754,
+        "sha": "0cc478b9f85f9fc00854712e2e7b104108122f8f",
+        "title": "Update README.md",
+        "url": "https://api.github.com/repos/Jakub-Vacek/JenkinsTest/pulls/17",
+      },
+      Object {
+        "id": 773951645,
+        "sha": "64dcd5e958ccbfecc35ee378591aecfd9d93bfe1",
+        "title": "Update README.md",
+        "url": "https://api.github.com/repos/Jakub-Vacek/JenkinsTest/pulls/16",
+      },
+      Object {
+        "id": 773950394,
+        "sha": "7f7b5e032db43e90ae79716daee81d3aa3a49f1c",
+        "title": "Update README.md",
+        "url": "https://api.github.com/repos/Jakub-Vacek/JenkinsTest/pulls/15",
+      },
+      Object {
+        "id": 773950260,
+        "sha": "a90ab2fe22d6dfd13bed6876da955e0f1488139c",
+        "title": "Update README.md",
+        "url": "https://api.github.com/repos/Jakub-Vacek/JenkinsTest/pulls/14",
+      },
+      Object {
+        "id": 773950131,
+        "sha": "5045c1725d9dc4adce4f6d857bf2f4195d662720",
+        "title": "Update README.md",
+        "url": "https://api.github.com/repos/Jakub-Vacek/JenkinsTest/pulls/13",
+      },
+      Object {
+        "id": 773949960,
+        "sha": "19394e1132b3da084ee1be1bb969b28fe635cb77",
+        "title": "Update README.md",
+        "url": "https://api.github.com/repos/Jakub-Vacek/JenkinsTest/pulls/12",
+      },
+      Object {
+        "id": 773949835,
+        "sha": "8d26681869c4d42f7a64bf4ced34cf8bbfc38622",
+        "title": "Update README.md",
+        "url": "https://api.github.com/repos/Jakub-Vacek/JenkinsTest/pulls/11",
+      },
+      Object {
+        "id": 773949661,
+        "sha": "652c590d50e0f069a59ddf0da8fcc07c80fd1ed6",
+        "title": "Update README.md",
+        "url": "https://api.github.com/repos/Jakub-Vacek/JenkinsTest/pulls/10",
+      },
+      Object {
+        "id": 773949504,
+        "sha": "f004c4bf716d31b719ab62110b931edf3998431a",
+        "title": "Update README.md",
+        "url": "https://api.github.com/repos/Jakub-Vacek/JenkinsTest/pulls/9",
+      },
+      Object {
+        "id": 773949182,
+        "sha": "f46478fdbd45597884985c799d1cdaf3098ce732",
+        "title": "Update README.md",
+        "url": "https://api.github.com/repos/Jakub-Vacek/JenkinsTest/pulls/8",
+      },
+      Object {
+        "id": 773949093,
+        "sha": "e7877e4db45baa4368f41c9531193ad8c5185d8b",
+        "title": "Update README.md",
+        "url": "https://api.github.com/repos/Jakub-Vacek/JenkinsTest/pulls/7",
+      },
+      Object {
+        "id": 773948989,
+        "sha": "ec9987e3a216f92c6daf78e0a4701f12930dc8ed",
+        "title": "Update README.md",
+        "url": "https://api.github.com/repos/Jakub-Vacek/JenkinsTest/pulls/6",
+      },
+      Object {
+        "id": 773948901,
+        "sha": "83e159a9e73294894b0fb9bfc5a05027bed17dcd",
+        "title": "Update README.md",
+        "url": "https://api.github.com/repos/Jakub-Vacek/JenkinsTest/pulls/5",
+      },
+      Object {
+        "id": 773948797,
+        "sha": "179e3a44d8fbe0935947e09074c50b3202506f36",
+        "title": "Update README.md",
+        "url": "https://api.github.com/repos/Jakub-Vacek/JenkinsTest/pulls/4",
+      },
+      Object {
+        "id": 773948554,
+        "sha": "478d790ef209c26360def329fbdb1b4e5f2970f4",
+        "title": "Update README.md",
+        "url": "https://api.github.com/repos/Jakub-Vacek/JenkinsTest/pulls/3",
+      },
+      Object {
+        "id": 773948409,
+        "sha": "2090c04fc0583810318632eee863927c8e8216d5",
+        "title": "Update README.md",
+        "url": "https://api.github.com/repos/Jakub-Vacek/JenkinsTest/pulls/2",
+      },
+      Object {
+        "id": 773948236,
+        "sha": "6ac5ffa7432615df3f9c09aac39c8775bfde7bbf",
+        "title": "Update README.md",
+        "url": "https://api.github.com/repos/Jakub-Vacek/JenkinsTest/pulls/1",
+      },
+    ],
+    "statusCode": 200,
+  },
+}
+`;

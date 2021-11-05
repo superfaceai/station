@@ -1,10 +1,6 @@
 import { SuperfaceClient } from '../../../../superface/sdk';
 
 describe('vcs/user-repos/mock-typed', () => {
-  beforeAll(() => {
-    jest.setTimeout(10000);
-  });
-
   it('performs correctly', async () => {
     const client = new SuperfaceClient();
     const profile = await client.getProfile('vcs/user-repos');

@@ -1,35 +1,48 @@
-import { SuperfaceClient } from '@superfaceai/one-sdk';
+import { SuperfaceTest } from '@superfaceai/testing-lib';
 
-describe('vcs/user-repos/github', () => {
-  beforeAll(() => {
-    jest.setTimeout(10000);
+describe(`vcs/user-repos/github`, () => {
+  let superface: SuperfaceTest;
+
+  beforeEach(() => {
+    superface = new SuperfaceTest();
   });
 
-  it('performs correctly', async () => {
-    const client = new SuperfaceClient();
-    const profile = await client.getProfile('vcs/user-repos');
-    const useCase = profile.getUseCase('UserRepos');
-    const provider = await client.getProvider('github');
-    const result = await useCase.perform({ user: 'jakub-vacek' }, { provider });
-    const value = result.unwrap();
-
-    expect(value).toEqual({
-      repos: [
-        { name: 'BcAppClient', description: 'Client for BcAppServer' },
-        { name: 'BcAppServer', description: undefined },
-        {
-          name: 'docucheck',
-          description: "Tool for validating Wultra's documentation ",
-        },
-        { name: 'ICT', description: 'ICT Node.js project' },
-        { name: 'JenkinsTest', description: 'Test repo for Jenkins' },
-        { name: 'linterTest', description: undefined },
-        { name: 'MonitorService', description: undefined },
-        {
-          name: 'standard-readme',
-          description: 'A standard style for README files',
-        },
-      ],
+  describe('UserRepos', () => {
+    it('should perform successfully', async () => {
+      await expect(
+        superface.run({
+          profile: 'vcs/user-repos',
+          provider: 'github',
+          useCase: 'UserRepos',
+          input: {
+            user: 'jakub-vacek',
+          },
+        })
+      ).resolves.toMatchSnapshot();
+    });
+    it('should perform successfully - user with big number of repos', async () => {
+      await expect(
+        superface.run({
+          profile: 'vcs/user-repos',
+          provider: 'github',
+          useCase: 'UserRepos',
+          input: {
+            user: 'oclif',
+          },
+        })
+      ).resolves.toMatchSnapshot();
+    });
+    it('should map error successfully', async () => {
+      await expect(
+        superface.run({
+          profile: 'vcs/user-repos',
+          provider: 'github',
+          useCase: 'UserRepos',
+          input: {
+            user: '!!',
+          },
+        })
+      ).resolves.toMatchSnapshot();
     });
   });
 });
