@@ -1,29 +1,58 @@
 name = "language/translate"
 version = "1.0.0"
 
-
-// TODO: add more languages
-model Language enum {
-    EN, SK, CZ
-}
-
-
 """
 Translate text usecase
 """
 usecase TranslateText {
     input {
-        text string
-        targetLanguage Language 
+        text
+        targetLanguage
+        sourceLanguage
     }
 
     result {
-        text string
-        language
+        text
+        sourceLanguage
     } 
 
     error {
-        title string
-        detail string
+        title
+        detail
     }
 }
+
+"""
+Text
+"""
+field text string
+
+"""
+Target language
+Language that specified text is translated into
+"""
+field targetLanguage enum {
+    BG, CS, DA, DE, EL, EN_GB = 'EN-GB', EN_US = 'EN-US', EN, ES, ET, FI, FR, HU, IT, JA, 
+    LT, LV, NL, PL, PT_PT = 'PT-PT', PT_BR = 'PT-BR', PT, RO, RU, SK, SL, SV, ZH
+}
+
+"""
+Source language
+Language of specified text
+"""
+field sourceLanguage enum {
+    BG, CS, DA, DE, EL, EN, ES, ET, FI, FR, HU, IT, JA, LT, LV, 
+    NL, PL, PT, RO, RU, SK, SL, SV, ZH
+}
+
+"""
+Title
+A short, human-readable summary of the problem type.
+"""
+field title string
+
+"""
+Detail
+A human-readable explanation specific to this occurrence of the problem.
+"""
+field detail string
