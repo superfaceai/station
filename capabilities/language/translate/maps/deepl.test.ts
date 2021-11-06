@@ -1,4 +1,4 @@
-import { SuperfaceTest } from '@superfaceai/testing';
+import { SuperfaceTest } from '@superfaceai/testing-lib';
 
 describe('DeepL', () => {
   let superface: SuperfaceTest;
