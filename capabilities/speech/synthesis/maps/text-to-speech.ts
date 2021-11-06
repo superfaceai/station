@@ -1,14 +1,14 @@
 /* eslint-disable jest/no-export */
 
 import {
-  RecordingProcessFunctions,
+  RecordingProcessOptions,
   SuperfaceTest,
 } from '@superfaceai/testing-lib';
 
 export const textToSpeechTest = (
   provider: string,
   params: { text: string; voice: { languageCode: string } },
-  hooks?: RecordingProcessFunctions
+  hooks?: RecordingProcessOptions
 ): void => {
   describe(`speech/synthesis/${provider}`, () => {
     let superface: SuperfaceTest;
