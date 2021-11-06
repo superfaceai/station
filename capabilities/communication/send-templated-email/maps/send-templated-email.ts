@@ -4,6 +4,7 @@ import { SuperfaceTest } from '@superfaceai/testing-lib';
 
 export const sendTemplatedEmailTest = (
   provider: string,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   params: { from: string; to: string; templateId: string; [key: string]: any }
 ): void => {
   describe(`communication/send-templated-email/${provider}`, () => {

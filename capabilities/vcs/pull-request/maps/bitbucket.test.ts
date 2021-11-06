@@ -1,29 +1,41 @@
-import { SuperfaceClient } from '../../../../superface/sdk';
+import { SuperfaceTest } from '@superfaceai/testing-lib';
 
-describe('vcs/pull-request/bitbucket-typed', () => {
-  beforeAll(() => {
-    jest.setTimeout(10000);
+describe(`vcs/pull-request/bitbucket}`, () => {
+  let superface: SuperfaceTest;
+
+  beforeEach(() => {
+    superface = new SuperfaceTest();
   });
 
-  it('performs correctly', async () => {
-    const client = new SuperfaceClient();
-    const profile = await client.getProfile('vcs/pull-request');
-    const provider = await client.getProvider('bitbucket');
-    const usecase = profile.useCases.PullRequest;
+  describe('PullRequest', () => {
+    it('should perform successfully', async () => {
+      await expect(
+        superface.run({
+          profile: 'vcs/pull-request',
+          provider: 'bitbucket',
+          useCase: 'PullRequest',
+          input: {
+            owner: 'jakuvacek',
+            repo: 'testrepository',
+            identifier: 1,
+          },
+        })
+      ).resolves.toMatchSnapshot();
+    });
 
-    expect(provider).not.toBeUndefined();
-    expect(usecase).not.toBeUndefined();
-
-    //Edit input values and expected result
-    const result = await usecase.perform(
-      { owner: 'jakuvacek', repo: 'testrepository', identifier: 1 },
-      { provider }
-    );
-    expect(result.unwrap()).toEqual({
-      id: 1,
-      sha: 'd1d6bab92584',
-      title: 'README.md edited online with Bitbucket',
-      url: 'https://bitbucket.org/jakuvacek/testrepository/pull-requests/1',
+    it('should map error', async () => {
+      await expect(
+        superface.run({
+          profile: 'vcs/pull-request',
+          provider: 'bitbucket',
+          useCase: 'PullRequest',
+          input: {
+            owner: 'jakuvacek',
+            repo: 'testrepository',
+            identifier: 999,
+          },
+        })
+      ).resolves.toMatchSnapshot();
     });
   });
 });

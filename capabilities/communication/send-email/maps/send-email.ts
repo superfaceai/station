@@ -4,7 +4,12 @@ import { SuperfaceTest } from '@superfaceai/testing-lib';
 
 export const sendEmailTest = (
   provider: string,
-  params: { from: string; to: string; [key: string]: any }
+  params: {
+    from: string;
+    to: string;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    [key: string]: any;
+  }
 ): void => {
   describe(`communication/send-email/${provider}`, () => {
     let superface: SuperfaceTest;
