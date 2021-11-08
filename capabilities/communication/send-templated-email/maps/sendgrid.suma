@@ -11,7 +11,7 @@ map SendTemplatedEmail {
     'template_id': 'templateId',
   }
 
-  http POST "/mail/send" {
+  http POST "/v3/mail/send" {
     security "bearer_token"
 
     request {

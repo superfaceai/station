@@ -1,3 +1,5 @@
 import { emailTemplatestTest } from './email-templates';
 
-emailTemplatestTest('postmark');
+emailTemplatestTest('postmark', {
+  id: '25760152',
+});
