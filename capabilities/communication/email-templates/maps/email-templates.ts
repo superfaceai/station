@@ -56,15 +56,16 @@ export const emailTemplatestTest = (
     let superface: SuperfaceTest;
 
     beforeEach(() => {
-      superface = new SuperfaceTest();
+      superface = new SuperfaceTest({
+        profile: 'communication/email-templates',
+        provider,
+      });
     });
 
     describe('usecase ListTemplates', () => {
       it('should perform correctly', async () => {
         const result = await superface.run(
           {
-            profile: 'communication/email-templates',
-            provider,
             useCase: 'ListTemplates',
             input: {},
           },
@@ -86,8 +87,6 @@ export const emailTemplatestTest = (
         await expect(
           superface.run(
             {
-              profile: 'communication/email-templates',
-              provider,
               useCase: 'GetTemplateContent',
               input: {
                 id: params.id,
@@ -104,8 +103,6 @@ export const emailTemplatestTest = (
         await expect(
           superface.run(
             {
-              profile: 'communication/email-templates',
-              provider,
               useCase: 'CreateTemplate',
               input: {
                 name: 'Station Create template test (DELETE ME)',
@@ -124,8 +121,6 @@ export const emailTemplatestTest = (
       it('should perform correctly', async () => {
         const result = await superface.run(
           {
-            profile: 'communication/email-templates',
-            provider,
             useCase: 'CreateTemplate',
             input: {
               id: params.id,
@@ -152,8 +147,6 @@ export const emailTemplatestTest = (
         await expect(
           superface.run(
             {
-              profile: 'communication/email-templates',
-              provider,
               useCase: 'UpdateTemplate',
               input: {
                 id: newTemplateId,
