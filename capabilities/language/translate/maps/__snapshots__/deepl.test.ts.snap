@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DeepL TranslateText failes - Bad Request 1`] = `
+Err {
+  "error": "HTTPError: Expected HTTP error
+Properties: {
+  \\"title\\": \\"Bad request\\",
+  \\"detail\\": \\"\\\\\\"Parameter 'text' not specified.\\\\\\"\\"
+}
+AST Path: definitions[0].statements[0].responseHandlers[1].statements[0]
+Original Map Location: Line 27, column 13",
+}
+`;
+
+exports[`DeepL TranslateText performs correctly 1`] = `
+Ok {
+  "value": Object {
+    "sourceLanguage": "SK",
+    "text": "Testing",
+  },
+}
+`;

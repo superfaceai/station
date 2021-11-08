@@ -288,6 +288,18 @@
           "file": "../capabilities/crm/contacts/maps/hubspot.suma"
         }
       }
+    },
+    "language/translate": {
+      "file": "../capabilities/language/translate/profile.supr",
+      "priority": ["deepl", "mock"],
+      "providers": {
+        "deepl": {
+          "file": "../capabilities/language/translate/maps/deepl.suma"
+        },
+        "mock": {
+          "file": "../capabilities/language/translate/maps/mock.suma"
+        }
+      }
     }
   },
   "providers": {
@@ -558,6 +570,15 @@
         {
           "id": "apiKey",
           "apikey": "$HUBSPOT_API_KEY"
+        }
+      ]
+    },
+    "deepl": {
+      "file": "../providers/deepl.json",
+      "security": [
+        {
+          "id": "apikey",
+          "apikey": "$DEEPL_API_KEY"
         }
       ]
     }
