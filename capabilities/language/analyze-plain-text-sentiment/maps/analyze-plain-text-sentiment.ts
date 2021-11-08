@@ -1,6 +1,6 @@
 /* eslint-disable jest/no-export */
 
-import { SuperfaceTest } from '@superfaceai/testing-lib';
+import { SuperfaceTest } from '@superfaceai/testing';
 
 export const analyzePlainTextSentimentTests = (provider: string): void => {
   describe(`language/analyze-plain-text-sentiment/${provider}`, () => {
