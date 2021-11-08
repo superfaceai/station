@@ -264,6 +264,17 @@
         }
       }
     },
+    "computer-vision/face-detection": {
+      "file": "../capabilities/computer-vision/face-detection/profile.supr",
+      "providers": {
+        "google-apis-computer-vision": {
+          "file": "../capabilities/computer-vision/face-detection/maps/google-apis-computer-vision.suma"
+        },
+        "mock": {
+          "file": "../capabilities/computer-vision/face-detection/maps/mock.suma"
+        }
+      }
+    },
     "crypto/exchange-rate": {
       "file": "../capabilities/crypto/exchange-rate/exchange-rate.supr",
       "providers": {
@@ -536,6 +547,15 @@
     "wttr-in": {
       "file": "../providers/wttr-in.json",
       "security": []
+    },
+    "google-apis-computer-vision": {
+      "file": "../providers/google-apis-computer-vision.json",
+      "security": [
+        {
+          "id": "google-api-key",
+          "apikey": "$GOOGLE_VISION_API_KEY"
+        }
+      ]
     },
     "openweathermap": {
       "file": "../providers/openweathermap.json",

@@ -1,0 +1,64 @@
+[
+  {
+    "scope": "https://vision.googleapis.com:443",
+    "method": "POST",
+    "path": "/v1/images:annotate?key=credentials-removed-to-keep-them-secure",
+    "body": {
+      "requests": [
+        {
+          "features": [
+            {
+              "maxResults": 1,
+              "type": "FACE_DETECTION"
+            }
+          ],
+          "image": {
+            "source": {
+              "imageUri": "https://upload.wikimedia.org"
+            }
+          }
+        }
+      ]
+    },
+    "status": 200,
+    "response": [
+      "1f",
+      "8b",
+      "08",
+      "00",
+      "00",
+      "00000002ff45cdc10ac2400c04d0fb7ec5b06729089efc060f228807f110b2410b6b5276578a94febbb158bccce1cd844c018845ea605aa5c63dae0ec0b4a457528a15e7159cd892b86c779bbf3da556ba7f395e044c0ab5066276477b08cea703f8558a68cbef0ec72c5405c946cd466999b069f31aa40903f95ddfd06b177f5fe6b0e62dcce10344fd8946b8000000"
+    ],
+    "rawHeaders": [
+      "Content-Type",
+      "application/json; charset=UTF-8",
+      "Vary",
+      "Origin",
+      "Vary",
+      "X-Origin",
+      "Vary",
+      "Referer",
+      "Content-Encoding",
+      "gzip",
+      "Date",
+      "Mon, 08 Nov 2021 14:14:20 GMT",
+      "Server",
+      "ESF",
+      "Cache-Control",
+      "private",
+      "X-XSS-Protection",
+      "0",
+      "X-Frame-Options",
+      "SAMEORIGIN",
+      "X-Content-Type-Options",
+      "nosniff",
+      "Alt-Svc",
+      "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"",
+      "Connection",
+      "close",
+      "Transfer-Encoding",
+      "chunked"
+    ],
+    "responseIsBinary": false
+  }
+]
