@@ -3,7 +3,7 @@ VCS User Repositories
 Retrieve the version control system repositories of specified user.
 """
 name = "vcs/user-repos"
-version = "2.0.0"
+version = "2.0.1"
 
 """
 Get User Repositories
@@ -45,4 +45,16 @@ usecase UserRepos safe {
     """
     description string!
   }
+
+example success {
+    input {
+      user = 'superfaceai'
+    }
+
+    result {
+      name = 'one-sdk-js',
+      description = 'Superface core client library'
+    }
+  }
 }
+

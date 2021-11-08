@@ -3,7 +3,7 @@ Single File Content
 Retrieve the raw content of single file from a version control system repository.
 """
 name = "vcs/single-file-content"
-version = "1.1.0"
+version = "1.1.1"
 
 """
 Single File Content
@@ -72,4 +72,35 @@ usecase SingleFileContent {
     """
     description string!
    }
+
+   example success {
+    input {
+      owner = "superfaceai",
+      repo = "one-sdk-js",
+      path = "/README.md",
+      ref = "c5e4d76",
+    }
+
+    result {
+      size = '5', 
+      content = '0.a4ba399d443d3', 
+      encoding = 'base64'
+    }
+  }
+
+  example errorNoMatch {
+    input {
+      owner = "superfaceai",
+      repo = "one-sdk-js",
+      path = "/wrongfile.md",
+      ref = "c5e4d76",
+    }
+
+    error {
+      message = 'No commit found for the ref 1a2b3c4',
+      description = 'https://docs.github.com/v3/repos/contents/',
+      statusCode = 404
+    }
+  }
+
 }
