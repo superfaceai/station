@@ -250,6 +250,17 @@
         }
       }
     },
+    "weather/forecast-city": {
+      "file": "../capabilities/weather/forecast-city/profile.supr",
+      "providers": {
+        "mock": {
+          "file": "../capabilities/weather/forecast-city/maps/mock.suma"
+        },
+        "wttr-in": {
+          "file": "../capabilities/weather/forecast-city/maps/wttr-in.suma"
+        }
+      }
+    },
     "speech/synthesis": {
       "file": "../capabilities/speech/synthesis/profile.supr",
       "providers": {
@@ -484,7 +495,7 @@
           "username": "$MAILGUN_USERNAME",
           "password": "$MAILGUN_PASSWORD"
         }
-      ], 
+      ],
       "parameters": {
         "DOMAIN": "$MAILGUN_DOMAIN"
       }

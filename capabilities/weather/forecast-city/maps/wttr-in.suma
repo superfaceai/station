@@ -1,0 +1,63 @@
+profile = "weather/forecast-city@1.0"
+provider = "wttr-in"
+
+map GetWeatherForecastInCity {
+  inputCity = input.city
+
+  set {
+    unit = input.units
+  }
+
+  http GET "/{inputCity}" {
+
+    request {
+      query {
+        // request JSON for response
+        format = 'j1'
+      }
+    }
+
+    response {
+      return map error if (statusCode !== 200) {
+        statusCode = statusCode
+        message = body
+      }
+      forecast = call foreach(weather of body.weather) mapWeather(
+        units = unit,
+        weather = weather
+      )
+
+      return map result forecast
+    }
+  }
+}
+
+operation pickTemperatures {
+  return if (args.units === 'F') {
+    avgTemp = Number(args.weather.avgtempF)
+    maxTemp = Number(args.weather.maxtempF)
+    minTemp = Number(args.weather.mintempF)
+  }
+  return if (args.units === 'K') {
+    avgTemp = Number(args.weather.avgtempC) + 273
+    maxTemp = Number(args.weather.maxtempC) + 273
+    minTemp = Number(args.weather.mintempC) + 273
+  }
+  return {
+    avgTemp = Number(args.weather.avgtempC)
+    maxTemp = Number(args.weather.maxtempC)
+    minTemp = Number(args.weather.mintempC)
+  }
+}
+
+operation mapWeather {
+  set {
+    temperatureWrapper = call pickTemperatures(units = args.units, weather = args.weather)
+  }
+  return {
+    averageTemperature = temperatureWrapper.avgTemp
+    date = args.weather.date
+    maxTemperature = temperatureWrapper.maxTemp
+    minTemperature = temperatureWrapper.minTemp
+  }
+}

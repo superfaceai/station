@@ -1,0 +1,38 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`weather/forecast-city/wttr-in GetWeatherForecastInCity when all inputs are correct should return weather object 1`] = `
+Ok {
+  "value": Array [
+    Object {
+      "averageTemperature": 6,
+      "date": "2021-11-08",
+      "maxTemperature": 8,
+      "minTemperature": 4,
+    },
+    Object {
+      "averageTemperature": 7,
+      "date": "2021-11-09",
+      "maxTemperature": 11,
+      "minTemperature": 4,
+    },
+    Object {
+      "averageTemperature": 5,
+      "date": "2021-11-10",
+      "maxTemperature": 9,
+      "minTemperature": 2,
+    },
+  ],
+}
+`;
+
+exports[`weather/forecast-city/wttr-in GetWeatherForecastInCity when inputs are invalid should throw an exception 1`] = `
+Err {
+  "error": "HTTPError: Expected HTTP error
+Properties: {
+  \\"statusCode\\": 400,
+  \\"message\\": \\"<html>\\\\r\\\\n<head><title>400 Bad Request</title></head>\\\\r\\\\n<body bgcolor=\\\\\\"white\\\\\\">\\\\r\\\\n<center><h1>400 Bad Request</h1></center>\\\\r\\\\n<hr><center>nginx/1.10.3</center>\\\\r\\\\n</body>\\\\r\\\\n</html>\\\\r\\\\n\\"
+}
+AST Path: definitions[0].statements[2].responseHandlers[0].statements[0]
+Original Map Location: Line 21, column 7",
+}
+`;
