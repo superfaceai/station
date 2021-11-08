@@ -52,9 +52,22 @@ example success {
     }
 
     result {
-      name = 'one-sdk-js',
-      description = 'Superface core client library'
+      repos = [{
+        name = 'one-sdk-js',
+        description = 'Superface core client library'
+      }]
+    }
+}
+
+example errorNoMatch {
+    input {
+      user = 'wrongName'
+    }
+    
+    error {
+      message = 'No repos found for wrongName',
+      description = 'https://docs.github.com/v3/repos/contents/',
+      statusCode = 404
     }
   }
 }
-
