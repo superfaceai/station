@@ -1,41 +1,41 @@
 //Shippo API reference: https://goshippo.com/docs/reference#tracks-retrieve
 
 profile = "delivery-tracking/shipment-info@1.1"
-  provider = "shippo"
+provider = "shippo"
   
 map ShipmentInfo {
-  fetchShipmentOutcome = call FetchShipment(
-    carrier = input.carrier,
-    trackingNumber = input.trackingNumber)
+  call FetchShipment(
+    trackingNumber = input.trackingNumber,
+    carrier = input.carrier) {
+      return map result if (!outcome.error) outcome.data
 
-  map error if (fetchShipmentOutcome.errorMessage) {
-    title = fetchShipmentOutcome.errorMessage
-  }
-  
-  map result fetchShipmentOutcome
+      return map error {
+        title = outcome.error.title
+      }
+    }
 }
 
 operation FetchShipment {
   http GET "/tracks/{args.carrier}/{args.trackingNumber}" {
     security "shippo_api_token"
     response 200 "application/json" {
-      shipment = call MapShipment(shipment = body)
+      shipment = call MapShipment(shipment = body, trackingNumber = args.trackingNumber)
 
       return [shipment]
     }
     response 404 {
       fail {
-        errorMessage = "No shipment with given tracking number found"
+        title = "No shipment with given tracking number found"
       }
     }
     response 401 {
       fail {
-        errorMessage = "Invalid api token"
+        title = "Invalid api token"
       }
     }
     response 429 {
       fail {
-        errorMessage = "Too many requests within defined time period"
+        title = "Too many requests within defined time period"
       }
     }
   }

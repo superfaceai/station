@@ -1,9 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`starwars/character-information/swapi should map error correctly 1`] = `
-Object {
+exports[`starwars/character-information/swapi should map error correctly when there are no characters found 1`] = `
+Err {
   "error": "HTTPError: Expected HTTP error
-Properites: {
+Properties: {
   \\"message\\": \\"No character found\\"
 }
 AST Path: definitions[0].statements[0].responseHandlers[0].statements[0]
@@ -11,8 +11,22 @@ Original Map Location: Line 13, column 7",
 }
 `;
 
+exports[`starwars/character-information/swapi should map error correctly when there are suggestions 1`] = `
+Err {
+  "error": "HTTPError: Expected HTTP error
+Properties: {
+  \\"message\\": \\"Specified character name is incorrect, did you mean to enter one of following?\\",
+  \\"characters\\": [
+    \\"Luke Skywalker\\"
+  ]
+}
+AST Path: definitions[0].statements[0].responseHandlers[0].statements[2]
+Original Map Location: Line 19, column 7",
+}
+`;
+
 exports[`starwars/character-information/swapi should perform successfully 1`] = `
-Object {
+Ok {
   "value": Object {
     "height": "172",
     "weight": "77",

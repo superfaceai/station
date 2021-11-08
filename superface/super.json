@@ -275,6 +275,17 @@
         }
       }
     },
+    "computer-vision/face-detection": {
+      "file": "../capabilities/computer-vision/face-detection/profile.supr",
+      "providers": {
+        "google-apis-computer-vision": {
+          "file": "../capabilities/computer-vision/face-detection/maps/google-apis-computer-vision.suma"
+        },
+        "mock": {
+          "file": "../capabilities/computer-vision/face-detection/maps/mock.suma"
+        }
+      }
+    },
     "crypto/exchange-rate": {
       "file": "../capabilities/crypto/exchange-rate/exchange-rate.supr",
       "providers": {
@@ -297,6 +308,18 @@
         },
         "hubspot": {
           "file": "../capabilities/crm/contacts/maps/hubspot.suma"
+        }
+      }
+    },
+    "language/translate": {
+      "file": "../capabilities/language/translate/profile.supr",
+      "priority": ["deepl", "mock"],
+      "providers": {
+        "deepl": {
+          "file": "../capabilities/language/translate/maps/deepl.suma"
+        },
+        "mock": {
+          "file": "../capabilities/language/translate/maps/mock.suma"
         }
       }
     }
@@ -536,6 +559,15 @@
       "file": "../providers/wttr-in.json",
       "security": []
     },
+    "google-apis-computer-vision": {
+      "file": "../providers/google-apis-computer-vision.json",
+      "security": [
+        {
+          "id": "google-api-key",
+          "apikey": "$GOOGLE_VISION_API_KEY"
+        }
+      ]
+    },
     "openweathermap": {
       "file": "../providers/openweathermap.json",
       "security": [
@@ -569,6 +601,15 @@
         {
           "id": "apiKey",
           "apikey": "$HUBSPOT_API_KEY"
+        }
+      ]
+    },
+    "deepl": {
+      "file": "../providers/deepl.json",
+      "security": [
+        {
+          "id": "apikey",
+          "apikey": "$DEEPL_API_KEY"
         }
       ]
     }
