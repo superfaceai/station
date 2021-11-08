@@ -28,7 +28,7 @@ export const speechToTextRecognitionTest = (
           ).toString('base64');
           const input = {
             audioContent: audioBase64Encoded,
-            languageCode: 'en',
+            languageCode: 'en-US',
           };
 
           await expect(
@@ -48,7 +48,7 @@ export const speechToTextRecognitionTest = (
       describe('when inputs are invalid', () => {
         it('should throw an exception', async () => {
           const input = {
-            languageCode: 'en',
+            languageCode: 'en-US',
           };
 
           await expect(
