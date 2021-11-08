@@ -13,7 +13,11 @@ export const forecastCityTest = (
     let superface: SuperfaceTest;
 
     beforeEach(() => {
-      superface = new SuperfaceTest();
+      superface = new SuperfaceTest({
+        profile: 'weather/forecast-city',
+        provider,
+        useCase: 'GetWeatherForecastInCity',
+      });
     });
 
     describe('GetWeatherForecastInCity', () => {
@@ -26,9 +30,6 @@ export const forecastCityTest = (
           await expect(
             superface.run(
               {
-                profile: 'weather/forecast-city',
-                provider,
-                useCase: 'GetWeatherForecastInCity',
                 input,
               },
               options
@@ -46,9 +47,6 @@ export const forecastCityTest = (
           await expect(
             superface.run(
               {
-                profile: 'weather/forecast-city',
-                provider,
-                useCase: 'GetWeatherForecastInCity',
                 input,
               },
               options
