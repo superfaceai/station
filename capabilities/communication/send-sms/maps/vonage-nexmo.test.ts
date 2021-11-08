@@ -1,35 +1,40 @@
-import { Profile, Provider, SuperfaceClient } from '@superfaceai/one-sdk';
-
-const recipient = process.env.COMMUNICATION_SENDMESSAGE_TO;
-let profile: Profile;
-let provider: Provider;
+import { SuperfaceTest } from '@superfaceai/testing-lib';
 
 describe('communication/send-sms/vonage-nexmo', () => {
-  beforeAll(async () => {
-    const client = new SuperfaceClient();
-    profile = await client.getProfile('communication/send-sms');
-    provider = await client.getProvider('vonage-nexmo');
+  let superface: SuperfaceTest;
+
+  beforeEach(() => {
+    superface = new SuperfaceTest({
+      profile: 'communication/send-sms',
+      provider: 'vonage-nexmo',
+    });
   });
 
-  it('sends a message', async () => {
-    const useCase = profile.getUseCase('SendMessage');
-    const result = await useCase.perform<any, { messageId: string }>(
-      { to: recipient, from: 'Vonage APIs', text: 'Hello World!' },
-      { provider }
-    );
-
-    // if (result.isErr()) {
-    //   console.log('Error >', result.error);
-    // }
-    expect(result.isOk()).toBeTruthy();
-    expect(typeof result.unwrap().messageId).toBe('string');
-    // console.log('Result >', result.value)
+  describe('SendMessage', () => {
+    it('should perform successfully', async () => {
+      await expect(
+        superface.run({
+          useCase: 'SendMessage',
+          input: {
+            to: '+4915207930698', // https://receive-smss.com/sms/4915207930698/
+            from: 'Vonage APIs',
+            text: 'Hello World!',
+          },
+        })
+      ).resolves.toMatchSnapshot();
+    });
   });
 
-  it('does not retrieves message status', async () => {
-    const useCase = profile.getUseCase('RetrieveMessageStatus');
-    const result = await useCase.perform({ messageId: '' }, { provider });
-
-    expect(result.isErr()).toBeTruthy();
+  describe('RetrieveMessageStatus', () => {
+    it('should return error saying it is not supported', async () => {
+      await expect(
+        superface.run({
+          useCase: 'RetrieveMessageStatus',
+          input: {
+            messageId: 'xxx',
+          },
+        })
+      ).resolves.toMatchSnapshot();
+    });
   });
 });

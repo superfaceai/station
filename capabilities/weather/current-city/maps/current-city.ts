@@ -1,44 +1,31 @@
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
-/* eslint-disable jest/no-try-expect */
-/* eslint-disable jest/no-conditional-expect */
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable jest/no-export */
 
 import { describe, expect } from '@jest/globals';
-import { Provider } from '@superfaceai/one-sdk';
-
-import {
-  SuperfaceClient,
-  WeatherCurrentCityProfile,
-} from '../../../../superface/sdk';
+import { SuperfaceTest } from '@superfaceai/testing-lib';
 
 export const currentCityTest = (providerName: string): void => {
   describe(`weather/current-city/${providerName}`, () => {
-    let client: InstanceType<typeof SuperfaceClient>;
-    let profile: WeatherCurrentCityProfile;
-    let provider: Provider;
+    let superface: SuperfaceTest;
 
-    beforeEach(async () => {
-      client = new SuperfaceClient();
-      profile = await client.getProfile('weather/current-city');
-      provider = await client.getProvider(providerName);
-    });
-
-    it('should find provider', async () => {
-      expect(provider).not.toBeUndefined();
+    beforeEach(() => {
+      superface = new SuperfaceTest({
+        profile: 'weather/current-city',
+        provider: providerName,
+      });
     });
 
     describe('GetCurrentWeatherInCity', () => {
       describe('when all inputs are correct', () => {
-        it('should return weather object', async () => {
-          const result = await profile.useCases.GetCurrentWeatherInCity.perform(
-            { city: 'Prague,CZ' },
-            { provider }
-          );
-          expect(result.unwrap()).toEqual({
-            temperature: expect.any(Number),
-            feelsLike: expect.any(Number),
-            description: expect.any(String),
+        it('returns a weather data', async () => {
+          const result = await superface.run({
+            useCase: 'GetCurrentWeatherInCity',
+            input: { city: 'Prague,CZ' },
           });
+          const weatherData = result.unwrap();
+
+          expect(weatherData).toMatchSnapshot();
         });
       });
     });

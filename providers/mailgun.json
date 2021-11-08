@@ -2,16 +2,22 @@
   "name": "mailgun",
   "services": [
     {
-      "id": "v3",
-      "baseUrl": "https://api.mailgun.net/v3"
+      "id": "default",
+      "baseUrl": "https://api.mailgun.net"
     }
   ],
-  "defaultService": "v3",
+  "defaultService": "default",
   "securitySchemes": [
     {
       "id": "basic",
       "type": "http",
       "scheme": "basic"
+    }
+  ],
+  "parameters": [
+    {
+      "name": "DOMAIN",
+      "description": "Your sending domain"
     }
   ]
 }
