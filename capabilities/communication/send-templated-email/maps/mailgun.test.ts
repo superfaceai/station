@@ -1,8 +1,22 @@
 import { sendTemplatedEmailTest } from './send-templated-email';
 
-sendTemplatedEmailTest('mailgun', {
-  from: 'hello@demo.superface.org',
-  to: 'hello@superface.ai',
-  domain: 'demo.superface.org',
-  templateId: 'station-test',
-});
+sendTemplatedEmailTest(
+  'mailgun',
+  {
+    from: 'demo@demo.superface.org',
+    to: 'demo@superface.ai',
+    templateId: 'station-test',
+  },
+  {
+    beforeRecordingSave: recordings => {
+      recordings.forEach(recording => {
+        if (typeof recording.body === 'string') {
+          recording.body = recording.body.replace(
+            /parameters-removed-to-keep-them-secure/g,
+            process.env.MAILGUN_DOMAIN as string
+          );
+        }
+      });
+    },
+  }
+);

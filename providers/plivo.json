@@ -6,6 +6,7 @@
       "baseUrl": "https://api.plivo.com"
     }
   ],
+  "defaultService": "default",
   "securitySchemes": [
     {
       "id": "basic",
@@ -13,5 +14,10 @@
       "scheme": "basic"
     }
   ],
-  "defaultService": "default"
+  "parameters": [
+    {
+      "name": "authId",
+      "description": "Auth ID"
+    }
+  ]
 }

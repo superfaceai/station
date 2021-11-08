@@ -1,6 +1,9 @@
 /* eslint-disable jest/no-export */
 
-import { SuperfaceTest } from '@superfaceai/testing-lib';
+import {
+  RecordingProcessOptions,
+  SuperfaceTest,
+} from '@superfaceai/testing-lib';
 
 export const sendEmailTest = (
   provider: string,
@@ -9,7 +12,8 @@ export const sendEmailTest = (
     to: string;
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     [key: string]: any;
-  }
+  },
+  options?: RecordingProcessOptions
 ): void => {
   describe(`communication/send-email/${provider}`, () => {
     let superface: SuperfaceTest;
@@ -28,12 +32,15 @@ export const sendEmailTest = (
           };
 
           await expect(
-            superface.run({
-              profile: 'communication/send-email',
-              provider,
-              useCase: 'SendEmail',
-              input,
-            })
+            superface.run(
+              {
+                profile: 'communication/send-email',
+                provider,
+                useCase: 'SendEmail',
+                input,
+              },
+              options
+            )
           ).resolves.toMatchSnapshot();
         });
       });
@@ -49,12 +56,15 @@ export const sendEmailTest = (
           };
 
           await expect(
-            superface.run({
-              profile: 'communication/send-email',
-              provider,
-              useCase: 'SendEmail',
-              input,
-            })
+            superface.run(
+              {
+                profile: 'communication/send-email',
+                provider,
+                useCase: 'SendEmail',
+                input,
+              },
+              options
+            )
           ).resolves.toMatchSnapshot();
         });
       });

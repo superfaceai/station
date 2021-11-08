@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`address/clean-address/mock CleanAddress when all inputs are correct should return clean address 1`] = `
+Ok {
+  "value": Object {
+    "city": "San Francisco",
+    "state": "United States",
+    "street": "270 7th Street",
+    "zipcode": "94103",
+  },
+}
+`;
+
+exports[`address/clean-address/mock CleanAddress when inputs are invalid should throw an exception 1`] = `
+Err {
+  "error": "MappedError: Expected error
+Properties: {
+  \\"title\\": \\"Bad request\\"
+}
+AST Path: definitions[0].statements[0]
+Original Map Location: Line 5, column 3",
+}
+`;

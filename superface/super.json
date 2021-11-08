@@ -31,38 +31,10 @@
           }
         },
         "vonage-nexmo": {
-          "file": "../capabilities/communication/send-sms/maps/vonage-nexmo.suma",
-          "defaults": {
-            "SendMessage": {
-              "input": {
-                "NEXMO_API_KEY": "$NEXMO_API_KEY",
-                "NEXMO_API_SECRET": "$NEXMO_API_SECRET"
-              }
-            },
-            "RetrieveMessageStatus": {
-              "input": {
-                "NEXMO_API_KEY": "$NEXMO_API_KEY",
-                "NEXMO_API_SECRET": "$NEXMO_API_SECRET"
-              }
-            }
-          }
+          "file": "../capabilities/communication/send-sms/maps/vonage-nexmo.suma"
         },
         "plivo": {
-          "file": "../capabilities/communication/send-sms/maps/plivo.suma",
-          "defaults": {
-            "SendMessage": {
-              "input": {
-                "PLIVO_AUTH_ID": "$PLIVO_AUTH_ID",
-                "PLIVO_AUTH_TOKEN": "$PLIVO_AUTH_TOKEN"
-              }
-            },
-            "RetrieveMessageStatus": {
-              "input": {
-                "PLIVO_AUTH_ID": "$PLIVO_AUTH_ID",
-                "PLIVO_AUTH_TOKEN": "$PLIVO_AUTH_TOKEN"
-              }
-            }
-          }
+          "file": "../capabilities/communication/send-sms/maps/plivo.suma"
         },
         "mock": {
           "file": "../capabilities/communication/send-sms/maps/mock.suma"
@@ -124,14 +96,7 @@
       "file": "../capabilities/address/clean-address/profile.supr",
       "providers": {
         "smartystreets": {
-          "file": "../capabilities/address/clean-address/maps/smartystreets.suma",
-          "defaults": {
-            "CleanAddress": {
-              "input": {
-                "SMARTYSTREETS_AUTH_ID": "$SMARTYSTREETS_AUTH_ID"
-              }
-            }
-          }
+          "file": "../capabilities/address/clean-address/maps/smartystreets.suma"
         },
         "mock": {
           "file": "../capabilities/address/clean-address/maps/mock.suma"
@@ -294,15 +259,8 @@
         "google-apis-text-to-speech": {
           "file": "../capabilities/speech/synthesis/maps/google-apis-text-to-speech.suma"
         },
-        "ibm-cloud-text-to-speech-eu-de": {
-          "file": "../capabilities/speech/synthesis/maps/ibm-cloud-text-to-speech-eu-de.suma",
-          "defaults": {
-            "TextToSpeechSynthesis": {
-              "input": {
-                "instance": "$IBM_CLOUD_TEXT_TO_SPEECH_EU_DE_INSTANCE"
-              }
-            }
-          }
+        "ibm-cloud-text-to-speech": {
+          "file": "../capabilities/speech/synthesis/maps/ibm-cloud-text-to-speech.suma"
         }
       }
     },
@@ -335,17 +293,30 @@
   "providers": {
     "github": {
       "file": "../providers/github.json",
-      "security": []
+      "security": [
+        {
+          "id": "basic",
+          "username": "$GITHUB_USERNAME",
+          "password": "$GITHUB_TOKEN"
+        },
+        {
+          "id": "bearer_token",
+          "token": "$GITHUB_TOKEN"
+        }
+      ]
     },
     "twilio": {
       "file": "../providers/twilio.json",
       "security": [
         {
           "id": "basic",
-          "username": "$TWILIO_USERNAME",
-          "password": "$TWILIO_PASSWORD"
+          "username": "$TWILIO_ACCOUNT_SID",
+          "password": "$TWILIO_AUTH_TOKEN"
         }
-      ]
+      ],
+      "parameters": {
+        "accountSid": "$TWILIO_ACCOUNT_SID"
+      }
     },
     "tyntec": {
       "file": "../providers/tyntec.json",
@@ -358,11 +329,46 @@
     },
     "gitlab": {
       "file": "../providers/gitlab.json",
-      "security": []
+      "security": [
+        {
+          "id": "bearer_token",
+          "token": "$GITLAB_TOKEN"
+        },
+        {
+          "id": "personal_access_token_in_header",
+          "apikey": "$GITLAB_TOKEN"
+        },
+        {
+          "id": "personal_access_token_in_query",
+          "apikey": "$GITLAB_TOKEN"
+        },
+        {
+          "id": "access_token_in_query",
+          "apikey": "$GITLAB_TOKEN"
+        }
+      ]
     },
     "bitbucket": {
       "file": "../providers/bitbucket.json",
-      "security": []
+      "security": [
+        {
+          "id": "access_token",
+          "token": "$BITBUCKET_TOKEN"
+        },
+        {
+          "id": "access_token_in_query",
+          "apikey": "$BITBUCKET_TOKEN"
+        },
+        {
+          "id": "access_token_in_body",
+          "apikey": "$BITBUCKET_TOKEN"
+        },
+        {
+          "id": "basic",
+          "username": "$BITBUCKET_USERNAME",
+          "password": "$BITBUCKET_TOKEN"
+        }
+      ]
     },
     "smartystreets": {
       "file": "../providers/smartystreets.json",
@@ -371,11 +377,22 @@
           "id": "auth-token",
           "apikey": "$SMARTYSTREETS_API_KEY"
         }
-      ]
+      ],
+      "parameters": {
+        "AUTH_ID": "$SMARTYSTREETS_AUTH_ID"
+      }
     },
     "vonage-nexmo": {
       "file": "../providers/vonage-nexmo.json",
-      "security": []
+      "security": [
+        {
+          "id": "apiKey",
+          "apikey": "$NEXMO_API_KEY"
+        }
+      ],
+      "parameters": {
+        "apiSecret": "$NEXMO_API_SECRET"
+      }
     },
     "plivo": {
       "file": "../providers/plivo.json",
@@ -385,7 +402,10 @@
           "username": "$PLIVO_AUTH_ID",
           "password": "$PLIVO_AUTH_TOKEN"
         }
-      ]
+      ],
+      "parameters": {
+        "authId": "$PLIVO_AUTH_ID"
+      }
     },
     "dhl": {
       "file": "../providers/dhl.json",
@@ -457,7 +477,10 @@
           "username": "$MAILGUN_USERNAME",
           "password": "$MAILGUN_PASSWORD"
         }
-      ]
+      ], 
+      "parameters": {
+        "DOMAIN": "$MAILGUN_DOMAIN"
+      }
     },
     "mailchimp": {
       "file": "../providers/mailchimp.json",
@@ -511,15 +534,19 @@
         }
       ]
     },
-    "ibm-cloud-text-to-speech-eu-de": {
-      "file": "../providers/ibm-cloud-text-to-speech-eu-de.json",
+    "ibm-cloud-text-to-speech": {
+      "file": "../providers/ibm-cloud-text-to-speech.json",
       "security": [
         {
           "id": "basic",
           "username": "apikey",
-          "password": "$IBM_CLOUD_TEXT_TO_SPEECH_EU_DE_KEY"
+          "password": "$IBM_CLOUD_TEXT_TO_SPEECH_KEY"
         }
-      ]
+      ],
+      "parameters": {
+        "REGION": "$IBM_CLOUD_TEXT_TO_SPEECH_REGION",
+        "INSTANCE_ID": "$IBM_CLOUD_TEXT_TO_SPEECH_INSTANCE_ID"
+      }
     },
     "binance": {
       "file": "../providers/binance.json",
