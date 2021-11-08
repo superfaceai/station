@@ -2,7 +2,10 @@ profile = "speech/synthesis@1.0"
 provider = "google-apis-text-to-speech"
 
 map TextToSpeechSynthesis {
-  encoding = call MapAudioEncoding(encoding = input.audio.encoding)
+  audio = input.audio
+  voice = input.voice
+
+  encoding = call MapAudioEncoding(encoding = audio.encoding)
 
   http POST "/v1/text:synthesize" {
     security "apikey"
@@ -12,12 +15,12 @@ map TextToSpeechSynthesis {
           text: input.text
         },
         voice = {
-          languageCode: input.voice.languageCode,
-          name: input.voice.name
+          languageCode: voice.languageCode,
+          name: voice.name
         },
         audioConfig = {
           audioEncoding: encoding,
-          sampleRateHertz: input.audio.sampleRateHertz
+          sampleRateHertz: audio.sampleRateHertz
         }
       }
     }
