@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`language/analyze-plain-text-sentiment/google-apis-language AnalyzePlainTextSentiment when all inputs are correct should return negative sentiment 1`] = `
-Object {
+Ok {
   "value": Object {
     "score": -0.8,
     "sentiment": "negative",
@@ -10,7 +10,7 @@ Object {
 `;
 
 exports[`language/analyze-plain-text-sentiment/google-apis-language AnalyzePlainTextSentiment when all inputs are correct should return neutral sentiment 1`] = `
-Object {
+Ok {
   "value": Object {
     "score": 0,
     "sentiment": "neutral",
@@ -19,7 +19,7 @@ Object {
 `;
 
 exports[`language/analyze-plain-text-sentiment/google-apis-language AnalyzePlainTextSentiment when all inputs are correct should return positive sentiment 1`] = `
-Object {
+Ok {
   "value": Object {
     "score": 0.9,
     "sentiment": "positive",
@@ -28,8 +28,12 @@ Object {
 `;
 
 exports[`language/analyze-plain-text-sentiment/google-apis-language AnalyzePlainTextSentiment when inputs are invalid should throw an exception 1`] = `
-Object {
+Err {
   "error": "HTTPError: Expected HTTP error
+Properties: {
+  \\"title\\": \\"Invalid argument\\",
+  \\"detail\\": \\"The document.language is not valid. Please leave it empty, if you do not know the language.\\"
+}
 AST Path: definitions[0].statements[0].responseHandlers[1].statements[0]
 Original Map Location: Line 27, column 7",
 }
