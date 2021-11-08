@@ -2,11 +2,10 @@ profile = "weather/current-city@1.0"
 provider = "wttr-in"
 
 map GetCurrentWeatherInCity {
-  set {
-    units = input.units
-  }
+  units = input.units
+  city = `${input.city}`
 
-  http GET "/{input.city}" {
+  http GET "/{city}" {
     security none
 
     request {
