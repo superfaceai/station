@@ -31,38 +31,10 @@
           }
         },
         "vonage-nexmo": {
-          "file": "../capabilities/communication/send-sms/maps/vonage-nexmo.suma",
-          "defaults": {
-            "SendMessage": {
-              "input": {
-                "NEXMO_API_KEY": "$NEXMO_API_KEY",
-                "NEXMO_API_SECRET": "$NEXMO_API_SECRET"
-              }
-            },
-            "RetrieveMessageStatus": {
-              "input": {
-                "NEXMO_API_KEY": "$NEXMO_API_KEY",
-                "NEXMO_API_SECRET": "$NEXMO_API_SECRET"
-              }
-            }
-          }
+          "file": "../capabilities/communication/send-sms/maps/vonage-nexmo.suma"
         },
         "plivo": {
-          "file": "../capabilities/communication/send-sms/maps/plivo.suma",
-          "defaults": {
-            "SendMessage": {
-              "input": {
-                "PLIVO_AUTH_ID": "$PLIVO_AUTH_ID",
-                "PLIVO_AUTH_TOKEN": "$PLIVO_AUTH_TOKEN"
-              }
-            },
-            "RetrieveMessageStatus": {
-              "input": {
-                "PLIVO_AUTH_ID": "$PLIVO_AUTH_ID",
-                "PLIVO_AUTH_TOKEN": "$PLIVO_AUTH_TOKEN"
-              }
-            }
-          }
+          "file": "../capabilities/communication/send-sms/maps/plivo.suma"
         },
         "mock": {
           "file": "../capabilities/communication/send-sms/maps/mock.suma"
@@ -345,10 +317,13 @@
       "security": [
         {
           "id": "basic",
-          "username": "$TWILIO_USERNAME",
-          "password": "$TWILIO_PASSWORD"
+          "username": "$TWILIO_ACCOUNT_SID",
+          "password": "$TWILIO_AUTH_TOKEN"
         }
-      ]
+      ],
+      "parameters": {
+        "accountSid": "$TWILIO_ACCOUNT_SID"
+      }
     },
     "tyntec": {
       "file": "../providers/tyntec.json",
@@ -416,7 +391,15 @@
     },
     "vonage-nexmo": {
       "file": "../providers/vonage-nexmo.json",
-      "security": []
+      "security": [
+        {
+          "id": "apiKey",
+          "apikey": "$NEXMO_API_KEY"
+        }
+      ],
+      "parameters": {
+        "apiSecret": "$NEXMO_API_SECRET"
+      }
     },
     "plivo": {
       "file": "../providers/plivo.json",
@@ -426,7 +409,10 @@
           "username": "$PLIVO_AUTH_ID",
           "password": "$PLIVO_AUTH_TOKEN"
         }
-      ]
+      ],
+      "parameters": {
+        "authId": "$PLIVO_AUTH_ID"
+      }
     },
     "dhl": {
       "file": "../providers/dhl.json",

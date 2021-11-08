@@ -6,5 +6,19 @@
       "baseUrl": "https://rest.nexmo.com"
     }
   ],
-  "defaultService": "default"
+  "defaultService": "default",
+  "securitySchemes": [
+    {
+      "id": "apiKey",
+      "type": "apiKey",
+      "in": "body",
+      "name": "api_key"
+    }
+  ],
+  "parameters": [
+    {
+      "name": "apiSecret",
+      "description": "Your API secret"
+    }
+  ]
 }
