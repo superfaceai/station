@@ -12,14 +12,24 @@ export { DeliveryTrackingShipmentInfoProfile } from "./types/delivery-tracking/s
 export { CommunicationEmailTemplatesProfile } from "./types/communication/email-templates";
 export { CommunicationSendMessageProfile } from "./types/communication/send-message";
 export { WeatherCurrentCityProfile } from "./types/weather/current-city";
+export { WeatherForecastCityProfile } from "./types/weather/forecast-city";
 export { SpeechSynthesisProfile } from "./types/speech/synthesis";
 export { CryptoExchangeRateProfile } from "./types/crypto/exchange-rate";
+export { CrmContactsProfile } from "./types/crm/contacts";
 export declare const SuperfaceClient: new () => import("@superfaceai/one-sdk/dist/client/client").TypedSuperfaceClient<{
+    "crm/contacts": {
+        Create: [import("./types/crm/contacts").CrmContactsCreateInput, import("./types/crm/contacts").CrmContactsCreateResult];
+        Update: [import("./types/crm/contacts").CrmContactsUpdateInput, import("./types/crm/contacts").CrmContactsUpdateResult];
+        Search: [import("./types/crm/contacts").CrmContactsSearchInput, import("./types/crm/contacts").CrmContactsSearchResult];
+    };
     "crypto/exchange-rate": {
         GetExchangeRate: [import("./types/crypto/exchange-rate").CryptoExchangeRateGetExchangeRateInput, import("./types/crypto/exchange-rate").CryptoExchangeRateGetExchangeRateResult];
     };
     "speech/synthesis": {
         TextToSpeechSynthesis: [import("./types/speech/synthesis").SpeechSynthesisTextToSpeechSynthesisInput, import("./types/speech/synthesis").SpeechSynthesisTextToSpeechSynthesisResult];
+    };
+    "weather/forecast-city": {
+        GetWeatherForecastInCity: [import("./types/weather/forecast-city").WeatherForecastCityGetWeatherForecastInCityInput, import("./types/weather/forecast-city").WeatherForecastCityGetWeatherForecastInCityResult];
     };
     "weather/current-city": {
         GetCurrentWeatherInCity: [import("./types/weather/current-city").WeatherCurrentCityGetCurrentWeatherInCityInput, import("./types/weather/current-city").WeatherCurrentCityGetCurrentWeatherInCityResult];
