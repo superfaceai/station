@@ -1,0 +1,94 @@
+profile = "speech/recognize@1.0"
+provider = "google-apis-speech"
+
+map Recognize {
+  encoding = call MapAudioEncoding(encoding = input.audioEncoding)
+
+  maxAlternatives = 1
+  set if (input.maxAlternatives) {
+    maxAlternatives = input.maxAlternatives
+  }
+
+  http POST "/v1/speech:recognize" {
+  security "apikey"
+  
+  request {
+    headers {
+      "Content-Type" = "application/json"
+    }
+    body = {
+        config: { 
+          encoding: encoding,
+          languageCode: input.languageCode,
+          maxAlternatives: maxAlternatives
+        },
+        audio: {
+          content: input.audioContent
+        }
+      }
+    }
+
+  response 200 {
+      return map result {
+        results = call foreach(result of body.results) MapResult(result = result)
+      }
+    }
+
+  response 400 "application/json" {
+      map error {
+        title = (body.error.status === "INVALID_ARGUMENT") ? "Invalid argument" : "Bad request"
+        detail = body.error.message
+      }
+    }
+
+    response 401 "application/json" {
+      map error {
+        title = "Unauthorized"
+        detail = body.error.message
+      }
+    }
+
+    response 403 "application/json" {
+      map error {
+        title = "Forbidden"
+        detail = body.error.message
+      }
+    }
+
+    response 500 "application/json" {
+      map error {
+        title = "Internal server Error"
+        detail = body.error.message
+      }
+    }
+  }
+}
+
+operation MapResult {
+  return {
+    alternatives = call foreach(alternative of args.result.alternatives) MapAlternative(alternative = alternative)
+  }
+}
+
+operation MapAlternative {
+  return {
+    transcript = args.alternative.transcript,
+    confidence = args.alternative.confidence
+  }
+}
+
+operation MapAudioEncoding {
+  set {
+    result = (() => {
+      switch (args.encoding) {
+        case 'linear_pcm':
+          return 'LINEAR16'
+
+        default:
+          return undefined
+      }
+    })()
+  }
+
+  return result
+}

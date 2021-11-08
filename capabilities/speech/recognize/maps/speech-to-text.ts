@@ -1,9 +1,6 @@
 /* eslint-disable jest/no-export */
 
-import {
-  RecordingProcessOptions,
-  SuperfaceTest,
-} from '@superfaceai/testing-lib';
+import { RecordingProcessOptions, SuperfaceTest } from '@superfaceai/testing';
 import * as fs from 'fs/promises';
 
 export const speechToTextRecognitionTest = (
@@ -49,6 +46,9 @@ export const speechToTextRecognitionTest = (
         it('should throw an exception', async () => {
           const input = {
             languageCode: 'en-US',
+            audioContent: Buffer.from('invalid audio file content').toString(
+              'base64'
+            ),
           };
 
           await expect(

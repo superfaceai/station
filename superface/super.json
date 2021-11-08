@@ -362,6 +362,12 @@
        "providers": {
         "mock": {
           "file": "../capabilities/speech/recognize/maps/mock.suma"
+        },
+        "google-apis-speech": {
+          "file": "../capabilities/speech/recognize/maps/google-apis-speech.suma"
+        },
+         "ibm-cloud-speech-to-text": {
+          "file": "../capabilities/speech/recognize/maps/ibm-cloud-speech-to-text.suma"
         }
       }
     }
@@ -694,6 +700,29 @@
       "parameters": {
         "PROJECT_TOKEN": "$MIXPANEL_PROJECT_TOKEN",
         "SERVER": "$MIXPANEL_SERVER"
+      }
+    },
+    "google-apis-speech": {
+      "file": "../providers/google-apis-speech.json",
+      "security": [
+        {
+          "id": "apikey",
+          "apikey": "$GOOGLE_APIS_API_KEY"
+        }
+      ]
+    },
+    "ibm-cloud-speech-to-text": {
+      "file": "../providers/ibm-cloud-speech-to-text.json",
+      "security": [
+        {
+          "id": "basic",
+          "username": "apikey",
+          "password": "$IBM_CLOUD_SPEECH_TO_TEXT_KEY"
+        }
+      ],
+      "parameters": {
+        "REGION": "$IBM_CLOUD_SPEECH_TO_TEXT_REGION",
+        "INSTANCE_ID": "$IBM_CLOUD_SPEECH_TO_TEXT_INSTANCE_ID"
       }
     }
   }

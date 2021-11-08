@@ -1,0 +1,95 @@
+profile = "speech/recognize@1.0"
+provider = "ibm-cloud-speech-to-text"
+
+"""
+Recognize map
+"""
+map Recognize {
+  contentType = call MapAudioEncodingToContentType(encoding = input.audioEncoding)
+  audioContent = input.audioContent
+
+  maxAlternatives = 1
+  set if (input.maxAlternatives) {
+    maxAlternatives = input.maxAlternatives
+  }
+
+  http POST "/instances/{parameters.INSTANCE_ID}/v1/recognize" {
+    security "basic"
+    
+    request "audio/wav" {
+      query {
+        max_alternatives = maxAlternatives
+      }
+      body = Buffer.from(audioContent, 'base64')
+    }
+
+    response 200 {
+      return map result {
+        results = call foreach(result of body.results) MapResult(result = result)
+      }
+    }
+
+    response 400 {
+        map error {
+        title = "Bad request"
+        detail = body.error
+      }
+    }
+
+    response 401 "application/json" {
+      map error {
+        title = "Unauthorized"
+        detail = body.error
+      }
+    }
+
+    response 403 "application/json" {
+      map error {
+        title = "Forbidden"
+        detail = body.error
+      }
+    }
+
+    response 404 {
+        map error {
+        title = body.code_description
+        detail = body.error
+      }
+    }
+
+    response 500 "application/json" {
+      map error {
+        title = "Internal server Error"
+        detail = body.error
+      }
+    }
+  }
+}
+
+operation MapResult {
+  return {
+    alternatives = call foreach(alternative of args.result.alternatives) MapAlternative(alternative = alternative)
+  }
+}
+
+operation MapAlternative {
+  return {
+    transcript = args.alternative.transcript,
+    confidence = args.alternative.confidence
+  }
+}
+
+operation MapAudioEncodingToContentType {
+  set {
+    result = (() => {
+      switch (args.encoding) {
+        case 'linear_pcm':
+          return 'audio/l16'
+        case 'wav':
+          return 'audio/wav'
+        default:
+          return undefined
+      }
+    })()
+  }
+}
