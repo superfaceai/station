@@ -1,5 +1,5 @@
-// import { SuperfaceTest, TestingReturn } from '@superfaceai/testing-lib';
-import { SuperfaceTest } from '@superfaceai/testing-lib';
+// import { SuperfaceTest, TestingReturn } from '@superfaceai/testing';
+import { SuperfaceTest } from '@superfaceai/testing';
 
 describe(`crypto/exchange-rate/binance}`, () => {
   let superface: SuperfaceTest;
