@@ -259,15 +259,8 @@
         "google-apis-text-to-speech": {
           "file": "../capabilities/speech/synthesis/maps/google-apis-text-to-speech.suma"
         },
-        "ibm-cloud-text-to-speech-eu-de": {
-          "file": "../capabilities/speech/synthesis/maps/ibm-cloud-text-to-speech-eu-de.suma",
-          "defaults": {
-            "TextToSpeechSynthesis": {
-              "input": {
-                "instance": "$IBM_CLOUD_TEXT_TO_SPEECH_EU_DE_INSTANCE"
-              }
-            }
-          }
+        "ibm-cloud-text-to-speech": {
+          "file": "../capabilities/speech/synthesis/maps/ibm-cloud-text-to-speech.suma"
         }
       }
     },
@@ -541,15 +534,19 @@
         }
       ]
     },
-    "ibm-cloud-text-to-speech-eu-de": {
-      "file": "../providers/ibm-cloud-text-to-speech-eu-de.json",
+    "ibm-cloud-text-to-speech": {
+      "file": "../providers/ibm-cloud-text-to-speech.json",
       "security": [
         {
           "id": "basic",
           "username": "apikey",
-          "password": "$IBM_CLOUD_TEXT_TO_SPEECH_EU_DE_KEY"
+          "password": "$IBM_CLOUD_TEXT_TO_SPEECH_KEY"
         }
-      ]
+      ],
+      "parameters": {
+        "REGION": "$IBM_CLOUD_TEXT_TO_SPEECH_REGION",
+        "INSTANCE_ID": "$IBM_CLOUD_TEXT_TO_SPEECH_INSTANCE_ID"
+      }
     },
     "binance": {
       "file": "../providers/binance.json",

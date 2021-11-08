@@ -1,8 +1,8 @@
 profile = "speech/synthesis@1.0"
-provider = "ibm-cloud-text-to-speech-eu-de"
+provider = "ibm-cloud-text-to-speech"
 
 map TextToSpeechSynthesis {
-  http POST "/instances/{input.instance}/v1/synthesize" {
+  http POST "/instances/{parameters.INSTANCE_ID}/v1/synthesize" {
     security "basic"
     request {
       query {
