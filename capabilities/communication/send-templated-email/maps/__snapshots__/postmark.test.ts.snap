@@ -1,16 +1,20 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`communication/send-templated-email/postmark SendTemplatedEmail when all inputs are correct should return messageId as result 1`] = `
-Object {
+Ok {
   "value": Object {
-    "messageId": "42cd96bc-4a2b-4a1a-9f32-7778e7fe59af",
+    "messageId": "a9fd17c0-e290-49a0-b0ca-88c86479f619",
   },
 }
 `;
 
 exports[`communication/send-templated-email/postmark SendTemplatedEmail when inputs are invalid should throw error 1`] = `
-Object {
+Err {
   "error": "HTTPError: Expected HTTP error
+Properties: {
+  \\"title\\": \\"Invalid inputs\\",
+  \\"detail\\": \\"Received valid, but incompatible JSON input.\\"
+}
 AST Path: definitions[0].statements[0].responseHandlers[1].statements[0]
 Original Map Location: Line 26, column 7",
 }

@@ -1,7 +1,7 @@
 import { sendTemplatedEmailTest } from './send-templated-email';
 
 sendTemplatedEmailTest('postmark', {
-  from: 'hello@superface.ai',
-  to: 'hello@superface.ai',
-  templateId: '23783943',
+  from: 'demo@demo.superface.org',
+  to: 'demo@demo.superface.org',
+  templateId: '25760152',
 });
