@@ -28,8 +28,6 @@ const beforeRecordingLoad = (definitions: RecordingDefinitions) => {
           'parameters-removed-to-keep-them-secure',
           process.env.PLIVO_AUTH_ID as any
         );
-
-      console.log(name, def.rawHeaders[name]);
     }
   });
 };
