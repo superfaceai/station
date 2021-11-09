@@ -2,12 +2,13 @@ profile = "navigation/nearby-poi@1.0"
 provider = "overpass-de"
 
 map NearbyPoi {
+  center = input.center
   http POST "/api/interpreter" {
     request "application/x-www-form-urlencoded" {
       body {
         data = call BuildQuery(
-          latitude = input.center.latitude,
-          longitude = input.center.longitude,
+          latitude = center.latitude,
+          longitude = center.longitude,
           radius = input.radius,
           categories = input.categories || []
         )

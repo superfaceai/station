@@ -2,14 +2,16 @@ profile = "navigation/nearby-poi@1.0"
 provider = "mock"
 
 map NearbyPoi {
-  map result [
+  category = 'CAFE'
+  pois = [
     {
       coordinates: {
       latitude: 51.4768380,
       longitude: -0.0006877
       },
       name: "Astronomy Café",
-      categories: ["CAFE"]
+      categories: [category]
     }
   ]
+  map result pois
 }
