@@ -19,13 +19,41 @@ map Geocode {
     }
 
     response 200 "application/json" {
-      return map error if (statusCode !== 200) {
+      return map error if (statusCode !== 200 || !body.length) {
         title = "Error geocoding address"
       }
 
       map result {
         latitude = body[0].lat
         longitude = body[0].lon
+      }
+    }
+
+    response 400 "application/json" {
+      map error {
+        title = "Bad request"
+        detail = body.error.message
+      }
+    }
+
+    response 401 "application/json" {
+      map error {
+        title = "Unauthorized"
+        detail = body.error.message
+      }
+    }
+
+    response 403 "application/json" {
+      map error {
+        title = "Forbidden"
+        detail = body.error.message
+      }
+    }
+
+    response 500 "application/json" {
+      map error {
+        title = "Internal server Error"
+        detail = body.error.message
       }
     }
   }
@@ -101,6 +129,34 @@ map ReverseGeocode {
       }
 
       map result [mappedAddress] 
+    }
+
+    response 400 "application/json" {
+      map error {
+        title = "Bad request"
+        detail = body.error.message
+      }
+    }
+
+    response 401 "application/json" {
+      map error {
+        title = "Unauthorized"
+        detail = body.error.message
+      }
+    }
+
+    response 403 "application/json" {
+      map error {
+        title = "Forbidden"
+        detail = body.error.message
+      }
+    }
+
+    response 500 "application/json" {
+      map error {
+        title = "Internal server Error"
+        detail = body.error.message
+      }
     }
   }
 }

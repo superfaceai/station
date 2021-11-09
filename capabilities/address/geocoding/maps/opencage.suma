@@ -26,6 +26,34 @@ map Geocode {
         longitude = body.results[0].geometry.lng
       }
     }
+
+    response 400 "application/json" {
+      map error {
+        title = "Bad request"
+        detail = body.status.message
+      }
+    }
+
+    response 401 "application/json" {
+      map error {
+        title = "Unauthorized"
+        detail = body.status.message
+      }
+    }
+
+    response 403 "application/json" {
+      map error {
+        title = "Forbidden"
+        detail = body.status.message
+      }
+    }
+
+    response 500 "application/json" {
+      map error {
+        title = "Internal server Error"
+        detail = body.status.message
+      }
+    }
   }
 }
 
@@ -45,6 +73,11 @@ map ReverseGeocode {
       return map error if (body.status.code !== 200) {
         title = "Error reverse geocoding coordinates"
         detail = body.status.message
+      }
+
+      return map error if (!body.total_results) {
+        title = "Error reverse geocoding coordinates"
+        detail = "No results returned"
       }
 
       map result body.results.map(result => {
@@ -98,6 +131,34 @@ map ReverseGeocode {
 
         return mappedAddress;
       })
+    }
+
+    response 400 "application/json" {
+      map error {
+        title = "Bad request"
+        detail = body.status.message
+      }
+    }
+
+    response 401 "application/json" {
+      map error {
+        title = "Unauthorized"
+        detail = body.status.message
+      }
+    }
+
+    response 403 "application/json" {
+      map error {
+        title = "Forbidden"
+        detail = body.status.message
+      }
+    }
+
+    response 500 "application/json" {
+      map error {
+        title = "Internal server Error"
+        detail = body.status.message
+      }
     }
   }
 }

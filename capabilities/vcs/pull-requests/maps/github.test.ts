@@ -1,30 +1,53 @@
-import { SuperfaceClient } from '@superfaceai/one-sdk';
+import { SuperfaceTest } from '@superfaceai/testing';
 
-describe('vcs/pull-requests/github', () => {
-  beforeAll(() => {
-    jest.setTimeout(10000);
+describe(`vcs/pull-requests/github`, () => {
+  let superface: SuperfaceTest;
+
+  beforeEach(() => {
+    superface = new SuperfaceTest();
   });
 
-  it('performs correctly', async () => {
-    const client = new SuperfaceClient();
-    const profile = await client.getProfile('vcs/pull-requests');
-    const useCase = profile.getUseCase('PullRequests');
-    const provider = await client.getProvider('github');
-    const result = await useCase.perform(
-      { owner: 'superfaceai', repo: 'astexplorer' },
-      { provider }
-    );
-    const value = result.unwrap();
-
-    expect(value).toEqual({
-      pullRequests: [
-        {
-          id: 567476468,
-          sha: 'a8e318f2f5f14504a2f0da049d26cbc80d35fa9d',
-          title: 'chore: Bump parser version',
-          url: 'https://api.github.com/repos/superfaceai/astexplorer/pulls/3',
-        },
-      ],
+  describe('PullRequests', () => {
+    it('should perform successfully - only one page of PRs', async () => {
+      await expect(
+        superface.run({
+          profile: 'vcs/pull-requests',
+          provider: 'github',
+          useCase: 'PullRequests',
+          //Repo with 1 PR, default page size is 30 - should fit on one page
+          input: {
+            owner: 'Jakub-Vacek',
+            repo: 'BcAppServer',
+          },
+        })
+      ).resolves.toMatchSnapshot();
+    });
+    it('should perform successfully - two pages of PRs', async () => {
+      await expect(
+        superface.run({
+          profile: 'vcs/pull-requests',
+          provider: 'github',
+          useCase: 'PullRequests',
+          //Repo with 32 PRs, default page size is 30 - should fit on two pages
+          input: {
+            owner: 'Jakub-Vacek',
+            repo: 'JenkinsTest',
+          },
+        })
+      ).resolves.toMatchSnapshot();
+    });
+    it('should handle error', async () => {
+      await expect(
+        superface.run({
+          profile: 'vcs/pull-requests',
+          provider: 'github',
+          useCase: 'PullRequests',
+          input: {
+            owner: 'Jakub-Vacek',
+            repo: 'made-up',
+          },
+        })
+      ).resolves.toMatchSnapshot();
     });
   });
 });

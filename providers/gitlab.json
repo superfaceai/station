@@ -3,7 +3,32 @@
   "services": [
     {
       "id": "default",
-      "baseUrl": "https://gitlab.com/api/v4"
+      "baseUrl": "https://gitlab.com/api"
+    }
+  ],
+  "securitySchemes": [
+    {
+      "id": "bearer_token",
+      "type": "http",
+      "scheme": "bearer"
+    },
+    {
+      "id": "personal_access_token_in_header",
+      "type": "apiKey",
+      "in": "header",
+      "name": "PRIVATE-TOKEN"
+    },
+    {
+      "id": "access_token_in_query",
+      "type": "apiKey",
+      "in": "query",
+      "name": "access_token"
+    },
+    {
+      "id": "personal_access_token_in_query",
+      "type": "apiKey",
+      "in": "query",
+      "name": "private_token"
     }
   ],
   "defaultService": "default"

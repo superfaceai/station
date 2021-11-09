@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`crm/contacts/sendgrid Create should perform successfully 1`] = `
-Object {
+Ok {
   "value": Object {
     "id": null,
   },
@@ -9,24 +9,28 @@ Object {
 `;
 
 exports[`crm/contacts/sendgrid Create should return error if email is missing 1`] = `
-Object {
-  "error": "HTTPError: Expected HTTP error
+Err {
+  "error": "MappedError: Expected error
+Properties: {
+  \\"title\\": \\"Missing field\\",
+  \\"detail\\": \\"SendGrid requires email on contact\\"
+}
 AST Path: definitions[0].statements[0]
 Original Map Location: Line 5, column 3",
 }
 `;
 
 exports[`crm/contacts/sendgrid Search should perform successfully 1`] = `
-Object {
+Ok {
   "value": Array [
     Object {
       "country": "",
       "customProperties": Object {
-        "existingField": "value",
+        "test": "value",
       },
       "email": "test@example.com",
       "firstName": "test",
-      "id": "9fd2a571-2f57-4410-8974-ddae6a4fb134",
+      "id": "ed62c84e-59fe-4bb5-8a96-323b1b5db10b",
       "lastName": "",
       "phone": "",
     },
@@ -35,7 +39,7 @@ Object {
 `;
 
 exports[`crm/contacts/sendgrid Search should return error if unknow operator is used 1`] = `
-Object {
+Err {
   "error": "Input validation failed:
 Path: input.operator
 Error: Invalid enum value: \\"%\\"
@@ -45,7 +49,7 @@ Error: Invalid enum value: \\"%\\"",
 `;
 
 exports[`crm/contacts/sendgrid Update should perform successfully 1`] = `
-Object {
+Ok {
   "value": Object {
     "id": "test@example.com",
   },
@@ -53,8 +57,12 @@ Object {
 `;
 
 exports[`crm/contacts/sendgrid Update should return error if email is missing 1`] = `
-Object {
-  "error": "HTTPError: Expected HTTP error
+Err {
+  "error": "MappedError: Expected error
+Properties: {
+  \\"title\\": \\"Missing field\\",
+  \\"detail\\": \\"You must specify id or email to identify contact\\"
+}
 AST Path: definitions[1].statements[0]
 Original Map Location: Line 70, column 3",
 }

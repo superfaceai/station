@@ -13,10 +13,20 @@ export { CommunicationEmailTemplatesProfile } from "./types/communication/email-
 export { CommunicationSendMessageProfile } from "./types/communication/send-message";
 export { WeatherCurrentCityProfile } from "./types/weather/current-city";
 export { SpeechSynthesisProfile } from "./types/speech/synthesis";
+export { ComputerVisionFaceDetectionProfile } from "./types/computer-vision/face-detection";
 export { CryptoExchangeRateProfile } from "./types/crypto/exchange-rate";
+export { CrmContactsProfile } from "./types/crm/contacts";
 export declare const SuperfaceClient: new () => import("@superfaceai/one-sdk/dist/client/client").TypedSuperfaceClient<{
+    "crm/contacts": {
+        Create: [import("./types/crm/contacts").CrmContactsCreateInput, import("./types/crm/contacts").CrmContactsCreateResult];
+        Update: [import("./types/crm/contacts").CrmContactsUpdateInput, import("./types/crm/contacts").CrmContactsUpdateResult];
+        Search: [import("./types/crm/contacts").CrmContactsSearchInput, import("./types/crm/contacts").CrmContactsSearchResult];
+    };
     "crypto/exchange-rate": {
         GetExchangeRate: [import("./types/crypto/exchange-rate").CryptoExchangeRateGetExchangeRateInput, import("./types/crypto/exchange-rate").CryptoExchangeRateGetExchangeRateResult];
+    };
+    "computer-vision/face-detection": {
+        FaceDetection: [import("./types/computer-vision/face-detection").ComputerVisionFaceDetectionFaceDetectionInput, import("./types/computer-vision/face-detection").ComputerVisionFaceDetectionFaceDetectionResult];
     };
     "speech/synthesis": {
         TextToSpeechSynthesis: [import("./types/speech/synthesis").SpeechSynthesisTextToSpeechSynthesisInput, import("./types/speech/synthesis").SpeechSynthesisTextToSpeechSynthesisResult];
@@ -67,6 +77,9 @@ export declare const SuperfaceClient: new () => import("@superfaceai/one-sdk/dis
     "communication/send-sms": {
         SendMessage: [import("./types/communication/send-sms").CommunicationSendSmsSendMessageInput, import("./types/communication/send-sms").CommunicationSendSmsSendMessageResult];
         RetrieveMessageStatus: [import("./types/communication/send-sms").CommunicationSendSmsRetrieveMessageStatusInput, import("./types/communication/send-sms").CommunicationSendSmsRetrieveMessageStatusResult];
+    };
+    "language/analyze-plain-text-sentiment": {
+        AnalyzePlainTextSentiment: [import("./types/language/analyze-plain-text-sentiment").TranslationAnalyzePlainTextSentimentAnalyzePlainTextSentimentInput, import("./types/language/analyze-plain-text-sentiment").TranslationAnalyzePlainTextSentimentAnalyzePlainTextSentimentResult];
     };
 }>;
 export declare type SuperfaceClient = InstanceType<typeof SuperfaceClient>;

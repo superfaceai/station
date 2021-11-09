@@ -1,8 +1,8 @@
-profile = "communication/send-sms@1.0"
+profile = "communication/send-sms@2.0"
 provider = "tyntec"
 
 // Tyntec API documentation available at:
-//  https://api.tyntec.com/reference/#conversations-send-messages-send-a-message
+// https://api.tyntec.com/reference/#conversations-send-messages-send-a-message
 
 map SendMessage {
   http POST "/chat-api/v2/messages" {
@@ -36,7 +36,7 @@ map RetrieveMessageStatus {
     response 200 "application/json" {
       // sanity check
       return map error if (!body.history.length) {
-        message = 'no history available'
+        title = 'History not available'
       }
 
       // harmonize the latest state

@@ -1,14 +1,12 @@
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
-/* eslint-disable jest/no-try-expect */
 /* eslint-disable jest/no-conditional-expect */
 /* eslint-disable jest/no-export */
 
-import { Provider } from '@superfaceai/one-sdk';
+import { RecordingProcessOptions, SuperfaceTest } from '@superfaceai/testing';
 
-import {
-  CommunicationEmailTemplatesProfile,
-  SuperfaceClient,
-} from '../../../../superface/sdk';
+declare type Template = {
+  id: string;
+  name: string;
+};
 
 const htmlTemplate = `
 <!doctype html>
@@ -44,127 +42,120 @@ This template is used by integration tests only 2
 </html>
 `;
 
-export const emailTemplatestTest = (providerName: string): void => {
-  describe(`communication/email-templates/${providerName}`, () => {
-    let client: SuperfaceClient;
-    let profile: CommunicationEmailTemplatesProfile;
-    let provider: Provider;
+export const emailTemplatestTest = (
+  provider: string,
+  params: {
+    id: string;
+  },
+  options?: RecordingProcessOptions
+): void => {
+  describe(`communication/email-templates/${provider}`, () => {
+    let superface: SuperfaceTest;
 
-    beforeAll(() => {
-      jest.setTimeout(10000);
-    });
-
-    beforeEach(async () => {
-      client = new SuperfaceClient();
-      profile = await client.getProfile('communication/email-templates');
-      provider = await client.getProvider(providerName);
-    });
-
-    it('should have profile defined', () => {
-      expect(profile).not.toBeUndefined();
-    });
-
-    it('should have provider defined', () => {
-      expect(provider).not.toBeUndefined();
+    beforeEach(() => {
+      superface = new SuperfaceTest({
+        profile: 'communication/email-templates',
+        provider,
+      });
     });
 
     describe('usecase ListTemplates', () => {
       it('should perform correctly', async () => {
-        const usecase = profile.useCases.ListTemplates;
-        expect(usecase).not.toBeUndefined();
+        const result = await superface.run(
+          {
+            useCase: 'ListTemplates',
+            input: {},
+          },
+          options
+        );
 
-        const result = await usecase.perform({}, { provider });
-        const templates = result.unwrap();
-        const randomTemplate =
-          templates[Math.floor(Math.random() * templates.length)];
-
-        expect(Array.isArray(templates)).toBeTruthy();
-        expect(typeof randomTemplate.id).toBe('string');
-        expect(typeof randomTemplate.name).toBe('string');
+        // list values can be different every run, so we can't use snapshots
+        if ('value' in result) {
+          if (Array.isArray(result.value)) {
+            expect(result.value[0]).toHaveProperty('id');
+            expect(result.value[0]).toHaveProperty('name');
+          }
+        }
       });
     });
 
     describe('usecase GetTemplateContent', () => {
       it('should perform correctly', async () => {
-        const usecase = profile.useCases.GetTemplateContent;
-        expect(usecase).not.toBeUndefined();
-
-        const templates = (
-          await profile.useCases.ListTemplates.perform({}, { provider })
-        ).unwrap();
-        const randomTemplate =
-          templates[Math.floor(Math.random() * templates.length)];
-
-        const result = await usecase.perform(
-          { id: randomTemplate.id },
-          { provider }
-        );
-
-        const templateData = result.unwrap();
-
-        expect(typeof templateData).toBe('object');
-        expect(typeof templateData.subject).toBe('string');
-        expect(typeof templateData.text).toBe('string');
-        expect(typeof templateData.html).toBe('string');
+        await expect(
+          superface.run(
+            {
+              useCase: 'GetTemplateContent',
+              input: {
+                id: params.id,
+              },
+            },
+            options
+          )
+        ).resolves.toMatchSnapshot();
       });
     });
 
     describe('usecase CreateTemplate', () => {
       it('should perform correctly', async () => {
-        const usecase = profile.useCases.CreateTemplate;
-        expect(usecase).not.toBeUndefined();
-
-        const result = await usecase.perform(
-          {
-            name: 'Station test template',
-            subject: 'Integration Test Email #1',
-            text: 'This template is used by integration tests only',
-            html: htmlTemplate,
-          },
-          { provider }
-        );
-
-        const data = result.unwrap();
-
-        expect(typeof data).toBe('object');
-        expect(typeof data.id).toBe('string');
-        expect(typeof data.name).toBe('string');
-        expect(data.name).toBe('Station test template');
+        await expect(
+          superface.run(
+            {
+              useCase: 'CreateTemplate',
+              input: {
+                name: 'Station Create template test (DELETE ME)',
+                subject: 'Test Email',
+                text: 'This template is used by integration tests only',
+                html: htmlTemplate,
+              },
+            },
+            options
+          )
+        ).resolves.toMatchSnapshot();
       });
     });
 
     describe('usecase UpdateTemplate', () => {
       it('should perform correctly', async () => {
-        const createResult = await profile.useCases.CreateTemplate.perform(
+        const result = await superface.run(
           {
-            name: 'Station test template',
-            subject: 'Integration Test Email #1',
-            text: 'This template is used by integration tests only',
-            html: htmlTemplate,
+            useCase: 'CreateTemplate',
+            input: {
+              id: params.id,
+              name: 'Station Update template test (DELETE ME)',
+              subject: 'Test Email',
+              text: 'Empty',
+              html: htmlTemplate,
+            },
           },
-          { provider }
+          options
         );
 
-        expect(createResult.isOk()).toBeTruthy();
+        let newTemplateId = '';
 
-        const templateId = createResult.unwrap().id;
+        if (
+          'value' in result &&
+          typeof result.value === 'object' &&
+          result.value !== null &&
+          'id' in result.value
+        ) {
+          newTemplateId = (result.value as Template).id;
+        }
 
-        const usecase = profile.useCases.UpdateTemplate;
-        expect(usecase).not.toBeUndefined();
-
-        const patch = {
-          id: templateId,
-          name: 'Station test template 2',
-          subject: 'Integration Test Email #2',
-          text: 'This template is used by integration tests only 2',
-          html: htmlTemplateUpdated,
-        };
-
-        const result = await usecase.perform(patch, { provider });
-        const data = result.unwrap();
-
-        expect(data.id).toBe(templateId);
-        expect(data.name).toBe('Station test template 2');
+        await expect(
+          superface.run(
+            {
+              useCase: 'UpdateTemplate',
+              input: {
+                id: newTemplateId,
+                name: 'Station Update template test updated (DELETE ME)',
+                subject: 'Test Email',
+                text: 'This template is used by integration tests only',
+                html: htmlTemplateUpdated,
+              },
+            },
+            options
+          )
+        ).resolves.toMatchSnapshot();
       });
     });
   });

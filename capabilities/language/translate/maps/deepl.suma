@@ -1,0 +1,96 @@
+profile = "language/translate@1.0"
+provider = "deepl"
+
+"""
+Translate text
+"""
+map TranslateText {
+    http GET "/v2/translate" {
+        security 'apikey'
+
+        request {
+            query {
+                text = input.text
+                source_lang = input.sourceLanguage
+                target_lang = input.targetLanguage
+            }
+        }
+
+        response 200 "application/json" {
+            return map result {
+                text = body.translations[0].text
+                sourceLanguage = body.translations[0].detected_source_language
+            }
+        }
+
+        response 400 {
+            map error {
+                title = "Bad request"
+                detail = body.message
+            }
+        }
+
+        response 403 {
+            map error {
+                title = "Authorization failed"
+                detail = body.message
+            }
+        }
+
+        response 404 {
+            map error {
+                title = "The requested resource could not be found"
+                detail = body.message
+            }
+        }
+
+        response 413 {
+            map error {
+                title = "The request size exceeds the limit"
+                detail = body.message
+            }
+        }
+
+        response 414 {
+            map error {
+                title = "The request URL is too long"
+                detail = body.message
+            }
+        }
+
+        response 429 {
+            map error {
+                title = "Too many requests"
+                detail = body.message
+            }
+        }
+
+        response 456 {
+            map error {
+                title = "Quota exceeded"
+                detail = body.message
+            }
+        }
+
+        response 503 {
+            map error {
+                title = "Authorization failed"
+                detail = body.message
+            }
+        }
+
+        response 500 {
+            map error {
+                title = "Internal error"
+                detail = body.message
+            }
+        }
+
+        response 529 {
+            map error {
+                title = "Too many requests"
+                detail = body.message
+            }
+        }
+    }
+}

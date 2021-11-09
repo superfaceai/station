@@ -3,7 +3,7 @@ Star Wars Character Information
 Retrive information about Star Wars characters.
 """
 name = "starwars/character-information"
-version = "1.0.3"
+version = "1.0.4"
 
 """
 Retrieve Character Info
@@ -23,6 +23,39 @@ usecase RetrieveCharacterInformation safe {
   error {
     message
     characters
+  }
+
+  example success {
+    input {
+      characterName = 'Luke Skywalker'
+    }
+
+    result {
+      height = "172",
+      weight = "77",
+      yearOfBirth = "19BBY",
+    }
+  }
+
+  example errorNoMatch {
+    input {
+      characterName = "madeUp"
+    }
+
+    error {
+      message = "No character found"
+    }
+  }
+
+  example errorWithSuggestions {
+    input {
+      characterName = "Luke"
+    }
+
+    error {
+      message = "Specified character name is incorrect, did you mean to enter one of following?"
+      characters = ["Luke Skywalker"]
+    }
   }
 }
 

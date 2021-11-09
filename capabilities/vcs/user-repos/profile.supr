@@ -3,17 +3,17 @@ VCS User Repositories
 Retrieve the version control system repositories of specified user.
 """
 name = "vcs/user-repos"
-version = "1.0.2"
+version = "2.0.0"
 
 """
 Get User Repositories
 Get repositories of the specified user.
 """
-usecase UserRepos {
+usecase UserRepos safe {
   input {
     "
-    User name 
-    User identifier for whom to list repositories. Some providers use authenticated user instead
+    User
+    User identifier for whom to list repositories.
     "
     user! string!
   }
@@ -26,5 +26,23 @@ usecase UserRepos {
       "Description of the repository"
       description string!
     }]
+  }
+
+  error {
+    """
+    Message
+    A short, human-readable summary of the problem.
+    """
+    message! string!
+    """
+    Status code
+    Usually a HTTP status code connected to occured problem.
+    """
+    statusCode!
+    """
+    Description
+    A optional, human-readable explanation specific to this occurrence of the problem.
+    """
+    description string!
   }
 }

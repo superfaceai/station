@@ -1,0 +1,49 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`address/geocoding/google-apis-maps Geocode when all inputs are correct should geocode address to geographical coordinates 1`] = `
+Ok {
+  "value": Object {
+    "latitude": 50.0755381,
+    "longitude": 14.4378005,
+  },
+}
+`;
+
+exports[`address/geocoding/google-apis-maps Geocode when inputs are invalid should throw an exception 1`] = `
+Err {
+  "error": "HTTPError: Expected HTTP error
+Properties: {
+  \\"title\\": \\"Error geocoding address\\",
+  \\"detail\\": \\"ZERO_RESULTS\\"
+}
+AST Path: definitions[0].statements[1].responseHandlers[0].statements[0]
+Original Map Location: Line 19, column 7",
+}
+`;
+
+exports[`address/geocoding/google-apis-maps ReverseGeocode when all inputs are correct should reverse geocode geographical coordinates 1`] = `
+Ok {
+  "value": Array [
+    Object {
+      "addressCountry": "US",
+      "addressLocality": "Brooklyn",
+      "addressRegion": "Kings County, NY",
+      "formattedAddress": "277 Bedford Ave, Brooklyn, NY 11211, USA",
+      "postalCode": "11211",
+      "streetAddress": "277 Bedford Ave",
+    },
+  ],
+}
+`;
+
+exports[`address/geocoding/google-apis-maps ReverseGeocode when inputs are invalid should throw an exception 1`] = `
+Err {
+  "error": "HTTPError: Expected HTTP error
+Properties: {
+  \\"title\\": \\"Bad request\\",
+  \\"detail\\": \\"Invalid request. Invalid 'latlng' parameter.\\"
+}
+AST Path: definitions[1].statements[1].responseHandlers[1].statements[0]
+Original Map Location: Line 148, column 7",
+}
+`;

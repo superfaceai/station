@@ -1,29 +1,53 @@
-import { SuperfaceClient } from '@superfaceai/one-sdk';
+import { SuperfaceTest } from '@superfaceai/testing';
 
-describe('vcs/pull-requests/bitbucket', () => {
-  beforeAll(() => {
-    jest.setTimeout(10000);
+describe(`vcs/pull-requests/bitbucket`, () => {
+  let superface: SuperfaceTest;
+
+  beforeEach(() => {
+    superface = new SuperfaceTest();
   });
 
-  it('performs correctly', async () => {
-    const client = new SuperfaceClient();
-    const profile = await client.getProfile('vcs/pull-requests');
-    const useCase = profile.getUseCase('PullRequests');
-    const provider = await client.getProvider('bitbucket');
-    const result = await useCase.perform(
-      { owner: 'jakuvacek', repo: 'testrepository' },
-      { provider }
-    );
-    const value = result.unwrap();
-    expect(value).toEqual({
-      pullRequests: [
-        {
-          id: 1,
-          sha: 'd1d6bab92584',
-          title: 'README.md edited online with Bitbucket',
-          url: 'https://bitbucket.org/jakuvacek/testrepository/pull-requests/1',
-        },
-      ],
+  describe('PullRequests', () => {
+    it('should perform successfully - only one page of PRs', async () => {
+      await expect(
+        superface.run({
+          profile: 'vcs/pull-requests',
+          provider: 'bitbucket',
+          useCase: 'PullRequests',
+          //Repo with 1 PR, default page size is 10 - should fit on one page
+          input: {
+            owner: 'JakubVacek',
+            repo: 'SinglePR',
+          },
+        })
+      ).resolves.toMatchSnapshot();
     });
+    it('should perform successfully - multiple pages of PRs', async () => {
+      await expect(
+        superface.run({
+          profile: 'vcs/pull-requests',
+          provider: 'bitbucket',
+          useCase: 'PullRequests',
+          //Repo with 22 PRs, default page size is 10
+          input: {
+            owner: 'JakubVacek',
+            repo: 'test',
+          },
+        })
+      ).resolves.toMatchSnapshot();
+    });
+  });
+  it('should handle error', async () => {
+    await expect(
+      superface.run({
+        profile: 'vcs/pull-requests',
+        provider: 'bitbucket',
+        useCase: 'PullRequests',
+        input: {
+          owner: 'JakubVacek',
+          repo: 'made-up',
+        },
+      })
+    ).resolves.toMatchSnapshot();
   });
 });

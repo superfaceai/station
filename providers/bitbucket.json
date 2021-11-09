@@ -6,6 +6,29 @@
       "baseUrl": "https://api.bitbucket.org"
     }
   ],
-  "securitySchemes": [],
+  "securitySchemes": [
+    {
+      "id": "access_token",
+      "type": "http",
+      "scheme": "bearer"
+    },
+    {
+      "id": "access_token_in_query",
+      "type": "apiKey",
+      "in": "query",
+      "name": "access_token"
+    },
+    {
+      "id": "access_token_in_body",
+      "type": "apiKey",
+      "in": "body",
+      "name": "access_token"
+    },
+    {
+      "id": "basic",
+      "type": "http",
+      "scheme": "basic"
+    }
+  ],
   "defaultService": "default"
 }

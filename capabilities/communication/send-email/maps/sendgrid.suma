@@ -21,7 +21,7 @@ map SendEmail {
     content = content.concat([{ type: 'text/html', value: input.html }])
   }
 
-  http POST "/mail/send" {
+  http POST "/v3/mail/send" {
     security "bearer_token"
     
     request {

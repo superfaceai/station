@@ -1,42 +1,51 @@
-import { Profile, SuperfaceClient } from '@superfaceai/one-sdk';
-
-const recipient = process.env.COMMUNICATION_SENDMESSAGE_TO;
-let profile: Profile;
-let provider: any;
+import { SuperfaceTest } from '@superfaceai/testing';
 
 describe('communication/send-sms/twilio', () => {
-  beforeAll(async () => {
-    const client = new SuperfaceClient();
-    profile = await client.getProfile('communication/send-sms');
-    provider = await client.getProvider('twilio');
+  let superface: SuperfaceTest;
+
+  beforeEach(() => {
+    superface = new SuperfaceTest({
+      profile: 'communication/send-sms',
+      provider: 'twilio',
+    });
   });
 
-  it('sends a message', async () => {
-    const useCase = profile.getUseCase('SendMessage');
-    // note: `from` input is configured in super.json
-    const result = await useCase.perform<any, { messageId: string }>(
-      { to: recipient, text: 'Hello World!' },
-      { provider }
-    );
-    expect(result.isOk()).toBeTruthy();
-    expect(typeof result.unwrap().messageId).toBe('string');
+  describe('SendMessage', () => {
+    it('should perform successfully', async () => {
+      await expect(
+        superface.run({
+          useCase: 'SendMessage',
+          input: {
+            to: '+4915207930698', // https://receive-smss.com/sms/4915207930698/
+            from: '+13369019173', // Twilio trial number
+            text: 'Hello World!',
+          },
+        })
+      ).resolves.toMatchSnapshot();
+    });
   });
 
-  it('retrieves message status', async () => {
-    const sendMessageUseCase = profile.getUseCase('SendMessage');
-    const sendMessageResult = await sendMessageUseCase.perform<
-      any,
-      { messageId: string }
-    >({ to: recipient, text: 'Hello World!' }, { provider });
-    const messageId = sendMessageResult.unwrap().messageId;
+  describe('RetrieveMessageStatus', () => {
+    it('should perform successfully', async () => {
+      const result = await superface.run({
+        useCase: 'SendMessage',
+        input: {
+          to: '+4915207930698', // https://receive-smss.com/sms/4915207930698/
+          from: '+13369019173', // Twilio trial number
+          text: 'Hello World 2! ',
+        },
+      });
 
-    const useCase = profile.getUseCase('RetrieveMessageStatus');
-    const result = await useCase.perform(
-      { messageId: messageId },
-      { provider }
-    );
+      const messageId = (result.unwrap() as any).messageId;
 
-    expect(result.isOk()).toBeTruthy();
-    expect(typeof (result.unwrap() as any).deliveryStatus).toBe('string');
+      await expect(
+        superface.run({
+          useCase: 'RetrieveMessageStatus',
+          input: {
+            messageId,
+          },
+        })
+      ).resolves.toMatchSnapshot();
+    });
   });
 });

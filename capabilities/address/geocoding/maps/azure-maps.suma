@@ -7,10 +7,10 @@ provider = "azure-maps"
 map Geocode {
   payload = input.query || `${input.streetAddress || ""} ${input.addressLocality || ""} ${input.addressRegion || ""} ${input.postalCode || ""} ${input.addressCountry || ""}`;
 
-  http GET "/json" {
+  http GET "/search/address/json" {
+    security "subscription-key"
     request {
       query {
-        'subscription-key' = input.subscriptionKey
         'api-version' = '1.0'
         query = payload
       }
@@ -26,16 +26,44 @@ map Geocode {
         longitude = body.results[0].position.lon
       }
     }
+
+    response 400 "application/json" {
+      map error {
+        title = "Bad request"
+        detail = body.error.message
+      }
+    }
+
+    response 401 "application/json" {
+      map error {
+        title = "Unauthorized"
+        detail = body.error.message
+      }
+    }
+
+    response 403 "application/json" {
+      map error {
+        title = "Forbidden"
+        detail = body.error.message
+      }
+    }
+
+    response 500 "application/json" {
+      map error {
+        title = "Internal server Error"
+        detail = body.error.message
+      }
+    }
   }
 }
 
 map ReverseGeocode {
   payload = `${input.latitude},${input.longitude}`;
 
-  http GET "/reverse/json" {
+  http GET "/search/address/reverse/json" {
+    security "subscription-key"
     request {
       query {
-        'subscription-key' = input.subscriptionKey
         'api-version' = '1.0'
         query = payload
       }
@@ -53,7 +81,7 @@ map ReverseGeocode {
       }
       
       map result addresses.map(address => {
-        result = {}
+        let result = {}
         
         // country code
         if (address.countryCodeISO3 || address.countryCode) {
@@ -96,6 +124,34 @@ map ReverseGeocode {
 
         return result
       });
+    }
+
+    response 400 "application/json" {
+      map error {
+        title = "Bad request"
+        detail = body.error.message
+      }
+    }
+
+    response 401 "application/json" {
+      map error {
+        title = "Unauthorized"
+        detail = body.error.message
+      }
+    }
+
+    response 403 "application/json" {
+      map error {
+        title = "Forbidden"
+        detail = body.error.message
+      }
+    }
+
+    response 500 "application/json" {
+      map error {
+        title = "Internal server Error"
+        detail = body.error.message
+      }
     }
   }
 }

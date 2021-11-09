@@ -93,21 +93,22 @@ We encourage to use [Superface Testing](https://github.com/superfaceai/testing-l
 Alongside `.suma` file create `.test.ts` and use this template.
 
 ```ts
-import { SuperfaceTest } from '@superfaceai/testing-lib';
+import { SuperfaceTest } from '@superfaceai/testing';
 
 describe(`scope/name/provider_name}`, () => {
   let superface: SuperfaceTest;
 
   beforeEach(() => {
-    superface = new SuperfaceTest();
+    superface = new SuperfaceTest({
+      profile: 'scope/name',
+      provider: 'provider_name',
+    });
   });
 
   describe('UseCase', () => {
     it('should perform successfully', async () => {
       await expect(
         superface.run({
-          profile: 'scope/name',
-          provider: 'provider_name',
           useCase: 'UseCase',
           input: {
             field1: '',

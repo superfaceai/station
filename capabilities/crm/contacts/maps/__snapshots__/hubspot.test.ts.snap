@@ -1,31 +1,21 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`crm/contacts/hubspot Create should perform successfully 1`] = `
-Object {
+Ok {
   "value": Object {
-    "id": "601",
+    "id": "651",
   },
 }
 `;
 
 exports[`crm/contacts/hubspot Search should perform successfully 1`] = `
-Object {
-  "value": Array [
-    Object {
-      "company": undefined,
-      "country": undefined,
-      "email": "test@example.com",
-      "firstName": "Test",
-      "id": "601",
-      "lastName": "User",
-      "phone": undefined,
-    },
-  ],
+Ok {
+  "value": Array [],
 }
 `;
 
 exports[`crm/contacts/hubspot Search should return error for unknown operator 1`] = `
-Object {
+Err {
   "error": "Input validation failed:
 Path: input.operator
 Error: Invalid enum value: \\"%\\"
@@ -35,7 +25,7 @@ Error: Invalid enum value: \\"%\\"",
 `;
 
 exports[`crm/contacts/hubspot Update should perform successfully 1`] = `
-Object {
+Ok {
   "value": Object {
     "id": "401",
   },
@@ -43,8 +33,12 @@ Object {
 `;
 
 exports[`crm/contacts/hubspot Update should return error if id is missing 1`] = `
-Object {
-  "error": "HTTPError: Expected HTTP error
+Err {
+  "error": "MappedError: Expected error
+Properties: {
+  \\"title\\": \\"Missing field\\",
+  \\"detail\\": \\"ID is missing in input values\\"
+}
 AST Path: definitions[1].statements[0]
 Original Map Location: Line 52, column 3",
 }

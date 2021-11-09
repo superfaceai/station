@@ -1,0 +1,80 @@
+"""
+Analyze plain text sentiment
+Analyzes the prevailing emotional opinion of given text.
+"""
+
+name = "language/analyze-plain-text-sentiment"
+version = "1.0.0"
+
+"""
+Analyze plain text sentiment
+Determines writer's attitude in the text as positive, negative, or neutral.
+"""
+usecase AnalyzePlainTextSentiment safe {
+  input {
+    """
+    Text
+    The text to be analyzed.
+    """
+    text! string!
+
+    """
+    Language code
+    The language of the text expressed as a ISO 639‑1 language code, e.g. 'en'.
+    """
+    languageCode! string!
+  }
+
+  result {
+    """
+    Sentiment
+    The overal writer's attitude in the analyzed text.
+    """
+    sentiment! Sentiment!
+
+    """
+    Score
+    Score of the sentiment ranges between -1.0 (negative) and 1.0 (positive) and corresponds to the overall emotional leaning of the text.
+    """
+    score number!
+  }
+
+  error {
+    """
+    Title
+    A short, human-readable summary of the problem type.
+    """
+    title!
+
+    """
+    Detail
+    A human-readable explanation specific to this occurrence of the problem.
+    """
+    detail
+  }
+
+}
+
+"""
+Sentiment
+The overal sentiment of the analyzed text.
+"""
+model Sentiment enum {
+  """
+  Positive
+  The overall sentiment is positive.
+  """
+  positive
+
+  """
+  Neutral
+  The overall sentiment is neutral.
+  """
+  neutral
+
+  """
+  Negative
+  The overall sentiment is negative.
+  """
+  negative
+}
