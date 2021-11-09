@@ -1,0 +1,66 @@
+profile = "language/analyze-plain-text-sentiment@1.0"
+provider = "google-apis-language"
+
+map AnalyzePlainTextSentiment {
+
+  http POST "/v1/documents:analyzeSentiment" {
+    security "apikey"
+    request {
+      body {
+        encodingType = 'UTF8',
+        document = {
+          type: 'PLAIN_TEXT',
+          language: input.languageCode,
+          content: input.text
+        }
+      }
+    }
+
+    response 200 "application/json" {
+      map result {
+        sentiment = call MapScoreToSentiment(score = body.documentSentiment.score)
+        score = body.documentSentiment.score
+      }
+    }
+
+    response 400 "application/json" {
+      map error {
+        title = (body.error.status === "INVALID_ARGUMENT") ? "Invalid argument" : "Bad request"
+        detail = body.error.message
+      }
+    }
+
+    response 401 "application/json" {
+      map error {
+        title = "Unauthorized"
+        detail = body.error.message
+      }
+    }
+
+    response 403 "application/json" {
+      map error {
+        title = "Forbidden"
+        detail = body.error.message
+      }
+    }
+
+    response 500 "application/json" {
+      map error {
+        title = "Internal server Error"
+        detail = body.error.message
+      }
+    }
+  }
+}
+
+operation MapScoreToSentiment {
+  result = 'neutral'
+  set if (args.score <= -0.25) {
+    result = 'negative'
+  }
+  set if (args.score >= 0.25) {
+    result = 'positive'
+  }
+
+  return result
+}
