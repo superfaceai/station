@@ -59,4 +59,28 @@ usecase GetCurrentWeatherInCity safe {
     """
     detail
   }
+
+  example Successful {
+    input {
+      city = 'Prague, Czech Republic',
+      units = 'C'
+    }
+
+    result {
+      temperature = 9,
+      feelsLike = 8,
+      description = 'Partly cloudy'
+    }
+  }
+
+  example Failed {
+    input {
+      city = 'dreamtown'
+    }
+
+    error {
+      title = 'Bad request'
+      detail = 'City cannot be found'
+    }
+  }
 }
