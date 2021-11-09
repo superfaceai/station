@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`address/geocoding/opencage Geocode when all inputs are correct should geocode address to geographical coordinates 1`] = `
-Object {
+Ok {
   "value": Object {
     "latitude": 50.0874654,
     "longitude": 14.4212535,
@@ -10,9 +10,9 @@ Object {
 `;
 
 exports[`address/geocoding/opencage Geocode when inputs are invalid should throw an exception 1`] = `
-Object {
+Err {
   "error": "HTTPError: Expected HTTP error
-Properites: {
+Properties: {
   \\"title\\": \\"Bad request\\",
   \\"detail\\": \\"missing or bad query\\"
 }
@@ -22,7 +22,7 @@ Original Map Location: Line 31, column 7",
 `;
 
 exports[`address/geocoding/opencage ReverseGeocode when all inputs are correct should reverse geocode geographical coordinates 1`] = `
-Object {
+Ok {
   "value": Array [
     Object {
       "addressCountry": "us",
@@ -37,9 +37,9 @@ Object {
 `;
 
 exports[`address/geocoding/opencage ReverseGeocode when inputs are invalid should throw an exception 1`] = `
-Object {
+Err {
   "error": "HTTPError: Expected HTTP error
-Properites: {
+Properties: {
   \\"title\\": \\"Error reverse geocoding coordinates\\",
   \\"detail\\": \\"No results returned\\"
 }
