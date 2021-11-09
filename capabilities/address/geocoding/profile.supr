@@ -29,6 +29,44 @@ usecase Geocode {
     title!
     detail
   }
+
+
+  example UsingFreeformQuery {
+    input {
+      query = '1600 Amphitheatre Parkway, Mountain View, CA'
+    }
+
+    result {
+      latitude = 37.423199,
+      longitude = -122.084068
+    }
+  }
+
+  example UsingFullAddress {
+    input {
+      streetAddress = '1600 Amphitheatre Parkway',
+      addressLocality = 'Mountain View',
+      addressRegion = 'California',
+      addressCountry = 'USA',
+      postalCode = '94043'
+    }
+
+    result {
+      latitude = 37.423199,
+      longitude = -122.084068
+    }
+  }
+
+  example Failed {
+    input {
+      query = 'Hometown'
+    }
+
+    error {
+      title = 'Bad request'
+      detail = 'Missing or bad query'
+    }
+  }
 }
 
 """
