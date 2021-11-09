@@ -3,7 +3,7 @@
 /* eslint-disable jest/no-export */
 
 import { describe, expect } from '@jest/globals';
-import { SuperfaceTest } from '@superfaceai/testing-lib';
+import { SuperfaceTest } from '@superfaceai/testing';
 
 export const currentCityTest = (providerName: string): void => {
   describe(`weather/current-city/${providerName}`, () => {
