@@ -1,9 +1,6 @@
 /* eslint-disable jest/no-export */
 
-import {
-  RecordingProcessOptions,
-  SuperfaceTest,
-} from '@superfaceai/testing-lib';
+import { RecordingProcessOptions, SuperfaceTest } from '@superfaceai/testing';
 
 export const forecastCityTest = (
   provider: string,
