@@ -56,6 +56,35 @@ usecase CleanAddress {
     """
     detail
   }
+
+  example Successful {
+    input {
+      street = '3301 South Greenfield Road',
+      city = 'Gilbert',
+      state = 'AZ',
+      zipcode = '85297'
+    }
+
+    result {
+      street = '3301 S Greenfield Rd',
+      city = 'Gilbert',
+      state = 'AZ',
+      zipcode = '85297',
+    }
+  }
+
+  example Failed {
+    input {
+      street = '2229 Glitchy',
+      city = ' ',
+      state = 'RO',
+      zipcode = '45'
+    }
+
+    error {
+      title = 'Bad Request'
+    }
+  }
 }
 
 """
