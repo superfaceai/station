@@ -26,7 +26,9 @@ map ListTemplates {
 }
 
 map GetTemplateContent {
-  http GET "/v3/templates/{input.id}" {
+  inputId = `${input.id}`
+
+  http GET "/v3/templates/{inputId}" {
     security "bearer_token"
 
     response 200 "application/json" {
@@ -36,11 +38,6 @@ map GetTemplateContent {
         subject = activeTemplate.subject
         text = activeTemplate.plain_content
         html = activeTemplate.html_content
-      }
-
-      map error if (!activeTemplate) {
-        title = (`Template not found`)
-        detail = (`Template with id ${input.id} not found`)
       }
     }
   }
@@ -65,11 +62,6 @@ map UpdateTemplate {
   html = input.html || template.html
 
   templateVersion = call CreateTemplateVersionCall(templateId = template.id, subject = subject, text = text, html = html) if (subject || text || html)
-
-  map error if (!template) {
-    title = 'Template not found'
-    detail = (`Template with id: ${input.id} doesn't exists`)
-  }
 
   map result {
     id = template.id

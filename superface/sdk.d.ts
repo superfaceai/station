@@ -78,5 +78,8 @@ export declare const SuperfaceClient: new () => import("@superfaceai/one-sdk/dis
         SendMessage: [import("./types/communication/send-sms").CommunicationSendSmsSendMessageInput, import("./types/communication/send-sms").CommunicationSendSmsSendMessageResult];
         RetrieveMessageStatus: [import("./types/communication/send-sms").CommunicationSendSmsRetrieveMessageStatusInput, import("./types/communication/send-sms").CommunicationSendSmsRetrieveMessageStatusResult];
     };
+    "language/analyze-plain-text-sentiment": {
+        AnalyzePlainTextSentiment: [import("./types/language/analyze-plain-text-sentiment").TranslationAnalyzePlainTextSentimentAnalyzePlainTextSentimentInput, import("./types/language/analyze-plain-text-sentiment").TranslationAnalyzePlainTextSentimentAnalyzePlainTextSentimentResult];
+    };
 }>;
 export declare type SuperfaceClient = InstanceType<typeof SuperfaceClient>;

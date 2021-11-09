@@ -1,4 +1,4 @@
-import { SuperfaceTest } from '@superfaceai/testing-lib';
+import { SuperfaceTest } from '@superfaceai/testing';
 
 describe(`vcs/single-file-content/bitbucket`, () => {
   let superface: SuperfaceTest;

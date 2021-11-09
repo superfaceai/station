@@ -1,6 +1,6 @@
 /* eslint-disable jest/no-export */
 
-import { SuperfaceTest } from '@superfaceai/testing-lib';
+import { SuperfaceTest } from '@superfaceai/testing';
 
 export const nearbyPoiTest = (provider: string): void => {
   describe(`navigation/nearby-poi/${provider}`, () => {

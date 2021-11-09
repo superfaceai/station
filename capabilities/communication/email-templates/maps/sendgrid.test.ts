@@ -1,4 +1,4 @@
-import { RecordingDefinitions } from '@superfaceai/testing-lib';
+import { RecordingDefinitions } from '@superfaceai/testing';
 
 import { emailTemplatestTest } from './email-templates';
 

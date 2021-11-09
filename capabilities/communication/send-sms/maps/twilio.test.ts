@@ -1,4 +1,4 @@
-import { SuperfaceTest } from '@superfaceai/testing-lib';
+import { SuperfaceTest } from '@superfaceai/testing';
 
 describe('communication/send-sms/twilio', () => {
   let superface: SuperfaceTest;

@@ -1,10 +1,7 @@
 /* eslint-disable jest/no-conditional-expect */
 /* eslint-disable jest/no-export */
 
-import {
-  RecordingProcessOptions,
-  SuperfaceTest,
-} from '@superfaceai/testing-lib';
+import { RecordingProcessOptions, SuperfaceTest } from '@superfaceai/testing';
 
 declare type Template = {
   id: string;

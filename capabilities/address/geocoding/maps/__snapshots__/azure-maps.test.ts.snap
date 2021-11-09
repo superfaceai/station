@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`address/geocoding/azure-maps Geocode when all inputs are correct should geocode address to geographical coordinates 1`] = `
-Object {
+Ok {
   "value": Object {
     "latitude": 50.08781,
     "longitude": 14.42046,
@@ -10,9 +10,9 @@ Object {
 `;
 
 exports[`address/geocoding/azure-maps Geocode when inputs are invalid should throw an exception 1`] = `
-Object {
+Err {
   "error": "HTTPError: Expected HTTP error
-Properites: {
+Properties: {
   \\"title\\": \\"Bad request\\",
   \\"detail\\": \\"query is missing or empty\\"
 }
@@ -22,7 +22,7 @@ Original Map Location: Line 31, column 7",
 `;
 
 exports[`address/geocoding/azure-maps ReverseGeocode when all inputs are correct should reverse geocode geographical coordinates 1`] = `
-Object {
+Ok {
   "value": Array [
     Object {
       "addressCountry": "USA",
@@ -37,9 +37,9 @@ Object {
 `;
 
 exports[`address/geocoding/azure-maps ReverseGeocode when inputs are invalid should throw an exception 1`] = `
-Object {
+Err {
   "error": "HTTPError: Expected HTTP error
-Properites: {
+Properties: {
   \\"title\\": \\"Bad request\\",
   \\"detail\\": \\"The provided coordinates in query are invalid, out of range, or not in the expected format\\"
 }

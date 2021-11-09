@@ -1,0 +1,64 @@
+profile = "language/analyze-plain-text-sentiment@1.0"
+provider = "ibm-cloud-natural-language-understanding"
+
+map AnalyzePlainTextSentiment {
+  text = input.text
+  languageCode = input.languageCode
+
+  http POST "/instances/{parameters.INSTANCE_ID}/v1/analyze?version=2021-08-01" {
+    security "basic"
+    request {
+      body {
+        text = text,
+        language = languageCode,
+        features = {
+          sentiment: {
+            document: true,
+          }
+        }
+      }
+    }
+
+    response 200 {
+      map result {
+        sentiment = body.sentiment.document.label,
+        score = body.sentiment.document.score,
+      }
+    }
+
+    response 400 "application/json" {
+       map error {
+        title = "Bad request"
+        detail = body.error
+      }
+    }
+
+    response 401 "application/json" {
+      map error {
+        title = "Unauthorized"
+        detail = body.error
+      }
+    }
+
+    response 403 "application/json" {
+      map error {
+        title = "Forbidden"
+        detail = body.error
+      }
+    }
+
+    response 404 "application/json" {
+       map error {
+        title = body.code_description
+        detail = body.error
+      }
+    }
+
+    response 500 "application/json" {
+      map error {
+        title = "Internal server Error"
+        detail = body.error
+      }
+    }
+  }
+}
