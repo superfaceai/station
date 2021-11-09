@@ -45,7 +45,7 @@ export const speechToTextRecognitionTest = (
       describe('when inputs are invalid', () => {
         it('should throw an exception', async () => {
           const input = {
-            languageCode: 'en-US',
+            languageCode: 'invalid-code',
             audioContent: Buffer.from('invalid audio file content').toString(
               'base64'
             ),
