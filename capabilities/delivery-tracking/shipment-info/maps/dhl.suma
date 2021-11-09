@@ -4,47 +4,49 @@ profile = "delivery-tracking/shipment-info@1.1"
 provider = "dhl"
 
 map ShipmentInfo {
-  fetchShipmentOutcome = call FetchShipment(
+   call FetchShipment(
     trackingNumber = input.trackingNumber,
-    carrier = input.carrier)
+    carrier = input.carrier) {
+      return map result if (!outcome.error) outcome.data
 
-  map error if (fetchShipmentOutcome.errorMessage) {
-    title = fetchShipmentOutcome.errorMessage
-  }
-  
-  map result fetchShipmentOutcome
+      return map error {
+        title = outcome.error.title
+      }
+    }
 }
 
 operation FetchShipment {
+  trackingNumber = args.trackingNumber
+
   http GET "/track/shipments" {
     security "dhl_api_key"
     request {
       query {
-        trackingNumber = args.trackingNumber
+        trackingNumber = trackingNumber
         service = args.carrier
       }
     }
     response 200 "application/json" {
-      
       shipments = call foreach(shipment of body.shipments) MapShipment(
-        shipment = shipment
+        shipment = shipment,
+        trackingNumber = trackingNumber
       )
 
       return shipments
     }
     response 404 {
       fail {
-        errorMessage = "No shipment with given tracking number found"
+        title = "No shipment with given tracking number found"
       }
     }
     response 401 {
       fail {
-        errorMessage = "Invalid api key"
+        title = "Invalid api key"
       }
     }
     response 429 {
       fail {
-        errorMessage = "Too many requests within defined time period"
+        title = "Too many requests within defined time period"
       }
     }
   }

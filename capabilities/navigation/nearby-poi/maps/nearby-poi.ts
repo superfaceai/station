@@ -1,11 +1,14 @@
 /* eslint-disable jest/no-export */
 
-import { RecordingProcessFunctions, SuperfaceTest } from '@superfaceai/testing-lib';
+import {
+  RecordingProcessFunctions,
+  SuperfaceTest,
+} from '@superfaceai/testing-lib';
 
 export const nearbyPoiTest = (
   provider: string,
   options?: {
-    supertestHooks?: RecordingProcessFunctions
+    supertestHooks?: RecordingProcessFunctions;
   }
 ): void => {
   describe(`navigation/nearby-poi/${provider}`, () => {
@@ -16,23 +19,26 @@ export const nearbyPoiTest = (
     });
 
     describe('find nearby pois', () => {
-      it('it should find astronomy cafe', async () => {
+      it('should find astronomy cafe', async () => {
         const input = {
           center: {
             latitude: 51.477,
-            longitude: 0.0
+            longitude: 0.0,
           },
           radius: 100,
-          categories: ['CAFE']
+          categories: ['CAFE'],
         };
 
         await expect(
-          superface.run({
-            profile: 'navigation/nearby-poi',
-            provider,
-            useCase: 'NearbyPoi',
-            input,
-          }, options?.supertestHooks)
+          superface.run(
+            {
+              profile: 'navigation/nearby-poi',
+              provider,
+              useCase: 'NearbyPoi',
+              input,
+            },
+            options?.supertestHooks
+          )
         ).resolves.toMatchSnapshot();
       });
     });

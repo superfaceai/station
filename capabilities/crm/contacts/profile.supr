@@ -1,0 +1,289 @@
+"""
+Contacts
+Manage contacts in Customer Relation Management systems
+"""
+
+name = "crm/contacts"
+version = "1.0.0"
+
+"""
+Create Contact
+Create single contact in CRM
+"""
+usecase Create unsafe {
+  input {
+    email
+    phone
+    firstName
+    lastName
+    company
+    country
+    customProperties
+  }
+
+  result {
+    id
+  }
+
+  error {
+    title!
+    detail
+  }
+
+  // example success {
+  //   input {
+  //     email = "johndoe@example.com"
+  //     firstName = "John"
+  //     lastName = "Doe"
+  //     company = "Superface"
+  //     country = "USA"
+  //     customProperties = {
+  //       myproperty = "field value",
+  //     }
+  //   }
+
+  //   result {
+  //     id = "512"
+  //   }
+  // }
+  
+  // example error {
+  //   input {
+  //     email = "johndoe@example.com"
+  //   }
+
+  //   error {
+  //     title = "Unauthorized"
+  //     detail = "The API key provided is invalid"
+  //   }
+  // }
+}
+
+"""
+Update Contact
+Update single contact matched by id or email
+"""
+usecase Update unsafe {
+  input {
+    id
+    email
+    phone
+    firstName
+    lastName
+    company
+    country
+    customProperties
+  }
+
+  result {
+    id
+  }
+
+  error {
+    title!
+    detail
+  }
+
+  // example success {
+  //   input {
+  //     id = "512"
+  //     email = "johndoe@example.com"
+  //     firstName = "John"
+  //     lastName = "Doe"
+  //     company = "Superface"
+  //     country = "USA"
+  //     customProperties = {
+  //       myproperty = "field value",
+  //     }
+  //   }
+
+  //   result {
+  //     id = "512"
+  //   }
+  // }
+  
+  // example error {
+  //   input {
+  //     email = "johndoe@example.com"
+  //   }
+
+  //   error {
+  //     title = "Unauthorized"
+  //     detail = "The API key provided is invalid"
+  //   }
+  // }
+}
+
+"""
+Search contact
+Search contact by it's property value
+"""
+usecase Search safe {
+  input {
+    """
+    Property
+    Property name to compare value with
+    """
+    property!
+
+    """
+    Operator
+    Comparison operation
+    """
+    operator! enum { EQ, NEQ }
+
+    """
+    Value
+    Value to compare against values in property
+    """
+    value!
+  }
+
+  result [{
+    id
+    email
+    phone
+    firstName
+    lastName
+    company
+    country
+    customProperties
+  }]
+
+  error {
+    title!
+    detail
+  }
+
+  // example SearchByEmail {
+  //   input {
+  //     property = "email"
+  //     operator = "="
+  //     value = "johndoe@example.com"
+  //   }
+
+  //   result [{
+  //     id = "512"
+  //     email = "johndoe@example.com"
+  //     firstName = "John"
+  //     lastName = "Doe"
+  //     company = "Superface"
+  //     country = "USA"
+  //     customProperties = {
+  //       myproperty = "field value"
+  //     }
+  //   }]
+  // }
+
+  // example SearchById {
+  //   input {
+  //     property = "id"
+  //     operator = "="
+  //     value = "512"
+  //   }
+
+  //   result [{
+  //     id = "512"
+  //     email = "johndoe@example.com"
+  //     firstName = "John"
+  //     lastName = "Doe"
+  //     company = "Superface"
+  //     country = "USA"
+  //     customProperties = {
+  //       myproperty = "field value"
+  //     }
+  //   }]
+  // }
+
+  // example SearchNotEqual {
+  //   input {
+  //     property = "firstName"
+  //     operator = "!="
+  //     value = "Doe"
+  //   }
+
+  //   result [{
+  //     id = "512"
+  //     email = "johnsmith@example.com"
+  //     firstName = "John"
+  //     lastName = "Smiths"
+  //     company = "Example"
+  //     country = "USA"
+  //   }]
+  // }
+
+  // example UnknowOperator {
+  //   input {
+  //     property = "email"
+  //     operator = "%"
+  //     value "example.com"
+  //   }
+
+  //   error {
+  //     title = "Unknown operator"
+  //     detail = "Operator \"%\" is not recognized"
+  //   }
+  // }
+}
+
+"""
+Identifier
+The contact's identifier
+
+If contact is created or up dated asynchronously it may be missing
+"""
+field id
+
+"""
+E-mail
+The contact's primary email
+"""
+field email
+
+"""
+Phone
+The contact's primary phone number
+"""
+field phone
+
+"""
+First name
+The contact's personal name
+"""
+field firstName
+
+"""
+Last name
+The contact's family name
+"""
+field lastName
+
+"""
+Company
+The contact's company
+"""
+field company
+
+"""
+Country
+The contact's country
+"""
+field country
+
+"""
+Custom fieldsproperties
+Additional properties about the contact
+"""
+field customProperties
+
+"""
+Title
+A short, human-readable summary of the problem type
+"""
+field title
+
+"""
+Detail
+A human-readable explanation specific to this occurrence of the problem
+"""
+field detail

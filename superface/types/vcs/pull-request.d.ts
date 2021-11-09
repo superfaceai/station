@@ -1,26 +1,46 @@
 import { TypedProfile } from '@superfaceai/one-sdk';
-
 export declare type VcsPullRequestPullRequestInput = {
-    /** Owner of the repository **/
+    /**
+     * Owner
+     * Owner of the repository
+     **/
     owner: string;
-    /** Repository name **/
+    /**
+     * Repo
+     * Repository name
+     **/
     repo: string;
-    /** Id of pull request **/
+    /**
+     * Identifier
+     * Id of pull request
+     **/
     identifier: number;
 };
 export declare type VcsPullRequestPullRequestResult = {
-    /** Title of pull request **/
+    /**
+     * Tittle
+     * Title of pull request
+     **/
     title: string;
-    /** Pull request Id **/
+    /**
+     * Id
+     * Pull request Id
+     **/
     id: number;
-    /** Web url of pull request **/
+    /**
+     * Url
+     * Web url of pull request
+     **/
     url: string;
-    /** Pull request sha **/
+    /**
+     * Sha
+     * Pull request sha
+     **/
     sha: string;
 };
 declare const profile: {
     /**
-     * Get Pull Request Details
+     * PullRequest
      * Get details of the specified pull request.
      **/
     PullRequest: [VcsPullRequestPullRequestInput, VcsPullRequestPullRequestResult];
@@ -29,7 +49,7 @@ export declare type VcsPullRequestProfile = TypedProfile<typeof profile>;
 export declare const vcsPullRequest: {
     "vcs/pull-request": {
         /**
-         * Get Pull Request Details
+         * PullRequest
          * Get details of the specified pull request.
          **/
         PullRequest: [VcsPullRequestPullRequestInput, VcsPullRequestPullRequestResult];

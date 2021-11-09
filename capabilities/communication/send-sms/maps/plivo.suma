@@ -1,4 +1,4 @@
-profile = "communication/send-sms@1.0"
+profile = "communication/send-sms@2.0"
 provider = "plivo"
 
 // Plivo API documentation available at:
@@ -6,10 +6,8 @@ provider = "plivo"
 //  https://www.plivo.com/docs/sms/api/message/
   
 map SendMessage { 
-  authId = input.PLIVO_AUTH_ID
-
   // note the trailing `/` is important per plivo design
-  http POST "/v1/Account/{authId}/Message/" {
+  http POST "/v1/Account/{parameters.authId}/Message/" {
     security "basic"
     request "application/json" {
       body {
@@ -28,9 +26,7 @@ map SendMessage {
 }
 
 map RetrieveMessageStatus {
-  authId = input.PLIVO_AUTH_ID
-
-  http GET "/v1/Account/{authId}/Message/{input.messageId}" {
+  http GET "/v1/Account/{parameters.authId}/Message/{input.messageId}" {
     security "basic"
 
     response 200 "application/json" {

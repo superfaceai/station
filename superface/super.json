@@ -31,38 +31,10 @@
           }
         },
         "vonage-nexmo": {
-          "file": "../capabilities/communication/send-sms/maps/vonage-nexmo.suma",
-          "defaults": {
-            "SendMessage": {
-              "input": {
-                "NEXMO_API_KEY": "$NEXMO_API_KEY",
-                "NEXMO_API_SECRET": "$NEXMO_API_SECRET"
-              }
-            },
-            "RetrieveMessageStatus": {
-              "input": {
-                "NEXMO_API_KEY": "$NEXMO_API_KEY",
-                "NEXMO_API_SECRET": "$NEXMO_API_SECRET"
-              }
-            }
-          }
+          "file": "../capabilities/communication/send-sms/maps/vonage-nexmo.suma"
         },
         "plivo": {
-          "file": "../capabilities/communication/send-sms/maps/plivo.suma",
-          "defaults": {
-            "SendMessage": {
-              "input": {
-                "PLIVO_AUTH_ID": "$PLIVO_AUTH_ID",
-                "PLIVO_AUTH_TOKEN": "$PLIVO_AUTH_TOKEN"
-              }
-            },
-            "RetrieveMessageStatus": {
-              "input": {
-                "PLIVO_AUTH_ID": "$PLIVO_AUTH_ID",
-                "PLIVO_AUTH_TOKEN": "$PLIVO_AUTH_TOKEN"
-              }
-            }
-          }
+          "file": "../capabilities/communication/send-sms/maps/plivo.suma"
         },
         "mock": {
           "file": "../capabilities/communication/send-sms/maps/mock.suma"
@@ -124,14 +96,7 @@
       "file": "../capabilities/address/clean-address/profile.supr",
       "providers": {
         "smartystreets": {
-          "file": "../capabilities/address/clean-address/maps/smartystreets.suma",
-          "defaults": {
-            "CleanAddress": {
-              "input": {
-                "SMARTYSTREETS_AUTH_ID": "$SMARTYSTREETS_AUTH_ID"
-              }
-            }
-          }
+          "file": "../capabilities/address/clean-address/maps/smartystreets.suma"
         },
         "mock": {
           "file": "../capabilities/address/clean-address/maps/mock.suma"
@@ -209,8 +174,8 @@
     "address/geocoding": {
       "file": "../capabilities/address/geocoding/profile.supr",
       "providers": {
-        "google-apis": {
-          "file": "../capabilities/address/geocoding/maps/google-apis.suma"
+        "google-apis-maps": {
+          "file": "../capabilities/address/geocoding/maps/google-apis-maps.suma"
         },
         "opencage": {
           "file": "../capabilities/address/geocoding/maps/opencage.suma"
@@ -222,19 +187,7 @@
           "file": "../capabilities/address/geocoding/maps/nominatim.suma"
         },
         "azure-maps": {
-          "file": "../capabilities/address/geocoding/maps/azure-maps.suma",
-          "defaults": {
-            "Geocode": {
-              "input": {
-                "subscriptionKey": "$SUBSCRIPTION_KEY"
-              }
-            },
-            "ReverseGeocode": {
-              "input": {
-                "subscriptionKey": "$SUBSCRIPTION_KEY"
-              }
-            }
-          }
+          "file": "../capabilities/address/geocoding/maps/azure-maps.suma"
         }
       }
     },
@@ -306,25 +259,64 @@
         "google-apis-text-to-speech": {
           "file": "../capabilities/speech/synthesis/maps/google-apis-text-to-speech.suma"
         },
-        "ibm-cloud-text-to-speech-eu-de": {
-          "file": "../capabilities/speech/synthesis/maps/ibm-cloud-text-to-speech-eu-de.suma",
-          "defaults": {
-            "TextToSpeechSynthesis": {
-              "input": {
-                "instance": "$IBM_CLOUD_TEXT_TO_SPEECH_EU_DE_INSTANCE"
-              }
-            }
-          }
+        "ibm-cloud-text-to-speech": {
+          "file": "../capabilities/speech/synthesis/maps/ibm-cloud-text-to-speech.suma"
+        }
+      }
+    },
+    "computer-vision/face-detection": {
+      "file": "../capabilities/computer-vision/face-detection/profile.supr",
+      "providers": {
+        "google-apis-computer-vision": {
+          "file": "../capabilities/computer-vision/face-detection/maps/google-apis-computer-vision.suma"
+        },
+        "mock": {
+          "file": "../capabilities/computer-vision/face-detection/maps/mock.suma"
+        }
+      }
+    },
+    "crypto/exchange-rate": {
+      "file": "../capabilities/crypto/exchange-rate/exchange-rate.supr",
+      "providers": {
+        "binance": {
+          "file": "../capabilities/crypto/exchange-rate/maps/binance.suma"
+        },
+        "mock": {
+          "file": "../capabilities/crypto/exchange-rate/maps/mock.suma"
+        }
+      }
+    },
+    "crm/contacts": {
+      "file": "../capabilities/crm/contacts/profile.supr",
+      "providers": {
+        "mock": {
+          "file": "../capabilities/crm/contacts/maps/mock.suma"
+        },
+        "sendgrid": {
+          "file": "../capabilities/crm/contacts/maps/sendgrid.suma"
+        },
+        "hubspot": {
+          "file": "../capabilities/crm/contacts/maps/hubspot.suma"
+        }
+      }
+    },
+    "language/translate": {
+      "file": "../capabilities/language/translate/profile.supr",
+      "priority": [
+        "deepl",
+        "mock"
+      ],
+      "providers": {
+        "deepl": {
+          "file": "../capabilities/language/translate/maps/deepl.suma"
+        },
+        "mock": {
+          "file": "../capabilities/language/translate/maps/mock.suma"
         }
       }
     },
     "navigation/nearby-poi": {
       "file": "../capabilities/navigation/nearby-poi/profile.supr",
-      "priority": [
-        "mock",
-        "overpass-de",
-        "google-apis"
-      ],
       "providers": {
         "mock": {
           "file": "../capabilities/navigation/nearby-poi/maps/mock.suma"
@@ -332,8 +324,8 @@
         "overpass-de": {
           "file": "../capabilities/navigation/nearby-poi/maps/overpass-de.suma"
         },
-        "google-apis": {
-          "file": "../capabilities/navigation/nearby-poi/maps/google-apis.suma"
+        "google-apis-maps": {
+          "file": "../capabilities/navigation/nearby-poi/maps/google-apis-maps.suma"
         }
       }
     }
@@ -341,17 +333,30 @@
   "providers": {
     "github": {
       "file": "../providers/github.json",
-      "security": []
+      "security": [
+        {
+          "id": "basic",
+          "username": "$GITHUB_USERNAME",
+          "password": "$GITHUB_TOKEN"
+        },
+        {
+          "id": "bearer_token",
+          "token": "$GITHUB_TOKEN"
+        }
+      ]
     },
     "twilio": {
       "file": "../providers/twilio.json",
       "security": [
         {
           "id": "basic",
-          "username": "$TWILIO_USERNAME",
-          "password": "$TWILIO_PASSWORD"
+          "username": "$TWILIO_ACCOUNT_SID",
+          "password": "$TWILIO_AUTH_TOKEN"
         }
-      ]
+      ],
+      "parameters": {
+        "accountSid": "$TWILIO_ACCOUNT_SID"
+      }
     },
     "tyntec": {
       "file": "../providers/tyntec.json",
@@ -364,11 +369,46 @@
     },
     "gitlab": {
       "file": "../providers/gitlab.json",
-      "security": []
+      "security": [
+        {
+          "id": "bearer_token",
+          "token": "$GITLAB_TOKEN"
+        },
+        {
+          "id": "personal_access_token_in_header",
+          "apikey": "$GITLAB_TOKEN"
+        },
+        {
+          "id": "personal_access_token_in_query",
+          "apikey": "$GITLAB_TOKEN"
+        },
+        {
+          "id": "access_token_in_query",
+          "apikey": "$GITLAB_TOKEN"
+        }
+      ]
     },
     "bitbucket": {
       "file": "../providers/bitbucket.json",
-      "security": []
+      "security": [
+        {
+          "id": "access_token",
+          "token": "$BITBUCKET_TOKEN"
+        },
+        {
+          "id": "access_token_in_query",
+          "apikey": "$BITBUCKET_TOKEN"
+        },
+        {
+          "id": "access_token_in_body",
+          "apikey": "$BITBUCKET_TOKEN"
+        },
+        {
+          "id": "basic",
+          "username": "$BITBUCKET_USERNAME",
+          "password": "$BITBUCKET_TOKEN"
+        }
+      ]
     },
     "smartystreets": {
       "file": "../providers/smartystreets.json",
@@ -377,11 +417,22 @@
           "id": "auth-token",
           "apikey": "$SMARTYSTREETS_API_KEY"
         }
-      ]
+      ],
+      "parameters": {
+        "AUTH_ID": "$SMARTYSTREETS_AUTH_ID"
+      }
     },
     "vonage-nexmo": {
       "file": "../providers/vonage-nexmo.json",
-      "security": []
+      "security": [
+        {
+          "id": "apiKey",
+          "apikey": "$NEXMO_API_KEY"
+        }
+      ],
+      "parameters": {
+        "apiSecret": "$NEXMO_API_SECRET"
+      }
     },
     "plivo": {
       "file": "../providers/plivo.json",
@@ -391,7 +442,10 @@
           "username": "$PLIVO_AUTH_ID",
           "password": "$PLIVO_AUTH_TOKEN"
         }
-      ]
+      ],
+      "parameters": {
+        "authId": "$PLIVO_AUTH_ID"
+      }
     },
     "dhl": {
       "file": "../providers/dhl.json",
@@ -415,8 +469,8 @@
       "file": "../providers/swapi.json",
       "security": []
     },
-    "google-apis": {
-      "file": "../providers/google-apis.json",
+    "google-apis-maps": {
+      "file": "../providers/google-apis-maps.json",
       "security": [
         {
           "id": "apikey",
@@ -463,10 +517,19 @@
           "username": "$MAILGUN_USERNAME",
           "password": "$MAILGUN_PASSWORD"
         }
-      ]
+      ],
+      "parameters": {
+        "DOMAIN": "$MAILGUN_DOMAIN"
+      }
     },
     "mailchimp": {
-      "file": "../providers/mailchimp.json"
+      "file": "../providers/mailchimp.json",
+      "security": [
+        {
+          "id": "api_key",
+          "apikey": "$MAILCHIMP_API_KEY"
+        }
+      ]
     },
     "postmark": {
       "file": "../providers/postmark.json",
@@ -482,7 +545,12 @@
     },
     "azure-maps": {
       "file": "../providers/azure-maps.json",
-      "security": []
+      "security": [
+        {
+          "id": "subscription-key",
+          "apikey": "$AZURE_MAPS_SUBSCRIPTION_KEY"
+        }
+      ]
     },
     "slack": {
       "file": "../providers/slack.json",
@@ -497,6 +565,15 @@
       "file": "../providers/wttr-in.json",
       "security": []
     },
+    "google-apis-computer-vision": {
+      "file": "../providers/google-apis-computer-vision.json",
+      "security": [
+        {
+          "id": "google-api-key",
+          "apikey": "$GOOGLE_VISION_API_KEY"
+        }
+      ]
+    },
     "openweathermap": {
       "file": "../providers/openweathermap.json",
       "security": [
@@ -506,16 +583,42 @@
         }
       ]
     },
-    "ibm-cloud-text-to-speech-eu-de": {
-      "file": "../providers/ibm-cloud-text-to-speech-eu-de.json",
+    "ibm-cloud-text-to-speech": {
+      "file": "../providers/ibm-cloud-text-to-speech.json",
       "security": [
         {
           "id": "basic",
           "username": "apikey",
-          "password": "$IBM_CLOUD_TEXT_TO_SPEECH_EU_DE_KEY"
+          "password": "$IBM_CLOUD_TEXT_TO_SPEECH_KEY"
+        }
+      ],
+      "parameters": {
+        "REGION": "$IBM_CLOUD_TEXT_TO_SPEECH_REGION",
+        "INSTANCE_ID": "$IBM_CLOUD_TEXT_TO_SPEECH_INSTANCE_ID"
+      }
+    },
+    "binance": {
+      "file": "../providers/binance.json",
+      "security": []
+    },
+    "hubspot": {
+      "file": "../providers/hubspot.json",
+      "security": [
+        {
+          "id": "apiKey",
+          "apikey": "$HUBSPOT_API_KEY"
         }
       ]
-	},
+    },
+    "deepl": {
+      "file": "../providers/deepl.json",
+      "security": [
+        {
+          "id": "apikey",
+          "apikey": "$DEEPL_API_KEY"
+        }
+      ]
+    },
     "overpass-de": {
       "file": "../providers/overpass-de.json",
       "security": []

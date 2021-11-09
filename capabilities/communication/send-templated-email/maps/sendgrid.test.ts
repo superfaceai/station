@@ -1,7 +1,7 @@
 import { sendTemplatedEmailTest } from './send-templated-email';
 
 sendTemplatedEmailTest('sendgrid', {
-  from: 'hello@superface.ai',
-  to: 'hello@superface.ai',
-  templateId: 'd-0b2a1c572233468ba4b35737d7a004ba',
+  from: 'demo@demo.superface.org',
+  to: 'demo@demo.superface.org',
+  templateId: 'd-ef6d417300f74f96a9f722050edae85f',
 });

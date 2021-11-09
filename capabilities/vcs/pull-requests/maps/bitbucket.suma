@@ -1,25 +1,66 @@
-profile = "vcs/pull-requests@1.0"
-  provider = "bitbucket"
-  
-  """
-  PullRequests map
-  """
-  map PullRequests{
-    owner = input.owner
-    repo = input.repo
+profile = "vcs/pull-requests@2.0"
+provider = "bitbucket"
 
-  http GET "/2.0/repositories/{owner}/{repo}/pullrequests" {
-    response 200 "application/json" {
-      //maps returned values to result object
-      map result {
-        pullRequests = body.values.map((r) => {
+"""
+PullRequests map. Retruns all pull requests from specified repository od specified user
+"""
+map PullRequests{
+  owner = input.owner
+  repo = input.repo
+
+  call Paginate(
+  owner = input.owner,
+  repo = input.repo,
+  ) {
+      return map error if (outcome.error) outcome.error
+      return map result outcome.data
+    }
+}
+
+operation Paginate {
+  data = []
+  page = 1
+  //Hack to create a while loop. Use Superface stdlib instead
+  call foreach(_x of Array(2**32-1)) FetchPullRequests(owner = args.owner, repo = args.repo, page = page) {
+    fail if (outcome.error) outcome.error
+
+    data = [...data, ...outcome.data.pullRequests]
+
+    page = page + 1
+    return if (outcome.data.isLastPage) {
+      pullRequests: data,
+      statusCode: 200
+    }
+  }
+  return {
+    pullRequests: data,
+    statusCode: 200
+  }
+ }
+
+operation FetchPullRequests {
+  http GET "/2.0/repositories/{args.owner}/{args.repo}/pullrequests" {
+    request {
+      query {
+        page = args.page
+      }
+    }
+    response  {
+      fail if(statusCode !== 200) {
+        message: body.error.message,
+        statusCode: statusCode
+      }
+      return {
+        pullRequests: body.values.map((pr) => {
           return {
-            title: r.title,
-            id: r.id,
-            url: r.links.html.href,
-            sha: r.source.commit.hash,
+            title: pr.title,
+            id: pr.id,
+            url: pr.links.html.href,
+            sha: pr.source.commit.hash,
           }
-        })
+        }),
+        statusCode: statusCode,
+        isLastPage: body.next ? false : true
       }
     }
   }

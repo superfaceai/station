@@ -5,7 +5,7 @@ var one_sdk_1 = require("@superfaceai/one-sdk");
 var profile = {
     /**
      * Retrieve Shipment Status
-     * Get the actual shipment status.
+     * Get the current shipment status.
      **/
     "ShipmentInfo": one_sdk_1.typeHelper()
 };

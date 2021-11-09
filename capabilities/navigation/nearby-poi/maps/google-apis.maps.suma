@@ -1,0 +1,108 @@
+profile = "navigation/nearby-poi@1.0"
+provider = "google-apis-maps"
+
+map NearbyPoi {
+  categories = input.categories || []
+
+  http GET "/maps/api/place/nearbysearch/json" {
+    security "apikey"
+
+    request {
+      query {
+        location = `${input.center.latitude},${input.center.longitude}`,
+        radius = input.radius,
+        type = call BuildCategoryQueryType(categories = categories)
+      }
+    }
+
+    response 200 "application/json" {
+      return map result if (body.status === "ZERO_RESULTS") []
+
+      return map error if (body.status !== "OK") {
+        status: body.status,
+        message: body.error_message || body.status
+      }
+
+      points = call foreach(place of body.results) ConvertResponse(place = place)
+      set if (categories.length > 1) {
+        points = points.filter(
+          p => p.categories.some(c => categories.includes(c))
+        )
+      }
+
+      map result points
+    }
+  }
+}
+
+operation BuildCategoryQueryType {
+  return if (args.categories.length !== 1) undefined
+
+  types = call CategoriesToTypes(categories = args.categories)
+  return types[0]
+}
+
+operation ConvertResponse {
+  categories = []
+  set if (args.place.types) {
+    categories = call TypesToCategories(types = args.place.types)
+  }
+  
+  point = {
+    coordinates: {
+      latitude: args.place.geometry.location.lat,
+      longitude: args.place.geometry.location.lng
+    },
+    name: args.place.name || args.place.place_id,
+    categories: categories
+  }
+
+  return point
+}
+
+"""
+Converts a list of categories into a list of types
+"""
+operation CategoriesToTypes {
+  return if (!args.categories) []
+
+  categoryTypeMap = {
+    "RESTAURANT": ["restaurant"],
+    "CAFE": ["cafe"],
+    "BAR": ["bar"],
+  }
+
+  amenities = args.categories.flatMap(
+    category => categoryTypeMap[category]
+  )
+
+  return amenities
+}
+
+"""
+Converts a list of types into a list of categories
+"""
+operation TypesToCategories {
+  return if (!args.types) []
+
+  typeCategoryMap = {
+    "restaurant": "RESTAURANT",
+    "cafe": "CAFE",
+    "bar": "BAR"
+  }
+
+  types = (() => {
+    const types = []
+
+    for (const type of args.types) {
+      const category = typeCategoryMap[type]
+      if (category !== undefined && !types.includes(category)) {
+        types.push(category)
+      }
+    }
+
+    return types
+  })()
+
+  return types
+}

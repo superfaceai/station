@@ -3,7 +3,7 @@
 exports[`communication/send-templated-email/mailchimp SendTemplatedEmail when all inputs are correct should return messageId as result 1`] = `
 Object {
   "value": Object {
-    "messageId": "bf2603d71b75479b83195d774a6ca326",
+    "messageId": "ca67ec414e504d5ba239b7e70d58c1cf",
   },
 }
 `;
@@ -11,7 +11,11 @@ Object {
 exports[`communication/send-templated-email/mailchimp SendTemplatedEmail when inputs are invalid should throw error 1`] = `
 Object {
   "error": "HTTPError: Expected HTTP error
+Properites: {
+  \\"title\\": \\"Invalid inputs\\",
+  \\"detail\\": \\"Validation error: {\\\\\\"message\\\\\\":{\\\\\\"from_email\\\\\\":\\\\\\"An email address must contain a single @\\\\\\"}}\\"
+}
 AST Path: definitions[0].statements[0].responseHandlers[1].statements[1]
-Original Map Location: Line 42, column 7",
+Original Map Location: Line 43, column 7",
 }
 `;

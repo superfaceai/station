@@ -6,7 +6,6 @@ provider = "mailchimp"
 
 map SendEmail {
   body = {
-    key: input.mailchimp_api_key,
     message: {
       from_email: input.from,
       to: [
@@ -27,7 +26,9 @@ map SendEmail {
     body.html = input.html
   }
 
-  http POST "/messages/send" {
+  http POST "/api/1.0/messages/send" {
+    security "api_key"
+    
     request {
       body = body
     }

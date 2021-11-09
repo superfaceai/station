@@ -4,7 +4,7 @@ Send a single SMS message or retieve its status.
 """
 
 name = "communication/send-sms"
-version = "1.0.1"
+version = "2.0.0"
 
 """
 Send SMS Message
@@ -27,9 +27,8 @@ usecase SendMessage unsafe {
   }
 
   error {
-    problem
+    title!
     detail
-    instance
   }
 }
 
@@ -45,6 +44,11 @@ usecase RetrieveMessageStatus safe {
 
   result {
     deliveryStatus
+  }
+
+  error {
+    title!
+    detail
   }
 }
 
@@ -65,3 +69,15 @@ field deliveryStatus enum {
   unknown
   failed
 }
+
+"""
+Title
+A short, human-readable summary of the problem type
+"""
+field title
+
+"""
+Detail
+A human-readable explanation specific to this occurrence of the problem
+"""
+field detail

@@ -4,7 +4,7 @@ exports.vcsSingleFileContent = void 0;
 var one_sdk_1 = require("@superfaceai/one-sdk");
 var profile = {
     /**
-     * Get Single File Content
+     * Single File Content
      * Get the content of the specified file.
      **/
     "SingleFileContent": one_sdk_1.typeHelper()

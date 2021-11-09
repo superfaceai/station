@@ -4,7 +4,6 @@
     "method": "POST",
     "path": "/api/1.0/messages/send-template",
     "body": {
-      "key": "xxx",
       "template_name": "station-test",
       "template_content": [
         {
@@ -18,10 +17,6 @@
         {
           "name": "templateId",
           "content": "station-test"
-        },
-        {
-          "name": "mailchimp_api_key",
-          "content": "xxx"
         }
       ],
       "message": {
@@ -32,17 +27,18 @@
             "type": "to"
           }
         ]
-      }
+      },
+      "key": "credentials-removed-to-keep-them-secure"
     },
     "status": 200,
     "response": [
-      "1f8b08000000000000030cca410e82301040d1bbccda18a0d01156dec318326d07c58c2de9b42be3dde9f2e5ffc70ff84bbbc0026f164977ad07e78d3c5f537ec105b450a9dab2722ccdeb1e1adc36d8ce04ec1d4e23ceee66fa790a8823594f66b06dccfc615fd6cca429c212abc8ff79020000ffff03008e96e8056f000000"
+      "1f8b08000000000000030cca410ec2201046e1bbccda985641b42bef614c331dfe6acd08868195f1eeb2fcf2deed4b78f3a634d113aaf96aed83b2b2609fcb837664956bb39e0da976cf5bec103e05881b1dfce0a25ff870bc2c016188fe2ca3ac7d2c7841ea5cc096134da9a9feee7f000000ffff03008fd3957f6f000000"
     ],
     "rawHeaders": [
       "server",
       "nginx/1.12.2",
       "date",
-      "Fri, 24 Sep 2021 08:14:02 GMT",
+      "Tue, 02 Nov 2021 12:18:08 GMT",
       "content-type",
       "application/json; charset=utf-8",
       "transfer-encoding",
@@ -69,7 +65,6 @@
     "method": "POST",
     "path": "/api/1.0/messages/send-template",
     "body": {
-      "key": "xxx",
       "template_name": "invalid",
       "template_content": [],
       "message": {
@@ -80,7 +75,8 @@
             "type": "to"
           }
         ]
-      }
+      },
+      "key": "credentials-removed-to-keep-them-secure"
     },
     "status": 500,
     "response": [
@@ -88,9 +84,9 @@
     ],
     "rawHeaders": [
       "server",
-      "nginx/1.12.2",
+      "nginx/1.4.6 (Ubuntu)",
       "date",
-      "Fri, 24 Sep 2021 08:14:03 GMT",
+      "Tue, 02 Nov 2021 12:18:09 GMT",
       "content-type",
       "application/json; charset=utf-8",
       "transfer-encoding",

@@ -1,0 +1,168 @@
+profile = "crm/contacts@1.0"
+provider = "hubspot"
+
+map Create {
+  http POST "/crm/v3/objects/contacts" {
+    security "apiKey"
+
+    request {
+      body = {
+        properties: {
+          ...input.customProperties,
+          firstname: input.firstName,
+          lastname: input.lastName,
+          email: input.email,
+          phone: input.phone,
+          company: input.company,
+          country: input.country,
+        }
+      }
+    }
+
+    response 201 "application/json" {
+      map result {
+        id = body.id
+      }
+    }
+
+    response 400 "application/json" {
+      map error {
+        title = body.category,
+        detail = body.message,
+      }
+    }
+
+    response 409 "application/json" {
+      map error {
+        title = body.category,
+        detail = body.message,
+      }
+    }
+
+    response 401 "application/json" {
+      map error {
+        title = body.category,
+        detail = body.message,
+      }
+    }
+  }
+}
+
+map Update {
+  return map error if (input.id === null || input.id === undefined) {
+    title = "Missing field"
+    detail = "ID is missing in input values"
+  }
+
+  set {
+    strId = `${input.id}`
+  } 
+
+  http PATCH "/crm/v3/objects/contacts/{strId}" {
+    security "apiKey"
+
+    request {
+      body = {
+        properties: {
+          ...input.customProperties,
+          firstname: input.firstName,
+          lastname: input.lastName,
+          email: input.email,
+          phone: input.phone,
+          company: input.company,
+          country: input.country,
+        }
+      }
+    }
+
+    response 200 "application/json" {
+      map result {
+        id = body.id
+      }
+    }
+
+    response 400 "application/json" {
+      map error {
+        title = body.category,
+        detail = body.message,
+      }
+    }
+
+    response 409 "application/json" {
+      map error {
+        title = body.category,
+        detail = body.message,
+      }
+    }
+
+    response 401 "application/json" {
+      map error {
+        title = body.category,
+        detail = body.message,
+      }
+    }
+  }
+}
+
+map Search {
+  set {
+    FIELD_MAP = {
+      firstName: 'firstname',
+      lastName: 'lastname',
+    }
+  }
+
+  http POST "/crm/v3/objects/contacts/search" {
+    security "apiKey"
+
+    request {
+      body = {
+        filterGroups: [
+          {
+            filters: [
+              {
+                propertyName: FIELD_MAP[input.property] || input.property,
+                operator: input.operator,
+                value: input.value,
+              },
+            ],
+          },
+        ],
+      }
+    }
+
+    response 200 "application/json" {
+      map result body.results.map((c) => ({
+        id: c.id,
+        email: c.properties.email,
+        phone: c.properties.phone,
+        firstName: c.properties.firstname,
+        lastName: c.properties.lastname,
+        company: c.properties.company,
+        country: c.properties.country,
+        ...(c.properties.customProperties || {})
+      }))
+    }
+
+    response 400 "application/json" {
+      map error {
+        title = body.category,
+        detail = body.message,
+      }
+    }
+
+    response 409 "application/json" {
+      map error {
+        title = body.category,
+        detail = body.message,
+      }
+    }
+
+    response 401 "application/json" {
+      map error {
+        title = body.category,
+        detail = body.message,
+      }
+    }
+  }
+}

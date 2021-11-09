@@ -1,0 +1,35 @@
+[
+  {
+    "scope": "https://api.mailgun.net:443",
+    "method": "POST",
+    "path": "/v3/parameters-removed-to-keep-them-secure/messages",
+    "body": "from=invalidemail&to=invalidemail&template=invalid",
+    "status": 400,
+    "response": {
+      "message": "'from' parameter is not a valid address. please check documentation"
+    },
+    "rawHeaders": [
+      "Access-Control-Allow-Headers",
+      "Content-Type, x-requested-with, Authorization",
+      "Access-Control-Allow-Methods",
+      "GET, POST, PUT, DELETE, OPTIONS",
+      "Access-Control-Allow-Origin",
+      "*",
+      "Access-Control-Max-Age",
+      "600",
+      "Cache-Control",
+      "no-store",
+      "Content-Type",
+      "application/json",
+      "Date",
+      "Fri, 05 Nov 2021 14:13:31 GMT",
+      "Server",
+      "nginx",
+      "Content-Length",
+      "86",
+      "Connection",
+      "Close"
+    ],
+    "responseIsBinary": false
+  }
+]

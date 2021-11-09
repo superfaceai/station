@@ -3,8 +3,16 @@
   "services": [
     {
       "id": "default",
-      "baseUrl": "https://atlas.microsoft.com/search/address"
+      "baseUrl": "https://atlas.microsoft.com"
     }
   ],
-  "defaultService": "default"
+  "defaultService": "default",
+  "securitySchemes": [
+    {
+      "id": "subscription-key",
+      "type": "apiKey",
+      "in": "query",
+      "name": "subscription-key"
+    }
+  ]
 }

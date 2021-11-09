@@ -1,26 +1,48 @@
-import { SuperfaceClient } from '../../../../superface/sdk';
+import { SuperfaceTest } from '@superfaceai/testing-lib';
 
 describe('starwars/character-information/swapi', () => {
-  it('performs correctly', async () => {
-    const client = new SuperfaceClient();
-    const profile = await client.getProfile('starwars/character-information');
-    const useCase = profile.useCases.RetrieveCharacterInformation;
-    const provider = await client.getProvider('swapi');
+  let superface: SuperfaceTest;
 
-    expect(useCase).not.toBeUndefined();
-    expect(provider).not.toBeUndefined();
+  beforeEach(() => {
+    superface = new SuperfaceTest();
+  });
 
-    const result = await useCase.perform(
-      {
-        characterName: 'Luke Skywalker',
-      },
-      { provider }
-    );
+  it('should perform successfully', async () => {
+    await expect(
+      superface.run({
+        profile: 'starwars/character-information',
+        provider: 'swapi',
+        useCase: 'RetrieveCharacterInformation',
+        input: {
+          characterName: 'Luke Skywalker',
+        },
+      })
+    ).resolves.toMatchSnapshot();
+  });
 
-    expect(result.unwrap()).toEqual({
-      height: '172',
-      weight: '77',
-      yearOfBirth: '19BBY',
-    });
+  it('should map error correctly when there are suggestions', async () => {
+    await expect(
+      superface.run({
+        profile: 'starwars/character-information',
+        provider: 'swapi',
+        useCase: 'RetrieveCharacterInformation',
+        input: {
+          characterName: 'Luke',
+        },
+      })
+    ).resolves.toMatchSnapshot();
+  });
+
+  it('should map error correctly when there are no characters found', async () => {
+    await expect(
+      superface.run({
+        profile: 'starwars/character-information',
+        provider: 'swapi',
+        useCase: 'RetrieveCharacterInformation',
+        input: {
+          characterName: 'Duke',
+        },
+      })
+    ).resolves.toMatchSnapshot();
   });
 });

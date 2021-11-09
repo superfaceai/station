@@ -1,0 +1,47 @@
+"""
+Exchange Rate
+Get exchange rate of two currencies
+"""
+name = "crypto/exchange-rate"
+version = "1.0.0"
+
+"""
+Get Exchange Rate
+Get exchange rate of two currencies
+"""
+usecase GetExchangeRate safe {
+  input {
+    """
+    From
+    Code of the source currency, e.g.: "ETH"
+    """
+    from! string!
+    """
+    To
+    Code of the target currency, e.g.: "BTC"
+    """
+    to! string!
+  }
+
+  result {
+    """
+    Rate
+    Exchange rate, e.g.: "0.06249100"
+    """
+    rate! string!
+  }
+
+  error {
+    """
+    Title
+    A short, human-readable summary of the problem type
+    """
+    title! string!
+
+    """
+    Detail
+    A human-readable explanation specific to this occurrence of the problem
+    """
+    detail
+  }
+}
