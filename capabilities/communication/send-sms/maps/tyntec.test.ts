@@ -1,4 +1,4 @@
-import { SuperfaceTest } from '@superfaceai/testing-lib';
+import { SuperfaceTest } from '@superfaceai/testing';
 
 describe('communication/send-sms/tyntect', () => {
   let superface: SuperfaceTest;
@@ -26,7 +26,7 @@ describe('communication/send-sms/tyntect', () => {
   });
 
   describe('RetrieveMessageStatus', () => {
-    it('should return error saying it is not supported', async () => {
+    it('should perform successfuly', async () => {
       const result = await superface.run({
         useCase: 'SendMessage',
         input: {

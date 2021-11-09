@@ -1,4 +1,4 @@
-import { SuperfaceTest } from '@superfaceai/testing-lib';
+import { SuperfaceTest } from '@superfaceai/testing';
 
 describe(`vcs/pull-request/gitlab}`, () => {
   let superface: SuperfaceTest;

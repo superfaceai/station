@@ -18,7 +18,11 @@ export { ComputerVisionFaceDetectionProfile } from "./types/computer-vision/face
 export { CryptoExchangeRateProfile } from "./types/crypto/exchange-rate";
 export { CrmContactsProfile } from "./types/crm/contacts";
 export { LanguageTranslateProfile } from "./types/language/translate";
+export { LanguageAnalyzePlainTextSentimentProfile } from "./types/language/analyze-plain-text-sentiment";
 export declare const SuperfaceClient: new () => import("@superfaceai/one-sdk/dist/client/client").TypedSuperfaceClient<{
+    "language/analyze-plain-text-sentiment": {
+        AnalyzePlainTextSentiment: [import("./types/language/analyze-plain-text-sentiment").LanguageAnalyzePlainTextSentimentAnalyzePlainTextSentimentInput, import("./types/language/analyze-plain-text-sentiment").LanguageAnalyzePlainTextSentimentAnalyzePlainTextSentimentResult];
+    };
     "language/translate": {
         TranslateText: [import("./types/language/translate").LanguageTranslateTranslateTextInput, import("./types/language/translate").LanguageTranslateTranslateTextResult];
     };

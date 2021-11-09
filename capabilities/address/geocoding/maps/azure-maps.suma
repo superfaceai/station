@@ -17,7 +17,7 @@ map Geocode {
     }
 
     response 200 "application/json" {
-      map error if (body.results.length === 0) {
+      return map error if (body.results.length === 0) {
         title = "Error geocoding address"
       }
 
@@ -70,13 +70,13 @@ map ReverseGeocode {
     }
 
     response 200 "application/json" {
-      map error if (body.addresses.length === 0) {
+      return map error if (body.addresses.length === 0) {
         title = "Error reverse geocoding coordinates"
       }
 
       addresses = body.addresses.map(item => item.address).filter(item => item.countryCode || item.freeformAddress);
 
-      map error if (addresses.length === 0) {
+      return map error if (addresses.length === 0) {
           title = "Could not find any information about address."
       }
       

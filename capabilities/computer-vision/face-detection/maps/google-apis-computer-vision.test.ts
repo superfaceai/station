@@ -1,4 +1,4 @@
-import { SuperfaceTest } from '@superfaceai/testing-lib';
+import { SuperfaceTest } from '@superfaceai/testing';
 
 describe(`computer-vision/face-detection/google-apis-computer-vision`, () => {
   let superface: SuperfaceTest;
