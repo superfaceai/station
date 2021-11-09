@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`address/geocoding/google-apis-maps Geocode when all inputs are correct should geocode address to geographical coordinates 1`] = `
-Object {
+Ok {
   "value": Object {
     "latitude": 50.0755381,
     "longitude": 14.4378005,
@@ -10,9 +10,9 @@ Object {
 `;
 
 exports[`address/geocoding/google-apis-maps Geocode when inputs are invalid should throw an exception 1`] = `
-Object {
+Err {
   "error": "HTTPError: Expected HTTP error
-Properites: {
+Properties: {
   \\"title\\": \\"Error geocoding address\\",
   \\"detail\\": \\"ZERO_RESULTS\\"
 }
@@ -22,7 +22,7 @@ Original Map Location: Line 19, column 7",
 `;
 
 exports[`address/geocoding/google-apis-maps ReverseGeocode when all inputs are correct should reverse geocode geographical coordinates 1`] = `
-Object {
+Ok {
   "value": Array [
     Object {
       "addressCountry": "US",
@@ -37,9 +37,9 @@ Object {
 `;
 
 exports[`address/geocoding/google-apis-maps ReverseGeocode when inputs are invalid should throw an exception 1`] = `
-Object {
+Err {
   "error": "HTTPError: Expected HTTP error
-Properites: {
+Properties: {
   \\"title\\": \\"Bad request\\",
   \\"detail\\": \\"Invalid request. Invalid 'latlng' parameter.\\"
 }
