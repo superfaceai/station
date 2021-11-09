@@ -1,0 +1,47 @@
+profile = "speech/recognize@1.0"
+provider = "azure-speech-to-text"
+
+map Recognize {
+  http POST "/speech/recognition/conversation/cognitiveservices/v1" {
+  security "opc-subscription-key"
+
+  request "audio/wav;codecs=audio/pcm;samplerate=24000" {
+    query {
+      language = input.languageCode
+    }
+    
+    body = Buffer.from(input.audioContent, 'base64')
+  }
+
+  response 200 {
+      return map result {
+        results = [{
+          alternatives: [{
+            transcript: body.DisplayText
+          }]
+        }]
+      }
+    }
+
+  response 400 "text/plain" {
+      map error {
+        title = "Bad request"
+        detail = body
+      }
+    }
+
+    response 401 {
+      map error {
+        title = "Unauthorized"
+      }
+    }
+
+    response 500 "text/plain" {
+      map error {
+        title = "Internal server Error"
+        detail = body
+      }
+    }
+  }
+}
+

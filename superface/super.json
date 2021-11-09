@@ -368,6 +368,9 @@
         },
          "ibm-cloud-speech-to-text": {
           "file": "../capabilities/speech/recognize/maps/ibm-cloud-speech-to-text.suma"
+        },
+        "azure-speech-to-text": {
+          "file": "../capabilities/speech/recognize/maps/azure-speech-to-text.suma"
         }
       }
     }
@@ -723,6 +726,18 @@
       "parameters": {
         "REGION": "$IBM_CLOUD_SPEECH_TO_TEXT_REGION",
         "INSTANCE_ID": "$IBM_CLOUD_SPEECH_TO_TEXT_INSTANCE_ID"
+      }
+    },
+    "azure-speech-to-text": {
+      "file": "../providers/azure-speech-to-text.json",
+       "security": [
+        {
+          "id": "opc-subscription-key",
+          "apikey": "$AZURE_SPEECH_TO_TEXT_SUBSCRIPTION_KEY"
+        }
+      ],
+      "parameters": {
+        "REGION": "$AZURE_SPEECH_TO_TEXT_REGION"
       }
     }
   }
