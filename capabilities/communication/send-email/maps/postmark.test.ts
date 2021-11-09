@@ -1,6 +1,6 @@
 import { sendEmailTest } from './send-email';
 
 sendEmailTest('postmark', {
-  from: 'hello@superface.org',
-  to: 'hello@superface.ai',
+  from: 'demo@demo.superface.org',
+  to: 'demo@demo.superface.org',
 });
