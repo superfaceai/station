@@ -8,25 +8,12 @@ version = "1.1.0"
 """
 Clean Address
 
-This use case will take an address like:
+This use case is useful for cleaning up addresses input by users.
 
-{
-  street: '3301 South Greenfield Road',
-  city: 'Gilbert',
-  state: 'AZ',
-  zipcode: '85297',
-}
-
-And convert it to:
-
-{
-  city: 'Gilbert',
-  state: 'AZ',
-  street: '3301 S Greenfield Rd',
-  zipcode: '85297',
-}
-
-This is useful for cleaning up addresses input by users.
+It will take an address like 
+'3301 South Greenfield Road, Gilbert, AZ 85297'
+and converts it to
+'3301 S Greenfield Rd, Gilbert, AZ 85297'.
 """
 usecase CleanAddress {
   input {
