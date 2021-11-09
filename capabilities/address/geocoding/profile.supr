@@ -93,6 +93,34 @@ usecase ReverseGeocode {
     title!
     detail
   }
+
+  example Successful {
+    input {
+      latitude = 37.423199,
+      longitude = -122.084068
+    }
+
+    result [{
+      addressCountry = 'us',
+      addressLocality = 'Mountain View',
+      addressRegion = 'CA',
+      formattedAddress = 'Amphitheatre Parkway, Mountain View, CA 94043, United States of America',
+      postalCode = '94043',
+      streetAddress = 'Amphitheatre Parkway',
+    }]
+  }
+
+  example Failed {
+    input {
+      latitude = 720,
+      longitude = 540
+    }
+
+    error {
+      title = 'Bad request',
+      detail = 'The provided coordinates in query are invalid, out of range, or not in the expected format'
+    }
+  }
 }
 
 """
