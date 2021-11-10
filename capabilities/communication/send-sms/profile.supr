@@ -74,6 +74,27 @@ usecase RetrieveMessageStatus safe {
     title!
     detail
   }
+
+  example Successful {
+    input {
+      messageId = '150000003351F9D7',
+    }
+
+    result {
+      deliveryStatus = 'delivered',
+    }
+  }
+
+  example Failed {
+    input {
+      messageId = '',
+    }
+
+    error {
+      title = 'Not Found',
+      detail = "We don't recognize this message",
+    }
+  }
 }
 
 "
