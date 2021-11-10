@@ -36,7 +36,7 @@ map NearbyPoi {
 }
 
 operation BuildCategoryQueryType {
-  return if (args.categories.length !== 1) undefined
+  return if (args.categories.length === 0) undefined
 
   types = call CategoriesToTypes(categories = args.categories)
   return types[0]
@@ -70,6 +70,14 @@ operation CategoriesToTypes {
     "RESTAURANT": ["restaurant"],
     "CAFE": ["cafe"],
     "BAR": ["bar"],
+    "BANK": ["bank"],
+    "ATM":["atm"],
+    "HEALTHCARE": [ "doctor","hospital"],
+    "SCHOOL": ["university", "primary_school", "school", "secondary_school"],
+    "TAXI": ["taxi_stand"],
+    "POST": ["post_office"],
+    "POLICE": ["police"],
+    "PARKING": ["parking"]
   }
 
   amenities = args.categories.flatMap(
@@ -86,9 +94,32 @@ operation TypesToCategories {
   return if (!args.types) []
 
   typeCategoryMap = {
+    //Restaurant
     "restaurant": "RESTAURANT",
+    //Cafe
     "cafe": "CAFE",
-    "bar": "BAR"
+    //Bar
+    "bar": "BAR",
+    //Healthcare
+    "doctor": "HEALTHCARE",
+    "hospital": "HEALTHCARE",
+    //Bank
+    "bank": "BANK",
+    //ATM
+    "atm": "ATM",
+    //School
+    "university": "SCHOOL",
+    "primary_school": "SCHOOL",
+    "school": "SCHOOL",
+    "secondary_school": "SCHOOL",
+    //Taxi
+    "taxi_stand": "TAXI",
+    //Post
+    "post_office": "POST",
+    //Police
+    "police": "POLICE",
+    //Parking
+    "parking": "PARKING",
   }
 
   types = (() => {

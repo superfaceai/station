@@ -24,6 +24,19 @@ map NearbyPoi {
       points = call foreach(node of body.elements) ConvertResponse(node = node)
       map result points
     }
+    response 400 {
+      return map error {
+        status: statusCode,
+        message: "Invalid parameters"
+      }
+    }
+
+    response {
+      return map error {
+        status: statusCode,
+        message: body
+      }
+    }
   }
 }
 
@@ -62,7 +75,7 @@ operation ConvertResponse {
       latitude: args.node.lat,
       longitude: args.node.lon,
     },
-    name: nodeTags.name || args.node.id.toString(),
+    name: args.node.name || args.node.id.toString(),
     categories: categories
   }
 
@@ -76,9 +89,17 @@ operation CategoriesToAmenities {
   return if (!args.categories) []
 
   categoryAmenityMap = {
-    "RESTAURANT": ["restaurant"],
+    "RESTAURANT": ["restaurant", "fast_food", "food_court"],
     "CAFE": ["cafe"],
-    "BAR": ["bar", "pub"],
+    "BAR": ["bar", "pub", "biergarten"],
+    "SCHOOL": ["school","college","kindergarten","language_school","music_school","university"],
+    "TAXI": ["taxi"],
+    "POST": ["post_box","post_depot","post_office"],
+    "HEALTHCARE":[ "clinic", "doctors", "hospital"],
+    "BANK": ["bank"],
+    "ATM":["atm"],
+    "POLICE": ["police"],
+    "PARKING": ["parking","parking_entrance", "parking_space"]
   }
 
   amenities = args.categories.flatMap(
@@ -95,10 +116,43 @@ operation AmenitiesToCategories {
   return if (!args.amenities) []
 
   amenityCategoryMap = {
+    //Restaurant
     "restaurant": "RESTAURANT",
+    "fast_food": "RESTAURANT",
+    "food_court": "RESTAURANT",
+    //Cafe
     "cafe": "CAFE",
+    //Bar
     "bar": "BAR",
-    "pub": "BAR"
+    "pub": "BAR",
+    "biergarten": "BAR",
+    //School
+    "school": "SCHOOL",
+    "college": "SCHOOL",
+    "kindergarten": "SCHOOL",
+    "language_school": "SCHOOL",
+    "music_school": "SCHOOL",
+    "university": "SCHOOL",
+    //Taxi
+    "taxi": "TAXI",
+    //Post
+    "post_box": "POST",
+    "post_depot": "POST",
+    "post_office": "POST",
+    //Police
+    "police": "POLICE",
+    //Healthcare
+    "clinic": "HEALTHCARE",
+    "doctors": "HEALTHCARE",
+    "hospital": "HEALTHCARE",
+    //Bank
+    "bank": "BANK",
+    //ATM
+    "atm": "ATM",
+    //Parking
+    "parking": "PARKING",
+    "parking_entrance": "PARKING",
+    "parking_space": "PARKING"
   }
 
   categories = (() => {

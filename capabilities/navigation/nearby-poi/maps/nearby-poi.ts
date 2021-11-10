@@ -30,6 +30,45 @@ export const nearbyPoiTest = (provider: string): void => {
           })
         ).resolves.toMatchSnapshot();
       });
+
+      it('should find close pois with any category', async () => {
+        const input = {
+          center: {
+            latitude: 51.477,
+            longitude: 0.0,
+          },
+          radius: 10,
+          //categories is missing
+        };
+
+        await expect(
+          superface.run({
+            profile: 'navigation/nearby-poi',
+            provider,
+            useCase: 'NearbyPoi',
+            input,
+          })
+        ).resolves.toMatchSnapshot();
+      });
+
+      it('should map error correctly', async () => {
+        const input = {
+          center: {
+            latitude: 589.477,
+            longitude: 998.0,
+          },
+          radius: 10,
+        };
+
+        await expect(
+          superface.run({
+            profile: 'navigation/nearby-poi',
+            provider,
+            useCase: 'NearbyPoi',
+            input,
+          })
+        ).resolves.toMatchSnapshot();
+      });
     });
   });
 };

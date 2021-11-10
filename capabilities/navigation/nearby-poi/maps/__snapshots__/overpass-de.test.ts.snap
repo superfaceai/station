@@ -11,8 +11,43 @@ Ok {
         "latitude": 51.476838,
         "longitude": -0.0006877,
       },
-      "name": "Astronomy Café",
+      "name": "2738840351",
     },
   ],
+}
+`;
+
+exports[`navigation/nearby-poi/overpass-de find nearby pois should find close pois without any category 1`] = `
+Ok {
+  "value": Array [
+    Object {
+      "categories": Array [],
+      "coordinates": Object {
+        "latitude": 51.4770346,
+        "longitude": 0.0000949,
+      },
+      "name": "2739826920",
+    },
+    Object {
+      "categories": Array [],
+      "coordinates": Object {
+        "latitude": 51.4769819,
+        "longitude": -0.0001075,
+      },
+      "name": "8895562422",
+    },
+  ],
+}
+`;
+
+exports[`navigation/nearby-poi/overpass-de find nearby pois should map error correctly 1`] = `
+Err {
+  "error": "HTTPError: Expected HTTP error
+Properties: {
+  \\"status\\": 400,
+  \\"message\\": \\"Invalid parameters\\"
+}
+AST Path: definitions[0].statements[1].responseHandlers[1].statements[0]
+Original Map Location: Line 28, column 7",
 }
 `;
