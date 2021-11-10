@@ -4,7 +4,7 @@ Track your shipment. Get the latest information on your shipment status.
 """
 
 name = "delivery-tracking/shipment-info"
-version = "1.1.0"
+version = "1.1.1"
 
 """
 Retrieve Shipment Status
@@ -81,6 +81,98 @@ usecase ShipmentInfo safe {
     A human-readable explanation specific to this occurrence of the problem.
     """
     detail
+  }
+
+  example Successful {
+    input {
+      trackingNumber = '00340434292135100148'
+    }
+
+    result [{
+      carrier = 'shippo',
+      destination = {
+        address = {
+          addressLocality = 'Chicago',
+          countryCode = 'US',
+          postalCode = '60611',
+        },
+      },
+      estimatedDeliveryDate = '2021-11-08T07:03:30.944Z',
+      events = [
+        {
+          statusCode = 'unknown',
+          statusText = 'The carrier has received the electronic shipment information.',
+          timestamp = '2021-11-01T19:54:08.906Z',
+        },
+        {
+          location = {
+            address = {
+              addressLocality = 'San Francisco',
+              countryCode = 'US',
+              postalCode = '94103',
+            },
+          },
+          statusCode = 'transit',
+          statusText = 'Your shipment has departed from the origin.',
+          timestamp = '2021-11-02T23:54:08.906Z',
+        },
+        {
+          location = {
+            address =  {
+              addressLocality = 'Memphis',
+              countryCode = 'US',
+              postalCode = '37501',
+            },
+          },
+          statusCode = 'failure',
+          statusText = 'The Postal Service has identified a problem with the processing of this item and you should contact support to get further information.',
+          timestamp = '2021-11-04T11:54:08.906Z',
+        },
+        {
+          location = {
+            address =  {
+              addressLocality = 'Chicago',
+              countryCode = 'US',
+              postalCode = '60611',
+            },
+          },
+          statusCode = 'delivered',
+          statusText = 'Your shipment has been delivered.',
+          timestamp = '2021-11-03T23:54:08.906Z',
+        },
+      ],
+      origin = {
+        address = {
+          addressLocality = 'San Francisco',
+          countryCode = 'US',
+          postalCode = '94103',
+        },
+      },
+      status = {
+        location = {
+          address = {
+            addressLocality = 'Chicago',
+            countryCode = 'US',
+            postalCode = '60611',
+          },
+        },
+        statusCode = 'delivered',
+        statusText = 'Your shipment has been delivered.',
+        timestamp = '2021-11-03T23:54:08.906Z',
+      },
+      trackingNumber = '00340434292135100148',
+      },
+    ]
+  }
+
+  example Failed {
+    input {
+      trackingNumber = '12345'
+    }
+
+    error {
+      title = 'No shipment with given tracking number found'
+    }
   }
 }
 
