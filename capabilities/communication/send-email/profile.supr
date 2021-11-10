@@ -65,4 +65,44 @@ usecase SendEmail unsafe {
     """
     detail
   }
+
+  example SuccessfulPlainTextEmail {
+    input {
+      from = 'no-reply@example.com',
+      to = 'jane.doe@example.com',
+      subject = 'Your order has been shipped!',
+      text = 'Hello Jane, your recent order on Our Shop has been shipped.',
+    }
+
+    result {
+      messageId = 'JpITLjVBS3iknTzDq1BKPg',
+    }
+  }
+
+  example SuccessfulHtmlEmail {
+    input {
+      from = 'no-reply@example.com',
+      to = 'jane.doe@example.com',
+      subject = 'Your order has been shipped!',
+      html = "<p>Hello Jane, we shipped your recent order on Our Shop. <a>You can track it here</a>.</p>",
+    }
+
+    result {
+      messageId = 'JpITLjVBS3iknTzDq1BKPg',
+    }
+  }
+
+  example Failed {
+    input {
+      from = 'no-reply@example.com',
+      to = 'Jane Doe',
+      subject = 'Your order has been shipped!',
+      text = 'Hello Jane, your recent order on Our Shop has been shipped.',
+    }
+
+    result {
+      title = 'Invalid inputs',
+      detail = 'An email address must contain a single @',
+    }
+  }
 }
