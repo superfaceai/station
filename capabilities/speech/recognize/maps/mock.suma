@@ -2,7 +2,7 @@ profile = "speech/recognize@1.0"
 provider = "mock"
 
 map Recognize {
-  map error if(!input.audioContent) {
+  map error if(!input.audioContent || input.languageCode !== "en-US") {
     title = "Bad request"
   }
 
