@@ -60,4 +60,36 @@ usecase SendTemplatedEmail unsafe {
     """
     detail
   }
+
+  example Successful {
+    input {
+      from = 'no-reply@example.com',
+      to = 'jane.doe@example.com',
+      templateId = 'user-invitation',
+      templateData = {
+        invited_by = 'Bob',
+        invitation_link = 'example.com/invite?code=invite',
+      },
+    }
+
+    result {
+      messageId = 'gyax6ce9QLKQ80VOqsRX2g',
+    }
+  }
+
+  example Failed {
+    input {
+      from = 'no-reply@example.com',
+      to = 'Jane Doe',
+      templateId = 'template-id',
+      templateData = {
+        template_data_param = 'value',
+      },
+    }
+
+    result {
+      title = 'Invalid inputs',
+      detail = 'An email address must contain a single @',
+    }
+  }
 }
