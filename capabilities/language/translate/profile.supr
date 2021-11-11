@@ -26,6 +26,29 @@ usecase TranslateText {
       title!
       detail
   }
+
+  example Successful {
+    input {
+      text = 'Enjoy your stay.',
+      targetLanguage = 'ES',
+    }
+
+    result {
+      text = 'Disfrute de su estancia.'
+      sourceLanguage = 'EN'
+    }
+  }
+
+  example Failed {
+    input {
+      targetLanguage = 'EN',
+    }
+
+    error {
+      title = 'Bad request',
+      detail = 'Parameter \'text\' not specified.'
+    }
+  }
 }
 
 """
