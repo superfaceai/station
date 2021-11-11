@@ -48,7 +48,7 @@ usecase GetExchangeRate safe {
   example Successful {
     input {
       from = "BTC"
-      to ="USDT"
+      to = "USDT"
     }
 
     result {
@@ -59,12 +59,12 @@ usecase GetExchangeRate safe {
   example Failed {
     input {
       from = "FOO"
-      to ="BAR"
+      to = "BAR"
     }
 
     error {
       title = "400 - Bad Request"
-      detail = "Invalid symbole"
+      detail = "Invalid symbol."
     }
   }
 }
