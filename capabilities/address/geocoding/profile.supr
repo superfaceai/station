@@ -3,7 +3,7 @@ Geocoding
 Code or decode an postal address to or from geographical coordinates.
 """
 name = "address/geocoding"
-version = "3.1.0"
+version = "3.1.1"
 
 """
 Geocode address
@@ -28,6 +28,44 @@ usecase Geocode {
   error {
     title!
     detail
+  }
+
+
+  example UsingFreeformQuery {
+    input {
+      query = '1600 Amphitheatre Parkway, Mountain View, CA'
+    }
+
+    result {
+      latitude = 37.423199,
+      longitude = -122.084068
+    }
+  }
+
+  example UsingFullAddress {
+    input {
+      streetAddress = '1600 Amphitheatre Parkway',
+      addressLocality = 'Mountain View',
+      addressRegion = 'California',
+      addressCountry = 'USA',
+      postalCode = '94043'
+    }
+
+    result {
+      latitude = 37.423199,
+      longitude = -122.084068
+    }
+  }
+
+  example Failed {
+    input {
+      query = 'Hometown'
+    }
+
+    error {
+      title = 'Bad request'
+      detail = 'Missing or bad query'
+    }
   }
 }
 
@@ -54,6 +92,34 @@ usecase ReverseGeocode {
   error {
     title!
     detail
+  }
+
+  example Successful {
+    input {
+      latitude = 37.423199,
+      longitude = -122.084068
+    }
+
+    result [{
+      addressCountry = 'us',
+      addressLocality = 'Mountain View',
+      addressRegion = 'CA',
+      formattedAddress = 'Amphitheatre Parkway, Mountain View, CA 94043, United States of America',
+      postalCode = '94043',
+      streetAddress = 'Amphitheatre Parkway',
+    }]
+  }
+
+  example Failed {
+    input {
+      latitude = 720,
+      longitude = 540
+    }
+
+    error {
+      title = 'Bad request',
+      detail = 'The provided coordinates in query are invalid, out of range, or not in the expected format'
+    }
   }
 }
 
