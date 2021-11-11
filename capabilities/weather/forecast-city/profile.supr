@@ -64,4 +64,42 @@ usecase GetWeatherForecastInCity {
     """
     statusCode!
   }
+
+  example success {
+    input {
+      city = 'Prague,CZ',
+    }
+
+    result [
+      {
+        averageTemperature = 6,
+        date = "2021-11-08",
+        maxTemperature = 8,
+        minTemperature = 4,
+      },
+      {
+        averageTemperature = 7,
+        date = "2021-11-09",
+        maxTemperature = 11,
+        minTemperature = 4,
+      },
+      {
+        averageTemperature = 5,
+        date = "2021-11-10",
+        maxTemperature = 9,
+        minTemperature = 2,
+      }
+    ]
+  }
+
+  example fail {
+    input {
+      city = '%',
+    }
+
+    error {
+      status = 400
+      message = "<h1>400 Bad Request</h1>"
+    }
+  }
 }
