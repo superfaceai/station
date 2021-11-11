@@ -4,7 +4,7 @@ Get current weather for the city
 """
 
 name = "weather/current-city"
-version = "1.0.1"
+version = "1.0.2"
 
 """
 Get Current Weather In City
@@ -58,5 +58,29 @@ usecase GetCurrentWeatherInCity safe {
     A human-readable explanation specific to this occurrence of the problem
     """
     detail
+  }
+
+  example Successful {
+    input {
+      city = 'Prague, Czech Republic',
+      units = 'C'
+    }
+
+    result {
+      temperature = 9,
+      feelsLike = 8,
+      description = 'Partly cloudy'
+    }
+  }
+
+  example Failed {
+    input {
+      city = 'dreamtown'
+    }
+
+    error {
+      title = 'Bad request'
+      detail = 'City cannot be found'
+    }
   }
 }
