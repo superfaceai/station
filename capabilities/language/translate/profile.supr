@@ -4,28 +4,28 @@ Translations from one to another language
 """
 
 name = "language/translate"
-version = "1.0.0"
+version = "1.0.1"
 
 """
 Translate text usecase
 Translate text to another language
 """
 usecase TranslateText {
-    input {
-        text
-        targetLanguage
-        sourceLanguage
-    }
+  input {
+      text
+      targetLanguage
+      sourceLanguage
+  }
 
-    result {
-        text
-        sourceLanguage
-    } 
+  result {
+      text
+      sourceLanguage
+  } 
 
-    error {
-        title!
-        detail
-    }
+  error {
+      title!
+      detail
+  }
 }
 
 """
