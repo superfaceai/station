@@ -158,7 +158,7 @@ usecase Search safe {
   example SearchByEmail {
     input {
       property = "email"
-      operator = "="
+      operator = "EQ"
       value = "johndoe@example.com"
     }
 
@@ -178,7 +178,7 @@ usecase Search safe {
   example SearchById {
     input {
       property = "id"
-      operator = "="
+      operator = "EQ"
       value = "512"
     }
 
@@ -198,7 +198,7 @@ usecase Search safe {
   example SearchNotEqual {
     input {
       property = "firstName"
-      operator = "!="
+      operator = "NEQ"
       value = "Doe"
     }
 
@@ -212,7 +212,7 @@ usecase Search safe {
     }]
   }
 
-  example UnknowOperator {
+  example UnknownOperator {
     input {
       property = "email"
       operator = "%"
