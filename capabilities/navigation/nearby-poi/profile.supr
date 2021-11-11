@@ -48,6 +48,45 @@ usecase NearbyPoi {
 		"Human-readable error message"
 		message! string!
 	}
+
+  example success {
+    input {
+      center = {
+        latitude = 51.477,
+        longitude = 0.0,
+      },
+      radius = 100,
+      categories = ['CAFE'],
+    }
+  
+
+  result [{
+      categories = [
+        'CAFE',
+      ],
+      coordinates = {
+        latitude = 51.476838,
+        longitude = -0.0006877,
+      },
+      name = "2738840351",
+    }
+  ]
+}
+
+  example failed {
+    input {
+      center = {
+        latitude = 589.477,
+        longitude = 998.0,
+      },
+      radius = 10
+    }
+
+    error {
+      status = 400,
+      message = "Invalid parameters"
+    }
+  }
 }
 
 model Coordinates {
