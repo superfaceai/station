@@ -12,6 +12,15 @@ Result isn't paginated, amount of returned templates depenends on provider.
 """
 usecase ListTemplates safe {
   result [Template]
+
+  example Successful {
+    result [
+      {
+        id = "d-8be96c63de164e6799c5dbf2521d7959"
+        name = "Email template name"
+      }
+    ]
+  }
 }
 
 """
@@ -28,6 +37,37 @@ usecase GetTemplateContent safe {
     text
     html
   }
+
+  example Successful {
+    input {
+      id = "d-ef6d417300f74f96a9f722050edae85f"
+    }
+
+    result {
+      subject = "Station test"
+      text = "Station usecase automated test
+
+From: {{from}}
+to: {{to}}
+
+Unsubscribe ( {{{unsubscribe}}} ) - Unsubscribe Preferences ( {{{unsubscribe_preferences}}} )"
+      html = """<!doctype html>
+<html>
+
+<head>
+  <meta name="viewport" content="width=device-width">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>Integration Test Email #1</title>
+</head>
+
+<body class="">
+This template is used by integration tests only
+</body>
+
+</html>
+"""
+    }
+  }
 }
 
 """
@@ -43,6 +83,34 @@ usecase CreateTemplate unsafe {
   }
 
   result Template
+
+  example Successful {
+    input {
+      name = "Station Create template test (DELETE ME)"
+      subject = "Test Email"
+      text = "This template is used by integration tests only"
+      html = """<!doctype html>
+<html>
+
+<head>
+  <meta name="viewport" content="width=device-width">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>Integration Test Email #1</title>
+</head>
+
+<body class="">
+This template is used by integration tests only
+</body>
+
+</html>
+"""
+    }
+
+    result {
+      id = "d-8be96c63de164e6799c5dbf2521d7959"
+      name = "Station Create template test (DELETE ME)"
+    }
+  }
 }
 
 """
@@ -59,6 +127,34 @@ usecase UpdateTemplate unsafe {
   }
 
   result Template
+
+  example Successful {
+    input {
+      name = "Station Update template test (DELETE ME)"
+      subject = "Test Email"
+      text = "This template is used by integration tests only"
+      html = """<!doctype html>
+<html>
+
+<head>
+  <meta name="viewport" content="width=device-width">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>Integration Test Email #1</title>
+</head>
+
+<body class="">
+This template is used by integration tests only 2
+</body>
+
+</html>
+"""
+    }
+
+    result {
+      id = "d-8be96c63de164e6799c5dbf2521d7959"
+      name = "Station Update template test updated (DELETE ME)"
+    }
+  }
 }
 
 """
