@@ -1,14 +1,14 @@
 """
 Geocoding
-Code or decode an postal address to or from geographical coordinates.
+Code or decode a postal address to or from geographical coordinates.
 """
 name = "address/geocoding"
-version = "3.1.1"
+version = "3.1.2"
 
 """
 Geocode address
 
-Geocode postal address into geographical coordinates (latitude and longitude)
+Geocode a postal address into geographical coordinates (latitude and longitude).
 """
 usecase Geocode {
   input {
@@ -72,7 +72,7 @@ usecase Geocode {
 """
 Reverse geocode
 
-Decodes geographical coordinates (latitude and longitude) into postal addresses
+Decodes geographical coordinates (latitude and longitude) into a postal addresses.
 """
 usecase ReverseGeocode {
   input {
@@ -137,7 +137,7 @@ field addressCountry
 
 """
 Region
-The region in which the locality is, and which is in the country. For example, California or another appropriate first-level Administrative division
+The region in which the locality is, and which is in the country. For example, California or another appropriate first-level Administrative division.
 """
 field addressRegion
 
