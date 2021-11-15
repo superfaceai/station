@@ -329,8 +329,8 @@
     "analytics/track-event": {
       "file": "../capabilities/analytics/track-event/profile.supr",
       "providers": {
-        "mixpanel-eu": {
-          "file": "../capabilities/analytics/track-event/maps/mixpanel-eu.suma"
+        "mixpanel": {
+          "file": "../capabilities/analytics/track-event/maps/mixpanel.suma"
         },
         "mock": {
           "file": "../capabilities/analytics/track-event/maps/mock.suma"
@@ -652,8 +652,22 @@
         }
       ]
     },
-    "mixpanel-eu": {
-      "file": "../providers/mixpanel-eu.json"
+    "mixpanel": {
+      "file": "../providers/mixpanel.json",
+      "security": [
+        {
+          "id": "project_token",
+          "apikey": "$MIXPANEL_PROJECT_TOKEN"
+        },
+        {
+          "id": "service_account",
+          "username": "$MIXPANEL_SERVICE_ACCOUNT_USER",
+          "password": "$MIXPANEL_SERVICE_ACCOUNT_PASSWORD"
+        }
+      ],
+      "parameters": {
+        "SERVER": "$MIXPANEL_SERVER"
+      }
     }
   }
 }

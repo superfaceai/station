@@ -1,17 +1,17 @@
 // API Reference: https://developer.mixpanel.com/reference/events
 
 profile = "analytics/track-event@1.0"
-provider = "mixpanel-eu"
+provider = "mixpanel"
 
 map TrackEvent {
   http POST "/track" {
-    security none
+    security "project_token"
   
     request "application/x-www-form-urlencoded" {
       body {
         data = {
           event: input.eventName,
-          properties: { token: input.token, ...input.eventProperties }
+          properties: { ...input.eventProperties }
         }
       }
     }

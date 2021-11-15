@@ -1,0 +1,30 @@
+{
+  "name": "mixpanel",
+  "services": [
+    {
+      "id": "default",
+      "baseUrl": "https://{SERVER}.mixpanel.com"
+    }
+  ],
+  "defaultService": "default",
+  "securitySchemes": [
+    {
+      "id": "project_token",
+      "type": "apiKey",
+      "in": "body",
+      "name": "/data/properties/token"
+    },
+    {
+      "id": "service_account",
+      "type": "http",
+      "scheme": "basic"
+    }
+  ],
+  "parameters": [
+    {
+      "name": "SERVER",
+      "description": "Choose between US (api) and EU (api-eu) server residency",
+      "default": "api"
+    }
+  ]
+}
