@@ -83,8 +83,6 @@ operation MapAudioEncodingToContentType {
   set {
     result = (() => {
       switch (args.encoding) {
-        case 'linear_pcm':
-          return 'audio/l16'
         case 'wav':
           return 'audio/wav'
         default:
