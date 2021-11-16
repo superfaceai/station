@@ -5,7 +5,7 @@ map Recognize {
   http POST "/speech/recognition/conversation/cognitiveservices/v1" {
     security "opc-subscription-key"
 
-    request "audio/wav;codecs=audio/pcm;samplerate=24000" {
+    request "audio/wav" {
       query {
         language = input.languageCode
       }
