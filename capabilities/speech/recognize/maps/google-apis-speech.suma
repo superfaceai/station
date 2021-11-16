@@ -10,13 +10,13 @@ map Recognize {
   }
 
   http POST "/v1/speech:recognize" {
-  security "apikey"
+    security "apikey"
   
-  request {
-    headers {
-      "Content-Type" = "application/json"
-    }
-    body = {
+    request {
+      headers {
+        "Content-Type" = "application/json"
+      }
+      body = {
         config: { 
           encoding: encoding,
           languageCode: input.languageCode,
@@ -28,13 +28,13 @@ map Recognize {
       }
     }
 
-  response 200 {
+    response 200 {
       return map result {
         results = call foreach(result of body.results) MapResult(result = result)
       }
     }
 
-  response 400 "application/json" {
+    response 400 "application/json" {
       map error {
         title = (body.error.status === "INVALID_ARGUMENT") ? "Invalid argument" : "Bad request"
         detail = body.error.message
