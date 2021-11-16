@@ -2,6 +2,16 @@ profile = "speech/recognize@1.0"
 provider = "azure-speech-to-text"
 
 map Recognize {
+  audioEncoding = 'wav'
+
+  set if(input.audioEncoding) {
+    audioEncoding = input.audioEncoding
+  }
+
+  return map error if(audioEncoding !== 'wav') {
+    title = "Audio encoding not supported"
+  }
+
   http POST "/speech/recognition/conversation/cognitiveservices/v1" {
     security "opc-subscription-key"
 
