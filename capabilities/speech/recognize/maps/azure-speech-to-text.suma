@@ -3,17 +3,17 @@ provider = "azure-speech-to-text"
 
 map Recognize {
   http POST "/speech/recognition/conversation/cognitiveservices/v1" {
-  security "opc-subscription-key"
+    security "opc-subscription-key"
 
-  request "audio/wav;codecs=audio/pcm;samplerate=24000" {
-    query {
-      language = input.languageCode
-    }
+    request "audio/wav;codecs=audio/pcm;samplerate=24000" {
+      query {
+        language = input.languageCode
+      }
     
-    body = Buffer.from(input.audioContent, 'base64')
-  }
+      body = Buffer.from(input.audioContent, 'base64')
+    }
 
-  response 200 {
+    response 200 {
       return map result {
         results = [{
           alternatives: [{
@@ -23,7 +23,7 @@ map Recognize {
       }
     }
 
-  response 400 "text/plain" {
+    response 400 "text/plain" {
       map error {
         title = "Bad request"
         detail = body
