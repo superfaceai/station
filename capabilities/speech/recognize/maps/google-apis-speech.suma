@@ -81,8 +81,8 @@ operation MapAudioEncoding {
   set {
     result = (() => {
       switch (args.encoding) {
-        case 'linear_pcm':
-          return 'LINEAR16'
+        case 'wav':
+          return 'WAV'
 
         default:
           return undefined
