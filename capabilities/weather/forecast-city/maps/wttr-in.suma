@@ -2,32 +2,16 @@ profile = "weather/forecast-city@1.0"
 provider = "wttr-in"
 
 map GetWeatherForecastInCity {
-  inputCity = input.city
-
   set {
     unit = input.units
   }
 
-  http GET "/{inputCity}" {
-
-    request {
-      query {
-        // request JSON for response
-        format = 'j1'
-      }
-    }
-
-    response {
-      return map error if (statusCode !== 200) {
-        message = body
-      }
-      forecast = call foreach(weather of body.weather) mapWeather(
-        units = unit,
-        weather = weather
-      )
-
-      return map result forecast
-    }
+   call fetchWeather(
+    units = unit,
+    city = input.city
+  ) {
+    return map error if (outcome.error) outcome.error
+    return map result  outcome.data 
   }
 }
 
@@ -46,6 +30,30 @@ operation pickTemperatures {
     avgTemp = Number(args.weather.avgtempC)
     maxTemp = Number(args.weather.maxtempC)
     minTemp = Number(args.weather.mintempC)
+  }
+}
+
+operation fetchWeather {
+  http GET "/{args.city}" {
+
+    request {
+      query {
+        // request JSON for response
+        format = 'j1'
+      }
+    }
+
+    response {
+      fail if (statusCode !== 200) {
+        message = body
+      }
+      forecast = call foreach(weather of body.weather) mapWeather(
+        units = args.unit,
+        weather = weather
+      )
+      
+      return forecast
+    }
   }
 }
 
