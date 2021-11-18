@@ -58,11 +58,6 @@ usecase GetWeatherForecastInCity {
     A short, human-readable summary of the problem.
     """
     message string!
-    """
-    Status code
-    Usually a HTTP status code connected to occured problem.
-    """
-    statusCode!
   }
 
   example success {
@@ -98,7 +93,6 @@ usecase GetWeatherForecastInCity {
     }
 
     error {
-      status = 400
       message = "<h1>400 Bad Request</h1>"
     }
   }

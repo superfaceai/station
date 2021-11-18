@@ -19,7 +19,6 @@ map GetWeatherForecastInCity {
 
     response {
       return map error if (statusCode !== 200) {
-        statusCode = statusCode
         message = body
       }
       forecast = call foreach(weather of body.weather) mapWeather(
