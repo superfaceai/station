@@ -4,7 +4,7 @@ Send message via IM such as Messanger, Slack or MS Teams.
 """
 
 name = "communication/send-message"
-version = "2.0.0"
+version = "2.0.1"
 
 """
 Send Message
@@ -26,7 +26,7 @@ usecase SendMessage {
   }
 
   result {
-    """"
+    """
     Destination
     Identifier of the destination where the message was sent.
     """
@@ -50,5 +50,28 @@ usecase SendMessage {
     A human-readable explanation specific to this occurrence of the problem.
     """
     detail
+  }
+
+  example Successful {
+    input {
+      destination = 'C1H9RESGL',
+      text = 'Our app has 1,000,000 subscribers!',
+    }
+
+    result {
+      destination = 'C1H9RESGL',
+      messageId = "1503435956.000247",
+    }
+  }
+
+  example Failed {
+    input {
+      destination = 'random',
+      text = 'Message to nonexistent destination',
+    }
+
+    error {
+      title = 'channel_not_found',
+    }
   }
 }

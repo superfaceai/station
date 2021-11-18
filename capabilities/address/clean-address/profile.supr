@@ -3,30 +3,17 @@ Clean Address
 Normalize postal address from user input.
 """
 name = "address/clean-address"
-version = "1.1.0"
+version = "1.1.1"
 
 """
 Clean Address
 
-This use case will take an address like:
+This use case is useful for cleaning up addresses input by users.
 
-{
-  street: '3301 South Greenfield Road',
-  city: 'Gilbert',
-  state: 'AZ',
-  zipcode: '85297',
-}
-
-And convert it to:
-
-{
-  city: 'Gilbert',
-  state: 'AZ',
-  street: '3301 S Greenfield Rd',
-  zipcode: '85297',
-}
-
-This is useful for cleaning up addresses input by users.
+It will take an address like 
+'3301 South Greenfield Road, Gilbert, AZ 85297'
+and converts it to
+'3301 S Greenfield Rd, Gilbert, AZ 85297'.
 """
 usecase CleanAddress {
   input {
@@ -55,6 +42,35 @@ usecase CleanAddress {
     A human-readable explanation specific to this occurrence of the problem.
     """
     detail
+  }
+
+  example Successful {
+    input {
+      street = '3301 South Greenfield Road',
+      city = 'Gilbert',
+      state = 'AZ',
+      zipcode = '85297'
+    }
+
+    result {
+      street = '3301 S Greenfield Rd',
+      city = 'Gilbert',
+      state = 'AZ',
+      zipcode = '85297',
+    }
+  }
+
+  example Failed {
+    input {
+      street = '2229 Glitchy',
+      city = ' ',
+      state = 'RO',
+      zipcode = '45'
+    }
+
+    error {
+      title = 'Bad Request'
+    }
   }
 }
 

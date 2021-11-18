@@ -3,7 +3,7 @@ Pull Requests
 Retrive version control system's pull requests for a repository.
 """
 name = "vcs/pull-requests"
-version = "2.0.0"
+version = "2.0.1"
 
 """
 PullRequests
@@ -68,5 +68,34 @@ usecase PullRequests safe {
     A optional, human-readable explanation specific to this occurrence of the problem.
     """
     description string!
+  }
+
+  example success {
+    input {
+      owner = 'superfaceai',
+      repo = 'one-sdk-js',
+    }
+
+    result {
+      pullRequests = [{
+        title = 'feat: add magic abilities',
+        id = 123456789,
+        url = 'https://api.github.com/repos/superfaceai/one-sdk-js/pulls/173',
+        sha = '4z123ad91519dde1d8da2f141237b5760afd9bed'
+      }]
+    }
+  }
+
+example errorNoMatch {
+    input {
+      owner = 'superfaceai',
+      repo = 'wrong-repo',
+    }
+
+    error {
+      message = 'Not Found',
+      description = 'https://docs.github.com/v3/repos/contents/',
+      statusCode = 404
+    }
   }
 }

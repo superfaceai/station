@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`crypto/exchange-rate/binance} GetExchangeRate should fail on non-existing coins 1`] = `
+Err {
+  "error": "MappedError: Expected error
+Properties: {
+  \\"title\\": \\"400 - Bad Request\\",
+  \\"detail\\": \\"Invalid symbol.\\"
+}
+AST Path: definitions[0].statements[1].statements[1]
+Original Map Location: Line 18, column 5",
+}
+`;
+
+exports[`crypto/exchange-rate/binance} GetExchangeRate should perform conversion 1`] = `
+Ok {
+  "value": Object {
+    "rate": "67709.58000000",
+  },
+}
+`;
+
+exports[`crypto/exchange-rate/binance} GetExchangeRate should perform conversion back 1`] = `
+Ok {
+  "value": Object {
+    "rate": "0.00001477",
+  },
+}
+`;
