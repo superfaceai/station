@@ -18,9 +18,17 @@ map NearbyPoi {
     response 200 "application/json" {
       return map result if (body.status === "ZERO_RESULTS") []
 
+      set if(body.status !== "OK" && body.error_message) {
+        message = body.error_message
+      }
+
+      set if(body.status !== "OK" && !body.error_message) {
+        message = body.status
+      }
+
       return map error if (body.status !== "OK") {
         status: body.status,
-        message: body.error_message || body.status
+        message: message
       }
 
       points = call foreach(place of body.results) ConvertResponse(place = place)
