@@ -1,0 +1,142 @@
+profile = "address/geocoding@3.1"
+provider = "here"
+
+// Here API documentation
+//   https://developer.here.com/documentation
+
+map Geocode {
+    payload = input.query || `${input.streetAddress || ""} ${input.addressLocality || ""} ${input.addressRegion || ""} ${input.postalCode || ""} ${input.addressCountry || ""}`;
+
+    http GET "/v1/geocode" {
+        security "apiKey"
+        request {
+            query {
+                q = payload
+            }
+        }
+
+        response 200 "application/json" {
+            return map error if (body.items.length === 0) {
+                title = 'Results not found',
+                detail = 'No results were found for specified address'
+            }
+            
+            map result {
+                latitude = body.items[0].position.lat
+                longitude = body.items[0].position.lng
+            }
+        }
+
+        response 400 {
+            map error {
+                title = body.title
+                detail = body.cause
+            }
+        }
+
+        response 405 {
+            map error {
+                title = body.title
+                detail = body.cause
+            }
+        }
+
+        response 429 {
+            map error {
+                title = body.title
+                detail = body.cause
+            }
+        }
+
+        response 503 {
+            map error {
+                title = body.title
+                detail = body.cause
+            }
+        }
+    }
+}
+
+map ReverseGeocode {
+    payload = `${input.latitude},${input.longitude}`;
+
+    http GET "/v1/revgeocode" {
+        security "apiKey"
+        request {
+            query {
+                at = payload
+            }
+        }
+
+        response 200 "application/json" {
+            return map error if (body.items.length === 0) {
+                title = 'Results not found',
+                detail = 'No results were found for specified coordinates'
+            }
+
+            map result body.items.map(item => {
+                const mappedAddress = {};
+
+                // country code
+                mappedAddress.addressCountry = item.address.countryCode
+
+                // region
+                mappedAddress.addressRegion = item.address.state;
+                if (item.address.stateCode) {
+                    mappedAddress.addressRegion = `${item.address.stateCode}, ${mappedAddress.addressRegion}`
+                }
+                if (item.address.county) {
+                    mappedAddress.addressRegion = `${mappedAddress.addressRegion}, ${item.address.county}`
+                }
+
+                // locality
+                mappedAddress.addressLocality = item.address.city;
+                if (item.address.district && item.address.district !== item.address.city) {
+                    mappedAddress.addressLocality = `${mappedAddress.addressLocality}, ${item.address.district}`
+                }
+
+                // street address
+                mappedAddress.streetAddress = item.address.street
+                if (item.address.houseNumber) {
+                    mappedAddress.streetAddress = `${item.address.houseNumber} ${mappedAddress.streetAddress}`
+                }
+
+                // postal code
+                mappedAddress.postalCode = item.address.postalCode
+
+                // formatted address
+                mappedAddress.formattedAddress = item.address.label
+
+                return mappedAddress
+            })
+        }
+
+        response 400 {
+            map error {
+                title = body.title
+                detail = body.cause
+            }
+        }
+
+        response 405 {
+            map error {
+                title = body.title
+                detail = body.cause
+            }
+        }
+
+        response 429 {
+            map error {
+                title = body.title
+                detail = body.cause
+            }
+        }
+
+        response 503 {
+            map error {
+                title = body.title
+                detail = body.cause
+            }
+        }
+    }
+}
