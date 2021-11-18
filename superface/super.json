@@ -188,6 +188,9 @@
         },
         "azure-maps": {
           "file": "../capabilities/address/geocoding/maps/azure-maps.suma"
+        },
+        "here": {
+          "file": "../capabilities/address/geocoding/maps/here.suma"
         }
       }
     },
@@ -635,6 +638,15 @@
         {
           "id": "apikey",
           "apikey": "$DEEPL_API_KEY"
+        }
+      ]
+    },
+    "here": {
+      "file": "../providers/here.json",
+      "security": [
+        {
+          "id": "apiKey",
+          "apikey": "$HERE_API_KEY"
         }
       ]
     }
