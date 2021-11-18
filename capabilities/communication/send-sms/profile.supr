@@ -4,7 +4,7 @@ Send a single SMS message or retieve its status.
 """
 
 name = "communication/send-sms"
-version = "2.0.0"
+version = "2.0.1"
 
 """
 Send SMS Message
@@ -30,6 +30,30 @@ usecase SendMessage unsafe {
     title!
     detail
   }
+
+  example Successful {
+    input {
+      to = '+12127290149',
+      from = '+4915207955279',
+      text = 'Your order is ready to be picked up!',
+    }
+
+    result {
+      messageId = '150000003351F9D7',
+    }
+  }
+
+  example Failed {
+    input {
+      to = '+12127290149',
+      from = '',
+      text = 'Your order is ready to be picked up!',
+    }
+
+    error {
+      title = "Missing 'from' number",
+    }
+  }
 }
 
 "
@@ -49,6 +73,27 @@ usecase RetrieveMessageStatus safe {
   error {
     title!
     detail
+  }
+
+  example Successful {
+    input {
+      messageId = '150000003351F9D7',
+    }
+
+    result {
+      deliveryStatus = 'delivered',
+    }
+  }
+
+  example Failed {
+    input {
+      messageId = '',
+    }
+
+    error {
+      title = 'Not Found',
+      detail = "We don't recognize this message",
+    }
   }
 }
 

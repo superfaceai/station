@@ -4,7 +4,7 @@ Turn text into natural-sounding speech.
 """
 
 name = "speech/synthesis"
-version = "1.0"
+version = "1.0.1"
 
 """
 Text to speech synthesis
@@ -51,6 +51,40 @@ usecase TextToSpeechSynthesis {
     A human-readable explanation specific to this occurrence of the problem.
     """
     detail
+  }
+
+  example Successful {
+    input {
+      text = 'Hello world.',
+      voice = {
+        languageCode = 'en-US'
+      },
+      audio = {
+        encoding = 'linear_pcm'
+      }
+    }
+
+    result {
+      audioContent = '<Synthesised audio data bytes encoded as 16-bit signed little-endian samples with WAV header>',
+    }
+  }
+
+  example Failed {
+    input {
+      text = 'Hello world.',
+      voice = {
+        languageCode = 'en-US'
+      },
+      audio = {
+          encoding = 'linear_pcm',
+          sampleRateHertz = -2,
+      },
+    }
+
+    error {
+      title = 'Invalid argument',
+      detail = 'Request contains an invalid argument.'
+    }
   }
 
 }

@@ -4,7 +4,7 @@ Manage contacts in Customer Relation Management systems
 """
 
 name = "crm/contacts"
-version = "1.0.0"
+version = "1.0.1"
 
 """
 Create Contact
@@ -30,33 +30,33 @@ usecase Create unsafe {
     detail
   }
 
-  // example success {
-  //   input {
-  //     email = "johndoe@example.com"
-  //     firstName = "John"
-  //     lastName = "Doe"
-  //     company = "Superface"
-  //     country = "USA"
-  //     customProperties = {
-  //       myproperty = "field value",
-  //     }
-  //   }
+  example success {
+    input {
+      email = "johndoe@example.com"
+      firstName = "John"
+      lastName = "Doe"
+      company = "Superface"
+      country = "USA"
+      customProperties = {
+        myproperty = "field value",
+      }
+    }
 
-  //   result {
-  //     id = "512"
-  //   }
-  // }
+    result {
+      id = "512"
+    }
+  }
   
-  // example error {
-  //   input {
-  //     email = "johndoe@example.com"
-  //   }
+  example error {
+    input {
+      email = "johndoe@example.com"
+    }
 
-  //   error {
-  //     title = "Unauthorized"
-  //     detail = "The API key provided is invalid"
-  //   }
-  // }
+    error {
+      title = "Unauthorized"
+      detail = "The API key provided is invalid"
+    }
+  }
 }
 
 """
@@ -84,34 +84,34 @@ usecase Update unsafe {
     detail
   }
 
-  // example success {
-  //   input {
-  //     id = "512"
-  //     email = "johndoe@example.com"
-  //     firstName = "John"
-  //     lastName = "Doe"
-  //     company = "Superface"
-  //     country = "USA"
-  //     customProperties = {
-  //       myproperty = "field value",
-  //     }
-  //   }
+  example success {
+    input {
+      id = "512"
+      email = "johndoe@example.com"
+      firstName = "John"
+      lastName = "Doe"
+      company = "Superface"
+      country = "USA"
+      customProperties = {
+        myproperty = "field value",
+      }
+    }
 
-  //   result {
-  //     id = "512"
-  //   }
-  // }
+    result {
+      id = "512"
+    }
+  }
   
-  // example error {
-  //   input {
-  //     email = "johndoe@example.com"
-  //   }
+  example error {
+    input {
+      email = "johndoe@example.com"
+    }
 
-  //   error {
-  //     title = "Unauthorized"
-  //     detail = "The API key provided is invalid"
-  //   }
-  // }
+    error {
+      title = "Unauthorized"
+      detail = "The API key provided is invalid"
+    }
+  }
 }
 
 """
@@ -155,75 +155,75 @@ usecase Search safe {
     detail
   }
 
-  // example SearchByEmail {
-  //   input {
-  //     property = "email"
-  //     operator = "="
-  //     value = "johndoe@example.com"
-  //   }
+  example SearchByEmail {
+    input {
+      property = "email"
+      operator = "EQ"
+      value = "johndoe@example.com"
+    }
 
-  //   result [{
-  //     id = "512"
-  //     email = "johndoe@example.com"
-  //     firstName = "John"
-  //     lastName = "Doe"
-  //     company = "Superface"
-  //     country = "USA"
-  //     customProperties = {
-  //       myproperty = "field value"
-  //     }
-  //   }]
-  // }
+    result [{
+      id = "512"
+      email = "johndoe@example.com"
+      firstName = "John"
+      lastName = "Doe"
+      company = "Superface"
+      country = "USA"
+      customProperties = {
+        myproperty = "field value"
+      }
+    }]
+  }
 
-  // example SearchById {
-  //   input {
-  //     property = "id"
-  //     operator = "="
-  //     value = "512"
-  //   }
+  example SearchById {
+    input {
+      property = "id"
+      operator = "EQ"
+      value = "512"
+    }
 
-  //   result [{
-  //     id = "512"
-  //     email = "johndoe@example.com"
-  //     firstName = "John"
-  //     lastName = "Doe"
-  //     company = "Superface"
-  //     country = "USA"
-  //     customProperties = {
-  //       myproperty = "field value"
-  //     }
-  //   }]
-  // }
+    result [{
+      id = "512"
+      email = "johndoe@example.com"
+      firstName = "John"
+      lastName = "Doe"
+      company = "Superface"
+      country = "USA"
+      customProperties = {
+        myproperty = "field value"
+      }
+    }]
+  }
 
-  // example SearchNotEqual {
-  //   input {
-  //     property = "firstName"
-  //     operator = "!="
-  //     value = "Doe"
-  //   }
+  example SearchNotEqual {
+    input {
+      property = "firstName"
+      operator = "NEQ"
+      value = "Doe"
+    }
 
-  //   result [{
-  //     id = "512"
-  //     email = "johnsmith@example.com"
-  //     firstName = "John"
-  //     lastName = "Smiths"
-  //     company = "Example"
-  //     country = "USA"
-  //   }]
-  // }
+    result [{
+      id = "512"
+      email = "johnsmith@example.com"
+      firstName = "John"
+      lastName = "Smiths"
+      company = "Example"
+      country = "USA"
+    }]
+  }
 
-  // example UnknowOperator {
-  //   input {
-  //     property = "email"
-  //     operator = "%"
-  //     value "example.com"
-  //   }
+  example UnknownOperator {
+    input {
+      property = "email"
+      operator = "%"
+      value = "example.com"
+    }
 
-  //   error {
-  //     title = "Unknown operator"
-  //     detail = "Operator \"%\" is not recognized"
-  //   }
-  // }
+    error {
+      title = "Unknown operator"
+      detail = "Operator \"%\" is not recognized"
+    }
+  }
 }
 
 """

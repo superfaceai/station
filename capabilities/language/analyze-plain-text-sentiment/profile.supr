@@ -4,7 +4,7 @@ Analyzes the prevailing emotional opinion of given text.
 """
 
 name = "language/analyze-plain-text-sentiment"
-version = "1.0.0"
+version = "1.0.1"
 
 """
 Analyze plain text sentiment
@@ -51,6 +51,30 @@ usecase AnalyzePlainTextSentiment safe {
     A human-readable explanation specific to this occurrence of the problem.
     """
     detail
+  }
+
+  example Successful {
+    input {
+      text = 'Enjoy your stay.',
+      languageCode = 'en',
+    }
+
+    result {
+      sentiment = 'positive',
+      score = 0.9,
+    }
+  }
+
+  example Failed {
+    input {
+      text = '',
+      languageCode = 'wrong_language_code',
+    }
+
+    error {
+      title = 'Bad request',
+      detail = 'invalid request: content is empty'
+    }
   }
 
 }

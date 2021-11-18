@@ -4,9 +4,11 @@ provider = "wttr-in"
 map GetCurrentWeatherInCity {
   set {
     units = input.units
+    // FIXME: workaround for vscode ext NonNullStructure error
+    inputCity = input.city
   }
 
-  http GET "/{input.city}" {
+  http GET "/{inputCity}" {
     security none
 
     request {
