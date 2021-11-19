@@ -18,17 +18,9 @@ map NearbyPoi {
     response 200 "application/json" {
       return map result if (body.status === "ZERO_RESULTS") []
 
-      set if(body.status !== "OK" && body.error_message) {
-        message = body.error_message
-      }
-
-      set if(body.status !== "OK" && !body.error_message) {
-        message = body.status
-      }
-
       return map error if (body.status !== "OK") {
         status: body.status,
-        message: message
+        message: body.error_message ? body.error_message : body.status
       }
 
       points = call foreach(place of body.results) ConvertResponse(place = place)
@@ -44,7 +36,7 @@ map NearbyPoi {
 }
 
 operation BuildCategoryQueryType {
-  return if (args.categories.length === 0) undefined
+  return if (args.categories.length !== 1) undefined
 
   types = call CategoriesToTypes(categories = args.categories)
   return types[0]
