@@ -297,12 +297,18 @@
         },
         "hubspot": {
           "file": "../capabilities/crm/contacts/maps/hubspot.suma"
+        },
+        "mixpanel": {
+          "file": "../capabilities/crm/contacts/maps/mixpanel.suma"
         }
       }
     },
     "language/translate": {
       "file": "../capabilities/language/translate/profile.supr",
-      "priority": ["deepl", "mock"],
+      "priority": [
+        "deepl",
+        "mock"
+      ],
       "providers": {
         "deepl": {
           "file": "../capabilities/language/translate/maps/deepl.suma"
@@ -534,7 +540,7 @@
           "username": "$MAILGUN_USERNAME",
           "password": "$MAILGUN_PASSWORD"
         }
-      ], 
+      ],
       "parameters": {
         "DOMAIN": "$MAILGUN_DOMAIN"
       }
@@ -607,7 +613,8 @@
           "id": "basic",
           "username": "apikey",
           "password": "$IBM_CLOUD_TEXT_TO_SPEECH_KEY"
-        }],
+        }
+      ],
       "parameters": {
         "REGION": "$IBM_CLOUD_TEXT_TO_SPEECH_REGION",
         "INSTANCE_ID": "$IBM_CLOUD_TEXT_TO_SPEECH_INSTANCE_ID"
