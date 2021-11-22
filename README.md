@@ -152,7 +152,7 @@ $ yarn test capabilities/scope/name/maps/example.test.ts
 
 ### Enviroment variables
 
-Secretes used for authentication during tests are stored in `.env.capabilities` and loaded using dotenv. Run `cp .env.capabilities.example .env.capabilities` to start from the template.
+Secretes used for authentication during tests are stored in `.env` and loaded using dotenv. Run `cp .env.example .env` to start from the template.
 
 ### Automated publishing
 
