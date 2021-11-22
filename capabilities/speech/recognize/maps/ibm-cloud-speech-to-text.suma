@@ -5,9 +5,17 @@ provider = "ibm-cloud-speech-to-text"
 Recognize map
 """
 map Recognize {
-  contentType = call MapAudioEncodingToContentType(encoding = input.audioEncoding)
+  audioEncoding = 'wav'
   audioContent = input.audioContent
 
+  set if(input.audioEncoding) {
+    audioEncoding = input.audioEncoding
+  }
+
+  return map error if(audioEncoding !== 'wav') {
+    title = "Audio encoding not supported"
+  }
+ 
   maxAlternatives = 1
   set if (input.maxAlternatives) {
     maxAlternatives = input.maxAlternatives
@@ -76,18 +84,5 @@ operation MapAlternative {
   return {
     transcript = args.alternative.transcript,
     confidence = args.alternative.confidence
-  }
-}
-
-operation MapAudioEncodingToContentType {
-  set {
-    result = (() => {
-      switch (args.encoding) {
-        case 'wav':
-          return 'audio/wav'
-        default:
-          return undefined
-      }
-    })()
   }
 }
