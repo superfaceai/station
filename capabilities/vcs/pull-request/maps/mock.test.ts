@@ -1,11 +1,11 @@
-import { SuperfaceClient } from '../../../../superface/sdk';
+import { SuperfaceClient } from '@superfaceai/one-sdk';
 
 describe('vcs/pull-request/mock-typed', () => {
   it('performs correctly', async () => {
     const client = new SuperfaceClient();
     const profile = await client.getProfile('vcs/pull-request');
     const provider = await client.getProvider('mock');
-    const usecase = profile.useCases.PullRequest;
+    const usecase = profile.getUseCase('PullRequest');
 
     expect(provider).not.toBeUndefined();
     expect(usecase).not.toBeUndefined();

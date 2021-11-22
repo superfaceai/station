@@ -1,4 +1,4 @@
-import { SuperfaceClient } from '../../../../superface/sdk';
+import { SuperfaceClient } from '@superfaceai/one-sdk';
 
 describe('crypto/exchange-rate/mock', () => {
   describe('GetExchangeRate', () => {
@@ -6,7 +6,7 @@ describe('crypto/exchange-rate/mock', () => {
       const client = new SuperfaceClient();
       const profile = await client.getProfile('crypto/exchange-rate');
       const provider = await client.getProvider('mock');
-      const usecase = profile.useCases.GetExchangeRate;
+      const usecase = profile.getUseCase('GetExchangeRate');
 
       expect(provider).not.toBeUndefined();
       expect(usecase).not.toBeUndefined();

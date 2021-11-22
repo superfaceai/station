@@ -1,11 +1,11 @@
-import { SuperfaceClient } from '../../../../superface/sdk';
+import { SuperfaceClient } from '@superfaceai/one-sdk';
 
 describe('address/geocoding/mock-typed', () => {
   it('Geocode address', async () => {
     const client = new SuperfaceClient();
     const profile = await client.getProfile('address/geocoding');
     const provider = await client.getProvider('mock');
-    const result = await profile.useCases.Geocode.perform(
+    const result = await profile.getUseCase('Geocode').perform(
       {
         streetAddress: '',
         addressLocality: '',
@@ -15,7 +15,7 @@ describe('address/geocoding/mock-typed', () => {
       { provider }
     );
 
-    const value = result.unwrap();
+    const value = result.unwrap() as any;
     expect(result.isOk()).toBeTruthy();
     expect(value.latitude).toBeDefined();
     expect(value.longitude).toBeDefined();
@@ -25,7 +25,7 @@ describe('address/geocoding/mock-typed', () => {
     const client = new SuperfaceClient();
     const profile = await client.getProfile('address/geocoding');
     const provider = await client.getProvider('mock');
-    const result = await profile.useCases.ReverseGeocode.perform(
+    const result = await profile.getUseCase('ReverseGeocode').perform(
       {
         latitude: 0,
         longitude: 0,
@@ -33,7 +33,7 @@ describe('address/geocoding/mock-typed', () => {
       { provider }
     );
 
-    const value = result.unwrap();
+    const value = result.unwrap() as any;
     expect(result.isOk()).toBeTruthy();
     expect(value[0]).toBeDefined();
   });

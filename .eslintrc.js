@@ -5,12 +5,8 @@ module.exports = {
     tsconfigRootDir: __dirname,
     project: ['./tsconfig.json'],
   },
-  ignorePatterns: ["superface/**/*.js", "superface/types", "*.config.js"],
-  plugins: [
-    '@typescript-eslint',
-    'jest',
-    'simple-import-sort',
-  ],
+  ignorePatterns: ['*.config.js'],
+  plugins: ['@typescript-eslint', 'jest', 'simple-import-sort'],
   extends: [
     'eslint:recommended',
     'plugin:@typescript-eslint/eslint-recommended',
@@ -30,9 +26,13 @@ module.exports = {
     'import/no-duplicates': 'error',
     'no-multiple-empty-lines': 'error',
     'lines-between-class-members': 'off',
-    '@typescript-eslint/lines-between-class-members': ['error', 'always', { exceptAfterSingleLine: true, exceptAfterOverload: true }],
+    '@typescript-eslint/lines-between-class-members': [
+      'error',
+      'always',
+      { exceptAfterSingleLine: true, exceptAfterOverload: true },
+    ],
     '@typescript-eslint/no-empty-function': 'off',
-    '@typescript-eslint/require-await': 'off'
+    '@typescript-eslint/require-await': 'off',
   },
   settings: {
     'import/parsers': {
@@ -44,20 +44,22 @@ module.exports = {
       },
     },
   },
-  overrides: [{
-    files: '*.ts',
-    parserOptions: {
-      project: ['./tsconfig.json'],
+  overrides: [
+    {
+      files: '*.ts',
+      parserOptions: {
+        project: ['./tsconfig.json'],
+      },
     },
-  },
-  {
-    files: '*.test.ts',
-    rules: {
-      '@typescript-eslint/no-explicit-any': 'off',
-      'jest/no-conditional-expect': 'off',
-      'jest/no-try-expect': 'off',
-      '@typescript-eslint/no-unsafe-assignment': 'off',
-      '@typescript-eslint/no-unsafe-member-access': 'off'
-    }
-  }],
+    {
+      files: '*.test.ts',
+      rules: {
+        '@typescript-eslint/no-explicit-any': 'off',
+        'jest/no-conditional-expect': 'off',
+        'jest/no-try-expect': 'off',
+        '@typescript-eslint/no-unsafe-assignment': 'off',
+        '@typescript-eslint/no-unsafe-member-access': 'off',
+      },
+    },
+  ],
 };
