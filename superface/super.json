@@ -656,16 +656,13 @@
       "file": "../providers/mixpanel.json",
       "security": [
         {
-          "id": "project_token",
-          "apikey": "$MIXPANEL_PROJECT_TOKEN"
-        },
-        {
           "id": "service_account",
           "username": "$MIXPANEL_SERVICE_ACCOUNT_USER",
           "password": "$MIXPANEL_SERVICE_ACCOUNT_PASSWORD"
         }
       ],
       "parameters": {
+        "PROJECT_TOKEN": "$MIXPANEL_PROJECT_TOKEN",
         "SERVER": "$MIXPANEL_SERVER"
       }
     }

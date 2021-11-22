@@ -4,14 +4,12 @@ profile = "analytics/track-event@1.0"
 provider = "mixpanel"
 
 map TrackEvent {
-  http POST "/track" {
-    security "project_token"
-  
+  http POST "/track" {  
     request "application/x-www-form-urlencoded" {
       body {
         data = {
           event: input.eventName,
-          properties: { ...input.eventProperties }
+          properties: { token: parameters.PROJECT_TOKEN, ...input.eventProperties }
         }
       }
     }

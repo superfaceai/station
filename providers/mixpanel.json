@@ -9,18 +9,16 @@
   "defaultService": "default",
   "securitySchemes": [
     {
-      "id": "project_token",
-      "type": "apiKey",
-      "in": "body",
-      "name": "/data/properties/token"
-    },
-    {
       "id": "service_account",
       "type": "http",
       "scheme": "basic"
     }
   ],
   "parameters": [
+    {
+      "name": "PROJECT_TOKEN",
+      "description": "Every Mixpanel project has a unique alphanumerical token for collecting data. A project's token is not a secret value. In front-end implementation, such as our javascript library, this token will be available to anyone visiting your page."
+    },
     {
       "name": "SERVER",
       "description": "Choose between US (api) and EU (api-eu) server residency",
