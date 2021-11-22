@@ -40,14 +40,17 @@ yarn install
 ## Usage
 
 ```shell
-# Validate capabilities are correctly linked and ahve all requirements
-$ yarn capabilities:validate
+# Check all files are correctly linked together
+$ yarn check
+
+# Runs linter on Profiles and maps
+$ yarn lint
 
 # Run tests
-$ yarn capabilities:test
+$ yarn test
 
 # Record new trafic with live API calls
-$ yarn capabilities:test:record capabilites/path/to/test.ts
+$ yarn test:record capabilites/path/to/test.ts
 ```
 
 ## Security
@@ -62,7 +65,7 @@ If you need any additional support, have any questions or you just want to talk 
 
 ### Adding new capability
 
-If you are starting with Capabilities authoring check our [guide](https://superface.ai/docs/guides/how-to-create).
+If you are starting with authoring check our [guide](https://superface.ai/docs/guides/how-to-create).
 
 Station repository has defined structure, here are commands for [Superface CLI](https://github.com/superfaceai/cli#superface-create) how to create profiles, maps and providers.
 
@@ -106,7 +109,7 @@ describe(`scope/name/provider_name}`, () => {
   });
 
   describe('UseCase', () => {
-    it('should perform successfully', async () => {
+    it('performs successfully', async () => {
       await expect(
         superface.run({
           useCase: 'UseCase',
@@ -126,7 +129,7 @@ _All inputs should be written directly to the test file and shouldn't use enviro
 **2. Do call against live API to record traffic and create snapshot**
 
 ```shell
-$ yarn capabilities:test:record capabilities/scope/name/maps/example.test.ts
+$ yarn test:record capabilities/scope/name/maps/example.test.ts
 ```
 
 **3. Check result in snapshot**
@@ -144,7 +147,7 @@ We try to sanitize recordings and remove any sensitive data. But you should stil
 **5. Run tests with recorded traffic**
 
 ```shell
-$ yarn capabilities:test capabilities/scope/name/maps/example.test.ts
+$ yarn test capabilities/scope/name/maps/example.test.ts
 ```
 
 ### Enviroment variables
