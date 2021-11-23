@@ -325,6 +325,17 @@
           "file": "../capabilities/language/analyze-plain-text-sentiment/maps/ibm-cloud-natural-language-understanding.suma"
         }
       }
+    },
+    "analytics/track-event": {
+      "file": "../capabilities/analytics/track-event/profile.supr",
+      "providers": {
+        "mixpanel": {
+          "file": "../capabilities/analytics/track-event/maps/mixpanel.suma"
+        },
+        "mock": {
+          "file": "../capabilities/analytics/track-event/maps/mock.suma"
+        }
+      }
     }
   },
   "providers": {
@@ -637,6 +648,20 @@
           "apikey": "$DEEPL_API_KEY"
         }
       ]
+    },
+    "mixpanel": {
+      "file": "../providers/mixpanel.json",
+      "security": [
+        {
+          "id": "service_account",
+          "username": "$MIXPANEL_SERVICE_ACCOUNT_USER",
+          "password": "$MIXPANEL_SERVICE_ACCOUNT_PASSWORD"
+        }
+      ],
+      "parameters": {
+        "PROJECT_TOKEN": "$MIXPANEL_PROJECT_TOKEN",
+        "SERVER": "$MIXPANEL_SERVER"
+      }
     }
   }
 }

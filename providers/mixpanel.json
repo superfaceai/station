@@ -1,0 +1,28 @@
+{
+  "name": "mixpanel",
+  "services": [
+    {
+      "id": "default",
+      "baseUrl": "https://{SERVER}.mixpanel.com"
+    }
+  ],
+  "defaultService": "default",
+  "securitySchemes": [
+    {
+      "id": "service_account",
+      "type": "http",
+      "scheme": "basic"
+    }
+  ],
+  "parameters": [
+    {
+      "name": "PROJECT_TOKEN",
+      "description": "Every Mixpanel project has a unique alphanumerical token for collecting data. A project's token is not a secret value. In front-end implementation, such as our javascript library, this token will be available to anyone visiting your page."
+    },
+    {
+      "name": "SERVER",
+      "description": "Choose between US (api) and EU (api-eu) server residency",
+      "default": "api"
+    }
+  ]
+}
