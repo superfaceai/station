@@ -50,7 +50,7 @@ $ yarn lint
 $ yarn test
 
 # Record new trafic with live API calls
-$ yarn test:record capabilites/path/to/test.ts
+$ yarn test:record grid/path/to/test.ts
 ```
 
 ## Security
@@ -72,7 +72,7 @@ Station repository has defined structure, here are commands for [Superface CLI](
 #### Create new profile
 
 ```shell
-yarn superface create --profileId [scope](optional)/[name] --profile --profileFileName capabilities/[scope]/[name]/profile.supr
+yarn superface create --profileId [scope](optional)/[name] --profile --profileFileName grid/[scope]/[name]/profile.supr
 ```
 
 #### Create new provider
@@ -84,7 +84,7 @@ yarn superface create --providerName [provider_name] --provider --providerFileNa
 #### Create map for profile and provider
 
 ```shell
-yarn superface create --profileId [scope](optional)/[name] --providerName [provider_name] --map --mapFileName capabilities/[scope]/[name]/maps/[provider_name].suma
+yarn superface create --profileId [scope](optional)/[name] --providerName [provider_name] --map --mapFileName grid/[scope]/[name]/maps/[provider_name].suma
 ```
 
 #### Test the map
@@ -129,7 +129,7 @@ _All inputs should be written directly to the test file and shouldn't use enviro
 **2. Do call against live API to record traffic and create snapshot**
 
 ```shell
-$ yarn test:record capabilities/scope/name/maps/example.test.ts
+$ yarn test:record grid/scope/name/maps/example.test.ts
 ```
 
 **3. Check result in snapshot**
@@ -137,7 +137,7 @@ $ yarn test:record capabilities/scope/name/maps/example.test.ts
 Snapshot for test run should be created in location:
 
 ```
-capabilities/scope/name/maps/__snapshots__/example.test.ts.snap
+grid/scope/name/maps/__snapshots__/example.test.ts.snap
 ```
 
 **4. Do post processing for traffic recording**
@@ -147,7 +147,7 @@ We try to sanitize recordings and remove any sensitive data. But you should stil
 **5. Run tests with recorded traffic**
 
 ```shell
-$ yarn test capabilities/scope/name/maps/example.test.ts
+$ yarn test grid/scope/name/maps/example.test.ts
 ```
 
 ### Enviroment variables
