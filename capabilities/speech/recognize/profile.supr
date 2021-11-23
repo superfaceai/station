@@ -58,6 +58,36 @@ usecase Recognize safe {
     """
     detail
   }
+
+  example Successful {
+    input {
+      audioContent = '<base64 encoded wav audio>',
+      languageCode = 'en-US'
+    }
+
+    result {
+      results = [{
+          alternatives = [{
+              confidence = 0.8393012,
+              transcript = 'hello world',
+            }
+          ]
+        }
+      ]
+    }
+  }
+
+  example Failed {
+    input {
+      audioContent = '<base64 encoded wav audio>',
+      languageCode = 'invalid-language-code'
+    }
+
+    error {
+      title = 'Invalid argument',
+      detail = 'Request contains an invalid argument.'
+    }
+  }
 }
 
 model SpeechRecognitionResult {
