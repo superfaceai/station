@@ -115,7 +115,7 @@ jobs:
         run: "license-checker --onlyAllow '0BDS;MIT;Apache-2.0;ISC;BSD-3-Clause;BSD-2-Clause;CC-BY-4.0;CC-BY-3.0;BSD;CC0-1.0;Unlicense;UNLICENSED' --summary"
 
   publish:
-    name: Publish Capabilities to Superface.ai
+    name: Publish to Superface.ai
     runs-on: ubuntu-latest
     needs: ['test', 'license_check']
     if: ${{ github.ref == 'refs/heads/main' }}

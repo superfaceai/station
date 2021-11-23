@@ -5,7 +5,7 @@
 
 <img src="https://github.com/superfaceai/station/blob/main/.github/docs/LogoGreen.png" alt="superface logo" width="150" height="150">
 
-Where capabilities are born. In this repository we build curated capabilities. Examples in this repository are ideal staring point for writing your own capability.
+Where use-cases are born. In this repository we build curated use-cases. Examples in this repository are ideal staring point for writing your own.
 
 ## Table of Contents
 
@@ -19,11 +19,11 @@ Where capabilities are born. In this repository we build curated capabilities. E
 
 ## Background
 
-Superface (super-interface) is a higher-order API, an abstraction on top of the modern APIs like GraphQL and REST. Superface is one interface to discover, connect, and query any capabilities available via conventional APIs.
+Superface (super-interface) is a higher-order API, an abstraction on top of the modern APIs like GraphQL and REST. Superface is one interface to discover, connect, and query any use-cases available via conventional APIs.
 
 Through its focus on application-level semantics, Superface decouples the clients from servers, enabling fully autonomous evolution. As such it minimizes the code base as well as errors and downtimes while providing unmatched resiliency and redundancy.
 
-Superface allows for switching capability providers without development at a runtime in milliseconds. Furthermore, Superface decentralizes the composition and aggregation, and thus creates an Autonomous Integration Mesh.
+Superface allows for switching providers without development at a runtime in milliseconds. Furthermore, Superface decentralizes the composition and aggregation, and thus creates an Autonomous Integration Mesh.
 
 Motivation behind Superface is nicely described in this [video](https://www.youtube.com/watch?v=BCvq3NXFb94) from APIdays conference.
 
@@ -63,7 +63,7 @@ You can find more information in [OneSDK repository](https://github.com/superfac
 
 If you need any additional support, have any questions or you just want to talk you can do that through our [documentation page](https://superface.ai/docs/support).
 
-### Adding new capability
+### Adding new use-case
 
 If you are starting with authoring check our [guide](https://superface.ai/docs/guides/how-to-create).
 
@@ -156,7 +156,7 @@ Secretes used for authentication during tests are stored in `.env` and loaded us
 
 ### Automated publishing
 
-Station have Workflow to automate capabilities publishing. For details see [CI / CD](https://github.com/superfaceai/station/blob/main/.github/workflows/ci_cd.yml) workflow.
+Station have Workflow to automate publishing. For details see [CI / CD](https://github.com/superfaceai/station/blob/main/.github/workflows/ci_cd.yml) workflow.
 
 ## Contributing
 
