@@ -1,4 +1,4 @@
-import { SuperfaceClient } from '../../../../superface/sdk';
+import { SuperfaceClient } from '@superfaceai/one-sdk';
 
 describe('weather/forecast-city/mock-typed', () => {
   beforeAll(() => {
@@ -9,7 +9,7 @@ describe('weather/forecast-city/mock-typed', () => {
     const client = new SuperfaceClient();
     const profile = await client.getProfile('weather/forecast-city');
     const provider = await client.getProvider('mock');
-    const usecase = profile.useCases.GetWeatherForecastInCity;
+    const usecase = profile.getUseCase('GetWeatherForecastInCity');
 
     expect(provider).not.toBeUndefined();
     expect(usecase).not.toBeUndefined();

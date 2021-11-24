@@ -1,11 +1,11 @@
-import { SuperfaceClient } from '../../../../superface/sdk';
+import { SuperfaceClient } from '@superfaceai/one-sdk';
 
 describe('computer-vision/face-detection/mock', () => {
   it('should return mock data', async () => {
     const client = new SuperfaceClient();
     const profile = await client.getProfile('computer-vision/face-detection');
     const provider = await client.getProvider('mock');
-    const usecase = profile.useCases.FaceDetection;
+    const usecase = profile.getUseCase('FaceDetection');
 
     expect(provider).not.toBeUndefined();
     expect(usecase).not.toBeUndefined();
@@ -20,7 +20,7 @@ describe('computer-vision/face-detection/mock', () => {
     result.unwrap();
     expect(result.isOk()).toBeTruthy();
 
-    const faceAnnotations = result.unwrap();
+    const faceAnnotations = result.unwrap() as any;
     expect(faceAnnotations[0]).toHaveProperty('faces');
     expect(faceAnnotations[0].faces?.[0]).toHaveProperty('emotions');
     expect(faceAnnotations[0].faces?.[0].emotions).toHaveProperty('sadness');

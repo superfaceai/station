@@ -1,4 +1,4 @@
-import { SuperfaceClient } from '../../../../superface/sdk';
+import { SuperfaceClient } from '@superfaceai/one-sdk';
 
 describe('speech/synthesis/mock', () => {
   describe('TextToSpeechSynthesis', () => {
@@ -6,7 +6,7 @@ describe('speech/synthesis/mock', () => {
       const client = new SuperfaceClient();
       const profile = await client.getProfile('speech/synthesis');
       const provider = await client.getProvider('mock');
-      const usecase = profile.useCases.TextToSpeechSynthesis;
+      const usecase = profile.getUseCase('TextToSpeechSynthesis');
 
       expect(provider).not.toBeUndefined();
       expect(usecase).not.toBeUndefined();
@@ -23,7 +23,7 @@ describe('speech/synthesis/mock', () => {
         },
         { provider }
       );
-      expect(result.unwrap().audioContent).toBeInstanceOf(Buffer);
+      expect((result.unwrap() as any).audioContent).toBeInstanceOf(Buffer);
     });
   });
 });

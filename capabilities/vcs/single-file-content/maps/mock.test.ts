@@ -1,15 +1,15 @@
-import { SuperfaceClient } from '../../../../superface/sdk';
+import { SuperfaceClient } from '@superfaceai/one-sdk';
 
 describe('vcs/single-file-content/mock-typed', () => {
   it('performs correctly', async () => {
     const client = new SuperfaceClient();
     const profile = await client.getProfile('vcs/single-file-content');
     const provider = await client.getProvider('mock');
-    const usecase = profile.useCases.SingleFileContent;
+    const usecase = profile.getUseCase('SingleFileContent');
 
     expect(provider).not.toBeUndefined();
     expect(usecase).not.toBeUndefined();
-    const result = await profile.useCases.SingleFileContent.perform(
+    const result = await usecase.perform(
       {
         owner: 'test',
         repo: 'test',

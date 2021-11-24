@@ -1,4 +1,4 @@
-import { SuperfaceClient } from '../../../../superface/sdk';
+import { SuperfaceClient } from '@superfaceai/one-sdk';
 
 describe('language/analyze-sentiment/mock', () => {
   describe('AnalyzePlainTextSentiment', () => {
@@ -8,7 +8,7 @@ describe('language/analyze-sentiment/mock', () => {
         'language/analyze-plain-text-sentiment'
       );
       const provider = await client.getProvider('mock');
-      const usecase = profile.useCases.AnalyzePlainTextSentiment;
+      const usecase = profile.getUseCase('AnalyzePlainTextSentiment');
 
       expect(provider).not.toBeUndefined();
       expect(usecase).not.toBeUndefined();
@@ -20,8 +20,9 @@ describe('language/analyze-sentiment/mock', () => {
         },
         { provider }
       );
-      expect(result.unwrap().sentiment).toBe('positive');
-      expect(result.unwrap().score).toBe(0.9);
+      const data = result.unwrap() as any;
+      expect(data.sentiment).toBe('positive');
+      expect(data.score).toBe(0.9);
     });
   });
 });
