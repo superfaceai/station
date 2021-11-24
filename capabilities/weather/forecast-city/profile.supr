@@ -11,18 +11,18 @@ Get weather forecast for the city in chosen units
 """
 usecase GetWeatherForecastInCity {
   input {
-  """
-  City
-  Name of the city including state and country, e.g.: "Prague, Czech Republic" or "New York City, NY, USA"
-  """
-  city! string!
+    """
+    City
+    Name of the city including state and country, e.g.: "Prague, Czech Republic" or "New York City, NY, USA"
+    """
+    city! string!
 
-  """
-  Units
-  Units used to represent temperature - Fahrenheit, Celsius, Kelvin;
-  Celsius by default
-  """
-  units enum {C, F, K}
+    """
+    Units
+    Units used to represent temperature - Fahrenheit, Celsius, Kelvin;
+    Celsius by default
+    """
+    units enum {C, F, K}
   }
 
   result [
@@ -52,12 +52,19 @@ usecase GetWeatherForecastInCity {
       minTemperature number!
     }
   ]
+
   error {
     """
-    Message
-    A short, human-readable summary of the problem.
+    Title
+    A short, human-readable summary of the problem type.
     """
-    message string!
+    title!
+
+    """
+    Detail
+    A human-readable explanation specific to this occurrence of the problem.
+    """
+    detail
   }
 
   example success {
@@ -93,7 +100,8 @@ usecase GetWeatherForecastInCity {
     }
 
     error {
-      message = "<h1>400 Bad Request</h1>"
+      title = "Bad Request"
+      detail = "<h1>400 Bad Request</h1>"
     }
   }
 }

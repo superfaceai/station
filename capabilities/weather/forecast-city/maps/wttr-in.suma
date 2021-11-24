@@ -44,9 +44,16 @@ operation fetchWeather {
     }
 
     response {
-      fail if (statusCode !== 200) {
-        message = body
+      fail if (statusCode === 400) {
+        title = "Bad request",
+        detail = body
       }
+
+      fail if (statusCode === 404) {
+        title = "Not Found",
+        detail = body
+      }
+
       forecast = call foreach(weather of body.weather) mapWeather(
         units = args.unit,
         weather = weather
