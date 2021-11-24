@@ -1,0 +1,126 @@
+"""
+Speech to text conversion
+Converts speech to text.
+"""
+
+name = "speech/recognize"
+version = "1.0.0"
+
+"""
+Speech recognition
+Real-time speech recognition.
+"""
+usecase Recognize safe {
+  input {
+    """
+    Audio content
+    Audio data in the encoding specified by audioEncodig input parameter.
+    """
+    audioContent!
+
+    """
+    Language code
+    The language (and potentially also the region) of the speech expressed as a BCP-47 language tag, e.g. 'en-US'.
+    """
+    languageCode! string!
+
+    """
+    Audio encoding 
+    Encoding of audio data sent. This input is optional for WAV audio files and required for other audio formats.
+    """
+    audioEncoding AudioEncoding!
+
+    """
+    Maximum alternatives
+    Maximum number of recognition hypotheses to be returned. The server may return fewer than maxAlternatives. Valid values are 0-30. Default value is 1.
+    """
+    maxAlternatives number!
+  }
+
+  result {
+    """
+    Results
+    Sequential list of transcription results corresponding to sequential portions of audio.
+    """
+    results! [SpeechRecognitionResult!]
+  }
+
+  error {
+    """
+    Title
+    A short, human-readable summary of the problem type.
+    """
+    title!
+
+    """
+    Detail
+    A human-readable explanation specific to this occurrence of the problem.
+    """
+    detail
+  }
+
+  example Successful {
+    input {
+      audioContent = '<base64 encoded wav audio>',
+      languageCode = 'en-US'
+    }
+
+    result {
+      results = [{
+          alternatives = [{
+              confidence = 0.8393012,
+              transcript = 'hello world',
+            }
+          ]
+        }
+      ]
+    }
+  }
+
+  example Failed {
+    input {
+      audioContent = '<base64 encoded wav audio>',
+      languageCode = 'invalid-language-code'
+    }
+
+    error {
+      title = 'Invalid argument',
+      detail = 'Request contains an invalid argument.'
+    }
+  }
+}
+
+model SpeechRecognitionResult {
+  """
+  Alternatives
+  Alternative hypotheses.
+  """
+  alternatives! [SpeechRecognitionAlternative!]
+}
+
+model SpeechRecognitionAlternative {
+  """
+  Transcript
+  Transcript text representing the words recognized in audio input.
+  """
+  transcript! string!
+
+  """
+  Confidence
+  The confidence estimate between 0.0 and 1.0. A higher number indicates an estimated greater likelihood that the recognized words are correct. 
+  The default of 0.0 is a sentinel value indicating confidence was not set.
+  """
+  confidence number
+}
+
+"""
+Audio encoding
+Audio encoding formats.
+"""
+model AudioEncoding enum {
+  """
+  WAW
+  WAV audio format with eather LINEAR16 or MULAW encoded audio.
+  """
+  wav
+}

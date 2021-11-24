@@ -1,0 +1,102 @@
+profile = "speech/recognize@1.0"
+provider = "ibm-cloud-speech-to-text"
+
+"""
+Recognize map
+"""
+map Recognize {
+  audioEncoding = 'wav'
+  audioContent = input.audioContent
+
+  set if(input.audioEncoding) {
+    audioEncoding = input.audioEncoding
+  }
+
+  return map error if(audioEncoding !== 'wav') {
+    title = "Audio encoding not supported"
+  }
+ 
+  maxAlternatives = 1
+  set if (input.maxAlternatives) {
+    maxAlternatives = input.maxAlternatives
+  }
+
+  call RecognizeWav(
+    maxAlternatives = maxAlternatives,
+    audioEncoding = audioEncoding,
+    audioContent = audioContent) if(audioEncoding === 'wav') {
+      return map result if (!outcome.error) outcome.data
+
+      return map error {
+        title = outcome.error.title
+        detail = outcome.error.detail
+      }
+  }
+}
+
+operation RecognizeWav {
+  http POST "/instances/{parameters.INSTANCE_ID}/v1/recognize" {
+    security "basic"
+    
+    request "audio/wav" {
+      query {
+        max_alternatives = args.maxAlternatives
+      }
+      body = Buffer.from(args.audioContent, 'base64')
+    }
+
+    response 200 {
+      return {
+        results = call foreach(result of body.results) MapResult(result = result)
+      }
+    }
+
+    response 400 {
+      fail {
+        title = "Bad request"
+        detail = body.error
+      }
+    }
+
+    response 401 "application/json" {
+      fail {
+        title = "Unauthorized"
+        detail = body.error
+      }
+    }
+
+    response 403 "application/json" {
+      fail {
+        title = "Forbidden"
+        detail = body.error
+      }
+    }
+
+    response 404 {
+      fail {
+        title = body.code_description
+        detail = body.error
+      }
+    }
+
+    response 500 "application/json" {
+      fail {
+        title = "Internal server Error"
+        detail = body.error
+      }
+    }
+  }
+}
+
+operation MapResult {
+  return {
+    alternatives = call foreach(alternative of args.result.alternatives) MapAlternative(alternative = alternative)
+  }
+}
+
+operation MapAlternative {
+  return {
+    transcript = args.alternative.transcript,
+    confidence = args.alternative.confidence
+  }
+}

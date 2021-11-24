@@ -356,6 +356,23 @@
           "file": "../capabilities/analytics/track-event/maps/mock.suma"
         }
       }
+    },
+    "speech/recognize": {
+      "file": "../capabilities/speech/recognize/profile.supr",
+       "providers": {
+        "mock": {
+          "file": "../capabilities/speech/recognize/maps/mock.suma"
+        },
+        "google-apis-speech": {
+          "file": "../capabilities/speech/recognize/maps/google-apis-speech.suma"
+        },
+         "ibm-cloud-speech-to-text": {
+          "file": "../capabilities/speech/recognize/maps/ibm-cloud-speech-to-text.suma"
+        },
+        "azure-speech-to-text": {
+          "file": "../capabilities/speech/recognize/maps/azure-speech-to-text.suma"
+        }
+      }
     }
   },
   "providers": {
@@ -630,7 +647,7 @@
         }
       ],
       "parameters": {
-        "REGION": "$IBM_CLOUD_TEXT_TO_SPEECH_REGION",
+        "REGION": "$IBM_CLOUD_REGION",
         "INSTANCE_ID": "$IBM_CLOUD_TEXT_TO_SPEECH_INSTANCE_ID"
       }
     },
@@ -644,7 +661,7 @@
         }
       ],
       "parameters": {
-        "REGION": "$IBM_CLOUD_NATURAL_LANGUAGE_UNDERSTANDING_REGION",
+        "REGION": "$IBM_CLOUD_REGION",
         "INSTANCE_ID": "$IBM_CLOUD_NATURAL_LANGUAGE_UNDERSTANDING_INSTANCE_ID"
       }
     },
@@ -686,6 +703,41 @@
       "parameters": {
         "PROJECT_TOKEN": "$MIXPANEL_PROJECT_TOKEN",
         "SERVER": "$MIXPANEL_SERVER"
+      }
+    },
+    "google-apis-speech": {
+      "file": "../providers/google-apis-speech.json",
+      "security": [
+        {
+          "id": "apikey",
+          "apikey": "$GOOGLE_APIS_API_KEY"
+        }
+      ]
+    },
+    "ibm-cloud-speech-to-text": {
+      "file": "../providers/ibm-cloud-speech-to-text.json",
+      "security": [
+        {
+          "id": "basic",
+          "username": "apikey",
+          "password": "$IBM_CLOUD_SPEECH_TO_TEXT_KEY"
+        }
+      ],
+      "parameters": {
+        "REGION": "$IBM_CLOUD_REGION",
+        "INSTANCE_ID": "$IBM_CLOUD_SPEECH_TO_TEXT_INSTANCE_ID"
+      }
+    },
+    "azure-speech-to-text": {
+      "file": "../providers/azure-speech-to-text.json",
+       "security": [
+        {
+          "id": "opc-subscription-key",
+          "apikey": "$AZURE_SPEECH_TO_TEXT_SUBSCRIPTION_KEY"
+        }
+      ],
+      "parameters": {
+        "REGION": "$AZURE_SPEECH_TO_TEXT_REGION"
       }
     }
   }

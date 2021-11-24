@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`speech/recognize/mock SpeechToTextRecognition when inputs are invalid should throw an exception 1`] = `
+Err {
+  "error": "MappedError: Expected error
+Properties: {
+  \\"title\\": \\"Bad request\\"
+}
+AST Path: definitions[0].statements[0]
+Original Map Location: Line 5, column 3",
+}
+`;
+
+exports[`speech/recognize/mock SpeechToTextRecognition when speech encoded in linear pcm wav should convert speech to text 1`] = `
+Ok {
+  "value": Object {
+    "results": Array [
+      Object {
+        "alternatives": Array [
+          Object {
+            "confidence": 0.9,
+            "transcript": "Hello world!",
+          },
+        ],
+      },
+    ],
+  },
+}
+`;
