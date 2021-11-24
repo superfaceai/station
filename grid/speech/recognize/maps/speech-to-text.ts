@@ -19,9 +19,7 @@ export const speechToTextRecognitionTest = (
         it('should convert speech to text', async () => {
           // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
           const audioBase64Encoded = (
-            await fs.readFile(
-              './capabilities/speech/recognize/maps/hello_world.wav'
-            )
+            await fs.readFile('./grid/speech/recognize/maps/hello_world.wav')
           ).toString('base64');
           const input = {
             audioContent: audioBase64Encoded,

@@ -34,11 +34,11 @@ Follow these steps:
 
 **NOTE: Please open an issue first if you want to make larger changes**
 
-### Contribute by adding capability
+### Contribute by adding use-case
 
-For help with authoring new capability see [Superface documentation](https://superface.ai/docs/guides/create-new-capability).
+For help with authoring new use-case see [Superface documentation](https://superface.ai/docs/guides/create-new-capability).
 
-In Station we want to keep capabilities which are consistent and in great quality. To achieve it, set of [convetions](CONVENTIONS) were created.
+In Station we want to keep use-cases which are consistent and in great quality. To achieve it, set of [convetions](CONVENTIONS) were created.
 
 ### Contribute by reporting bugs
 

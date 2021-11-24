@@ -125,7 +125,7 @@ export async function localProfiles(
   const cwd = await SuperJson.detectSuperJson(process.cwd());
 
   return glob
-    .sync('../capabilities/**/*.supr', {
+    .sync('../grid/**/*.supr', {
       cwd,
     })
     .map(i => normalizePath(i, superJson));
@@ -137,7 +137,7 @@ export async function localMaps(
   const cwd = await SuperJson.detectSuperJson(process.cwd());
 
   return glob
-    .sync('../capabilities/**/*.suma', {
+    .sync('../grid/**/*.suma', {
       cwd,
     })
     .map(i => normalizePath(i, superJson));

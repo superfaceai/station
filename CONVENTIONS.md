@@ -1,6 +1,6 @@
 # Conventions
 
-This document gives coding conventions for the Superface capabilities created in [Station repository](https://github.com/superfaceai/station).
+This document gives coding conventions for the Superface use-cases created in [Station repository](https://github.com/superfaceai/station).
 
 ## Profile
 
@@ -44,9 +44,9 @@ We want first gather more content to understand how Comlink maps are written to 
 
 ### Tests
 
-- Capability MUST have automated tests.
+- Use-case MUST have automated tests.
 - TODO: Link to README section about testing.
 
-## Example Capability
+## Example Use-case
 
-For reference capabability see [communication/send-email](https://github.com/superfaceai/station/tree/main/capabilities/communication/send-email).
+For reference capabability see [communication/send-email](https://github.com/superfaceai/station/tree/main/grid/communication/send-email).

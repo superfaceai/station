@@ -5,7 +5,7 @@
 
 <img src="https://github.com/superfaceai/station/blob/main/.github/docs/LogoGreen.png" alt="superface logo" width="150" height="150">
 
-Where capabilities are born. In this repository we build curated capabilities. Examples in this repository are ideal staring point for writing your own capability.
+Where use-cases are born. In this repository we build curated use-cases. Examples in this repository are ideal staring point for writing your own.
 
 ## Table of Contents
 
@@ -19,11 +19,11 @@ Where capabilities are born. In this repository we build curated capabilities. E
 
 ## Background
 
-Superface (super-interface) is a higher-order API, an abstraction on top of the modern APIs like GraphQL and REST. Superface is one interface to discover, connect, and query any capabilities available via conventional APIs.
+Superface (super-interface) is a higher-order API, an abstraction on top of the modern APIs like GraphQL and REST. Superface is one interface to discover, connect, and query any use-cases available via conventional APIs.
 
 Through its focus on application-level semantics, Superface decouples the clients from servers, enabling fully autonomous evolution. As such it minimizes the code base as well as errors and downtimes while providing unmatched resiliency and redundancy.
 
-Superface allows for switching capability providers without development at a runtime in milliseconds. Furthermore, Superface decentralizes the composition and aggregation, and thus creates an Autonomous Integration Mesh.
+Superface allows for switching providers without development at a runtime in milliseconds. Furthermore, Superface decentralizes the composition and aggregation, and thus creates an Autonomous Integration Mesh.
 
 Motivation behind Superface is nicely described in this [video](https://www.youtube.com/watch?v=BCvq3NXFb94) from APIdays conference.
 
@@ -40,14 +40,17 @@ yarn install
 ## Usage
 
 ```shell
-# Validate capabilities are correctly linked and ahve all requirements
-$ yarn capabilities:validate
+# Check all files are correctly linked together
+$ yarn check
+
+# Runs linter on Profiles and maps
+$ yarn lint
 
 # Run tests
-$ yarn capabilities:test
+$ yarn test
 
 # Record new trafic with live API calls
-$ yarn capabilities:test:record capabilites/path/to/test.ts
+$ yarn test:record grid/path/to/test.ts
 ```
 
 ## Security
@@ -60,16 +63,16 @@ You can find more information in [OneSDK repository](https://github.com/superfac
 
 If you need any additional support, have any questions or you just want to talk you can do that through our [documentation page](https://superface.ai/docs/support).
 
-### Adding new capability
+### Adding new use-case
 
-If you are starting with Capabilities authoring check our [guide](https://superface.ai/docs/guides/how-to-create).
+If you are starting with authoring check our [guide](https://superface.ai/docs/guides/how-to-create).
 
 Station repository has defined structure, here are commands for [Superface CLI](https://github.com/superfaceai/cli#superface-create) how to create profiles, maps and providers.
 
 #### Create new profile
 
 ```shell
-yarn superface create --profileId [scope](optional)/[name] --profile --profileFileName capabilities/[scope]/[name]/profile.supr
+yarn superface create --profileId [scope](optional)/[name] --profile --profileFileName grid/[scope]/[name]/profile.supr
 ```
 
 #### Create new provider
@@ -81,7 +84,7 @@ yarn superface create --providerName [provider_name] --provider --providerFileNa
 #### Create map for profile and provider
 
 ```shell
-yarn superface create --profileId [scope](optional)/[name] --providerName [provider_name] --map --mapFileName capabilities/[scope]/[name]/maps/[provider_name].suma
+yarn superface create --profileId [scope](optional)/[name] --providerName [provider_name] --map --mapFileName grid/[scope]/[name]/maps/[provider_name].suma
 ```
 
 #### Test the map
@@ -106,7 +109,7 @@ describe(`scope/name/provider_name}`, () => {
   });
 
   describe('UseCase', () => {
-    it('should perform successfully', async () => {
+    it('performs successfully', async () => {
       await expect(
         superface.run({
           useCase: 'UseCase',
@@ -126,7 +129,7 @@ _All inputs should be written directly to the test file and shouldn't use enviro
 **2. Do call against live API to record traffic and create snapshot**
 
 ```shell
-$ yarn capabilities:test:record capabilities/scope/name/maps/example.test.ts
+$ yarn test:record grid/scope/name/maps/example.test.ts
 ```
 
 **3. Check result in snapshot**
@@ -134,7 +137,7 @@ $ yarn capabilities:test:record capabilities/scope/name/maps/example.test.ts
 Snapshot for test run should be created in location:
 
 ```
-capabilities/scope/name/maps/__snapshots__/example.test.ts.snap
+grid/scope/name/maps/__snapshots__/example.test.ts.snap
 ```
 
 **4. Do post processing for traffic recording**
@@ -144,16 +147,16 @@ We try to sanitize recordings and remove any sensitive data. But you should stil
 **5. Run tests with recorded traffic**
 
 ```shell
-$ yarn capabilities:test capabilities/scope/name/maps/example.test.ts
+$ yarn test grid/scope/name/maps/example.test.ts
 ```
 
 ### Enviroment variables
 
-Secretes used for authentication during tests are stored in `.env.capabilities` and loaded using dotenv. Run `cp .env.capabilities.example .env.capabilities` to start from the template.
+Secretes used for authentication during tests are stored in `.env` and loaded using dotenv. Run `cp .env.example .env` to start from the template.
 
 ### Automated publishing
 
-Station have Workflow to automate capabilities publishing. For details see [CI / CD](https://github.com/superfaceai/station/blob/main/.github/workflows/ci_cd.yml) workflow.
+Station have Workflow to automate publishing. For details see [CI / CD](https://github.com/superfaceai/station/blob/main/.github/workflows/ci_cd.yml) workflow.
 
 ## Contributing
 
