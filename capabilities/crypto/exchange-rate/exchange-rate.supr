@@ -3,7 +3,7 @@ Exchange Rate
 Get exchange rate of two currencies
 """
 name = "crypto/exchange-rate"
-version = "1.0.0"
+version = "1.0.1"
 
 """
 Get Exchange Rate
@@ -43,5 +43,28 @@ usecase GetExchangeRate safe {
     A human-readable explanation specific to this occurrence of the problem
     """
     detail
+  }
+
+  example Successful {
+    input {
+      from = "BTC"
+      to = "USDT"
+    }
+
+    result {
+      rate = "67709.58000000"
+    }
+  }
+
+  example Failed {
+    input {
+      from = "FOO"
+      to = "BAR"
+    }
+
+    error {
+      title = "400 - Bad Request"
+      detail = "Invalid symbol."
+    }
   }
 }
