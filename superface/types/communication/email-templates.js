@@ -4,15 +4,24 @@ exports.communicationEmailTemplates = void 0;
 var one_sdk_1 = require("@superfaceai/one-sdk");
 var profile = {
     /**
-     * List all Templates
+     * List all templates
      * Result isn't paginated, amount of returned templates depenends on provider.
      **/
     "ListTemplates": one_sdk_1.typeHelper(),
-    /** Obtain template content **/
+    /**
+     * Get template content
+     * Obtain template content
+     **/
     "GetTemplateContent": one_sdk_1.typeHelper(),
-    /** Create new template **/
+    /**
+     * Create template
+     * Creates new template
+     **/
     "CreateTemplate": one_sdk_1.typeHelper(),
-    /** Update template **/
+    /**
+     * Update template
+     * Updates template with specified id
+     **/
     "UpdateTemplate": one_sdk_1.typeHelper()
 };
 exports.communicationEmailTemplates = {

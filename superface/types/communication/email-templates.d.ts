@@ -1,82 +1,165 @@
 import { TypedProfile } from '@superfaceai/one-sdk';
 export declare type CommunicationEmailTemplatesListTemplatesResult = {
-    /** Unique template identifier **/
+    /**
+     * Id
+     * Unique template identifier
+     **/
     id?: unknown;
-    /** Name of the template **/
+    /**
+     * Name
+     * Name of the template
+     **/
     name?: unknown;
 }[];
 export declare type CommunicationEmailTemplatesGetTemplateContentInput = {
-    /** Unique template identifier **/
+    /**
+     * Id
+     * Unique template identifier
+     **/
     id: unknown;
 };
 export declare type CommunicationEmailTemplatesGetTemplateContentResult = {
-    /** Subject of the email **/
+    /**
+     * Subject
+     * Subject of the email
+     **/
     subject?: unknown;
-    /** Text content **/
+    /**
+     * Text Content
+     * Text version of the template
+     **/
     text?: unknown;
-    /** HTML Content **/
+    /**
+     * HTML Content
+     * HTML version of the template
+     **/
     html?: unknown;
 };
 export declare type CommunicationEmailTemplatesCreateTemplateInput = {
-    /** Name of the template **/
+    /**
+     * Name
+     * Name of the template
+     **/
     name: unknown;
-    /** Subject of the email **/
+    /**
+     * Subject
+     * Subject of the email
+     **/
     subject: unknown;
-    /** Text content **/
+    /**
+     * Text Content
+     * Text version of the template
+     **/
     text: unknown;
-    /** HTML Content **/
+    /**
+     * HTML Content
+     * HTML version of the template
+     **/
     html: unknown;
 };
+/**
+ * Template
+ * Minimal information about the template
+ **/
 export declare type CommunicationEmailTemplatesCreateTemplateResult = {
-    /** Unique template identifier **/
+    /**
+     * Id
+     * Unique template identifier
+     **/
     id?: unknown;
-    /** Name of the template **/
+    /**
+     * Name
+     * Name of the template
+     **/
     name?: unknown;
 };
 export declare type CommunicationEmailTemplatesUpdateTemplateInput = {
-    /** Unique template identifier **/
+    /**
+     * Id
+     * Unique template identifier
+     **/
     id: unknown;
-    /** Name of the template **/
+    /**
+     * Name
+     * Name of the template
+     **/
     name?: unknown;
-    /** Subject of the email **/
+    /**
+     * Subject
+     * Subject of the email
+     **/
     subject?: unknown;
-    /** Text content **/
+    /**
+     * Text Content
+     * Text version of the template
+     **/
     text?: unknown;
-    /** HTML Content **/
+    /**
+     * HTML Content
+     * HTML version of the template
+     **/
     html?: unknown;
 };
+/**
+ * Template
+ * Minimal information about the template
+ **/
 export declare type CommunicationEmailTemplatesUpdateTemplateResult = {
-    /** Unique template identifier **/
+    /**
+     * Id
+     * Unique template identifier
+     **/
     id?: unknown;
-    /** Name of the template **/
+    /**
+     * Name
+     * Name of the template
+     **/
     name?: unknown;
 };
 declare const profile: {
     /**
-     * List all Templates
+     * List all templates
      * Result isn't paginated, amount of returned templates depenends on provider.
      **/
     ListTemplates: [any, CommunicationEmailTemplatesListTemplatesResult];
-    /** Obtain template content **/
+    /**
+     * Get template content
+     * Obtain template content
+     **/
     GetTemplateContent: [CommunicationEmailTemplatesGetTemplateContentInput, CommunicationEmailTemplatesGetTemplateContentResult];
-    /** Create new template **/
+    /**
+     * Create template
+     * Creates new template
+     **/
     CreateTemplate: [CommunicationEmailTemplatesCreateTemplateInput, CommunicationEmailTemplatesCreateTemplateResult];
-    /** Update template **/
+    /**
+     * Update template
+     * Updates template with specified id
+     **/
     UpdateTemplate: [CommunicationEmailTemplatesUpdateTemplateInput, CommunicationEmailTemplatesUpdateTemplateResult];
 };
 export declare type CommunicationEmailTemplatesProfile = TypedProfile<typeof profile>;
 export declare const communicationEmailTemplates: {
     "communication/email-templates": {
         /**
-         * List all Templates
+         * List all templates
          * Result isn't paginated, amount of returned templates depenends on provider.
          **/
         ListTemplates: [any, CommunicationEmailTemplatesListTemplatesResult];
-        /** Obtain template content **/
+        /**
+         * Get template content
+         * Obtain template content
+         **/
         GetTemplateContent: [CommunicationEmailTemplatesGetTemplateContentInput, CommunicationEmailTemplatesGetTemplateContentResult];
-        /** Create new template **/
+        /**
+         * Create template
+         * Creates new template
+         **/
         CreateTemplate: [CommunicationEmailTemplatesCreateTemplateInput, CommunicationEmailTemplatesCreateTemplateResult];
-        /** Update template **/
+        /**
+         * Update template
+         * Updates template with specified id
+         **/
         UpdateTemplate: [CommunicationEmailTemplatesUpdateTemplateInput, CommunicationEmailTemplatesUpdateTemplateResult];
     };
 };

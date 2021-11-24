@@ -12,11 +12,20 @@ export { DeliveryTrackingShipmentInfoProfile } from "./types/delivery-tracking/s
 export { CommunicationEmailTemplatesProfile } from "./types/communication/email-templates";
 export { CommunicationSendMessageProfile } from "./types/communication/send-message";
 export { WeatherCurrentCityProfile } from "./types/weather/current-city";
+export { WeatherForecastCityProfile } from "./types/weather/forecast-city";
 export { SpeechSynthesisProfile } from "./types/speech/synthesis";
 export { ComputerVisionFaceDetectionProfile } from "./types/computer-vision/face-detection";
 export { CryptoExchangeRateProfile } from "./types/crypto/exchange-rate";
 export { CrmContactsProfile } from "./types/crm/contacts";
+export { LanguageTranslateProfile } from "./types/language/translate";
+export { LanguageAnalyzePlainTextSentimentProfile } from "./types/language/analyze-plain-text-sentiment";
 export declare const SuperfaceClient: new () => import("@superfaceai/one-sdk/dist/client/client").TypedSuperfaceClient<{
+    "language/analyze-plain-text-sentiment": {
+        AnalyzePlainTextSentiment: [import("./types/language/analyze-plain-text-sentiment").LanguageAnalyzePlainTextSentimentAnalyzePlainTextSentimentInput, import("./types/language/analyze-plain-text-sentiment").LanguageAnalyzePlainTextSentimentAnalyzePlainTextSentimentResult];
+    };
+    "language/translate": {
+        TranslateText: [import("./types/language/translate").LanguageTranslateTranslateTextInput, import("./types/language/translate").LanguageTranslateTranslateTextResult];
+    };
     "crm/contacts": {
         Create: [import("./types/crm/contacts").CrmContactsCreateInput, import("./types/crm/contacts").CrmContactsCreateResult];
         Update: [import("./types/crm/contacts").CrmContactsUpdateInput, import("./types/crm/contacts").CrmContactsUpdateResult];
@@ -30,6 +39,9 @@ export declare const SuperfaceClient: new () => import("@superfaceai/one-sdk/dis
     };
     "speech/synthesis": {
         TextToSpeechSynthesis: [import("./types/speech/synthesis").SpeechSynthesisTextToSpeechSynthesisInput, import("./types/speech/synthesis").SpeechSynthesisTextToSpeechSynthesisResult];
+    };
+    "weather/forecast-city": {
+        GetWeatherForecastInCity: [import("./types/weather/forecast-city").WeatherForecastCityGetWeatherForecastInCityInput, import("./types/weather/forecast-city").WeatherForecastCityGetWeatherForecastInCityResult];
     };
     "weather/current-city": {
         GetCurrentWeatherInCity: [import("./types/weather/current-city").WeatherCurrentCityGetCurrentWeatherInCityInput, import("./types/weather/current-city").WeatherCurrentCityGetCurrentWeatherInCityResult];
@@ -77,9 +89,6 @@ export declare const SuperfaceClient: new () => import("@superfaceai/one-sdk/dis
     "communication/send-sms": {
         SendMessage: [import("./types/communication/send-sms").CommunicationSendSmsSendMessageInput, import("./types/communication/send-sms").CommunicationSendSmsSendMessageResult];
         RetrieveMessageStatus: [import("./types/communication/send-sms").CommunicationSendSmsRetrieveMessageStatusInput, import("./types/communication/send-sms").CommunicationSendSmsRetrieveMessageStatusResult];
-    };
-    "language/analyze-plain-text-sentiment": {
-        AnalyzePlainTextSentiment: [import("./types/language/analyze-plain-text-sentiment").TranslationAnalyzePlainTextSentimentAnalyzePlainTextSentimentInput, import("./types/language/analyze-plain-text-sentiment").TranslationAnalyzePlainTextSentimentAnalyzePlainTextSentimentResult];
     };
 }>;
 export declare type SuperfaceClient = InstanceType<typeof SuperfaceClient>;

@@ -1,5 +1,5 @@
 import { TypedProfile } from '@superfaceai/one-sdk';
-export declare type TranslationAnalyzePlainTextSentimentAnalyzePlainTextSentimentInput = {
+export declare type LanguageAnalyzePlainTextSentimentAnalyzePlainTextSentimentInput = {
     /**
      * Text
      * The text to be analyzed.
@@ -11,7 +11,7 @@ export declare type TranslationAnalyzePlainTextSentimentAnalyzePlainTextSentimen
      **/
     languageCode: string;
 };
-export declare type TranslationAnalyzePlainTextSentimentAnalyzePlainTextSentimentResult = {
+export declare type LanguageAnalyzePlainTextSentimentAnalyzePlainTextSentimentResult = {
     /**
      * Sentiment
      * The overal writer's attitude in the analyzed text.
@@ -28,16 +28,16 @@ declare const profile: {
      * Analyze plain text sentiment
      * Determines writer's attitude in the text as positive, negative, or neutral.
      **/
-    AnalyzePlainTextSentiment: [TranslationAnalyzePlainTextSentimentAnalyzePlainTextSentimentInput, TranslationAnalyzePlainTextSentimentAnalyzePlainTextSentimentResult];
+    AnalyzePlainTextSentiment: [LanguageAnalyzePlainTextSentimentAnalyzePlainTextSentimentInput, LanguageAnalyzePlainTextSentimentAnalyzePlainTextSentimentResult];
 };
-export declare type TranslationAnalyzePlainTextSentimentProfile = TypedProfile<typeof profile>;
-export declare const translationAnalyzePlainTextSentiment: {
+export declare type LanguageAnalyzePlainTextSentimentProfile = TypedProfile<typeof profile>;
+export declare const languageAnalyzePlainTextSentiment: {
     "language/analyze-plain-text-sentiment": {
         /**
          * Analyze plain text sentiment
          * Determines writer's attitude in the text as positive, negative, or neutral.
          **/
-        AnalyzePlainTextSentiment: [TranslationAnalyzePlainTextSentimentAnalyzePlainTextSentimentInput, TranslationAnalyzePlainTextSentimentAnalyzePlainTextSentimentResult];
+        AnalyzePlainTextSentiment: [LanguageAnalyzePlainTextSentimentAnalyzePlainTextSentimentInput, LanguageAnalyzePlainTextSentimentAnalyzePlainTextSentimentResult];
     };
 };
 export {};

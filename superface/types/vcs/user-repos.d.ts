@@ -1,8 +1,8 @@
 import { TypedProfile } from '@superfaceai/one-sdk';
 export declare type VcsUserReposUserReposInput = {
     /**
-     * User name
-     * User identifier for whom to list repositories. Some providers use authenticated user instead
+     * User
+     * User identifier for whom to list repositories.
      **/
     user: string;
 };

@@ -1,14 +1,46 @@
 import { TypedProfile } from '@superfaceai/one-sdk';
 export declare type AddressCleanAddressCleanAddressInput = {
+    /**
+     * Street
+     * Street Address
+     **/
     street?: unknown;
+    /**
+     * City
+     * City or Town
+     **/
     city?: unknown;
+    /**
+     * State
+     * State or Province
+     **/
     state?: unknown;
+    /**
+     * ZIP code
+     * Zip or Postal code
+     **/
     zipcode?: unknown;
 };
 export declare type AddressCleanAddressCleanAddressResult = {
+    /**
+     * Street
+     * Street Address
+     **/
     street?: unknown;
+    /**
+     * City
+     * City or Town
+     **/
     city?: unknown;
+    /**
+     * State
+     * State or Province
+     **/
     state?: unknown;
+    /**
+     * ZIP code
+     * Zip or Postal code
+     **/
     zipcode?: unknown;
 };
 declare const profile: {
