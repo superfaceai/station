@@ -1,0 +1,70 @@
+// API Reference: https://developer.mixpanel.com/reference/profile-set
+
+profile = "crm/contacts@1.0"
+provider = "mixpanel"
+
+map Update {
+  return map error if (input.id === null || input.id === undefined) {
+    title = "Missing field"
+    detail = "ID is missing in input values"
+  }
+
+  http POST "/engage" {
+    request "application/x-www-form-urlencoded" {
+      body {
+        data = {
+          "$token": parameters.PROJECT_TOKEN,
+          "$distinct_id": input.id,
+          "$set": {
+            email: input.email,
+            phone: input.phone,
+            name: (input.firstName || input.lastName ? `${input.firstName} ${input.lastName}`.trim() : undefined),
+            firstName: input.firstName,
+            lastName: input.lastName,
+            company: input.company,
+            country: input.country,
+            ...input.customProperties,
+          },
+        }
+      }
+    }
+
+    response 200 "*" {
+      return map result if (body === 1) {
+        id = input.id
+      }
+
+      map error {
+        title = "Invalid Data"
+      }
+    }
+
+    response 401 {
+      map error {
+        title = "Unauthorized"
+        detail = body.error
+      }
+    }
+
+    response 403 {
+      map error {
+        title = "Forbidden"
+        detail = body.error
+      }
+    }
+  }
+}
+
+map Create {
+  return map error {
+    title = "Not supported"
+    detail = "Use Update usecase instead"
+  }
+}
+
+map Search {
+  return map error {
+    title = "Not supported"
+    detail = "This usecase is not supported"
+  }
+}

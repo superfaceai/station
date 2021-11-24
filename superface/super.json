@@ -308,18 +308,38 @@
         },
         "hubspot": {
           "file": "../capabilities/crm/contacts/maps/hubspot.suma"
+        },
+        "mixpanel": {
+          "file": "../capabilities/crm/contacts/maps/mixpanel.suma"
         }
       }
     },
     "language/translate": {
       "file": "../capabilities/language/translate/profile.supr",
-      "priority": ["deepl", "mock"],
+      "priority": [
+        "deepl",
+        "mock"
+      ],
       "providers": {
         "deepl": {
           "file": "../capabilities/language/translate/maps/deepl.suma"
         },
         "mock": {
           "file": "../capabilities/language/translate/maps/mock.suma"
+        }
+      }
+    },
+    "navigation/nearby-poi": {
+      "file": "../capabilities/navigation/nearby-poi/profile.supr",
+      "providers": {
+        "mock": {
+          "file": "../capabilities/navigation/nearby-poi/maps/mock.suma"
+        },
+        "overpass-de": {
+          "file": "../capabilities/navigation/nearby-poi/maps/overpass-de.suma"
+        },
+        "google-apis-maps": {
+          "file": "../capabilities/navigation/nearby-poi/maps/google-apis-maps.suma"
         }
       }
     },
@@ -618,7 +638,8 @@
           "id": "basic",
           "username": "apikey",
           "password": "$IBM_CLOUD_TEXT_TO_SPEECH_KEY"
-        }],
+        }
+      ],
       "parameters": {
         "REGION": "$IBM_CLOUD_TEXT_TO_SPEECH_REGION",
         "INSTANCE_ID": "$IBM_CLOUD_TEXT_TO_SPEECH_INSTANCE_ID"
@@ -659,6 +680,10 @@
           "apikey": "$DEEPL_API_KEY"
         }
       ]
+    },
+    "overpass-de": {
+      "file": "../providers/overpass-de.json",
+      "security": []
     },
     "mixpanel": {
       "file": "../providers/mixpanel.json",

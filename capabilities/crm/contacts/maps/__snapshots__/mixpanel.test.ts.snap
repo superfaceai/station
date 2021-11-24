@@ -1,0 +1,45 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`crm/contacts/mixpanel Create returns Mapped error with unsupported title 1`] = `
+Err {
+  "error": "MappedError: Expected error
+Properties: {
+  \\"title\\": \\"Not supported\\",
+  \\"detail\\": \\"Use Update usecase instead\\"
+}
+AST Path: definitions[1].statements[0]
+Original Map Location: Line 59, column 3",
+}
+`;
+
+exports[`crm/contacts/mixpanel Search returns Mapped error with unsupported title 1`] = `
+Err {
+  "error": "MappedError: Expected error
+Properties: {
+  \\"title\\": \\"Not supported\\",
+  \\"detail\\": \\"This usecase is not supported\\"
+}
+AST Path: definitions[2].statements[0]
+Original Map Location: Line 66, column 3",
+}
+`;
+
+exports[`crm/contacts/mixpanel Update performs successfully 1`] = `
+Ok {
+  "value": Object {
+    "id": "user_1",
+  },
+}
+`;
+
+exports[`crm/contacts/mixpanel Update returns error if id is missing 1`] = `
+Err {
+  "error": "MappedError: Expected error
+Properties: {
+  \\"title\\": \\"Missing field\\",
+  \\"detail\\": \\"ID is missing in input values\\"
+}
+AST Path: definitions[1].statements[0]
+Original Map Location: Line 52, column 3",
+}
+`;

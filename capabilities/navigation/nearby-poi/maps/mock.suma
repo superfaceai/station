@@ -1,0 +1,17 @@
+profile = "navigation/nearby-poi@1.0"
+provider = "mock"
+
+map NearbyPoi {
+  category = 'CAFE'
+  pois = [
+    {
+      coordinates: {
+      latitude: 51.4768380,
+      longitude: -0.0006877
+      },
+      name: "Astronomy Café",
+      categories: [category]
+    }
+  ]
+  map result pois
+}
