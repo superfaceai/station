@@ -1,0 +1,39 @@
+"""
+Track Event
+Track events to better understand interactions between users and your product.
+"""
+name = "analytics/track-event"
+version = "1.0.0"
+
+"""
+Track Event
+Allows to send event to tracking system
+"""
+usecase TrackEvent unsafe {
+  input {
+    """
+    Event Name
+    A string value representing event
+    """
+    eventName! string!
+
+    """
+    Event Properties
+    Event Properties are attributes that help you define the specifics of an Event.
+    """
+    eventProperties
+  }
+
+  result string
+
+  error {
+    """
+    A short, human-readable summary of the problem type.
+    """
+    title! string!
+    """
+    A human-readable explanation specific to this occurrence of the problem.
+    """
+    detail string
+  }
+}
