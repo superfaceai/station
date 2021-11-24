@@ -54,7 +54,7 @@ describe(`crm/contacts/mixpanel`, () => {
             firstName: 'Test',
             lastName: 'User',
             customProperties: {
-              utmSource: 'sfc.is',
+              Source: 'sfc.is',
             },
           },
         })
