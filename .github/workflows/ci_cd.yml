@@ -80,10 +80,8 @@ jobs:
       - run: cat /etc/hosts
       - run: yarn capabilities:check
       - run: yarn capabilities:lint
-        continue-on-error: true
       - run: yarn capabilities:structure
       - run: yarn capabilities:test
-        continue-on-error: true
 
   license_check:
     name: License check
