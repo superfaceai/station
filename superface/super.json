@@ -318,6 +318,20 @@
         }
       }
     },
+    "navigation/nearby-poi": {
+      "file": "../capabilities/navigation/nearby-poi/profile.supr",
+      "providers": {
+        "mock": {
+          "file": "../capabilities/navigation/nearby-poi/maps/mock.suma"
+        },
+        "overpass-de": {
+          "file": "../capabilities/navigation/nearby-poi/maps/overpass-de.suma"
+        },
+        "google-apis-maps": {
+          "file": "../capabilities/navigation/nearby-poi/maps/google-apis-maps.suma"
+        }
+      }
+    },
     "language/analyze-plain-text-sentiment": {
       "file": "../capabilities/language/analyze-plain-text-sentiment/profile.supr",
       "providers": {
@@ -655,6 +669,10 @@
           "apikey": "$DEEPL_API_KEY"
         }
       ]
+    },
+    "overpass-de": {
+      "file": "../providers/overpass-de.json",
+      "security": []
     },
     "mixpanel": {
       "file": "../providers/mixpanel.json",
