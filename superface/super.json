@@ -382,6 +382,9 @@
         },
         "azure-speech-to-text": {
           "file": "../grid/speech/recognize/maps/azure-speech-to-text.suma"
+        },
+        "assemblyai": {
+          "file": "../grid/speech/recognize/maps/assemblyai.suma"
         }
       }
     }
@@ -750,6 +753,15 @@
       "parameters": {
         "REGION": "$AZURE_SPEECH_TO_TEXT_REGION"
       }
+    },
+    "assemblyai": {
+      "file": "../providers/assemblyai.json",
+      "security": [
+        {
+          "id": "api-token",
+          "apikey": "$ASSEMBLYAI_API_TOKEN"
+        }
+      ]
     }
   }
 }

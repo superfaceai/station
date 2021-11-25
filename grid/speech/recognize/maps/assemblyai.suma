@@ -1,0 +1,71 @@
+profile = "speech/recognize@1.0"
+provider = "assemblyai"
+
+map Recognize {
+  audioEncoding = 'wav'
+  language = 'en'
+
+  set if(input.audioEncoding) {
+    audioEncoding = input.audioEncoding
+  }
+
+  return map error if(audioEncoding !== 'wav') {
+    title = "Audio encoding not supported"
+  }
+
+  return map error if(!input.languageCode.startsWith('en')) {
+    title = "assemblyai provider supports only Global English (English and all of its accents)"
+  }
+
+  http POST "/v2/stream" {
+    security "api-token"
+    
+    request {
+      headers {
+        "Content-Type" = "application/json"
+      }
+      body = {
+          audio_data: input.audioContent
+      }
+    }
+
+    response 200 {
+      map result {
+        results = [{
+          alternatives: [{
+            transcript: body.text,
+            confidence: body.confidence
+          }]
+        }]
+      }
+    }
+
+    response 400 {
+      map error {
+        title = "Bad request"
+        detail = body.error
+      }
+    }
+
+    response 401 "application/json" {
+      map error {
+        title = "Unauthorized"
+        detail = body.error
+      }
+    }
+
+    response 403 "application/json" {
+      map error {
+        title = "Forbidden"
+        detail = body.error
+      }
+    }
+
+    response 500 "application/json" {
+      map error {
+        title = "Internal server Error"
+        detail = body.error
+      }
+    }
+  }
+}
