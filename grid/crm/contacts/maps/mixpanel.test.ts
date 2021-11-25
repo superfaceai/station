@@ -34,8 +34,6 @@ describe(`crm/contacts/mixpanel`, () => {
     it('returns error if id is missing', async () => {
       await expect(
         superface.run({
-          profile: 'crm/contacts',
-          provider: 'hubspot',
           useCase: 'Update',
           input: {
             email: 'test@example.com',
@@ -55,6 +53,8 @@ describe(`crm/contacts/mixpanel`, () => {
             lastName: 'User',
             customProperties: {
               Source: 'sfc.is',
+              $ip: '0',
+              $city: 'Prague',
             },
           },
         })

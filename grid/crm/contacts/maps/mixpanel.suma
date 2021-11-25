@@ -1,4 +1,5 @@
 // API Reference: https://developer.mixpanel.com/reference/profile-set
+// Profile properties: https://help.mixpanel.com/hc/en-us/articles/115004708186
 
 profile = "crm/contacts@1.0"
 provider = "mixpanel"
@@ -9,21 +10,27 @@ map Update {
     detail = "ID is missing in input values"
   }
 
+  set {
+    customProperties = input.customProperties || {}
+  }
+
   http POST "/engage" {
     request "application/x-www-form-urlencoded" {
       body {
         data = {
-          "$token": parameters.PROJECT_TOKEN,
-          "$distinct_id": input.id,
-          "$set": {
-            "$email": input.email,
-            "$name": `${input.firstName || ''} ${input.lastName || ''}`.trim() || undefined,
-            Phone: input.phone,
-            "First Name": input.firstName,
-            "Last Name": input.lastName,
+          $token: parameters.PROJECT_TOKEN,
+          $distinct_id: input.id,
+          $ip: customProperties.$ip,
+          
+          $set: {
+            $email: input.email,
+            $phone: input.phone,
+            $first_name: input.firstName,
+            $last_name: input.lastName,
+            $country_code: input.country,
+
             Company: input.company,
-            Country: input.country,
-            ...input.customProperties,
+            ...customProperties,
           },
         }
       }
