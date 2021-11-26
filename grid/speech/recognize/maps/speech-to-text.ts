@@ -5,6 +5,7 @@ import * as fs from 'fs/promises';
 
 export const speechToTextRecognitionTest = (
   provider: string,
+  audioFilePath = './grid/speech/recognize/maps/hello_world_24khz.wav',
   hooks?: RecordingProcessOptions
 ): void => {
   describe(`speech/recognize/${provider}`, () => {
@@ -19,7 +20,7 @@ export const speechToTextRecognitionTest = (
         it('should convert speech to text', async () => {
           // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
           const audioBase64Encoded = (
-            await fs.readFile('./grid/speech/recognize/maps/hello_world.wav')
+            await fs.readFile(audioFilePath)
           ).toString('base64');
           const input = {
             audioContent: audioBase64Encoded,
