@@ -16,8 +16,8 @@ usecase ListTemplates safe {
   example Successful {
     result [
       {
-        id = "d-8be96c63de164e6799c5dbf2521d7959"
-        name = "Email template name"
+        id = "template-id"
+        name = "example"
       }
     ]
   }
@@ -40,28 +40,23 @@ usecase GetTemplateContent safe {
 
   example Successful {
     input {
-      id = "d-ef6d417300f74f96a9f722050edae85f"
+      id = "example-id"
     }
 
     result {
-      subject = "Station test"
-      text = "Station usecase automated test
-
-From: {{from}}
-to: {{to}}
-
-Unsubscribe ( {{{unsubscribe}}} ) - Unsubscribe Preferences ( {{{unsubscribe_preferences}}} )"
+      subject = "Templated email example"
+      text = "Hi there, this is text content of example email."
       html = """<!doctype html>
 <html>
 
 <head>
   <meta name="viewport" content="width=device-width">
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>Integration Test Email #1</title>
+  <title>Templated email example</title>
 </head>
 
 <body class="">
-This template is used by integration tests only
+Hi there, this is html content of example email.
 </body>
 
 </html>
@@ -86,20 +81,20 @@ usecase CreateTemplate unsafe {
 
   example Successful {
     input {
-      name = "Station Create template test (DELETE ME)"
-      subject = "Test Email"
-      text = "This template is used by integration tests only"
+      name = "example"
+      subject = "Templated email example"
+      text = "Hi there, this is text content of example email."
       html = """<!doctype html>
 <html>
 
 <head>
   <meta name="viewport" content="width=device-width">
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>Integration Test Email #1</title>
+  <title>Templated email example</title>
 </head>
 
 <body class="">
-This template is used by integration tests only
+Hi there, this is html content of example email.
 </body>
 
 </html>
@@ -107,8 +102,8 @@ This template is used by integration tests only
     }
 
     result {
-      id = "d-8be96c63de164e6799c5dbf2521d7959"
-      name = "Station Create template test (DELETE ME)"
+      id = "template-id"
+      name = "example"
     }
   }
 }
@@ -130,20 +125,21 @@ usecase UpdateTemplate unsafe {
 
   example Successful {
     input {
-      name = "Station Update template test (DELETE ME)"
-      subject = "Test Email"
-      text = "This template is used by integration tests only"
+      id = "template-id"
+      name = "example"
+      subject = "Templated email example"
+      text = "Hi there, this is text content of example email."
       html = """<!doctype html>
 <html>
 
 <head>
   <meta name="viewport" content="width=device-width">
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>Integration Test Email #1</title>
+  <title>Templated email example</title>
 </head>
 
 <body class="">
-This template is used by integration tests only 2
+Hi there, this is html content of example email.
 </body>
 
 </html>
@@ -151,8 +147,8 @@ This template is used by integration tests only 2
     }
 
     result {
-      id = "d-8be96c63de164e6799c5dbf2521d7959"
-      name = "Station Update template test updated (DELETE ME)"
+      id = "template-id"
+      name = "Templated email example"
     }
   }
 }
