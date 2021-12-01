@@ -4,7 +4,7 @@ List, create, update and get template content
 """
 
 name = "communication/email-templates"
-version = "1.0.1"
+version = "1.0.2"
 
 """
 List all templates
@@ -12,6 +12,15 @@ Result isn't paginated, amount of returned templates depenends on provider.
 """
 usecase ListTemplates safe {
   result [Template]
+
+  example Successful {
+    result [
+      {
+        id = "template-id"
+        name = "example"
+      }
+    ]
+  }
 }
 
 """
@@ -28,6 +37,32 @@ usecase GetTemplateContent safe {
     text
     html
   }
+
+  example Successful {
+    input {
+      id = "example-id"
+    }
+
+    result {
+      subject = "Templated email example"
+      text = "Hi there, this is text content of example email."
+      html = """<!doctype html>
+<html>
+
+<head>
+  <meta name="viewport" content="width=device-width">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>Templated email example</title>
+</head>
+
+<body class="">
+Hi there, this is html content of example email.
+</body>
+
+</html>
+"""
+    }
+  }
 }
 
 """
@@ -43,6 +78,34 @@ usecase CreateTemplate unsafe {
   }
 
   result Template
+
+  example Successful {
+    input {
+      name = "example"
+      subject = "Templated email example"
+      text = "Hi there, this is text content of example email."
+      html = """<!doctype html>
+<html>
+
+<head>
+  <meta name="viewport" content="width=device-width">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>Templated email example</title>
+</head>
+
+<body class="">
+Hi there, this is html content of example email.
+</body>
+
+</html>
+"""
+    }
+
+    result {
+      id = "template-id"
+      name = "example"
+    }
+  }
 }
 
 """
@@ -59,6 +122,35 @@ usecase UpdateTemplate unsafe {
   }
 
   result Template
+
+  example Successful {
+    input {
+      id = "template-id"
+      name = "example"
+      subject = "Templated email example"
+      text = "Hi there, this is text content of example email."
+      html = """<!doctype html>
+<html>
+
+<head>
+  <meta name="viewport" content="width=device-width">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>Templated email example</title>
+</head>
+
+<body class="">
+Hi there, this is html content of example email.
+</body>
+
+</html>
+"""
+    }
+
+    result {
+      id = "template-id"
+      name = "Templated email example"
+    }
+  }
 }
 
 """
