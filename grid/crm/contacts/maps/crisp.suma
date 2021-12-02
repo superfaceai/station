@@ -105,19 +105,19 @@ map Search {
     "NEQ": 'neq'
   }
 
-  search_filter = [{
-    criterion : input.property,
-    query : [input.value],
-    operator : OPERATOR_MAP[input.operator] || input.operator,
-    model: "people"
-  }]
-
-  search_filter_query_param = encodeURIComponent(JSON.stringify(search_filter))
-
-  http GET "/v1/website/{parameters.WEBSITE_ID}/people/profiles?search_filter={search_filter_query_param}" {
+  http GET "/v1/website/{parameters.WEBSITE_ID}/people/profiles" {
     security "plugin_tier"
 
     request "application/json" {
+      query {
+        search_filter = [{
+          criterion : input.property,
+          query : [input.value],
+          operator : OPERATOR_MAP[input.operator] || input.operator,
+          model: "people"
+        }] 
+      }
+
       headers { "X-Crisp-Tier" = "plugin" }
     }
 
