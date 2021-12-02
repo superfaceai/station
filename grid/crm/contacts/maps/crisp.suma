@@ -42,7 +42,7 @@ map Create {
     response 409 {
       map error {
         title = "Contact already exists"
-        detail = (`Contact '${input.email}' already exists. If you with to update it, use 'Update' use case`)
+        detail = (`Contact '${input.email}' already exists. If you wish to update it, use 'Update' use case`)
       }
     }
 
@@ -88,7 +88,7 @@ map Update {
     response 409 {
       map error {
         title = "Email already exists"
-        detail = (`Email '${input.email}' already exists in another contact.`)
+        detail = (`Email '${input.email}' already exists in another contact`)
       }
     }
 
@@ -254,7 +254,7 @@ operation HandleCommonErrors {
 
   return if (statusCode === 401) {
     title = "Unauthenticated"
-    detail = "Please make sure you're providing a valid Crisp API credentials."
+    detail = "Please make sure you're providing a valid Crisp API credentials"
   }
 
   return if (statusCode === 402) {
@@ -271,12 +271,12 @@ operation HandleCommonErrors {
   }
 
   return if (statusCode === 423 || statusCode === 429) {
-    title = "Quota limit exceeded!"
+    title = "Quota limit exceeded"
   }
 
   return if (statusCode === 500) {
     title = "Error on Crisp's side"
-    detail = "It looks like Crisp is temporarily having difficulties processing your request. Please try again or contact Crisp's support."
+    detail = "It looks like Crisp is temporarily having difficulties processing your request. Please try again or contact Crisp's support"
   }
 
   return {
