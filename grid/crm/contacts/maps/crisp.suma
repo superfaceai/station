@@ -185,22 +185,20 @@ operation PatchCustomProperties {
 operation BuildCrispProfile {
   input = args.input
 
-  fullName = [input.firstName || "", input.lastName || ""].join(' ').trim()
+  fullName = [input.firstName || "", input.lastName || ""].join(' ').trim() || undefined
 
   return { 
     email: input.email,
 
-    person: fullName.length || input.phone || input.country ? {
-      nickname: fullName || undefined,
+    person: (fullName || input.phone || input.country) && {
+      nickname: fullName,
       phone: input.phone,
-      geolocation: input.country ? {
-        country: input.country
-      } : undefined
-    } : undefined,
+      geolocation: { country: input.country }
+    },
 
-    company: input.company ? {
+    company: input.company && {
       name: input.company
-    } : undefined
+    }
   }
 }
 
