@@ -762,6 +762,19 @@
           "apikey": "$ASSEMBLYAI_API_TOKEN"
         }
       ]
+    },
+    "crisp": {
+      "file": "../providers/crisp.json",
+      "security": [
+        {
+          "id": "plugin_tier",
+          "username": "$CRISP_USERNAME",
+          "password": "$CRISP_PASSWORD"
+        }
+      ],
+      "parameters": {
+        "WEBSITE_ID": "$CRISP_WEBSITE_ID"
+      }
     }
   }
 }
