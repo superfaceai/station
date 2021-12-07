@@ -373,14 +373,14 @@
     },
     "speech/recognize": {
       "file": "../grid/speech/recognize/profile.supr",
-       "providers": {
+      "providers": {
         "mock": {
           "file": "../grid/speech/recognize/maps/mock.suma"
         },
         "google-apis-speech": {
           "file": "../grid/speech/recognize/maps/google-apis-speech.suma"
         },
-         "ibm-cloud-speech-to-text": {
+        "ibm-cloud-speech-to-text": {
           "file": "../grid/speech/recognize/maps/ibm-cloud-speech-to-text.suma"
         },
         "azure-speech-to-text": {
@@ -388,6 +388,14 @@
         },
         "assemblyai": {
           "file": "../grid/speech/recognize/maps/assemblyai.suma"
+        }
+      }
+    },
+    "social-media/publish-post": {
+      "file": "../grid/social-media/publish-post/profile.supr",
+      "providers": {
+        "mock": {
+          "file": "../grid/social-media/publish-post/maps/mock.suma"
         }
       }
     }
@@ -747,7 +755,7 @@
     },
     "azure-speech-to-text": {
       "file": "../providers/azure-speech-to-text.json",
-       "security": [
+      "security": [
         {
           "id": "opc-subscription-key",
           "apikey": "$AZURE_SPEECH_TO_TEXT_SUBSCRIPTION_KEY"

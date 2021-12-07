@@ -1,0 +1,117 @@
+"""
+Publish a Post
+Publish a Post on social media such as Instagram, Facebook or Twitter.
+"""
+
+name = "social-media/publish-post"
+version = "1.0.0"
+
+"""
+Publish a Post
+Publish a Post on social media.
+"""
+usecase PublishPost unsafe {
+  input {
+    """
+    Feed ID
+    ID of the feed to publish post in
+    """
+    feed FacebookFeedId | InstagramFeedId
+
+    """
+    Text
+    Text of the post
+    """
+    text string!
+
+    """
+    Image url
+    Url of an image to be published in the post
+    """
+    imageUrl string!
+  }
+
+  result {
+
+    """
+    Post ID
+    Identifier of the post that was published
+    """
+    postId
+  }
+
+  error {
+    """
+    Title
+    A short, human-readable summary of the problem type.
+    """
+    title!
+
+    """
+    A human-readable explanation specific to this occurrence of the problem.
+    """
+    detail
+  }
+
+  example Successful {
+    input {
+      feed = {
+        accessToken = 'EAA8i39yoLFlweowsE3dV31224zNLG5IKIERYg3n3AkCOZBsZCdpe3ChyNDpCcCeovj8q4pns6nwSwZA9QrIyse5FJIFj1r6eeiOMDf60sGit5f45fgIipVqpS',
+        pageId = '110138490'
+      }
+      text = 'Text of the Post.',
+    }
+
+    result {
+      postId = "04098b6e-0631-4cb1-8b47-295c7f4de739",
+    }
+  }
+
+  example Failed {
+    input {
+      feed = {
+        accessToken = 'invalid access token',
+        pageId = '2'
+      }
+      text = 'Text of the Post.',
+    }
+
+    error {
+      title = 'Unauthorized'
+    }
+  }
+}
+
+model FacebookFeedId {
+  """
+  Access token
+  Facebook user access token.
+  """
+  accessToken! string!
+
+  """
+  Page ID
+  The page ID to publish post on
+  """
+  pageId string!
+
+  """
+  Gropup ID
+  The group ID to publish post on
+  """
+  groupId string!
+}
+
+model InstagramFeedId {
+  """
+  Access token
+  Facebook user access token.
+  """
+  accessToken! string!
+
+  """
+  Business account ID
+  The ID of Instagram business account linked with Facebook account.
+  """
+  businessAccountId! string!
+}
