@@ -1,0 +1,94 @@
+// Instagram Graph API Reference: https://developers.facebook.com/docs/instagram-api
+
+profile = "social-media/publish-post@1.0"
+provider = "instagram"
+
+map PublishPost {
+  apiVersion = 'v12.0'
+  feed = input.feed
+  businessAccountId = feed.businessAccountId
+  authorizationHeaderValue = 'Bearer ' + feed.accessToken
+
+  return map error if(!input.imageUrl) { 
+      title = "Image url required"
+      detail = "Parameter imageUrl is required by Instagram provider"
+    }
+
+  http POST "/{apiVersion}/{businessAccountId}/media" {
+
+    request {
+      query {
+          image_url = input.imageUrl,
+          caption = input.text
+      }
+
+      headers {
+        "authorization" = authorizationHeaderValue
+      }
+    }
+
+    response 200 "application/json" {
+      igContainerId =  body.id
+    }
+
+    response 400 "application/json" {
+      return map error {
+        title = "Bad request"
+        detail = body.error.message
+      }
+    }
+
+    response 401 "application/json" {
+      return map error {
+        title = "Unauthenticated"
+        detail = body.error.message
+      }
+    }
+
+    response 403 "application/json" {
+      return map error {
+        title = "Forbidden"
+        detail = body.error.message
+      }
+    }
+  }
+
+  http POST "/{apiVersion}/{businessAccountId}/media_publish" {
+    request {
+      query {
+          creation_id = igContainerId
+      }
+
+      headers {
+        "authorization" = authorizationHeaderValue
+      }
+    }
+
+    response 200 "application/json" {
+      map result {
+        postId = body.id
+      }
+    }
+
+    response 400 "application/json" {
+      map error {
+        title = "Bad request"
+        detail = body.error.message
+      }
+    }
+
+    response 401 "application/json" {
+      return map error {
+        title = "Unauthenticated"
+        detail = body.error.message
+      }
+    }
+
+    response 403 "application/json" {
+      return map error {
+        title = "Forbidden"
+        detail = body.error.message
+      }
+    }
+  }
+}

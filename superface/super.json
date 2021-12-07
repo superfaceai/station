@@ -394,6 +394,9 @@
     "social-media/publish-post": {
       "file": "../grid/social-media/publish-post/profile.supr",
       "providers": {
+        "instagram": {
+          "file": "../grid/social-media/publish-post/maps/instagram.suma"
+        },
         "mock": {
           "file": "../grid/social-media/publish-post/maps/mock.suma"
         }
@@ -786,6 +789,15 @@
       "parameters": {
         "WEBSITE_ID": "$CRISP_WEBSITE_ID"
       }
+    },
+    "instagram": {
+      "file": "../providers/instagram.json",
+      "security": [
+        {
+          "id": "bearer_token",
+          "token": "$INSTAGRAM_TOKEN"
+        }
+      ]
     }
   }
 }
