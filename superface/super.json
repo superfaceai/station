@@ -397,6 +397,9 @@
         "instagram": {
           "file": "../grid/social-media/publish-post/maps/instagram.suma"
         },
+        "facebook": {
+          "file": "../grid/social-media/publish-post/maps/facebook.suma"
+        },
         "mock": {
           "file": "../grid/social-media/publish-post/maps/mock.suma"
         }
@@ -796,6 +799,15 @@
         {
           "id": "bearer_token",
           "token": "$INSTAGRAM_TOKEN"
+        }
+      ]
+    },
+    "facebook": {
+      "file": "../providers/facebook.json",
+      "security": [
+        {
+          "id": "bearer_token",
+          "token": "$FACEBOOK_TOKEN"
         }
       ]
     }

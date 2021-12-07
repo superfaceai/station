@@ -1,0 +1,154 @@
+// Facebook Graph API Reference: https://developers.facebook.com/docs/graph-api/
+
+profile = "social-media/publish-post@1.0"
+provider = "facebook"
+
+map PublishPost {
+  apiVersion = call GetApiVersion()
+  feed = input.feed
+  set if(feed.pageId) {
+    objectId = feed.pageId
+  }
+  set if(feed.groupId) {
+    objectId = feed.groupId
+  }
+
+  return map error if(!objectId) { 
+      title = "Feed parameter is missing"
+      detail = "Eather pageId or groupId parameter is required"
+    }
+
+  call GetPageAccessToken(pageId = feed.pageId, userAccessToken = feed.accessToken) {
+    return map error if (outcome.error) outcome.error
+    
+    token = outcome.data.pageAccessToken
+  }
+
+  set if(!token) {
+    token = feed.accessToken
+  }
+
+  http POST "/{apiVersion}/{objectId}/feed" {
+
+    request {
+      query {
+          access_token = token,
+          link = input.imageUrl,
+          message = input.text
+      }
+    }
+
+    response 200 "application/json" {
+      map result {
+        postId =  body.id
+      }
+    }
+
+    response 400 "application/json" {
+      map error {
+        title = "Bad request"
+        detail = body.error.message
+      }
+    }
+
+    response 401 "application/json" {
+      map error {
+        title = "Unauthenticated"
+        detail = body.error.message
+      }
+    }
+
+    response 403 "application/json" {
+      map error {
+        title = "Forbidden"
+        detail = body.error.message
+      }
+    }
+  }
+}
+
+operation GetPageAccessToken {
+  return if(!args.pageId) {}
+
+  apiVersion = call GetApiVersion()
+
+  http GET "/{apiVersion}/me/accounts" {
+    request {
+      query {
+          access_token = args.userAccessToken,
+      }
+    }
+
+    response 200 "application/json" {
+      set if(body.data.length === 1) {
+        userId = body.data[0].id
+      }
+
+      fail if(body.data.length !== 1) {
+        title = "User ID not found"
+        detail = "User ID not found for passed access token or there are multiple accounts associated with the access token"
+      }
+    }
+
+    response 400 "application/json" {
+      fail {
+        title = "Bad request"
+        detail = body.error.message
+      }
+    }
+
+    response 401 "application/json" {
+      fail {
+        title = "Unauthenticated"
+        detail = body.error.message
+      }
+    }
+
+    response 403 "application/json" {
+      fail {
+        title = "Forbidden"
+        detail = body.error.message
+      }
+    }
+  }
+
+  http GET "/{apiVersion}/{userId}" {
+    request {
+      query {
+          fields = 'access_token',
+          access_token = args.userAccessToken
+      }
+    }
+
+    response 200 "application/json" {
+      return {
+        pageAccessToken = body.access_token
+      }
+    }
+
+    response 400 "application/json" {
+      fail {
+        title = "Bad request"
+        detail = body.error.message
+      }
+    }
+
+    response 401 "application/json" {
+      fail {
+        title = "Unauthenticated"
+        detail = body.error.message
+      }
+    }
+
+    response 403 "application/json" {
+      fail {
+        title = "Forbidden"
+        detail = body.error.message
+      }
+    }
+  }
+}
+
+operation GetApiVersion {
+  return 'v12.0'
+}
