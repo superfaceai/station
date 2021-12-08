@@ -229,16 +229,17 @@ operation MapProfileFromCrisp {
 }
 
 operation ParseCrispName {
-  lastNameIx = args.name.lastIndexOf(' ')
+  crispName = (args.name || '').trim()
+  lastNameIx = crispName.lastIndexOf(' ')
 
   return if (lastNameIx === -1) {
-    firstName = args.name
+    firstName = crispName || undefined
     lastName = undefined
   }
 
   return {
-    firstName = args.name.slice(0, lastNameIx).trim()
-    lastName = args.name.slice(lastNameIx).trim()
+    firstName = crispName.slice(0, lastNameIx).trim()
+    lastName = crispName.slice(lastNameIx).trim()
   }
 }
 

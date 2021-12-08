@@ -86,6 +86,19 @@ describe(`crm/contacts/crisp`, () => {
       ).resolves.toMatchSnapshot();
     });
 
+    it('performs successfully for contacts without name', async () => {
+      await expect(
+        superface.run({
+          useCase: 'Search',
+          input: {
+            property: 'email',
+            operator: 'EQ',
+            value: 'support+stationnoname@superface.ai',
+          },
+        })
+      ).resolves.toMatchSnapshot();
+    });
+
     it('returns error for unknown operator', async () => {
       await expect(
         superface.run({
