@@ -3,7 +3,7 @@
 exports[`crm/contacts/crisp Create performs successfully 1`] = `
 Ok {
   "value": Object {
-    "id": "d16f225a-a008-48ae-a2d8-ff9bc5528255",
+    "id": "11f0b7f4-5b44-4b13-994c-0972e5de6436",
   },
 }
 `;
@@ -32,9 +32,26 @@ Ok {
       },
       "email": "support+station@superface.ai",
       "firstName": "Station Test",
-      "id": "d16f225a-a008-48ae-a2d8-ff9bc5528255",
+      "id": "11f0b7f4-5b44-4b13-994c-0972e5de6436",
       "lastName": "Support",
       "phone": "+420123456789",
+    },
+  ],
+}
+`;
+
+exports[`crm/contacts/crisp Search performs successfully for contacts without name 1`] = `
+Ok {
+  "value": Array [
+    Object {
+      "company": undefined,
+      "country": undefined,
+      "customProperties": Object {},
+      "email": "support+stationnoname@superface.ai",
+      "firstName": undefined,
+      "id": "6e3fef92-51f2-4af5-9f51-4ea2a4dfa2fa",
+      "lastName": undefined,
+      "phone": undefined,
     },
   ],
 }
