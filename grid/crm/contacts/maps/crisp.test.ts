@@ -7,6 +7,7 @@ describe(`crm/contacts/crisp`, () => {
     superface = new SuperfaceTest({
       profile: 'crm/contacts',
       provider: 'crisp',
+      testInstance: expect,
     });
   });
 

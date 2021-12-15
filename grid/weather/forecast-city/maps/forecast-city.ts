@@ -14,6 +14,7 @@ export const forecastCityTest = (
         profile: 'weather/forecast-city',
         provider,
         useCase: 'GetWeatherForecastInCity',
+        testInstance: expect,
       });
     });
 

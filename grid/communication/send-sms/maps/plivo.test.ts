@@ -39,6 +39,7 @@ describe('communication/send-sms/plivo', () => {
     superface = new SuperfaceTest({
       profile: 'communication/send-sms',
       provider: 'plivo',
+      testInstance: expect,
     });
   });
 

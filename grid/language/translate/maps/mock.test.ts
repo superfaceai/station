@@ -7,6 +7,7 @@ describe('mock', () => {
     superface = new SuperfaceTest({
       profile: 'language/translate',
       provider: 'mock',
+      testInstance: expect,
     });
   });
 

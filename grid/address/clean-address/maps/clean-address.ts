@@ -10,7 +10,11 @@ export const cleanAddressTest = (
     let superface: SuperfaceTest;
 
     beforeEach(() => {
-      superface = new SuperfaceTest();
+      superface = new SuperfaceTest({
+        profile: 'address/clean-address',
+        provider,
+        testInstance: expect,
+      });
     });
 
     describe('CleanAddress', () => {
@@ -19,8 +23,6 @@ export const cleanAddressTest = (
           await expect(
             superface.run(
               {
-                profile: 'address/clean-address',
-                provider,
                 useCase: 'CleanAddress',
                 input: {
                   street: '3301 South Greenfield Road',
@@ -40,8 +42,6 @@ export const cleanAddressTest = (
           await expect(
             superface.run(
               {
-                profile: 'address/clean-address',
-                provider,
                 useCase: 'CleanAddress',
                 input: {},
               },

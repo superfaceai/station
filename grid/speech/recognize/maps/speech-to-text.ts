@@ -12,7 +12,11 @@ export const speechToTextRecognitionTest = (
     let superface: SuperfaceTest;
 
     beforeEach(() => {
-      superface = new SuperfaceTest();
+      superface = new SuperfaceTest({
+        profile: 'speech/recognize',
+        provider,
+        testInstance: expect,
+      });
     });
 
     describe('SpeechToTextRecognition', () => {
@@ -30,8 +34,6 @@ export const speechToTextRecognitionTest = (
           await expect(
             superface.run(
               {
-                profile: 'speech/recognize',
-                provider,
                 useCase: 'Recognize',
                 input,
               },
@@ -53,8 +55,6 @@ export const speechToTextRecognitionTest = (
           await expect(
             superface.run(
               {
-                profile: 'speech/recognize',
-                provider,
                 useCase: 'Recognize',
                 input,
               },

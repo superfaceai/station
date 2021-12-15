@@ -4,15 +4,17 @@ describe(`vcs/user-repos/github`, () => {
   let superface: SuperfaceTest;
 
   beforeEach(() => {
-    superface = new SuperfaceTest();
+    superface = new SuperfaceTest({
+      profile: 'vcs/user-repos',
+      provider: 'github',
+      testInstance: expect,
+    });
   });
 
   describe('UserRepos', () => {
     it('should perform successfully', async () => {
       await expect(
         superface.run({
-          profile: 'vcs/user-repos',
-          provider: 'github',
           useCase: 'UserRepos',
           input: {
             user: 'jakub-vacek',
@@ -20,11 +22,10 @@ describe(`vcs/user-repos/github`, () => {
         })
       ).resolves.toMatchSnapshot();
     });
+    
     it('should perform successfully - user with big number of repos', async () => {
       await expect(
         superface.run({
-          profile: 'vcs/user-repos',
-          provider: 'github',
           useCase: 'UserRepos',
           input: {
             user: 'oclif',
@@ -32,11 +33,10 @@ describe(`vcs/user-repos/github`, () => {
         })
       ).resolves.toMatchSnapshot();
     });
+    
     it('should map error successfully', async () => {
       await expect(
         superface.run({
-          profile: 'vcs/user-repos',
-          provider: 'github',
           useCase: 'UserRepos',
           input: {
             user: '!!',

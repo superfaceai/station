@@ -12,7 +12,11 @@ export const sendTemplatedEmailTest = (
     let superface: SuperfaceTest;
 
     beforeEach(async () => {
-      superface = new SuperfaceTest();
+      superface = new SuperfaceTest({
+        profile: 'communication/send-templated-email',
+        provider,
+        testInstance: expect,
+      });
     });
 
     describe('SendTemplatedEmail', () => {
@@ -26,8 +30,6 @@ export const sendTemplatedEmailTest = (
           await expect(
             superface.run(
               {
-                profile: 'communication/send-templated-email',
-                provider,
                 useCase: 'SendTemplatedEmail',
                 input,
               },
@@ -50,8 +52,6 @@ export const sendTemplatedEmailTest = (
           await expect(
             superface.run(
               {
-                profile: 'communication/send-templated-email',
-                provider,
                 useCase: 'SendTemplatedEmail',
                 input,
               },

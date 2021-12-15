@@ -11,7 +11,11 @@ export const textToSpeechTest = (
     let superface: SuperfaceTest;
 
     beforeEach(() => {
-      superface = new SuperfaceTest();
+      superface = new SuperfaceTest({
+        profile: 'speech/synthesis',
+        provider,
+        testInstance: expect,
+      });
     });
 
     describe('TextToSpeechSynthesis', () => {
@@ -27,8 +31,6 @@ export const textToSpeechTest = (
           await expect(
             superface.run(
               {
-                profile: 'speech/synthesis',
-                provider,
                 useCase: 'TextToSpeechSynthesis',
                 input,
               },
@@ -48,8 +50,6 @@ export const textToSpeechTest = (
           await expect(
             superface.run(
               {
-                profile: 'speech/synthesis',
-                provider,
                 useCase: 'TextToSpeechSynthesis',
                 input,
               },
@@ -72,8 +72,6 @@ export const textToSpeechTest = (
           await expect(
             superface.run(
               {
-                profile: 'speech/synthesis',
-                provider,
                 useCase: 'TextToSpeechSynthesis',
                 input,
               },

@@ -7,6 +7,7 @@ describe('communication/send-sms/vonage-nexmo', () => {
     superface = new SuperfaceTest({
       profile: 'communication/send-sms',
       provider: 'vonage-nexmo',
+      testInstance: expect,
     });
   });
 

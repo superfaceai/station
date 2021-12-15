@@ -15,7 +15,11 @@ export const shipmentInfoTest = (
     let superface: SuperfaceTest;
 
     beforeEach(() => {
-      superface = new SuperfaceTest();
+      superface = new SuperfaceTest({
+        profile: 'delivery-tracking/shipment-info',
+        provider,
+        testInstance: expect,
+      });
     });
 
     describe('ShipmentInfo', () => {
@@ -24,8 +28,6 @@ export const shipmentInfoTest = (
           it(testVector.expectedResult, async () => {
             await expect(
               superface.run({
-                profile: 'delivery-tracking/shipment-info',
-                provider,
                 useCase: 'ShipmentInfo',
                 input: testVector.input,
               })
