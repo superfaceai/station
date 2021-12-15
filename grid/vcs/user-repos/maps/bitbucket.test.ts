@@ -22,7 +22,7 @@ describe(`vcs/user-repos/bitbucket`, () => {
         })
       ).resolves.toMatchSnapshot();
     });
-    
+
     it('should perform successfully - user with mutiple repositories', async () => {
       await expect(
         superface.run({
@@ -33,7 +33,7 @@ describe(`vcs/user-repos/bitbucket`, () => {
         })
       ).resolves.toMatchSnapshot();
     });
-    
+
     it('should map error successfully', async () => {
       await expect(
         superface.run({
