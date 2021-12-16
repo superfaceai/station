@@ -1,36 +1,4 @@
-import {
-  RecordingDefinition,
-  RecordingDefinitions,
-  SuperfaceTest,
-} from '@superfaceai/testing';
-
-/* 
- * TODO: move this to testing library
-   simple parsing is done before load where headers are not matching
-   nock interface nock.Definition
- */
-function assertRawHeaders(
-  definition: RecordingDefinition
-): asserts definition is RecordingDefinition & { rawHeaders: string[] } {
-  if (!('rawHeaders' in definition)) {
-    throw new Error('rawHeaders not found');
-  }
-}
-
-const beforeRecordingLoad = (definitions: RecordingDefinitions) => {
-  definitions.forEach((def: RecordingDefinition) => {
-    assertRawHeaders(def);
-
-    for (const [name, value] of def.rawHeaders.entries()) {
-      def.rawHeaders[name] = value
-        .toString()
-        .replace(
-          'parameters-removed-to-keep-them-secure',
-          process.env.PLIVO_AUTH_ID as any
-        );
-    }
-  });
-};
+import { SuperfaceTest } from '@superfaceai/testing';
 
 describe('communication/send-sms/plivo', () => {
   let superface: SuperfaceTest;
@@ -72,17 +40,12 @@ describe('communication/send-sms/plivo', () => {
       const messageId = (result.unwrap() as any).messageId;
 
       await expect(
-        superface.run(
-          {
-            useCase: 'RetrieveMessageStatus',
-            input: {
-              messageId,
-            },
+        superface.run({
+          useCase: 'RetrieveMessageStatus',
+          input: {
+            messageId,
           },
-          {
-            beforeRecordingLoad,
-          }
-        )
+        })
       ).resolves.toMatchSnapshot();
     });
   });
