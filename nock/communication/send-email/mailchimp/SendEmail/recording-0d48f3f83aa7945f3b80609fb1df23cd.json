@@ -12,20 +12,32 @@
             "type": "to"
           }
         ],
-        "subject": "Station test"
+        "subject": "Station test with attachements"
       },
       "text": "Station test - mailchimp",
-      "key": "SECURITY_api_key"
+      "attachments": [
+        {
+          "content": "dGVzdA==",
+          "name": "test.txt",
+          "type": "text/plain"
+        },
+        {
+          "content": "dGVzdC==",
+          "name": "test2.json",
+          "type": "application/json"
+        }
+      ],
+      "key": "credentials-removed-to-keep-them-secure"
     },
     "status": 200,
     "response": [
-      "1f8b08000000000000030ccac10ac2300c00d07fc959469d5b6d77f23f444648329d64ad34ed49fc777b7cf0ee5f90037785055ea29a6f2c471eac7da46c4832e4f2841358c5daac1f9354bbd79d3bc2c55174335d69f6531c5d8861f27e631e39b833fa1e8bbc85ea5a042d27585253fd3dfe000000ffff03009583cc7474000000"
+      "1f8b08000000000000030c8ac10e82301005ff65cf8618586ae0e47f1843d6f250ccd29a6e7b32febb7b9b99cced4b3864579ae905d57c5d71e4ceda076593882e97279dc8aad466fe1852755ff6d505cc3dc218fa28173e0f936cc28ede7892e1117c2c7823d6a5402c279a5353fdddff000000ffff030070e7d65f74000000"
     ],
     "rawHeaders": [
       "server",
-      "nginx/1.12.2",
+      "nginx/1.4.6 (Ubuntu)",
       "date",
-      "Mon, 10 Jan 2022 10:53:42 GMT",
+      "Mon, 10 Jan 2022 10:53:43 GMT",
       "content-type",
       "application/json; charset=utf-8",
       "transfer-encoding",
