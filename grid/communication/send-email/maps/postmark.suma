@@ -4,6 +4,17 @@ profile = "communication/send-email@2.0"
 provider = "postmark"
 
 map SendEmail {
+  Attachments = null
+  set if (input.attachments) {
+    Attachments = input.attachments.map(attachment => {
+      return {
+        Content: attachment.content,
+        Name: attachment.filename,
+        ContentType: attachment.type,
+      }
+    })
+  }
+
   http POST "/email" {
     security "server_token"
     

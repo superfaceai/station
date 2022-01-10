@@ -65,6 +65,38 @@ export const sendEmailTest = (
           ).resolves.toMatchSnapshot();
         });
       });
+
+      it('sends email with attachements', async () => {
+        const input = {
+          ...params,
+          subject: 'Station test with attachements',
+          text: `Station test - ${provider}`,
+          attachments: [
+            {
+              content: 'dGVzdA==',
+              type: 'text/plain',
+              filename: 'test.txt',
+            },
+            {
+              content: 'dGVzdC==',
+              type: 'application/json',
+              filename: 'test2.json',
+            },
+          ],
+        };
+
+        await expect(
+          superface.run(
+            {
+              profile: 'communication/send-email',
+              provider,
+              useCase: 'SendEmail',
+              input,
+            },
+            options
+          )
+        ).resolves.toMatchSnapshot();
+      });
     });
   });
 };
