@@ -7,12 +7,24 @@
       "From": "demo@demo.superface.org",
       "To": "demo@demo.superface.org",
       "Subject": "Station test with attachements",
-      "TextBody": "Station test - postmark"
+      "TextBody": "Station test - postmark",
+      "Attachments": [
+        {
+          "Content": "dGVzdA==",
+          "Name": "test.txt",
+          "ContentType": "text/plain"
+        },
+        {
+          "Content": "dGVzdC==",
+          "Name": "test2.json",
+          "ContentType": "application/json"
+        }
+      ]
     },
     "status": 200,
     "response": [
-      "1f8b08000000000004033cccbb0ec2301044d17fd91a47ebc706c7150828104214a4a273ec4d441119d94985f8774c4333d5b9f3863e8183c873dafda629eb8bf3e80337294fb081fb3acccf65e1b85faa53a894402924f6121d696774d39a8e88e4a3e22b97e2273e1f2bf54c2168b2c278eb8589d80aab8944c7de7037206ded589353ce291f526470f83fa8f9ed029f2f000000ffff",
-      "030031f6bf439d000000"
+      "1f8b08000000000004033cccb10ec2201485e177b9b3900b0504268d3a18631cece446e1b6716830944ec677171797337dff79439fc143a239ef7ec397f545650c91782e136ce0be0ef3b3564afbda9c4429190a26442fd02be7c5963b944a5bfb68f84acb12263a1f1b153175d668c96442c394c5c80239cb862eda511b9782d22d399592cb2127028fff8396df2ef0f9020000ffff",
+      "03004f4d50c19d000000"
     ],
     "rawHeaders": [
       "cache-control",
@@ -28,7 +40,7 @@
       "x-powered-by",
       "ASP.NET",
       "date",
-      "Mon, 10 Jan 2022 10:53:43 GMT",
+      "Tue, 11 Jan 2022 10:49:17 GMT",
       "strict-transport-security",
       "max-age=16000000;",
       "content-encoding",
