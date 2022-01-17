@@ -1,0 +1,75 @@
+profile = "communication/send-sms@2.0"
+provider = "messente"
+
+// Messente API documentation available at:
+//  https://messente.com/documentation/
+//  https://messente.com/documentation/omnichannel-api/reference
+
+map SendMessage {
+  http POST "/v1/omnimessage" {
+  	security "basic"
+		request "application/json" {
+			body { 
+				to = input.to
+				messages = [
+					{
+						text: input.text,
+						channel: "sms"
+					}
+				]
+			}
+		}
+
+		response 201 "application/json" {
+			map result {
+				messageId = body.omnimessage_id
+			}
+		}
+
+		response 400 {
+			map error {
+				title = body.errors[0].title
+				detail = body.errors[0].detail
+			}
+		}
+	}
+}
+
+map RetrieveMessageStatus {
+	http GET "/v1/omnimessage/{input.messageId}/status" {
+		security "basic"
+
+		response 200 "application/json" {
+			map result {
+				deliveryStatus = (() => {
+					switch (body.statuses[0].status) {
+							case 'ACK':
+							case 'ACCEPTD':
+								return 'accepted'
+							case 'DELIVRD':
+								return 'delivered';
+							case 'SEEN':
+								return 'seen';
+							case 'UNDELIV':
+							case 'FAILED':
+							case 'REJECTD':
+							case 'DELETED':
+							case 'EXPIRED':
+							case 'NACK':
+								return 'failed';
+							case 'UNKNOWN':
+								return 'unknown'
+						}
+					}
+				)
+			}
+		}
+
+		response 404 "application/json" {
+		  map error {
+				title = body.errors[0].title
+				detail = body.errors[0].detail
+			}
+		}
+	}
+}
