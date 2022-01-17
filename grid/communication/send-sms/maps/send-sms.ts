@@ -46,12 +46,17 @@ export const sendSmsTest = (
         const messageId = (result.unwrap() as { messageId: string }).messageId;
 
         await expect(
-          superface.run({
-            useCase: 'RetrieveMessageStatus',
-            input: {
-              messageId,
+          superface.run(
+            {
+              useCase: 'RetrieveMessageStatus',
+              input: {
+                messageId,
+              },
             },
-          })
+            {
+              hideInput: ['messageId'],
+            }
+          )
         ).resolves.toMatchSnapshot();
       });
     });
