@@ -7,7 +7,7 @@
   "scripts": {
     "tools:test": "jest -c jest.tools.config.js",
     "tools:lint": "eslint ./",
-    "tools:lint:fix": "yarn lint --fix",
+    "tools:lint:fix": "yarn tools:lint --fix",
     "tools:format": "prettier -c ./",
     "tools:format:fix": "prettier --write ./",
     "prepush": "yarn tools:lint:fix && yarn tools:format:fix",
