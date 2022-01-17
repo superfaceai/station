@@ -4,15 +4,17 @@ describe(`vcs/single-file-content/bitbucket`, () => {
   let superface: SuperfaceTest;
 
   beforeEach(() => {
-    superface = new SuperfaceTest();
+    superface = new SuperfaceTest({
+      profile: 'vcs/single-file-content',
+      provider: 'bitbucket',
+      testInstance: expect,
+    });
   });
 
   describe('SingleFileContent', () => {
     it('should perform successfully', async () => {
       await expect(
         superface.run({
-          profile: 'vcs/single-file-content',
-          provider: 'bitbucket',
           useCase: 'SingleFileContent',
           input: {
             owner: 'jakuvacek',
@@ -27,8 +29,6 @@ describe(`vcs/single-file-content/bitbucket`, () => {
     it('should map error', async () => {
       await expect(
         superface.run({
-          profile: 'vcs/single-file-content',
-          provider: 'bitbucket',
           useCase: 'SingleFileContent',
           input: {
             owner: 'jakuvacek',

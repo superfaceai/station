@@ -4,15 +4,17 @@ describe(`crm/contacts/sendgrid`, () => {
   let superface: SuperfaceTest;
 
   beforeEach(() => {
-    superface = new SuperfaceTest();
+    superface = new SuperfaceTest({
+      profile: 'crm/contacts',
+      provider: 'sendgrid',
+      testInstance: expect,
+    });
   });
 
   describe('Create', () => {
     it('should return error if email is missing', async () => {
       await expect(
         superface.run({
-          profile: 'crm/contacts',
-          provider: 'sendgrid',
           useCase: 'Create',
           input: {},
         })
@@ -22,8 +24,6 @@ describe(`crm/contacts/sendgrid`, () => {
     it('should perform successfully', async () => {
       await expect(
         superface.run({
-          profile: 'crm/contacts',
-          provider: 'sendgrid',
           useCase: 'Create',
           input: {
             email: 'TEST@example.com',
@@ -40,8 +40,6 @@ describe(`crm/contacts/sendgrid`, () => {
     it('should return error if email is missing', async () => {
       await expect(
         superface.run({
-          profile: 'crm/contacts',
-          provider: 'sendgrid',
           useCase: 'Update',
           input: {},
         })
@@ -51,8 +49,6 @@ describe(`crm/contacts/sendgrid`, () => {
     it('should perform successfully', async () => {
       await expect(
         superface.run({
-          profile: 'crm/contacts',
-          provider: 'sendgrid',
           useCase: 'Update',
           input: {
             id: 'test@example.com',
@@ -67,8 +63,6 @@ describe(`crm/contacts/sendgrid`, () => {
     it('should return error if unknow operator is used', async () => {
       await expect(
         superface.run({
-          profile: 'crm/contacts',
-          provider: 'sendgrid',
           useCase: 'Search',
           input: {
             property: 'firstName',
@@ -82,8 +76,6 @@ describe(`crm/contacts/sendgrid`, () => {
     it('should perform successfully', async () => {
       await expect(
         superface.run({
-          profile: 'crm/contacts',
-          provider: 'sendgrid',
           useCase: 'Search',
           input: {
             property: 'firstName',

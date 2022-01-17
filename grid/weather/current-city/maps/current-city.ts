@@ -13,6 +13,7 @@ export const currentCityTest = (providerName: string): void => {
       superface = new SuperfaceTest({
         profile: 'weather/current-city',
         provider: providerName,
+        testInstance: expect,
       });
     });
 

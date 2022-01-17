@@ -4,15 +4,17 @@ describe(`crm/contacts/hubspot`, () => {
   let superface: SuperfaceTest;
 
   beforeEach(() => {
-    superface = new SuperfaceTest();
+    superface = new SuperfaceTest({
+      profile: 'crm/contacts',
+      provider: 'hubspot',
+      testInstance: expect,
+    });
   });
 
   describe('Create', () => {
     it('should perform successfully', async () => {
       await expect(
         superface.run({
-          profile: 'crm/contacts',
-          provider: 'hubspot',
           useCase: 'Create',
           input: {
             email: 'test@example.com',
@@ -33,8 +35,6 @@ describe(`crm/contacts/hubspot`, () => {
     it('should return error if id is missing', async () => {
       await expect(
         superface.run({
-          profile: 'crm/contacts',
-          provider: 'hubspot',
           useCase: 'Update',
           input: {
             email: 'test@example.com',
@@ -46,8 +46,6 @@ describe(`crm/contacts/hubspot`, () => {
     it('should perform successfully', async () => {
       await expect(
         superface.run({
-          profile: 'crm/contacts',
-          provider: 'hubspot',
           useCase: 'Update',
           input: {
             id: '401',
@@ -62,8 +60,6 @@ describe(`crm/contacts/hubspot`, () => {
     it('should return error for unknown operator', async () => {
       await expect(
         superface.run({
-          profile: 'crm/contacts',
-          provider: 'hubspot',
           useCase: 'Search',
           input: {
             property: 'firstname',
@@ -77,8 +73,6 @@ describe(`crm/contacts/hubspot`, () => {
     it('should perform successfully', async () => {
       await expect(
         superface.run({
-          profile: 'crm/contacts',
-          provider: 'hubspot',
           useCase: 'Search',
           input: {
             property: 'firstname',

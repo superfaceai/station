@@ -9,7 +9,9 @@ export const analyzePlainTextSentimentTests = (provider: string): void => {
     beforeEach(() => {
       superface = new SuperfaceTest({
         profile: 'language/analyze-plain-text-sentiment',
+        provider,
         useCase: 'AnalyzePlainTextSentiment',
+        testInstance: expect,
       });
     });
 
@@ -23,7 +25,6 @@ export const analyzePlainTextSentimentTests = (provider: string): void => {
 
           await expect(
             superface.run({
-              provider,
               input,
             })
           ).resolves.toMatchSnapshot();
@@ -37,7 +38,6 @@ export const analyzePlainTextSentimentTests = (provider: string): void => {
 
           await expect(
             superface.run({
-              provider,
               input,
             })
           ).resolves.toMatchSnapshot();
@@ -51,7 +51,6 @@ export const analyzePlainTextSentimentTests = (provider: string): void => {
 
           await expect(
             superface.run({
-              provider,
               input,
             })
           ).resolves.toMatchSnapshot();
@@ -67,7 +66,6 @@ export const analyzePlainTextSentimentTests = (provider: string): void => {
 
           await expect(
             superface.run({
-              provider,
               input,
             })
           ).resolves.toMatchSnapshot();

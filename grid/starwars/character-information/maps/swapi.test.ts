@@ -4,14 +4,16 @@ describe('starwars/character-information/swapi', () => {
   let superface: SuperfaceTest;
 
   beforeEach(() => {
-    superface = new SuperfaceTest();
+    superface = new SuperfaceTest({
+      profile: 'starwars/character-information',
+      provider: 'swapi',
+      testInstance: expect,
+    });
   });
 
   it('should perform successfully', async () => {
     await expect(
       superface.run({
-        profile: 'starwars/character-information',
-        provider: 'swapi',
         useCase: 'RetrieveCharacterInformation',
         input: {
           characterName: 'Luke Skywalker',
@@ -23,8 +25,6 @@ describe('starwars/character-information/swapi', () => {
   it('should map error correctly when there are suggestions', async () => {
     await expect(
       superface.run({
-        profile: 'starwars/character-information',
-        provider: 'swapi',
         useCase: 'RetrieveCharacterInformation',
         input: {
           characterName: 'Luke',
@@ -36,8 +36,6 @@ describe('starwars/character-information/swapi', () => {
   it('should map error correctly when there are no characters found', async () => {
     await expect(
       superface.run({
-        profile: 'starwars/character-information',
-        provider: 'swapi',
         useCase: 'RetrieveCharacterInformation',
         input: {
           characterName: 'Duke',

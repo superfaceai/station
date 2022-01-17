@@ -12,6 +12,7 @@ export const sendMessage = (
     superface = new SuperfaceTest({
       profile: 'communication/send-message',
       provider,
+      testInstance: expect,
     });
   });
 

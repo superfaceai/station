@@ -7,7 +7,11 @@ export const nearbyPoiTest = (provider: string): void => {
     let superface: SuperfaceTest;
 
     beforeEach(() => {
-      superface = new SuperfaceTest();
+      superface = new SuperfaceTest({
+        profile: 'navigation/nearby-poi',
+        provider,
+        testInstance: expect,
+      });
     });
 
     describe('find nearby pois', () => {
@@ -23,8 +27,6 @@ export const nearbyPoiTest = (provider: string): void => {
 
         await expect(
           superface.run({
-            profile: 'navigation/nearby-poi',
-            provider,
             useCase: 'NearbyPoi',
             input,
           })
@@ -43,8 +45,6 @@ export const nearbyPoiTest = (provider: string): void => {
 
         await expect(
           superface.run({
-            profile: 'navigation/nearby-poi',
-            provider,
             useCase: 'NearbyPoi',
             input,
           })
@@ -62,8 +62,6 @@ export const nearbyPoiTest = (provider: string): void => {
 
         await expect(
           superface.run({
-            profile: 'navigation/nearby-poi',
-            provider,
             useCase: 'NearbyPoi',
             input,
           })

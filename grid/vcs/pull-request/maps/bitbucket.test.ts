@@ -4,15 +4,17 @@ describe(`vcs/pull-request/bitbucket}`, () => {
   let superface: SuperfaceTest;
 
   beforeEach(() => {
-    superface = new SuperfaceTest();
+    superface = new SuperfaceTest({
+      profile: 'vcs/pull-request',
+      provider: 'bitbucket',
+      testInstance: expect,
+    });
   });
 
   describe('PullRequest', () => {
     it('should perform successfully', async () => {
       await expect(
         superface.run({
-          profile: 'vcs/pull-request',
-          provider: 'bitbucket',
           useCase: 'PullRequest',
           input: {
             owner: 'jakuvacek',
@@ -26,8 +28,6 @@ describe(`vcs/pull-request/bitbucket}`, () => {
     it('should map error', async () => {
       await expect(
         superface.run({
-          profile: 'vcs/pull-request',
-          provider: 'bitbucket',
           useCase: 'PullRequest',
           input: {
             owner: 'jakuvacek',

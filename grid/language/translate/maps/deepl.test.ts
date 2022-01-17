@@ -7,6 +7,7 @@ describe('DeepL', () => {
     superface = new SuperfaceTest({
       profile: 'language/translate',
       provider: 'deepl',
+      testInstance: expect,
     });
   });
 
