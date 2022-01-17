@@ -2,6 +2,13 @@
   "profiles": {
     "communication/send-sms": {
       "file": "../grid/communication/send-sms/profile.supr",
+      "priority": [
+        "twilio",
+        "tyntec",
+        "vonage-nexmo",
+        "plivo",
+        "messente"
+      ],
       "providers": {
         "twilio": {
           "file": "../grid/communication/send-sms/maps/twilio.suma",
@@ -35,6 +42,9 @@
         },
         "plivo": {
           "file": "../grid/communication/send-sms/maps/plivo.suma"
+        },
+        "messente": {
+          "file": "../grid/communication/send-sms/maps/messente.suma"
         },
         "mock": {
           "file": "../grid/communication/send-sms/maps/mock.suma"
@@ -373,14 +383,14 @@
     },
     "speech/recognize": {
       "file": "../grid/speech/recognize/profile.supr",
-       "providers": {
+      "providers": {
         "mock": {
           "file": "../grid/speech/recognize/maps/mock.suma"
         },
         "google-apis-speech": {
           "file": "../grid/speech/recognize/maps/google-apis-speech.suma"
         },
-         "ibm-cloud-speech-to-text": {
+        "ibm-cloud-speech-to-text": {
           "file": "../grid/speech/recognize/maps/ibm-cloud-speech-to-text.suma"
         },
         "azure-speech-to-text": {
@@ -747,7 +757,7 @@
     },
     "azure-speech-to-text": {
       "file": "../providers/azure-speech-to-text.json",
-       "security": [
+      "security": [
         {
           "id": "opc-subscription-key",
           "apikey": "$AZURE_SPEECH_TO_TEXT_SUBSCRIPTION_KEY"
@@ -778,6 +788,16 @@
       "parameters": {
         "WEBSITE_ID": "$CRISP_WEBSITE_ID"
       }
+    },
+    "messente": {
+      "file": "../providers/messente.json",
+      "security": [
+        {
+          "id": "basic",
+          "username": "$MESSENTE_API_USERNAME",
+          "password": "$MESSENTE_API_PASSWORD"
+        }
+      ]
     }
   }
 }
