@@ -7,6 +7,7 @@ describe(`analytics/track-event/mixpanel`, () => {
     superface = new SuperfaceTest({
       profile: 'analytics/track-event',
       provider: 'mixpanel',
+      testInstance: expect,
     });
   });
 

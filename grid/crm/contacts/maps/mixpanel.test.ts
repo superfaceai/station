@@ -7,6 +7,7 @@ describe(`crm/contacts/mixpanel`, () => {
     superface = new SuperfaceTest({
       profile: 'crm/contacts',
       provider: 'mixpanel',
+      testInstance: expect,
     });
   });
 

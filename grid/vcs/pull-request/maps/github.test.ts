@@ -4,15 +4,17 @@ describe(`vcs/pull-request/github}`, () => {
   let superface: SuperfaceTest;
 
   beforeEach(() => {
-    superface = new SuperfaceTest();
+    superface = new SuperfaceTest({
+      profile: 'vcs/pull-request',
+      provider: 'github',
+      testInstance: expect,
+    });
   });
 
   describe('PullRequest', () => {
     it('should perform successfully', async () => {
       await expect(
         superface.run({
-          profile: 'vcs/pull-request',
-          provider: 'github',
           useCase: 'PullRequest',
           input: {
             owner: 'superfaceai',
@@ -26,8 +28,6 @@ describe(`vcs/pull-request/github}`, () => {
     it('should map error', async () => {
       await expect(
         superface.run({
-          profile: 'vcs/pull-request',
-          provider: 'github',
           useCase: 'PullRequest',
           input: {
             owner: 'superfaceai',

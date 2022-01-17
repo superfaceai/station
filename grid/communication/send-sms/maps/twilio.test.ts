@@ -7,6 +7,7 @@ describe('communication/send-sms/twilio', () => {
     superface = new SuperfaceTest({
       profile: 'communication/send-sms',
       provider: 'twilio',
+      testInstance: expect,
     });
   });
 

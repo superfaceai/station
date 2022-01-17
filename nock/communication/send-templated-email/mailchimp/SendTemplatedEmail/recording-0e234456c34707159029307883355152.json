@@ -1,0 +1,63 @@
+[
+  {
+    "scope": "https://mandrillapp.com:443",
+    "method": "POST",
+    "path": "/api/1.0/messages/send-template",
+    "body": {
+      "template_name": "station-test",
+      "template_content": [
+        {
+          "name": "from",
+          "content": "hello@superface.org"
+        },
+        {
+          "name": "to",
+          "content": "hello@superface.org"
+        },
+        {
+          "name": "templateId",
+          "content": "station-test"
+        }
+      ],
+      "message": {
+        "from_email": "hello@superface.org",
+        "to": [
+          {
+            "email": "hello@superface.org",
+            "type": "to"
+          }
+        ]
+      },
+      "key": "SECURITY_api_key"
+    },
+    "status": 200,
+    "response": [
+      "1f8b08000000000000030cca410ec2201046e1bbccda180852a12bef614c33e25fad19a1616065bcbb2cbfbc77fd123ebc09cdf48248b968df51574e3896faa40369e3d67564456ec3cbf618601fac35267a67718ad184e0ee6e4a5893394f3ef2182bde486da9602d99e6dc457eb73f000000ffff0300f6d7d8416f000000"
+    ],
+    "rawHeaders": [
+      "server",
+      "nginx/1.4.6 (Ubuntu)",
+      "date",
+      "Tue, 09 Nov 2021 10:07:47 GMT",
+      "content-type",
+      "application/json; charset=utf-8",
+      "transfer-encoding",
+      "chunked",
+      "access-control-allow-origin",
+      "*",
+      "access-control-allow-methods",
+      "POST, GET, OPTIONS",
+      "access-control-allow-headers",
+      "Content-Type",
+      "access-control-allow-credentials",
+      "false",
+      "content-encoding",
+      "gzip",
+      "vary",
+      "Accept-Encoding",
+      "connection",
+      "close"
+    ],
+    "responseIsBinary": false
+  }
+]

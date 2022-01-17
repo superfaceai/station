@@ -8,6 +8,7 @@ describe(`computer-vision/face-detection/google-apis-computer-vision`, () => {
       profile: 'computer-vision/face-detection',
       provider: 'google-apis-computer-vision',
       useCase: 'FaceDetection',
+      testInstance: expect,
     });
   });
 

@@ -1,5 +1,17 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`vcs/pull-requests/bitbucket PullRequests should handle error 1`] = `
+Err {
+  "error": "MappedError: Expected error
+Properties: {
+  \\"message\\": \\"The requested repository either does not exist or you do not have access. If you believe this repository exists and you have access, make sure you're authenticated.\\",
+  \\"statusCode\\": 404
+}
+AST Path: definitions[0].statements[2].statements[0]
+Original Map Location: Line 15, column 7",
+}
+`;
+
 exports[`vcs/pull-requests/bitbucket PullRequests should perform successfully - multiple pages of PRs 1`] = `
 Ok {
   "value": Object {
@@ -155,17 +167,5 @@ Ok {
     ],
     "statusCode": 200,
   },
-}
-`;
-
-exports[`vcs/pull-requests/bitbucket should handle error 1`] = `
-Err {
-  "error": "MappedError: Expected error
-Properties: {
-  \\"message\\": \\"The requested repository either does not exist or you do not have access. If you believe this repository exists and you have access, make sure you're authenticated.\\",
-  \\"statusCode\\": 404
-}
-AST Path: definitions[0].statements[2].statements[0]
-Original Map Location: Line 15, column 7",
 }
 `;

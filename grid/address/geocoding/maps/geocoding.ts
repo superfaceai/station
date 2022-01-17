@@ -10,7 +10,11 @@ export const geocodingTest = (
     let superface: SuperfaceTest;
 
     beforeEach(() => {
-      superface = new SuperfaceTest();
+      superface = new SuperfaceTest({
+        profile: 'address/geocoding',
+        provider,
+        testInstance: expect,
+      });
     });
 
     describe('Geocode', () => {
@@ -19,8 +23,6 @@ export const geocodingTest = (
           await expect(
             superface.run(
               {
-                profile: 'address/geocoding',
-                provider,
                 useCase: 'Geocode',
                 input: {
                   query: 'Prague',
@@ -37,8 +39,6 @@ export const geocodingTest = (
           await expect(
             superface.run(
               {
-                profile: 'address/geocoding',
-                provider,
                 useCase: 'Geocode',
                 input: {},
               },
@@ -60,8 +60,6 @@ export const geocodingTest = (
           await expect(
             superface.run(
               {
-                profile: 'address/geocoding',
-                provider,
                 useCase: 'ReverseGeocode',
                 input,
               },
@@ -77,8 +75,6 @@ export const geocodingTest = (
           await expect(
             superface.run(
               {
-                profile: 'address/geocoding',
-                provider,
                 useCase: 'ReverseGeocode',
                 input,
               },

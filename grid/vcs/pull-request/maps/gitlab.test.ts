@@ -4,15 +4,17 @@ describe(`vcs/pull-request/gitlab}`, () => {
   let superface: SuperfaceTest;
 
   beforeEach(() => {
-    superface = new SuperfaceTest();
+    superface = new SuperfaceTest({
+      profile: 'vcs/pull-request',
+      provider: 'gitlab',
+      testInstance: expect,
+    });
   });
 
   describe('PullRequest', () => {
     it('should perform successfully', async () => {
       await expect(
         superface.run({
-          profile: 'vcs/pull-request',
-          provider: 'gitlab',
           useCase: 'PullRequest',
           input: {
             owner: 'Jakub-Vacek',
@@ -26,8 +28,6 @@ describe(`vcs/pull-request/gitlab}`, () => {
     it('should map error', async () => {
       await expect(
         superface.run({
-          profile: 'vcs/pull-request',
-          provider: 'gitlab',
           useCase: 'PullRequest',
           input: {
             owner: 'Jakub-Vacek',

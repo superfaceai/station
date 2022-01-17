@@ -8,6 +8,7 @@ describe(`crypto/exchange-rate/binance}`, () => {
       profile: 'crypto/exchange-rate',
       provider: 'binance',
       useCase: 'GetExchangeRate',
+      testInstance: expect,
     });
   });
 

@@ -4,15 +4,17 @@ describe(`vcs/single-file-content/github`, () => {
   let superface: SuperfaceTest;
 
   beforeEach(() => {
-    superface = new SuperfaceTest();
+    superface = new SuperfaceTest({
+      profile: 'vcs/single-file-content',
+      provider: 'github',
+      testInstance: expect,
+    });
   });
 
   describe('SingleFileContent', () => {
     it('should perform successfully', async () => {
       await expect(
         superface.run({
-          profile: 'vcs/single-file-content',
-          provider: 'github',
           useCase: 'SingleFileContent',
           input: {
             owner: 'superfaceai',
@@ -27,8 +29,6 @@ describe(`vcs/single-file-content/github`, () => {
     it('should map error', async () => {
       await expect(
         superface.run({
-          profile: 'vcs/single-file-content',
-          provider: 'github',
           useCase: 'SingleFileContent',
           input: {
             owner: 'superfaceai',

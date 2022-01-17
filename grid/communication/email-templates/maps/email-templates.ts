@@ -56,6 +56,7 @@ export const emailTemplatestTest = (
       superface = new SuperfaceTest({
         profile: 'communication/email-templates',
         provider,
+        testInstance: expect,
       });
     });
 

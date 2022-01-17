@@ -7,6 +7,7 @@ describe('communication/send-sms/tyntect', () => {
     superface = new SuperfaceTest({
       profile: 'communication/send-sms',
       provider: 'tyntec',
+      testInstance: expect,
     });
   });
 
