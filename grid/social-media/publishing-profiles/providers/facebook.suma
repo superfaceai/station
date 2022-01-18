@@ -1,0 +1,62 @@
+profile = "social-media/publishing-profiles@1.0"
+provider = "facebook"
+
+"""
+Get Facebook Pages for publishing
+https://developers.facebook.com/docs/graph-api/reference/user/accounts/
+https://developers.facebook.com/docs/graph-api/reference/page/
+"""
+map GetProfilesForPublishing {
+  apiVersion = 'v12.0'
+
+  http GET "/{apiVersion}/me/accounts" {
+    request {
+      query {
+        access_token = parameters.accessToken
+        fields = "id,name,can_post,link,username,picture{url}"
+      }
+    }
+
+    response 200 "application/json" {
+      pages = call foreach(page of body.data) MapPage(page = page)
+
+      return map result {
+        profiles = pages
+      }
+    }
+
+    response 400 "application/json" {
+      return map error {
+        title = "Bad request"
+        detail = body.error.message
+      }
+    }
+
+    response 401 "application/json" {
+      return map error {
+        title = "Unauthenticated"
+        detail = body.error.message
+      }
+    }
+
+    response 403 "application/json" {
+      return map error {
+        title = "Forbidden"
+        detail = body.error.message
+      }
+    }
+  }
+}
+
+operation MapPage {
+  page = args.page
+
+  // TODO: Handle can_post
+
+  return {
+    id = page.id
+    name = page.name
+    username = page.username
+    imageUrl = page.picture.data.url
+  }
+}

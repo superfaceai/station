@@ -1,0 +1,73 @@
+profile = "social-media/publishing-profiles@1.0"
+provider = "instagram"
+
+"""
+Get Instagram accounts for publishing from Facebook pages
+https://developers.facebook.com/docs/instagram-api/getting-started
+"""
+map GetProfilesForPublishing {
+  apiVersion = 'v12.0'
+
+  // Initial request: get FB pages
+  http GET "/{apiVersion}/me/accounts" {
+    request {
+      query {
+        access_token = parameters.accessToken
+        fields = "id,instagram_business_account"
+      }
+    }
+
+    response 200 "application/json" {
+      // Now map them to IG profiles
+      profiles = call foreach(page of body.data) MapPage(page = page)
+
+      return map result {
+        profiles = profiles
+      }
+    }
+
+    response 400 "application/json" {
+      return map error {
+        title = "Bad request"
+        detail = body.error.message
+      }
+    }
+
+    response 401 "application/json" {
+      return map error {
+        title = "Unauthenticated"
+        detail = body.error.message
+      }
+    }
+
+    response 403 "application/json" {
+      return map error {
+        title = "Forbidden"
+        detail = body.error.message
+      }
+    }
+  }
+}
+
+operation MapPage {
+  http GET "/v12.0/{args.page.id}" {
+    request {
+      query {
+        // wellp, traversing the edge is undocumented but seems to work for now...
+        fields = 'instagram_business_account{id,name,username,profile_picture_url}',
+        access_token = parameters.accessToken
+      }
+    }
+
+    response 200 "application/json" {
+      igAccount = body.instagram_business_account
+    }
+  }
+
+  return {
+    id = igAccount.id
+    name = igAccount.name
+    username = igAccount.username
+    imageUrl = igAccount.profile_picture_url
+  }
+}
