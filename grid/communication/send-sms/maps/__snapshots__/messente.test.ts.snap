@@ -1,21 +1,17 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`communication/send-sms/messente RetrieveMessageStatus should perform successfully 1`] = `
-Err {
-  "error": "HTTPError: Expected HTTP error
-Properties: {
-  \\"title\\": \\"Not found\\",
-  \\"detail\\": \\"Message with id ad58d42e-ece2-4faa-8f90-9dd3bd412b4e not found not found\\"
-}
-AST Path: definitions[1].statements[0].responseHandlers[1].statements[0]
-Original Map Location: Line 69, column 5",
+Ok {
+  "value": Object {
+    "deliveryStatus": "delivered",
+  },
 }
 `;
 
 exports[`communication/send-sms/messente SendMessage should perform successfully 1`] = `
 Ok {
   "value": Object {
-    "messageId": "248f0257-6daf-42c1-a9b2-b7543265bc32",
+    "messageId": "ea957d09-7221-4377-a2b6-fc8751426c6d",
   },
 }
 `;
