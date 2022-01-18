@@ -2,13 +2,6 @@
   "profiles": {
     "communication/send-sms": {
       "file": "../grid/communication/send-sms/profile.supr",
-      "priority": [
-        "twilio",
-        "tyntec",
-        "vonage-nexmo",
-        "plivo",
-        "messente"
-      ],
       "providers": {
         "twilio": {
           "file": "../grid/communication/send-sms/maps/twilio.suma",
@@ -243,11 +236,6 @@
     },
     "weather/current-city": {
       "file": "../grid/weather/current-city/profile.supr",
-      "priority": [
-        "mock",
-        "wttr-in",
-        "openweathermap"
-      ],
       "providers": {
         "mock": {
           "file": "../grid/weather/current-city/maps/mock.suma"
@@ -329,10 +317,6 @@
     },
     "language/translate": {
       "file": "../grid/language/translate/profile.supr",
-      "priority": [
-        "deepl",
-        "mock"
-      ],
       "providers": {
         "deepl": {
           "file": "../grid/language/translate/maps/deepl.suma"
