@@ -1,0 +1,35 @@
+name = "social-media/publishing-profiles"
+version = "1.0.0"
+
+"""
+Get Profiles for Publishing
+Relevant social-media profiles (pages, accounts) user is authorized to publish to.
+"""
+usecase GetProfilesForPublishing safe {
+  result {
+    profiles [
+      {
+        "Profile ID"
+        id! string
+        "Profile name (non-unique)"
+        name string
+        "Vanity name (where applicable)"
+        username string
+        "Profile image (avatar) URL"
+        imageUrl string
+      }
+  ]}
+
+  error {
+    """
+    Title
+    A short, human-readable summary of the problem type.
+    """
+    title!
+
+    """
+    A human-readable explanation specific to this occurrence of the problem.
+    """
+    detail
+  }
+}
