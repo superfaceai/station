@@ -43,25 +43,25 @@ map RetrieveMessageStatus {
 			map result {
 				deliveryStatus = (() => {
 					switch (body.statuses[0].status) {
-							case 'ACK':
-							case 'ACCEPTD':
-								return 'accepted'
-							case 'DELIVRD':
-								return 'delivered';
-							case 'SEEN':
-								return 'seen';
-							case 'UNDELIV':
-							case 'FAILED':
-							case 'REJECTD':
-							case 'DELETED':
-							case 'EXPIRED':
-							case 'NACK':
-								return 'failed';
-							case 'UNKNOWN':
-								return 'unknown'
-						}
+						case 'ACK':
+						case 'ACCEPTD':
+							return 'accepted'
+						case 'DELIVRD':
+							return 'delivered';
+						case 'SEEN':
+							return 'seen';
+						case 'UNDELIV':
+						case 'FAILED':
+						case 'REJECTD':
+						case 'DELETED':
+						case 'EXPIRED':
+						case 'NACK':
+							return 'failed';
+						case 'UNKNOWN':
+						default:
+							return 'unknown'
 					}
-				)
+				})()
 			}
 		}
 
