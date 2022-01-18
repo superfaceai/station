@@ -1,0 +1,50 @@
+// Facebook Graph API Reference: https://developer.twitter.com/en/docs/twitter-api
+
+profile = "social-media/publish-post@1.0"
+provider = "twitter"
+
+map PublishPost {
+  return map error if (input.media && input.media.length > 0) {
+    title = "Media publishing not implemented"
+    detail = "Publishing media to Twitter provider is not yet supported."
+  }
+
+  http POST "/2/tweets" {
+
+    request {
+      headers {
+        authorization = "Bearer " + parameters.accessToken
+      }
+      body {
+        text = input.text
+      }
+    }
+
+    response 201 "application/json" {
+      map result {
+        postId =  body.data.id
+      }
+    }
+
+    response 400 "application/json" {
+      map error {
+        title = "Bad request"
+        detail = body.detail
+      }
+    }
+
+    response 401 "application/json" {
+      map error {
+        title = "Unauthenticated"
+        detail = body.detail
+      }
+    }
+
+    response 403 "application/json" {
+      map error {
+        title = "Forbidden"
+        detail = body.detail
+      }
+    }
+  }
+}
