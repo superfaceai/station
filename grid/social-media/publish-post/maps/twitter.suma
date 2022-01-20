@@ -23,6 +23,7 @@ map PublishPost {
     response 201 "application/json" {
       map result {
         postId =  body.data.id
+        url = 'https://twitter.com/i/status/' + body.data.id
       }
     }
 
