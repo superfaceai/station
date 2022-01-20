@@ -33,12 +33,18 @@ map PublishPost {
 
   call PublishPhotoPost(pageId = profileId, pageAccessToken = token, input = input) if (media.length > 0) {
     map error if (outcome.error) outcome.error
-    return map result outcome.data
+    return map result if (outcome.data) {
+      postId = outcome.data.postId
+      url = outcome.data.link
+    }
   }
   // just text / link -> POST "/{apiVersion}/{profileId}/feed"
   call PublishTextPost(pageId = profileId, pageAccessToken = token, input = input) {
     map error if (outcome.error) outcome.error
-    return map result outcome.data
+    return map result if (outcome.data)  {
+      postId = outcome.data.postId
+      url = outcome.data.link
+    }
   }
 
 }
