@@ -1,7 +1,10 @@
 /* eslint-disable jest/no-export */
-import { SuperfaceTest } from '@superfaceai/testing';
+import { RecordingProcessOptions, SuperfaceTest } from '@superfaceai/testing';
 
-export const publishPostTest = (provider: string): void => {
+export const publishPostTest = (
+  provider: string,
+  hooks?: RecordingProcessOptions
+): void => {
   describe(`social-media/publish-post/${provider}`, () => {
     let superfacePublishingProfiles: SuperfaceTest;
     let superfacePublisPost: SuperfaceTest;
@@ -19,7 +22,7 @@ export const publishPostTest = (provider: string): void => {
 
     describe('PublishPost', () => {
       describe('when publishing text post', () => {
-        it('should return succeed', async () => {
+        it('should succeed', async () => {
           const result = await superfacePublishingProfiles.run({
             useCase: 'GetProfilesForPublishing',
             input: {},
@@ -29,14 +32,17 @@ export const publishPostTest = (provider: string): void => {
           const resultUnwrapped = result.unwrap();
 
           await expect(
-            superfacePublisPost.run({
-              useCase: 'PublishPost',
-              input: {
-                // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-explicit-any
-                profileId: (resultUnwrapped as any).profiles[0].id,
-                text: `Test from Superface Station.`,
+            superfacePublisPost.run(
+              {
+                useCase: 'PublishPost',
+                input: {
+                  // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-explicit-any
+                  profileId: (resultUnwrapped as any).profiles[0].id,
+                  text: `Test from Superface Station 7.`,
+                },
               },
-            })
+              hooks
+            )
           ).resolves.toMatchSnapshot();
         });
       });
