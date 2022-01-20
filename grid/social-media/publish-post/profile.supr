@@ -69,29 +69,24 @@ usecase PublishPost unsafe {
 
   example Successful {
     input {
-      feed = {
-        accessToken = 'EAA8i39yoLFlweowsE3dV31224zNLG5IKIERYg3n3AkCOZBsZCdpe3ChyNDpCcCeovj8q4pns6nwSwZA9QrIyse5FJIFj1r6eeiOMDf60sGit5f45fgIipVqpS',
-        pageId = '110138490'
-      }
+      profileId = '110658944785122',
       text = 'Text of the Post.',
     }
 
     result {
-      postId = "04098b6e-0631-4cb1-8b47-295c7f4de739",
+      postId = '110658944785122_125682506616099',
+      url = 'https://www.facebook.com/110658944785122/posts/125682506616099/',
     }
   }
 
   example Failed {
     input {
-      feed = {
-        accessToken = 'invalid access token',
-        pageId = '2'
-      }
+      profileId = 'invalid profile ID',
       text = 'Text of the Post.',
     }
 
     error {
-      title = 'Unauthorized'
+      title = 'Bad request'
     }
   }
 }
