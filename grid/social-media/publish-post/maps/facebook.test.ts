@@ -3,7 +3,7 @@ import { env } from 'process';
 
 import { publishPostTest } from './publish-post';
 
-const ACCESS_TOKEN_REDACTED_VALUE = 'PARAMS_pageAccessToken';
+const PAGE_ACCESS_TOKEN_REDACTED_VALUE = 'PAGE_ACCESS_TOKEN_VALUE_REDACTED';
 
 const beforeRecordingSave = function (recordings: RecordingDefinitions) {
   let pageAccessToken: string | undefined;
@@ -12,7 +12,7 @@ const beforeRecordingSave = function (recordings: RecordingDefinitions) {
     if (pageAccessToken) {
       recording.path = recording.path.replace(
         pageAccessToken,
-        ACCESS_TOKEN_REDACTED_VALUE
+        PAGE_ACCESS_TOKEN_REDACTED_VALUE
       );
     }
     if (recording.response) {
@@ -21,7 +21,7 @@ const beforeRecordingSave = function (recordings: RecordingDefinitions) {
         pageAccessToken = response.access_token;
         recording.response = {
           ...response,
-          access_token: ACCESS_TOKEN_REDACTED_VALUE,
+          access_token: PAGE_ACCESS_TOKEN_REDACTED_VALUE,
         };
       }
     }
@@ -31,7 +31,7 @@ const beforeRecordingSave = function (recordings: RecordingDefinitions) {
 const beforeRecordingLoad = function (recordings: RecordingDefinitions) {
   recordings.forEach(recording => {
     recording.path.replace(
-      ACCESS_TOKEN_REDACTED_VALUE,
+      PAGE_ACCESS_TOKEN_REDACTED_VALUE,
       env.FACEBOOK_ACCESS_TOKEN || 'xxx'
     );
   });
