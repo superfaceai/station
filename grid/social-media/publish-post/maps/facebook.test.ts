@@ -4,6 +4,7 @@ import { publishPostTest } from './publish-post';
 
 const PAGE_ACCESS_TOKEN_REDACTED_VALUE = 'PAGE_ACCESS_TOKEN_VALUE_REDACTED';
 
+// Remove page access tokens from internal requests and responses
 const beforeRecordingSave = function (recordings: RecordingDefinitions) {
   let pageAccessToken: string | undefined;
 
