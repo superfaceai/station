@@ -1,5 +1,4 @@
 import { RecordingDefinitions } from '@superfaceai/testing';
-import { env } from 'process';
 
 import { publishPostTest } from './publish-post';
 
@@ -28,16 +27,6 @@ const beforeRecordingSave = function (recordings: RecordingDefinitions) {
   });
 };
 
-const beforeRecordingLoad = function (recordings: RecordingDefinitions) {
-  recordings.forEach(recording => {
-    recording.path.replace(
-      PAGE_ACCESS_TOKEN_REDACTED_VALUE,
-      env.FACEBOOK_ACCESS_TOKEN || 'xxx'
-    );
-  });
-};
-
 publishPostTest('facebook', {
   beforeRecordingSave,
-  beforeRecordingLoad,
 });
