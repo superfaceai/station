@@ -1,0 +1,140 @@
+// Instagram Graph API Reference: https://developers.facebook.com/docs/instagram-api
+
+profile = "social-media/publish-post@1.0"
+provider = "instagram"
+
+map PublishPost {
+  apiVersion = 'v12.0'
+  businessAccountId = input.profileId
+  authorizationHeaderValue = 'Bearer ' + parameters.accessToken
+
+  media = input.media || []
+
+  return map error if(media.length === 0 || !media[0].url) { 
+    title = "Media url required"
+    detail = "You must provide one media with URL for Instagram provider"
+  }
+
+  return map error if(media.length > 1) {
+    title = "Too many media items"
+    detail = "Only 1 media item can be published with Instagram provider"
+  }
+
+
+  http POST "/{apiVersion}/{businessAccountId}/media" {
+
+    request {
+      query {
+        image_url = media[0].url,
+        caption = input.text
+      }
+
+      headers {
+        "authorization" = authorizationHeaderValue
+      }
+    }
+
+    response 200 "application/json" {
+      igContainerId =  body.id
+    }
+
+    response 400 "application/json" {
+      return map error {
+        title = "Bad request"
+        detail = body.error.message
+      }
+    }
+
+    response 401 "application/json" {
+      return map error {
+        title = "Unauthenticated"
+        detail = body.error.message
+      }
+    }
+
+    response 403 "application/json" {
+      return map error {
+        title = "Forbidden"
+        detail = body.error.message
+      }
+    }
+  }
+
+  http POST "/{apiVersion}/{businessAccountId}/media_publish" {
+    request {
+      query {
+        creation_id = igContainerId
+      }
+
+      headers {
+        "authorization" = authorizationHeaderValue
+      }
+    }
+
+    response 200 "application/json" {
+      postId = body.id
+    }
+
+    response 400 "application/json" {
+      map error {
+        title = "Bad request"
+        detail = body.error.message
+      }
+    }
+
+    response 401 "application/json" {
+      return map error {
+        title = "Unauthenticated"
+        detail = body.error.message
+      }
+    }
+
+    response 403 "application/json" {
+      return map error {
+        title = "Forbidden"
+        detail = body.error.message
+      }
+    }
+  }
+
+  // 3rd request because there doesn't seem to be another way to read-on-create the permalink or ig_id fields, or to convert Graph API ID to a working URL
+  http GET "/{apiVersion}/{postId}" {
+    request {
+      query {
+        fields = "permalink"
+      }
+
+      headers {
+        "authorization" = authorizationHeaderValue
+      }
+    }
+
+    response 200 "application/json" {
+      map result {
+        postId = postId
+        url = body.permalink
+      }
+    }
+
+    response 400 "application/json" {
+      map error {
+        title = "Bad request"
+        detail = body.error.message
+      }
+    }
+
+    response 401 "application/json" {
+      return map error {
+        title = "Unauthenticated"
+        detail = body.error.message
+      }
+    }
+
+    response 403 "application/json" {
+      return map error {
+        title = "Forbidden"
+        detail = body.error.message
+      }
+    }
+  }
+}

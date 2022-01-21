@@ -384,6 +384,40 @@
           "file": "../grid/speech/recognize/maps/assemblyai.suma"
         }
       }
+    },
+    "social-media/publishing-profiles": {
+      "file": "../grid/social-media/publishing-profiles/profile.supr",
+      "providers": {
+        "mock": {
+          "file": "../grid/social-media/publishing-profiles/maps/mock.suma"
+        },
+        "facebook": {
+          "file": "../grid/social-media/publishing-profiles/maps/facebook.suma"
+        },
+        "instagram": {
+          "file": "../grid/social-media/publishing-profiles/maps/instagram.suma"
+        },
+        "twitter": {
+          "file": "../grid/social-media/publishing-profiles/maps/twitter.suma"
+        }
+      }
+    },
+    "social-media/publish-post": {
+      "file": "../grid/social-media/publish-post/profile.supr",
+      "providers": {
+        "mock": {
+          "file": "../grid/social-media/publish-post/maps/mock.suma"
+        },
+        "facebook": {
+          "file": "../grid/social-media/publish-post/maps/facebook.suma"
+        },
+        "instagram": {
+          "file": "../grid/social-media/publish-post/maps/instagram.suma"
+        },
+        "twitter": {
+          "file": "../grid/social-media/publish-post/maps/twitter.suma"
+        }
+      }
     }
   },
   "providers": {
@@ -782,6 +816,24 @@
           "password": "$MESSENTE_API_PASSWORD"
         }
       ]
+    },
+    "facebook": {
+      "file": "../providers/facebook.json",
+      "parameters": {
+        "accessToken": "$FACEBOOK_ACCESS_TOKEN"
+      }
+    },
+    "instagram": {
+      "file": "../providers/instagram.json",
+      "parameters": {
+        "accessToken": "$INSTAGRAM_ACCESS_TOKEN"
+      }
+    },
+    "twitter": {
+      "file": "../providers/twitter.json",
+      "parameters": {
+        "accessToken": "$TWITTER_ACCESS_TOKEN"
+      }
     }
   }
 }

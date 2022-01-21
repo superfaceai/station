@@ -1,0 +1,253 @@
+// Facebook Graph API Reference: https://developers.facebook.com/docs/graph-api/
+
+profile = "social-media/publish-post@1.0"
+provider = "facebook"
+
+"""
+Publish post to Facebook profile (page)
+"""
+map PublishPost {
+  apiVersion = call GetApiVersion()
+  profileId = input.profileId
+  media = input.media || []
+
+  return map error if(!profileId) { 
+    title = "profileId field is missing"
+    detail = "Missing or invalid profileId, either page or group ID is expected"
+  }
+
+  return map error if(media.length === 0 && !input.text && !input.link) {
+    title = "Missing text or link"
+    detail = "Either text or link fields must be non-empty for text posts"
+  }
+
+  call GetPageAccessToken(pageId = profileId, userAccessToken = parameters.accessToken) {
+    return map error if (outcome.error) outcome.error
+    
+    token = outcome.data.pageAccessToken
+  }
+
+  set if(!token) {
+    token = parameters.accessToken
+  }
+
+  call PublishPhotoPost(pageId = profileId, pageAccessToken = token, input = input) if (media.length > 0) {
+    map error if (outcome.error) outcome.error
+    return map result if (outcome.data) {
+      postId = outcome.data.postId
+      url = outcome.data.link
+    }
+  }
+  // just text / link -> POST "/{apiVersion}/{profileId}/feed"
+  call PublishTextPost(pageId = profileId, pageAccessToken = token, input = input) {
+    map error if (outcome.error) outcome.error
+    return map result if (outcome.data)  {
+      postId = outcome.data.postId
+      url = outcome.data.link
+    }
+  }
+
+}
+
+operation GetPageAccessToken {
+  return if(!args.pageId) {}
+
+  apiVersion = call GetApiVersion()
+
+  http GET "/{apiVersion}/{args.pageId}" {
+    request {
+      query {
+        fields = 'access_token',
+        access_token = args.userAccessToken
+      }
+    }
+
+    response 200 "application/json" {
+      return {
+        pageAccessToken = body.access_token
+      }
+    }
+
+    response 400 "application/json" {
+      fail {
+        title = "Bad request"
+        detail = body.error.message
+      }
+    }
+
+    response 401 "application/json" {
+      fail {
+        title = "Unauthenticated"
+        detail = body.error.message
+      }
+    }
+
+    response 403 "application/json" {
+      fail {
+        title = "Forbidden"
+        detail = body.error.message
+      }
+    }
+  }
+}
+
+operation PublishTextPost {
+  input = args.input
+
+  apiVersion = call GetApiVersion()
+
+  http POST "/{apiVersion}/{args.pageId}/feed" {
+    request {
+      query {
+        access_token = args.pageAccessToken,
+        link = input.link,
+        message = input.text,
+        fields = "id,permalink_url",
+      }
+    }
+
+    response 200 "application/json" {
+      return {
+        postId = body.id
+        link = body.permalink_url
+      }
+    }
+
+    response 400 "application/json" {
+      fail {
+        title = "Bad request"
+        detail = body.error.message
+      }
+    }
+
+    response 401 "application/json" {
+      fail {
+        title = "Unauthenticated"
+        detail = body.error.message
+      }
+    }
+
+    response 403 "application/json" {
+      fail {
+        title = "Forbidden"
+        detail = body.error.message
+      }
+    }
+  }
+}
+
+operation PublishPhotoPost {
+  // TODO:
+  // - single image -> https://developers.facebook.com/docs/graph-api/reference/photo#Creating
+  // - multiple images -> https://stackoverflow.com/a/39128878
+  input = args.input
+
+  apiVersion = call GetApiVersion()
+
+  photos = call foreach(photo of input.media) PublishPhoto(
+    pageAccessToken = args.pageAccessToken,
+    pageId = args.pageId,
+    photo = photo,
+  )
+
+  attachedMedia = photos.map((id) => {
+    // poor man's JSON encoding
+    return `{"media_fbid":"${id}"}`
+  }),
+
+  // Adding a link will override media attachments, so if the link is provided, just concat it to the message
+  message = `${input.text || ''} ${input.link || ''}`.trim()
+
+
+  http POST "/{apiVersion}/{args.pageId}/feed" {
+    // "message": "Photo post",
+    // "attached_media": [
+    //   "{\"media_fbid\":\"122266273624389\"}",
+    //   "{\"media_fbid\":\"122266476957702\"}"
+    // ]
+    request "application/json" {
+      body {
+        access_token = args.pageAccessToken,
+        message = message,
+        attached_media = attachedMedia,
+        fields = "id,permalink_url",
+      }
+    }
+
+    response 200 "application/json" {
+      return {
+        postId = body.id
+        link = body.permalink_url
+      }
+    }
+
+    response 400 "application/json" {
+      fail {
+        title = "Bad request"
+        detail = body.error.message
+      }
+    }
+
+    response 401 "application/json" {
+      fail {
+        title = "Unauthenticated"
+        detail = body.error.message
+      }
+    }
+
+    response 403 "application/json" {
+      fail {
+        title = "Forbidden"
+        detail = body.error.message
+      }
+    }
+  }
+
+
+}
+
+operation PublishPhoto {
+  apiVersion = call GetApiVersion()
+  photo = args.photo
+
+  http POST "/{apiVersion}/{args.pageId}/photos" {
+    request {
+      query {
+        access_token = args.pageAccessToken,
+        published = "false",
+        url = photo.url,
+        alt_text_custom = photo.altText,
+        fields = "id",
+      }
+    }
+
+    response 200 "application/json" {
+      return body.id
+    }
+
+    response 400 "application/json" {
+      fail {
+        title = "Bad request"
+        detail = body.error.message
+      }
+    }
+
+    response 401 "application/json" {
+      fail {
+        title = "Unauthenticated"
+        detail = body.error.message
+      }
+    }
+
+    response 403 "application/json" {
+      fail {
+        title = "Forbidden"
+        detail = body.error.message
+      }
+    }
+  }
+}
+
+operation GetApiVersion {
+  return 'v12.0'
+}
