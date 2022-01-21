@@ -1,0 +1,115 @@
+// Twitter API Reference: https://developer.twitter.com/en/docs/twitter-api
+
+profile = "social-media/posts@1.0"
+provider = "twitter"
+
+map GetProfilePosts {
+
+  http GET "/2/users/{input.profileId}/tweets" {
+
+    request {
+      query {
+        'tweet.fields' = 'id,text,created_at,attachments'
+        expansions = 'attachments.media_keys'
+        'media.fields' = 'duration_ms,height,media_key,preview_image_url,type,url,width,alt_text'
+        start_time = input.afterDate
+        end_time = input.beforeDate
+        pagination_token = input.page
+        max_results = 25
+      }
+      headers {
+        authorization = "Bearer " + parameters.accessToken
+      }
+    }
+
+    response 200 "application/json" {
+      posts = []
+
+      set if (body.meta.result_count > 0) {
+        //workaround for map interpreter variables merging issue
+        posts = call foreach(index of Array(body.data.length - 1).fill().map((_, i) => i)) MapTweetToPost(
+            index = index,
+            tweets = body.data,
+            includes = body.includes
+          )
+      }
+
+      map result {
+        posts = posts
+        previousPage = body.meta.previous_token
+        nextPage = body.meta.next_token
+      }
+    }
+
+    response 400 "application/json" {
+      map error {
+        title = "Bad request"
+        detail = body.detail
+      }
+    }
+
+    response 401 "application/json" {
+      map error {
+        title = "Unauthenticated"
+        detail = body.detail
+      }
+    }
+
+    response 403 "application/json" {
+      map error {
+        title = "Forbidden"
+        detail = body.detail
+      }
+    }
+  }
+}
+
+operation MapTweetToPost {
+  index = args.index
+  tweet = args.tweets[index]
+  includes = args.includes
+  attachments = []
+
+   set if(tweet && tweet.attachments && tweet.attachments.media_keys && includes.media) {
+    attachments = call foreach(mediaKey of tweet.attachments.media_keys) MapMediaAttachment(
+        mediaKey = mediaKey,
+        media = includes.media
+      )
+  }
+
+  return {
+    id = tweet.id
+    url = 'https://twitter.com/i/status/' + tweet.id
+    createdAt = tweet.created_at
+    text = tweet.text
+    attachments = attachments.filter((attachment) => { return attachment !== undefined })
+  }
+}
+
+operation MapMediaAttachment {
+  mediaKey = args.mediaKey
+  mediaList = args.media
+  result = undefined
+
+  foundMedia = mediaList.find((media) => { return media.media_key === mediaKey })
+
+  duration = undefined
+
+  set if(foundMedia && foundMedia.duration_ms) {
+    duration = foundMedia.duration_ms / 1000
+  }
+
+  set if(foundMedia) {
+    result = {
+      type: foundMedia.type,
+      url: foundMedia.url,
+      height: foundMedia.height,
+      width: foundMedia.width,
+      preview: foundMedia.preview_image_url,
+      altText: foundMedia.alt_text,
+      duration: duration
+    }
+  }
+
+  return result
+}
