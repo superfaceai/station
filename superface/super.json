@@ -36,6 +36,9 @@
         "plivo": {
           "file": "../grid/communication/send-sms/maps/plivo.suma"
         },
+        "messente": {
+          "file": "../grid/communication/send-sms/maps/messente.suma"
+        },
         "mock": {
           "file": "../grid/communication/send-sms/maps/mock.suma"
         }
@@ -233,11 +236,6 @@
     },
     "weather/current-city": {
       "file": "../grid/weather/current-city/profile.supr",
-      "priority": [
-        "mock",
-        "wttr-in",
-        "openweathermap"
-      ],
       "providers": {
         "mock": {
           "file": "../grid/weather/current-city/maps/mock.suma"
@@ -319,10 +317,6 @@
     },
     "language/translate": {
       "file": "../grid/language/translate/profile.supr",
-      "priority": [
-        "deepl",
-        "mock"
-      ],
       "providers": {
         "deepl": {
           "file": "../grid/language/translate/maps/deepl.suma"
@@ -373,14 +367,14 @@
     },
     "speech/recognize": {
       "file": "../grid/speech/recognize/profile.supr",
-       "providers": {
+      "providers": {
         "mock": {
           "file": "../grid/speech/recognize/maps/mock.suma"
         },
         "google-apis-speech": {
           "file": "../grid/speech/recognize/maps/google-apis-speech.suma"
         },
-         "ibm-cloud-speech-to-text": {
+        "ibm-cloud-speech-to-text": {
           "file": "../grid/speech/recognize/maps/ibm-cloud-speech-to-text.suma"
         },
         "azure-speech-to-text": {
@@ -747,7 +741,7 @@
     },
     "azure-speech-to-text": {
       "file": "../providers/azure-speech-to-text.json",
-       "security": [
+      "security": [
         {
           "id": "opc-subscription-key",
           "apikey": "$AZURE_SPEECH_TO_TEXT_SUBSCRIPTION_KEY"
@@ -778,6 +772,16 @@
       "parameters": {
         "WEBSITE_ID": "$CRISP_WEBSITE_ID"
       }
+    },
+    "messente": {
+      "file": "../providers/messente.json",
+      "security": [
+        {
+          "id": "basic",
+          "username": "$MESSENTE_API_USERNAME",
+          "password": "$MESSENTE_API_PASSWORD"
+        }
+      ]
     }
   }
 }
