@@ -1,0 +1,107 @@
+// Facebook Graph API Reference: https://developers.facebook.com/docs/graph-api/
+
+profile = "social-media/posts@1.0"
+provider = "facebook"
+
+map GetProfilePosts {
+  apiVersion = 'v12.0'
+  profileId = input.profileId
+  after = undefined
+  before = undefined
+
+  // We need to pass information whether we are iterating forward (next), or backward (previous),
+  // but we use only the bare cursors, hence we need to enrich them with this info.
+  set if( input.page && input.page.startsWith('next:')) {
+    after = input.page.replace('next:','')
+  }
+
+  set if( input.page && input.page.startsWith('previous:')) {
+    before = input.page.replace('previous:','')
+  }
+
+  http GET "/{apiVersion}/{profileId}/feed" {
+
+    request {
+      query {
+          access_token = parameters.accessToken
+          after = after
+          before = before
+          limit = 25
+          fields = 'id,permalink_url,created_time,message,attachments,duration,height,width'
+      }
+    }
+
+    response 200 "application/json" {
+      posts = call foreach(post of body.data) MapPost(post = post)
+      previousPage = undefined
+      nextPage = undefined
+
+      set if(body.paging && body.paging.previous && body.paging.cursors && body.paging.cursors.before) {
+        previousPage = 'previous:' + body.paging.cursors.before
+      }
+
+       set if(body.paging && body.paging.next && body.paging.cursors && body.paging.cursors.after) {
+        nextPage = 'next:' + body.paging.cursors.after
+      }
+
+      return map result {
+        previousPage = previousPage
+        nextPage = nextPage
+        posts = posts
+      }
+    }
+
+    response 400 "application/json" {
+      return map error {
+        title = "Bad request"
+        detail = body.error.message
+      }
+    }
+
+    response 401 "application/json" {
+      return map error {
+        title = "Unauthenticated"
+        detail = body.error.message
+      }
+    }
+
+    response 403 "application/json" {
+      return map error {
+        title = "Forbidden"
+        detail = body.error.message
+      }
+    }
+  }
+}
+
+operation MapPost {
+  post = args.post
+  attachments = []
+
+  set if(post.attachments) {
+    attachments = call foreach(attachment of post.attachments.data) MapAttachment(attachment = attachment)
+  }
+  
+
+  return {
+    id = post.id
+    url = post.permalink_url
+    createdAt = post.created_time
+    text = post.message
+    attachments = attachments
+  }
+}
+
+operation MapAttachment {
+  attachment = args.attachment
+
+  return {
+    type = attachment.type
+    url = attachment.url
+    title = attachment.title
+    description = attachment.text
+    height = attachment.height
+    width = attachment.width
+    duration = attachment.duration
+  }
+}
