@@ -65,4 +65,31 @@ usecase GetFollowers safe {
     """
     detail
   }
+
+  example Successful {
+    input {
+      profileId = "429238130"
+    }
+
+    result {
+      followers = [
+        {
+          id = "1466796521412771840",
+          username = "superface_test",
+          imageUrl = "https://pbs.twimg.com/profile_images/1478302204306067462/5BEbrnPO_normal.jpg",
+        }
+      ],
+      nextPage = "QVFIUjc2Y01oQ3F1bHk5WHNzNVVuS2ZAMSEtpdkxmbC1FV09XcGNmTUc4ZAkhrMlBPU19LYkM0dFY4"
+    }
+  }
+
+  example Failed {
+    input {
+      profileId = "429238130"
+    }
+
+    error {
+      title = 'Rate limit exceeded'
+    }
+  }
 }
