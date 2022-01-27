@@ -1,0 +1,67 @@
+profile = "chat/get-messages@1.0"
+provider = "slack"
+
+"""
+GetMessages map
+"""
+map GetMessages {
+    http GET "/conversations.history" {
+        request "application/x-www-form-urlencoded" {
+            query {
+                channel = input.destination
+                latest = input.afterDate
+                cursor = input.page
+                limit = input.limit || 999
+            }
+
+            headers {
+                "Authorization" = `Bearer ${parameters.accessToken}`
+            }
+        }
+
+        response 200 "application/json" {
+            return map error if (body.ok === false) {
+                title = body.error
+            }
+
+            messages = body.messages.filter(message => message.type === 'message')
+            
+            set if(messages.length > 0) {
+                messages = messages.map((message) => ({
+                    id: message.ts,
+                    author: message.user || message.bot_id || undefined,
+                    channelId: message.channel,
+                    threadId: message.thread_ts,
+                    
+                    text: message.text,
+                    createdAt: message.ts,
+                    updatedAt: message.edited ? message.edited.ts : undefined,
+                    
+                    reactions: 
+                        message.reactions 
+                        ? message.reactions.map(reaction => ({
+                            emoji: reaction.name,
+                            count: reaction.count,
+                            users: reaction.users
+                        })) 
+                        : undefined
+                }))
+            }
+
+            return map result if (body.has_more === true) {
+                nextPage = body.response_metadata.next_cursor
+                messages = messages
+            }
+
+            return map result {
+                messages = messages
+            }
+        }
+
+        response "application/json" {
+            map error {
+                title = body.error
+            }
+        }
+    }
+}

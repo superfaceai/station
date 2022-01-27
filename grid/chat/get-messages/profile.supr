@@ -1,0 +1,47 @@
+name = "chat/get-messages"
+version = "1.0.0"
+
+"""
+GetMessages usecase
+"""
+usecase GetMessages {
+	input {
+		destination! string!
+		afterDate string
+        limit number
+		page string
+	}
+	
+	result Messages
+	error Error
+}
+
+model Message {
+	id! string!
+	author! string!
+	channelId string!
+	threadId string
+
+	text string
+	createdAt string
+	updatedAt string
+
+	reactions [
+		{
+			emoji string
+			count number
+            users [string]
+		}
+	]
+}
+
+model Messages {
+	previousPage string
+	nextPage string
+	messages [Message]
+}
+
+model Error {
+	title!
+	detail
+}
