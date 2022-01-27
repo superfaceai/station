@@ -1,3 +1,3 @@
-import { getMessagesTest } from "./get-messages";
+import { getMessagesTest } from './get-messages';
 
-getMessagesTest('discord', 'random')
+getMessagesTest('discord', 'random');
