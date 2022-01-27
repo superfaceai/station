@@ -438,11 +438,10 @@
     },
     "chat/get-messages": {
       "file": "../grid/chat/get-messages/profile.supr",
-      "priority": [
-        "discord",
-        "slack"
-      ],
       "providers": {
+        "mock": {
+          "file": "../grid/chat/get-messages/maps/mock.suma"
+        },
         "discord": {
           "file": "../grid/chat/get-messages/maps/discord.suma"
         },
