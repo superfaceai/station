@@ -11,7 +11,7 @@ map GetMessages {
                 channel = input.destination
                 latest = input.afterDate
                 cursor = input.page
-                limit = input.limit || 999
+                limit = input.limit || 100
             }
 
             headers {
