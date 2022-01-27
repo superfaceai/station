@@ -435,6 +435,21 @@
           "file": "../grid/social-media/posts/maps/twitter.suma"
         }
       }
+    },
+    "chat/get-messages": {
+      "file": "./grid/chat/get-messages/profile.supr",
+      "priority": [
+        "discord",
+        "slack"
+      ],
+      "providers": {
+        "discord": {
+          "file": "./grid/chat/get-messages/maps/discord.suma"
+        },
+        "slack": {
+          "file": "./grid/chat/get-messages/maps/slack.suma"
+        }
+      }
     }
   },
   "providers": {
@@ -675,7 +690,16 @@
           "id": "bearer_token",
           "token": "$SLACK_ACCESS_TOKEN"
         }
-      ]
+      ],
+      "parameters": {
+        "accessToken": "$SLACK_ACCESS_TOKEN"
+      }
+    },
+    "discord": {
+      "file": "../providers/discord.json",
+      "parameters": {
+        "accessToken": "$DISCORD_ACCESS_TOKEN"
+      }
     },
     "wttr-in": {
       "file": "../providers/wttr-in.json",
