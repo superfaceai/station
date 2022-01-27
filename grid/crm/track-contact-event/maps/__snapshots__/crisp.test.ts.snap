@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`crm/track-contact-event/crisp TrackContactEvent performs successfully 1`] = `
+Ok {
+  "value": Object {
+    "contactId": "support+station@superface.ai",
+  },
+}
+`;
+
+exports[`crm/track-contact-event/crisp TrackContactEvent returns error for non existent contact 1`] = `
+Err {
+  "error": "HTTPError: Expected HTTP error
+Properties: {
+  \\"title\\": \\"Not found\\",
+  \\"detail\\": \\"Contact or website was not found or Crisp plugin is not subscribed. Make sure the Crisp website exists and uses your plugin\\"
+}
+AST Path: definitions[0].statements[0].responseHandlers[5].statements[0]
+Original Map Location: Line 58, column 7",
+}
+`;
