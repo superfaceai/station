@@ -1,3 +1,3 @@
 import { getMessagesTest } from "./get-messages";
 
-getMessagesTest('slack')
+getMessagesTest('slack', 'CF3H7S63W')

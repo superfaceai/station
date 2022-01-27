@@ -1,3 +1,3 @@
 import { getMessagesTest } from "./get-messages";
 
-getMessagesTest('discord')
+getMessagesTest('discord', 'random')

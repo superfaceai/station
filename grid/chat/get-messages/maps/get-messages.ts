@@ -4,6 +4,7 @@ import { RecordingProcessOptions, SuperfaceTest } from '@superfaceai/testing';
 
 export const getMessagesTest = (
   provider: string,
+  destination: string,
   options?: RecordingProcessOptions
 ): void => {
   describe(`chat/get-messages/${provider}`, () => {
@@ -23,7 +24,7 @@ export const getMessagesTest = (
           superface.run(
             {
               input: {
-                destination: 'random',
+                destination,
               },
             },
             options
