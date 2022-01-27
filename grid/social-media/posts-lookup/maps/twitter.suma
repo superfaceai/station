@@ -1,0 +1,166 @@
+// Twitter API Reference: https://developer.twitter.com/en/docs/twitter-api
+
+profile = "social-media/posts-lookup@1.0"
+provider = "twitter"
+
+map FindByHashtag {
+
+  http GET "/2/tweets/search/recent" {
+    
+    request {
+      query {
+        query = '#' + input.hashtag
+        'tweet.fields' = 'id,text,created_at,attachments'
+        expansions = 'attachments.media_keys'
+        'media.fields' = 'duration_ms,height,media_key,preview_image_url,type,url,width,alt_text'
+        start_time = input.afterDate
+        pagination_token = input.page
+        max_results = 100
+      }
+      headers {
+        authorization = "Bearer " + parameters.accessToken
+      }
+    }
+
+    response 200 "application/json" {
+      result = call MapSearchResult(body = body)
+
+      map result result
+    }
+
+    response {
+      error = call MapTwitterError(statusCode = statusCode, error = body)
+      map error error
+    }
+  }
+}
+
+map FindByMention {
+
+  http GET "/2/users/{input.profileId}/mentions" {
+
+    request {
+      query {
+        'tweet.fields' = 'id,text,created_at,attachments'
+        expansions = 'attachments.media_keys'
+        'media.fields' = 'duration_ms,height,media_key,preview_image_url,type,url,width,alt_text'
+        start_time = input.afterDate
+        pagination_token = input.page
+        max_results = 100
+      }
+      headers {
+        authorization = "Bearer " + parameters.accessToken
+      }
+    }
+
+    response 200 "application/json" {
+      result = call MapSearchResult(body = body)
+
+      map result result
+    }
+
+    response {
+      error = call MapTwitterError(statusCode = statusCode, error = body)
+      map error error
+    }
+  }
+}
+
+operation MapSearchResult {
+  body = args.body
+  posts = []
+
+  set if (body.meta.result_count > 0) {
+    //workaround for map interpreter variables merging issue
+    posts = call foreach(index of Array(body.data.length - 1).fill().map((_, i) => i)) MapTweetToPost(
+      index = index,
+      tweets = body.data,
+      includes = body.includes
+    )
+  }
+
+  return {
+    posts = posts
+    previousPage = body.meta.previous_token
+    nextPage = body.meta.next_token
+  }
+}
+
+operation MapTweetToPost {
+  index = args.index
+  tweet = args.tweets[index]
+  includes = args.includes
+  attachments = []
+
+   set if(tweet && tweet.attachments && tweet.attachments.media_keys && includes.media) {
+    attachments = call foreach(mediaKey of tweet.attachments.media_keys) MapMediaAttachment(
+        mediaKey = mediaKey,
+        media = includes.media
+      )
+  }
+
+  return {
+    id = tweet.id
+    url = 'https://twitter.com/i/status/' + tweet.id
+    createdAt = tweet.created_at
+    text = tweet.text
+    attachments = attachments.filter((attachment) => { return attachment !== undefined })
+  }
+}
+
+operation MapMediaAttachment {
+  mediaKey = args.mediaKey
+  mediaList = args.media
+  result = undefined
+
+  foundMedia = mediaList.find((media) => { return media.media_key === mediaKey })
+
+  duration = undefined
+
+  set if(foundMedia && foundMedia.duration_ms) {
+    duration = foundMedia.duration_ms / 1000
+  }
+
+  set if(foundMedia) {
+    result = {
+      type: foundMedia.type,
+      url: foundMedia.url,
+      height: foundMedia.height,
+      width: foundMedia.width,
+      preview: foundMedia.preview_image_url,
+      altText: foundMedia.alt_text,
+      duration: duration
+    }
+  }
+
+  return result
+}
+
+operation MapTwitterError {
+  statusCode = args.statusCode
+  twitterError = args.error
+
+  return if (statusCode === 400) {
+    title = "Bad request"
+    detail = twitterError.detail
+  }
+
+  return if (statusCode === 401) {
+    title = "Unauthenticated"
+    detail = twitterError.detail
+  }
+
+  return if (statusCode === 403) {
+    title = "Forbidden"
+    detail = twitterError.detail
+  }
+
+  return if (statusCode === 429) {
+    title = "Rate limit exceeded"
+  }
+
+  return {
+    title = "Unknown error"
+    detail = (`Unknown error occurred. Status: ${statusCode}`)
+  }
+}
