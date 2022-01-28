@@ -1,0 +1,79 @@
+// Twitter API Reference: https://developer.twitter.com/en/docs/twitter-api
+
+profile = "social-media/followers@1.0"
+provider = "twitter"
+
+// Required Twitter OAuth 2.0 scopes:
+//  - tweet.read
+//  - users.read
+//  - follows.read
+
+map GetFollowers {
+
+  http GET "/2/users/{input.profileId}/followers" {
+
+    request {
+      query {
+        'user.fields' = 'id,username,profile_image_url'
+        pagination_token = input.page
+        max_results = 100
+      }
+      headers {
+        authorization = "Bearer " + parameters.accessToken
+      }
+    }
+
+    response 200 "application/json" {
+      followers = []
+
+      set if (body.meta.result_count > 0) {
+        followers = call foreach(follower of body.data) MapFollower(
+            follower = follower
+          )
+      }
+
+      map result {
+        followers = followers
+        previousPage = body.meta.previous_token
+        nextPage = body.meta.next_token
+      }
+    }
+
+    response 400 "application/json" {
+      map error {
+        title = "Bad request"
+        detail = body.detail
+      }
+    }
+
+    response 401 "application/json" {
+      map error {
+        title = "Unauthenticated"
+        detail = body.detail
+      }
+    }
+
+    response 403 "application/json" {
+      map error {
+        title = "Forbidden"
+        detail = body.detail
+      }
+    }
+
+    response 429 "application/json" {
+      map error {
+        title = "Rate limit exceeded"
+      }
+    }
+  }
+}
+
+operation MapFollower {
+  follower = args.follower
+
+  return {
+    id: follower.id,
+    username: follower.username,
+    imageUrl: follower.profile_image_url
+  }
+}
