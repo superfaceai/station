@@ -4,7 +4,7 @@ import { RecordingProcessOptions, SuperfaceTest } from '@superfaceai/testing';
 
 export const getMessagesTest = (
   provider: string,
-  destination: string,
+  destination: string[],
   options?: RecordingProcessOptions
 ): void => {
   describe(`chat/get-messages/${provider}`, () => {
@@ -19,17 +19,34 @@ export const getMessagesTest = (
         });
       });
 
-      it('performs correctly', async () => {
-        await expect(
-          superface.run(
-            {
-              input: {
-                destination,
+      describe('when specified destination does exist', () => {
+        it('performs correctly', async () => {
+          await expect(
+            superface.run(
+              {
+                input: {
+                  destination: destination[0],
+                },
               },
-            },
-            options
-          )
-        ).resolves.toMatchSnapshot();
+              options
+            )
+          ).resolves.toMatchSnapshot();
+        });
+      });
+
+      describe('when specified destination does not exist', () => {
+        it('returns error', async () => {
+          await expect(
+            superface.run(
+              {
+                input: {
+                  destination: destination[1],
+                },
+              },
+              options
+            )
+          ).resolves.toMatchSnapshot();
+        });
       });
     });
   });

@@ -5,6 +5,10 @@ provider = "mock"
 GetMessages map
 """
 map GetMessages {
+    return map error if(input.destination === 'not-existing-dest') {
+        title = 'channel_not_found'
+    }
+
     map result {
         messages = [
             {

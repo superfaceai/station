@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`chat/get-messages/slack GetMessages performs correctly 1`] = `
+exports[`chat/get-messages/slack GetMessages when specified destination does exist performs correctly 1`] = `
 Ok {
   "value": Object {
     "messages": Array [
@@ -54,5 +54,16 @@ Ok {
       },
     ],
   },
+}
+`;
+
+exports[`chat/get-messages/slack GetMessages when specified destination does not exist returns error 1`] = `
+Err {
+  "error": "HTTPError: Expected HTTP error
+Properties: {
+  \\"title\\": \\"channel_not_found\\"
+}
+AST Path: definitions[0].statements[0].responseHandlers[0].statements[0]
+Original Map Location: Line 24, column 13",
 }
 `;
