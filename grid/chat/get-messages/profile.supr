@@ -3,12 +3,32 @@ version = "1.0.0"
 
 """
 GetMessages usecase
+Retrieve paginated list of messages
 """
 usecase GetMessages {
 	input {
+		"""
+		Destination
+		Identification of destination to retrieve messages from
+		"""
 		destination! string!
+		
+		"""
+		AfterDate
+		Date that marks beginning of messages range until current time
+		"""
 		afterDate string
-        limit number
+        
+		"""
+		Limit
+		Maximum number of records to retrieve
+		"""
+		limit number
+		
+		"""
+		Page
+		Identification of page to retrieve
+		"""
 		page string
 	}
 	
@@ -44,15 +64,52 @@ usecase GetMessages {
 }
 
 model Message {
+	"""
+	Id
+	Identification of message
+	"""
 	id! string!
+
+	"""
+	Author
+	Author of retrieved message
+	"""
 	author! string!
-	channelId string!
+
+	"""
+	Destination
+	Destination of retrieved message
+	"""
+	destination string!
+
+	"""
+	ThreadId
+	Thread destination of retrieved message
+	"""
 	threadId string
 
+	"""
+	Text
+	Content of retrieved message
+	"""
 	text string
+
+	"""
+	CreatedAt
+	Date retrieved message was created
+	"""
 	createdAt string
+
+	"""
+	CreatedAt
+	Date retrieved message was last updated
+	"""
 	updatedAt string
 
+	"""
+	Reactions
+	List of reactions on retrieved message
+	"""
 	reactions [
 		{
 			emoji string
@@ -63,12 +120,34 @@ model Message {
 }
 
 model Messages {
+	"""
+	PreviousPage
+	Identification of previous page
+	"""
 	previousPage string
+	
+	"""
+	NextPage
+	Identification of next page
+	"""
 	nextPage string
+
+	"""
+	Messages
+	List of retrieved messages
+	"""
 	messages [Message]
 }
 
 model Error {
-	title!
+	"""
+    Title
+    A short, human-readable summary of the problem type.
+    """
+    title!
+
+    """
+    A human-readable explanation specific to this occurrence of the problem.
+    """
 	detail
 }
