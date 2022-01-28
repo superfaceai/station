@@ -14,6 +14,33 @@ usecase GetMessages {
 	
 	result Messages
 	error Error
+
+	example Successfull {
+		input {
+			destination = 'general',
+			limit = 2
+		}
+
+		result {
+			messages = [
+				{
+					id = '1'
+					author = 'U01',
+					text = 'success!'
+				}
+			]
+		}
+	}
+
+	example Failed {
+		input {
+			destination = 'not-existing',
+		}
+
+		error {
+			title = 'channel_not_found'
+		}
+	}
 }
 
 model Message {
