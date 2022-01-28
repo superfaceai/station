@@ -20,33 +20,12 @@ map GetMessages {
         }
 
         response 200 "application/json" {
+            // See https://api.slack.com/methods/conversations.history#errors for more information about errors
             return map error if (body.ok === false) {
                 title = body.error
             }
 
-            messages = body.messages.filter(message => message.type === 'message')
-            
-            set if(messages.length > 0) {
-                messages = messages.map((message) => ({
-                    id: message.ts,
-                    author: message.user || message.bot_id || undefined,
-                    channelId: message.channel,
-                    threadId: message.thread_ts,
-                    
-                    text: message.text,
-                    createdAt: message.ts,
-                    updatedAt: message.edited ? message.edited.ts : undefined,
-                    
-                    reactions: 
-                        message.reactions 
-                        ? message.reactions.map(reaction => ({
-                            emoji: reaction.name,
-                            count: reaction.count,
-                            users: reaction.users
-                        })) 
-                        : undefined
-                }))
-            }
+            messages = call MapMessages(messages = body.messages)
 
             return map result if (body.has_more === true) {
                 nextPage = body.response_metadata.next_cursor
@@ -58,10 +37,45 @@ map GetMessages {
             }
         }
 
+        response 429 {
+            map error {
+                title = 'Too Many Requests'
+                detail = `Retry after ${headers['Retry-After']} seconds`
+            }
+        }
+
         response "application/json" {
             map error {
                 title = body.error
             }
         }
     }
+}
+
+operation MapMessages {
+    messages = args.messages.filter(message => message.type === 'message')
+            
+    set if(messages.length > 0) {
+        messages = messages.map((message) => ({
+            id: message.ts,
+            author: message.user || message.bot_id || undefined,
+            channelId: message.channel,
+            threadId: message.thread_ts,
+            
+            text: message.text,
+            createdAt: message.ts,
+            updatedAt: message.edited ? message.edited.ts : undefined,
+            
+            reactions: 
+                message.reactions 
+                ? message.reactions.map(reaction => ({
+                    emoji: reaction.name,
+                    count: reaction.count,
+                    users: reaction.users
+                })) 
+                : undefined
+        }))
+    }
+
+    return messages
 }
