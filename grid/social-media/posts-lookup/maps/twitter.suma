@@ -1,6 +1,6 @@
 // Twitter API Reference: https://developer.twitter.com/en/docs/twitter-api
 
-profile = "social-media/posts-lookup@1.0"
+profile = "social-media/posts-lookup@1.1"
 provider = "twitter"
 
 map FindByHashtag {
@@ -10,9 +10,10 @@ map FindByHashtag {
     request {
       query {
         query = '#' + input.hashtag
-        'tweet.fields' = 'id,text,created_at,attachments'
-        expansions = 'attachments.media_keys'
+        'tweet.fields' = 'id,text,created_at,attachments,referenced_tweets'
+        expansions = 'attachments.media_keys,author_id'
         'media.fields' = 'duration_ms,height,media_key,preview_image_url,type,url,width,alt_text'
+        'user.fields' = 'id,username'
         start_time = input.afterDate
         pagination_token = input.page
         max_results = 100
@@ -41,9 +42,10 @@ map FindByMention {
 
     request {
       query {
-        'tweet.fields' = 'id,text,created_at,attachments'
-        expansions = 'attachments.media_keys'
+        'tweet.fields' = 'id,text,created_at,attachments,referenced_tweets'
+        expansions = 'attachments.media_keys,author_id'
         'media.fields' = 'duration_ms,height,media_key,preview_image_url,type,url,width,alt_text'
+        'user.fields' = 'id,username'
         start_time = input.afterDate
         pagination_token = input.page
         max_results = 100
@@ -91,12 +93,27 @@ operation MapTweetToPost {
   tweet = args.tweets[index]
   includes = args.includes
   attachments = []
+  replyReference = undefined
+  replyId = undefined
+  author = undefined
 
-   set if(tweet && tweet.attachments && tweet.attachments.media_keys && includes.media) {
+  set if(tweet.attachments && tweet.attachments.media_keys && includes.media) {
     attachments = call foreach(mediaKey of tweet.attachments.media_keys) MapMediaAttachment(
         mediaKey = mediaKey,
         media = includes.media
       )
+  }
+
+  set if(tweet.referenced_tweets) {
+    replyReference = tweet.referenced_tweets.find(referencedTweet => referencedTweet.type === 'replied_to')
+  }
+
+  set if(replyReference !== undefined) {
+    replyId = replyReference.id
+  }
+
+  set if(tweet.author_id && includes.users) {
+    author = call MapUser(user = includes.users.find(user => user.id === tweet.author_id))
   }
 
   return {
@@ -104,7 +121,9 @@ operation MapTweetToPost {
     url = 'https://twitter.com/i/status/' + tweet.id
     createdAt = tweet.created_at
     text = tweet.text
-    attachments = attachments.filter((attachment) => { return attachment !== undefined })
+    replyId = replyId
+    author = author
+    attachments = attachments.filter(attachment => attachment !== undefined)
   }
 }
 
@@ -113,7 +132,7 @@ operation MapMediaAttachment {
   mediaList = args.media
   result = undefined
 
-  foundMedia = mediaList.find((media) => { return media.media_key === mediaKey })
+  foundMedia = mediaList.find(media => media.media_key === mediaKey)
 
   duration = undefined
 
@@ -163,4 +182,17 @@ operation MapTwitterError {
     title = "Unknown error"
     detail = (`Unknown error occurred. Status: ${statusCode}`)
   }
+}
+
+operation MapUser {
+  author = undefined
+
+  set if(args.user) {
+    author = {
+      id: args.user.id,
+      username: args.user.username
+    }
+  }
+
+  return author
 }

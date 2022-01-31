@@ -1,9 +1,9 @@
 name = "social-media/posts-lookup"
-version = "1.0.0"
+version = "1.1.0"
 
 """
-Search content by hashtag
-Search recent posts that match hashtag.
+Lookup posts by hashtag
+Lookup recent posts that match hashtag.
 """
 usecase FindByHashtag safe {
   input {
@@ -46,8 +46,8 @@ usecase FindByHashtag safe {
 }
 
 """
-Search content by mentions
-Search recent posts by mentions of social media profile.
+Lookup posts by mention
+Lookup recent posts by mentions of social media profile.
 """
 usecase FindByMention safe {
   input {
@@ -110,6 +110,25 @@ model Post {
   Text of the post.
   """
   text string
+  """
+  Reply ID
+  If the post is reply it contains ID of parent post
+  """
+  replyId string
+  """
+  Author
+  The author of the post
+  """
+  author {
+    """
+    User ID
+    """
+    id string
+    """
+    Username
+    """
+    username string
+  }
   """
   Attachments
   Sequential list of attachments.
