@@ -185,8 +185,14 @@ operation MapTwitterError {
 }
 
 operation MapUser {
-  return {
-    id = args.user.id
-    username = args.user.username
+  author = undefined
+
+  set if(args.user) {
+    author = {
+      id: args.user.id,
+      username: args.user.username
+    }
   }
+
+  return author
 }
