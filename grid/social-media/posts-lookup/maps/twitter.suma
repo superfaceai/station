@@ -105,7 +105,7 @@ operation MapTweetToPost {
   }
 
   set if(tweet.referenced_tweets) {
-    replyReference = tweet.referenced_tweets.find(referencedTweet => { return referencedTweet.type === 'replied_to'})
+    replyReference = tweet.referenced_tweets.find(referencedTweet => referencedTweet.type === 'replied_to')
   }
 
   set if(replyReference !== undefined) {
@@ -113,7 +113,7 @@ operation MapTweetToPost {
   }
 
   set if(tweet.author_id && includes.users) {
-    author = call MapUser(user = includes.users.find(user => { return user.id === tweet.author_id}))
+    author = call MapUser(user = includes.users.find(user => user.id === tweet.author_id))
   }
 
   return {
@@ -123,7 +123,7 @@ operation MapTweetToPost {
     text = tweet.text
     replyId = replyId
     author = author
-    attachments = attachments.filter((attachment) => { return attachment !== undefined })
+    attachments = attachments.filter(attachment => attachment !== undefined)
   }
 }
 
@@ -132,7 +132,7 @@ operation MapMediaAttachment {
   mediaList = args.media
   result = undefined
 
-  foundMedia = mediaList.find((media) => { return media.media_key === mediaKey })
+  foundMedia = mediaList.find(media => media.media_key === mediaKey)
 
   duration = undefined
 
