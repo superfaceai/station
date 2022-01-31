@@ -112,9 +112,23 @@ model Post {
   text string
   """
   Reply ID
-  If the post is reply, it contains ID of parent post
+  If the post is reply it contains ID of parent post
   """
   replyId string
+  """
+  Author
+  The author of the post
+  """
+  author {
+    """
+    User ID
+    """
+    id string
+    """
+    Username
+    """
+    username string
+  }
   """
   Attachments
   Sequential list of attachments.

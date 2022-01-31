@@ -11,8 +11,9 @@ map FindByHashtag {
       query {
         query = '#' + input.hashtag
         'tweet.fields' = 'id,text,created_at,attachments,referenced_tweets'
-        expansions = 'attachments.media_keys'
+        expansions = 'attachments.media_keys,author_id'
         'media.fields' = 'duration_ms,height,media_key,preview_image_url,type,url,width,alt_text'
+        'user.fields' = 'id,username'
         start_time = input.afterDate
         pagination_token = input.page
         max_results = 100
@@ -42,8 +43,9 @@ map FindByMention {
     request {
       query {
         'tweet.fields' = 'id,text,created_at,attachments,referenced_tweets'
-        expansions = 'attachments.media_keys'
+        expansions = 'attachments.media_keys,author_id'
         'media.fields' = 'duration_ms,height,media_key,preview_image_url,type,url,width,alt_text'
+        'user.fields' = 'id,username'
         start_time = input.afterDate
         pagination_token = input.page
         max_results = 100
@@ -93,6 +95,7 @@ operation MapTweetToPost {
   attachments = []
   replyReference = undefined
   replyId = undefined
+  author = undefined
 
   set if(tweet.attachments && tweet.attachments.media_keys && includes.media) {
     attachments = call foreach(mediaKey of tweet.attachments.media_keys) MapMediaAttachment(
@@ -109,12 +112,17 @@ operation MapTweetToPost {
     replyId = replyReference.id
   }
 
+  set if(tweet.author_id && includes.users) {
+    author = call MapUser(user = includes.users.find(user => { return user.id === tweet.author_id}))
+  }
+
   return {
     id = tweet.id
     url = 'https://twitter.com/i/status/' + tweet.id
     createdAt = tweet.created_at
     text = tweet.text
     replyId = replyId
+    author = author
     attachments = attachments.filter((attachment) => { return attachment !== undefined })
   }
 }
@@ -173,5 +181,12 @@ operation MapTwitterError {
   return {
     title = "Unknown error"
     detail = (`Unknown error occurred. Status: ${statusCode}`)
+  }
+}
+
+operation MapUser {
+  return {
+    id = args.user.id
+    username = args.user.username
   }
 }
