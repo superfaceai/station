@@ -10,7 +10,7 @@ map FindByHashtag {
     request {
       query {
         query = '#' + input.hashtag
-        'tweet.fields' = 'id,text,created_at,attachments'
+        'tweet.fields' = 'id,text,created_at,attachments,referenced_tweets'
         expansions = 'attachments.media_keys'
         'media.fields' = 'duration_ms,height,media_key,preview_image_url,type,url,width,alt_text'
         start_time = input.afterDate
@@ -41,7 +41,7 @@ map FindByMention {
 
     request {
       query {
-        'tweet.fields' = 'id,text,created_at,attachments'
+        'tweet.fields' = 'id,text,created_at,attachments,referenced_tweets'
         expansions = 'attachments.media_keys'
         'media.fields' = 'duration_ms,height,media_key,preview_image_url,type,url,width,alt_text'
         start_time = input.afterDate
@@ -91,12 +91,22 @@ operation MapTweetToPost {
   tweet = args.tweets[index]
   includes = args.includes
   attachments = []
+  replyReference = undefined
+  replyId = undefined
 
-   set if(tweet && tweet.attachments && tweet.attachments.media_keys && includes.media) {
+  set if(tweet.attachments && tweet.attachments.media_keys && includes.media) {
     attachments = call foreach(mediaKey of tweet.attachments.media_keys) MapMediaAttachment(
         mediaKey = mediaKey,
         media = includes.media
       )
+  }
+
+  set if(tweet.referenced_tweets) {
+    replyReference = tweet.referenced_tweets.find(referencedTweet => { return referencedTweet.type === 'replied_to'})
+  }
+
+  set if(replyReference !== undefined) {
+    replyId = replyReference.id
   }
 
   return {
@@ -104,6 +114,7 @@ operation MapTweetToPost {
     url = 'https://twitter.com/i/status/' + tweet.id
     createdAt = tweet.created_at
     text = tweet.text
+    replyId = replyId
     attachments = attachments.filter((attachment) => { return attachment !== undefined })
   }
 }
