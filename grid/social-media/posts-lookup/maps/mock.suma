@@ -1,4 +1,4 @@
-profile = "social-media/posts-lookup@1.0"
+profile = "social-media/posts-lookup@1.1"
 provider = "mock"
 
 map FindByHashtag {
@@ -9,6 +9,10 @@ map FindByHashtag {
         createdAt: '2022-01-07T15:43:27+0000',
         text: 'Post with attachments and #hashtag',
         url: 'https://www.facebook.com/sftest7904/photos/a.121467247037625/122332100284473/?type=3',
+        author: {
+          id: '1466796521412771840',
+          username: 'superface_test'
+        },
         attachments: [
            {
             title: 'Photos on timeline',
@@ -22,6 +26,10 @@ map FindByHashtag {
         createdAt: '2022-01-20T12:15:45+0000',
         text: 'Simple text post wiht #hashtag.',
         url: 'https://www.facebook.com/110658944785122/posts/125744069943276/',
+        author: {
+          id: '1466796521412771840',
+          username: 'superface_test'
+        },
         attachments: [],
       },
     ],
@@ -37,6 +45,11 @@ map FindByMention {
         createdAt: '2022-01-20T12:15:45+0000',
         text: 'Post with mention',
         url: 'https://www.facebook.com/110658944785122/posts/125744069943276/',
+        author: {
+          id: '1466796521412771840',
+          username: 'superface_test'
+        },
+        replyId: '110658944785122_125744069943276',
         attachments: [],
       },
     ]
