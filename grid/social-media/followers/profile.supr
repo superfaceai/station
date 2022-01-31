@@ -51,6 +51,32 @@ usecase GetFollowers safe {
       """
       imageUrl string
     } ]
+    """
+    Rate limit
+    Rate limit details.
+    """
+    rateLimit {
+      """
+      Total requests available
+      Total requests available in the time window.
+      """
+      totalRequestsAvailable number
+      """
+      Remaining requests available
+      Remaining requests available in the time window.
+      """
+      remainingRequestsAvailable number
+      """
+      Remaining requests available in percents
+      Remaining requests available in the time window in percents.
+      """
+      remainingRequestsAvailableInPercent number
+      """
+      Reset date time
+      Date and time when the rate limits will reset (in ISO 8601 format). Available only for providers without rolling rate limit window.
+      """
+      resetDateTime string
+    }
   }
 
   error {
@@ -64,6 +90,29 @@ usecase GetFollowers safe {
     A human-readable explanation specific to this occurrence of the problem.
     """
     detail
+
+    """
+    Code
+    Error code.
+    """
+    code! ErrorCode!
+
+    """
+    Rate limit
+    Rate limit error details.
+    """
+    rateLimit {
+      """
+      Total requests available
+      Total requests available in the time window.
+      """
+      totalRequestsAvailable number
+      """
+      Retry after
+      Retry the call after timestamp (in ISO 8601 format). Available only for providers without rolling rate limit window.
+      """
+      retryAfter string
+    }
   }
 
   example Successful {
@@ -92,4 +141,12 @@ usecase GetFollowers safe {
       title = 'Rate limit exceeded'
     }
   }
+}
+
+model ErrorCode enum {
+  Unauthenticated
+  Unauthorized
+  BadRequest
+  RateLimitReached
+  UnknownError
 }

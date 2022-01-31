@@ -43,6 +43,7 @@ map GetFollowers {
       map error {
         title = "Bad request"
         detail = body.detail
+        code = 'BadRequest'
       }
     }
 
@@ -50,6 +51,7 @@ map GetFollowers {
       map error {
         title = "Unauthenticated"
         detail = body.detail
+        code = 'Unauthenticated'
       }
     }
 
@@ -57,12 +59,14 @@ map GetFollowers {
       map error {
         title = "Forbidden"
         detail = body.detail
+        code = 'Unauthorized'
       }
     }
 
     response 429 "application/json" {
       map error {
         title = "Rate limit exceeded"
+        code = 'RateLimitReached'
       }
     }
   }
