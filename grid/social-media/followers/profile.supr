@@ -121,6 +121,11 @@ model ErrorCode enum {
 
 model RateLimit {
   """
+  Bucket
+  Bucket identifies parts of the API with dedicated rate limits.
+  """
+  bucket string
+  """
   Total requests
   Total requests available in the time window.
   """
