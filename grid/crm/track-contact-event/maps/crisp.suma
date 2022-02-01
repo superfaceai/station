@@ -23,7 +23,7 @@ map TrackContactEvent {
 
       map error {
         title = "Unexpected error"
-        detail = body
+        detail = `Crisp responsed with: ${JSON.stringify(body)}`
       }
     }
 
