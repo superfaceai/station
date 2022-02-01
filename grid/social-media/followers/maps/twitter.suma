@@ -76,7 +76,7 @@ operation MapRateLimit {
     remainingRequests = parseInt(remainingRequestsHeader, 10)
   }
 
-  set if(totalRequests && remainingRequests) {
+  set if(totalRequests > 0 && remainingRequests !== undefined) {
     remainingRequestsPercentage = remainingRequests / totalRequests * 100
   }
 
