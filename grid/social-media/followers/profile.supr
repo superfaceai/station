@@ -164,7 +164,8 @@ model ErrorCode enum {
 model RateLimit {
   """
   Bucket
-  Bucket identifies parts of the API with dedicated rate limits.
+  Different parts of API may have different rate limits.
+  Bucket identifies to which part of API the rate limits apply.
   """
   bucket string
   """
