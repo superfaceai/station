@@ -121,6 +121,13 @@ operation MapTwitterError {
     rateLimit = rateLimit
   }
 
+  return if (statusCode === 404) {
+    title = "Not found"
+    detail = twitterError.detail
+    code = 'NotFound'
+    rateLimit = rateLimit
+  }
+
   return if (statusCode === 429) {
     title = "Rate limit exceeded"
     detail = `Twitter API resource '${rateLimit.bucket}' reached max requests quota.`
