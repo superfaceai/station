@@ -96,7 +96,14 @@ usecase GetFollowers safe {
           imageUrl = "https://pbs.twimg.com/profile_images/1478302204306067462/5BEbrnPO_normal.jpg",
         }
       ],
-      nextPage = "QVFIUjc2Y01oQ3F1bHk5WHNzNVVuS2ZAMSEtpdkxmbC1FV09XcGNmTUc4ZAkhrMlBPU19LYkM0dFY4"
+      nextPage = "QVFIUjc2Y01oQ3F1bHk5WHNzNVVuS2ZAMSEtpdkxmbC1FV09XcGNmTUc4ZAkhrMlBPU19LYkM0dFY4",
+      rateLimit = {
+        bucket = "get-users-followed-lists",
+        totalRequests = 15,
+        remainingRequests = 12,
+        remainingRequestsPercentage = 80,
+        resetTimestamp = 1643713585,
+      }
     }
   }
 
@@ -106,10 +113,20 @@ usecase GetFollowers safe {
     }
 
     error {
-      title = 'Rate limit exceeded'
+      title = 'Rate limit exceeded',
+      detail = 'Twitter API resource \'get-users-followed-lists\' reached max requests quota.',
+      code = 'RateLimitReached',
+      rateLimit = {
+        bucket = "get-users-followed-lists",
+        totalRequests = 15,
+        remainingRequests = 0,
+        remainingRequestsPercentage = 0,
+        resetTimestamp = 1643713585,
+      }
     }
   }
 }
+
 
 model ErrorCode enum {
   """
