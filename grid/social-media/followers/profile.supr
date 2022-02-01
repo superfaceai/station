@@ -112,10 +112,35 @@ usecase GetFollowers safe {
 }
 
 model ErrorCode enum {
-  Unauthenticated
-  Unauthorized
+  """
+  Bad request
+  The request was invalid or cannot be otherwise served.
+  """
   BadRequest
+  """
+  Not found
+  The profileId does not exist.
+  """
+  NotFound
+  """
+  Rate limit reached
+  Returned when a request cannot be served due to the user or app reached max requests quota.
+  """
   RateLimitReached
+  """
+  Unauthenticated
+  There was a problem authenticating your request. Check that you are passing valid access token.
+  """
+  Unauthenticated
+  """
+  Unauthorized
+  The request is understood, but it has been refused or access is not allowed.
+  """
+  Unauthorized
+  """
+  Unknown error
+  Returned when an unexpected error occured.
+  """
   UnknownError
 }
 
