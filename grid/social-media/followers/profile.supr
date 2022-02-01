@@ -121,23 +121,23 @@ model ErrorCode enum {
 
 model RateLimit {
   """
-  Total requests available
+  Total requests
   Total requests available in the time window.
   """
-  totalRequestsAvailable number
+  totalRequests number
   """
-  Remaining requests available
+  Remaining requests
   Remaining requests available in the time window.
   """
-  remainingRequestsAvailable number
+  remainingRequests number
   """
   Remaining requests available in percents
   Remaining requests available in the time window in percents.
   """
-  remainingRequestsAvailablePercentage number
+  remainingRequestsPercentage number
   """
-  Reset date time
-  Date and time when the rate limits will reset (in ISO 8601 format). Available only for providers without rolling rate limit window.
+  Reset timestamp
+  Timestamp when the rate limits will reset (in  Unix Timestamp format). Available only for providers without rolling rate limit window.
   """
-  resetDateTime string
+  resetTimestamp number
 }
