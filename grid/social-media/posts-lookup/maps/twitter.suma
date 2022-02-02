@@ -1,9 +1,10 @@
 // Twitter API Reference: https://developer.twitter.com/en/docs/twitter-api
 
-profile = "social-media/posts-lookup@1.1"
+profile = "social-media/posts-lookup@1.2"
 provider = "twitter"
 
 map FindByHashtag {
+  rateLimitBucket = 'Search Recent Tweets'
 
   http GET "/2/tweets/search/recent" {
     
@@ -24,19 +25,20 @@ map FindByHashtag {
     }
 
     response 200 "application/json" {
-      result = call MapSearchResult(body = body)
+      result = call MapSearchResult(body = body, headers = headers, rateLimitBucket = rateLimitBucket)
 
       map result result
     }
 
     response {
-      error = call MapTwitterError(statusCode = statusCode, error = body)
+      error = call MapTwitterError(statusCode = statusCode, error = body, headers = headers, rateLimitBucket = rateLimitBucket)
       map error error
     }
   }
 }
 
 map FindByMention {
+  rateLimitBucket = 'User mention timeline'
 
   http GET "/2/users/{input.profileId}/mentions" {
 
@@ -56,13 +58,13 @@ map FindByMention {
     }
 
     response 200 "application/json" {
-      result = call MapSearchResult(body = body)
+      result = call MapSearchResult(body = body, headers = headers, rateLimitBucket = rateLimitBucket)
 
       map result result
     }
 
     response {
-      error = call MapTwitterError(statusCode = statusCode, error = body)
+      error = call MapTwitterError(statusCode = statusCode, error = body, headers = headers, rateLimitBucket = rateLimitBucket)
       map error error
     }
   }
@@ -70,6 +72,7 @@ map FindByMention {
 
 operation MapSearchResult {
   body = args.body
+  headers = args.headers
   posts = []
 
   set if (body.meta.result_count > 0) {
@@ -85,6 +88,7 @@ operation MapSearchResult {
     posts = posts
     previousPage = body.meta.previous_token
     nextPage = body.meta.next_token
+    rateLimit =  call MapRateLimit(headers = headers, bucket = args.rateLimitBucket)
   }
 }
 
@@ -155,32 +159,90 @@ operation MapMediaAttachment {
   return result
 }
 
+//Twitter rate limits: https://developer.twitter.com/en/docs/twitter-api/rate-limits
+operation MapRateLimit {
+  totalRequestsHeader = args.headers['x-rate-limit-limit']
+  remainingRequestsHeader = args.headers['x-rate-limit-remaining']
+  resetTimestampHeader = args.headers['x-rate-limit-reset']
+
+  totalRequests = undefined
+  remainingRequests = undefined
+  remainingRequestsPercentage = undefined
+  resetTimestamp = undefined
+
+  set if(totalRequestsHeader && parseInt(totalRequestsHeader, 10) !== 'NaN') {
+    totalRequests = parseInt(totalRequestsHeader, 10)
+  }
+
+  set if(remainingRequestsHeader && parseInt(remainingRequestsHeader, 10) !== 'NaN') {
+    remainingRequests = parseInt(remainingRequestsHeader, 10)
+  }
+
+  set if(totalRequests > 0 && remainingRequests !== undefined) {
+    remainingRequestsPercentage = remainingRequests / totalRequests * 100
+  }
+
+  set if(resetTimestampHeader && parseInt(resetTimestampHeader, 10) !== 'NaN') {
+    resetTimestamp = parseInt(resetTimestampHeader, 10)
+  }  
+
+  return {
+    bucket = args.bucket
+    totalRequests = totalRequests
+    remainingRequests = remainingRequests
+    remainingRequestsPercentage = remainingRequestsPercentage
+    resetTimestamp = resetTimestamp
+  }
+}
+
 operation MapTwitterError {
   statusCode = args.statusCode
   twitterError = args.error
+  headers = args.headers
+  rateLimitBucket = args.rateLimitBucket
+
+  rateLimit =  call MapRateLimit(headers = headers, bucket = rateLimitBucket)
 
   return if (statusCode === 400) {
     title = "Bad request"
     detail = twitterError.detail
+    code = 'BadRequest'
+    rateLimit = rateLimit
   }
 
   return if (statusCode === 401) {
     title = "Unauthenticated"
     detail = twitterError.detail
+    code = 'Unauthenticated'
+    rateLimit = rateLimit
   }
 
   return if (statusCode === 403) {
-    title = "Forbidden"
+    title = "Unauthorized"
     detail = twitterError.detail
+    code = 'Unauthorized'
+    rateLimit = rateLimit
+  }
+
+  return if (statusCode === 404) {
+    title = "Not found"
+    detail = twitterError.detail
+    code = 'NotFound'
+    rateLimit = rateLimit
   }
 
   return if (statusCode === 429) {
     title = "Rate limit exceeded"
+    detail = `Twitter API resource '${rateLimit.bucket}' reached max requests quota.`
+    code = 'RateLimitReached'
+    rateLimit = rateLimit
   }
 
   return {
     title = "Unknown error"
     detail = (`Unknown error occurred. Status: ${statusCode}`)
+    code = 'UnknownError'
+    rateLimit = rateLimit
   }
 }
 

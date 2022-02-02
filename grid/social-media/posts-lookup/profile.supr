@@ -1,5 +1,5 @@
 name = "social-media/posts-lookup"
-version = "1.1.0"
+version = "1.2.0"
 
 """
 Lookup posts by hashtag
@@ -40,6 +40,11 @@ usecase FindByHashtag safe {
     List of posts ordered by creation date. Latest posts are on the top of the list.
     """
     posts [Post]
+    """
+    Rate limit
+    Rate limit details.
+    """
+    rateLimit RateLimit
   }
 
   error Error
@@ -84,6 +89,11 @@ usecase FindByMention safe {
     List of posts ordered by creation date. Latest posts are on the top of the list.
     """
     posts [Post]
+    """
+    Rate limit
+    Rate limit details.
+    """
+    rateLimit RateLimit
   }
 
   error Error
@@ -190,4 +200,78 @@ model Error {
   A human-readable explanation specific to this occurrence of the problem.
   """
   detail
+
+  """
+  Code
+  Machine processable error code.
+  """
+  code! ErrorCode!
+
+  """
+  Rate limit
+  Rate limit details.
+  """
+  rateLimit RateLimit
+}
+
+model ErrorCode enum {
+  """
+  Bad request
+  The request was invalid or cannot be otherwise served.
+  """
+  BadRequest
+  """
+  Not found
+  The profileId does not exist.
+  """
+  NotFound
+  """
+  Rate limit reached
+  Returned when a request cannot be served due to the user or app reached max requests quota.
+  """
+  RateLimitReached
+  """
+  Unauthenticated
+  There was a problem authenticating your request. Check that you are passing valid access token.
+  """
+  Unauthenticated
+  """
+  Unauthorized
+  The request is understood, but it has been refused or access is not allowed.
+  """
+  Unauthorized
+  """
+  Unknown error
+  Returned when an unexpected error occured.
+  """
+  UnknownError
+}
+
+model RateLimit {
+  """
+  Bucket
+  Different parts of API may have different rate limits.
+  Bucket identifies to which part of API the rate limits apply.
+  """
+  bucket string
+  """
+  Total requests
+  Total requests available in the time window.
+  """
+  totalRequests number
+  """
+  Remaining requests
+  Remaining requests available in the time window.
+  """
+  remainingRequests number
+  """
+  Remaining requests available in percents
+  Remaining requests available in the time window in percents.
+  """
+  remainingRequestsPercentage number
+  """
+  Reset timestamp
+  Timestamp when the rate limits will reset (in  Unix Timestamp format). Available only for providers without rolling rate limit window.
+  """
+  resetTimestamp number
 }
