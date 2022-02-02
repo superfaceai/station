@@ -2,7 +2,7 @@ name = "chat/get-messages"
 version = "1.0.0"
 
 """
-GetMessages usecase
+Get chat messages
 Retrieve paginated list of messages
 """
 usecase GetMessages {
@@ -15,7 +15,7 @@ usecase GetMessages {
 		
 		"""
 		AfterDate
-		Date that marks beginning of messages range until current time
+		Retrieve only messages after this date and time, ISO 8601 format (YYYY-MM-DDTHH:MM:SS)
 		"""
 		afterDate string
         
@@ -35,7 +35,7 @@ usecase GetMessages {
 	result Messages
 	error Error
 
-	example Successfull {
+	example Successful {
 		input {
 			destination = 'general',
 			limit = 2
@@ -66,7 +66,7 @@ usecase GetMessages {
 model Message {
 	"""
 	Id
-	Identification of message
+	Unique identifier of the message
 	"""
 	id! string!
 
@@ -83,25 +83,25 @@ model Message {
 	destination string!
 
 	"""
-	ThreadId
-	Thread destination of retrieved message
+	Thread Id
+	If the message was sent to a thread, identifies the parent thread by its Id.
 	"""
 	threadId string
 
 	"""
 	Text
-	Content of retrieved message
+	Contents of the retrieved message
 	"""
 	text string
 
 	"""
-	CreatedAt
+	Created At
 	Date retrieved message was created
 	"""
 	createdAt string
 
 	"""
-	CreatedAt
+	Updated At
 	Date retrieved message was last updated
 	"""
 	updatedAt string
@@ -121,8 +121,8 @@ model Message {
 
 model Messages {
 	"""
-	PreviousPage
-	Identification of previous page
+	Previous page
+	Cursor to the previous page for paginating backwards
 	"""
 	previousPage string
 	
