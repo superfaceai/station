@@ -36,7 +36,7 @@ export const getMessagesTest = (
 
           // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
           if (page1.isOk() && !(page1.value as any).nextPage) {
-            throw new Error('Test results should be paginated')
+            throw new Error('Test results should be paginated');
           }
 
           const page2 = await superface.run(
