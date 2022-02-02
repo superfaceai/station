@@ -1,4 +1,4 @@
-profile = "social-media/publishing-profiles@1.0"
+profile = "social-media/publishing-profiles@1.1"
 provider = "twitter"
 
 """
@@ -25,31 +25,102 @@ map GetProfilesForPublishing {
           name: profile.name,
           username: profile.username,
           imageUrl: profile.profile_image_url,
-        }]
+        }],
+        rateLimit = call MapRateLimit(headers = headers)
       }
     }
 
-    // https://developer.twitter.com/en/support/twitter-api/error-troubleshooting
-    response 400 "application/json" {
-      return map error {
-        title = body.title || "Bad request"
-        detail = body.detail
-      }
+    response {
+      error = call MapTwitterError(statusCode = statusCode, error = body, headers = headers)
+      map error error
     }
+  }
+}
 
-    response 401 "application/json" {
-      return map error {
-        title = body.title || "Unauthorized"
-        detail = body.detail
-      }
-    }
+//Twitter rate limits: https://developer.twitter.com/en/docs/twitter-api/rate-limits
+operation MapRateLimit {
+  totalRequestsHeader = args.headers['x-rate-limit-limit']
+  remainingRequestsHeader = args.headers['x-rate-limit-remaining']
+  resetTimestampHeader = args.headers['x-rate-limit-reset']
 
-    response 403 "application/json" {
-      return map error {
-        title = body.title || "Forbidden"
-        detail = body.detail
-      }
-    }
+  totalRequests = undefined
+  remainingRequests = undefined
+  remainingRequestsPercentage = undefined
+  resetTimestamp = undefined
+
+  set if(totalRequestsHeader && parseInt(totalRequestsHeader, 10) !== 'NaN') {
+    totalRequests = parseInt(totalRequestsHeader, 10)
+  }
+
+  set if(remainingRequestsHeader && parseInt(remainingRequestsHeader, 10) !== 'NaN') {
+    remainingRequests = parseInt(remainingRequestsHeader, 10)
+  }
+
+  set if(totalRequests > 0 && remainingRequests !== undefined) {
+    remainingRequestsPercentage = remainingRequests / totalRequests * 100
+  }
+
+  set if(resetTimestampHeader && parseInt(resetTimestampHeader, 10) !== 'NaN') {
+    resetTimestamp = parseInt(resetTimestampHeader, 10)
+  }  
+
+  return {
+    bucket = 'User lookup'
+    totalRequests = totalRequests
+    remainingRequests = remainingRequests
+    remainingRequestsPercentage = remainingRequestsPercentage
+    resetTimestamp = resetTimestamp
+  }
+}
+
+//Twitter errors: https://developer.twitter.com/en/support/twitter-api/error-troubleshooting
+operation MapTwitterError {
+  statusCode = args.statusCode
+  twitterError = args.error
+  headers = args.headers
+
+  rateLimit =  call MapRateLimit(headers = headers)
+
+  return if (statusCode === 400) {
+    title = "Bad request"
+    detail = twitterError.detail
+    code = 'BadRequest'
+    rateLimit = rateLimit
+  }
+
+  return if (statusCode === 401) {
+    title = "Unauthenticated"
+    detail = twitterError.detail
+    code = 'Unauthenticated'
+    rateLimit = rateLimit
+  }
+
+  return if (statusCode === 403) {
+    title = "Unauthorized"
+    detail = twitterError.detail
+    code = 'Unauthorized'
+    rateLimit = rateLimit
+  }
+
+  return if (statusCode === 404) {
+    title = "Not found"
+    detail = twitterError.detail
+    code = 'NotFound'
+    rateLimit = rateLimit
+  }
+
+  return if (statusCode === 429) {
+    title = "Rate limit exceeded"
+    detail = `Twitter API resource '${rateLimit.bucket}' reached max requests quota.`
+    code = 'RateLimitReached'
+    rateLimit = rateLimit
+  }
+
+  return {
+    title = "Unknown error"
+    detail = (`Unknown error occurred. Status: ${statusCode}`)
+    code = 'UnknownError'
+    rateLimit = rateLimit
   }
 }
 
