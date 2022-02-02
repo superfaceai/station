@@ -4,7 +4,8 @@ profile = "social-media/posts-lookup@1.2"
 provider = "twitter"
 
 map FindByHashtag {
-  rateLimitBucket = 'Search Recent Tweets'
+  //workaround: We can not assign string to rateLimitBucket variable here, linter reports: Wrong Structure: expected ObjectStructure, but got "Search Recent Tweets" error
+  rateLimitBucket = call GetSearchRecentTweetsBucket()
 
   http GET "/2/tweets/search/recent" {
     
@@ -38,7 +39,8 @@ map FindByHashtag {
 }
 
 map FindByMention {
-  rateLimitBucket = 'User mention timeline'
+  //workaround: We can not assign string to rateLimitBucket variable here, linter reports: Wrong Structure: expected ObjectStructure, but got "Search Recent Tweets" error
+  rateLimitBucket = call GetUserMentionTimelineBucket()
 
   http GET "/2/users/{input.profileId}/mentions" {
 
@@ -257,4 +259,12 @@ operation MapUser {
   }
 
   return author
+}
+
+operation GetSearchRecentTweetsBucket {
+  return "Search Recent Tweets"
+}
+
+operation GetUserMentionTimelineBucket {
+  return "User mention timeline"
 }
