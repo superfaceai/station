@@ -9,7 +9,7 @@ map GetMessages {
 		request "application/x-www-form-urlencoded" {
 			query {
 				channel = input.destination
-				latest = input.afterDate
+				oldest = input.afterDate
 				cursor = input.page
 				limit = input.limit || 100
 			}
@@ -28,12 +28,12 @@ map GetMessages {
 			messages = call MapMessages(messages = body.messages)
 
 			return map result if (body.has_more) {
-			    nextPage = body.response_metadata.next_cursor
-			    messages = messages
+				nextPage = body.response_metadata.next_cursor
+				messages = messages
 			}
 
 			return map result if (!body.has_more) {
-			    messages = messages
+				messages = messages
 			}
 		}
 
@@ -53,39 +53,39 @@ map GetMessages {
 }
 
 operation MapMessages {
-    messages = args.messages.filter(message => message.type === 'message')
-            
-    set if (messages.length > 0) {
-			messages = messages.map((message) => {
-				const result = {
-					id: message.ts,
-					text: message.text,
-					createdAt: parseFloat(message.ts),
-				}
-				
-				if (message.user || message.bot_id) {
-					result.author = message.user || message.bot_id;
-				}
+	messages = args.messages.filter(message => message.type === 'message')
+					
+	set if (messages.length > 0) {
+		messages = messages.map((message) => {
+			const result = {
+				id: message.ts,
+				text: message.text,
+				createdAt: parseFloat(message.ts),
+			}
+			
+			if (message.user || message.bot_id) {
+				result.author = message.user || message.bot_id;
+			}
 
-				if (message.thread_ts){  
-					result.threadId = parseFloat(message.thread_ts);
-				}
+			if (message.thread_ts) {
+				result.threadId = parseFloat(message.thread_ts);
+			}
 
-				if (message.edited) {
-					result.updatedAt = parseFloat(message.edited.ts);
-				}
+			if (message.edited) {
+				result.updatedAt = parseFloat(message.edited.ts);
+			}
 
-				if (message.reactions) {
-					result.reactions = message.reactions.map(reaction => ({
-						emoji: reaction.name,
-						count: reaction.count,
-						users: reaction.users
-					}));
-				}
+			if (message.reactions) {
+				result.reactions = message.reactions.map(reaction => ({
+					emoji: reaction.name,
+					count: reaction.count,
+					users: reaction.users
+				}));
+			}
 
-				return result
-			});
-    }
+			return result
+		});
+	}
 
-    return messages
+	return messages
 }

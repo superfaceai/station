@@ -34,6 +34,11 @@ export const getMessagesTest = (
           expect(page1.isOk).toBeTruthy();
           expect(page1).toMatchSnapshot();
 
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+          if (page1.isOk() && !(page1.value as any).nextPage) {
+            throw new Error('Test results should be paginated')
+          }
+
           const page2 = await superface.run(
             {
               input: {
