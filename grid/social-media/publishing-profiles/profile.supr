@@ -1,5 +1,5 @@
 name = "social-media/publishing-profiles"
-version = "1.0.0"
+version = "1.1.0"
 
 """
 Get Profiles for Publishing
@@ -18,7 +18,13 @@ usecase GetProfilesForPublishing safe {
         "Profile image (avatar) URL"
         imageUrl string
       }
-  ]}
+    ]
+    """
+    Rate limit
+    Rate limit details.
+    """
+    rateLimit RateLimit
+  }
 
   error {
     """
@@ -31,6 +37,18 @@ usecase GetProfilesForPublishing safe {
     A human-readable explanation specific to this occurrence of the problem.
     """
     detail
+
+    """
+    Code
+    Error code.
+    """
+    code! ErrorCode!
+
+    """
+    Rate limit
+    Rate limit details.
+    """
+    rateLimit RateLimit
   }
 
   example Successful {
@@ -44,15 +62,95 @@ usecase GetProfilesForPublishing safe {
           username = "sftest7904",
           imageUrl = "https://scontent-prg1-1.xx.fbcdn.net/v/t39.30808-1/cp0/p50x50/263679317_110659048118445_8251344428401368545_n.png?_nc_cat=103&ccb=1-5&_nc_sid=dbb9e7&_nc_ohc=kN4tKgxAWdYAX_B0I6K&_nc_ht=scontent-prg1-1.xx&edm=AGaHXAAEAAAA&oh=00_AT8KpGTOc-H8gJrtOJwvNasfXrW8I27s0h1T5a8_nxUeyg&oe=61EDD39E",
         }
-      ]
+      ],
+      rateLimit = {
+        bucket = "User lookup",
+        totalRequests = 15,
+        remainingRequests = 12,
+        remainingRequestsPercentage = 80,
+        resetTimestamp = 1643713585,
+      }
     }
   }
-
-  example Failed {
-    input {}
+  
+example Failed {
+    input {
+      profileId = "429238130"
+    }
 
     error {
-      title = 'Unauthorized'
+      title = 'Rate limit exceeded',
+      detail = 'Twitter API resource \'User lookup\' reached max requests quota.',
+      code = 'RateLimitReached',
+      rateLimit = {
+        bucket = 'User lookup',
+        totalRequests = 75,
+        remainingRequests = 0,
+        remainingRequestsPercentage = 0,
+        resetTimestamp = 1643713585,
+      }
     }
   }
+}
+
+model ErrorCode enum {
+  """
+  Bad request
+  The request was invalid or cannot be otherwise served.
+  """
+  BadRequest
+  """
+  Not found
+  The profileId does not exist.
+  """
+  NotFound
+  """
+  Rate limit reached
+  Returned when a request cannot be served due to the user or app reached max requests quota.
+  """
+  RateLimitReached
+  """
+  Unauthenticated
+  There was a problem authenticating your request. Check that you are passing valid access token.
+  """
+  Unauthenticated
+  """
+  Unauthorized
+  The request is understood, but it has been refused or access is not allowed.
+  """
+  Unauthorized
+  """
+  Unknown error
+  Returned when an unexpected error occured.
+  """
+  UnknownError
+}
+
+model RateLimit {
+  """
+  Bucket
+  Different parts of API may have different rate limits.
+  Bucket identifies to which part of API the rate limits apply.
+  """
+  bucket string
+  """
+  Total requests
+  Total requests available in the time window.
+  """
+  totalRequests number
+  """
+  Remaining requests
+  Remaining requests available in the time window.
+  """
+  remainingRequests number
+  """
+  Remaining requests available in percents
+  Remaining requests available in the time window in percents.
+  """
+  remainingRequestsPercentage number
+  """
+  Reset timestamp
+  Timestamp when the rate limits will reset (in  Unix Timestamp format). Available only for providers without rolling rate limit window.
+  """
+  resetTimestamp number
 }
