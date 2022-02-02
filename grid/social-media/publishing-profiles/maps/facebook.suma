@@ -22,29 +22,15 @@ map GetProfilesForPublishing {
 
       return map result {
         profiles = pages
+        rateLimit = call MapRateLimit(headers = headers)
       }
     }
 
-    response 400 "application/json" {
-      return map error {
-        title = "Bad request"
-        detail = body.error.message
-      }
+    response {
+      error = call MapFacebookError(statusCode = statusCode, error = body, headers = headers)
+      map error error
     }
 
-    response 401 "application/json" {
-      return map error {
-        title = "Unauthenticated"
-        detail = body.error.message
-      }
-    }
-
-    response 403 "application/json" {
-      return map error {
-        title = "Forbidden"
-        detail = body.error.message
-      }
-    }
   }
 }
 
@@ -60,3 +46,79 @@ operation MapPage {
     imageUrl = page.picture.data.url
   }
 }
+
+//Facebook rate limits: https://developers.facebook.com/docs/graph-api/overview/rate-limiting
+operation MapRateLimit {
+  appUsageHeader = args.headers['x-app-usage']
+  appUsageHeaderParsed = undefined
+
+  set if (appUsageHeader) {
+    appUsageHeaderParsed = JSON.parse(appUsageHeader)
+  }
+
+  remainingRequestsPercentage = undefined
+
+  set if(appUsageHeaderParsed && appUsageHeaderParsed.call_count && parseInt(appUsageHeaderParsed.call_count, 10) !== 'NaN') {
+    remainingRequestsPercentage = 100 - parseInt(appUsageHeaderParsed.call_count, 10)
+  }
+
+  // TODO: add CPU time and time rate limit values to th outcome (remainingCPUTimePrecentage and remainingTimePercentage)
+
+  return {
+    bucket = 'Facebook' //Facebook uses generic rate limits for me/accounts endpoint
+    remainingRequestsPercentage = remainingRequestsPercentage
+  }
+}
+
+operation MapFacebookError {
+  statusCode = args.statusCode
+  facebookError = args.error
+  headers = args.headers
+
+  rateLimit =  call MapRateLimit(headers = headers)
+
+  detail = facebookError.error.message
+
+  return if (statusCode === 400) {
+    title = "Bad request"
+    detail = detail
+    code = 'BadRequest'
+    rateLimit = rateLimit
+  }
+
+  return if (statusCode === 401) {
+    title = "Unauthenticated"
+    detail = detail
+    code = 'Unauthenticated'
+    rateLimit = rateLimit
+  }
+
+  return if (statusCode === 403) {
+    title = "Unauthorized"
+    detail = detail
+    code = 'Unauthorized'
+    rateLimit = rateLimit
+  }
+
+  return if (statusCode === 404) {
+    title = "Not found"
+    detail = detail
+    code = 'NotFound'
+    rateLimit = rateLimit
+  }
+
+  return if (statusCode === 429) {
+    title = "Rate limit exceeded"
+    detail = `You reached Facebook API max requests quota.`
+    code = 'RateLimitReached'
+    rateLimit = rateLimit
+  }
+
+  return {
+    title = "Unknown error"
+    detail = (`Unknown error occurred. Status: ${statusCode}`)
+    code = 'UnknownError'
+    rateLimit = rateLimit
+  }
+}
+
