@@ -9,15 +9,15 @@ usecase GetMessages {
 	input {
 		"""
 		Destination
-		Identification of destination to retrieve messages from
+		Representation of a messaging destination. Can be ID or channel name, depending on the provider capability.
 		"""
 		destination! string!
 		
 		"""
 		AfterDate
-		Retrieve only messages after this date and time, ISO 8601 format (YYYY-MM-DDTHH:MM:SS)
+		Retrieve only messages after this date and time, UNIX timestamp format (e.g. 1095379198.75)
 		"""
-		afterDate string
+		afterDate number
         
 		"""
 		Limit
@@ -27,9 +27,9 @@ usecase GetMessages {
 		
 		"""
 		Page
-		Identification of page to retrieve
+		Identification of page with paginated results (cursor)
 		"""
-		page string
+		page string!
 	}
 	
 	result Messages
@@ -72,15 +72,15 @@ model Message {
 
 	"""
 	Author
-	Author of retrieved message
+	Representation of the author of retrieved message. Can be ID or username, depending on the provider capability.
 	"""
 	author! string!
 
 	"""
-	Destination
-	Destination of retrieved message
+	Created At
+	UNIX timestamp (e.g. 1095379198.75) when the message was created
 	"""
-	destination string!
+	createdAt! number!
 
 	"""
 	Thread Id
@@ -95,40 +95,41 @@ model Message {
 	text string
 
 	"""
-	Created At
-	Date retrieved message was created
-	"""
-	createdAt string
-
-	"""
 	Updated At
-	Date retrieved message was last updated
+	UNIX timestamp (e.g. 1095379198.75) when the message was last updated
 	"""
-	updatedAt string
+	updatedAt number
 
 	"""
 	Reactions
-	List of reactions on retrieved message
+	List of reactions on retrieved message. Each reaction contains emoji string containing encoded emoji,
+	number of reactions and list of users (IDs or usernames, depending on the provider capability)
 	"""
 	reactions [
 		{
 			emoji string
 			count number
-            users [string]
+      users [string]
 		}
 	]
+
+	"""
+  Rate Limit
+  Rate limit details.
+  """
+  rateLimit RateLimit
 }
 
 model Messages {
 	"""
-	Previous page
-	Cursor to the previous page for paginating backwards
+	Previous Page
+	Cursor to the previous page for pagination backwards
 	"""
 	previousPage string
 	
 	"""
-	NextPage
-	Identification of next page
+	Next Page
+	Cursor to the next page for pagination forwards
 	"""
 	nextPage string
 
@@ -141,13 +142,46 @@ model Messages {
 
 model Error {
 	"""
-    Title
-    A short, human-readable summary of the problem type.
-    """
-    title!
+	Title
+	A short, human-readable summary of the problem type.
+	"""
+	title!
 
-    """
-    A human-readable explanation specific to this occurrence of the problem.
-    """
+	"""
+	A human-readable explanation specific to this occurrence of the problem.
+	"""
 	detail
+}
+
+model RateLimit {
+  """
+  Bucket
+  Different parts of API may have different rate limits.
+  Bucket identifies to which part of API the rate limits apply.
+  """
+  bucket string
+
+  """
+  Total Requests
+  Total requests available in the time window.
+  """
+  totalRequests number
+
+  """
+  Remaining Requests
+  Remaining requests available in the time window.
+  """
+  remainingRequests number
+
+  """
+  Remaining Requests available in percents
+  Remaining requests available in the time window in percents.
+  """
+  remainingRequestsPercentage number
+
+  """
+  Reset Timestamp
+  Timestamp when the rate limits will reset (in  Unix Timestamp format). Available only for providers without rolling rate limit window.
+  """
+  resetTimestamp number
 }

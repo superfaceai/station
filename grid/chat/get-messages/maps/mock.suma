@@ -5,17 +5,43 @@ provider = "mock"
 GetMessages map
 """
 map GetMessages {
-    return map error if(input.destination === 'not-existing-dest') {
-        title = 'channel_not_found'
-    }
-
-    map result {
-        messages = [
-            {
-                id: '1',
-                author: 'U01',
-                text: 'test'
-            }
-        ]
-    }
+	map result {
+		messages = [
+			{
+				id: '1',
+				author: 'U01',
+				text: 'test',
+				reactions: [
+					{
+						count: 2,
+						emoji: 'tada',
+						users: ['U01', 'U02'],
+					}
+				],
+				createdAt: 1643798532.134069,
+			},
+			{
+				id: '2',
+				author: 'U02',
+				text: 'test',
+				reactions: [
+					{
+						count: 2,
+						emoji: 'tada',
+						users: ['U01', 'U02'],
+					}
+				],
+				createdAt: 1643216443.234079,
+			},
+			{
+				id: '3',
+				author: 'U01',
+				text: 'test',
+				createdAt: 1546167104.0002,
+			}
+		]
+		
+		previousPage = 'XXXXXXXXXXXXXXXXXX01'
+		nextPage = 'XXXXXXXXXXXXXXXXX03'
+	}
 }

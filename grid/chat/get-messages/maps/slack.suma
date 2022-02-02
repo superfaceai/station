@@ -5,76 +5,86 @@ provider = "slack"
 GetMessages map
 """
 map GetMessages {
-    http GET "/conversations.history" {
-        request "application/x-www-form-urlencoded" {
-            query {
-                channel = input.destination
-                latest = input.afterDate
-                cursor = input.page
-                limit = input.limit || 100
-            }
+	http GET "/conversations.history" {
+		request "application/x-www-form-urlencoded" {
+			query {
+				channel = input.destination
+				latest = input.afterDate
+				cursor = input.page
+				limit = input.limit || 100
+			}
 
-            headers {
-                "Authorization" = `Bearer ${parameters.accessToken}`
-            }
-        }
+			headers {
+				"Authorization" = `Bearer ${parameters.accessToken}`
+			}
+		}
 
-        response 200 "application/json" {
-            // See https://api.slack.com/methods/conversations.history#errors for more information about errors
-            return map error if (body.ok === false) {
-                title = body.error
-            }
+		response 200 "application/json" {
+			// See https://api.slack.com/methods/conversations.history#errors for more information about errors
+			return map error if (body.ok === false) {
+				title = body.error
+			}
 
-            messages = call MapMessages(messages = body.messages)
+			messages = call MapMessages(messages = body.messages)
 
-            return map result if (body.has_more === true) {
-                nextPage = body.response_metadata.next_cursor
-                messages = messages
-            }
+			return map result if (body.has_more) {
+			    nextPage = body.response_metadata.next_cursor
+			    messages = messages
+			}
 
-            return map result {
-                messages = messages
-            }
-        }
+			return map result if (!body.has_more) {
+			    messages = messages
+			}
+		}
 
-        response 429 {
-            map error {
-                title = 'Too Many Requests'
-                detail = `Retry after ${headers['Retry-After']} seconds`
-            }
-        }
+		response 429 {
+			map error {
+				title = 'Too Many Requests'
+				detail = `Retry after ${headers['Retry-After']} seconds`
+			}
+		}
 
-        response "application/json" {
-            map error {
-                title = body.error
-            }
-        }
-    }
+		response "application/json" {
+			map error {
+				title = body.error
+			}
+		}
+	}
 }
 
 operation MapMessages {
     messages = args.messages.filter(message => message.type === 'message')
             
-    set if(messages.length > 0) {
-        messages = messages.map((message) => ({
-            id: message.ts,
-            author: message.user || message.bot_id || undefined,
-            channelId: message.channel,
-            threadId: message.thread_ts,
-            
-            text: message.text,
-            createdAt: message.ts,
-            updatedAt: message.edited ? message.edited.ts : undefined,
-            
-            reactions: 
-                message.reactions 
-                ? message.reactions.map(reaction => ({
-                    emoji: reaction.name,
-                    count: reaction.count,
-                    users: reaction.users
-                })) 
-                : undefined
-        }))
+    set if (messages.length > 0) {
+			messages = messages.map((message) => {
+				const result = {
+					id: message.ts,
+					text: message.text,
+					createdAt: parseFloat(message.ts),
+				}
+				
+				if (message.user || message.bot_id) {
+					result.author = message.user || message.bot_id;
+				}
+
+				if (message.thread_ts){  
+					result.threadId = parseFloat(message.thread_ts);
+				}
+
+				if (message.edited) {
+					result.updatedAt = parseFloat(message.edited.ts);
+				}
+
+				if (message.reactions) {
+					result.reactions = message.reactions.map(reaction => ({
+						emoji: reaction.name,
+						count: reaction.count,
+						users: reaction.users
+					}));
+				}
+
+				return result
+			});
     }
 
     return messages

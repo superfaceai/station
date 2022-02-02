@@ -6,8 +6,44 @@ Ok {
     "messages": Array [
       Object {
         "author": "UF4PRBHL7",
-        "channelId": undefined,
-        "createdAt": "1643216443.234079",
+        "createdAt": 1643835555.648069,
+        "id": "1643835555.648069",
+        "text": "test",
+      },
+      Object {
+        "author": "UF4PRBHL7",
+        "createdAt": 1643835553.658259,
+        "id": "1643835553.658259",
+        "reactions": Array [
+          Object {
+            "count": 1,
+            "emoji": "eyes",
+            "users": Array [
+              "UF4PRBHL7",
+            ],
+          },
+        ],
+        "text": "test",
+      },
+      Object {
+        "author": "UF4PRBHL7",
+        "createdAt": 1643798649.182019,
+        "id": "1643798649.182019",
+        "text": "test",
+      },
+    ],
+    "nextPage": "bmV4dF90czoxNjQzMjE2NDQzMjM0MDc5",
+  },
+}
+`;
+
+exports[`chat/get-messages/slack GetMessages when specified destination does exist performs correctly 2`] = `
+Ok {
+  "value": Object {
+    "messages": Array [
+      Object {
+        "author": "UF4PRBHL7",
+        "createdAt": 1643216443.234079,
         "id": "1643216443.234079",
         "reactions": Array [
           Object {
@@ -19,38 +55,7 @@ Ok {
           },
         ],
         "text": "test",
-        "threadId": undefined,
-        "updatedAt": "1643285583.000000",
-      },
-      Object {
-        "author": "UF4PRBHL7",
-        "channelId": undefined,
-        "createdAt": "1643106264.000100",
-        "id": "1643106264.000100",
-        "reactions": undefined,
-        "text": "added an integration to this channel: <https://iguess-workspace.slack.com/services/B02V1KMJ9QX|TestApp>",
-        "threadId": undefined,
-        "updatedAt": undefined,
-      },
-      Object {
-        "author": "UF3V1PRHP",
-        "channelId": undefined,
-        "createdAt": "1546390690.000200",
-        "id": "1546390690.000200",
-        "reactions": undefined,
-        "text": "<@UF3V1PRHP> has joined the channel",
-        "threadId": undefined,
-        "updatedAt": undefined,
-      },
-      Object {
-        "author": "UF4PRBHL7",
-        "channelId": undefined,
-        "createdAt": "1546167104.000200",
-        "id": "1546167104.000200",
-        "reactions": undefined,
-        "text": "<@UF4PRBHL7> has joined the channel",
-        "threadId": undefined,
-        "updatedAt": undefined,
+        "updatedAt": 1643285583,
       },
     ],
   },
@@ -64,6 +69,6 @@ Properties: {
   \\"title\\": \\"channel_not_found\\"
 }
 AST Path: definitions[0].statements[0].responseHandlers[0].statements[0]
-Original Map Location: Line 24, column 13",
+Original Map Location: Line 24, column 4",
 }
 `;

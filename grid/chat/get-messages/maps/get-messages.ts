@@ -21,16 +21,33 @@ export const getMessagesTest = (
 
       describe('when specified destination does exist', () => {
         it('performs correctly', async () => {
-          await expect(
-            superface.run(
-              {
-                input: {
-                  destination: destination[0],
-                },
+          const page1 = await superface.run(
+            {
+              input: {
+                destination: destination[0],
+                limit: 3,
               },
-              options
-            )
-          ).resolves.toMatchSnapshot();
+            },
+            options
+          );
+
+          expect(page1.isOk).toBeTruthy()
+          expect(page1).toMatchSnapshot();
+
+          const page2 = await superface.run(
+            {
+              input: {
+                destination: destination[0],
+                limit: 3,
+                // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
+                page: page1.isOk() ? (page1.value as any).nextPage : undefined
+              },
+            },
+            options
+          );
+
+          expect(page2.isOk).toBeTruthy()
+          expect(page2).toMatchSnapshot();
         });
       });
 
