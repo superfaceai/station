@@ -1,4 +1,4 @@
-profile = "social-media/publishing-profiles@1.0"
+profile = "social-media/publishing-profiles@1.1"
 provider = "mock"
 
 map GetProfilesForPublishing {
@@ -22,6 +22,13 @@ map GetProfilesForPublishing {
         username: "BazZZ",
         imageUrl: "https://picsum.photos/205"
       },
-    ]
+    ],
+    rateLimit = {
+      bucket: "User lookup",
+      totalRequests: 15,
+      remainingRequests: 12,
+      remainingRequestsPercentage: 80,
+      resetTimestamp: 1643713585,
+    }
   }
 }
