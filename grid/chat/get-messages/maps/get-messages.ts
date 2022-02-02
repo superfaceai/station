@@ -31,7 +31,7 @@ export const getMessagesTest = (
             options
           );
 
-          expect(page1.isOk).toBeTruthy()
+          expect(page1.isOk).toBeTruthy();
           expect(page1).toMatchSnapshot();
 
           const page2 = await superface.run(
@@ -40,13 +40,13 @@ export const getMessagesTest = (
                 destination: destination[0],
                 limit: 3,
                 // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
-                page: page1.isOk() ? (page1.value as any).nextPage : undefined
+                page: page1.isOk() ? (page1.value as any).nextPage : undefined,
               },
             },
             options
           );
 
-          expect(page2.isOk).toBeTruthy()
+          expect(page2.isOk).toBeTruthy();
           expect(page2).toMatchSnapshot();
         });
       });
