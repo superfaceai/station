@@ -75,7 +75,7 @@ usecase FindByHashtag safe {
       ],
       nextPage = "QVFIUjc2Y01oQ3F1bHk5WHNzNVVuS2ZAMSEtpdkxmbC1FV09XcGNmTUc4ZAkhrMlBPU19LYkM0dFY4",
       rateLimit = {
-        bucket = "Search Recent Tweets",
+        bucket = "Search recent tweets",
         totalRequests = 15,
         remainingRequests = 12,
         remainingRequestsPercentage = 80,
@@ -91,10 +91,10 @@ usecase FindByHashtag safe {
 
     error {
       title = 'Rate limit exceeded',
-      detail = 'Twitter API resource \'Search Recent Tweets\' reached max requests quota.',
+      detail = 'Twitter API resource \'Search recent tweets\' reached max requests quota.',
       code = 'RateLimitReached',
       rateLimit = {
-        bucket = "Search Recent Tweets",
+        bucket = "Search recent tweets",
         totalRequests = 15,
         remainingRequests = 0,
         remainingRequestsPercentage = 0,
@@ -179,7 +179,7 @@ usecase FindByMention safe {
       ],
       nextPage = "QVFIUjc2Y01oQ3F1bHk5WHNzNVVuS2ZAMSEtpdkxmbC1FV09XcGNmTUc4ZAkhrMlBPU19LYkM0dFY4",
       rateLimit = {
-        bucket = "Search Recent Tweets",
+        bucket = "User mention timeline",
         totalRequests = 15,
         remainingRequests = 12,
         remainingRequestsPercentage = 80,
@@ -195,10 +195,10 @@ usecase FindByMention safe {
 
     error {
       title = 'Rate limit exceeded',
-      detail = 'Twitter API resource \'Search Recent Tweets\' reached max requests quota.',
+      detail = 'Twitter API resource \'User mention timeline\' reached max requests quota.',
       code = 'RateLimitReached',
       rateLimit = {
-        bucket = "Search Recent Tweets",
+        bucket = "User mention timeline",
         totalRequests = 15,
         remainingRequests = 0,
         remainingRequestsPercentage = 0,
