@@ -5,6 +5,7 @@ provider = "discord"
 GetMessages map
 """
 map GetMessages {
+	destination = input.destination
 	afterId = undefined
 	beforeId = undefined
 
@@ -16,7 +17,7 @@ map GetMessages {
 		beforeId = call GetSnowflake(date = input.beforeDate)
 	}
 
-	http GET "/channels/{input.destination}/messages" {
+	http GET "/channels/{destination}/messages" {
 		request "application/json" {
 			query {
 				after = afterId
@@ -107,6 +108,10 @@ operation MapMessages {
 			createdAt: Date.parse(message.timestamp),
 			text: message.content
 		}
+		const discordEpoch = 1420070400000;
+		const getTimestamp = (snowflake) => {
+			return Number(BigInt(snowflake) >> BigInt(22)) + discordEpoch
+		} 
 
 		if (message.edited_timestamp) {
 			result.updatedAt = Date.parse(message.edited_timestamp)
@@ -127,8 +132,7 @@ operation MapMessages {
 		if (message.attachments && message.attachments.length > 0) {
 			result.attachments = message.attachments.map(file => ({
 				id: file.id,
-				// check out operation GetTimestamp for clarification 
-				createdAt: Number(BigInt(file.id) >> BigInt(22)) + 1420070400000,
+				createdAt: getTimestamp(file.id),
 				fileName: file.filename,
 				mediaType: file.content_type,
 				url: file.url,
