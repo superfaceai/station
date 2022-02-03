@@ -45,7 +45,7 @@ map GetMessages {
 		}
 
 		response "application/json" {
-			map error {
+			map error if (body.ok === false) {
 				title = body.error
 			}
 		}
@@ -64,11 +64,15 @@ operation MapMessages {
 			}
 			
 			if (message.user || message.bot_id) {
-				result.author = message.user || message.bot_id;
+				result.author = {
+					id: message.user || message.bot_id,
+					username: message.username
+				};
 			}
 
 			if (message.thread_ts) {
-				result.threadId = parseFloat(message.thread_ts);
+				result.hasThread = true
+				result.threadId = message.thread_ts;
 			}
 
 			if (message.edited) {
@@ -81,6 +85,17 @@ operation MapMessages {
 					count: reaction.count,
 					users: reaction.users
 				}));
+			}
+
+			if (message.files) {
+				result.attachments = message.files.map(file => ({
+					id: file.id,
+					createdAt: file.created,
+					fileName: file.name,
+					mediaType: file.mimetype,
+					url: file.permalink_public,
+					preview: file.preview,
+				}))
 			}
 
 			return result
