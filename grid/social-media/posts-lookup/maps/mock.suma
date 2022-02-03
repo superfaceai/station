@@ -1,4 +1,4 @@
-profile = "social-media/posts-lookup@1.1"
+profile = "social-media/posts-lookup@1.2"
 provider = "mock"
 
 map FindByHashtag {
@@ -33,7 +33,14 @@ map FindByHashtag {
         attachments: [],
       },
     ],
-    nextPage = 'next:QVFIUjc2Y01oQ3F1bHk5WHNzNVVuS2ZAMSEtpdkxmbC1FV09XcGNmTUc4ZAkhrMlBPU19LYkM0dFY4RjZAKY3pYU1VMNll5Y24zcGhWS2pIUUVlSFBuTFI4X3haVmQ2amxtTU83R3JMRDJFd1hhUWJ0RWxfZAjN2ZAE51b2FBckhtZAG04SDN3'
+    nextPage = 'next:QVFIUjc2Y01oQ3F1bHk5WHNzNVVuS2ZAMSEtpdkxmbC1FV09XcGNmTUc4ZAkhrMlBPU19LYkM0dFY4RjZAKY3pYU1VMNll5Y24zcGhWS2pIUUVlSFBuTFI4X3haVmQ2amxtTU83R3JMRDJFd1hhUWJ0RWxfZAjN2ZAE51b2FBckhtZAG04SDN3',
+    rateLimit = {
+      bucket: "Search Recent Posts",
+      totalRequests: 180,
+      remainingRequests: 179,
+      remainingRequestsPercentage: 99.4,
+      resetTimestamp: 1643792793,
+    },
   }
 }
 
@@ -52,6 +59,13 @@ map FindByMention {
         replyId: '110658944785122_125744069943276',
         attachments: [],
       },
-    ]
+    ],
+    rateLimit = {
+      bucket: "User mention timeline",
+      remainingRequests: 179,
+      remainingRequestsPercentage: 99.4,
+      resetTimestamp: 1643792796,
+      totalRequests: 180,
+    },
   }
 }
