@@ -14,10 +14,18 @@ usecase GetMessages {
 		destination! string!
 		
 		"""
-		AfterDate
-		Retrieve only messages after this date and time, UNIX timestamp format (e.g. 1095379198.75)
+		After Date
+		Retrieve only messages after this date and time, UNIX timestamp format (e.g. 1095379198.75) 
+		or snowflake format, which includes UNIX timestamp in its first 42 bits.
 		"""
-		afterDate number
+		afterDate string | number
+		
+		"""
+		Before Date
+		Retrieve only messages before this date and time, UNIX timestamp format (e.g. 1095379198.75)
+		or snowflake format, which includes UNIX timestamp in its first 42 bits.
+		"""
+		beforeDate string | number
         
 		"""
 		Limit
@@ -45,8 +53,21 @@ usecase GetMessages {
 			messages = [
 				{
 					id = '1'
-					author = 'U01',
-					text = 'success!'
+					author = {
+						id = 'U01'
+						username = 'user1'
+					},
+					createdAt = 1643835553.658259,
+					text = 'test 1'
+				}
+				{
+					id = '2'
+					author = {
+						id = 'U02'
+						username = 'user2'
+					},
+					createdAt = 1643835555.648069
+					text = 'test 2'
 				}
 			]
 		}
@@ -63,6 +84,44 @@ usecase GetMessages {
 	}
 }
 
+model Attachment {
+	"""
+	Id
+	Unique identifier of the attachment
+	"""
+	id! string!
+
+	"""
+	Created At
+	UNIX timestamp (e.g. 1095379198.75) when the attachment was created
+	"""
+	createdAt! number!
+
+	"""
+	File Name
+	Name of attached file
+	"""
+	fileName string
+
+	"""
+	Media Type
+	Format of the attached file	
+	"""
+	mediaType string
+
+	"""
+	Url
+	Source url of the attachment
+	"""
+	url string
+
+	"""
+	Preview
+	Preview of the attached file
+	"""
+	preview string
+}
+
 model Message {
 	"""
 	Id
@@ -72,15 +131,24 @@ model Message {
 
 	"""
 	Author
-	Representation of the author of retrieved message. Can be ID or username, depending on the provider capability.
+	Representation of the author of retrieved message. Contains ID and username, depending on the provider capability.
 	"""
-	author! string!
+	author! {
+		id! string!
+		username string!
+	}!
 
 	"""
 	Created At
 	UNIX timestamp (e.g. 1095379198.75) when the message was created
 	"""
 	createdAt! number!
+
+	"""
+	Has Thread
+	Boolean that represents whether message is parent to some thread
+	"""
+	hasThread boolean
 
 	"""
 	Thread Id
@@ -109,15 +177,15 @@ model Message {
 		{
 			emoji string
 			count number
-      users [string]
+      		users [string]
 		}
 	]
 
 	"""
-  Rate Limit
-  Rate limit details.
-  """
-  rateLimit RateLimit
+	Attachments
+	List of attachments in retrieved message. Contains 
+	"""
+	attachments [Attachment]
 }
 
 model Messages {
@@ -137,7 +205,13 @@ model Messages {
 	Messages
 	List of retrieved messages
 	"""
-	messages [Message]
+	messages! [Message]!
+
+	"""
+	Rate Limit
+	Rate limit details.
+	"""
+	rateLimit RateLimit
 }
 
 model Error {
@@ -181,7 +255,13 @@ model RateLimit {
 
   """
   Reset Timestamp
-  Timestamp when the rate limits will reset (in  Unix Timestamp format). Available only for providers without rolling rate limit window.
+  Timestamp when the rate limits will reset (in  Unix Timestamp format).
   """
   resetTimestamp number
+
+  """
+  Retry After
+  Number of seconds until reset of rate limit
+  """
+  retryAfter number
 }
