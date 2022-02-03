@@ -34,22 +34,29 @@ export const getMessagesTest = (
           expect(page1.isOk).toBeTruthy();
           expect(page1).toMatchSnapshot();
 
-          // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-          if (page1.isOk() && !(page1.value as any).nextPage) {
-            throw new Error('Test results should be paginated');
+          /* eslint-disable @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-assignment */
+          const cursor = page1.isOk()
+            ? (page1.value as any).nextPage
+            : undefined;
+
+          if (!cursor) {
+            return;
           }
 
-          const page2 = await superface.run(
-            {
-              input: {
-                destination: destination[0],
-                limit: 3,
-                // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
-                page: page1.isOk() ? (page1.value as any).nextPage : undefined,
-              },
-            },
-            options
-          );
+          const input = {
+            destination: destination[0],
+            limit: 3,
+          } as any;
+
+          if (provider === 'discord') {
+            input.beforeDate = cursor;
+          } else {
+            input.page = cursor;
+          }
+
+          /* eslint-enable @typescript-eslint/no-unsafe-member-access */
+
+          const page2 = await superface.run({ input }, options);
 
           expect(page2.isOk).toBeTruthy();
           expect(page2).toMatchSnapshot();

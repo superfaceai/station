@@ -87,7 +87,7 @@ operation MapMessages {
 				}));
 			}
 
-			if (message.files) {
+			if (message.files && message.files.length > 0) {
 				result.attachments = message.files.map(file => ({
 					id: file.id,
 					createdAt: file.created,
