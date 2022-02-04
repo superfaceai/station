@@ -1,0 +1,39 @@
+profile = "chat/send-message@1.0"
+provider = "slack"
+
+"""
+SendMessage map
+"""
+map SendMessage {
+	http POST "/chat.postMessage" {
+		request {
+			headers {
+				"Authorization" = `Bearer ${parameters.accessToken}`
+			}
+			body {
+				channel = input.destination
+				text = input.text
+			}
+		}
+
+		response 200 {
+			return map error if (!body.ok) body
+
+			map result {
+				destination = body.channel
+				messageId = body.ts
+			}
+		}
+
+		response 429 {
+			map error {
+				title = 'Too Many Requests'
+				detail = `Retry after ${headers['Retry-After']} seconds`
+			}
+		}
+
+		response "application/json" {
+			map error body
+		}
+  }
+}
