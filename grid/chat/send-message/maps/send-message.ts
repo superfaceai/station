@@ -21,27 +21,27 @@ export const sendMessageTest = (
 
       describe('when specified destination does exist', () => {
         it('performs correctly', async () => {
-          const result = await superface.run(
-            {
-              input: {
-                destination: destination[0],
-                text: 'test',
-                attachments: [
-                  {
-                    id: '1',
-                    createdAt: 1503435956.000247,
-                    fileName: 'myfile.suma',
-                    mediaType: 'text',
-                    preview: 'sdasdasd'
-                  }
-                ]
+          await expect(
+            superface.run(
+              {
+                input: {
+                  destination: destination[0],
+                  text: 'test',
+                  // TODO: implement sending attachments
+                  attachments: [
+                    {
+                      id: '1',
+                      createdAt: 1503435956.000247,
+                      fileName: 'myfile.suma',
+                      mediaType: 'text',
+                      preview: 'sdasdasd',
+                    },
+                  ],
+                },
               },
-            },
-            options
-          );
-
-          // expect(result.isOk()).toBeTruthy();
-          expect(result).toMatchSnapshot();
+              options
+            )
+          ).resolves.toMatchSnapshot();
         });
       });
 

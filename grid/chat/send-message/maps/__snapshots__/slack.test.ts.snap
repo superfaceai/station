@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`chat/send-message/slack SendMessage when specified destination does exist performs correctly 1`] = `
+Ok {
+  "value": Object {
+    "destination": "CF3H7S63W",
+    "messageId": "1643972607.995709",
+  },
+}
+`;
+
+exports[`chat/send-message/slack SendMessage when specified destination does not exist returns error 1`] = `
+Err {
+  "error": "HTTPError: Expected HTTP error
+Properties: {
+  \\"ok\\": false,
+  \\"error\\": \\"channel_not_found\\",
+  \\"warning\\": \\"missing_charset\\",
+  \\"response_metadata\\": {
+    \\"warnings\\": [
+      \\"missing_charset\\"
+    ]
+  }
+}
+AST Path: definitions[0].statements[0].responseHandlers[0].statements[0]
+Original Map Location: Line 20, column 4",
+}
+`;

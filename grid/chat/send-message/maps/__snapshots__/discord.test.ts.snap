@@ -1,0 +1,30 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`chat/send-message/discord SendMessage when specified destination does exist performs correctly 1`] = `
+Ok {
+  "value": Object {
+    "destination": "935962220104396885",
+    "messageId": "939113926841495623",
+    "rateLimit": Object {
+      "bucket": "a06de0de4a08126315431cc0c55ee3dc",
+      "remainingRequests": 4,
+      "remainingRequestsPercentage": 80,
+      "resetTimestamp": 1643972614,
+      "retryAfter": 5,
+      "totalRequests": 5,
+    },
+  },
+}
+`;
+
+exports[`chat/send-message/discord SendMessage when specified destination does not exist returns error 1`] = `
+Err {
+  "error": "HTTPError: Expected HTTP error
+Properties: {
+  \\"title\\": \\"Not Found\\",
+  \\"detail\\": \\"Unknown Channel\\"
+}
+AST Path: definitions[0].statements[1].responseHandlers[4].statements[0]
+Original Map Location: Line 52, column 4",
+}
+`;
