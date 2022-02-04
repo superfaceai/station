@@ -16,7 +16,7 @@ describe('chat/send-message/mock', () => {
         { provider }
       );
 
-      expect(result.isOk() && (result.value as any).messageId).toEqual("1");
+      expect(result.isOk() && (result.value as any).messageId).toEqual('1');
     });
   });
 });

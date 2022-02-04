@@ -13,7 +13,9 @@ describe('chat/get-destinations/mock', () => {
 
       const result = await usecase.perform({}, { provider });
 
-      expect(result.isOk() && (result.value as any).destinations.length).toEqual(3);
+      expect(
+        result.isOk() && (result.value as any).destinations.length
+      ).toEqual(3);
     });
   });
 });
