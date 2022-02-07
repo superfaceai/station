@@ -59,29 +59,25 @@ operation MapFollower {
 
 //Twitter rate limits: https://developer.twitter.com/en/docs/twitter-api/rate-limits
 operation MapRateLimit {
-  totalRequestsHeader = args.headers['x-rate-limit-limit']
-  remainingRequestsHeader = args.headers['x-rate-limit-remaining']
-  resetTimestampHeader = args.headers['x-rate-limit-reset']
-
-  totalRequests = undefined
-  remainingRequests = undefined
+  totalRequests = parseInt(args.headers['x-rate-limit-limit'], 10)
+  remainingRequests = parseInt(args.headers['x-rate-limit-remaining'], 10)
   remainingRequestsPercentage = undefined
-  resetTimestamp = undefined
+  resetTimestamp = parseInt(args.headers['x-rate-limit-reset'], 10)
 
-  set if(totalRequestsHeader && parseInt(totalRequestsHeader, 10) !== 'NaN') {
-    totalRequests = parseInt(totalRequestsHeader, 10)
+  set if(isNaN(totalRequests)) {
+    totalRequests = undefined
   }
 
-  set if(remainingRequestsHeader && parseInt(remainingRequestsHeader, 10) !== 'NaN') {
-    remainingRequests = parseInt(remainingRequestsHeader, 10)
+  set if(isNaN(remainingRequests)) {
+    remainingRequests = undefined
   }
 
   set if(totalRequests > 0 && remainingRequests !== undefined) {
     remainingRequestsPercentage = remainingRequests / totalRequests * 100
   }
 
-  set if(resetTimestampHeader && parseInt(resetTimestampHeader, 10) !== 'NaN') {
-    resetTimestamp = parseInt(resetTimestampHeader, 10)
+  set if(isNaN(resetTimestamp, 10)) {
+    resetTimestamp = undefined
   }  
 
   return {
