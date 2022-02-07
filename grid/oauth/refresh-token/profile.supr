@@ -28,14 +28,43 @@ usecase GetAccessTokenFromRefreshToken unsafe {
   }
 
   result {
+    """
+    Access Token
+    Newly issued access token
+    """
     accessToken! string!
-    expiresIn! number!
+    """
+    Expires in (seconds)
+    Duration of time the access token is granted for.
+    """
+    expiresIn number!
+    """
+    Scopes
+    Authorized scopes for the issued access token.
+    """
     scopes [string]
+    """
+    Token type
+    The type of token this is, usually "Bearer".
+    """
     tokenType string
   }
 
   error {
-    status string
-    message string
+    "Error code"
+    error enum {
+      invalid_request
+      invalid_client
+      invalid_grant
+      invalid_scope
+      unauthorized_client
+      unsupported_grant_type
+      // If we cannot map the error code:
+      unknown_response
+    }
+    "Error description"
+    description
+    "Link with error detail"
+    link
   }
 }
