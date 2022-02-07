@@ -9,6 +9,10 @@ map GetAccessTokenFromRefreshToken {
 
   http POST "/oauth2/v4/token" {
     request "application/x-www-form-urlencoded" {
+      headers {
+        // This simplifies debugging and also gzip over https isn't quite safe
+        "Accept-Encoding" = "identity"
+      }
       body {
         grant_type = "refresh_token"
         refresh_token = input.refreshToken
