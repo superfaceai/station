@@ -473,7 +473,10 @@
       }
     },
     "oauth/refresh-token": {
-      "file": "../grid/oauth/refresh-token/profile.supr"
+      "file": "../grid/oauth/refresh-token/profile.supr",
+      "google-apis": {
+        "file": "../grid/oauth/refresh-token/maps/google-apis.suma"
+      }
     }
   },
   "providers": {
@@ -898,7 +901,11 @@
       }
     },
     "google-apis": {
-      "file": "../providers/google-apis.json"
+      "file": "../providers/google-apis.json",
+      "parameters": {
+        "clientId": "$GOOGLE_APIS_CLIENT_ID",
+        "clientSecret": "$GOOGLE_APIS_CLIENT_SECRET"
+      }
     }
   }
 }
