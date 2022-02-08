@@ -5,6 +5,25 @@ Ok {
   "value": Object {
     "messages": Array [
       Object {
+        "author": Object {
+          "id": "UF4PRBHL7",
+          "username": undefined,
+        },
+        "createdAt": 1644310634.546009,
+        "id": "1644310634.546009",
+        "reactions": Array [
+          Object {
+            "count": 1,
+            "emoji": "eyes",
+            "users": Array [
+              "UF4PRBHL7",
+            ],
+          },
+        ],
+        "text": "hello world",
+        "url": "https://slack.com/api/conversations.history?channel=CF3H7S63W&latest=1644310634.546009&inclusive=true&limit=1",
+      },
+      Object {
         "attachments": Array [
           Object {
             "createdAt": 1643893737,
@@ -26,6 +45,7 @@ GetMessages map",
         "createdAt": 1643893771.052369,
         "id": "1643893771.052369",
         "text": ":superhero:",
+        "url": "https://slack.com/api/conversations.history?channel=CF3H7S63W&latest=1643893771.052369&inclusive=true&limit=1",
       },
       Object {
         "author": Object {
@@ -37,7 +57,18 @@ GetMessages map",
         "id": "1643835555.648069",
         "text": "test",
         "threadId": "1643835555.648069",
+        "url": "https://slack.com/api/conversations.history?channel=CF3H7S63W&latest=1643835555.648069&inclusive=true&limit=1",
       },
+    ],
+    "nextPage": "bmV4dF90czoxNjQzODM1NTUzNjU4MjU5",
+  },
+}
+`;
+
+exports[`chat/get-messages/slack GetMessages when specified destination does exist performs correctly 2`] = `
+Ok {
+  "value": Object {
+    "messages": Array [
       Object {
         "author": Object {
           "id": "UF4PRBHL7",
@@ -55,17 +86,8 @@ GetMessages map",
           },
         ],
         "text": "test",
+        "url": "https://slack.com/api/conversations.history?channel=CF3H7S63W&latest=1643835553.658259&inclusive=true&limit=1",
       },
-    ],
-    "nextPage": "bmV4dF90czoxNjQzNzk4NjQ5MTgyMDE5",
-  },
-}
-`;
-
-exports[`chat/get-messages/slack GetMessages when specified destination does exist performs correctly 2`] = `
-Ok {
-  "value": Object {
-    "messages": Array [
       Object {
         "author": Object {
           "id": "UF4PRBHL7",
@@ -75,6 +97,7 @@ Ok {
         "id": "1643798649.182019",
         "text": "test :test_tube:",
         "updatedAt": 1643836476,
+        "url": "https://slack.com/api/conversations.history?channel=CF3H7S63W&latest=1643798649.182019&inclusive=true&limit=1",
       },
       Object {
         "author": Object {
@@ -94,6 +117,7 @@ Ok {
         ],
         "text": "test",
         "updatedAt": 1643285583,
+        "url": "https://slack.com/api/conversations.history?channel=CF3H7S63W&latest=1643216443.234079&inclusive=true&limit=1",
       },
     ],
   },
