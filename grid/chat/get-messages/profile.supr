@@ -15,17 +15,15 @@ usecase GetMessages {
 		
 		"""
 		After Date
-		Retrieve only messages after this date and time, UNIX timestamp format (e.g. 1095379198.75) 
-		or snowflake format, which includes UNIX timestamp in its first 42 bits.
+		Retrieve only messages after this timestamp, UNIX timestamp format (e.g. 1095379198.75)
 		"""
-		afterDate string | number
+		afterTimestamp number
 		
 		"""
 		Before Date
-		Retrieve only messages before this date and time, UNIX timestamp format (e.g. 1095379198.75)
-		or snowflake format, which includes UNIX timestamp in its first 42 bits.
+		Retrieve only messages before this timestamp, UNIX timestamp format (e.g. 1095379198.75)
 		"""
-		beforeDate string | number
+		beforeTimestamp number
         
 		"""
 		Limit
@@ -145,6 +143,12 @@ model Message {
 	createdAt! number!
 
 	"""
+	URL
+	URL address pointing to retrieved message.
+	"""
+	url string!
+
+	"""
 	Has Thread
 	Boolean that represents whether message is parent to some thread
 	"""
@@ -155,6 +159,12 @@ model Message {
 	If the message was sent to a thread, identifies the parent thread by its Id.
 	"""
 	threadId string
+
+	"""
+	Parent ID
+	If the message is a reply, identifies the parent message, to which is replying
+	"""
+	parentId string
 
 	"""
 	Text
@@ -190,12 +200,6 @@ model Message {
 
 model Messages {
 	"""
-	Previous Page
-	Cursor to the previous page for pagination backwards
-	"""
-	previousPage string
-	
-	"""
 	Next Page
 	Cursor to the next page for pagination forwards
 	"""
@@ -222,9 +226,16 @@ model Error {
 	title!
 
 	"""
+	Detail
 	A human-readable explanation specific to this occurrence of the problem.
 	"""
 	detail
+
+	"""
+	Rate Limit
+	Rate limit details.
+	"""
+	rateLimit RateLimit
 }
 
 model RateLimit {
