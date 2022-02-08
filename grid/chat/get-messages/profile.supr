@@ -29,7 +29,7 @@ usecase GetMessages {
         
 		"""
 		Limit
-		Maximum number of records to retrieve
+		Maximum number of messages to retrieve in one page
 		"""
 		limit number
 		
@@ -131,7 +131,7 @@ model Message {
 
 	"""
 	Author
-	Representation of the author of retrieved message. Contains ID and username, depending on the provider capability.
+	Author of retrieved message. Contains ID and username, depending on the provider capability.
 	"""
 	author! {
 		id! string!
@@ -177,7 +177,7 @@ model Message {
 		{
 			emoji string
 			count number
-      		users [string]
+			users [string]
 		}
 	]
 
@@ -222,9 +222,16 @@ model Error {
 	title!
 
 	"""
+	Detail
 	A human-readable explanation specific to this occurrence of the problem.
 	"""
 	detail
+
+	"""
+	Rate Limit
+	Rate limit details.
+	"""
+	rateLimit RateLimit
 }
 
 model RateLimit {

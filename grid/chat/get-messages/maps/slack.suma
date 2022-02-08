@@ -53,7 +53,9 @@ map GetMessages {
 }
 
 operation MapMessages {
-	messages = args.messages.filter(message => message.type === 'message')
+	set if (args.messages && args.messages.length > 0) {
+		messages = args.messages.filter(message => message.type === 'message')
+	}
 					
 	set if (messages.length > 0) {
 		messages = messages.map((message) => {
