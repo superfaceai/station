@@ -76,7 +76,7 @@ export const refreshTokenTest = (
   input: UseCaseInput,
   onRefreshPerform?: (result: UseCaseResult) => void
 ): void => {
-  describe(`oauth/refresh-token/${provider}`, () => {
+  describe(`oauth2/refresh-token/${provider}`, () => {
     let superfaceRefreshToken: SuperfaceTest;
     const currentInput = { ...input };
 
@@ -97,7 +97,7 @@ export const refreshTokenTest = (
 
     beforeEach(() => {
       superfaceRefreshToken = new SuperfaceTest({
-        profile: 'oauth/refresh-token',
+        profile: 'oauth2/refresh-token',
         useCase: 'GetAccessTokenFromRefreshToken',
         provider,
         testInstance: expect,
