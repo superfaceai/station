@@ -145,6 +145,12 @@ model Message {
 	createdAt! number!
 
 	"""
+	URL
+	URL address pointing to retrieved message.
+	"""
+	url string!
+
+	"""
 	Has Thread
 	Boolean that represents whether message is parent to some thread
 	"""
