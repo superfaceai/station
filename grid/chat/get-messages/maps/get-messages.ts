@@ -43,20 +43,16 @@ export const getMessagesTest = (
             return;
           }
 
-          const input = {
-            destination: destination[0],
-            limit: 3,
-          } as any;
-
-          if (provider === 'discord') {
-            input.beforeDate = cursor;
-          } else {
-            input.page = cursor;
-          }
-
-          /* eslint-enable @typescript-eslint/no-unsafe-member-access */
-
-          const page2 = await superface.run({ input }, options);
+          const page2 = await superface.run(
+            {
+              input: {
+                destination: destination[0],
+                limit: 3,
+                page: cursor,
+              },
+            },
+            options
+          );
 
           expect(page2.isOk).toBeTruthy();
           expect(page2).toMatchSnapshot();

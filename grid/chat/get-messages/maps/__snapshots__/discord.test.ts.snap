@@ -9,10 +9,57 @@ Ok {
           "id": "170231057197563904",
           "username": "Martin Albert",
         },
+        "createdAt": 1644322924200,
+        "id": "940583259262308362",
+        "parentId": "938783520371916840",
+        "reactions": Array [
+          Object {
+            "count": 1,
+            "emoji": "🔥",
+          },
+        ],
+        "text": "reply to attachment message",
+        "url": "https://discord.com/api/channels/938614740995960844/messages/940583259262308362",
+      },
+      Object {
+        "author": Object {
+          "id": "935958634016419920",
+          "username": "TestApp",
+        },
+        "createdAt": 1643975905801,
+        "id": "939127758603321384",
+        "text": "text message",
+        "url": "https://discord.com/api/channels/938614740995960844/messages/939127758603321384",
+      },
+      Object {
+        "author": Object {
+          "id": "170231057197563904",
+          "username": "Martin Albert",
+        },
         "createdAt": 1643910369785,
         "id": "938852880629256233",
+        "parentId": undefined,
         "text": "test thread",
+        "url": "https://discord.com/api/channels/938614740995960844/messages/938852880629256233",
       },
+    ],
+    "nextPage": "938852880629256233",
+    "rateLimit": Object {
+      "bucket": "fccc1d589e71dd6f0c55fde9faa2838d",
+      "remainingRequests": 4,
+      "remainingRequestsPercentage": 80,
+      "resetTimestamp": 1644326073,
+      "retryAfter": 5,
+      "totalRequests": 5,
+    },
+  },
+}
+`;
+
+exports[`chat/get-messages/discord GetMessages when specified destination does exist performs correctly 2`] = `
+Ok {
+  "value": Object {
+    "messages": Array [
       Object {
         "attachments": Array [
           Object {
@@ -30,6 +77,7 @@ Ok {
         "createdAt": 1643893833011,
         "id": "938783520371916840",
         "text": "🦸",
+        "url": "https://discord.com/api/channels/938614740995960844/messages/938783520371916840",
       },
       Object {
         "author": Object {
@@ -41,26 +89,8 @@ Ok {
         "id": "938779397664673793",
         "text": "test",
         "threadId": "938779397664673793",
+        "url": "https://discord.com/api/channels/938614740995960844/messages/938779397664673793",
       },
-    ],
-    "nextPage": "938779397664673793",
-    "previousPage": "938852880629256233",
-    "rateLimit": Object {
-      "bucket": "fccc1d589e71dd6f0c55fde9faa2838d",
-      "remainingRequests": 4,
-      "remainingRequestsPercentage": 80,
-      "resetTimestamp": 1643910956,
-      "retryAfter": 5,
-      "totalRequests": 5,
-    },
-  },
-}
-`;
-
-exports[`chat/get-messages/discord GetMessages when specified destination does exist performs correctly 2`] = `
-Ok {
-  "value": Object {
-    "messages": Array [
       Object {
         "author": Object {
           "id": "935958634016419920",
@@ -69,33 +99,15 @@ Ok {
         "createdAt": 1643892831594,
         "id": "938779320124596244",
         "text": "test",
-      },
-      Object {
-        "author": Object {
-          "id": "935958634016419920",
-          "username": "TestApp",
-        },
-        "createdAt": 1643855918869,
-        "id": "938624496934461510",
-        "text": "4 - test",
-      },
-      Object {
-        "author": Object {
-          "id": "935958634016419920",
-          "username": "TestApp",
-        },
-        "createdAt": 1643855918496,
-        "id": "938624495370010635",
-        "text": "3 - test",
+        "url": "https://discord.com/api/channels/938614740995960844/messages/938779320124596244",
       },
     ],
-    "nextPage": "938624495370010635",
-    "previousPage": "938779320124596244",
+    "nextPage": "938779320124596244",
     "rateLimit": Object {
       "bucket": "fccc1d589e71dd6f0c55fde9faa2838d",
       "remainingRequests": 3,
       "remainingRequestsPercentage": 60,
-      "resetTimestamp": 1643910956,
+      "resetTimestamp": 1644326073,
       "retryAfter": 5,
       "totalRequests": 5,
     },
@@ -111,6 +123,6 @@ Properties: {
   \\"detail\\": \\"Unknown Channel\\"
 }
 AST Path: definitions[0].statements[5].responseHandlers[4].statements[0]
-Original Map Location: Line 67, column 4",
+Original Map Location: Line 66, column 4",
 }
 `;
