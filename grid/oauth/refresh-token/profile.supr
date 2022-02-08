@@ -48,6 +48,12 @@ usecase GetAccessTokenFromRefreshToken unsafe {
     The type of token this is, usually "Bearer".
     """
     tokenType string
+
+    """
+    Refresh token
+    Provider may issue a new refresh token, invalidating the previously used refresh token
+    """
+    refreshToken string
   }
 
   error {
