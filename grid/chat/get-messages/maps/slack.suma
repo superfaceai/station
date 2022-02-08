@@ -25,7 +25,10 @@ map GetMessages {
 				title = body.error
 			}
 
-			messages = call MapMessages(messages = body.messages)
+			messages = call MapMessages(
+				messages = body.messages,
+				destination = input.destination,
+			)
 
 			return map result if (body.has_more) {
 				nextPage = body.response_metadata.next_cursor
@@ -56,53 +59,72 @@ operation MapMessages {
 	set if (args.messages && args.messages.length > 0) {
 		messages = args.messages.filter(message => message.type === 'message')
 	}
-					
-	set if (messages.length > 0) {
-		messages = messages.map((message) => {
-			const result = {
-				id: message.ts,
-				text: message.text,
-				createdAt: parseFloat(message.ts),
-			}
-			
-			if (message.user || message.bot_id) {
-				result.author = {
-					id: message.user || message.bot_id,
-					username: message.username
-				};
-			}
 
-			if (message.thread_ts) {
-				result.hasThread = true
-				result.threadId = message.thread_ts;
-			}
+	listOfMessages = []
+	
+	// workaround for map interpreter variables merging issue
+	listOfMessages = call foreach(index of Array(messages.length).fill().map((_, i) => i)) MapMessage(
+		index = index,
+		messages = messages,
+		dest = args.destination,
+	) if (messages.length > 0)
 
-			if (message.edited) {
-				result.updatedAt = parseFloat(message.edited.ts);
-			}
+	return listOfMessages
+}
 
-			if (message.reactions) {
-				result.reactions = message.reactions.map(reaction => ({
-					emoji: reaction.name,
-					count: reaction.count,
-					users: reaction.users
-				}));
-			}
+operation MapMessage {
+	index = args.index
+	message = args.messages[index]
 
-			if (message.files) {
-				result.attachments = message.files.map(file => ({
-					id: file.id,
-					createdAt: file.created,
-					fileName: file.name,
-					mediaType: file.mimetype,
-					url: file.permalink_public,
-					preview: file.preview,
-				}))
-			}
-
-			return result
-		});
+	messageResult = {
+		id: message.ts,
+		text: message.text,
+		createdAt: parseFloat(message.ts),
 	}
 
-	return messages
+	set if(message.user || message.bot_id) {
+		messageResult.author = {
+			id: message.user || message.bot_id,
+			username: message.username
+		}
+	}
+
+	set if (message.thread_ts) {
+		messageResult.hasThread = true
+		messageResult.threadId = message.thread_ts;
+	}
+
+	set if (message.edited) {
+		messageResult.updatedAt = parseFloat(message.edited.ts);
+	}
+
+	set if (message.reactions) {
+		messageResult.reactions = message.reactions.map(reaction => ({
+			emoji: reaction.name,
+			count: reaction.count,
+			users: reaction.users
+		}))
+	}
+
+	set if (message.files && message.files.length > 0) {
+		messageResult.attachments = message.files.map(file => ({
+			id: file.id,
+			createdAt: file.created,
+			fileName: file.name,
+			mediaType: file.mimetype,
+			url: file.permalink_public,
+			preview: file.preview,
+		}))
+	}
+
+	messageResult.url = call ComposeURL(ts = message.ts, dest = args.dest)
+
+	return messageResult
+}
+
+operation ComposeURL {
+	timestamp = args.ts
+	destination = args.dest
+
+	return `https://slack.com/api/conversations.history?channel=${destination}&latest=${timestamp}&inclusive=true&limit=1`
 }
