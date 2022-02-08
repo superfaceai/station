@@ -9,7 +9,7 @@ map GetMessages {
 		request "application/x-www-form-urlencoded" {
 			query {
 				channel = input.destination
-				oldest = input.afterDate
+				oldest = input.afterTimestamp
 				cursor = input.page
 				limit = input.limit || 100
 			}
