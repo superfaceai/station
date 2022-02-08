@@ -120,6 +120,16 @@ model ErrorCode enum {
   """
   Unauthorized
   """
+  Service unavailable
+  Provider service is unavailable. Try the request later.
+  """
+  ServiceUnavailable
+  """
+  Unprocessable entity
+  API server was not able to process entity. (i.e. duplicite post)
+  """
+  UnprocessableEntity
+  """
   Unknown error
   Returned when an unexpected error occured.
   """
