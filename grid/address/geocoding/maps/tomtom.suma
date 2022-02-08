@@ -1,0 +1,86 @@
+profile = "address/geocoding@1.0"
+provider = "tomtom"
+
+
+map Geocode {}
+
+
+map ReverseGeocode {
+  payload = `${input.latitude},${input.longitude}`
+
+  http GET "/search/2/reverseGeocode/{payload}.json" {
+    security "apikey"
+    request {
+      query {
+        returnRoadUse = false
+        returnSpeedLimit = false
+      }
+    }    
+
+    response 200 "application/json" {
+      map result body.addresses.map(result => {
+        let mappedAddress = {};
+
+        // country code
+        if (result.address.countryCode) {
+          mappedAddress.addressCountry = result.address.countryCode;
+        }
+
+        // region
+        if (result.address.countrySubdivision) {
+          mappedAddress.addressRegion = result.address.countrySubdivision
+        }
+        
+        // locality
+        if (result.address.municipalitySubdivision && result.address.municipality) {
+          mappedAddress.addressLocality = 
+            `${result.address.municipalitySubdivision}, ${result.address.municipality}`
+        }
+
+        // street number
+        if (result.address.streetNameAndNumber) {
+          mappedAddress.streetAddress = result.address.streetNameAndNumber
+        }
+
+        // postal code
+        if (result.address.postalCode) {
+          mappedAddress.postalCode = result.address.postalCode;
+        }        
+
+        // formatted address
+        if (result.address.freeformAddress && result.address.country) {
+          mappedAddress.formattedAddress = `${result.address.freeformAddress}, ${result.address.country}`;
+        }
+
+        return mappedAddress;
+      })
+    }
+
+    response 400 "application/json" {
+      map error {
+        title = "Bad request"
+        detail = body.detailedError.message
+      }
+    }
+
+    response 403 {
+      map error {
+        title = "Forbidden"
+        detail = "Possible reasons: Service requires SSL, Not authorized, Rate or volume limit exceeded, Unknown referer"
+      }
+    }
+
+    response 404 {
+      map error {
+        title = "Not found"
+      }
+    }
+
+    response 429 "application/json" {
+      map error {
+        title = "Too many requests"
+        detail = body.detailedError.message
+      }
+    }        
+  }
+}

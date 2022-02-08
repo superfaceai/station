@@ -191,8 +191,14 @@
         },
         "azure-maps": {
           "file": "../grid/address/geocoding/maps/azure-maps.suma"
+        },
+        "tomtom": {
+          "file": "../grid/address/geocoding/maps/tomtom.suma"
         }
-      }
+      },
+      "priority": [
+        "tomtom"
+      ]
     },
     "delivery-tracking/shipment-info": {
       "file": "../grid/delivery-tracking/shipment-info/profile.supr",
@@ -893,6 +899,15 @@
       "parameters": {
         "accessToken": "$LINKEDIN_ACCESS_TOKEN"
       }
+    },
+    "tomtom": {
+      "file": "../providers/tomtom.json",
+      "security": [
+        {
+          "id": "apikey",
+          "apikey": "$TOMTOM_API_KEY"
+        }
+      ]      
     }
   }
 }
