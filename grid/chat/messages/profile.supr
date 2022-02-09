@@ -1,4 +1,4 @@
-name = "chat/get-messages"
+name = "chat/messages"
 version = "1.0.0"
 
 """
@@ -27,7 +27,7 @@ usecase GetMessages {
         
 		"""
 		Limit
-		Maximum number of records to retrieve
+		Maximum number of messages to retrieve in one page
 		"""
 		limit number
 		
@@ -187,7 +187,7 @@ model Message {
 		{
 			emoji string
 			count number
-      		users [string]
+			users [string]
 		}
 	]
 

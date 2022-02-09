@@ -1,0 +1,130 @@
+profile = "chat/messages@1.0"
+provider = "slack"
+
+"""
+GetMessages map
+"""
+map GetMessages {
+	http GET "/conversations.history" {
+		request "application/x-www-form-urlencoded" {
+			query {
+				channel = input.destination
+				oldest = input.afterDate
+				cursor = input.page
+				limit = input.limit || 100
+			}
+
+			headers {
+				"Authorization" = `Bearer ${parameters.accessToken}`
+			}
+		}
+
+		response 200 "application/json" {
+			// See https://api.slack.com/methods/conversations.history#errors for more information about errors
+			return map error if (body.ok === false) {
+				title = body.error
+			}
+
+			messages = call MapMessages(
+				messages = body.messages,
+				destination = input.destination,
+			)
+
+			return map result if (body.has_more) {
+				nextPage = body.response_metadata.next_cursor
+				messages = messages
+			}
+
+			return map result if (!body.has_more) {
+				messages = messages
+			}
+		}
+
+		response 429 {
+			map error {
+				title = 'Too Many Requests'
+				detail = `Retry after ${headers['Retry-After']} seconds`
+			}
+		}
+
+		response "application/json" {
+			map error if (body.ok === false) {
+				title = body.error
+			}
+		}
+	}
+}
+
+operation MapMessages {
+	set if (args.messages && args.messages.length > 0) {
+		messages = args.messages.filter(message => message.type === 'message')
+	}
+
+	listOfMessages = []
+	
+	// workaround for map interpreter variables merging issue
+	listOfMessages = call foreach(index of Array(messages.length).fill().map((_, i) => i)) MapMessage(
+		index = index,
+		messages = messages,
+		dest = args.destination,
+	) if (messages.length > 0)
+
+	return listOfMessages
+}
+
+operation MapMessage {
+	index = args.index
+	message = args.messages[index]
+
+	messageResult = {
+		id: message.ts,
+		text: message.text,
+		createdAt: parseFloat(message.ts),
+	}
+
+	set if(message.user || message.bot_id) {
+		messageResult.author = {
+			id: message.user || message.bot_id,
+			username: message.username
+		}
+	}
+
+	set if (message.thread_ts) {
+		messageResult.hasThread = true
+		messageResult.threadId = message.thread_ts;
+	}
+
+	set if (message.edited) {
+		messageResult.updatedAt = parseFloat(message.edited.ts);
+	}
+
+	set if (message.reactions) {
+		messageResult.reactions = message.reactions.map(reaction => ({
+			emoji: reaction.name,
+			count: reaction.count,
+			users: reaction.users
+		}))
+	}
+
+	set if (message.files && message.files.length > 0) {
+		messageResult.attachments = message.files.map(file => ({
+			id: file.id,
+			createdAt: file.created,
+			fileName: file.name,
+			mediaType: file.mimetype,
+			url: file.permalink_public,
+			preview: file.preview,
+		}))
+	}
+
+	messageResult.url = call ComposeURL(ts = message.ts, dest = args.dest)
+
+	return messageResult
+}
+
+operation ComposeURL {
+	timestamp = args.ts
+	destination = args.dest
+
+	return `https://slack.com/api/conversations.history?channel=${destination}&latest=${timestamp}&inclusive=true&limit=1`
+}
