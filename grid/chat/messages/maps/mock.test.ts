@@ -1,10 +1,10 @@
 import { SuperfaceClient } from '@superfaceai/one-sdk';
 
-describe('chat/get-messages/mock', () => {
+describe('chat/messages/mock', () => {
   describe('GetMessages', () => {
     it('performs correctly', async () => {
       const client = new SuperfaceClient();
-      const profile = await client.getProfile('chat/get-messages');
+      const profile = await client.getProfile('chat/messages');
       const provider = await client.getProvider('mock');
       const usecase = profile.getUseCase('GetMessages');
 

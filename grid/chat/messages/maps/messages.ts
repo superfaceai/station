@@ -7,13 +7,13 @@ export const getMessagesTest = (
   destination: string[],
   options?: RecordingProcessOptions
 ): void => {
-  describe(`chat/get-messages/${provider}`, () => {
+  describe(`chat/messages/${provider}`, () => {
     let superface: SuperfaceTest;
 
     describe('GetMessages', () => {
       beforeAll(() => {
         superface = new SuperfaceTest({
-          profile: 'chat/get-messages',
+          profile: 'chat/messages',
           provider,
           useCase: 'GetMessages',
         });
