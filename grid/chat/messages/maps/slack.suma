@@ -9,7 +9,7 @@ map GetMessages {
 		request "application/x-www-form-urlencoded" {
 			query {
 				channel = input.destination
-				oldest = input.afterDate
+				oldest = input.afterTimestamp
 				cursor = input.page
 				limit = input.limit || 100
 			}
@@ -56,18 +56,18 @@ map GetMessages {
 }
 
 operation MapMessages {
+	listOfMessages = []
+
 	set if (args.messages && args.messages.length > 0) {
-		messages = args.messages.filter(message => message.type === 'message')
+		listOfMessages = args.messages.filter(message => message.type === 'message')
 	}
 
-	listOfMessages = []
-	
 	// workaround for map interpreter variables merging issue
-	listOfMessages = call foreach(index of Array(messages.length).fill().map((_, i) => i)) MapMessage(
+	listOfMessages = call foreach(index of Array(listOfMessages.length).fill().map((_, i) => i)) MapMessage(
 		index = index,
-		messages = messages,
+		messages = listOfMessages,
 		dest = args.destination,
-	) if (messages.length > 0)
+	) if (listOfMessages.length > 0)
 
 	return listOfMessages
 }
