@@ -85,37 +85,45 @@ Operation MapDestinations
 Returns array mapping destinations in received body
 """
 operation MapDestinations {
-    destinations = args.destinations
+    destinations = []
+
+    set if(args.destinations && args.destinations.length > 0) {
+        destinations = args.destinations.filter(dest => [0, 1, 3, 5].includes(dest.type))
+    }
 
     set if(destinations.length > 0) {
-        destinations = args.destinations.map(dest => {
-            const discordEpoch = 1420070400000;
-            const getTimestamp = (snowflake) => {
-                return Number(BigInt(snowflake) >> BigInt(22)) + discordEpoch;
-            } ;
-
-            const result = {
-                id: dest.id,
-                createdAt: getTimestamp(dest.id),
-            };
-
-            if (dest.name) {
-                result.name = dest.name;
-            }
-
-            if (dest.topic) {
-                result.description = result.topic;
-            }
-
-            if (dest.member_count) {
-                result.numOfMembers = dest.member_count;
-            }
-
-            return result;
-        })
+        destinations = call foreach(index of Array(destinations.length).fill().map((_, i) => i)) MapDestination(
+            index = index,
+            destinations = destinations,
+        )
     }
 
     return destinations
+}
+
+operation MapDestination {
+    index = args.index
+    dest = args.destinations[index]
+
+    resultDest = {
+        id: dest.id,
+    }
+
+    resultDest.createdAt = call GetTimestamp(id = dest.id)
+
+    set if (dest.name) {
+        resultDest.name = dest.name
+    }
+
+    set if (dest.topic) {
+        resultDest.description = dest.topic
+    }
+
+    set if (dest.member_count) {
+        resultDest.numOfMembers = dest.member_count
+    }
+
+    return resultDest
 }
 
 """
@@ -138,4 +146,19 @@ operation MapRateLimitDetails {
 		resetTimestamp = resetTimestamp
 		retryAfter = retryAfter
 	}
+}
+
+"""
+Operation Get Timestamp
+
+Returns UNIX timestamp from specified discord snowflake id
+More about snowflakes: https://discord.com/developers/docs/reference#snowflakes
+"""
+operation GetTimestamp {
+	discordEpoch = 1420070400000
+
+	snowflake = args.id
+	processedSnowflake = Number(BigInt(snowflake) >> BigInt(22))
+
+	return processedSnowflake + discordEpoch
 }
