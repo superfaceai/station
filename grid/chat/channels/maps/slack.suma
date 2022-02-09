@@ -57,37 +57,45 @@ operation MapChannels {
     channels = []
     
     set if (args.channels && args.channels.length > 0) {
-        channels = args.channels.map(channel => {
-            const resultChannel = {
-                id: channel.id,
-                createdAt: channel.created,
-            };
-
-            if (channel.name) {
-                resultChannel.name = channel.name;
-            }
-
-            if (channel.topic.value && channel.topic.value !== '') {
-                resultChannel.description = channel.topic.value;
-            }
-            
-            if (channel.purpose.value && channel.purpose.value !== '') {
-                if (resultChannel.description !== undefined) {
-                    resultChannel.description += ` - ${channel.purpose.value}`;
-                } else {
-                    resultChannel.description = channel.purpose.value;
-                }
-            }
-
-            if (channel.num_members) {
-                resultChannel.numOfMembers = channel.num_members;
-            }
-
-            return resultChannel;
-        })
+        channels = call foreach(index of Array(args.channels.length).fill().map((_, i) => i)) MapChannel(
+            index = index,
+            channels = args.channels,
+        )
     }
 
     return channels
+}
+
+operation MapChannel {
+    index = args.index
+    channel = args.channels[index]
+
+    resultChannel = {
+        id: channel.id,
+        createdAt: channel.created
+    }
+
+    set if (channel.name) {
+        resultChannel.name = channel.name;
+    }
+
+    set if (channel.topic.value && channel.topic.value !== '') {
+        resultChannel.description = channel.topic.value;
+    }
+    
+    set if (resultChannel.description !== undefined && channel.purpose.value && channel.purpose.value !== '') {
+        resultChannel.description = resultChannel.description + ` - ${channel.purpose.value}`;
+    }
+
+    set if (resultChannel.description === undefined && channel.purpose.value && channel.purpose.value !== '') {
+        resultChannel.description = channel.purpose.value
+    }
+
+    set if (channel.num_members) {
+        resultChannel.numOfMembers = channel.num_members;
+    }
+
+    return resultChannel
 }
 
 operation typesToQuery {
