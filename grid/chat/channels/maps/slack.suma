@@ -1,10 +1,10 @@
-profile = "chat/get-destinations@1.0"
+profile = "chat/channels@1.0"
 provider = "slack"
 
 """
-GetDestinations map
+GetChannels map
 """
-map GetDestinations {
+map GetChannels {
     types = call typesToQuery(types = input.types)
 
     http GET "/conversations.list" {
@@ -26,15 +26,15 @@ map GetDestinations {
                 title = body.error
             }
 
-            destinations = call MapDestinations(destinations = body.channels)
+            channels = call MapChannels(channels = body.channels)
 
             return map result if (body.has_more === true) {
                 nextPage = body.response_metadata.next_cursor
-                destinations = destinations
+                channels = channels
             }
 
             return map result {
-                destinations = destinations
+                channels = channels
             }
         }
 
@@ -53,37 +53,41 @@ map GetDestinations {
     }
 }
 
-operation MapDestinations {
-    destinations = args.destinations.map(dest => {
-        const result = {
-            id: dest.id,
-            createdAt: dest.created,
-        };
+operation MapChannels {
+    channels = []
+    
+    set if (args.channels && args.channels.length > 0) {
+        channels = args.channels.map(channel => {
+            const resultChannel = {
+                id: channel.id,
+                createdAt: channel.created,
+            };
 
-        if (dest.name) {
-            result.name = dest.name;
-        }
-
-        if (dest.topic.value && dest.topic.value !== '') {
-            result.description = dest.topic.value;
-        }
-        
-        if (dest.purpose.value && dest.purpose.value !== '') {
-            if (result.description !== undefined) {
-                result.description += ` - ${dest.purpose.value}`;
-            } else {
-                result.description = dest.purpose.value;
+            if (channel.name) {
+                resultChannel.name = channel.name;
             }
-        }
 
-        if (dest.num_members) {
-            result.numOfMembers = dest.num_members;
-        }
+            if (channel.topic.value && channel.topic.value !== '') {
+                resultChannel.description = channel.topic.value;
+            }
+            
+            if (channel.purpose.value && channel.purpose.value !== '') {
+                if (resultChannel.description !== undefined) {
+                    resultChannel.description += ` - ${channel.purpose.value}`;
+                } else {
+                    resultChannel.description = channel.purpose.value;
+                }
+            }
 
-        return result;
-    })
+            if (channel.num_members) {
+                resultChannel.numOfMembers = channel.num_members;
+            }
 
-    return destinations
+            return resultChannel;
+        })
+    }
+
+    return channels
 }
 
 operation typesToQuery {

@@ -1,10 +1,10 @@
-profile = "chat/get-destinations@1.0"
+profile = "chat/channels@1.0"
 provider = "discord"
 
 """
-GetDestinations map
+GetChannels map
 """
-map GetDestinations {
+map GetChannels {
     return map error if (input.server === undefined) {
         title = "Input parameter `server` is required in case of discord provider"
     }
@@ -17,11 +17,11 @@ map GetDestinations {
        }
 
        response 200 "application/json" {
-            destinations = call MapDestinations(destinations = body)
+            channels = call MapChannels(channels = body)
 		    rateLimit = call MapRateLimitDetails(headers = headers)
 
             map result {
-                destinations = destinations
+                channels = channels
                 rateLimit = rateLimit
             }
        }
@@ -81,49 +81,49 @@ map GetDestinations {
 }
 
 """
-Operation MapDestinations
-Returns array mapping destinations in received body
+Operation MapChannels
+Returns array mapping channels in received body
 """
-operation MapDestinations {
-    destinations = []
+operation MapChannels {
+    channels = []
 
-    set if(args.destinations && args.destinations.length > 0) {
-        destinations = args.destinations.filter(dest => [0, 1, 3, 5].includes(dest.type))
+    set if(args.channels && args.channels.length > 0) {
+        channels = args.channels.filter(channel => [0, 1, 3, 5].includes(channel.type))
     }
 
-    set if(destinations.length > 0) {
-        destinations = call foreach(index of Array(destinations.length).fill().map((_, i) => i)) MapDestination(
+    set if(channels.length > 0) {
+        channels = call foreach(index of Array(channels.length).fill().map((_, i) => i)) MapChannel(
             index = index,
-            destinations = destinations,
+            channels = channels,
         )
     }
 
-    return destinations
+    return channels
 }
 
-operation MapDestination {
+operation MapChannel {
     index = args.index
-    dest = args.destinations[index]
+    channel = args.channels[index]
 
-    resultDest = {
-        id: dest.id,
+    resultChannel = {
+        id: channel.id,
     }
 
-    resultDest.createdAt = call GetTimestamp(id = dest.id)
+    resultChannel.createdAt = call GetTimestamp(id = channel.id)
 
-    set if (dest.name) {
-        resultDest.name = dest.name
+    set if (channel.name) {
+        resultChannel.name = channel.name
     }
 
-    set if (dest.topic) {
-        resultDest.description = dest.topic
+    set if (channel.topic) {
+        resultChannel.description = channel.topic
     }
 
-    set if (dest.member_count) {
-        resultDest.numOfMembers = dest.member_count
+    set if (channel.member_count) {
+        resultChannel.numOfMembers = channel.member_count
     }
 
-    return resultDest
+    return resultChannel
 }
 
 """
