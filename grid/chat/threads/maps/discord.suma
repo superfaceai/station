@@ -1,0 +1,147 @@
+profile = "chat/threads@1.0"
+provider = "discord"
+
+"""
+GetThreads map
+"""
+map GetThreads {
+    http GET "/guilds/{input.server}/threads/active" {
+       request "application/json" {
+           headers {
+               "Authorization" = `Bot ${parameters.accessToken}`
+           }
+       }
+
+       response 200 "application/json" {
+            threads = call MapThreads(threads = body.threads)
+
+            map result {
+				threads = threads
+			}
+       	}
+
+		response 400 "application/json" {
+			map error {
+				title = "Bad Request"
+				detail = body
+			}
+		}
+
+		response 401 "application/json" {
+			map error {
+				title = "Unauthorized"
+				detail = body.message
+			}
+		}
+
+		response 403 "application/json" {
+			map error {
+				title = "Forbidden"
+				detail = body.message
+			}
+		}
+
+		response 404 "application/json" {
+			map error {
+				title = "Not Found"
+				detail = body.message
+			}
+		}
+
+		response 405 "application/json" {
+			map error {
+				title = "Method not allowed"
+				detail = body.message
+			}
+		}
+
+		response 429 "application/json" {
+			map error {
+				title = "Too many requests"
+				detail = body.message
+			}
+		}
+
+		response 502 "application/json" {
+			map error {
+				title = "Gateway unavailable"
+				detail = body.message
+			}
+		}
+   }
+}
+
+"""
+Operation MapThreads
+Returns array mapping threads in received body
+"""
+operation MapThreads {
+	threads = []
+
+	set if (args.threads && args.threads.length > 0) {
+    	threads = args.threads.filter(thread => [10, 11, 12].includes(thread.type))
+	}
+
+    set if (threads.length > 0) {
+		// workaround for map interpreter variables merging issue
+		threads = call foreach(index of Array(threads.length).fill().map((_, i) => i)) MapThread(
+			index = index,
+			threads = threads
+		)
+    }
+
+    return threads
+}
+
+operation MapThread {
+	index = args.index
+	thread = args.threads[index]
+
+	resultThread = {
+		id: thread.id
+	}
+
+	set if (thread.name) {
+		resultThread.name = thread.name
+	}
+
+	set if (thread.parent_id) {
+		resultThread.channel = thread.parent_id
+	}
+
+	set if (thread.thread_metadata) {
+		duration = thread.thread_metadata.auto_archive_duration
+		ts = Date.parse(thread.thread_metadata.archive_timestamp)
+	}
+
+	set if(thread.thread_metadata) {
+		resultThread.archiveAt = ts + (duration * 60 * 1000)
+	}
+
+	// only available for threads created after 2022-01-09
+	set if (thread.thread_metadata && thread.thread_metadata.create_timestamp) {
+		resultThread.createdAt = Date.parse(thread.thread_metadata.create_timestamp)
+	}
+
+	// for threads after 2022-01-09 createdAt will be time when parent message was sent
+	set if (resultThread.createdAt === undefined) {
+		resultThread.createdAt = call GetTimestamp(id = thread.id)
+	}
+
+	return resultThread
+}
+
+"""
+OperationGet Timestamp
+
+Returns UNIX timestamp from specified discord snowflake id
+More about snowflakes: https://discord.com/developers/docs/reference#snowflakes
+"""
+operation GetTimestamp {
+	discordEpoch = 1420070400000
+
+	snowflake = args.id
+	processedSnowflake = Number(BigInt(snowflake) >> BigInt(22))
+
+	return processedSnowflake + discordEpoch
+}
