@@ -1,0 +1,47 @@
+profile = "oauth2/refresh-token@1.0"
+provider = "google-apis"
+
+map GetAccessTokenFromRefreshToken {
+  set {
+    clientId = input.clientId || parameters.clientId
+    clientSecret = input.clientSecret || parameters.clientSecret
+  }
+
+  http POST "/oauth2/v4/token" {
+    request "application/x-www-form-urlencoded" {
+      headers {
+        // This simplifies debugging and also gzip over https isn't quite safe
+        "Accept-Encoding" = "identity"
+      }
+      body {
+        grant_type = "refresh_token"
+        refresh_token = input.refreshToken
+        client_id = clientId
+        client_secret = clientSecret
+      }
+    }
+
+    response 200 "application/json" {
+      return map result {
+        accessToken = body.access_token
+        expiresIn = body.expires_in
+        tokenType = body.token_type
+        scopes = body.scope.split(' ')
+      }
+    }
+
+    response "application/json" {
+      // Follows standard mapping https://www.oauth.com/oauth2-servers/access-tokens/access-token-response/#error
+      return map error if (body.error) {
+        error = body.error
+        description = body.error_description
+        link = body.error_uri
+      }
+
+      map error {
+        error = "unknown_response"
+        description = JSON.stringify(body, null, 2)
+      }
+    }
+  }
+}

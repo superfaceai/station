@@ -474,6 +474,20 @@
           "file": "../grid/social-media/followers/maps/twitter.suma"
         }
       }
+    },
+    "oauth2/refresh-token": {
+      "file": "../grid/oauth2/refresh-token/profile.supr",
+      "providers": {
+        "google-apis": {
+          "file": "../grid/oauth2/refresh-token/maps/google-apis.suma"
+        },
+        "mock": {
+          "file": "../grid/oauth2/refresh-token/maps/mock.suma"
+        },
+        "twitter": {
+          "file": "../grid/oauth2/refresh-token/maps/twitter.suma"
+        }
+      }
     }
   },
   "providers": {
@@ -888,7 +902,9 @@
     "twitter": {
       "file": "../providers/twitter.json",
       "parameters": {
-        "accessToken": "$TWITTER_ACCESS_TOKEN"
+        "accessToken": "$TWITTER_ACCESS_TOKEN",
+        "clientId": "$TWITTER_CLIENT_ID",
+        "clientSecret": "$TWITTER_CLIENT_SECRET"
       }
     },
     "linkedin": {
@@ -904,7 +920,14 @@
           "id": "apikey",
           "apikey": "$TOMTOM_API_KEY"
         }
-      ]      
+      ]
+    }
+    "google-apis": {
+      "file": "../providers/google-apis.json",
+      "parameters": {
+        "clientId": "$GOOGLE_APIS_CLIENT_ID",
+        "clientSecret": "$GOOGLE_APIS_CLIENT_SECRET"
+      }
     }
   }
 }
