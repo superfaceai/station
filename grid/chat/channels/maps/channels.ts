@@ -2,19 +2,19 @@
 
 import { RecordingProcessOptions, SuperfaceTest } from '@superfaceai/testing';
 
-export const getDestinationsTest = (
+export const getChannelsTest = (
   provider: string,
   options?: { server?: string; recordingOptions?: RecordingProcessOptions }
 ): void => {
-  describe(`chat/get-destinations/${provider}`, () => {
+  describe(`chat/channels/${provider}`, () => {
     let superface: SuperfaceTest;
 
-    describe('GetDestinations', () => {
+    describe('GetChannels', () => {
       beforeAll(() => {
         superface = new SuperfaceTest({
-          profile: 'chat/get-destinations',
+          profile: 'chat/channels',
           provider,
-          useCase: 'GetDestinations',
+          useCase: 'GetChannels',
         });
       });
 
