@@ -11,7 +11,10 @@ describe('chat/threads/mock', () => {
       expect(provider).not.toBeUndefined();
       expect(usecase).not.toBeUndefined();
 
-      const result = await usecase.perform({ server: 'server_id' }, { provider });
+      const result = await usecase.perform(
+        { server: 'server_id' },
+        { provider }
+      );
 
       expect(result.isOk() && (result.value as any).threads.length).toEqual(3);
     });
