@@ -49,8 +49,8 @@ Ok {
       "bucket": "fccc1d589e71dd6f0c55fde9faa2838d",
       "remainingRequests": 4,
       "remainingRequestsPercentage": 80,
-      "resetTimestamp": 1644496716,
-      "retryAfter": 5,
+      "resetAfter": 5,
+      "resetTimestamp": 1644498474,
       "totalRequests": 5,
     },
   },
@@ -108,8 +108,8 @@ Ok {
       "bucket": "fccc1d589e71dd6f0c55fde9faa2838d",
       "remainingRequests": 3,
       "remainingRequestsPercentage": 60,
-      "resetTimestamp": 1644496716,
-      "retryAfter": 5,
+      "resetAfter": 5,
+      "resetTimestamp": 1644498474,
       "totalRequests": 5,
     },
   },
@@ -120,10 +120,18 @@ exports[`chat/messages/discord GetMessages when specified destination does not e
 Err {
   "error": "HTTPError: Expected HTTP error
 Properties: {
-  \\"title\\": \\"Not Found\\",
-  \\"detail\\": \\"Unknown Channel\\"
+  \\"title\\": \\"Not found\\",
+  \\"detail\\": \\"Unknown Channel\\",
+  \\"rateLimit\\": {
+    \\"bucket\\": \\"fccc1d589e71dd6f0c55fde9faa2838d\\",
+    \\"totalRequests\\": 5,
+    \\"remainingRequests\\": 4,
+    \\"resetAfter\\": 5,
+    \\"resetTimestamp\\": 1644498475,
+    \\"remainingRequestsPercentage\\": 80
+  }
 }
-AST Path: definitions[0].statements[5].responseHandlers[4].statements[0]
-Original Map Location: Line 66, column 4",
+AST Path: definitions[0].statements[5].responseHandlers[1].statements[1]
+Original Map Location: Line 51, column 4",
 }
 `;
