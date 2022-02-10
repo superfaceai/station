@@ -128,7 +128,7 @@ operation MapMessage {
 		)
 	}
 	
-	set if (message.message_reference) {
+	set if (message.message_reference && message.message_reference.message_id) {
 		messageResult.parentId = message.message_reference.message_id
 	}
 

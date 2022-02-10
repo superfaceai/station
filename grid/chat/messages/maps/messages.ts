@@ -16,6 +16,7 @@ export const getMessagesTest = (
           profile: 'chat/messages',
           provider,
           useCase: 'GetMessages',
+          testInstance: expect,
         });
       });
 
@@ -27,6 +28,7 @@ export const getMessagesTest = (
                 destination: destination[0],
                 limit: 3,
               },
+              testName: 'page 1',
             },
             options
           );
@@ -50,6 +52,7 @@ export const getMessagesTest = (
                 limit: 3,
                 page: cursor,
               },
+              testName: 'page 2',
             },
             options
           );

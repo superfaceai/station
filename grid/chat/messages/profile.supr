@@ -200,16 +200,16 @@ model Message {
 
 model Messages {
 	"""
-	Next Page
-	Cursor to the next page for pagination forwards
-	"""
-	nextPage string
-
-	"""
 	Messages
 	List of retrieved messages
 	"""
 	messages! [Message]!
+
+	"""
+	Next Page
+	Cursor to the next page for pagination forwards
+	"""
+	nextPage string
 
 	"""
 	Rate Limit
@@ -239,40 +239,46 @@ model Error {
 }
 
 model RateLimit {
-  """
-  Bucket
-  Different parts of API may have different rate limits.
-  Bucket identifies to which part of API the rate limits apply.
-  """
-  bucket string
+	"""
+	Bucket
+	Different parts of API may have different rate limits.
+	Bucket identifies to which part of API the rate limits apply.
+	"""
+	bucket string
 
-  """
-  Total Requests
-  Total requests available in the time window.
-  """
-  totalRequests number
+	"""
+	Total Requests
+	Total requests available in the time window.
+	"""
+	totalRequests number
 
-  """
-  Remaining Requests
-  Remaining requests available in the time window.
-  """
-  remainingRequests number
+	"""
+	Remaining Requests
+	Remaining requests available in the time window.
+	"""
+	remainingRequests number
 
-  """
-  Remaining Requests available in percents
-  Remaining requests available in the time window in percents.
-  """
-  remainingRequestsPercentage number
+	"""
+	Remaining Requests available in percents
+	Remaining requests available in the time window in percents.
+	"""
+	remainingRequestsPercentage number
 
-  """
-  Reset Timestamp
-  Timestamp when the rate limits will reset (in  Unix Timestamp format).
-  """
-  resetTimestamp number
+	"""
+	Reset Timestamp
+	Timestamp when the rate limits will reset (in Unix Timestamp format).
+	"""
+	resetTimestamp number
 
-  """
-  Retry After
-  Number of seconds until reset of rate limit
-  """
-  retryAfter number
+	"""
+	Reset After
+	Number of seconds until reset of rate limit
+	"""
+	resetAfter number
+
+	"""
+	Retry After
+	Number of seconds until user can retry the request
+	"""
+	retryAfter number
 }
