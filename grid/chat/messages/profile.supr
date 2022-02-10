@@ -16,17 +16,15 @@ usecase GetMessages {
 		"""
 		After Date
 		Retrieve only messages after this date and time, UNIX timestamp format (e.g. 1095379198.75) 
-		or snowflake format, which includes UNIX timestamp in its first 42 bits.
 		"""
-		afterDate string | number
+		afterDate number
 		
 		"""
 		Before Date
 		Retrieve only messages before this date and time, UNIX timestamp format (e.g. 1095379198.75)
-		or snowflake format, which includes UNIX timestamp in its first 42 bits.
 		"""
-		beforeDate string | number
-        
+		beforeDate number
+
 		"""
 		Limit
 		Maximum number of messages to retrieve in one page
@@ -196,16 +194,16 @@ model Message {
 
 model Messages {
 	"""
-	Next Page
-	Cursor to the next page for pagination forwards
-	"""
-	nextPage string
-
-	"""
 	Messages
 	List of retrieved messages
 	"""
 	messages! [Message]!
+
+	"""
+	Next Page
+	Cursor to the next page for pagination forwards
+	"""
+	nextPage string
 
 	"""
 	Rate Limit
@@ -235,46 +233,46 @@ model Error {
 }
 
 model RateLimit {
-  """
-  Bucket
-  Different parts of API may have different rate limits.
-  Bucket identifies to which part of API the rate limits apply.
-  """
-  bucket string
+	"""
+	Bucket
+	Different parts of API may have different rate limits.
+	Bucket identifies to which part of API the rate limits apply.
+	"""
+	bucket string
 
-  """
-  Total Requests
-  Total requests available in the time window.
-  """
-  totalRequests number
+	"""
+	Total Requests
+	Total requests available in the time window.
+	"""
+	totalRequests number
 
-  """
-  Remaining Requests
-  Remaining requests available in the time window.
-  """
-  remainingRequests number
+	"""
+	Remaining Requests
+	Remaining requests available in the time window.
+	"""
+	remainingRequests number
 
-  """
-  Remaining Requests available in percents
-  Remaining requests available in the time window in percents.
-  """
-  remainingRequestsPercentage number
+	"""
+	Remaining Requests available in percents
+	Remaining requests available in the time window in percents.
+	"""
+	remainingRequestsPercentage number
 
-  """
-  Reset Timestamp
-  Timestamp when the rate limits will reset (in  Unix Timestamp format).
-  """
-  resetTimestamp number
+	"""
+	Reset Timestamp
+	Timestamp when the rate limits will reset (in Unix Timestamp format).
+	"""
+	resetTimestamp number
 
-  """
-  Reset After
-  Number of seconds until reset of rate limit
-  """
-  resetAfter number
+	"""
+	Reset After
+	Number of seconds until reset of rate limit
+	"""
+	resetAfter number
 
-  """
-  Retry After
-  Number of seconds until user can retry the request
-  """
-  retryAfter number
+	"""
+	Retry After
+	Number of seconds until user can retry the request
+	"""
+	retryAfter number
 }
