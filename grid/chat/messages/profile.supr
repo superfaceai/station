@@ -273,8 +273,14 @@ model RateLimit {
   resetTimestamp number
 
   """
-  Retry After
+  Reset After
   Number of seconds until reset of rate limit
+  """
+  resetAfter number
+
+  """
+  Retry After
+  Number of seconds until user can retry the request
   """
   retryAfter number
 }
