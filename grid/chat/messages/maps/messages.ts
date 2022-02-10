@@ -16,6 +16,7 @@ export const getMessagesTest = (
           profile: 'chat/messages',
           provider,
           useCase: 'GetMessages',
+          testInstance: expect,
         });
       });
 
@@ -27,6 +28,7 @@ export const getMessagesTest = (
                 destination: destination[0],
                 limit: 3,
               },
+              testName: 'page 1',
             },
             options
           );
@@ -47,6 +49,7 @@ export const getMessagesTest = (
                 // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
                 page: page1.isOk() ? (page1.value as any).nextPage : undefined,
               },
+              testName: 'page 2',
             },
             options
           );
