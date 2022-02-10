@@ -1,4 +1,4 @@
-profile = "social-media/publishing-profiles@1.0"
+profile = "social-media/publishing-profiles@1.1"
 provider = "instagram"
 
 """
@@ -20,31 +20,17 @@ map GetProfilesForPublishing {
     response 200 "application/json" {
       // Now map them to IG profiles
       profiles = call foreach(page of body.data) MapPage(page = page)
+      rateLimit = call MapRateLimit(headers = headers)
 
       return map result {
         profiles = profiles
+        rateLimit = rateLimit
       }
     }
 
-    response 400 "application/json" {
-      return map error {
-        title = "Bad request"
-        detail = body.error.message
-      }
-    }
-
-    response 401 "application/json" {
-      return map error {
-        title = "Unauthenticated"
-        detail = body.error.message
-      }
-    }
-
-    response 403 "application/json" {
-      return map error {
-        title = "Forbidden"
-        detail = body.error.message
-      }
+    response {
+      error = call MapFacebookError(statusCode = statusCode, error = body.error, headers = headers)
+      map error error
     }
   }
 }
@@ -69,5 +55,129 @@ operation MapPage {
     name = igAccount.name
     username = igAccount.username
     imageUrl = igAccount.profile_picture_url
+  }
+}
+
+//Facebook rate limits: https://developers.facebook.com/docs/graph-api/overview/rate-limiting
+operation MapRateLimit {
+  appUsageHeader = args.headers['x-business-use-case-usage']
+  appUsageHeaderParsed = undefined
+  usedRequestsPercentage = undefined
+  remainingRequestsPercentage = undefined
+  bucket = undefined
+  maxUsage = undefined
+  appUsageEntries = undefined
+
+  set if (appUsageHeader) {
+    appUsageHeaderParsed = Object.entries(JSON.parse(appUsageHeader))
+  }
+
+  set if (appUsageHeaderParsed) {
+   appUsageEntries = call foreach(usageEntry of appUsageHeaderParsed) MapUsageEntry(usageEntry = usageEntry)
+  }
+
+  set if (appUsageEntries && appUsageEntries.length > 0) {
+    maxUsage = appUsageEntries[0] //for me/accounts endpoint Facebook API returns just Instagram profile account rate limits
+  }
+
+  set if (maxUsage) {
+    bucket = maxUsage.profileId + '_' + maxUsage.type //concat profileId and usage type as bucket name
+    remainingRequestsPercentage = 100 - maxUsage.callCount
+  }
+
+  return {
+    bucket = bucket
+    remainingRequestsPercentage = remainingRequestsPercentage
+  }
+}
+
+operation MapUsageEntry {
+  profileId = args.usageEntry[0]
+  usages = args.usageEntry[1]
+  maxUsage = undefined
+  type = undefined
+  call_count = undefined
+
+  callCounts = usages.map(usage => {
+    return usage.call_count
+  })
+
+  //find the rate limit bucket with maximum call counts
+  maxCallCountsValue = Math.max(...callCounts);
+
+  maxUsage = usages[callCounts.indexOf(maxCallCountsValue)]
+  
+  return {
+    profileId = profileId,
+    type = maxUsage.type
+    callCount = maxUsage.call_count
+  }
+}
+
+// Facebook and Instagram error handling documentation: https://developers.facebook.com/docs/graph-api/guides/error-handling
+operation MapFacebookError {
+  statusCode = args.statusCode
+  facebookError = args.error
+  headers = args.headers
+
+  rateLimit =  call MapRateLimit(headers = headers)
+
+  detail = facebookError.message
+
+  //Facebook Graph API errors are described by body parameters: message, type, code, error_subcode. Facebook returns HTTP status codes 400, 401, 403 but status code is not significant.
+  return if (facebookError.type !== 'OAuthException') {
+    title = "Unknown error"
+    detail = (`Unknown error occurred. Type: ${facebookError.type}. Message:  ${facebookError.message}. Type:  ${facebookError.type}`)
+    code = 'UnknownError'
+    rateLimit = rateLimit
+  }
+  
+  return if (facebookError.code === undefined || facebookError.code === 102) {
+    title = "Unauthenticated"
+    detail = detail
+    code = 'Unauthenticated'
+    rateLimit = rateLimit
+  }
+
+  return if (facebookError.code === 190) {
+    title = "Unauthorized"
+    detail = detail
+    code = 'Unauthorized'
+    rateLimit = rateLimit
+  }
+
+  return if (facebookError.code === 506) {
+    title = "Unprocessable entity"
+    detail = detail
+    code = 'UnprocessableEntity'
+    rateLimit = rateLimit
+  }
+
+  return if (facebookError.code === 3 || facebookError.code === 10 || (facebookError.code >= 200 && facebookError.code <= 299) || facebookError.code ===  368) {
+    title = "Unauthorized"
+    detail = detail
+    code = 'Unauthorized'
+    rateLimit = rateLimit
+  }
+
+  return if (facebookError.code === 1 || facebookError.code === 2) {
+    title = "Service unavailable"
+    detail = detail
+    code = 'ServiceUnavailable'
+    rateLimit = rateLimit
+  }
+
+  return if (facebookError.code === 4 || facebookError.code === 17 || facebookError.code === 341) {
+    title = "Rate limit reached"
+    detail = detail
+    code = 'RateLimitReached'
+    rateLimit = rateLimit
+  }
+
+  return {
+    title = "Unknown error"
+    detail = (`Unknown error occurred. Status: ${statusCode}. Facebook error type, code, subcode:  ${facebookError.type}, ${facebookError.code}, ${facebookError.error_subcode}`)
+    code = 'UnknownError'
+    rateLimit = rateLimit
   }
 }
