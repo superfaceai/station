@@ -191,6 +191,9 @@
         },
         "azure-maps": {
           "file": "../grid/address/geocoding/maps/azure-maps.suma"
+        },
+        "tomtom": {
+          "file": "../grid/address/geocoding/maps/tomtom.suma"
         }
       }
     },
@@ -909,6 +912,15 @@
       "parameters": {
         "accessToken": "$LINKEDIN_ACCESS_TOKEN"
       }
+    },
+    "tomtom": {
+      "file": "../providers/tomtom.json",
+      "security": [
+        {
+          "id": "apikey",
+          "apikey": "$TOMTOM_API_KEY"
+        }
+      ]
     },
     "google-apis": {
       "file": "../providers/google-apis.json",
