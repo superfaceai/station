@@ -27,11 +27,16 @@ map SendMessage {
 
 			rateLimit = call MapRateLimitDetails(headers = headers)
 
-			map result {
-				destination = body.channel
-				messageId = body.ts
-				rateLimit = rateLimit
+			result = {
+				destination: body.channel,
+				messageId: body.ts,
 			}
+
+			set if (rateLimit) {
+				result.rateLimit = rateLimit
+			}
+
+			map result result
 		}
 
 		response {
