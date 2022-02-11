@@ -4,7 +4,7 @@ import { RecordingProcessOptions, SuperfaceTest } from '@superfaceai/testing';
 
 export const getMembersTest = (
   provider: string,
-  options?: {server?: string, recordingOptions?: RecordingProcessOptions}
+  options?: { server?: string; recordingOptions?: RecordingProcessOptions }
 ): void => {
   describe(`chat/members/${provider}`, () => {
     let superface: SuperfaceTest;
@@ -35,9 +35,7 @@ export const getMembersTest = (
         expect(page1).toMatchSnapshot();
 
         /* eslint-disable @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-assignment */
-        const cursor = page1.isOk()
-          ? (page1.value as any).nextPage
-          : undefined;
+        const cursor = page1.isOk() ? (page1.value as any).nextPage : undefined;
 
         if (!cursor) {
           return;
