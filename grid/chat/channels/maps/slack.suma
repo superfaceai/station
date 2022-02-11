@@ -21,35 +21,39 @@ map GetChannels {
             }
         }
 
-        response 200 "application/json" {
-            return map error if (body.ok === false) {
-                title = body.error
-            }
+        response 200 "application/json" {   
+			error = call MapSlackError(
+				statusCode = statusCode,
+				error = body,
+				headers = headers,
+			) if (!body.ok)
+
+			return map error if (!body.ok) error
 
             channels = call MapChannels(channels = body.channels)
+			rateLimit = call MapRateLimitDetails(headers = headers)
+			result = { channels: channels }
 
-            return map result if (body.has_more === true) {
-                nextPage = body.response_metadata.next_cursor
-                channels = channels
-            }
-
-            return map result {
-                channels = channels
-            }
-        }
-
-		response 429 {
-			map error {
-				title = 'Too Many Requests'
-				detail = `Retry after ${headers['Retry-After']} seconds`
+			set if (body.has_more) {
+				result.nextPage = body.response_metadata.next_cursor
 			}
-		}
 
-        response "application/json" {
-            map error {
-                title = body.error
-            }
+			set if (rateLimit) {
+				result.rateLimit = rateLimit
+			}
+
+			map result result
         }
+
+		response {
+			error = call MapSlackError(
+				statusCode = statusCode,
+				error = body,
+				headers = headers,
+			)
+			
+			map error error
+		}
     }
 }
 
