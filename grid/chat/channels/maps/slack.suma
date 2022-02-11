@@ -22,9 +22,13 @@ map GetChannels {
         }
 
         response 200 "application/json" {
-            return map error if (body.ok === false) {
-                title = body.error
-            }
+            error = call MapSlackError(
+				statusCode = statusCode,
+				error = body,
+				headers = headers,
+			) if (!body.ok)
+
+			return map error if (!body.ok) error
 
             channels = call MapChannels(channels = body.channels)
 
@@ -38,18 +42,15 @@ map GetChannels {
             }
         }
 
-		response 429 {
-			map error {
-				title = 'Too Many Requests'
-				detail = `Retry after ${headers['Retry-After']} seconds`
-			}
+		response {
+			error = call MapSlackError(
+				statusCode = statusCode,
+				error = body,
+				headers = headers,
+			)
+			
+			map error error
 		}
-
-        response "application/json" {
-            map error {
-                title = body.error
-            }
-        }
     }
 }
 
