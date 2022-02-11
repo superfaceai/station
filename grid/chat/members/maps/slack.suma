@@ -30,7 +30,7 @@ map GetMembers {
 			rateLimit = call MapRateLimitDetails(headers = headers)
 			result = { members: members }
 
-			set if (body.has_more) {
+			set if (body.response_metadata && body.response_metadata.next_cursor) {
 				result.nextPage = body.response_metadata.next_cursor
 			}
 
