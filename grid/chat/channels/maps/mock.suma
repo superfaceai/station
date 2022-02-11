@@ -1,0 +1,31 @@
+profile = "chat/channels@1.0"
+provider = "mock"
+
+"""
+GetChannels map
+"""
+map GetChannels {
+	map result {
+		nextPage = 'XXXXXXXXXXXXXXXXX03'
+		channels = [
+			{
+				id: '1',
+				createdAt: 1643798532.134069,
+				name: 'test',
+				numOfMembers: 100
+			},
+			{
+				id: '2',
+				createdAt: 1643216443.234079,
+				name: 'test 2',
+				numOfMembers: 4
+			},
+			{
+				id: '3',
+				createdAt: 1546167104.0002,
+				name: 'test 3',
+				description: 'test description',
+			}
+		]
+	}
+}
