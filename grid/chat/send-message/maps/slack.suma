@@ -25,9 +25,12 @@ map SendMessage {
 
 			return map error if (!body.ok) error
 
+			rateLimit = call MapRateLimitDetails(headers = headers)
+
 			map result {
 				destination = body.channel
 				messageId = body.ts
+				rateLimit = rateLimit
 			}
 		}
 
