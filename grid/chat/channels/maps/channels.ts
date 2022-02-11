@@ -15,6 +15,7 @@ export const getChannelsTest = (
           profile: 'chat/channels',
           provider,
           useCase: 'GetChannels',
+          testInstance: expect,
         });
       });
 
