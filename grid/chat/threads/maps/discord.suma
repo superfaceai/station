@@ -96,6 +96,10 @@ operation MapThread {
 		resultThread.createdAt = call GetTimestamp(id = thread.id)
 	}
 
+	set if (thread.mumber_count) {
+		resultThread.numOfMembers = thread.member_count
+	}
+
 	return resultThread
 }
 
