@@ -1,0 +1,51 @@
+[
+  {
+    "scope": "https://discord.com:443",
+    "method": "GET",
+    "path": "/api/guilds/not-existing-server-id/threads/active",
+    "body": "",
+    "status": 400,
+    "response": {
+      "guild_id": [
+        "Value \"not-existing-server-id\" is not snowflake."
+      ]
+    },
+    "rawHeaders": [
+      "Date",
+      "Fri, 11 Feb 2022 08:43:14 GMT",
+      "Content-Type",
+      "application/json",
+      "Content-Length",
+      "68",
+      "Connection",
+      "close",
+      "set-cookie",
+      "__dcfduid=a5525a428b1611ecbef842010a0a06a3; Expires=Wed, 10-Feb-2027 08:43:13 GMT; Max-Age=157680000; Secure; HttpOnly; Path=/",
+      "set-cookie",
+      "__sdcfduid=a5525a428b1611ecbef842010a0a06a3cb2828fb4e188d1b946b48896c0bda678845c7d5d7d4e2b411df0154e9ad20ac; Expires=Wed, 10-Feb-2027 08:43:13 GMT; Max-Age=157680000; Secure; HttpOnly; Path=/",
+      "strict-transport-security",
+      "max-age=31536000; includeSubDomains; preload",
+      "x-envoy-upstream-service-time",
+      "5",
+      "Via",
+      "1.1 google",
+      "Alt-Svc",
+      "h3=\":443\"; ma=86400, h3-29=\":443\"; ma=86400",
+      "CF-Cache-Status",
+      "DYNAMIC",
+      "Expect-CT",
+      "max-age=604800, report-uri=\"https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct\"",
+      "Report-To",
+      "{\"endpoints\":[{\"url\":\"https:\\/\\/a.nel.cloudflare.com\\/report\\/v3?s=ekVeuUj4xDeB6JOPWb5SMINn8mjifg3H8KRQc8h8L1NJAPwb1mLFwwBo%2FJLY02wp2NIbKYU4%2FrBGU1LHRccOBS4Wu%2BcJS8GOruDP53Y9RlMidjpS2U%2FOfg7bFdUb\"}],\"group\":\"cf-nel\",\"max_age\":604800}",
+      "NEL",
+      "{\"success_fraction\":0,\"report_to\":\"cf-nel\",\"max_age\":604800}",
+      "X-Content-Type-Options",
+      "nosniff",
+      "Server",
+      "cloudflare",
+      "CF-RAY",
+      "6dbc49d3ad1b2784-PRG"
+    ],
+    "responseIsBinary": false
+  }
+]

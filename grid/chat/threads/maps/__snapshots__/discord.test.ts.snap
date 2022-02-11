@@ -1,5 +1,21 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`chat/threads/discord GetThreads fails 1`] = `
+Err {
+  "error": "HTTPError: Expected HTTP error
+Properties: {
+  \\"title\\": \\"Bad request\\",
+  \\"detail\\": {
+    \\"guild_id\\": [
+      \\"Value \\\\\\"not-existing-server-id\\\\\\" is not snowflake.\\"
+    ]
+  }
+}
+AST Path: definitions[0].statements[0].responseHandlers[1].statements[1]
+Original Map Location: Line 37, column 4",
+}
+`;
+
 exports[`chat/threads/discord GetThreads performs correctly 1`] = `
 Ok {
   "value": Object {

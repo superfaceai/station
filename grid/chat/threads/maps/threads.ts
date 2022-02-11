@@ -16,6 +16,7 @@ export const getThreadsTest = (
           profile: 'chat/threads',
           provider,
           useCase: 'GetThreads',
+          testInstance: expect,
         });
       });
 
@@ -31,6 +32,19 @@ export const getThreadsTest = (
           )
         ).resolves.toMatchSnapshot();
       });
+
+      it('fails', async () => {
+        await expect(
+          superface.run(
+            {
+              input: {
+                server: 'not-existing-server-id',
+              },
+            },
+            options
+          )
+        ).resolves.toMatchSnapshot()
+      })
     });
   });
 };
