@@ -7,15 +7,16 @@ export const getMessagesTest = (
   destination: string[],
   options?: RecordingProcessOptions
 ): void => {
-  describe(`chat/get-messages/${provider}`, () => {
+  describe(`chat/messages/${provider}`, () => {
     let superface: SuperfaceTest;
 
     describe('GetMessages', () => {
       beforeAll(() => {
         superface = new SuperfaceTest({
-          profile: 'chat/get-messages',
+          profile: 'chat/messages',
           provider,
           useCase: 'GetMessages',
+          testInstance: expect,
         });
       });
 
@@ -27,6 +28,7 @@ export const getMessagesTest = (
                 destination: destination[0],
                 limit: 3,
               },
+              testName: 'page 1',
             },
             options
           );
@@ -43,20 +45,17 @@ export const getMessagesTest = (
             return;
           }
 
-          const input = {
-            destination: destination[0],
-            limit: 3,
-          } as any;
-
-          if (provider === 'discord') {
-            input.beforeDate = cursor;
-          } else {
-            input.page = cursor;
-          }
-
-          /* eslint-enable @typescript-eslint/no-unsafe-member-access */
-
-          const page2 = await superface.run({ input }, options);
+          const page2 = await superface.run(
+            {
+              input: {
+                destination: destination[0],
+                limit: 3,
+                page: cursor,
+              },
+              testName: 'page 2',
+            },
+            options
+          );
 
           expect(page2.isOk).toBeTruthy();
           expect(page2).toMatchSnapshot();
