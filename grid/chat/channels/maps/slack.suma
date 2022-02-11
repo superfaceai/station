@@ -1,22 +1,27 @@
-profile = "chat/send-message@1.0"
+profile = "chat/channels@1.0"
 provider = "slack"
 
 """
-SendMessage map
+GetChannels map
 """
-map SendMessage {
-	http POST "/chat.postMessage" {
-		request {
-			headers {
-				"Authorization" = `Bearer ${parameters.accessToken}`
-			}
-			body {
-				channel = input.destination
-				text = input.text
-			}
-		}
+map GetChannels {
+    types = call typesToQuery(types = input.types)
 
-		response 200 {
+    http GET "/conversations.list" {
+        request "application/x-www-form-urlencoded" {
+            query {
+                cursor = input.page
+                exclude_archived = true
+                limit = input.limit
+                types = types
+            }
+
+            headers {
+                "Authorization" = `Bearer ${parameters.accessToken}`
+            }
+        }
+
+        response 200 "application/json" {
 			error = call MapSlackError(
 				statusCode = statusCode,
 				error = body,
@@ -25,11 +30,12 @@ map SendMessage {
 
 			return map error if (!body.ok) error
 
+            channels = call MapChannels(channels = body.channels)
 			rateLimit = call MapRateLimitDetails(headers = headers)
+			result = { channels: channels }
 
-			result = {
-				destination: body.channel,
-				messageId: body.ts,
+			set if (body.has_more) {
+				result.nextPage = body.response_metadata.next_cursor
 			}
 
 			set if (rateLimit) {
@@ -37,7 +43,7 @@ map SendMessage {
 			}
 
 			map result result
-		}
+        }
 
 		response {
 			error = call MapSlackError(
@@ -48,7 +54,64 @@ map SendMessage {
 			
 			map error error
 		}
-  }
+    }
+}
+
+operation MapChannels {
+    channels = []
+    
+    set if (args.channels && args.channels.length > 0) {
+        channels = call foreach(index of Array(args.channels.length).fill().map((_, i) => i)) MapChannel(
+            index = index,
+            channels = args.channels,
+        )
+    }
+
+    return channels
+}
+
+operation MapChannel {
+    index = args.index
+    channel = args.channels[index]
+
+    resultChannel = {
+        id: channel.id,
+        createdAt: channel.created
+    }
+
+    set if (channel.name) {
+        resultChannel.name = channel.name;
+    }
+
+    set if (channel.topic.value && channel.topic.value !== '') {
+        resultChannel.description = channel.topic.value;
+    }
+    
+    set if (resultChannel.description !== undefined && channel.purpose.value && channel.purpose.value !== '') {
+        resultChannel.description = resultChannel.description + ` - ${channel.purpose.value}`;
+    }
+
+    set if (resultChannel.description === undefined && channel.purpose.value && channel.purpose.value !== '') {
+        resultChannel.description = channel.purpose.value
+    }
+
+    set if (channel.num_members) {
+        resultChannel.numOfMembers = channel.num_members;
+    }
+
+    return resultChannel
+}
+
+operation typesToQuery {
+    types = args.types.map(type => {
+        if (type === 'private') {
+            return 'private_channel';
+        } else if (type === 'public') {
+            return 'public_channel';
+        }
+    }).join(',')
+
+    return types;
 }
 
 """
@@ -156,5 +219,5 @@ operation MapSlackError {
 		title = 'Unknown error'
 		detail = `Unknown error occurred. Status: ${statusCode}. Code: ${detail}.`
 		rateLimit = rateLimit
-	}
+    }
 }

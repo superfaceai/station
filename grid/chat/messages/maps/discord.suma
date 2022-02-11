@@ -1,0 +1,276 @@
+profile = "chat/messages@1.0"
+provider = "discord"
+
+"""
+GetMessages map
+"""
+map GetMessages {
+	destination = input.destination
+	afterId = undefined
+	beforeId = undefined
+
+	set if (input.afterTimestamp) {
+		afterId = call GetSnowflake(ts = input.afterTimestamp)
+	}
+
+	set if (input.beforeTimestamp) {
+		beforeId = call GetSnowflake(ts = input.beforeTimestamp)
+	}
+
+	http GET "/channels/{destination}/messages" {
+		request "application/json" {
+			query {
+				after = afterId
+				before = input.page || beforeId
+				limit = input.limit
+			}
+
+			headers {
+				"Authorization" = `Bot ${parameters.accessToken}`
+			}
+		}
+
+		response 200 "application/json" {
+			messages = call MapMessages(messages = body)
+			rateLimit = call MapRateLimitDetails(headers = headers)
+
+			map result {
+				nextPage = messages[messages.length - 1].id
+				messages = messages
+				rateLimit = rateLimit
+			}
+		}
+
+		response {
+			error = call MapDiscordError(
+				statusCode = statusCode,
+				error = body,
+				headers = headers,
+			)
+			
+			map error error
+		}
+	}
+}
+
+operation MapMessage {
+	index = args.index
+	message = args.messages[index]
+
+	messageResult = {
+		id: message.id,
+		author: {
+			id: message.author.id,
+			username: message.author.username
+		},
+		createdAt: Date.parse(message.timestamp),
+		text: message.content
+	}
+
+	set if (message.edited_timestamp) {
+		messageResult.updatedAt = Date.parse(message.edited_timestamp)
+	}
+
+	set if (message.reactions && message.reactions.length > 0) {
+		messageResult.reactions = message.reactions.map(reaction => ({
+			emoji: reaction.emoji.name,
+			count: reaction.count,
+		}))
+	}
+
+	set if (message.thread) {
+		messageResult.hasThread = true
+		messageResult.threadId = message.thread.id
+	}
+
+	set if (message.attachments && message.attachments.length > 0) {
+		messageResult.attachments = call foreach(attachment of message.attachments) MapAttachment(
+			attachment = attachment
+		)
+	}
+	
+	set if (message.message_reference && message.message_reference.message_id) {
+		messageResult.parentId = message.message_reference.message_id
+	}
+
+	messageResult.url = call ComposeURL(dest = message.channel_id, id = message.id)
+	
+	return messageResult
+}
+
+operation MapAttachment {
+	attachment = args.attachment
+	createdAt = call GetTimestamp(id = attachment.id)
+
+	return {
+		id: attachment.id,
+		createdAt: createdAt,
+		fileName: attachment.filename,
+		mediaType: attachment.content_type,
+		url: attachment.url,
+	}
+}
+
+"""
+Operation MapMessages
+Returns array mapping messages in received body
+"""
+operation MapMessages {
+	listOfMessages = []
+	
+	// workaround for map interpreter variables merging issue
+	listOfMessages = call foreach(index of Array(args.messages.length).fill().map((_, i) => i)) MapMessage(
+		index = index,
+		messages = args.messages,
+	) if (args.messages && args.messages.length > 0)
+
+	return listOfMessages
+}
+
+"""
+Operation MapRateLimitDetails
+Returns object mapping rate limit details specified in received headers
+"""
+operation MapRateLimitDetails {
+	headers = args.headers
+	details = {}
+
+	bucket = headers['x-ratelimit-bucket']
+	totalRequests = parseInt(headers['x-ratelimit-limit'])
+	remainingRequests = parseInt(headers['x-ratelimit-remaining'])
+	resetTimestamp = parseFloat(headers['x-ratelimit-reset'])
+	resetAfter = parseInt(headers['x-ratelimit-reset-after'])
+	retryAfter = parseInt(headers['Retry-After'])
+
+	set if (bucket) {
+		details.bucket = bucket
+	}
+
+	set if (!isNaN(totalRequests)) {
+		details.totalRequests = totalRequests
+	}
+
+	set if (!isNaN(remainingRequests)) {
+		details.remainingRequests = remainingRequests
+	}
+
+	set if (!isNaN(resetAfter)) {
+		details.resetAfter = resetAfter
+	}
+
+	set if (!isNaN(resetTimestamp)) {
+		details.resetTimestamp = resetTimestamp
+	}
+
+	set if (!isNaN(retryAfter)) {
+		details.retryAfter = retryAfter
+	}
+
+	set if (details.remainingRequests && details.totalRequests) {
+		details.remainingRequestsPercentage = (details.remainingRequests / details.totalRequests) * 100
+	}
+
+	set if (Object.keys(details).length === 0) {
+		details = undefined
+	}
+
+	return details
+}
+
+"""
+Operation GetSnowflake
+
+Returns discord snowflake id based on input
+More about snowflakes: https://discord.com/developers/docs/reference#snowflakes
+"""
+operation GetSnowflake {
+	discordEpoch = 1420070400000
+
+	timestamp = args.ts
+	processedDate = timestamp - discordEpoch
+
+	return (BigInt(processedDate) << BigInt(22)).toString()
+}
+
+"""
+OperationGet Timestamp
+
+Returns UNIX timestamp from specified discord snowflake id
+More about snowflakes: https://discord.com/developers/docs/reference#snowflakes
+"""
+operation GetTimestamp {
+	discordEpoch = 1420070400000
+
+	snowflake = args.id
+	processedSnowflake = Number(BigInt(snowflake) >> BigInt(22))
+
+	return processedSnowflake + discordEpoch
+}
+
+operation ComposeURL {
+	destination = args.dest
+	messageId = args.id
+
+	return `https://discord.com/api/channels/${destination}/messages/${messageId}`
+}
+
+"""
+Operation Map Discord Error
+Returns error object based on error body, statusCode and headers.
+"""
+operation MapDiscordError {
+	statusCode = args.statusCode
+	discordError = args.error
+	headers = args.headers
+
+	rateLimit = call MapRateLimitDetails(headers = headers)
+	detail = discordError.message
+
+	return if (statusCode === 400) {
+		title = 'Bad request'
+		detail = discordError
+		rateLimit = rateLimit
+	}
+
+	return if (statusCode === 401) {
+		title = 'Unauthorized'
+		detail = detail
+		rateLimit = rateLimit
+	}
+
+	return if (statusCode === 403) {
+		title = 'Forbidden'
+		detail = detail
+		rateLimit = rateLimit
+	}
+
+	return if (statusCode === 404) {
+		title = 'Not found'
+		detail = detail
+		rateLimit = rateLimit
+	}
+
+	return if (statusCode === 405) {
+		title = 'Method not allowed'
+		detail = detail
+		rateLimit = rateLimit
+	}
+
+	return if (statusCode === 429) {
+		title = 'Too Many Requests'
+		detail = `${detail} Retry after ${discordError.retry_after} seconds`
+		rateLimit = rateLimit
+	}
+
+	return if (statusCode === 502) {
+		title = 'Bad gateway'
+		detail = detail
+		rateLimit = rateLimit
+	}
+
+	return {
+		title = 'Unknown error'
+		detail = `Unknown error occurred. Status: ${statusCode}. Message: ${detail}.`
+		rateLimit = rateLimit
+	}
+}

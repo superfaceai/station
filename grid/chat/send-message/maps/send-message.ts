@@ -16,6 +16,7 @@ export const sendMessageTest = (
           profile: 'chat/send-message',
           provider,
           useCase: 'SendMessage',
+          testInstance: expect,
         });
       });
 
@@ -27,16 +28,6 @@ export const sendMessageTest = (
                 input: {
                   destination: destination[0],
                   text: 'test',
-                  // TODO: implement sending attachments
-                  attachments: [
-                    {
-                      id: '1',
-                      createdAt: 1503435956.000247,
-                      fileName: 'myfile.suma',
-                      mediaType: 'text',
-                      preview: 'sdasdasd',
-                    },
-                  ],
                 },
               },
               options

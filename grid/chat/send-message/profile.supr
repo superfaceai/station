@@ -18,12 +18,6 @@ usecase SendMessage {
 		Content of the message
 		"""
 		text! string!
-
-		"""
-		Attachments
-		List of attachments in retrieved message 
-		"""
-		attachments
 	}
 	
 	result {
@@ -80,6 +74,7 @@ model Error {
 	title!
 
 	"""
+	Detail
 	A human-readable explanation specific to this occurrence of the problem.
 	"""
 	detail
@@ -92,40 +87,46 @@ model Error {
 }
 
 model RateLimit {
-  """
-  Bucket
-  Different parts of API may have different rate limits.
-  Bucket identifies to which part of API the rate limits apply.
-  """
-  bucket string
+	"""
+	Bucket
+	Different parts of API may have different rate limits.
+	Bucket identifies to which part of API the rate limits apply.
+	"""
+	bucket string
 
-  """
-  Total Requests
-  Total requests available in the time window.
-  """
-  totalRequests number
+	"""
+	Total Requests
+	Total requests available in the time window.
+	"""
+	totalRequests number
 
-  """
-  Remaining Requests
-  Remaining requests available in the time window.
-  """
-  remainingRequests number
+	"""
+	Remaining Requests
+	Remaining requests available in the time window.
+	"""
+	remainingRequests number
 
-  """
-  Remaining Requests available in percents
-  Remaining requests available in the time window in percents.
-  """
-  remainingRequestsPercentage number
+	"""
+	Remaining Requests available in percents
+	Remaining requests available in the time window in percents.
+	"""
+	remainingRequestsPercentage number
 
-  """
-  Reset Timestamp
-  Timestamp when the rate limits will reset (in  Unix Timestamp format).
-  """
-  resetTimestamp number
+	"""
+	Reset Timestamp
+	Timestamp when the rate limits will reset (in Unix Timestamp format).
+	"""
+	resetTimestamp number
 
-  """
-  Retry After
-  Number of seconds until reset of rate limit
-  """
-  retryAfter number
+	"""
+	Reset After
+	Number of seconds until reset of rate limit
+	"""
+	resetAfter number
+
+	"""
+	Retry After
+	Number of seconds until user can retry the request
+	"""
+	retryAfter number
 }

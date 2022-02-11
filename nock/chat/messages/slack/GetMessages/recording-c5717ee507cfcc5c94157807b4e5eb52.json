@@ -1,19 +1,16 @@
 [
   {
     "scope": "https://slack.com:443",
-    "method": "POST",
-    "path": "/api/chat.postMessage",
-    "body": {
-      "channel": "not-existing-dest",
-      "text": "test"
-    },
+    "method": "GET",
+    "path": "/api/conversations.history?channel=not-existing-dest&limit=100",
+    "body": "",
     "status": 200,
     "response": [
-      "1f8b0800000000000003658b410a80300c04ffb2675fd0af8894a0518b6d2249c583f4eff6e2c9dbc0cc3cd00361a5ec3c80cdd41030ef24c2398ad6b8ea250b06dc649264ebb624f74eb157e65cbb33f653c53916aeb4502584e71b1c61fc2d536b2f17a53f6979000000"
+      "1f8b0800000000000003ab56cacf56b24a4bcc294ed5514a2d2aca2f52b2524ace48cccb4bcd89cfcb2f894fcb2fcd4b51aa0500f86f946928000000"
     ],
     "rawHeaders": [
       "date",
-      "Fri, 11 Feb 2022 08:13:53 GMT",
+      "Thu, 10 Feb 2022 13:07:49 GMT",
       "server",
       "Apache",
       "x-powered-by",
@@ -33,7 +30,7 @@
       "x-oauth-scopes",
       "identify,channels:history,groups:history,im:history,mpim:history,channels:read,groups:read,reactions:read,users:read,chat:write,identity.basic,identity.email,identity.avatar,identity.team",
       "x-accepted-oauth-scopes",
-      "chat:write",
+      "channels:history,groups:history,mpim:history,im:history,read",
       "expires",
       "Mon, 26 Jul 1997 05:00:00 GMT",
       "cache-control",
@@ -45,13 +42,13 @@
       "x-content-type-options",
       "nosniff",
       "x-slack-req-id",
-      "7ddae9f1a800ce0e020c09c8fec7c584",
+      "7d89e3c28cb67e1d3f20c3f99279779b",
       "vary",
       "Accept-Encoding",
       "content-encoding",
       "gzip",
       "content-length",
-      "107",
+      "60",
       "content-type",
       "application/json; charset=utf-8",
       "x-envoy-upstream-service-time",
@@ -59,11 +56,11 @@
       "x-backend",
       "main_normal main_bedrock_normal_with_overflow main_canary_with_overflow main_bedrock_canary_with_overflow main_control_with_overflow main_bedrock_control_with_overflow",
       "x-server",
-      "slack-www-hhvm-main-iad-ljhr",
+      "slack-www-hhvm-main-iad-p0sv",
       "x-slack-shared-secret-outcome",
       "no-match",
       "via",
-      "envoy-www-iad-4a6x, envoy-edge-fra-qt6x",
+      "envoy-www-iad-t0e2, envoy-edge-fra-bng1",
       "x-edge-backend",
       "envoy-www",
       "x-slack-edge-shared-secret-outcome",

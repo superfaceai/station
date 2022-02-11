@@ -1,22 +1,25 @@
-profile = "chat/send-message@1.0"
+profile = "chat/messages@1.0"
 provider = "slack"
 
 """
-SendMessage map
+GetMessages map
 """
-map SendMessage {
-	http POST "/chat.postMessage" {
-		request {
+map GetMessages {
+	http GET "/conversations.history" {
+		request "application/x-www-form-urlencoded" {
+			query {
+				channel = input.destination
+				oldest = input.afterTimestamp
+				cursor = input.page
+				limit = input.limit || 100
+			}
+
 			headers {
 				"Authorization" = `Bearer ${parameters.accessToken}`
 			}
-			body {
-				channel = input.destination
-				text = input.text
-			}
 		}
 
-		response 200 {
+		response 200 "application/json" {
 			error = call MapSlackError(
 				statusCode = statusCode,
 				error = body,
@@ -25,11 +28,17 @@ map SendMessage {
 
 			return map error if (!body.ok) error
 
+			messages = call MapMessages(
+				messages = body.messages,
+				destination = input.destination,
+			)
+
 			rateLimit = call MapRateLimitDetails(headers = headers)
 
-			result = {
-				destination: body.channel,
-				messageId: body.ts,
+			result = { messages: messages }
+
+			set if (body.has_more) {
+				result.nextPage = body.response_metadata.next_cursor
 			}
 
 			set if (rateLimit) {
@@ -48,7 +57,74 @@ map SendMessage {
 			
 			map error error
 		}
-  }
+	}
+}
+
+operation MapMessages {
+	listOfMessages = []
+
+	set if (args.messages && args.messages.length > 0) {
+		listOfMessages = args.messages.filter(message => message.type === 'message')
+	}
+
+	// workaround for map interpreter variables merging issue
+	listOfMessages = call foreach(index of Array(listOfMessages.length).fill().map((_, i) => i)) MapMessage(
+		index = index,
+		messages = listOfMessages,
+		dest = args.destination,
+	) if (listOfMessages.length > 0)
+
+	return listOfMessages
+}
+
+operation MapMessage {
+	index = args.index
+	message = args.messages[index]
+
+	messageResult = {
+		id: message.ts,
+		text: message.text,
+		createdAt: parseFloat(message.ts),
+	}
+
+	set if(message.user || message.bot_id) {
+		messageResult.author = {
+			id: message.user || message.bot_id,
+			username: message.username
+		}
+	}
+
+	set if (message.thread_ts) {
+		messageResult.hasThread = true
+		messageResult.threadId = message.thread_ts;
+	}
+
+	set if (message.edited) {
+		messageResult.updatedAt = parseFloat(message.edited.ts);
+	}
+
+	set if (message.reactions) {
+		messageResult.reactions = message.reactions.map(reaction => ({
+			emoji: reaction.name,
+			count: reaction.count,
+			users: reaction.users
+		}))
+	}
+
+	set if (message.files && message.files.length > 0) {
+		messageResult.attachments = message.files.map(file => ({
+			id: file.id,
+			createdAt: file.created,
+			fileName: file.name,
+			mediaType: file.mimetype,
+			url: file.permalink_public,
+			preview: file.preview,
+		}))
+	}
+
+	messageResult.url = call ComposeURL(ts = message.ts, dest = args.dest)
+
+	return messageResult
 }
 
 """
@@ -90,6 +166,13 @@ operation MapRateLimitDetails {
 	}
 
 	return details
+}
+
+operation ComposeURL {
+	timestamp = args.ts
+	destination = args.dest
+
+	return `https://slack.com/api/conversations.history?channel=${destination}&latest=${timestamp}&inclusive=true&limit=1`
 }
 
 """
