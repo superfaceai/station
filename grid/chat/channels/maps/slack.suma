@@ -22,7 +22,7 @@ map GetChannels {
         }
 
         response 200 "application/json" {
-            error = call MapSlackError(
+			error = call MapSlackError(
 				statusCode = statusCode,
 				error = body,
 				headers = headers,
@@ -31,15 +31,18 @@ map GetChannels {
 			return map error if (!body.ok) error
 
             channels = call MapChannels(channels = body.channels)
+			rateLimit = call MapRateLimitDetails(headers = headers)
+			result = { channels: channels }
 
-            return map result if (body.has_more === true) {
-                nextPage = body.response_metadata.next_cursor
-                channels = channels
-            }
+			set if (body.has_more) {
+				result.nextPage = body.response_metadata.next_cursor
+			}
 
-            return map result {
-                channels = channels
-            }
+			set if (rateLimit) {
+				result.rateLimit = rateLimit
+			}
+
+			map result result
         }
 
 		response {
