@@ -6,67 +6,35 @@ GetThreads map
 """
 map GetThreads {
     http GET "/guilds/{input.server}/threads/active" {
-       request "application/json" {
-           headers {
-               "Authorization" = `Bot ${parameters.accessToken}`
-           }
-       }
-
-       response 200 "application/json" {
-            threads = call MapThreads(threads = body.threads)
-
-            map result {
-				threads = threads
+		request "application/json" {
+			headers {
+				"Authorization" = `Bot ${parameters.accessToken}`
 			}
+		}
+
+       	response 200 "application/json" {
+			threads = call MapThreads(threads = body.threads)
+			rateLimit = call MapRateLimitDetails(headers = headers)
+
+			result = {
+				threads: threads,
+			}
+
+			set if (rateLimit) {
+				result.rateLimit = rateLimit
+			}
+
+			map result result
        	}
 
-		response 400 "application/json" {
-			map error {
-				title = "Bad Request"
-				detail = body
-			}
-		}
-
-		response 401 "application/json" {
-			map error {
-				title = "Unauthorized"
-				detail = body.message
-			}
-		}
-
-		response 403 "application/json" {
-			map error {
-				title = "Forbidden"
-				detail = body.message
-			}
-		}
-
-		response 404 "application/json" {
-			map error {
-				title = "Not Found"
-				detail = body.message
-			}
-		}
-
-		response 405 "application/json" {
-			map error {
-				title = "Method not allowed"
-				detail = body.message
-			}
-		}
-
-		response 429 "application/json" {
-			map error {
-				title = "Too many requests"
-				detail = body.message
-			}
-		}
-
-		response 502 "application/json" {
-			map error {
-				title = "Gateway unavailable"
-				detail = body.message
-			}
+		response {
+			error = call MapDiscordError(
+				statusCode = statusCode,
+				error = body,
+				headers = headers,
+			)
+			
+			map error error
 		}
    }
 }
@@ -144,4 +112,115 @@ operation GetTimestamp {
 	processedSnowflake = Number(BigInt(snowflake) >> BigInt(22))
 
 	return processedSnowflake + discordEpoch
+}
+
+"""
+Operation MapRateLimitDetails
+Returns object mapping rate limit details specified in received headers
+"""
+operation MapRateLimitDetails {
+	headers = args.headers
+	details = {}
+
+	bucket = headers['x-ratelimit-bucket']
+	totalRequests = parseInt(headers['x-ratelimit-limit'])
+	remainingRequests = parseInt(headers['x-ratelimit-remaining'])
+	resetTimestamp = parseFloat(headers['x-ratelimit-reset'])
+	resetAfter = parseInt(headers['x-ratelimit-reset-after'])
+	retryAfter = parseInt(headers['Retry-After'])
+
+	set if (bucket) {
+		details.bucket = bucket
+	}
+
+	set if (!isNaN(totalRequests)) {
+		details.totalRequests = totalRequests
+	}
+
+	set if (!isNaN(remainingRequests)) {
+		details.remainingRequests = remainingRequests
+	}
+
+	set if (!isNaN(resetAfter)) {
+		details.resetAfter = resetAfter
+	}
+
+	set if (!isNaN(resetTimestamp)) {
+		details.resetTimestamp = resetTimestamp
+	}
+
+	set if (!isNaN(retryAfter)) {
+		details.retryAfter = retryAfter
+	}
+
+	set if (details.remainingRequests && details.totalRequests) {
+		details.remainingRequestsPercentage = (details.remainingRequests / details.totalRequests) * 100
+	}
+
+	set if (Object.keys(details).length === 0) {
+		details = undefined
+	}
+
+	return details
+}
+
+"""
+Operation Map Discord Error
+Returns error object based on error body, statusCode and headers.
+"""
+operation MapDiscordError {
+	statusCode = args.statusCode
+	discordError = args.error
+	headers = args.headers
+
+	rateLimit = call MapRateLimitDetails(headers = headers)
+	detail = discordError.message
+
+	return if (statusCode === 400) {
+		title = 'Bad request'
+		detail = discordError
+		rateLimit = rateLimit
+	}
+
+	return if (statusCode === 401) {
+		title = 'Unauthorized'
+		detail = detail
+		rateLimit = rateLimit
+	}
+
+	return if (statusCode === 403) {
+		title = 'Forbidden'
+		detail = detail
+		rateLimit = rateLimit
+	}
+
+	return if (statusCode === 404) {
+		title = 'Not found'
+		detail = detail
+		rateLimit = rateLimit
+	}
+
+	return if (statusCode === 405) {
+		title = 'Method not allowed'
+		detail = detail
+		rateLimit = rateLimit
+	}
+
+	return if (statusCode === 429) {
+		title = 'Too Many Requests'
+		detail = `${detail} Retry after ${discordError.retry_after} seconds`
+		rateLimit = rateLimit
+	}
+
+	return if (statusCode === 502) {
+		title = 'Bad gateway'
+		detail = detail
+		rateLimit = rateLimit
+	}
+
+	return {
+		title = 'Unknown error'
+		detail = `Unknown error occurred. Status: ${statusCode}. Message: ${detail}.`
+		rateLimit = rateLimit
+	}
 }
