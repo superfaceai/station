@@ -43,8 +43,8 @@ export const getThreadsTest = (
             },
             options
           )
-        ).resolves.toMatchSnapshot()
-      })
+        ).resolves.toMatchSnapshot();
+      });
     });
   });
 };
