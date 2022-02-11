@@ -107,7 +107,7 @@ operation MapSlackError {
 
 	return if (statusCode === 400) {
 		title = 'Bad request'
-		detail = detail
+		detail = slackError
 		rateLimit = rateLimit
 	}
 
