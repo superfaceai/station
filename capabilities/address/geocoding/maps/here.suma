@@ -7,8 +7,9 @@ provider = "here"
 map Geocode {
     payload = input.query || `${input.streetAddress || ""} ${input.addressLocality || ""} ${input.addressRegion || ""} ${input.postalCode || ""} ${input.addressCountry || ""}`;
 
-    http GET "/v1/geocode" {
+    http GET "geocode" "/v1/geocode" {
         security "apiKey"
+        
         request {
             query {
                 q = payload
@@ -60,8 +61,9 @@ map Geocode {
 map ReverseGeocode {
     payload = `${input.latitude},${input.longitude}`;
 
-    http GET "/v1/revgeocode" {
+    http GET "reverse-geocode" "/v1/revgeocode" {
         security "apiKey"
+        
         request {
             query {
                 at = payload
