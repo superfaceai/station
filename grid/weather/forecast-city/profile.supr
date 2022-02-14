@@ -1,0 +1,107 @@
+"""
+Weather Forecast For City
+Get weather forecast for the city
+"""
+name = "weather/forecast-city"
+version = "1.0.0"
+
+"""
+Get Weather Forecast For City
+Get weather forecast for the city in chosen units
+"""
+usecase GetWeatherForecastInCity {
+  input {
+    """
+    City
+    Name of the city including state and country, e.g.: "Prague, Czech Republic" or "New York City, NY, USA"
+    """
+    city! string!
+
+    """
+    Units
+    Units used to represent temperature - Fahrenheit, Celsius, Kelvin;
+    Celsius by default
+    """
+    units enum {C, F, K}
+  }
+
+  result [
+    {
+      """
+      AverageTemperature
+      Daily average Temperature in specified units
+      """
+      averageTemperature! number!
+
+      """
+      Date
+      Date of the weather forecast
+      """
+      date! string!
+
+      """
+      MaxTemperature
+      Daily maximal temperature in specified units
+      """
+      maxTemperature number!
+
+      """
+      MinTemperature
+      Datily minimal temperature in specified units
+      """
+      minTemperature number!
+    }
+  ]
+
+  error {
+    """
+    Title
+    A short, human-readable summary of the problem type.
+    """
+    title!
+
+    """
+    Detail
+    A human-readable explanation specific to this occurrence of the problem.
+    """
+    detail
+  }
+
+  example success {
+    input {
+      city = 'Prague,CZ',
+    }
+
+    result [
+      {
+        averageTemperature = 6,
+        date = "2021-11-08",
+        maxTemperature = 8,
+        minTemperature = 4,
+      },
+      {
+        averageTemperature = 7,
+        date = "2021-11-09",
+        maxTemperature = 11,
+        minTemperature = 4,
+      },
+      {
+        averageTemperature = 5,
+        date = "2021-11-10",
+        maxTemperature = 9,
+        minTemperature = 2,
+      }
+    ]
+  }
+
+  example fail {
+    input {
+      city = '%',
+    }
+
+    error {
+      title = "Bad Request"
+      detail = "<h1>400 Bad Request</h1>"
+    }
+  }
+}

@@ -64,7 +64,7 @@ describe('util', () => {
     it('should call resolvePath on SuperJson', () => {
       const spy = jest.spyOn(superJson, 'resolvePath');
 
-      util.normalizePath('./capabilities/profile.supr', superJson);
+      util.normalizePath('./grid/profile.supr', superJson);
 
       expect(spy).toBeCalled();
     });
@@ -207,18 +207,16 @@ describe('util', () => {
       superJson = new SuperJson({}, '/home');
     });
 
-    it('should call glob with capabilities/**/*.supr', async () => {
-      mocked(glob.sync).mockReturnValue([
-        './capabilities/send-email/profile.supr',
-      ]);
+    it('should call glob with grid/**/*.supr', async () => {
+      mocked(glob.sync).mockReturnValue(['./grid/send-email/profile.supr']);
       jest.spyOn(SuperJson, 'detectSuperJson').mockResolvedValue('/home');
 
       const result = await util.localProfiles(superJson);
 
-      expect(glob.sync).toBeCalledWith('../capabilities/**/*.supr', {
+      expect(glob.sync).toBeCalledWith('../grid/**/*.supr', {
         cwd: '/home',
       });
-      expect(result).toEqual(['/capabilities/send-email/profile.supr']);
+      expect(result).toEqual(['/grid/send-email/profile.supr']);
     });
   });
 
@@ -229,18 +227,16 @@ describe('util', () => {
       superJson = new SuperJson({}, '/home');
     });
 
-    it('should call glob with capabilities/**/*.suma', async () => {
-      mocked(glob.sync).mockReturnValue([
-        './capabilities/send-email/provider.suma',
-      ]);
+    it('should call glob with grid/**/*.suma', async () => {
+      mocked(glob.sync).mockReturnValue(['./grid/send-email/provider.suma']);
       jest.spyOn(SuperJson, 'detectSuperJson').mockResolvedValue('/home');
 
       const result = await util.localMaps(superJson);
 
-      expect(glob.sync).toBeCalledWith('../capabilities/**/*.suma', {
+      expect(glob.sync).toBeCalledWith('../grid/**/*.suma', {
         cwd: '/home',
       });
-      expect(result).toEqual(['/capabilities/send-email/provider.suma']);
+      expect(result).toEqual(['/grid/send-email/provider.suma']);
     });
   });
 });

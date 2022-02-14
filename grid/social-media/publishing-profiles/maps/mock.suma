@@ -1,0 +1,27 @@
+profile = "social-media/publishing-profiles@1.0"
+provider = "mock"
+
+map GetProfilesForPublishing {
+  return map result {
+    profiles = [
+      {
+        id: "111111111",
+        name: "Foo",
+        username: "foo",
+        imageUrl: "https://picsum.photos/200"
+      },
+      {
+        id: "111111112",
+        name: "BarFoo",
+        username: "bar-foo",
+        imageUrl: "https://picsum.photos/202"
+      },
+      {
+        id: "111111113",
+        name: "Baz",
+        username: "BazZZ",
+        imageUrl: "https://picsum.photos/205"
+      },
+    ]
+  }
+}

@@ -1,0 +1,285 @@
+profile = "crm/contacts@1.0"
+provider = "crisp"
+
+// Implements https://docs.crisp.chat/guides/rest-api/quickstart/
+
+map Create {
+  set {
+    newProfile = call BuildCrispProfile(input = input)
+  }
+
+  return map error if (!newProfile.email || !(newProfile.person || {}).nickname) {
+    title = "Missing fields"
+    detail = "Crisp requires Email and Name to create new contact"
+  }
+
+  http POST "/v1/website/{parameters.WEBSITE_ID}/people/profile" {
+    security "plugin_tier"
+
+    request "application/json" {
+      headers { "X-Crisp-Tier" = "plugin" }
+      body = newProfile
+    }
+
+    response 201 {
+      set {
+        customPropsResult = call PatchCustomProperties(
+          profileId = body.data.people_id,
+          customProperties = input.customProperties
+        )
+      }
+
+      return map error if (!customPropsResult) {
+        title = "Partially failed"
+        detail = "Contact might have been created without custom properties. Please update the contact for consistency"
+      }
+
+      map result {
+        id = body.data.people_id
+      }
+    }
+
+    response 409 {
+      map error {
+        title = "Contact already exists"
+        detail = (`Contact '${input.email}' already exists. If you wish to update it, use 'Update' use case`)
+      }
+    }
+
+    response {
+      error = call HandleCommonErrors(statusCode = statusCode)
+      map error error
+    }
+  }
+}
+
+map Update {
+  set {
+    profileId = input.id || input.email
+    profileUpdate = call BuildCrispProfile(input = input)
+  }
+
+  http PATCH "/v1/website/{parameters.WEBSITE_ID}/people/profile/{profileId}" {
+    security "plugin_tier"
+
+    request "application/json" {
+      headers { "X-Crisp-Tier" = "plugin" }
+      body = profileUpdate
+    }
+
+    response 200 {
+      set {
+        customPropsResult = call PatchCustomProperties(
+          profileId = profileId,
+          customProperties = input.customProperties
+        )
+      }
+
+      return map error if (!customPropsResult) {
+        title = "Partially failed"
+        detail = "Contact might be updated without custom properties. Please update the contact for data consistency"
+      }
+
+      map result {
+        id = profileId
+      }
+    }
+
+    response 409 {
+      map error {
+        title = "Email already exists"
+        detail = (`Email '${input.email}' already exists in another contact`)
+      }
+    }
+
+    response {
+      error = call HandleCommonErrors(statusCode = statusCode)
+      map error error
+    }
+  }
+}
+
+map Search {
+  OPERATOR_MAP = {
+    "EQ": 'eq',
+    "NEQ": 'neq'
+  }
+
+  http GET "/v1/website/{parameters.WEBSITE_ID}/people/profiles" {
+    security "plugin_tier"
+
+    request "application/json" {
+      query {
+        search_filter = [{
+          criterion : input.property,
+          query : [input.value],
+          operator : OPERATOR_MAP[input.operator] || input.operator,
+          model: "people"
+        }] 
+      }
+
+      headers { "X-Crisp-Tier" = "plugin" }
+    }
+
+    response 200 {
+      set {
+        contactsList = call foreach (profile of body.data) MapProfileFromCrisp(profile = profile)
+      }
+
+      map result contactsList
+    }
+
+    response {
+      error = call HandleCommonErrors(statusCode = statusCode)
+      map error error
+    }
+  }
+}
+
+operation GetCustomProperties {
+  http GET "/v1/website/{parameters.WEBSITE_ID}/people/data/{args.profileId}" {
+    security "plugin_tier"
+
+    request {
+      headers { "X-Crisp-Tier" = "plugin" }
+    }
+
+    response 200 {
+      return body.data.data
+    }
+
+    response {
+      error = call HandleCommonErrors(statusCode = statusCode)
+      fail error
+    }
+  }
+}
+
+operation PatchCustomProperties {
+  return if (Object.keys(args.customProperties).length < 1) { 
+    id = args.profileId
+  }
+
+  http PATCH "/v1/website/{parameters.WEBSITE_ID}/people/data/{args.profileId}" {
+    security "plugin_tier"
+
+    request {
+      headers { "X-Crisp-Tier" = "plugin" }
+      body = {
+        data: args.customProperties
+      }
+    }
+
+    response 200 { 
+      return { id = args.profileId }
+    }
+
+    response {
+      error = call HandleCommonErrors(statusCode = statusCode)
+      fail error
+    }
+  }
+}
+
+// Utilities
+operation BuildCrispProfile {
+  input = args.input
+
+  fullName = [input.firstName || "", input.lastName || ""].join(' ').trim() || undefined
+
+  return { 
+    email: input.email,
+
+    person: (fullName || input.phone || input.country) && {
+      nickname: fullName,
+      phone: input.phone,
+      geolocation: { country: input.country }
+    },
+
+    company: input.company && {
+      name: input.company
+    }
+  }
+}
+
+operation MapProfileFromCrisp {
+  crispProfile = args.profile
+  crispProfilePerson = crispProfile.person || {}
+
+  parsedName = call ParseCrispName(name = crispProfilePerson.nickname)
+
+  call GetCustomProperties(profileId = crispProfile.people_id) {
+    set if (!outcome.error) {
+      customProperties = outcome.data
+    }
+
+    fail if (outcome.error) outcome.error
+  }
+
+  return {
+    id = crispProfile.people_id
+    email = crispProfile.email
+    phone = crispProfilePerson.phone
+    firstName = parsedName.firstName,
+    lastName = parsedName.lastName,
+    company = (crispProfile.company || {}).name
+    country = (crispProfilePerson.geolocation || {}).country
+    customProperties = customProperties
+  }
+}
+
+operation ParseCrispName {
+  crispName = (args.name || '').trim()
+  lastNameIx = crispName.lastIndexOf(' ')
+
+  return if (lastNameIx === -1) {
+    firstName = crispName || undefined
+    lastName = undefined
+  }
+
+  return {
+    firstName = crispName.slice(0, lastNameIx).trim()
+    lastName = crispName.slice(lastNameIx).trim()
+  }
+}
+
+operation HandleCommonErrors {
+  statusCode = args.statusCode
+
+  return if (statusCode === 400) {
+    title = "Invalid data"
+    detail = "Invalid data was sent to Crisp server"
+  }
+
+  return if (statusCode === 401) {
+    title = "Unauthenticated"
+    detail = "Please make sure you're providing a valid Crisp API credentials"
+  }
+
+  return if (statusCode === 402) {
+    title = "Crisp subscription upgrade required"
+  }
+
+  return if (statusCode === 403) {
+    title = "Not allowed"
+  }
+
+  return if (statusCode === 404) {
+    title = "Not found"
+    detail = "Contact or website was not found or Crisp plugin is not subscribed. Make sure the Crisp website exists and uses your plugin"
+  }
+
+  return if (statusCode === 423 || statusCode === 429) {
+    title = "Quota limit exceeded"
+  }
+
+  return if (statusCode === 500) {
+    title = "Error on Crisp's side"
+    detail = "It looks like Crisp is temporarily having difficulties processing your request. Please try again or contact Crisp's support"
+  }
+
+  return {
+    title = "Unknown error"
+    detail = (`Unknown error occurred. Status: ${statusCode}`)
+  }
+}

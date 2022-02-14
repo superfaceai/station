@@ -1,10 +1,10 @@
 {
   "profiles": {
     "communication/send-sms": {
-      "file": "../capabilities/communication/send-sms/profile.supr",
+      "file": "../grid/communication/send-sms/profile.supr",
       "providers": {
         "twilio": {
-          "file": "../capabilities/communication/send-sms/maps/twilio.suma",
+          "file": "../grid/communication/send-sms/maps/twilio.suma",
           "defaults": {
             "SendMessage": {
               "input": {
@@ -21,7 +21,7 @@
           }
         },
         "tyntec": {
-          "file": "../capabilities/communication/send-sms/maps/tyntec.suma",
+          "file": "../grid/communication/send-sms/maps/tyntec.suma",
           "defaults": {
             "SendMessage": {
               "input": {
@@ -31,301 +31,464 @@
           }
         },
         "vonage-nexmo": {
-          "file": "../capabilities/communication/send-sms/maps/vonage-nexmo.suma"
+          "file": "../grid/communication/send-sms/maps/vonage-nexmo.suma"
         },
         "plivo": {
-          "file": "../capabilities/communication/send-sms/maps/plivo.suma"
+          "file": "../grid/communication/send-sms/maps/plivo.suma"
+        },
+        "messente": {
+          "file": "../grid/communication/send-sms/maps/messente.suma"
         },
         "mock": {
-          "file": "../capabilities/communication/send-sms/maps/mock.suma"
+          "file": "../grid/communication/send-sms/maps/mock.suma"
         }
       }
     },
     "vcs/user-repos": {
-      "file": "../capabilities/vcs/user-repos/profile.supr",
+      "file": "../grid/vcs/user-repos/profile.supr",
       "providers": {
         "github": {
-          "file": "../capabilities/vcs/user-repos/maps/github.suma"
+          "file": "../grid/vcs/user-repos/maps/github.suma"
         },
         "gitlab": {
-          "file": "../capabilities/vcs/user-repos/maps/gitlab.suma"
+          "file": "../grid/vcs/user-repos/maps/gitlab.suma"
         },
         "bitbucket": {
-          "file": "../capabilities/vcs/user-repos/maps/bitbucket.suma"
+          "file": "../grid/vcs/user-repos/maps/bitbucket.suma"
         },
         "mock": {
-          "file": "../capabilities/vcs/user-repos/maps/mock.suma"
+          "file": "../grid/vcs/user-repos/maps/mock.suma"
         }
       }
     },
     "vcs/pull-requests": {
-      "file": "../capabilities/vcs/pull-requests/profile.supr",
+      "file": "../grid/vcs/pull-requests/profile.supr",
       "providers": {
         "gitlab": {
-          "file": "../capabilities/vcs/pull-requests/maps/gitlab.suma"
+          "file": "../grid/vcs/pull-requests/maps/gitlab.suma"
         },
         "bitbucket": {
-          "file": "../capabilities/vcs/pull-requests/maps/bitbucket.suma"
+          "file": "../grid/vcs/pull-requests/maps/bitbucket.suma"
         },
         "github": {
-          "file": "../capabilities/vcs/pull-requests/maps/github.suma"
+          "file": "../grid/vcs/pull-requests/maps/github.suma"
         },
         "mock": {
-          "file": "../capabilities/vcs/pull-requests/maps/mock.suma"
+          "file": "../grid/vcs/pull-requests/maps/mock.suma"
         }
       }
     },
     "vcs/single-file-content": {
-      "file": "../capabilities/vcs/single-file-content/profile.supr",
+      "file": "../grid/vcs/single-file-content/profile.supr",
       "providers": {
         "github": {
-          "file": "../capabilities/vcs/single-file-content/maps/github.suma"
+          "file": "../grid/vcs/single-file-content/maps/github.suma"
         },
         "gitlab": {
-          "file": "../capabilities/vcs/single-file-content/maps/gitlab.suma"
+          "file": "../grid/vcs/single-file-content/maps/gitlab.suma"
         },
         "bitbucket": {
-          "file": "../capabilities/vcs/single-file-content/maps/bitbucket.suma"
+          "file": "../grid/vcs/single-file-content/maps/bitbucket.suma"
         },
         "mock": {
-          "file": "../capabilities/vcs/single-file-content/maps/mock.suma"
+          "file": "../grid/vcs/single-file-content/maps/mock.suma"
         }
       }
     },
     "address/clean-address": {
-      "file": "../capabilities/address/clean-address/profile.supr",
+      "file": "../grid/address/clean-address/profile.supr",
       "providers": {
         "smartystreets": {
-          "file": "../capabilities/address/clean-address/maps/smartystreets.suma"
+          "file": "../grid/address/clean-address/maps/smartystreets.suma"
         },
         "mock": {
-          "file": "../capabilities/address/clean-address/maps/mock.suma"
+          "file": "../grid/address/clean-address/maps/mock.suma"
         }
       }
     },
     "communication/send-email": {
-      "file": "../capabilities/communication/send-email/profile.supr",
+      "file": "../grid/communication/send-email/profile.supr",
       "providers": {
         "sendgrid": {
-          "file": "../capabilities/communication/send-email/maps/sendgrid.suma"
+          "file": "../grid/communication/send-email/maps/sendgrid.suma"
         },
         "mailgun": {
-          "file": "../capabilities/communication/send-email/maps/mailgun.suma"
+          "file": "../grid/communication/send-email/maps/mailgun.suma"
         },
         "mock": {
-          "file": "../capabilities/communication/send-email/maps/mock.suma"
+          "file": "../grid/communication/send-email/maps/mock.suma"
         },
         "mailchimp": {
-          "file": "../capabilities/communication/send-email/maps/mailchimp.suma"
+          "file": "../grid/communication/send-email/maps/mailchimp.suma"
         },
         "postmark": {
-          "file": "../capabilities/communication/send-email/maps/postmark.suma"
+          "file": "../grid/communication/send-email/maps/postmark.suma"
         }
       }
     },
     "communication/send-templated-email": {
-      "file": "../capabilities/communication/send-templated-email/profile.supr",
+      "file": "../grid/communication/send-templated-email/profile.supr",
       "providers": {
         "mock": {
-          "file": "../capabilities/communication/send-templated-email/maps/mock.suma"
+          "file": "../grid/communication/send-templated-email/maps/mock.suma"
         },
         "mailchimp": {
-          "file": "../capabilities/communication/send-templated-email/maps/mailchimp.suma"
+          "file": "../grid/communication/send-templated-email/maps/mailchimp.suma"
         },
         "mailgun": {
-          "file": "../capabilities/communication/send-templated-email/maps/mailgun.suma"
+          "file": "../grid/communication/send-templated-email/maps/mailgun.suma"
         },
         "postmark": {
-          "file": "../capabilities/communication/send-templated-email/maps/postmark.suma"
+          "file": "../grid/communication/send-templated-email/maps/postmark.suma"
         },
         "sendgrid": {
-          "file": "../capabilities/communication/send-templated-email/maps/sendgrid.suma"
+          "file": "../grid/communication/send-templated-email/maps/sendgrid.suma"
         }
       }
     },
     "starwars/character-information": {
-      "file": "../capabilities/starwars/character-information/profile.supr",
+      "file": "../grid/starwars/character-information/profile.supr",
       "providers": {
         "swapi": {
-          "file": "../capabilities/starwars/character-information/maps/swapi.suma"
+          "file": "../grid/starwars/character-information/maps/swapi.suma"
         },
         "mock": {
-          "file": "../capabilities/starwars/character-information/maps/mock.suma"
+          "file": "../grid/starwars/character-information/maps/mock.suma"
         }
       }
     },
     "vcs/pull-request": {
-      "file": "../capabilities/vcs/pull-request/profile.supr",
+      "file": "../grid/vcs/pull-request/profile.supr",
       "providers": {
         "github": {
-          "file": "../capabilities/vcs/pull-request/maps/github.suma"
+          "file": "../grid/vcs/pull-request/maps/github.suma"
         },
         "gitlab": {
-          "file": "../capabilities/vcs/pull-request/maps/gitlab.suma"
+          "file": "../grid/vcs/pull-request/maps/gitlab.suma"
         },
         "bitbucket": {
-          "file": "../capabilities/vcs/pull-request/maps/bitbucket.suma"
+          "file": "../grid/vcs/pull-request/maps/bitbucket.suma"
         },
         "mock": {
-          "file": "../capabilities/vcs/pull-request/maps/mock.suma"
+          "file": "../grid/vcs/pull-request/maps/mock.suma"
         }
       }
     },
     "address/geocoding": {
-      "file": "../capabilities/address/geocoding/profile.supr",
+      "file": "../grid/address/geocoding/profile.supr",
       "providers": {
         "google-apis-maps": {
-          "file": "../capabilities/address/geocoding/maps/google-apis-maps.suma"
+          "file": "../grid/address/geocoding/maps/google-apis-maps.suma"
         },
         "opencage": {
-          "file": "../capabilities/address/geocoding/maps/opencage.suma"
+          "file": "../grid/address/geocoding/maps/opencage.suma"
         },
         "mock": {
-          "file": "../capabilities/address/geocoding/maps/mock.suma"
+          "file": "../grid/address/geocoding/maps/mock.suma"
         },
         "nominatim": {
-          "file": "../capabilities/address/geocoding/maps/nominatim.suma"
+          "file": "../grid/address/geocoding/maps/nominatim.suma"
         },
         "azure-maps": {
-          "file": "../capabilities/address/geocoding/maps/azure-maps.suma"
+          "file": "../grid/address/geocoding/maps/azure-maps.suma"
+        },
+        "tomtom": {
+          "file": "../grid/address/geocoding/maps/tomtom.suma"
         },
         "here": {
-          "file": "../capabilities/address/geocoding/maps/here.suma"
+          "file": "../grid/address/geocoding/maps/here.suma"
         }
       }
     },
     "delivery-tracking/shipment-info": {
-      "file": "../capabilities/delivery-tracking/shipment-info/profile.supr",
+      "file": "../grid/delivery-tracking/shipment-info/profile.supr",
       "defaults": {},
       "providers": {
         "dhl": {
-          "file": "../capabilities/delivery-tracking/shipment-info/maps/dhl.suma"
+          "file": "../grid/delivery-tracking/shipment-info/maps/dhl.suma"
         },
         "shippo": {
-          "file": "../capabilities/delivery-tracking/shipment-info/maps/shippo.suma"
+          "file": "../grid/delivery-tracking/shipment-info/maps/shippo.suma"
         },
         "mock": {
-          "file": "../capabilities/delivery-tracking/shipment-info/maps/mock.suma"
+          "file": "../grid/delivery-tracking/shipment-info/maps/mock.suma"
         }
       }
     },
     "communication/email-templates": {
-      "file": "../capabilities/communication/email-templates/profile.supr",
+      "file": "../grid/communication/email-templates/profile.supr",
       "providers": {
         "mock": {
-          "file": "../capabilities/communication/email-templates/maps/mock.suma"
+          "file": "../grid/communication/email-templates/maps/mock.suma"
         },
         "sendgrid": {
-          "file": "../capabilities/communication/email-templates/maps/sendgrid.suma"
+          "file": "../grid/communication/email-templates/maps/sendgrid.suma"
         },
         "postmark": {
-          "file": "../capabilities/communication/email-templates/maps/postmark.suma"
+          "file": "../grid/communication/email-templates/maps/postmark.suma"
         }
       }
     },
     "communication/send-message": {
-      "file": "../capabilities/communication/send-message/profile.supr",
+      "file": "../grid/communication/send-message/profile.supr",
       "providers": {
         "mock": {
-          "file": "../capabilities/communication/send-message/maps/mock.suma"
+          "file": "../grid/communication/send-message/maps/mock.suma"
         },
         "slack": {
-          "file": "../capabilities/communication/send-message/maps/slack.suma"
+          "file": "../grid/communication/send-message/maps/slack.suma"
         }
       }
     },
     "weather/current-city": {
-      "file": "../capabilities/weather/current-city/profile.supr",
-      "priority": [
-        "mock",
-        "wttr-in",
-        "openweathermap"
-      ],
+      "file": "../grid/weather/current-city/profile.supr",
       "providers": {
         "mock": {
-          "file": "../capabilities/weather/current-city/maps/mock.suma"
+          "file": "../grid/weather/current-city/maps/mock.suma"
         },
         "wttr-in": {
-          "file": "../capabilities/weather/current-city/maps/wttr-in.suma"
+          "file": "../grid/weather/current-city/maps/wttr-in.suma"
         },
         "openweathermap": {
-          "file": "../capabilities/weather/current-city/maps/openweathermap.suma"
+          "file": "../grid/weather/current-city/maps/openweathermap.suma"
+        }
+      }
+    },
+    "weather/forecast-city": {
+      "file": "../grid/weather/forecast-city/profile.supr",
+      "providers": {
+        "mock": {
+          "file": "../grid/weather/forecast-city/maps/mock.suma"
+        },
+        "wttr-in": {
+          "file": "../grid/weather/forecast-city/maps/wttr-in.suma"
         }
       }
     },
     "speech/synthesis": {
-      "file": "../capabilities/speech/synthesis/profile.supr",
+      "file": "../grid/speech/synthesis/profile.supr",
       "providers": {
         "mock": {
-          "file": "../capabilities/speech/synthesis/maps/mock.suma"
+          "file": "../grid/speech/synthesis/maps/mock.suma"
         },
         "google-apis-text-to-speech": {
-          "file": "../capabilities/speech/synthesis/maps/google-apis-text-to-speech.suma"
+          "file": "../grid/speech/synthesis/maps/google-apis-text-to-speech.suma"
         },
         "ibm-cloud-text-to-speech": {
-          "file": "../capabilities/speech/synthesis/maps/ibm-cloud-text-to-speech.suma"
+          "file": "../grid/speech/synthesis/maps/ibm-cloud-text-to-speech.suma"
         }
       }
     },
     "computer-vision/face-detection": {
-      "file": "../capabilities/computer-vision/face-detection/profile.supr",
+      "file": "../grid/computer-vision/face-detection/profile.supr",
       "providers": {
         "google-apis-computer-vision": {
-          "file": "../capabilities/computer-vision/face-detection/maps/google-apis-computer-vision.suma"
+          "file": "../grid/computer-vision/face-detection/maps/google-apis-computer-vision.suma"
         },
         "mock": {
-          "file": "../capabilities/computer-vision/face-detection/maps/mock.suma"
+          "file": "../grid/computer-vision/face-detection/maps/mock.suma"
         }
       }
     },
     "crypto/exchange-rate": {
-      "file": "../capabilities/crypto/exchange-rate/exchange-rate.supr",
+      "file": "../grid/crypto/exchange-rate/exchange-rate.supr",
       "providers": {
         "binance": {
-          "file": "../capabilities/crypto/exchange-rate/maps/binance.suma"
+          "file": "../grid/crypto/exchange-rate/maps/binance.suma"
         },
         "mock": {
-          "file": "../capabilities/crypto/exchange-rate/maps/mock.suma"
+          "file": "../grid/crypto/exchange-rate/maps/mock.suma"
         }
       }
     },
     "crm/contacts": {
-      "file": "../capabilities/crm/contacts/profile.supr",
+      "file": "../grid/crm/contacts/profile.supr",
       "providers": {
         "mock": {
-          "file": "../capabilities/crm/contacts/maps/mock.suma"
+          "file": "../grid/crm/contacts/maps/mock.suma"
         },
         "sendgrid": {
-          "file": "../capabilities/crm/contacts/maps/sendgrid.suma"
+          "file": "../grid/crm/contacts/maps/sendgrid.suma"
         },
         "hubspot": {
-          "file": "../capabilities/crm/contacts/maps/hubspot.suma"
+          "file": "../grid/crm/contacts/maps/hubspot.suma"
+        },
+        "mixpanel": {
+          "file": "../grid/crm/contacts/maps/mixpanel.suma"
+        },
+        "crisp": {
+          "file": "../grid/crm/contacts/maps/crisp.suma"
         }
       }
     },
     "language/translate": {
-      "file": "../capabilities/language/translate/profile.supr",
-      "priority": ["deepl", "mock"],
+      "file": "../grid/language/translate/profile.supr",
       "providers": {
         "deepl": {
-          "file": "../capabilities/language/translate/maps/deepl.suma"
+          "file": "../grid/language/translate/maps/deepl.suma"
         },
         "mock": {
-          "file": "../capabilities/language/translate/maps/mock.suma"
+          "file": "../grid/language/translate/maps/mock.suma"
+        }
+      }
+    },
+    "navigation/nearby-poi": {
+      "file": "../grid/navigation/nearby-poi/profile.supr",
+      "providers": {
+        "mock": {
+          "file": "../grid/navigation/nearby-poi/maps/mock.suma"
+        },
+        "overpass-de": {
+          "file": "../grid/navigation/nearby-poi/maps/overpass-de.suma"
+        },
+        "google-apis-maps": {
+          "file": "../grid/navigation/nearby-poi/maps/google-apis-maps.suma"
         }
       }
     },
     "language/analyze-plain-text-sentiment": {
-      "file": "../capabilities/language/analyze-plain-text-sentiment/profile.supr",
+      "file": "../grid/language/analyze-plain-text-sentiment/profile.supr",
       "providers": {
         "mock": {
-          "file": "../capabilities/language/analyze-plain-text-sentiment/maps/mock.suma"
+          "file": "../grid/language/analyze-plain-text-sentiment/maps/mock.suma"
         },
         "google-apis-language": {
-          "file": "../capabilities/language/analyze-plain-text-sentiment/maps/google-apis-language.suma"
+          "file": "../grid/language/analyze-plain-text-sentiment/maps/google-apis-language.suma"
         },
         "ibm-cloud-natural-language-understanding": {
-          "file": "../capabilities/language/analyze-plain-text-sentiment/maps/ibm-cloud-natural-language-understanding.suma"
+          "file": "../grid/language/analyze-plain-text-sentiment/maps/ibm-cloud-natural-language-understanding.suma"
+        }
+      }
+    },
+    "analytics/track-event": {
+      "file": "../grid/analytics/track-event/profile.supr",
+      "providers": {
+        "mixpanel": {
+          "file": "../grid/analytics/track-event/maps/mixpanel.suma"
+        },
+        "mock": {
+          "file": "../grid/analytics/track-event/maps/mock.suma"
+        }
+      }
+    },
+    "speech/recognize": {
+      "file": "../grid/speech/recognize/profile.supr",
+      "providers": {
+        "mock": {
+          "file": "../grid/speech/recognize/maps/mock.suma"
+        },
+        "google-apis-speech": {
+          "file": "../grid/speech/recognize/maps/google-apis-speech.suma"
+        },
+        "ibm-cloud-speech-to-text": {
+          "file": "../grid/speech/recognize/maps/ibm-cloud-speech-to-text.suma"
+        },
+        "azure-speech-to-text": {
+          "file": "../grid/speech/recognize/maps/azure-speech-to-text.suma"
+        },
+        "assemblyai": {
+          "file": "../grid/speech/recognize/maps/assemblyai.suma"
+        }
+      }
+    },
+    "social-media/publishing-profiles": {
+      "file": "../grid/social-media/publishing-profiles/profile.supr",
+      "providers": {
+        "mock": {
+          "file": "../grid/social-media/publishing-profiles/maps/mock.suma"
+        },
+        "facebook": {
+          "file": "../grid/social-media/publishing-profiles/maps/facebook.suma"
+        },
+        "instagram": {
+          "file": "../grid/social-media/publishing-profiles/maps/instagram.suma"
+        },
+        "twitter": {
+          "file": "../grid/social-media/publishing-profiles/maps/twitter.suma"
+        },
+        "linkedin": {
+          "file": "../grid/social-media/publishing-profiles/maps/linkedin.suma"
+        }
+      }
+    },
+    "social-media/publish-post": {
+      "file": "../grid/social-media/publish-post/profile.supr",
+      "providers": {
+        "mock": {
+          "file": "../grid/social-media/publish-post/maps/mock.suma"
+        },
+        "facebook": {
+          "file": "../grid/social-media/publish-post/maps/facebook.suma"
+        },
+        "instagram": {
+          "file": "../grid/social-media/publish-post/maps/instagram.suma"
+        },
+        "twitter": {
+          "file": "../grid/social-media/publish-post/maps/twitter.suma"
+        }
+      }
+    },
+    "social-media/posts": {
+      "file": "../grid/social-media/posts/profile.supr",
+      "providers": {
+        "mock": {
+          "file": "../grid/social-media/posts/maps/mock.suma"
+        },
+        "facebook": {
+          "file": "../grid/social-media/posts/maps/facebook.suma"
+        },
+        "instagram": {
+          "file": "../grid/social-media/posts/maps/instagram.suma"
+        },
+        "twitter": {
+          "file": "../grid/social-media/posts/maps/twitter.suma"
+        }
+      }
+    },
+    "crm/track-contact-event": {
+      "file": "../grid/crm/track-contact-event/profile.supr",
+      "providers": {
+        "crisp": {
+          "file": "../grid/crm/track-contact-event/maps/crisp.suma"
+        },
+        "mock": {
+          "file": "../grid/crm/track-contact-event/maps/mock.suma"
+        }
+      }
+    },
+    "social-media/posts-lookup": {
+      "file": "../grid/social-media/posts-lookup/profile.supr",
+      "providers": {
+        "mock": {
+          "file": "../grid/social-media/posts-lookup/maps/mock.suma"
+        },
+        "twitter": {
+          "file": "../grid/social-media/posts-lookup/maps/twitter.suma"
+        }
+      }
+    },
+    "social-media/followers": {
+      "file": "../grid/social-media/followers/profile.supr",
+      "providers": {
+        "mock": {
+          "file": "../grid/social-media/followers/maps/mock.suma"
+        },
+        "twitter": {
+          "file": "../grid/social-media/followers/maps/twitter.suma"
+        }
+      }
+    },
+    "oauth2/refresh-token": {
+      "file": "../grid/oauth2/refresh-token/profile.supr",
+      "providers": {
+        "google-apis": {
+          "file": "../grid/oauth2/refresh-token/maps/google-apis.suma"
+        },
+        "mock": {
+          "file": "../grid/oauth2/refresh-token/maps/mock.suma"
+        },
+        "twitter": {
+          "file": "../grid/oauth2/refresh-token/maps/twitter.suma"
         }
       }
     }
@@ -526,7 +689,7 @@
           "username": "$MAILGUN_USERNAME",
           "password": "$MAILGUN_PASSWORD"
         }
-      ], 
+      ],
       "parameters": {
         "DOMAIN": "$MAILGUN_DOMAIN"
       }
@@ -599,9 +762,10 @@
           "id": "basic",
           "username": "apikey",
           "password": "$IBM_CLOUD_TEXT_TO_SPEECH_KEY"
-        }],
+        }
+      ],
       "parameters": {
-        "REGION": "$IBM_CLOUD_TEXT_TO_SPEECH_REGION",
+        "REGION": "$IBM_CLOUD_REGION",
         "INSTANCE_ID": "$IBM_CLOUD_TEXT_TO_SPEECH_INSTANCE_ID"
       }
     },
@@ -615,7 +779,7 @@
         }
       ],
       "parameters": {
-        "REGION": "$IBM_CLOUD_NATURAL_LANGUAGE_UNDERSTANDING_REGION",
+        "REGION": "$IBM_CLOUD_REGION",
         "INSTANCE_ID": "$IBM_CLOUD_NATURAL_LANGUAGE_UNDERSTANDING_INSTANCE_ID"
       }
     },
@@ -640,6 +804,133 @@
           "apikey": "$DEEPL_API_KEY"
         }
       ]
+    },
+    "overpass-de": {
+      "file": "../providers/overpass-de.json",
+      "security": []
+    },
+    "mixpanel": {
+      "file": "../providers/mixpanel.json",
+      "security": [
+        {
+          "id": "service_account",
+          "username": "$MIXPANEL_SERVICE_ACCOUNT_USER",
+          "password": "$MIXPANEL_SERVICE_ACCOUNT_PASSWORD"
+        }
+      ],
+      "parameters": {
+        "PROJECT_TOKEN": "$MIXPANEL_PROJECT_TOKEN",
+        "SERVER": "$MIXPANEL_SERVER"
+      }
+    },
+    "google-apis-speech": {
+      "file": "../providers/google-apis-speech.json",
+      "security": [
+        {
+          "id": "apikey",
+          "apikey": "$GOOGLE_APIS_API_KEY"
+        }
+      ]
+    },
+    "ibm-cloud-speech-to-text": {
+      "file": "../providers/ibm-cloud-speech-to-text.json",
+      "security": [
+        {
+          "id": "basic",
+          "username": "apikey",
+          "password": "$IBM_CLOUD_SPEECH_TO_TEXT_KEY"
+        }
+      ],
+      "parameters": {
+        "REGION": "$IBM_CLOUD_REGION",
+        "INSTANCE_ID": "$IBM_CLOUD_SPEECH_TO_TEXT_INSTANCE_ID"
+      }
+    },
+    "azure-speech-to-text": {
+      "file": "../providers/azure-speech-to-text.json",
+      "security": [
+        {
+          "id": "opc-subscription-key",
+          "apikey": "$AZURE_SPEECH_TO_TEXT_SUBSCRIPTION_KEY"
+        }
+      ],
+      "parameters": {
+        "REGION": "$AZURE_SPEECH_TO_TEXT_REGION"
+      }
+    },
+    "assemblyai": {
+      "file": "../providers/assemblyai.json",
+      "security": [
+        {
+          "id": "api-token",
+          "apikey": "$ASSEMBLYAI_API_TOKEN"
+        }
+      ]
+    },
+    "crisp": {
+      "file": "../providers/crisp.json",
+      "security": [
+        {
+          "id": "plugin_tier",
+          "username": "$CRISP_USERNAME",
+          "password": "$CRISP_PASSWORD"
+        }
+      ],
+      "parameters": {
+        "WEBSITE_ID": "$CRISP_WEBSITE_ID"
+      }
+    },
+    "messente": {
+      "file": "../providers/messente.json",
+      "security": [
+        {
+          "id": "basic",
+          "username": "$MESSENTE_API_USERNAME",
+          "password": "$MESSENTE_API_PASSWORD"
+        }
+      ]
+    },
+    "facebook": {
+      "file": "../providers/facebook.json",
+      "parameters": {
+        "accessToken": "$FACEBOOK_ACCESS_TOKEN"
+      }
+    },
+    "instagram": {
+      "file": "../providers/instagram.json",
+      "parameters": {
+        "accessToken": "$INSTAGRAM_ACCESS_TOKEN"
+      }
+    },
+    "twitter": {
+      "file": "../providers/twitter.json",
+      "parameters": {
+        "accessToken": "$TWITTER_ACCESS_TOKEN",
+        "clientId": "$TWITTER_CLIENT_ID",
+        "clientSecret": "$TWITTER_CLIENT_SECRET"
+      }
+    },
+    "linkedin": {
+      "file": "../providers/linkedin.json",
+      "parameters": {
+        "accessToken": "$LINKEDIN_ACCESS_TOKEN"
+      }
+    },
+    "tomtom": {
+      "file": "../providers/tomtom.json",
+      "security": [
+        {
+          "id": "apikey",
+          "apikey": "$TOMTOM_API_KEY"
+        }
+      ]
+    },
+    "google-apis": {
+      "file": "../providers/google-apis.json",
+      "parameters": {
+        "clientId": "$GOOGLE_APIS_CLIENT_ID",
+        "clientSecret": "$GOOGLE_APIS_CLIENT_SECRET"
+      }
     },
     "here": {
       "file": "../providers/here.json",

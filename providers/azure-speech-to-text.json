@@ -1,0 +1,24 @@
+{
+  "name": "azure-speech-to-text",
+  "services": [
+    {
+      "id": "default",
+      "baseUrl": "https://{REGION}.stt.speech.microsoft.com"
+    }
+  ],
+  "securitySchemes": [
+    {
+      "id": "opc-subscription-key",
+      "type": "apiKey",
+      "in": "header",
+      "name": "Ocp-Apim-Subscription-Key"
+    }
+  ],
+  "defaultService": "default",
+  "parameters": [
+    {
+      "name": "REGION",
+      "description": "Your speech to text instance region (westeurope, ...)"
+    }
+  ]
+}

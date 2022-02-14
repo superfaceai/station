@@ -1,0 +1,27 @@
+{
+  "name": "ibm-cloud-speech-to-text",
+  "services": [
+    {
+      "id": "default",
+      "baseUrl": "https://api.{REGION}.speech-to-text.watson.cloud.ibm.com"
+    }
+  ],
+  "securitySchemes": [
+    {
+      "id": "basic",
+      "type": "http",
+      "scheme": "basic"
+    }
+  ],
+  "defaultService": "default",
+  "parameters": [
+    {
+      "name": "REGION",
+      "description": "Your speech to text instance region (eu-de, us-east, ...)"
+    },
+    {
+      "name": "INSTANCE_ID",
+      "description": "Your speech to text instance id"
+    }
+  ]
+}

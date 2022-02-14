@@ -1,0 +1,30 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`speech/recognize/ibm-cloud-speech-to-text SpeechToTextRecognition when inputs are invalid should throw an exception 1`] = `
+Err {
+  "error": "MappedError: Expected error
+Properties: {
+  \\"title\\": \\"Bad request\\",
+  \\"detail\\": \\"Stream was 26 bytes but needs to be at least 100 bytes.\\"
+}
+AST Path: definitions[0].statements[6].statements[1]
+Original Map Location: Line 30, column 7",
+}
+`;
+
+exports[`speech/recognize/ibm-cloud-speech-to-text SpeechToTextRecognition when speech encoded in linear pcm wav should convert speech to text 1`] = `
+Ok {
+  "value": Object {
+    "results": Array [
+      Object {
+        "alternatives": Array [
+          Object {
+            "confidence": 0.98,
+            "transcript": "hello world ",
+          },
+        ],
+      },
+    ],
+  },
+}
+`;

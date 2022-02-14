@@ -1,0 +1,193 @@
+"""
+Manage email templates
+List, create, update and get template content
+"""
+
+name = "communication/email-templates"
+version = "1.0.2"
+
+"""
+List all templates
+Result isn't paginated, amount of returned templates depenends on provider.
+"""
+usecase ListTemplates safe {
+  result [Template]
+
+  example Successful {
+    result [
+      {
+        id = "template-id"
+        name = "example"
+      }
+    ]
+  }
+}
+
+"""
+Get template content
+Obtain template content
+"""
+usecase GetTemplateContent safe {
+  input {
+    id!
+  }
+
+  result {
+    subject
+    text
+    html
+  }
+
+  example Successful {
+    input {
+      id = "example-id"
+    }
+
+    result {
+      subject = "Templated email example"
+      text = "Hi there, this is text content of example email."
+      html = """<!doctype html>
+<html>
+
+<head>
+  <meta name="viewport" content="width=device-width">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>Templated email example</title>
+</head>
+
+<body class="">
+Hi there, this is html content of example email.
+</body>
+
+</html>
+"""
+    }
+  }
+}
+
+"""
+Create template
+Creates new template
+"""
+usecase CreateTemplate unsafe {
+  input {
+    name!
+    subject!
+    text!
+    html!
+  }
+
+  result Template
+
+  example Successful {
+    input {
+      name = "example"
+      subject = "Templated email example"
+      text = "Hi there, this is text content of example email."
+      html = """<!doctype html>
+<html>
+
+<head>
+  <meta name="viewport" content="width=device-width">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>Templated email example</title>
+</head>
+
+<body class="">
+Hi there, this is html content of example email.
+</body>
+
+</html>
+"""
+    }
+
+    result {
+      id = "template-id"
+      name = "example"
+    }
+  }
+}
+
+"""
+Update template
+Updates template with specified id
+"""
+usecase UpdateTemplate unsafe {
+  input {
+    id!
+    name
+    subject
+    text
+    html
+  }
+
+  result Template
+
+  example Successful {
+    input {
+      id = "template-id"
+      name = "example"
+      subject = "Templated email example"
+      text = "Hi there, this is text content of example email."
+      html = """<!doctype html>
+<html>
+
+<head>
+  <meta name="viewport" content="width=device-width">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>Templated email example</title>
+</head>
+
+<body class="">
+Hi there, this is html content of example email.
+</body>
+
+</html>
+"""
+    }
+
+    result {
+      id = "template-id"
+      name = "Templated email example"
+    }
+  }
+}
+
+"""
+Template
+Minimal information about the template
+"""
+model Template {
+  id
+  name
+}
+
+"""
+Id
+Unique template identifier
+"""
+field id
+
+"""
+Name
+Name of the template
+"""
+field name
+
+"""
+Subject
+Subject of the email
+"""
+field subject
+
+"""
+Text Content
+Text version of the template
+"""
+field text
+
+"""
+HTML Content
+HTML version of the template
+"""
+field html

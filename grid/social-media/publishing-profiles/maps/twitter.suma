@@ -1,0 +1,55 @@
+profile = "social-media/publishing-profiles@1.0"
+provider = "twitter"
+
+"""
+Get authenticated user
+https://developer.twitter.com/en/docs/twitter-api/users/lookup/api-reference/get-users-me
+"""
+map GetProfilesForPublishing {
+  http GET "/2/users/me" {
+    request {
+      query {
+        "user.fields" = "id,name,profile_image_url,username"
+      }
+      headers {
+        authorization = "Bearer " + parameters.accessToken
+      }
+    }
+
+    response 200 "application/json" {
+      profile = body.data
+
+      return map result {
+        profiles = [{
+          id: profile.id,
+          name: profile.name,
+          username: profile.username,
+          imageUrl: profile.profile_image_url,
+        }]
+      }
+    }
+
+    // https://developer.twitter.com/en/support/twitter-api/error-troubleshooting
+    response 400 "application/json" {
+      return map error {
+        title = body.title || "Bad request"
+        detail = body.detail
+      }
+    }
+
+    response 401 "application/json" {
+      return map error {
+        title = body.title || "Unauthorized"
+        detail = body.detail
+      }
+    }
+
+    response 403 "application/json" {
+      return map error {
+        title = body.title || "Forbidden"
+        detail = body.detail
+      }
+    }
+  }
+}
+

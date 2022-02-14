@@ -1,0 +1,18 @@
+profile = "speech/recognize@1.0"
+provider = "mock"
+
+map Recognize {
+  map error if(!input.audioContent || input.languageCode !== "en-US") {
+    title = "Bad request"
+  }
+
+  map result {
+    results = [{
+      alternatives: [{
+          transcript: "Hello world!",
+          confidence: 0.9
+        }
+      ]
+    }]
+  }
+}

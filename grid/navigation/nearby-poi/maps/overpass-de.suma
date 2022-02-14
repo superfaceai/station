@@ -1,0 +1,172 @@
+profile = "navigation/nearby-poi@1.0"
+provider = "overpass-de"
+
+map NearbyPoi {
+  center = input.center
+  http POST "/api/interpreter" {
+    request "application/x-www-form-urlencoded" {
+      body {
+        data = call BuildQuery(
+          latitude = center.latitude,
+          longitude = center.longitude,
+          radius = input.radius,
+          categories = input.categories || []
+        )
+      }
+    }
+
+    response 200 "application/json" {
+      return map error if (body.remarks && body.remarks.includes("Query timed out")) {
+        status: "TIMEOUT",
+        message: body.remarks
+      }
+
+      points = call foreach(node of body.elements) ConvertResponse(node = node)
+      map result points
+    }
+    response 400 {
+      return map error {
+        status: statusCode,
+        message: "Invalid parameters"
+      }
+    }
+
+    response {
+      return map error {
+        status: statusCode,
+        message: body
+      }
+    }
+  }
+}
+
+"""
+Build an overpass API query
+
+The query timeout is set to 10 seconds.
+"""
+operation BuildQuery {
+  amenities = call CategoriesToAmenities(categories = args.categories)
+  amenityFilter = ""
+  set if (amenities.length > 0) {
+    amenityFilter = `[amenity~"^(${amenities.join("|")})$"]`
+  }
+  
+  query = `
+    [out:json][timeout:10];
+    node(around:${args.radius},${args.latitude},${args.longitude})${amenityFilter};
+
+    out;
+  `
+
+  return query
+}
+
+operation ConvertResponse {
+  nodeTags = args.node.tags || {}
+
+  categories = []
+  set if (nodeTags.amenity) {
+    categories = call AmenitiesToCategories(amenities = [nodeTags.amenity])
+  }
+
+  point = {
+    coordinates: {
+      latitude: args.node.lat,
+      longitude: args.node.lon,
+    },
+    name: args.node.name || args.node.id.toString(),
+    categories: categories
+  }
+
+  return point
+}
+
+"""
+Converts a list of categories into a list of amenities
+"""
+operation CategoriesToAmenities {
+  return if (!args.categories) []
+
+  categoryAmenityMap = {
+    "RESTAURANT": ["restaurant", "fast_food", "food_court"],
+    "CAFE": ["cafe"],
+    "BAR": ["bar", "pub", "biergarten"],
+    "SCHOOL": ["school","college","kindergarten","language_school","music_school","university"],
+    "TAXI": ["taxi"],
+    "POST": ["post_box","post_depot","post_office"],
+    "HEALTHCARE":[ "clinic", "doctors", "hospital"],
+    "BANK": ["bank"],
+    "ATM":["atm"],
+    "POLICE": ["police"],
+    "PARKING": ["parking","parking_entrance", "parking_space"]
+  }
+
+  amenities = args.categories.flatMap(
+    category => categoryAmenityMap[category]
+  )
+
+  return amenities
+}
+
+"""
+Converts a list of amenities to categories
+"""
+operation AmenitiesToCategories {
+  return if (!args.amenities) []
+
+  amenityCategoryMap = {
+    //Restaurant
+    "restaurant": "RESTAURANT",
+    "fast_food": "RESTAURANT",
+    "food_court": "RESTAURANT",
+    //Cafe
+    "cafe": "CAFE",
+    //Bar
+    "bar": "BAR",
+    "pub": "BAR",
+    "biergarten": "BAR",
+    //School
+    "school": "SCHOOL",
+    "college": "SCHOOL",
+    "kindergarten": "SCHOOL",
+    "language_school": "SCHOOL",
+    "music_school": "SCHOOL",
+    "university": "SCHOOL",
+    //Taxi
+    "taxi": "TAXI",
+    //Post
+    "post_box": "POST",
+    "post_depot": "POST",
+    "post_office": "POST",
+    //Police
+    "police": "POLICE",
+    //Healthcare
+    "clinic": "HEALTHCARE",
+    "doctors": "HEALTHCARE",
+    "hospital": "HEALTHCARE",
+    //Bank
+    "bank": "BANK",
+    //ATM
+    "atm": "ATM",
+    //Parking
+    "parking": "PARKING",
+    "parking_entrance": "PARKING",
+    "parking_space": "PARKING"
+  }
+
+  categories = (() => {
+    const categories = []
+
+    for (const amenity of args.amenities) {
+      const category = amenityCategoryMap[amenity]
+      if (category !== undefined && !categories.includes(category)) {
+        categories.push(category)
+      }
+    }
+
+    return categories
+  })()
+
+  return categories
+}
