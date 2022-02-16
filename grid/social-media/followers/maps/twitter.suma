@@ -27,9 +27,13 @@ map GetFollowers {
       followers = []
 
       set if (body.meta.result_count > 0) {
-        followers = call foreach(follower of body.data) MapFollower(
-            follower = follower
-          )
+        followers = body.data.map(follower => {
+          return {
+            id: follower.id,
+            username: follower.username,
+            imageUrl: follower.profile_image_url
+          }
+        })
       }
 
       map result {
@@ -44,16 +48,6 @@ map GetFollowers {
       error = call MapTwitterError(statusCode = statusCode, error = body, headers = headers)
       map error error
     }
-  }
-}
-
-operation MapFollower {
-  follower = args.follower
-
-  return {
-    id: follower.id,
-    username: follower.username,
-    imageUrl: follower.profile_image_url
   }
 }
 
