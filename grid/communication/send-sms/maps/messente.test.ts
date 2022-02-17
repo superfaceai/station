@@ -1,3 +1,3 @@
 import { sendSmsTest } from './send-sms';
 
-sendSmsTest('messente');
+sendSmsTest('messente', ['Superface', 'Superface']);
