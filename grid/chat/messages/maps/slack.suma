@@ -9,9 +9,10 @@ map GetMessages {
 		request "application/x-www-form-urlencoded" {
 			query {
 				channel = input.destination
+				latest = input.beforeTimestamp
 				oldest = input.afterTimestamp
 				cursor = input.page
-				limit = input.limit || 100
+				limit = input.limit || 999
 			}
 
 			headers {
@@ -63,68 +64,62 @@ map GetMessages {
 operation MapMessages {
 	listOfMessages = []
 
-	set if (args.messages && args.messages.length > 0) {
-		listOfMessages = args.messages.filter(message => message.type === 'message')
-	}
+	listOfMessages = args.messages.filter(message => message.type === 'message').map(message => {
+		const resultMessage = {
+			id: message.ts,
+			text: message.text,
+			createdAt: parseFloat(message.ts),
+		}
 
-	// workaround for map interpreter variables merging issue
-	listOfMessages = call foreach(index of Array(listOfMessages.length).fill().map((_, i) => i)) MapMessage(
-		index = index,
-		messages = listOfMessages,
-		dest = args.destination,
-	) if (listOfMessages.length > 0)
+		let author, reactions = [], attachments = [];
+
+		if (message.user || message.bot_id) {
+			author = {
+				id: message.user || message.bot_id,
+				username: message.username
+			};
+
+			resultMessage.author = author;
+		}
+
+		if (message.thread_ts) {
+			resultMessage.hasThread = true;
+			resultMessage.threadId = message.thread_ts;
+		}
+
+		if (message.edited) {
+			resultMessage.updatedAt = parseFloat(message.edited.ts);
+		}
+
+		if (message.reactions) {
+			reactions = message.reactions.map(reaction => ({
+				emoji: reaction.name,
+				count: reaction.count,
+				users: reaction.users,
+			}));
+
+			resultMessage.reactions = reactions;
+		}
+
+		if (message.files) {
+			attachments = message.files.map(file => ({
+				id: file.id,
+				createdAt: file.created,
+				fileName: file.name,
+				mediaType: file.mimetype,
+				url: file.permalink_public,
+				preview: file.preview,
+			}));
+
+			resultMessage.attachments = attachments;
+		}
+
+		resultMessage.url = `https://slack.com/api/conversations.history?channel=${args.destination}&latest=${message.ts}&inclusive=true&limit=1`;
+
+		return resultMessage
+	});
 
 	return listOfMessages
-}
-
-operation MapMessage {
-	index = args.index
-	message = args.messages[index]
-
-	messageResult = {
-		id: message.ts,
-		text: message.text,
-		createdAt: parseFloat(message.ts),
-	}
-
-	set if(message.user || message.bot_id) {
-		messageResult.author = {
-			id: message.user || message.bot_id,
-			username: message.username
-		}
-	}
-
-	set if (message.thread_ts) {
-		messageResult.hasThread = true
-		messageResult.threadId = message.thread_ts;
-	}
-
-	set if (message.edited) {
-		messageResult.updatedAt = parseFloat(message.edited.ts);
-	}
-
-	set if (message.reactions) {
-		messageResult.reactions = message.reactions.map(reaction => ({
-			emoji: reaction.name,
-			count: reaction.count,
-			users: reaction.users
-		}))
-	}
-
-	set if (message.files && message.files.length > 0) {
-		messageResult.attachments = message.files.map(file => ({
-			id: file.id,
-			createdAt: file.created,
-			fileName: file.name,
-			mediaType: file.mimetype,
-			url: file.permalink_public,
-			preview: file.preview,
-		}))
-	}
-
-	messageResult.url = call ComposeURL(ts = message.ts, dest = args.dest)
-
-	return messageResult
 }
 
 """
@@ -166,13 +161,6 @@ operation MapRateLimitDetails {
 	}
 
 	return details
-}
-
-operation ComposeURL {
-	timestamp = args.ts
-	destination = args.dest
-
-	return `https://slack.com/api/conversations.history?channel=${destination}&latest=${timestamp}&inclusive=true&limit=1`
 }
 
 """
