@@ -14,16 +14,16 @@ usecase GetMessages {
 		destination! string!
 		
 		"""
-		After Date
-		Retrieve only messages after this date and time, UNIX timestamp format (e.g. 1095379198.75) 
+		After Timestamp
+		Retrieve only messages after the given UNIX timestamp (in seconds, e.g. 1095379198.75) 
 		"""
-		afterDate number
+		afterTimestamp number
 		
 		"""
-		Before Date
-		Retrieve only messages before this date and time, UNIX timestamp format (e.g. 1095379198.75)
+		Before Timestamp
+		Retrieve only messages before the given UNIX timestamp (in seconds, e.g. 1095379198.75)
 		"""
-		beforeDate number
+		beforeTimestamp number
 
 		"""
 		Limit
@@ -103,7 +103,7 @@ model Attachment {
 
 	"""
 	Media Type
-	Format of the attached file	
+	MIME type of the attached file
 	"""
 	mediaType string
 
@@ -112,12 +112,6 @@ model Attachment {
 	Source url of the attachment
 	"""
 	url string
-
-	"""
-	Preview
-	Preview of the attached file
-	"""
-	preview string
 }
 
 model Message {
