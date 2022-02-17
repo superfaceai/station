@@ -28,32 +28,13 @@ map Geocode {
             }
         }
 
-        response 400 {
-            map error {
-                title = body.title
-                detail = body.cause
-            }
-        }
+        response {
+            error = call MapHereError(
+                statusCode = statusCode,
+                body = body
+            )
 
-        response 405 {
-            map error {
-                title = body.title
-                detail = body.cause
-            }
-        }
-
-        response 429 {
-            map error {
-                title = body.title
-                detail = body.cause
-            }
-        }
-
-        response 503 {
-            map error {
-                title = body.title
-                detail = body.cause
-            }
+            map error error
         }
     }
 }
@@ -113,32 +94,31 @@ map ReverseGeocode {
             })
         }
 
-        response 400 {
-            map error {
-                title = body.title
-                detail = body.cause
-            }
-        }
+        response {
+            error = call MapHereError(
+                statusCode = statusCode,
+                body = body
+            )
 
-        response 405 {
-            map error {
-                title = body.title
-                detail = body.cause
-            }
-        }
-
-        response 429 {
-            map error {
-                title = body.title
-                detail = body.cause
-            }
-        }
-
-        response 503 {
-            map error {
-                title = body.title
-                detail = body.cause
-            }
+            map error error
         }
     }
+}
+
+
+operation MapHereError {
+  statusCode = args.statusCode
+  body = args.body
+
+  supportedCodes = [400, 405, 429, 503]
+
+  return if (supportedCodes.includes(statusCode)) {
+    title = body.title
+    detail = body.cause
+  }
+
+  return {
+    title = "Unknown error"
+    detail = (`Unknown error occurred. Status: ${statusCode}. Provider detail: ${body.title} ${body.cause}`)
+  }
 }
