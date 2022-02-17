@@ -931,6 +931,15 @@
         "clientId": "$GOOGLE_APIS_CLIENT_ID",
         "clientSecret": "$GOOGLE_APIS_CLIENT_SECRET"
       }
+    },
+    "freegeoip": {
+      "file": "../providers/freegeoip.json",
+      "security": [
+        {
+          "id": "apikey",
+          "apikey": "$FREEGEOIP_API_KEY"
+        }
+      ]
     }
   }
 }
