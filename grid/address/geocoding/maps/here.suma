@@ -107,18 +107,33 @@ map ReverseGeocode {
 
 
 operation MapHereError {
-  statusCode = args.statusCode
-  body = args.body
+    statusCode = args.statusCode
+    body = args.body
 
-  supportedCodes = [400, 405, 429, 503]
+    supportedCodes = [400, 405, 429, 503]
 
-  return if (supportedCodes.includes(statusCode)) {
-    title = body.title
-    detail = body.cause
-  }
+    return if (supportedCodes.includes(statusCode)) {
+        title = body.title
+        detail = body.cause
+    }
 
-  return {
-    title = "Unknown error"
-    detail = (`Unknown error occurred. Status: ${statusCode}. Provider detail: ${body.title} ${body.cause}`)
-  }
+    return if (statusCode === 401) {
+        title = 'Unauthorized',
+        detail = body
+    }
+
+    return if (statusCode === 403) {
+        title = 'Forbidden',
+        detail = body
+    }
+
+    return if (statusCode === 404) {
+        title = 'Not Found',
+        detail = body
+    }
+
+    return {
+        title = "Unknown error"
+        detail = (`Unknown error occurred. Status: ${statusCode}.`)
+    }
 }
