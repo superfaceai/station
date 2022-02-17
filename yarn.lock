@@ -640,18 +640,25 @@
   dependencies:
     typescript-is "^0.18.3"
 
-"@superfaceai/cli@^1.0.1":
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/@superfaceai/cli/-/cli-1.0.1.tgz#53c684be49c270c9eda50b01a10373db4d93d2e9"
-  integrity sha512-T9nG1Pdf/fVA3K61ImFkYcduTSj6wGQTkB0Kv86APylQ+TssTq1k3U1EYuks0Q4dFnHIUJ7T7eXuvwjni3k9Xw==
+"@superfaceai/ast@^1.1.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@superfaceai/ast/-/ast-1.1.0.tgz#cb87f9c980e600bd74536e14bafe7231d15c291c"
+  integrity sha512-/Bpm21XWwUElogBB8AdKkjbe4h1vExBx2xTrfE5t74FiFZUxhnLYfVcUCKNqUqsuggF/uUUAZ+5uBtmffJYm6g==
+  dependencies:
+    typescript-is "^0.18.3"
+
+"@superfaceai/cli@1.1.0-beta.0":
+  version "1.1.0-beta.0"
+  resolved "https://registry.yarnpkg.com/@superfaceai/cli/-/cli-1.1.0-beta.0.tgz#d12b4225e334ad9f72eca5f91714e3fa0faa6519"
+  integrity sha512-fj1myNoSD3/YUngsNEThATzqVKMAFaYB7vGgQlqi15mGnl0A/ZpVayTNKhVdutX/D9t7Z+Tyvkdg3w8ln5oP2g==
   dependencies:
     "@oclif/command" "^1.8.0"
     "@oclif/config" "^1.17.0"
     "@oclif/plugin-warn-if-update-available" "^1.7.0"
-    "@superfaceai/ast" "^1.0.0"
-    "@superfaceai/one-sdk" "^1.0.0"
-    "@superfaceai/parser" "^1.0.0"
-    "@superfaceai/service-client" "0.0.26"
+    "@superfaceai/ast" "^1.1.0"
+    "@superfaceai/one-sdk" "1.3.0"
+    "@superfaceai/parser" "^1.1.0"
+    "@superfaceai/service-client" "^1.1.0"
     chalk "^4.1.0"
     cross-fetch "^3.1.4"
     debug "^4.3.1"
@@ -662,18 +669,18 @@
     rimraf "^3.0.2"
     typescript "^4.0.5"
 
-"@superfaceai/one-sdk@^1.0.0":
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/@superfaceai/one-sdk/-/one-sdk-1.0.0.tgz#4f8bc66df69277960af0406cd63da7765b6e507e"
-  integrity sha512-iwqE5Ig4WCn2vXEOIVThPFlbRrw4OMyBKezdyV1fgEhUvS/rFgYYOhOg+/UI5yIMPbeSx16ryivWcFGgSwfL4w==
+"@superfaceai/one-sdk@1.3.0":
+  version "1.3.0"
+  resolved "https://registry.yarnpkg.com/@superfaceai/one-sdk/-/one-sdk-1.3.0.tgz#741ee1454877913b420a11b14b823e6262453809"
+  integrity sha512-XyztSPy33kRpoNuCq97tL1jMdT6BX1jJ2cFaz50fjwCsfX7f+zi5qx0tvpcZM2dDRm+1dS9cRC04lweIQtmRSg==
   dependencies:
-    "@superfaceai/ast" "1.0.0"
-    "@superfaceai/parser" "1.0.0"
+    "@superfaceai/ast" "^1.1.0"
+    "@superfaceai/parser" "^1.1.0"
     abort-controller "^3.0.0"
-    cross-fetch "^3.0.5"
+    cross-fetch "^3.1.5"
     debug "^4.3.2"
     isomorphic-form-data "^2.0.0"
-    vm2 "^3.9.2"
+    vm2 "^3.9.7"
 
 "@superfaceai/one-sdk@^1.0.1":
   version "1.0.1"
@@ -688,7 +695,7 @@
     isomorphic-form-data "^2.0.0"
     vm2 "^3.9.2"
 
-"@superfaceai/parser@1.0.0", "@superfaceai/parser@^1.0.0":
+"@superfaceai/parser@1.0.0":
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/@superfaceai/parser/-/parser-1.0.0.tgz#48e55b40670a9af6e603107709cc89ae538f71d8"
   integrity sha512-verBpn8bN13fAo1pDCNMGxKLwXC26dlR7iDIM2ekioN/K+kOtXjq6A/bWILvJ+jAP2gWRHGZU017SKGPRrPOHg==
@@ -708,10 +715,20 @@
     debug "^4.3.1"
     typescript "^4"
 
-"@superfaceai/service-client@0.0.26":
-  version "0.0.26"
-  resolved "https://registry.yarnpkg.com/@superfaceai/service-client/-/service-client-0.0.26.tgz#16ba6b9d12ad646afc77e5ce8a6f000e757eaa3f"
-  integrity sha512-Hh8tJ2buhUANOuuvt9gGpBl9AqgY5fHY6DpH8LMW1hKZPBZWzr6mBlobKe2qNhFN/FG6JLxTHgFwgf6VN+s2kA==
+"@superfaceai/parser@^1.1.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@superfaceai/parser/-/parser-1.1.0.tgz#5e268b3cbf7c1b20aced9cddbabe8dd837c3f4b6"
+  integrity sha512-onu8Omp1nv/U+nXuf5fFW3Jg31JCTNOTOecpPoGw6NzcVDociNezdpzvlrrznPI7nna1G95vdwx0FTt3YHWaqg==
+  dependencies:
+    "@superfaceai/ast" "^1.1.0"
+    "@types/debug" "^4.1.5"
+    debug "^4.3.1"
+    typescript "^4"
+
+"@superfaceai/service-client@^1.1.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@superfaceai/service-client/-/service-client-1.1.0.tgz#1aae37afe0eed8099c5c25b8bcbc06b91ad878f7"
+  integrity sha512-e7l2eH2vvMxkEcoOSFut3w6Od+wAO7nQQ6kKDL1c4GD6lBDmQwQsvM2zo+VLawYE582cDDKWs7ug3sxfcntIew==
   dependencies:
     cross-fetch "^3.1.0"
 
@@ -983,7 +1000,7 @@ acorn-walk@^7.1.1:
   resolved "https://registry.yarnpkg.com/acorn-walk/-/acorn-walk-7.2.0.tgz#0de889a601203909b0fbe07b8938dc21d2e967bc"
   integrity sha512-OPdCF6GsMIP+Az+aWfAAOEt2/+iVDKE7oy6lJ098aoe59oAmK76qV6Gw60SbZ8jHuG2wH058GF4pLFbYamYrVA==
 
-acorn-walk@^8.1.1:
+acorn-walk@^8.1.1, acorn-walk@^8.2.0:
   version "8.2.0"
   resolved "https://registry.yarnpkg.com/acorn-walk/-/acorn-walk-8.2.0.tgz#741210f2e2426454508853a2f44d0ab83b7f69c1"
   integrity sha512-k+iyHEuPgSw6SbuDpGQM+06HQUa04DZ3o+F6CSzXMvvI5KMvnaEqXe+YVe555R9nn6GPt404fos4wcgpw12SDA==
@@ -1002,6 +1019,11 @@ acorn@^8.4.1:
   version "8.5.0"
   resolved "https://registry.yarnpkg.com/acorn/-/acorn-8.5.0.tgz#4512ccb99b3698c752591e9bb4472e38ad43cee2"
   integrity sha512-yXbYeFy+jUuYd3/CDcg2NkIYE991XYX/bje7LmjJigUciaeO1JR4XxXgCIV1/Zc/dRuFEyw1L0pbA+qynJkW5Q==
+
+acorn@^8.7.0:
+  version "8.7.0"
+  resolved "https://registry.yarnpkg.com/acorn/-/acorn-8.7.0.tgz#90951fde0f8f09df93549481e5fc141445b791cf"
+  integrity sha512-V/LGr1APy+PXIwKebEWrkZPwoeoF+w1jiOBUmuxuiUIaOHtob8Qc9BTrYo7VuI5fR8tqsy+buA2WFooR5olqvQ==
 
 ajv@^6.10.0, ajv@^6.12.3, ajv@^6.12.4:
   version "6.12.6"
@@ -1566,6 +1588,13 @@ cross-fetch@^3.0.5, cross-fetch@^3.1.0, cross-fetch@^3.1.4:
   integrity sha512-1eAtFWdIubi6T4XPy6ei9iUFoKpUkIF971QLN8lIvvvwueI65+Nw5haMNKUwfJxabqlIIDODJKGrQ66gxC0PbQ==
   dependencies:
     node-fetch "2.6.1"
+
+cross-fetch@^3.1.5:
+  version "3.1.5"
+  resolved "https://registry.yarnpkg.com/cross-fetch/-/cross-fetch-3.1.5.tgz#e1389f44d9e7ba767907f7af8454787952ab534f"
+  integrity sha512-lvb1SBsI0Z7GDwmuid+mU3kWVBwTVUbe7S0H52yaaAdQOXq2YktTCZdlAcNKFzE6QtRz0snpw9bNiPeOIkkQvw==
+  dependencies:
+    node-fetch "2.6.7"
 
 cross-spawn@^6.0.0:
   version "6.0.5"
@@ -3804,6 +3833,13 @@ node-fetch@2.6.1:
   resolved "https://registry.yarnpkg.com/node-fetch/-/node-fetch-2.6.1.tgz#045bd323631f76ed2e2b55573394416b639a0052"
   integrity sha512-V4aYg89jEoVRxRb2fJdAg8FHvI7cEyYdVAh94HH0UIK8oJxUfkjlDQN9RbMx+bEjP7+ggMiFRprSti032Oipxw==
 
+node-fetch@2.6.7:
+  version "2.6.7"
+  resolved "https://registry.yarnpkg.com/node-fetch/-/node-fetch-2.6.7.tgz#24de9fba827e3b4ae44dc8b20256a379160052ad"
+  integrity sha512-ZjMPFEfVx5j+y2yF35Kzx5sF7kDzxuDj6ziH4FFbOp87zKDZNx8yExJIb05OGF4Nlt9IHFIMBkRl41VdvcNdbQ==
+  dependencies:
+    whatwg-url "^5.0.0"
+
 node-int64@^0.4.0:
   version "0.4.0"
   resolved "https://registry.yarnpkg.com/node-int64/-/node-int64-0.4.0.tgz#87a9065cdb355d3182d8f94ce11188b825c68a3b"
@@ -4934,6 +4970,11 @@ tr46@^2.0.2:
   dependencies:
     punycode "^2.1.1"
 
+tr46@~0.0.3:
+  version "0.0.3"
+  resolved "https://registry.yarnpkg.com/tr46/-/tr46-0.0.3.tgz#8184fd347dac9cdc185992f3a6622e14b9d9ab6a"
+  integrity sha1-gYT9NH2snNwYWZLzpmIuFLnZq2o=
+
 ts-jest@^26.4.4:
   version "26.5.5"
   resolved "https://registry.yarnpkg.com/ts-jest/-/ts-jest-26.5.5.tgz#e40481b6ee4dd162626ba481a2be05fa57160ea5"
@@ -5169,6 +5210,14 @@ vm2@^3.9.2:
   resolved "https://registry.yarnpkg.com/vm2/-/vm2-3.9.5.tgz#5288044860b4bbace443101fcd3bddb2a0aa2496"
   integrity sha512-LuCAHZN75H9tdrAiLFf030oW7nJV5xwNMuk1ymOZwopmuK3d2H4L1Kv4+GFHgarKiLfXXLFU+7LDABHnwOkWng==
 
+vm2@^3.9.7:
+  version "3.9.8"
+  resolved "https://registry.yarnpkg.com/vm2/-/vm2-3.9.8.tgz#e99c000db042735cd2f94d8db6c42163a17be04e"
+  integrity sha512-/1PYg/BwdKzMPo8maOZ0heT7DLI0DAFTm7YQaz/Lim9oIaFZsJs3EdtalvXuBfZwczNwsYhju75NW4d6E+4q+w==
+  dependencies:
+    acorn "^8.7.0"
+    acorn-walk "^8.2.0"
+
 w3c-hr-time@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/w3c-hr-time/-/w3c-hr-time-1.0.2.tgz#0a89cdf5cc15822df9c360543676963e0cc308cd"
@@ -5189,6 +5238,11 @@ walker@^1.0.7, walker@~1.0.5:
   integrity sha1-L3+bj9ENZ3JisYqITijRlhjgKPs=
   dependencies:
     makeerror "1.0.x"
+
+webidl-conversions@^3.0.0:
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/webidl-conversions/-/webidl-conversions-3.0.1.tgz#24534275e2a7bc6be7bc86611cc16ae0a5654871"
+  integrity sha1-JFNCdeKnvGvnvIZhHMFq4KVlSHE=
 
 webidl-conversions@^5.0.0:
   version "5.0.0"
@@ -5211,6 +5265,14 @@ whatwg-mimetype@^2.3.0:
   version "2.3.0"
   resolved "https://registry.yarnpkg.com/whatwg-mimetype/-/whatwg-mimetype-2.3.0.tgz#3d4b1e0312d2079879f826aff18dbeeca5960fbf"
   integrity sha512-M4yMwr6mAnQz76TbJm914+gPpB/nCwvZbJU28cUD6dR004SAxDLOOSUaB1JDRqLtaOV/vi0IC5lEAGFgrjGv/g==
+
+whatwg-url@^5.0.0:
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/whatwg-url/-/whatwg-url-5.0.0.tgz#966454e8765462e37644d3626f6742ce8b70965d"
+  integrity sha1-lmRU6HZUYuN2RNNib2dCzotwll0=
+  dependencies:
+    tr46 "~0.0.3"
+    webidl-conversions "^3.0.0"
 
 whatwg-url@^8.0.0, whatwg-url@^8.5.0:
   version "8.5.0"
