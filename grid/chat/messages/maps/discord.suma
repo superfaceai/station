@@ -102,13 +102,18 @@ operation MapAttachment {
 	attachment = args.attachment
 	createdAt = call GetTimestamp(id = attachment.id)
 
-	return {
+	resultAttachment = {
 		id: attachment.id,
 		createdAt: createdAt,
 		fileName: attachment.filename,
-		mediaType: attachment.content_type,
 		url: attachment.url,
 	}
+
+	set if (attachment.content_type) {
+		resultAttachment.mediaType = attachment.content_type
+	}
+
+	return resultAttachment
 }
 
 """
