@@ -36,7 +36,7 @@ map GetMessages {
 
 			rateLimit = call MapRateLimitDetails(headers = headers)
 
-			result = { messages: messages }
+			result.messages = messages
 
 			set if (body.has_more) {
 				result.nextPage = body.response_metadata.next_cursor
