@@ -113,7 +113,10 @@ operation MapMessages {
       resultMessage.attachments = attachments;
     }
 
-    resultMessage.url = `https://slack.com/api/conversations.history?channel=${args.destination}&latest=${message.ts}&inclusive=true&limit=1`;
+    // TODO: implement composing URL
+    // BLOCKER: unknown workspace name
+    // Format of public URL:          https://<workspace-name>.slack.com/archives/<channel-id>/p<processed-message-id>
+    // Format of URL poiting to API:  https://slack.com/api/conversations.history?channel=<channel-id>&latest=<message-id>&inclusive=true&limit=1
 
     return resultMessage
   });
