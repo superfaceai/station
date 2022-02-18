@@ -5,52 +5,52 @@ provider = "slack"
 GetMembers map
 """
 map GetMembers {
-    http GET "/users.list" {
-		request "application/x-www-form-urlencoded" {
-			query {
-				cursor = input.page
-				limit = input.limit || 100
-			}
+  http GET "/users.list" {
+    request "application/x-www-form-urlencoded" {
+      query {
+        cursor = input.page
+        limit = input.limit || 100
+      }
 
-			headers {
-				"Authorization" = `Bearer ${parameters.accessToken}`
-			}
-		}
+      headers {
+        "Authorization" = `Bearer ${parameters.accessToken}`
+      }
+    }
 
-		response 200 "application/json" {
-			error = call MapSlackError(
-				statusCode = statusCode,
-				error = body,
-				headers = headers,
-			) if (!body.ok)
+    response 200 "application/json" {
+      error = call MapSlackError(
+        statusCode = statusCode,
+        error = body,
+        headers = headers,
+      ) if (!body.ok)
 
-			return map error if (!body.ok) error
+      return map error if (!body.ok) error
 
-			members = call MapMembers(members = body.members)
-			rateLimit = call MapRateLimitDetails(headers = headers)
-			result.members = members
+      members = call MapMembers(members = body.members)
+      rateLimit = call MapRateLimitDetails(headers = headers)
+      result.members = members
 
-			set if (body.response_metadata && body.response_metadata.next_cursor) {
-				result.nextPage = body.response_metadata.next_cursor
-			}
+      set if (body.response_metadata && body.response_metadata.next_cursor) {
+        result.nextPage = body.response_metadata.next_cursor
+      }
 
-			set if (rateLimit) {
-				result.rateLimit = rateLimit
-			}
+      set if (rateLimit) {
+        result.rateLimit = rateLimit
+      }
 
-			map result result
-		}
+      map result result
+    }
 
-		response {
-			error = call MapSlackError(
-				statusCode = statusCode,
-				error = body,
-				headers = headers,
-			)
-			
-			map error error
-		}
-	}
+    response {
+      error = call MapSlackError(
+        statusCode = statusCode,
+        error = body,
+        headers = headers,
+      )
+      
+      map error error
+    }
+  }
 }
 
 """
@@ -58,26 +58,26 @@ Operation MapMembers
 Returns array mapping members in received body
 """
 operation MapMembers {
-	members = []
+  members = []
 
-	members = args.members.map(member => {
-		const resultMember = {
-			id: member.id,
-			isBot: member.is_bot,
-		}
+  members = args.members.map(member => {
+    const resultMember = {
+      id: member.id,
+      isBot: member.is_bot,
+    }
 
-		if (member.profile && member.profile.display_name) {
-			resultMember.username = member.profile.display_name;
-		}
+    if (member.profile && member.profile.display_name) {
+      resultMember.username = member.profile.display_name;
+    }
 
-		if (resultMember.username === undefined) {
-			resultMember.username = member.name;
-		}
+    if (resultMember.username === undefined) {
+      resultMember.username = member.name;
+    }
 
-		return resultMember
-	});
+    return resultMember
+  });
 
-	return members
+  return members
 }
 
 """
@@ -85,40 +85,40 @@ Operation MapRateLimitDetails
 Returns object mapping rate limit details specified in received headers
 """
 operation MapRateLimitDetails {
-	headers = args.headers
-	details = {}
+  headers = args.headers
+  details = {}
 
-	totalRequests = parseInt(headers['X-Rate-Limit-Limit'])
-	remainingRequests = parseInt(headers['X-Rate-Limit-Remaining'])
-	resetAfter = parseInt(headers['X-Rate-Limit-Reset'])
-	retryAfter = parseInt(headers['Retry-After'])
+  totalRequests = parseInt(headers['X-Rate-Limit-Limit'])
+  remainingRequests = parseInt(headers['X-Rate-Limit-Remaining'])
+  resetAfter = parseInt(headers['X-Rate-Limit-Reset'])
+  retryAfter = parseInt(headers['Retry-After'])
 
-	set if (!isNaN(totalRequests)) {
-		details.totalRequests = totalRequests
-	}
+  set if (!isNaN(totalRequests)) {
+    details.totalRequests = totalRequests
+  }
 
-	set if (!isNaN(remainingRequests)) {
-		details.remainingRequests = remainingRequests
-	}
+  set if (!isNaN(remainingRequests)) {
+    details.remainingRequests = remainingRequests
+  }
 
-	set if (!isNaN(resetAfter)) {
-		details.resetAfter = resetAfter
-		details.resetTimestamp = Date.now() + (resetAfter * 1000)
-	}
+  set if (!isNaN(resetAfter)) {
+    details.resetAfter = resetAfter
+    details.resetTimestamp = Date.now() + (resetAfter * 1000)
+  }
 
-	set if (!isNaN(retryAfter)) {
-		details.retryAfter = retryAfter
-	}
+  set if (!isNaN(retryAfter)) {
+    details.retryAfter = retryAfter
+  }
 
-	set if (details.remainingRequests && details.totalRequests) {
-		details.remainingRequestsPercentage = (details.remainingRequests / details.totalRequests) * 100
-	}
+  set if (details.remainingRequests && details.totalRequests) {
+    details.remainingRequestsPercentage = (details.remainingRequests / details.totalRequests) * 100
+  }
 
-	set if (Object.keys(details).length === 0) {
-		details = undefined
-	}
+  set if (Object.keys(details).length === 0) {
+    details = undefined
+  }
 
-	return details
+  return details
 }
 
 """
@@ -127,63 +127,63 @@ Returns error object based on error body, statusCode and headers.
 See https://api.slack.com/methods/conversations.history#errors for more information about errors
 """
 operation MapSlackError {
-	statusCode = args.statusCode
-	slackError = args.error
-	headers = args.headers
+  statusCode = args.statusCode
+  slackError = args.error
+  headers = args.headers
 
-	rateLimit = call MapRateLimitDetails(headers = headers)
-	detail = slackError.error
+  rateLimit = call MapRateLimitDetails(headers = headers)
+  detail = slackError.error
 
-	return if (statusCode === 200) {
-		title = detail
-		rateLimit = rateLimit
-	}
+  return if (statusCode === 200) {
+    title = detail
+    rateLimit = rateLimit
+  }
 
-	return if (statusCode === 400) {
-		title = 'Bad request'
-		detail = slackError
-		rateLimit = rateLimit
-	}
+  return if (statusCode === 400) {
+    title = 'Bad request'
+    detail = slackError
+    rateLimit = rateLimit
+  }
 
-	return if (statusCode === 401) {
-		title = 'Unauthorized'
-		detail = detail
-		rateLimit = rateLimit
-	}
+  return if (statusCode === 401) {
+    title = 'Unauthorized'
+    detail = detail
+    rateLimit = rateLimit
+  }
 
-	return if (statusCode === 403) {
-		title = 'Forbidden'
-		detail = detail
-		rateLimit = rateLimit
-	}
+  return if (statusCode === 403) {
+    title = 'Forbidden'
+    detail = detail
+    rateLimit = rateLimit
+  }
 
-	return if (statusCode === 404) {
-		title = 'Not found'
-		detail = detail
-		rateLimit = rateLimit
-	}
+  return if (statusCode === 404) {
+    title = 'Not found'
+    detail = detail
+    rateLimit = rateLimit
+  }
 
-	return if (statusCode === 405) {
-		title = 'Method not allowed'
-		detail = detail
-		rateLimit = rateLimit
-	}
+  return if (statusCode === 405) {
+    title = 'Method not allowed'
+    detail = detail
+    rateLimit = rateLimit
+  }
 
-	return if (statusCode === 429) {
-		title = 'Too Many Requests'
-		detail = `Retry after ${headers['Retry-After']} seconds`
-		rateLimit = rateLimit
-	}
+  return if (statusCode === 429) {
+    title = 'Too Many Requests'
+    detail = `Retry after ${headers['Retry-After']} seconds`
+    rateLimit = rateLimit
+  }
 
-	return if (statusCode === 502) {
-		title = 'Bad gateway'
-		detail = detail
-		rateLimit = rateLimit
-	}
+  return if (statusCode === 502) {
+    title = 'Bad gateway'
+    detail = detail
+    rateLimit = rateLimit
+  }
 
-	return {
-		title = 'Unknown error'
-		detail = `Unknown error occurred. Status: ${statusCode}. Code: ${detail}.`
-		rateLimit = rateLimit
-	}
+  return {
+    title = 'Unknown error'
+    detail = `Unknown error occurred. Status: ${statusCode}. Code: ${detail}.`
+    rateLimit = rateLimit
+  }
 }
