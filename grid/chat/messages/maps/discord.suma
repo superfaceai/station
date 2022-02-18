@@ -118,7 +118,10 @@ operation MapMessages {
       resultMessage.parentId = message.message_reference.message_id;
     }
 
-    resultMessage.url = `https://discord.com/api/channels/${message.channel_id}/messages/${message.id}`;
+    // TODO: implement composing URL
+    // BLOCKER: unknown guild id
+    // Format of public URL:          https://discord.com/channels/<guild-id>/<channel-id>/<message-id>
+    // Format of URL poiting to API:  https://discord.com/api/channels/<channel-id>/messages/<message-id>
 
     return resultMessage;
   });
