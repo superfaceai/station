@@ -5,121 +5,120 @@ provider = "slack"
 GetMessages map
 """
 map GetMessages {
-	http GET "/conversations.history" {
-		request "application/x-www-form-urlencoded" {
-			query {
-				channel = input.destination
-				latest = input.beforeTimestamp
-				oldest = input.afterTimestamp
-				cursor = input.page
-				limit = input.limit || 999
-			}
+  http GET "/conversations.history" {
+    request "application/x-www-form-urlencoded" {
+      query {
+        channel = input.destination
+        latest = input.beforeTimestamp
+        oldest = input.afterTimestamp
+        cursor = input.page
+        limit = input.limit || 999
+      }
 
-			headers {
-				"Authorization" = `Bearer ${parameters.accessToken}`
-			}
-		}
+      headers {
+        "Authorization" = `Bearer ${parameters.accessToken}`
+      }
+    }
 
-		response 200 "application/json" {
-			error = call MapSlackError(
-				statusCode = statusCode,
-				error = body,
-				headers = headers,
-			) if (!body.ok)
+    response 200 "application/json" {
+      error = call MapSlackError(
+        statusCode = statusCode,
+        error = body,
+        headers = headers,
+      ) if (!body.ok)
 
-			return map error if (!body.ok) error
+      return map error if (!body.ok) error
 
-			messages = call MapMessages(
-				messages = body.messages,
-				destination = input.destination,
-			)
+      messages = call MapMessages(
+        messages = body.messages,
+        destination = input.destination,
+      )
 
-			rateLimit = call MapRateLimitDetails(headers = headers)
+      rateLimit = call MapRateLimitDetails(headers = headers)
+      result.messages = messages
 
-			result.messages = messages
+      set if (body.has_more) {
+        result.nextPage = body.response_metadata.next_cursor
+      }
 
-			set if (body.has_more) {
-				result.nextPage = body.response_metadata.next_cursor
-			}
+      set if (rateLimit) {
+        result.rateLimit = rateLimit
+      }
 
-			set if (rateLimit) {
-				result.rateLimit = rateLimit
-			}
+      map result result
+    }
 
-			map result result
-		}
-
-		response {
-			error = call MapSlackError(
-				statusCode = statusCode,
-				error = body,
-				headers = headers,
-			)
-			
-			map error error
-		}
-	}
+    response {
+      error = call MapSlackError(
+        statusCode = statusCode,
+        error = body,
+        headers = headers,
+      )
+      
+      map error error
+    }
+  }
 }
 
 operation MapMessages {
-	listOfMessages = []
-	
-	listOfMessages = args.messages.filter(message => message.type === 'message').map(message => {
-		const resultMessage = {
-			id: message.ts,
-			text: message.text,
-			createdAt: parseFloat(message.ts),
-		}
+  listOfMessages = []
 
-		let author, reactions = [], attachments = [];
+  listOfMessages = args.messages.filter(message => message.type === 'message').map(message => {
+    const resultMessage = {
+      id: message.ts,
+      text: message.text,
+      createdAt: parseFloat(message.ts),
+    }
 
-		if (message.user || message.bot_id) {
-			author = {
-				id: message.user || message.bot_id,
-				username: message.username
-			};
+    let author, reactions = [], attachments = [];
 
-			resultMessage.author = author;
-		}
+    if (message.user || message.bot_id) {
+      author = {
+        id: message.user || message.bot_id,
+        username: message.username
+      };
 
-		if (message.thread_ts) {
-			resultMessage.hasThread = true;
-			resultMessage.threadId = message.thread_ts;
-		}
+      resultMessage.author = author;
+    }
 
-		if (message.edited) {
-			resultMessage.updatedAt = parseFloat(message.edited.ts);
-		}
+    if (message.thread_ts) {
+      resultMessage.hasThread = true;
+      resultMessage.threadId = message.thread_ts;
+    }
 
-		if (message.reactions) {
-			reactions = message.reactions.map(reaction => ({
-				emoji: reaction.name,
-				count: reaction.count,
-				users: reaction.users,
-			}));
+    if (message.edited) {
+      resultMessage.updatedAt = parseFloat(message.edited.ts);
+    }
 
-			resultMessage.reactions = reactions;
-		}
+    if (message.reactions) {
+      reactions = message.reactions.map(reaction => ({
+        emoji: reaction.name,
+        count: reaction.count,
+        users: reaction.users,
+      }));
 
-		if (message.files) {
-			attachments = message.files.map(file => ({
-				id: file.id,
-				createdAt: file.created,
-				fileName: file.name,
-				mediaType: file.mimetype,
-				url: file.permalink_public,
-				preview: file.preview,
-			}));
+      resultMessage.reactions = reactions;
+    }
 
-			resultMessage.attachments = attachments;
-		}
+    if (message.files) {
+      attachments = message.files.map(file => ({
+        id: file.id,
+        createdAt: file.created,
+        fileName: file.name,
+        mediaType: file.mimetype,
+        url: file.permalink_public,
+        preview: file.preview,
+      }));
 
-		resultMessage.url = `https://slack.com/api/conversations.history?channel=${args.destination}&latest=${message.ts}&inclusive=true&limit=1`;
+      resultMessage.attachments = attachments;
+    }
 
-		return resultMessage
-	});
+    resultMessage.url = `https://slack.com/api/conversations.history?channel=${args.destination}&latest=${message.ts}&inclusive=true&limit=1`;
 
-	return listOfMessages
+    return resultMessage
+  });
+
+  return listOfMessages
 }
 
 """
@@ -127,40 +126,40 @@ Operation MapRateLimitDetails
 Returns object mapping rate limit details specified in received headers
 """
 operation MapRateLimitDetails {
-	headers = args.headers
-	details = {}
+  headers = args.headers
+  details = {}
 
-	totalRequests = parseInt(headers['X-Rate-Limit-Limit'])
-	remainingRequests = parseInt(headers['X-Rate-Limit-Remaining'])
-	resetAfter = parseInt(headers['X-Rate-Limit-Reset'])
-	retryAfter = parseInt(headers['Retry-After'])
+  totalRequests = parseInt(headers['X-Rate-Limit-Limit'])
+  remainingRequests = parseInt(headers['X-Rate-Limit-Remaining'])
+  resetAfter = parseInt(headers['X-Rate-Limit-Reset'])
+  retryAfter = parseInt(headers['Retry-After'])
 
-	set if (!isNaN(totalRequests)) {
-		details.totalRequests = totalRequests
-	}
+  set if (!isNaN(totalRequests)) {
+    details.totalRequests = totalRequests
+  }
 
-	set if (!isNaN(remainingRequests)) {
-		details.remainingRequests = remainingRequests
-	}
+  set if (!isNaN(remainingRequests)) {
+    details.remainingRequests = remainingRequests
+  }
 
-	set if (!isNaN(resetAfter)) {
-		details.resetAfter = resetAfter
-		details.resetTimestamp = Date.now() + (resetAfter * 1000)
-	}
+  set if (!isNaN(resetAfter)) {
+    details.resetAfter = resetAfter
+    details.resetTimestamp = Date.now() + (resetAfter * 1000)
+  }
 
-	set if (!isNaN(retryAfter)) {
-		details.retryAfter = retryAfter
-	}
+  set if (!isNaN(retryAfter)) {
+    details.retryAfter = retryAfter
+  }
 
-	set if (details.remainingRequests && details.totalRequests) {
-		details.remainingRequestsPercentage = (details.remainingRequests / details.totalRequests) * 100
-	}
+  set if (details.remainingRequests && details.totalRequests) {
+    details.remainingRequestsPercentage = (details.remainingRequests / details.totalRequests) * 100
+  }
 
-	set if (Object.keys(details).length === 0) {
-		details = undefined
-	}
+  set if (Object.keys(details).length === 0) {
+    details = undefined
+  }
 
-	return details
+  return details
 }
 
 """
@@ -169,63 +168,63 @@ Returns error object based on error body, statusCode and headers.
 See https://api.slack.com/methods/conversations.history#errors for more information about errors
 """
 operation MapSlackError {
-	statusCode = args.statusCode
-	slackError = args.error
-	headers = args.headers
+  statusCode = args.statusCode
+  slackError = args.error
+  headers = args.headers
 
-	rateLimit = call MapRateLimitDetails(headers = headers)
-	detail = slackError.error
+  rateLimit = call MapRateLimitDetails(headers = headers)
+  detail = slackError.error
 
-	return if (statusCode === 200) {
-		title = detail
-		rateLimit = rateLimit
-	}
+  return if (statusCode === 200) {
+    title = detail
+    rateLimit = rateLimit
+  }
 
-	return if (statusCode === 400) {
-		title = 'Bad request'
-		detail = detail
-		rateLimit = rateLimit
-	}
+  return if (statusCode === 400) {
+    title = 'Bad request'
+    detail = detail
+    rateLimit = rateLimit
+  }
 
-	return if (statusCode === 401) {
-		title = 'Unauthorized'
-		detail = detail
-		rateLimit = rateLimit
-	}
+  return if (statusCode === 401) {
+    title = 'Unauthorized'
+    detail = detail
+    rateLimit = rateLimit
+  }
 
-	return if (statusCode === 403) {
-		title = 'Forbidden'
-		detail = detail
-		rateLimit = rateLimit
-	}
+  return if (statusCode === 403) {
+    title = 'Forbidden'
+    detail = detail
+    rateLimit = rateLimit
+  }
 
-	return if (statusCode === 404) {
-		title = 'Not found'
-		detail = detail
-		rateLimit = rateLimit
-	}
+  return if (statusCode === 404) {
+    title = 'Not found'
+    detail = detail
+    rateLimit = rateLimit
+  }
 
-	return if (statusCode === 405) {
-		title = 'Method not allowed'
-		detail = detail
-		rateLimit = rateLimit
-	}
+  return if (statusCode === 405) {
+    title = 'Method not allowed'
+    detail = detail
+    rateLimit = rateLimit
+  }
 
-	return if (statusCode === 429) {
-		title = 'Too Many Requests'
-		detail = `Retry after ${headers['Retry-After']} seconds`
-		rateLimit = rateLimit
-	}
+  return if (statusCode === 429) {
+    title = 'Too Many Requests'
+    detail = `Retry after ${headers['Retry-After']} seconds`
+    rateLimit = rateLimit
+  }
 
-	return if (statusCode === 502) {
-		title = 'Bad gateway'
-		detail = detail
-		rateLimit = rateLimit
-	}
+  return if (statusCode === 502) {
+    title = 'Bad gateway'
+    detail = detail
+    rateLimit = rateLimit
+  }
 
-	return {
-		title = 'Unknown error'
-		detail = `Unknown error occurred. Status: ${statusCode}. Code: ${detail}.`
-		rateLimit = rateLimit
-	}
+  return {
+    title = 'Unknown error'
+    detail = `Unknown error occurred. Status: ${statusCode}. Code: ${detail}.`
+    rateLimit = rateLimit
+  }
 }
