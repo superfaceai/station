@@ -26,11 +26,8 @@ map SendMessage {
 			return map error if (!body.ok) error
 
 			rateLimit = call MapRateLimitDetails(headers = headers)
-
-			result = {
-				destination: body.channel,
-				messageId: body.ts,
-			}
+			result.destination = body.channel,
+			result.messageId = body.ts
 
 			set if (rateLimit) {
 				result.rateLimit = rateLimit
