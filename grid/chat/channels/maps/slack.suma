@@ -32,7 +32,7 @@ map GetChannels {
 
             channels = call MapChannels(channels = body.channels)
 			rateLimit = call MapRateLimitDetails(headers = headers)
-			result = { channels: channels }
+			result.channels = channels
 
 			set if (body.has_more) {
 				result.nextPage = body.response_metadata.next_cursor
@@ -59,47 +59,36 @@ map GetChannels {
 
 operation MapChannels {
     channels = []
-    
-    set if (args.channels && args.channels.length > 0) {
-        channels = call foreach(index of Array(args.channels.length).fill().map((_, i) => i)) MapChannel(
-            index = index,
-            channels = args.channels,
-        )
-    }
+
+	channels = args.channels.map(channel => {
+		const resultChannel = {
+			id: channel.id,
+			createdAt: channel.created,
+		};
+
+		if (channel.name) {
+			resultChannel.name = channel.name;
+		}
+
+		if (channel.topic.value && channel.topic.value !== '') {
+			resultChannel.description = channel.topic.value;
+		}
+
+		if (channel.purpose.value && channel.purpose.value !== '') {
+			resultChannel.description = 
+				resultChannel.description === undefined 
+				? channel.purpose.value
+				: `${resultChannel.description} - ${channel.purpose.value}`;
+		}
+
+		if (channel.num_members) {
+			resultChannel.numOfMembers = channel.num_members;
+		}
+
+		return resultChannel;
+	});
 
     return channels
-}
-
-operation MapChannel {
-    index = args.index
-    channel = args.channels[index]
-
-    resultChannel = {
-        id: channel.id,
-        createdAt: channel.created
-    }
-
-    set if (channel.name) {
-        resultChannel.name = channel.name;
-    }
-
-    set if (channel.topic.value && channel.topic.value !== '') {
-        resultChannel.description = channel.topic.value;
-    }
-    
-    set if (resultChannel.description !== undefined && channel.purpose.value && channel.purpose.value !== '') {
-        resultChannel.description = resultChannel.description + ` - ${channel.purpose.value}`;
-    }
-
-    set if (resultChannel.description === undefined && channel.purpose.value && channel.purpose.value !== '') {
-        resultChannel.description = channel.purpose.value
-    }
-
-    set if (channel.num_members) {
-        resultChannel.numOfMembers = channel.num_members;
-    }
-
-    return resultChannel
 }
 
 operation typesToQuery {
