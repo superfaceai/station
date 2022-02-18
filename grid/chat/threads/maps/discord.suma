@@ -15,10 +15,7 @@ map GetThreads {
        	response 200 "application/json" {
 			threads = call MapThreads(threads = body.threads)
 			rateLimit = call MapRateLimitDetails(headers = headers)
-
-			result = {
-				threads: threads,
-			}
+			result.threads = threads
 
 			set if (rateLimit) {
 				result.rateLimit = rateLimit
@@ -46,76 +43,47 @@ Returns array mapping threads in received body
 operation MapThreads {
 	threads = []
 
-	set if (args.threads && args.threads.length > 0) {
-    	threads = args.threads.filter(thread => [10, 11, 12].includes(thread.type))
-	}
+	threads = args.threads.filter(thread => [10, 11, 12].includes(thread.type)).map(thread => {
+		const resultThread = {
+			id: thread.id,
+		};
 
-    set if (threads.length > 0) {
-		// workaround for map interpreter variables merging issue
-		threads = call foreach(index of Array(threads.length).fill().map((_, i) => i)) MapThread(
-			index = index,
-			threads = threads
-		)
-    }
+		if (thread.name) {
+			resultThread.name = thread.name
+		}
+
+		if (thread.parent_id) {
+			resultThread.channel = thread.parent_id;
+		}
+
+		if (thread.thread_metadata) {
+			const duration = thread.thread_metadata.auto_archive_duration;
+			const ts = Date.parse(thread.thread_metadata.archive_timestamp);
+		
+			resultThread.archiveAt = ts + (duration * 60 * 1000);
+		}
+
+		// only available for threads created after 2022-01-09
+		if (thread.thread_metadata && thread.thread_metadata.create_timestamp) {
+			resultThread.createdAt = Date.parse(thread.thread_metadata.create_timestamp);
+		}
+
+		// for threads after 2022-01-09 createdAt will be time when parent message was sent
+		if (resultThread.createdAt === undefined) {
+			const discordEpoch = 1420070400000;
+			const getTimestamp = (snowflake) => Number(BigInt(snowflake) >> BigInt(22)) + discordEpoch;
+			
+			resultThread.createdAt = getTimestamp(thread.id);
+		}
+
+		if (thread.mumber_count) {
+			resultThread.numOfMembers = thread.member_count;
+		}
+
+		return resultThread;
+	});
 
     return threads
-}
-
-operation MapThread {
-	index = args.index
-	thread = args.threads[index]
-
-	resultThread = {
-		id: thread.id
-	}
-
-	set if (thread.name) {
-		resultThread.name = thread.name
-	}
-
-	set if (thread.parent_id) {
-		resultThread.channel = thread.parent_id
-	}
-
-	set if (thread.thread_metadata) {
-		duration = thread.thread_metadata.auto_archive_duration
-		ts = Date.parse(thread.thread_metadata.archive_timestamp)
-	}
-
-	set if(thread.thread_metadata) {
-		resultThread.archiveAt = ts + (duration * 60 * 1000)
-	}
-
-	// only available for threads created after 2022-01-09
-	set if (thread.thread_metadata && thread.thread_metadata.create_timestamp) {
-		resultThread.createdAt = Date.parse(thread.thread_metadata.create_timestamp)
-	}
-
-	// for threads after 2022-01-09 createdAt will be time when parent message was sent
-	set if (resultThread.createdAt === undefined) {
-		resultThread.createdAt = call GetTimestamp(id = thread.id)
-	}
-
-	set if (thread.mumber_count) {
-		resultThread.numOfMembers = thread.member_count
-	}
-
-	return resultThread
-}
-
-"""
-OperationGet Timestamp
-
-Returns UNIX timestamp from specified discord snowflake id
-More about snowflakes: https://discord.com/developers/docs/reference#snowflakes
-"""
-operation GetTimestamp {
-	discordEpoch = 1420070400000
-
-	snowflake = args.id
-	processedSnowflake = Number(BigInt(snowflake) >> BigInt(22))
-
-	return processedSnowflake + discordEpoch
 }
 
 """
