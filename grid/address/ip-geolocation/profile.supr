@@ -11,19 +11,19 @@ usecase IpGeolocation safe {
     IP address
     If left empty, most providers will attempt to retrieve data for client IP address.
     """
-    ipAddress
+    ipAddress string
   }
   
   result {
-    ipAddress,
-    addressCountryCode,
-    addressCountry,
-    addressRegion,
-    addressLocality,
-    postalCode,
-    timeZone,
-    latitude,
-    longitude,
+    ipAddress string
+    addressCountryCode string
+    addressCountry string
+    addressRegion string
+    addressLocality string
+    postalCode string
+    timeZone string
+    latitude number
+    longitude number
   }
 
   error {
