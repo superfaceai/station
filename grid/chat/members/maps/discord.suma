@@ -25,10 +25,8 @@ map GetMembers {
 			members = call MapMembers(members = body)
 			rateLimit = call MapRateLimitDetails(headers = headers)
 
-			result = {
-				members: members,
-				nextPage: members[members.length - 1].id
-			}
+			result.members = members,
+			result.nextPage = members[members.length - 1].id
 
 			set if (rateLimit) {
 				result.rateLimit = rateLimit
@@ -56,33 +54,25 @@ Returns array mapping members in received body
 operation MapMembers {
 	members = []
 	
-	members = call foreach(index of Array(args.members.length).fill().map((_, i) => i)) MapMember(
-		index = index,
-		members = args.members,
-	) if (args.members && args.members.length > 0)
+	members = args.members.map(member => {
+		const resultMember = {
+			id: member.user.id,
+			joinedAt: Date.parse(member.joined_at),
+			isBot: member.user.bot ? true : false,
+		}
+
+		if (member.nick) {
+			resultMember.username = member.nick
+		}
+
+		if (resultMember.username === undefined) {
+			resultMember.username = member.user.username
+		}
+
+		return resultMember
+	});
 
 	return members
-}
-
-operation MapMember {
-	index = args.index
-	member = args.members[index]
-
-	resultMember = {
-		id: member.user.id,
-		joinedAt: Date.parse(member.joined_at),
-		isBot: member.user.bot ? true : false,
-	}
-
-	set if (member.nick) {
-		resultMember.username = member.nick
-	}
-
-	set if (!resultMember.username) {
-		resultMember.username = member.user.username
-	}
-
-	return resultMember
 }
 
 """
