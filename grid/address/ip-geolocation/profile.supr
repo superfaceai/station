@@ -30,6 +30,32 @@ usecase IpGeolocation safe {
     title!
     detail
   }
+
+  example Successful {
+    input {
+      ipAddress = "8.8.8.8"
+    }
+
+    result {
+      ipAddress = "8.8.8.8"
+      addressCountryCode = "US"
+      addressCountry = "United States"
+      timeZone = "America/Chicago"
+      latitude = 37.751
+      longitude = -97.822
+    }
+  }
+
+  example Failed {
+    input {
+      ipAddress = "wrong IP format"
+    }
+
+    error {
+      title = 'Bad request'
+      detail = 'Wrong IP address format.'
+    }
+  }
 }
 
 """
