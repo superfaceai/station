@@ -4,7 +4,10 @@ import { RecordingProcessOptions, SuperfaceTest } from '@superfaceai/testing';
 
 export const sendMessageTest = (
   provider: string,
-  destination: string[],
+  destination: {
+    valid: string;
+    invalid: string;
+  },
   options?: RecordingProcessOptions
 ): void => {
   describe(`chat/send-message/${provider}`, () => {
@@ -26,7 +29,7 @@ export const sendMessageTest = (
             superface.run(
               {
                 input: {
-                  destination: destination[0],
+                  destination: destination.valid,
                   text: 'test',
                 },
               },
@@ -42,7 +45,7 @@ export const sendMessageTest = (
             superface.run(
               {
                 input: {
-                  destination: destination[1],
+                  destination: destination.invalid,
                   text: 'test',
                 },
               },
