@@ -4,7 +4,7 @@ import { RecordingProcessOptions, SuperfaceTest } from '@superfaceai/testing';
 
 export const getThreadsTest = (
   provider: string,
-  server: string,
+  workspace: string,
   options?: RecordingProcessOptions
 ): void => {
   describe(`chat/threads/${provider}`, () => {
@@ -25,7 +25,7 @@ export const getThreadsTest = (
           superface.run(
             {
               input: {
-                server,
+                workspace,
               },
             },
             options
@@ -38,7 +38,7 @@ export const getThreadsTest = (
           superface.run(
             {
               input: {
-                server: 'not-existing-server-id',
+                workspace: 'not-existing-workspace-id',
               },
             },
             options

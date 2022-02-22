@@ -5,7 +5,7 @@ provider = "discord"
 GetThreads map
 """
 map GetThreads {
-  http GET "/guilds/{input.server}/threads/active" {
+  http GET "/guilds/{input.workspace}/threads/active" {
     request "application/json" {
       headers {
         "Authorization" = `Bot ${parameters.accessToken}`
@@ -41,47 +41,57 @@ Operation MapThreads
 Returns array mapping threads in received body
 """
 operation MapThreads {
-  threads = []
+  threads = args.threads.reduce((acc, thread) => {
+    /**
+     * Filter only relevant channels 
+     * more about channel types here: https://discord.com/developers/docs/resources/channel#channel-object-channel-types
+     */
+    if ([10, 11, 12].includes(thread.type)) {
+      const resultThread = {
+        id: thread.id,
+      };
 
-  threads = args.threads.filter(thread => [10, 11, 12].includes(thread.type)).map(thread => {
-    const resultThread = {
-      id: thread.id,
-    };
+      if (thread.name) {
+        resultThread.name = thread.name
+      }
 
-    if (thread.name) {
-      resultThread.name = thread.name
-    }
+      if (thread.parent_id) {
+        resultThread.channel = thread.parent_id;
+      }
 
-    if (thread.parent_id) {
-      resultThread.channel = thread.parent_id;
-    }
-
-    if (thread.thread_metadata) {
-      const duration = thread.thread_metadata.auto_archive_duration;
-      const ts = Date.parse(thread.thread_metadata.archive_timestamp);
-    
-      resultThread.archiveAt = ts + (duration * 60 * 1000);
-    }
-
-    // only available for threads created after 2022-01-09
-    if (thread.thread_metadata && thread.thread_metadata.create_timestamp) {
-      resultThread.createdAt = Date.parse(thread.thread_metadata.create_timestamp);
-    }
-
-    // for threads after 2022-01-09 createdAt will be time when parent message was sent
-    if (resultThread.createdAt === undefined) {
-      const discordEpoch = 1420070400000;
-      const getTimestamp = (snowflake) => Number(BigInt(snowflake) >> BigInt(22)) + discordEpoch;
+      if (thread.thread_metadata) {
+        const duration = thread.thread_metadata.auto_archive_duration;
+        const ts = Date.parse(thread.thread_metadata.archive_timestamp);
       
-      resultThread.createdAt = getTimestamp(thread.id);
+        resultThread.archiveAt = ts + (duration * 60 * 1000);
+      }
+
+      // only available for threads created after 2022-01-09
+      if (thread.thread_metadata && thread.thread_metadata.create_timestamp) {
+        resultThread.createdAt = Date.parse(thread.thread_metadata.create_timestamp);
+      }
+
+      // for threads after 2022-01-09 createdAt will be time when parent message was sent
+      if (resultThread.createdAt === undefined) {
+        /**
+         * Returns UNIX timestamp from specified discord snowflake id
+         * More about snowflakes: https://discord.com/developers/docs/reference#snowflakes
+         */
+        const discordEpoch = 1420070400000;
+        const getTimestamp = (snowflake) => Number(BigInt(snowflake) >> BigInt(22)) + discordEpoch;
+        
+        resultThread.createdAt = getTimestamp(thread.id);
+      }
+
+      if (thread.mumber_count) {
+        resultThread.membersCount = thread.member_count;
+      }
+
+      acc.push(resultThread);
     }
 
-    if (thread.mumber_count) {
-      resultThread.numOfMembers = thread.member_count;
-    }
-
-    return resultThread;
-  });
+    return acc;
+  }, []);
 
   return threads
 }

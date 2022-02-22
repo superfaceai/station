@@ -12,7 +12,7 @@ describe('chat/threads/mock', () => {
       expect(usecase).not.toBeUndefined();
 
       const result = await usecase.perform(
-        { server: 'server_id' },
+        { workspace: 'workspace_id' },
         { provider }
       );
 

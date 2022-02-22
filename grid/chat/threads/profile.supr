@@ -8,10 +8,10 @@ Retrieve paginated list of threads
 usecase GetThreads {
   input  {
     """
-    Server
-    Representation of a server. Can be guild or server, depending on the provider capability.
+    Workspace
+    Representation of a workspace. Can be guild or workspace, depending on the provider capability.
     """
-    server! string!
+    workspace! string!
   }
 
   result {
@@ -32,7 +32,7 @@ usecase GetThreads {
 
   example Successful {
     input {
-      server = 'server_id'
+      workspace = 'workspace_id'
     }
 
     result {
@@ -53,11 +53,11 @@ usecase GetThreads {
 
   example Failed {
     input {
-      server = 'not-existing-server'
+      workspace = 'not-existing-workspace'
     }
 
     error {
-      title = 'server_not_found'
+      title = 'workspace_not_found'
     }
   }
 }
@@ -94,10 +94,10 @@ model Thread {
   name string
 
   """
-  Num Of Members
-  Number of members in retrieved thread
+  Members Count
+  Number of members of the retrieved thread
   """
-  numOfMembers number
+  membersCount number
 }   
 
 model Error {
