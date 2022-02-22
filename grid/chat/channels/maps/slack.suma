@@ -5,7 +5,7 @@ provider = "slack"
 GetChannels map
 """
 map GetChannels {
-  types = call typesToQuery(types = input.types)
+  types = call visibilityToTypes(visibility = input.visibility)
 
   http GET "/conversations.list" {
     request "application/x-www-form-urlencoded" {
@@ -58,8 +58,6 @@ map GetChannels {
 }
 
 operation MapChannels {
-  channels = []
-
   channels = args.channels.map(channel => {
     const resultChannel = {
       id: channel.id,
@@ -82,7 +80,7 @@ operation MapChannels {
     }
 
     if (channel.num_members) {
-      resultChannel.numOfMembers = channel.num_members;
+      resultChannel.membersCount = channel.num_members;
     }
 
     return resultChannel;
@@ -91,16 +89,12 @@ operation MapChannels {
   return channels
 }
 
-operation typesToQuery {
-  types = args.types.map(type => {
-    if (type === 'private') {
-      return 'private_channel';
-    } else if (type === 'public') {
-      return 'public_channel';
-    }
-  }).join(',')
+operation visibilityToTypes {
+  supportedTypes = ['private_channel', 'public_channel']
 
-  return types;
+  return if (args.visibility === undefined) supportedTypes.join(',')
+  return if (args.visibility === 'private') supportedTypes[0]
+  return if (args.visibility === 'public') supportedTypes[1]
 }
 
 """
