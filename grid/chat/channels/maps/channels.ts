@@ -4,7 +4,7 @@ import { RecordingProcessOptions, SuperfaceTest } from '@superfaceai/testing';
 
 export const getChannelsTest = (
   provider: string,
-  options?: { server?: string; recordingOptions?: RecordingProcessOptions }
+  options?: { workspace?: string; recordingOptions?: RecordingProcessOptions }
 ): void => {
   describe(`chat/channels/${provider}`, () => {
     let superface: SuperfaceTest;
@@ -24,8 +24,8 @@ export const getChannelsTest = (
           superface.run(
             {
               input: {
-                server: options?.server,
-                types: ['public'],
+                workspace: options?.workspace,
+                visibility: 'public',
                 limit: 4,
               },
             },

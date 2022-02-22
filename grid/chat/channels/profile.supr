@@ -8,21 +8,19 @@ Retrieve paginated list of channels, e.g. text channels in slack or discord
 usecase GetChannels {
   input {
     """
-    Server
-    Representation of a server. Can be guild or server, depending on the provider capability.
+    Workspace
+    Representation of a workspace. Can be guild or workspace, depending on the provider capability.
     """
-    server string
+    workspace string
 
     """
-    Types
-    List of categories of channels
+    Channel Visibility Filter
+    Limit the listing to either public or private channels; all channels are listed by default.
     """
-    types [
-      enum {
-        private
-        public
-      }
-    ]
+    visibility enum {
+      private
+      public
+    }
 
     """
     Limit
@@ -46,7 +44,7 @@ usecase GetChannels {
 
     """
     Next Page
-    Cursor to the next page for pagination forwards
+    Cursor to the next page of listing
     """
     nextPage string
 
@@ -61,7 +59,7 @@ usecase GetChannels {
 
   example Successful {
     input {
-      types = ['public'],
+      visibility = ['public'],
       limit = 2
     }
 
@@ -84,11 +82,11 @@ usecase GetChannels {
 
   example Failed {
     input {
-      server = 'not-existing-server'
+      workspace = 'not-existing-workspace'
     }
 
     error {
-      title = 'server_not_found'
+      title = 'workspace_not_found'
     }
   }
 }
@@ -108,7 +106,7 @@ model Channel {
 
   """
   Name
-  Name of retrieved channel
+  Name of the retrieved channel
   """
   name string
 
@@ -119,10 +117,10 @@ model Channel {
   description string
 
   """
-  Num Of Member
-  Number of members in retrieved channel
+  Members Count
+  Number of members of the retrieved channel
   """
-  numOfMembers number
+  membersCount number
 }   
 
 model Error {

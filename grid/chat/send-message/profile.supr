@@ -9,13 +9,13 @@ usecase SendMessage {
   input {
     """
     Destination
-    Identification of destination to retrieve messages from
+    Channel to send the message to
     """
     destination! string!
     
     """
     Text
-    Content of the message
+    Contents of the message
     """
     text! string!
   }

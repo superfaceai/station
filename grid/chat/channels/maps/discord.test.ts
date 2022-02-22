@@ -1,3 +1,3 @@
 import { getChannelsTest } from './channels';
 
-getChannelsTest('discord', { server: '935962220104396881' });
+getChannelsTest('discord', { workspace: '935962220104396881' });
