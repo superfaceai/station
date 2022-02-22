@@ -488,6 +488,17 @@
           "file": "../grid/oauth2/refresh-token/maps/twitter.suma"
         }
       }
+    },
+    "address/ip-geolocation": {
+      "file": "../grid/address/ip-geolocation/profile.supr",
+      "providers": {
+        "mock": {
+          "file": "../grid/address/ip-geolocation/maps/mock.suma"
+        },
+        "freegeoip": {
+          "file": "../grid/address/ip-geolocation/maps/freegeoip.suma"
+        }
+      }
     }
   },
   "providers": {
@@ -928,6 +939,15 @@
         "clientId": "$GOOGLE_APIS_CLIENT_ID",
         "clientSecret": "$GOOGLE_APIS_CLIENT_SECRET"
       }
+    },
+    "freegeoip": {
+      "file": "../providers/freegeoip.json",
+      "security": [
+        {
+          "id": "apikey",
+          "apikey": "$FREEGEOIP_API_KEY"
+        }
+      ]
     }
   }
 }
