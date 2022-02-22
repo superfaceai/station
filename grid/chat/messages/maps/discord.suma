@@ -58,9 +58,7 @@ Operation MapMessages
 Returns array mapping messages in received body
 """
 operation MapMessages {
-  listOfMessages = []
-
-  listOfMessages = args.messages.map(message => {
+  messages = args.messages.map(message => {
     const resultMessage = {
       id: message.id,
       author: {
@@ -126,7 +124,7 @@ operation MapMessages {
     return resultMessage;
   });
 
-  return listOfMessages
+  return messages
 }
 
 """

@@ -61,9 +61,7 @@ map GetMessages {
 }
 
 operation MapMessages {
-  listOfMessages = []
-
-  listOfMessages = args.messages.filter(message => message.type === 'message').map(message => {
+  messages = args.messages.filter(message => message.type === 'message').map(message => {
     const resultMessage = {
       id: message.ts,
       text: message.text,
@@ -121,7 +119,7 @@ operation MapMessages {
     return resultMessage
   });
 
-  return listOfMessages
+  return messages
 }
 
 """
