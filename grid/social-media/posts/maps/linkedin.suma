@@ -1,0 +1,107 @@
+profile = "social-media/posts@1.0"
+provider = "linkedin"
+
+// Uses LinkedIn's UGC Posts API: https://docs.microsoft.com/en-us/linkedin/marketing/integrations/community-management/shares/ugc-post-api#find-ugc-posts-by-authors
+// There's a posts API beta but currently it seems broken for even basic retrieval: https://docs.microsoft.com/en-us/linkedin/marketing/integrations/community-management/shares/posts-api-beta
+
+"""
+Retrieve posts from LinkedIn profile
+Requires `r_organization_social` scope for reading data from organization's profile.
+"""
+map GetProfilePosts {
+  count = 50
+  // https://stackoverflow.com/a/60450805/240963
+
+  projection = '(paging,elements*(id,created,specificContent(com.linkedin.ugc.ShareContent(shareMediaCategory,shareCommentary,media(*(media~:playableStreams,originalUrl,description,title,thumbnails))))))'
+
+  requestPath = input.page || `v2/ugcPosts?q=authors&sortBy=LAST_MODIFIED&authors=List(${encodeURIComponent(input.profileId)})&count=${count}&projection=${projection}`
+  // FIXME: I can't use just bare {requestPath} here since SDK assumes it's an absolute URL...
+  http GET "/{requestPath}" {
+    request "application/json" {
+      headers {
+        "X-Restli-Protocol-Version" = "2.0.0",
+        "Authorization" = `Bearer ${parameters.accessToken}`,
+      }
+    }
+  
+    response 200 "application/json" {
+      result = body.paging.links.reduce((acc, current) => {
+        const {rel} = current;
+        // Hack for "relativizing" URL
+        const href = current.href.substring(1);
+        if (rel === 'next') {
+          acc.nextPage = href;
+        }
+        if (rel === 'prev') {
+          acc.previousPage = href;
+        }
+        return acc;
+      }, {})
+
+      
+      result.posts = body.elements.map((element) => {
+        const content = element.specificContent['com.linkedin.ugc.ShareContent'] || {shareCommentary: {}, media: []};
+        let attachmentType = undefined;
+        switch (content.shareMediaCategory) {
+          case 'IMAGE':
+            attachmentType = 'image';
+            break;
+          case 'VIDEO':
+            attachmentType = 'video';
+            break;
+          case 'ARTICLE':
+            attachmentType = 'link';
+            break;
+          case 'NONE': // text-only posts; reshared posts?
+          case 'URN_REFERENCE': // polls?
+          case 'NATIVE_DOCUMENT': // document attachment (PDF)
+            break;
+        }
+        let attachments;
+        if (attachmentType) {
+          attachments = content.media.map((media) => {
+            const thumbnail = media.thumbnails && media.thumbnails[0] || {};
+            let videoUrl, duration, width, height;
+            if (attachmentType === 'video') {
+              const mediaElement = media['media~'] && media['media~'].elements.find((mediaEl) => {
+                return mediaEl.data['com.linkedin.digitalmedia.mediaartifact.AdaptiveStreamVideoWithAudio'] || mediaEl.data['com.linkedin.digitalmedia.mediaartifact.AdaptiveStreamVideo']
+              });
+              if (mediaElement) {
+                const artifact = mediaElement.data['com.linkedin.digitalmedia.mediaartifact.AdaptiveStreamVideoWithAudio'] || mediaElement.data['com.linkedin.digitalmedia.mediaartifact.AdaptiveStreamVideo']
+                width = artifact.videoStream.displaySize.width;
+                height = artifact.videoStream.displaySize.height;
+                duration = artifact.durationInMicroseconds / 1000;
+                videoUrl = mediaElement.identifiers[0].identifier;
+              }
+            }
+            const description = media.description && media.description.text;
+            const altText = (attachmentType === 'image') ? description : undefined;
+            return {
+              type: attachmentType,
+              url: videoUrl || media.originalUrl,
+              preview: thumbnail.url,
+              duration: duration,
+              width: width || thumbnail.width,
+              height: height || thumbnail.height,
+              title: media.title && media.title.text,
+              altText: altText,
+              description: description,
+            };
+          });
+        }
+        const post = {
+          id: element.id,
+          // FIXME: timestamp to ISO date
+          // createdAt: `${element.created.time}`,
+          url: `https://www.linkedin.com/feed/update/${element.id}`,
+          text: content.shareCommentary.text,
+          attachments: attachments,
+        }
+        return post;
+      });
+
+
+      return map result result
+    }
+  }
+}
