@@ -5,6 +5,8 @@ provider = "nominatim"
 //   https://nominatim.org/release-docs/latest/api/Overview/
 
 map Geocode {
+  address = input.query || `${input.streetAddress || ""} ${input.addressLocality || ""} ${input.addressRegion || ""} ${input.postalCode || ""} ${input.addressCountry || ""}`
+
   http GET "/search" {
     request {
       query {
@@ -20,7 +22,7 @@ map Geocode {
 
     response 200 "application/json" {
       return map error if (statusCode !== 200 || !body.length) {
-        title = "Error geocoding address"
+        title = "Unable to find geolocation coordinates for address: " + address.trim()
       }
 
       map result {
