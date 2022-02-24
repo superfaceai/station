@@ -1,3 +1,3 @@
-import { getWorkspacesTest } from "./workspaces";
+import { getWorkspacesTest } from './workspaces';
 
-getWorkspacesTest('discord')
+getWorkspacesTest('discord');
