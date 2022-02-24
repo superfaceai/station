@@ -1,3 +1,3 @@
 import { getMembersTest } from './members';
 
-getMembersTest('discord', { server: '935962220104396881' });
+getMembersTest('discord', { workspace: '935962220104396881' });

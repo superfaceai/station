@@ -4,7 +4,7 @@ import { RecordingProcessOptions, SuperfaceTest } from '@superfaceai/testing';
 
 export const getMembersTest = (
   provider: string,
-  options?: { server?: string; recordingOptions?: RecordingProcessOptions }
+  options?: { workspace?: string; recordingOptions?: RecordingProcessOptions }
 ): void => {
   describe(`chat/members/${provider}`, () => {
     let superface: SuperfaceTest;
@@ -23,7 +23,7 @@ export const getMembersTest = (
         const page1 = await superface.run(
           {
             input: {
-              server: options?.server,
+              workspace: options?.workspace,
               limit: 1,
             },
             testName: 'page 1',
@@ -44,7 +44,7 @@ export const getMembersTest = (
         const page2 = await superface.run(
           {
             input: {
-              server: options?.server,
+              workspace: options?.workspace,
               limit: 1,
               page: cursor,
             },

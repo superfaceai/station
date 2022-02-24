@@ -5,11 +5,11 @@ provider = "discord"
 GetMembers map
 """
 map GetMembers {
-  return map error if (input.server === undefined) {
-    title = "Input parameter `server` is required in case of discord provider"
+  return map error if (input.workspace === undefined) {
+    title = "Input parameter `workspace` is required for provider discord"
   }
 
-  http GET "/guilds/{input.server}/members" {
+  http GET "/guilds/{input.workspace}/members" {
     request "application/json" {
       query {
         after = input.page
@@ -52,8 +52,6 @@ Operation MapMembers
 Returns array mapping members in received body
 """
 operation MapMembers {
-  members = []
-
   members = args.members.map(member => {
     const resultMember = {
       id: member.user.id,
@@ -61,12 +59,14 @@ operation MapMembers {
       isBot: member.user.bot ? true : false,
     }
 
-    if (member.nick) {
-      resultMember.username = member.nick
+    // map user's platform wide nickname - username
+    if (member.user && member.user.username) {
+      resultMember.username = member.user.username
     }
 
-    if (resultMember.username === undefined) {
-      resultMember.username = member.user.username
+    // if user's guild nickname is available - use it instead
+    if (member.nick) {
+      resultMember.username = member.nick
     }
 
     return resultMember

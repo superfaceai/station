@@ -58,8 +58,6 @@ Operation MapMembers
 Returns array mapping members in received body
 """
 operation MapMembers {
-  members = []
-
   members = args.members.map(member => {
     const resultMember = {
       id: member.id,
@@ -70,7 +68,7 @@ operation MapMembers {
       resultMember.username = member.profile.display_name;
     }
 
-    if (resultMember.username === undefined) {
+    if (member.name && resultMember.username === undefined) {
       resultMember.username = member.name;
     }
 

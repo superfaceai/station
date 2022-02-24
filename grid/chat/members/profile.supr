@@ -2,16 +2,16 @@ name = "chat/members"
 version = "1.0.0"
 
 """
-Get server members
+Get workspace members
 Retrieve paginated list of members
 """
 usecase GetMembers {
   input {
     """
-    Server
-    Representation of a server. Can be ID or name, depending on the provider capability.
+    Workspace
+    Representation of a workspace. Can be ID or name, depending on the provider capability.
     """
-    server string!
+    workspace string!
     
     """
     Limit
@@ -31,7 +31,7 @@ usecase GetMembers {
 
   example Successful {
     input {
-      server = '877903817948147752',
+      workspace = '877903817948147752',
       limit = 2
     }
 
@@ -54,11 +54,11 @@ usecase GetMembers {
 
   example Failed {
     input {
-      server = 'not-existing',
+      workspace = 'not-existing',
     }
 
     error {
-      title = 'server_not_found'
+      title = 'workspace_not_found'
     }
   }
 }
@@ -78,7 +78,7 @@ model Member {
 
   """
   Joined at
-  UNIX timestamp (e.g. 1095379198.75) when the member joined server
+  UNIX timestamp (e.g. 1095379198.75) when the member joined workspace
   """
   joinedAt number
 
@@ -98,7 +98,7 @@ model Members {
 
   """
   Next Page
-  Cursor to the next page for pagination forwards
+  Cursor to the next page of listing
   """
   nextPage string
 
