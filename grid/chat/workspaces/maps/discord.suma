@@ -47,10 +47,18 @@ operation MapWorkspaces {
       id: workspace.id,
       createdAt: getTimestamp(workspace.id),
       name: workspace.name,
+    };
+
+    if (workspace.member_count) {
+      resultWorkspace.membersCount = workspace.member_count;
     }
 
     if (workspace.icon) {
-      resultWorkspace.icon = workspace.icon
+      resultWorkspace.icon = workspace.icon;
+    }
+
+    if (workspace.description) {
+      resultWorkspace.description = workspace.description;
     }
 
     return resultWorkspace;
