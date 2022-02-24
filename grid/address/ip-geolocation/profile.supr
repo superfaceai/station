@@ -1,0 +1,131 @@
+name = "address/ip-geolocation"
+version = "1.0.0"
+
+"""
+IP Geolocation
+Retrieve address and geolocation coordinates from IP address
+"""
+usecase IpGeolocation safe {
+  input {
+    """
+    IP address
+    If left empty, most providers will attempt to retrieve data for client IP address.
+    """
+    ipAddress string
+  }
+  
+  result {
+    ipAddress string
+    addressCountryCode string
+    addressCountry string
+    addressRegion string
+    addressLocality string
+    postalCode string
+    timeZone string
+    latitude number
+    longitude number
+  }
+
+  error {
+    title!
+    detail
+  }
+
+  example Successful {
+    input {
+      ipAddress = "8.8.8.8"
+    }
+
+    result {
+      ipAddress = "8.8.8.8"
+      addressCountryCode = "US"
+      addressCountry = "United States"
+      timeZone = "America/Chicago"
+      latitude = 37.751
+      longitude = -97.822
+    }
+  }
+
+  example Failed {
+    input {
+      ipAddress = "wrong IP format"
+    }
+
+    error {
+      title = 'Bad request'
+      detail = 'Wrong IP address format.'
+    }
+  }
+}
+
+"""
+IP address
+IP address from the input or client IP address.
+"""
+field ipAddress
+
+"""
+Country code
+ISO 3166-1 alpha-2 country code.
+"""
+field addressCountryCode
+
+"""
+Country
+The country. For example, USA.
+"""
+field addressCountry
+
+"""
+Region
+The region in which the locality is, and which is in the country. For example, California or another appropriate first-level Administrative division.
+"""
+field addressRegion
+
+"""
+Locality
+The locality in which the street address is, and which is in the region. For example, Mountain View.
+"""
+field addressLocality
+
+"""
+Postal code
+The postal code. For example, 94043.
+"""
+field postalCode
+
+"""
+Street address
+The street address. For example, 1600 Amphitheatre Pkwy.
+"""
+field streetAddress
+
+"""
+Time zone
+The IANA time zone of the location. For example, America/Los_Angeles.
+"""
+field timeZone
+
+"""
+Latitude
+The latitude of a location. For example 37.42242 (WGS 84).
+"""
+field latitude
+
+"""
+Longitude
+The longitude of a location. For example -122.08585 (WGS 84).
+"""
+field longitude
+
+"""
+Title
+A short, human-readable summary of the problem type.
+"""
+field title
+
+"""
+Detail
+A human-readable explanation specific to this occurrence of the problem.
+"""
+field detail

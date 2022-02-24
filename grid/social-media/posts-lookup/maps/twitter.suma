@@ -78,12 +78,87 @@ operation MapSearchResult {
   posts = []
 
   set if (body.meta.result_count > 0) {
-    //workaround for map interpreter variables merging issue
-    posts = call foreach(index of Array(body.data.length - 1).fill().map((_, i) => i)) MapTweetToPost(
-      index = index,
-      tweets = body.data,
-      includes = body.includes
-    )
+    //map posts in single Jessie script for better performance
+    posts = [body].map(body => {
+      //get media hashmap
+      const mediaHashmap = {}
+      if(body.includes.media) {
+        for(const media of body.includes.media) {
+          mediaHashmap[media.media_key] = media
+        }
+      }
+
+      //get authors hashmap
+      const authorsHashmap = {}
+      if(body.includes.users) {
+        for(const user of body.includes.users) {
+          authorsHashmap[user.id] = user
+        }
+      }
+
+      //map tweets to posts
+      const posts = body.data.map((tweet) => {
+        let mappedAuthor
+        let replyReference
+        let replyId
+        let attachments = []
+
+        //get author
+        const author = authorsHashmap[tweet.author_id]
+        if (author) {
+          //strip user properties we do not want to have in result
+          mappedAuthor = {
+            id: author.id,
+            username: author.username
+          }
+        }
+
+        //get reply id
+        if(tweet.referenced_tweets) {
+          replyReference = tweet.referenced_tweets.find(referencedTweet => referencedTweet.type === 'replied_to')
+        }
+
+        if(replyReference !== undefined) {
+          replyId = replyReference.id
+        }
+
+        //get attachments
+        if(tweet.attachments && tweet.attachments.media_keys) {
+          attachments = tweet.attachments.media_keys.map((mediaKey) => {
+            let result = undefined
+
+            let foundMedia = mediaHashmap[mediaKey]
+
+            let duration = undefined
+
+            if(foundMedia && foundMedia.duration_ms) {
+              duration = foundMedia.duration_ms / 1000
+            }
+
+            return foundMedia && {
+                type: foundMedia.type,
+                url: foundMedia.url,
+                height: foundMedia.height,
+                width: foundMedia.width,
+                preview: foundMedia.preview_image_url,
+                altText: foundMedia.alt_text,
+                duration: duration
+              }
+          })
+        }
+
+        return {
+          id: tweet.id,
+          url: 'https://twitter.com/i/status/' + tweet.id,
+          createdAt: tweet.created_at,
+          text: tweet.text,
+          replyId: replyId,
+          author: mappedAuthor,
+          attachments: attachments.filter(attachment => attachment !== undefined)
+        }
+      })
+      return posts
+    })[0]
   }
 
   return {
@@ -92,73 +167,6 @@ operation MapSearchResult {
     nextPage = body.meta.next_token
     rateLimit =  call MapRateLimit(headers = headers, bucket = args.rateLimitBucket)
   }
-}
-
-operation MapTweetToPost {
-  index = args.index
-  tweet = args.tweets[index]
-  includes = args.includes
-  attachments = []
-  replyReference = undefined
-  replyId = undefined
-  author = undefined
-
-  set if(tweet.attachments && tweet.attachments.media_keys && includes.media) {
-    attachments = call foreach(mediaKey of tweet.attachments.media_keys) MapMediaAttachment(
-        mediaKey = mediaKey,
-        media = includes.media
-      )
-  }
-
-  set if(tweet.referenced_tweets) {
-    replyReference = tweet.referenced_tweets.find(referencedTweet => referencedTweet.type === 'replied_to')
-  }
-
-  set if(replyReference !== undefined) {
-    replyId = replyReference.id
-  }
-
-  set if(tweet.author_id && includes.users) {
-    author = call MapUser(user = includes.users.find(user => user.id === tweet.author_id))
-  }
-
-  return {
-    id = tweet.id
-    url = 'https://twitter.com/i/status/' + tweet.id
-    createdAt = tweet.created_at
-    text = tweet.text
-    replyId = replyId
-    author = author
-    attachments = attachments.filter(attachment => attachment !== undefined)
-  }
-}
-
-operation MapMediaAttachment {
-  mediaKey = args.mediaKey
-  mediaList = args.media
-  result = undefined
-
-  foundMedia = mediaList.find(media => media.media_key === mediaKey)
-
-  duration = undefined
-
-  set if(foundMedia && foundMedia.duration_ms) {
-    duration = foundMedia.duration_ms / 1000
-  }
-
-  set if(foundMedia) {
-    result = {
-      type: foundMedia.type,
-      url: foundMedia.url,
-      height: foundMedia.height,
-      width: foundMedia.width,
-      preview: foundMedia.preview_image_url,
-      altText: foundMedia.alt_text,
-      duration: duration
-    }
-  }
-
-  return result
 }
 
 //Twitter rate limits: https://developer.twitter.com/en/docs/twitter-api/rate-limits
@@ -242,19 +250,6 @@ operation MapTwitterError {
     code = 'UnknownError'
     rateLimit = rateLimit
   }
-}
-
-operation MapUser {
-  author = undefined
-
-  set if(args.user) {
-    author = {
-      id: args.user.id,
-      username: args.user.username
-    }
-  }
-
-  return author
 }
 
 operation GetSearchRecentTweetsBucket {

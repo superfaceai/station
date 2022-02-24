@@ -440,6 +440,9 @@
         "instagram": {
           "file": "../grid/social-media/posts/maps/instagram.suma"
         },
+        "linkedin": {
+          "file": "../grid/social-media/posts/maps/linkedin.suma"
+        },
         "twitter": {
           "file": "../grid/social-media/posts/maps/twitter.suma"
         }
@@ -489,6 +492,17 @@
         },
         "twitter": {
           "file": "../grid/oauth2/refresh-token/maps/twitter.suma"
+        }
+      }
+    },
+    "address/ip-geolocation": {
+      "file": "../grid/address/ip-geolocation/profile.supr",
+      "providers": {
+        "mock": {
+          "file": "../grid/address/ip-geolocation/maps/mock.suma"
+        },
+        "freegeoip": {
+          "file": "../grid/address/ip-geolocation/maps/freegeoip.suma"
         }
       }
     }
@@ -931,6 +945,15 @@
         "clientId": "$GOOGLE_APIS_CLIENT_ID",
         "clientSecret": "$GOOGLE_APIS_CLIENT_SECRET"
       }
+    },
+    "freegeoip": {
+      "file": "../providers/freegeoip.json",
+      "security": [
+        {
+          "id": "apikey",
+          "apikey": "$FREEGEOIP_API_KEY"
+        }
+      ]
     },
     "here": {
       "file": "../providers/here.json",
