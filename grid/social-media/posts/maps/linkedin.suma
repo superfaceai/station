@@ -57,7 +57,7 @@ map GetProfilePosts {
           case 'NATIVE_DOCUMENT': // document attachment (PDF)
             break;
         }
-        let attachments;
+        let attachments = [];
         if (attachmentType) {
           attachments = content.media.map((media) => {
             const thumbnail = media.thumbnails && media.thumbnails[0] || {};
