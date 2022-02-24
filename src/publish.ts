@@ -5,6 +5,7 @@ import {
 } from '@superfaceai/ast';
 import { parseMap, parseProfile, Source } from '@superfaceai/parser';
 import { ServiceApiError, ServiceClient } from '@superfaceai/service-client';
+import { promisify } from 'util';
 
 import {
   exists,
@@ -15,6 +16,8 @@ import {
   PrintFn,
   readFile,
 } from './util';
+
+const sleep = promisify(setTimeout);
 
 export type PublishOptions = {
   print?: PrintFn;
@@ -102,6 +105,12 @@ export async function publishAll(
         options?.print?.(`FAILED: ${error.message}`);
       } else {
         options?.print?.('FAILED: With unknown error');
+      }
+    } finally {
+      const delay = parseInt(process.env.PUBLISH_DELAY_MS ?? '0');
+      if (delay) {
+        options?.print?.(`Waiting ${delay} ms`);
+        await sleep(delay);
       }
     }
   }
