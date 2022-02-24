@@ -5,135 +5,135 @@ provider = "here"
 //   https://developer.here.com/documentation
 
 map Geocode {
-    payload = input.query || `${input.streetAddress || ""} ${input.addressLocality || ""} ${input.addressRegion || ""} ${input.postalCode || ""} ${input.addressCountry || ""}`;
+  payload = input.query || `${input.streetAddress || ""} ${input.addressLocality || ""} ${input.addressRegion || ""} ${input.postalCode || ""} ${input.addressCountry || ""}`;
 
-    http GET "geocode" "/v1/geocode" {
-        security "apiKey"
-        
-        request {
-            query {
-                q = payload
-            }
-        }
-
-        response 200 "application/json" {
-            return map error if (body.items.length === 0) {
-                title = 'Results not found',
-                detail = 'No results were found for specified address'
-            }
-            
-            map result {
-                latitude = body.items[0].position.lat
-                longitude = body.items[0].position.lng
-            }
-        }
-
-        response {
-            error = call MapHereError(
-                statusCode = statusCode,
-                body = body
-            )
-
-            map error error
-        }
+  http GET "geocode" "/v1/geocode" {
+    security "apiKey"
+    
+    request {
+      query {
+        q = payload
+      }
     }
+
+    response 200 "application/json" {
+      return map error if (body.items.length === 0) {
+        title = 'Results not found',
+        detail = 'No results were found for specified address'
+      }
+      
+      map result {
+        latitude = body.items[0].position.lat
+        longitude = body.items[0].position.lng
+      }
+    }
+
+    response {
+      error = call MapHereError(
+        statusCode = statusCode,
+        body = body
+      )
+
+      map error error
+    }
+  }
 }
 
 map ReverseGeocode {
-    payload = `${input.latitude},${input.longitude}`;
+  payload = `${input.latitude},${input.longitude}`;
 
-    http GET "reverse-geocode" "/v1/revgeocode" {
-        security "apiKey"
-        
-        request {
-            query {
-                at = payload
-            }
-        }
-
-        response 200 "application/json" {
-            return map error if (body.items.length === 0) {
-                title = 'Results not found',
-                detail = 'No results were found for specified coordinates'
-            }
-
-            map result body.items.map(item => {
-                const mappedAddress = {};
-
-                // country code
-                mappedAddress.addressCountry = item.address.countryCode
-
-                // region
-                mappedAddress.addressRegion = item.address.state;
-                if (item.address.stateCode) {
-                    mappedAddress.addressRegion = `${item.address.stateCode}, ${mappedAddress.addressRegion}`
-                }
-                if (item.address.county) {
-                    mappedAddress.addressRegion = `${mappedAddress.addressRegion}, ${item.address.county}`
-                }
-
-                // locality
-                mappedAddress.addressLocality = item.address.city;
-                if (item.address.district && item.address.district !== item.address.city) {
-                    mappedAddress.addressLocality = `${mappedAddress.addressLocality}, ${item.address.district}`
-                }
-
-                // street address
-                mappedAddress.streetAddress = item.address.street
-                if (item.address.houseNumber) {
-                    mappedAddress.streetAddress = `${item.address.houseNumber} ${mappedAddress.streetAddress}`
-                }
-
-                // postal code
-                mappedAddress.postalCode = item.address.postalCode
-
-                // formatted address
-                mappedAddress.formattedAddress = item.address.label
-
-                return mappedAddress
-            })
-        }
-
-        response {
-            error = call MapHereError(
-                statusCode = statusCode,
-                body = body
-            )
-
-            map error error
-        }
+  http GET "reverse-geocode" "/v1/revgeocode" {
+    security "apiKey"
+    
+    request {
+      query {
+        at = payload
+      }
     }
+
+    response 200 "application/json" {
+      return map error if (body.items.length === 0) {
+        title = 'Results not found',
+        detail = 'No results were found for specified coordinates'
+      }
+
+      map result body.items.map(item => {
+        const mappedAddress = {};
+
+        // country code
+        mappedAddress.addressCountry = item.address.countryCode
+
+        // region
+        mappedAddress.addressRegion = item.address.state;
+        if (item.address.stateCode) {
+          mappedAddress.addressRegion = `${item.address.stateCode}, ${mappedAddress.addressRegion}`
+        }
+        if (item.address.county) {
+          mappedAddress.addressRegion = `${mappedAddress.addressRegion}, ${item.address.county}`
+        }
+
+        // locality
+        mappedAddress.addressLocality = item.address.city;
+        if (item.address.district && item.address.district !== item.address.city) {
+          mappedAddress.addressLocality = `${mappedAddress.addressLocality}, ${item.address.district}`
+        }
+
+        // street address
+        mappedAddress.streetAddress = item.address.street
+        if (item.address.houseNumber) {
+          mappedAddress.streetAddress = `${item.address.houseNumber} ${mappedAddress.streetAddress}`
+        }
+
+        // postal code
+        mappedAddress.postalCode = item.address.postalCode
+
+        // formatted address
+        mappedAddress.formattedAddress = item.address.label
+
+        return mappedAddress
+      })
+    }
+
+    response {
+      error = call MapHereError(
+        statusCode = statusCode,
+        body = body
+      )
+
+      map error error
+    }
+  }
 }
 
 
 operation MapHereError {
-    statusCode = args.statusCode
-    body = args.body
+  statusCode = args.statusCode
+  body = args.body
 
-    supportedCodes = [400, 405, 429, 503]
+  supportedCodes = [400, 405, 429, 503]
 
-    return if (supportedCodes.includes(statusCode)) {
-        title = body.title
-        detail = body.cause
-    }
+  return if (supportedCodes.includes(statusCode)) {
+    title = body.title
+    detail = body.cause
+  }
 
-    return if (statusCode === 401) {
-        title = 'Unauthorized',
-        detail = body
-    }
+  return if (statusCode === 401) {
+    title = 'Unauthorized',
+    detail = body
+  }
 
-    return if (statusCode === 403) {
-        title = 'Forbidden',
-        detail = body
-    }
+  return if (statusCode === 403) {
+    title = 'Forbidden',
+    detail = body
+  }
 
-    return if (statusCode === 404) {
-        title = 'Not Found',
-        detail = body
-    }
+  return if (statusCode === 404) {
+    title = 'Not Found',
+    detail = body
+  }
 
-    return {
-        title = "Unknown error"
-        detail = (`Unknown error occurred. Status: ${statusCode}.`)
-    }
+  return {
+    title = "Unknown error"
+    detail = (`Unknown error occurred. Status: ${statusCode}.`)
+  }
 }
