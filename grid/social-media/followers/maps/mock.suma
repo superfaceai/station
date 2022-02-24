@@ -1,0 +1,21 @@
+profile = "social-media/followers@1.1"
+provider = "mock"
+
+map GetFollowers {
+  return map result {
+    followers = [ {
+      id: "1466796521412771840",
+      username: "superface_test",
+      imageUrl: "https://pbs.twimg.com/profile_images/1478302204306067462/5BEbrnPO_normal.jpg"
+    }
+    ],
+    nextPage = 'QVFIUjc2Y01oQ3F1bHk5WHNzNVVuS2ZAMSEtpdkxmbC1FV09XcGNmTUc4ZAkhrMlBPU19LYkM0dFY4',
+    rateLimit = {
+      bucket: "Follows lookup",
+      totalRequests: 15,
+      remainingRequests: 12,
+      remainingRequestsPercentage: 80,
+      resetTimestamp: 1643713585,
+    }
+  }
+}

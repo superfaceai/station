@@ -1,0 +1,80 @@
+profile = "social-media/publishing-profiles@1.0"
+provider = "linkedin"
+
+"""
+Get Company profiles for publishing
+https://docs.microsoft.com/en-us/linkedin/marketing/integrations/community-management/organizations/organization-access-control-by-role
+https://docs.microsoft.com/en-us/linkedin/marketing/integrations/community-management/organizations/organization-lookup-api
+"""
+map GetProfilesForPublishing {
+  // FIXME: Pagination
+  http GET "/v2/organizationAcls" {
+    request {
+      query {
+        q = "roleAssignee",
+        state = "APPROVED",
+        role = "ADMINISTRATOR",
+        // https://docs.microsoft.com/en-us/linkedin/shared/api-guide/concepts/decoration?context=linkedin/marketing/context
+        // Lovely, right?
+        projection = "(paging,elements(*(organization~(id,localizedName,vanityName,logoV2(cropped~:playableStreams)))))",
+        count = 100,
+      }
+      headers {
+        "X-Restli-Protocol-Version" = "2.0.0",
+        Authorization = `Bearer ${parameters.accessToken}`,
+        Accept = "application/json"
+      }
+    }
+
+    response 200 "application/json" {
+      profiles = call foreach(element of body.elements) MapOrganization(element = element)
+
+      return map result {
+        profiles = profiles
+      }
+    }
+
+    response 400 "application/json" {
+      return map error {
+        title = "Bad request"
+        detail = body.message
+      }
+    }
+
+    response 401 "application/json" {
+      return map error {
+        title = "Unauthenticated"
+        detail = body.message
+      }
+    }
+
+    response 403 "application/json" {
+      return map error {
+        title = "Forbidden"
+        detail = body.message
+      }
+    }
+  }
+}
+
+operation MapOrganization {
+  org = args.element['organization~']
+  orgLogo = null
+  logoElements = null
+  
+  // If the profile is missing logo, the property logoV2 will be omitted
+  set if (org.logoV2 && org.logoV2['cropped~']) {
+    logoElements = org.logoV2['cropped~'].elements
+  }
+  set if (logoElements && logoElements.length > 0) {
+    // FIXME: Find only authorizationMethod=PUBLIC and identifierType=EXTERNAL_URL?
+    orgLogo = logoElements[0].identifiers[0].identifier
+  }
+
+  return {
+    id = args.element.organization
+    name = org.localizedName
+    username = org.vanityName
+    imageUrl = orgLogo
+  }
+}

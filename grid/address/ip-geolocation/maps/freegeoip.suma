@@ -1,0 +1,64 @@
+profile = "address/ip-geolocation@1.0"
+provider = "freegeoip"
+
+// Free Geo IP documentation: https://freegeoip.app/#documentation
+map IpGeolocation {
+  ipAddress = ''
+
+  set if(input.ipAddress) {
+    ipAddress = input.ipAddress
+  }
+
+  http GET "/json/{ipAddress}" {
+    security "apikey"
+    response 200 "application/json" {
+      map result {
+        ipAddress = body.ip
+        addressCountryCode = body.country_code
+        addressCountry = body.country_name
+        addressRegion = body.region_name
+        addressLocality = body.city
+        postalCode = body.zip_code
+        timeZone = body.time_zone
+        latitude = body.latitude
+        longitude = body.longitude
+      }
+    }
+
+    response {
+      error = call MapError(statusCode = statusCode, body = body)
+      map error error
+    }
+  }
+}
+
+// Free Geo IP does't provide any error handling documentation
+operation MapError {
+  statusCode = args.statusCode
+  body = args.body
+  detail = body.message
+
+  return if (statusCode === 401) {
+    title = "Unauthenticated"
+    detail = detail
+  }
+
+  return if (statusCode === 403) {
+    title = "Unauthorized"
+    detail = detail
+  }
+
+  return if (statusCode === 404) {
+    title = "Wrong IP address format"
+  }
+
+  return if (statusCode === 429) {
+    title = "Rate limit exceeded"
+    detail = `You reached max requests quota.`
+  }
+
+  return {
+    title = "Unknown error"
+    detail = `Unknown error occurred. Status: ${statusCode}. Freegeoip error info: ${detail}.`
+  }
+}

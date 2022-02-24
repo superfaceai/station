@@ -191,6 +191,9 @@
         },
         "azure-maps": {
           "file": "../grid/address/geocoding/maps/azure-maps.suma"
+        },
+        "tomtom": {
+          "file": "../grid/address/geocoding/maps/tomtom.suma"
         }
       }
     },
@@ -399,6 +402,9 @@
         },
         "twitter": {
           "file": "../grid/social-media/publishing-profiles/maps/twitter.suma"
+        },
+        "linkedin": {
+          "file": "../grid/social-media/publishing-profiles/maps/linkedin.suma"
         }
       }
     },
@@ -424,15 +430,76 @@
       "providers": {
         "mock": {
           "file": "../grid/social-media/posts/maps/mock.suma"
-         },
+        },
         "facebook": {
           "file": "../grid/social-media/posts/maps/facebook.suma"
         },
         "instagram": {
           "file": "../grid/social-media/posts/maps/instagram.suma"
         },
+        "linkedin": {
+          "file": "../grid/social-media/posts/maps/linkedin.suma"
+        },
         "twitter": {
           "file": "../grid/social-media/posts/maps/twitter.suma"
+        }
+      }
+    },
+    "crm/track-contact-event": {
+      "file": "../grid/crm/track-contact-event/profile.supr",
+      "providers": {
+        "crisp": {
+          "file": "../grid/crm/track-contact-event/maps/crisp.suma"
+        },
+        "mock": {
+          "file": "../grid/crm/track-contact-event/maps/mock.suma"
+        }
+      }
+    },
+    "social-media/posts-lookup": {
+      "file": "../grid/social-media/posts-lookup/profile.supr",
+      "providers": {
+        "mock": {
+          "file": "../grid/social-media/posts-lookup/maps/mock.suma"
+        },
+        "twitter": {
+          "file": "../grid/social-media/posts-lookup/maps/twitter.suma"
+        }
+      }
+    },
+    "social-media/followers": {
+      "file": "../grid/social-media/followers/profile.supr",
+      "providers": {
+        "mock": {
+          "file": "../grid/social-media/followers/maps/mock.suma"
+        },
+        "twitter": {
+          "file": "../grid/social-media/followers/maps/twitter.suma"
+        }
+      }
+    },
+    "oauth2/refresh-token": {
+      "file": "../grid/oauth2/refresh-token/profile.supr",
+      "providers": {
+        "google-apis": {
+          "file": "../grid/oauth2/refresh-token/maps/google-apis.suma"
+        },
+        "mock": {
+          "file": "../grid/oauth2/refresh-token/maps/mock.suma"
+        },
+        "twitter": {
+          "file": "../grid/oauth2/refresh-token/maps/twitter.suma"
+        }
+      }
+    },
+    "address/ip-geolocation": {
+      "file": "../grid/address/ip-geolocation/profile.supr",
+      "providers": {
+        "mock": {
+          "file": "../grid/address/ip-geolocation/maps/mock.suma"
+        },
+        "freegeoip": {
+          "file": "../grid/address/ip-geolocation/maps/freegeoip.suma"
         }
       }
     },
@@ -446,7 +513,7 @@
           "file": "../grid/chat/messages/maps/slack.suma"
         }
       }
-    }
+    },
   },
   "providers": {
     "github": {
@@ -863,8 +930,41 @@
     "twitter": {
       "file": "../providers/twitter.json",
       "parameters": {
-        "accessToken": "$TWITTER_ACCESS_TOKEN"
+        "accessToken": "$TWITTER_ACCESS_TOKEN",
+        "clientId": "$TWITTER_CLIENT_ID",
+        "clientSecret": "$TWITTER_CLIENT_SECRET"
       }
+    },
+    "linkedin": {
+      "file": "../providers/linkedin.json",
+      "parameters": {
+        "accessToken": "$LINKEDIN_ACCESS_TOKEN"
+      }
+    },
+    "tomtom": {
+      "file": "../providers/tomtom.json",
+      "security": [
+        {
+          "id": "apikey",
+          "apikey": "$TOMTOM_API_KEY"
+        }
+      ]
+    },
+    "google-apis": {
+      "file": "../providers/google-apis.json",
+      "parameters": {
+        "clientId": "$GOOGLE_APIS_CLIENT_ID",
+        "clientSecret": "$GOOGLE_APIS_CLIENT_SECRET"
+      }
+    },
+    "freegeoip": {
+      "file": "../providers/freegeoip.json",
+      "security": [
+        {
+          "id": "apikey",
+          "apikey": "$FREEGEOIP_API_KEY"
+        }
+      ]
     }
   }
 }

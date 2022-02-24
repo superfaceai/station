@@ -1,0 +1,79 @@
+"""
+Track Event for Contact
+Track events that are specific for a single contact.
+"""
+name = "crm/track-contact-event"
+version = "1.0.0"
+
+"""
+Track Contact Event
+Sends an event data to CRM for a specific contact
+"""
+usecase TrackContactEvent unsafe {
+  input {
+    contactId!
+
+    """
+    Event Name
+    A text value representing the event name
+    """
+    eventName! string!
+
+    """
+    Event Properties
+    Event Properties are attributes that help you define the specifics of an Event.
+    """
+    eventProperties
+  }
+
+  result {
+    contactId!
+  }
+
+  error {
+    """
+    A short, human-readable summary of the problem type.
+    """
+    title! string!
+
+    """
+    A human-readable explanation specific to this occurrence of the problem.
+    """
+    detail string
+  }
+
+  example Successful {
+    input {
+      contactId = "example.user@email.com"
+      eventName = "order-created"
+      eventProperties = {
+        orderId = "nYRe6bt97oLrH4g5Ssak6"
+        totalAmount = "42"
+        currency = "EUR"
+      }
+    }
+
+    result {
+      contactId = "example.user@email.com"
+    }
+  }
+
+  example NotFound {
+    input {
+      contactId = "example.user@email.com"
+      eventName = "order-created"
+    }
+
+    error {
+      title = "Not found"
+      detail = "Contact was not found. Make sure to provide an existing identifier"
+    }
+  }
+}
+
+"""
+Contact Identifier
+A value that uniquely identifies a contact. Each provider might use a different
+identifier (e.g. email or random number).
+"""
+field contactId string
