@@ -9,15 +9,18 @@ Retrieve posts from LinkedIn profile
 Requires `r_organization_social` scope for reading data from organization's profile.
 """
 map GetProfilePosts {
-  count = 50
-  // https://stackoverflow.com/a/60450805/240963
+  count = 10
+  inputPage = parseInt(input.page, 10)
+  start = isNaN(inputPage) ? 0 : inputPage
 
+  // https://stackoverflow.com/a/60450805/240963
   projection = '(paging,elements*(id,created,specificContent(com.linkedin.ugc.ShareContent(shareMediaCategory,shareCommentary,media(*(media~:playableStreams,originalUrl,description,title,thumbnails))))))'
 
-  requestPath = input.page || `v2/ugcPosts?q=authors&sortBy=LAST_MODIFIED&authors=List(${encodeURIComponent(input.profileId)})&count=${count}&projection=${projection}`
-  // FIXME: I can't use just bare {requestPath} here since SDK assumes it's an absolute URL...
-  http GET "/{requestPath}" {
-    request "application/json" {
+  // We need tight control over parameters encoding, which isn't the case with query construct
+  queryParams = `?q=authors&sortBy=LAST_MODIFIED&authors=List(${encodeURIComponent(input.profileId)})&count=${count}&start=${start}&projection=${projection}`
+  
+  http GET "/v2/ugcPosts{queryParams}" {
+    request {
       headers {
         "X-Restli-Protocol-Version" = "2.0.0",
         "Authorization" = `Bearer ${parameters.accessToken}`,
@@ -25,18 +28,15 @@ map GetProfilePosts {
     }
   
     response 200 "application/json" {
-      result = body.paging.links.reduce((acc, current) => {
-        const {rel} = current;
-        // Hack for "relativizing" URL
-        const href = current.href.substring(1);
-        if (rel === 'next') {
-          acc.nextPage = href;
-        }
-        if (rel === 'prev') {
-          acc.previousPage = href;
-        }
-        return acc;
-      }, {})
+      // LinkedIn returns paging.links but it seems they have a bug with double encoding projection parameter: https://stackoverflow.com/q/71250137/240963
+      // Instead we will just calculate next and previous pages' URLs ourselves
+      paging = body.paging
+      result = {
+        previousPage: (paging.start > 0) ? `${Math.max(0, paging.start - paging.count)}` : undefined,
+        // count is passed value, not the real count of items
+        nextPage: (paging.start + paging.count) < paging.total ? `${paging.start + paging.count}` : undefined,
+      }
+      
 
       
       result.posts = body.elements.map((element) => {
