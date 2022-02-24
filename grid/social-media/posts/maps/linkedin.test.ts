@@ -61,5 +61,19 @@ describe(`social-media/posts/${provider}`, () => {
         }
       });
     });
+
+    describe('error states', () => {
+      it('expects error for inaccessible profile', async () => {
+        await expect(
+          superfacePosts.run({
+            useCase: 'GetProfilePosts',
+            input: {
+              // any person profile will do here
+              profileId: 'urn:li:person:QIMLoK7PG6',
+            },
+          })
+        ).resolves.toMatchSnapshot();
+      });
+    });
   });
 });

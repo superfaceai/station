@@ -36,9 +36,7 @@ map GetProfilePosts {
         // count is passed value, not the real count of items
         nextPage: (paging.start + paging.count) < paging.total ? `${paging.start + paging.count}` : undefined,
       }
-      
 
-      
       result.posts = body.elements.map((element) => {
         const content = element.specificContent['com.linkedin.ugc.ShareContent'] || {shareCommentary: {}, media: []};
         let attachmentType = undefined;
@@ -102,6 +100,31 @@ map GetProfilePosts {
 
 
       return map result result
+    }
+
+    response 400 "application/json" {
+      return map error {
+        title = "Bad Request",
+        detail = body.message,
+      }
+    }
+    response 401 "application/json" {
+      return map error {
+        title = "Unauthorized",
+        detail = body.message,
+      }
+    }
+    response 403 "application/json" {
+      return map error {
+        title = "Forbidden",
+        detail = body.message,
+      }
+    }
+    response 404 "application/json" {
+      return map error {
+        title = "Resource Not Found",
+        detail = body.message,
+      }
     }
   }
 }
