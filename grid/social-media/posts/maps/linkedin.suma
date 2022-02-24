@@ -70,7 +70,7 @@ map GetProfilePosts {
                 const artifact = mediaElement.data['com.linkedin.digitalmedia.mediaartifact.AdaptiveStreamVideoWithAudio'] || mediaElement.data['com.linkedin.digitalmedia.mediaartifact.AdaptiveStreamVideo']
                 width = artifact.videoStream.displaySize.width;
                 height = artifact.videoStream.displaySize.height;
-                duration = artifact.durationInMicroseconds / 1000;
+                duration = artifact.durationInMicroseconds / (1000 * 1000);
                 videoUrl = mediaElement.identifiers[0].identifier;
               }
             }
