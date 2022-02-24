@@ -499,6 +499,17 @@
           "file": "../grid/address/ip-geolocation/maps/freegeoip.suma"
         }
       }
+    },
+    "chat/workspaces": {
+      "file": "../grid/chat/workspaces/profile.supr",
+      "providers": {
+        "mock": {
+          "file": "../grid/chat/workspaces/maps/mock.suma"
+        },
+        "discord": {
+          "file": "../grid/chat/workspaces/maps/discord.suma"
+        }
+      }
     }
   },
   "providers": {
@@ -740,6 +751,12 @@
           "token": "$SLACK_ACCESS_TOKEN"
         }
       ]
+    },
+    "discord": {
+      "file": "../providers/discord.json",
+      "parameters": {
+        "accessToken": "$DISCORD_ACCESS_TOKEN"
+      }
     },
     "wttr-in": {
       "file": "../providers/wttr-in.json",
