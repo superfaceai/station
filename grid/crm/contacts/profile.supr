@@ -211,19 +211,6 @@ usecase Search safe {
       country = "USA"
     }]
   }
-
-  example UnknownOperator {
-    input {
-      property = "email"
-      operator = "%"
-      value = "example.com"
-    }
-
-    error {
-      title = "Unknown operator"
-      detail = "Operator \"%\" is not recognized"
-    }
-  }
 }
 
 """
