@@ -1,0 +1,11 @@
+profile = "oauth2/refresh-token@1.0"
+provider = "mock"
+
+map GetAccessTokenFromRefreshToken {
+  return map result {
+    accessToken = "d34db33f",
+    tokenType = "Bearer",
+    expiresIn = 3600,
+    scopes = ["read", "write"]
+  }
+}

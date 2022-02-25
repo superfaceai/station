@@ -1,0 +1,48 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`address/geocoding/tomtom Geocode when all inputs are correct should geocode address to geographical coordinates 1`] = `
+Ok {
+  "value": Object {
+    "latitude": 50.08781,
+    "longitude": 14.42046,
+  },
+}
+`;
+
+exports[`address/geocoding/tomtom Geocode when inputs are invalid should throw an exception 1`] = `
+Err {
+  "error": "HTTPError: Expected HTTP error
+Properties: {
+  \\"title\\": \\"Unable to find geolocation coordinates for address: \\"
+}
+AST Path: definitions[0].statements[1].responseHandlers[0].statements[0]
+Original Map Location: Line 17, column 7",
+}
+`;
+
+exports[`address/geocoding/tomtom ReverseGeocode when all inputs are correct should reverse geocode geographical coordinates 1`] = `
+Ok {
+  "value": Array [
+    Object {
+      "addressCountry": "US",
+      "addressLocality": "Brooklyn, New York",
+      "addressRegion": "NY",
+      "formattedAddress": "279 Bedford Avenue, Brooklyn, NY 11211, United States",
+      "postalCode": "11211",
+      "streetAddress": "279 Bedford Avenue",
+    },
+  ],
+}
+`;
+
+exports[`address/geocoding/tomtom ReverseGeocode when inputs are invalid should throw an exception 1`] = `
+Err {
+  "error": "HTTPError: Expected HTTP error
+Properties: {
+  \\"title\\": \\"Bad request\\",
+  \\"detail\\": \\"Invalid request: invalid position: cannot parse position.\\"
+}
+AST Path: definitions[1].statements[1].responseHandlers[1].statements[0]
+Original Map Location: Line 109, column 7",
+}
+`;

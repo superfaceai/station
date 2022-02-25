@@ -1,0 +1,1993 @@
+[
+  {
+    "scope": "https://api.linkedin.com:443",
+    "method": "GET",
+    "path": "/v2/ugcPosts?q=authors&sortBy=LAST_MODIFIED&authors=List(urn%3Ali%3Aorganization%3A2414183)&count=10&start=0&projection=(paging,elements*(id,created,specificContent(com.linkedin.ugc.ShareContent(shareMediaCategory,shareCommentary,media(*(media~:playableStreams,originalUrl,description,title,thumbnails))))))",
+    "body": "",
+    "status": 200,
+    "response": {
+      "paging": {
+        "total": 284244,
+        "count": 10,
+        "start": 0,
+        "links": [
+          {
+            "rel": "next",
+            "type": "application/json",
+            "href": "/v2/ugcPosts?q=authors&count=10&start=10&sortBy=LAST_MODIFIED&projection=%28paging%2Celements*%28id%2Ccreated%2CspecificContent%28com.linkedin.ugc.ShareContent%28shareMediaCategory%2CshareCommentary%2Cmedia%28*%28media~%3AplayableStreams%2CoriginalUrl%2Cdescription%2Ctitle%2Cthumbnails%29%29%29%29%29%29&authors=List(urn%3Ali%3Aorganization%3A2414183)"
+          }
+        ]
+      },
+      "elements": [
+        {
+          "specificContent": {
+            "com.linkedin.ugc.ShareContent": {
+              "shareMediaCategory": "ARTICLE",
+              "shareCommentary": {
+                "attributes": [],
+                "text": "\n  \n  1 test estates link 1 PI-PNL-02.pdf prezentacja"
+              },
+              "media": [
+                {
+                  "media!": {
+                    "message": "Unsupported URN domain: li:article:playableStreams",
+                    "status": 501
+                  },
+                  "media": "urn:li:article:-1",
+                  "originalUrl": "http://jrs-stage.int.railwaymen.org/content/8f36d0af-bcc8-4294-8708-bd6baab80424",
+                  "title": {
+                    "text": "1 test estates link 1"
+                  },
+                  "thumbnails": [
+                    {
+                      "media": "urn:li:digitalmediaAsset:C4E34AQEq3HQv8b_Xdw",
+                      "url": "http://jrs-stage.int.railwaymen.org/rails/active_storage/blobs/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBa3U2IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--edd7dcfe90f218434c9f632d5767e04a96531f4d/PI-PNL-02-0.jpg"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          "created": {
+            "actor": "urn:li:person:FRTi-79SDF",
+            "time": 1645697048787
+          },
+          "id": "urn:li:share:6902553714066808832"
+        },
+        {
+          "specificContent": {
+            "com.linkedin.ugc.ShareContent": {
+              "shareMediaCategory": "ARTICLE",
+              "shareCommentary": {
+                "inferredLocale": "en_US",
+                "attributes": [],
+                "text": "\n  \n  2 test dui link v2"
+              },
+              "media": [
+                {
+                  "media!": {
+                    "message": "Unsupported URN domain: li:article:playableStreams",
+                    "status": 501
+                  },
+                  "media": "urn:li:article:-1",
+                  "originalUrl": "http://jrs-stage.int.railwaymen.org/content/774ac55c-ea18-4622-a0c5-1d5eaed844f0",
+                  "title": {
+                    "text": "2 test dui link v2"
+                  },
+                  "thumbnails": [
+                    {
+                      "media": "urn:li:digitalmediaAsset:C4E34AQF8S7kvYL5B3w",
+                      "url": "http://jrs-stage.int.railwaymen.org/rails/active_storage/blobs/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBb3lnIiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--1e94028f734a026a14db3d38e596f069b5b46755/RM-VID%20(1)-0.jpg"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          "created": {
+            "actor": "urn:li:person:FRTi-79SDF",
+            "time": 1645688769173
+          },
+          "id": "urn:li:share:6902518986865463296"
+        },
+        {
+          "specificContent": {
+            "com.linkedin.ugc.ShareContent": {
+              "shareMediaCategory": "VIDEO",
+              "shareCommentary": {
+                "attributes": [
+                  {
+                    "start": 6,
+                    "length": 8,
+                    "value": {
+                      "com.linkedin.common.CompanyAttributedEntity": {
+                        "company": "urn:li:organization:1337"
+                      }
+                    }
+                  }
+                ],
+                "text": "Hello LinkedIn"
+              },
+              "media": [
+                {
+                  "media~": {
+                    "paging": {
+                      "count": 10,
+                      "start": 0,
+                      "links": []
+                    },
+                    "elements": [
+                      {
+                        "artifact": "urn:li:digitalmediaMediaArtifact:(urn:li:digitalmediaAsset:C5610AQGkH2If4C2AoQ,urn:li:digitalmediaMediaArtifactClass:hls-360p-720p-crf28)",
+                        "authorizationMethod": "PUBLIC",
+                        "data": {
+                          "com.linkedin.digitalmedia.mediaartifact.AdaptiveStreamVideoMasterPlaylist": {
+                            "protocol": "HLS",
+                            "startTimeInMicroseconds": 0,
+                            "playlistFileIndex": 0,
+                            "playlistType": "VOD",
+                            "representations": [
+                              {
+                                "bitrate": {
+                                  "average": 226262,
+                                  "maximum": 289717,
+                                  "type": "UNKNOWN",
+                                  "minimum": 162808
+                                },
+                                "codecs": [
+                                  {
+                                    "name": "h264",
+                                    "longName": "H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10"
+                                  }
+                                ],
+                                "artifactClass": "urn:li:digitalmediaMediaArtifactClass:hls-640p-30fp-crf28"
+                              },
+                              {
+                                "bitrate": {
+                                  "average": 262992,
+                                  "maximum": 341368,
+                                  "type": "UNKNOWN",
+                                  "minimum": 184616
+                                },
+                                "codecs": [
+                                  {
+                                    "name": "h264",
+                                    "longName": "H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10"
+                                  }
+                                ],
+                                "artifactClass": "urn:li:digitalmediaMediaArtifactClass:hls-720p-30fp-crf28"
+                              },
+                              {
+                                "bitrate": {
+                                  "average": 163619,
+                                  "maximum": 205414,
+                                  "type": "UNKNOWN",
+                                  "minimum": 121824
+                                },
+                                "codecs": [
+                                  {
+                                    "name": "h264",
+                                    "longName": "H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10"
+                                  }
+                                ],
+                                "artifactClass": "urn:li:digitalmediaMediaArtifactClass:hls-480p-30fp-crf28"
+                              },
+                              {
+                                "bitrate": {
+                                  "average": 120884,
+                                  "maximum": 146640,
+                                  "type": "UNKNOWN",
+                                  "minimum": 95128
+                                },
+                                "codecs": [
+                                  {
+                                    "name": "h264",
+                                    "longName": "H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10"
+                                  }
+                                ],
+                                "artifactClass": "urn:li:digitalmediaMediaArtifactClass:hls-360p-30fp-crf28"
+                              },
+                              {
+                                "bitrate": {
+                                  "average": 187386,
+                                  "maximum": 238661,
+                                  "type": "UNKNOWN",
+                                  "minimum": 136112
+                                },
+                                "codecs": [
+                                  {
+                                    "name": "h264",
+                                    "longName": "H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10"
+                                  }
+                                ],
+                                "artifactClass": "urn:li:digitalmediaMediaArtifactClass:hls-540p-30fp-crf28"
+                              }
+                            ],
+                            "durationInMicroseconds": 6533333,
+                            "displayAspectRatio": {
+                              "widthAspect": 16,
+                              "heightAspect": 9,
+                              "formatted": "16:9"
+                            }
+                          }
+                        },
+                        "identifiers": [
+                          {
+                            "identifier": "https://dms.licdn.com/playlist/C5610AQGkH2If4C2AoQ/hls-360p-720p-crf28/0/1645681855111?e=1645786800&v=beta&t=wWLiND6tuVe6kjhIxp8cc5zVvoXPAUTY0FCwRAeNNlI",
+                            "file": "urn:li:digitalmediaFile:(urn:li:digitalmediaAsset:C5610AQGkH2If4C2AoQ,urn:li:digitalmediaArtifactClass:hls-360p-720p-crf28,0)",
+                            "size": 1197,
+                            "index": 0,
+                            "mediaType": "application/vnd.apple.mpegURL",
+                            "identifierType": "EXTERNAL_URL",
+                            "identifierExpiresInSeconds": 1645786800
+                          }
+                        ]
+                      },
+                      {
+                        "artifact": "urn:li:digitalmediaMediaArtifact:(urn:li:digitalmediaAsset:C5610AQGkH2If4C2AoQ,urn:li:digitalmediaMediaArtifactClass:hls-540p-30fp-crf28)",
+                        "authorizationMethod": "PUBLIC",
+                        "data": {
+                          "com.linkedin.digitalmedia.mediaartifact.AdaptiveStreamVideo": {
+                            "segmentTargetDurationInMicroseconds": 4000000,
+                            "protocol": "HLS",
+                            "videoStream": {
+                              "frameRate": {
+                                "type": "UNKNOWN",
+                                "average": {
+                                  "fps": 30,
+                                  "rational": {
+                                    "numerator": 30,
+                                    "denominator": 1
+                                  },
+                                  "formatted": "30/1"
+                                }
+                              },
+                              "codec": {
+                                "name": "h264",
+                                "longName": "H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10"
+                              },
+                              "displaySize": {
+                                "width": 960,
+                                "uom": "PX",
+                                "height": 540
+                              },
+                              "displayAspectRatio": {
+                                "widthAspect": 16,
+                                "heightAspect": 9,
+                                "formatted": "16:9"
+                              },
+                              "storageSize": {
+                                "width": 960,
+                                "height": 540
+                              },
+                              "storageAspectRatio": {
+                                "widthAspect": 16,
+                                "heightAspect": 9,
+                                "formatted": "16:9"
+                              }
+                            },
+                            "playlistFileIndex": 0,
+                            "playlistType": "VOD",
+                            "segmentContainerFormat": {
+                              "name": "mpegts",
+                              "tags": []
+                            },
+                            "videoMultiMethodAssessmentFusion": 52.66416,
+                            "durationInMicroseconds": 6533333,
+                            "segments": [
+                              {
+                                "fileIndex": 1,
+                                "type": "MEDIA",
+                                "startTimeInMicroseconds": 0,
+                                "durationInMicroseconds": 4000000
+                              },
+                              {
+                                "fileIndex": 2,
+                                "type": "MEDIA",
+                                "startTimeInMicroseconds": 5466667,
+                                "durationInMicroseconds": 2533333
+                              }
+                            ]
+                          }
+                        },
+                        "identifiers": [
+                          {
+                            "identifier": "https://dms.licdn.com/playlist/C5610AQGkH2If4C2AoQ/hls-540p-30fp-crf28/0/1645681854322?e=1645786800&v=beta&t=Z4W3L2s4qW-Koz0qWIgjCaCO_yCGS5u6c2BqWlPiWjw",
+                            "file": "urn:li:digitalmediaFile:(urn:li:digitalmediaAsset:C5610AQGkH2If4C2AoQ,urn:li:digitalmediaArtifactClass:hls-540p-30fp-crf28,0)",
+                            "size": 236,
+                            "index": 0,
+                            "mediaType": "application/vnd.apple.mpegURL",
+                            "identifierType": "EXTERNAL_URL",
+                            "identifierExpiresInSeconds": 1645786800
+                          }
+                        ]
+                      },
+                      {
+                        "artifact": "urn:li:digitalmediaMediaArtifact:(urn:li:digitalmediaAsset:C5610AQGkH2If4C2AoQ,urn:li:digitalmediaMediaArtifactClass:hls-480p-30fp-crf28)",
+                        "authorizationMethod": "PUBLIC",
+                        "data": {
+                          "com.linkedin.digitalmedia.mediaartifact.AdaptiveStreamVideo": {
+                            "segmentTargetDurationInMicroseconds": 4000000,
+                            "protocol": "HLS",
+                            "videoStream": {
+                              "frameRate": {
+                                "type": "UNKNOWN",
+                                "average": {
+                                  "fps": 30,
+                                  "rational": {
+                                    "numerator": 30,
+                                    "denominator": 1
+                                  },
+                                  "formatted": "30/1"
+                                }
+                              },
+                              "codec": {
+                                "name": "h264",
+                                "longName": "H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10"
+                              },
+                              "displaySize": {
+                                "width": 854,
+                                "uom": "PX",
+                                "height": 480
+                              },
+                              "displayAspectRatio": {
+                                "widthAspect": 16,
+                                "heightAspect": 9,
+                                "formatted": "16:9"
+                              },
+                              "storageSize": {
+                                "width": 854,
+                                "height": 480
+                              },
+                              "storageAspectRatio": {
+                                "widthAspect": 16,
+                                "heightAspect": 9,
+                                "formatted": "16:9"
+                              }
+                            },
+                            "playlistFileIndex": 0,
+                            "playlistType": "VOD",
+                            "segmentContainerFormat": {
+                              "name": "mpegts",
+                              "tags": []
+                            },
+                            "videoMultiMethodAssessmentFusion": 45.87308,
+                            "durationInMicroseconds": 6533333,
+                            "segments": [
+                              {
+                                "fileIndex": 1,
+                                "type": "MEDIA",
+                                "startTimeInMicroseconds": 0,
+                                "durationInMicroseconds": 4000000
+                              },
+                              {
+                                "fileIndex": 2,
+                                "type": "MEDIA",
+                                "startTimeInMicroseconds": 5466667,
+                                "durationInMicroseconds": 2533333
+                              }
+                            ]
+                          }
+                        },
+                        "identifiers": [
+                          {
+                            "identifier": "https://dms.licdn.com/playlist/C5610AQGkH2If4C2AoQ/hls-480p-30fp-crf28/0/1645681854070?e=1645786800&v=beta&t=wJTwlHdei0AJunc_2wMClTT_nA1tHUzje-_-N1zaCLs",
+                            "file": "urn:li:digitalmediaFile:(urn:li:digitalmediaAsset:C5610AQGkH2If4C2AoQ,urn:li:digitalmediaArtifactClass:hls-480p-30fp-crf28,0)",
+                            "size": 236,
+                            "index": 0,
+                            "mediaType": "application/vnd.apple.mpegURL",
+                            "identifierType": "EXTERNAL_URL",
+                            "identifierExpiresInSeconds": 1645786800
+                          }
+                        ]
+                      },
+                      {
+                        "artifact": "urn:li:digitalmediaMediaArtifact:(urn:li:digitalmediaAsset:C5610AQGkH2If4C2AoQ,urn:li:digitalmediaMediaArtifactClass:hls-720p-30fp-crf28)",
+                        "authorizationMethod": "PUBLIC",
+                        "data": {
+                          "com.linkedin.digitalmedia.mediaartifact.AdaptiveStreamVideo": {
+                            "segmentTargetDurationInMicroseconds": 4000000,
+                            "protocol": "HLS",
+                            "videoStream": {
+                              "frameRate": {
+                                "type": "UNKNOWN",
+                                "average": {
+                                  "fps": 30,
+                                  "rational": {
+                                    "numerator": 30,
+                                    "denominator": 1
+                                  },
+                                  "formatted": "30/1"
+                                }
+                              },
+                              "codec": {
+                                "name": "h264",
+                                "longName": "H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10"
+                              },
+                              "displaySize": {
+                                "width": 1280,
+                                "uom": "PX",
+                                "height": 720
+                              },
+                              "displayAspectRatio": {
+                                "widthAspect": 16,
+                                "heightAspect": 9,
+                                "formatted": "16:9"
+                              },
+                              "storageSize": {
+                                "width": 1280,
+                                "height": 720
+                              },
+                              "storageAspectRatio": {
+                                "widthAspect": 16,
+                                "heightAspect": 9,
+                                "formatted": "16:9"
+                              }
+                            },
+                            "playlistFileIndex": 0,
+                            "playlistType": "VOD",
+                            "segmentContainerFormat": {
+                              "name": "mpegts",
+                              "tags": []
+                            },
+                            "videoMultiMethodAssessmentFusion": 67.21682,
+                            "durationInMicroseconds": 6533333,
+                            "segments": [
+                              {
+                                "fileIndex": 1,
+                                "type": "MEDIA",
+                                "startTimeInMicroseconds": 0,
+                                "durationInMicroseconds": 4000000
+                              },
+                              {
+                                "fileIndex": 2,
+                                "type": "MEDIA",
+                                "startTimeInMicroseconds": 5466667,
+                                "durationInMicroseconds": 2533333
+                              }
+                            ]
+                          }
+                        },
+                        "identifiers": [
+                          {
+                            "identifier": "https://dms.licdn.com/playlist/C5610AQGkH2If4C2AoQ/hls-720p-30fp-crf28/0/1645681853746?e=1645786800&v=beta&t=X_sZxHt7u7ei3QzSqlI9vojlLkBX5-kOklGHVtkxzCY",
+                            "file": "urn:li:digitalmediaFile:(urn:li:digitalmediaAsset:C5610AQGkH2If4C2AoQ,urn:li:digitalmediaArtifactClass:hls-720p-30fp-crf28,0)",
+                            "size": 236,
+                            "index": 0,
+                            "mediaType": "application/vnd.apple.mpegURL",
+                            "identifierType": "EXTERNAL_URL",
+                            "identifierExpiresInSeconds": 1645786800
+                          }
+                        ]
+                      },
+                      {
+                        "artifact": "urn:li:digitalmediaMediaArtifact:(urn:li:digitalmediaAsset:C5610AQGkH2If4C2AoQ,urn:li:digitalmediaMediaArtifactClass:hls-640p-30fp-crf28)",
+                        "authorizationMethod": "PUBLIC",
+                        "data": {
+                          "com.linkedin.digitalmedia.mediaartifact.AdaptiveStreamVideo": {
+                            "segmentTargetDurationInMicroseconds": 4000000,
+                            "protocol": "HLS",
+                            "videoStream": {
+                              "frameRate": {
+                                "type": "UNKNOWN",
+                                "average": {
+                                  "fps": 30,
+                                  "rational": {
+                                    "numerator": 30,
+                                    "denominator": 1
+                                  },
+                                  "formatted": "30/1"
+                                }
+                              },
+                              "codec": {
+                                "name": "h264",
+                                "longName": "H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10"
+                              },
+                              "displaySize": {
+                                "width": 1138,
+                                "uom": "PX",
+                                "height": 640
+                              },
+                              "displayAspectRatio": {
+                                "widthAspect": 16,
+                                "heightAspect": 9,
+                                "formatted": "16:9"
+                              },
+                              "storageSize": {
+                                "width": 1138,
+                                "height": 640
+                              },
+                              "storageAspectRatio": {
+                                "widthAspect": 16,
+                                "heightAspect": 9,
+                                "formatted": "16:9"
+                              }
+                            },
+                            "playlistFileIndex": 0,
+                            "playlistType": "VOD",
+                            "segmentContainerFormat": {
+                              "name": "mpegts",
+                              "tags": []
+                            },
+                            "videoMultiMethodAssessmentFusion": 62.085022,
+                            "durationInMicroseconds": 6533333,
+                            "segments": [
+                              {
+                                "fileIndex": 1,
+                                "type": "MEDIA",
+                                "startTimeInMicroseconds": 0,
+                                "durationInMicroseconds": 4000000
+                              },
+                              {
+                                "fileIndex": 2,
+                                "type": "MEDIA",
+                                "startTimeInMicroseconds": 5466667,
+                                "durationInMicroseconds": 2533333
+                              }
+                            ]
+                          }
+                        },
+                        "identifiers": [
+                          {
+                            "identifier": "https://dms.licdn.com/playlist/C5610AQGkH2If4C2AoQ/hls-640p-30fp-crf28/0/1645681855053?e=1645786800&v=beta&t=qAgtTMBGaecJjJhqd5MRlBP_evCd-_y8YVm9l4SLjhI",
+                            "file": "urn:li:digitalmediaFile:(urn:li:digitalmediaAsset:C5610AQGkH2If4C2AoQ,urn:li:digitalmediaArtifactClass:hls-640p-30fp-crf28,0)",
+                            "size": 236,
+                            "index": 0,
+                            "mediaType": "application/vnd.apple.mpegURL",
+                            "identifierType": "EXTERNAL_URL",
+                            "identifierExpiresInSeconds": 1645786800
+                          }
+                        ]
+                      },
+                      {
+                        "artifact": "urn:li:digitalmediaMediaArtifact:(urn:li:digitalmediaAsset:C5610AQGkH2If4C2AoQ,urn:li:digitalmediaMediaArtifactClass:hls-360p-30fp-crf28)",
+                        "authorizationMethod": "PUBLIC",
+                        "data": {
+                          "com.linkedin.digitalmedia.mediaartifact.AdaptiveStreamVideo": {
+                            "segmentTargetDurationInMicroseconds": 4000000,
+                            "protocol": "HLS",
+                            "videoStream": {
+                              "frameRate": {
+                                "type": "UNKNOWN",
+                                "average": {
+                                  "fps": 30,
+                                  "rational": {
+                                    "numerator": 30,
+                                    "denominator": 1
+                                  },
+                                  "formatted": "30/1"
+                                }
+                              },
+                              "codec": {
+                                "name": "h264",
+                                "longName": "H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10"
+                              },
+                              "displaySize": {
+                                "width": 640,
+                                "uom": "PX",
+                                "height": 360
+                              },
+                              "displayAspectRatio": {
+                                "widthAspect": 16,
+                                "heightAspect": 9,
+                                "formatted": "16:9"
+                              },
+                              "storageSize": {
+                                "width": 640,
+                                "height": 360
+                              },
+                              "storageAspectRatio": {
+                                "widthAspect": 16,
+                                "heightAspect": 9,
+                                "formatted": "16:9"
+                              }
+                            },
+                            "playlistFileIndex": 0,
+                            "playlistType": "VOD",
+                            "segmentContainerFormat": {
+                              "name": "mpegts",
+                              "tags": []
+                            },
+                            "videoMultiMethodAssessmentFusion": 24.767357,
+                            "durationInMicroseconds": 6533333,
+                            "segments": [
+                              {
+                                "fileIndex": 1,
+                                "type": "MEDIA",
+                                "startTimeInMicroseconds": 0,
+                                "durationInMicroseconds": 4000000
+                              },
+                              {
+                                "fileIndex": 2,
+                                "type": "MEDIA",
+                                "startTimeInMicroseconds": 5466667,
+                                "durationInMicroseconds": 2533333
+                              }
+                            ]
+                          }
+                        },
+                        "identifiers": [
+                          {
+                            "identifier": "https://dms.licdn.com/playlist/C5610AQGkH2If4C2AoQ/hls-360p-30fp-crf28/0/1645681852151?e=1645786800&v=beta&t=fBjsTTZ7Kf-6RVRBxjKTRmcktUeyqPTkT0agQDLGkIc",
+                            "file": "urn:li:digitalmediaFile:(urn:li:digitalmediaAsset:C5610AQGkH2If4C2AoQ,urn:li:digitalmediaArtifactClass:hls-360p-30fp-crf28,0)",
+                            "size": 236,
+                            "index": 0,
+                            "mediaType": "application/vnd.apple.mpegURL",
+                            "identifierType": "EXTERNAL_URL",
+                            "identifierExpiresInSeconds": 1645786800
+                          }
+                        ]
+                      },
+                      {
+                        "artifact": "urn:li:digitalmediaMediaArtifact:(urn:li:digitalmediaAsset:C5610AQGkH2If4C2AoQ,urn:li:digitalmediaMediaArtifactClass:mp4-640p-30fp-crf28)",
+                        "authorizationMethod": "PUBLIC",
+                        "data": {
+                          "com.linkedin.digitalmedia.mediaartifact.Video": {
+                            "startTimeInMicroseconds": 0,
+                            "videoStreams": [
+                              {
+                                "pixelAspectRatio": {
+                                  "widthAspect": 1,
+                                  "heightAspect": 1.0001953,
+                                  "formatted": "1.00:1.00"
+                                },
+                                "startTimeInMicroseconds": 0,
+                                "chromaSubsampling": "4:2:0",
+                                "index": 0,
+                                "displaySize": {
+                                  "width": 1138,
+                                  "uom": "PX",
+                                  "height": 640
+                                },
+                                "displayAspectRatio": {
+                                  "widthAspect": 16,
+                                  "heightAspect": 9,
+                                  "formatted": "16:9"
+                                },
+                                "frameRate": {
+                                  "type": "UNKNOWN",
+                                  "average": {
+                                    "fps": 30,
+                                    "rational": {
+                                      "numerator": 30,
+                                      "denominator": 1
+                                    },
+                                    "formatted": "30/1"
+                                  }
+                                },
+                                "codec": {
+                                  "name": "h264",
+                                  "longName": "H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10"
+                                },
+                                "bitRate": {
+                                  "type": "UNKNOWN",
+                                  "average": 172830,
+                                  "maximum": 172830
+                                },
+                                "colorSpaceName": "YUV",
+                                "storageSize": {
+                                  "width": 1138,
+                                  "height": 640
+                                },
+                                "storageAspectRatio": {
+                                  "widthAspect": 16,
+                                  "heightAspect": 9,
+                                  "formatted": "16:9"
+                                },
+                                "videoMultiMethodAssessmentFusion": 62.097176,
+                                "durationInMicroseconds": 6533333
+                              }
+                            ],
+                            "rawMetadataTags": [],
+                            "mediaType": "video/mp4",
+                            "audioStreams": [],
+                            "rawFormatSpec": {
+                              "name": "mov,mp4,m4a,3gp,3g2,mj2",
+                              "longName": "QuickTime / MOV",
+                              "tags": [
+                                {
+                                  "value": "isom",
+                                  "key": "major_brand"
+                                },
+                                {
+                                  "value": "Lavf58.45.100",
+                                  "key": "encoder"
+                                },
+                                {
+                                  "value": "512",
+                                  "key": "minor_version"
+                                },
+                                {
+                                  "value": "isomiso2avc1mp41",
+                                  "key": "compatible_brands"
+                                }
+                              ]
+                            },
+                            "durationInMicroseconds": 6534000
+                          }
+                        },
+                        "identifiers": [
+                          {
+                            "identifier": "https://dms.licdn.com/playlist/C5610AQGkH2If4C2AoQ/mp4-640p-30fp-crf28/0/1645681855123?e=1645786800&v=beta&t=slxiAITxOUqv733_Z46WB_Ccgf6aw_EefY3ZITpGsio",
+                            "file": "urn:li:digitalmediaFile:(urn:li:digitalmediaAsset:C5610AQGkH2If4C2AoQ,urn:li:digitalmediaArtifactClass:mp4-640p-30fp-crf28,0)",
+                            "size": 144335,
+                            "index": 0,
+                            "mediaType": "video/mp4",
+                            "identifierType": "EXTERNAL_URL",
+                            "identifierExpiresInSeconds": 1645786800
+                          }
+                        ]
+                      },
+                      {
+                        "artifact": "urn:li:digitalmediaMediaArtifact:(urn:li:digitalmediaAsset:C5610AQGkH2If4C2AoQ,urn:li:digitalmediaMediaArtifactClass:mp4-360p-30fp-crf28)",
+                        "authorizationMethod": "PUBLIC",
+                        "data": {
+                          "com.linkedin.digitalmedia.mediaartifact.Video": {
+                            "startTimeInMicroseconds": 0,
+                            "videoStreams": [
+                              {
+                                "pixelAspectRatio": {
+                                  "widthAspect": 1,
+                                  "heightAspect": 1,
+                                  "formatted": "1.00:1.00"
+                                },
+                                "startTimeInMicroseconds": 0,
+                                "chromaSubsampling": "4:2:0",
+                                "index": 0,
+                                "displaySize": {
+                                  "width": 640,
+                                  "uom": "PX",
+                                  "height": 360
+                                },
+                                "displayAspectRatio": {
+                                  "widthAspect": 16,
+                                  "heightAspect": 9,
+                                  "formatted": "16:9"
+                                },
+                                "frameRate": {
+                                  "type": "UNKNOWN",
+                                  "average": {
+                                    "fps": 30,
+                                    "rational": {
+                                      "numerator": 30,
+                                      "denominator": 1
+                                    },
+                                    "formatted": "30/1"
+                                  }
+                                },
+                                "codec": {
+                                  "name": "h264",
+                                  "longName": "H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10"
+                                },
+                                "bitRate": {
+                                  "type": "UNKNOWN",
+                                  "average": 73198,
+                                  "maximum": 73198
+                                },
+                                "colorSpaceName": "YUV",
+                                "storageSize": {
+                                  "width": 640,
+                                  "height": 360
+                                },
+                                "storageAspectRatio": {
+                                  "widthAspect": 16,
+                                  "heightAspect": 9,
+                                  "formatted": "16:9"
+                                },
+                                "videoMultiMethodAssessmentFusion": 24.795553,
+                                "durationInMicroseconds": 6533333
+                              }
+                            ],
+                            "rawMetadataTags": [],
+                            "mediaType": "video/mp4",
+                            "audioStreams": [],
+                            "rawFormatSpec": {
+                              "name": "mov,mp4,m4a,3gp,3g2,mj2",
+                              "longName": "QuickTime / MOV",
+                              "tags": [
+                                {
+                                  "value": "isom",
+                                  "key": "major_brand"
+                                },
+                                {
+                                  "value": "Lavf58.45.100",
+                                  "key": "encoder"
+                                },
+                                {
+                                  "value": "512",
+                                  "key": "minor_version"
+                                },
+                                {
+                                  "value": "isomiso2avc1mp41",
+                                  "key": "compatible_brands"
+                                }
+                              ]
+                            },
+                            "durationInMicroseconds": 6534000
+                          }
+                        },
+                        "identifiers": [
+                          {
+                            "identifier": "https://dms.licdn.com/playlist/C5610AQGkH2If4C2AoQ/mp4-360p-30fp-crf28/0/1645681854081?e=1645786800&v=beta&t=SK3zC0YIA1AE5L8PwEF1_aQ5PmvYH6Sc8bOEH8KTcp4",
+                            "file": "urn:li:digitalmediaFile:(urn:li:digitalmediaAsset:C5610AQGkH2If4C2AoQ,urn:li:digitalmediaArtifactClass:mp4-360p-30fp-crf28,0)",
+                            "size": 62963,
+                            "index": 0,
+                            "mediaType": "video/mp4",
+                            "identifierType": "EXTERNAL_URL",
+                            "identifierExpiresInSeconds": 1645786800
+                          }
+                        ]
+                      },
+                      {
+                        "artifact": "urn:li:digitalmediaMediaArtifact:(urn:li:digitalmediaAsset:C5610AQGkH2If4C2AoQ,urn:li:digitalmediaMediaArtifactClass:mp4-720p-30fp-crf28)",
+                        "authorizationMethod": "PUBLIC",
+                        "data": {
+                          "com.linkedin.digitalmedia.mediaartifact.Video": {
+                            "startTimeInMicroseconds": 0,
+                            "videoStreams": [
+                              {
+                                "pixelAspectRatio": {
+                                  "widthAspect": 1,
+                                  "heightAspect": 1,
+                                  "formatted": "1.00:1.00"
+                                },
+                                "startTimeInMicroseconds": 0,
+                                "chromaSubsampling": "4:2:0",
+                                "index": 0,
+                                "displaySize": {
+                                  "width": 1280,
+                                  "uom": "PX",
+                                  "height": 720
+                                },
+                                "displayAspectRatio": {
+                                  "widthAspect": 16,
+                                  "heightAspect": 9,
+                                  "formatted": "16:9"
+                                },
+                                "frameRate": {
+                                  "type": "UNKNOWN",
+                                  "average": {
+                                    "fps": 30,
+                                    "rational": {
+                                      "numerator": 30,
+                                      "denominator": 1
+                                    },
+                                    "formatted": "30/1"
+                                  }
+                                },
+                                "codec": {
+                                  "name": "h264",
+                                  "longName": "H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10"
+                                },
+                                "bitRate": {
+                                  "type": "UNKNOWN",
+                                  "average": 207625,
+                                  "maximum": 207625
+                                },
+                                "colorSpaceName": "YUV",
+                                "storageSize": {
+                                  "width": 1280,
+                                  "height": 720
+                                },
+                                "storageAspectRatio": {
+                                  "widthAspect": 16,
+                                  "heightAspect": 9,
+                                  "formatted": "16:9"
+                                },
+                                "videoMultiMethodAssessmentFusion": 67.21901,
+                                "durationInMicroseconds": 6533333
+                              }
+                            ],
+                            "rawMetadataTags": [],
+                            "mediaType": "video/mp4",
+                            "audioStreams": [],
+                            "rawFormatSpec": {
+                              "name": "mov,mp4,m4a,3gp,3g2,mj2",
+                              "longName": "QuickTime / MOV",
+                              "tags": [
+                                {
+                                  "value": "isom",
+                                  "key": "major_brand"
+                                },
+                                {
+                                  "value": "Lavf58.45.100",
+                                  "key": "encoder"
+                                },
+                                {
+                                  "value": "512",
+                                  "key": "minor_version"
+                                },
+                                {
+                                  "value": "isomiso2avc1mp41",
+                                  "key": "compatible_brands"
+                                }
+                              ]
+                            },
+                            "durationInMicroseconds": 6534000
+                          }
+                        },
+                        "identifiers": [
+                          {
+                            "identifier": "https://dms.licdn.com/playlist/C5610AQGkH2If4C2AoQ/mp4-720p-30fp-crf28/0/1645681854206?e=1645786800&v=beta&t=4xQMqz38-Z4R2cECyqi_-8RZQOMN4YQkzxvXUVMQNMQ",
+                            "file": "urn:li:digitalmediaFile:(urn:li:digitalmediaAsset:C5610AQGkH2If4C2AoQ,urn:li:digitalmediaArtifactClass:mp4-720p-30fp-crf28,0)",
+                            "size": 172746,
+                            "index": 0,
+                            "mediaType": "video/mp4",
+                            "identifierType": "EXTERNAL_URL",
+                            "identifierExpiresInSeconds": 1645786800
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  "media": "urn:li:digitalmediaAsset:C5610AQGkH2If4C2AoQ",
+                  "title": {
+                    "text": "title of the video"
+                  },
+                  "thumbnails": []
+                }
+              ]
+            }
+          },
+          "created": {
+            "actor": "urn:li:person:ni9uyHI38P",
+            "time": 1645682035754
+          },
+          "id": "urn:li:ugcPost:6902490744620232704"
+        },
+        {
+          "specificContent": {
+            "com.linkedin.ugc.ShareContent": {
+              "shareMediaCategory": "VIDEO",
+              "shareCommentary": {
+                "attributes": [
+                  {
+                    "start": 6,
+                    "length": 9,
+                    "value": {
+                      "com.linkedin.common.CompanyAttributedEntity": {
+                        "company": "urn:li:organization:2414183"
+                      }
+                    }
+                  }
+                ],
+                "text": "Hello Devtestco"
+              },
+              "media": [
+                {
+                  "media~": {
+                    "paging": {
+                      "count": 10,
+                      "start": 0,
+                      "links": []
+                    },
+                    "elements": [
+                      {
+                        "artifact": "urn:li:digitalmediaMediaArtifact:(urn:li:digitalmediaAsset:C5610AQGHDaySba4R7A,urn:li:digitalmediaMediaArtifactClass:hls-360p-720p-crf28)",
+                        "authorizationMethod": "PUBLIC",
+                        "data": {
+                          "com.linkedin.digitalmedia.mediaartifact.AdaptiveStreamVideoMasterPlaylist": {
+                            "protocol": "HLS",
+                            "startTimeInMicroseconds": 0,
+                            "playlistFileIndex": 0,
+                            "playlistType": "VOD",
+                            "representations": [
+                              {
+                                "bitrate": {
+                                  "average": 226262,
+                                  "maximum": 289717,
+                                  "type": "UNKNOWN",
+                                  "minimum": 162808
+                                },
+                                "codecs": [
+                                  {
+                                    "name": "h264",
+                                    "longName": "H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10"
+                                  }
+                                ],
+                                "artifactClass": "urn:li:digitalmediaMediaArtifactClass:hls-640p-30fp-crf28"
+                              },
+                              {
+                                "bitrate": {
+                                  "average": 262992,
+                                  "maximum": 341368,
+                                  "type": "UNKNOWN",
+                                  "minimum": 184616
+                                },
+                                "codecs": [
+                                  {
+                                    "name": "h264",
+                                    "longName": "H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10"
+                                  }
+                                ],
+                                "artifactClass": "urn:li:digitalmediaMediaArtifactClass:hls-720p-30fp-crf28"
+                              },
+                              {
+                                "bitrate": {
+                                  "average": 163619,
+                                  "maximum": 205414,
+                                  "type": "UNKNOWN",
+                                  "minimum": 121824
+                                },
+                                "codecs": [
+                                  {
+                                    "name": "h264",
+                                    "longName": "H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10"
+                                  }
+                                ],
+                                "artifactClass": "urn:li:digitalmediaMediaArtifactClass:hls-480p-30fp-crf28"
+                              },
+                              {
+                                "bitrate": {
+                                  "average": 120884,
+                                  "maximum": 146640,
+                                  "type": "UNKNOWN",
+                                  "minimum": 95128
+                                },
+                                "codecs": [
+                                  {
+                                    "name": "h264",
+                                    "longName": "H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10"
+                                  }
+                                ],
+                                "artifactClass": "urn:li:digitalmediaMediaArtifactClass:hls-360p-30fp-crf28"
+                              },
+                              {
+                                "bitrate": {
+                                  "average": 187386,
+                                  "maximum": 238661,
+                                  "type": "UNKNOWN",
+                                  "minimum": 136112
+                                },
+                                "codecs": [
+                                  {
+                                    "name": "h264",
+                                    "longName": "H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10"
+                                  }
+                                ],
+                                "artifactClass": "urn:li:digitalmediaMediaArtifactClass:hls-540p-30fp-crf28"
+                              }
+                            ],
+                            "durationInMicroseconds": 6533333,
+                            "displayAspectRatio": {
+                              "widthAspect": 16,
+                              "heightAspect": 9,
+                              "formatted": "16:9"
+                            }
+                          }
+                        },
+                        "identifiers": [
+                          {
+                            "identifier": "https://dms.licdn.com/playlist/C5610AQGHDaySba4R7A/hls-360p-720p-crf28/0/1645681260917?e=1645786800&v=beta&t=1BjLKTngdzk4L9-WkxK9pDjDM0gnjM3EXWzOBxiHY5Y",
+                            "file": "urn:li:digitalmediaFile:(urn:li:digitalmediaAsset:C5610AQGHDaySba4R7A,urn:li:digitalmediaArtifactClass:hls-360p-720p-crf28,0)",
+                            "size": 1197,
+                            "index": 0,
+                            "mediaType": "application/vnd.apple.mpegURL",
+                            "identifierType": "EXTERNAL_URL",
+                            "identifierExpiresInSeconds": 1645786800
+                          }
+                        ]
+                      },
+                      {
+                        "artifact": "urn:li:digitalmediaMediaArtifact:(urn:li:digitalmediaAsset:C5610AQGHDaySba4R7A,urn:li:digitalmediaMediaArtifactClass:hls-540p-30fp-crf28)",
+                        "authorizationMethod": "PUBLIC",
+                        "data": {
+                          "com.linkedin.digitalmedia.mediaartifact.AdaptiveStreamVideo": {
+                            "segmentTargetDurationInMicroseconds": 4000000,
+                            "protocol": "HLS",
+                            "videoStream": {
+                              "frameRate": {
+                                "type": "UNKNOWN",
+                                "average": {
+                                  "fps": 30,
+                                  "rational": {
+                                    "numerator": 30,
+                                    "denominator": 1
+                                  },
+                                  "formatted": "30/1"
+                                }
+                              },
+                              "codec": {
+                                "name": "h264",
+                                "longName": "H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10"
+                              },
+                              "displaySize": {
+                                "width": 960,
+                                "uom": "PX",
+                                "height": 540
+                              },
+                              "displayAspectRatio": {
+                                "widthAspect": 16,
+                                "heightAspect": 9,
+                                "formatted": "16:9"
+                              },
+                              "storageSize": {
+                                "width": 960,
+                                "height": 540
+                              },
+                              "storageAspectRatio": {
+                                "widthAspect": 16,
+                                "heightAspect": 9,
+                                "formatted": "16:9"
+                              }
+                            },
+                            "playlistFileIndex": 0,
+                            "playlistType": "VOD",
+                            "segmentContainerFormat": {
+                              "name": "mpegts",
+                              "tags": []
+                            },
+                            "videoMultiMethodAssessmentFusion": 52.66416,
+                            "durationInMicroseconds": 6533333,
+                            "segments": [
+                              {
+                                "fileIndex": 1,
+                                "type": "MEDIA",
+                                "startTimeInMicroseconds": 0,
+                                "durationInMicroseconds": 4000000
+                              },
+                              {
+                                "fileIndex": 2,
+                                "type": "MEDIA",
+                                "startTimeInMicroseconds": 5466667,
+                                "durationInMicroseconds": 2533333
+                              }
+                            ]
+                          }
+                        },
+                        "identifiers": [
+                          {
+                            "identifier": "https://dms.licdn.com/playlist/C5610AQGHDaySba4R7A/hls-540p-30fp-crf28/0/1645681260429?e=1645786800&v=beta&t=Jqo5dVvTsa0njo6EWzY9hYHK3mLCiSdyQpQSxr8aW1I",
+                            "file": "urn:li:digitalmediaFile:(urn:li:digitalmediaAsset:C5610AQGHDaySba4R7A,urn:li:digitalmediaArtifactClass:hls-540p-30fp-crf28,0)",
+                            "size": 236,
+                            "index": 0,
+                            "mediaType": "application/vnd.apple.mpegURL",
+                            "identifierType": "EXTERNAL_URL",
+                            "identifierExpiresInSeconds": 1645786800
+                          }
+                        ]
+                      },
+                      {
+                        "artifact": "urn:li:digitalmediaMediaArtifact:(urn:li:digitalmediaAsset:C5610AQGHDaySba4R7A,urn:li:digitalmediaMediaArtifactClass:hls-480p-30fp-crf28)",
+                        "authorizationMethod": "PUBLIC",
+                        "data": {
+                          "com.linkedin.digitalmedia.mediaartifact.AdaptiveStreamVideo": {
+                            "segmentTargetDurationInMicroseconds": 4000000,
+                            "protocol": "HLS",
+                            "videoStream": {
+                              "frameRate": {
+                                "type": "UNKNOWN",
+                                "average": {
+                                  "fps": 30,
+                                  "rational": {
+                                    "numerator": 30,
+                                    "denominator": 1
+                                  },
+                                  "formatted": "30/1"
+                                }
+                              },
+                              "codec": {
+                                "name": "h264",
+                                "longName": "H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10"
+                              },
+                              "displaySize": {
+                                "width": 854,
+                                "uom": "PX",
+                                "height": 480
+                              },
+                              "displayAspectRatio": {
+                                "widthAspect": 16,
+                                "heightAspect": 9,
+                                "formatted": "16:9"
+                              },
+                              "storageSize": {
+                                "width": 854,
+                                "height": 480
+                              },
+                              "storageAspectRatio": {
+                                "widthAspect": 16,
+                                "heightAspect": 9,
+                                "formatted": "16:9"
+                              }
+                            },
+                            "playlistFileIndex": 0,
+                            "playlistType": "VOD",
+                            "segmentContainerFormat": {
+                              "name": "mpegts",
+                              "tags": []
+                            },
+                            "videoMultiMethodAssessmentFusion": 45.87308,
+                            "durationInMicroseconds": 6533333,
+                            "segments": [
+                              {
+                                "fileIndex": 1,
+                                "type": "MEDIA",
+                                "startTimeInMicroseconds": 0,
+                                "durationInMicroseconds": 4000000
+                              },
+                              {
+                                "fileIndex": 2,
+                                "type": "MEDIA",
+                                "startTimeInMicroseconds": 5466667,
+                                "durationInMicroseconds": 2533333
+                              }
+                            ]
+                          }
+                        },
+                        "identifiers": [
+                          {
+                            "identifier": "https://dms.licdn.com/playlist/C5610AQGHDaySba4R7A/hls-480p-30fp-crf28/0/1645681258531?e=1645786800&v=beta&t=39oSIMeFoT2O28xwllsxVp6eCffacavqkfs_tb2MVvQ",
+                            "file": "urn:li:digitalmediaFile:(urn:li:digitalmediaAsset:C5610AQGHDaySba4R7A,urn:li:digitalmediaArtifactClass:hls-480p-30fp-crf28,0)",
+                            "size": 236,
+                            "index": 0,
+                            "mediaType": "application/vnd.apple.mpegURL",
+                            "identifierType": "EXTERNAL_URL",
+                            "identifierExpiresInSeconds": 1645786800
+                          }
+                        ]
+                      },
+                      {
+                        "artifact": "urn:li:digitalmediaMediaArtifact:(urn:li:digitalmediaAsset:C5610AQGHDaySba4R7A,urn:li:digitalmediaMediaArtifactClass:hls-720p-30fp-crf28)",
+                        "authorizationMethod": "PUBLIC",
+                        "data": {
+                          "com.linkedin.digitalmedia.mediaartifact.AdaptiveStreamVideo": {
+                            "segmentTargetDurationInMicroseconds": 4000000,
+                            "protocol": "HLS",
+                            "videoStream": {
+                              "frameRate": {
+                                "type": "UNKNOWN",
+                                "average": {
+                                  "fps": 30,
+                                  "rational": {
+                                    "numerator": 30,
+                                    "denominator": 1
+                                  },
+                                  "formatted": "30/1"
+                                }
+                              },
+                              "codec": {
+                                "name": "h264",
+                                "longName": "H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10"
+                              },
+                              "displaySize": {
+                                "width": 1280,
+                                "uom": "PX",
+                                "height": 720
+                              },
+                              "displayAspectRatio": {
+                                "widthAspect": 16,
+                                "heightAspect": 9,
+                                "formatted": "16:9"
+                              },
+                              "storageSize": {
+                                "width": 1280,
+                                "height": 720
+                              },
+                              "storageAspectRatio": {
+                                "widthAspect": 16,
+                                "heightAspect": 9,
+                                "formatted": "16:9"
+                              }
+                            },
+                            "playlistFileIndex": 0,
+                            "playlistType": "VOD",
+                            "segmentContainerFormat": {
+                              "name": "mpegts",
+                              "tags": []
+                            },
+                            "videoMultiMethodAssessmentFusion": 67.21682,
+                            "durationInMicroseconds": 6533333,
+                            "segments": [
+                              {
+                                "fileIndex": 1,
+                                "type": "MEDIA",
+                                "startTimeInMicroseconds": 0,
+                                "durationInMicroseconds": 4000000
+                              },
+                              {
+                                "fileIndex": 2,
+                                "type": "MEDIA",
+                                "startTimeInMicroseconds": 5466667,
+                                "durationInMicroseconds": 2533333
+                              }
+                            ]
+                          }
+                        },
+                        "identifiers": [
+                          {
+                            "identifier": "https://dms.licdn.com/playlist/C5610AQGHDaySba4R7A/hls-720p-30fp-crf28/0/1645681260866?e=1645786800&v=beta&t=jVghm8yw0jgBEC6FcePGbyvv-idYxqx1fqd1YYwpu-c",
+                            "file": "urn:li:digitalmediaFile:(urn:li:digitalmediaAsset:C5610AQGHDaySba4R7A,urn:li:digitalmediaArtifactClass:hls-720p-30fp-crf28,0)",
+                            "size": 236,
+                            "index": 0,
+                            "mediaType": "application/vnd.apple.mpegURL",
+                            "identifierType": "EXTERNAL_URL",
+                            "identifierExpiresInSeconds": 1645786800
+                          }
+                        ]
+                      },
+                      {
+                        "artifact": "urn:li:digitalmediaMediaArtifact:(urn:li:digitalmediaAsset:C5610AQGHDaySba4R7A,urn:li:digitalmediaMediaArtifactClass:hls-640p-30fp-crf28)",
+                        "authorizationMethod": "PUBLIC",
+                        "data": {
+                          "com.linkedin.digitalmedia.mediaartifact.AdaptiveStreamVideo": {
+                            "segmentTargetDurationInMicroseconds": 4000000,
+                            "protocol": "HLS",
+                            "videoStream": {
+                              "frameRate": {
+                                "type": "UNKNOWN",
+                                "average": {
+                                  "fps": 30,
+                                  "rational": {
+                                    "numerator": 30,
+                                    "denominator": 1
+                                  },
+                                  "formatted": "30/1"
+                                }
+                              },
+                              "codec": {
+                                "name": "h264",
+                                "longName": "H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10"
+                              },
+                              "displaySize": {
+                                "width": 1138,
+                                "uom": "PX",
+                                "height": 640
+                              },
+                              "displayAspectRatio": {
+                                "widthAspect": 16,
+                                "heightAspect": 9,
+                                "formatted": "16:9"
+                              },
+                              "storageSize": {
+                                "width": 1138,
+                                "height": 640
+                              },
+                              "storageAspectRatio": {
+                                "widthAspect": 16,
+                                "heightAspect": 9,
+                                "formatted": "16:9"
+                              }
+                            },
+                            "playlistFileIndex": 0,
+                            "playlistType": "VOD",
+                            "segmentContainerFormat": {
+                              "name": "mpegts",
+                              "tags": []
+                            },
+                            "videoMultiMethodAssessmentFusion": 62.085022,
+                            "durationInMicroseconds": 6533333,
+                            "segments": [
+                              {
+                                "fileIndex": 1,
+                                "type": "MEDIA",
+                                "startTimeInMicroseconds": 0,
+                                "durationInMicroseconds": 4000000
+                              },
+                              {
+                                "fileIndex": 2,
+                                "type": "MEDIA",
+                                "startTimeInMicroseconds": 5466667,
+                                "durationInMicroseconds": 2533333
+                              }
+                            ]
+                          }
+                        },
+                        "identifiers": [
+                          {
+                            "identifier": "https://dms.licdn.com/playlist/C5610AQGHDaySba4R7A/hls-640p-30fp-crf28/0/1645681258871?e=1645786800&v=beta&t=kBi4E3an1_6XIqs0GXmgq73J5hLAH39tg7q4mJZdXGk",
+                            "file": "urn:li:digitalmediaFile:(urn:li:digitalmediaAsset:C5610AQGHDaySba4R7A,urn:li:digitalmediaArtifactClass:hls-640p-30fp-crf28,0)",
+                            "size": 236,
+                            "index": 0,
+                            "mediaType": "application/vnd.apple.mpegURL",
+                            "identifierType": "EXTERNAL_URL",
+                            "identifierExpiresInSeconds": 1645786800
+                          }
+                        ]
+                      },
+                      {
+                        "artifact": "urn:li:digitalmediaMediaArtifact:(urn:li:digitalmediaAsset:C5610AQGHDaySba4R7A,urn:li:digitalmediaMediaArtifactClass:hls-360p-30fp-crf28)",
+                        "authorizationMethod": "PUBLIC",
+                        "data": {
+                          "com.linkedin.digitalmedia.mediaartifact.AdaptiveStreamVideo": {
+                            "segmentTargetDurationInMicroseconds": 4000000,
+                            "protocol": "HLS",
+                            "videoStream": {
+                              "frameRate": {
+                                "type": "UNKNOWN",
+                                "average": {
+                                  "fps": 30,
+                                  "rational": {
+                                    "numerator": 30,
+                                    "denominator": 1
+                                  },
+                                  "formatted": "30/1"
+                                }
+                              },
+                              "codec": {
+                                "name": "h264",
+                                "longName": "H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10"
+                              },
+                              "displaySize": {
+                                "width": 640,
+                                "uom": "PX",
+                                "height": 360
+                              },
+                              "displayAspectRatio": {
+                                "widthAspect": 16,
+                                "heightAspect": 9,
+                                "formatted": "16:9"
+                              },
+                              "storageSize": {
+                                "width": 640,
+                                "height": 360
+                              },
+                              "storageAspectRatio": {
+                                "widthAspect": 16,
+                                "heightAspect": 9,
+                                "formatted": "16:9"
+                              }
+                            },
+                            "playlistFileIndex": 0,
+                            "playlistType": "VOD",
+                            "segmentContainerFormat": {
+                              "name": "mpegts",
+                              "tags": []
+                            },
+                            "videoMultiMethodAssessmentFusion": 24.767357,
+                            "durationInMicroseconds": 6533333,
+                            "segments": [
+                              {
+                                "fileIndex": 1,
+                                "type": "MEDIA",
+                                "startTimeInMicroseconds": 0,
+                                "durationInMicroseconds": 4000000
+                              },
+                              {
+                                "fileIndex": 2,
+                                "type": "MEDIA",
+                                "startTimeInMicroseconds": 5466667,
+                                "durationInMicroseconds": 2533333
+                              }
+                            ]
+                          }
+                        },
+                        "identifiers": [
+                          {
+                            "identifier": "https://dms.licdn.com/playlist/C5610AQGHDaySba4R7A/hls-360p-30fp-crf28/0/1645681258274?e=1645786800&v=beta&t=u1OtrhqKZUE2-6ACDr92-WpMaSfA5ze1QeTGMsncKUE",
+                            "file": "urn:li:digitalmediaFile:(urn:li:digitalmediaAsset:C5610AQGHDaySba4R7A,urn:li:digitalmediaArtifactClass:hls-360p-30fp-crf28,0)",
+                            "size": 236,
+                            "index": 0,
+                            "mediaType": "application/vnd.apple.mpegURL",
+                            "identifierType": "EXTERNAL_URL",
+                            "identifierExpiresInSeconds": 1645786800
+                          }
+                        ]
+                      },
+                      {
+                        "artifact": "urn:li:digitalmediaMediaArtifact:(urn:li:digitalmediaAsset:C5610AQGHDaySba4R7A,urn:li:digitalmediaMediaArtifactClass:mp4-640p-30fp-crf28)",
+                        "authorizationMethod": "PUBLIC",
+                        "data": {
+                          "com.linkedin.digitalmedia.mediaartifact.Video": {
+                            "startTimeInMicroseconds": 0,
+                            "videoStreams": [
+                              {
+                                "pixelAspectRatio": {
+                                  "widthAspect": 1,
+                                  "heightAspect": 1.0001953,
+                                  "formatted": "1.00:1.00"
+                                },
+                                "startTimeInMicroseconds": 0,
+                                "chromaSubsampling": "4:2:0",
+                                "index": 0,
+                                "displaySize": {
+                                  "width": 1138,
+                                  "uom": "PX",
+                                  "height": 640
+                                },
+                                "displayAspectRatio": {
+                                  "widthAspect": 16,
+                                  "heightAspect": 9,
+                                  "formatted": "16:9"
+                                },
+                                "frameRate": {
+                                  "type": "UNKNOWN",
+                                  "average": {
+                                    "fps": 30,
+                                    "rational": {
+                                      "numerator": 30,
+                                      "denominator": 1
+                                    },
+                                    "formatted": "30/1"
+                                  }
+                                },
+                                "codec": {
+                                  "name": "h264",
+                                  "longName": "H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10"
+                                },
+                                "bitRate": {
+                                  "type": "UNKNOWN",
+                                  "average": 172830,
+                                  "maximum": 172830
+                                },
+                                "colorSpaceName": "YUV",
+                                "storageSize": {
+                                  "width": 1138,
+                                  "height": 640
+                                },
+                                "storageAspectRatio": {
+                                  "widthAspect": 16,
+                                  "heightAspect": 9,
+                                  "formatted": "16:9"
+                                },
+                                "videoMultiMethodAssessmentFusion": 62.097176,
+                                "durationInMicroseconds": 6533333
+                              }
+                            ],
+                            "rawMetadataTags": [],
+                            "mediaType": "video/mp4",
+                            "audioStreams": [],
+                            "rawFormatSpec": {
+                              "name": "mov,mp4,m4a,3gp,3g2,mj2",
+                              "longName": "QuickTime / MOV",
+                              "tags": [
+                                {
+                                  "value": "isom",
+                                  "key": "major_brand"
+                                },
+                                {
+                                  "value": "Lavf58.45.100",
+                                  "key": "encoder"
+                                },
+                                {
+                                  "value": "512",
+                                  "key": "minor_version"
+                                },
+                                {
+                                  "value": "isomiso2avc1mp41",
+                                  "key": "compatible_brands"
+                                }
+                              ]
+                            },
+                            "durationInMicroseconds": 6534000
+                          }
+                        },
+                        "identifiers": [
+                          {
+                            "identifier": "https://dms.licdn.com/playlist/C5610AQGHDaySba4R7A/mp4-640p-30fp-crf28/0/1645681259327?e=1645786800&v=beta&t=k1eoS7hq9QXIm6JD6ZVnpGfFu4LbBz5MtfXAicr796M",
+                            "file": "urn:li:digitalmediaFile:(urn:li:digitalmediaAsset:C5610AQGHDaySba4R7A,urn:li:digitalmediaArtifactClass:mp4-640p-30fp-crf28,0)",
+                            "size": 144335,
+                            "index": 0,
+                            "mediaType": "video/mp4",
+                            "identifierType": "EXTERNAL_URL",
+                            "identifierExpiresInSeconds": 1645786800
+                          }
+                        ]
+                      },
+                      {
+                        "artifact": "urn:li:digitalmediaMediaArtifact:(urn:li:digitalmediaAsset:C5610AQGHDaySba4R7A,urn:li:digitalmediaMediaArtifactClass:mp4-360p-30fp-crf28)",
+                        "authorizationMethod": "PUBLIC",
+                        "data": {
+                          "com.linkedin.digitalmedia.mediaartifact.Video": {
+                            "startTimeInMicroseconds": 0,
+                            "videoStreams": [
+                              {
+                                "pixelAspectRatio": {
+                                  "widthAspect": 1,
+                                  "heightAspect": 1,
+                                  "formatted": "1.00:1.00"
+                                },
+                                "startTimeInMicroseconds": 0,
+                                "chromaSubsampling": "4:2:0",
+                                "index": 0,
+                                "displaySize": {
+                                  "width": 640,
+                                  "uom": "PX",
+                                  "height": 360
+                                },
+                                "displayAspectRatio": {
+                                  "widthAspect": 16,
+                                  "heightAspect": 9,
+                                  "formatted": "16:9"
+                                },
+                                "frameRate": {
+                                  "type": "UNKNOWN",
+                                  "average": {
+                                    "fps": 30,
+                                    "rational": {
+                                      "numerator": 30,
+                                      "denominator": 1
+                                    },
+                                    "formatted": "30/1"
+                                  }
+                                },
+                                "codec": {
+                                  "name": "h264",
+                                  "longName": "H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10"
+                                },
+                                "bitRate": {
+                                  "type": "UNKNOWN",
+                                  "average": 73198,
+                                  "maximum": 73198
+                                },
+                                "colorSpaceName": "YUV",
+                                "storageSize": {
+                                  "width": 640,
+                                  "height": 360
+                                },
+                                "storageAspectRatio": {
+                                  "widthAspect": 16,
+                                  "heightAspect": 9,
+                                  "formatted": "16:9"
+                                },
+                                "videoMultiMethodAssessmentFusion": 24.795553,
+                                "durationInMicroseconds": 6533333
+                              }
+                            ],
+                            "rawMetadataTags": [],
+                            "mediaType": "video/mp4",
+                            "audioStreams": [],
+                            "rawFormatSpec": {
+                              "name": "mov,mp4,m4a,3gp,3g2,mj2",
+                              "longName": "QuickTime / MOV",
+                              "tags": [
+                                {
+                                  "value": "isom",
+                                  "key": "major_brand"
+                                },
+                                {
+                                  "value": "Lavf58.45.100",
+                                  "key": "encoder"
+                                },
+                                {
+                                  "value": "512",
+                                  "key": "minor_version"
+                                },
+                                {
+                                  "value": "isomiso2avc1mp41",
+                                  "key": "compatible_brands"
+                                }
+                              ]
+                            },
+                            "durationInMicroseconds": 6534000
+                          }
+                        },
+                        "identifiers": [
+                          {
+                            "identifier": "https://dms.licdn.com/playlist/C5610AQGHDaySba4R7A/mp4-360p-30fp-crf28/0/1645681260407?e=1645786800&v=beta&t=gbxOzwyM9tcMCpXHruMH9guu_eUejjjGmZZkAi4IAcM",
+                            "file": "urn:li:digitalmediaFile:(urn:li:digitalmediaAsset:C5610AQGHDaySba4R7A,urn:li:digitalmediaArtifactClass:mp4-360p-30fp-crf28,0)",
+                            "size": 62963,
+                            "index": 0,
+                            "mediaType": "video/mp4",
+                            "identifierType": "EXTERNAL_URL",
+                            "identifierExpiresInSeconds": 1645786800
+                          }
+                        ]
+                      },
+                      {
+                        "artifact": "urn:li:digitalmediaMediaArtifact:(urn:li:digitalmediaAsset:C5610AQGHDaySba4R7A,urn:li:digitalmediaMediaArtifactClass:mp4-720p-30fp-crf28)",
+                        "authorizationMethod": "PUBLIC",
+                        "data": {
+                          "com.linkedin.digitalmedia.mediaartifact.Video": {
+                            "startTimeInMicroseconds": 0,
+                            "videoStreams": [
+                              {
+                                "pixelAspectRatio": {
+                                  "widthAspect": 1,
+                                  "heightAspect": 1,
+                                  "formatted": "1.00:1.00"
+                                },
+                                "startTimeInMicroseconds": 0,
+                                "chromaSubsampling": "4:2:0",
+                                "index": 0,
+                                "displaySize": {
+                                  "width": 1280,
+                                  "uom": "PX",
+                                  "height": 720
+                                },
+                                "displayAspectRatio": {
+                                  "widthAspect": 16,
+                                  "heightAspect": 9,
+                                  "formatted": "16:9"
+                                },
+                                "frameRate": {
+                                  "type": "UNKNOWN",
+                                  "average": {
+                                    "fps": 30,
+                                    "rational": {
+                                      "numerator": 30,
+                                      "denominator": 1
+                                    },
+                                    "formatted": "30/1"
+                                  }
+                                },
+                                "codec": {
+                                  "name": "h264",
+                                  "longName": "H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10"
+                                },
+                                "bitRate": {
+                                  "type": "UNKNOWN",
+                                  "average": 207625,
+                                  "maximum": 207625
+                                },
+                                "colorSpaceName": "YUV",
+                                "storageSize": {
+                                  "width": 1280,
+                                  "height": 720
+                                },
+                                "storageAspectRatio": {
+                                  "widthAspect": 16,
+                                  "heightAspect": 9,
+                                  "formatted": "16:9"
+                                },
+                                "videoMultiMethodAssessmentFusion": 67.21901,
+                                "durationInMicroseconds": 6533333
+                              }
+                            ],
+                            "rawMetadataTags": [],
+                            "mediaType": "video/mp4",
+                            "audioStreams": [],
+                            "rawFormatSpec": {
+                              "name": "mov,mp4,m4a,3gp,3g2,mj2",
+                              "longName": "QuickTime / MOV",
+                              "tags": [
+                                {
+                                  "value": "isom",
+                                  "key": "major_brand"
+                                },
+                                {
+                                  "value": "Lavf58.45.100",
+                                  "key": "encoder"
+                                },
+                                {
+                                  "value": "512",
+                                  "key": "minor_version"
+                                },
+                                {
+                                  "value": "isomiso2avc1mp41",
+                                  "key": "compatible_brands"
+                                }
+                              ]
+                            },
+                            "durationInMicroseconds": 6534000
+                          }
+                        },
+                        "identifiers": [
+                          {
+                            "identifier": "https://dms.licdn.com/playlist/C5610AQGHDaySba4R7A/mp4-720p-30fp-crf28/0/1645681260899?e=1645786800&v=beta&t=2OVrtP0YI02Kq3OhIzWqXbvOWnYtehjed6vEwCx_uyk",
+                            "file": "urn:li:digitalmediaFile:(urn:li:digitalmediaAsset:C5610AQGHDaySba4R7A,urn:li:digitalmediaArtifactClass:mp4-720p-30fp-crf28,0)",
+                            "size": 172746,
+                            "index": 0,
+                            "mediaType": "video/mp4",
+                            "identifierType": "EXTERNAL_URL",
+                            "identifierExpiresInSeconds": 1645786800
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  "media": "urn:li:digitalmediaAsset:C5610AQGHDaySba4R7A",
+                  "title": {
+                    "text": "title of the video"
+                  },
+                  "thumbnails": []
+                }
+              ]
+            }
+          },
+          "created": {
+            "actor": "urn:li:person:ni9uyHI38P",
+            "time": 1645681329190
+          },
+          "id": "urn:li:ugcPost:6902487781059252224"
+        },
+        {
+          "specificContent": {
+            "com.linkedin.ugc.ShareContent": {
+              "shareMediaCategory": "ARTICLE",
+              "shareCommentary": {
+                "inferredLocale": "en_US",
+                "attributes": [],
+                "text": "\n  \n  2 test dui link v2"
+              },
+              "media": [
+                {
+                  "media!": {
+                    "message": "Unsupported URN domain: li:article:playableStreams",
+                    "status": 501
+                  },
+                  "media": "urn:li:article:-1",
+                  "originalUrl": "http://jrs-stage.int.railwaymen.org/content/e1723b33-f64d-468e-b35d-12bfbaecfec6",
+                  "title": {
+                    "text": "2 test dui link v2"
+                  },
+                  "thumbnails": [
+                    {
+                      "media": "urn:li:digitalmediaAsset:C4E34AQF8S7kvYL5B3w",
+                      "url": "http://jrs-stage.int.railwaymen.org/rails/active_storage/blobs/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBb3lnIiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--1e94028f734a026a14db3d38e596f069b5b46755/RM-VID%20(1)-0.jpg"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          "created": {
+            "actor": "urn:li:person:FRTi-79SDF",
+            "time": 1645668008180
+          },
+          "id": "urn:li:share:6902431907846381568"
+        },
+        {
+          "specificContent": {
+            "com.linkedin.ugc.ShareContent": {
+              "shareMediaCategory": "NONE",
+              "shareCommentary": {
+                "inferredLocale": "la",
+                "attributes": [],
+                "text": "Lorem tempor elit, eiusmod et aliqua adipiscing dolore magna amet sed @ 1645653163721"
+              },
+              "media": []
+            }
+          },
+          "id": "urn:li:share:6902369647795036160",
+          "created": {
+            "actor": "urn:li:person:6ex4gwykCd",
+            "time": 1645653167398
+          }
+        },
+        {
+          "specificContent": {
+            "com.linkedin.ugc.ShareContent": {
+              "shareMediaCategory": "NONE",
+              "shareCommentary": {
+                "inferredLocale": "it_IT",
+                "attributes": [],
+                "text": "adipiscing magna tempor dolore sed eiusmod amet Lorem aliqua et elit, @ 1645642757123"
+              },
+              "media": []
+            }
+          },
+          "id": "urn:li:share:6902325999292293120",
+          "created": {
+            "actor": "urn:li:person:6ex4gwykCd",
+            "time": 1645642757347
+          }
+        },
+        {
+          "specificContent": {
+            "com.linkedin.ugc.ShareContent": {
+              "shareMediaCategory": "ARTICLE",
+              "shareCommentary": {
+                "inferredLocale": "en",
+                "attributes": [],
+                "text": "\n  \n  Post content text"
+              },
+              "media": [
+                {
+                  "media!": {
+                    "message": "Unsupported URN domain: li:article:playableStreams",
+                    "status": 501
+                  },
+                  "media": "urn:li:article:-1",
+                  "originalUrl": "http://jrs-stage.int.railwaymen.org/content/1bb7ed00-2ac9-487a-b3fd-67359916a853",
+                  "title": {
+                    "text": "Post Title"
+                  },
+                  "thumbnails": [
+                    {
+                      "media": "urn:li:digitalmediaAsset:C4E34AQGYkVi_Gms6mw",
+                      "url": "http://jrs-stage.int.railwaymen.org/rails/active_storage/blobs/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBbCs5IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--f06d87cabc6cd8f9aba70faca72d5bb03bf3d369/postpreview.png"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          "created": {
+            "actor": "urn:li:person:FRTi-79SDF",
+            "time": 1645628410762
+          },
+          "id": "urn:li:share:6902265825319809024"
+        },
+        {
+          "specificContent": {
+            "com.linkedin.ugc.ShareContent": {
+              "shareMediaCategory": "ARTICLE",
+              "shareCommentary": {
+                "attributes": [],
+                "text": "\n  \n  2 test estates link 1"
+              },
+              "media": [
+                {
+                  "media!": {
+                    "message": "Unsupported URN domain: li:article:playableStreams",
+                    "status": 501
+                  },
+                  "media": "urn:li:article:-1",
+                  "originalUrl": "http://jrs-stage.int.railwaymen.org/content/e3c8cb42-2e34-4b5c-affc-734a57e57037",
+                  "title": {
+                    "text": "2 test estates link 1"
+                  },
+                  "thumbnails": [
+                    {
+                      "media": "urn:li:digitalmediaAsset:C4E34AQFYeNkFoH_bMQ",
+                      "url": "http://jrs-stage.int.railwaymen.org/rails/active_storage/blobs/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBcUthIiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--714d48c3cc856afa4492c4a3f61d1ecd07c63e6e/sample-0.jpg"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          "created": {
+            "actor": "urn:li:person:FRTi-79SDF",
+            "time": 1645609568217
+          },
+          "id": "urn:li:share:6902186793995702272"
+        },
+        {
+          "specificContent": {
+            "com.linkedin.ugc.ShareContent": {
+              "shareMediaCategory": "ARTICLE",
+              "shareCommentary": {
+                "attributes": [],
+                "text": "\n  00244826288262882628"
+              },
+              "media": [
+                {
+                  "media!": {
+                    "message": "Unsupported URN domain: li:article:playableStreams",
+                    "status": 501
+                  },
+                  "media": "urn:li:article:9219705851198355054",
+                  "originalUrl": "https://vimeo.com/540045535",
+                  "title": {
+                    "text": "00244826288262882628"
+                  },
+                  "thumbnails": [
+                    {
+                      "media": "urn:li:digitalmediaAsset:C4E34AQHoh8_lqY3CfQ",
+                      "url": "http://jrs-stage.int.railwaymen.org/rails/active_storage/blobs/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBbGU2IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--e27548b72ecdfc4139504bb24139690a19fbc004/preview.png"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          "created": {
+            "actor": "urn:li:person:FRTi-79SDF",
+            "time": 1645608789841
+          },
+          "id": "urn:li:share:6902183529258508288"
+        }
+      ]
+    },
+    "rawHeaders": [
+      "X-LI-ResponseOrigin",
+      "RGW",
+      "Content-Type",
+      "application/json;charset=utf-8",
+      "Date",
+      "Thu, 24 Feb 2022 10:54:28 GMT",
+      "X-Li-Fabric",
+      "prod-ltx1",
+      "Transfer-Encoding",
+      "chunked",
+      "X-Li-Source-Fabric",
+      "prod-lor1",
+      "X-Li-Pop",
+      "prod-lor1-x",
+      "X-LI-Proto",
+      "http/1.1",
+      "X-LI-UUID",
+      "AAXYwWf3nNJyJpWVOj4wcA==",
+      "Set-Cookie",
+      "bcookie=\"v=2&11a10f81-45d2-4052-88ea-3def6b0ee724\"; Domain=.linkedin.com; Expires=Sat, 24-Feb-2024 22:32:00 GMT; Path=/; Secure; SameSite=None",
+      "Set-Cookie",
+      "li_gc=MTswOzE2NDU3MDAwNjg7MjswMjGCnuxS/V+dDVT2dmn/onM1AeWFXRNeZ9gBQdDZCumNfQ==; Domain=.linkedin.com; Expires=Thu, 22 Feb 2024 19:34:32 GMT; Path=/; Secure; SameSite=None",
+      "Set-Cookie",
+      "lidc=\"b=TB77:s=T:r=T:a=T:p=T:g=2867:u=883:x=1:i=1645700068:t=1645780880:v=2:sig=AQHdghO4h0zJEf7UOyJCHR3QEn5iZJXe\"",
+      "X-LI-Route-Key",
+      "\"b=TB77:s=T:r=T:a=T:p=T:g=2867:u=883:x=1:i=1645700068:t=1645780880:v=2:sig=AQHdghO4h0zJEf7UOyJCHR3QEn5iZJXe\""
+    ],
+    "responseIsBinary": false
+  }
+]

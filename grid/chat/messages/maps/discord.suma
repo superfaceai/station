@@ -58,9 +58,7 @@ Operation MapMessages
 Returns array mapping messages in received body
 """
 operation MapMessages {
-  listOfMessages = []
-
-  listOfMessages = args.messages.map(message => {
+  messages = args.messages.map(message => {
     const resultMessage = {
       id: message.id,
       author: {
@@ -92,6 +90,10 @@ operation MapMessages {
     }
 
     if (message.attachments && message.attachments.length > 0) {
+      /**
+       * Returns UNIX timestamp from specified discord snowflake id
+       * More about snowflakes: https://discord.com/developers/docs/reference#snowflakes
+       */
       const discordEpoch = 1420070400000;
       const getTimestamp = (snowflake) => Number(BigInt(snowflake) >> BigInt(22)) + discordEpoch;
 
@@ -118,12 +120,15 @@ operation MapMessages {
       resultMessage.parentId = message.message_reference.message_id;
     }
 
-    resultMessage.url = `https://discord.com/api/channels/${message.channel_id}/messages/${message.id}`;
+    // TODO: implement composing URL
+    // BLOCKER: unknown guild id
+    // Format of public URL:          https://discord.com/channels/<guild-id>/<channel-id>/<message-id>
+    // Format of URL poiting to API:  https://discord.com/api/channels/<channel-id>/messages/<message-id>
 
     return resultMessage;
   });
 
-  return listOfMessages
+  return messages
 }
 
 """

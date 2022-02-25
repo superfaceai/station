@@ -121,6 +121,7 @@ jobs:
     if: ${{ github.ref == 'refs/heads/main' }}
     env:
       SUPERFACE_REFRESH_TOKEN: ${{ secrets.SUPERFACE_REFRESH_TOKEN }}
+      PUBLISH_DELAY_MS: ${{ secrets.PUBLISH_DELAY_MS }}
     steps:
       - name: Setup Node.js
         uses: actions/setup-node@v2

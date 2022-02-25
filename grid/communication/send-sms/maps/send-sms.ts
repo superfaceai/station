@@ -4,6 +4,7 @@ import { RecordingProcessOptions, SuperfaceTest } from '@superfaceai/testing';
 
 export const sendSmsTest = (
   provider: string,
+  sender: string,
   _options?: RecordingProcessOptions
 ): void => {
   describe(`communication/send-sms/${provider}`, () => {
@@ -24,7 +25,7 @@ export const sendSmsTest = (
             useCase: 'SendMessage',
             input: {
               to: '+4915207930698', // https://receive-smss.com/sms/4915207930698/
-              from: `${provider} APIs`,
+              from: sender,
               text: 'Hello World!',
             },
           })
@@ -38,7 +39,7 @@ export const sendSmsTest = (
           useCase: 'SendMessage',
           input: {
             to: '+4915207930698', // https://receive-smss.com/sms/4915207930698/
-            from: `${provider} APIs 2`,
+            from: sender,
             text: 'Hello World!',
           },
         });
