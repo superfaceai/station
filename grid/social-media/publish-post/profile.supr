@@ -1,6 +1,6 @@
 """
-Publish a Post
-Publish a Post on social media such as Instagram, Facebook or Twitter.
+Publish Social Media Post
+Publish posts on social media such as Instagram, Facebook, or Twitter.
 """
 
 name = "social-media/publish-post"
@@ -8,13 +8,13 @@ version = "1.0.0"
 
 """
 Publish a Post
-Publish post on social media profile.
+Publish a post on a social media profile with optional image attachments.
 """
 usecase PublishPost unsafe {
   input {
     """
     Profile ID
-    Identification of profile to publish to; may be optional with some providers
+    Identifier of a profile to publish to. May be optional with some providers.
     """
     profileId string!
 
@@ -43,13 +43,13 @@ usecase PublishPost unsafe {
 
     """
     Post ID
-    Identifier of the post that was published
+    Identifier of the published post.
     """
     postId string
 
     """
     Post URL
-    Link to the published post
+    Link to the published post.
     """
     url string
   }

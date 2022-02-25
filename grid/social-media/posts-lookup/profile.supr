@@ -1,49 +1,26 @@
+"""
+Lookup Social Media Posts
+Retrieve social media posts by hashtag or mention of a profile.
+"""
+
 name = "social-media/posts-lookup"
 version = "1.2.0"
 
 """
-Lookup posts by hashtag
-Lookup recent posts that match hashtag.
+Lookup Posts by Hashtag
+Retrieve recent posts that match a hashtag.
 """
 usecase FindByHashtag safe {
   input {
-    """
-    Hashtag
-    The hashtag with which posts will be filtered.
-    """
     hashtag string
-    """
-    After date
-    Filter posts that have been created after the date in ISO 8601 date and time format.
-    """
     afterDate string
-    """
-    Page
-    Token of the page to retrieve.
-    """
     page string
   } 
 
   result {
-    """
-    Previous page
-    Previous page token.
-    """
     previousPage string
-    """
-    Next page
-    Next page token.
-    """
     nextPage string
-    """
-    Posts
-    List of posts ordered by creation date. Latest posts are on the top of the list.
-    """
     posts [Post]
-    """
-    Rate limit
-    Rate limit details.
-    """
     rateLimit RateLimit
   }
 
@@ -105,48 +82,24 @@ usecase FindByHashtag safe {
 }
 
 """
-Lookup posts by mention
-Lookup recent posts by mentions of social media profile.
+Lookup Posts by Mention
+Retrieve recent posts that mention a social media profile.
 """
 usecase FindByMention safe {
   input {
     """
     Profile ID
-    The profile ID which should be mentioned in returned posts.
+    The ID of the profile mentioned in the posts.
     """
     profileId string
-    """
-    After date
-    Filter posts that have been created after the date in ISO 8601 date and time format.
-    """
     afterDate string
-    """
-    Page
-    Token of the page to retrieve.
-    """
     page string
   } 
 
   result {
-    """
-    Previous page
-    Previous page token.
-    """
     previousPage string
-    """
-    Next page
-    Next page token.
-    """
     nextPage string
-    """
-    Posts
-    List of posts ordered by creation date. Latest posts are on the top of the list.
-    """
     posts [Post]
-    """
-    Rate limit
-    Rate limit details.
-    """
     rateLimit RateLimit
   }
 
@@ -211,17 +164,17 @@ usecase FindByMention safe {
 model Post {
   """
   ID
-  Unique identification of the post.
+  Identifier of the post.
   """
   id string
   """
   URL
-  The permanent static URL to the post.
+  Permanent URL of the post.
   """
   url string
   """
   Created at
-  The time the post was published.
+  Date and time the post was published at.
   """
   createdAt string
   """
@@ -231,7 +184,7 @@ model Post {
   text string
   """
   Reply ID
-  If the post is reply it contains ID of parent post
+  If the post is reply it contains an ID of the parent post
   """
   replyId string
   """
@@ -263,6 +216,10 @@ model Post {
     Attachment URL.
     """
     url string
+    """
+    Preview URL
+    Thumbnail or another preview of the attachment.
+    """
     preview
     """
     Title
@@ -316,10 +273,6 @@ model Error {
   """
   code! ErrorCode!
 
-  """
-  Rate limit
-  Rate limit details.
-  """
   rateLimit RateLimit
 }
 
@@ -384,3 +337,44 @@ model RateLimit {
   """
   resetTimestamp number
 }
+
+"""
+Hashtag
+The hashtag with which posts will be filtered.
+"""
+field hashtag
+
+"""
+After date
+Filter posts that have been created after the date in ISO 8601 date and time format.
+"""
+field afterDate
+
+"""
+Page
+Token of the page to retrieve.
+"""
+field page
+
+"""
+Previous page
+Previous page token.
+"""
+field previousPage
+
+"""
+Next page
+Next page token.
+"""
+field nextPage
+
+"""
+Posts
+List of posts ordered by creation date. Latest posts are on the top of the list.
+"""
+field posts
+"""
+Rate limit
+Rate limit details.
+"""
+field rateLimit
