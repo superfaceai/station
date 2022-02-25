@@ -1,0 +1,261 @@
+// Twitter API Reference: https://developer.twitter.com/en/docs/twitter-api
+
+profile = "social-media/posts-lookup@1.2"
+provider = "twitter"
+
+map FindByHashtag {
+  //workaround: We can not assign string to rateLimitBucket variable here, linter reports: Wrong Structure: expected ObjectStructure, but got "Search recent tweets" error
+  rateLimitBucket = call GetSearchRecentTweetsBucket()
+
+  http GET "/2/tweets/search/recent" {
+    
+    request {
+      query {
+        query = '#' + input.hashtag
+        'tweet.fields' = 'id,text,created_at,attachments,referenced_tweets'
+        expansions = 'attachments.media_keys,author_id'
+        'media.fields' = 'duration_ms,height,media_key,preview_image_url,type,url,width,alt_text'
+        'user.fields' = 'id,username'
+        start_time = input.afterDate
+        pagination_token = input.page
+        max_results = 100
+      }
+      headers {
+        authorization = "Bearer " + parameters.accessToken
+      }
+    }
+
+    response 200 "application/json" {
+      result = call MapSearchResult(body = body, headers = headers, rateLimitBucket = rateLimitBucket)
+
+      map result result
+    }
+
+    response {
+      error = call MapTwitterError(statusCode = statusCode, error = body, headers = headers, rateLimitBucket = rateLimitBucket)
+      map error error
+    }
+  }
+}
+
+map FindByMention {
+  //workaround: We can not assign string to rateLimitBucket variable here, linter reports: Wrong Structure: expected ObjectStructure, but got "Search recent tweets" error
+  rateLimitBucket = call GetUserMentionTimelineBucket()
+
+  http GET "/2/users/{input.profileId}/mentions" {
+
+    request {
+      query {
+        'tweet.fields' = 'id,text,created_at,attachments,referenced_tweets'
+        expansions = 'attachments.media_keys,author_id'
+        'media.fields' = 'duration_ms,height,media_key,preview_image_url,type,url,width,alt_text'
+        'user.fields' = 'id,username'
+        start_time = input.afterDate
+        pagination_token = input.page
+        max_results = 100
+      }
+      headers {
+        authorization = "Bearer " + parameters.accessToken
+      }
+    }
+
+    response 200 "application/json" {
+      result = call MapSearchResult(body = body, headers = headers, rateLimitBucket = rateLimitBucket)
+
+      map result result
+    }
+
+    response {
+      error = call MapTwitterError(statusCode = statusCode, error = body, headers = headers, rateLimitBucket = rateLimitBucket)
+      map error error
+    }
+  }
+}
+
+operation MapSearchResult {
+  body = args.body
+  headers = args.headers
+  posts = []
+
+  set if (body.meta.result_count > 0) {
+    //map posts in single Jessie script for better performance
+    posts = [body].map(body => {
+      //get media hashmap
+      const mediaHashmap = {}
+      if(body.includes.media) {
+        for(const media of body.includes.media) {
+          mediaHashmap[media.media_key] = media
+        }
+      }
+
+      //get authors hashmap
+      const authorsHashmap = {}
+      if(body.includes.users) {
+        for(const user of body.includes.users) {
+          authorsHashmap[user.id] = user
+        }
+      }
+
+      //map tweets to posts
+      const posts = body.data.map((tweet) => {
+        let mappedAuthor
+        let replyReference
+        let replyId
+        let attachments = []
+
+        //get author
+        const author = authorsHashmap[tweet.author_id]
+        if (author) {
+          //strip user properties we do not want to have in result
+          mappedAuthor = {
+            id: author.id,
+            username: author.username
+          }
+        }
+
+        //get reply id
+        if(tweet.referenced_tweets) {
+          replyReference = tweet.referenced_tweets.find(referencedTweet => referencedTweet.type === 'replied_to')
+        }
+
+        if(replyReference !== undefined) {
+          replyId = replyReference.id
+        }
+
+        //get attachments
+        if(tweet.attachments && tweet.attachments.media_keys) {
+          attachments = tweet.attachments.media_keys.map((mediaKey) => {
+            let result = undefined
+
+            let foundMedia = mediaHashmap[mediaKey]
+
+            let duration = undefined
+
+            if(foundMedia && foundMedia.duration_ms) {
+              duration = foundMedia.duration_ms / 1000
+            }
+
+            return foundMedia && {
+                type: foundMedia.type,
+                url: foundMedia.url,
+                height: foundMedia.height,
+                width: foundMedia.width,
+                preview: foundMedia.preview_image_url,
+                altText: foundMedia.alt_text,
+                duration: duration
+              }
+          })
+        }
+
+        return {
+          id: tweet.id,
+          url: 'https://twitter.com/i/status/' + tweet.id,
+          createdAt: tweet.created_at,
+          text: tweet.text,
+          replyId: replyId,
+          author: mappedAuthor,
+          attachments: attachments.filter(attachment => attachment !== undefined)
+        }
+      })
+      return posts
+    })[0]
+  }
+
+  return {
+    posts = posts
+    previousPage = body.meta.previous_token
+    nextPage = body.meta.next_token
+    rateLimit =  call MapRateLimit(headers = headers, bucket = args.rateLimitBucket)
+  }
+}
+
+//Twitter rate limits: https://developer.twitter.com/en/docs/twitter-api/rate-limits
+operation MapRateLimit {
+  totalRequests = parseInt(args.headers['x-rate-limit-limit'], 10)
+  remainingRequests = parseInt(args.headers['x-rate-limit-remaining'], 10)
+  remainingRequestsPercentage = undefined
+  resetTimestamp = parseInt(args.headers['x-rate-limit-reset'], 10)
+
+  set if(isNaN(totalRequests)) {
+    totalRequests = undefined
+  }
+
+  set if(isNaN(remainingRequests)) {
+    remainingRequests = undefined
+  }
+
+  set if(totalRequests > 0 && remainingRequests !== undefined) {
+    remainingRequestsPercentage = remainingRequests / totalRequests * 100
+  }
+
+  set if(isNaN(resetTimestamp)) {
+    resetTimestamp = undefined
+  }  
+
+  return {
+    bucket = args.bucket
+    totalRequests = totalRequests
+    remainingRequests = remainingRequests
+    remainingRequestsPercentage = remainingRequestsPercentage
+    resetTimestamp = resetTimestamp
+  }
+}
+
+operation MapTwitterError {
+  statusCode = args.statusCode
+  twitterError = args.error
+  headers = args.headers
+  rateLimitBucket = args.rateLimitBucket
+
+  rateLimit =  call MapRateLimit(headers = headers, bucket = rateLimitBucket)
+
+  return if (statusCode === 400) {
+    title = "Bad request"
+    detail = twitterError.detail
+    code = 'BadRequest'
+    rateLimit = rateLimit
+  }
+
+  return if (statusCode === 401) {
+    title = "Unauthenticated"
+    detail = twitterError.detail
+    code = 'Unauthenticated'
+    rateLimit = rateLimit
+  }
+
+  return if (statusCode === 403) {
+    title = "Unauthorized"
+    detail = twitterError.detail
+    code = 'Unauthorized'
+    rateLimit = rateLimit
+  }
+
+  return if (statusCode === 404) {
+    title = "Not found"
+    detail = twitterError.detail
+    code = 'NotFound'
+    rateLimit = rateLimit
+  }
+
+  return if (statusCode === 429) {
+    title = "Rate limit exceeded"
+    detail = `Twitter API resource '${rateLimit.bucket}' reached max requests quota.`
+    code = 'RateLimitReached'
+    rateLimit = rateLimit
+  }
+
+  return {
+    title = "Unknown error"
+    detail = (`Unknown error occurred. Status: ${statusCode}`)
+    code = 'UnknownError'
+    rateLimit = rateLimit
+  }
+}
+
+operation GetSearchRecentTweetsBucket {
+  return "Search recent tweets"
+}
+
+operation GetUserMentionTimelineBucket {
+  return "User mention timeline"
+}

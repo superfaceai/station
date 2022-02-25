@@ -34,7 +34,7 @@ export function normalizePath(
 export async function exists(path: string): Promise<boolean> {
   try {
     await access(path);
-  } catch (err) {
+  } catch (err: any) {
     // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
     if (err.code === 'ENOENT') {
       return false;
