@@ -194,6 +194,9 @@
         },
         "tomtom": {
           "file": "../grid/address/geocoding/maps/tomtom.suma"
+        },
+        "here": {
+          "file": "../grid/address/geocoding/maps/here.suma"
         }
       }
     },
@@ -949,6 +952,15 @@
         {
           "id": "apikey",
           "apikey": "$FREEGEOIP_API_KEY"
+        }
+      ]
+    },
+    "here": {
+      "file": "../providers/here.json",
+      "security": [
+        {
+          "id": "apiKey",
+          "apikey": "$HERE_API_KEY"
         }
       ]
     }
