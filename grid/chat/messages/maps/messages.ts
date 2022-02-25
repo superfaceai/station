@@ -36,9 +36,13 @@ export const getMessagesTest = (
           expect(page1.isOk).toBeTruthy();
           expect(page1).toMatchSnapshot();
 
-          // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-          if (page1.isOk() && !(page1.value as any).nextPage) {
-            throw new Error('Test results should be paginated');
+          /* eslint-disable @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-assignment */
+          const cursor = page1.isOk()
+            ? (page1.value as any).nextPage
+            : undefined;
+
+          if (!cursor) {
+            return;
           }
 
           const page2 = await superface.run(
@@ -46,8 +50,7 @@ export const getMessagesTest = (
               input: {
                 destination: destination[0],
                 limit: 3,
-                // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
-                page: page1.isOk() ? (page1.value as any).nextPage : undefined,
+                page: cursor,
               },
               testName: 'page 2',
             },

@@ -1,0 +1,130 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`chat/messages/discord GetMessages when specified destination does exist performs correctly 1`] = `
+Ok {
+  "value": Object {
+    "messages": Array [
+      Object {
+        "author": Object {
+          "id": "170231057197563904",
+          "username": "Martin Albert",
+        },
+        "createdAt": 1644322924200,
+        "hasThread": true,
+        "id": "940583259262308362",
+        "parentId": "938783520371916840",
+        "reactions": Array [
+          Object {
+            "count": 1,
+            "emoji": "🔥",
+          },
+        ],
+        "text": "reply to attachment message",
+        "threadId": "940583259262308362",
+      },
+      Object {
+        "author": Object {
+          "id": "935958634016419920",
+          "username": "TestApp",
+        },
+        "createdAt": 1643975905801,
+        "id": "939127758603321384",
+        "text": "text message",
+      },
+      Object {
+        "author": Object {
+          "id": "170231057197563904",
+          "username": "Martin Albert",
+        },
+        "createdAt": 1643910369785,
+        "id": "938852880629256233",
+        "text": "test thread",
+      },
+    ],
+    "nextPage": "938852880629256233",
+    "rateLimit": Object {
+      "bucket": "fccc1d589e71dd6f0c55fde9faa2838d",
+      "remainingRequests": 4,
+      "remainingRequestsPercentage": 80,
+      "resetAfter": 5,
+      "resetTimestamp": 1645092261,
+      "totalRequests": 5,
+    },
+  },
+}
+`;
+
+exports[`chat/messages/discord GetMessages when specified destination does exist performs correctly 2`] = `
+Ok {
+  "value": Object {
+    "messages": Array [
+      Object {
+        "attachments": Array [
+          Object {
+            "createdAt": 1643893832931,
+            "fileName": "discord.suma",
+            "id": "938783520036364348",
+            "url": "https://cdn.discordapp.com/attachments/938614740995960844/938783520036364348/discord.suma",
+          },
+        ],
+        "author": Object {
+          "id": "170231057197563904",
+          "username": "Martin Albert",
+        },
+        "createdAt": 1643893833011,
+        "id": "938783520371916840",
+        "text": "🦸",
+      },
+      Object {
+        "author": Object {
+          "id": "935958634016419920",
+          "username": "TestApp",
+        },
+        "createdAt": 1643892850081,
+        "hasThread": true,
+        "id": "938779397664673793",
+        "text": "test",
+        "threadId": "938779397664673793",
+      },
+      Object {
+        "author": Object {
+          "id": "935958634016419920",
+          "username": "TestApp",
+        },
+        "createdAt": 1643892831594,
+        "id": "938779320124596244",
+        "text": "test",
+      },
+    ],
+    "nextPage": "938779320124596244",
+    "rateLimit": Object {
+      "bucket": "fccc1d589e71dd6f0c55fde9faa2838d",
+      "remainingRequests": 3,
+      "remainingRequestsPercentage": 60,
+      "resetAfter": 5,
+      "resetTimestamp": 1645092261,
+      "totalRequests": 5,
+    },
+  },
+}
+`;
+
+exports[`chat/messages/discord GetMessages when specified destination does not exist returns error 1`] = `
+Err {
+  "error": "HTTPError: Expected HTTP error
+Properties: {
+  \\"title\\": \\"Not found\\",
+  \\"detail\\": \\"Unknown Channel\\",
+  \\"rateLimit\\": {
+    \\"bucket\\": \\"fccc1d589e71dd6f0c55fde9faa2838d\\",
+    \\"totalRequests\\": 5,
+    \\"remainingRequests\\": 4,
+    \\"resetAfter\\": 5,
+    \\"resetTimestamp\\": 1645092262,
+    \\"remainingRequestsPercentage\\": 80
+  }
+}
+AST Path: definitions[0].statements[5].responseHandlers[1].statements[1]
+Original Map Location: Line 51, column 7",
+}
+`;

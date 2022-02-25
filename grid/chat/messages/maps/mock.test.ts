@@ -16,7 +16,7 @@ describe('chat/messages/mock', () => {
         { provider }
       );
 
-      expect((result.unwrap() as any).messages.length).toEqual(3);
+      expect(result.isOk() && (result.value as any).messages.length).toEqual(3);
     });
   });
 });
