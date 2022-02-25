@@ -34,8 +34,6 @@ usecase GetProfilesForPublishing safe {
   }
 
   example Successful {
-    input {}
-
     result {
       profiles = [
         {
@@ -49,8 +47,6 @@ usecase GetProfilesForPublishing safe {
   }
 
   example Failed {
-    input {}
-
     error {
       title = 'Unauthorized'
     }
