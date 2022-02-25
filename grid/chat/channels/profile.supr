@@ -59,7 +59,7 @@ usecase GetChannels {
 
   example Successful {
     input {
-      visibility = ['public'],
+      visibility = 'public',
       limit = 2
     }
 
@@ -69,12 +69,12 @@ usecase GetChannels {
           id = '1'
           createdAt = 1546167104
           name = 'random'
-          numOfMembers = 100
+          membersCount = 100
         }
         {
           id = '2'
           createdAt = 1546167104
-          numOfMembers = 100
+          membersCount = 100
         }
       ]
     }
