@@ -505,6 +505,17 @@
           "file": "../grid/address/ip-geolocation/maps/freegeoip.suma"
         }
       }
+    },
+    "chat/messages": {
+      "file": "../grid/chat/messages/profile.supr",
+      "providers": {
+        "mock": {
+          "file": "../grid/chat/messages/maps/mock.suma"
+        },
+        "slack": {
+          "file": "../grid/chat/messages/maps/slack.suma"
+        }
+      }
     }
   },
   "providers": {
@@ -745,7 +756,10 @@
           "id": "bearer_token",
           "token": "$SLACK_ACCESS_TOKEN"
         }
-      ]
+      ],
+      "parameters": {
+        "accessToken": "$SLACK_ACCESS_TOKEN"
+      }
     },
     "wttr-in": {
       "file": "../providers/wttr-in.json",
