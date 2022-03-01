@@ -11,6 +11,13 @@ map IpGeolocation {
 
   http GET "/{ipAddress}" {
     security "apikey"
+    
+    request {
+      query {
+        fields = 'ip,country_code,country_name,region,city,postal,time_zone,latitude,longitude'
+      }
+    }
+
     response 200 "application/json" {
       timezone = undefined
 
