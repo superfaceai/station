@@ -503,6 +503,9 @@
         },
         "freegeoip": {
           "file": "../grid/address/ip-geolocation/maps/freegeoip.suma"
+        },
+        "ipdata": {
+          "file": "../grid/address/ip-geolocation/maps/ipdata.suma"
         }
       }
     },
@@ -998,6 +1001,15 @@
         {
           "id": "apiKey",
           "apikey": "$HERE_API_KEY"
+        }
+      ]
+    },
+    "ipdata": {
+      "file": "../providers/ipdata.json",
+      "security": [
+        {
+          "id": "apikey",
+          "apikey": "$IPDATA_API_KEY"
         }
       ]
     }
