@@ -52,7 +52,7 @@ operation MapError {
   detail = body.message
 
   return if (statusCode === 400) {
-    title = "Wrong IP address format"
+    title = "Bad request"
     detail = detail
   }
 
