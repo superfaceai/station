@@ -1,0 +1,70 @@
+profile = "address/ip-geolocation@1.0"
+provider = "ipdata"
+
+// IPData documentation: https://docs.ipdata.co/
+map IpGeolocation {
+  ipAddress = ''
+
+  set if (input.ipAddress) {
+    ipAddress = input.ipAddress
+  }
+
+  http GET "/{ipAddress}" {
+    security "apikey"
+    response 200 "application/json" {
+      timezone = undefined
+
+      set if (body.time_zone) {
+        timezone = body.time_zone.name
+      }
+
+      map result {
+        ipAddress = body.ip
+        addressCountryCode = body.country_code ? body.country_code : undefined
+        addressCountry = body.country_name ? body.country_name : undefined
+        addressRegion = body.region ? body.region : undefined
+        addressLocality = body.city ? body.city: undefined
+        postalCode = body.postal ? body.postal : undefined
+        timeZone = timezone
+        latitude = body.latitude ? body.latitude : undefined
+        longitude = body.longitude ? body.longitude : undefined
+      }
+    }
+
+    response {
+      error = call MapError(statusCode = statusCode, body = body)
+      map error error
+    }
+  }
+}
+
+operation MapError {
+  statusCode = args.statusCode
+  body = args.body
+  detail = body.message
+
+  return if (statusCode === 401) {
+    title = "Unauthenticated"
+    detail = detail
+  }
+
+  return if (statusCode === 403) {
+    title = "Unauthorized"
+    detail = detail
+  }
+
+  return if (statusCode === 400) {
+    title = "Wrong IP address format"
+    detail = detail
+  }
+
+  return if (statusCode === 429) {
+    title = "Rate limit exceeded"
+    detail = `You reached max requests quota.`
+  }
+
+  return {
+    title = "Unknown error"
+    detail = `Unknown error occurred. Status: ${statusCode}. IPData provider error info: ${detail}.`
+  }
+}
