@@ -45,6 +45,7 @@ map IpGeolocation {
   }
 }
 
+//Status codes documentation: https://docs.ipdata.co/api-reference/status-codes
 operation MapError {
   statusCode = args.statusCode
   body = args.body
@@ -57,6 +58,11 @@ operation MapError {
 
   return if (statusCode === 403) {
     title = "Unauthorized"
+    detail = detail
+  }
+
+  return if (statusCode === 404) {
+    title = "Not found"
     detail = detail
   }
 
