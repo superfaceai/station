@@ -51,6 +51,11 @@ operation MapError {
   body = args.body
   detail = body.message
 
+  return if (statusCode === 400) {
+    title = "Wrong IP address format"
+    detail = detail
+  }
+
   return if (statusCode === 401) {
     title = "Unauthenticated"
     detail = detail
@@ -63,11 +68,6 @@ operation MapError {
 
   return if (statusCode === 404) {
     title = "Not found"
-    detail = detail
-  }
-
-  return if (statusCode === 400) {
-    title = "Wrong IP address format"
     detail = detail
   }
 
