@@ -1,0 +1,175 @@
+profile = "social-media/publish-post@1.0"
+provider = "linkedin"
+
+"""
+Publish Share to LinkedIn
+For text-only posts, links, and images (up to 200MB per image).
+"""
+map PublishPost {
+
+  set {
+    contentEntities = input.link ? [
+      { entityLocation: input.link }
+    ] : []
+    media = Array.isArray(input.media) ? input.media : []
+    text = input.text
+    shareMediaCategory = undefined
+  }
+
+  // FIXME: Workaround for https://github.com/superfaceai/one-sdk-js/issues/215
+  assets = call foreach(index of Array(media.length).fill().map((_, i) => i)) UploadImage(media = input.media, index = index, accessToken = parameters.accessToken, profileId = input.profileId)
+
+  set if (Array.isArray(assets) && assets.length > 0) {
+    // override contentEntities since we can't combine the link with image
+    contentEntities = assets
+    // instead append the link to the post
+    text = input.link ? `${text || ''} ${input.link}`.trim() : text
+    // https://docs.microsoft.com/en-us/linkedin/marketing/integrations/community-management/shares/share-api#using-images-for-shares
+    shareMediaCategory = "IMAGE"
+  }
+
+  // https://docs.microsoft.com/en-us/linkedin/marketing/integrations/community-management/shares/share-api#post-shares
+  http POST "/v2/shares" {
+    request "application/json" {
+
+      headers {
+        "Authorization" = `Bearer ${parameters.accessToken}`,
+      }
+
+      body {
+        owner = input.profileId,
+        text = text ? {text: text} : undefined,
+        distribution = {linkedInDistributionTarget: {}}, // Required to set the share as publicly visible. For sponsored content where the targeting is defined when it is sponsored, distribution should be null.
+        content = contentEntities.length > 0 ? {contentEntities: contentEntities, shareMediaCategory: shareMediaCategory} : undefined,
+      }
+
+    }
+  
+    response 201 "application/json" {
+      urn = `urn:li:share:${body.id}`
+      activityId = body.activity,
+
+      return map result {
+        postId = urn,
+        url = `https://www.linkedin.com/feed/update/${activityId}`,
+      }
+    }
+
+    response {
+      error = call MapError(statusCode = statusCode, body = body)
+      map error error
+    }
+  }
+}
+
+// https://docs.microsoft.com/en-us/linkedin/marketing/integrations/community-management/shares/vector-asset-api
+operation UploadImage {
+  mediaItem = args.media[args.index]
+
+  set {
+    uploadPath = undefined
+    uploadHeaders = {}
+    assetUrn = undefined
+  }
+  // 1. register upload
+  http POST "/v2/assets" {
+    security none
+  
+    request {
+      query {
+        action = "registerUpload",
+      }
+      headers {
+        "Authorization" = `Bearer ${args.accessToken}`,
+      }
+      body {
+        registerUploadRequest = {
+          owner: args.profileId,
+          supportedUploadMechanism: ["SYNCHRONOUS_UPLOAD"],
+          recipes: [
+            "urn:li:digitalmediaRecipe:feedshare-image",
+          ],
+          serviceRelationships: [
+            {
+              identifier: "urn:li:userGeneratedContent",
+              relationshipType: "OWNER",
+            },
+          ]
+        }
+      }
+    }
+  
+    response 200 "application/json" {
+      uploadRequest = body.value.uploadMechanism['com.linkedin.digitalmedia.uploading.MediaUploadHttpRequest']
+      uploadPath = uploadRequest.uploadUrl.replace('https://api.linkedin.com/', '') // no URL parsing for you
+      uploadHeaders = uploadRequest.headers
+      assetUrn = body.value.asset
+    }
+
+    response {
+      error = call MapError(statusCode = statusCode, body = body)
+      fail error
+    }
+  }
+
+  // 2. upload the image
+  http PUT "/{uploadPath}" {
+    request "application/octet-stream" {
+      headers {
+        "Authorization" = `Bearer ${args.accessToken}`,
+      }
+
+      body = mediaItem.contents
+    }
+
+    response 201 {
+      return {
+        entity = assetUrn,
+      }
+    }
+
+    // Error responses from this endpoint have empty body
+    response 400 {
+      fail {
+        title = "Bad Request",
+        detail = "Media upload resulted in Bad Request error."
+      }
+    }
+
+    response 401 {
+      fail {
+        title = "Unauthorized",
+        detail = "Media upload resulted in Unauthorized error. The access token is either invalid, or expired."
+      }
+    }
+  }
+}
+
+// https://docs.microsoft.com/en-us/linkedin/marketing/integrations/community-management/shares/share-api?tabs=http#common-creation-errors
+operation MapError {
+  statusCode = args.statusCode
+  title = `Unknown response: HTTP ${statusCode}`
+  body = args.body
+  detail = body.message
+
+  set if (statusCode === 400) {
+    title = "Bad Request"
+  }
+  set if (statusCode === 401) {
+    title = "Unauthorized"
+  }
+  set if (statusCode === 422) {
+    title = "Conflict"
+  }
+  set if (statusCode === 429) {
+    title = "Too Many Requests"
+  }
+  set if (statusCode === 500) {
+    title = "Server Error"
+  }
+
+  return {
+    title = title,
+    detail = detail,
+  }
+}

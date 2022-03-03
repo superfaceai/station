@@ -1,0 +1,73 @@
+[
+  {
+    "scope": "https://api.linkedin.com:443",
+    "method": "POST",
+    "path": "/v2/shares",
+    "body": {
+      "owner": "urn:li:organization:2414183",
+      "text": {
+        "text": "This is a post with a link to an example domain."
+      },
+      "distribution": {
+        "linkedInDistributionTarget": {}
+      },
+      "content": {
+        "contentEntities": [
+          {
+            "entityLocation": "https://example.com"
+          }
+        ]
+      }
+    },
+    "status": 422,
+    "response": {
+      "errorDetailType": "com.linkedin.common.error.BadRequest",
+      "message": "com.linkedin.content.common.exception.BadRequestResponseException: Content is a duplicate of urn:li:share:6905097774052777984",
+      "errorDetails": {
+        "inputErrors": [
+          {
+            "description": "Duplicate post is detected",
+            "input": {},
+            "code": "DUPLICATE_POST"
+          }
+        ]
+      },
+      "status": 422
+    },
+    "rawHeaders": [
+      "x-li-responseorigin",
+      "RGW",
+      "Content-Type",
+      "application/json",
+      "x-linkedin-error-response",
+      "true",
+      "x-restli-gateway-error",
+      "false",
+      "x-restli-protocol-version",
+      "1.0.0",
+      "Content-Length",
+      "322",
+      "Date",
+      "Thu, 03 Mar 2022 10:35:03 GMT",
+      "X-Li-Fabric",
+      "prod-ltx1",
+      "X-Li-Source-Fabric",
+      "prod-lva1",
+      "X-Li-Pop",
+      "prod-lva1-x",
+      "X-LI-Proto",
+      "http/1.1",
+      "X-LI-UUID",
+      "AAXZTfNwu1CXjR7Mf6zDmQ==",
+      "Set-Cookie",
+      "bcookie=\"v=2&e64a380f-fb51-4165-80ad-0ec515cc9048\"; Domain=.linkedin.com; Expires=Sat, 02-Mar-2024 22:12:35 GMT; Path=/; Secure; SameSite=None",
+      "Set-Cookie",
+      "li_gc=MTswOzE2NDYzMDM3MDM7MjswMjEAxFZMP1AwdL34N3AWjH3cwAeEa+AdCpBoULEDGgtZpg==; Domain=.linkedin.com; Expires=Sun, 25 Feb 2024 23:50:09 GMT; Path=/; Secure; SameSite=None",
+      "Set-Cookie",
+      "lidc=\"b=TB77:s=T:r=T:a=T:p=T:g=2871:u=883:x=1:i=1646303703:t=1646304966:v=2:sig=AQEQ1cWoYy3RY3JAy6M_n9WFoAEHL88N\"",
+      "X-LI-Route-Key",
+      "\"b=TB77:s=T:r=T:a=T:p=T:g=2871:u=883:x=1:i=1646303703:t=1646304966:v=2:sig=AQEQ1cWoYy3RY3JAy6M_n9WFoAEHL88N\""
+    ],
+    "responseIsBinary": false
+  }
+]
