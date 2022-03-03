@@ -158,6 +158,12 @@ operation MapError {
   set if (statusCode === 401) {
     title = "Unauthorized"
   }
+  set if (statusCode === 403) {
+    title = "Forbidden"
+  }
+  set if (statusCode === 404) {
+    title = "Not Found"
+  }
   set if (statusCode === 422) {
     title = "Conflict"
   }
