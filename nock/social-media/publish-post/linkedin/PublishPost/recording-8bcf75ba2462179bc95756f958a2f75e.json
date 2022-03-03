@@ -19,70 +19,58 @@
         ]
       }
     },
-    "status": 201,
+    "status": 422,
     "response": {
-      "owner": "urn:li:organization:2414183",
-      "activity": "urn:li:activity:6905098678680244225",
-      "edited": false,
-      "created": {
-        "actor": "urn:li:person:3W-GHjejaD",
-        "time": 1646303815498
-      },
-      "text": {
-        "text": "This is a post with a link to an example domain..."
-      },
-      "lastModified": {
-        "actor": "urn:li:csUser:0",
-        "time": 1646303815543
-      },
-      "id": "6905098678067871744",
-      "distribution": {
-        "linkedInDistributionTarget": {
-          "visibleToGuest": true
-        }
-      },
-      "content": {
-        "contentEntities": [
+      "errorDetailType": "com.linkedin.common.error.BadRequest",
+      "message": "com.linkedin.content.common.exception.BadRequestResponseException: Content is a duplicate of urn:li:share:6905136380414877696",
+      "errorDetails": {
+        "inputErrors": [
           {
-            "entityLocation": "https://example.com"
+            "description": "Duplicate post is detected",
+            "input": {},
+            "code": "DUPLICATE_POST"
           }
-        ],
-        "shareMediaCategory": "ARTICLE"
-      }
+        ]
+      },
+      "status": 422
     },
     "rawHeaders": [
       "x-li-responseorigin",
       "RGW",
       "Content-Type",
       "application/json",
-      "Location",
-      "/shares/6905098678067871744",
-      "x-linkedin-id",
-      "6905098678067871744",
+      "x-linkedin-error-response",
+      "true",
+      "x-restli-gateway-error",
+      "false",
       "x-restli-protocol-version",
       "1.0.0",
       "Content-Length",
-      "505",
+      "322",
       "Date",
-      "Thu, 03 Mar 2022 10:36:55 GMT",
+      "Thu, 03 Mar 2022 13:07:33 GMT",
       "X-Li-Fabric",
       "prod-ltx1",
       "X-Li-Source-Fabric",
       "prod-lor1",
+      "Report-To",
+      "{\"group\":\"network-errors\",\"max_age\":2592000,\"endpoints\":[{\"url\":\"https://www.linkedin.com/li/rep\"}],\"include_subdomains\":true}",
+      "NEL",
+      "{\"report_to\":\"network-errors\",\"max_age\":1296000,\"success_fraction\":0.00066,\"failure_fraction\":1,\"include_subdomains\":true}",
       "X-Li-Pop",
       "prod-lor1-x",
       "X-LI-Proto",
       "http/1.1",
       "X-LI-UUID",
-      "AAXZTfoZ2gewtlcW1lxMIg==",
+      "AAXZUBTMMzm4k+0FWtv4yg==",
       "Set-Cookie",
-      "bcookie=\"v=2&c4241680-1013-4f9a-8c1c-d1e685b0c8f8\"; Domain=.linkedin.com; Expires=Sat, 02-Mar-2024 22:14:27 GMT; Path=/; Secure; SameSite=None",
+      "bcookie=\"v=2&f6cd9a7e-9759-4af1-88ce-377296e08b55\"; Domain=.linkedin.com; Expires=Sun, 03-Mar-2024 00:45:05 GMT; Path=/; Secure; SameSite=None",
       "Set-Cookie",
-      "li_gc=MTswOzE2NDYzMDM4MTU7MjswMjFLbSCWzGOJKLh/fET7KoJc2i1gyorpg+Bmt/kj3Z3EHg==; Domain=.linkedin.com; Expires=Sun, 25 Feb 2024 09:06:55 GMT; Path=/; Secure; SameSite=None",
+      "li_gc=MTswOzE2NDYzMTI4NTM7MjswMjHUItN6YpHE6fIqc1PEfjOni3G/Eo29TRh9L1mWwOj4nw==; Domain=.linkedin.com; Expires=Thu, 22 Feb 2024 20:30:02 GMT; Path=/; Secure; SameSite=None",
       "Set-Cookie",
-      "lidc=\"b=TB77:s=T:r=T:a=T:p=T:g=2871:u=883:x=1:i=1646303815:t=1646304966:v=2:sig=AQGxFQZ6C7YVRZnNy_6Zy0RaPjGjHfJs\"",
+      "lidc=\"b=TB77:s=T:r=T:a=T:p=T:g=2871:u=883:x=1:i=1646312853:t=1646399131:v=2:sig=AQFuVEotB7bsQSsasmaGt9y4YuYD__mh\"",
       "X-LI-Route-Key",
-      "\"b=TB77:s=T:r=T:a=T:p=T:g=2871:u=883:x=1:i=1646303815:t=1646304966:v=2:sig=AQGxFQZ6C7YVRZnNy_6Zy0RaPjGjHfJs\""
+      "\"b=TB77:s=T:r=T:a=T:p=T:g=2871:u=883:x=1:i=1646312853:t=1646399131:v=2:sig=AQFuVEotB7bsQSsasmaGt9y4YuYD__mh\""
     ],
     "responseIsBinary": false
   }

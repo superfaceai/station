@@ -39,7 +39,7 @@ describe(`social-media/posts/${provider}`, () => {
           useCase: 'PublishPost',
           input: {
             profileId,
-            text: `Test from Superface Station 9.`,
+            text: `Test from Superface Station 7`,
           },
         });
         expect(result.isOk()).toBe(true);
@@ -53,7 +53,7 @@ describe(`social-media/posts/${provider}`, () => {
           useCase: 'PublishPost',
           input: {
             profileId,
-            text: 'This is a post with a link to an example domain...',
+            text: 'This is a post with a link to an example domain.',
             link: 'https://example.com',
           },
         });
@@ -90,6 +90,7 @@ describe(`social-media/posts/${provider}`, () => {
           input: {
             profileId,
             text: 'This is a post with an image and a link.',
+            link: 'https://example.com',
             media: [media[0]],
           },
         });
