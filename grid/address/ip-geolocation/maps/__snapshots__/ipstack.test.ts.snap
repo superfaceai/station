@@ -1,0 +1,45 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`address/ip-geolocation/ipstack IpGeolocation when api key is valid should return bad request error when IP address format is wrong 1`] = `
+Err {
+  "error": "HTTPError: Expected HTTP error
+Properties: {
+  \\"title\\": \\"Bad request\\",
+  \\"detail\\": \\"The IP Address supplied is invalid.\\"
+}
+AST Path: definitions[0].statements[2].responseHandlers[0].statements[3]
+Original Map Location: Line 27, column 7",
+}
+`;
+
+exports[`address/ip-geolocation/ipstack IpGeolocation when api key is valid should return client IP geolocation coordinates when no IP address specified in input 1`] = `
+Ok {
+  "value": Object {
+    "addressCountry": "Czechia",
+    "addressCountryCode": "CZ",
+    "addressLocality": "Jablonec nad Nisou",
+    "addressRegion": "Liberecký kraj",
+    "ipAddress": "94.127.131.198",
+    "latitude": 50.68013000488281,
+    "longitude": 15.321399688720703,
+    "postalCode": "468 22",
+    "timeZone": undefined,
+  },
+}
+`;
+
+exports[`address/ip-geolocation/ipstack IpGeolocation when api key is valid should return geolocation coordinates and address for valid IP address 1`] = `
+Ok {
+  "value": Object {
+    "addressCountry": "United States",
+    "addressCountryCode": "US",
+    "addressLocality": "Mountain View",
+    "addressRegion": "California",
+    "ipAddress": "8.8.8.8",
+    "latitude": 37.38801956176758,
+    "longitude": -122.07431030273438,
+    "postalCode": "94041",
+    "timeZone": undefined,
+  },
+}
+`;
