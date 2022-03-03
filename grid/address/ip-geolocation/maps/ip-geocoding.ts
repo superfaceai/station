@@ -3,7 +3,7 @@ import { RecordingProcessOptions, SuperfaceTest } from '@superfaceai/testing';
 
 export const ipGeolocationTest = (
   provider: string,
-  recordingOptions: RecordingProcessOptions
+  recordingOptions?: RecordingProcessOptions
 ): void => {
   describe(`address/ip-geolocation/${provider}`, () => {
     let superfaceTest: SuperfaceTest;
