@@ -12,10 +12,6 @@ map IpGeolocation {
   http GET "/{ipAddress}" {
     security "apikey"
     
-    request {
-      query {}
-    }
-
     response 200 "application/json" {
       error = undefined
       timezone = undefined
