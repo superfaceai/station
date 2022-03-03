@@ -3,7 +3,7 @@ import { RecordingDefinitions } from '@superfaceai/testing';
 import { ipGeolocationTest } from './ip-geocoding';
 
 ipGeolocationTest('ipstack', {
-  //Testing library is not processing recordings because integration parameter is used to replace HTTP scheme
+  //Testing library is not processing recordings because integration parameter is used to replace HTTP scheme which is not supported by testing lib
   processRecordings: false,
   beforeRecordingSave: (recordings: RecordingDefinitions) => {
     const IPSTACK_API_KEY_REDACTED_VALUE = 'IPSTACK_API_KEY_REDACTED';
