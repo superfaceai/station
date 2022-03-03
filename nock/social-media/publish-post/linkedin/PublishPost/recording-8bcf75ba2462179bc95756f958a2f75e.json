@@ -1,0 +1,77 @@
+[
+  {
+    "scope": "https://api.linkedin.com:443",
+    "method": "POST",
+    "path": "/v2/shares",
+    "body": {
+      "owner": "urn:li:organization:2414183",
+      "text": {
+        "text": "This is a post with a link to an example domain..."
+      },
+      "distribution": {
+        "linkedInDistributionTarget": {}
+      },
+      "content": {
+        "contentEntities": [
+          {
+            "entityLocation": "https://example.com"
+          }
+        ]
+      }
+    },
+    "status": 422,
+    "response": {
+      "errorDetailType": "com.linkedin.common.error.BadRequest",
+      "message": "com.linkedin.content.common.exception.BadRequestResponseException: Content is a duplicate of urn:li:share:6905136380414877696",
+      "errorDetails": {
+        "inputErrors": [
+          {
+            "description": "Duplicate post is detected",
+            "input": {},
+            "code": "DUPLICATE_POST"
+          }
+        ]
+      },
+      "status": 422
+    },
+    "rawHeaders": [
+      "x-li-responseorigin",
+      "RGW",
+      "Content-Type",
+      "application/json",
+      "x-linkedin-error-response",
+      "true",
+      "x-restli-gateway-error",
+      "false",
+      "x-restli-protocol-version",
+      "1.0.0",
+      "Content-Length",
+      "322",
+      "Date",
+      "Thu, 03 Mar 2022 13:07:33 GMT",
+      "X-Li-Fabric",
+      "prod-ltx1",
+      "X-Li-Source-Fabric",
+      "prod-lor1",
+      "Report-To",
+      "{\"group\":\"network-errors\",\"max_age\":2592000,\"endpoints\":[{\"url\":\"https://www.linkedin.com/li/rep\"}],\"include_subdomains\":true}",
+      "NEL",
+      "{\"report_to\":\"network-errors\",\"max_age\":1296000,\"success_fraction\":0.00066,\"failure_fraction\":1,\"include_subdomains\":true}",
+      "X-Li-Pop",
+      "prod-lor1-x",
+      "X-LI-Proto",
+      "http/1.1",
+      "X-LI-UUID",
+      "AAXZUBTMMzm4k+0FWtv4yg==",
+      "Set-Cookie",
+      "bcookie=\"v=2&f6cd9a7e-9759-4af1-88ce-377296e08b55\"; Domain=.linkedin.com; Expires=Sun, 03-Mar-2024 00:45:05 GMT; Path=/; Secure; SameSite=None",
+      "Set-Cookie",
+      "li_gc=MTswOzE2NDYzMTI4NTM7MjswMjHUItN6YpHE6fIqc1PEfjOni3G/Eo29TRh9L1mWwOj4nw==; Domain=.linkedin.com; Expires=Thu, 22 Feb 2024 20:30:02 GMT; Path=/; Secure; SameSite=None",
+      "Set-Cookie",
+      "lidc=\"b=TB77:s=T:r=T:a=T:p=T:g=2871:u=883:x=1:i=1646312853:t=1646399131:v=2:sig=AQFuVEotB7bsQSsasmaGt9y4YuYD__mh\"",
+      "X-LI-Route-Key",
+      "\"b=TB77:s=T:r=T:a=T:p=T:g=2871:u=883:x=1:i=1646312853:t=1646399131:v=2:sig=AQFuVEotB7bsQSsasmaGt9y4YuYD__mh\""
+    ],
+    "responseIsBinary": false
+  }
+]
