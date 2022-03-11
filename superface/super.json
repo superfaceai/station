@@ -512,6 +512,9 @@
         },
         "ipstack": {
           "file": "../grid/address/ip-geolocation/maps/ipstack.suma"
+        },
+        "ipgeolocation": {
+          "file": "../grid/address/ip-geolocation/maps/ipgeolocation.suma"
         }
       }
     },
@@ -1030,6 +1033,15 @@
       "parameters": {
         "HTTP_SCHEME": "$IPSTACK_HTTP_SCHEME"
       }
+    },
+    "ipgeolocation": {
+      "file": "../providers/ipgeolocation.json",
+      "security": [
+        {
+          "id": "apikey",
+          "apikey": "$IPGEOLOCATION_API_KEY"
+        }
+      ]
     }
   }
 }

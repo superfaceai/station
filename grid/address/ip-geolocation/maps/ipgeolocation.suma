@@ -1,0 +1,81 @@
+profile = "address/ip-geolocation@1.0"
+provider = "ipgeolocation"
+
+// IP Geolocation documentation:https://ipgeolocation.io/documentation/ip-geolocation-api.html
+map IpGeolocation {
+
+  http GET "/ipgeo" {
+    security "apikey"
+    
+    request {
+      query {
+        ip = input.ipAddress
+        fields = 'country_code2,country_name,state_prov,city,zipcode,time_zone,latitude,longitude'
+      }
+    }
+
+    response 200 "application/json" {
+      timezone = undefined
+    
+      set if (body.time_zone) {
+        timezone = body.time_zone.name
+      }
+
+      latitude = parseFloat(body.latitude, 10)
+      longitude = parseFloat(body.longitude, 10)
+
+      map result {
+        ipAddress = body.ip
+        addressCountryCode = body.country_code2
+        addressCountry = body.country_name
+        addressRegion = body.state_prov
+        addressLocality = body.city
+        postalCode = body.zipcode
+        timeZone = timezone
+        latitude = (!isNaN(latitude))?latitude:undefined
+        longitude = (!isNaN(longitude))?longitude:undefined
+      }
+    }
+
+    response {
+      error = call MapError(statusCode = statusCode, body = body)
+      map error error
+    }
+  }
+}
+
+operation MapError {
+  statusCode = args.statusCode
+  body = args.body
+  detail = body.message
+
+  return if (statusCode === 400 || statusCode === 423) {
+    title = "Bad request"
+    detail = detail
+  }
+
+  return if (statusCode === 401) {
+    title = "Unauthenticated"
+    detail = detail
+  }
+
+  return if (statusCode === 403) {
+    title = "Unauthorized"
+    detail = detail
+  }
+
+  return if (statusCode === 404) {
+    title = "Not found"
+    detail = detail
+  }
+
+  return if (statusCode === 429) {
+    title = "Rate limit exceeded"
+    detail = detail
+  }
+
+  return {
+    title = "Unknown error"
+    detail = `Unknown error occurred. Status: ${statusCode}. IP Geolocation provider error info: ${detail}.`
+  }
+}
