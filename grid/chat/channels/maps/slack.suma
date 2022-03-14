@@ -61,7 +61,7 @@ operation MapChannels {
   channels = args.channels.map(channel => {
     const resultChannel = {
       id: channel.id,
-      createdAt: channel.created,
+      createdAt: channel.created * 1000,
     };
 
     if (channel.name) {
