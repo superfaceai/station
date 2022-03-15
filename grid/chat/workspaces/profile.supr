@@ -75,7 +75,7 @@ model Workspace {
 
   """
   Created At
-  UNIX timestamp (e.g. 1095379198.75) when the workspace was created
+  UNIX ms timestamp (e.g. 1095379198750) when the workspace was created
   """
   createdAt! number!
 
@@ -152,7 +152,7 @@ model RateLimit {
 
   """
   Reset Timestamp
-  Timestamp when the rate limits will reset (in  Unix Timestamp format).
+  Timestamp when the rate limits will reset (in Unix Timestamp ms format).
   """
   resetTimestamp number
 
