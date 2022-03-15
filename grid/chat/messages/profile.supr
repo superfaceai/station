@@ -15,13 +15,13 @@ usecase GetMessages {
     
     """
     After Timestamp
-    Retrieve only messages after the given UNIX timestamp (in seconds, e.g. 1095379198.75) 
+    Retrieve only messages after the given UNIX timestamp (in milliseconds, e.g. 1095379198750) 
     """
     afterTimestamp number
     
     """
     Before Timestamp
-    Retrieve only messages before the given UNIX timestamp (in seconds, e.g. 1095379198.75)
+    Retrieve only messages before the given UNIX timestamp (in milliseconds, e.g. 1095379198750)
     """
     beforeTimestamp number
 
@@ -91,7 +91,7 @@ model Attachment {
 
   """
   Created At
-  UNIX timestamp (e.g. 1095379198.75) when the attachment was created
+  UNIX ms timestamp (e.g. 1095379198750) when the attachment was created
   """
   createdAt! number!
 
@@ -132,7 +132,7 @@ model Message {
 
   """
   Created At
-  UNIX timestamp (e.g. 1095379198.75) when the message was created
+  UNIX ms timestamp (e.g. 1095379198750) when the message was created
   """
   createdAt! number!
 
@@ -162,7 +162,7 @@ model Message {
 
   """
   Updated At
-  UNIX timestamp (e.g. 1095379198.75) when the message was last updated
+  UNIX ms timestamp (e.g. 1095379198750) when the message was last updated
   """
   updatedAt number
 
@@ -254,7 +254,7 @@ model RateLimit {
 
   """
   Reset Timestamp
-  Timestamp when the rate limits will reset (in Unix Timestamp format).
+  Timestamp when the rate limits will reset (in Unix Timestamp ms format).
   """
   resetTimestamp number
 
