@@ -75,7 +75,7 @@ model Thread {
 
   """
   Created At
-  UNIX timestamp (e.g. 1095379198.75) when the thread was created
+  UNIX timestamp in ms (e.g. 1095379198750) when the thread was created
   """
   createdAt! number!
 
@@ -87,7 +87,7 @@ model Thread {
 
   """
   Archive At
-  UNIX timestamp (e.g. 1095379198.75) when will be the thread archived
+  UNIX timestamp in ms (e.g. 1095379198750) when the thread will be archived
   """
   archiveAt number!
 
@@ -152,7 +152,7 @@ model RateLimit {
 
   """
   Reset Timestamp
-  Timestamp when the rate limits will reset (in Unix Timestamp format).
+  Timestamp when the rate limits will reset (in Unix Timestamp ms format).
   """
   resetTimestamp number
 
