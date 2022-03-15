@@ -19,7 +19,7 @@ usecase GetThreads {
     Threads
     List of retrieved threads
     """
-    threads [Thread]
+    threads! [Thread]
 
     """
     Rate Limit
@@ -39,12 +39,12 @@ usecase GetThreads {
       threads = [
         {
           id = '1'
-          createdAt = 1546167104
+          createdAt = 1546167104000
           channel = 'random'
         },
         {
           id = '2'
-          createdAt = 1546167105
+          createdAt = 1546167105000
           channel = 'random'
         }
       ]

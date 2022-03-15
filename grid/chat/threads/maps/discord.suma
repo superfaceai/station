@@ -128,7 +128,7 @@ operation MapRateLimitDetails {
   }
 
   set if (!isNaN(resetTimestamp)) {
-    details.resetTimestamp = resetTimestamp
+    details.resetTimestamp = resetTimestamp * 1000
   }
 
   set if (!isNaN(retryAfter)) {
