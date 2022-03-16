@@ -33,9 +33,16 @@ map GetMessages {
     response 200 "application/json" {
       messages = call MapMessages(messages = body)
       rateLimit = call MapRateLimitDetails(headers = headers)
+      
+      return map result if ((messages.length < input.limit) || (messages.length === 0)) {
+        messages = messages
+        rateLimit = rateLimit
+      }
+
+      lastMessage = messages[messages.length - 1]
 
       map result {
-        nextPage = messages[messages.length - 1].id
+        nextPage = lastMessage.id
         messages = messages
         rateLimit = rateLimit
       }
