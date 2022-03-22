@@ -78,7 +78,7 @@ operation MapRateLimitDetails {
     details.retryAfter = retryAfter
   }
 
-  set if (details.remainingRequests && details.totalRequests) {
+  set if (details.remainingRequests !== undefined && details.totalRequests) {
     details.remainingRequestsPercentage = (details.remainingRequests / details.totalRequests) * 100
   }
 
