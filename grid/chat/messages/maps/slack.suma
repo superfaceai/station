@@ -61,64 +61,75 @@ map GetMessages {
 }
 
 operation MapMessages {
-  listOfMessages = []
+  messages = args.messages.reduce((acc, message) => {
+    if (message.type === 'message') {
+      const resultMessage = {
+        id: message.ts,
+        text: message.text,
+        createdAt: parseFloat(message.ts) * 1000,
+      }
+  
+      let author, reactions = [], attachments = [];
+  
+      if (message.user || message.bot_id) {
+        author = {
+          id: message.user || message.bot_id,
+          username: message.username
+        };
+  
+        resultMessage.author = author;
+      }
+  
+      if (message.thread_ts) {
+        resultMessage.hasThread = true;
+        resultMessage.threadId = message.thread_ts;
+      }
+  
+      if (message.edited) {
+        resultMessage.updatedAt = parseFloat(message.edited.ts) * 1000;
+      }
+  
+      if (message.reactions) {
+        reactions = message.reactions.map(reaction => ({
+          emoji: reaction.name,
+          count: reaction.count,
+          users: reaction.users,
+        }));
+  
+        resultMessage.reactions = reactions;
+      }
+  
+      if (message.files) {
+        attachments = message.files.reduce((attachAcc, file) => {
+          if (file.created !== undefined) {
+            attachAcc.push({
+              id: file.id,
+              createdAt: file.created,
+              fileName: file.name,
+              mediaType: file.mimetype,
+              url: file.permalink_public,
+              preview: file.preview,
+            });
+          }
 
-  listOfMessages = args.messages.filter(message => message.type === 'message').map(message => {
-    const resultMessage = {
-      id: message.ts,
-      text: message.text,
-      createdAt: parseFloat(message.ts),
+          return attachAcc;
+		    }, []);
+  
+        resultMessage.attachments = attachments;
+      }
+  
+      // TODO: implement composing URL
+      // BLOCKER: unknown workspace name
+      // Format of public URL:          https://<workspace-name>.slack.com/archives/<channel-id>/p<processed-message-id>
+      // Format of URL poiting to API:  https://slack.com/api/conversations.history?channel=<channel-id>&latest=<message-id>&inclusive=true&limit=1
+  
+      acc.push(resultMessage);
     }
 
-    let author, reactions = [], attachments = [];
+    return acc;
+  }, []);
 
-    if (message.user || message.bot_id) {
-      author = {
-        id: message.user || message.bot_id,
-        username: message.username
-      };
-
-      resultMessage.author = author;
-    }
-
-    if (message.thread_ts) {
-      resultMessage.hasThread = true;
-      resultMessage.threadId = message.thread_ts;
-    }
-
-    if (message.edited) {
-      resultMessage.updatedAt = parseFloat(message.edited.ts);
-    }
-
-    if (message.reactions) {
-      reactions = message.reactions.map(reaction => ({
-        emoji: reaction.name,
-        count: reaction.count,
-        users: reaction.users,
-      }));
-
-      resultMessage.reactions = reactions;
-    }
-
-    if (message.files) {
-      attachments = message.files.map(file => ({
-        id: file.id,
-        createdAt: file.created,
-        fileName: file.name,
-        mediaType: file.mimetype,
-        url: file.permalink_public,
-        preview: file.preview,
-      }));
-
-      resultMessage.attachments = attachments;
-    }
-
-    resultMessage.url = `https://slack.com/api/conversations.history?channel=${args.destination}&latest=${message.ts}&inclusive=true&limit=1`;
-
-    return resultMessage
-  });
-
-  return listOfMessages
+  return messages
 }
 
 """

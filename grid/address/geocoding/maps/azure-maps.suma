@@ -18,7 +18,7 @@ map Geocode {
 
     response 200 "application/json" {
       return map error if (body.results.length === 0) {
-        title = "Error geocoding address"
+        title = "Unable to find geolocation coordinates for address: " + payload.trim()
       }
 
       map result {

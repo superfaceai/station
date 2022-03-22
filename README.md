@@ -129,7 +129,7 @@ _All inputs should be written directly to the test file and shouldn't use enviro
 **2. Do call against live API to record traffic and create snapshot**
 
 ```shell
-$ yarn test:record grid/scope/name/maps/example.test.ts
+$ yarn test:record grid/[scope]/[name]/maps/[provider].test.ts
 ```
 
 **3. Check result in snapshot**
@@ -137,7 +137,7 @@ $ yarn test:record grid/scope/name/maps/example.test.ts
 Snapshot for test run should be created in location:
 
 ```
-grid/scope/name/maps/__snapshots__/example.test.ts.snap
+grid/[scope]/[name]/maps/__snapshots__/[provider].test.ts.snap
 ```
 
 **4. Do post processing for traffic recording**
@@ -147,7 +147,21 @@ We try to sanitize recordings and remove any sensitive data. But you should stil
 **5. Run tests with recorded traffic**
 
 ```shell
-$ yarn test grid/scope/name/maps/example.test.ts
+$ yarn test grid/[scope]/[name]/maps/example.test.ts
+```
+
+### Debugging maps
+
+You can set OneSDK environment variable `DEBUG` to use the logging output from the OneSDK for debugging maps: 
+
+```
+DEBUG="superface:http*"
+```
+
+For example, when recording traffic:
+
+```
+$ DEBUG="superface:http*" yarn test:record grid/[scope]/[name]/maps/[provider].test.ts
 ```
 
 ### Enviroment variables
@@ -183,4 +197,4 @@ Note: If editing the README, please conform to the [standard-readme](https://git
 ## License
 
 The Superface is licensed under the [MIT](LICENSE).
-© 2021 Superface
+© 2022 Superface

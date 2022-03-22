@@ -633,13 +633,6 @@
   dependencies:
     "@sinonjs/commons" "^1.7.0"
 
-"@superfaceai/ast@1.0.0", "@superfaceai/ast@^1.0.0":
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/@superfaceai/ast/-/ast-1.0.0.tgz#7f58f244e60efc7cb6ae5d421fec66c9a94aa6bd"
-  integrity sha512-YbJTkisep18UCcTRpeFDRYUqIajbQWv396c7fkfIjAuR9HAOkt3hZqrdrnA3qINjLaFUzviZW0NOQTL1jeiRXw==
-  dependencies:
-    typescript-is "^0.18.3"
-
 "@superfaceai/ast@^1.1.0":
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/@superfaceai/ast/-/ast-1.1.0.tgz#cb87f9c980e600bd74536e14bafe7231d15c291c"
@@ -647,10 +640,10 @@
   dependencies:
     typescript-is "^0.18.3"
 
-"@superfaceai/cli@1.1.0-beta.0":
-  version "1.1.0-beta.0"
-  resolved "https://registry.yarnpkg.com/@superfaceai/cli/-/cli-1.1.0-beta.0.tgz#d12b4225e334ad9f72eca5f91714e3fa0faa6519"
-  integrity sha512-fj1myNoSD3/YUngsNEThATzqVKMAFaYB7vGgQlqi15mGnl0A/ZpVayTNKhVdutX/D9t7Z+Tyvkdg3w8ln5oP2g==
+"@superfaceai/cli@^1.1.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@superfaceai/cli/-/cli-1.1.0.tgz#f351b3beb9f49cb0fdc043780124dee1e39185de"
+  integrity sha512-G3s1uYl98vWw3vCzEIU/yqL07VbnJyu7fRWBToQq7cQaTJbfqm9zGGJTElUEgzHh4VXTpeaabovMuT2lpkzVAw==
   dependencies:
     "@oclif/command" "^1.8.0"
     "@oclif/config" "^1.17.0"
@@ -669,7 +662,7 @@
     rimraf "^3.0.2"
     typescript "^4.0.5"
 
-"@superfaceai/one-sdk@1.3.0":
+"@superfaceai/one-sdk@1.3.0", "@superfaceai/one-sdk@^1.3.0":
   version "1.3.0"
   resolved "https://registry.yarnpkg.com/@superfaceai/one-sdk/-/one-sdk-1.3.0.tgz#741ee1454877913b420a11b14b823e6262453809"
   integrity sha512-XyztSPy33kRpoNuCq97tL1jMdT6BX1jJ2cFaz50fjwCsfX7f+zi5qx0tvpcZM2dDRm+1dS9cRC04lweIQtmRSg==
@@ -681,39 +674,6 @@
     debug "^4.3.2"
     isomorphic-form-data "^2.0.0"
     vm2 "^3.9.7"
-
-"@superfaceai/one-sdk@^1.0.1":
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/@superfaceai/one-sdk/-/one-sdk-1.0.1.tgz#e39ba8cf7ed0051313b437fc8b58cd307f6e2e42"
-  integrity sha512-0jdC87a98A5TMZvDUWsKJ+bINCSvzXg9iuepc90XmiLy7tFvFvrrlWrw0VYtc9eC3son/i3Yhr6OLCbOcvxH3Q==
-  dependencies:
-    "@superfaceai/ast" "1.0.0"
-    "@superfaceai/parser" "1.0.0"
-    abort-controller "^3.0.0"
-    cross-fetch "^3.0.5"
-    debug "^4.3.2"
-    isomorphic-form-data "^2.0.0"
-    vm2 "^3.9.2"
-
-"@superfaceai/parser@1.0.0":
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/@superfaceai/parser/-/parser-1.0.0.tgz#48e55b40670a9af6e603107709cc89ae538f71d8"
-  integrity sha512-verBpn8bN13fAo1pDCNMGxKLwXC26dlR7iDIM2ekioN/K+kOtXjq6A/bWILvJ+jAP2gWRHGZU017SKGPRrPOHg==
-  dependencies:
-    "@superfaceai/ast" "1.0.0"
-    "@types/debug" "^4.1.5"
-    debug "^4.3.1"
-    typescript "^4"
-
-"@superfaceai/parser@1.1.0-rc.0":
-  version "1.1.0-rc.0"
-  resolved "https://registry.yarnpkg.com/@superfaceai/parser/-/parser-1.1.0-rc.0.tgz#6866de9a2293d6d9ac2e76dcccdc66f5ab728d0e"
-  integrity sha512-W4Go5pAk4qFvWiSDPnaYjjbTtBmicY84LcmFanxXM0Y2wvcDK3rB0hsTsZK6CofdRX2uYv379AajTpTY5Tfupw==
-  dependencies:
-    "@superfaceai/ast" "1.0.0"
-    "@types/debug" "^4.1.5"
-    debug "^4.3.1"
-    typescript "^4"
 
 "@superfaceai/parser@^1.1.0":
   version "1.1.0"
@@ -732,12 +692,12 @@
   dependencies:
     cross-fetch "^3.1.0"
 
-"@superfaceai/testing@^2.0.0":
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/@superfaceai/testing/-/testing-2.0.0.tgz#32eca268125d8653383702d6081f1a39f987ee1f"
-  integrity sha512-9SyWpI8wMfiIEZSfxQ1bpAQgbvt5w41bV1uiBJLg2MMBxykOofW2EBjSG6neYFKgPBT7juP0cJaF0zF+D1u8SQ==
+"@superfaceai/testing@^2.0.3":
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/@superfaceai/testing/-/testing-2.0.3.tgz#bff8cdb15686055d8188bfbbe31f35416434caf0"
+  integrity sha512-aEQXa1rInbK6dBZoEmzocyYpnqLC/eGJFRlaJgMTPCu7IHKWQde00IxUWEXJ2g8M7L/kD+GIwUUVF2BOfrewwg==
   dependencies:
-    "@superfaceai/ast" "^1.0.0"
+    "@superfaceai/ast" "^1.1.0"
     debug "^4.3.2"
     nock "^13.1.3"
 
@@ -1582,14 +1542,7 @@ create-require@^1.1.0:
   resolved "https://registry.yarnpkg.com/create-require/-/create-require-1.1.1.tgz#c1d7e8f1e5f6cfc9ff65f9cd352d37348756c333"
   integrity sha512-dcKFX3jn0MpIaXjisoRvexIJVEKzaq7z2rZKxf+MSr9TkdmHmsU4m2lcLojrj/FHl8mk5VxMmYA+ftRkP/3oKQ==
 
-cross-fetch@^3.0.5, cross-fetch@^3.1.0, cross-fetch@^3.1.4:
-  version "3.1.4"
-  resolved "https://registry.yarnpkg.com/cross-fetch/-/cross-fetch-3.1.4.tgz#9723f3a3a247bf8b89039f3a380a9244e8fa2f39"
-  integrity sha512-1eAtFWdIubi6T4XPy6ei9iUFoKpUkIF971QLN8lIvvvwueI65+Nw5haMNKUwfJxabqlIIDODJKGrQ66gxC0PbQ==
-  dependencies:
-    node-fetch "2.6.1"
-
-cross-fetch@^3.1.5:
+cross-fetch@^3.1.0, cross-fetch@^3.1.4, cross-fetch@^3.1.5:
   version "3.1.5"
   resolved "https://registry.yarnpkg.com/cross-fetch/-/cross-fetch-3.1.5.tgz#e1389f44d9e7ba767907f7af8454787952ab534f"
   integrity sha512-lvb1SBsI0Z7GDwmuid+mU3kWVBwTVUbe7S0H52yaaAdQOXq2YktTCZdlAcNKFzE6QtRz0snpw9bNiPeOIkkQvw==
@@ -1663,14 +1616,7 @@ debug@^3.1.0:
   dependencies:
     ms "^2.1.1"
 
-debug@^4.0.1, debug@^4.1.0, debug@^4.1.1:
-  version "4.3.1"
-  resolved "https://registry.yarnpkg.com/debug/-/debug-4.3.1.tgz#f0d229c505e0c6d8c49ac553d1b13dc183f6b2ee"
-  integrity sha512-doEwdvm4PCeK4K3RQN2ZC2BYUBaxwLARCqZmMjtF8a51J2Rb0xpVloFRnCODwqjpwnAoao4pelN8l3RJdv3gRQ==
-  dependencies:
-    ms "2.1.2"
-
-debug@^4.3.1, debug@^4.3.2:
+debug@^4.0.1, debug@^4.1.0, debug@^4.1.1, debug@^4.3.1, debug@^4.3.2:
   version "4.3.2"
   resolved "https://registry.yarnpkg.com/debug/-/debug-4.3.2.tgz#f0a49c18ac8779e31d4a0c6029dfb76873c7428b"
   integrity sha512-mOp8wKcvj7XxC78zLgw/ZA+6TSgkoE2C/ienthhRD298T7UNwAg9diBpLRxC0mOezLl4B0xV7M0cCO6P/O0Xhw==
@@ -3828,11 +3774,6 @@ nock@^13.1.3:
     lodash.set "^4.3.2"
     propagate "^2.0.0"
 
-node-fetch@2.6.1:
-  version "2.6.1"
-  resolved "https://registry.yarnpkg.com/node-fetch/-/node-fetch-2.6.1.tgz#045bd323631f76ed2e2b55573394416b639a0052"
-  integrity sha512-V4aYg89jEoVRxRb2fJdAg8FHvI7cEyYdVAh94HH0UIK8oJxUfkjlDQN9RbMx+bEjP7+ggMiFRprSti032Oipxw==
-
 node-fetch@2.6.7:
   version "2.6.7"
   resolved "https://registry.yarnpkg.com/node-fetch/-/node-fetch-2.6.7.tgz#24de9fba827e3b4ae44dc8b20256a379160052ad"
@@ -5104,15 +5045,10 @@ typescript-is@^0.18.3:
   optionalDependencies:
     reflect-metadata ">=0.1.12"
 
-typescript@^4:
+typescript@^4, typescript@^4.0.5:
   version "4.4.3"
   resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.4.3.tgz#bdc5407caa2b109efd4f82fe130656f977a29324"
   integrity sha512-4xfscpisVgqqDfPaJo5vkd+Qd/ItkoagnHpufr+i2QCHBsNYp+G7UAoyFl8aPtx879u38wPV65rZ8qbGZijalA==
-
-typescript@^4.0.5:
-  version "4.2.4"
-  resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.2.4.tgz#8610b59747de028fda898a8aef0e103f156d0961"
-  integrity sha512-V+evlYHZnQkaz8TRBuxTA92yZBPotr5H+WhQ7bD3hZUndx5tGOa1fuCgeSjxAzM1RiN5IzvadIXTVefuuwZCRg==
 
 unbox-primitive@^1.0.0:
   version "1.0.1"
@@ -5204,11 +5140,6 @@ verror@1.10.0:
     assert-plus "^1.0.0"
     core-util-is "1.0.2"
     extsprintf "^1.2.0"
-
-vm2@^3.9.2:
-  version "3.9.5"
-  resolved "https://registry.yarnpkg.com/vm2/-/vm2-3.9.5.tgz#5288044860b4bbace443101fcd3bddb2a0aa2496"
-  integrity sha512-LuCAHZN75H9tdrAiLFf030oW7nJV5xwNMuk1ymOZwopmuK3d2H4L1Kv4+GFHgarKiLfXXLFU+7LDABHnwOkWng==
 
 vm2@^3.9.7:
   version "3.9.8"

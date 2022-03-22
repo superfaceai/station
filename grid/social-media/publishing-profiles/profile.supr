@@ -1,9 +1,14 @@
+"""
+Social Media Publishing Profiles
+Identify profiles the authenticated user is authorized to publish to (e.g. Facebook page, Instagram business account, or LinkedIn organization page).
+"""
+
 name = "social-media/publishing-profiles"
-version = "1.0.0"
+version = "1.0.1"
 
 """
 Get Profiles for Publishing
-Relevant social-media profiles (pages, accounts) user is authorized to publish to.
+Retrieve social media profiles (pages, accounts) the authenticated user is authorized to publish to.
 """
 usecase GetProfilesForPublishing safe {
   result {
@@ -13,7 +18,10 @@ usecase GetProfilesForPublishing safe {
         id! string
         "Profile name (non-unique)"
         name string
-        "Vanity name (where applicable)"
+        """
+        Username or vanity name
+        Only where applicable
+        """
         username string
         "Profile image (avatar) URL"
         imageUrl string
@@ -34,8 +42,6 @@ usecase GetProfilesForPublishing safe {
   }
 
   example Successful {
-    input {}
-
     result {
       profiles = [
         {
@@ -49,8 +55,6 @@ usecase GetProfilesForPublishing safe {
   }
 
   example Failed {
-    input {}
-
     error {
       title = 'Unauthorized'
     }
