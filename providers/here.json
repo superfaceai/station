@@ -1,0 +1,26 @@
+{
+  "name": "here",
+  "services": [
+    {
+      "id": "geocode",
+      "baseUrl": "https://geocode.search.hereapi.com"
+    },
+    {
+      "id": "reverse-geocode",
+      "baseUrl": "https://revgeocode.search.hereapi.com"
+    },
+    {
+      "id": "discover",
+      "baseUrl": "https://discover.search.hereapi.com"
+    }
+  ],
+  "securitySchemes": [
+    {
+      "id": "apiKey",
+      "type": "apiKey",
+      "in": "query",
+      "name": "apiKey"
+    }
+  ],
+  "defaultService": "geocode"
+}

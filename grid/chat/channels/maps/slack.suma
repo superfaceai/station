@@ -1,0 +1,206 @@
+profile = "chat/channels@1.0"
+provider = "slack"
+
+"""
+GetChannels map
+"""
+map GetChannels {
+  types = call visibilityToTypes(visibility = input.visibility)
+
+  http GET "/conversations.list" {
+    request "application/x-www-form-urlencoded" {
+      query {
+        cursor = input.page
+        exclude_archived = true
+        limit = input.limit
+        types = types
+      }
+
+      headers {
+        "Authorization" = `Bearer ${parameters.accessToken}`
+      }
+    }
+
+    response 200 "application/json" {   
+      error = call MapSlackError(
+        statusCode = statusCode,
+        error = body,
+        headers = headers,
+      ) if (!body.ok)
+
+      return map error if (!body.ok) error
+
+      channels = call MapChannels(channels = body.channels)
+      rateLimit = call MapRateLimitDetails(headers = headers)
+      result.channels = channels
+
+      set if (body.has_more) {
+        result.nextPage = body.response_metadata.next_cursor
+      }
+
+      set if (rateLimit) {
+        result.rateLimit = rateLimit
+      }
+
+      map result result
+    }
+
+    response {
+      error = call MapSlackError(
+        statusCode = statusCode,
+        error = body,
+        headers = headers,
+      )
+      
+      map error error
+    }
+  }
+}
+
+operation MapChannels {
+  channels = args.channels.map(channel => {
+    const resultChannel = {
+      id: channel.id,
+      createdAt: channel.created,
+    };
+
+    if (channel.name) {
+      resultChannel.name = channel.name;
+    }
+
+    if (channel.topic.value && channel.topic.value !== '') {
+      resultChannel.description = channel.topic.value;
+    }
+
+    if (channel.purpose.value && channel.purpose.value !== '') {
+      resultChannel.description = 
+        resultChannel.description === undefined 
+        ? channel.purpose.value
+        : `${resultChannel.description} - ${channel.purpose.value}`;
+    }
+
+    if (channel.num_members) {
+      resultChannel.membersCount = channel.num_members;
+    }
+
+    return resultChannel;
+  });
+
+  return channels
+}
+
+operation visibilityToTypes {
+  supportedTypes = ['private_channel', 'public_channel']
+
+  return if (args.visibility === undefined) supportedTypes.join(',')
+  return if (args.visibility === 'private') supportedTypes[0]
+  return if (args.visibility === 'public') supportedTypes[1]
+}
+
+"""
+Operation MapRateLimitDetails
+Returns object mapping rate limit details specified in received headers
+"""
+operation MapRateLimitDetails {
+  headers = args.headers
+  details = {}
+
+  totalRequests = parseInt(headers['X-Rate-Limit-Limit'])
+  remainingRequests = parseInt(headers['X-Rate-Limit-Remaining'])
+  resetAfter = parseInt(headers['X-Rate-Limit-Reset'])
+  retryAfter = parseInt(headers['Retry-After'])
+
+  set if (!isNaN(totalRequests)) {
+    details.totalRequests = totalRequests
+  }
+
+  set if (!isNaN(remainingRequests)) {
+    details.remainingRequests = remainingRequests
+  }
+
+  set if (!isNaN(resetAfter)) {
+    details.resetAfter = resetAfter
+    details.resetTimestamp = Date.now() + (resetAfter * 1000)
+  }
+
+  set if (!isNaN(retryAfter)) {
+    details.retryAfter = retryAfter
+  }
+
+  set if (details.remainingRequests && details.totalRequests) {
+    details.remainingRequestsPercentage = (details.remainingRequests / details.totalRequests) * 100
+  }
+
+  set if (Object.keys(details).length === 0) {
+    details = undefined
+  }
+
+  return details
+}
+
+"""
+Operation Map Slack Error
+Returns error object based on error body, statusCode and headers.
+See https://api.slack.com/methods/conversations.history#errors for more information about errors
+"""
+operation MapSlackError {
+  statusCode = args.statusCode
+  slackError = args.error
+  headers = args.headers
+
+  rateLimit = call MapRateLimitDetails(headers = headers)
+  detail = slackError.error
+
+  return if (statusCode === 200) {
+    title = detail
+    rateLimit = rateLimit
+  }
+
+  return if (statusCode === 400) {
+    title = 'Bad request'
+    detail = detail
+    rateLimit = rateLimit
+  }
+
+  return if (statusCode === 401) {
+    title = 'Unauthorized'
+    detail = detail
+    rateLimit = rateLimit
+  }
+
+  return if (statusCode === 403) {
+    title = 'Forbidden'
+    detail = detail
+    rateLimit = rateLimit
+  }
+
+  return if (statusCode === 404) {
+    title = 'Not found'
+    detail = detail
+    rateLimit = rateLimit
+  }
+
+  return if (statusCode === 405) {
+    title = 'Method not allowed'
+    detail = detail
+    rateLimit = rateLimit
+  }
+
+  return if (statusCode === 429) {
+    title = 'Too Many Requests'
+    detail = `Retry after ${headers['Retry-After']} seconds`
+    rateLimit = rateLimit
+  }
+
+  return if (statusCode === 502) {
+    title = 'Bad gateway'
+    detail = detail
+    rateLimit = rateLimit
+  }
+
+  return {
+    title = 'Unknown error'
+    detail = `Unknown error occurred. Status: ${statusCode}. Code: ${detail}.`
+    rateLimit = rateLimit
+  }
+}

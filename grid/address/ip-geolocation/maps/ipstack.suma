@@ -1,0 +1,94 @@
+profile = "address/ip-geolocation@1.0"
+provider = "ipstack"
+
+// IP Stack documentation: https://ipstack.com/documentation
+map IpGeolocation {
+  ipAddress = input.ipAddress
+
+  set if (!input.ipAddress) {
+    ipAddress = "check"
+  }
+
+  http GET "/{ipAddress}" {
+    security "apikey"
+    
+    response 200 "application/json" {
+      error = undefined
+      timezone = undefined
+
+      //"detail" property is returned in request body in case of "Not found" error, this is not documented
+      set if (body.success === false || body.detail) {
+        error = call MapError(statusCode = statusCode, body = body)
+      }
+
+      map error if (error) error
+
+      set if (body.time_zone) {
+        timezone = body.time_zone.id
+      }
+
+      map result {
+        ipAddress = body.ip
+        addressCountryCode = body.country_code
+        addressCountry = body.country_name
+        addressRegion = body.region_name
+        addressLocality = body.city
+        postalCode = body.zip
+        timeZone = timezone
+        latitude = body.latitude
+        longitude = body.longitude
+      }
+    }
+
+    response {
+      error = call MapError(statusCode = statusCode, body = body)
+      map error error
+    }
+  }
+}
+
+operation MapError {
+  statusCode = args.statusCode
+  body = args.body
+  detail = undefined
+  ipstackErrorCode = undefined
+  
+  set if (body.error) {
+    detail = body.error.info
+    ipstackErrorCode = body.error.code
+  }
+
+  set if (!detail) {
+    detail = body.detail
+  }
+
+  return if (ipstackErrorCode === 404 || ipstackErrorCode === 103) {
+    title = "Not found"
+    detail = detail
+  }
+
+  return if (ipstackErrorCode === 101) {
+    title = "Unauthenticated"
+    detail = detail
+  }
+
+  return if (ipstackErrorCode === 104) {
+    title = "Rate limit exceeded"
+    detail = detail
+  }
+
+  return if (ipstackErrorCode === 105 || ipstackErrorCode === 303) {
+    title = `Unauthorized`
+    detail = detail
+  }
+
+  return if (ipstackErrorCode === 106 || ipstackErrorCode === 301 || ipstackErrorCode === 302) {
+    title = "Bad request"
+    detail = detail
+  }
+
+  return {
+    title = "Unknown error"
+    detail = `Unknown error occurred. Status code: ${statusCode}. IP Stack error code: ${ipstackErrorCode}. IP Stack provider error info: ${detail}.`
+  }
+}

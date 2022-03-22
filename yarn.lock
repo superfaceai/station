@@ -633,25 +633,25 @@
   dependencies:
     "@sinonjs/commons" "^1.7.0"
 
-"@superfaceai/ast@1.0.0", "@superfaceai/ast@^1.0.0":
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/@superfaceai/ast/-/ast-1.0.0.tgz#7f58f244e60efc7cb6ae5d421fec66c9a94aa6bd"
-  integrity sha512-YbJTkisep18UCcTRpeFDRYUqIajbQWv396c7fkfIjAuR9HAOkt3hZqrdrnA3qINjLaFUzviZW0NOQTL1jeiRXw==
+"@superfaceai/ast@^1.1.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@superfaceai/ast/-/ast-1.1.0.tgz#cb87f9c980e600bd74536e14bafe7231d15c291c"
+  integrity sha512-/Bpm21XWwUElogBB8AdKkjbe4h1vExBx2xTrfE5t74FiFZUxhnLYfVcUCKNqUqsuggF/uUUAZ+5uBtmffJYm6g==
   dependencies:
     typescript-is "^0.18.3"
 
-"@superfaceai/cli@^1.0.1":
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/@superfaceai/cli/-/cli-1.0.1.tgz#53c684be49c270c9eda50b01a10373db4d93d2e9"
-  integrity sha512-T9nG1Pdf/fVA3K61ImFkYcduTSj6wGQTkB0Kv86APylQ+TssTq1k3U1EYuks0Q4dFnHIUJ7T7eXuvwjni3k9Xw==
+"@superfaceai/cli@^1.1.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@superfaceai/cli/-/cli-1.1.0.tgz#f351b3beb9f49cb0fdc043780124dee1e39185de"
+  integrity sha512-G3s1uYl98vWw3vCzEIU/yqL07VbnJyu7fRWBToQq7cQaTJbfqm9zGGJTElUEgzHh4VXTpeaabovMuT2lpkzVAw==
   dependencies:
     "@oclif/command" "^1.8.0"
     "@oclif/config" "^1.17.0"
     "@oclif/plugin-warn-if-update-available" "^1.7.0"
-    "@superfaceai/ast" "^1.0.0"
-    "@superfaceai/one-sdk" "^1.0.0"
-    "@superfaceai/parser" "^1.0.0"
-    "@superfaceai/service-client" "0.0.26"
+    "@superfaceai/ast" "^1.1.0"
+    "@superfaceai/one-sdk" "1.3.0"
+    "@superfaceai/parser" "^1.1.0"
+    "@superfaceai/service-client" "^1.1.0"
     chalk "^4.1.0"
     cross-fetch "^3.1.4"
     debug "^4.3.1"
@@ -662,65 +662,42 @@
     rimraf "^3.0.2"
     typescript "^4.0.5"
 
-"@superfaceai/one-sdk@^1.0.0":
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/@superfaceai/one-sdk/-/one-sdk-1.0.0.tgz#4f8bc66df69277960af0406cd63da7765b6e507e"
-  integrity sha512-iwqE5Ig4WCn2vXEOIVThPFlbRrw4OMyBKezdyV1fgEhUvS/rFgYYOhOg+/UI5yIMPbeSx16ryivWcFGgSwfL4w==
+"@superfaceai/one-sdk@1.3.0", "@superfaceai/one-sdk@^1.3.0":
+  version "1.3.0"
+  resolved "https://registry.yarnpkg.com/@superfaceai/one-sdk/-/one-sdk-1.3.0.tgz#741ee1454877913b420a11b14b823e6262453809"
+  integrity sha512-XyztSPy33kRpoNuCq97tL1jMdT6BX1jJ2cFaz50fjwCsfX7f+zi5qx0tvpcZM2dDRm+1dS9cRC04lweIQtmRSg==
   dependencies:
-    "@superfaceai/ast" "1.0.0"
-    "@superfaceai/parser" "1.0.0"
+    "@superfaceai/ast" "^1.1.0"
+    "@superfaceai/parser" "^1.1.0"
     abort-controller "^3.0.0"
-    cross-fetch "^3.0.5"
+    cross-fetch "^3.1.5"
     debug "^4.3.2"
     isomorphic-form-data "^2.0.0"
-    vm2 "^3.9.2"
+    vm2 "^3.9.7"
 
-"@superfaceai/one-sdk@^1.0.1":
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/@superfaceai/one-sdk/-/one-sdk-1.0.1.tgz#e39ba8cf7ed0051313b437fc8b58cd307f6e2e42"
-  integrity sha512-0jdC87a98A5TMZvDUWsKJ+bINCSvzXg9iuepc90XmiLy7tFvFvrrlWrw0VYtc9eC3son/i3Yhr6OLCbOcvxH3Q==
+"@superfaceai/parser@^1.1.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@superfaceai/parser/-/parser-1.1.0.tgz#5e268b3cbf7c1b20aced9cddbabe8dd837c3f4b6"
+  integrity sha512-onu8Omp1nv/U+nXuf5fFW3Jg31JCTNOTOecpPoGw6NzcVDociNezdpzvlrrznPI7nna1G95vdwx0FTt3YHWaqg==
   dependencies:
-    "@superfaceai/ast" "1.0.0"
-    "@superfaceai/parser" "1.0.0"
-    abort-controller "^3.0.0"
-    cross-fetch "^3.0.5"
-    debug "^4.3.2"
-    isomorphic-form-data "^2.0.0"
-    vm2 "^3.9.2"
-
-"@superfaceai/parser@1.0.0", "@superfaceai/parser@^1.0.0":
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/@superfaceai/parser/-/parser-1.0.0.tgz#48e55b40670a9af6e603107709cc89ae538f71d8"
-  integrity sha512-verBpn8bN13fAo1pDCNMGxKLwXC26dlR7iDIM2ekioN/K+kOtXjq6A/bWILvJ+jAP2gWRHGZU017SKGPRrPOHg==
-  dependencies:
-    "@superfaceai/ast" "1.0.0"
+    "@superfaceai/ast" "^1.1.0"
     "@types/debug" "^4.1.5"
     debug "^4.3.1"
     typescript "^4"
 
-"@superfaceai/parser@1.1.0-rc.0":
-  version "1.1.0-rc.0"
-  resolved "https://registry.yarnpkg.com/@superfaceai/parser/-/parser-1.1.0-rc.0.tgz#6866de9a2293d6d9ac2e76dcccdc66f5ab728d0e"
-  integrity sha512-W4Go5pAk4qFvWiSDPnaYjjbTtBmicY84LcmFanxXM0Y2wvcDK3rB0hsTsZK6CofdRX2uYv379AajTpTY5Tfupw==
-  dependencies:
-    "@superfaceai/ast" "1.0.0"
-    "@types/debug" "^4.1.5"
-    debug "^4.3.1"
-    typescript "^4"
-
-"@superfaceai/service-client@0.0.26":
-  version "0.0.26"
-  resolved "https://registry.yarnpkg.com/@superfaceai/service-client/-/service-client-0.0.26.tgz#16ba6b9d12ad646afc77e5ce8a6f000e757eaa3f"
-  integrity sha512-Hh8tJ2buhUANOuuvt9gGpBl9AqgY5fHY6DpH8LMW1hKZPBZWzr6mBlobKe2qNhFN/FG6JLxTHgFwgf6VN+s2kA==
+"@superfaceai/service-client@^1.1.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@superfaceai/service-client/-/service-client-1.1.0.tgz#1aae37afe0eed8099c5c25b8bcbc06b91ad878f7"
+  integrity sha512-e7l2eH2vvMxkEcoOSFut3w6Od+wAO7nQQ6kKDL1c4GD6lBDmQwQsvM2zo+VLawYE582cDDKWs7ug3sxfcntIew==
   dependencies:
     cross-fetch "^3.1.0"
 
-"@superfaceai/testing@^2.0.0":
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/@superfaceai/testing/-/testing-2.0.0.tgz#32eca268125d8653383702d6081f1a39f987ee1f"
-  integrity sha512-9SyWpI8wMfiIEZSfxQ1bpAQgbvt5w41bV1uiBJLg2MMBxykOofW2EBjSG6neYFKgPBT7juP0cJaF0zF+D1u8SQ==
+"@superfaceai/testing@^2.0.3":
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/@superfaceai/testing/-/testing-2.0.3.tgz#bff8cdb15686055d8188bfbbe31f35416434caf0"
+  integrity sha512-aEQXa1rInbK6dBZoEmzocyYpnqLC/eGJFRlaJgMTPCu7IHKWQde00IxUWEXJ2g8M7L/kD+GIwUUVF2BOfrewwg==
   dependencies:
-    "@superfaceai/ast" "^1.0.0"
+    "@superfaceai/ast" "^1.1.0"
     debug "^4.3.2"
     nock "^13.1.3"
 
@@ -983,7 +960,7 @@ acorn-walk@^7.1.1:
   resolved "https://registry.yarnpkg.com/acorn-walk/-/acorn-walk-7.2.0.tgz#0de889a601203909b0fbe07b8938dc21d2e967bc"
   integrity sha512-OPdCF6GsMIP+Az+aWfAAOEt2/+iVDKE7oy6lJ098aoe59oAmK76qV6Gw60SbZ8jHuG2wH058GF4pLFbYamYrVA==
 
-acorn-walk@^8.1.1:
+acorn-walk@^8.1.1, acorn-walk@^8.2.0:
   version "8.2.0"
   resolved "https://registry.yarnpkg.com/acorn-walk/-/acorn-walk-8.2.0.tgz#741210f2e2426454508853a2f44d0ab83b7f69c1"
   integrity sha512-k+iyHEuPgSw6SbuDpGQM+06HQUa04DZ3o+F6CSzXMvvI5KMvnaEqXe+YVe555R9nn6GPt404fos4wcgpw12SDA==
@@ -1002,6 +979,11 @@ acorn@^8.4.1:
   version "8.5.0"
   resolved "https://registry.yarnpkg.com/acorn/-/acorn-8.5.0.tgz#4512ccb99b3698c752591e9bb4472e38ad43cee2"
   integrity sha512-yXbYeFy+jUuYd3/CDcg2NkIYE991XYX/bje7LmjJigUciaeO1JR4XxXgCIV1/Zc/dRuFEyw1L0pbA+qynJkW5Q==
+
+acorn@^8.7.0:
+  version "8.7.0"
+  resolved "https://registry.yarnpkg.com/acorn/-/acorn-8.7.0.tgz#90951fde0f8f09df93549481e5fc141445b791cf"
+  integrity sha512-V/LGr1APy+PXIwKebEWrkZPwoeoF+w1jiOBUmuxuiUIaOHtob8Qc9BTrYo7VuI5fR8tqsy+buA2WFooR5olqvQ==
 
 ajv@^6.10.0, ajv@^6.12.3, ajv@^6.12.4:
   version "6.12.6"
@@ -1560,12 +1542,12 @@ create-require@^1.1.0:
   resolved "https://registry.yarnpkg.com/create-require/-/create-require-1.1.1.tgz#c1d7e8f1e5f6cfc9ff65f9cd352d37348756c333"
   integrity sha512-dcKFX3jn0MpIaXjisoRvexIJVEKzaq7z2rZKxf+MSr9TkdmHmsU4m2lcLojrj/FHl8mk5VxMmYA+ftRkP/3oKQ==
 
-cross-fetch@^3.0.5, cross-fetch@^3.1.0, cross-fetch@^3.1.4:
-  version "3.1.4"
-  resolved "https://registry.yarnpkg.com/cross-fetch/-/cross-fetch-3.1.4.tgz#9723f3a3a247bf8b89039f3a380a9244e8fa2f39"
-  integrity sha512-1eAtFWdIubi6T4XPy6ei9iUFoKpUkIF971QLN8lIvvvwueI65+Nw5haMNKUwfJxabqlIIDODJKGrQ66gxC0PbQ==
+cross-fetch@^3.1.0, cross-fetch@^3.1.4, cross-fetch@^3.1.5:
+  version "3.1.5"
+  resolved "https://registry.yarnpkg.com/cross-fetch/-/cross-fetch-3.1.5.tgz#e1389f44d9e7ba767907f7af8454787952ab534f"
+  integrity sha512-lvb1SBsI0Z7GDwmuid+mU3kWVBwTVUbe7S0H52yaaAdQOXq2YktTCZdlAcNKFzE6QtRz0snpw9bNiPeOIkkQvw==
   dependencies:
-    node-fetch "2.6.1"
+    node-fetch "2.6.7"
 
 cross-spawn@^6.0.0:
   version "6.0.5"
@@ -1634,14 +1616,7 @@ debug@^3.1.0:
   dependencies:
     ms "^2.1.1"
 
-debug@^4.0.1, debug@^4.1.0, debug@^4.1.1:
-  version "4.3.1"
-  resolved "https://registry.yarnpkg.com/debug/-/debug-4.3.1.tgz#f0d229c505e0c6d8c49ac553d1b13dc183f6b2ee"
-  integrity sha512-doEwdvm4PCeK4K3RQN2ZC2BYUBaxwLARCqZmMjtF8a51J2Rb0xpVloFRnCODwqjpwnAoao4pelN8l3RJdv3gRQ==
-  dependencies:
-    ms "2.1.2"
-
-debug@^4.3.1, debug@^4.3.2:
+debug@^4.0.1, debug@^4.1.0, debug@^4.1.1, debug@^4.3.1, debug@^4.3.2:
   version "4.3.2"
   resolved "https://registry.yarnpkg.com/debug/-/debug-4.3.2.tgz#f0a49c18ac8779e31d4a0c6029dfb76873c7428b"
   integrity sha512-mOp8wKcvj7XxC78zLgw/ZA+6TSgkoE2C/ienthhRD298T7UNwAg9diBpLRxC0mOezLl4B0xV7M0cCO6P/O0Xhw==
@@ -3799,10 +3774,12 @@ nock@^13.1.3:
     lodash.set "^4.3.2"
     propagate "^2.0.0"
 
-node-fetch@2.6.1:
-  version "2.6.1"
-  resolved "https://registry.yarnpkg.com/node-fetch/-/node-fetch-2.6.1.tgz#045bd323631f76ed2e2b55573394416b639a0052"
-  integrity sha512-V4aYg89jEoVRxRb2fJdAg8FHvI7cEyYdVAh94HH0UIK8oJxUfkjlDQN9RbMx+bEjP7+ggMiFRprSti032Oipxw==
+node-fetch@2.6.7:
+  version "2.6.7"
+  resolved "https://registry.yarnpkg.com/node-fetch/-/node-fetch-2.6.7.tgz#24de9fba827e3b4ae44dc8b20256a379160052ad"
+  integrity sha512-ZjMPFEfVx5j+y2yF35Kzx5sF7kDzxuDj6ziH4FFbOp87zKDZNx8yExJIb05OGF4Nlt9IHFIMBkRl41VdvcNdbQ==
+  dependencies:
+    whatwg-url "^5.0.0"
 
 node-int64@^0.4.0:
   version "0.4.0"
@@ -4934,6 +4911,11 @@ tr46@^2.0.2:
   dependencies:
     punycode "^2.1.1"
 
+tr46@~0.0.3:
+  version "0.0.3"
+  resolved "https://registry.yarnpkg.com/tr46/-/tr46-0.0.3.tgz#8184fd347dac9cdc185992f3a6622e14b9d9ab6a"
+  integrity sha1-gYT9NH2snNwYWZLzpmIuFLnZq2o=
+
 ts-jest@^26.4.4:
   version "26.5.5"
   resolved "https://registry.yarnpkg.com/ts-jest/-/ts-jest-26.5.5.tgz#e40481b6ee4dd162626ba481a2be05fa57160ea5"
@@ -5063,15 +5045,10 @@ typescript-is@^0.18.3:
   optionalDependencies:
     reflect-metadata ">=0.1.12"
 
-typescript@^4:
+typescript@^4, typescript@^4.0.5:
   version "4.4.3"
   resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.4.3.tgz#bdc5407caa2b109efd4f82fe130656f977a29324"
   integrity sha512-4xfscpisVgqqDfPaJo5vkd+Qd/ItkoagnHpufr+i2QCHBsNYp+G7UAoyFl8aPtx879u38wPV65rZ8qbGZijalA==
-
-typescript@^4.0.5:
-  version "4.2.4"
-  resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.2.4.tgz#8610b59747de028fda898a8aef0e103f156d0961"
-  integrity sha512-V+evlYHZnQkaz8TRBuxTA92yZBPotr5H+WhQ7bD3hZUndx5tGOa1fuCgeSjxAzM1RiN5IzvadIXTVefuuwZCRg==
 
 unbox-primitive@^1.0.0:
   version "1.0.1"
@@ -5164,10 +5141,13 @@ verror@1.10.0:
     core-util-is "1.0.2"
     extsprintf "^1.2.0"
 
-vm2@^3.9.2:
-  version "3.9.5"
-  resolved "https://registry.yarnpkg.com/vm2/-/vm2-3.9.5.tgz#5288044860b4bbace443101fcd3bddb2a0aa2496"
-  integrity sha512-LuCAHZN75H9tdrAiLFf030oW7nJV5xwNMuk1ymOZwopmuK3d2H4L1Kv4+GFHgarKiLfXXLFU+7LDABHnwOkWng==
+vm2@^3.9.7:
+  version "3.9.8"
+  resolved "https://registry.yarnpkg.com/vm2/-/vm2-3.9.8.tgz#e99c000db042735cd2f94d8db6c42163a17be04e"
+  integrity sha512-/1PYg/BwdKzMPo8maOZ0heT7DLI0DAFTm7YQaz/Lim9oIaFZsJs3EdtalvXuBfZwczNwsYhju75NW4d6E+4q+w==
+  dependencies:
+    acorn "^8.7.0"
+    acorn-walk "^8.2.0"
 
 w3c-hr-time@^1.0.2:
   version "1.0.2"
@@ -5190,6 +5170,11 @@ walker@^1.0.7, walker@~1.0.5:
   dependencies:
     makeerror "1.0.x"
 
+webidl-conversions@^3.0.0:
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/webidl-conversions/-/webidl-conversions-3.0.1.tgz#24534275e2a7bc6be7bc86611cc16ae0a5654871"
+  integrity sha1-JFNCdeKnvGvnvIZhHMFq4KVlSHE=
+
 webidl-conversions@^5.0.0:
   version "5.0.0"
   resolved "https://registry.yarnpkg.com/webidl-conversions/-/webidl-conversions-5.0.0.tgz#ae59c8a00b121543a2acc65c0434f57b0fc11aff"
@@ -5211,6 +5196,14 @@ whatwg-mimetype@^2.3.0:
   version "2.3.0"
   resolved "https://registry.yarnpkg.com/whatwg-mimetype/-/whatwg-mimetype-2.3.0.tgz#3d4b1e0312d2079879f826aff18dbeeca5960fbf"
   integrity sha512-M4yMwr6mAnQz76TbJm914+gPpB/nCwvZbJU28cUD6dR004SAxDLOOSUaB1JDRqLtaOV/vi0IC5lEAGFgrjGv/g==
+
+whatwg-url@^5.0.0:
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/whatwg-url/-/whatwg-url-5.0.0.tgz#966454e8765462e37644d3626f6742ce8b70965d"
+  integrity sha1-lmRU6HZUYuN2RNNib2dCzotwll0=
+  dependencies:
+    tr46 "~0.0.3"
+    webidl-conversions "^3.0.0"
 
 whatwg-url@^8.0.0, whatwg-url@^8.5.0:
   version "8.5.0"

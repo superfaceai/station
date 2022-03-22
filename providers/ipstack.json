@@ -1,0 +1,25 @@
+{
+  "name": "ipstack",
+  "services": [
+    {
+      "id": "default",
+      "baseUrl": "{HTTP_SCHEME}://api.ipstack.com/"
+    }
+  ],
+  "defaultService": "default",
+  "securitySchemes": [
+    {
+      "id": "apikey",
+      "type": "apiKey",
+      "in": "query",
+      "name": "access_key"
+    }
+  ],
+  "parameters": [
+    {
+      "name": "HTTP_SCHEME",
+      "description": "The scheme identifies the protocol to be used to access the IP Stack API. Allowed values are \"http\" or \"https\". Only \"http\" scheme is allowed in case of IP Stack FREE subscription.",
+      "default": "https"
+    }
+  ]
+}

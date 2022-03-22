@@ -1,20 +1,25 @@
+"""
+Social Media Followers
+List folowers of a social media profile (e.g. Twitter followers).
+"""
+
 name = "social-media/followers"
-version = "1.1.0"
+version = "1.1.1"
 
 """
 Get Followers
-Retrieve paginated list of social-media profile followers.
+Retrieve a paginated list of followers for a social media profile.
 """
 usecase GetFollowers safe {
   input {
     """
     Profile ID
-    Identification of profile to retrieve posts from; may be optional with some providers.
+    Identifier of a profile to retrieve followers from. May be optional with some providers.
     """
     profileId string
     """
     Page
-    Token of the page to retrieve
+    Pagination cursor (obtained from `previousPage` or `nextPage`).
     """
     page string
   }
@@ -22,12 +27,12 @@ usecase GetFollowers safe {
   result {
     """
     Previous page
-    Previous page token
+    Previous page cursor.
     """
     previousPage string
     """
     Next page
-    Next page token
+    Next page cursor.
     """
     nextPage string
     """
@@ -37,7 +42,7 @@ usecase GetFollowers safe {
     followers [ {
       """
       Follower ID
-      Unique follower identification.
+      Profile identifier of the follower.
       """
       id string
       """
@@ -46,7 +51,7 @@ usecase GetFollowers safe {
       """
       username string
       """
-      Image url
+      Image URL
       Follower profile image url.
       """
       imageUrl string
@@ -60,12 +65,13 @@ usecase GetFollowers safe {
 
   error {
     """
-    Title
+    Error Title
     A short, human-readable summary of the problem type.
     """
     title!
 
     """
+    Error Detail
     A human-readable explanation specific to this occurrence of the problem.
     """
     detail

@@ -1,0 +1,130 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`chat/messages/slack GetMessages when specified destination does exist performs correctly 1`] = `
+Ok {
+  "value": Object {
+    "messages": Array [
+      Object {
+        "author": Object {
+          "id": "UF4PRBHL7",
+          "username": undefined,
+        },
+        "createdAt": 1644310634.546009,
+        "id": "1644310634.546009",
+        "reactions": Array [
+          Object {
+            "count": 1,
+            "emoji": "eyes",
+            "users": Array [
+              "UF4PRBHL7",
+            ],
+          },
+        ],
+        "text": "hello world",
+      },
+      Object {
+        "attachments": Array [
+          Object {
+            "createdAt": 1643893737,
+            "fileName": "slack.suma",
+            "id": "F031A9LKQJ2",
+            "mediaType": "text/plain",
+            "preview": "profile = \\"chat/get-messages@1.0\\"
+provider = \\"slack\\"
+
+\\"\\"\\"
+GetMessages map",
+            "url": "https://slack-files.com/TF3U3G65B-F031A9LKQJ2-76e5c49d59",
+          },
+        ],
+        "author": Object {
+          "id": "UF4PRBHL7",
+          "username": undefined,
+        },
+        "createdAt": 1643893771.052369,
+        "id": "1643893771.052369",
+        "text": ":superhero:",
+      },
+      Object {
+        "author": Object {
+          "id": "UF4PRBHL7",
+          "username": undefined,
+        },
+        "createdAt": 1643835555.648069,
+        "hasThread": true,
+        "id": "1643835555.648069",
+        "text": "test",
+        "threadId": "1643835555.648069",
+      },
+    ],
+    "nextPage": "bmV4dF90czoxNjQzODM1NTUzNjU4MjU5",
+  },
+}
+`;
+
+exports[`chat/messages/slack GetMessages when specified destination does exist performs correctly 2`] = `
+Ok {
+  "value": Object {
+    "messages": Array [
+      Object {
+        "author": Object {
+          "id": "UF4PRBHL7",
+          "username": undefined,
+        },
+        "createdAt": 1643835553.658259,
+        "id": "1643835553.658259",
+        "reactions": Array [
+          Object {
+            "count": 1,
+            "emoji": "eyes",
+            "users": Array [
+              "UF4PRBHL7",
+            ],
+          },
+        ],
+        "text": "test",
+      },
+      Object {
+        "author": Object {
+          "id": "UF4PRBHL7",
+          "username": undefined,
+        },
+        "createdAt": 1643798649.182019,
+        "id": "1643798649.182019",
+        "text": "test :test_tube:",
+        "updatedAt": 1643836476,
+      },
+      Object {
+        "author": Object {
+          "id": "UF4PRBHL7",
+          "username": undefined,
+        },
+        "createdAt": 1643216443.234079,
+        "id": "1643216443.234079",
+        "reactions": Array [
+          Object {
+            "count": 1,
+            "emoji": "tada",
+            "users": Array [
+              "UF4PRBHL7",
+            ],
+          },
+        ],
+        "text": "test",
+        "updatedAt": 1643285583,
+      },
+    ],
+  },
+}
+`;
+
+exports[`chat/messages/slack GetMessages when specified destination does not exist returns error 1`] = `
+Err {
+  "error": "HTTPError: Expected HTTP error
+Properties: {
+  \\"title\\": \\"channel_not_found\\"
+}
+AST Path: definitions[0].statements[0].responseHandlers[0].statements[1]
+Original Map Location: Line 30, column 7",
+}
+`;
