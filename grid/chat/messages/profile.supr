@@ -18,6 +18,18 @@ usecase GetMessages {
     destination! string!
     
     """
+    List Thread Messages
+    Boolean that represents whether this usecase is used for retrieving channel messages or thread messages. Default is false.
+    """
+    listThreadMessages boolean!
+
+    """
+		Thread ID
+		Representation of a messaging destination thread. If present, this use-case lists messages from specified thread.
+		"""
+		threadId string!
+    
+    """
     After Timestamp
     Retrieve only messages after the given UNIX timestamp (in milliseconds, e.g. 1095379198750) 
     """
