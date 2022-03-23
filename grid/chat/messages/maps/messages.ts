@@ -5,8 +5,8 @@ import { RecordingProcessOptions, SuperfaceTest } from '@superfaceai/testing';
 export const getMessagesTest = (
   provider: string,
   destination: {
-    channel: string,
-    thread: string,
+    channel: string;
+    thread: string;
   }[],
   options?: RecordingProcessOptions
 ): void => {
