@@ -669,7 +669,7 @@
     rimraf "^3.0.2"
     typescript "^4.0.5"
 
-"@superfaceai/one-sdk@1.3.0":
+"@superfaceai/one-sdk@1.3.0", "@superfaceai/one-sdk@^1.3.0":
   version "1.3.0"
   resolved "https://registry.yarnpkg.com/@superfaceai/one-sdk/-/one-sdk-1.3.0.tgz#741ee1454877913b420a11b14b823e6262453809"
   integrity sha512-XyztSPy33kRpoNuCq97tL1jMdT6BX1jJ2cFaz50fjwCsfX7f+zi5qx0tvpcZM2dDRm+1dS9cRC04lweIQtmRSg==
@@ -681,29 +681,6 @@
     debug "^4.3.2"
     isomorphic-form-data "^2.0.0"
     vm2 "^3.9.7"
-
-"@superfaceai/one-sdk@^1.0.1":
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/@superfaceai/one-sdk/-/one-sdk-1.0.1.tgz#e39ba8cf7ed0051313b437fc8b58cd307f6e2e42"
-  integrity sha512-0jdC87a98A5TMZvDUWsKJ+bINCSvzXg9iuepc90XmiLy7tFvFvrrlWrw0VYtc9eC3son/i3Yhr6OLCbOcvxH3Q==
-  dependencies:
-    "@superfaceai/ast" "1.0.0"
-    "@superfaceai/parser" "1.0.0"
-    abort-controller "^3.0.0"
-    cross-fetch "^3.0.5"
-    debug "^4.3.2"
-    isomorphic-form-data "^2.0.0"
-    vm2 "^3.9.2"
-
-"@superfaceai/parser@1.0.0":
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/@superfaceai/parser/-/parser-1.0.0.tgz#48e55b40670a9af6e603107709cc89ae538f71d8"
-  integrity sha512-verBpn8bN13fAo1pDCNMGxKLwXC26dlR7iDIM2ekioN/K+kOtXjq6A/bWILvJ+jAP2gWRHGZU017SKGPRrPOHg==
-  dependencies:
-    "@superfaceai/ast" "1.0.0"
-    "@types/debug" "^4.1.5"
-    debug "^4.3.1"
-    typescript "^4"
 
 "@superfaceai/parser@1.1.0-rc.0":
   version "1.1.0-rc.0"
@@ -732,12 +709,12 @@
   dependencies:
     cross-fetch "^3.1.0"
 
-"@superfaceai/testing@^2.0.0":
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/@superfaceai/testing/-/testing-2.0.0.tgz#32eca268125d8653383702d6081f1a39f987ee1f"
-  integrity sha512-9SyWpI8wMfiIEZSfxQ1bpAQgbvt5w41bV1uiBJLg2MMBxykOofW2EBjSG6neYFKgPBT7juP0cJaF0zF+D1u8SQ==
+"@superfaceai/testing@^2.0.3":
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/@superfaceai/testing/-/testing-2.0.3.tgz#bff8cdb15686055d8188bfbbe31f35416434caf0"
+  integrity sha512-aEQXa1rInbK6dBZoEmzocyYpnqLC/eGJFRlaJgMTPCu7IHKWQde00IxUWEXJ2g8M7L/kD+GIwUUVF2BOfrewwg==
   dependencies:
-    "@superfaceai/ast" "^1.0.0"
+    "@superfaceai/ast" "^1.1.0"
     debug "^4.3.2"
     nock "^13.1.3"
 
@@ -1582,7 +1559,7 @@ create-require@^1.1.0:
   resolved "https://registry.yarnpkg.com/create-require/-/create-require-1.1.1.tgz#c1d7e8f1e5f6cfc9ff65f9cd352d37348756c333"
   integrity sha512-dcKFX3jn0MpIaXjisoRvexIJVEKzaq7z2rZKxf+MSr9TkdmHmsU4m2lcLojrj/FHl8mk5VxMmYA+ftRkP/3oKQ==
 
-cross-fetch@^3.0.5, cross-fetch@^3.1.0, cross-fetch@^3.1.4:
+cross-fetch@^3.1.0, cross-fetch@^3.1.4:
   version "3.1.4"
   resolved "https://registry.yarnpkg.com/cross-fetch/-/cross-fetch-3.1.4.tgz#9723f3a3a247bf8b89039f3a380a9244e8fa2f39"
   integrity sha512-1eAtFWdIubi6T4XPy6ei9iUFoKpUkIF971QLN8lIvvvwueI65+Nw5haMNKUwfJxabqlIIDODJKGrQ66gxC0PbQ==
@@ -5204,11 +5181,6 @@ verror@1.10.0:
     assert-plus "^1.0.0"
     core-util-is "1.0.2"
     extsprintf "^1.2.0"
-
-vm2@^3.9.2:
-  version "3.9.5"
-  resolved "https://registry.yarnpkg.com/vm2/-/vm2-3.9.5.tgz#5288044860b4bbace443101fcd3bddb2a0aa2496"
-  integrity sha512-LuCAHZN75H9tdrAiLFf030oW7nJV5xwNMuk1ymOZwopmuK3d2H4L1Kv4+GFHgarKiLfXXLFU+7LDABHnwOkWng==
 
 vm2@^3.9.7:
   version "3.9.8"
