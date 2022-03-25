@@ -2,41 +2,40 @@
   {
     "scope": "https://discord.com:443",
     "method": "GET",
-    "path": "/api/guilds/not-existing-workspace-id/threads/active",
+    "path": "/api/guilds/000000000000000000/threads/active",
     "body": "",
-    "status": 400,
+    "status": 404,
     "response": {
-      "guild_id": [
-        "Value \"not-existing-workspace-id\" is not snowflake."
-      ]
+      "message": "Unknown Guild",
+      "code": 10004
     },
     "rawHeaders": [
       "Date",
-      "Tue, 22 Feb 2022 10:19:03 GMT",
+      "Fri, 25 Mar 2022 12:02:39 GMT",
       "Content-Type",
       "application/json",
       "Content-Length",
-      "71",
+      "43",
       "Connection",
       "close",
       "set-cookie",
-      "__dcfduid=dbbc178e93c811ec977442010a0a0b9e; Expires=Sun, 21-Feb-2027 10:19:03 GMT; Max-Age=157680000; Secure; HttpOnly; Path=/",
-      "set-cookie",
-      "__sdcfduid=dbbc178e93c811ec977442010a0a0b9edd9debefe933d59c700aa7e2abe97c05471f7f777cd4a6e6b2eb244a79f6d12c; Expires=Sun, 21-Feb-2027 10:19:03 GMT; Max-Age=157680000; Secure; HttpOnly; Path=/",
+      "__dcfduid=77d81748ac3311ec8ede3634a976c221; Expires=Wed, 24-Mar-2027 12:02:39 GMT; Max-Age=157680000; Secure; HttpOnly; Path=/",
       "strict-transport-security",
       "max-age=31536000; includeSubDomains; preload",
       "x-envoy-upstream-service-time",
-      "9",
+      "35",
       "Via",
       "1.1 google",
       "Alt-Svc",
       "h3=\":443\"; ma=86400, h3-29=\":443\"; ma=86400",
+      "set-cookie",
+      "__sdcfduid=77d81748ac3311ec8ede3634a976c2217e2a3fc039c9b594d3accf6d1c926856c4256110869b06bb31e0d72e74e0ea09; Expires=Wed, 24-Mar-2027 12:02:39 GMT; Max-Age=157680000; Secure; HttpOnly; Path=/",
       "CF-Cache-Status",
       "DYNAMIC",
       "Expect-CT",
       "max-age=604800, report-uri=\"https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct\"",
       "Report-To",
-      "{\"endpoints\":[{\"url\":\"https:\\/\\/a.nel.cloudflare.com\\/report\\/v3?s=oYW4iHmZNhuio9eWvsUV3mAlTvzkF9v4yOp89G86V80CjxMfz8naNK45atftHx7DdNNqW5ylh7RFmy9odc7vyNEmuBY5y1F9SxfQrlbaOCubpS56BhrQzvo53p69\"}],\"group\":\"cf-nel\",\"max_age\":604800}",
+      "{\"endpoints\":[{\"url\":\"https:\\/\\/a.nel.cloudflare.com\\/report\\/v3?s=%2BF6pdp5oyfaJQvSw6%2B%2B5XSk8tKckC1Vn5S51%2FUo09B24dbK9Z4Xn%2BT%2BPGCsbq71dGLEOgcrpHTg92dNByrZOWW3lvoh%2FHf1%2BmmXFpUg4culvPPohAwmOJ0R7Pyze\"}],\"group\":\"cf-nel\",\"max_age\":604800}",
       "NEL",
       "{\"success_fraction\":0,\"report_to\":\"cf-nel\",\"max_age\":604800}",
       "X-Content-Type-Options",
@@ -44,7 +43,7 @@
       "Server",
       "cloudflare",
       "CF-RAY",
-      "6e1779533ca04126-PRG"
+      "6f177fb49a63781b-VIE"
     ],
     "responseIsBinary": false
   }
