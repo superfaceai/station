@@ -75,7 +75,7 @@ model Thread {
 
   """
   Created At
-  UNIX timestamp in ms (e.g. 1095379198750) when the thread was created
+  UNIX timestamp (in milliseconds, e.g. 1095379198750) when the thread was created
   """
   createdAt! number!
 
@@ -87,7 +87,7 @@ model Thread {
 
   """
   Archive At
-  UNIX timestamp in ms (e.g. 1095379198750) when the thread will be archived
+  UNIX timestamp (in milliseconds, e.g. 1095379198750) when the thread will be archived
   """
   archiveAt number!
 
@@ -102,6 +102,18 @@ model Thread {
   Number of members of the retrieved thread
   """
   membersCount number
+
+  """
+  Messages Count
+  Number of messages in the retrieved thread
+  """
+  messagesCount number
+
+  """
+  Last Message At
+  UNIX timestamp (in milliseconds, e.g. 1095379198750) when was the last message sent to thread.
+  """
+  lastMessageAt number
 }   
 
 model Error {
