@@ -1,0 +1,84 @@
+profile = "crm/track-contact-event@1.0"
+provider = "crisp"
+
+// Implements https://docs.crisp.chat/guides/rest-api/quickstart/
+
+map TrackContactEvent {
+  http POST "/v1/website/{parameters.WEBSITE_ID}/people/events/{input.contactId}" {
+    security "plugin_tier"
+
+    request "application/json" {
+      headers { "X-Crisp-Tier" = "plugin" }
+
+      body = {
+        text: input.eventName,
+        data: { ...input.eventProperties }
+      }
+    }
+
+    response 201 "application/json" {
+      return map result if (body.reason === "added") {
+        contactId = input.contactId
+      }
+
+      map error {
+        title = "Unexpected error"
+        detail = `Crisp responsed with: ${JSON.stringify(body)}`
+      }
+    }
+
+    response 400 {
+      map error {
+        title = "Invalid data"
+        detail = "Invalid data was sent to Crisp server. Hint: Crisp only accepts flat object for event properties"
+      }
+    }
+
+    response 401 {
+      map error {
+        title = "Unauthenticated"
+        detail = "Please make sure you're providing a valid Crisp API credentials"
+      }
+    }
+
+    response 402 {
+      map error {
+        title = "Crisp subscription upgrade required"
+      }
+    }
+
+    response 403 {
+      map error {
+        title = "Not allowed"
+      }
+    }
+
+    response 404 {
+      map error {
+        title = "Not found"
+        detail = "Contact or website was not found or Crisp plugin is not subscribed. Make sure the Crisp website exists and uses your plugin"
+      }
+    }
+
+    response 423 {
+      map error {
+        title = "Quota limit exceeded"
+        detail = "Wait until the limit is reset or send requests less frequently."
+      }
+    }
+
+    response 429 {
+      map error {
+        title = "Rate limit exceeded"
+        detail = "Wait until the limit is reset or send requests less frequently."
+      }
+    }
+
+    response 500 {
+      map error {
+        title = "Error on Crisp's side"
+        detail = "It looks like Crisp is temporarily having difficulties processing your request. Please try again or contact Crisp's support"
+      }
+    }
+  }
+}

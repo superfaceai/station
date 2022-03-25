@@ -1,0 +1,45 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`address/ip-geolocation/ipdata IpGeolocation when api key is valid should return bad request error when IP address format is wrong 1`] = `
+Err {
+  "error": "HTTPError: Expected HTTP error
+Properties: {
+  \\"title\\": \\"Bad request\\",
+  \\"detail\\": \\"256.256.256.256 is not a valid IPv4 or IPv6 address.\\"
+}
+AST Path: definitions[0].statements[2].responseHandlers[1].statements[1]
+Original Map Location: Line 43, column 7",
+}
+`;
+
+exports[`address/ip-geolocation/ipdata IpGeolocation when api key is valid should return client IP geolocation coordinates when no IP address specified in input 1`] = `
+Ok {
+  "value": Object {
+    "addressCountry": "Czechia",
+    "addressCountryCode": "CZ",
+    "addressLocality": "Zelezny Brod",
+    "addressRegion": "Liberecky kraj",
+    "ipAddress": "94.127.131.198",
+    "latitude": 50.6385,
+    "longitude": 15.2474,
+    "postalCode": "468 22",
+    "timeZone": "Europe/Prague",
+  },
+}
+`;
+
+exports[`address/ip-geolocation/ipdata IpGeolocation when api key is valid should return geolocation coordinates and address for valid IP address 1`] = `
+Ok {
+  "value": Object {
+    "addressCountry": "United States",
+    "addressCountryCode": "US",
+    "addressLocality": undefined,
+    "addressRegion": undefined,
+    "ipAddress": "8.8.8.8",
+    "latitude": 37.751,
+    "longitude": -97.822,
+    "postalCode": undefined,
+    "timeZone": "America/Chicago",
+  },
+}
+`;

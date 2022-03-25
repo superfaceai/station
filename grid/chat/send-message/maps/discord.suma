@@ -69,14 +69,14 @@ operation MapRateLimitDetails {
   }
 
   set if (!isNaN(resetTimestamp)) {
-    details.resetTimestamp = resetTimestamp
+    details.resetTimestamp = resetTimestamp * 1000
   }
 
   set if (!isNaN(retryAfter)) {
     details.retryAfter = retryAfter
   }
 
-  set if (details.remainingRequests && details.totalRequests) {
+  set if (details.remainingRequests !== undefined && details.totalRequests) {
     details.remainingRequestsPercentage = (details.remainingRequests / details.totalRequests) * 100
   }
 
