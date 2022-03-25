@@ -7,13 +7,13 @@ version = "1.0.0"
 
 """
 Get Threads
-Retrieve paginated list of threads
+Retrieve a paginated list of threads from the whole workspace.
 """
 usecase GetThreads {
   input  {
     """
     Workspace
-    Representation of a workspace. Can be guild or workspace, depending on the provider capability.
+    Identifier of a workspace, for example a Discord guild or a Slack workspace.
     """
     workspace! string!
   }
@@ -99,7 +99,7 @@ model Thread {
 
   """
   Members Count
-  Number of members of the retrieved thread
+  Number of users participating in the thread
   """
   membersCount number
 
