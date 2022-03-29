@@ -1,13 +1,16 @@
-profile = "social-media/followers@1.1"
+profile = "social-media/followers@1.2"
 provider = "mock"
 
 map GetFollowers {
   return map result {
     followers = [ {
-      id: "1466796521412771840",
-      username: "superface_test",
-      imageUrl: "https://pbs.twimg.com/profile_images/1478302204306067462/5BEbrnPO_normal.jpg"
-    }
+        id: "1466796521412771840",
+        username: "superface_test",
+        imageUrl: "https://pbs.twimg.com/profile_images/1478302204306067462/5BEbrnPO_normal.jpg",
+        followersCount: 42,
+        followingCount: 3,
+        postsCount: 321,
+      }
     ],
     nextPage = 'QVFIUjc2Y01oQ3F1bHk5WHNzNVVuS2ZAMSEtpdkxmbC1FV09XcGNmTUc4ZAkhrMlBPU19LYkM0dFY4',
     rateLimit = {
