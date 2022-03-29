@@ -1,6 +1,6 @@
 // Twitter API Reference: https://developer.twitter.com/en/docs/twitter-api
 
-profile = "social-media/followers@1.1"
+profile = "social-media/followers@1.2"
 provider = "twitter"
 
 // Required Twitter OAuth 2.0 scopes:
@@ -14,7 +14,7 @@ map GetFollowers {
 
     request {
       query {
-        'user.fields' = 'id,username,profile_image_url'
+        'user.fields' = 'id,username,profile_image_url,public_metrics'
         pagination_token = input.page
         max_results = 100
       }
@@ -31,7 +31,9 @@ map GetFollowers {
           return {
             id: follower.id,
             username: follower.username,
-            imageUrl: follower.profile_image_url
+            imageUrl: follower.profile_image_url,
+            followersCount: follower.public_metrics.followers_count,
+            followingCount: follower.public_metrics.following_count
           }
         })
       }
