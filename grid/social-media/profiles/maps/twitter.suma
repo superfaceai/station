@@ -13,7 +13,7 @@ map GetProfiles {
     request {
       query {
         ids = input.profileIds.join(','),
-        'user.fields' = 'id,username,name,description,profile_image_url,url,public_metrics'
+        'user.fields' = 'id,username,name,description,profile_image_url,url,location,public_metrics'
       }
       headers {
         authorization = "Bearer " + parameters.accessToken
@@ -31,6 +31,7 @@ map GetProfiles {
           profileUrl: `https://twitter.com/${user.username}`,
           description: user.description,
           website: user.url ? user.url : undefined,
+          location: user.location,
           followersCount: metrics.followers_count,
           followingCount: metrics.following_count,
           postsCount: metrics.tweet_count,
