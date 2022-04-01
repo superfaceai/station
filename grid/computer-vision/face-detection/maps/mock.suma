@@ -5,110 +5,126 @@ provider = "mock"
 FaceDetection map
 """
 map FaceDetection {
-  map result [{
-    faces: [{
-      faceRectangle:{
-        topLeft: {
-          x: 1,
-          y: 1
+  return map result [{
+    faces: [
+      {
+        emotions: {
+          anger: `veryUnlikely`,
+          happiness: `veryUnlikely`,
+          sadness: `veryUnlikely`,
+          surprise: `veryUnlikely`,
         },
-        topRight: {
-          x: 2,
-          y: 1
+        faceRectangle: {
+          bottomLeft: {
+            x: 176,
+            y: 34,
+          },
+          bottomRight:{
+            x: 428,
+            y: 34,
+          },
+          topLeft: {
+            x: 176,
+            y: 327,
+          },
+          topRight: {
+            x: 428,
+            y: 327,
+          },
         },
-        bottomLeft: {
-          x: 1,
-          y: 2
-        },
-        bottomRight: {
-          x: 2,
-          y: 2
-        }
+        landmarks:[
+          {
+            kind: `leftPupil`,
+            x: 229.75856,
+            y: 174.96147,
+          },
+          {
+            kind: `rightPupil`,
+            x: 289.5152,
+            y: 169.29749,
+          },
+          {
+            kind: `eyebrowLeftOuter`,
+            x: 211.37524,
+            y: 158.85571,
+          },
+          {
+            kind: `eyebrowLeftInner`,
+            x: 232.82782,
+            y: 154.77731,
+          },
+          {
+            kind: `eyebrowRightOuter`,
+            x: 313.55548,
+            y: 145.77417,
+          },
+          {
+            kind: `noseTip`,
+            x: 234.91925,
+            y: 216.38809,
+          },
+          {
+            kind: `mouthLeft`,
+            x: 244.84465,
+            y: 257.07285,
+          },
+          {
+            kind: `mouthRight`,
+            x: 287.81973,
+            y: 253.6265,
+          },
+          {
+            kind: `noseRootRight`,
+            x: 268.56677,
+            y: 223.62668,
+          },
+          {
+            kind: `noseRootLeft`,
+            x: 240.72118,
+            y: 226.80193,
+          },
+          {
+            kind: `eyeLeftTop`,
+            x: 226.20166,
+            y: 169.5451,
+          },
+          {
+            kind: `eyeLeftInner`,
+            x: 240.20996,
+            y: 174.60138,
+          },
+          {
+            kind: `eyeLeftBottom`,
+            x: 228.97414,
+            y: 180.8672,
+          },
+          {
+            kind: `eyeLeftOuter`,
+            x: 221.64114,
+            y: 176.38219,
+          },
+          {
+            kind: `eyeRightTop`,
+            x: 289.28845,
+            y: 160.4581,
+          },
+          {
+            kind: `eyeRightOuter`,
+            x: 307.3009,
+            y: 169.60486,
+          },
+          {
+            kind: `eyeRightBottom`,
+            x: 291.20908,
+            y: 176.04889,
+          },
+          {
+            kind: `eyeRightInner`,
+            x: 275.35458,
+            y: 172.26141,
+          },
+        ],
       },
-      landmarks: [
-        {
-          kind: `eyebrowLeftOuter`,
-          x: 1,
-          y: 2
-        },{
-          kind: `eyebrowLeftInner`,
-          x: 1,
-          y: 2
-        },{
-          kind: `eyebrowRightOuter`,
-          x: 1,
-          y: 2
-        },{
-          kind: `eyebrowRightInner`,
-          x: 1,
-          y: 2
-        },{
-          kind: `mouthLeft`,
-          x: 1,
-          y: 2
-        },{
-          kind: `mouthRight`,
-          x: 1,
-          y: 2
-        },{
-          kind: `noseRootLeft`,
-          x: 1,
-          y: 2
-        }, {
-          kind: `noseRootRight`,
-          x: 1,
-          y: 2
-        }, {
-          kind: `noseTip`,
-          x: 1,
-          y: 2
-        },{
-          kind: `leftPupil`,
-          x: 1,
-          y: 2
-        },{
-          kind: `eyeLeftTop`,
-          x: 1,
-          y: 2
-        },{
-          kind: `eyeLeftInner`,
-          x: 1,
-          y: 2
-        }, {
-          kind: `eyeLeftOuter`,
-          x: 1,
-          y: 2
-        }, {
-          kind: `eyeLeftBottom`,
-          x: 1,
-          y: 2
-        }, {
-          kind: `rightPupil`,
-          x: 1,
-          y: 2
-        }, {
-          kind: `eyeRightTop`,
-          x: 1,
-          y: 2
-        }, {
-          kind: `eyeRightInner`,
-          x: 1,
-          y: 2
-        },{
-          kind: `eyeRightOuter`,
-          x: 1,
-          y: 2
-        },{
-          kind: `eyeRightBottom`,
-          x: 1,
-          y: 2
-      }],
-      emotions: {
-        happiness: `possible`,
-        anger: `possible`,
-        sadness: `possible`,
-        surprise: `possible`,
-      }
-    }]
+    ],
   }]
 }
