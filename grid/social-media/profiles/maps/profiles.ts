@@ -3,6 +3,7 @@ import { SuperfaceTest } from '@superfaceai/testing';
 
 type InputOptions = {
   profileIds?: string[];
+  usernames?: string[];
 };
 
 export const profilesTest = (provider: string, input: InputOptions): void => {
@@ -24,6 +25,21 @@ export const profilesTest = (provider: string, input: InputOptions): void => {
               useCase: 'GetProfiles',
               input: {
                 profileIds: input.profileIds,
+              },
+            })
+          ).resolves.toMatchSnapshot();
+        });
+      });
+    });
+
+    describe('GetProfilesByUsername', () => {
+      describe('when access token is valid', () => {
+        it('returns a list of profiles', async () => {
+          await expect(
+            superfaceProfiles.run({
+              useCase: 'GetProfilesByUsername',
+              input: {
+                usernames: input.usernames,
               },
             })
           ).resolves.toMatchSnapshot();
