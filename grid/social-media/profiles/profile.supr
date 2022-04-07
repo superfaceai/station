@@ -4,10 +4,10 @@ Retrieve information about social media users' profiles.
 """
 
 name = "social-media/profiles"
-version = "1.0.0"
+version = "1.1.0"
 
 """
-Get Profiles
+Get Profiles by ID
 Retrieve information about social media profile
 """
 usecase GetProfiles safe {
@@ -24,116 +24,9 @@ usecase GetProfiles safe {
     page string
   }
 
-  result {    
-    """
-    Next page
-    Next page cursor.
-    """
-    nextPage string
-    
-    """
-    Profiles
-    List of profiles
-    """
-    profiles [ {
-      """
-      Profile ID
-      Identifier of the user profile.
-      """
-      id! string
+  result ResultModel
 
-      """
-      Username
-      Username of the profile, typically unique on the site.
-      """
-      username string
-
-      """
-      Name
-      Display name of the profile
-      """
-      name string
-
-      """
-      Image URL
-      Profile image url.
-      """
-      imageUrl string
-
-      """
-      URL
-      Profile URL on the social media site.
-      """
-      profileUrl string
-
-      """
-      Description
-      Text of the profile description (bio).
-      """
-      description string
-
-      """
-      Website
-      URL specified in the user's profile (e.g. user's homepage).
-      """
-      website string
-
-      """
-      Location
-      User-provided location specified in the profile, can be a real place but doesn't have to be.
-      """
-      location string
-
-      """
-      Followers count
-      How many followers does the profile have
-      """
-      followersCount number
-
-      """
-      Following count
-      How many profiles is the profile following
-      """
-      followingCount number
-
-      """
-      Posts count
-      How many posts has the profile published
-      """
-      postsCount number
-    } ]
-    """
-    Rate limit
-    Rate limit details.
-    """
-    rateLimit RateLimit
-  }
-
-  error {
-    """
-    Error Title
-    A short, human-readable summary of the problem type.
-    """
-    title!
-
-    """
-    Error Detail
-    A human-readable explanation specific to this occurrence of the problem.
-    """
-    detail
-
-    """
-    Code
-    Error code.
-    """
-    code! ErrorCode!
-
-    """
-    Rate limit
-    Rate limit details.
-    """
-    rateLimit RateLimit
-  }
+  error ErrorModel
 
   example Successful {
     input {
@@ -194,6 +87,177 @@ usecase GetProfiles safe {
   }
 }
 
+"""
+Get Profiles by Username
+Retrieve information about social media profile
+"""
+usecase GetProfilesByUsername safe {
+  input {
+    """
+    usernames
+    A list of unique usernames to obtain information about profiles
+    """
+    usernames! [string!]!
+    """
+    Page
+    Pagination cursor (obtained from `nextPage`)
+    """
+    page string
+  }
+
+  result ResultModel
+
+  error ErrorModel
+
+  example Successful {
+    input {
+      usernames = ["superfaceai", "CrowdDevHQ"]
+    }
+
+    result {
+      profiles = [
+        {
+          description = "Low-code API & Edge API Integration. We build the successor to APIs so you can focus on your business and never worry about APIs again.",
+          followersCount = 678,
+          followingCount = 545,
+          id = "1196797704015400960",
+          imageUrl = "https://pbs.twimg.com/profile_images/1343506099786412032/WXYqcht6_normal.jpg",
+          name = "superface",
+          postsCount = 158,
+          profileUrl = "https://twitter.com/superfaceai",
+          username = "superfaceai",
+          website = "https://t.co/1eIDvslNuK",
+        },
+        {
+          description = "Building tools to fuel developer community growth. 
+  Join our free beta. 👇",
+          followersCount = 101,
+          followingCount = 82,
+          id = "1362101830923259908",
+          imageUrl = "https://pbs.twimg.com/profile_images/1419741008716251141/6exZe94-_normal.jpg",
+          location = "🌍 remote",
+          name = "Crowd.dev",
+          postsCount = 88,
+          profileUrl = "https://twitter.com/CrowdDevHQ",
+          username = "CrowdDevHQ",
+          website = "https://t.co/GRLDhqFWk4",
+        },
+      ],
+      rateLimit = {
+        bucket = "User lookup",
+        totalRequests = 15,
+        remainingRequests = 12,
+        remainingRequestsPercentage = 80,
+        resetTimestamp = 1643713585,
+      }
+    }
+  }
+
+  example Failed {
+    input {
+      usernames = ["superfaceai"]
+    }
+
+    error {
+      title = 'Rate limit exceeded',
+      detail = 'Twitter API resource \'User lookup\' reached max requests quota.',
+      code = 'RateLimitReached',
+      rateLimit = {
+        bucket = "User lookup",
+        totalRequests = 15,
+        remainingRequests = 0,
+        remainingRequestsPercentage = 0,
+        resetTimestamp = 1643713585,
+      }
+    }
+  }
+}
+
+model ResultModel {
+  """
+  Next page
+  Next page cursor.
+  """
+  nextPage string
+  """
+  Profiles
+  List of profiles
+  """
+  profiles [ Profile ]
+  """
+  Rate limit
+  Rate limit details.
+  """
+  rateLimit RateLimit
+}
+
+model Profile {
+  """
+  Profile ID
+  Identifier of the user profile.
+  """
+  id! string
+
+  """
+  Username
+  Username of the profile, typically unique on the site.
+  """
+  username string
+
+  """
+  Name
+  Display name of the profile
+  """
+  name string
+
+  """
+  Image URL
+  Profile image url.
+  """
+  imageUrl string
+
+  """
+  URL
+  Profile URL on the social media site.
+  """
+  profileUrl string
+
+  """
+  Description
+  Text of the profile description (bio).
+  """
+  description string
+
+  """
+  Website
+  URL specified in the user's profile (e.g. user's homepage).
+  """
+  website string
+
+  """
+  Location
+  User-provided location specified in the profile, can be a real place but doesn't have to be.
+  """
+  location string
+
+  """
+  Followers count
+  How many followers does the profile have
+  """
+  followersCount number
+
+  """
+  Following count
+  How many profiles is the profile following
+  """
+  followingCount number
+
+  """
+  Posts count
+  How many posts has the profile published
+  """
+  postsCount number
+}
 
 model ErrorCode enum {
   """

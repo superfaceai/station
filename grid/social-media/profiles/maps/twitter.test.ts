@@ -9,4 +9,6 @@ const profileIds = [
   '732521058507620356', // Ukraine
 ];
 
-profilesTest('twitter', { profileIds });
+const usernames = ['NASAPersevere', 'superfaceai', 'CrowdDevHQ'];
+
+profilesTest('twitter', { profileIds, usernames });
