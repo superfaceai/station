@@ -43,11 +43,6 @@ usecase SendEmail unsafe {
     """
     html
 
-    """
-    Attachments
-    The email attachments.
-    """
-    attachments [Attachment!]
   }
 
   result {
@@ -77,11 +72,6 @@ usecase SendEmail unsafe {
       to = 'jane.doe@example.com',
       subject = 'Your order has been shipped!',
       text = 'Hello Jane, your recent order on Our Shop has been shipped.',
-      attachments = [{
-        filename = 'order.pdf',
-        type = 'application/pdf',
-        content = 'JVBERi0xLjQKJeLjz9MKMyAwIG9...'
-      }],
     }
 
     result {
@@ -115,24 +105,4 @@ usecase SendEmail unsafe {
       detail = 'An email address must contain a single @',
     }
   }
-}
-
-model Attachment {
-  """
-  Content
-  The Base64 encoded content of the attachment.
-  """
-  content!
-
-  """
-  Type
-  The MIME type of the content you are attaching (e.g., “text/plain” or “text/html”).
-  """
-  type!
-
-  """
-  Filename
-  The attachment's filename.
-  """
-  filename
 }

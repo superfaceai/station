@@ -12,7 +12,6 @@ map SendEmail {
   }
 
   content = []
-  attachments = null
 
   set if (input.text) {
     content = content.concat([{ type: 'text/plain', value: input.text }])
@@ -20,16 +19,6 @@ map SendEmail {
 
   set if (input.html) {
     content = content.concat([{ type: 'text/html', value: input.html }])
-  }
-
-  set if (input.attachments) {
-    attachments = input.attachments.map(attachment => {
-      return {
-        content: attachment.content,
-        filename: attachment.filename,
-        type: attachment.type,
-      }
-    })
   }
 
   http POST "/v3/mail/send" {
@@ -42,8 +31,7 @@ map SendEmail {
         content: content,
         personalizations: [{
           to: [{ email: input.to }], 
-        }],
-        attachments: attachments,
+        }]
       }
     }
     

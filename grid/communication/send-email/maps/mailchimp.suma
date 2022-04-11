@@ -26,16 +26,6 @@ map SendEmail {
     body.html = input.html
   }
 
-  set if (input.attachments) {
-    body.attachments = input.attachments.map(attachment => {
-      return {
-        content: attachment.content,
-        name: attachment.filename,
-        type: attachment.type,
-      }
-    })
-  }
-
   http POST "/api/1.0/messages/send" {
     security "api_key"
     

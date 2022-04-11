@@ -1,29 +1,21 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`communication/send-email/mailgun SendEmail when all inputs are correct sends email with attachments 1`] = `
-Ok {
-  "value": Object {
-    "messageId": "<20220411141940.5bd156ea62c3a350@demo.superface.org>",
-  },
-}
-`;
-
 exports[`communication/send-email/mailgun SendEmail when all inputs are correct should return messageId as result 1`] = `
 Ok {
   "value": Object {
-    "messageId": "<20220411141940.4193cb03ad8b1b53@demo.superface.org>",
+    "messageId": "<20211109100314.6f92b1b85e821e74@demo.superface.org>",
   },
 }
 `;
 
-exports[`communication/send-email/mailgun when inputs are invalid should throw an exception 1`] = `
+exports[`communication/send-email/mailgun SendEmail when inputs are invalid should throw an exception 1`] = `
 Err {
   "error": "HTTPError: Expected HTTP error
 Properties: {
   \\"title\\": \\"Invalid inputs\\",
   \\"detail\\": \\"from parameter is not a valid address. please check documentation\\"
 }
-AST Path: definitions[0].statements[4].responseHandlers[1].statements[0]
-Original Map Location: Line 39, column 7",
+AST Path: definitions[0].statements[3].responseHandlers[1].statements[0]
+Original Map Location: Line 35, column 7",
 }
 `;

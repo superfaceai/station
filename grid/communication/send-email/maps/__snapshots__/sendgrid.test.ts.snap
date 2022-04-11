@@ -1,29 +1,21 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`communication/send-email/sendgrid SendEmail when all inputs are correct sends email with attachments 1`] = `
-Ok {
-  "value": Object {
-    "messageId": "B_bfTy-yQ4Wsi7IkFCLDhg",
-  },
-}
-`;
-
 exports[`communication/send-email/sendgrid SendEmail when all inputs are correct should return messageId as result 1`] = `
 Ok {
   "value": Object {
-    "messageId": "6pxCmISvTXuqMk4lHAuAdQ",
+    "messageId": "JpITLjVBS3iknTzDq1BKPg",
   },
 }
 `;
 
-exports[`communication/send-email/sendgrid when inputs are invalid should throw an exception 1`] = `
+exports[`communication/send-email/sendgrid SendEmail when inputs are invalid should throw an exception 1`] = `
 Err {
   "error": "HTTPError: Expected HTTP error
 Properties: {
   \\"title\\": \\"Invalid inputs\\",
   \\"detail\\": \\"Input 'from': The from email does not contain a valid address. Input 'to': Does not contain a valid address. Input 'subject': The subject is required. You can get around this requirement if you use a template with a subject defined or if every personalization has a subject defined. Input 'content': Unless a valid template_id is provided, the content parameter is required. There must be at least one defined content block. We typically suggest both text/plain and text/html blocks are included, but only one block is required.\\"
 }
-AST Path: definitions[0].statements[6].responseHandlers[1].statements[0]
-Original Map Location: Line 57, column 7",
+AST Path: definitions[0].statements[4].responseHandlers[1].statements[0]
+Original Map Location: Line 45, column 7",
 }
 `;
