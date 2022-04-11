@@ -18,6 +18,10 @@ map SendEmail {
     body.html = input.html
   }
 
+  set if (input.attachments) {
+    body.attachment = input.attachments.map(attachment => Buffer.from(attachment.content, 'base64'));
+  }
+
   http POST "/v3/{parameters.DOMAIN}/messages" {
     security "basic"
 

@@ -1,21 +1,29 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`communication/send-email/postmark SendEmail when all inputs are correct should return messageId as result 1`] = `
+exports[`communication/send-email/postmark SendEmail when all inputs are correct sends email with attachments 1`] = `
 Ok {
   "value": Object {
-    "messageId": "13279cff-ed4b-4581-953d-e64b0c3ce5ed",
+    "messageId": "9754979e-13ed-4eab-aacd-6f53d23bd2fd",
   },
 }
 `;
 
-exports[`communication/send-email/postmark SendEmail when inputs are invalid should throw an exception 1`] = `
+exports[`communication/send-email/postmark SendEmail when all inputs are correct should return messageId as result 1`] = `
+Ok {
+  "value": Object {
+    "messageId": "813eb597-52dd-428a-b4d5-34678d97d9fb",
+  },
+}
+`;
+
+exports[`communication/send-email/postmark when inputs are invalid should throw an exception 1`] = `
 Err {
   "error": "HTTPError: Expected HTTP error
 Properties: {
   \\"title\\": \\"Invalid inputs\\",
   \\"detail\\": \\"Error parsing 'To': Illegal email address 'invalidemail'. It must contain the '@' symbol.\\"
 }
-AST Path: definitions[0].statements[0].responseHandlers[1].statements[0]
-Original Map Location: Line 27, column 7",
+AST Path: definitions[0].statements[2].responseHandlers[1].statements[0]
+Original Map Location: Line 39, column 7",
 }
 `;
