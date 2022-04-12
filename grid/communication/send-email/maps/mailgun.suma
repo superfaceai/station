@@ -1,0 +1,45 @@
+// Mailgun API Reference: https://documentation.mailgun.com/en/latest/api_reference.html
+
+profile = "communication/send-email@2.0"
+provider = "mailgun"
+
+map SendEmail {  
+  body = {
+    from: input.from,
+    to: input.to,
+    subject: input.subject,
+  }
+
+  set if (input.text) {
+    body.text = input.text
+  }
+  
+  set if (input.html) {
+    body.html = input.html
+  }
+
+  set if (input.attachments) {
+    body.attachment = input.attachments.map(attachment => Buffer.from(attachment.content, 'base64'));
+  }
+
+  http POST "/v3/{parameters.DOMAIN}/messages" {
+    security "basic"
+
+    request "application/x-www-form-urlencoded" {
+      body = body
+    }
+
+    response 200 {
+      map result {
+        messageId = body.id
+      }
+    }
+
+    response 400 {
+      map error {
+        title = "Invalid inputs"
+        detail = body.message
+      }
+    }
+  }
+}
