@@ -1,6 +1,6 @@
 // Facebook Graph API Reference: https://developers.facebook.com/docs/graph-api/
 
-profile = "social-media/publish-post@1.0"
+profile = "social-media/publish-post@1.1"
 provider = "facebook"
 
 """
@@ -46,7 +46,6 @@ map PublishPost {
       url = outcome.data.link
     }
   }
-
 }
 
 operation GetPageAccessToken {
@@ -68,25 +67,9 @@ operation GetPageAccessToken {
       }
     }
 
-    response 400 "application/json" {
-      fail {
-        title = "Bad request"
-        detail = body.error.message
-      }
-    }
-
-    response 401 "application/json" {
-      fail {
-        title = "Unauthenticated"
-        detail = body.error.message
-      }
-    }
-
-    response 403 "application/json" {
-      fail {
-        title = "Forbidden"
-        detail = body.error.message
-      }
+    response {
+      error = call MapApiError(statusCode = statusCode, body = body, headers = headers)
+      fail error
     }
   }
 }
@@ -113,25 +96,9 @@ operation PublishTextPost {
       }
     }
 
-    response 400 "application/json" {
-      fail {
-        title = "Bad request"
-        detail = body.error.message
-      }
-    }
-
-    response 401 "application/json" {
-      fail {
-        title = "Unauthenticated"
-        detail = body.error.message
-      }
-    }
-
-    response 403 "application/json" {
-      fail {
-        title = "Forbidden"
-        detail = body.error.message
-      }
+    response {
+      error = call MapApiError(statusCode = statusCode, body = body, headers = headers)
+      fail error
     }
   }
 }
@@ -181,25 +148,9 @@ operation PublishPhotoPost {
       }
     }
 
-    response 400 "application/json" {
-      fail {
-        title = "Bad request"
-        detail = body.error.message
-      }
-    }
-
-    response 401 "application/json" {
-      fail {
-        title = "Unauthenticated"
-        detail = body.error.message
-      }
-    }
-
-    response 403 "application/json" {
-      fail {
-        title = "Forbidden"
-        detail = body.error.message
-      }
+    response {
+      error = call MapApiError(statusCode = statusCode, body = body, headers = headers)
+      fail error
     }
   }
 
@@ -225,26 +176,28 @@ operation PublishPhoto {
       return body.id
     }
 
-    response 400 "application/json" {
-      fail {
-        title = "Bad request"
-        detail = body.error.message
-      }
+    response {
+      error = call MapApiError(statusCode = statusCode, body = body, headers = headers)
+      fail error
     }
+  }
+}
 
-    response 401 "application/json" {
-      fail {
-        title = "Unauthenticated"
-        detail = body.error.message
-      }
-    }
+// https://developers.facebook.com/docs/graph-api/guides/error-handling/
+operation MapApiError {
+  statusCode = args.statusCode
+  headers = args.headers
+  body = args.body
 
-    response 403 "application/json" {
-      fail {
-        title = "Forbidden"
-        detail = body.error.message
-      }
-    }
+  subcode = body.error.code
+  title = body.error.error_user_title || body.error.type || body.error.message || 'Unknown error'
+  detail = body.error.error_user_msg || body.error.message || undefined
+
+  // FIXME: Code handling
+  return {
+    title = title
+    detail = detail
+    original = body.error || body
   }
 }
 
