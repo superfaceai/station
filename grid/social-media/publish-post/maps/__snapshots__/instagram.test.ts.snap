@@ -1,5 +1,26 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`social-media/publish-post/instagram PublishPost error cases invalid profileId ends in not found error 1`] = `
+Err {
+  "error": "JessieError: Error in Jessie script
+ReferenceError: igContainerId is not defined
+AST Path: definitions[0].statements[7].request.query.fields[0].value
+Original Map Location: Line 50, column 23",
+}
+`;
+
+exports[`social-media/publish-post/instagram PublishPost error cases missing media causes immediate failure 1`] = `
+Err {
+  "error": "MappedError: Expected error
+Properties: {
+  \\"title\\": \\"Media url required\\",
+  \\"detail\\": \\"You must provide one media with URL for Instagram provider\\"
+}
+AST Path: definitions[0].statements[4]
+Original Map Location: Line 13, column 3",
+}
+`;
+
 exports[`social-media/publish-post/instagram PublishPost when publishing media post should succeed 1`] = `
 Ok {
   "value": Object {

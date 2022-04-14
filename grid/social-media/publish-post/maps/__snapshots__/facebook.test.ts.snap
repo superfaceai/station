@@ -1,10 +1,29 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`social-media/publish-post/facebook PublishPost error cases $message 1`] = `
+Err {
+  "error": "MappedError: Expected error
+Properties: {
+  \\"title\\": \\"GraphMethodException\\",
+  \\"detail\\": \\"Unsupported get request. Object with ID '4' does not exist, cannot be loaded due to missing permissions, or does not support this operation. Please read the Graph API documentation at https://developers.facebook.com/docs/graph-api\\",
+  \\"original\\": {
+    \\"message\\": \\"Unsupported get request. Object with ID '4' does not exist, cannot be loaded due to missing permissions, or does not support this operation. Please read the Graph API documentation at https://developers.facebook.com/docs/graph-api\\",
+    \\"type\\": \\"GraphMethodException\\",
+    \\"code\\": 100,
+    \\"error_subcode\\": 33,
+    \\"fbtrace_id\\": \\"Av1GZWHl5a42PnGIZ8vgaJq\\"
+  }
+}
+AST Path: definitions[0].statements[5].statements[0]
+Original Map Location: Line 25, column 5",
+}
+`;
+
 exports[`social-media/publish-post/facebook PublishPost when publishing text post should succeed 1`] = `
 Ok {
   "value": Object {
-    "postId": "110658944785122_125744069943276",
-    "url": "https://www.facebook.com/110658944785122/posts/125744069943276/",
+    "postId": "34298089714_10160007425254715",
+    "url": "https://www.facebook.com/34298089714/posts/10160007425254715/",
   },
 }
 `;
