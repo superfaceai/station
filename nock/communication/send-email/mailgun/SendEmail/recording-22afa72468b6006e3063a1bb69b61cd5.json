@@ -3,15 +3,12 @@
     "scope": "https://api.mailgun.net:443",
     "method": "POST",
     "path": "/v3/PARAMS_DOMAIN/messages",
-    "body": "from=demo%40PARAMS_DOMAIN&to=demo%40superface.ai&subject=Station+test+with+attachements&text=Station+test+-+mailgun&attachment=%5B%7B%22type%22%3A%22Buffer%22%2C%22data%22%3A%5B116%2C101%2C115%2C116%5D%7D%2C%7B%22type%22%3A%22Buffer%22%2C%22data%22%3A%5B116%2C101%2C115%2C116%5D%7D%5D",
-    "status": 200,
+    "body": "----------------------------462627680497938171117001\r\nContent-Disposition: form-data; name=\"from\"\r\n\r\ndemo@PARAMS_DOMAIN\r\n----------------------------462627680497938171117001\r\nContent-Disposition: form-data; name=\"to\"\r\n\r\ndemo@superface.ai\r\n----------------------------462627680497938171117001\r\nContent-Disposition: form-data; name=\"subject\"\r\n\r\nStation test with attachements\r\n----------------------------462627680497938171117001\r\nContent-Disposition: form-data; name=\"text\"\r\n\r\nStation test - mailgun\r\n----------------------------462627680497938171117001--\r\n",
+    "status": 400,
     "response": {
-      "id": "<20220411141940.5bd156ea62c3a350@PARAMS_DOMAIN>",
-      "message": "Queued. Thank you."
+      "message": "Boundary not found for multipart/form-data request"
     },
     "rawHeaders": [
-      "Access-Control-Allow-Credentials",
-      "true",
       "Access-Control-Allow-Headers",
       "Content-Type, X-Mailgun-Requestor, x-requested-with, Authorization",
       "Access-Control-Allow-Methods",
@@ -25,13 +22,11 @@
       "Content-Type",
       "application/json; charset=utf-8",
       "Date",
-      "Mon, 11 Apr 2022 14:19:40 GMT",
+      "Tue, 12 Apr 2022 09:11:35 GMT",
       "Server",
       "nginx",
-      "Strict-Transport-Security",
-      "max-age=63072000; includeSubDomains",
       "Content-Length",
-      "93",
+      "65",
       "Connection",
       "Close"
     ],

@@ -18,14 +18,16 @@ map SendEmail {
     body.html = input.html
   }
 
-  set if (input.attachments) {
-    body.attachment = input.attachments.map(attachment => Buffer.from(attachment.content, 'base64'));
-  }
+  // set if (input.attachments) {
+  //   // body.attachment = input.attachments.map(attachment => Buffer.from(attachment.content, 'base64'));
+  //   attch = input.attachments[0]
+  //   body.attachment = Buffer.from(attch, 'base64')
+  // }
 
   http POST "/v3/{parameters.DOMAIN}/messages" {
     security "basic"
 
-    request "application/x-www-form-urlencoded" {
+    request "multipart/form-data" {
       body = body
     }
 

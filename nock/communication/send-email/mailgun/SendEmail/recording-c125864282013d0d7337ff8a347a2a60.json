@@ -3,10 +3,10 @@
     "scope": "https://api.mailgun.net:443",
     "method": "POST",
     "path": "/v3/PARAMS_DOMAIN/messages",
-    "body": "from=invalidemail&to=invalidemail&subject=",
+    "body": "----------------------------165135979437108878771064\r\nContent-Disposition: form-data; name=\"from\"\r\n\r\ninvalidemail\r\n----------------------------165135979437108878771064\r\nContent-Disposition: form-data; name=\"to\"\r\n\r\ninvalidemail\r\n----------------------------165135979437108878771064\r\nContent-Disposition: form-data; name=\"subject\"\r\n\r\n\r\n----------------------------165135979437108878771064--\r\n",
     "status": 400,
     "response": {
-      "message": "from parameter is not a valid address. please check documentation"
+      "message": "Boundary not found for multipart/form-data request"
     },
     "rawHeaders": [
       "Access-Control-Allow-Headers",
@@ -22,11 +22,11 @@
       "Content-Type",
       "application/json; charset=utf-8",
       "Date",
-      "Mon, 11 Apr 2022 14:19:41 GMT",
+      "Tue, 12 Apr 2022 09:11:36 GMT",
       "Server",
       "nginx",
       "Content-Length",
-      "80",
+      "65",
       "Connection",
       "Close"
     ],
