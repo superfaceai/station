@@ -2,10 +2,20 @@
 
 exports[`social-media/publish-post/instagram PublishPost error cases invalid profileId ends in not found error 1`] = `
 Err {
-  "error": "JessieError: Error in Jessie script
-ReferenceError: igContainerId is not defined
-AST Path: definitions[0].statements[7].request.query.fields[0].value
-Original Map Location: Line 50, column 23",
+  "error": "HTTPError: Expected HTTP error
+Properties: {
+  \\"title\\": \\"GraphMethodException\\",
+  \\"detail\\": \\"Unsupported post request. Object with ID '4' does not exist, cannot be loaded due to missing permissions, or does not support this operation. Please read the Graph API documentation at https://developers.facebook.com/docs/graph-api\\",
+  \\"original\\": {
+    \\"message\\": \\"Unsupported post request. Object with ID '4' does not exist, cannot be loaded due to missing permissions, or does not support this operation. Please read the Graph API documentation at https://developers.facebook.com/docs/graph-api\\",
+    \\"type\\": \\"GraphMethodException\\",
+    \\"code\\": 100,
+    \\"error_subcode\\": 33,
+    \\"fbtrace_id\\": \\"AaGYT45Qe7lxoYXrIYM3tvH\\"
+  }
+}
+AST Path: definitions[0].statements[6].responseHandlers[1].statements[1]
+Original Map Location: Line 43, column 7",
 }
 `;
 
@@ -24,8 +34,8 @@ Original Map Location: Line 13, column 3",
 exports[`social-media/publish-post/instagram PublishPost when publishing media post should succeed 1`] = `
 Ok {
   "value": Object {
-    "postId": "17874096131670746",
-    "url": "https://www.instagram.com/p/CcVeRFhq21i/",
+    "postId": "18087839620292055",
+    "url": "https://www.instagram.com/p/CcVg83aqg6m/",
   },
 }
 `;

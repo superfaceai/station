@@ -29,7 +29,7 @@ export const publishMediaPostTest = (
     });
 
     describe('PublishPost', () => {
-      describe.only('when publishing media post', () => {
+      describe('when publishing media post', () => {
         it('should succeed', async () => {
           const result = await superfacePublishingProfiles.run({
             useCase: 'GetProfilesForPublishing',

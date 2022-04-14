@@ -35,12 +35,12 @@ map PublishPost {
     }
 
     response 200 "application/json" {
-      igContainerId =  body.id
+      igContainerId = body.id
     }
 
     response {
       error = call MapApiError(statusCode = statusCode, body = body, headers = headers)
-      map error error
+      return map error error
     }
   }
 
@@ -61,7 +61,7 @@ map PublishPost {
 
     response {
       error = call MapApiError(statusCode = statusCode, body = body, headers = headers)
-      map error error
+      return map error error
     }
   }
 
@@ -86,7 +86,7 @@ map PublishPost {
 
     response {
       error = call MapApiError(statusCode = statusCode, body = body, headers = headers)
-      map error error
+      return map error error
     }
   }
 }
