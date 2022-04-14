@@ -2,6 +2,8 @@ import { SuperfaceTest } from '@superfaceai/testing';
 import { readFile } from 'fs/promises';
 import path from 'path';
 
+import { publishPostErrorTest } from './publish-post';
+
 const provider = 'linkedin';
 // DevTestCo - https://docs.microsoft.com/en-us/linkedin/marketing/integrations/community-management/organizations#test-organizations
 const profileId = 'urn:li:organization:2414183';
@@ -100,3 +102,13 @@ describe(`social-media/posts/${provider}`, () => {
     });
   });
 });
+
+publishPostErrorTest(provider, [
+  {
+    name: 'invalid profileId ends in not found error',
+    input: {
+      profileId: '4',
+      text: `Test media publishing from Superface Station.`,
+    },
+  },
+]);
