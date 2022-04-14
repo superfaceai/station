@@ -11,7 +11,7 @@ Properties: {
     \\"type\\": \\"GraphMethodException\\",
     \\"code\\": 100,
     \\"error_subcode\\": 33,
-    \\"fbtrace_id\\": \\"AW3ikxLJ9xR61vVt_c5D7XU\\"
+    \\"fbtrace_id\\": \\"AfXB4mjTkPpzZrYbRlegMAc\\"
   }
 }
 AST Path: definitions[0].statements[5].statements[0]
@@ -20,10 +20,23 @@ Original Map Location: Line 25, column 5",
 `;
 
 exports[`social-media/publish-post/facebook PublishPost when publishing text post should succeed 1`] = `
-Ok {
-  "value": Object {
-    "postId": "34298089714_10160007513114715",
-    "url": "https://www.facebook.com/34298089714/posts/10160007513114715/",
-  },
+Err {
+  "error": "MappedError: Expected error
+Properties: {
+  \\"title\\": \\"Duplicate Status Update\\",
+  \\"detail\\": \\"This status update is identical to the last one you posted. Try posting something different, or delete your previous update.\\",
+  \\"original\\": {
+    \\"message\\": \\"Duplicate status message\\",
+    \\"type\\": \\"OAuthException\\",
+    \\"code\\": 506,
+    \\"error_subcode\\": 1455006,
+    \\"is_transient\\": false,
+    \\"error_user_title\\": \\"Duplicate Status Update\\",
+    \\"error_user_msg\\": \\"This status update is identical to the last one you posted. Try posting something different, or delete your previous update.\\",
+    \\"fbtrace_id\\": \\"Ab09Ji_SP3KLDBPQ3qBsQiL\\"
+  }
+}
+AST Path: definitions[0].statements[8].statements[0]
+Original Map Location: Line 43, column 5",
 }
 `;
