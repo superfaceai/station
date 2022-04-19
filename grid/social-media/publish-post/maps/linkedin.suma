@@ -1,4 +1,4 @@
-profile = "social-media/publish-post@1.0"
+profile = "social-media/publish-post@1.1"
 provider = "linkedin"
 
 """
@@ -177,5 +177,6 @@ operation MapError {
   return {
     title = title,
     detail = detail,
+    original = body,
   }
 }

@@ -1,5 +1,9 @@
 /* eslint-disable jest/no-export */
-import { RecordingProcessOptions, SuperfaceTest } from '@superfaceai/testing';
+import {
+  RecordingProcessOptions,
+  SuperfaceTest,
+  SuperfaceTestRun,
+} from '@superfaceai/testing';
 
 export const publishPostTest = (
   provider: string,
@@ -44,6 +48,49 @@ export const publishPostTest = (
               hooks
             )
           ).resolves.toMatchSnapshot();
+        });
+      });
+    });
+  });
+};
+
+type ErrorCase = {
+  name: string;
+  input: SuperfaceTestRun['input'];
+};
+
+export const publishPostErrorTest = (
+  provider: string,
+  cases: ErrorCase[],
+  hooks?: RecordingProcessOptions
+): void => {
+  describe(`social-media/publish-post/${provider}`, () => {
+    let superfacePublisPost: SuperfaceTest;
+
+    beforeEach(() => {
+      superfacePublisPost = new SuperfaceTest({
+        profile: 'social-media/publish-post',
+        provider,
+      });
+    });
+
+    const testCases: Array<
+      [string, ErrorCase['input']]
+    > = cases.map(({ name, input }) => [name, input]);
+
+    describe('PublishPost', () => {
+      describe('error cases', () => {
+        // FIXME: Use $name in Jest 27+
+        test.each(testCases)('%s', async (_name, input) => {
+          const result = await superfacePublisPost.run(
+            {
+              useCase: 'PublishPost',
+              input,
+            },
+            hooks
+          );
+          expect(result.isErr()).toBe(true);
+          expect(result).toMatchSnapshot();
         });
       });
     });

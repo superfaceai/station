@@ -36,7 +36,6 @@ export const publishMediaPostTest = (
             input: {},
           });
 
-          expect(result.isOk()).toBeTruthy();
           const resultUnwrapped = result.unwrap();
 
           await expect(
