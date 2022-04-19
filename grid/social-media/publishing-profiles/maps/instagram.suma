@@ -18,8 +18,10 @@ map GetProfilesForPublishing {
     }
 
     response 200 "application/json" {
+      // Keep only profiles with IG accounts
+      pagesWithIgAccounts = body.data.filter(({instagram_business_account}) => instagram_business_account && instagram_business_account.id)
       // Now map them to IG profiles
-      profiles = call foreach(page of body.data) MapPage(page = page)
+      profiles = call foreach(page of pagesWithIgAccounts) MapPage(page = page)
 
       return map result {
         profiles = profiles
@@ -50,7 +52,7 @@ map GetProfilesForPublishing {
 }
 
 operation MapPage {
-  http GET "/v12.0/{args.page.id}" {
+  http GET "/v13.0/{args.page.id}" {
     request {
       query {
         // wellp, traversing the edge is undocumented but seems to work for now...
