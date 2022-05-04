@@ -567,6 +567,17 @@
           "file": "../grid/chat/send-message/maps/discord.suma"
         }
       }
+    },
+    "project-management/tasks": {
+      "file": "../grid/project-management/tasks/profile.supr",
+      "providers": {
+        "mock": {
+          "file": "../grid/project-management/tasks/maps/mock.suma"
+        },
+        "asana": {
+          "file":  "../grid/project-management/tasks/maps/asana.suma"
+        }
+      }
     }
   },
   "providers": {
@@ -1064,6 +1075,18 @@
           "apikey": "$IPGEOLOCATION_API_KEY"
         }
       ]
+    },
+    "asana": {
+      "file": "../providers/asana.json",
+      "security": [
+        {
+          "id": "pat",
+          "token": "$ASANA_PERSONAL_ACCESS_TOKEN"
+        }
+      ],
+      "parameters": {
+        "accessToken": "$ASANA_PERSONAL_ACCESS_TOKEN"
+      }
     }
   }
 }

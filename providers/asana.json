@@ -1,0 +1,23 @@
+{
+  "name": "asana",
+  "services": [
+    {
+      "id": "default",
+      "baseUrl": "https://app.asana.com/api/1.0"
+    }
+  ],
+  "securitySchemes": [
+    {
+      "id": "pat",
+      "type": "http",
+      "scheme": "bearer"
+    }
+  ],
+  "parameters": [
+    {
+      "name": "pat",
+      "description": "Personal Access Token"
+    }
+  ],
+  "defaultService": "default"
+}

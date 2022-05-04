@@ -1,0 +1,71 @@
+"""
+Manage tasks in project management systems.
+"""
+name = "project-management/tasks"
+version = "1.0.0"
+
+"""
+Create a new task.
+"""
+usecase CreateTask {
+	input {
+
+    """
+    projects
+    An array of IDs of projects this task belongs to.
+    """
+    projects! [string]!
+
+		"""
+		label
+		Textual label of the task.
+		"""
+		label! string!
+		
+		"""
+		description
+		Free-form textual description of the task.
+		"""
+		description string
+	
+    """
+    parent
+    ID of the parent task (if applicable).
+    """
+    parent string
+
+    """
+    assignee
+    ID of the user this task should be assigned to.
+    """
+    assignee string
+	}
+
+	result {
+    "ID of the just created task."
+    id! string!
+
+    "Project IDs it was successfully added to."
+    projects! [string]!
+  }
+
+	error {
+		"Human-readable error message"
+		message! string!
+		"Human-readable details about the error"
+		description! string!
+	}
+
+  example success {
+    input {
+      projects = ["46ebca75-68af-42a1-916d-b228c2082d4f"]
+      label = "Get milk"
+      description = "We ran out of milk :("
+    }
+
+    result {
+      id = "ffa18e32-45e6-4b2b-97fa-b8509b3a8c76"
+      projects = ["46ebca75-68af-42a1-916d-b228c2082d4f"]
+    }
+  }
+}
