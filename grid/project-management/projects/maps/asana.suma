@@ -1,0 +1,23 @@
+profile = "project-management/projects@1.0.0"
+provider = "asana"
+
+map ListProjects {
+  http GET "/projects" {
+    security "personalAccesstoken"
+    
+    request "application/json" {
+      headers {
+        "Authorization" = `Bearer ${parameters.accessToken}`
+      }
+    }
+    
+    response 200 "application/json" {
+      return map result body.data.map((project) => {
+        return {
+          id: project.gid,
+          name: project.name
+        }
+      })
+    }
+  }
+}

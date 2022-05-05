@@ -578,6 +578,17 @@
           "file":  "../grid/project-management/tasks/maps/asana.suma"
         }
       }
+    },
+    "project-management/projects": {
+      "file": "../grid/project-management/projects/profile.supr",
+      "providers": {
+        "mock": {
+          "file": "../grid/project-management/projects/maps/mock.suma"
+        },
+        "asana": {
+          "file":  "../grid/project-management/projects/maps/asana.suma"
+        }
+      }
     }
   },
   "providers": {
@@ -1080,7 +1091,7 @@
       "file": "../providers/asana.json",
       "security": [
         {
-          "id": "pat",
+          "id": "personalAccessToken",
           "token": "$ASANA_PERSONAL_ACCESS_TOKEN"
         }
       ],

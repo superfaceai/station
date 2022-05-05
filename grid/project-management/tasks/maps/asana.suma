@@ -3,7 +3,7 @@ provider = "asana"
 
 map CreateTask {
   http POST "/tasks" {
-    security "pat"
+    security "personalAccessToken"
     
     request "application/json" {
       headers {
@@ -12,9 +12,9 @@ map CreateTask {
 
       body {
         data = {
-          name: input.label,
+          name: input.title,
           notes: input.description,
-          projects: input.projects,
+          project: input.project,
           parent: input.parent,
           assignee: input.assignee
         }
@@ -24,7 +24,7 @@ map CreateTask {
     response 200 "application/json" {
       return map result {
         id = body.data.gid
-        projects = body.data.projects
+        url = body.data.permalink_url
       }
     }
   }

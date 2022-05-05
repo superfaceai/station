@@ -1,6 +1,6 @@
 import { createTaskTest } from './tasks';
 
 createTaskTest('mock', {
-  label: 'Mock task.',
-  projects: ['foobar'],
+  title: 'Mock task.',
+  project: 'foobar',
 });

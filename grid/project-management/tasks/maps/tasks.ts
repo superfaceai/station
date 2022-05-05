@@ -5,8 +5,8 @@ import { SuperfaceTest } from '@superfaceai/testing';
 export const createTaskTest = (
   provider: string,
   params: {
-    label: string;
-    projects: string[];
+    title: string;
+    project: string;
     parent?: string;
     assignee?: string;
   }
