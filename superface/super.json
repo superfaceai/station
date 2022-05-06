@@ -512,9 +512,6 @@
         "mock": {
           "file": "../grid/address/ip-geolocation/maps/mock.suma"
         },
-        "freegeoip": {
-          "file": "../grid/address/ip-geolocation/maps/freegeoip.suma"
-        },
         "ipdata": {
           "file": "../grid/address/ip-geolocation/maps/ipdata.suma"
         },
@@ -523,6 +520,9 @@
         },
         "ipgeolocation": {
           "file": "../grid/address/ip-geolocation/maps/ipgeolocation.suma"
+        },
+        "ipbase": {
+          "file": "../grid/address/ip-geolocation/maps/ipbase.suma"
         }
       }
     },
@@ -1039,15 +1039,6 @@
         "clientSecret": "$GOOGLE_APIS_CLIENT_SECRET"
       }
     },
-    "freegeoip": {
-      "file": "../providers/freegeoip.json",
-      "security": [
-        {
-          "id": "apikey",
-          "apikey": "$FREEGEOIP_API_KEY"
-        }
-      ]
-    },
     "here": {
       "file": "../providers/here.json",
       "security": [
@@ -1098,6 +1089,15 @@
       "parameters": {
         "accessToken": "$ASANA_PERSONAL_ACCESS_TOKEN"
       }
+    },
+    "ipbase": {
+      "file": "../providers/ipbase.json",
+      "security": [
+        {
+          "id": "apikey",
+          "apikey": "$IPBASE_API_KEY"
+        }
+      ]
     }
   }
 }
