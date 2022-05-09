@@ -1,0 +1,47 @@
+[
+  {
+    "scope": "https://api.pinterest.com:443",
+    "method": "POST",
+    "path": "/v5/oauth/token",
+    "body": "grant_type=refresh_token&refresh_token=XXX_REFRESH_TOKEN_REDACTED_XXX&client_id=PARAMS_clientId&client_secret=PARAMS_clientSecret",
+    "status": 200,
+    "response": {
+      "access_token": "XXX_ACCESS_TOKEN_REDACTED_XXX",
+      "response_type": "refresh_token",
+      "token_type": "bearer",
+      "expires_in": 2592000,
+      "scope": "boards:read boards:write pins:read pins:write"
+    },
+    "rawHeaders": [
+      "Content-Type",
+      "application/json",
+      "Content-Length",
+      "251",
+      "pinterest-version",
+      "3295b9e",
+      "x-content-type-options",
+      "nosniff",
+      "x-frame-options",
+      "DENY",
+      "x-envoy-upstream-service-time",
+      "112",
+      "pinterest-generated-by",
+      "tpp-api-prod-0a03a300",
+      "Cache-Control",
+      "no-cache, no-store, must-revalidate",
+      "x-pinterest-rid",
+      "7748853971874479",
+      "Date",
+      "Mon, 09 May 2022 09:33:11 GMT",
+      "Connection",
+      "close",
+      "Set-Cookie",
+      "_ir=0; Max-Age=1800; HttpOnly; Path=/; Secure",
+      "AKAMAI-GRN",
+      "0.c66ed417.1652088791.412403af",
+      "X-CDN",
+      "akamai"
+    ],
+    "responseIsBinary": false
+  }
+]

@@ -87,9 +87,10 @@ export const refreshTokenTest = (
         refreshToken?: string;
       };
       onRefreshPerform?.(resultUnwrapped);
-      const { accessToken, refreshToken, ...rest } = resultUnwrapped;
-      expect(accessToken).toEqual(expect.any(String));
-      expect(rest).toMatchSnapshot();
+      const { refreshToken, ...rest } = resultUnwrapped;
+      expect(rest).toMatchSnapshot({
+        accessToken: expect.any(String),
+      });
       if (refreshToken) {
         currentInput.refreshToken = refreshToken;
       }
