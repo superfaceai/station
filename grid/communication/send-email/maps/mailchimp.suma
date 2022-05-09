@@ -45,14 +45,18 @@ map SendEmail {
       }
     }
 
-    response 200 {
-      map result if (body[0].status === "sent") {
+    response 200 "application/json" {
+      set {
+        msgStatus = body[0].status
+      }
+      // the sending status of the recipient Possible values: "sent", "queued", "scheduled", "rejected", or "invalid".
+      return map result if (msgStatus === "sent" || msgStatus === "queued" || msgStatus === "scheduled") {
         messageId = body[0]._id
       }
 
-      map error if (body[0].status !== "sent") {
+      return map error {
         title = "Send Email Failed",
-        detail = (`${body[0].status}: ${body[0].reject_reason}`)
+        detail = (`${msgStatus}: ${body[0].reject_reason}`)
       }
     }
 
