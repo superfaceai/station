@@ -5,8 +5,8 @@ profile = "communication/send-email@2.1"
 provider = "mailchimp"
 
 map SendEmail {
-  body = {
-    message: {
+  set {
+    message = {
       from_email: input.from,
       to: [
         {
@@ -19,15 +19,15 @@ map SendEmail {
   }
 
   set if (input.text) {
-    body.text = input.text
+    message.text = input.text
   }
 
   set if (input.html) {
-    body.html = input.html
+    message.html = input.html
   }
 
-  set if (input.attachments) {
-    body.attachments = input.attachments.map(attachment => {
+  set if (Array.isArray(input.attachments)) {
+    message.attachments = input.attachments.map(attachment => {
       return {
         content: attachment.content,
         name: attachment.filename,
@@ -40,7 +40,9 @@ map SendEmail {
     security "api_key"
     
     request {
-      body = body
+      body = {
+        message: message
+      }
     }
 
     response 200 {
@@ -57,6 +59,7 @@ map SendEmail {
     response 500 {
       map error if (body) {
         title = "Internal server Error"
+        detail = body.message || `${body}`
       }
 
       map error if (body.name === "ValidationError") {
