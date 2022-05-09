@@ -21,12 +21,14 @@ map GetProfilesForPublishing {
     }
   
     response 200 "application/json" {
-      map result body.items.map((item) => {
-        return {
-          id: item.id,
-          name: item.name,
-        }
-      })
+      map result {
+        profiles = body.items.map((item) => {
+          return {
+            id: item.id,
+            name: item.name,
+          }
+        }),
+      }
       // nextPage = body.bookmark
     }
   

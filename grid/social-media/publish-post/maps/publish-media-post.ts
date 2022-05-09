@@ -31,32 +31,31 @@ export const publishMediaPostTest = (
     describe('PublishPost', () => {
       describe('when publishing media post', () => {
         it('should succeed', async () => {
-          const result = await superfacePublishingProfiles.run({
+          const profilesResult = await superfacePublishingProfiles.run({
             useCase: 'GetProfilesForPublishing',
             input: {},
           });
 
-          const resultUnwrapped = result.unwrap();
-
-          await expect(
-            superfacePublisPost.run(
-              {
-                useCase: 'PublishPost',
-                input: {
-                  // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-explicit-any
-                  profileId: (resultUnwrapped as any).profiles[0].id,
-                  text: `Test media publishing from Superface Station.`,
-                  media: [
-                    {
-                      url:
-                        'https://upload.wikimedia.org/wikipedia/commons/0/09/Sitta-carolinensis-001.jpg',
-                    },
-                  ],
-                },
+          const profilesUnwrapped = profilesResult.unwrap();
+          const result = await superfacePublisPost.run(
+            {
+              useCase: 'PublishPost',
+              input: {
+                // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-explicit-any
+                profileId: (profilesUnwrapped as any).profiles[0].id,
+                text: `Test media publishing from Superface Station.`,
+                media: [
+                  {
+                    url:
+                      'https://upload.wikimedia.org/wikipedia/commons/0/09/Sitta-carolinensis-001.jpg',
+                  },
+                ],
               },
-              hooks
-            )
-          ).resolves.toMatchSnapshot();
+            },
+            hooks
+          );
+          expect(result.isOk()).toBe(true);
+          expect(result).toMatchSnapshot();
         });
       });
     });
