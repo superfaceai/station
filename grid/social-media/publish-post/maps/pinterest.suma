@@ -7,23 +7,11 @@ map PublishPost {
     title = "Invalid media"
     detail = "You must provide exactly one media item for Pinterest."
   }
-
-//   {
-//   "link": "https://www.pinterest.com/",
-//   "title": "string",
-//   "description": "string",
-//   "alt_text": "string",
-//   "board_id": "string",
-//   "board_section_id": "string",
-//   "media_source": {
-//     "source_type": "image_base64",
-//     "content_type": "image/jpeg",
-//     "data": "string"
-//   }
-// }
-
+  
   set {
-    media = input.media[0]
+    // FIXME[linter]: Workaround for `ElementAccessExpression - Wrong Input Structure: expected {profileId: string!, text: string!, link: string!, media: [{url: string!, contents: any, altText: string}]}, but got input.media.0`
+    origMedia = input.media
+    media = origMedia[0]
     mediaSource = {}
   }
 
