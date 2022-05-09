@@ -6,6 +6,7 @@ map GetAccessTokenFromRefreshToken {
   set {
     clientId = input.clientId || parameters.clientId
     clientSecret = input.clientSecret || parameters.clientSecret
+    refreshToken = input.refreshToken
   }
 
   http POST "/v5/oauth/token" {
@@ -16,7 +17,7 @@ map GetAccessTokenFromRefreshToken {
 
       body {
         grant_type = "refresh_token",
-        refresh_token = input.refreshToken,
+        refresh_token = refreshToken,
         client_id = clientId,
         client_secret = clientSecret,
       }
@@ -25,7 +26,7 @@ map GetAccessTokenFromRefreshToken {
     response 200 "application/json" {
       return map result {
         accessToken = body.access_token,
-        refreshToken = body.refresh_token || input.refreshToken,
+        refreshToken = body.refresh_token || refreshToken,
         expiresIn = body.expires_in,
         tokenType = body.token_type,
         scopes = body.scope.split(' '),
