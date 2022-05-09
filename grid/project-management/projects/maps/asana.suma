@@ -3,7 +3,7 @@ provider = "asana"
 
 map ListProjects {
   http GET "/projects" {
-    security "personalAccesstoken"
+    security "personalAccessToken"
     
     request "application/json" {
       headers {

@@ -16,12 +16,11 @@ export const createProjectTest = (provider: string): void => {
     describe('ListProject', () => {
       describe('the usecase without any parameters', () => {
         it('should list all projects', async () => {
-          await expect(
-            superface.run({
-              useCase: 'ListProjects',
-              input: {},
-            })
-          ).resolves.toMatchSnapshot();
+          const result = await superface.run({
+            useCase: 'ListProjects',
+            input: {},
+          });
+          expect(result).toMatchSnapshot();
         });
       });
     });

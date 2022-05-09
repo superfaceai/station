@@ -14,14 +14,14 @@ map CreateTask {
         data = {
           name: input.title,
           notes: input.description,
-          project: input.project,
+          projects: [input.project],
           parent: input.parent,
           assignee: input.assignee
         }
       }
     }
     
-    response 200 "application/json" {
+    response 201 "application/json" {
       return map result {
         id = body.data.gid
         url = body.data.permalink_url

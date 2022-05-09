@@ -5,22 +5,22 @@ name = "project-management/tasks"
 version = "1.0.0"
 
 """
-Create a new task in project
+Create a new task in a project
 """
 usecase CreateTask {
 	input {
 
     """
     projects
-    An array of IDs of projects this task belongs to.
+    ID of project to create the task in.
     """
-    project! string!
+    project string
 
 		"""
 		title
 		Textual title of the task.
 		"""
-		title! string!
+		title string
 		
 		"""
 		description
@@ -45,8 +45,8 @@ usecase CreateTask {
     "ID of the created task."
     id! string!
 
-    "URL of the task."
-    url string!
+    "URL of the created task"
+    url string
   }
 
 	error {

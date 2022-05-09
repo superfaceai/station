@@ -24,12 +24,11 @@ export const createTaskTest = (
     describe('CreateTask', () => {
       describe('when all inputs are correct', () => {
         it('should create a task', async () => {
-          await expect(
-            superface.run({
-              useCase: 'CreateTask',
-              input: params,
-            })
-          ).resolves.toMatchSnapshot();
+          const result = await superface.run({
+            useCase: 'CreateTask',
+            input: params,
+          });
+          expect(result).toMatchSnapshot();
         });
       });
     });
