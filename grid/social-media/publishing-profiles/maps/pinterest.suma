@@ -1,0 +1,41 @@
+profile = "social-media/publishing-profiles@1.0"
+provider = "pinterest"
+
+// https://developers.pinterest.com/docs/api/v5/#tag/boards
+// FIXME: Need to handle pagination
+map GetProfilesForPublishing {
+  set {
+    accessToken = parameters.accessToken
+  }
+  http GET "/v5/boards" {
+    request "application/json" {
+      query {
+        page_size = 100,
+        // bookmark = input.page,
+      }
+
+      headers {
+        Authorization = `Bearer ${accessToken}`
+      }
+
+    }
+  
+    response 200 "application/json" {
+      map result {
+        profiles = body.items.map((item) => {
+          return {
+            id: item.id,
+            name: item.name,
+          }
+        }),
+      }
+      // nextPage = body.bookmark
+    }
+  
+    response {
+      map error {
+        title = body.message
+      }
+    }
+  }
+}

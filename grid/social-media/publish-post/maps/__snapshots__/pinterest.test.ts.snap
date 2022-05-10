@@ -1,0 +1,68 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`social-media/publish-post/pinterest PublishPost error cases invalid profileId ends in not found error 1`] = `
+Err {
+  "error": "HTTPError: Expected HTTP error
+Properties: {
+  \\"title\\": \\"Not found\\",
+  \\"detail\\": \\"Board not found.\\",
+  \\"original\\": {
+    \\"code\\": 40,
+    \\"message\\": \\"Board not found.\\"
+  }
+}
+AST Path: definitions[0].statements[8].responseHandlers[4].statements[0]
+Original Map Location: Line 95, column 7",
+}
+`;
+
+exports[`social-media/publish-post/pinterest PublishPost error cases missing media causes immediate failure 1`] = `
+Err {
+  "error": "MappedError: Expected error
+Properties: {
+  \\"title\\": \\"Invalid media\\",
+  \\"detail\\": \\"You must provide exactly one media item for Pinterest.\\"
+}
+AST Path: definitions[0].statements[0]
+Original Map Location: Line 6, column 3",
+}
+`;
+
+exports[`social-media/publish-post/pinterest PublishPost media upload JPG upload passes 1`] = `
+Ok {
+  "value": Object {
+    "postId": "989877193072194537",
+    "url": "https://www.pinterest.com/pin/989877193072194537/",
+  },
+}
+`;
+
+exports[`social-media/publish-post/pinterest PublishPost media upload transparent PNG upload passes 1`] = `
+Ok {
+  "value": Object {
+    "postId": "989877193072194538",
+    "url": "https://www.pinterest.com/pin/989877193072194538/",
+  },
+}
+`;
+
+exports[`social-media/publish-post/pinterest PublishPost media upload transparent WebP upload fails 1`] = `
+Err {
+  "error": "MappedError: Expected error
+Properties: {
+  \\"title\\": \\"Unknown or unsupported media contents type\\",
+  \\"detail\\": \\"Only PNG or JPG images are supported.\\"
+}
+AST Path: definitions[0].statements[7]
+Original Map Location: Line 43, column 3",
+}
+`;
+
+exports[`social-media/publish-post/pinterest PublishPost when publishing media post should succeed 1`] = `
+Ok {
+  "value": Object {
+    "postId": "989877193072194536",
+    "url": "https://www.pinterest.com/pin/989877193072194536/",
+  },
+}
+`;
