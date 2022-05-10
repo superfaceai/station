@@ -5,8 +5,8 @@ profile = "communication/send-email@2.1"
 provider = "mailchimp"
 
 map SendEmail {
-  body = {
-    message: {
+  set {
+    message = {
       from_email: input.from,
       to: [
         {
@@ -19,15 +19,15 @@ map SendEmail {
   }
 
   set if (input.text) {
-    body.text = input.text
+    message.text = input.text
   }
 
   set if (input.html) {
-    body.html = input.html
+    message.html = input.html
   }
 
-  set if (input.attachments) {
-    body.attachments = input.attachments.map(attachment => {
+  set if (Array.isArray(input.attachments)) {
+    message.attachments = input.attachments.map(attachment => {
       return {
         content: attachment.content,
         name: attachment.filename,
@@ -40,23 +40,30 @@ map SendEmail {
     security "api_key"
     
     request {
-      body = body
+      body = {
+        message: message
+      }
     }
 
-    response 200 {
-      map result if (body[0].status === "sent") {
+    response 200 "application/json" {
+      set {
+        msgStatus = body[0].status
+      }
+      // the sending status of the recipient Possible values: "sent", "queued", "scheduled", "rejected", or "invalid".
+      return map result if (msgStatus === "sent" || msgStatus === "queued" || msgStatus === "scheduled") {
         messageId = body[0]._id
       }
 
-      map error if (body[0].status !== "sent") {
+      return map error {
         title = "Send Email Failed",
-        detail = (`${body[0].status}: ${body[0].reject_reason}`)
+        detail = (`${msgStatus}: ${body[0].reject_reason}`)
       }
     }
 
     response 500 {
       map error if (body) {
         title = "Internal server Error"
+        detail = body.message || `${body}`
       }
 
       map error if (body.name === "ValidationError") {
