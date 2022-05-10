@@ -1,12 +1,31 @@
 /* eslint-disable jest/no-export */
 import { RecordingProcessOptions, SuperfaceTest } from '@superfaceai/testing';
+import { readFile } from 'fs/promises';
+import path from 'path';
+
+import { getPublishingProfiles } from './publish-post';
+
+async function fixturesToMedia(
+  fixtureNames: string[]
+): Promise<Array<{ contents: Buffer; altText: string }>> {
+  const buffers = await Promise.all(
+    fixtureNames.map(fixture => {
+      const fixturePath = path.join(__dirname, 'fixtures', fixture);
+
+      return readFile(fixturePath);
+    })
+  );
+
+  return fixtureNames.map((name, i) => {
+    return { contents: buffers[i], altText: name };
+  });
+}
 
 export const publishMediaPostTest = (
   provider: string,
   hooks?: RecordingProcessOptions
 ): void => {
   describe(`social-media/publish-post/${provider}`, () => {
-    let superfacePublishingProfiles: SuperfaceTest;
     let superfacePublisPost: SuperfaceTest;
 
     beforeAll(() => {
@@ -18,10 +37,6 @@ export const publishMediaPostTest = (
     });
 
     beforeEach(() => {
-      superfacePublishingProfiles = new SuperfaceTest({
-        profile: 'social-media/publishing-profiles',
-        provider,
-      });
       superfacePublisPost = new SuperfaceTest({
         profile: 'social-media/publish-post',
         provider,
@@ -31,18 +46,13 @@ export const publishMediaPostTest = (
     describe('PublishPost', () => {
       describe('when publishing media post', () => {
         it('should succeed', async () => {
-          const profilesResult = await superfacePublishingProfiles.run({
-            useCase: 'GetProfilesForPublishing',
-            input: {},
-          });
+          const profiles = await getPublishingProfiles(provider);
 
-          const profilesUnwrapped = profilesResult.unwrap();
           const result = await superfacePublisPost.run(
             {
               useCase: 'PublishPost',
               input: {
-                // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-explicit-any
-                profileId: (profilesUnwrapped as any).profiles[0].id,
+                profileId: profiles[0].id,
                 text: `Test media publishing from Superface Station.`,
                 media: [
                   {
@@ -55,6 +65,57 @@ export const publishMediaPostTest = (
             hooks
           );
           expect(result.isOk()).toBe(true);
+          expect(result).toMatchSnapshot();
+        });
+      });
+    });
+  });
+};
+
+type UploadTestCase = {
+  name: string;
+  media: string[];
+  success?: boolean;
+};
+
+export const publishMediaUploadTest = (
+  provider: string,
+  cases: UploadTestCase[],
+  hooks?: RecordingProcessOptions
+): void => {
+  describe(`social-media/publish-post/${provider}`, () => {
+    let superfacePublisPost: SuperfaceTest;
+
+    beforeEach(() => {
+      superfacePublisPost = new SuperfaceTest({
+        profile: 'social-media/publish-post',
+        provider,
+      });
+    });
+
+    const testCases: Array<
+      [name: string, media: UploadTestCase['media'], success: boolean]
+    > = cases.map(({ name, media, success = true }) => [name, media, success]);
+
+    describe('PublishPost', () => {
+      describe('media upload', () => {
+        // FIXME: Use $name in Jest 27+
+        test.each(testCases)('%s', async (name, fixtureFiles, success) => {
+          const profiles = await getPublishingProfiles(provider);
+
+          const media = await fixturesToMedia(fixtureFiles);
+          const result = await superfacePublisPost.run(
+            {
+              useCase: 'PublishPost',
+              input: {
+                profileId: profiles[0].id,
+                text: `Test media publishing from Superface Station (${name})`,
+                media,
+              },
+            },
+            hooks
+          );
+          expect(result.isOk()).toBe(success);
           expect(result).toMatchSnapshot();
         });
       });

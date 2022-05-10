@@ -1,4 +1,7 @@
-import { publishMediaPostTest } from './publish-media-post';
+import {
+  publishMediaPostTest,
+  publishMediaUploadTest,
+} from './publish-media-post';
 import { publishPostErrorTest } from './publish-post';
 
 publishMediaPostTest('pinterest');
@@ -19,5 +22,14 @@ publishPostErrorTest('pinterest', [
         },
       ],
     },
+  },
+]);
+publishMediaUploadTest('pinterest', [
+  { name: 'JPG upload passes', media: ['horizontal.jpg'] },
+  { name: 'transparent PNG upload passes', media: ['vase.transparent.png'] },
+  {
+    name: 'transparent WebP upload fails',
+    media: ['vase.transparent.webp'],
+    success: false,
   },
 ]);

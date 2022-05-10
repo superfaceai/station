@@ -5,6 +5,24 @@ import {
   SuperfaceTestRun,
 } from '@superfaceai/testing';
 
+type ProfilesResult = Array<{ id: string; name: string }>;
+
+export const getPublishingProfiles = async (
+  provider: string
+): Promise<ProfilesResult> => {
+  const superfacePublishingProfiles = new SuperfaceTest({
+    profile: 'social-media/publishing-profiles',
+    provider,
+  });
+  const result = await superfacePublishingProfiles.run({
+    useCase: 'GetProfilesForPublishing',
+    input: {},
+  });
+  expect(result.isOk()).toBeTruthy();
+
+  return (result.unwrap() as { profiles: ProfilesResult })?.profiles || [];
+};
+
 export const publishPostTest = (
   provider: string,
   hooks?: RecordingProcessOptions

@@ -40,10 +40,10 @@ map PublishPost {
     }
   }
 
-  // return map error if (!mediaSource.url && !mediaSource.content_type) {
-  //   title = "Unknown or unsupported media contents type"
-  //   detail = "Only PNG or JPG images are supported."
-  // }
+  return map error if (!mediaSource.url && !mediaSource.content_type) {
+    title = "Unknown or unsupported media contents type"
+    detail = "Only PNG or JPG images are supported."
+  }
 
   http POST "/v5/pins" {
 
