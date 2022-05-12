@@ -27,12 +27,12 @@ map GetPostComments {
           id: element["$URN"],
           text: element.message.text,
           created: {
-            user: element.created.actor,
-            time: element.created.time
+            by: element.created.actor,
+            at: element.created.time
           },
           lastModified: {
-            user: element.lastModified.actor,
-            time: element.lastModified.time
+            by: element.lastModified.actor,
+            at: element.lastModified.time
           }
         }
       })

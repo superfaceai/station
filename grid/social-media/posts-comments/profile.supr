@@ -59,20 +59,20 @@ usecase GetPostComments safe {
             {
                 id = "123"
                 created = {
-                    user = "@alberteinstein"
-                    time = 1652271236
+                    by = "@alberteinstein"
+                    at = 1652271236
                 }
                 text = "Hello, World!"
             },
             {
                 id = "124"
                 created = {
-                    user = "@isaacnewton"
-                    time = 1652272236
+                    by = "@isaacnewton"
+                    at = 1652272236
                 }
                 lastModified = {
-                    user = "@moderator"
-                    time = 1652272256
+                    by = "@moderator"
+                    at = 1652272256
                 }
                 text = "(deleted.)"
             }
@@ -94,15 +94,15 @@ model Comment {
     """
     created {
         """
-        User
+        Created by
         Identification of the author of the comment.
         """
-        user string
+        by string
         """
-        Time
+        Created at
         UNIX timestamp (in seconds) of the comment creation.
         """
-        time number
+        at number
     }
 
     """
@@ -111,15 +111,15 @@ model Comment {
     """
     lastModified {
         """
-        User
+        Created by
         Identification of the user who last modified the comment.
         """
-        user string
+        by string
         """
-        Time
+        Created at
         UNIX timestamp (in seconds) of last modification of the comment.
         """
-        time number
+        at number
     }
 
     """
