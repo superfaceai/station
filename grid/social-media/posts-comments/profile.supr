@@ -1,0 +1,130 @@
+name = "social-media/posts-comments"
+version = "1.0.0"
+
+"""
+Get comments on a social media post
+"""
+usecase GetPostComments safe {
+  input {
+    """
+    ID
+    Identifier of the post.
+    """
+    id! string!
+    """
+    Page
+    Pagination cursor (obtained from `previousPage` or `nextPage`).
+    """
+    page string
+  }
+
+  result {
+    """
+    Previous page
+    Previous page cursor.
+    """
+    previousPage string
+    """
+    Next page
+    Next page cursor.
+    """
+    nextPage string
+    """
+    Comments
+    List of comments under the post.
+    """
+    comments [Comment]
+  }
+  
+  error {
+    """
+    Title
+    A short, human-readable summary of the problem type.
+    """
+    title!
+
+    """
+    A human-readable explanation specific to this occurrence of the problem.
+    """
+    detail
+  }
+
+  example success {
+      input {
+          id = "be7cdc05-4264-4d47-bc1f-af704d6abf32"
+      }
+
+      result {
+          comments = [
+            {
+                id = "123"
+                created = {
+                    user = "@alberteinstein"
+                    time = 1652271236
+                }
+                text = "Hello, World!"
+            },
+            {
+                id = "124"
+                created = {
+                    user = "@isaacnewton"
+                    time = 1652272236
+                }
+                lastModified = {
+                    user = "@moderator"
+                    time = 1652272256
+                }
+                text = "(deleted.)"
+            }
+        ]
+      }
+  }
+}
+
+model Comment {
+    """
+    ID
+    Identifier of the comment.
+    """
+    id! string!
+
+    """
+    Created
+    Information about the creation of a comment (author, time).
+    """
+    created {
+        """
+        User
+        Identification of the author of the comment.
+        """
+        user string
+        """
+        Time
+        UNIX timestamp (in seconds) of the comment creation.
+        """
+        time number
+    }
+
+    """
+    Last Modified
+    Information about the last known modification of a comment (author, time).
+    """
+    lastModified {
+        """
+        User
+        Identification of the user who last modified the comment.
+        """
+        user string
+        """
+        Time
+        UNIX timestamp (in seconds) of last modification of the comment.
+        """
+        time number
+    }
+
+    """
+    Text
+    Textual content of the comment.
+    """
+    text string
+}

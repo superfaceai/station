@@ -1,0 +1,29 @@
+profile = "social-media/posts-comments@1.0"
+provider = "mock"
+
+map GetPostComments {
+  return map result {
+    comments = [
+      {
+        id: "123",
+        created: {
+          user: "@alberteinstein",
+          time: 1652271236
+        },
+        text: "Hello, World!"
+      },
+      {
+        id: "124",
+        created: {
+          user: "@isaacnewton",
+          time: 1652272236
+        },
+        lastModified: {
+          user: "@moderator",
+          time: 1652272256
+        },
+        text: "(deleted.)"
+      }
+    ]
+  }
+}
