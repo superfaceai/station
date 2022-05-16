@@ -4,7 +4,7 @@ Publish posts on social media such as Instagram, Facebook, or Twitter.
 """
 
 name = "social-media/publish-post"
-version = "1.1.0"
+version = "1.2.0"
 
 """
 Publish a Post
@@ -29,6 +29,12 @@ usecase PublishPost unsafe {
     URL to attach to the post
     """
     link string!
+
+    """
+    Title
+    Title of the post, if supported by the provider (e.g. Pinterest). Ignored otherwise.
+    """
+    title string!
 
     """
     Media attachments
