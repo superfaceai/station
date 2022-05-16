@@ -4,7 +4,16 @@ import {
 } from './publish-media-post';
 import { publishPostErrorTest } from './publish-post';
 
-publishMediaPostTest('pinterest');
+publishMediaPostTest('pinterest', {
+  title: `Test post title`,
+  text: `Test media publishing from Superface Station.`,
+  media: [
+    {
+      url:
+        'https://upload.wikimedia.org/wikipedia/commons/0/09/Sitta-carolinensis-001.jpg',
+    },
+  ],
+});
 publishPostErrorTest('pinterest', [
   {
     name: 'missing media causes immediate failure',
