@@ -2,10 +2,8 @@
   {
     "scope": "https://mandrillapp.com:443",
     "method": "POST",
-    "path": "/api/1.0/messages/send-template",
+    "path": "/api/1.0/messages/send",
     "body": {
-      "template_name": "invalid",
-      "template_content": [],
       "message": {
         "from_email": "invalidemail",
         "to": [
@@ -13,7 +11,8 @@
             "email": "invalidemail",
             "type": "to"
           }
-        ]
+        ],
+        "subject": ""
       },
       "key": "SECURITY_api_key"
     },
@@ -25,7 +24,7 @@
       "server",
       "nginx/1.12.2",
       "date",
-      "Tue, 09 Nov 2021 10:07:48 GMT",
+      "Fri, 27 May 2022 12:03:28 GMT",
       "content-type",
       "application/json; charset=utf-8",
       "transfer-encoding",
