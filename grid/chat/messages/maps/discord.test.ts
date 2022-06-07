@@ -43,10 +43,10 @@ describe('chat/messages/discord', () => {
                 createdAt: expect.any(Number),
               }),
             ]),
-						nextPage: expect.any(String),
-						rateLimit: expect.objectContaining({
-							resetTimestamp: expect.any(Number)
-						})
+            nextPage: expect.any(String),
+            rateLimit: expect.objectContaining({
+              resetTimestamp: expect.any(Number),
+            }),
           }),
         });
 
@@ -75,9 +75,9 @@ describe('chat/messages/discord', () => {
                 createdAt: expect.any(Number),
               }),
             ]),
-						rateLimit: expect.objectContaining({
-							resetTimestamp: expect.any(Number)
-						})
+            rateLimit: expect.objectContaining({
+              resetTimestamp: expect.any(Number),
+            }),
           }),
         });
       });
@@ -97,9 +97,9 @@ describe('chat/messages/discord', () => {
             message: expect.stringMatching('Expected HTTP error'),
             properties: expect.objectContaining({
               title: expect.any(String),
-							rateLimit: expect.objectContaining({
-								resetTimestamp: expect.any(Number)
-							})
+              rateLimit: expect.objectContaining({
+                resetTimestamp: expect.any(Number),
+              }),
             }),
             statusCode: expect.any(Number),
           }),
