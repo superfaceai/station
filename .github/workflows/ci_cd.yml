@@ -79,7 +79,7 @@ jobs:
       - run: sudo yarn hosts:block
       - run: cat /etc/hosts
       - run: yarn exec superface -- --version
-      - run: yarn script check
+      - run: yarn run check
       - run: yarn lint
       - run: yarn structure
       - run: yarn test
