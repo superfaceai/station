@@ -1,15 +1,20 @@
+"""
+Social Media Posts
+Read social media posts posted by a profile (e.g. posts published by a Facebook page, LinkedIn organization, or Twitter profile).
+"""
+
 name = "social-media/posts"
-version = "1.0.0"
+version = "1.0.1"
 
 """
-Get Posts
-Retrieve paginated list of posts from social-media profile.
+Get Profile's Posts
+Retrieve a paginated list of posts from a social media profile.
 """
 usecase GetProfilePosts safe {
   input {
     """
     Profile ID
-    Identification of profile to retrieve posts from; may be optional with some providers.
+    Identifier of a profile to retrieve posts from. May be optional with some providers.
     """
     profileId string
     """
@@ -24,7 +29,7 @@ usecase GetProfilePosts safe {
     afterDate string
     """
     Page
-    Token of the page to retrieve
+    Pagination cursor (obtained from `previousPage` or `nextPage`).
     """
     page string
   } 
@@ -32,12 +37,12 @@ usecase GetProfilePosts safe {
   result {
     """
     Previous page
-    Previous page token
+    Previous page cursor.
     """
     previousPage string
     """
     Next page
-    Next page token
+    Next page cursor.
     """
     nextPage string
     """
@@ -48,17 +53,17 @@ usecase GetProfilePosts safe {
       {
       """
       ID
-      Unique identification of the post.
+      Identifier of the post.
       """
       id string
       """
       URL
-      The permanent static URL to the post.
+      Permanent URL to the post.
       """
       url string
       """
       Created at
-      The time the post was published.
+      Date and time the post was published at.
       """
       createdAt string
       """
@@ -68,13 +73,13 @@ usecase GetProfilePosts safe {
       text string
       """
       Attachments
-      Sequential list of attachments.
+      List of attachments.
       """
       attachments [
           {
             """
             Type
-            Attachment type.
+            Attachment type (e.g. image, video).
             """
             type string
             """
@@ -82,7 +87,13 @@ usecase GetProfilePosts safe {
             Attachment URL.
             """
             url string
+
+            """
+            Preview URL
+            Thumbnail or another preview of the attachment.
+            """
             preview
+
             """
             Title
             Attachment title.

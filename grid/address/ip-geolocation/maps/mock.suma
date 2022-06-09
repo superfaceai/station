@@ -1,0 +1,13 @@
+profile = "address/ip-geolocation@1.0"
+provider = "mock"
+
+map IpGeolocation {
+  return map result {
+    ipAddress = input.ipAddress
+    addressCountryCode = "US"
+    addressCountry = "United States"
+    timeZone = "America/Chicago"
+    latitude = 37.751
+    longitude = -97.822
+  }
+}

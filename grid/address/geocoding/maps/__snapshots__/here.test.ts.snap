@@ -1,0 +1,49 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`address/geocoding/here Geocode when all inputs are correct should geocode address to geographical coordinates 1`] = `
+Ok {
+  "value": Object {
+    "latitude": 50.07913,
+    "longitude": 14.43302,
+  },
+}
+`;
+
+exports[`address/geocoding/here Geocode when inputs are invalid should throw an exception 1`] = `
+Err {
+  "error": "HTTPError: Expected HTTP error
+Properties: {
+  \\"title\\": \\"Results not found\\",
+  \\"detail\\": \\"No results were found for specified address\\"
+}
+AST Path: definitions[0].statements[1].responseHandlers[0].statements[0]
+Original Map Location: Line 20, column 7",
+}
+`;
+
+exports[`address/geocoding/here ReverseGeocode when all inputs are correct should reverse geocode geographical coordinates 1`] = `
+Ok {
+  "value": Array [
+    Object {
+      "addressCountry": "USA",
+      "addressLocality": "Brooklyn, Williamsburg",
+      "addressRegion": "NY, New York, Kings",
+      "formattedAddress": "281 Bedford Ave, Brooklyn, NY 11211-4203, United States",
+      "postalCode": "11211-4203",
+      "streetAddress": "281 Bedford Ave",
+    },
+  ],
+}
+`;
+
+exports[`address/geocoding/here ReverseGeocode when inputs are invalid should throw an exception 1`] = `
+Err {
+  "error": "HTTPError: Expected HTTP error
+Properties: {
+  \\"title\\": \\"Illegal input for parameter 'at'\\",
+  \\"detail\\": \\"Actual parameter value: 'undefined,undefined'\\"
+}
+AST Path: definitions[1].statements[1].responseHandlers[1].statements[1]
+Original Map Location: Line 103, column 7",
+}
+`;

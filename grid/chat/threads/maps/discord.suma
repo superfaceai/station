@@ -71,20 +71,28 @@ operation MapThreads {
         resultThread.createdAt = Date.parse(thread.thread_metadata.create_timestamp);
       }
 
+      /**
+       * Returns UNIX timestamp from specified discord snowflake id
+       * More about snowflakes: https://discord.com/developers/docs/reference#snowflakes
+       */
+      const discordEpoch = 1420070400000;
+      const getTimestamp = (snowflake) => Number(BigInt(snowflake) >> BigInt(22)) + discordEpoch;
+
       // for threads after 2022-01-09 createdAt will be time when parent message was sent
       if (resultThread.createdAt === undefined) {
-        /**
-         * Returns UNIX timestamp from specified discord snowflake id
-         * More about snowflakes: https://discord.com/developers/docs/reference#snowflakes
-         */
-        const discordEpoch = 1420070400000;
-        const getTimestamp = (snowflake) => Number(BigInt(snowflake) >> BigInt(22)) + discordEpoch;
-        
         resultThread.createdAt = getTimestamp(thread.id);
       }
 
-      if (thread.mumber_count) {
+      if (thread.last_message_id) {
+        resultThread.lastMessageAt = getTimestamp(thread.last_message_id);
+      }
+
+      if (thread.member_count) {
         resultThread.membersCount = thread.member_count;
+      }
+
+      if (thread.message_count) {
+        resultThread.messagesCount = thread.message_count;
       }
 
       acc.push(resultThread);
@@ -128,14 +136,14 @@ operation MapRateLimitDetails {
   }
 
   set if (!isNaN(resetTimestamp)) {
-    details.resetTimestamp = resetTimestamp
+    details.resetTimestamp = resetTimestamp * 1000
   }
 
   set if (!isNaN(retryAfter)) {
     details.retryAfter = retryAfter
   }
 
-  set if (details.remainingRequests && details.totalRequests) {
+  set if (details.remainingRequests !== undefined && details.totalRequests) {
     details.remainingRequestsPercentage = (details.remainingRequests / details.totalRequests) * 100
   }
 

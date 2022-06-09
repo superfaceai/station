@@ -4,12 +4,8 @@ exports[`chat/threads/discord GetThreads fails 1`] = `
 Err {
   "error": "HTTPError: Expected HTTP error
 Properties: {
-  \\"title\\": \\"Bad request\\",
-  \\"detail\\": {
-    \\"guild_id\\": [
-      \\"Value \\\\\\"not-existing-workspace-id\\\\\\" is not snowflake.\\"
-    ]
-  }
+  \\"title\\": \\"Not found\\",
+  \\"detail\\": \\"Unknown Guild\\"
 }
 AST Path: definitions[0].statements[0].responseHandlers[1].statements[1]
 Original Map Location: Line 34, column 7",
@@ -21,17 +17,23 @@ Ok {
   "value": Object {
     "threads": Array [
       Object {
-        "archiveAt": 1645611531013,
+        "archiveAt": 1648300823821,
         "channel": "938614740995960844",
         "createdAt": 1643910369618,
         "id": "938779397664673793",
+        "lastMessageAt": 1648214423830,
+        "membersCount": 2,
+        "messagesCount": 3,
         "name": "test thread",
       },
       Object {
-        "archiveAt": 1645611524720,
+        "archiveAt": 1648121147206,
         "channel": "938614740995960844",
         "createdAt": 1644399963026,
         "id": "940583259262308362",
+        "lastMessageAt": 1648214397891,
+        "membersCount": 1,
+        "messagesCount": 7,
         "name": "new thread",
       },
     ],

@@ -1,15 +1,19 @@
+"""
+Chat Threads
+Retrieve chat threads in the workspace.
+"""
 name = "chat/threads"
 version = "1.0.0"
 
 """
 Get Threads
-Retrieve paginated list of threads
+Retrieve list of threads from the whole workspace.
 """
 usecase GetThreads {
   input  {
     """
     Workspace
-    Representation of a workspace. Can be guild or workspace, depending on the provider capability.
+    Identifier of a workspace, for example a Discord guild or a Slack workspace.
     """
     workspace! string!
   }
@@ -19,7 +23,7 @@ usecase GetThreads {
     Threads
     List of retrieved threads
     """
-    threads [Thread]
+    threads! [Thread]
 
     """
     Rate Limit
@@ -39,12 +43,12 @@ usecase GetThreads {
       threads = [
         {
           id = '1'
-          createdAt = 1546167104
+          createdAt = 1546167104000
           channel = 'random'
         },
         {
           id = '2'
-          createdAt = 1546167105
+          createdAt = 1546167105000
           channel = 'random'
         }
       ]
@@ -71,7 +75,7 @@ model Thread {
 
   """
   Created At
-  UNIX timestamp (e.g. 1095379198.75) when the thread was created
+  UNIX timestamp (in milliseconds, e.g. 1095379198750) when the thread was created
   """
   createdAt! number!
 
@@ -83,7 +87,8 @@ model Thread {
 
   """
   Archive At
-  UNIX timestamp (e.g. 1095379198.75) when will be the thread archived
+  UNIX timestamp (in milliseconds, e.g. 1095379198750) when the thread will be archived
+  Some providers limit the lifetime of threads and automatically archive them after some time period of inactivity.
   """
   archiveAt number!
 
@@ -95,9 +100,21 @@ model Thread {
 
   """
   Members Count
-  Number of members of the retrieved thread
+  Number of users participating in the thread
   """
   membersCount number
+
+  """
+  Messages Count
+  Number of messages in the retrieved thread
+  """
+  messagesCount number
+
+  """
+  Last Message At
+  UNIX timestamp (in milliseconds, e.g. 1095379198750) when was the last message sent to thread.
+  """
+  lastMessageAt number
 }   
 
 model Error {
@@ -148,7 +165,7 @@ model RateLimit {
 
   """
   Reset Timestamp
-  Timestamp when the rate limits will reset (in Unix Timestamp format).
+  Timestamp when the rate limits will reset (in Unix Timestamp ms format).
   """
   resetTimestamp number
 

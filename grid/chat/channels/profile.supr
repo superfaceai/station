@@ -1,3 +1,7 @@
+"""
+Chat Channels
+Retrieve chat channels (rooms) in the workspace. 
+"""
 name = "chat/channels"
 version = "1.0.0"
 
@@ -59,7 +63,7 @@ usecase GetChannels {
 
   example Successful {
     input {
-      visibility = ['public'],
+      visibility = 'public',
       limit = 2
     }
 
@@ -67,14 +71,14 @@ usecase GetChannels {
       channels = [
         {
           id = '1'
-          createdAt = 1546167104
+          createdAt = 1546167104000
           name = 'random'
-          numOfMembers = 100
+          membersCount = 100
         }
         {
           id = '2'
-          createdAt = 1546167104
-          numOfMembers = 100
+          createdAt = 1546167104000
+          membersCount = 100
         }
       ]
     }
@@ -100,7 +104,7 @@ model Channel {
 
   """
   Created At
-  UNIX timestamp (e.g. 1095379198.75) when the channel was created
+  UNIX timestamp (in milliseconds, e.g. 1095379198750) when the channel was created
   """
   createdAt! number!
 
@@ -171,7 +175,7 @@ model RateLimit {
 
   """
   Reset Timestamp
-  Timestamp when the rate limits will reset (in  Unix Timestamp format).
+  Unix timestamp when the rate limits will reset (in milliseconds).
   """
   resetTimestamp number
 
