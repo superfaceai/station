@@ -54,11 +54,19 @@ operation MapWorkspaces {
     }
 
     if (workspace.icon) {
-      resultWorkspace.icon = workspace.icon;
+      const iconsBaseUrl = 'https://cdn.discordapp.com/icons';
+
+      resultWorkspace.icon = `${iconsBaseUrl}/${workspace.id}/${workspace.icon}`;
     }
 
     if (workspace.description) {
       resultWorkspace.description = workspace.description;
+    }
+
+    if (workspace.vanity_url_code) {
+      const baseUrl = 'https://discord.gg'
+
+      resultWorkspace.url = `${baseUrl}/${workspace.vanity_url_code}`;
     }
 
     return resultWorkspace;
