@@ -62,14 +62,7 @@ operation MapMembers {
     const resultMember = {
       id: member.id,
       isBot: member.is_bot,
-    }
-
-    if (member.profile && member.profile.display_name) {
-      resultMember.username = member.profile.display_name;
-    }
-
-    if (member.name && resultMember.username === undefined) {
-      resultMember.username = member.name;
+			username: member.profile.display_name
     }
 
     return resultMember

@@ -25,14 +25,18 @@ map GetMembers {
       members = call MapMembers(members = body)
       rateLimit = call MapRateLimitDetails(headers = headers)
 
-      result.members = members,
-      result.nextPage = members[members.length - 1].id
-
-      set if (rateLimit) {
-        result.rateLimit = rateLimit
+      return map result if ((members.length < input.limit) || (members.length === 0)) {
+        members = members
+        rateLimit = rateLimit
       }
 
-      map result result
+      lastMember = members[members.length - 1]
+      
+      map result {
+        nextPage = lastMember.id
+        members = members
+        rateLimit = rateLimit
+      }
     }
 
     response {
@@ -52,7 +56,7 @@ Operation MapMembers
 Returns array mapping members in received body
 """
 operation MapMembers {
-  members = args.members.map(member => {
+  members = args.members.filter(member => member.user !== undefined).map(member => {
     const resultMember = {
       id: member.user.id,
       joinedAt: Date.parse(member.joined_at),
@@ -60,7 +64,7 @@ operation MapMembers {
     }
 
     // map user's platform wide nickname - username
-    if (member.user && member.user.username) {
+    if (member.user.username) {
       resultMember.username = member.user.username
     }
 
