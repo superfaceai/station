@@ -30,7 +30,26 @@ usecase GetMembers {
     page string!
   }
 
-  result Members
+  result {
+    """
+		Members
+		List of retrieved members
+		"""
+		members! [Member]!
+
+		"""
+		Next Page
+		Cursor to the next page of listing
+		"""
+		nextPage string
+
+		"""
+		Rate Limit
+		Rate limit details.
+		"""
+		rateLimit RateLimit
+  }
+	
   error Error
 
   example Successful {
@@ -91,26 +110,6 @@ model Member {
   Boolean that represents whether the member is a bot
   """
   isBot boolean
-}
-
-model Members {
-  """
-  Members
-  List of retrieved members
-  """
-  members! [Member]!
-
-  """
-  Next Page
-  Cursor to the next page of listing
-  """
-  nextPage string
-
-  """
-  Rate Limit
-  Rate limit details.
-  """
-  rateLimit RateLimit
 }
 
 model Error {
