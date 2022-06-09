@@ -88,6 +88,7 @@ model Thread {
   """
   Archive At
   UNIX timestamp (in milliseconds, e.g. 1095379198750) when the thread will be archived
+  Some providers limit the lifetime of threads and automatically archive them after some time period of inactivity.
   """
   archiveAt number!
 

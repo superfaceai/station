@@ -4,7 +4,7 @@ import { RecordingProcessOptions, SuperfaceTest } from '@superfaceai/testing';
 
 export const getThreadsTest = (
   provider: string,
-  workspaces: string[],
+  workspaces: [valid: string, invalid: string],
   options?: RecordingProcessOptions
 ): void => {
   describe(`chat/threads/${provider}`, () => {
