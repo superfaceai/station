@@ -26,9 +26,9 @@ map GetPostComments {
         return {
           id: element["$URN"],
           text: element.message.text,
-          createdAt: undefined, // TODO once SDK 1.4 lands
+          createdAt: std.unstable.time.unixTimestampToIsoDate(element.created.time),
           authorId: element.created.actor,
-          lastModifiedAt: undefined // TODO once SDK 1.4 lands
+          lastModifiedAt: std.unstable.time.unixTimestampToIsoDate(element.lastModified.time)
         }  
       })
 
