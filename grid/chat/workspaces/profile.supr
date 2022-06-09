@@ -3,7 +3,7 @@ Chat Workspaces
 Retrieve workspaces for the user.
 """
 name = "chat/workspaces"
-version = "1.0.0"
+version = "1.1.0"
 
 """
 GetWorkspaces usecase
@@ -83,7 +83,7 @@ model Workspace {
   Name
   Name of the retrieved workspace
   """
-  name string
+  name! string!
 
   """
   Members Count
@@ -93,7 +93,7 @@ model Workspace {
 
   """
   Icon
-  Icon of the retrieved workspace
+  URL of icon used for retrieved workspace
   """
   icon string
 
@@ -102,6 +102,12 @@ model Workspace {
   Description of the workspace
   """
   description string
+
+  """
+  URL
+  URL address for retrieved workspace
+  """
+  url string
 }   
 
 model Error {
