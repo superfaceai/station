@@ -18,7 +18,7 @@ export const getRepliesTest = (provider: string, postId: string): void => {
         it('should list all comments', async () => {
           const result = await superface.run({
             useCase: 'GetPostComments',
-            input: { id: postId },
+            input: { parentId: postId },
           });
           expect(result.isOk()).toBe(true);
           expect(result).toMatchSnapshot();

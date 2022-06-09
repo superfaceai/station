@@ -6,7 +6,7 @@ map GetPostComments {
   inputPage = parseInt(input.page, 10)
   start = isNaN(inputPage) ? 0 : inputPage
 
-  http GET "/v2/socialActions/{input.id}/comments?count={count}&start={start}" {
+  http GET "/v2/socialActions/{input.parentId}/comments?count={count}&start={start}" {
     request {
       headers {
         "Authorization" = `Bearer ${parameters.accessToken}`,
@@ -26,15 +26,10 @@ map GetPostComments {
         return {
           id: element["$URN"],
           text: element.message.text,
-          created: {
-            by: element.created.actor,
-            at: element.created.time
-          },
-          lastModified: {
-            by: element.lastModified.actor,
-            at: element.lastModified.time
-          }
-        }
+          createdAt: undefined, // TODO once SDK 1.4 lands
+          authorId: element.created.actor,
+          lastModifiedAt: undefined // TODO once SDK 1.4 lands
+        }  
       })
 
       map result result
