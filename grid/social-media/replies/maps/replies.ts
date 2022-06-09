@@ -2,13 +2,13 @@
 
 import { SuperfaceTest } from '@superfaceai/testing';
 
-export const getPostCommentsTest = (provider: string, postId: string): void => {
-  describe(`social-media/posts-comments/${provider}`, () => {
+export const getRepliesTest = (provider: string, postId: string): void => {
+  describe(`social-media/replies/${provider}`, () => {
     let superface: SuperfaceTest;
 
     beforeEach(() => {
       superface = new SuperfaceTest({
-        profile: 'social-media/posts-comments',
+        profile: 'social-media/replies',
         provider,
       });
     });
