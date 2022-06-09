@@ -1,12 +1,16 @@
-// Facebook Graph API Reference: https://developer.twitter.com/en/docs/twitter-api
+// https://developer.twitter.com/en/docs/twitter-api
 
-profile = "social-media/publish-post@1.1"
+profile = "social-media/publish-post@1.2"
 provider = "twitter"
 
 map PublishPost {
   return map error if (input.media && input.media.length > 0) {
     title = "Media publishing not implemented"
     detail = "Publishing media to Twitter provider is not yet supported."
+  }
+
+  set {
+    text = input.link ? `${input.text || ''} ${input.link}`.trim() : input.text
   }
 
   http POST "/2/tweets" {
@@ -16,7 +20,7 @@ map PublishPost {
         authorization = "Bearer " + parameters.accessToken
       }
       body {
-        text = input.text
+        text = text
       }
     }
 

@@ -1,5 +1,9 @@
 /* eslint-disable jest/no-export */
-import { RecordingProcessOptions, SuperfaceTest } from '@superfaceai/testing';
+import {
+  RecordingProcessOptions,
+  SuperfaceTest,
+  SuperfaceTestRun,
+} from '@superfaceai/testing';
 import { readFile } from 'fs/promises';
 import path from 'path';
 
@@ -21,8 +25,19 @@ async function fixturesToMedia(
   });
 }
 
+const defaultInput = Object.freeze({
+  text: `Test media publishing from Superface Station.`,
+  media: [
+    {
+      url:
+        'https://upload.wikimedia.org/wikipedia/commons/0/09/Sitta-carolinensis-001.jpg',
+    },
+  ],
+});
+
 export const publishMediaPostTest = (
   provider: string,
+  input: SuperfaceTestRun['input'] = defaultInput,
   hooks?: RecordingProcessOptions
 ): void => {
   describe(`social-media/publish-post/${provider}`, () => {
@@ -53,13 +68,7 @@ export const publishMediaPostTest = (
               useCase: 'PublishPost',
               input: {
                 profileId: profiles[0].id,
-                text: `Test media publishing from Superface Station.`,
-                media: [
-                  {
-                    url:
-                      'https://upload.wikimedia.org/wikipedia/commons/0/09/Sitta-carolinensis-001.jpg',
-                  },
-                ],
+                ...input,
               },
             },
             hooks
