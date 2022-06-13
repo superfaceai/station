@@ -16,8 +16,8 @@ map UserRepos {
 operation Paginate {
   data = []
   page = 1
-  //Hack to create a while with maximum loop count - use Superface stdlib instead
-  call foreach(_x of Array(2**32 -1)) FetchRepos(user = args.user, page = page) {
+  // FIXME: Hack to create a while with maximum loop count - use Superface stdlib instead
+  call foreach(_x of Array(1000)) FetchRepos(user = args.user, page = page) {
     fail if (outcome.error) outcome.error
     data = [...data, ...outcome.data.repositories]
   
