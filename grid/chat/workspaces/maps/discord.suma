@@ -8,7 +8,7 @@ map GetWorkspaces {
   http GET "/users/@me/guilds" {
     request "application/json" {
       headers {
-        "Authorization" = `${input.asBot ? 'Bot' : 'Bearer'} ${parameters.accessToken}`
+        "Authorization" = `Bot ${parameters.accessToken}`
       }
     }
 
