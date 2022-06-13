@@ -13,11 +13,11 @@ export const getRepliesTest = (provider: string, postId: string): void => {
       });
     });
 
-    describe('GetPostComments', () => {
+    describe('GetPostReplies', () => {
       describe('when a post ID is given', () => {
-        it('should list all comments', async () => {
+        it('should list all replies', async () => {
           const result = await superface.run({
-            useCase: 'GetPostComments',
+            useCase: 'GetPostReplies',
             input: { parentId: postId },
           });
           expect(result.isOk()).toBe(true);

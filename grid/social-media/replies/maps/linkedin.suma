@@ -1,7 +1,7 @@
 profile = "social-media/replies@1.0"
 provider = "linkedin"
 
-map GetPostComments {
+map GetPostReplies {
   count = 10
   inputPage = parseInt(input.page, 10)
   start = isNaN(inputPage) ? 0 : inputPage
@@ -22,7 +22,7 @@ map GetPostComments {
         nextPage: (paging.start + paging.count) < paging.total ? `${paging.start + paging.count}` : undefined,
       }
 
-      result.comments = body.elements.map((element) => {
+      result.replies = body.elements.map((element) => {
         return {
           id: element["$URN"],
           text: element.message.text,
