@@ -10,13 +10,7 @@ Get Workspaces
 List workspaces (guilds, servers) the user has joined.
 """
 usecase GetWorkspaces {
-  input {
-    """
-    As Bot
-    Boolean representing whether to authorize as bot
-    """
-    asBot boolean
-  }
+  input {}
 
   result {
     """
@@ -35,9 +29,7 @@ usecase GetWorkspaces {
   error Error
 
   example Successful {
-    input {
-      asBot = true
-    }
+    input {}
 
     result {
       workspaces = [
