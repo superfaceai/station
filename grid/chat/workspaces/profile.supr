@@ -10,8 +10,6 @@ Get Workspaces
 List workspaces (guilds, servers) the user has joined.
 """
 usecase GetWorkspaces {
-  input {}
-
   result {
     """
     Workspaces
@@ -29,8 +27,6 @@ usecase GetWorkspaces {
   error Error
 
   example Successful {
-    input {}
-
     result {
       workspaces = [
         {
@@ -51,8 +47,6 @@ usecase GetWorkspaces {
   }
 
   example Failed {
-    input {}
-
     error {
       title = 'No workspaces found for current user.'
     }
