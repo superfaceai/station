@@ -9,6 +9,8 @@ map GetMembers {
     title = "Input parameter `workspace` is required for provider discord"
   }
 
+  limit = input.limit || 100;
+
   http GET "/guilds/{input.workspace}/members" {
     request "application/json" {
       query {
