@@ -2,13 +2,14 @@ name = "social-media/replies"
 version = "1.0.0"
 
 """
-Get comments on a social media post
+Get Post Replies
+Get replies (comments) on a social media post.
 """
-usecase GetPostComments safe {
+usecase GetPostReplies safe {
   input {
     """
-    ID
-    Identifier of the post.
+    Parent ID
+    Identifier of the parent post to get replies for.
     """
     parentId! string!
     """
