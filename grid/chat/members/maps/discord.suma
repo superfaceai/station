@@ -62,7 +62,7 @@ operation MapMembers {
     const resultMember = {
       id: member.user.id,
       joinedAt: Date.parse(member.joined_at),
-      isBot: member.user.bot ? true : false,
+     isBot: !!member.user.bot,
     }
 
     // map user's platform wide nickname - username
