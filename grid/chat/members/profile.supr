@@ -31,23 +31,23 @@ usecase GetMembers {
   }
 
   result {
+		"""
+    Members
+    List of retrieved members
     """
-		Members
-		List of retrieved members
-		"""
-		members! [Member]!
+    members! [Member]!
 
-		"""
-		Next Page
-		Cursor to the next page of listing
-		"""
-		nextPage string
+    """
+    Next Page
+    Cursor to the next page of listing
+    """
+    nextPage string
 
-		"""
-		Rate Limit
-		Rate limit details.
-		"""
-		rateLimit RateLimit
+    """
+    Rate Limit
+    Rate limit details.
+    """
+    rateLimit RateLimit
   }
 	
   error Error
