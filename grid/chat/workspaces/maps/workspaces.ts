@@ -23,9 +23,7 @@ export const getWorkspacesTest = (
         await expect(
           superface.run(
             {
-              input: {
-                asBot: true,
-              },
+              input: {},
             },
             options
           )
