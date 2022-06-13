@@ -1,0 +1,50 @@
+profile = "social-media/profiles@1.1"
+provider = "mock"
+
+map GetProfiles {
+  return map result {
+    profiles = [ {
+        "description": "NASA Mars rover. Launch: July 30, 2020. Landing: Feb. 18, 2021. Hobbies: Photography, collecting rocks, off-roading. 🚀 Team HQ @NASAJPL",
+        "followersCount": 2909944,
+        "followingCount": 58,
+        "id": "1232783237623119872",
+        "imageUrl": "https://pbs.twimg.com/profile_images/1379527227436531712/QasZP9s-_normal.jpg",
+        "postsCount": 860,
+        "profileUrl": "https://twitter.com/NASAPersevere",
+        "username": "NASAPersevere",
+        "website": "https://t.co/GpTOmL7zGl",
+      }
+    ],
+    rateLimit = {
+      bucket: "User lookup",
+      totalRequests: 15,
+      remainingRequests: 12,
+      remainingRequestsPercentage: 80,
+      resetTimestamp: 1643713585,
+    }
+  }
+}
+
+map GetProfilesByUsername {
+  return map result {
+    profiles = [ {
+        "description": "NASA Mars rover. Launch: July 30, 2020. Landing: Feb. 18, 2021. Hobbies: Photography, collecting rocks, off-roading. 🚀 Team HQ @NASAJPL",
+        "followersCount": 2909944,
+        "followingCount": 58,
+        "id": "1232783237623119872",
+        "imageUrl": "https://pbs.twimg.com/profile_images/1379527227436531712/QasZP9s-_normal.jpg",
+        "postsCount": 860,
+        "profileUrl": "https://twitter.com/NASAPersevere",
+        "username": "NASAPersevere",
+        "website": "https://t.co/GpTOmL7zGl",
+      }
+    ],
+    rateLimit = {
+      bucket: "User lookup",
+      totalRequests: 15,
+      remainingRequests: 12,
+      remainingRequestsPercentage: 80,
+      resetTimestamp: 1643713585,
+    }
+  }
+}

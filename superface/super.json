@@ -112,14 +112,11 @@
         "sendgrid": {
           "file": "../grid/communication/send-email/maps/sendgrid.suma"
         },
-        "mailgun": {
-          "file": "../grid/communication/send-email/maps/mailgun.suma"
-        },
         "mock": {
           "file": "../grid/communication/send-email/maps/mock.suma"
         },
-        "mailchimp": {
-          "file": "../grid/communication/send-email/maps/mailchimp.suma"
+        "mandrillapp": {
+          "file": "../grid/communication/send-email/maps/mandrillapp.suma"
         },
         "postmark": {
           "file": "../grid/communication/send-email/maps/postmark.suma"
@@ -132,8 +129,8 @@
         "mock": {
           "file": "../grid/communication/send-templated-email/maps/mock.suma"
         },
-        "mailchimp": {
-          "file": "../grid/communication/send-templated-email/maps/mailchimp.suma"
+        "mandrillapp": {
+          "file": "../grid/communication/send-templated-email/maps/mandrillapp.suma"
         },
         "mailgun": {
           "file": "../grid/communication/send-templated-email/maps/mailgun.suma"
@@ -403,11 +400,14 @@
         "instagram": {
           "file": "../grid/social-media/publishing-profiles/maps/instagram.suma"
         },
-        "twitter": {
-          "file": "../grid/social-media/publishing-profiles/maps/twitter.suma"
-        },
         "linkedin": {
           "file": "../grid/social-media/publishing-profiles/maps/linkedin.suma"
+        },
+        "pinterest": {
+          "file": "../grid/social-media/publishing-profiles/maps/pinterest.suma"
+        },
+        "twitter": {
+          "file": "../grid/social-media/publishing-profiles/maps/twitter.suma"
         }
       }
     },
@@ -425,6 +425,9 @@
         },
         "linkedin": {
           "file": "../grid/social-media/publish-post/maps/linkedin.suma"
+        },
+        "pinterest": {
+          "file": "../grid/social-media/publish-post/maps/pinterest.suma"
         },
         "twitter": {
           "file": "../grid/social-media/publish-post/maps/twitter.suma"
@@ -484,6 +487,17 @@
         }
       }
     },
+    "social-media/profiles": {
+      "file": "../grid/social-media/profiles/profile.supr",
+      "providers": {
+        "mock": {
+          "file": "../grid/social-media/profiles/maps/mock.suma"
+        },
+        "twitter": {
+          "file": "../grid/social-media/profiles/maps/twitter.suma"
+        }
+      }
+    },
     "oauth2/refresh-token": {
       "file": "../grid/oauth2/refresh-token/profile.supr",
       "providers": {
@@ -492,6 +506,9 @@
         },
         "mock": {
           "file": "../grid/oauth2/refresh-token/maps/mock.suma"
+        },
+        "pinterest": {
+          "file": "../grid/oauth2/refresh-token/maps/pinterest.suma"
         },
         "twitter": {
           "file": "../grid/oauth2/refresh-token/maps/twitter.suma"
@@ -504,9 +521,6 @@
         "mock": {
           "file": "../grid/address/ip-geolocation/maps/mock.suma"
         },
-        "freegeoip": {
-          "file": "../grid/address/ip-geolocation/maps/freegeoip.suma"
-        },
         "ipdata": {
           "file": "../grid/address/ip-geolocation/maps/ipdata.suma"
         },
@@ -515,6 +529,9 @@
         },
         "ipgeolocation": {
           "file": "../grid/address/ip-geolocation/maps/ipgeolocation.suma"
+        },
+        "ipbase": {
+          "file": "../grid/address/ip-geolocation/maps/ipbase.suma"
         }
       }
     },
@@ -546,6 +563,20 @@
         }
       }
     },
+    "chat/send-message": {
+      "file": "../grid/chat/send-message/profile.supr",
+      "providers": {
+        "mock": {
+          "file": "../grid/chat/send-message/maps/mock.suma"
+        },
+        "slack": {
+          "file": "../grid/chat/send-message/maps/slack.suma"
+        },
+        "discord": {
+          "file": "../grid/chat/send-message/maps/discord.suma"
+        }
+      }
+    },
     "chat/workspaces": {
       "file": "../grid/chat/workspaces/profile.supr",
       "providers": {
@@ -554,6 +585,28 @@
         },
         "discord": {
           "file": "../grid/chat/workspaces/maps/discord.suma"
+        }
+      }
+    },
+    "project-management/tasks": {
+      "file": "../grid/project-management/tasks/profile.supr",
+      "providers": {
+        "mock": {
+          "file": "../grid/project-management/tasks/maps/mock.suma"
+        },
+        "asana": {
+          "file":  "../grid/project-management/tasks/maps/asana.suma"
+        }
+      }
+    },
+    "project-management/projects": {
+      "file": "../grid/project-management/projects/profile.supr",
+      "providers": {
+        "mock": {
+          "file": "../grid/project-management/projects/maps/mock.suma"
+        },
+        "asana": {
+          "file":  "../grid/project-management/projects/maps/asana.suma"
         }
       }
     }
@@ -759,12 +812,12 @@
         "DOMAIN": "$MAILGUN_DOMAIN"
       }
     },
-    "mailchimp": {
-      "file": "../providers/mailchimp.json",
+    "mandrillapp": {
+      "file": "../providers/mandrillapp.json",
       "security": [
         {
           "id": "api_key",
-          "apikey": "$MAILCHIMP_API_KEY"
+          "apikey": "$MANDRILLAPP_API_KEY"
         }
       ]
     },
@@ -799,12 +852,6 @@
       ],
       "parameters": {
         "accessToken": "$SLACK_ACCESS_TOKEN"
-      }
-    },
-    "discord": {
-      "file": "../providers/discord.json",
-      "parameters": {
-        "accessToken": "$DISCORD_ACCESS_TOKEN"
       }
     },
     "discord": {
@@ -1012,15 +1059,6 @@
         "clientSecret": "$GOOGLE_APIS_CLIENT_SECRET"
       }
     },
-    "freegeoip": {
-      "file": "../providers/freegeoip.json",
-      "security": [
-        {
-          "id": "apikey",
-          "apikey": "$FREEGEOIP_API_KEY"
-        }
-      ]
-    },
     "here": {
       "file": "../providers/here.json",
       "security": [
@@ -1059,6 +1097,35 @@
           "apikey": "$IPGEOLOCATION_API_KEY"
         }
       ]
+    },
+    "asana": {
+      "file": "../providers/asana.json",
+      "security": [
+        {
+          "id": "personalAccessToken",
+          "token": "$ASANA_PERSONAL_ACCESS_TOKEN"
+        }
+      ],
+      "parameters": {
+        "accessToken": "$ASANA_PERSONAL_ACCESS_TOKEN"
+      }
+    },
+    "ipbase": {
+      "file": "../providers/ipbase.json",
+      "security": [
+        {
+          "id": "apikey",
+          "apikey": "$IPBASE_API_KEY"
+        }
+      ]
+    },
+    "pinterest": {
+      "file": "../providers/pinterest.json",
+      "parameters": {
+        "accessToken": "$PINTEREST_ACCESS_TOKEN",
+        "clientId": "$PINTEREST_APP_ID",
+        "clientSecret": "$PINTEREST_APP_SECRET"
+      }
     }
   }
 }

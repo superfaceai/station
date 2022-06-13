@@ -4,7 +4,7 @@ List folowers of a social media profile (e.g. Twitter followers).
 """
 
 name = "social-media/followers"
-version = "1.1.1"
+version = "1.2.0"
 
 """
 Get Followers
@@ -30,11 +30,13 @@ usecase GetFollowers safe {
     Previous page cursor.
     """
     previousPage string
+    
     """
     Next page
     Next page cursor.
     """
     nextPage string
+    
     """
     Followers
     List of followers.
@@ -45,16 +47,36 @@ usecase GetFollowers safe {
       Profile identifier of the follower.
       """
       id string
+
       """
       Username
       Username of the follower.
       """
       username string
+
       """
       Image URL
       Follower profile image url.
       """
       imageUrl string
+
+      """
+      Followers count
+      How many followers does the follower have
+      """
+      followersCount number
+
+      """
+      Following count
+      How many profiles is the follower following
+      """
+      followingCount number
+
+      """
+      Posts count
+      How many posts has the follower published
+      """
+      postsCount number
     } ]
     """
     Rate limit
@@ -100,6 +122,9 @@ usecase GetFollowers safe {
           id = "1466796521412771840",
           username = "superface_test",
           imageUrl = "https://pbs.twimg.com/profile_images/1478302204306067462/5BEbrnPO_normal.jpg",
+          followersCount = 42,
+          followingCount = 3,
+          postsCount = 321,
         }
       ],
       nextPage = "QVFIUjc2Y01oQ3F1bHk5WHNzNVVuS2ZAMSEtpdkxmbC1FV09XcGNmTUc4ZAkhrMlBPU19LYkM0dFY4",

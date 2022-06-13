@@ -4,7 +4,7 @@ Retrieve social media posts by hashtag or mention of a profile.
 """
 
 name = "social-media/posts-lookup"
-version = "1.2.1"
+version = "1.3.0"
 
 """
 Lookup Posts by Hashtag
@@ -47,6 +47,9 @@ usecase FindByHashtag safe {
           author = {
             id = "3333333",
             username = "johndoe",
+            followersCount = 42,
+            followingCount = 3,
+            postsCount = 321,
           }
         }
       ],
@@ -123,10 +126,14 @@ usecase FindByMention safe {
               width = 480,
             },
           ],
-          replyId = "222222"
+          replyId = "222222",
+          parentId = "222222",
           author = {
             id = "3333333",
             username = "johndoe",
+            followersCount = 42,
+            followingCount = 3,
+            postsCount = 321,
           }
         }
       ],
@@ -182,11 +189,20 @@ model Post {
   Text of the post.
   """
   text string
+
   """
   Reply ID
+  [DEPRECATED] Use parentId.
   ID of a parent post in case the post is a reply.
   """
   replyId string
+
+  """
+  Parent ID
+  ID of a parent post in case the post is a reply.
+  """
+  parentId string
+
   """
   Author
   The author of the post
@@ -200,6 +216,24 @@ model Post {
     Username
     """
     username string
+
+    """
+    Followers count
+    How many followers does the author have
+    """
+    followersCount number
+
+    """
+    Following count
+    How many profiles is the author following
+    """
+    followingCount number
+
+    """
+    Posts count
+    How many posts has the author published
+    """
+    postsCount number
   }
   """
   Attachments

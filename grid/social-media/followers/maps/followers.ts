@@ -27,13 +27,14 @@ export const followersTest = (provider: string): void => {
 
           expect(result.isOk()).toBeTruthy();
           const resultUnwrapped = result.unwrap();
-
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-explicit-any
+          const profileId: any = (resultUnwrapped as any).profiles[0].id;
           await expect(
             superfaceFollowers.run({
               useCase: 'GetFollowers',
               input: {
-                // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-explicit-any
-                profileId: (resultUnwrapped as any).profiles[0].id,
+                // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                profileId,
               },
             })
           ).resolves.toMatchSnapshot();

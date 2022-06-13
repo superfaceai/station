@@ -1,6 +1,6 @@
 // Twitter API Reference: https://developer.twitter.com/en/docs/twitter-api
 
-profile = "social-media/posts-lookup@1.2"
+profile = "social-media/posts-lookup@1.3"
 provider = "twitter"
 
 map FindByHashtag {
@@ -15,7 +15,7 @@ map FindByHashtag {
         'tweet.fields' = 'id,text,created_at,attachments,referenced_tweets'
         expansions = 'attachments.media_keys,author_id'
         'media.fields' = 'duration_ms,height,media_key,preview_image_url,type,url,width,alt_text'
-        'user.fields' = 'id,username'
+        'user.fields' = 'id,username,public_metrics'
         start_time = input.afterDate
         pagination_token = input.page
         max_results = 100
@@ -49,7 +49,7 @@ map FindByMention {
         'tweet.fields' = 'id,text,created_at,attachments,referenced_tweets'
         expansions = 'attachments.media_keys,author_id'
         'media.fields' = 'duration_ms,height,media_key,preview_image_url,type,url,width,alt_text'
-        'user.fields' = 'id,username'
+        'user.fields' = 'id,username,public_metrics'
         start_time = input.afterDate
         pagination_token = input.page
         max_results = 100
@@ -106,10 +106,13 @@ operation MapSearchResult {
         //get author
         const author = authorsHashmap[tweet.author_id]
         if (author) {
-          //strip user properties we do not want to have in result
+          const metrics = author.public_metrics || {};
           mappedAuthor = {
             id: author.id,
-            username: author.username
+            username: author.username,
+            followersCount: metrics.followers_count,
+            followingCount: metrics.following_count,
+            postsCount: metrics.tweet_count,
           }
         }
 
@@ -152,7 +155,9 @@ operation MapSearchResult {
           url: 'https://twitter.com/i/status/' + tweet.id,
           createdAt: tweet.created_at,
           text: tweet.text,
+          // FIXME: Remove replyId in next major version
           replyId: replyId,
+          parentId: replyId,
           author: mappedAuthor,
           attachments: attachments.filter(attachment => attachment !== undefined)
         }

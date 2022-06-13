@@ -95,7 +95,7 @@ model Attachment {
 
   """
   Created At
-  UNIX ms timestamp (e.g. 1095379198750) when the attachment was created
+  UNIX timestamp (in milliseconds, e.g. 1095379198750) when the attachment was created
   """
   createdAt! number!
 
@@ -136,7 +136,7 @@ model Message {
 
   """
   Created At
-  UNIX ms timestamp (e.g. 1095379198750) when the message was created
+  UNIX timestamp (in milliseconds, e.g. 1095379198750) when the message was created
   """
   createdAt! number!
 
@@ -166,7 +166,7 @@ model Message {
 
   """
   Updated At
-  UNIX ms timestamp (e.g. 1095379198750) when the message was last updated
+  UNIX timestamp (in milliseconds, e.g. 1095379198750) when the message was last updated
   """
   updatedAt number
 
@@ -258,7 +258,7 @@ model RateLimit {
 
   """
   Reset Timestamp
-  Timestamp when the rate limits will reset (in Unix Timestamp ms format).
+  Unix timestamp when the rate limits will reset (in milliseconds).
   """
   resetTimestamp number
 

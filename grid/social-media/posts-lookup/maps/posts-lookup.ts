@@ -1,6 +1,10 @@
 /* eslint-disable jest/no-export */
 import { RecordingProcessOptions, SuperfaceTest } from '@superfaceai/testing';
 
+type PartialResult = {
+  posts: Array<{ replyId?: string; parentId?: string }>;
+};
+
 export const postsLookupTest = (
   provider: string,
   inputs: {
@@ -9,10 +13,10 @@ export const postsLookupTest = (
   hooks?: RecordingProcessOptions
 ): void => {
   describe(`social-media/posts-lookup/${provider}`, () => {
-    let superfaceContentSearch: SuperfaceTest;
+    let superfacePostsLookup: SuperfaceTest;
 
     beforeEach(() => {
-      superfaceContentSearch = new SuperfaceTest({
+      superfacePostsLookup = new SuperfaceTest({
         profile: 'social-media/posts-lookup',
         provider,
       });
@@ -22,7 +26,7 @@ export const postsLookupTest = (
       describe('when searching latest posts by hashtag #apis', () => {
         it('should succeed', async () => {
           await expect(
-            superfaceContentSearch.run(
+            superfacePostsLookup.run(
               {
                 useCase: 'FindByHashtag',
                 input: {
@@ -40,7 +44,7 @@ export const postsLookupTest = (
       describe('when searching latest posts by mentions', () => {
         it('should succeed', async () => {
           await expect(
-            superfaceContentSearch.run(
+            superfacePostsLookup.run(
               {
                 useCase: 'FindByMention',
                 input: {
@@ -50,6 +54,27 @@ export const postsLookupTest = (
               hooks
             )
           ).resolves.toMatchSnapshot();
+        });
+        it('keeps replyId in sync with parentId for backward compatibility', async () => {
+          const result = await superfacePostsLookup.run(
+            {
+              useCase: 'FindByMention',
+              input: {
+                profileId: inputs.profileId,
+              },
+            },
+            hooks
+          );
+          expect(result.isOk()).toBe(true);
+          const data = result.unwrap() as PartialResult;
+
+          // Try to find a post which is a reply
+          const replyPost = data.posts.find(post => post.replyId);
+          // FIXME: Conditional test is not ideal, perhaps this can be moved under more appropriate lookup
+          if (replyPost) {
+            // eslint-disable-next-line jest/no-conditional-expect
+            expect(replyPost.replyId).toBe(replyPost.parentId);
+          }
         });
       });
     });

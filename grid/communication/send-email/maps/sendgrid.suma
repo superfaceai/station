@@ -1,7 +1,7 @@
 // SendGrid API Reference: https://sendgrid.com/docs/api-reference/"
 // Errors: https://sendgrid.api-docs.io/v3.0/mail-send/mail-send-errors
 
-profile = "communication/send-email@2.0"
+profile = "communication/send-email@2.1"
 provider = "sendgrid"
 
 map SendEmail {
@@ -12,6 +12,7 @@ map SendEmail {
   }
 
   content = []
+  attachments = null
 
   set if (input.text) {
     content = content.concat([{ type: 'text/plain', value: input.text }])
@@ -19,6 +20,16 @@ map SendEmail {
 
   set if (input.html) {
     content = content.concat([{ type: 'text/html', value: input.html }])
+  }
+
+  set if (input.attachments) {
+    attachments = input.attachments.map(attachment => {
+      return {
+        content: attachment.content,
+        filename: attachment.filename,
+        type: attachment.type,
+      }
+    })
   }
 
   http POST "/v3/mail/send" {
@@ -31,7 +42,8 @@ map SendEmail {
         content: content,
         personalizations: [{
           to: [{ email: input.to }], 
-        }]
+        }],
+        attachments: attachments,
       }
     }
     
