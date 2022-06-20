@@ -1,0 +1,163 @@
+"""
+Chat Workspaces
+Retrieve workspaces for the user.
+"""
+name = "chat/workspaces"
+version = "1.1.0"
+
+"""
+Get Workspaces
+List workspaces (guilds, servers) the user has joined.
+"""
+usecase GetWorkspaces {
+  result {
+    """
+    Workspaces
+    List of workspaces. Can be workspaces or guilds, depending on the provider capability.
+    """
+    workspaces! [Workspace]!
+
+    """
+    Rate Limit
+    Rate limit details.
+    """
+    rateLimit RateLimit
+  }
+
+  error Error
+
+  example Successful {
+    result {
+      workspaces = [
+        {
+          id = '1'
+          createdAt = 1643798532134.069
+          name = 'workspace'
+          membersCount = 100
+        },
+        {
+          id = '2'
+          createdAt = 1643216443234.079
+          name = 'workspace 2'
+          membersCount = 4
+          description = 'Test workspace'
+        }
+      ]
+    }
+  }
+
+  example Failed {
+    error {
+      title = 'No workspaces found for current user.'
+    }
+  }
+}
+
+model Workspace {
+  """
+  Id
+  Unique identifier of the workspace
+  """
+  id! string!
+
+  """
+  Created At
+  UNIX ms timestamp (e.g. 1095379198750) when the workspace was created
+  """
+  createdAt! number!
+
+  """
+  Name
+  Name of the retrieved workspace
+  """
+  name! string!
+
+  """
+  Members Count
+  Number of members of the retrieved workspace
+  """
+  membersCount number
+
+  """
+  Icon
+  URL of icon used for retrieved workspace
+  """
+  icon string
+
+  """
+  Description
+  Description of the workspace
+  """
+  description string
+
+  """
+  URL
+  URL address for retrieved workspace
+  """
+  url string
+}   
+
+model Error {
+  """
+  Title
+  A short, human-readable summary of the problem type.
+  """
+  title!
+
+  """
+  Detail
+  A human-readable explanation specific to this occurrence of the problem.
+  """
+  detail
+
+  """
+  Rate Limit
+  Rate limit details.
+  """
+  rateLimit RateLimit
+}
+
+model RateLimit {
+  """
+  Bucket
+  Different parts of API may have different rate limits.
+  Bucket identifies to which part of API the rate limits apply.
+  """
+  bucket string
+
+  """
+  Total Requests
+  Total requests available in the time window.
+  """
+  totalRequests number
+
+  """
+  Remaining Requests
+  Remaining requests available in the time window.
+  """
+  remainingRequests number
+
+  """
+  Remaining Requests available in percents
+  Remaining requests available in the time window in percents.
+  """
+  remainingRequestsPercentage number
+
+  """
+  Reset Timestamp
+  Timestamp when the rate limits will reset (in Unix Timestamp ms format).
+  """
+  resetTimestamp number
+
+  """
+  Reset After
+  Number of seconds until reset of rate limit
+  """
+  resetAfter number
+
+  """
+  Retry After
+  Number of seconds until user can retry the request
+  """
+  retryAfter number
+}

@@ -1,0 +1,25 @@
+profile = "chat/workspaces@1.1"
+provider = "mock"
+
+"""
+GetWorkspaces map
+"""
+map GetWorkspaces {
+  map result {
+    workspaces = [
+      {
+        id: '1',
+        createdAt: 1643798532134.069,
+        name: 'workspace',
+        membersCount: 100,
+      },
+      {
+        id: '2',
+        createdAt: 1643216443234.079,
+        name: 'workspace 2',
+        membersCount: 4,
+        description: 'Test workspace',
+      }
+    ]
+  }
+}
