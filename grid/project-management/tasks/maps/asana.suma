@@ -1,0 +1,31 @@
+profile = "project-management/tasks@1.0.0"
+provider = "asana"
+
+map CreateTask {
+  http POST "/tasks" {
+    security "personalAccessToken"
+    
+    request "application/json" {
+      headers {
+        "Authorization" = `Bearer ${parameters.accessToken}`
+      }
+
+      body {
+        data = {
+          name: input.title,
+          notes: input.description,
+          projects: [input.project],
+          parent: input.parent,
+          assignee: input.assignee
+        }
+      }
+    }
+    
+    response 201 "application/json" {
+      return map result {
+        id = body.data.gid
+        url = body.data.permalink_url
+      }
+    }
+  }
+}

@@ -1,6 +1,6 @@
 import { RecordingDefinitions } from '@superfaceai/testing';
 
-import { publishPostTest } from './publish-post';
+import { publishPostErrorTest, publishPostTest } from './publish-post';
 
 const PAGE_ACCESS_TOKEN_REDACTED_VALUE = 'PAGE_ACCESS_TOKEN_VALUE_REDACTED';
 
@@ -31,3 +31,14 @@ const beforeRecordingSave = function (recordings: RecordingDefinitions) {
 publishPostTest('facebook', {
   beforeRecordingSave,
 });
+
+publishPostErrorTest(
+  'facebook',
+  [
+    {
+      name: 'invalid profileId is not found',
+      input: { profileId: '4', text: 'This should fail.' },
+    },
+  ],
+  { beforeRecordingSave }
+);

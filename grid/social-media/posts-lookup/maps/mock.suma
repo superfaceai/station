@@ -1,4 +1,4 @@
-profile = "social-media/posts-lookup@1.2"
+profile = "social-media/posts-lookup@1.3"
 provider = "mock"
 
 map FindByHashtag {
@@ -11,7 +11,10 @@ map FindByHashtag {
         url: 'https://www.facebook.com/sftest7904/photos/a.121467247037625/122332100284473/?type=3',
         author: {
           id: '1466796521412771840',
-          username: 'superface_test'
+          username: 'superface_test',
+          followersCount: 42,
+          followingCount: 3,
+          postsCount: 321,
         },
         attachments: [
            {
@@ -54,9 +57,13 @@ map FindByMention {
         url: 'https://www.facebook.com/110658944785122/posts/125744069943276/',
         author: {
           id: '1466796521412771840',
-          username: 'superface_test'
+          username: 'superface_test',
+          followersCount: 42,
+          followingCount: 3,
+          postsCount: 321,
         },
         replyId: '110658944785122_125744069943276',
+        parentId: '110658944785122_125744069943276',
         attachments: [],
       },
     ],

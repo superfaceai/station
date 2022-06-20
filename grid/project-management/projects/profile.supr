@@ -1,0 +1,41 @@
+"""
+Manage projects
+List projects in project management systems.
+"""
+name = "project-management/projects"
+version = "1.0.0"
+
+"""
+List Projects
+"""
+usecase ListProjects {
+	result [
+    {
+      "ID of the project."
+      id! string!
+
+      "Name of the project."
+      name! string!
+    }
+  ]
+
+	error {
+		"Human-readable error message"
+		message! string!
+		"Human-readable details about the error"
+		description! string!
+	}
+
+  example success {
+    result [
+      {
+        id = "46ebca75-68af-42a1-916d-b228c2082d4f"
+        name = "Take over the world!"
+      },
+      {
+        id = "c6c81d2e-b161-4aca-a72b-be9efe50b370"
+        name = "Household chores"
+      },
+    ]
+  }
+}

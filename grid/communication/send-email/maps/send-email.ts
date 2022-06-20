@@ -42,21 +42,31 @@ export const sendEmailTest = (
             )
           ).resolves.toMatchSnapshot();
         });
-      });
 
-      describe('when inputs are invalid', () => {
-        it('should throw an exception', async () => {
+        it('sends email with attachments', async () => {
           const input = {
             ...params,
-            to: 'invalidemail',
-            from: 'invalidemail',
-            subject: '',
-            text: '',
+            subject: 'Station test with attachements',
+            text: `Station test - ${provider}`,
+            attachments: [
+              {
+                content: 'dGVzdA==',
+                type: 'text/plain',
+                filename: 'test.txt',
+              },
+              {
+                content: 'dGVzdC==',
+                type: 'application/json',
+                filename: 'test2.json',
+              },
+            ],
           };
 
           await expect(
             superface.run(
               {
+                profile: 'communication/send-email',
+                provider,
                 useCase: 'SendEmail',
                 input,
               },
@@ -64,6 +74,28 @@ export const sendEmailTest = (
             )
           ).resolves.toMatchSnapshot();
         });
+      });
+    });
+
+    describe('when inputs are invalid', () => {
+      it('should throw an exception', async () => {
+        const input = {
+          ...params,
+          to: 'invalidemail',
+          from: 'invalidemail',
+          subject: '',
+          text: '',
+        };
+
+        await expect(
+          superface.run(
+            {
+              useCase: 'SendEmail',
+              input,
+            },
+            options
+          )
+        ).resolves.toMatchSnapshot();
       });
     });
   });

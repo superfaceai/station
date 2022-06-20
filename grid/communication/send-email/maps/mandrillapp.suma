@@ -1,0 +1,80 @@
+// Transactional API Quick Start: https://mailchimp.com/developer/transactional/guides/quick-start/
+// API Reference: https://mailchimp.com/developer/transactional/api/messages/send-new-message/
+
+profile = "communication/send-email@2.1"
+provider = "mandrillapp"
+
+map SendEmail {
+  set {
+    message = {
+      from_email: input.from,
+      to: [
+        {
+          email: input.to,
+          type: "to"
+        }
+      ],
+      subject: input.subject
+    }
+  }
+
+  set if (input.text) {
+    message.text = input.text
+  }
+
+  set if (input.html) {
+    message.html = input.html
+  }
+
+  set if (Array.isArray(input.attachments)) {
+    message.attachments = input.attachments.map(attachment => {
+      return {
+        content: attachment.content,
+        name: attachment.filename,
+        type: attachment.type,
+      }
+    })
+  }
+
+  http POST "/api/1.0/messages/send" {
+    security "api_key"
+    
+    request {
+      body = {
+        message: message
+      }
+    }
+
+    response 200 "application/json" {
+      set {
+        msgStatus = body[0].status
+      }
+      // the sending status of the recipient Possible values: "sent", "queued", "scheduled", "rejected", or "invalid".
+      return map result if (msgStatus === "sent" || msgStatus === "queued" || msgStatus === "scheduled") {
+        messageId = body[0]._id
+      }
+
+      return map error {
+        title = "Send Email Failed",
+        detail = (`${msgStatus}: ${body[0].reject_reason}`)
+      }
+    }
+
+    response 500 {
+      map error if (body) {
+        title = "Internal server Error"
+        detail = body.message || `${body}`
+      }
+
+      map error if (body.name === "ValidationError") {
+        title = "Invalid inputs"
+        detail = body.message
+      } 
+
+      map error if (body.name === "Invalid_Key") {
+        title = "Unauthorized"
+        detail = "Invalid key"
+      }
+    }
+  }
+}

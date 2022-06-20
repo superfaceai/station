@@ -1,0 +1,42 @@
+[
+  {
+    "scope": "https://api.postmarkapp.com:443",
+    "method": "POST",
+    "path": "/email",
+    "body": {
+      "From": "invalidemail",
+      "To": "invalidemail",
+      "Subject": "",
+      "TextBody": "",
+      "Attachments": null
+    },
+    "status": 422,
+    "response": {
+      "ErrorCode": 300,
+      "Message": "Error parsing 'To': Illegal email address 'invalidemail'. It must contain the '@' symbol."
+    },
+    "rawHeaders": [
+      "cache-control",
+      "private",
+      "content-type",
+      "application/json; charset=utf-8",
+      "x-postmark-account",
+      "220280",
+      "x-postmark-server",
+      "8386826",
+      "server",
+      "unicorns-double-rainbow",
+      "x-powered-by",
+      "ASP.NET",
+      "date",
+      "Mon, 11 Apr 2022 14:19:40 GMT",
+      "content-length",
+      "119",
+      "strict-transport-security",
+      "max-age=16000000;",
+      "connection",
+      "close"
+    ],
+    "responseIsBinary": false
+  }
+]

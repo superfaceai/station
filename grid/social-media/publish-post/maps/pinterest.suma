@@ -1,0 +1,119 @@
+profile = "social-media/publish-post@1.2"
+provider = "pinterest"
+
+// https://developers.pinterest.com/docs/api/v5/#operation/pins/create
+map PublishPost {
+  return map error if (!Array.isArray(input.media) || input.media.length !== 1) {
+    title = "Invalid media"
+    detail = "You must provide exactly one media item for Pinterest."
+  }
+
+  // FIXME[linter]: Workaround for `ElementAccessExpression - Wrong Input Structure: expected {profileId: string!, text: string!, link: string!, media: [{url: string!, contents: any, altText: string}]}, but got input.media.0`
+  set {
+    origMedia = input.media
+  }
+  
+  set {
+    media = origMedia[0]
+    mediaSource = {}
+  }
+
+  set if (media.contents) {
+    mediaSource = {
+      source_type: 'image_base64',
+      data: Buffer.isBuffer(media.contents) ? media.contents.toString('base64') : media.contents,
+      content_type: undefined,
+    }
+  }
+  // https://stackoverflow.com/a/69570564 :wow:
+  set if (mediaSource.data && mediaSource.data.startsWith('/9j')) {
+    mediaSource.content_type = 'image/jpeg'
+  }
+  set if (mediaSource.data && mediaSource.data.startsWith('iVB')) {
+    mediaSource.content_type = 'image/png'
+  }
+
+  set if (media.url) {
+    mediaSource = {
+      source_type: 'image_url',
+      url: media.url,
+    }
+  }
+
+  return map error if (!mediaSource.url && !mediaSource.content_type) {
+    title = "Unknown or unsupported media contents type"
+    detail = "Only PNG or JPG images are supported."
+  }
+
+  http POST "/v5/pins" {
+
+    request {
+      headers {
+        authorization = "Bearer " + parameters.accessToken
+      }
+      body {
+        board_id = input.profileId,
+        link = input.link,
+        description = input.text,
+        title = input.title,
+        alt_text = media.altText,
+        media_source = mediaSource,
+      }
+    }
+
+    response 201 "application/json" {
+      map result {
+        postId =  body.id,
+        url = `https://www.pinterest.com/pin/${body.id}/`,
+      }
+    }
+
+    response 400 "application/json" {
+      map error {
+        title = "Bad request",
+        detail = body.message,
+        original = body,
+      }
+    }
+
+    response 401 "application/json" {
+      map error {
+        title = "Unauthenticated"
+        detail = body.message
+        original = body
+      }
+    }
+
+    response 403 "application/json" {
+      map error {
+        title = "Forbidden"
+        detail = body.message
+        original = body
+      }
+    }
+
+    response 404 "application/json" {
+      map error {
+        title = "Not found"
+        detail = body.message
+        original = body
+      }
+    }
+
+    response 429 "application/json" {
+      map error {
+        title = "Too Many Requests"
+        detail = body.message
+        original = body
+      }
+    }
+
+    response {
+      map error {
+        title = "Unexpected error"
+        detail = body.message
+        original = body
+      }
+    }
+  }
+}
