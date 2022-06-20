@@ -15,7 +15,7 @@ map GetMembers {
     request "application/json" {
       query {
         after = input.page
-        limit = input.limit
+        limit = limit
       }
 
       headers {
@@ -27,7 +27,7 @@ map GetMembers {
       members = call MapMembers(members = body)
       rateLimit = call MapRateLimitDetails(headers = headers)
 
-      return map result if ((members.length < input.limit) || (members.length === 0)) {
+      return map result if ((members.length < limit) || (members.length === 0)) {
         members = members
         rateLimit = rateLimit
       }
