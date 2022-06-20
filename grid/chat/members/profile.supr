@@ -1,0 +1,178 @@
+"""
+Chat Members
+Retrieve members of the workspace.
+"""
+name = "chat/members"
+version = "1.0.0"
+
+"""
+Get workspace members
+Retrieve paginated list of members
+"""
+usecase GetMembers {
+  input {
+    """
+    Workspace
+    Representation of a workspace. Can be ID or name, depending on the provider capability.
+    """
+    workspace string!
+    
+    """
+    Limit
+    Maximum number of records to retrieve
+    """
+    limit number
+    
+    """
+    Page
+    Page cursor retrieved from nextPage for results pagination
+    """
+    page string!
+  }
+
+  result {
+		"""
+    Members
+    List of retrieved members
+    """
+    members! [Member]!
+
+    """
+    Next Page
+    Cursor to the next page of listing
+    """
+    nextPage string
+
+    """
+    Rate Limit
+    Rate limit details.
+    """
+    rateLimit RateLimit
+  }
+	
+  error Error
+
+  example Successful {
+    input {
+      workspace = '877903817948147752',
+      limit = 2
+    }
+
+    result {
+      members = [
+        {
+          id = '1'
+          username = 'user1'
+          joinedAt = 1643798532134.069,
+        }
+        {
+          id = '2'
+          username = 'userBot'
+          joinedAt = 1643808532134.069,
+          isBot = true
+        }
+      ]
+    }
+  }
+
+  example Failed {
+    input {
+      workspace = 'not-existing',
+    }
+
+    error {
+      title = 'workspace_not_found'
+    }
+  }
+}
+
+model Member {
+  """
+  Id
+  Unique identifier of the member
+  """
+  id! string!
+
+  """
+  Username
+  Username identifier of the member
+  """
+  username! string!
+
+  """
+  Joined at
+  UNIX ms timestamp (e.g. 1095379198750) when the member joined workspace
+  """
+  joinedAt number
+
+  """
+  Is Bot
+  Boolean that represents whether the member is a bot
+  """
+  isBot boolean
+}
+
+model Error {
+  """
+  Title
+  A short, human-readable summary of the problem type.
+  """
+  title!
+
+  """
+  Detail
+  A human-readable explanation specific to this occurrence of the problem.
+  """
+  detail
+
+  """
+  Rate Limit
+  Rate limit details.
+  """
+  rateLimit RateLimit
+}
+
+model RateLimit {
+  """
+  Bucket
+  Different parts of API may have different rate limits.
+  Bucket identifies to which part of API the rate limits apply.
+  """
+  bucket string
+
+  """
+  Total Requests
+  Total requests available in the time window.
+  """
+  totalRequests number
+
+  """
+  Remaining Requests
+  Remaining requests available in the time window.
+  """
+  remainingRequests number
+
+  """
+  Remaining Requests available in percents
+  Remaining requests available in the time window in percents.
+  """
+  remainingRequestsPercentage number
+
+  """
+  Reset Timestamp
+  Timestamp when the rate limits will reset (in Unix Timestamp ms format).
+  """
+  resetTimestamp number
+
+  """
+  Reset After
+  Number of seconds until reset of rate limit
+  """
+  resetAfter number
+
+  """
+  Retry After
+  Number of seconds until user can retry the request
+  """
+  retryAfter number
+}
