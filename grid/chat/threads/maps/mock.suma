@@ -1,0 +1,28 @@
+profile = "chat/threads@1.0"
+provider = "mock"
+
+"""
+GetThreads map
+"""
+map GetThreads {
+  map result {
+    threads = [
+      {
+        id: '1',
+        createdAt: 1643798532134.069,
+        channel: 'channel_id_1',
+        archiveAt: 1643799532135.070,
+      },
+      {
+        id: '2',
+        createdAt: 1643216443234.079,
+        channel: 'channel_id_2',
+      },
+      {
+        id: '3',
+        createdAt: 1546167104000.2,
+        channel: 'channel_id_3',
+      }
+    ]
+  }
+}
