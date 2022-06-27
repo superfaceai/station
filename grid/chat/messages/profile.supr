@@ -3,7 +3,7 @@ Chat Messages
 Retrieve chat messages.
 """
 name = "chat/messages"
-version = "1.0.0"
+version = "1.0.1"
 
 """
 Get chat messages
@@ -16,6 +16,18 @@ usecase GetMessages {
     Representation of a messaging destination. Can be ID or channel name, depending on the provider capability.
     """
     destination! string!
+    
+    """
+    List Thread Messages
+    Boolean that represents whether this usecase is used for retrieving channel messages or thread messages. Default is false.
+    """
+    listThreadMessages boolean!
+
+    """
+    Thread ID
+    Representation of a messaging destination thread. If present, this use-case lists messages from specified thread.
+    """
+    threadId string!
     
     """
     After Timestamp

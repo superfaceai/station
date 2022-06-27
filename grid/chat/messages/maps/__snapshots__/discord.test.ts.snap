@@ -9,6 +9,15 @@ Ok {
           "id": "170231057197563904",
           "username": "Martin Albert",
         },
+        "createdAt": 1648034960463,
+        "id": "956152667808366635",
+        "text": "test",
+      },
+      Object {
+        "author": Object {
+          "id": "170231057197563904",
+          "username": "Martin Albert",
+        },
         "createdAt": 1644322924200,
         "hasThread": true,
         "id": "940583259262308362",
@@ -31,23 +40,14 @@ Ok {
         "id": "939127758603321384",
         "text": "text message",
       },
-      Object {
-        "author": Object {
-          "id": "170231057197563904",
-          "username": "Martin Albert",
-        },
-        "createdAt": 1643910369785,
-        "id": "938852880629256233",
-        "text": "test thread",
-      },
     ],
-    "nextPage": "938852880629256233",
+    "nextPage": "939127758603321384",
     "rateLimit": Object {
       "bucket": "fccc1d589e71dd6f0c55fde9faa2838d",
       "remainingRequests": 4,
       "remainingRequestsPercentage": 80,
       "resetAfter": 5,
-      "resetTimestamp": 1645092261000,
+      "resetTimestamp": 1648041235000,
       "totalRequests": 5,
     },
   },
@@ -58,6 +58,15 @@ exports[`chat/messages/discord GetMessages when specified destination does exist
 Ok {
   "value": Object {
     "messages": Array [
+      Object {
+        "author": Object {
+          "id": "170231057197563904",
+          "username": "Martin Albert",
+        },
+        "createdAt": 1643910369785,
+        "id": "938852880629256233",
+        "text": "test thread",
+      },
       Object {
         "attachments": Array [
           Object {
@@ -86,23 +95,14 @@ Ok {
         "text": "test",
         "threadId": "938779397664673793",
       },
-      Object {
-        "author": Object {
-          "id": "935958634016419920",
-          "username": "TestApp",
-        },
-        "createdAt": 1643892831594,
-        "id": "938779320124596244",
-        "text": "test",
-      },
     ],
-    "nextPage": "938779320124596244",
+    "nextPage": "938779397664673793",
     "rateLimit": Object {
       "bucket": "fccc1d589e71dd6f0c55fde9faa2838d",
       "remainingRequests": 3,
       "remainingRequestsPercentage": 60,
       "resetAfter": 5,
-      "resetTimestamp": 1645092261000,
+      "resetTimestamp": 1648041235000,
       "totalRequests": 5,
     },
   },
@@ -120,11 +120,111 @@ Properties: {
     \\"totalRequests\\": 5,
     \\"remainingRequests\\": 4,
     \\"resetAfter\\": 5,
-    \\"resetTimestamp\\": 1645092262000,
+    \\"resetTimestamp\\": 1648041237000,
     \\"remainingRequestsPercentage\\": 80
   }
 }
-AST Path: definitions[0].statements[5].responseHandlers[1].statements[1]
-Original Map Location: Line 58, column 7",
+AST Path: definitions[0].statements[6].responseHandlers[1].statements[1]
+Original Map Location: Line 71, column 7",
+}
+`;
+
+exports[`chat/messages/discord GetMessages when specified thread destination does not exist returns error 1`] = `
+Err {
+  "error": "HTTPError: Expected HTTP error
+Properties: {
+  \\"title\\": \\"Not found\\",
+  \\"detail\\": \\"Unknown Channel\\",
+  \\"rateLimit\\": {
+    \\"bucket\\": \\"fccc1d589e71dd6f0c55fde9faa2838d\\",
+    \\"totalRequests\\": 5,
+    \\"remainingRequests\\": 4,
+    \\"resetAfter\\": 5,
+    \\"resetTimestamp\\": 1648041238000,
+    \\"remainingRequestsPercentage\\": 80
+  }
+}
+AST Path: definitions[0].statements[6].responseHandlers[1].statements[1]
+Original Map Location: Line 71, column 7",
+}
+`;
+
+exports[`chat/messages/discord GetMessages when specified thread destination exists performs correctly 1`] = `
+Ok {
+  "value": Object {
+    "messages": Array [
+      Object {
+        "author": Object {
+          "id": "170231057197563904",
+          "username": "Martin Albert",
+        },
+        "createdAt": 1648034750981,
+        "id": "956151789177163786",
+        "text": "test 4",
+      },
+      Object {
+        "author": Object {
+          "id": "170231057197563904",
+          "username": "Martin Albert",
+        },
+        "createdAt": 1648034748553,
+        "id": "956151778993389608",
+        "text": "test 3",
+      },
+      Object {
+        "author": Object {
+          "id": "170231057197563904",
+          "username": "Martin Albert",
+        },
+        "createdAt": 1648034747220,
+        "id": "956151773402382359",
+        "text": "test 2",
+      },
+    ],
+    "nextPage": "956151773402382359",
+    "rateLimit": Object {
+      "bucket": "fccc1d589e71dd6f0c55fde9faa2838d",
+      "remainingRequests": 4,
+      "remainingRequestsPercentage": 80,
+      "resetAfter": 5,
+      "resetTimestamp": 1648041237000,
+      "totalRequests": 5,
+    },
+  },
+}
+`;
+
+exports[`chat/messages/discord GetMessages when specified thread destination exists performs correctly 2`] = `
+Ok {
+  "value": Object {
+    "messages": Array [
+      Object {
+        "author": Object {
+          "id": "170231057197563904",
+          "username": "Martin Albert",
+        },
+        "createdAt": 1645525124730,
+        "id": "945625653754093592",
+        "text": "test",
+      },
+      Object {
+        "author": Object {
+          "id": "170231057197563904",
+          "username": "Martin Albert",
+        },
+        "createdAt": 1644569701193,
+        "id": "941618316991152242",
+        "text": "hello world",
+      },
+    ],
+    "rateLimit": Object {
+      "bucket": "fccc1d589e71dd6f0c55fde9faa2838d",
+      "remainingRequests": 3,
+      "remainingRequestsPercentage": 60,
+      "resetAfter": 5,
+      "resetTimestamp": 1648041237000,
+      "totalRequests": 5,
+    },
+  },
 }
 `;

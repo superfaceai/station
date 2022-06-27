@@ -9,6 +9,16 @@ map GetMessages {
   afterId = undefined
   beforeId = undefined
 
+  // `input.listThreadMessages` and `input.threadId` is not necessary in case of discord, 
+  // users can specify thread id also in `input.destination` as Discord API does not need 
+  // channel id for retrieving thread messages as it creates threads as unique channels across guild.
+  
+  // Those input parameters are needed to enable this map to work in similar manner as the slack map.
+  // For this to work, you should also specify `input.destination`
+  set if (input.listThreadMessages && input.threadId !== undefined) {
+    destination = input.threadId
+  }
+
   set if (input.afterTimestamp) {
     afterId = call GetSnowflake(ts = input.afterTimestamp)
   }
@@ -31,7 +41,10 @@ map GetMessages {
     }
 
     response 200 "application/json" {
-      messages = call MapMessages(messages = body)
+      messages = call MapMessages(
+        messages = body, 
+        isThreadEndpoint = input.threadId !== undefined
+      )
       rateLimit = call MapRateLimitDetails(headers = headers)
       
       return map result if ((messages.length < input.limit) || (messages.length === 0)) {
@@ -65,7 +78,16 @@ Operation MapMessages
 Returns array mapping messages in received body
 """
 operation MapMessages {
-  messages = args.messages.map(message => {
+  messages = args.messages
+
+  // Filtering received messages can be done based on message type
+  // More about discord message types here: https://discord.com/developers/docs/resources/channel#message-object-message-types
+  // In case of retrieving thread messages, we want to filter thread starter message with type 21.
+  set if (args.isThreadEndpoint) {
+    messages = args.messages.filter(message => message.type !== 21);
+  }
+
+  messages = messages.map(message => {
     const resultMessage = {
       id: message.id,
       author: {
