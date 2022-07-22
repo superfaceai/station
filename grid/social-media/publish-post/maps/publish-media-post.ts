@@ -73,6 +73,7 @@ export const publishMediaPostTest = (
             },
             hooks
           );
+          result.mapErr(console.log);
           expect(result.isOk()).toBe(true);
           expect(result).toMatchSnapshot();
         });
@@ -80,6 +81,7 @@ export const publishMediaPostTest = (
     });
   });
 };
+
 
 type UploadTestCase = {
   name: string;
@@ -102,9 +104,9 @@ export const publishMediaUploadTest = (
       });
     });
 
-    const testCases: Array<
-      [name: string, media: UploadTestCase['media'], success: boolean]
-    > = cases.map(({ name, media, success = true }) => [name, media, success]);
+    const testCases = cases.map(
+      ({ name, media, success = true }) => [name, media, success] as const
+    );
 
     describe('PublishPost', () => {
       describe('media upload', () => {

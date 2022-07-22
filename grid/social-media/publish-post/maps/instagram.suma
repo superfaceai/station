@@ -109,18 +109,20 @@ operation MapApiError {
 operation UploadMedia {
   apiVersion = 'v14.0'
   businessAccountId = args.businessAccountId
-  item = args.item
+  itemUrl = args.item ? args.item.url : undefined
   isCarousel = args.isCarousel || undefined
   children = args.children ? JSON.stringify(args.children) : undefined
   caption = isCarousel ? undefined : args.caption // captions are not supported for carousel items
+  mediaType = children ? 'CAROUSEL' : undefined
   authorizationHeaderValue = args.authorization
 
   http POST "/{apiVersion}/{businessAccountId}/media" {
     request {
       query {
-        image_url = item.url,
+        image_url = itemUrl,
         caption = caption,
         is_carousel_item = isCarousel,
+        media_type = mediaType,
         children = children,
       }
 
