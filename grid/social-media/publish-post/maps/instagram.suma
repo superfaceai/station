@@ -4,9 +4,10 @@ profile = "social-media/publish-post@1.2"
 provider = "instagram"
 
 map PublishPost {
-  apiVersion = 'v12.0'
+  apiVersion = 'v14.0'
   businessAccountId = input.profileId
   authorizationHeaderValue = 'Bearer ' + parameters.accessToken
+  text = input.text
 
   media = input.media || []
 
@@ -15,33 +16,29 @@ map PublishPost {
     detail = "You must provide one media with URL for Instagram provider"
   }
 
-  return map error if(media.length > 1) {
+  return map error if(media.length > 10) {
     title = "Too many media items"
-    detail = "Only 1 media item can be published with Instagram provider"
+    detail = "Only up to 10 media items can be published with Instagram provider"
   }
 
+  isCarousel = false
+  set if (media.length > 1) {
+    isCarousel = true
+  }
 
-  http POST "/{apiVersion}/{businessAccountId}/media" {
+  // Upload all media regardless whether it's in carousel or not
+  mediaIds = []
+  call foreach(item of media) UploadMedia(businessAccountId = businessAccountId, item = item, isCarousel = isCarousel, caption = text, authorization = authorizationHeaderValue) {
+    return map error if (outcome.error) outcome.error
+    mediaIds = [...mediaIds, outcome.data]
+  }
 
-    request {
-      query {
-        image_url = media[0].url,
-        caption = input.text
-      }
-
-      headers {
-        "authorization" = authorizationHeaderValue
-      }
-    }
-
-    response 200 "application/json" {
-      igContainerId = body.id
-    }
-
-    response {
-      error = call MapApiError(statusCode = statusCode, body = body, headers = headers)
-      return map error error
-    }
+  // +1 request if this is a carousel
+  // https://developers.facebook.com/docs/instagram-api/guides/content-publishing#carousel-posts
+  containerId = call UploadMedia(businessAccountId = businessAccountId, children = mediaIds, caption = text, authorization = authorizationHeaderValue) if (isCarousel)
+  // Otherwise just pick the first uploaded item
+  set if (!isCarousel) {
+    containerId = mediaIds[0]
   }
 
   http POST "/{apiVersion}/{businessAccountId}/media_publish" {
@@ -106,5 +103,39 @@ operation MapApiError {
     title = title
     detail = detail
     original = body.error || body
+  }
+}
+
+operation UploadMedia {
+  apiVersion = 'v14.0'
+  businessAccountId = args.businessAccountId
+  item = args.item
+  isCarousel = args.isCarousel || undefined
+  children = args.children ? JSON.stringify(args.children) : undefined
+  caption = isCarousel ? undefined : args.caption // captions are not supported for carousel items
+  authorizationHeaderValue = args.authorization
+
+  http POST "/{apiVersion}/{businessAccountId}/media" {
+    request {
+      query {
+        image_url = item.url,
+        caption = caption,
+        is_carousel_item = isCarousel,
+        children = children,
+      }
+
+      headers {
+        authorization = authorizationHeaderValue
+      }
+    }
+
+    response 200 "application/json" {
+      return body.id
+    }
+
+    response {
+      error = call MapApiError(statusCode = statusCode, body = body, headers = headers)
+      fail error
+    }
   }
 }
