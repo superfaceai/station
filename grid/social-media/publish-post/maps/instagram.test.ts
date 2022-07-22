@@ -1,6 +1,5 @@
 import { publishInputCasesTest, publishPostErrorTest } from './publish-post';
 
-// publishMediaPostTest('instagram');
 publishInputCasesTest('instagram', [
   {
     name: 'single picture',
@@ -31,6 +30,7 @@ publishInputCasesTest('instagram', [
     },
   },
 ]);
+
 publishPostErrorTest('instagram', [
   {
     name: 'missing media causes immediate failure',
