@@ -4,7 +4,7 @@ profile = "social-media/publish-post@1.2"
 provider = "instagram"
 
 map PublishPost {
-  apiVersion = 'v14.0'
+  apiVersion = 'v12.0'
   businessAccountId = input.profileId
   authorizationHeaderValue = 'Bearer ' + parameters.accessToken
   text = input.text
@@ -44,7 +44,7 @@ map PublishPost {
   http POST "/{apiVersion}/{businessAccountId}/media_publish" {
     request {
       query {
-        creation_id = igContainerId
+        creation_id = containerId
       }
 
       headers {
@@ -107,7 +107,7 @@ operation MapApiError {
 }
 
 operation UploadMedia {
-  apiVersion = 'v14.0'
+  apiVersion = 'v12.0'
   businessAccountId = args.businessAccountId
   item = args.item
   isCarousel = args.isCarousel || undefined
