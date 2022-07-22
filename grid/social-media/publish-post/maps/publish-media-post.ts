@@ -82,7 +82,6 @@ export const publishMediaPostTest = (
   });
 };
 
-
 type UploadTestCase = {
   name: string;
   media: string[];
