@@ -72,6 +72,63 @@ export const publishPostTest = (
   });
 };
 
+type InputTestCase = {
+  name: string;
+  input: SuperfaceTestRun['input'];
+  success?: boolean;
+};
+
+export const publishInputCasesTest = (
+  provider: string,
+  cases: InputTestCase[],
+  hooks?: RecordingProcessOptions
+): void => {
+  describe(`social-media/publish-post/${provider}`, () => {
+    let superfacePublisPost: SuperfaceTest;
+
+    beforeAll(() => {
+      jest.setTimeout(15000);
+    });
+
+    afterAll(() => {
+      jest.setTimeout(5000);
+    });
+
+    beforeEach(() => {
+      superfacePublisPost = new SuperfaceTest({
+        profile: 'social-media/publish-post',
+        provider,
+      });
+    });
+
+    const testCases = cases.map(
+      ({ name, input, success = true }) => [name, input, success] as const
+    );
+
+    describe('PublishPost', () => {
+      describe('media custom input', () => {
+        // FIXME: Use $name in Jest 27+
+        test.each(testCases)('%s', async (_name, input, success) => {
+          const profiles = await getPublishingProfiles(provider);
+
+          const result = await superfacePublisPost.run(
+            {
+              useCase: 'PublishPost',
+              input: {
+                profileId: profiles[0].id,
+                ...input,
+              },
+            },
+            hooks
+          );
+          expect(result.isOk()).toBe(success);
+          expect(result).toMatchSnapshot();
+        });
+      });
+    });
+  });
+};
+
 type ErrorCase = {
   name: string;
   input: SuperfaceTestRun['input'];
