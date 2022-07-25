@@ -73,7 +73,6 @@ export const publishMediaPostTest = (
             },
             hooks
           );
-          result.mapErr(console.log);
           expect(result.isOk()).toBe(true);
           expect(result).toMatchSnapshot();
         });

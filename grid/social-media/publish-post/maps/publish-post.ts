@@ -121,7 +121,6 @@ export const publishInputCasesTest = (
             },
             hooks
           );
-          result.mapErr(console.log);
           expect(result.isOk()).toBe(success);
           expect(result).toMatchSnapshot();
         });
