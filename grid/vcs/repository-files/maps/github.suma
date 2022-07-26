@@ -25,12 +25,10 @@ map ListDirectory {
   }
 
   http GET "/repos/{owner}/{repo}/contents/{path}" {
+
     request {
       query {
         ref = ref
-      }
-      headers {
-        Accept = "application/json"
       }
     }
     response 200 "application/json" {
@@ -50,10 +48,10 @@ map ListDirectory {
         entries = mappedEntries
       }
     }
-    response {
-      map error {
-        message: body.message,
-        description: body.documentation_url,
+    response "application/json" {
+      return map error {
+        message = body.message ? body.message : `Unknown error, status code: ${statusCode}`,
+        detail = body.documentation_url,
       }
     }
   }
