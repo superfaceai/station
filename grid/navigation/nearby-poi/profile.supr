@@ -21,6 +21,8 @@ The `categories` parameter can include one or more of:
   - BANK
   - ATM
   - PARKING
+  - GROCERY_STORE
+  - TRANSIT_STATION
 """
 usecase NearbyPoi {
 	input {
@@ -118,5 +120,7 @@ model InterestCategory enum {
   HEALTHCARE,
   BANK,
   ATM,
-  PARKING
+  PARKING,
+  GROCERY_STORE,
+  TRANSIT_STATION
 }

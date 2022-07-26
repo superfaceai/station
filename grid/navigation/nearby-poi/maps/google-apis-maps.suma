@@ -77,7 +77,9 @@ operation CategoriesToTypes {
     "TAXI": ["taxi_stand"],
     "POST": ["post_office"],
     "POLICE": ["police"],
-    "PARKING": ["parking"]
+    "PARKING": ["parking"],
+    "GROCERY_STORE": ["supermarket", "convenience_store"],
+    "TRANSIT_STATION": ["bus_station", "light_rail_station", "subway_station", "train_station", "transit_station"]
   }
 
   amenities = args.categories.flatMap(
@@ -120,6 +122,15 @@ operation TypesToCategories {
     "police": "POLICE",
     //Parking
     "parking": "PARKING",
+    //Grocery Store
+    "convenience_store": "GROCERY_STORE",
+    "supermarket": "GROCERY_STORE",
+    //Transit Station
+    "bus_station": "TRANSIT_STATION",
+    "light_rail_station": "TRANSIT_STATION",
+    "subway_station": "TRANSIT_STATION",
+    "train_station": "TRANSIT_STATION",
+    "transit_station": "TRANSIT_STATION"
   }
 
   types = (() => {
