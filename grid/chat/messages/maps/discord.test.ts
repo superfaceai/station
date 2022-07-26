@@ -1,8 +1,4 @@
-// import { getMessagesTest } from './messages';
-
 import { SuperfaceTest } from '@superfaceai/testing';
-
-// getMessagesTest('discord', ['938614740995960844', '000000000000000000']);
 
 describe('chat/messages/discord', () => {
   let superface: SuperfaceTest;
@@ -85,11 +81,14 @@ describe('chat/messages/discord', () => {
 
     describe('when specified destination does not exist', () => {
       it('returns error', async () => {
-        const res = await superface.run({
-          input: {
-            destination: '000000000000000000',
+        const res = await superface.run(
+          {
+            input: {
+              destination: '000000000000000000',
+            },
           },
-        });
+          { fullError: true }
+        );
 
         expect(res).toMatchSnapshot({
           error: expect.objectContaining({
