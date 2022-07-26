@@ -5,7 +5,6 @@ Access files in a hosted VCS (Git) repository.
 name = "vcs/repository-files"
 version = "1.0.0"
 
-
 """
 List Files in Directory
 List files in a repository on the provided path
@@ -47,41 +46,7 @@ usecase ListDirectory {
   }
 
   result {
-    entries [{
-      """
-      File name
-      """
-      name! string!
-
-      """
-      File path
-      """
-      path! string!
-
-      """
-      File type
-      Whether the entry is a directory or a file
-      """
-      type! enum {
-        file
-        directory
-      }
-
-      """
-      File mode 
-      """
-      mode string!
-
-      """
-      File size
-      """
-      size number!
-
-      """
-      File URL for downloading
-      """
-      rawUrl string!
-    }]
+    entries [FileEntry]
 
     """
     Next page
@@ -90,4 +55,52 @@ usecase ListDirectory {
     nextPage string
   }
 
+  error {
+    """
+    Error message
+    A short, human-readable summary of the problem.
+    """
+    message! string!
+
+    """
+    Detail
+    Optional detailed explanation of the problem, for example original error response.
+    """
+    detail
+  }
+
+}
+
+model FileEntry {
+  """
+  File name
+  """
+  name! string!
+
+  """
+  File path
+  """
+  path! string!
+
+  """
+  File type
+  Whether the entry is a directory or a file
+  """
+  type! enum {
+    file
+    directory
+    symlink
+  }
+
+  """
+  File size
+  Empty for directories.
+  """
+  size number!
+
+  """
+  File URL for downloading
+  Empty for directories.
+  """
+  rawUrl string!
 }

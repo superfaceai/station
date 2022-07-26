@@ -1,0 +1,61 @@
+profile = "vcs/repository-files@1.0"
+provider = "github"
+
+"""
+ListDirectory for GitHub
+https://docs.github.com/en/rest/repos/contents#get-repository-content
+"""
+map ListDirectory {
+  owner = input.owner
+  repo = input.repository
+  path = input.path || ''
+  ref = input.reference
+  parts = undefined
+  set if (repo.includes('/')) {
+    parts = repo.split('/')
+  }
+  set if (parts && parts.length > 1) {
+    owner = parts[0]
+    repo = parts[1]
+  }
+
+  return map error if (!owner) {
+    message = "Missing owner"
+    detail = "Either specify 'owner', or include the owner in the 'repository' (e.g. 'octocat/hello-world')"
+  }
+
+  http GET "/repos/{owner}/{repo}/contents/{path}" {
+    request {
+      query {
+        ref = ref
+      }
+      headers {
+        Accept = "application/json"
+      }
+    }
+    response 200 "application/json" {
+      entries = Array.isArray(body) ? body : [body]
+      mappedEntries = entries.map((entry) => {
+        // NOTE: Submodules are exposed as files with size = 0
+        const type = entry.type === 'dir' ? 'directory' : entry.type
+        return {
+          name: entry.name,
+          path: entry.path,
+          type: type,
+          size: type === 'directory' ? undefined : entry.size,
+          rawUrl: entry.download_url,
+        }
+      })
+      map result {
+        entries = mappedEntries
+      }
+    }
+    response {
+      map error {
+        message: body.message,
+        description: body.documentation_url,
+      }
+    }
+  }
+}
+  
