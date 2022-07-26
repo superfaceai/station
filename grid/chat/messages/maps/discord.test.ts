@@ -1,6 +1,6 @@
 import { SuperfaceTest } from '@superfaceai/testing';
 
-describe('chat/messages/discord', () => {
+describe('(LiveTest): chat/messages/discord', () => {
   let superface: SuperfaceTest;
 
   describe('GetMessages', () => {
