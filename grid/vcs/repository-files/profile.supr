@@ -1,0 +1,106 @@
+"""
+Repository Files
+Access files in a hosted VCS (Git) repository.
+"""
+name = "vcs/repository-files"
+version = "1.0.0"
+
+"""
+List Files in Directory
+List files in a repository on the provided path
+"""
+usecase ListDirectory {
+  input {
+    """
+    Repository
+    Repository name or identifier, e.g.: `octocat/hello-worId` (without `owner`), or `hello-worId` (if `owner` is set).
+    """
+    repository! string!
+
+    """
+    Repository Owner
+    Username of the account owning the repository.
+    Optional if provided in `repository`.
+    """
+    owner string!
+
+    """
+    Directory Path
+    Path to the directory for listing.
+    Defaults to the root directory (`/`).
+    """
+    path string!
+
+    """
+    Reference (branch)
+    Branch name or commit reference.
+    Defaults to the default branch for the repository (e.g. `main` or `master`).
+    """
+    reference string!
+
+    """
+    Page
+    For entries pagination, use value from `nextPage`.
+    """
+    page string!
+  }
+
+  result {
+    entries [FileEntry]
+
+    """
+    Next page
+    For paginating entries. Pass to `page` parameter.
+    """
+    nextPage string
+  }
+
+  error {
+    """
+    Error message
+    A short, human-readable summary of the problem.
+    """
+    message! string!
+
+    """
+    Detail
+    Optional detailed explanation of the problem, for example original error response.
+    """
+    detail string
+  }
+
+}
+
+model FileEntry {
+  """
+  File name
+  """
+  name! string!
+
+  """
+  File path
+  """
+  path! string!
+
+  """
+  File type
+  Whether the entry is a directory or a file
+  """
+  type! enum {
+    file
+    directory
+    symlink
+  }
+
+  """
+  File size
+  Empty for directories.
+  """
+  size number!
+
+  """
+  File URL for downloading
+  Empty for directories.
+  """
+  rawUrl string!
+}
