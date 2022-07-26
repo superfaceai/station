@@ -8,6 +8,19 @@ version = "1.0.0"
 """
 Find nearby points of interest
 Find points of interest near the given location.
+
+The `categories` parameter can include one or more of:
+  - RESTAURANT
+  - CAFE
+  - BAR
+  - SCHOOL
+  - TAXI
+  - POST
+  - POLICE
+  - HEALTHCARE
+  - BANK
+  - ATM
+  - PARKING
 """
 usecase NearbyPoi {
 	input {
@@ -50,41 +63,41 @@ usecase NearbyPoi {
 	}
 
   example success {
-    input {
-      center = {
-        latitude = 51.477,
-        longitude = 0.0,
+  - input {
+    - center = {
+      - latitude = 51.477,
+      - longitude = 0.0,
       },
-      radius = 100,
-      categories = ['CAFE'],
+    - radius = 100,
+    - categories = ['CAFE'],
     }
   
 
   result [{
-      categories = [
+    - categories = [
         'CAFE',
       ],
-      coordinates = {
-        latitude = 51.476838,
-        longitude = -0.0006877,
+    - coordinates = {
+      - latitude = 51.476838,
+      - longitude = -0.0006877,
       },
-      name = "2738840351",
+    - name = "2738840351",
     }
   ]
 }
 
   example failed {
-    input {
-      center = {
-        latitude = 589.477,
-        longitude = 998.0,
+  - input {
+    - center = {
+      - latitude = 589.477,
+      - longitude = 998.0,
       },
-      radius = 10
+    - radius = 10
     }
 
-    error {
-      status = "Not Found",
-      message = "Invalid parameters"
+  - error {
+    - status = "Not Found",
+    - message = "Invalid parameters"
     }
   }
 }
