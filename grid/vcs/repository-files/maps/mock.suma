@@ -1,13 +1,44 @@
-profile = "vcs/single-file-content@1.1"
+profile = "vcs/repository-files@1.0"
 provider = "mock"
 
 """
-SingleFileContent map
+ListDirectory mock map
 """
-map SingleFileContent{
-        map result {
-        size = Math.floor(Math.random() * 10) + 1
-        content = Math.random().toString(16)
-        encoding = 'base64'
-      }
+map ListDirectory{
+  map result {
+    entries = [
+      {
+        name: 'README.md',
+        path: 'README.md',
+        rawUrl:
+          'https://example.com/repo/test-branch/README.md',
+        size: 780,
+        type: 'file',
+      },
+      {
+        name: 'index.html',
+        path: 'index.html',
+        rawUrl:
+          'https://example.com/repo/test-branch/index.html',
+        size: 355,
+        type: 'file',
+      },
+      {
+        name: 'styles.css',
+        path: 'styles.css',
+        rawUrl:
+          'https://example.com/repo/test-branch/styles.css',
+        size: 256,
+        type: 'file',
+      },
+      {
+        name: 'test',
+        path: 'test',
+        rawUrl:
+          'https://example.com/repo/test-branch/test.md',
+        size: undefined,
+        type: 'directory',
+      },
+    ]
+  }
 }

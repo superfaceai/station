@@ -1,29 +1,26 @@
-import { SuperfaceClient } from '@superfaceai/one-sdk';
+import { SuperfaceTest } from '@superfaceai/testing';
 
-describe('vcs/single-file-content/mock-typed', () => {
-  it('performs correctly', async () => {
-    const client = new SuperfaceClient();
-    const profile = await client.getProfile('vcs/single-file-content');
-    const provider = await client.getProvider('mock');
-    const usecase = profile.getUseCase('SingleFileContent');
+describe(`vcs/repository-files/mock`, () => {
+  let superface: SuperfaceTest;
 
-    expect(provider).not.toBeUndefined();
-    expect(usecase).not.toBeUndefined();
-    const result = await usecase.perform(
-      {
-        owner: 'test',
-        repo: 'test',
-        path: 'test',
-        ref: 'master',
-      },
-      { provider }
-    );
+  beforeEach(() => {
+    superface = new SuperfaceTest({
+      profile: 'vcs/repository-files',
+      provider: 'mock',
+    });
+  });
 
-    expect(result.isOk()).toBeTruthy();
-    expect(result.unwrap()).toEqual({
-      content: expect.any(String),
-      encoding: 'base64',
-      size: expect.any(Number),
+  describe('ListDirectory', () => {
+    it('works', async () => {
+      const result = await superface.run({
+        useCase: 'ListDirectory',
+        input: {
+          owner: 'octocat',
+          repository: 'hello-world',
+        },
+      });
+
+      expect(result.isOk()).toBe(true);
     });
   });
 });
