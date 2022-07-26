@@ -37,6 +37,18 @@ Ok {
 }
 `;
 
+exports[`vcs/repository-files/github ListDirectory errors handling fails when owner cannot be inferred from repository 1`] = `
+Err {
+  "error": "MappedError: Expected error
+Properties: {
+  \\"message\\": \\"Missing owner\\",
+  \\"detail\\": \\"Either specify 'owner', or include the owner in the 'repository' (e.g. 'octocat/hello-world')\\"
+}
+AST Path: definitions[0].statements[7]
+Original Map Location: Line 22, column 3",
+}
+`;
+
 exports[`vcs/repository-files/github ListDirectory errors handling fails with non-existent reference 1`] = `
 Err {
   "error": "HTTPError: Expected HTTP error

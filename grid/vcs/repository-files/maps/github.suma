@@ -41,7 +41,7 @@ map ListDirectory {
           path: entry.path,
           type: type,
           size: type === 'directory' ? undefined : entry.size,
-          rawUrl: entry.download_url,
+          rawUrl: entry.download_url ? entry.download_url : undefined,
         }
       })
       map result {

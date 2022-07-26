@@ -84,6 +84,16 @@ describe(`vcs/repository-files/github`, () => {
         expect(result.isErr()).toBe(true);
         expect(result).toMatchSnapshot();
       });
+      it('fails when owner cannot be inferred from repository', async () => {
+        const result = await superface.run({
+          useCase: 'ListDirectory',
+          input: {
+            repository: 'docs',
+          },
+        });
+        expect(result.isErr()).toBe(true);
+        expect(result).toMatchSnapshot();
+      });
     });
   });
 });
