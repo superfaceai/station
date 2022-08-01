@@ -117,7 +117,7 @@ jobs:
           echo SLACK_ACCESS_TOKEN=${{ env.SLACK_ACCESS_TOKEN }} >> .env
 
       - run: yarn install
-      - run: sudo yarn hosts:block
+      - run: sudo yarn hosts:allow
       - run: cat /etc/hosts
       - run: yarn run check
       - run: yarn lint
