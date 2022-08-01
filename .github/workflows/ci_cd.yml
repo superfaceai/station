@@ -87,6 +87,9 @@ jobs:
   test_live:
     name: Station Tests Live
     runs-on: ubuntu-latest
+    env:
+      DISCORD_ACCESS_TOKEN: ${{ secrets.DISCORD_ACCESS_TOKEN }}
+      SLACK_ACCESS_TOKEN: ${{ secrets.SLACK_ACCESS_TOKEN }}
     steps:
       - name: Setup Node.js
         uses: actions/setup-node@v2
