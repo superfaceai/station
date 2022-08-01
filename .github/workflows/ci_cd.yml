@@ -110,6 +110,12 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-yarn-
 
+      - name: 'Create env file'
+        run: |
+          touch .env
+          echo DISCORD_ACCESS_TOKEN=${{ secrets.DISCORD_ACCESS_TOKEN }} >> .env
+          echo SLACK_ACCESS_TOKEN=${{ secrets.SLACK_ACCESS_TOKEN }} >> .env
+
       - run: yarn install
       - run: sudo yarn hosts:block
       - run: cat /etc/hosts
