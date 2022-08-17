@@ -1,6 +1,7 @@
 /* eslint-disable jest/no-export */
 
 import { RecordingProcessOptions, SuperfaceTest } from '@superfaceai/testing';
+import { nockConfig } from '../../../test-config';
 
 export const getMessagesTest = (
   provider: string,
@@ -12,12 +13,10 @@ export const getMessagesTest = (
 
     describe('GetMessages', () => {
       beforeAll(() => {
-        superface = new SuperfaceTest({
-          profile: 'chat/messages',
-          provider,
-          useCase: 'GetMessages',
-          testInstance: expect,
-        });
+        superface = new SuperfaceTest(
+          { profile: 'chat/messages', provider, useCase: 'GetMessages' },
+          nockConfig
+        );
       });
 
       describe('when specified destination does exist', () => {
