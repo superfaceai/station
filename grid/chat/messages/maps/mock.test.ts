@@ -1,20 +1,19 @@
-import { SuperfaceClient } from '@superfaceai/one-sdk';
+import { SuperfaceTest } from '@superfaceai/testing';
+import { nockConfig } from '../../../test-config';
 
 describe('chat/messages/mock', () => {
+  let superface: SuperfaceTest;
+
+  beforeAll(() => {
+    superface = new SuperfaceTest(
+      { profile: 'chat/messages', provider: 'mock', useCase: 'GetMessages' },
+      nockConfig
+    );
+  });
+
   describe('GetMessages', () => {
     it('performs correctly', async () => {
-      const client = new SuperfaceClient();
-      const profile = await client.getProfile('chat/messages');
-      const provider = await client.getProvider('mock');
-      const usecase = profile.getUseCase('GetMessages');
-
-      expect(provider).not.toBeUndefined();
-      expect(usecase).not.toBeUndefined();
-
-      const result = await usecase.perform(
-        { destination: 'random' },
-        { provider }
-      );
+      const result = await superface.run({ input: { destination: 'random' } });
 
       expect(result.isOk() && (result.value as any).messages.length).toEqual(3);
     });
