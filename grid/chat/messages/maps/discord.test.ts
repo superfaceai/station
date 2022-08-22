@@ -56,14 +56,17 @@ describe('chat/messages/discord', () => {
           return;
         }
 
-        const page2 = await superface.run({
-          input: {
-            destination: '938614740995960844',
-            limit: 3,
-            page: cursor,
+        const page2 = await superface.run(
+          {
+            input: {
+              destination: '938614740995960844',
+              limit: 3,
+              page: cursor,
+            },
+            testName: 'page 2',
           },
-          testName: 'page 2',
-        });
+          { hideInput: ['page'] }
+        );
 
         expect(page2.isOk).toBeTruthy();
         expect(page2).toMatchSnapshot({
