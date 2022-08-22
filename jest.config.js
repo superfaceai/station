@@ -1,7 +1,7 @@
 module.exports = {
   preset: 'ts-jest',
   testEnvironment: 'node',
-  rootDir: './',
+  rootDir: './grid',
   runner: 'groups',
-  reporters: ['default', './dist/reporter.js']
+  reporters: ['default', '../dist/reporter.js']
 };
