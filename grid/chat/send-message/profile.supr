@@ -3,7 +3,7 @@ Send a message
 Send a text message to channel destination
 """
 name = "chat/send-message"
-version = "1.0.0"
+version = "1.1.0"
 
 """
 Send Message
@@ -22,6 +22,12 @@ usecase SendMessage {
     Contents of the message
     """
     text! string!
+
+    """
+    Blocks
+    More complex structure of messages
+    """
+    blocks [Blocks]
   }
 
   result {
@@ -134,3 +140,5 @@ model RateLimit {
   """
   retryAfter number
 }
+
+model Blocks

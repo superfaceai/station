@@ -1,4 +1,4 @@
-profile = "chat/send-message@1.0"
+profile = "chat/send-message@1.1"
 provider = "slack"
 
 """
@@ -13,6 +13,7 @@ map SendMessage {
       body {
         channel = input.destination
         text = input.text
+        blocks = input.blocks
       }
     }
 
