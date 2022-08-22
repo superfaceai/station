@@ -6,25 +6,63 @@ import { SuperfaceTest } from '@superfaceai/testing';
  * @group live/safe
  */
 
+const provider = 'slack';
+const destination = 'C03UL8E5YMR';
+
 describe('chat/messages/slack', () => {
   let superface: SuperfaceTest;
+  let prepare: SuperfaceTest;
+  let teardown: SuperfaceTest;
+  let messageIds: string[] = [];
 
   describe('GetMessages', () => {
     beforeAll(() => {
       superface = new SuperfaceTest({
         profile: 'chat/messages',
-        provider: 'slack',
+        provider,
         useCase: 'GetMessages',
+        testInstance: expect,
+      });
+
+      prepare = new SuperfaceTest({
+        profile: 'chat/send-message',
+        provider,
+        useCase: 'SendMessage',
+        testInstance: expect,
+      });
+
+      teardown = new SuperfaceTest({
+        profile: 'chat/delete-message',
+        provider,
+        useCase: 'DeleteMessage',
         testInstance: expect,
       });
     });
 
     describe('when specified destination does exist', () => {
+      beforeEach(async () => {
+        for (const i of [1, 2, 3, 4]) {
+          const result = await prepare.run({
+            input: { destination, text: `Test ${i}` },
+          });
+  
+          if (result.isOk()) {
+            messageIds.push((result.value as any).messageId);
+          }
+        }
+      });
+  
+      afterAll(async () => {
+        for (const messageId of messageIds) {
+          await teardown.run({ input: { destination, messageId } });
+        }
+      });
+
       it('performs correctly', async () => {
         const page1 = await superface.run({
           input: {
-            destination: 'CF3H7S63W',
-            limit: 3,
+            destination,
+            limit: 2,
           },
           testName: 'page 1',
         });
@@ -56,8 +94,8 @@ describe('chat/messages/slack', () => {
         const page2 = await superface.run(
           {
             input: {
-              destination: 'CF3H7S63W',
-              limit: 3,
+              destination,
+              limit: 2,
               page: cursor,
             },
             testName: 'page 2',
