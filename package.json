@@ -15,7 +15,7 @@
     "test": "dotenv -e .env.example -- jest",
     "test:with_new_traffic": "USE_NEW_TRAFFIC=true yarn test",
     "test:update_traffic": "UPDATE_TRAFFIC=true yarn test",
-    "test:record": "SUPERFACE_LIVE_API='*' dotenv -e .env -e .env.example -- jest",
+    "test:record": "SUPERFACE_LIVE_API='*' dotenv -e .env -e .env.example -- jest -c jest.live.config.js",
     "test:record:dev": "TEST_ENV='dev' yarn test:record --group=live/safe",
     "test:record:prod": "TEST_ENV='prod' yarn test:record --group=live/safe",
     "test:update_snapshots": "yarn test -u",
