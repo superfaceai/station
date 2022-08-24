@@ -3,7 +3,7 @@ import { SuperfaceTest } from '@superfaceai/testing';
 /**
  * Live tests
  *
- * @group unsafe
+ * @group live/safe
  */
 
 describe('chat/delete-message/slack', () => {
@@ -23,10 +23,15 @@ describe('chat/delete-message/slack', () => {
       let messageId: string;
 
       beforeEach(async () => {
-        const result = await superface.run({
+        const prepare = new SuperfaceTest({
           profile: 'chat/send-message',
           useCase: 'SendMessage',
-          input: { destination: 'CF3H7S63W', text: 'test' },
+          provider: 'slack',
+        });
+
+        const result = await prepare.run({
+          input: { destination: 'C03UL8E5YMR', text: 'test DeleteMessage' },
+          testName: 'prepare-chat/delete-chat/send',
         });
 
         if (result.isOk()) {
@@ -35,18 +40,19 @@ describe('chat/delete-message/slack', () => {
       });
 
       it('performs correctly', async () => {
-        const result = await superface.run({
-          profile: 'chat/delete-message',
-          useCase: 'DeleteMessage',
-          input: {
-            destination: 'CF3H7S63W',
-            messageId,
+        const result = await superface.run(
+          {
+            profile: 'chat/delete-message',
+            useCase: 'DeleteMessage',
+            input: {
+              destination: 'C03UL8E5YMR',
+              messageId,
+            },
           },
-        });
+          { hideInput: ['messageId'] }
+        );
 
         expect(result.isOk).toBeTruthy();
-
-        /* eslint-disable @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-assignment */
 
         expect(result).toMatchSnapshot({
           value: {},
@@ -84,7 +90,7 @@ describe('chat/delete-message/slack', () => {
         const result = await superface.run(
           {
             input: {
-              destination: 'CF3H7S63W',
+              destination: 'C03UL8E5YMR',
               messageId: 'not-existing-id',
             },
           },
