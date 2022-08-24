@@ -13,7 +13,7 @@ describe('chat/messages/slack', () => {
   let superface: SuperfaceTest;
   let prepare: SuperfaceTest;
   let teardown: SuperfaceTest;
-  let messageIds: string[] = [];
+  const messageIds: string[] = [];
 
   describe('GetMessages', () => {
     beforeAll(() => {
@@ -28,33 +28,40 @@ describe('chat/messages/slack', () => {
         profile: 'chat/send-message',
         provider,
         useCase: 'SendMessage',
-        testInstance: expect,
       });
 
       teardown = new SuperfaceTest({
         profile: 'chat/delete-message',
         provider,
         useCase: 'DeleteMessage',
-        testInstance: expect,
       });
     });
 
     describe('when specified destination does exist', () => {
       beforeEach(async () => {
-        for (const i of [1, 2, 3, 4]) {
+        for (const i of [1, 2, 3]) {
           const result = await prepare.run({
             input: { destination, text: `Test ${i}` },
+            testName: `prepare-chat/messages-chat/send-${i}`,
           });
-  
+
           if (result.isOk()) {
             messageIds.push((result.value as any).messageId);
           }
         }
       });
-  
-      afterAll(async () => {
-        for (const messageId of messageIds) {
-          await teardown.run({ input: { destination, messageId } });
+
+      afterEach(async () => {
+        for (const i of [0, 1, 2]) {
+          await teardown.run(
+            {
+              input: { destination, messageId: messageIds[i] },
+              testName: `teardown-chat/messages-chat/delete-${i + 1}`,
+            },
+            {
+              hideInput: ['messageId'],
+            }
+          );
         }
       });
 
