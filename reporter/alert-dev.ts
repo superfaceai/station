@@ -1,7 +1,6 @@
-import { TestReport } from '@superfaceai/testing';
-import { AnalysisResult } from '@superfaceai/testing/dist/nock/analyzer';
+import { TestAnalysis, TestReport } from '@superfaceai/testing';
 
-const parseAnalysis = (analysis: AnalysisResult): string =>
+const parseAnalysis = (analysis: TestAnalysis): string =>
   `${analysis.impact} change at ${analysis.recordingPath}:
 ${analysis.profileId}/${analysis.providerName}/${analysis.useCaseName}
 

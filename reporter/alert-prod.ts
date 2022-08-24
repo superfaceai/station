@@ -6,11 +6,10 @@ const parseAnalysis = (analysis: TestAnalysis): any => {
   const removedErrors = analysis.errors.removed.join('\n');
   const changedErrors = analysis.errors.changed.join('\n');
 
-  const errorsCount = [
-    ...analysis.errors.added,
-    ...analysis.errors.removed,
-    ...analysis.errors.changed,
-  ].length;
+  const errorsCount =
+    analysis.errors.added.length +
+    analysis.errors.removed.length +
+    analysis.errors.changed.length;
 
   if (errorsCount === 0) {
     return undefined;
@@ -84,6 +83,13 @@ const parseAnalysis = (analysis: TestAnalysis): any => {
 
 export const alertProd = async (report: TestReport): Promise<void> => {
   const reports = report.map(parseAnalysis);
+  const destination = process.env.PROD_REPORTING_DESTINATION;
+
+  if (destination === undefined) {
+    throw new Error(
+      'Slack destination is not set. Setup environment variable "PROD_REPORTING_DESTINATION".'
+    );
+  }
 
   const client = new SuperfaceClient();
   const profile = await client.getProfile('chat/send-message');
@@ -91,7 +97,7 @@ export const alertProd = async (report: TestReport): Promise<void> => {
     if (blocks !== undefined) {
       const result = await profile.getUseCase('SendMessage').perform(
         {
-          destination: 'CF3H7S63W',
+          destination,
           text: 'Provider change report',
           blocks,
         },
