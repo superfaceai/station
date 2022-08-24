@@ -1,0 +1,13 @@
+profile = "chat/delete-message@1.0"
+provider = "mock"
+
+"""
+DeleteMessage map
+"""
+map DeleteMessage {
+  map error if (input.destination === 'not-existing-dest') {
+    title = 'Channel not found'
+  }
+
+  map result {}
+}
