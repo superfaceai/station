@@ -95,6 +95,7 @@ export const alertProd = async (report: TestReport): Promise<void> => {
   const profile = await client.getProfile('chat/send-message');
   for (const blocks of reports) {
     if (blocks !== undefined) {
+      /* eslint-disable @typescript-eslint/no-unsafe-assignment */
       const result = await profile.getUseCase('SendMessage').perform(
         {
           destination,
