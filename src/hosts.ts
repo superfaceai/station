@@ -21,10 +21,10 @@ export function save(hosts: string): void {
   writeFile('/etc/hosts', hosts);
 }
 
-export function block(): void {
+export async function block(): Promise<void> {
   const hosts = load();
 
-  const serviceUrls = getServiceUrls();
+  const serviceUrls = await getServiceUrls();
   const updatedHosts = updateHosts(hosts, serviceUrls);
 
   save(updatedHosts);
@@ -66,8 +66,8 @@ ${formatTemplate(TEMPLATE, serviceUrls.join(' '))}
   `.trim();
 }
 
-export function getServiceUrls(print = console.log): string[] {
-  const providerPaths = providersFiles();
+export async function getServiceUrls(print = console.log): Promise<string[]> {
+  const providerPaths = await providersFiles();
 
   const urls: string[] = [];
 
@@ -96,11 +96,11 @@ export function getServiceUrls(print = console.log): string[] {
   return urls;
 }
 
-export function run(print = console.log): void {
+export async function run(print = console.log): Promise<void> {
   const action = process.argv[2];
 
   if (action === 'block') {
-    block();
+    await block();
   } else if (action === 'allow') {
     allow();
   } else {
