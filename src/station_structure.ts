@@ -1,3 +1,5 @@
+import { IFileSystem, normalizeSuperJsonDocument } from '@superfaceai/one-sdk';
+
 import {
   arrayDiff,
   loadSuperJson,
@@ -14,16 +16,20 @@ export type CheckResult = {
   message: string;
 };
 
-export async function checkFiles(): Promise<CheckResult[]> {
+export async function checkFiles(options?: {
+  fileSystem?: IFileSystem;
+}): Promise<CheckResult[]> {
+  const superJson = await loadSuperJson(options);
   const localFiles: string[] = [];
-  localFiles.push(...(await localProviders()));
-  localFiles.push(...(await localProfiles()));
-  localFiles.push(...(await localMaps()));
+
+  localFiles.push(...(await localProviders(superJson, options)));
+  localFiles.push(...(await localProfiles(superJson, options)));
+  localFiles.push(...(await localMaps(superJson, options)));
 
   const superJsonFiles: string[] = [];
-  superJsonFiles.push(...providersFiles());
-  superJsonFiles.push(...profilesFiles());
-  superJsonFiles.push(...mapsFiles());
+  superJsonFiles.push(...(await providersFiles(superJson)));
+  superJsonFiles.push(...(await profilesFiles(superJson)));
+  superJsonFiles.push(...(await mapsFiles(superJson)));
 
   const notLinkedInSuperJson = arrayDiff(localFiles, superJsonFiles);
   const missingFiles = arrayDiff(superJsonFiles, localFiles);
@@ -47,12 +53,14 @@ export async function checkFiles(): Promise<CheckResult[]> {
   return result;
 }
 
-export async function checkMockMap(): Promise<CheckResult[]> {
-  const superJson = loadSuperJson();
+export async function checkMockMap(options?: {
+  fileSystem?: IFileSystem;
+}): Promise<CheckResult[]> {
+  const superJson = normalizeSuperJsonDocument(await loadSuperJson(options));
   const results: CheckResult[] = [];
 
-  for (const profileId in superJson.normalized.profiles) {
-    const profileSettings = superJson.normalized.profiles[profileId];
+  for (const profileId in superJson.profiles) {
+    const profileSettings = superJson.profiles[profileId];
 
     const mockProvider = profileSettings.providers.mock;
 
@@ -67,10 +75,13 @@ export async function checkMockMap(): Promise<CheckResult[]> {
   return results;
 }
 
-export async function run(print = console.log): Promise<void> {
+export async function run(
+  print = console.log,
+  options?: { fileSystem?: IFileSystem }
+): Promise<void> {
   const results: CheckResult[] = [];
 
-  results.push(...(await checkFiles()));
+  results.push(...(await checkFiles(options)));
   results.push(...(await checkMockMap()));
   // TODO: check test is present
 

@@ -3,13 +3,12 @@ import {
   detectSuperJson,
   IFileSystem,
   loadSuperJson as loadSuperJsonDocument,
-  loadSuperJsonSync,
   NodeFileSystem,
   normalizeSuperJsonDocument,
 } from '@superfaceai/one-sdk';
 import * as fs from 'fs';
 import * as glob from 'glob';
-import { join, resolve } from 'path';
+import { join as joinPath, resolve } from 'path';
 import { promisify } from 'util';
 
 export const access = promisify(fs.access);
@@ -30,7 +29,8 @@ export async function loadSuperJson(options?: {
 }): Promise<SuperJsonDocument> {
   const superJsonPath = await detectSuperJson(
     process.cwd(),
-    options?.fileSystem ?? NodeFileSystem
+    options?.fileSystem ?? NodeFileSystem,
+    2
   );
 
   if (superJsonPath === undefined) {
@@ -39,7 +39,7 @@ export async function loadSuperJson(options?: {
 
   if (!superJson) {
     const superJsonDocument = await loadSuperJsonDocument(
-      superJsonPath,
+      joinPath(superJsonPath, 'super.json'),
       options?.fileSystem ?? NodeFileSystem
     );
     superJson = superJsonDocument.unwrap();

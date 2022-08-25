@@ -1,5 +1,5 @@
 import { SuperJsonDocument } from '@superfaceai/ast';
-import { loadSuperJson } from '@superfaceai/one-sdk';
+import { detectSuperJson, loadSuperJson } from '@superfaceai/one-sdk';
 import * as glob from 'glob';
 import { mocked } from 'ts-jest/utils';
 
@@ -10,7 +10,7 @@ jest.mock('glob');
 jest.mock('@superfaceai/one-sdk', () => ({
   ...jest.requireActual('@superfaceai/one-sdk'),
   loadSuperJson: jest.fn(),
-}))
+}));
 
 const SUPER_JSON_DOCUMENT: SuperJsonDocument = {
   profiles: {
@@ -47,11 +47,10 @@ describe('util', () => {
   });
 
   describe('loadSuperJson', () => {
-    it('should call loadSync once', () => {
-      const spy = mocked(loadSuperJson)
+    it('should call loadSync once', async () => {
+      const spy = mocked(loadSuperJson);
 
-      util.loadSuperJson();
-      util.loadSuperJson();
+      await util.loadSuperJson();
 
       expect(spy).toBeCalledTimes(1);
 
@@ -60,19 +59,16 @@ describe('util', () => {
   });
 
   describe('normalizePath', () => {
-    let superJson: SuperJson;
-
-    beforeEach(() => {
-      superJson = new SuperJson({});
-    });
-
     // TODO: support this in SDK?
-    it.skip('should call resolvePath on SuperJson', () => {
-      const spy = jest.spyOn(superJson, 'resolvePath');
+    it.skip('should call resolvePath on SuperJson', async () => {
+      // const spy = jest.spyOn(superJson, 'resolvePath');
 
-      util.normalizePath('./grid/profile.supr', superJson);
+      const path = await util.normalizePath(
+        './grid/profile.supr',
+        SUPER_JSON_DOCUMENT
+      );
 
-      expect(spy).toBeCalled();
+      expect(path).toBe('');
     });
   });
 
@@ -95,109 +91,79 @@ describe('util', () => {
   });
 
   describe('profilesFiles', () => {
-    let superJson: SuperJson;
-
-    beforeEach(() => {
-      superJson = new SuperJson(SUPER_JSON_DOCUMENT);
-    });
-
-    it('should return all profiles with local file', () => {
-      expect(util.profilesFiles(superJson)).toEqual([
-        util.normalizePath('./one.supr', superJson),
-        util.normalizePath('./two.supr', superJson),
+    it('should return all profiles with local file', async () => {
+      expect(util.profilesFiles(SUPER_JSON_DOCUMENT)).toEqual([
+        await util.normalizePath('./one.supr', SUPER_JSON_DOCUMENT),
+        await util.normalizePath('./two.supr', SUPER_JSON_DOCUMENT),
       ]);
     });
 
     it("should throw if profile settings doesn't point to local file", () => {
       expect(() =>
-        util.profilesFiles(
-          new SuperJson({
-            profiles: {
-              profile: {
-                version: '1.0.0',
-                providers: {},
-              },
+        util.profilesFiles({
+          profiles: {
+            profile: {
+              version: '1.0.0',
+              providers: {},
             },
-          })
-        )
+          },
+        })
       ).toThrowError();
     });
   });
 
   describe('mapsFiles', () => {
-    let superJson: SuperJson;
-
-    beforeEach(() => {
-      superJson = new SuperJson(SUPER_JSON_DOCUMENT);
-    });
-
     it('should return map with local file', () => {
-      expect(util.mapsFiles(superJson)).toEqual([
-        util.normalizePath('./one.suma', superJson),
-        util.normalizePath('./two.suma', superJson),
+      expect(util.mapsFiles(SUPER_JSON_DOCUMENT)).toEqual([
+        util.normalizePath('./one.suma', SUPER_JSON_DOCUMENT),
+        util.normalizePath('./two.suma', SUPER_JSON_DOCUMENT),
       ]);
     });
 
     it("should throw if map doesn't point to local file", () => {
       expect(() =>
-        util.mapsFiles(
-          new SuperJson({
-            profiles: {
-              profile: {
-                file: './profile.supr',
-                providers: {
-                  provider: {},
-                },
+        util.mapsFiles({
+          profiles: {
+            profile: {
+              file: './profile.supr',
+              providers: {
+                provider: {},
               },
             },
-            providers: {
-              provider: {},
-            },
-          })
-        )
+          },
+          providers: {
+            provider: {},
+          },
+        })
       ).toThrowError();
     });
   });
 
   describe('providersFiles', () => {
-    let superJson: SuperJson;
-
-    beforeEach(() => {
-      superJson = new SuperJson(SUPER_JSON_DOCUMENT);
-    });
-
     it('should return provider with local file', () => {
-      expect(util.providersFiles(superJson)).toEqual([
-        util.normalizePath('./one.json', superJson),
-        util.normalizePath('./two.json', superJson),
+      expect(util.providersFiles(SUPER_JSON_DOCUMENT)).toEqual([
+        util.normalizePath('./one.json', SUPER_JSON_DOCUMENT),
+        util.normalizePath('./two.json', SUPER_JSON_DOCUMENT),
       ]);
     });
 
     it("should throw if provider settings doesn't point to local file", () => {
       expect(() =>
-        util.providersFiles(
-          new SuperJson({
-            providers: {
-              provider: {},
-            },
-          })
-        )
+        util.providersFiles({
+          providers: {
+            provider: {},
+          },
+        })
       ).toThrowError();
     });
   });
 
   describe('localProviders', () => {
-    let superJson: SuperJson;
-
-    beforeEach(() => {
-      superJson = new SuperJson({}, '/home');
-    });
-
     it('should call glob with providers/*.json', async () => {
       mocked(glob.sync).mockReturnValue(['./providers/one.json']);
-      jest.spyOn(SuperJson, 'detectSuperJson').mockResolvedValue('/home');
+      mocked(detectSuperJson).mockResolvedValue('/home');
 
-      const result = await util.localProviders(superJson);
+      const result = await util.localProviders(SUPER_JSON_DOCUMENT);
 
       expect(glob.sync).toBeCalledWith('../providers/*.json', {
         cwd: '/home',
@@ -207,17 +173,11 @@ describe('util', () => {
   });
 
   describe('localProfiles', () => {
-    let superJson: SuperJson;
-
-    beforeEach(() => {
-      superJson = new SuperJson({}, '/home');
-    });
-
     it('should call glob with grid/**/*.supr', async () => {
       mocked(glob.sync).mockReturnValue(['./grid/send-email/profile.supr']);
-      jest.spyOn(SuperJson, 'detectSuperJson').mockResolvedValue('/home');
+      mocked(detectSuperJson).mockResolvedValue('/home');
 
-      const result = await util.localProfiles(superJson);
+      const result = await util.localProfiles(SUPER_JSON_DOCUMENT);
 
       expect(glob.sync).toBeCalledWith('../grid/**/*.supr', {
         cwd: '/home',
@@ -227,17 +187,11 @@ describe('util', () => {
   });
 
   describe('localMaps', () => {
-    let superJson: SuperJson;
-
-    beforeEach(() => {
-      superJson = new SuperJson({}, '/home');
-    });
-
     it('should call glob with grid/**/*.suma', async () => {
       mocked(glob.sync).mockReturnValue(['./grid/send-email/provider.suma']);
-      jest.spyOn(SuperJson, 'detectSuperJson').mockResolvedValue('/home');
+      mocked(detectSuperJson).mockResolvedValue('/home');
 
-      const result = await util.localMaps(superJson);
+      const result = await util.localMaps(SUPER_JSON_DOCUMENT);
 
       expect(glob.sync).toBeCalledWith('../grid/**/*.suma', {
         cwd: '/home',
