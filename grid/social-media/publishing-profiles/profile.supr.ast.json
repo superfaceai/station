@@ -1,0 +1,822 @@
+{
+  "kind": "ProfileDocument",
+  "header": {
+    "kind": "ProfileHeader",
+    "scope": "social-media",
+    "name": "publishing-profiles",
+    "version": {
+      "major": 1,
+      "minor": 0,
+      "patch": 1
+    },
+    "location": {
+      "start": {
+        "line": 6,
+        "column": 1,
+        "charIndex": 192
+      },
+      "end": {
+        "line": 7,
+        "column": 18,
+        "charIndex": 251
+      }
+    },
+    "documentation": {
+      "title": "Social Media Publishing Profiles",
+      "description": "Identify profiles the authenticated user is authorized to publish to (e.g. Facebook page, Instagram business account, or LinkedIn organization page).",
+      "location": {
+        "start": {
+          "line": 1,
+          "column": 1,
+          "charIndex": 0
+        },
+        "end": {
+          "line": 4,
+          "column": 4,
+          "charIndex": 190
+        }
+      }
+    }
+  },
+  "definitions": [
+    {
+      "kind": "UseCaseDefinition",
+      "useCaseName": "GetProfilesForPublishing",
+      "safety": "safe",
+      "result": {
+        "kind": "UseCaseSlotDefinition",
+        "value": {
+          "kind": "ObjectDefinition",
+          "fields": [
+            {
+              "kind": "FieldDefinition",
+              "fieldName": "profiles",
+              "required": false,
+              "type": {
+                "kind": "ListDefinition",
+                "elementType": {
+                  "kind": "ObjectDefinition",
+                  "fields": [
+                    {
+                      "kind": "FieldDefinition",
+                      "fieldName": "id",
+                      "required": true,
+                      "type": {
+                        "kind": "PrimitiveTypeName",
+                        "name": "string",
+                        "location": {
+                          "start": {
+                            "line": 18,
+                            "column": 13,
+                            "charIndex": 497
+                          },
+                          "end": {
+                            "line": 18,
+                            "column": 19,
+                            "charIndex": 503
+                          }
+                        }
+                      },
+                      "location": {
+                        "start": {
+                          "line": 18,
+                          "column": 9,
+                          "charIndex": 493
+                        },
+                        "end": {
+                          "line": 18,
+                          "column": 19,
+                          "charIndex": 503
+                        }
+                      },
+                      "documentation": {
+                        "title": "Profile ID",
+                        "location": {
+                          "start": {
+                            "line": 17,
+                            "column": 9,
+                            "charIndex": 472
+                          },
+                          "end": {
+                            "line": 17,
+                            "column": 21,
+                            "charIndex": 484
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "kind": "FieldDefinition",
+                      "fieldName": "name",
+                      "required": false,
+                      "type": {
+                        "kind": "PrimitiveTypeName",
+                        "name": "string",
+                        "location": {
+                          "start": {
+                            "line": 20,
+                            "column": 14,
+                            "charIndex": 553
+                          },
+                          "end": {
+                            "line": 20,
+                            "column": 20,
+                            "charIndex": 559
+                          }
+                        }
+                      },
+                      "location": {
+                        "start": {
+                          "line": 20,
+                          "column": 9,
+                          "charIndex": 548
+                        },
+                        "end": {
+                          "line": 20,
+                          "column": 20,
+                          "charIndex": 559
+                        }
+                      },
+                      "documentation": {
+                        "title": "Profile name (non-unique)",
+                        "location": {
+                          "start": {
+                            "line": 19,
+                            "column": 9,
+                            "charIndex": 512
+                          },
+                          "end": {
+                            "line": 19,
+                            "column": 36,
+                            "charIndex": 539
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "kind": "FieldDefinition",
+                      "fieldName": "username",
+                      "required": false,
+                      "type": {
+                        "kind": "PrimitiveTypeName",
+                        "name": "string",
+                        "location": {
+                          "start": {
+                            "line": 25,
+                            "column": 18,
+                            "charIndex": 663
+                          },
+                          "end": {
+                            "line": 25,
+                            "column": 24,
+                            "charIndex": 669
+                          }
+                        }
+                      },
+                      "location": {
+                        "start": {
+                          "line": 25,
+                          "column": 9,
+                          "charIndex": 654
+                        },
+                        "end": {
+                          "line": 25,
+                          "column": 24,
+                          "charIndex": 669
+                        }
+                      },
+                      "documentation": {
+                        "title": "Username or vanity name",
+                        "description": "Only where applicable",
+                        "location": {
+                          "start": {
+                            "line": 21,
+                            "column": 9,
+                            "charIndex": 568
+                          },
+                          "end": {
+                            "line": 24,
+                            "column": 12,
+                            "charIndex": 645
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "kind": "FieldDefinition",
+                      "fieldName": "imageUrl",
+                      "required": false,
+                      "type": {
+                        "kind": "PrimitiveTypeName",
+                        "name": "string",
+                        "location": {
+                          "start": {
+                            "line": 27,
+                            "column": 18,
+                            "charIndex": 724
+                          },
+                          "end": {
+                            "line": 27,
+                            "column": 24,
+                            "charIndex": 730
+                          }
+                        }
+                      },
+                      "location": {
+                        "start": {
+                          "line": 27,
+                          "column": 9,
+                          "charIndex": 715
+                        },
+                        "end": {
+                          "line": 27,
+                          "column": 24,
+                          "charIndex": 730
+                        }
+                      },
+                      "documentation": {
+                        "title": "Profile image (avatar) URL",
+                        "location": {
+                          "start": {
+                            "line": 26,
+                            "column": 9,
+                            "charIndex": 678
+                          },
+                          "end": {
+                            "line": 26,
+                            "column": 37,
+                            "charIndex": 706
+                          }
+                        }
+                      }
+                    }
+                  ],
+                  "location": {
+                    "start": {
+                      "line": 16,
+                      "column": 7,
+                      "charIndex": 462
+                    },
+                    "end": {
+                      "line": 28,
+                      "column": 8,
+                      "charIndex": 738
+                    }
+                  }
+                },
+                "location": {
+                  "start": {
+                    "line": 15,
+                    "column": 14,
+                    "charIndex": 454
+                  },
+                  "end": {
+                    "line": 29,
+                    "column": 4,
+                    "charIndex": 742
+                  }
+                }
+              },
+              "location": {
+                "start": {
+                  "line": 15,
+                  "column": 5,
+                  "charIndex": 445
+                },
+                "end": {
+                  "line": 29,
+                  "column": 4,
+                  "charIndex": 742
+                }
+              }
+            }
+          ],
+          "location": {
+            "start": {
+              "line": 14,
+              "column": 10,
+              "charIndex": 439
+            },
+            "end": {
+              "line": 29,
+              "column": 5,
+              "charIndex": 743
+            }
+          }
+        },
+        "location": {
+          "start": {
+            "line": 14,
+            "column": 3,
+            "charIndex": 432
+          },
+          "end": {
+            "line": 29,
+            "column": 5,
+            "charIndex": 743
+          }
+        }
+      },
+      "error": {
+        "kind": "UseCaseSlotDefinition",
+        "value": {
+          "kind": "ObjectDefinition",
+          "fields": [
+            {
+              "kind": "FieldDefinition",
+              "fieldName": "title",
+              "required": true,
+              "location": {
+                "start": {
+                  "line": 36,
+                  "column": 5,
+                  "charIndex": 842
+                },
+                "end": {
+                  "line": 36,
+                  "column": 11,
+                  "charIndex": 848
+                }
+              },
+              "documentation": {
+                "title": "Title",
+                "description": "A short, human-readable summary of the problem type.",
+                "location": {
+                  "start": {
+                    "line": 32,
+                    "column": 5,
+                    "charIndex": 759
+                  },
+                  "end": {
+                    "line": 35,
+                    "column": 8,
+                    "charIndex": 837
+                  }
+                }
+              }
+            },
+            {
+              "kind": "FieldDefinition",
+              "fieldName": "detail",
+              "required": false,
+              "location": {
+                "start": {
+                  "line": 41,
+                  "column": 5,
+                  "charIndex": 947
+                },
+                "end": {
+                  "line": 41,
+                  "column": 11,
+                  "charIndex": 953
+                }
+              },
+              "documentation": {
+                "title": "A human-readable explanation specific to this occurrence of the problem.",
+                "location": {
+                  "start": {
+                    "line": 38,
+                    "column": 5,
+                    "charIndex": 854
+                  },
+                  "end": {
+                    "line": 40,
+                    "column": 8,
+                    "charIndex": 942
+                  }
+                }
+              }
+            }
+          ],
+          "location": {
+            "start": {
+              "line": 31,
+              "column": 9,
+              "charIndex": 753
+            },
+            "end": {
+              "line": 42,
+              "column": 4,
+              "charIndex": 957
+            }
+          }
+        },
+        "location": {
+          "start": {
+            "line": 31,
+            "column": 3,
+            "charIndex": 747
+          },
+          "end": {
+            "line": 42,
+            "column": 4,
+            "charIndex": 957
+          }
+        }
+      },
+      "examples": [
+        {
+          "kind": "UseCaseSlotDefinition",
+          "value": {
+            "kind": "UseCaseExample",
+            "exampleName": "Successful",
+            "result": {
+              "kind": "UseCaseSlotDefinition",
+              "value": {
+                "kind": "ComlinkObjectLiteral",
+                "fields": [
+                  {
+                    "kind": "ComlinkAssignment",
+                    "key": [
+                      "profiles"
+                    ],
+                    "value": {
+                      "kind": "ComlinkListLiteral",
+                      "items": [
+                        {
+                          "kind": "ComlinkObjectLiteral",
+                          "fields": [
+                            {
+                              "kind": "ComlinkAssignment",
+                              "key": [
+                                "id"
+                              ],
+                              "value": {
+                                "kind": "ComlinkPrimitiveLiteral",
+                                "value": "110658944785122",
+                                "location": {
+                                  "start": {
+                                    "line": 48,
+                                    "column": 16,
+                                    "charIndex": 1039
+                                  },
+                                  "end": {
+                                    "line": 48,
+                                    "column": 33,
+                                    "charIndex": 1056
+                                  }
+                                }
+                              },
+                              "location": {
+                                "start": {
+                                  "line": 48,
+                                  "column": 11,
+                                  "charIndex": 1034
+                                },
+                                "end": {
+                                  "line": 48,
+                                  "column": 33,
+                                  "charIndex": 1056
+                                }
+                              }
+                            },
+                            {
+                              "kind": "ComlinkAssignment",
+                              "key": [
+                                "name"
+                              ],
+                              "value": {
+                                "kind": "ComlinkPrimitiveLiteral",
+                                "value": "Sf-test",
+                                "location": {
+                                  "start": {
+                                    "line": 49,
+                                    "column": 18,
+                                    "charIndex": 1075
+                                  },
+                                  "end": {
+                                    "line": 49,
+                                    "column": 27,
+                                    "charIndex": 1084
+                                  }
+                                }
+                              },
+                              "location": {
+                                "start": {
+                                  "line": 49,
+                                  "column": 11,
+                                  "charIndex": 1068
+                                },
+                                "end": {
+                                  "line": 49,
+                                  "column": 27,
+                                  "charIndex": 1084
+                                }
+                              }
+                            },
+                            {
+                              "kind": "ComlinkAssignment",
+                              "key": [
+                                "username"
+                              ],
+                              "value": {
+                                "kind": "ComlinkPrimitiveLiteral",
+                                "value": "sftest7904",
+                                "location": {
+                                  "start": {
+                                    "line": 50,
+                                    "column": 22,
+                                    "charIndex": 1107
+                                  },
+                                  "end": {
+                                    "line": 50,
+                                    "column": 34,
+                                    "charIndex": 1119
+                                  }
+                                }
+                              },
+                              "location": {
+                                "start": {
+                                  "line": 50,
+                                  "column": 11,
+                                  "charIndex": 1096
+                                },
+                                "end": {
+                                  "line": 50,
+                                  "column": 34,
+                                  "charIndex": 1119
+                                }
+                              }
+                            },
+                            {
+                              "kind": "ComlinkAssignment",
+                              "key": [
+                                "imageUrl"
+                              ],
+                              "value": {
+                                "kind": "ComlinkPrimitiveLiteral",
+                                "value": "https://scontent-prg1-1.xx.fbcdn.net/v/t39.30808-1/cp0/p50x50/263679317_110659048118445_8251344428401368545_n.png?_nc_cat=103&ccb=1-5&_nc_sid=dbb9e7&_nc_ohc=kN4tKgxAWdYAX_B0I6K&_nc_ht=scontent-prg1-1.xx&edm=AGaHXAAEAAAA&oh=00_AT8KpGTOc-H8gJrtOJwvNasfXrW8I27s0h1T5a8_nxUeyg&oe=61EDD39E",
+                                "location": {
+                                  "start": {
+                                    "line": 51,
+                                    "column": 22,
+                                    "charIndex": 1142
+                                  },
+                                  "end": {
+                                    "line": 51,
+                                    "column": 308,
+                                    "charIndex": 1428
+                                  }
+                                }
+                              },
+                              "location": {
+                                "start": {
+                                  "line": 51,
+                                  "column": 11,
+                                  "charIndex": 1131
+                                },
+                                "end": {
+                                  "line": 51,
+                                  "column": 308,
+                                  "charIndex": 1428
+                                }
+                              }
+                            }
+                          ],
+                          "location": {
+                            "start": {
+                              "line": 47,
+                              "column": 9,
+                              "charIndex": 1022
+                            },
+                            "end": {
+                              "line": 52,
+                              "column": 10,
+                              "charIndex": 1439
+                            }
+                          }
+                        }
+                      ],
+                      "location": {
+                        "start": {
+                          "line": 46,
+                          "column": 18,
+                          "charIndex": 1012
+                        },
+                        "end": {
+                          "line": 53,
+                          "column": 8,
+                          "charIndex": 1447
+                        }
+                      }
+                    },
+                    "location": {
+                      "start": {
+                        "line": 46,
+                        "column": 7,
+                        "charIndex": 1001
+                      },
+                      "end": {
+                        "line": 53,
+                        "column": 8,
+                        "charIndex": 1447
+                      }
+                    }
+                  }
+                ],
+                "location": {
+                  "start": {
+                    "line": 45,
+                    "column": 12,
+                    "charIndex": 993
+                  },
+                  "end": {
+                    "line": 54,
+                    "column": 6,
+                    "charIndex": 1453
+                  }
+                }
+              },
+              "location": {
+                "start": {
+                  "line": 45,
+                  "column": 5,
+                  "charIndex": 986
+                },
+                "end": {
+                  "line": 54,
+                  "column": 6,
+                  "charIndex": 1453
+                }
+              }
+            },
+            "location": {
+              "start": {
+                "line": 44,
+                "column": 11,
+                "charIndex": 969
+              },
+              "end": {
+                "line": 55,
+                "column": 4,
+                "charIndex": 1457
+              }
+            }
+          },
+          "location": {
+            "start": {
+              "line": 44,
+              "column": 3,
+              "charIndex": 961
+            },
+            "end": {
+              "line": 55,
+              "column": 4,
+              "charIndex": 1457
+            }
+          }
+        },
+        {
+          "kind": "UseCaseSlotDefinition",
+          "value": {
+            "kind": "UseCaseExample",
+            "exampleName": "Failed",
+            "error": {
+              "kind": "UseCaseSlotDefinition",
+              "value": {
+                "kind": "ComlinkObjectLiteral",
+                "fields": [
+                  {
+                    "kind": "ComlinkAssignment",
+                    "key": [
+                      "title"
+                    ],
+                    "value": {
+                      "kind": "ComlinkPrimitiveLiteral",
+                      "value": "Unauthorized",
+                      "location": {
+                        "start": {
+                          "line": 59,
+                          "column": 15,
+                          "charIndex": 1504
+                        },
+                        "end": {
+                          "line": 59,
+                          "column": 29,
+                          "charIndex": 1518
+                        }
+                      }
+                    },
+                    "location": {
+                      "start": {
+                        "line": 59,
+                        "column": 7,
+                        "charIndex": 1496
+                      },
+                      "end": {
+                        "line": 59,
+                        "column": 29,
+                        "charIndex": 1518
+                      }
+                    }
+                  }
+                ],
+                "location": {
+                  "start": {
+                    "line": 58,
+                    "column": 11,
+                    "charIndex": 1488
+                  },
+                  "end": {
+                    "line": 60,
+                    "column": 6,
+                    "charIndex": 1524
+                  }
+                }
+              },
+              "location": {
+                "start": {
+                  "line": 58,
+                  "column": 5,
+                  "charIndex": 1482
+                },
+                "end": {
+                  "line": 60,
+                  "column": 6,
+                  "charIndex": 1524
+                }
+              }
+            },
+            "location": {
+              "start": {
+                "line": 57,
+                "column": 11,
+                "charIndex": 1469
+              },
+              "end": {
+                "line": 61,
+                "column": 4,
+                "charIndex": 1528
+              }
+            }
+          },
+          "location": {
+            "start": {
+              "line": 57,
+              "column": 3,
+              "charIndex": 1461
+            },
+            "end": {
+              "line": 61,
+              "column": 4,
+              "charIndex": 1528
+            }
+          }
+        }
+      ],
+      "location": {
+        "start": {
+          "line": 13,
+          "column": 1,
+          "charIndex": 390
+        },
+        "end": {
+          "line": 62,
+          "column": 2,
+          "charIndex": 1530
+        }
+      },
+      "documentation": {
+        "title": "Get Profiles for Publishing",
+        "description": "Retrieve social media profiles (pages, accounts) the authenticated user is authorized to publish to.",
+        "location": {
+          "start": {
+            "line": 9,
+            "column": 1,
+            "charIndex": 253
+          },
+          "end": {
+            "line": 12,
+            "column": 4,
+            "charIndex": 389
+          }
+        }
+      }
+    }
+  ],
+  "location": {
+    "start": {
+      "line": 6,
+      "column": 1,
+      "charIndex": 192
+    },
+    "end": {
+      "line": 62,
+      "column": 2,
+      "charIndex": 1530
+    }
+  },
+  "astMetadata": {
+    "astVersion": {
+      "major": 1,
+      "minor": 2,
+      "patch": 0
+    },
+    "parserVersion": {
+      "major": 1,
+      "minor": 2,
+      "patch": 0
+    },
+    "sourceChecksum": "90c4419c43cdef4a45a7ef92aa68697f7c9cd44ba7c0b8f190360a580378d772"
+  }
+}

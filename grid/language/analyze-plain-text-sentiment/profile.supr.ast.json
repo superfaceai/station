@@ -1,0 +1,1131 @@
+{
+  "kind": "ProfileDocument",
+  "header": {
+    "kind": "ProfileHeader",
+    "scope": "language",
+    "name": "analyze-plain-text-sentiment",
+    "version": {
+      "major": 1,
+      "minor": 0,
+      "patch": 1
+    },
+    "location": {
+      "start": {
+        "line": 6,
+        "column": 1,
+        "charIndex": 95
+      },
+      "end": {
+        "line": 7,
+        "column": 18,
+        "charIndex": 159
+      }
+    },
+    "documentation": {
+      "title": "Analyze plain text sentiment",
+      "description": "Analyzes the prevailing emotional opinion of given text.",
+      "location": {
+        "start": {
+          "line": 1,
+          "column": 1,
+          "charIndex": 0
+        },
+        "end": {
+          "line": 4,
+          "column": 4,
+          "charIndex": 93
+        }
+      }
+    }
+  },
+  "definitions": [
+    {
+      "kind": "UseCaseDefinition",
+      "useCaseName": "AnalyzePlainTextSentiment",
+      "safety": "safe",
+      "input": {
+        "kind": "UseCaseSlotDefinition",
+        "value": {
+          "kind": "ObjectDefinition",
+          "fields": [
+            {
+              "kind": "FieldDefinition",
+              "fieldName": "text",
+              "required": true,
+              "type": {
+                "kind": "NonNullDefinition",
+                "type": {
+                  "kind": "PrimitiveTypeName",
+                  "name": "string",
+                  "location": {
+                    "start": {
+                      "line": 19,
+                      "column": 11,
+                      "charIndex": 389
+                    },
+                    "end": {
+                      "line": 19,
+                      "column": 17,
+                      "charIndex": 395
+                    }
+                  }
+                },
+                "location": {
+                  "start": {
+                    "line": 19,
+                    "column": 11,
+                    "charIndex": 389
+                  },
+                  "end": {
+                    "line": 19,
+                    "column": 18,
+                    "charIndex": 396
+                  }
+                }
+              },
+              "location": {
+                "start": {
+                  "line": 19,
+                  "column": 5,
+                  "charIndex": 383
+                },
+                "end": {
+                  "line": 19,
+                  "column": 18,
+                  "charIndex": 396
+                }
+              },
+              "documentation": {
+                "title": "Text",
+                "description": "The text to be analyzed.",
+                "location": {
+                  "start": {
+                    "line": 15,
+                    "column": 5,
+                    "charIndex": 329
+                  },
+                  "end": {
+                    "line": 18,
+                    "column": 8,
+                    "charIndex": 378
+                  }
+                }
+              }
+            },
+            {
+              "kind": "FieldDefinition",
+              "fieldName": "languageCode",
+              "required": true,
+              "type": {
+                "kind": "NonNullDefinition",
+                "type": {
+                  "kind": "PrimitiveTypeName",
+                  "name": "string",
+                  "location": {
+                    "start": {
+                      "line": 25,
+                      "column": 19,
+                      "charIndex": 530
+                    },
+                    "end": {
+                      "line": 25,
+                      "column": 25,
+                      "charIndex": 536
+                    }
+                  }
+                },
+                "location": {
+                  "start": {
+                    "line": 25,
+                    "column": 19,
+                    "charIndex": 530
+                  },
+                  "end": {
+                    "line": 25,
+                    "column": 26,
+                    "charIndex": 537
+                  }
+                }
+              },
+              "location": {
+                "start": {
+                  "line": 25,
+                  "column": 5,
+                  "charIndex": 516
+                },
+                "end": {
+                  "line": 25,
+                  "column": 26,
+                  "charIndex": 537
+                }
+              },
+              "documentation": {
+                "title": "Language code",
+                "description": "The language of the text expressed as a ISO 639‑1 language code, e.g. 'en'.",
+                "location": {
+                  "start": {
+                    "line": 21,
+                    "column": 5,
+                    "charIndex": 402
+                  },
+                  "end": {
+                    "line": 24,
+                    "column": 8,
+                    "charIndex": 511
+                  }
+                }
+              }
+            }
+          ],
+          "location": {
+            "start": {
+              "line": 14,
+              "column": 9,
+              "charIndex": 323
+            },
+            "end": {
+              "line": 26,
+              "column": 4,
+              "charIndex": 541
+            }
+          }
+        },
+        "location": {
+          "start": {
+            "line": 14,
+            "column": 3,
+            "charIndex": 317
+          },
+          "end": {
+            "line": 26,
+            "column": 4,
+            "charIndex": 541
+          }
+        }
+      },
+      "result": {
+        "kind": "UseCaseSlotDefinition",
+        "value": {
+          "kind": "ObjectDefinition",
+          "fields": [
+            {
+              "kind": "FieldDefinition",
+              "fieldName": "sentiment",
+              "required": true,
+              "type": {
+                "kind": "NonNullDefinition",
+                "type": {
+                  "kind": "ModelTypeName",
+                  "name": "Sentiment",
+                  "location": {
+                    "start": {
+                      "line": 33,
+                      "column": 16,
+                      "charIndex": 654
+                    },
+                    "end": {
+                      "line": 33,
+                      "column": 25,
+                      "charIndex": 663
+                    }
+                  }
+                },
+                "location": {
+                  "start": {
+                    "line": 33,
+                    "column": 16,
+                    "charIndex": 654
+                  },
+                  "end": {
+                    "line": 33,
+                    "column": 26,
+                    "charIndex": 664
+                  }
+                }
+              },
+              "location": {
+                "start": {
+                  "line": 33,
+                  "column": 5,
+                  "charIndex": 643
+                },
+                "end": {
+                  "line": 33,
+                  "column": 26,
+                  "charIndex": 664
+                }
+              },
+              "documentation": {
+                "title": "Sentiment",
+                "description": "The overal writer's attitude in the analyzed text.",
+                "location": {
+                  "start": {
+                    "line": 29,
+                    "column": 5,
+                    "charIndex": 558
+                  },
+                  "end": {
+                    "line": 32,
+                    "column": 8,
+                    "charIndex": 638
+                  }
+                }
+              }
+            },
+            {
+              "kind": "FieldDefinition",
+              "fieldName": "score",
+              "required": false,
+              "type": {
+                "kind": "NonNullDefinition",
+                "type": {
+                  "kind": "PrimitiveTypeName",
+                  "name": "number",
+                  "location": {
+                    "start": {
+                      "line": 39,
+                      "column": 11,
+                      "charIndex": 841
+                    },
+                    "end": {
+                      "line": 39,
+                      "column": 17,
+                      "charIndex": 847
+                    }
+                  }
+                },
+                "location": {
+                  "start": {
+                    "line": 39,
+                    "column": 11,
+                    "charIndex": 841
+                  },
+                  "end": {
+                    "line": 39,
+                    "column": 18,
+                    "charIndex": 848
+                  }
+                }
+              },
+              "location": {
+                "start": {
+                  "line": 39,
+                  "column": 5,
+                  "charIndex": 835
+                },
+                "end": {
+                  "line": 39,
+                  "column": 18,
+                  "charIndex": 848
+                }
+              },
+              "documentation": {
+                "title": "Score",
+                "description": "Score of the sentiment ranges between -1.0 (negative) and 1.0 (positive) and corresponds to the overall emotional leaning of the text.",
+                "location": {
+                  "start": {
+                    "line": 35,
+                    "column": 5,
+                    "charIndex": 670
+                  },
+                  "end": {
+                    "line": 38,
+                    "column": 8,
+                    "charIndex": 830
+                  }
+                }
+              }
+            }
+          ],
+          "location": {
+            "start": {
+              "line": 28,
+              "column": 10,
+              "charIndex": 552
+            },
+            "end": {
+              "line": 40,
+              "column": 4,
+              "charIndex": 852
+            }
+          }
+        },
+        "location": {
+          "start": {
+            "line": 28,
+            "column": 3,
+            "charIndex": 545
+          },
+          "end": {
+            "line": 40,
+            "column": 4,
+            "charIndex": 852
+          }
+        }
+      },
+      "error": {
+        "kind": "UseCaseSlotDefinition",
+        "value": {
+          "kind": "ObjectDefinition",
+          "fields": [
+            {
+              "kind": "FieldDefinition",
+              "fieldName": "title",
+              "required": true,
+              "location": {
+                "start": {
+                  "line": 47,
+                  "column": 5,
+                  "charIndex": 951
+                },
+                "end": {
+                  "line": 47,
+                  "column": 11,
+                  "charIndex": 957
+                }
+              },
+              "documentation": {
+                "title": "Title",
+                "description": "A short, human-readable summary of the problem type.",
+                "location": {
+                  "start": {
+                    "line": 43,
+                    "column": 5,
+                    "charIndex": 868
+                  },
+                  "end": {
+                    "line": 46,
+                    "column": 8,
+                    "charIndex": 946
+                  }
+                }
+              }
+            },
+            {
+              "kind": "FieldDefinition",
+              "fieldName": "detail",
+              "required": false,
+              "location": {
+                "start": {
+                  "line": 53,
+                  "column": 5,
+                  "charIndex": 1067
+                },
+                "end": {
+                  "line": 53,
+                  "column": 11,
+                  "charIndex": 1073
+                }
+              },
+              "documentation": {
+                "title": "Detail",
+                "description": "A human-readable explanation specific to this occurrence of the problem.",
+                "location": {
+                  "start": {
+                    "line": 49,
+                    "column": 5,
+                    "charIndex": 963
+                  },
+                  "end": {
+                    "line": 52,
+                    "column": 8,
+                    "charIndex": 1062
+                  }
+                }
+              }
+            }
+          ],
+          "location": {
+            "start": {
+              "line": 42,
+              "column": 9,
+              "charIndex": 862
+            },
+            "end": {
+              "line": 54,
+              "column": 4,
+              "charIndex": 1077
+            }
+          }
+        },
+        "location": {
+          "start": {
+            "line": 42,
+            "column": 3,
+            "charIndex": 856
+          },
+          "end": {
+            "line": 54,
+            "column": 4,
+            "charIndex": 1077
+          }
+        }
+      },
+      "examples": [
+        {
+          "kind": "UseCaseSlotDefinition",
+          "value": {
+            "kind": "UseCaseExample",
+            "exampleName": "Successful",
+            "input": {
+              "kind": "UseCaseSlotDefinition",
+              "value": {
+                "kind": "ComlinkObjectLiteral",
+                "fields": [
+                  {
+                    "kind": "ComlinkAssignment",
+                    "key": [
+                      "text"
+                    ],
+                    "value": {
+                      "kind": "ComlinkPrimitiveLiteral",
+                      "value": "Enjoy your stay.",
+                      "location": {
+                        "start": {
+                          "line": 58,
+                          "column": 14,
+                          "charIndex": 1127
+                        },
+                        "end": {
+                          "line": 58,
+                          "column": 32,
+                          "charIndex": 1145
+                        }
+                      }
+                    },
+                    "location": {
+                      "start": {
+                        "line": 58,
+                        "column": 7,
+                        "charIndex": 1120
+                      },
+                      "end": {
+                        "line": 58,
+                        "column": 32,
+                        "charIndex": 1145
+                      }
+                    }
+                  },
+                  {
+                    "kind": "ComlinkAssignment",
+                    "key": [
+                      "languageCode"
+                    ],
+                    "value": {
+                      "kind": "ComlinkPrimitiveLiteral",
+                      "value": "en",
+                      "location": {
+                        "start": {
+                          "line": 59,
+                          "column": 22,
+                          "charIndex": 1168
+                        },
+                        "end": {
+                          "line": 59,
+                          "column": 26,
+                          "charIndex": 1172
+                        }
+                      }
+                    },
+                    "location": {
+                      "start": {
+                        "line": 59,
+                        "column": 7,
+                        "charIndex": 1153
+                      },
+                      "end": {
+                        "line": 59,
+                        "column": 26,
+                        "charIndex": 1172
+                      }
+                    }
+                  }
+                ],
+                "location": {
+                  "start": {
+                    "line": 57,
+                    "column": 11,
+                    "charIndex": 1112
+                  },
+                  "end": {
+                    "line": 60,
+                    "column": 6,
+                    "charIndex": 1179
+                  }
+                }
+              },
+              "location": {
+                "start": {
+                  "line": 57,
+                  "column": 5,
+                  "charIndex": 1106
+                },
+                "end": {
+                  "line": 60,
+                  "column": 6,
+                  "charIndex": 1179
+                }
+              }
+            },
+            "result": {
+              "kind": "UseCaseSlotDefinition",
+              "value": {
+                "kind": "ComlinkObjectLiteral",
+                "fields": [
+                  {
+                    "kind": "ComlinkAssignment",
+                    "key": [
+                      "sentiment"
+                    ],
+                    "value": {
+                      "kind": "ComlinkPrimitiveLiteral",
+                      "value": "positive",
+                      "location": {
+                        "start": {
+                          "line": 63,
+                          "column": 19,
+                          "charIndex": 1212
+                        },
+                        "end": {
+                          "line": 63,
+                          "column": 29,
+                          "charIndex": 1222
+                        }
+                      }
+                    },
+                    "location": {
+                      "start": {
+                        "line": 63,
+                        "column": 7,
+                        "charIndex": 1200
+                      },
+                      "end": {
+                        "line": 63,
+                        "column": 29,
+                        "charIndex": 1222
+                      }
+                    }
+                  },
+                  {
+                    "kind": "ComlinkAssignment",
+                    "key": [
+                      "score"
+                    ],
+                    "value": {
+                      "kind": "ComlinkPrimitiveLiteral",
+                      "value": 0.9,
+                      "location": {
+                        "start": {
+                          "line": 64,
+                          "column": 15,
+                          "charIndex": 1238
+                        },
+                        "end": {
+                          "line": 64,
+                          "column": 18,
+                          "charIndex": 1241
+                        }
+                      }
+                    },
+                    "location": {
+                      "start": {
+                        "line": 64,
+                        "column": 7,
+                        "charIndex": 1230
+                      },
+                      "end": {
+                        "line": 64,
+                        "column": 18,
+                        "charIndex": 1241
+                      }
+                    }
+                  }
+                ],
+                "location": {
+                  "start": {
+                    "line": 62,
+                    "column": 12,
+                    "charIndex": 1192
+                  },
+                  "end": {
+                    "line": 65,
+                    "column": 6,
+                    "charIndex": 1248
+                  }
+                }
+              },
+              "location": {
+                "start": {
+                  "line": 62,
+                  "column": 5,
+                  "charIndex": 1185
+                },
+                "end": {
+                  "line": 65,
+                  "column": 6,
+                  "charIndex": 1248
+                }
+              }
+            },
+            "location": {
+              "start": {
+                "line": 56,
+                "column": 11,
+                "charIndex": 1089
+              },
+              "end": {
+                "line": 66,
+                "column": 4,
+                "charIndex": 1252
+              }
+            }
+          },
+          "location": {
+            "start": {
+              "line": 56,
+              "column": 3,
+              "charIndex": 1081
+            },
+            "end": {
+              "line": 66,
+              "column": 4,
+              "charIndex": 1252
+            }
+          }
+        },
+        {
+          "kind": "UseCaseSlotDefinition",
+          "value": {
+            "kind": "UseCaseExample",
+            "exampleName": "Failed",
+            "input": {
+              "kind": "UseCaseSlotDefinition",
+              "value": {
+                "kind": "ComlinkObjectLiteral",
+                "fields": [
+                  {
+                    "kind": "ComlinkAssignment",
+                    "key": [
+                      "text"
+                    ],
+                    "value": {
+                      "kind": "ComlinkPrimitiveLiteral",
+                      "value": "",
+                      "location": {
+                        "start": {
+                          "line": 70,
+                          "column": 14,
+                          "charIndex": 1298
+                        },
+                        "end": {
+                          "line": 70,
+                          "column": 16,
+                          "charIndex": 1300
+                        }
+                      }
+                    },
+                    "location": {
+                      "start": {
+                        "line": 70,
+                        "column": 7,
+                        "charIndex": 1291
+                      },
+                      "end": {
+                        "line": 70,
+                        "column": 16,
+                        "charIndex": 1300
+                      }
+                    }
+                  },
+                  {
+                    "kind": "ComlinkAssignment",
+                    "key": [
+                      "languageCode"
+                    ],
+                    "value": {
+                      "kind": "ComlinkPrimitiveLiteral",
+                      "value": "wrong_language_code",
+                      "location": {
+                        "start": {
+                          "line": 71,
+                          "column": 22,
+                          "charIndex": 1323
+                        },
+                        "end": {
+                          "line": 71,
+                          "column": 43,
+                          "charIndex": 1344
+                        }
+                      }
+                    },
+                    "location": {
+                      "start": {
+                        "line": 71,
+                        "column": 7,
+                        "charIndex": 1308
+                      },
+                      "end": {
+                        "line": 71,
+                        "column": 43,
+                        "charIndex": 1344
+                      }
+                    }
+                  }
+                ],
+                "location": {
+                  "start": {
+                    "line": 69,
+                    "column": 11,
+                    "charIndex": 1283
+                  },
+                  "end": {
+                    "line": 72,
+                    "column": 6,
+                    "charIndex": 1351
+                  }
+                }
+              },
+              "location": {
+                "start": {
+                  "line": 69,
+                  "column": 5,
+                  "charIndex": 1277
+                },
+                "end": {
+                  "line": 72,
+                  "column": 6,
+                  "charIndex": 1351
+                }
+              }
+            },
+            "error": {
+              "kind": "UseCaseSlotDefinition",
+              "value": {
+                "kind": "ComlinkObjectLiteral",
+                "fields": [
+                  {
+                    "kind": "ComlinkAssignment",
+                    "key": [
+                      "title"
+                    ],
+                    "value": {
+                      "kind": "ComlinkPrimitiveLiteral",
+                      "value": "Bad request",
+                      "location": {
+                        "start": {
+                          "line": 75,
+                          "column": 15,
+                          "charIndex": 1379
+                        },
+                        "end": {
+                          "line": 75,
+                          "column": 28,
+                          "charIndex": 1392
+                        }
+                      }
+                    },
+                    "location": {
+                      "start": {
+                        "line": 75,
+                        "column": 7,
+                        "charIndex": 1371
+                      },
+                      "end": {
+                        "line": 75,
+                        "column": 28,
+                        "charIndex": 1392
+                      }
+                    }
+                  },
+                  {
+                    "kind": "ComlinkAssignment",
+                    "key": [
+                      "detail"
+                    ],
+                    "value": {
+                      "kind": "ComlinkPrimitiveLiteral",
+                      "value": "invalid request: content is empty",
+                      "location": {
+                        "start": {
+                          "line": 76,
+                          "column": 16,
+                          "charIndex": 1409
+                        },
+                        "end": {
+                          "line": 76,
+                          "column": 51,
+                          "charIndex": 1444
+                        }
+                      }
+                    },
+                    "location": {
+                      "start": {
+                        "line": 76,
+                        "column": 7,
+                        "charIndex": 1400
+                      },
+                      "end": {
+                        "line": 76,
+                        "column": 51,
+                        "charIndex": 1444
+                      }
+                    }
+                  }
+                ],
+                "location": {
+                  "start": {
+                    "line": 74,
+                    "column": 11,
+                    "charIndex": 1363
+                  },
+                  "end": {
+                    "line": 77,
+                    "column": 6,
+                    "charIndex": 1450
+                  }
+                }
+              },
+              "location": {
+                "start": {
+                  "line": 74,
+                  "column": 5,
+                  "charIndex": 1357
+                },
+                "end": {
+                  "line": 77,
+                  "column": 6,
+                  "charIndex": 1450
+                }
+              }
+            },
+            "location": {
+              "start": {
+                "line": 68,
+                "column": 11,
+                "charIndex": 1264
+              },
+              "end": {
+                "line": 78,
+                "column": 4,
+                "charIndex": 1454
+              }
+            }
+          },
+          "location": {
+            "start": {
+              "line": 68,
+              "column": 3,
+              "charIndex": 1256
+            },
+            "end": {
+              "line": 78,
+              "column": 4,
+              "charIndex": 1454
+            }
+          }
+        }
+      ],
+      "location": {
+        "start": {
+          "line": 13,
+          "column": 1,
+          "charIndex": 274
+        },
+        "end": {
+          "line": 80,
+          "column": 2,
+          "charIndex": 1457
+        }
+      },
+      "documentation": {
+        "title": "Analyze plain text sentiment",
+        "description": "Determines writer's attitude in the text as positive, negative, or neutral.",
+        "location": {
+          "start": {
+            "line": 9,
+            "column": 1,
+            "charIndex": 161
+          },
+          "end": {
+            "line": 12,
+            "column": 4,
+            "charIndex": 273
+          }
+        }
+      }
+    },
+    {
+      "kind": "NamedModelDefinition",
+      "modelName": "Sentiment",
+      "type": {
+        "kind": "EnumDefinition",
+        "values": [
+          {
+            "kind": "EnumValue",
+            "name": "positive",
+            "value": "positive",
+            "location": {
+              "start": {
+                "line": 91,
+                "column": 3,
+                "charIndex": 1605
+              },
+              "end": {
+                "line": 91,
+                "column": 11,
+                "charIndex": 1613
+              }
+            },
+            "documentation": {
+              "title": "Positive",
+              "description": "The overall sentiment is positive.",
+              "location": {
+                "start": {
+                  "line": 87,
+                  "column": 3,
+                  "charIndex": 1545
+                },
+                "end": {
+                  "line": 90,
+                  "column": 6,
+                  "charIndex": 1602
+                }
+              }
+            }
+          },
+          {
+            "kind": "EnumValue",
+            "name": "neutral",
+            "value": "neutral",
+            "location": {
+              "start": {
+                "line": 97,
+                "column": 3,
+                "charIndex": 1675
+              },
+              "end": {
+                "line": 97,
+                "column": 10,
+                "charIndex": 1682
+              }
+            },
+            "documentation": {
+              "title": "Neutral",
+              "description": "The overall sentiment is neutral.",
+              "location": {
+                "start": {
+                  "line": 93,
+                  "column": 3,
+                  "charIndex": 1617
+                },
+                "end": {
+                  "line": 96,
+                  "column": 6,
+                  "charIndex": 1672
+                }
+              }
+            }
+          },
+          {
+            "kind": "EnumValue",
+            "name": "negative",
+            "value": "negative",
+            "location": {
+              "start": {
+                "line": 103,
+                "column": 3,
+                "charIndex": 1746
+              },
+              "end": {
+                "line": 103,
+                "column": 11,
+                "charIndex": 1754
+              }
+            },
+            "documentation": {
+              "title": "Negative",
+              "description": "The overall sentiment is negative.",
+              "location": {
+                "start": {
+                  "line": 99,
+                  "column": 3,
+                  "charIndex": 1686
+                },
+                "end": {
+                  "line": 102,
+                  "column": 6,
+                  "charIndex": 1743
+                }
+              }
+            }
+          }
+        ],
+        "location": {
+          "start": {
+            "line": 86,
+            "column": 17,
+            "charIndex": 1536
+          },
+          "end": {
+            "line": 104,
+            "column": 2,
+            "charIndex": 1756
+          }
+        }
+      },
+      "location": {
+        "start": {
+          "line": 86,
+          "column": 1,
+          "charIndex": 1520
+        },
+        "end": {
+          "line": 104,
+          "column": 2,
+          "charIndex": 1756
+        }
+      },
+      "documentation": {
+        "title": "Sentiment",
+        "description": "The overal sentiment of the analyzed text.",
+        "location": {
+          "start": {
+            "line": 82,
+            "column": 1,
+            "charIndex": 1459
+          },
+          "end": {
+            "line": 85,
+            "column": 4,
+            "charIndex": 1519
+          }
+        }
+      }
+    }
+  ],
+  "location": {
+    "start": {
+      "line": 6,
+      "column": 1,
+      "charIndex": 95
+    },
+    "end": {
+      "line": 104,
+      "column": 2,
+      "charIndex": 1756
+    }
+  },
+  "astMetadata": {
+    "astVersion": {
+      "major": 1,
+      "minor": 2,
+      "patch": 0
+    },
+    "parserVersion": {
+      "major": 1,
+      "minor": 2,
+      "patch": 0
+    },
+    "sourceChecksum": "3e2b1feb6c89ec4b994bdf806ed589d922009ff80c2178cd65540b7d5d5e1e77"
+  }
+}

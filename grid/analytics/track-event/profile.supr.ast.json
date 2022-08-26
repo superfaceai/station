@@ -1,0 +1,404 @@
+{
+  "kind": "ProfileDocument",
+  "header": {
+    "kind": "ProfileHeader",
+    "scope": "analytics",
+    "name": "track-event",
+    "version": {
+      "major": 1,
+      "minor": 0,
+      "patch": 0
+    },
+    "location": {
+      "start": {
+        "line": 5,
+        "column": 1,
+        "charIndex": 99
+      },
+      "end": {
+        "line": 6,
+        "column": 18,
+        "charIndex": 147
+      }
+    },
+    "documentation": {
+      "title": "Track Event",
+      "description": "Track events to better understand interactions between users and your product.",
+      "location": {
+        "start": {
+          "line": 1,
+          "column": 1,
+          "charIndex": 0
+        },
+        "end": {
+          "line": 4,
+          "column": 4,
+          "charIndex": 98
+        }
+      }
+    }
+  },
+  "definitions": [
+    {
+      "kind": "UseCaseDefinition",
+      "useCaseName": "TrackEvent",
+      "safety": "unsafe",
+      "input": {
+        "kind": "UseCaseSlotDefinition",
+        "value": {
+          "kind": "ObjectDefinition",
+          "fields": [
+            {
+              "kind": "FieldDefinition",
+              "fieldName": "eventName",
+              "required": true,
+              "type": {
+                "kind": "NonNullDefinition",
+                "type": {
+                  "kind": "PrimitiveTypeName",
+                  "name": "string",
+                  "location": {
+                    "start": {
+                      "line": 18,
+                      "column": 16,
+                      "charIndex": 331
+                    },
+                    "end": {
+                      "line": 18,
+                      "column": 22,
+                      "charIndex": 337
+                    }
+                  }
+                },
+                "location": {
+                  "start": {
+                    "line": 18,
+                    "column": 16,
+                    "charIndex": 331
+                  },
+                  "end": {
+                    "line": 18,
+                    "column": 23,
+                    "charIndex": 338
+                  }
+                }
+              },
+              "location": {
+                "start": {
+                  "line": 18,
+                  "column": 5,
+                  "charIndex": 320
+                },
+                "end": {
+                  "line": 18,
+                  "column": 23,
+                  "charIndex": 338
+                }
+              },
+              "documentation": {
+                "title": "Event Name",
+                "description": "A string value representing event",
+                "location": {
+                  "start": {
+                    "line": 14,
+                    "column": 5,
+                    "charIndex": 251
+                  },
+                  "end": {
+                    "line": 17,
+                    "column": 8,
+                    "charIndex": 315
+                  }
+                }
+              }
+            },
+            {
+              "kind": "FieldDefinition",
+              "fieldName": "eventProperties",
+              "required": false,
+              "location": {
+                "start": {
+                  "line": 24,
+                  "column": 5,
+                  "charIndex": 465
+                },
+                "end": {
+                  "line": 24,
+                  "column": 20,
+                  "charIndex": 480
+                }
+              },
+              "documentation": {
+                "title": "Event Properties",
+                "description": "Event Properties are attributes that help you define the specifics of an Event.",
+                "location": {
+                  "start": {
+                    "line": 20,
+                    "column": 5,
+                    "charIndex": 344
+                  },
+                  "end": {
+                    "line": 23,
+                    "column": 8,
+                    "charIndex": 460
+                  }
+                }
+              }
+            }
+          ],
+          "location": {
+            "start": {
+              "line": 13,
+              "column": 9,
+              "charIndex": 245
+            },
+            "end": {
+              "line": 25,
+              "column": 4,
+              "charIndex": 484
+            }
+          }
+        },
+        "location": {
+          "start": {
+            "line": 13,
+            "column": 3,
+            "charIndex": 239
+          },
+          "end": {
+            "line": 25,
+            "column": 4,
+            "charIndex": 484
+          }
+        }
+      },
+      "result": {
+        "kind": "UseCaseSlotDefinition",
+        "value": {
+          "kind": "PrimitiveTypeName",
+          "name": "string",
+          "location": {
+            "start": {
+              "line": 27,
+              "column": 10,
+              "charIndex": 495
+            },
+            "end": {
+              "line": 27,
+              "column": 16,
+              "charIndex": 501
+            }
+          }
+        },
+        "location": {
+          "start": {
+            "line": 27,
+            "column": 3,
+            "charIndex": 488
+          },
+          "end": {
+            "line": 27,
+            "column": 16,
+            "charIndex": 501
+          }
+        }
+      },
+      "error": {
+        "kind": "UseCaseSlotDefinition",
+        "value": {
+          "kind": "ObjectDefinition",
+          "fields": [
+            {
+              "kind": "FieldDefinition",
+              "fieldName": "title",
+              "required": true,
+              "type": {
+                "kind": "NonNullDefinition",
+                "type": {
+                  "kind": "PrimitiveTypeName",
+                  "name": "string",
+                  "location": {
+                    "start": {
+                      "line": 33,
+                      "column": 12,
+                      "charIndex": 597
+                    },
+                    "end": {
+                      "line": 33,
+                      "column": 18,
+                      "charIndex": 603
+                    }
+                  }
+                },
+                "location": {
+                  "start": {
+                    "line": 33,
+                    "column": 12,
+                    "charIndex": 597
+                  },
+                  "end": {
+                    "line": 33,
+                    "column": 19,
+                    "charIndex": 604
+                  }
+                }
+              },
+              "location": {
+                "start": {
+                  "line": 33,
+                  "column": 5,
+                  "charIndex": 590
+                },
+                "end": {
+                  "line": 33,
+                  "column": 19,
+                  "charIndex": 604
+                }
+              },
+              "documentation": {
+                "title": "A short, human-readable summary of the problem type.",
+                "location": {
+                  "start": {
+                    "line": 30,
+                    "column": 5,
+                    "charIndex": 517
+                  },
+                  "end": {
+                    "line": 32,
+                    "column": 8,
+                    "charIndex": 585
+                  }
+                }
+              }
+            },
+            {
+              "kind": "FieldDefinition",
+              "fieldName": "detail",
+              "required": false,
+              "type": {
+                "kind": "PrimitiveTypeName",
+                "name": "string",
+                "location": {
+                  "start": {
+                    "line": 37,
+                    "column": 12,
+                    "charIndex": 709
+                  },
+                  "end": {
+                    "line": 37,
+                    "column": 18,
+                    "charIndex": 715
+                  }
+                }
+              },
+              "location": {
+                "start": {
+                  "line": 37,
+                  "column": 5,
+                  "charIndex": 702
+                },
+                "end": {
+                  "line": 37,
+                  "column": 18,
+                  "charIndex": 715
+                }
+              },
+              "documentation": {
+                "title": "A human-readable explanation specific to this occurrence of the problem.",
+                "location": {
+                  "start": {
+                    "line": 34,
+                    "column": 5,
+                    "charIndex": 609
+                  },
+                  "end": {
+                    "line": 36,
+                    "column": 8,
+                    "charIndex": 697
+                  }
+                }
+              }
+            }
+          ],
+          "location": {
+            "start": {
+              "line": 29,
+              "column": 9,
+              "charIndex": 511
+            },
+            "end": {
+              "line": 38,
+              "column": 4,
+              "charIndex": 719
+            }
+          }
+        },
+        "location": {
+          "start": {
+            "line": 29,
+            "column": 3,
+            "charIndex": 505
+          },
+          "end": {
+            "line": 38,
+            "column": 4,
+            "charIndex": 719
+          }
+        }
+      },
+      "location": {
+        "start": {
+          "line": 12,
+          "column": 1,
+          "charIndex": 209
+        },
+        "end": {
+          "line": 39,
+          "column": 2,
+          "charIndex": 721
+        }
+      },
+      "documentation": {
+        "title": "Track Event",
+        "description": "Allows to send event to tracking system",
+        "location": {
+          "start": {
+            "line": 8,
+            "column": 1,
+            "charIndex": 149
+          },
+          "end": {
+            "line": 11,
+            "column": 4,
+            "charIndex": 208
+          }
+        }
+      }
+    }
+  ],
+  "location": {
+    "start": {
+      "line": 5,
+      "column": 1,
+      "charIndex": 99
+    },
+    "end": {
+      "line": 39,
+      "column": 2,
+      "charIndex": 721
+    }
+  },
+  "astMetadata": {
+    "astVersion": {
+      "major": 1,
+      "minor": 2,
+      "patch": 0
+    },
+    "parserVersion": {
+      "major": 1,
+      "minor": 2,
+      "patch": 0
+    },
+    "sourceChecksum": "2aaf877340c900ed79196c99e898b376f24990be728bdb989f47bd74b5a652d2"
+  }
+}

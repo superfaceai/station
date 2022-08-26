@@ -1,0 +1,944 @@
+{
+  "kind": "ProfileDocument",
+  "header": {
+    "kind": "ProfileHeader",
+    "scope": "project-management",
+    "name": "tasks",
+    "version": {
+      "major": 1,
+      "minor": 0,
+      "patch": 1
+    },
+    "location": {
+      "start": {
+        "line": 5,
+        "column": 1,
+        "charIndex": 69
+      },
+      "end": {
+        "line": 6,
+        "column": 18,
+        "charIndex": 120
+      }
+    },
+    "documentation": {
+      "title": "Manage tasks",
+      "description": "Create new tasks in project management systems.",
+      "location": {
+        "start": {
+          "line": 1,
+          "column": 1,
+          "charIndex": 0
+        },
+        "end": {
+          "line": 4,
+          "column": 4,
+          "charIndex": 68
+        }
+      }
+    }
+  },
+  "definitions": [
+    {
+      "kind": "UseCaseDefinition",
+      "useCaseName": "CreateTask",
+      "input": {
+        "kind": "UseCaseSlotDefinition",
+        "value": {
+          "kind": "ObjectDefinition",
+          "fields": [
+            {
+              "kind": "FieldDefinition",
+              "fieldName": "project",
+              "required": false,
+              "type": {
+                "kind": "PrimitiveTypeName",
+                "name": "string",
+                "location": {
+                  "start": {
+                    "line": 18,
+                    "column": 13,
+                    "charIndex": 274
+                  },
+                  "end": {
+                    "line": 18,
+                    "column": 19,
+                    "charIndex": 280
+                  }
+                }
+              },
+              "location": {
+                "start": {
+                  "line": 18,
+                  "column": 5,
+                  "charIndex": 266
+                },
+                "end": {
+                  "line": 18,
+                  "column": 19,
+                  "charIndex": 280
+                }
+              },
+              "documentation": {
+                "title": "projects",
+                "description": "ID of project to create the task in.",
+                "location": {
+                  "start": {
+                    "line": 14,
+                    "column": 5,
+                    "charIndex": 196
+                  },
+                  "end": {
+                    "line": 17,
+                    "column": 8,
+                    "charIndex": 261
+                  }
+                }
+              }
+            },
+            {
+              "kind": "FieldDefinition",
+              "fieldName": "title",
+              "required": false,
+              "type": {
+                "kind": "PrimitiveTypeName",
+                "name": "string",
+                "location": {
+                  "start": {
+                    "line": 24,
+                    "column": 9,
+                    "charIndex": 339
+                  },
+                  "end": {
+                    "line": 24,
+                    "column": 15,
+                    "charIndex": 345
+                  }
+                }
+              },
+              "location": {
+                "start": {
+                  "line": 24,
+                  "column": 3,
+                  "charIndex": 333
+                },
+                "end": {
+                  "line": 24,
+                  "column": 15,
+                  "charIndex": 345
+                }
+              },
+              "documentation": {
+                "title": "title",
+                "description": "Textual title of the task.",
+                "location": {
+                  "start": {
+                    "line": 20,
+                    "column": 3,
+                    "charIndex": 284
+                  },
+                  "end": {
+                    "line": 23,
+                    "column": 6,
+                    "charIndex": 330
+                  }
+                }
+              }
+            },
+            {
+              "kind": "FieldDefinition",
+              "fieldName": "description",
+              "required": false,
+              "type": {
+                "kind": "PrimitiveTypeName",
+                "name": "string",
+                "location": {
+                  "start": {
+                    "line": 30,
+                    "column": 15,
+                    "charIndex": 434
+                  },
+                  "end": {
+                    "line": 30,
+                    "column": 21,
+                    "charIndex": 440
+                  }
+                }
+              },
+              "location": {
+                "start": {
+                  "line": 30,
+                  "column": 3,
+                  "charIndex": 422
+                },
+                "end": {
+                  "line": 30,
+                  "column": 21,
+                  "charIndex": 440
+                }
+              },
+              "documentation": {
+                "title": "description",
+                "description": "Free-form textual description of the task.",
+                "location": {
+                  "start": {
+                    "line": 26,
+                    "column": 3,
+                    "charIndex": 351
+                  },
+                  "end": {
+                    "line": 29,
+                    "column": 6,
+                    "charIndex": 419
+                  }
+                }
+              }
+            },
+            {
+              "kind": "FieldDefinition",
+              "fieldName": "parent",
+              "required": false,
+              "type": {
+                "kind": "PrimitiveTypeName",
+                "name": "string",
+                "location": {
+                  "start": {
+                    "line": 36,
+                    "column": 12,
+                    "charIndex": 524
+                  },
+                  "end": {
+                    "line": 36,
+                    "column": 18,
+                    "charIndex": 530
+                  }
+                }
+              },
+              "location": {
+                "start": {
+                  "line": 36,
+                  "column": 5,
+                  "charIndex": 517
+                },
+                "end": {
+                  "line": 36,
+                  "column": 18,
+                  "charIndex": 530
+                }
+              },
+              "documentation": {
+                "title": "parent",
+                "description": "ID of the parent task (if applicable).",
+                "location": {
+                  "start": {
+                    "line": 32,
+                    "column": 5,
+                    "charIndex": 447
+                  },
+                  "end": {
+                    "line": 35,
+                    "column": 8,
+                    "charIndex": 512
+                  }
+                }
+              }
+            },
+            {
+              "kind": "FieldDefinition",
+              "fieldName": "assignee",
+              "required": false,
+              "type": {
+                "kind": "PrimitiveTypeName",
+                "name": "string",
+                "location": {
+                  "start": {
+                    "line": 42,
+                    "column": 14,
+                    "charIndex": 626
+                  },
+                  "end": {
+                    "line": 42,
+                    "column": 20,
+                    "charIndex": 632
+                  }
+                }
+              },
+              "location": {
+                "start": {
+                  "line": 42,
+                  "column": 5,
+                  "charIndex": 617
+                },
+                "end": {
+                  "line": 42,
+                  "column": 20,
+                  "charIndex": 632
+                }
+              },
+              "documentation": {
+                "title": "assignee",
+                "description": "ID of the user this task should be assigned to.",
+                "location": {
+                  "start": {
+                    "line": 38,
+                    "column": 5,
+                    "charIndex": 536
+                  },
+                  "end": {
+                    "line": 41,
+                    "column": 8,
+                    "charIndex": 612
+                  }
+                }
+              }
+            }
+          ],
+          "location": {
+            "start": {
+              "line": 12,
+              "column": 8,
+              "charIndex": 189
+            },
+            "end": {
+              "line": 43,
+              "column": 3,
+              "charIndex": 635
+            }
+          }
+        },
+        "location": {
+          "start": {
+            "line": 12,
+            "column": 2,
+            "charIndex": 183
+          },
+          "end": {
+            "line": 43,
+            "column": 3,
+            "charIndex": 635
+          }
+        }
+      },
+      "result": {
+        "kind": "UseCaseSlotDefinition",
+        "value": {
+          "kind": "ObjectDefinition",
+          "fields": [
+            {
+              "kind": "FieldDefinition",
+              "fieldName": "id",
+              "required": true,
+              "type": {
+                "kind": "NonNullDefinition",
+                "type": {
+                  "kind": "PrimitiveTypeName",
+                  "name": "string",
+                  "location": {
+                    "start": {
+                      "line": 47,
+                      "column": 9,
+                      "charIndex": 685
+                    },
+                    "end": {
+                      "line": 47,
+                      "column": 15,
+                      "charIndex": 691
+                    }
+                  }
+                },
+                "location": {
+                  "start": {
+                    "line": 47,
+                    "column": 9,
+                    "charIndex": 685
+                  },
+                  "end": {
+                    "line": 47,
+                    "column": 16,
+                    "charIndex": 692
+                  }
+                }
+              },
+              "location": {
+                "start": {
+                  "line": 47,
+                  "column": 5,
+                  "charIndex": 681
+                },
+                "end": {
+                  "line": 47,
+                  "column": 16,
+                  "charIndex": 692
+                }
+              },
+              "documentation": {
+                "title": "ID of the created task.",
+                "location": {
+                  "start": {
+                    "line": 46,
+                    "column": 5,
+                    "charIndex": 651
+                  },
+                  "end": {
+                    "line": 46,
+                    "column": 30,
+                    "charIndex": 676
+                  }
+                }
+              }
+            },
+            {
+              "kind": "FieldDefinition",
+              "fieldName": "url",
+              "required": false,
+              "type": {
+                "kind": "PrimitiveTypeName",
+                "name": "string",
+                "location": {
+                  "start": {
+                    "line": 50,
+                    "column": 9,
+                    "charIndex": 732
+                  },
+                  "end": {
+                    "line": 50,
+                    "column": 15,
+                    "charIndex": 738
+                  }
+                }
+              },
+              "location": {
+                "start": {
+                  "line": 50,
+                  "column": 5,
+                  "charIndex": 728
+                },
+                "end": {
+                  "line": 50,
+                  "column": 15,
+                  "charIndex": 738
+                }
+              },
+              "documentation": {
+                "title": "URL of the created task",
+                "location": {
+                  "start": {
+                    "line": 49,
+                    "column": 5,
+                    "charIndex": 698
+                  },
+                  "end": {
+                    "line": 49,
+                    "column": 30,
+                    "charIndex": 723
+                  }
+                }
+              }
+            }
+          ],
+          "location": {
+            "start": {
+              "line": 45,
+              "column": 9,
+              "charIndex": 645
+            },
+            "end": {
+              "line": 51,
+              "column": 4,
+              "charIndex": 742
+            }
+          }
+        },
+        "location": {
+          "start": {
+            "line": 45,
+            "column": 2,
+            "charIndex": 638
+          },
+          "end": {
+            "line": 51,
+            "column": 4,
+            "charIndex": 742
+          }
+        }
+      },
+      "error": {
+        "kind": "UseCaseSlotDefinition",
+        "value": {
+          "kind": "ObjectDefinition",
+          "fields": [
+            {
+              "kind": "FieldDefinition",
+              "fieldName": "message",
+              "required": true,
+              "type": {
+                "kind": "NonNullDefinition",
+                "type": {
+                  "kind": "PrimitiveTypeName",
+                  "name": "string",
+                  "location": {
+                    "start": {
+                      "line": 55,
+                      "column": 12,
+                      "charIndex": 797
+                    },
+                    "end": {
+                      "line": 55,
+                      "column": 18,
+                      "charIndex": 803
+                    }
+                  }
+                },
+                "location": {
+                  "start": {
+                    "line": 55,
+                    "column": 12,
+                    "charIndex": 797
+                  },
+                  "end": {
+                    "line": 55,
+                    "column": 19,
+                    "charIndex": 804
+                  }
+                }
+              },
+              "location": {
+                "start": {
+                  "line": 55,
+                  "column": 3,
+                  "charIndex": 788
+                },
+                "end": {
+                  "line": 55,
+                  "column": 19,
+                  "charIndex": 804
+                }
+              },
+              "documentation": {
+                "title": "Human-readable error message",
+                "location": {
+                  "start": {
+                    "line": 54,
+                    "column": 3,
+                    "charIndex": 755
+                  },
+                  "end": {
+                    "line": 54,
+                    "column": 33,
+                    "charIndex": 785
+                  }
+                }
+              }
+            },
+            {
+              "kind": "FieldDefinition",
+              "fieldName": "description",
+              "required": true,
+              "type": {
+                "kind": "NonNullDefinition",
+                "type": {
+                  "kind": "PrimitiveTypeName",
+                  "name": "string",
+                  "location": {
+                    "start": {
+                      "line": 57,
+                      "column": 16,
+                      "charIndex": 863
+                    },
+                    "end": {
+                      "line": 57,
+                      "column": 22,
+                      "charIndex": 869
+                    }
+                  }
+                },
+                "location": {
+                  "start": {
+                    "line": 57,
+                    "column": 16,
+                    "charIndex": 863
+                  },
+                  "end": {
+                    "line": 57,
+                    "column": 23,
+                    "charIndex": 870
+                  }
+                }
+              },
+              "location": {
+                "start": {
+                  "line": 57,
+                  "column": 3,
+                  "charIndex": 850
+                },
+                "end": {
+                  "line": 57,
+                  "column": 23,
+                  "charIndex": 870
+                }
+              },
+              "documentation": {
+                "title": "Human-readable details about the error",
+                "location": {
+                  "start": {
+                    "line": 56,
+                    "column": 3,
+                    "charIndex": 807
+                  },
+                  "end": {
+                    "line": 56,
+                    "column": 43,
+                    "charIndex": 847
+                  }
+                }
+              }
+            }
+          ],
+          "location": {
+            "start": {
+              "line": 53,
+              "column": 8,
+              "charIndex": 751
+            },
+            "end": {
+              "line": 58,
+              "column": 3,
+              "charIndex": 873
+            }
+          }
+        },
+        "location": {
+          "start": {
+            "line": 53,
+            "column": 2,
+            "charIndex": 745
+          },
+          "end": {
+            "line": 58,
+            "column": 3,
+            "charIndex": 873
+          }
+        }
+      },
+      "examples": [
+        {
+          "kind": "UseCaseSlotDefinition",
+          "value": {
+            "kind": "UseCaseExample",
+            "exampleName": "success",
+            "input": {
+              "kind": "UseCaseSlotDefinition",
+              "value": {
+                "kind": "ComlinkObjectLiteral",
+                "fields": [
+                  {
+                    "kind": "ComlinkAssignment",
+                    "key": [
+                      "project"
+                    ],
+                    "value": {
+                      "kind": "ComlinkPrimitiveLiteral",
+                      "value": "46ebca75-68af-42a1-916d-b228c2082d4f",
+                      "location": {
+                        "start": {
+                          "line": 62,
+                          "column": 17,
+                          "charIndex": 923
+                        },
+                        "end": {
+                          "line": 62,
+                          "column": 55,
+                          "charIndex": 961
+                        }
+                      }
+                    },
+                    "location": {
+                      "start": {
+                        "line": 62,
+                        "column": 7,
+                        "charIndex": 913
+                      },
+                      "end": {
+                        "line": 62,
+                        "column": 55,
+                        "charIndex": 961
+                      }
+                    }
+                  },
+                  {
+                    "kind": "ComlinkAssignment",
+                    "key": [
+                      "title"
+                    ],
+                    "value": {
+                      "kind": "ComlinkPrimitiveLiteral",
+                      "value": "Get milk",
+                      "location": {
+                        "start": {
+                          "line": 63,
+                          "column": 15,
+                          "charIndex": 976
+                        },
+                        "end": {
+                          "line": 63,
+                          "column": 25,
+                          "charIndex": 986
+                        }
+                      }
+                    },
+                    "location": {
+                      "start": {
+                        "line": 63,
+                        "column": 7,
+                        "charIndex": 968
+                      },
+                      "end": {
+                        "line": 63,
+                        "column": 25,
+                        "charIndex": 986
+                      }
+                    }
+                  },
+                  {
+                    "kind": "ComlinkAssignment",
+                    "key": [
+                      "description"
+                    ],
+                    "value": {
+                      "kind": "ComlinkPrimitiveLiteral",
+                      "value": "We ran out of milk :(",
+                      "location": {
+                        "start": {
+                          "line": 64,
+                          "column": 21,
+                          "charIndex": 1007
+                        },
+                        "end": {
+                          "line": 64,
+                          "column": 44,
+                          "charIndex": 1030
+                        }
+                      }
+                    },
+                    "location": {
+                      "start": {
+                        "line": 64,
+                        "column": 7,
+                        "charIndex": 993
+                      },
+                      "end": {
+                        "line": 64,
+                        "column": 44,
+                        "charIndex": 1030
+                      }
+                    }
+                  }
+                ],
+                "location": {
+                  "start": {
+                    "line": 61,
+                    "column": 11,
+                    "charIndex": 905
+                  },
+                  "end": {
+                    "line": 65,
+                    "column": 6,
+                    "charIndex": 1036
+                  }
+                }
+              },
+              "location": {
+                "start": {
+                  "line": 61,
+                  "column": 5,
+                  "charIndex": 899
+                },
+                "end": {
+                  "line": 65,
+                  "column": 6,
+                  "charIndex": 1036
+                }
+              }
+            },
+            "result": {
+              "kind": "UseCaseSlotDefinition",
+              "value": {
+                "kind": "ComlinkObjectLiteral",
+                "fields": [
+                  {
+                    "kind": "ComlinkAssignment",
+                    "key": [
+                      "id"
+                    ],
+                    "value": {
+                      "kind": "ComlinkPrimitiveLiteral",
+                      "value": "ffa18e32-45e6-4b2b-97fa-b8509b3a8c76",
+                      "location": {
+                        "start": {
+                          "line": 68,
+                          "column": 12,
+                          "charIndex": 1062
+                        },
+                        "end": {
+                          "line": 68,
+                          "column": 50,
+                          "charIndex": 1100
+                        }
+                      }
+                    },
+                    "location": {
+                      "start": {
+                        "line": 68,
+                        "column": 7,
+                        "charIndex": 1057
+                      },
+                      "end": {
+                        "line": 68,
+                        "column": 50,
+                        "charIndex": 1100
+                      }
+                    }
+                  },
+                  {
+                    "kind": "ComlinkAssignment",
+                    "key": [
+                      "url"
+                    ],
+                    "value": {
+                      "kind": "ComlinkPrimitiveLiteral",
+                      "value": "https://example.com/tasks/ffa18e32-45e6-4b2b-97fa-b8509b3a8c76",
+                      "location": {
+                        "start": {
+                          "line": 69,
+                          "column": 13,
+                          "charIndex": 1113
+                        },
+                        "end": {
+                          "line": 69,
+                          "column": 77,
+                          "charIndex": 1177
+                        }
+                      }
+                    },
+                    "location": {
+                      "start": {
+                        "line": 69,
+                        "column": 7,
+                        "charIndex": 1107
+                      },
+                      "end": {
+                        "line": 69,
+                        "column": 77,
+                        "charIndex": 1177
+                      }
+                    }
+                  }
+                ],
+                "location": {
+                  "start": {
+                    "line": 67,
+                    "column": 12,
+                    "charIndex": 1049
+                  },
+                  "end": {
+                    "line": 70,
+                    "column": 6,
+                    "charIndex": 1183
+                  }
+                }
+              },
+              "location": {
+                "start": {
+                  "line": 67,
+                  "column": 5,
+                  "charIndex": 1042
+                },
+                "end": {
+                  "line": 70,
+                  "column": 6,
+                  "charIndex": 1183
+                }
+              }
+            },
+            "location": {
+              "start": {
+                "line": 60,
+                "column": 11,
+                "charIndex": 885
+              },
+              "end": {
+                "line": 71,
+                "column": 4,
+                "charIndex": 1187
+              }
+            }
+          },
+          "location": {
+            "start": {
+              "line": 60,
+              "column": 3,
+              "charIndex": 877
+            },
+            "end": {
+              "line": 71,
+              "column": 4,
+              "charIndex": 1187
+            }
+          }
+        }
+      ],
+      "location": {
+        "start": {
+          "line": 11,
+          "column": 1,
+          "charIndex": 161
+        },
+        "end": {
+          "line": 72,
+          "column": 2,
+          "charIndex": 1189
+        }
+      },
+      "documentation": {
+        "title": "Create a new task in a project",
+        "location": {
+          "start": {
+            "line": 8,
+            "column": 1,
+            "charIndex": 122
+          },
+          "end": {
+            "line": 10,
+            "column": 4,
+            "charIndex": 160
+          }
+        }
+      }
+    }
+  ],
+  "location": {
+    "start": {
+      "line": 5,
+      "column": 1,
+      "charIndex": 69
+    },
+    "end": {
+      "line": 72,
+      "column": 2,
+      "charIndex": 1189
+    }
+  },
+  "astMetadata": {
+    "astVersion": {
+      "major": 1,
+      "minor": 2,
+      "patch": 0
+    },
+    "parserVersion": {
+      "major": 1,
+      "minor": 2,
+      "patch": 0
+    },
+    "sourceChecksum": "aee0c1c720d053ad0dfbaa63b821a41bd450845521ca9c492ed2146e62c7da22"
+  }
+}

@@ -1,0 +1,1453 @@
+{
+  "kind": "ProfileDocument",
+  "header": {
+    "kind": "ProfileHeader",
+    "scope": "social-media",
+    "name": "replies",
+    "version": {
+      "major": 1,
+      "minor": 0,
+      "patch": 1
+    },
+    "location": {
+      "start": {
+        "line": 5,
+        "column": 1,
+        "charIndex": 92
+      },
+      "end": {
+        "line": 6,
+        "column": 18,
+        "charIndex": 139
+      }
+    },
+    "documentation": {
+      "title": "Social Media Replies",
+      "description": "Get replies to social media posts, comments, or other replies.",
+      "location": {
+        "start": {
+          "line": 1,
+          "column": 1,
+          "charIndex": 0
+        },
+        "end": {
+          "line": 4,
+          "column": 4,
+          "charIndex": 91
+        }
+      }
+    }
+  },
+  "definitions": [
+    {
+      "kind": "UseCaseDefinition",
+      "useCaseName": "GetPostReplies",
+      "safety": "safe",
+      "input": {
+        "kind": "UseCaseSlotDefinition",
+        "value": {
+          "kind": "ObjectDefinition",
+          "fields": [
+            {
+              "kind": "FieldDefinition",
+              "fieldName": "parentId",
+              "required": true,
+              "type": {
+                "kind": "NonNullDefinition",
+                "type": {
+                  "kind": "PrimitiveTypeName",
+                  "name": "string",
+                  "location": {
+                    "start": {
+                      "line": 18,
+                      "column": 15,
+                      "charIndex": 372
+                    },
+                    "end": {
+                      "line": 18,
+                      "column": 21,
+                      "charIndex": 378
+                    }
+                  }
+                },
+                "location": {
+                  "start": {
+                    "line": 18,
+                    "column": 15,
+                    "charIndex": 372
+                  },
+                  "end": {
+                    "line": 18,
+                    "column": 22,
+                    "charIndex": 379
+                  }
+                }
+              },
+              "location": {
+                "start": {
+                  "line": 18,
+                  "column": 5,
+                  "charIndex": 362
+                },
+                "end": {
+                  "line": 18,
+                  "column": 22,
+                  "charIndex": 379
+                }
+              },
+              "documentation": {
+                "title": "Parent ID",
+                "description": "Identifier of the parent post to get replies for.",
+                "location": {
+                  "start": {
+                    "line": 14,
+                    "column": 5,
+                    "charIndex": 278
+                  },
+                  "end": {
+                    "line": 17,
+                    "column": 8,
+                    "charIndex": 357
+                  }
+                }
+              }
+            },
+            {
+              "kind": "FieldDefinition",
+              "fieldName": "page",
+              "required": false,
+              "type": {
+                "kind": "PrimitiveTypeName",
+                "name": "string",
+                "location": {
+                  "start": {
+                    "line": 23,
+                    "column": 10,
+                    "charIndex": 482
+                  },
+                  "end": {
+                    "line": 23,
+                    "column": 16,
+                    "charIndex": 488
+                  }
+                }
+              },
+              "location": {
+                "start": {
+                  "line": 23,
+                  "column": 5,
+                  "charIndex": 477
+                },
+                "end": {
+                  "line": 23,
+                  "column": 16,
+                  "charIndex": 488
+                }
+              },
+              "documentation": {
+                "title": "Page",
+                "description": "Pagination cursor (obtained from `previousPage` or `nextPage`).",
+                "location": {
+                  "start": {
+                    "line": 19,
+                    "column": 5,
+                    "charIndex": 384
+                  },
+                  "end": {
+                    "line": 22,
+                    "column": 8,
+                    "charIndex": 472
+                  }
+                }
+              }
+            }
+          ],
+          "location": {
+            "start": {
+              "line": 13,
+              "column": 9,
+              "charIndex": 272
+            },
+            "end": {
+              "line": 24,
+              "column": 4,
+              "charIndex": 492
+            }
+          }
+        },
+        "location": {
+          "start": {
+            "line": 13,
+            "column": 3,
+            "charIndex": 266
+          },
+          "end": {
+            "line": 24,
+            "column": 4,
+            "charIndex": 492
+          }
+        }
+      },
+      "result": {
+        "kind": "UseCaseSlotDefinition",
+        "value": {
+          "kind": "ObjectDefinition",
+          "fields": [
+            {
+              "kind": "FieldDefinition",
+              "fieldName": "previousPage",
+              "required": false,
+              "type": {
+                "kind": "PrimitiveTypeName",
+                "name": "string",
+                "location": {
+                  "start": {
+                    "line": 31,
+                    "column": 18,
+                    "charIndex": 582
+                  },
+                  "end": {
+                    "line": 31,
+                    "column": 24,
+                    "charIndex": 588
+                  }
+                }
+              },
+              "location": {
+                "start": {
+                  "line": 31,
+                  "column": 5,
+                  "charIndex": 569
+                },
+                "end": {
+                  "line": 31,
+                  "column": 24,
+                  "charIndex": 588
+                }
+              },
+              "documentation": {
+                "title": "Previous page",
+                "description": "Previous page cursor.",
+                "location": {
+                  "start": {
+                    "line": 27,
+                    "column": 5,
+                    "charIndex": 509
+                  },
+                  "end": {
+                    "line": 30,
+                    "column": 8,
+                    "charIndex": 564
+                  }
+                }
+              }
+            },
+            {
+              "kind": "FieldDefinition",
+              "fieldName": "nextPage",
+              "required": false,
+              "type": {
+                "kind": "PrimitiveTypeName",
+                "name": "string",
+                "location": {
+                  "start": {
+                    "line": 36,
+                    "column": 14,
+                    "charIndex": 654
+                  },
+                  "end": {
+                    "line": 36,
+                    "column": 20,
+                    "charIndex": 660
+                  }
+                }
+              },
+              "location": {
+                "start": {
+                  "line": 36,
+                  "column": 5,
+                  "charIndex": 645
+                },
+                "end": {
+                  "line": 36,
+                  "column": 20,
+                  "charIndex": 660
+                }
+              },
+              "documentation": {
+                "title": "Next page",
+                "description": "Next page cursor.",
+                "location": {
+                  "start": {
+                    "line": 32,
+                    "column": 5,
+                    "charIndex": 593
+                  },
+                  "end": {
+                    "line": 35,
+                    "column": 8,
+                    "charIndex": 640
+                  }
+                }
+              }
+            },
+            {
+              "kind": "FieldDefinition",
+              "fieldName": "replies",
+              "required": false,
+              "type": {
+                "kind": "ListDefinition",
+                "elementType": {
+                  "kind": "ModelTypeName",
+                  "name": "Reply",
+                  "location": {
+                    "start": {
+                      "line": 41,
+                      "column": 14,
+                      "charIndex": 738
+                    },
+                    "end": {
+                      "line": 41,
+                      "column": 19,
+                      "charIndex": 743
+                    }
+                  }
+                },
+                "location": {
+                  "start": {
+                    "line": 41,
+                    "column": 13,
+                    "charIndex": 737
+                  },
+                  "end": {
+                    "line": 41,
+                    "column": 20,
+                    "charIndex": 744
+                  }
+                }
+              },
+              "location": {
+                "start": {
+                  "line": 41,
+                  "column": 5,
+                  "charIndex": 729
+                },
+                "end": {
+                  "line": 41,
+                  "column": 20,
+                  "charIndex": 744
+                }
+              },
+              "documentation": {
+                "title": "Replies",
+                "description": "List of replies under the post.",
+                "location": {
+                  "start": {
+                    "line": 37,
+                    "column": 5,
+                    "charIndex": 665
+                  },
+                  "end": {
+                    "line": 40,
+                    "column": 8,
+                    "charIndex": 724
+                  }
+                }
+              }
+            }
+          ],
+          "location": {
+            "start": {
+              "line": 26,
+              "column": 10,
+              "charIndex": 503
+            },
+            "end": {
+              "line": 42,
+              "column": 4,
+              "charIndex": 748
+            }
+          }
+        },
+        "location": {
+          "start": {
+            "line": 26,
+            "column": 3,
+            "charIndex": 496
+          },
+          "end": {
+            "line": 42,
+            "column": 4,
+            "charIndex": 748
+          }
+        }
+      },
+      "error": {
+        "kind": "UseCaseSlotDefinition",
+        "value": {
+          "kind": "ObjectDefinition",
+          "fields": [
+            {
+              "kind": "FieldDefinition",
+              "fieldName": "title",
+              "required": true,
+              "location": {
+                "start": {
+                  "line": 49,
+                  "column": 5,
+                  "charIndex": 849
+                },
+                "end": {
+                  "line": 49,
+                  "column": 11,
+                  "charIndex": 855
+                }
+              },
+              "documentation": {
+                "title": "Title",
+                "description": "A short, human-readable summary of the problem type.",
+                "location": {
+                  "start": {
+                    "line": 45,
+                    "column": 5,
+                    "charIndex": 766
+                  },
+                  "end": {
+                    "line": 48,
+                    "column": 8,
+                    "charIndex": 844
+                  }
+                }
+              }
+            },
+            {
+              "kind": "FieldDefinition",
+              "fieldName": "detail",
+              "required": false,
+              "location": {
+                "start": {
+                  "line": 54,
+                  "column": 5,
+                  "charIndex": 954
+                },
+                "end": {
+                  "line": 54,
+                  "column": 11,
+                  "charIndex": 960
+                }
+              },
+              "documentation": {
+                "title": "A human-readable explanation specific to this occurrence of the problem.",
+                "location": {
+                  "start": {
+                    "line": 51,
+                    "column": 5,
+                    "charIndex": 861
+                  },
+                  "end": {
+                    "line": 53,
+                    "column": 8,
+                    "charIndex": 949
+                  }
+                }
+              }
+            }
+          ],
+          "location": {
+            "start": {
+              "line": 44,
+              "column": 9,
+              "charIndex": 760
+            },
+            "end": {
+              "line": 55,
+              "column": 4,
+              "charIndex": 964
+            }
+          }
+        },
+        "location": {
+          "start": {
+            "line": 44,
+            "column": 3,
+            "charIndex": 754
+          },
+          "end": {
+            "line": 55,
+            "column": 4,
+            "charIndex": 964
+          }
+        }
+      },
+      "examples": [
+        {
+          "kind": "UseCaseSlotDefinition",
+          "value": {
+            "kind": "UseCaseExample",
+            "exampleName": "success",
+            "input": {
+              "kind": "UseCaseSlotDefinition",
+              "value": {
+                "kind": "ComlinkObjectLiteral",
+                "fields": [
+                  {
+                    "kind": "ComlinkAssignment",
+                    "key": [
+                      "parentId"
+                    ],
+                    "value": {
+                      "kind": "ComlinkPrimitiveLiteral",
+                      "value": "be7cdc05-4264-4d47-bc1f-af704d6abf32",
+                      "location": {
+                        "start": {
+                          "line": 59,
+                          "column": 22,
+                          "charIndex": 1021
+                        },
+                        "end": {
+                          "line": 59,
+                          "column": 60,
+                          "charIndex": 1059
+                        }
+                      }
+                    },
+                    "location": {
+                      "start": {
+                        "line": 59,
+                        "column": 11,
+                        "charIndex": 1010
+                      },
+                      "end": {
+                        "line": 59,
+                        "column": 60,
+                        "charIndex": 1059
+                      }
+                    }
+                  }
+                ],
+                "location": {
+                  "start": {
+                    "line": 58,
+                    "column": 13,
+                    "charIndex": 998
+                  },
+                  "end": {
+                    "line": 60,
+                    "column": 8,
+                    "charIndex": 1067
+                  }
+                }
+              },
+              "location": {
+                "start": {
+                  "line": 58,
+                  "column": 7,
+                  "charIndex": 992
+                },
+                "end": {
+                  "line": 60,
+                  "column": 8,
+                  "charIndex": 1067
+                }
+              }
+            },
+            "result": {
+              "kind": "UseCaseSlotDefinition",
+              "value": {
+                "kind": "ComlinkObjectLiteral",
+                "fields": [
+                  {
+                    "kind": "ComlinkAssignment",
+                    "key": [
+                      "replies"
+                    ],
+                    "value": {
+                      "kind": "ComlinkListLiteral",
+                      "items": [
+                        {
+                          "kind": "ComlinkObjectLiteral",
+                          "fields": [
+                            {
+                              "kind": "ComlinkAssignment",
+                              "key": [
+                                "id"
+                              ],
+                              "value": {
+                                "kind": "ComlinkPrimitiveLiteral",
+                                "value": "123",
+                                "location": {
+                                  "start": {
+                                    "line": 65,
+                                    "column": 22,
+                                    "charIndex": 1141
+                                  },
+                                  "end": {
+                                    "line": 65,
+                                    "column": 27,
+                                    "charIndex": 1146
+                                  }
+                                }
+                              },
+                              "location": {
+                                "start": {
+                                  "line": 65,
+                                  "column": 17,
+                                  "charIndex": 1136
+                                },
+                                "end": {
+                                  "line": 65,
+                                  "column": 27,
+                                  "charIndex": 1146
+                                }
+                              }
+                            },
+                            {
+                              "kind": "ComlinkAssignment",
+                              "key": [
+                                "createdAt"
+                              ],
+                              "value": {
+                                "kind": "ComlinkPrimitiveLiteral",
+                                "value": "2022-06-09T13:29:11+02:00",
+                                "location": {
+                                  "start": {
+                                    "line": 66,
+                                    "column": 29,
+                                    "charIndex": 1175
+                                  },
+                                  "end": {
+                                    "line": 66,
+                                    "column": 56,
+                                    "charIndex": 1202
+                                  }
+                                }
+                              },
+                              "location": {
+                                "start": {
+                                  "line": 66,
+                                  "column": 17,
+                                  "charIndex": 1163
+                                },
+                                "end": {
+                                  "line": 66,
+                                  "column": 56,
+                                  "charIndex": 1202
+                                }
+                              }
+                            },
+                            {
+                              "kind": "ComlinkAssignment",
+                              "key": [
+                                "authorId"
+                              ],
+                              "value": {
+                                "kind": "ComlinkPrimitiveLiteral",
+                                "value": "@alberteinstein",
+                                "location": {
+                                  "start": {
+                                    "line": 67,
+                                    "column": 28,
+                                    "charIndex": 1230
+                                  },
+                                  "end": {
+                                    "line": 67,
+                                    "column": 45,
+                                    "charIndex": 1247
+                                  }
+                                }
+                              },
+                              "location": {
+                                "start": {
+                                  "line": 67,
+                                  "column": 17,
+                                  "charIndex": 1219
+                                },
+                                "end": {
+                                  "line": 67,
+                                  "column": 45,
+                                  "charIndex": 1247
+                                }
+                              }
+                            },
+                            {
+                              "kind": "ComlinkAssignment",
+                              "key": [
+                                "authorName"
+                              ],
+                              "value": {
+                                "kind": "ComlinkPrimitiveLiteral",
+                                "value": "Albert Einstein",
+                                "location": {
+                                  "start": {
+                                    "line": 68,
+                                    "column": 30,
+                                    "charIndex": 1277
+                                  },
+                                  "end": {
+                                    "line": 68,
+                                    "column": 47,
+                                    "charIndex": 1294
+                                  }
+                                }
+                              },
+                              "location": {
+                                "start": {
+                                  "line": 68,
+                                  "column": 17,
+                                  "charIndex": 1264
+                                },
+                                "end": {
+                                  "line": 68,
+                                  "column": 47,
+                                  "charIndex": 1294
+                                }
+                              }
+                            },
+                            {
+                              "kind": "ComlinkAssignment",
+                              "key": [
+                                "text"
+                              ],
+                              "value": {
+                                "kind": "ComlinkPrimitiveLiteral",
+                                "value": "Hello, World!",
+                                "location": {
+                                  "start": {
+                                    "line": 69,
+                                    "column": 24,
+                                    "charIndex": 1318
+                                  },
+                                  "end": {
+                                    "line": 69,
+                                    "column": 39,
+                                    "charIndex": 1333
+                                  }
+                                }
+                              },
+                              "location": {
+                                "start": {
+                                  "line": 69,
+                                  "column": 17,
+                                  "charIndex": 1311
+                                },
+                                "end": {
+                                  "line": 69,
+                                  "column": 39,
+                                  "charIndex": 1333
+                                }
+                              }
+                            }
+                          ],
+                          "location": {
+                            "start": {
+                              "line": 64,
+                              "column": 13,
+                              "charIndex": 1118
+                            },
+                            "end": {
+                              "line": 70,
+                              "column": 14,
+                              "charIndex": 1347
+                            }
+                          }
+                        },
+                        {
+                          "kind": "ComlinkObjectLiteral",
+                          "fields": [
+                            {
+                              "kind": "ComlinkAssignment",
+                              "key": [
+                                "id"
+                              ],
+                              "value": {
+                                "kind": "ComlinkPrimitiveLiteral",
+                                "value": "124",
+                                "location": {
+                                  "start": {
+                                    "line": 72,
+                                    "column": 22,
+                                    "charIndex": 1384
+                                  },
+                                  "end": {
+                                    "line": 72,
+                                    "column": 27,
+                                    "charIndex": 1389
+                                  }
+                                }
+                              },
+                              "location": {
+                                "start": {
+                                  "line": 72,
+                                  "column": 17,
+                                  "charIndex": 1379
+                                },
+                                "end": {
+                                  "line": 72,
+                                  "column": 27,
+                                  "charIndex": 1389
+                                }
+                              }
+                            },
+                            {
+                              "kind": "ComlinkAssignment",
+                              "key": [
+                                "createdAt"
+                              ],
+                              "value": {
+                                "kind": "ComlinkPrimitiveLiteral",
+                                "value": "2022-06-09T16:29:11+02:00",
+                                "location": {
+                                  "start": {
+                                    "line": 73,
+                                    "column": 29,
+                                    "charIndex": 1418
+                                  },
+                                  "end": {
+                                    "line": 73,
+                                    "column": 56,
+                                    "charIndex": 1445
+                                  }
+                                }
+                              },
+                              "location": {
+                                "start": {
+                                  "line": 73,
+                                  "column": 17,
+                                  "charIndex": 1406
+                                },
+                                "end": {
+                                  "line": 73,
+                                  "column": 56,
+                                  "charIndex": 1445
+                                }
+                              }
+                            },
+                            {
+                              "kind": "ComlinkAssignment",
+                              "key": [
+                                "authorId"
+                              ],
+                              "value": {
+                                "kind": "ComlinkPrimitiveLiteral",
+                                "value": "@newton",
+                                "location": {
+                                  "start": {
+                                    "line": 74,
+                                    "column": 28,
+                                    "charIndex": 1473
+                                  },
+                                  "end": {
+                                    "line": 74,
+                                    "column": 37,
+                                    "charIndex": 1482
+                                  }
+                                }
+                              },
+                              "location": {
+                                "start": {
+                                  "line": 74,
+                                  "column": 17,
+                                  "charIndex": 1462
+                                },
+                                "end": {
+                                  "line": 74,
+                                  "column": 37,
+                                  "charIndex": 1482
+                                }
+                              }
+                            },
+                            {
+                              "kind": "ComlinkAssignment",
+                              "key": [
+                                "authorName"
+                              ],
+                              "value": {
+                                "kind": "ComlinkPrimitiveLiteral",
+                                "value": "Isaac Newton",
+                                "location": {
+                                  "start": {
+                                    "line": 75,
+                                    "column": 30,
+                                    "charIndex": 1512
+                                  },
+                                  "end": {
+                                    "line": 75,
+                                    "column": 44,
+                                    "charIndex": 1526
+                                  }
+                                }
+                              },
+                              "location": {
+                                "start": {
+                                  "line": 75,
+                                  "column": 17,
+                                  "charIndex": 1499
+                                },
+                                "end": {
+                                  "line": 75,
+                                  "column": 44,
+                                  "charIndex": 1526
+                                }
+                              }
+                            },
+                            {
+                              "kind": "ComlinkAssignment",
+                              "key": [
+                                "lastModifiedAt"
+                              ],
+                              "value": {
+                                "kind": "ComlinkPrimitiveLiteral",
+                                "value": "2022-06-09T16:32:42+02:00",
+                                "location": {
+                                  "start": {
+                                    "line": 76,
+                                    "column": 34,
+                                    "charIndex": 1560
+                                  },
+                                  "end": {
+                                    "line": 76,
+                                    "column": 61,
+                                    "charIndex": 1587
+                                  }
+                                }
+                              },
+                              "location": {
+                                "start": {
+                                  "line": 76,
+                                  "column": 17,
+                                  "charIndex": 1543
+                                },
+                                "end": {
+                                  "line": 76,
+                                  "column": 61,
+                                  "charIndex": 1587
+                                }
+                              }
+                            },
+                            {
+                              "kind": "ComlinkAssignment",
+                              "key": [
+                                "text"
+                              ],
+                              "value": {
+                                "kind": "ComlinkPrimitiveLiteral",
+                                "value": "(deleted.)",
+                                "location": {
+                                  "start": {
+                                    "line": 77,
+                                    "column": 24,
+                                    "charIndex": 1611
+                                  },
+                                  "end": {
+                                    "line": 77,
+                                    "column": 36,
+                                    "charIndex": 1623
+                                  }
+                                }
+                              },
+                              "location": {
+                                "start": {
+                                  "line": 77,
+                                  "column": 17,
+                                  "charIndex": 1604
+                                },
+                                "end": {
+                                  "line": 77,
+                                  "column": 36,
+                                  "charIndex": 1623
+                                }
+                              }
+                            }
+                          ],
+                          "location": {
+                            "start": {
+                              "line": 71,
+                              "column": 13,
+                              "charIndex": 1361
+                            },
+                            "end": {
+                              "line": 78,
+                              "column": 14,
+                              "charIndex": 1637
+                            }
+                          }
+                        }
+                      ],
+                      "location": {
+                        "start": {
+                          "line": 63,
+                          "column": 21,
+                          "charIndex": 1104
+                        },
+                        "end": {
+                          "line": 79,
+                          "column": 10,
+                          "charIndex": 1647
+                        }
+                      }
+                    },
+                    "location": {
+                      "start": {
+                        "line": 63,
+                        "column": 11,
+                        "charIndex": 1094
+                      },
+                      "end": {
+                        "line": 79,
+                        "column": 10,
+                        "charIndex": 1647
+                      }
+                    }
+                  }
+                ],
+                "location": {
+                  "start": {
+                    "line": 62,
+                    "column": 14,
+                    "charIndex": 1082
+                  },
+                  "end": {
+                    "line": 80,
+                    "column": 8,
+                    "charIndex": 1655
+                  }
+                }
+              },
+              "location": {
+                "start": {
+                  "line": 62,
+                  "column": 7,
+                  "charIndex": 1075
+                },
+                "end": {
+                  "line": 80,
+                  "column": 8,
+                  "charIndex": 1655
+                }
+              }
+            },
+            "location": {
+              "start": {
+                "line": 57,
+                "column": 11,
+                "charIndex": 976
+              },
+              "end": {
+                "line": 81,
+                "column": 4,
+                "charIndex": 1659
+              }
+            }
+          },
+          "location": {
+            "start": {
+              "line": 57,
+              "column": 3,
+              "charIndex": 968
+            },
+            "end": {
+              "line": 81,
+              "column": 4,
+              "charIndex": 1659
+            }
+          }
+        }
+      ],
+      "location": {
+        "start": {
+          "line": 12,
+          "column": 1,
+          "charIndex": 234
+        },
+        "end": {
+          "line": 82,
+          "column": 2,
+          "charIndex": 1661
+        }
+      },
+      "documentation": {
+        "title": "Get Post Replies",
+        "description": "Get replies (comments) on a social media post, comment, or a reply.",
+        "location": {
+          "start": {
+            "line": 8,
+            "column": 1,
+            "charIndex": 141
+          },
+          "end": {
+            "line": 11,
+            "column": 4,
+            "charIndex": 233
+          }
+        }
+      }
+    },
+    {
+      "kind": "NamedModelDefinition",
+      "modelName": "Reply",
+      "type": {
+        "kind": "ObjectDefinition",
+        "fields": [
+          {
+            "kind": "FieldDefinition",
+            "fieldName": "id",
+            "required": true,
+            "type": {
+              "kind": "NonNullDefinition",
+              "type": {
+                "kind": "PrimitiveTypeName",
+                "name": "string",
+                "location": {
+                  "start": {
+                    "line": 89,
+                    "column": 9,
+                    "charIndex": 1737
+                  },
+                  "end": {
+                    "line": 89,
+                    "column": 15,
+                    "charIndex": 1743
+                  }
+                }
+              },
+              "location": {
+                "start": {
+                  "line": 89,
+                  "column": 9,
+                  "charIndex": 1737
+                },
+                "end": {
+                  "line": 89,
+                  "column": 16,
+                  "charIndex": 1744
+                }
+              }
+            },
+            "location": {
+              "start": {
+                "line": 89,
+                "column": 5,
+                "charIndex": 1733
+              },
+              "end": {
+                "line": 89,
+                "column": 16,
+                "charIndex": 1744
+              }
+            },
+            "documentation": {
+              "title": "ID",
+              "description": "Identifier of the reply.",
+              "location": {
+                "start": {
+                  "line": 85,
+                  "column": 5,
+                  "charIndex": 1681
+                },
+                "end": {
+                  "line": 88,
+                  "column": 8,
+                  "charIndex": 1728
+                }
+              }
+            }
+          },
+          {
+            "kind": "FieldDefinition",
+            "fieldName": "createdAt",
+            "required": false,
+            "type": {
+              "kind": "PrimitiveTypeName",
+              "name": "string",
+              "location": {
+                "start": {
+                  "line": 95,
+                  "column": 15,
+                  "charIndex": 1847
+                },
+                "end": {
+                  "line": 95,
+                  "column": 21,
+                  "charIndex": 1853
+                }
+              }
+            },
+            "location": {
+              "start": {
+                "line": 95,
+                "column": 5,
+                "charIndex": 1837
+              },
+              "end": {
+                "line": 95,
+                "column": 21,
+                "charIndex": 1853
+              }
+            },
+            "documentation": {
+              "title": "Created at",
+              "description": "Timestamp of the reply creation in ISO 8601 format.",
+              "location": {
+                "start": {
+                  "line": 91,
+                  "column": 5,
+                  "charIndex": 1750
+                },
+                "end": {
+                  "line": 94,
+                  "column": 8,
+                  "charIndex": 1832
+                }
+              }
+            }
+          },
+          {
+            "kind": "FieldDefinition",
+            "fieldName": "authorId",
+            "required": false,
+            "type": {
+              "kind": "PrimitiveTypeName",
+              "name": "string",
+              "location": {
+                "start": {
+                  "line": 101,
+                  "column": 14,
+                  "charIndex": 1931
+                },
+                "end": {
+                  "line": 101,
+                  "column": 20,
+                  "charIndex": 1937
+                }
+              }
+            },
+            "location": {
+              "start": {
+                "line": 101,
+                "column": 5,
+                "charIndex": 1922
+              },
+              "end": {
+                "line": 101,
+                "column": 20,
+                "charIndex": 1937
+              }
+            },
+            "documentation": {
+              "title": "Author ID",
+              "description": "Identificator of the author.",
+              "location": {
+                "start": {
+                  "line": 97,
+                  "column": 5,
+                  "charIndex": 1859
+                },
+                "end": {
+                  "line": 100,
+                  "column": 8,
+                  "charIndex": 1917
+                }
+              }
+            }
+          },
+          {
+            "kind": "FieldDefinition",
+            "fieldName": "authorName",
+            "required": false,
+            "type": {
+              "kind": "PrimitiveTypeName",
+              "name": "string",
+              "location": {
+                "start": {
+                  "line": 107,
+                  "column": 16,
+                  "charIndex": 2025
+                },
+                "end": {
+                  "line": 107,
+                  "column": 22,
+                  "charIndex": 2031
+                }
+              }
+            },
+            "location": {
+              "start": {
+                "line": 107,
+                "column": 5,
+                "charIndex": 2014
+              },
+              "end": {
+                "line": 107,
+                "column": 22,
+                "charIndex": 2031
+              }
+            },
+            "documentation": {
+              "title": "Author name",
+              "description": "Human-friendly name of the author.",
+              "location": {
+                "start": {
+                  "line": 103,
+                  "column": 5,
+                  "charIndex": 1943
+                },
+                "end": {
+                  "line": 106,
+                  "column": 8,
+                  "charIndex": 2009
+                }
+              }
+            }
+          },
+          {
+            "kind": "FieldDefinition",
+            "fieldName": "lastModifiedAt",
+            "required": false,
+            "type": {
+              "kind": "PrimitiveTypeName",
+              "name": "string",
+              "location": {
+                "start": {
+                  "line": 113,
+                  "column": 20,
+                  "charIndex": 2157
+                },
+                "end": {
+                  "line": 113,
+                  "column": 26,
+                  "charIndex": 2163
+                }
+              }
+            },
+            "location": {
+              "start": {
+                "line": 113,
+                "column": 5,
+                "charIndex": 2142
+              },
+              "end": {
+                "line": 113,
+                "column": 26,
+                "charIndex": 2163
+              }
+            },
+            "documentation": {
+              "title": "Last modified",
+              "description": "Timestamp of the last known reply modification in ISO 8601 format.",
+              "location": {
+                "start": {
+                  "line": 109,
+                  "column": 5,
+                  "charIndex": 2037
+                },
+                "end": {
+                  "line": 112,
+                  "column": 8,
+                  "charIndex": 2137
+                }
+              }
+            }
+          },
+          {
+            "kind": "FieldDefinition",
+            "fieldName": "text",
+            "required": false,
+            "type": {
+              "kind": "PrimitiveTypeName",
+              "name": "string",
+              "location": {
+                "start": {
+                  "line": 119,
+                  "column": 10,
+                  "charIndex": 2233
+                },
+                "end": {
+                  "line": 119,
+                  "column": 16,
+                  "charIndex": 2239
+                }
+              }
+            },
+            "location": {
+              "start": {
+                "line": 119,
+                "column": 5,
+                "charIndex": 2228
+              },
+              "end": {
+                "line": 119,
+                "column": 16,
+                "charIndex": 2239
+              }
+            },
+            "documentation": {
+              "title": "Text",
+              "description": "Textual content of the reply.",
+              "location": {
+                "start": {
+                  "line": 115,
+                  "column": 5,
+                  "charIndex": 2169
+                },
+                "end": {
+                  "line": 118,
+                  "column": 8,
+                  "charIndex": 2223
+                }
+              }
+            }
+          }
+        ],
+        "location": {
+          "start": {
+            "line": 84,
+            "column": 13,
+            "charIndex": 1675
+          },
+          "end": {
+            "line": 120,
+            "column": 2,
+            "charIndex": 2241
+          }
+        }
+      },
+      "location": {
+        "start": {
+          "line": 84,
+          "column": 1,
+          "charIndex": 1663
+        },
+        "end": {
+          "line": 120,
+          "column": 2,
+          "charIndex": 2241
+        }
+      }
+    }
+  ],
+  "location": {
+    "start": {
+      "line": 5,
+      "column": 1,
+      "charIndex": 92
+    },
+    "end": {
+      "line": 120,
+      "column": 2,
+      "charIndex": 2241
+    }
+  },
+  "astMetadata": {
+    "astVersion": {
+      "major": 1,
+      "minor": 2,
+      "patch": 0
+    },
+    "parserVersion": {
+      "major": 1,
+      "minor": 2,
+      "patch": 0
+    },
+    "sourceChecksum": "dd75bbd9b2816927dcc7bd93953d831ef30c1405c1c809569801fa65002956d4"
+  }
+}

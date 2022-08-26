@@ -1,0 +1,1550 @@
+{
+  "kind": "ProfileDocument",
+  "header": {
+    "kind": "ProfileHeader",
+    "scope": "speech",
+    "name": "synthesis",
+    "version": {
+      "major": 1,
+      "minor": 0,
+      "patch": 1
+    },
+    "location": {
+      "start": {
+        "line": 6,
+        "column": 1,
+        "charIndex": 74
+      },
+      "end": {
+        "line": 7,
+        "column": 18,
+        "charIndex": 117
+      }
+    },
+    "documentation": {
+      "title": "Text to speech synthesis",
+      "description": "Turn text into natural-sounding speech.",
+      "location": {
+        "start": {
+          "line": 1,
+          "column": 1,
+          "charIndex": 0
+        },
+        "end": {
+          "line": 4,
+          "column": 4,
+          "charIndex": 72
+        }
+      }
+    }
+  },
+  "definitions": [
+    {
+      "kind": "UseCaseDefinition",
+      "useCaseName": "TextToSpeechSynthesis",
+      "input": {
+        "kind": "UseCaseSlotDefinition",
+        "value": {
+          "kind": "ObjectDefinition",
+          "fields": [
+            {
+              "kind": "FieldDefinition",
+              "fieldName": "text",
+              "required": true,
+              "type": {
+                "kind": "NonNullDefinition",
+                "type": {
+                  "kind": "PrimitiveTypeName",
+                  "name": "string",
+                  "location": {
+                    "start": {
+                      "line": 19,
+                      "column": 11,
+                      "charIndex": 307
+                    },
+                    "end": {
+                      "line": 19,
+                      "column": 17,
+                      "charIndex": 313
+                    }
+                  }
+                },
+                "location": {
+                  "start": {
+                    "line": 19,
+                    "column": 11,
+                    "charIndex": 307
+                  },
+                  "end": {
+                    "line": 19,
+                    "column": 18,
+                    "charIndex": 314
+                  }
+                }
+              },
+              "location": {
+                "start": {
+                  "line": 19,
+                  "column": 5,
+                  "charIndex": 301
+                },
+                "end": {
+                  "line": 19,
+                  "column": 18,
+                  "charIndex": 314
+                }
+              },
+              "documentation": {
+                "title": "Text",
+                "description": "The text input to be synthesized.",
+                "location": {
+                  "start": {
+                    "line": 15,
+                    "column": 5,
+                    "charIndex": 238
+                  },
+                  "end": {
+                    "line": 18,
+                    "column": 8,
+                    "charIndex": 296
+                  }
+                }
+              }
+            },
+            {
+              "kind": "FieldDefinition",
+              "fieldName": "voice",
+              "required": true,
+              "type": {
+                "kind": "NonNullDefinition",
+                "type": {
+                  "kind": "ModelTypeName",
+                  "name": "VoiceOptions",
+                  "location": {
+                    "start": {
+                      "line": 25,
+                      "column": 12,
+                      "charIndex": 382
+                    },
+                    "end": {
+                      "line": 25,
+                      "column": 24,
+                      "charIndex": 394
+                    }
+                  }
+                },
+                "location": {
+                  "start": {
+                    "line": 25,
+                    "column": 12,
+                    "charIndex": 382
+                  },
+                  "end": {
+                    "line": 25,
+                    "column": 25,
+                    "charIndex": 395
+                  }
+                }
+              },
+              "location": {
+                "start": {
+                  "line": 25,
+                  "column": 5,
+                  "charIndex": 375
+                },
+                "end": {
+                  "line": 25,
+                  "column": 25,
+                  "charIndex": 395
+                }
+              },
+              "documentation": {
+                "title": "Voice",
+                "description": "Voice selection options.",
+                "location": {
+                  "start": {
+                    "line": 21,
+                    "column": 5,
+                    "charIndex": 320
+                  },
+                  "end": {
+                    "line": 24,
+                    "column": 8,
+                    "charIndex": 370
+                  }
+                }
+              }
+            },
+            {
+              "kind": "FieldDefinition",
+              "fieldName": "audio",
+              "required": true,
+              "type": {
+                "kind": "NonNullDefinition",
+                "type": {
+                  "kind": "ModelTypeName",
+                  "name": "AudioOptions",
+                  "location": {
+                    "start": {
+                      "line": 31,
+                      "column": 12,
+                      "charIndex": 460
+                    },
+                    "end": {
+                      "line": 31,
+                      "column": 24,
+                      "charIndex": 472
+                    }
+                  }
+                },
+                "location": {
+                  "start": {
+                    "line": 31,
+                    "column": 12,
+                    "charIndex": 460
+                  },
+                  "end": {
+                    "line": 31,
+                    "column": 25,
+                    "charIndex": 473
+                  }
+                }
+              },
+              "location": {
+                "start": {
+                  "line": 31,
+                  "column": 5,
+                  "charIndex": 453
+                },
+                "end": {
+                  "line": 31,
+                  "column": 25,
+                  "charIndex": 473
+                }
+              },
+              "documentation": {
+                "title": "Audio",
+                "description": "Audio format options.",
+                "location": {
+                  "start": {
+                    "line": 27,
+                    "column": 5,
+                    "charIndex": 401
+                  },
+                  "end": {
+                    "line": 30,
+                    "column": 8,
+                    "charIndex": 448
+                  }
+                }
+              }
+            }
+          ],
+          "location": {
+            "start": {
+              "line": 14,
+              "column": 9,
+              "charIndex": 232
+            },
+            "end": {
+              "line": 32,
+              "column": 4,
+              "charIndex": 477
+            }
+          }
+        },
+        "location": {
+          "start": {
+            "line": 14,
+            "column": 3,
+            "charIndex": 226
+          },
+          "end": {
+            "line": 32,
+            "column": 4,
+            "charIndex": 477
+          }
+        }
+      },
+      "result": {
+        "kind": "UseCaseSlotDefinition",
+        "value": {
+          "kind": "ObjectDefinition",
+          "fields": [
+            {
+              "kind": "FieldDefinition",
+              "fieldName": "audioContent",
+              "required": true,
+              "location": {
+                "start": {
+                  "line": 39,
+                  "column": 5,
+                  "charIndex": 610
+                },
+                "end": {
+                  "line": 39,
+                  "column": 18,
+                  "charIndex": 623
+                }
+              },
+              "documentation": {
+                "title": "Audio content",
+                "description": "Synthesised audio data bytes encoded as specified in the audio options input.",
+                "location": {
+                  "start": {
+                    "line": 35,
+                    "column": 5,
+                    "charIndex": 494
+                  },
+                  "end": {
+                    "line": 38,
+                    "column": 8,
+                    "charIndex": 605
+                  }
+                }
+              }
+            }
+          ],
+          "location": {
+            "start": {
+              "line": 34,
+              "column": 10,
+              "charIndex": 488
+            },
+            "end": {
+              "line": 40,
+              "column": 4,
+              "charIndex": 627
+            }
+          }
+        },
+        "location": {
+          "start": {
+            "line": 34,
+            "column": 3,
+            "charIndex": 481
+          },
+          "end": {
+            "line": 40,
+            "column": 4,
+            "charIndex": 627
+          }
+        }
+      },
+      "error": {
+        "kind": "UseCaseSlotDefinition",
+        "value": {
+          "kind": "ObjectDefinition",
+          "fields": [
+            {
+              "kind": "FieldDefinition",
+              "fieldName": "title",
+              "required": true,
+              "location": {
+                "start": {
+                  "line": 47,
+                  "column": 5,
+                  "charIndex": 726
+                },
+                "end": {
+                  "line": 47,
+                  "column": 11,
+                  "charIndex": 732
+                }
+              },
+              "documentation": {
+                "title": "Title",
+                "description": "A short, human-readable summary of the problem type.",
+                "location": {
+                  "start": {
+                    "line": 43,
+                    "column": 5,
+                    "charIndex": 643
+                  },
+                  "end": {
+                    "line": 46,
+                    "column": 8,
+                    "charIndex": 721
+                  }
+                }
+              }
+            },
+            {
+              "kind": "FieldDefinition",
+              "fieldName": "detail",
+              "required": false,
+              "location": {
+                "start": {
+                  "line": 53,
+                  "column": 5,
+                  "charIndex": 842
+                },
+                "end": {
+                  "line": 53,
+                  "column": 11,
+                  "charIndex": 848
+                }
+              },
+              "documentation": {
+                "title": "Detail",
+                "description": "A human-readable explanation specific to this occurrence of the problem.",
+                "location": {
+                  "start": {
+                    "line": 49,
+                    "column": 5,
+                    "charIndex": 738
+                  },
+                  "end": {
+                    "line": 52,
+                    "column": 8,
+                    "charIndex": 837
+                  }
+                }
+              }
+            }
+          ],
+          "location": {
+            "start": {
+              "line": 42,
+              "column": 9,
+              "charIndex": 637
+            },
+            "end": {
+              "line": 54,
+              "column": 4,
+              "charIndex": 852
+            }
+          }
+        },
+        "location": {
+          "start": {
+            "line": 42,
+            "column": 3,
+            "charIndex": 631
+          },
+          "end": {
+            "line": 54,
+            "column": 4,
+            "charIndex": 852
+          }
+        }
+      },
+      "examples": [
+        {
+          "kind": "UseCaseSlotDefinition",
+          "value": {
+            "kind": "UseCaseExample",
+            "exampleName": "Successful",
+            "input": {
+              "kind": "UseCaseSlotDefinition",
+              "value": {
+                "kind": "ComlinkObjectLiteral",
+                "fields": [
+                  {
+                    "kind": "ComlinkAssignment",
+                    "key": [
+                      "text"
+                    ],
+                    "value": {
+                      "kind": "ComlinkPrimitiveLiteral",
+                      "value": "Hello world.",
+                      "location": {
+                        "start": {
+                          "line": 58,
+                          "column": 14,
+                          "charIndex": 902
+                        },
+                        "end": {
+                          "line": 58,
+                          "column": 28,
+                          "charIndex": 916
+                        }
+                      }
+                    },
+                    "location": {
+                      "start": {
+                        "line": 58,
+                        "column": 7,
+                        "charIndex": 895
+                      },
+                      "end": {
+                        "line": 58,
+                        "column": 28,
+                        "charIndex": 916
+                      }
+                    }
+                  },
+                  {
+                    "kind": "ComlinkAssignment",
+                    "key": [
+                      "voice"
+                    ],
+                    "value": {
+                      "kind": "ComlinkObjectLiteral",
+                      "fields": [
+                        {
+                          "kind": "ComlinkAssignment",
+                          "key": [
+                            "languageCode"
+                          ],
+                          "value": {
+                            "kind": "ComlinkPrimitiveLiteral",
+                            "value": "en-US",
+                            "location": {
+                              "start": {
+                                "line": 60,
+                                "column": 24,
+                                "charIndex": 957
+                              },
+                              "end": {
+                                "line": 60,
+                                "column": 31,
+                                "charIndex": 964
+                              }
+                            }
+                          },
+                          "location": {
+                            "start": {
+                              "line": 60,
+                              "column": 9,
+                              "charIndex": 942
+                            },
+                            "end": {
+                              "line": 60,
+                              "column": 31,
+                              "charIndex": 964
+                            }
+                          }
+                        }
+                      ],
+                      "location": {
+                        "start": {
+                          "line": 59,
+                          "column": 15,
+                          "charIndex": 932
+                        },
+                        "end": {
+                          "line": 61,
+                          "column": 8,
+                          "charIndex": 972
+                        }
+                      }
+                    },
+                    "location": {
+                      "start": {
+                        "line": 59,
+                        "column": 7,
+                        "charIndex": 924
+                      },
+                      "end": {
+                        "line": 61,
+                        "column": 8,
+                        "charIndex": 972
+                      }
+                    }
+                  },
+                  {
+                    "kind": "ComlinkAssignment",
+                    "key": [
+                      "audio"
+                    ],
+                    "value": {
+                      "kind": "ComlinkObjectLiteral",
+                      "fields": [
+                        {
+                          "kind": "ComlinkAssignment",
+                          "key": [
+                            "encoding"
+                          ],
+                          "value": {
+                            "kind": "ComlinkPrimitiveLiteral",
+                            "value": "linear_pcm",
+                            "location": {
+                              "start": {
+                                "line": 63,
+                                "column": 20,
+                                "charIndex": 1009
+                              },
+                              "end": {
+                                "line": 63,
+                                "column": 32,
+                                "charIndex": 1021
+                              }
+                            }
+                          },
+                          "location": {
+                            "start": {
+                              "line": 63,
+                              "column": 9,
+                              "charIndex": 998
+                            },
+                            "end": {
+                              "line": 63,
+                              "column": 32,
+                              "charIndex": 1021
+                            }
+                          }
+                        }
+                      ],
+                      "location": {
+                        "start": {
+                          "line": 62,
+                          "column": 15,
+                          "charIndex": 988
+                        },
+                        "end": {
+                          "line": 64,
+                          "column": 8,
+                          "charIndex": 1029
+                        }
+                      }
+                    },
+                    "location": {
+                      "start": {
+                        "line": 62,
+                        "column": 7,
+                        "charIndex": 980
+                      },
+                      "end": {
+                        "line": 64,
+                        "column": 8,
+                        "charIndex": 1029
+                      }
+                    }
+                  }
+                ],
+                "location": {
+                  "start": {
+                    "line": 57,
+                    "column": 11,
+                    "charIndex": 887
+                  },
+                  "end": {
+                    "line": 65,
+                    "column": 6,
+                    "charIndex": 1035
+                  }
+                }
+              },
+              "location": {
+                "start": {
+                  "line": 57,
+                  "column": 5,
+                  "charIndex": 881
+                },
+                "end": {
+                  "line": 65,
+                  "column": 6,
+                  "charIndex": 1035
+                }
+              }
+            },
+            "result": {
+              "kind": "UseCaseSlotDefinition",
+              "value": {
+                "kind": "ComlinkObjectLiteral",
+                "fields": [
+                  {
+                    "kind": "ComlinkAssignment",
+                    "key": [
+                      "audioContent"
+                    ],
+                    "value": {
+                      "kind": "ComlinkPrimitiveLiteral",
+                      "value": "<Synthesised audio data bytes encoded as 16-bit signed little-endian samples with WAV header>",
+                      "location": {
+                        "start": {
+                          "line": 68,
+                          "column": 22,
+                          "charIndex": 1071
+                        },
+                        "end": {
+                          "line": 68,
+                          "column": 117,
+                          "charIndex": 1166
+                        }
+                      }
+                    },
+                    "location": {
+                      "start": {
+                        "line": 68,
+                        "column": 7,
+                        "charIndex": 1056
+                      },
+                      "end": {
+                        "line": 68,
+                        "column": 117,
+                        "charIndex": 1166
+                      }
+                    }
+                  }
+                ],
+                "location": {
+                  "start": {
+                    "line": 67,
+                    "column": 12,
+                    "charIndex": 1048
+                  },
+                  "end": {
+                    "line": 69,
+                    "column": 6,
+                    "charIndex": 1173
+                  }
+                }
+              },
+              "location": {
+                "start": {
+                  "line": 67,
+                  "column": 5,
+                  "charIndex": 1041
+                },
+                "end": {
+                  "line": 69,
+                  "column": 6,
+                  "charIndex": 1173
+                }
+              }
+            },
+            "location": {
+              "start": {
+                "line": 56,
+                "column": 11,
+                "charIndex": 864
+              },
+              "end": {
+                "line": 70,
+                "column": 4,
+                "charIndex": 1177
+              }
+            }
+          },
+          "location": {
+            "start": {
+              "line": 56,
+              "column": 3,
+              "charIndex": 856
+            },
+            "end": {
+              "line": 70,
+              "column": 4,
+              "charIndex": 1177
+            }
+          }
+        },
+        {
+          "kind": "UseCaseSlotDefinition",
+          "value": {
+            "kind": "UseCaseExample",
+            "exampleName": "Failed",
+            "input": {
+              "kind": "UseCaseSlotDefinition",
+              "value": {
+                "kind": "ComlinkObjectLiteral",
+                "fields": [
+                  {
+                    "kind": "ComlinkAssignment",
+                    "key": [
+                      "text"
+                    ],
+                    "value": {
+                      "kind": "ComlinkPrimitiveLiteral",
+                      "value": "Hello world.",
+                      "location": {
+                        "start": {
+                          "line": 74,
+                          "column": 14,
+                          "charIndex": 1223
+                        },
+                        "end": {
+                          "line": 74,
+                          "column": 28,
+                          "charIndex": 1237
+                        }
+                      }
+                    },
+                    "location": {
+                      "start": {
+                        "line": 74,
+                        "column": 7,
+                        "charIndex": 1216
+                      },
+                      "end": {
+                        "line": 74,
+                        "column": 28,
+                        "charIndex": 1237
+                      }
+                    }
+                  },
+                  {
+                    "kind": "ComlinkAssignment",
+                    "key": [
+                      "voice"
+                    ],
+                    "value": {
+                      "kind": "ComlinkObjectLiteral",
+                      "fields": [
+                        {
+                          "kind": "ComlinkAssignment",
+                          "key": [
+                            "languageCode"
+                          ],
+                          "value": {
+                            "kind": "ComlinkPrimitiveLiteral",
+                            "value": "en-US",
+                            "location": {
+                              "start": {
+                                "line": 76,
+                                "column": 24,
+                                "charIndex": 1278
+                              },
+                              "end": {
+                                "line": 76,
+                                "column": 31,
+                                "charIndex": 1285
+                              }
+                            }
+                          },
+                          "location": {
+                            "start": {
+                              "line": 76,
+                              "column": 9,
+                              "charIndex": 1263
+                            },
+                            "end": {
+                              "line": 76,
+                              "column": 31,
+                              "charIndex": 1285
+                            }
+                          }
+                        }
+                      ],
+                      "location": {
+                        "start": {
+                          "line": 75,
+                          "column": 15,
+                          "charIndex": 1253
+                        },
+                        "end": {
+                          "line": 77,
+                          "column": 8,
+                          "charIndex": 1293
+                        }
+                      }
+                    },
+                    "location": {
+                      "start": {
+                        "line": 75,
+                        "column": 7,
+                        "charIndex": 1245
+                      },
+                      "end": {
+                        "line": 77,
+                        "column": 8,
+                        "charIndex": 1293
+                      }
+                    }
+                  },
+                  {
+                    "kind": "ComlinkAssignment",
+                    "key": [
+                      "audio"
+                    ],
+                    "value": {
+                      "kind": "ComlinkObjectLiteral",
+                      "fields": [
+                        {
+                          "kind": "ComlinkAssignment",
+                          "key": [
+                            "encoding"
+                          ],
+                          "value": {
+                            "kind": "ComlinkPrimitiveLiteral",
+                            "value": "linear_pcm",
+                            "location": {
+                              "start": {
+                                "line": 79,
+                                "column": 22,
+                                "charIndex": 1332
+                              },
+                              "end": {
+                                "line": 79,
+                                "column": 34,
+                                "charIndex": 1344
+                              }
+                            }
+                          },
+                          "location": {
+                            "start": {
+                              "line": 79,
+                              "column": 11,
+                              "charIndex": 1321
+                            },
+                            "end": {
+                              "line": 79,
+                              "column": 34,
+                              "charIndex": 1344
+                            }
+                          }
+                        },
+                        {
+                          "kind": "ComlinkAssignment",
+                          "key": [
+                            "sampleRateHertz"
+                          ],
+                          "value": {
+                            "kind": "ComlinkPrimitiveLiteral",
+                            "value": -2,
+                            "location": {
+                              "start": {
+                                "line": 80,
+                                "column": 29,
+                                "charIndex": 1374
+                              },
+                              "end": {
+                                "line": 80,
+                                "column": 31,
+                                "charIndex": 1376
+                              }
+                            }
+                          },
+                          "location": {
+                            "start": {
+                              "line": 80,
+                              "column": 11,
+                              "charIndex": 1356
+                            },
+                            "end": {
+                              "line": 80,
+                              "column": 31,
+                              "charIndex": 1376
+                            }
+                          }
+                        }
+                      ],
+                      "location": {
+                        "start": {
+                          "line": 78,
+                          "column": 15,
+                          "charIndex": 1309
+                        },
+                        "end": {
+                          "line": 81,
+                          "column": 8,
+                          "charIndex": 1385
+                        }
+                      }
+                    },
+                    "location": {
+                      "start": {
+                        "line": 78,
+                        "column": 7,
+                        "charIndex": 1301
+                      },
+                      "end": {
+                        "line": 81,
+                        "column": 8,
+                        "charIndex": 1385
+                      }
+                    }
+                  }
+                ],
+                "location": {
+                  "start": {
+                    "line": 73,
+                    "column": 11,
+                    "charIndex": 1208
+                  },
+                  "end": {
+                    "line": 82,
+                    "column": 6,
+                    "charIndex": 1392
+                  }
+                }
+              },
+              "location": {
+                "start": {
+                  "line": 73,
+                  "column": 5,
+                  "charIndex": 1202
+                },
+                "end": {
+                  "line": 82,
+                  "column": 6,
+                  "charIndex": 1392
+                }
+              }
+            },
+            "error": {
+              "kind": "UseCaseSlotDefinition",
+              "value": {
+                "kind": "ComlinkObjectLiteral",
+                "fields": [
+                  {
+                    "kind": "ComlinkAssignment",
+                    "key": [
+                      "title"
+                    ],
+                    "value": {
+                      "kind": "ComlinkPrimitiveLiteral",
+                      "value": "Invalid argument",
+                      "location": {
+                        "start": {
+                          "line": 85,
+                          "column": 15,
+                          "charIndex": 1420
+                        },
+                        "end": {
+                          "line": 85,
+                          "column": 33,
+                          "charIndex": 1438
+                        }
+                      }
+                    },
+                    "location": {
+                      "start": {
+                        "line": 85,
+                        "column": 7,
+                        "charIndex": 1412
+                      },
+                      "end": {
+                        "line": 85,
+                        "column": 33,
+                        "charIndex": 1438
+                      }
+                    }
+                  },
+                  {
+                    "kind": "ComlinkAssignment",
+                    "key": [
+                      "detail"
+                    ],
+                    "value": {
+                      "kind": "ComlinkPrimitiveLiteral",
+                      "value": "Request contains an invalid argument.",
+                      "location": {
+                        "start": {
+                          "line": 86,
+                          "column": 16,
+                          "charIndex": 1455
+                        },
+                        "end": {
+                          "line": 86,
+                          "column": 55,
+                          "charIndex": 1494
+                        }
+                      }
+                    },
+                    "location": {
+                      "start": {
+                        "line": 86,
+                        "column": 7,
+                        "charIndex": 1446
+                      },
+                      "end": {
+                        "line": 86,
+                        "column": 55,
+                        "charIndex": 1494
+                      }
+                    }
+                  }
+                ],
+                "location": {
+                  "start": {
+                    "line": 84,
+                    "column": 11,
+                    "charIndex": 1404
+                  },
+                  "end": {
+                    "line": 87,
+                    "column": 6,
+                    "charIndex": 1500
+                  }
+                }
+              },
+              "location": {
+                "start": {
+                  "line": 84,
+                  "column": 5,
+                  "charIndex": 1398
+                },
+                "end": {
+                  "line": 87,
+                  "column": 6,
+                  "charIndex": 1500
+                }
+              }
+            },
+            "location": {
+              "start": {
+                "line": 72,
+                "column": 11,
+                "charIndex": 1189
+              },
+              "end": {
+                "line": 88,
+                "column": 4,
+                "charIndex": 1504
+              }
+            }
+          },
+          "location": {
+            "start": {
+              "line": 72,
+              "column": 3,
+              "charIndex": 1181
+            },
+            "end": {
+              "line": 88,
+              "column": 4,
+              "charIndex": 1504
+            }
+          }
+        }
+      ],
+      "location": {
+        "start": {
+          "line": 13,
+          "column": 1,
+          "charIndex": 192
+        },
+        "end": {
+          "line": 90,
+          "column": 2,
+          "charIndex": 1507
+        }
+      },
+      "documentation": {
+        "title": "Text to speech synthesis",
+        "description": "Convert text into speech synchronously.",
+        "location": {
+          "start": {
+            "line": 9,
+            "column": 1,
+            "charIndex": 119
+          },
+          "end": {
+            "line": 12,
+            "column": 4,
+            "charIndex": 191
+          }
+        }
+      }
+    },
+    {
+      "kind": "NamedModelDefinition",
+      "modelName": "AudioEncoding",
+      "type": {
+        "kind": "EnumDefinition",
+        "values": [
+          {
+            "kind": "EnumValue",
+            "name": "mp3",
+            "value": "mp3",
+            "location": {
+              "start": {
+                "line": 97,
+                "column": 3,
+                "charIndex": 1572
+              },
+              "end": {
+                "line": 97,
+                "column": 6,
+                "charIndex": 1575
+              }
+            },
+            "documentation": {
+              "title": "MP3",
+              "description": "MP3 encoding.",
+              "location": {
+                "start": {
+                  "line": 93,
+                  "column": 3,
+                  "charIndex": 1538
+                },
+                "end": {
+                  "line": 96,
+                  "column": 6,
+                  "charIndex": 1569
+                }
+              }
+            }
+          },
+          {
+            "kind": "EnumValue",
+            "name": "linear_pcm",
+            "value": "linear_pcm",
+            "location": {
+              "start": {
+                "line": 103,
+                "column": 3,
+                "charIndex": 1681
+              },
+              "end": {
+                "line": 103,
+                "column": 13,
+                "charIndex": 1691
+              }
+            },
+            "documentation": {
+              "title": "Linear PCM encoding",
+              "description": "Uncompressed 16-bit signed little-endian samples with WAV header.",
+              "location": {
+                "start": {
+                  "line": 99,
+                  "column": 3,
+                  "charIndex": 1579
+                },
+                "end": {
+                  "line": 102,
+                  "column": 6,
+                  "charIndex": 1678
+                }
+              }
+            }
+          }
+        ],
+        "location": {
+          "start": {
+            "line": 92,
+            "column": 21,
+            "charIndex": 1529
+          },
+          "end": {
+            "line": 104,
+            "column": 2,
+            "charIndex": 1693
+          }
+        }
+      },
+      "location": {
+        "start": {
+          "line": 92,
+          "column": 1,
+          "charIndex": 1509
+        },
+        "end": {
+          "line": 104,
+          "column": 2,
+          "charIndex": 1693
+        }
+      }
+    },
+    {
+      "kind": "NamedModelDefinition",
+      "modelName": "AudioOptions",
+      "type": {
+        "kind": "ObjectDefinition",
+        "fields": [
+          {
+            "kind": "FieldDefinition",
+            "fieldName": "encoding",
+            "required": true,
+            "type": {
+              "kind": "ModelTypeName",
+              "name": "AudioEncoding",
+              "location": {
+                "start": {
+                  "line": 111,
+                  "column": 13,
+                  "charIndex": 1796
+                },
+                "end": {
+                  "line": 111,
+                  "column": 26,
+                  "charIndex": 1809
+                }
+              }
+            },
+            "location": {
+              "start": {
+                "line": 111,
+                "column": 3,
+                "charIndex": 1786
+              },
+              "end": {
+                "line": 111,
+                "column": 26,
+                "charIndex": 1809
+              }
+            },
+            "documentation": {
+              "title": "Audio encoding",
+              "description": "The format of the audio byte stream.",
+              "location": {
+                "start": {
+                  "line": 107,
+                  "column": 3,
+                  "charIndex": 1718
+                },
+                "end": {
+                  "line": 110,
+                  "column": 6,
+                  "charIndex": 1783
+                }
+              }
+            }
+          },
+          {
+            "kind": "FieldDefinition",
+            "fieldName": "sampleRateHertz",
+            "required": false,
+            "type": {
+              "kind": "NonNullDefinition",
+              "type": {
+                "kind": "PrimitiveTypeName",
+                "name": "number",
+                "location": {
+                  "start": {
+                    "line": 117,
+                    "column": 19,
+                    "charIndex": 1983
+                  },
+                  "end": {
+                    "line": 117,
+                    "column": 25,
+                    "charIndex": 1989
+                  }
+                }
+              },
+              "location": {
+                "start": {
+                  "line": 117,
+                  "column": 19,
+                  "charIndex": 1983
+                },
+                "end": {
+                  "line": 117,
+                  "column": 26,
+                  "charIndex": 1990
+                }
+              }
+            },
+            "location": {
+              "start": {
+                "line": 117,
+                "column": 3,
+                "charIndex": 1967
+              },
+              "end": {
+                "line": 117,
+                "column": 26,
+                "charIndex": 1990
+              }
+            },
+            "documentation": {
+              "title": "Sample rate",
+              "description": "The synthesis sample rate in hertz for the audio. Selected sample rate has to be supported by selected audio encoding format.",
+              "location": {
+                "start": {
+                  "line": 113,
+                  "column": 3,
+                  "charIndex": 1813
+                },
+                "end": {
+                  "line": 116,
+                  "column": 6,
+                  "charIndex": 1964
+                }
+              }
+            }
+          }
+        ],
+        "location": {
+          "start": {
+            "line": 106,
+            "column": 20,
+            "charIndex": 1714
+          },
+          "end": {
+            "line": 118,
+            "column": 2,
+            "charIndex": 1992
+          }
+        }
+      },
+      "location": {
+        "start": {
+          "line": 106,
+          "column": 1,
+          "charIndex": 1695
+        },
+        "end": {
+          "line": 118,
+          "column": 2,
+          "charIndex": 1992
+        }
+      }
+    },
+    {
+      "kind": "NamedModelDefinition",
+      "modelName": "VoiceOptions",
+      "type": {
+        "kind": "ObjectDefinition",
+        "fields": [
+          {
+            "kind": "FieldDefinition",
+            "fieldName": "languageCode",
+            "required": true,
+            "type": {
+              "kind": "PrimitiveTypeName",
+              "name": "string",
+              "location": {
+                "start": {
+                  "line": 125,
+                  "column": 17,
+                  "charIndex": 2171
+                },
+                "end": {
+                  "line": 125,
+                  "column": 23,
+                  "charIndex": 2177
+                }
+              }
+            },
+            "location": {
+              "start": {
+                "line": 125,
+                "column": 3,
+                "charIndex": 2157
+              },
+              "end": {
+                "line": 125,
+                "column": 23,
+                "charIndex": 2177
+              }
+            },
+            "documentation": {
+              "title": "Language code",
+              "description": "The language (and potentially also the region) of the voice expressed as a BCP-47 language tag, e.g. 'en-US'.",
+              "location": {
+                "start": {
+                  "line": 121,
+                  "column": 3,
+                  "charIndex": 2017
+                },
+                "end": {
+                  "line": 124,
+                  "column": 6,
+                  "charIndex": 2154
+                }
+              }
+            }
+          },
+          {
+            "kind": "FieldDefinition",
+            "fieldName": "name",
+            "required": false,
+            "type": {
+              "kind": "NonNullDefinition",
+              "type": {
+                "kind": "PrimitiveTypeName",
+                "name": "string",
+                "location": {
+                  "start": {
+                    "line": 131,
+                    "column": 8,
+                    "charIndex": 2236
+                  },
+                  "end": {
+                    "line": 131,
+                    "column": 14,
+                    "charIndex": 2242
+                  }
+                }
+              },
+              "location": {
+                "start": {
+                  "line": 131,
+                  "column": 8,
+                  "charIndex": 2236
+                },
+                "end": {
+                  "line": 131,
+                  "column": 15,
+                  "charIndex": 2243
+                }
+              }
+            },
+            "location": {
+              "start": {
+                "line": 131,
+                "column": 3,
+                "charIndex": 2231
+              },
+              "end": {
+                "line": 131,
+                "column": 15,
+                "charIndex": 2243
+              }
+            },
+            "documentation": {
+              "title": "Voice name",
+              "description": "The name of the voice.",
+              "location": {
+                "start": {
+                  "line": 127,
+                  "column": 3,
+                  "charIndex": 2181
+                },
+                "end": {
+                  "line": 130,
+                  "column": 6,
+                  "charIndex": 2228
+                }
+              }
+            }
+          }
+        ],
+        "location": {
+          "start": {
+            "line": 120,
+            "column": 20,
+            "charIndex": 2013
+          },
+          "end": {
+            "line": 132,
+            "column": 2,
+            "charIndex": 2245
+          }
+        }
+      },
+      "location": {
+        "start": {
+          "line": 120,
+          "column": 1,
+          "charIndex": 1994
+        },
+        "end": {
+          "line": 132,
+          "column": 2,
+          "charIndex": 2245
+        }
+      }
+    }
+  ],
+  "location": {
+    "start": {
+      "line": 6,
+      "column": 1,
+      "charIndex": 74
+    },
+    "end": {
+      "line": 132,
+      "column": 2,
+      "charIndex": 2245
+    }
+  },
+  "astMetadata": {
+    "astVersion": {
+      "major": 1,
+      "minor": 2,
+      "patch": 0
+    },
+    "parserVersion": {
+      "major": 1,
+      "minor": 2,
+      "patch": 0
+    },
+    "sourceChecksum": "fa3ebc0b27402202d29acc03ea3aabda28d484e3088e5c104984137dd663a96a"
+  }
+}
