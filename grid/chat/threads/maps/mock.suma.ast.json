@@ -1,0 +1,159 @@
+{
+  "kind": "MapDocument",
+  "header": {
+    "kind": "MapHeader",
+    "profile": {
+      "scope": "chat",
+      "name": "threads",
+      "version": {
+        "major": 1,
+        "minor": 0,
+        "patch": 0
+      }
+    },
+    "provider": "mock",
+    "location": {
+      "start": {
+        "line": 1,
+        "column": 1,
+        "charIndex": 0
+      },
+      "end": {
+        "line": 2,
+        "column": 18,
+        "charIndex": 46
+      }
+    }
+  },
+  "definitions": [
+    {
+      "kind": "MapDefinition",
+      "name": "GetThreads",
+      "usecaseName": "GetThreads",
+      "statements": [
+        {
+          "kind": "OutcomeStatement",
+          "isError": false,
+          "terminateFlow": false,
+          "value": {
+            "kind": "ObjectLiteral",
+            "fields": [
+              {
+                "kind": "Assignment",
+                "key": [
+                  "threads"
+                ],
+                "value": {
+                  "kind": "JessieExpression",
+                  "expression": "[\n    {\n        id: '1',\n        createdAt: 1643798532134.069,\n        channel: 'channel_id_1',\n        archiveAt: 1643799532135.070,\n    },\n    {\n        id: '2',\n        createdAt: 1643216443234.079,\n        channel: 'channel_id_2',\n    },\n    {\n        id: '3',\n        createdAt: 1546167104000.2,\n        channel: 'channel_id_3',\n    }\n]",
+                  "source": "[\n      {\n        id: '1',\n        createdAt: 1643798532134.069,\n        channel: 'channel_id_1',\n        archiveAt: 1643799532135.070,\n      },\n      {\n        id: '2',\n        createdAt: 1643216443234.079,\n        channel: 'channel_id_2',\n      },\n      {\n        id: '3',\n        createdAt: 1546167104000.2,\n        channel: 'channel_id_3',\n      }\n    ]",
+                  "sourceMap": "AAAA,IAAI,aAAa,GAAG;IACd;QACE,EAAE,EAAE,GAAG;QACP,SAAS,EAAE,iBAAiB;QAC5B,OAAO,EAAE,cAAc;QACvB,SAAS,EAAE,iBAAiB;KAC7B;IACD;QACE,EAAE,EAAE,GAAG;QACP,SAAS,EAAE,iBAAiB;QAC5B,OAAO,EAAE,cAAc;KACxB;IACD;QACE,EAAE,EAAE,GAAG;QACP,SAAS,EAAE,eAAe;QAC1B,OAAO,EAAE,cAAc;KACxB;CACF,CAAC",
+                  "location": {
+                    "start": {
+                      "line": 9,
+                      "column": 15,
+                      "charIndex": 117
+                    },
+                    "end": {
+                      "line": 26,
+                      "column": 6,
+                      "charIndex": 474
+                    }
+                  }
+                },
+                "location": {
+                  "start": {
+                    "line": 9,
+                    "column": 5,
+                    "charIndex": 107
+                  },
+                  "end": {
+                    "line": 26,
+                    "column": 6,
+                    "charIndex": 474
+                  }
+                }
+              }
+            ],
+            "location": {
+              "start": {
+                "line": 8,
+                "column": 14,
+                "charIndex": 101
+              },
+              "end": {
+                "line": 27,
+                "column": 4,
+                "charIndex": 478
+              }
+            }
+          },
+          "location": {
+            "start": {
+              "line": 8,
+              "column": 3,
+              "charIndex": 90
+            },
+            "end": {
+              "line": 27,
+              "column": 4,
+              "charIndex": 478
+            }
+          }
+        }
+      ],
+      "location": {
+        "start": {
+          "line": 7,
+          "column": 1,
+          "charIndex": 71
+        },
+        "end": {
+          "line": 28,
+          "column": 2,
+          "charIndex": 480
+        }
+      },
+      "documentation": {
+        "title": "GetThreads map",
+        "location": {
+          "start": {
+            "line": 4,
+            "column": 1,
+            "charIndex": 48
+          },
+          "end": {
+            "line": 6,
+            "column": 4,
+            "charIndex": 70
+          }
+        }
+      }
+    }
+  ],
+  "location": {
+    "start": {
+      "line": 1,
+      "column": 1,
+      "charIndex": 0
+    },
+    "end": {
+      "line": 28,
+      "column": 2,
+      "charIndex": 480
+    }
+  },
+  "astMetadata": {
+    "astVersion": {
+      "major": 1,
+      "minor": 2,
+      "patch": 0
+    },
+    "parserVersion": {
+      "major": 1,
+      "minor": 2,
+      "patch": 0
+    },
+    "sourceChecksum": "ae520cf3a725051b90a76d6155f8734858e489b1763ab6b7bbe397d7e5de2f87"
+  }
+}

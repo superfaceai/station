@@ -1,0 +1,144 @@
+{
+  "kind": "MapDocument",
+  "header": {
+    "kind": "MapHeader",
+    "profile": {
+      "scope": "social-media",
+      "name": "replies",
+      "version": {
+        "major": 1,
+        "minor": 0,
+        "patch": 0
+      }
+    },
+    "provider": "mock",
+    "location": {
+      "start": {
+        "line": 1,
+        "column": 1,
+        "charIndex": 0
+      },
+      "end": {
+        "line": 2,
+        "column": 18,
+        "charIndex": 54
+      }
+    }
+  },
+  "definitions": [
+    {
+      "kind": "MapDefinition",
+      "name": "GetPostReplies",
+      "usecaseName": "GetPostReplies",
+      "statements": [
+        {
+          "kind": "OutcomeStatement",
+          "isError": false,
+          "terminateFlow": true,
+          "value": {
+            "kind": "ObjectLiteral",
+            "fields": [
+              {
+                "kind": "Assignment",
+                "key": [
+                  "replies"
+                ],
+                "value": {
+                  "kind": "JessieExpression",
+                  "expression": "[\n    {\n        id: \"123\",\n        createdAt: \"2022-06-09T13:29:11+02:00\",\n        authorId: \"@alberteinstein\",\n        authorName: \"Albert Einstein\",\n        text: \"Hello, World!\"\n    },\n    {\n        id: \"124\",\n        createdAt: \"2022-06-09T16:29:11+02:00\",\n        authorId: \"@newton\",\n        authorName: \"Isaac Newton\",\n        lastModifiedAt: \"2022-06-09T16:32:42+02:00\",\n        text: \"(deleted.)\"\n    }\n]",
+                  "source": "[\n          {\n              id: \"123\",\n              createdAt: \"2022-06-09T13:29:11+02:00\",\n              authorId: \"@alberteinstein\",\n              authorName: \"Albert Einstein\",\n              text: \"Hello, World!\"\n          },\n          {\n              id: \"124\",\n              createdAt: \"2022-06-09T16:29:11+02:00\",\n              authorId: \"@newton\",\n              authorName: \"Isaac Newton\",\n              lastModifiedAt: \"2022-06-09T16:32:42+02:00\",\n              text: \"(deleted.)\"\n          }\n      ]",
+                  "sourceMap": "AAAA,IAAI,aAAa,GAAG;IACV;QACI,EAAE,EAAE,KAAK;QACT,SAAS,EAAE,2BAA2B;QACtC,QAAQ,EAAE,iBAAiB;QAC3B,UAAU,EAAE,iBAAiB;QAC7B,IAAI,EAAE,eAAe;KACxB;IACD;QACI,EAAE,EAAE,KAAK;QACT,SAAS,EAAE,2BAA2B;QACtC,QAAQ,EAAE,SAAS;QACnB,UAAU,EAAE,cAAc;QAC1B,cAAc,EAAE,2BAA2B;QAC3C,IAAI,EAAE,YAAY;KACrB;CACJ,CAAC",
+                  "location": {
+                    "start": {
+                      "line": 6,
+                      "column": 15,
+                      "charIndex": 113
+                    },
+                    "end": {
+                      "line": 22,
+                      "column": 8,
+                      "charIndex": 622
+                    }
+                  }
+                },
+                "location": {
+                  "start": {
+                    "line": 6,
+                    "column": 5,
+                    "charIndex": 103
+                  },
+                  "end": {
+                    "line": 22,
+                    "column": 8,
+                    "charIndex": 622
+                  }
+                }
+              }
+            ],
+            "location": {
+              "start": {
+                "line": 5,
+                "column": 21,
+                "charIndex": 97
+              },
+              "end": {
+                "line": 23,
+                "column": 4,
+                "charIndex": 626
+              }
+            }
+          },
+          "location": {
+            "start": {
+              "line": 5,
+              "column": 3,
+              "charIndex": 79
+            },
+            "end": {
+              "line": 23,
+              "column": 4,
+              "charIndex": 626
+            }
+          }
+        }
+      ],
+      "location": {
+        "start": {
+          "line": 4,
+          "column": 1,
+          "charIndex": 56
+        },
+        "end": {
+          "line": 24,
+          "column": 2,
+          "charIndex": 628
+        }
+      }
+    }
+  ],
+  "location": {
+    "start": {
+      "line": 1,
+      "column": 1,
+      "charIndex": 0
+    },
+    "end": {
+      "line": 24,
+      "column": 2,
+      "charIndex": 628
+    }
+  },
+  "astMetadata": {
+    "astVersion": {
+      "major": 1,
+      "minor": 2,
+      "patch": 0
+    },
+    "parserVersion": {
+      "major": 1,
+      "minor": 2,
+      "patch": 0
+    },
+    "sourceChecksum": "5e21a833be90ebbc1d8bae43ff0abe4fcc18582e43524a7ec9a9c56fbc184077"
+  }
+}

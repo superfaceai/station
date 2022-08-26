@@ -1,0 +1,314 @@
+{
+  "kind": "MapDocument",
+  "header": {
+    "kind": "MapHeader",
+    "profile": {
+      "scope": "address",
+      "name": "ip-geolocation",
+      "version": {
+        "major": 1,
+        "minor": 0,
+        "patch": 0
+      }
+    },
+    "provider": "mock",
+    "location": {
+      "start": {
+        "line": 1,
+        "column": 1,
+        "charIndex": 0
+      },
+      "end": {
+        "line": 2,
+        "column": 18,
+        "charIndex": 56
+      }
+    }
+  },
+  "definitions": [
+    {
+      "kind": "MapDefinition",
+      "name": "IpGeolocation",
+      "usecaseName": "IpGeolocation",
+      "statements": [
+        {
+          "kind": "OutcomeStatement",
+          "isError": false,
+          "terminateFlow": true,
+          "value": {
+            "kind": "ObjectLiteral",
+            "fields": [
+              {
+                "kind": "Assignment",
+                "key": [
+                  "ipAddress"
+                ],
+                "value": {
+                  "kind": "JessieExpression",
+                  "expression": "input.ipAddress",
+                  "source": "input.ipAddress",
+                  "sourceMap": "AAAA,IAAI,aAAa,GAAG,KAAK,CAAC,SAAS,CAAC",
+                  "location": {
+                    "start": {
+                      "line": 6,
+                      "column": 17,
+                      "charIndex": 116
+                    },
+                    "end": {
+                      "line": 6,
+                      "column": 32,
+                      "charIndex": 131
+                    }
+                  }
+                },
+                "location": {
+                  "start": {
+                    "line": 6,
+                    "column": 5,
+                    "charIndex": 104
+                  },
+                  "end": {
+                    "line": 6,
+                    "column": 32,
+                    "charIndex": 131
+                  }
+                }
+              },
+              {
+                "kind": "Assignment",
+                "key": [
+                  "addressCountryCode"
+                ],
+                "value": {
+                  "kind": "PrimitiveLiteral",
+                  "value": "US",
+                  "location": {
+                    "start": {
+                      "line": 7,
+                      "column": 26,
+                      "charIndex": 157
+                    },
+                    "end": {
+                      "line": 7,
+                      "column": 30,
+                      "charIndex": 161
+                    }
+                  }
+                },
+                "location": {
+                  "start": {
+                    "line": 7,
+                    "column": 5,
+                    "charIndex": 136
+                  },
+                  "end": {
+                    "line": 7,
+                    "column": 30,
+                    "charIndex": 161
+                  }
+                }
+              },
+              {
+                "kind": "Assignment",
+                "key": [
+                  "addressCountry"
+                ],
+                "value": {
+                  "kind": "PrimitiveLiteral",
+                  "value": "United States",
+                  "location": {
+                    "start": {
+                      "line": 8,
+                      "column": 22,
+                      "charIndex": 183
+                    },
+                    "end": {
+                      "line": 8,
+                      "column": 37,
+                      "charIndex": 198
+                    }
+                  }
+                },
+                "location": {
+                  "start": {
+                    "line": 8,
+                    "column": 5,
+                    "charIndex": 166
+                  },
+                  "end": {
+                    "line": 8,
+                    "column": 37,
+                    "charIndex": 198
+                  }
+                }
+              },
+              {
+                "kind": "Assignment",
+                "key": [
+                  "timeZone"
+                ],
+                "value": {
+                  "kind": "PrimitiveLiteral",
+                  "value": "America/Chicago",
+                  "location": {
+                    "start": {
+                      "line": 9,
+                      "column": 16,
+                      "charIndex": 214
+                    },
+                    "end": {
+                      "line": 9,
+                      "column": 33,
+                      "charIndex": 231
+                    }
+                  }
+                },
+                "location": {
+                  "start": {
+                    "line": 9,
+                    "column": 5,
+                    "charIndex": 203
+                  },
+                  "end": {
+                    "line": 9,
+                    "column": 33,
+                    "charIndex": 231
+                  }
+                }
+              },
+              {
+                "kind": "Assignment",
+                "key": [
+                  "latitude"
+                ],
+                "value": {
+                  "kind": "PrimitiveLiteral",
+                  "value": 37.751,
+                  "location": {
+                    "start": {
+                      "line": 10,
+                      "column": 16,
+                      "charIndex": 247
+                    },
+                    "end": {
+                      "line": 10,
+                      "column": 22,
+                      "charIndex": 253
+                    }
+                  }
+                },
+                "location": {
+                  "start": {
+                    "line": 10,
+                    "column": 5,
+                    "charIndex": 236
+                  },
+                  "end": {
+                    "line": 10,
+                    "column": 22,
+                    "charIndex": 253
+                  }
+                }
+              },
+              {
+                "kind": "Assignment",
+                "key": [
+                  "longitude"
+                ],
+                "value": {
+                  "kind": "PrimitiveLiteral",
+                  "value": -97.822,
+                  "location": {
+                    "start": {
+                      "line": 11,
+                      "column": 17,
+                      "charIndex": 270
+                    },
+                    "end": {
+                      "line": 11,
+                      "column": 24,
+                      "charIndex": 277
+                    }
+                  }
+                },
+                "location": {
+                  "start": {
+                    "line": 11,
+                    "column": 5,
+                    "charIndex": 258
+                  },
+                  "end": {
+                    "line": 11,
+                    "column": 24,
+                    "charIndex": 277
+                  }
+                }
+              }
+            ],
+            "location": {
+              "start": {
+                "line": 5,
+                "column": 21,
+                "charIndex": 98
+              },
+              "end": {
+                "line": 12,
+                "column": 4,
+                "charIndex": 281
+              }
+            }
+          },
+          "location": {
+            "start": {
+              "line": 5,
+              "column": 3,
+              "charIndex": 80
+            },
+            "end": {
+              "line": 12,
+              "column": 4,
+              "charIndex": 281
+            }
+          }
+        }
+      ],
+      "location": {
+        "start": {
+          "line": 4,
+          "column": 1,
+          "charIndex": 58
+        },
+        "end": {
+          "line": 13,
+          "column": 2,
+          "charIndex": 283
+        }
+      }
+    }
+  ],
+  "location": {
+    "start": {
+      "line": 1,
+      "column": 1,
+      "charIndex": 0
+    },
+    "end": {
+      "line": 13,
+      "column": 2,
+      "charIndex": 283
+    }
+  },
+  "astMetadata": {
+    "astVersion": {
+      "major": 1,
+      "minor": 2,
+      "patch": 0
+    },
+    "parserVersion": {
+      "major": 1,
+      "minor": 2,
+      "patch": 0
+    },
+    "sourceChecksum": "f0616f44e115844d37d18093aa156b344ba125bbe6adfb0ab303cdcbedb70441"
+  }
+}

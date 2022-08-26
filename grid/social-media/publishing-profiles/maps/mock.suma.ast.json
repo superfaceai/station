@@ -1,0 +1,144 @@
+{
+  "kind": "MapDocument",
+  "header": {
+    "kind": "MapHeader",
+    "profile": {
+      "scope": "social-media",
+      "name": "publishing-profiles",
+      "version": {
+        "major": 1,
+        "minor": 0,
+        "patch": 0
+      }
+    },
+    "provider": "mock",
+    "location": {
+      "start": {
+        "line": 1,
+        "column": 1,
+        "charIndex": 0
+      },
+      "end": {
+        "line": 2,
+        "column": 18,
+        "charIndex": 66
+      }
+    }
+  },
+  "definitions": [
+    {
+      "kind": "MapDefinition",
+      "name": "GetProfilesForPublishing",
+      "usecaseName": "GetProfilesForPublishing",
+      "statements": [
+        {
+          "kind": "OutcomeStatement",
+          "isError": false,
+          "terminateFlow": true,
+          "value": {
+            "kind": "ObjectLiteral",
+            "fields": [
+              {
+                "kind": "Assignment",
+                "key": [
+                  "profiles"
+                ],
+                "value": {
+                  "kind": "JessieExpression",
+                  "expression": "[\n    {\n        id: \"111111111\",\n        name: \"Foo\",\n        username: \"foo\",\n        imageUrl: \"https://picsum.photos/200\"\n    },\n    {\n        id: \"111111112\",\n        name: \"BarFoo\",\n        username: \"bar-foo\",\n        imageUrl: \"https://picsum.photos/202\"\n    },\n    {\n        id: \"111111113\",\n        name: \"Baz\",\n        username: \"BazZZ\",\n        imageUrl: \"https://picsum.photos/205\"\n    },\n]",
+                  "source": "[\n      {\n        id: \"111111111\",\n        name: \"Foo\",\n        username: \"foo\",\n        imageUrl: \"https://picsum.photos/200\"\n      },\n      {\n        id: \"111111112\",\n        name: \"BarFoo\",\n        username: \"bar-foo\",\n        imageUrl: \"https://picsum.photos/202\"\n      },\n      {\n        id: \"111111113\",\n        name: \"Baz\",\n        username: \"BazZZ\",\n        imageUrl: \"https://picsum.photos/205\"\n      },\n    ]",
+                  "sourceMap": "AAAA,IAAI,aAAa,GAAG;IACd;QACE,EAAE,EAAE,WAAW;QACf,IAAI,EAAE,KAAK;QACX,QAAQ,EAAE,KAAK;QACf,QAAQ,EAAE,2BAA2B;KACtC;IACD;QACE,EAAE,EAAE,WAAW;QACf,IAAI,EAAE,QAAQ;QACd,QAAQ,EAAE,SAAS;QACnB,QAAQ,EAAE,2BAA2B;KACtC;IACD;QACE,EAAE,EAAE,WAAW;QACf,IAAI,EAAE,KAAK;QACX,QAAQ,EAAE,OAAO;QACjB,QAAQ,EAAE,2BAA2B;KACtC;CACF,CAAC",
+                  "location": {
+                    "start": {
+                      "line": 6,
+                      "column": 16,
+                      "charIndex": 136
+                    },
+                    "end": {
+                      "line": 25,
+                      "column": 6,
+                      "charIndex": 554
+                    }
+                  }
+                },
+                "location": {
+                  "start": {
+                    "line": 6,
+                    "column": 5,
+                    "charIndex": 125
+                  },
+                  "end": {
+                    "line": 25,
+                    "column": 6,
+                    "charIndex": 554
+                  }
+                }
+              }
+            ],
+            "location": {
+              "start": {
+                "line": 5,
+                "column": 21,
+                "charIndex": 119
+              },
+              "end": {
+                "line": 26,
+                "column": 4,
+                "charIndex": 558
+              }
+            }
+          },
+          "location": {
+            "start": {
+              "line": 5,
+              "column": 3,
+              "charIndex": 101
+            },
+            "end": {
+              "line": 26,
+              "column": 4,
+              "charIndex": 558
+            }
+          }
+        }
+      ],
+      "location": {
+        "start": {
+          "line": 4,
+          "column": 1,
+          "charIndex": 68
+        },
+        "end": {
+          "line": 27,
+          "column": 2,
+          "charIndex": 560
+        }
+      }
+    }
+  ],
+  "location": {
+    "start": {
+      "line": 1,
+      "column": 1,
+      "charIndex": 0
+    },
+    "end": {
+      "line": 27,
+      "column": 2,
+      "charIndex": 560
+    }
+  },
+  "astMetadata": {
+    "astVersion": {
+      "major": 1,
+      "minor": 2,
+      "patch": 0
+    },
+    "parserVersion": {
+      "major": 1,
+      "minor": 2,
+      "patch": 0
+    },
+    "sourceChecksum": "7db712c16ac80dd4c09ea14d68f79389c3bf519989cb926adb6fbaff22d0cc4a"
+  }
+}

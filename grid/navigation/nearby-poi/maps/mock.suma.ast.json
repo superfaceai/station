@@ -1,0 +1,213 @@
+{
+  "kind": "MapDocument",
+  "header": {
+    "kind": "MapHeader",
+    "profile": {
+      "scope": "navigation",
+      "name": "nearby-poi",
+      "version": {
+        "major": 1,
+        "minor": 0,
+        "patch": 0
+      }
+    },
+    "provider": "mock",
+    "location": {
+      "start": {
+        "line": 1,
+        "column": 1,
+        "charIndex": 0
+      },
+      "end": {
+        "line": 2,
+        "column": 18,
+        "charIndex": 55
+      }
+    }
+  },
+  "definitions": [
+    {
+      "kind": "MapDefinition",
+      "name": "NearbyPoi",
+      "usecaseName": "NearbyPoi",
+      "statements": [
+        {
+          "kind": "SetStatement",
+          "assignments": [
+            {
+              "kind": "Assignment",
+              "key": [
+                "category"
+              ],
+              "value": {
+                "kind": "PrimitiveLiteral",
+                "value": "CAFE",
+                "location": {
+                  "start": {
+                    "line": 5,
+                    "column": 14,
+                    "charIndex": 86
+                  },
+                  "end": {
+                    "line": 5,
+                    "column": 20,
+                    "charIndex": 92
+                  }
+                }
+              },
+              "location": {
+                "start": {
+                  "line": 5,
+                  "column": 3,
+                  "charIndex": 75
+                },
+                "end": {
+                  "line": 5,
+                  "column": 20,
+                  "charIndex": 92
+                }
+              }
+            }
+          ],
+          "location": {
+            "start": {
+              "line": 5,
+              "column": 3,
+              "charIndex": 75
+            },
+            "end": {
+              "line": 5,
+              "column": 20,
+              "charIndex": 92
+            }
+          }
+        },
+        {
+          "kind": "SetStatement",
+          "assignments": [
+            {
+              "kind": "Assignment",
+              "key": [
+                "pois"
+              ],
+              "value": {
+                "kind": "JessieExpression",
+                "expression": "[\n    {\n        coordinates: {\n            latitude: 51.4768380,\n            longitude: -0.0006877\n        },\n        name: \"Astronomy Café\",\n        categories: [category]\n    }\n]",
+                "source": "[\n    {\n      coordinates: {\n      latitude: 51.4768380,\n      longitude: -0.0006877\n      },\n      name: \"Astronomy Café\",\n      categories: [category]\n    }\n  ]",
+                "sourceMap": "AAAA,IAAI,aAAa,GAAG;IAChB;QACE,WAAW,EAAE;YACb,QAAQ,EAAE,UAAU;YACpB,SAAS,EAAE,CAAC,SAAS;SACpB;QACD,IAAI,EAAE,gBAAgB;QACtB,UAAU,EAAE,CAAC,QAAQ,CAAC;KACvB;CACF,CAAC",
+                "location": {
+                  "start": {
+                    "line": 6,
+                    "column": 10,
+                    "charIndex": 102
+                  },
+                  "end": {
+                    "line": 15,
+                    "column": 4,
+                    "charIndex": 264
+                  }
+                }
+              },
+              "location": {
+                "start": {
+                  "line": 6,
+                  "column": 3,
+                  "charIndex": 95
+                },
+                "end": {
+                  "line": 15,
+                  "column": 4,
+                  "charIndex": 264
+                }
+              }
+            }
+          ],
+          "location": {
+            "start": {
+              "line": 6,
+              "column": 3,
+              "charIndex": 95
+            },
+            "end": {
+              "line": 15,
+              "column": 4,
+              "charIndex": 264
+            }
+          }
+        },
+        {
+          "kind": "OutcomeStatement",
+          "isError": false,
+          "terminateFlow": false,
+          "value": {
+            "kind": "JessieExpression",
+            "expression": "pois",
+            "source": "pois",
+            "sourceMap": "AAAA,IAAI,aAAa,GAAG,IAAI,CAAC",
+            "location": {
+              "start": {
+                "line": 16,
+                "column": 14,
+                "charIndex": 278
+              },
+              "end": {
+                "line": 16,
+                "column": 18,
+                "charIndex": 282
+              }
+            }
+          },
+          "location": {
+            "start": {
+              "line": 16,
+              "column": 3,
+              "charIndex": 267
+            },
+            "end": {
+              "line": 16,
+              "column": 18,
+              "charIndex": 282
+            }
+          }
+        }
+      ],
+      "location": {
+        "start": {
+          "line": 4,
+          "column": 1,
+          "charIndex": 57
+        },
+        "end": {
+          "line": 17,
+          "column": 2,
+          "charIndex": 284
+        }
+      }
+    }
+  ],
+  "location": {
+    "start": {
+      "line": 1,
+      "column": 1,
+      "charIndex": 0
+    },
+    "end": {
+      "line": 17,
+      "column": 2,
+      "charIndex": 284
+    }
+  },
+  "astMetadata": {
+    "astVersion": {
+      "major": 1,
+      "minor": 2,
+      "patch": 0
+    },
+    "parserVersion": {
+      "major": 1,
+      "minor": 2,
+      "patch": 0
+    },
+    "sourceChecksum": "dd3a872b0ad7f1017eb416c88e782bd54aababf9bc9824b8134935f80fa47198"
+  }
+}

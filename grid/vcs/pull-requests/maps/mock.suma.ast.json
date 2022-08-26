@@ -1,0 +1,177 @@
+{
+  "kind": "MapDocument",
+  "header": {
+    "kind": "MapHeader",
+    "profile": {
+      "scope": "vcs",
+      "name": "pull-requests",
+      "version": {
+        "major": 2,
+        "minor": 0,
+        "patch": 0
+      }
+    },
+    "provider": "mock",
+    "location": {
+      "start": {
+        "line": 1,
+        "column": 1,
+        "charIndex": 0
+      },
+      "end": {
+        "line": 2,
+        "column": 18,
+        "charIndex": 51
+      }
+    }
+  },
+  "definitions": [
+    {
+      "kind": "MapDefinition",
+      "name": "PullRequests",
+      "usecaseName": "PullRequests",
+      "statements": [
+        {
+          "kind": "SetStatement",
+          "assignments": [
+            {
+              "kind": "Assignment",
+              "key": [
+                "identifier"
+              ],
+              "value": {
+                "kind": "JessieExpression",
+                "expression": "Math.floor(Math.random() * 10) + 1",
+                "source": "Math.floor(Math.random() * 10) + 1",
+                "sourceMap": "AAAA,IAAI,aAAa,GAAG,IAAI,CAAC,KAAK,CAAC,IAAI,CAAC,MAAM,EAAE,GAAG,EAAE,CAAC,GAAG,CAAC,CAAC",
+                "location": {
+                  "start": {
+                    "line": 8,
+                    "column": 16,
+                    "charIndex": 116
+                  },
+                  "end": {
+                    "line": 8,
+                    "column": 50,
+                    "charIndex": 150
+                  }
+                }
+              },
+              "location": {
+                "start": {
+                  "line": 8,
+                  "column": 3,
+                  "charIndex": 103
+                },
+                "end": {
+                  "line": 8,
+                  "column": 50,
+                  "charIndex": 150
+                }
+              }
+            }
+          ],
+          "location": {
+            "start": {
+              "line": 8,
+              "column": 3,
+              "charIndex": 103
+            },
+            "end": {
+              "line": 8,
+              "column": 50,
+              "charIndex": 150
+            }
+          }
+        },
+        {
+          "kind": "OutcomeStatement",
+          "isError": false,
+          "terminateFlow": false,
+          "value": {
+            "kind": "JessieExpression",
+            "expression": "{\n    pullRequests: [{\n            title: 'Test',\n            id: identifier,\n            url: \"https://gitlab.com/\".concat(input.owner, \"/\").concat(input.repo, \"/-/merge_requests/\").concat(identifier),\n            sha: Math.random().toString(16),\n        }]\n}",
+            "source": "{\n    pullRequests: [{\n      title: 'Test',\n      id: identifier,\n      url: `https://gitlab.com/${input.owner}/${input.repo}/-/merge_requests/${identifier}`,\n      sha: Math.random().toString(16),\n    }]\n  }",
+            "sourceMap": "AAAA,IAAI,aAAa,GAAG;IAChB,YAAY,EAAE,CAAC;YACb,KAAK,EAAE,MAAM;YACb,EAAE,EAAE,UAAU;YACd,GAAG,EAAE,6BAAsB,KAAK,CAAC,KAAK,cAAI,KAAK,CAAC,IAAI,+BAAqB,UAAU,CAAE;YACrF,GAAG,EAAE,IAAI,CAAC,MAAM,EAAE,CAAC,QAAQ,CAAC,EAAE,CAAC;SAChC,CAAC;CACH,CAAC",
+            "location": {
+              "start": {
+                "line": 9,
+                "column": 14,
+                "charIndex": 164
+              },
+              "end": {
+                "line": 16,
+                "column": 4,
+                "charIndex": 372
+              }
+            }
+          },
+          "location": {
+            "start": {
+              "line": 9,
+              "column": 3,
+              "charIndex": 153
+            },
+            "end": {
+              "line": 16,
+              "column": 4,
+              "charIndex": 372
+            }
+          }
+        }
+      ],
+      "location": {
+        "start": {
+          "line": 7,
+          "column": 1,
+          "charIndex": 83
+        },
+        "end": {
+          "line": 17,
+          "column": 2,
+          "charIndex": 374
+        }
+      },
+      "documentation": {
+        "title": "PullRequests mock map",
+        "location": {
+          "start": {
+            "line": 4,
+            "column": 1,
+            "charIndex": 53
+          },
+          "end": {
+            "line": 6,
+            "column": 4,
+            "charIndex": 82
+          }
+        }
+      }
+    }
+  ],
+  "location": {
+    "start": {
+      "line": 1,
+      "column": 1,
+      "charIndex": 0
+    },
+    "end": {
+      "line": 17,
+      "column": 2,
+      "charIndex": 374
+    }
+  },
+  "astMetadata": {
+    "astVersion": {
+      "major": 1,
+      "minor": 2,
+      "patch": 0
+    },
+    "parserVersion": {
+      "major": 1,
+      "minor": 2,
+      "patch": 0
+    },
+    "sourceChecksum": "97256e1d223f1a038ea21f1c9ad778d57639ba3a289f5b63c61c2cdf9c7388ac"
+  }
+}

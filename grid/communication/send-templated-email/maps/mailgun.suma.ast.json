@@ -1,0 +1,521 @@
+{
+  "kind": "MapDocument",
+  "header": {
+    "kind": "MapHeader",
+    "profile": {
+      "scope": "communication",
+      "name": "send-templated-email",
+      "version": {
+        "major": 1,
+        "minor": 0,
+        "patch": 0
+      }
+    },
+    "provider": "mailgun",
+    "location": {
+      "start": {
+        "line": 3,
+        "column": 1,
+        "charIndex": 90
+      },
+      "end": {
+        "line": 4,
+        "column": 21,
+        "charIndex": 161
+      }
+    }
+  },
+  "definitions": [
+    {
+      "kind": "MapDefinition",
+      "name": "SendTemplatedEmail",
+      "usecaseName": "SendTemplatedEmail",
+      "statements": [
+        {
+          "kind": "HttpCallStatement",
+          "method": "POST",
+          "url": "/v3/{parameters.DOMAIN}/messages",
+          "request": {
+            "kind": "HttpRequest",
+            "contentType": "application/x-www-form-urlencoded",
+            "body": {
+              "kind": "ObjectLiteral",
+              "fields": [
+                {
+                  "kind": "Assignment",
+                  "key": [
+                    "from"
+                  ],
+                  "value": {
+                    "kind": "JessieExpression",
+                    "expression": "input.from",
+                    "source": "input.from",
+                    "sourceMap": "AAAA,IAAI,aAAa,GAAG,KAAK,CAAC,IAAI,CAAC",
+                    "location": {
+                      "start": {
+                        "line": 12,
+                        "column": 16,
+                        "charIndex": 337
+                      },
+                      "end": {
+                        "line": 12,
+                        "column": 26,
+                        "charIndex": 347
+                      }
+                    }
+                  },
+                  "location": {
+                    "start": {
+                      "line": 12,
+                      "column": 9,
+                      "charIndex": 330
+                    },
+                    "end": {
+                      "line": 12,
+                      "column": 26,
+                      "charIndex": 347
+                    }
+                  }
+                },
+                {
+                  "kind": "Assignment",
+                  "key": [
+                    "to"
+                  ],
+                  "value": {
+                    "kind": "JessieExpression",
+                    "expression": "input.to",
+                    "source": "input.to",
+                    "sourceMap": "AAAA,IAAI,aAAa,GAAG,KAAK,CAAC,EAAE,CAAC",
+                    "location": {
+                      "start": {
+                        "line": 13,
+                        "column": 14,
+                        "charIndex": 361
+                      },
+                      "end": {
+                        "line": 13,
+                        "column": 22,
+                        "charIndex": 369
+                      }
+                    }
+                  },
+                  "location": {
+                    "start": {
+                      "line": 13,
+                      "column": 9,
+                      "charIndex": 356
+                    },
+                    "end": {
+                      "line": 13,
+                      "column": 22,
+                      "charIndex": 369
+                    }
+                  }
+                },
+                {
+                  "kind": "Assignment",
+                  "key": [
+                    "template"
+                  ],
+                  "value": {
+                    "kind": "JessieExpression",
+                    "expression": "input.templateId",
+                    "source": "input.templateId",
+                    "sourceMap": "AAAA,IAAI,aAAa,GAAG,KAAK,CAAC,UAAU,CAAC",
+                    "location": {
+                      "start": {
+                        "line": 14,
+                        "column": 20,
+                        "charIndex": 389
+                      },
+                      "end": {
+                        "line": 14,
+                        "column": 36,
+                        "charIndex": 405
+                      }
+                    }
+                  },
+                  "location": {
+                    "start": {
+                      "line": 14,
+                      "column": 9,
+                      "charIndex": 378
+                    },
+                    "end": {
+                      "line": 14,
+                      "column": 36,
+                      "charIndex": 405
+                    }
+                  }
+                },
+                {
+                  "kind": "Assignment",
+                  "key": [
+                    "subject"
+                  ],
+                  "value": {
+                    "kind": "JessieExpression",
+                    "expression": "(input.templateData || {}).subject",
+                    "source": "(input.templateData || {}).subject ",
+                    "sourceMap": "AAAA,IAAI,aAAa,GAAG,CAAC,KAAK,CAAC,YAAY,IAAI,EAAE,CAAC,CAAC,OAAO,CAAE",
+                    "location": {
+                      "start": {
+                        "line": 15,
+                        "column": 19,
+                        "charIndex": 424
+                      },
+                      "end": {
+                        "line": 15,
+                        "column": 54,
+                        "charIndex": 459
+                      }
+                    }
+                  },
+                  "location": {
+                    "start": {
+                      "line": 15,
+                      "column": 9,
+                      "charIndex": 414
+                    },
+                    "end": {
+                      "line": 15,
+                      "column": 54,
+                      "charIndex": 459
+                    }
+                  }
+                },
+                {
+                  "kind": "Assignment",
+                  "key": [
+                    "h:x-mailgun-variables"
+                  ],
+                  "value": {
+                    "kind": "JessieExpression",
+                    "expression": "input.templateData",
+                    "source": "input.templateData",
+                    "sourceMap": "AAAA,IAAI,aAAa,GAAG,KAAK,CAAC,YAAY,CAAC",
+                    "location": {
+                      "start": {
+                        "line": 16,
+                        "column": 35,
+                        "charIndex": 575
+                      },
+                      "end": {
+                        "line": 16,
+                        "column": 53,
+                        "charIndex": 593
+                      }
+                    }
+                  },
+                  "location": {
+                    "start": {
+                      "line": 16,
+                      "column": 9,
+                      "charIndex": 549
+                    },
+                    "end": {
+                      "line": 16,
+                      "column": 53,
+                      "charIndex": 593
+                    }
+                  }
+                }
+              ],
+              "location": {
+                "start": {
+                  "line": 11,
+                  "column": 12,
+                  "charIndex": 320
+                },
+                "end": {
+                  "line": 17,
+                  "column": 8,
+                  "charIndex": 601
+                }
+              }
+            },
+            "location": {
+              "start": {
+                "line": 8,
+                "column": 5,
+                "charIndex": 241
+              },
+              "end": {
+                "line": 18,
+                "column": 6,
+                "charIndex": 607
+              }
+            },
+            "security": [
+              {
+                "id": "basic"
+              }
+            ]
+          },
+          "responseHandlers": [
+            {
+              "kind": "HttpResponseHandler",
+              "statusCode": 200,
+              "statements": [
+                {
+                  "kind": "OutcomeStatement",
+                  "isError": false,
+                  "terminateFlow": false,
+                  "value": {
+                    "kind": "ObjectLiteral",
+                    "fields": [
+                      {
+                        "kind": "Assignment",
+                        "key": [
+                          "messageId"
+                        ],
+                        "value": {
+                          "kind": "JessieExpression",
+                          "expression": "body.id",
+                          "source": "body.id",
+                          "sourceMap": "AAAA,IAAI,aAAa,GAAG,IAAI,CAAC,EAAE,CAAC",
+                          "location": {
+                            "start": {
+                              "line": 22,
+                              "column": 21,
+                              "charIndex": 667
+                            },
+                            "end": {
+                              "line": 22,
+                              "column": 28,
+                              "charIndex": 674
+                            }
+                          }
+                        },
+                        "location": {
+                          "start": {
+                            "line": 22,
+                            "column": 9,
+                            "charIndex": 655
+                          },
+                          "end": {
+                            "line": 22,
+                            "column": 28,
+                            "charIndex": 674
+                          }
+                        }
+                      }
+                    ],
+                    "location": {
+                      "start": {
+                        "line": 21,
+                        "column": 18,
+                        "charIndex": 645
+                      },
+                      "end": {
+                        "line": 23,
+                        "column": 8,
+                        "charIndex": 682
+                      }
+                    }
+                  },
+                  "location": {
+                    "start": {
+                      "line": 21,
+                      "column": 7,
+                      "charIndex": 634
+                    },
+                    "end": {
+                      "line": 23,
+                      "column": 8,
+                      "charIndex": 682
+                    }
+                  }
+                }
+              ],
+              "location": {
+                "start": {
+                  "line": 20,
+                  "column": 5,
+                  "charIndex": 613
+                },
+                "end": {
+                  "line": 24,
+                  "column": 6,
+                  "charIndex": 688
+                }
+              }
+            },
+            {
+              "kind": "HttpResponseHandler",
+              "statusCode": 400,
+              "statements": [
+                {
+                  "kind": "OutcomeStatement",
+                  "isError": true,
+                  "terminateFlow": false,
+                  "value": {
+                    "kind": "ObjectLiteral",
+                    "fields": [
+                      {
+                        "kind": "Assignment",
+                        "key": [
+                          "title"
+                        ],
+                        "value": {
+                          "kind": "PrimitiveLiteral",
+                          "value": "Invalid inputs",
+                          "location": {
+                            "start": {
+                              "line": 28,
+                              "column": 17,
+                              "charIndex": 743
+                            },
+                            "end": {
+                              "line": 28,
+                              "column": 33,
+                              "charIndex": 759
+                            }
+                          }
+                        },
+                        "location": {
+                          "start": {
+                            "line": 28,
+                            "column": 9,
+                            "charIndex": 735
+                          },
+                          "end": {
+                            "line": 28,
+                            "column": 33,
+                            "charIndex": 759
+                          }
+                        }
+                      },
+                      {
+                        "kind": "Assignment",
+                        "key": [
+                          "detail"
+                        ],
+                        "value": {
+                          "kind": "JessieExpression",
+                          "expression": "body.message",
+                          "source": "body.message",
+                          "sourceMap": "AAAA,IAAI,aAAa,GAAG,IAAI,CAAC,OAAO,CAAC",
+                          "location": {
+                            "start": {
+                              "line": 29,
+                              "column": 18,
+                              "charIndex": 777
+                            },
+                            "end": {
+                              "line": 29,
+                              "column": 30,
+                              "charIndex": 789
+                            }
+                          }
+                        },
+                        "location": {
+                          "start": {
+                            "line": 29,
+                            "column": 9,
+                            "charIndex": 768
+                          },
+                          "end": {
+                            "line": 29,
+                            "column": 30,
+                            "charIndex": 789
+                          }
+                        }
+                      }
+                    ],
+                    "location": {
+                      "start": {
+                        "line": 27,
+                        "column": 17,
+                        "charIndex": 725
+                      },
+                      "end": {
+                        "line": 30,
+                        "column": 8,
+                        "charIndex": 797
+                      }
+                    }
+                  },
+                  "location": {
+                    "start": {
+                      "line": 27,
+                      "column": 7,
+                      "charIndex": 715
+                    },
+                    "end": {
+                      "line": 30,
+                      "column": 8,
+                      "charIndex": 797
+                    }
+                  }
+                }
+              ],
+              "location": {
+                "start": {
+                  "line": 26,
+                  "column": 5,
+                  "charIndex": 694
+                },
+                "end": {
+                  "line": 31,
+                  "column": 6,
+                  "charIndex": 803
+                }
+              }
+            }
+          ],
+          "location": {
+            "start": {
+              "line": 7,
+              "column": 3,
+              "charIndex": 190
+            },
+            "end": {
+              "line": 32,
+              "column": 4,
+              "charIndex": 807
+            }
+          }
+        }
+      ],
+      "location": {
+        "start": {
+          "line": 6,
+          "column": 1,
+          "charIndex": 163
+        },
+        "end": {
+          "line": 33,
+          "column": 2,
+          "charIndex": 809
+        }
+      }
+    }
+  ],
+  "location": {
+    "start": {
+      "line": 3,
+      "column": 1,
+      "charIndex": 90
+    },
+    "end": {
+      "line": 33,
+      "column": 2,
+      "charIndex": 809
+    }
+  },
+  "astMetadata": {
+    "astVersion": {
+      "major": 1,
+      "minor": 2,
+      "patch": 0
+    },
+    "parserVersion": {
+      "major": 1,
+      "minor": 2,
+      "patch": 0
+    },
+    "sourceChecksum": "b60e8cf614815f512a39efdd94dbc5945ce33777ab9d169704e98b3c6329f37a"
+  }
+}

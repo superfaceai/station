@@ -1,0 +1,159 @@
+{
+  "kind": "MapDocument",
+  "header": {
+    "kind": "MapHeader",
+    "profile": {
+      "scope": "vcs",
+      "name": "repository-files",
+      "version": {
+        "major": 1,
+        "minor": 0,
+        "patch": 0
+      }
+    },
+    "provider": "mock",
+    "location": {
+      "start": {
+        "line": 1,
+        "column": 1,
+        "charIndex": 0
+      },
+      "end": {
+        "line": 2,
+        "column": 18,
+        "charIndex": 54
+      }
+    }
+  },
+  "definitions": [
+    {
+      "kind": "MapDefinition",
+      "name": "ListDirectory",
+      "usecaseName": "ListDirectory",
+      "statements": [
+        {
+          "kind": "OutcomeStatement",
+          "isError": false,
+          "terminateFlow": false,
+          "value": {
+            "kind": "ObjectLiteral",
+            "fields": [
+              {
+                "kind": "Assignment",
+                "key": [
+                  "entries"
+                ],
+                "value": {
+                  "kind": "JessieExpression",
+                  "expression": "[\n    {\n        name: 'README.md',\n        path: 'README.md',\n        rawUrl: 'https://example.com/repo/test-branch/README.md',\n        size: 780,\n        type: 'file',\n    },\n    {\n        name: 'index.html',\n        path: 'index.html',\n        rawUrl: 'https://example.com/repo/test-branch/index.html',\n        size: 355,\n        type: 'file',\n    },\n    {\n        name: 'styles.css',\n        path: 'styles.css',\n        rawUrl: 'https://example.com/repo/test-branch/styles.css',\n        size: 256,\n        type: 'file',\n    },\n    {\n        name: 'test',\n        path: 'test',\n        rawUrl: 'https://example.com/repo/test-branch/test.md',\n        type: 'directory',\n    },\n]",
+                  "source": "[\n      {\n        name: 'README.md',\n        path: 'README.md',\n        rawUrl:\n          'https://example.com/repo/test-branch/README.md',\n        size: 780,\n        type: 'file',\n      },\n      {\n        name: 'index.html',\n        path: 'index.html',\n        rawUrl:\n          'https://example.com/repo/test-branch/index.html',\n        size: 355,\n        type: 'file',\n      },\n      {\n        name: 'styles.css',\n        path: 'styles.css',\n        rawUrl:\n          'https://example.com/repo/test-branch/styles.css',\n        size: 256,\n        type: 'file',\n      },\n      {\n        name: 'test',\n        path: 'test',\n        rawUrl:\n          'https://example.com/repo/test-branch/test.md',\n        type: 'directory',\n      },\n    ]",
+                  "sourceMap": "AAAA,IAAI,aAAa,GAAG;IACd;QACE,IAAI,EAAE,WAAW;QACjB,IAAI,EAAE,WAAW;QACjB,MAAM,EACJ,gDAAgD;QAClD,IAAI,EAAE,GAAG;QACT,IAAI,EAAE,MAAM;KACb;IACD;QACE,IAAI,EAAE,YAAY;QAClB,IAAI,EAAE,YAAY;QAClB,MAAM,EACJ,iDAAiD;QACnD,IAAI,EAAE,GAAG;QACT,IAAI,EAAE,MAAM;KACb;IACD;QACE,IAAI,EAAE,YAAY;QAClB,IAAI,EAAE,YAAY;QAClB,MAAM,EACJ,iDAAiD;QACnD,IAAI,EAAE,GAAG;QACT,IAAI,EAAE,MAAM;KACb;IACD;QACE,IAAI,EAAE,MAAM;QACZ,IAAI,EAAE,MAAM;QACZ,MAAM,EACJ,8CAA8C;QAChD,IAAI,EAAE,WAAW;KAClB;CACF,CAAC",
+                  "location": {
+                    "start": {
+                      "line": 9,
+                      "column": 15,
+                      "charIndex": 135
+                    },
+                    "end": {
+                      "line": 41,
+                      "column": 6,
+                      "charIndex": 874
+                    }
+                  }
+                },
+                "location": {
+                  "start": {
+                    "line": 9,
+                    "column": 5,
+                    "charIndex": 125
+                  },
+                  "end": {
+                    "line": 41,
+                    "column": 6,
+                    "charIndex": 874
+                  }
+                }
+              }
+            ],
+            "location": {
+              "start": {
+                "line": 8,
+                "column": 14,
+                "charIndex": 119
+              },
+              "end": {
+                "line": 42,
+                "column": 4,
+                "charIndex": 878
+              }
+            }
+          },
+          "location": {
+            "start": {
+              "line": 8,
+              "column": 3,
+              "charIndex": 108
+            },
+            "end": {
+              "line": 42,
+              "column": 4,
+              "charIndex": 878
+            }
+          }
+        }
+      ],
+      "location": {
+        "start": {
+          "line": 7,
+          "column": 1,
+          "charIndex": 87
+        },
+        "end": {
+          "line": 43,
+          "column": 2,
+          "charIndex": 880
+        }
+      },
+      "documentation": {
+        "title": "ListDirectory mock map",
+        "location": {
+          "start": {
+            "line": 4,
+            "column": 1,
+            "charIndex": 56
+          },
+          "end": {
+            "line": 6,
+            "column": 4,
+            "charIndex": 86
+          }
+        }
+      }
+    }
+  ],
+  "location": {
+    "start": {
+      "line": 1,
+      "column": 1,
+      "charIndex": 0
+    },
+    "end": {
+      "line": 43,
+      "column": 2,
+      "charIndex": 880
+    }
+  },
+  "astMetadata": {
+    "astVersion": {
+      "major": 1,
+      "minor": 2,
+      "patch": 0
+    },
+    "parserVersion": {
+      "major": 1,
+      "minor": 2,
+      "patch": 0
+    },
+    "sourceChecksum": "6d1c88d68179b6b803c81b7880a0a2980e310da3c7007321fd2f819d5d2ff4a2"
+  }
+}

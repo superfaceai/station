@@ -1,0 +1,193 @@
+{
+  "kind": "MapDocument",
+  "header": {
+    "kind": "MapHeader",
+    "profile": {
+      "scope": "chat",
+      "name": "messages",
+      "version": {
+        "major": 1,
+        "minor": 0,
+        "patch": 0
+      }
+    },
+    "provider": "mock",
+    "location": {
+      "start": {
+        "line": 1,
+        "column": 1,
+        "charIndex": 0
+      },
+      "end": {
+        "line": 2,
+        "column": 18,
+        "charIndex": 47
+      }
+    }
+  },
+  "definitions": [
+    {
+      "kind": "MapDefinition",
+      "name": "GetMessages",
+      "usecaseName": "GetMessages",
+      "statements": [
+        {
+          "kind": "OutcomeStatement",
+          "isError": false,
+          "terminateFlow": false,
+          "value": {
+            "kind": "ObjectLiteral",
+            "fields": [
+              {
+                "kind": "Assignment",
+                "key": [
+                  "messages"
+                ],
+                "value": {
+                  "kind": "JessieExpression",
+                  "expression": "[\n    {\n        id: '1',\n        author: {\n            id: 'U01'\n        },\n        text: 'test',\n        reactions: [\n            {\n                count: 2,\n                emoji: 'tada',\n                users: ['U01', 'U02'],\n            }\n        ],\n        createdAt: 1643798532134.069,\n    },\n    {\n        id: '2',\n        author: {\n            id: 'U02'\n        },\n        text: 'test',\n        reactions: [\n            {\n                count: 2,\n                emoji: 'tada',\n                users: ['U01', 'U02'],\n            }\n        ],\n        createdAt: 1643216443234.079,\n    },\n    {\n        id: '3',\n        author: {\n            id: 'U01'\n        },\n        text: 'test',\n        createdAt: 1546167104000.2,\n    }\n]",
+                  "source": "[\n      {\n        id: '1',\n        author: {\n          id: 'U01'\n        },\n        text: 'test',\n        reactions: [\n          {\n            count: 2,\n            emoji: 'tada',\n            users: ['U01', 'U02'],\n          }\n        ],\n        createdAt: 1643798532134.069,\n      },\n      {\n        id: '2',\n        author: {\n          id: 'U02'\n        },\n        text: 'test',\n        reactions: [\n          {\n            count: 2,\n            emoji: 'tada',\n            users: ['U01', 'U02'],\n          }\n        ],\n        createdAt: 1643216443234.079,\n      },\n      {\n        id: '3',\n        author: {\n          id: 'U01'\n        },\n        text: 'test',\n        createdAt: 1546167104000.2,\n      }\n    ]",
+                  "sourceMap": "AAAA,IAAI,aAAa,GAAG;IACd;QACE,EAAE,EAAE,GAAG;QACP,MAAM,EAAE;YACN,EAAE,EAAE,KAAK;SACV;QACD,IAAI,EAAE,MAAM;QACZ,SAAS,EAAE;YACT;gBACE,KAAK,EAAE,CAAC;gBACR,KAAK,EAAE,MAAM;gBACb,KAAK,EAAE,CAAC,KAAK,EAAE,KAAK,CAAC;aACtB;SACF;QACD,SAAS,EAAE,iBAAiB;KAC7B;IACD;QACE,EAAE,EAAE,GAAG;QACP,MAAM,EAAE;YACN,EAAE,EAAE,KAAK;SACV;QACD,IAAI,EAAE,MAAM;QACZ,SAAS,EAAE;YACT;gBACE,KAAK,EAAE,CAAC;gBACR,KAAK,EAAE,MAAM;gBACb,KAAK,EAAE,CAAC,KAAK,EAAE,KAAK,CAAC;aACtB;SACF;QACD,SAAS,EAAE,iBAAiB;KAC7B;IACD;QACE,EAAE,EAAE,GAAG;QACP,MAAM,EAAE;YACN,EAAE,EAAE,KAAK;SACV;QACD,IAAI,EAAE,MAAM;QACZ,SAAS,EAAE,eAAe;KAC3B;CACF,CAAC",
+                  "location": {
+                    "start": {
+                      "line": 9,
+                      "column": 16,
+                      "charIndex": 121
+                    },
+                    "end": {
+                      "line": 48,
+                      "column": 6,
+                      "charIndex": 834
+                    }
+                  }
+                },
+                "location": {
+                  "start": {
+                    "line": 9,
+                    "column": 5,
+                    "charIndex": 110
+                  },
+                  "end": {
+                    "line": 48,
+                    "column": 6,
+                    "charIndex": 834
+                  }
+                }
+              },
+              {
+                "kind": "Assignment",
+                "key": [
+                  "nextPage"
+                ],
+                "value": {
+                  "kind": "PrimitiveLiteral",
+                  "value": "XXXXXXXXXXXXXXXXX03",
+                  "location": {
+                    "start": {
+                      "line": 50,
+                      "column": 16,
+                      "charIndex": 851
+                    },
+                    "end": {
+                      "line": 50,
+                      "column": 37,
+                      "charIndex": 872
+                    }
+                  }
+                },
+                "location": {
+                  "start": {
+                    "line": 50,
+                    "column": 5,
+                    "charIndex": 840
+                  },
+                  "end": {
+                    "line": 50,
+                    "column": 37,
+                    "charIndex": 872
+                  }
+                }
+              }
+            ],
+            "location": {
+              "start": {
+                "line": 8,
+                "column": 14,
+                "charIndex": 104
+              },
+              "end": {
+                "line": 51,
+                "column": 4,
+                "charIndex": 876
+              }
+            }
+          },
+          "location": {
+            "start": {
+              "line": 8,
+              "column": 3,
+              "charIndex": 93
+            },
+            "end": {
+              "line": 51,
+              "column": 4,
+              "charIndex": 876
+            }
+          }
+        }
+      ],
+      "location": {
+        "start": {
+          "line": 7,
+          "column": 1,
+          "charIndex": 73
+        },
+        "end": {
+          "line": 52,
+          "column": 2,
+          "charIndex": 878
+        }
+      },
+      "documentation": {
+        "title": "GetMessages map",
+        "location": {
+          "start": {
+            "line": 4,
+            "column": 1,
+            "charIndex": 49
+          },
+          "end": {
+            "line": 6,
+            "column": 4,
+            "charIndex": 72
+          }
+        }
+      }
+    }
+  ],
+  "location": {
+    "start": {
+      "line": 1,
+      "column": 1,
+      "charIndex": 0
+    },
+    "end": {
+      "line": 52,
+      "column": 2,
+      "charIndex": 878
+    }
+  },
+  "astMetadata": {
+    "astVersion": {
+      "major": 1,
+      "minor": 2,
+      "patch": 0
+    },
+    "parserVersion": {
+      "major": 1,
+      "minor": 2,
+      "patch": 0
+    },
+    "sourceChecksum": "af2187f48ebc34366ad3a1b41b454161763223d7495b71c9fa4f09188cc584b6"
+  }
+}

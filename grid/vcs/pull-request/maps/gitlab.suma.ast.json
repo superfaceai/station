@@ -1,0 +1,367 @@
+{
+  "kind": "MapDocument",
+  "header": {
+    "kind": "MapHeader",
+    "profile": {
+      "scope": "vcs",
+      "name": "pull-request",
+      "version": {
+        "major": 1,
+        "minor": 1,
+        "patch": 0
+      }
+    },
+    "provider": "gitlab",
+    "location": {
+      "start": {
+        "line": 1,
+        "column": 1,
+        "charIndex": 0
+      },
+      "end": {
+        "line": 2,
+        "column": 20,
+        "charIndex": 52
+      }
+    }
+  },
+  "definitions": [
+    {
+      "kind": "MapDefinition",
+      "name": "PullRequest",
+      "usecaseName": "PullRequest",
+      "statements": [
+        {
+          "kind": "SetStatement",
+          "assignments": [
+            {
+              "kind": "Assignment",
+              "key": [
+                "id"
+              ],
+              "value": {
+                "kind": "JessieExpression",
+                "expression": "encodeURIComponent(input.owner + '/' + input.repo)",
+                "source": "encodeURIComponent(input.owner + '/' + input.repo)",
+                "sourceMap": "AAAA,IAAI,aAAa,GAAG,kBAAkB,CAAC,KAAK,CAAC,KAAK,GAAG,GAAG,GAAG,KAAK,CAAC,IAAI,CAAC,CAAC",
+                "location": {
+                  "start": {
+                    "line": 9,
+                    "column": 8,
+                    "charIndex": 185
+                  },
+                  "end": {
+                    "line": 9,
+                    "column": 58,
+                    "charIndex": 235
+                  }
+                }
+              },
+              "location": {
+                "start": {
+                  "line": 9,
+                  "column": 3,
+                  "charIndex": 180
+                },
+                "end": {
+                  "line": 9,
+                  "column": 58,
+                  "charIndex": 235
+                }
+              }
+            }
+          ],
+          "location": {
+            "start": {
+              "line": 9,
+              "column": 3,
+              "charIndex": 180
+            },
+            "end": {
+              "line": 9,
+              "column": 58,
+              "charIndex": 235
+            }
+          }
+        },
+        {
+          "kind": "SetStatement",
+          "assignments": [
+            {
+              "kind": "Assignment",
+              "key": [
+                "identifier"
+              ],
+              "value": {
+                "kind": "JessieExpression",
+                "expression": "input.identifier",
+                "source": "input.identifier",
+                "sourceMap": "AAAA,IAAI,aAAa,GAAG,KAAK,CAAC,UAAU,CAAC",
+                "location": {
+                  "start": {
+                    "line": 10,
+                    "column": 16,
+                    "charIndex": 251
+                  },
+                  "end": {
+                    "line": 10,
+                    "column": 32,
+                    "charIndex": 267
+                  }
+                }
+              },
+              "location": {
+                "start": {
+                  "line": 10,
+                  "column": 3,
+                  "charIndex": 238
+                },
+                "end": {
+                  "line": 10,
+                  "column": 32,
+                  "charIndex": 267
+                }
+              }
+            }
+          ],
+          "location": {
+            "start": {
+              "line": 10,
+              "column": 3,
+              "charIndex": 238
+            },
+            "end": {
+              "line": 10,
+              "column": 32,
+              "charIndex": 267
+            }
+          }
+        },
+        {
+          "kind": "HttpCallStatement",
+          "method": "GET",
+          "url": "/v4/projects/{id}/merge_requests/{identifier}",
+          "responseHandlers": [
+            {
+              "kind": "HttpResponseHandler",
+              "statements": [
+                {
+                  "kind": "OutcomeStatement",
+                  "isError": false,
+                  "terminateFlow": false,
+                  "condition": {
+                    "kind": "ConditionAtom",
+                    "expression": {
+                      "kind": "JessieExpression",
+                      "expression": "statusCode === 200",
+                      "source": "statusCode === 200",
+                      "sourceMap": "AAAA,IAAI,aAAa,GAAG,UAAU,KAAK,GAAG,CAAC",
+                      "location": {
+                        "start": {
+                          "line": 14,
+                          "column": 21,
+                          "charIndex": 365
+                        },
+                        "end": {
+                          "line": 14,
+                          "column": 39,
+                          "charIndex": 383
+                        }
+                      }
+                    },
+                    "location": {
+                      "start": {
+                        "line": 14,
+                        "column": 18,
+                        "charIndex": 362
+                      },
+                      "end": {
+                        "line": 14,
+                        "column": 40,
+                        "charIndex": 384
+                      }
+                    }
+                  },
+                  "value": {
+                    "kind": "JessieExpression",
+                    "expression": "{\n    title: body.title,\n    id: body.iid,\n    url: body.web_url,\n    sha: body.sha,\n}",
+                    "source": "{\n        title: body.title,\n        id: body.iid,\n        url: body.web_url,\n        sha: body.sha,\n      }",
+                    "sourceMap": "AAAA,IAAI,aAAa,GAAG;IACZ,KAAK,EAAE,IAAI,CAAC,KAAK;IACjB,EAAE,EAAE,IAAI,CAAC,GAAG;IACZ,GAAG,EAAE,IAAI,CAAC,OAAO;IACjB,GAAG,EAAE,IAAI,CAAC,GAAG;CACd,CAAC",
+                    "location": {
+                      "start": {
+                        "line": 14,
+                        "column": 40,
+                        "charIndex": 384
+                      },
+                      "end": {
+                        "line": 19,
+                        "column": 8,
+                        "charIndex": 492
+                      }
+                    }
+                  },
+                  "location": {
+                    "start": {
+                      "line": 14,
+                      "column": 7,
+                      "charIndex": 351
+                    },
+                    "end": {
+                      "line": 19,
+                      "column": 8,
+                      "charIndex": 492
+                    }
+                  }
+                },
+                {
+                  "kind": "OutcomeStatement",
+                  "isError": true,
+                  "terminateFlow": false,
+                  "condition": {
+                    "kind": "ConditionAtom",
+                    "expression": {
+                      "kind": "JessieExpression",
+                      "expression": "statusCode !== 200",
+                      "source": "statusCode !== 200",
+                      "sourceMap": "AAAA,IAAI,aAAa,GAAG,UAAU,KAAK,GAAG,CAAC",
+                      "location": {
+                        "start": {
+                          "line": 20,
+                          "column": 20,
+                          "charIndex": 512
+                        },
+                        "end": {
+                          "line": 20,
+                          "column": 38,
+                          "charIndex": 530
+                        }
+                      }
+                    },
+                    "location": {
+                      "start": {
+                        "line": 20,
+                        "column": 17,
+                        "charIndex": 509
+                      },
+                      "end": {
+                        "line": 20,
+                        "column": 39,
+                        "charIndex": 531
+                      }
+                    }
+                  },
+                  "value": {
+                    "kind": "JessieExpression",
+                    "expression": "{\n    message: body.message,\n    statusCode: statusCode\n}",
+                    "source": "{\n        message: body.message,\n        statusCode: statusCode\n      }",
+                    "sourceMap": "AAAA,IAAI,aAAa,GAAG;IACZ,OAAO,EAAE,IAAI,CAAC,OAAO;IACrB,UAAU,EAAE,UAAU;CACvB,CAAC",
+                    "location": {
+                      "start": {
+                        "line": 20,
+                        "column": 40,
+                        "charIndex": 532
+                      },
+                      "end": {
+                        "line": 23,
+                        "column": 8,
+                        "charIndex": 603
+                      }
+                    }
+                  },
+                  "location": {
+                    "start": {
+                      "line": 20,
+                      "column": 7,
+                      "charIndex": 499
+                    },
+                    "end": {
+                      "line": 23,
+                      "column": 8,
+                      "charIndex": 603
+                    }
+                  }
+                }
+              ],
+              "location": {
+                "start": {
+                  "line": 13,
+                  "column": 5,
+                  "charIndex": 334
+                },
+                "end": {
+                  "line": 24,
+                  "column": 6,
+                  "charIndex": 609
+                }
+              }
+            }
+          ],
+          "location": {
+            "start": {
+              "line": 12,
+              "column": 3,
+              "charIndex": 271
+            },
+            "end": {
+              "line": 25,
+              "column": 4,
+              "charIndex": 613
+            }
+          }
+        }
+      ],
+      "location": {
+        "start": {
+          "line": 7,
+          "column": 1,
+          "charIndex": 78
+        },
+        "end": {
+          "line": 26,
+          "column": 2,
+          "charIndex": 615
+        }
+      },
+      "documentation": {
+        "title": "PullRequest map",
+        "location": {
+          "start": {
+            "line": 4,
+            "column": 1,
+            "charIndex": 54
+          },
+          "end": {
+            "line": 6,
+            "column": 4,
+            "charIndex": 77
+          }
+        }
+      }
+    }
+  ],
+  "location": {
+    "start": {
+      "line": 1,
+      "column": 1,
+      "charIndex": 0
+    },
+    "end": {
+      "line": 26,
+      "column": 2,
+      "charIndex": 615
+    }
+  },
+  "astMetadata": {
+    "astVersion": {
+      "major": 1,
+      "minor": 2,
+      "patch": 0
+    },
+    "parserVersion": {
+      "major": 1,
+      "minor": 2,
+      "patch": 0
+    },
+    "sourceChecksum": "54f58f91110a2f68eaf732b2d50f8576aaa51b85442755bd37c0802d34c603d6"
+  }
+}

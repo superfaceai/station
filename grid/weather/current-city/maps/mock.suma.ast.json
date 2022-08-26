@@ -1,0 +1,210 @@
+{
+  "kind": "MapDocument",
+  "header": {
+    "kind": "MapHeader",
+    "profile": {
+      "scope": "weather",
+      "name": "current-city",
+      "version": {
+        "major": 1,
+        "minor": 0,
+        "patch": 0
+      }
+    },
+    "provider": "mock",
+    "location": {
+      "start": {
+        "line": 1,
+        "column": 1,
+        "charIndex": 0
+      },
+      "end": {
+        "line": 2,
+        "column": 18,
+        "charIndex": 54
+      }
+    }
+  },
+  "definitions": [
+    {
+      "kind": "MapDefinition",
+      "name": "GetCurrentWeatherInCity",
+      "usecaseName": "GetCurrentWeatherInCity",
+      "statements": [
+        {
+          "kind": "OutcomeStatement",
+          "isError": false,
+          "terminateFlow": false,
+          "value": {
+            "kind": "ObjectLiteral",
+            "fields": [
+              {
+                "kind": "Assignment",
+                "key": [
+                  "temperature"
+                ],
+                "value": {
+                  "kind": "PrimitiveLiteral",
+                  "value": -1,
+                  "location": {
+                    "start": {
+                      "line": 6,
+                      "column": 19,
+                      "charIndex": 119
+                    },
+                    "end": {
+                      "line": 6,
+                      "column": 21,
+                      "charIndex": 121
+                    }
+                  }
+                },
+                "location": {
+                  "start": {
+                    "line": 6,
+                    "column": 5,
+                    "charIndex": 105
+                  },
+                  "end": {
+                    "line": 6,
+                    "column": 21,
+                    "charIndex": 121
+                  }
+                }
+              },
+              {
+                "kind": "Assignment",
+                "key": [
+                  "feelsLike"
+                ],
+                "value": {
+                  "kind": "PrimitiveLiteral",
+                  "value": 1,
+                  "location": {
+                    "start": {
+                      "line": 7,
+                      "column": 17,
+                      "charIndex": 138
+                    },
+                    "end": {
+                      "line": 7,
+                      "column": 18,
+                      "charIndex": 139
+                    }
+                  }
+                },
+                "location": {
+                  "start": {
+                    "line": 7,
+                    "column": 5,
+                    "charIndex": 126
+                  },
+                  "end": {
+                    "line": 7,
+                    "column": 18,
+                    "charIndex": 139
+                  }
+                }
+              },
+              {
+                "kind": "Assignment",
+                "key": [
+                  "description"
+                ],
+                "value": {
+                  "kind": "PrimitiveLiteral",
+                  "value": "Cloudy with a Chance of Meatballs",
+                  "location": {
+                    "start": {
+                      "line": 8,
+                      "column": 19,
+                      "charIndex": 158
+                    },
+                    "end": {
+                      "line": 8,
+                      "column": 54,
+                      "charIndex": 193
+                    }
+                  }
+                },
+                "location": {
+                  "start": {
+                    "line": 8,
+                    "column": 5,
+                    "charIndex": 144
+                  },
+                  "end": {
+                    "line": 8,
+                    "column": 54,
+                    "charIndex": 193
+                  }
+                }
+              }
+            ],
+            "location": {
+              "start": {
+                "line": 5,
+                "column": 14,
+                "charIndex": 99
+              },
+              "end": {
+                "line": 9,
+                "column": 4,
+                "charIndex": 197
+              }
+            }
+          },
+          "location": {
+            "start": {
+              "line": 5,
+              "column": 3,
+              "charIndex": 88
+            },
+            "end": {
+              "line": 9,
+              "column": 4,
+              "charIndex": 197
+            }
+          }
+        }
+      ],
+      "location": {
+        "start": {
+          "line": 4,
+          "column": 1,
+          "charIndex": 56
+        },
+        "end": {
+          "line": 10,
+          "column": 2,
+          "charIndex": 199
+        }
+      }
+    }
+  ],
+  "location": {
+    "start": {
+      "line": 1,
+      "column": 1,
+      "charIndex": 0
+    },
+    "end": {
+      "line": 10,
+      "column": 2,
+      "charIndex": 199
+    }
+  },
+  "astMetadata": {
+    "astVersion": {
+      "major": 1,
+      "minor": 2,
+      "patch": 0
+    },
+    "parserVersion": {
+      "major": 1,
+      "minor": 2,
+      "patch": 0
+    },
+    "sourceChecksum": "4387e0320389bdd119ef99fa57c7fc82f033df24e7df4927823c39d43c6b994a"
+  }
+}
