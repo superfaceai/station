@@ -2,6 +2,7 @@
 /* eslint-disable jest/no-export */
 
 import { SuperfaceTest } from '@superfaceai/testing';
+
 import { nockConfig } from '../../../test-config';
 
 export const shipmentInfoTest = (

@@ -36,9 +36,7 @@
           "assignments": [
             {
               "kind": "Assignment",
-              "key": [
-                "accessToken"
-              ],
+              "key": ["accessToken"],
               "value": {
                 "kind": "JessieExpression",
                 "expression": "parameters.accessToken",
@@ -96,9 +94,7 @@
               "fields": [
                 {
                   "kind": "Assignment",
-                  "key": [
-                    "page_size"
-                  ],
+                  "key": ["page_size"],
                   "value": {
                     "kind": "PrimitiveLiteral",
                     "value": 100,
@@ -147,9 +143,7 @@
               "fields": [
                 {
                   "kind": "Assignment",
-                  "key": [
-                    "Authorization"
-                  ],
+                  "key": ["Authorization"],
                   "value": {
                     "kind": "JessieExpression",
                     "expression": "\"Bearer \".concat(accessToken)",
@@ -224,9 +218,7 @@
                     "fields": [
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "profiles"
-                        ],
+                        "key": ["profiles"],
                         "value": {
                           "kind": "JessieExpression",
                           "expression": "body.items.map(function (item) {\n    return {\n        id: item.id,\n        name: item.name,\n    };\n})",
@@ -311,9 +303,7 @@
                     "fields": [
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "title"
-                        ],
+                        "key": ["title"],
                         "value": {
                           "kind": "JessieExpression",
                           "expression": "body.message",

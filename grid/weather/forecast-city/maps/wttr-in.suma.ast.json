@@ -36,9 +36,7 @@
           "assignments": [
             {
               "kind": "Assignment",
-              "key": [
-                "unit"
-              ],
+              "key": ["unit"],
               "value": {
                 "kind": "JessieExpression",
                 "expression": "input.units",
@@ -90,9 +88,7 @@
           "arguments": [
             {
               "kind": "Assignment",
-              "key": [
-                "units"
-              ],
+              "key": ["units"],
               "value": {
                 "kind": "JessieExpression",
                 "expression": "unit",
@@ -126,9 +122,7 @@
             },
             {
               "kind": "Assignment",
-              "key": [
-                "city"
-              ],
+              "key": ["city"],
               "value": {
                 "kind": "JessieExpression",
                 "expression": "input.city",
@@ -339,9 +333,7 @@
             "fields": [
               {
                 "kind": "Assignment",
-                "key": [
-                  "avgTemp"
-                ],
+                "key": ["avgTemp"],
                 "value": {
                   "kind": "JessieExpression",
                   "expression": "Number(args.weather.avgtempF)",
@@ -375,9 +367,7 @@
               },
               {
                 "kind": "Assignment",
-                "key": [
-                  "maxTemp"
-                ],
+                "key": ["maxTemp"],
                 "value": {
                   "kind": "JessieExpression",
                   "expression": "Number(args.weather.maxtempF)",
@@ -411,9 +401,7 @@
               },
               {
                 "kind": "Assignment",
-                "key": [
-                  "minTemp"
-                ],
+                "key": ["minTemp"],
                 "value": {
                   "kind": "JessieExpression",
                   "expression": "Number(args.weather.mintempF)",
@@ -514,9 +502,7 @@
             "fields": [
               {
                 "kind": "Assignment",
-                "key": [
-                  "avgTemp"
-                ],
+                "key": ["avgTemp"],
                 "value": {
                   "kind": "JessieExpression",
                   "expression": "Number(args.weather.avgtempC) + 273",
@@ -550,9 +536,7 @@
               },
               {
                 "kind": "Assignment",
-                "key": [
-                  "maxTemp"
-                ],
+                "key": ["maxTemp"],
                 "value": {
                   "kind": "JessieExpression",
                   "expression": "Number(args.weather.maxtempC) + 273",
@@ -586,9 +570,7 @@
               },
               {
                 "kind": "Assignment",
-                "key": [
-                  "minTemp"
-                ],
+                "key": ["minTemp"],
                 "value": {
                   "kind": "JessieExpression",
                   "expression": "Number(args.weather.mintempC) + 273",
@@ -656,9 +638,7 @@
             "fields": [
               {
                 "kind": "Assignment",
-                "key": [
-                  "avgTemp"
-                ],
+                "key": ["avgTemp"],
                 "value": {
                   "kind": "JessieExpression",
                   "expression": "Number(args.weather.avgtempC)",
@@ -692,9 +672,7 @@
               },
               {
                 "kind": "Assignment",
-                "key": [
-                  "maxTemp"
-                ],
+                "key": ["maxTemp"],
                 "value": {
                   "kind": "JessieExpression",
                   "expression": "Number(args.weather.maxtempC)",
@@ -728,9 +706,7 @@
               },
               {
                 "kind": "Assignment",
-                "key": [
-                  "minTemp"
-                ],
+                "key": ["minTemp"],
                 "value": {
                   "kind": "JessieExpression",
                   "expression": "Number(args.weather.mintempC)",
@@ -818,9 +794,7 @@
               "fields": [
                 {
                   "kind": "Assignment",
-                  "key": [
-                    "format"
-                  ],
+                  "key": ["format"],
                   "value": {
                     "kind": "PrimitiveLiteral",
                     "value": "j1",
@@ -924,9 +898,7 @@
                     "fields": [
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "title"
-                        ],
+                        "key": ["title"],
                         "value": {
                           "kind": "PrimitiveLiteral",
                           "value": "Bad request",
@@ -958,9 +930,7 @@
                       },
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "detail"
-                        ],
+                        "key": ["detail"],
                         "value": {
                           "kind": "JessieExpression",
                           "expression": "body",
@@ -1061,9 +1031,7 @@
                     "fields": [
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "title"
-                        ],
+                        "key": ["title"],
                         "value": {
                           "kind": "PrimitiveLiteral",
                           "value": "Not Found",
@@ -1095,9 +1063,7 @@
                       },
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "detail"
-                        ],
+                        "key": ["detail"],
                         "value": {
                           "kind": "JessieExpression",
                           "expression": "body",
@@ -1161,9 +1127,7 @@
                   "assignments": [
                     {
                       "kind": "Assignment",
-                      "key": [
-                        "forecast"
-                      ],
+                      "key": ["forecast"],
                       "value": {
                         "kind": "InlineCall",
                         "iteration": {
@@ -1204,9 +1168,7 @@
                         "arguments": [
                           {
                             "kind": "Assignment",
-                            "key": [
-                              "units"
-                            ],
+                            "key": ["units"],
                             "value": {
                               "kind": "JessieExpression",
                               "expression": "args.unit",
@@ -1240,9 +1202,7 @@
                           },
                           {
                             "kind": "Assignment",
-                            "key": [
-                              "weather"
-                            ],
+                            "key": ["weather"],
                             "value": {
                               "kind": "JessieExpression",
                               "expression": "weather",
@@ -1401,18 +1361,14 @@
           "assignments": [
             {
               "kind": "Assignment",
-              "key": [
-                "temperatureWrapper"
-              ],
+              "key": ["temperatureWrapper"],
               "value": {
                 "kind": "InlineCall",
                 "operationName": "pickTemperatures",
                 "arguments": [
                   {
                     "kind": "Assignment",
-                    "key": [
-                      "units"
-                    ],
+                    "key": ["units"],
                     "value": {
                       "kind": "JessieExpression",
                       "expression": "args.units",
@@ -1446,9 +1402,7 @@
                   },
                   {
                     "kind": "Assignment",
-                    "key": [
-                      "weather"
-                    ],
+                    "key": ["weather"],
                     "value": {
                       "kind": "JessieExpression",
                       "expression": "args.weather",
@@ -1530,9 +1484,7 @@
             "fields": [
               {
                 "kind": "Assignment",
-                "key": [
-                  "averageTemperature"
-                ],
+                "key": ["averageTemperature"],
                 "value": {
                   "kind": "JessieExpression",
                   "expression": "temperatureWrapper.avgTemp",
@@ -1566,9 +1518,7 @@
               },
               {
                 "kind": "Assignment",
-                "key": [
-                  "date"
-                ],
+                "key": ["date"],
                 "value": {
                   "kind": "JessieExpression",
                   "expression": "args.weather.date",
@@ -1602,9 +1552,7 @@
               },
               {
                 "kind": "Assignment",
-                "key": [
-                  "maxTemperature"
-                ],
+                "key": ["maxTemperature"],
                 "value": {
                   "kind": "JessieExpression",
                   "expression": "temperatureWrapper.maxTemp",
@@ -1638,9 +1586,7 @@
               },
               {
                 "kind": "Assignment",
-                "key": [
-                  "minTemperature"
-                ],
+                "key": ["minTemperature"],
                 "value": {
                   "kind": "JessieExpression",
                   "expression": "temperatureWrapper.minTemp",

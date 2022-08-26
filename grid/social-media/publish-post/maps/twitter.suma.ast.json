@@ -73,9 +73,7 @@
             "fields": [
               {
                 "kind": "Assignment",
-                "key": [
-                  "title"
-                ],
+                "key": ["title"],
                 "value": {
                   "kind": "PrimitiveLiteral",
                   "value": "Media publishing not implemented",
@@ -107,9 +105,7 @@
               },
               {
                 "kind": "Assignment",
-                "key": [
-                  "detail"
-                ],
+                "key": ["detail"],
                 "value": {
                   "kind": "PrimitiveLiteral",
                   "value": "Publishing media to Twitter provider is not yet supported.",
@@ -171,9 +167,7 @@
           "assignments": [
             {
               "kind": "Assignment",
-              "key": [
-                "text"
-              ],
+              "key": ["text"],
               "value": {
                 "kind": "JessieExpression",
                 "expression": "input.link ? \"\".concat(input.text || '', \" \").concat(input.link).trim() : input.text",
@@ -230,9 +224,7 @@
               "fields": [
                 {
                   "kind": "Assignment",
-                  "key": [
-                    "authorization"
-                  ],
+                  "key": ["authorization"],
                   "value": {
                     "kind": "JessieExpression",
                     "expression": "\"Bearer \" + parameters.accessToken",
@@ -283,9 +275,7 @@
               "fields": [
                 {
                   "kind": "Assignment",
-                  "key": [
-                    "text"
-                  ],
+                  "key": ["text"],
                   "value": {
                     "kind": "JessieExpression",
                     "expression": "text",
@@ -360,9 +350,7 @@
                     "fields": [
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "postId"
-                        ],
+                        "key": ["postId"],
                         "value": {
                           "kind": "JessieExpression",
                           "expression": "body.data.id",
@@ -396,9 +384,7 @@
                       },
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "url"
-                        ],
+                        "key": ["url"],
                         "value": {
                           "kind": "JessieExpression",
                           "expression": "'https://twitter.com/i/status/' + body.data.id",
@@ -485,9 +471,7 @@
                     "fields": [
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "title"
-                        ],
+                        "key": ["title"],
                         "value": {
                           "kind": "PrimitiveLiteral",
                           "value": "Bad request",
@@ -519,9 +503,7 @@
                       },
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "detail"
-                        ],
+                        "key": ["detail"],
                         "value": {
                           "kind": "JessieExpression",
                           "expression": "body.detail",
@@ -555,9 +537,7 @@
                       },
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "original"
-                        ],
+                        "key": ["original"],
                         "value": {
                           "kind": "JessieExpression",
                           "expression": "body",
@@ -644,9 +624,7 @@
                     "fields": [
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "title"
-                        ],
+                        "key": ["title"],
                         "value": {
                           "kind": "PrimitiveLiteral",
                           "value": "Unauthenticated",
@@ -678,9 +656,7 @@
                       },
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "detail"
-                        ],
+                        "key": ["detail"],
                         "value": {
                           "kind": "JessieExpression",
                           "expression": "body.detail",
@@ -714,9 +690,7 @@
                       },
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "original"
-                        ],
+                        "key": ["original"],
                         "value": {
                           "kind": "JessieExpression",
                           "expression": "body",
@@ -803,9 +777,7 @@
                     "fields": [
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "title"
-                        ],
+                        "key": ["title"],
                         "value": {
                           "kind": "PrimitiveLiteral",
                           "value": "Forbidden",
@@ -837,9 +809,7 @@
                       },
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "detail"
-                        ],
+                        "key": ["detail"],
                         "value": {
                           "kind": "JessieExpression",
                           "expression": "body.detail",
@@ -873,9 +843,7 @@
                       },
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "original"
-                        ],
+                        "key": ["original"],
                         "value": {
                           "kind": "JessieExpression",
                           "expression": "body",

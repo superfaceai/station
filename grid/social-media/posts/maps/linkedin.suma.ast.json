@@ -36,9 +36,7 @@
           "assignments": [
             {
               "kind": "Assignment",
-              "key": [
-                "count"
-              ],
+              "key": ["count"],
               "value": {
                 "kind": "PrimitiveLiteral",
                 "value": 10,
@@ -87,9 +85,7 @@
           "assignments": [
             {
               "kind": "Assignment",
-              "key": [
-                "inputPage"
-              ],
+              "key": ["inputPage"],
               "value": {
                 "kind": "JessieExpression",
                 "expression": "parseInt(input.page, 10)",
@@ -140,9 +136,7 @@
           "assignments": [
             {
               "kind": "Assignment",
-              "key": [
-                "start"
-              ],
+              "key": ["start"],
               "value": {
                 "kind": "JessieExpression",
                 "expression": "isNaN(inputPage) ? 0 : inputPage",
@@ -193,9 +187,7 @@
           "assignments": [
             {
               "kind": "Assignment",
-              "key": [
-                "projection"
-              ],
+              "key": ["projection"],
               "value": {
                 "kind": "PrimitiveLiteral",
                 "value": "(paging,elements*(id,created,specificContent(com.linkedin.ugc.ShareContent(shareMediaCategory,shareCommentary,media(*(media~:playableStreams,originalUrl,description,title,thumbnails))))))",
@@ -244,9 +236,7 @@
           "assignments": [
             {
               "kind": "Assignment",
-              "key": [
-                "queryParams"
-              ],
+              "key": ["queryParams"],
               "value": {
                 "kind": "JessieExpression",
                 "expression": "\"?q=authors&sortBy=LAST_MODIFIED&authors=List(\".concat(encodeURIComponent(input.profileId), \")&count=\").concat(count, \"&start=\").concat(start, \"&projection=\").concat(projection)",
@@ -303,9 +293,7 @@
               "fields": [
                 {
                   "kind": "Assignment",
-                  "key": [
-                    "X-Restli-Protocol-Version"
-                  ],
+                  "key": ["X-Restli-Protocol-Version"],
                   "value": {
                     "kind": "PrimitiveLiteral",
                     "value": "2.0.0",
@@ -337,9 +325,7 @@
                 },
                 {
                   "kind": "Assignment",
-                  "key": [
-                    "Authorization"
-                  ],
+                  "key": ["Authorization"],
                   "value": {
                     "kind": "JessieExpression",
                     "expression": "\"Bearer \".concat(parameters.accessToken)",
@@ -410,9 +396,7 @@
                   "assignments": [
                     {
                       "kind": "Assignment",
-                      "key": [
-                        "paging"
-                      ],
+                      "key": ["paging"],
                       "value": {
                         "kind": "JessieExpression",
                         "expression": "body.paging",
@@ -463,9 +447,7 @@
                   "assignments": [
                     {
                       "kind": "Assignment",
-                      "key": [
-                        "result"
-                      ],
+                      "key": ["result"],
                       "value": {
                         "kind": "JessieExpression",
                         "expression": "{\n    previousPage: (paging.start > 0) ? \"\".concat(Math.max(0, paging.start - paging.count)) : undefined,\n    // count is passed value, not the real count of items\n    nextPage: (paging.start + paging.count) < paging.total ? \"\".concat(paging.start + paging.count) : undefined,\n}",
@@ -516,10 +498,7 @@
                   "assignments": [
                     {
                       "kind": "Assignment",
-                      "key": [
-                        "result",
-                        "posts"
-                      ],
+                      "key": ["result", "posts"],
                       "value": {
                         "kind": "JessieExpression",
                         "expression": "body.elements.map(function (element) {\n    var content = element.specificContent['com.linkedin.ugc.ShareContent'] || { shareCommentary: {}, media: [] };\n    var attachmentType = undefined;\n    switch (content.shareMediaCategory) {\n        case 'IMAGE':\n            attachmentType = 'image';\n            break;\n        case 'VIDEO':\n            attachmentType = 'video';\n            break;\n        case 'ARTICLE':\n            attachmentType = 'link';\n            break;\n        case 'NONE': // text-only posts; reshared posts?\n        case 'URN_REFERENCE': // polls?\n        case 'NATIVE_DOCUMENT': // document attachment (PDF)\n            break;\n    }\n    var attachments = [];\n    if (attachmentType) {\n        attachments = content.media.map(function (media) {\n            var thumbnail = media.thumbnails && media.thumbnails[0] || {};\n            var videoUrl, duration, width, height;\n            if (attachmentType === 'video') {\n                var mediaElement = media['media~'] && media['media~'].elements.find(function (mediaEl) {\n                    return mediaEl.data['com.linkedin.digitalmedia.mediaartifact.AdaptiveStreamVideoWithAudio'] || mediaEl.data['com.linkedin.digitalmedia.mediaartifact.AdaptiveStreamVideo'];\n                });\n                if (mediaElement) {\n                    var artifact = mediaElement.data['com.linkedin.digitalmedia.mediaartifact.AdaptiveStreamVideoWithAudio'] || mediaElement.data['com.linkedin.digitalmedia.mediaartifact.AdaptiveStreamVideo'];\n                    width = artifact.videoStream.displaySize.width;\n                    height = artifact.videoStream.displaySize.height;\n                    duration = artifact.durationInMicroseconds / (1000 * 1000);\n                    videoUrl = mediaElement.identifiers[0].identifier;\n                }\n            }\n            var description = media.description && media.description.text;\n            var altText = (attachmentType === 'image') ? description : undefined;\n            return {\n                type: attachmentType,\n                url: videoUrl || media.originalUrl,\n                preview: thumbnail.url,\n                duration: duration,\n                width: width || thumbnail.width,\n                height: height || thumbnail.height,\n                title: media.title && media.title.text,\n                altText: altText,\n                description: description,\n            };\n        });\n    }\n    var post = {\n        id: element.id,\n        // FIXME: timestamp to ISO date\n        // createdAt: `${element.created.time}`,\n        url: \"https://www.linkedin.com/feed/update/\".concat(element.id),\n        text: content.shareCommentary.text,\n        attachments: attachments,\n    };\n    return post;\n})",
@@ -628,9 +607,7 @@
                     "fields": [
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "title"
-                        ],
+                        "key": ["title"],
                         "value": {
                           "kind": "PrimitiveLiteral",
                           "value": "Bad Request",
@@ -662,9 +639,7 @@
                       },
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "detail"
-                        ],
+                        "key": ["detail"],
                         "value": {
                           "kind": "JessieExpression",
                           "expression": "body.message",
@@ -751,9 +726,7 @@
                     "fields": [
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "title"
-                        ],
+                        "key": ["title"],
                         "value": {
                           "kind": "PrimitiveLiteral",
                           "value": "Unauthorized",
@@ -785,9 +758,7 @@
                       },
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "detail"
-                        ],
+                        "key": ["detail"],
                         "value": {
                           "kind": "JessieExpression",
                           "expression": "body.message",
@@ -874,9 +845,7 @@
                     "fields": [
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "title"
-                        ],
+                        "key": ["title"],
                         "value": {
                           "kind": "PrimitiveLiteral",
                           "value": "Forbidden",
@@ -908,9 +877,7 @@
                       },
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "detail"
-                        ],
+                        "key": ["detail"],
                         "value": {
                           "kind": "JessieExpression",
                           "expression": "body.message",
@@ -997,9 +964,7 @@
                     "fields": [
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "title"
-                        ],
+                        "key": ["title"],
                         "value": {
                           "kind": "PrimitiveLiteral",
                           "value": "Resource Not Found",
@@ -1031,9 +996,7 @@
                       },
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "detail"
-                        ],
+                        "key": ["detail"],
                         "value": {
                           "kind": "JessieExpression",
                           "expression": "body.message",

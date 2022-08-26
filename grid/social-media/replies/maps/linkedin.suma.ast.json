@@ -36,9 +36,7 @@
           "assignments": [
             {
               "kind": "Assignment",
-              "key": [
-                "count"
-              ],
+              "key": ["count"],
               "value": {
                 "kind": "PrimitiveLiteral",
                 "value": 10,
@@ -87,9 +85,7 @@
           "assignments": [
             {
               "kind": "Assignment",
-              "key": [
-                "inputPage"
-              ],
+              "key": ["inputPage"],
               "value": {
                 "kind": "JessieExpression",
                 "expression": "parseInt(input.page, 10)",
@@ -140,9 +136,7 @@
           "assignments": [
             {
               "kind": "Assignment",
-              "key": [
-                "start"
-              ],
+              "key": ["start"],
               "value": {
                 "kind": "JessieExpression",
                 "expression": "isNaN(inputPage) ? 0 : inputPage",
@@ -199,9 +193,7 @@
               "fields": [
                 {
                   "kind": "Assignment",
-                  "key": [
-                    "Authorization"
-                  ],
+                  "key": ["Authorization"],
                   "value": {
                     "kind": "JessieExpression",
                     "expression": "\"Bearer \".concat(parameters.accessToken)",
@@ -272,9 +264,7 @@
                   "assignments": [
                     {
                       "kind": "Assignment",
-                      "key": [
-                        "paging"
-                      ],
+                      "key": ["paging"],
                       "value": {
                         "kind": "JessieExpression",
                         "expression": "body.paging",
@@ -325,9 +315,7 @@
                   "assignments": [
                     {
                       "kind": "Assignment",
-                      "key": [
-                        "result"
-                      ],
+                      "key": ["result"],
                       "value": {
                         "kind": "JessieExpression",
                         "expression": "{\n    previousPage: (paging.start > 0) ? \"\".concat(Math.max(0, paging.start - paging.count)) : undefined,\n    // count is passed value, not the real count of items\n    nextPage: (paging.start + paging.count) < paging.total ? \"\".concat(paging.start + paging.count) : undefined,\n}",
@@ -378,10 +366,7 @@
                   "assignments": [
                     {
                       "kind": "Assignment",
-                      "key": [
-                        "result",
-                        "replies"
-                      ],
+                      "key": ["result", "replies"],
                       "value": {
                         "kind": "JessieExpression",
                         "expression": "body.elements.map(function (element) {\n    return {\n        id: element[\"$URN\"],\n        text: element.message.text,\n        createdAt: std.unstable.time.unixTimestampToIsoDate(element.created.time),\n        authorId: element.created.actor,\n        lastModifiedAt: std.unstable.time.unixTimestampToIsoDate(element.lastModified.time)\n    };\n})",

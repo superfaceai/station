@@ -42,9 +42,7 @@
               "fields": [
                 {
                   "kind": "Assignment",
-                  "key": [
-                    "search"
-                  ],
+                  "key": ["search"],
                   "value": {
                     "kind": "JessieExpression",
                     "expression": "input.characterName",
@@ -152,9 +150,7 @@
                     "fields": [
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "message"
-                        ],
+                        "key": ["message"],
                         "value": {
                           "kind": "PrimitiveLiteral",
                           "value": "No character found",
@@ -216,9 +212,7 @@
                   "assignments": [
                     {
                       "kind": "Assignment",
-                      "key": [
-                        "entries"
-                      ],
+                      "key": ["entries"],
                       "value": {
                         "kind": "JessieExpression",
                         "expression": "body.results.filter(function (result) { return result.name.toLowerCase() === input.characterName.toLowerCase(); })",
@@ -306,9 +300,7 @@
                     "fields": [
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "message"
-                        ],
+                        "key": ["message"],
                         "value": {
                           "kind": "PrimitiveLiteral",
                           "value": "Specified character name is incorrect, did you mean to enter one of following?",
@@ -340,9 +332,7 @@
                       },
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "characters"
-                        ],
+                        "key": ["characters"],
                         "value": {
                           "kind": "JessieExpression",
                           "expression": "body.results.map(function (result) { return result.name; })",
@@ -406,9 +396,7 @@
                   "assignments": [
                     {
                       "kind": "Assignment",
-                      "key": [
-                        "character"
-                      ],
+                      "key": ["character"],
                       "value": {
                         "kind": "JessieExpression",
                         "expression": "entries[0]",
@@ -463,9 +451,7 @@
                     "fields": [
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "height"
-                        ],
+                        "key": ["height"],
                         "value": {
                           "kind": "JessieExpression",
                           "expression": "character.height",
@@ -499,9 +485,7 @@
                       },
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "weight"
-                        ],
+                        "key": ["weight"],
                         "value": {
                           "kind": "JessieExpression",
                           "expression": "character.mass",
@@ -535,9 +519,7 @@
                       },
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "yearOfBirth"
-                        ],
+                        "key": ["yearOfBirth"],
                         "value": {
                           "kind": "JessieExpression",
                           "expression": "character.birth_year",

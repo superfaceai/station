@@ -73,9 +73,7 @@
             "fields": [
               {
                 "kind": "Assignment",
-                "key": [
-                  "title"
-                ],
+                "key": ["title"],
                 "value": {
                   "kind": "PrimitiveLiteral",
                   "value": "Missing field",
@@ -107,9 +105,7 @@
               },
               {
                 "kind": "Assignment",
-                "key": [
-                  "detail"
-                ],
+                "key": ["detail"],
                 "value": {
                   "kind": "PrimitiveLiteral",
                   "value": "ID is missing in input values",
@@ -171,9 +167,7 @@
           "assignments": [
             {
               "kind": "Assignment",
-              "key": [
-                "customProperties"
-              ],
+              "key": ["customProperties"],
               "value": {
                 "kind": "JessieExpression",
                 "expression": "input.customProperties || {}",
@@ -231,9 +225,7 @@
               "fields": [
                 {
                   "kind": "Assignment",
-                  "key": [
-                    "data"
-                  ],
+                  "key": ["data"],
                   "value": {
                     "kind": "JessieExpression",
                     "expression": "(function() {\nvar __assign = (this && this.__assign) || function () {\n    __assign = Object.assign || function(t) {\n        for (var s, i = 1, n = arguments.length; i < n; i++) {\n            s = arguments[i];\n            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))\n                t[p] = s[p];\n        }\n        return t;\n    };\n    return __assign.apply(this, arguments);\n};\nvar __jessieValue = {\n    $token: parameters.PROJECT_TOKEN,\n    $distinct_id: input.id,\n    $ip: customProperties.$ip,\n    $set: __assign({ $email: input.email, $phone: input.phone, $first_name: input.firstName, $last_name: input.lastName, $country_code: input.country, Company: input.company }, customProperties),\n};\nreturn __jessieValue;\n})()",
@@ -340,9 +332,7 @@
                     "fields": [
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "id"
-                        ],
+                        "key": ["id"],
                         "value": {
                           "kind": "JessieExpression",
                           "expression": "input.id",
@@ -410,9 +400,7 @@
                     "fields": [
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "title"
-                        ],
+                        "key": ["title"],
                         "value": {
                           "kind": "PrimitiveLiteral",
                           "value": "Invalid Data",
@@ -496,9 +484,7 @@
                     "fields": [
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "title"
-                        ],
+                        "key": ["title"],
                         "value": {
                           "kind": "PrimitiveLiteral",
                           "value": "Unauthorized",
@@ -530,9 +516,7 @@
                       },
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "detail"
-                        ],
+                        "key": ["detail"],
                         "value": {
                           "kind": "JessieExpression",
                           "expression": "body.error",
@@ -618,9 +602,7 @@
                     "fields": [
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "title"
-                        ],
+                        "key": ["title"],
                         "value": {
                           "kind": "PrimitiveLiteral",
                           "value": "Forbidden",
@@ -652,9 +634,7 @@
                       },
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "detail"
-                        ],
+                        "key": ["detail"],
                         "value": {
                           "kind": "JessieExpression",
                           "expression": "body.error",
@@ -769,9 +749,7 @@
             "fields": [
               {
                 "kind": "Assignment",
-                "key": [
-                  "title"
-                ],
+                "key": ["title"],
                 "value": {
                   "kind": "PrimitiveLiteral",
                   "value": "Not supported",
@@ -803,9 +781,7 @@
               },
               {
                 "kind": "Assignment",
-                "key": [
-                  "detail"
-                ],
+                "key": ["detail"],
                 "value": {
                   "kind": "PrimitiveLiteral",
                   "value": "Use Update usecase instead",
@@ -890,9 +866,7 @@
             "fields": [
               {
                 "kind": "Assignment",
-                "key": [
-                  "title"
-                ],
+                "key": ["title"],
                 "value": {
                   "kind": "PrimitiveLiteral",
                   "value": "Not supported",
@@ -924,9 +898,7 @@
               },
               {
                 "kind": "Assignment",
-                "key": [
-                  "detail"
-                ],
+                "key": ["detail"],
                 "value": {
                   "kind": "PrimitiveLiteral",
                   "value": "This usecase is not supported",

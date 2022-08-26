@@ -36,9 +36,7 @@
           "assignments": [
             {
               "kind": "Assignment",
-              "key": [
-                "owner"
-              ],
+              "key": ["owner"],
               "value": {
                 "kind": "JessieExpression",
                 "expression": "input.owner",
@@ -89,9 +87,7 @@
           "assignments": [
             {
               "kind": "Assignment",
-              "key": [
-                "repo"
-              ],
+              "key": ["repo"],
               "value": {
                 "kind": "JessieExpression",
                 "expression": "input.repository",
@@ -142,9 +138,7 @@
           "assignments": [
             {
               "kind": "Assignment",
-              "key": [
-                "path"
-              ],
+              "key": ["path"],
               "value": {
                 "kind": "JessieExpression",
                 "expression": "input.path || ''",
@@ -195,9 +189,7 @@
           "assignments": [
             {
               "kind": "Assignment",
-              "key": [
-                "ref"
-              ],
+              "key": ["ref"],
               "value": {
                 "kind": "JessieExpression",
                 "expression": "input.reference",
@@ -248,9 +240,7 @@
           "assignments": [
             {
               "kind": "Assignment",
-              "key": [
-                "parts"
-              ],
+              "key": ["parts"],
               "value": {
                 "kind": "JessieExpression",
                 "expression": "undefined",
@@ -334,9 +324,7 @@
           "assignments": [
             {
               "kind": "Assignment",
-              "key": [
-                "parts"
-              ],
+              "key": ["parts"],
               "value": {
                 "kind": "JessieExpression",
                 "expression": "repo.split('/')",
@@ -420,9 +408,7 @@
           "assignments": [
             {
               "kind": "Assignment",
-              "key": [
-                "owner"
-              ],
+              "key": ["owner"],
               "value": {
                 "kind": "JessieExpression",
                 "expression": "parts[0]",
@@ -456,9 +442,7 @@
             },
             {
               "kind": "Assignment",
-              "key": [
-                "repo"
-              ],
+              "key": ["repo"],
               "value": {
                 "kind": "JessieExpression",
                 "expression": "parts[1]",
@@ -546,9 +530,7 @@
             "fields": [
               {
                 "kind": "Assignment",
-                "key": [
-                  "message"
-                ],
+                "key": ["message"],
                 "value": {
                   "kind": "PrimitiveLiteral",
                   "value": "Missing owner",
@@ -580,9 +562,7 @@
               },
               {
                 "kind": "Assignment",
-                "key": [
-                  "detail"
-                ],
+                "key": ["detail"],
                 "value": {
                   "kind": "PrimitiveLiteral",
                   "value": "Either specify 'owner', or include the owner in the 'repository' (e.g. 'octocat/hello-world')",
@@ -650,9 +630,7 @@
               "fields": [
                 {
                   "kind": "Assignment",
-                  "key": [
-                    "ref"
-                  ],
+                  "key": ["ref"],
                   "value": {
                     "kind": "JessieExpression",
                     "expression": "ref",
@@ -723,9 +701,7 @@
                   "assignments": [
                     {
                       "kind": "Assignment",
-                      "key": [
-                        "entries"
-                      ],
+                      "key": ["entries"],
                       "value": {
                         "kind": "JessieExpression",
                         "expression": "Array.isArray(body) ? body : [body]",
@@ -776,9 +752,7 @@
                   "assignments": [
                     {
                       "kind": "Assignment",
-                      "key": [
-                        "mappedEntries"
-                      ],
+                      "key": ["mappedEntries"],
                       "value": {
                         "kind": "JessieExpression",
                         "expression": "entries.map(function (entry) {\n    // NOTE: Submodules are exposed as files with size = 0\n    var type = entry.type === 'dir' ? 'directory' : entry.type;\n    return {\n        name: entry.name,\n        path: entry.path,\n        type: type,\n        size: type === 'directory' ? undefined : entry.size,\n        rawUrl: entry.download_url ? entry.download_url : undefined,\n    };\n})",
@@ -833,9 +807,7 @@
                     "fields": [
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "entries"
-                        ],
+                        "key": ["entries"],
                         "value": {
                           "kind": "JessieExpression",
                           "expression": "mappedEntries",
@@ -921,9 +893,7 @@
                     "fields": [
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "message"
-                        ],
+                        "key": ["message"],
                         "value": {
                           "kind": "JessieExpression",
                           "expression": "body.message ? body.message : \"Unknown error, status code: \".concat(statusCode)",
@@ -957,9 +927,7 @@
                       },
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "detail"
-                        ],
+                        "key": ["detail"],
                         "value": {
                           "kind": "JessieExpression",
                           "expression": "body.documentation_url",

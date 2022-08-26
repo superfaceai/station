@@ -36,9 +36,7 @@
           "assignments": [
             {
               "kind": "Assignment",
-              "key": [
-                "contentEntities"
-              ],
+              "key": ["contentEntities"],
               "value": {
                 "kind": "JessieExpression",
                 "expression": "input.link ? [\n    { entityLocation: input.link }\n] : []",
@@ -72,9 +70,7 @@
             },
             {
               "kind": "Assignment",
-              "key": [
-                "media"
-              ],
+              "key": ["media"],
               "value": {
                 "kind": "JessieExpression",
                 "expression": "Array.isArray(input.media) ? input.media : []",
@@ -108,9 +104,7 @@
             },
             {
               "kind": "Assignment",
-              "key": [
-                "text"
-              ],
+              "key": ["text"],
               "value": {
                 "kind": "JessieExpression",
                 "expression": "input.text",
@@ -144,9 +138,7 @@
             },
             {
               "kind": "Assignment",
-              "key": [
-                "shareMediaCategory"
-              ],
+              "key": ["shareMediaCategory"],
               "value": {
                 "kind": "JessieExpression",
                 "expression": "undefined",
@@ -197,9 +189,7 @@
           "assignments": [
             {
               "kind": "Assignment",
-              "key": [
-                "assets"
-              ],
+              "key": ["assets"],
               "value": {
                 "kind": "InlineCall",
                 "iteration": {
@@ -240,9 +230,7 @@
                 "arguments": [
                   {
                     "kind": "Assignment",
-                    "key": [
-                      "media"
-                    ],
+                    "key": ["media"],
                     "value": {
                       "kind": "JessieExpression",
                       "expression": "input.media",
@@ -276,9 +264,7 @@
                   },
                   {
                     "kind": "Assignment",
-                    "key": [
-                      "index"
-                    ],
+                    "key": ["index"],
                     "value": {
                       "kind": "JessieExpression",
                       "expression": "index",
@@ -312,9 +298,7 @@
                   },
                   {
                     "kind": "Assignment",
-                    "key": [
-                      "accessToken"
-                    ],
+                    "key": ["accessToken"],
                     "value": {
                       "kind": "JessieExpression",
                       "expression": "parameters.accessToken",
@@ -348,9 +332,7 @@
                   },
                   {
                     "kind": "Assignment",
-                    "key": [
-                      "profileId"
-                    ],
+                    "key": ["profileId"],
                     "value": {
                       "kind": "JessieExpression",
                       "expression": "input.profileId",
@@ -461,9 +443,7 @@
           "assignments": [
             {
               "kind": "Assignment",
-              "key": [
-                "contentEntities"
-              ],
+              "key": ["contentEntities"],
               "value": {
                 "kind": "JessieExpression",
                 "expression": "assets",
@@ -497,9 +477,7 @@
             },
             {
               "kind": "Assignment",
-              "key": [
-                "text"
-              ],
+              "key": ["text"],
               "value": {
                 "kind": "JessieExpression",
                 "expression": "input.link ? \"\".concat(text || '', \" \").concat(input.link).trim() : text",
@@ -533,9 +511,7 @@
             },
             {
               "kind": "Assignment",
-              "key": [
-                "shareMediaCategory"
-              ],
+              "key": ["shareMediaCategory"],
               "value": {
                 "kind": "PrimitiveLiteral",
                 "value": "IMAGE",
@@ -591,9 +567,7 @@
               "fields": [
                 {
                   "kind": "Assignment",
-                  "key": [
-                    "Authorization"
-                  ],
+                  "key": ["Authorization"],
                   "value": {
                     "kind": "JessieExpression",
                     "expression": "\"Bearer \".concat(parameters.accessToken)",
@@ -644,9 +618,7 @@
               "fields": [
                 {
                   "kind": "Assignment",
-                  "key": [
-                    "owner"
-                  ],
+                  "key": ["owner"],
                   "value": {
                     "kind": "JessieExpression",
                     "expression": "input.profileId",
@@ -680,9 +652,7 @@
                 },
                 {
                   "kind": "Assignment",
-                  "key": [
-                    "text"
-                  ],
+                  "key": ["text"],
                   "value": {
                     "kind": "JessieExpression",
                     "expression": "text ? { text: text } : undefined",
@@ -716,9 +686,7 @@
                 },
                 {
                   "kind": "Assignment",
-                  "key": [
-                    "distribution"
-                  ],
+                  "key": ["distribution"],
                   "value": {
                     "kind": "JessieExpression",
                     "expression": "{ linkedInDistributionTarget: {} }",
@@ -752,9 +720,7 @@
                 },
                 {
                   "kind": "Assignment",
-                  "key": [
-                    "content"
-                  ],
+                  "key": ["content"],
                   "value": {
                     "kind": "JessieExpression",
                     "expression": "contentEntities.length > 0 ? { contentEntities: contentEntities, shareMediaCategory: shareMediaCategory } : undefined",
@@ -825,9 +791,7 @@
                   "assignments": [
                     {
                       "kind": "Assignment",
-                      "key": [
-                        "urn"
-                      ],
+                      "key": ["urn"],
                       "value": {
                         "kind": "JessieExpression",
                         "expression": "\"urn:li:share:\".concat(body.id)",
@@ -878,9 +842,7 @@
                   "assignments": [
                     {
                       "kind": "Assignment",
-                      "key": [
-                        "activityId"
-                      ],
+                      "key": ["activityId"],
                       "value": {
                         "kind": "JessieExpression",
                         "expression": "body.activity",
@@ -935,9 +897,7 @@
                     "fields": [
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "postId"
-                        ],
+                        "key": ["postId"],
                         "value": {
                           "kind": "JessieExpression",
                           "expression": "urn",
@@ -971,9 +931,7 @@
                       },
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "url"
-                        ],
+                        "key": ["url"],
                         "value": {
                           "kind": "JessieExpression",
                           "expression": "\"https://www.linkedin.com/feed/update/\".concat(activityId)",
@@ -1054,18 +1012,14 @@
                   "assignments": [
                     {
                       "kind": "Assignment",
-                      "key": [
-                        "error"
-                      ],
+                      "key": ["error"],
                       "value": {
                         "kind": "InlineCall",
                         "operationName": "MapError",
                         "arguments": [
                           {
                             "kind": "Assignment",
-                            "key": [
-                              "statusCode"
-                            ],
+                            "key": ["statusCode"],
                             "value": {
                               "kind": "JessieExpression",
                               "expression": "statusCode",
@@ -1099,9 +1053,7 @@
                           },
                           {
                             "kind": "Assignment",
-                            "key": [
-                              "body"
-                            ],
+                            "key": ["body"],
                             "value": {
                               "kind": "JessieExpression",
                               "expression": "body",
@@ -1276,9 +1228,7 @@
           "assignments": [
             {
               "kind": "Assignment",
-              "key": [
-                "mediaItem"
-              ],
+              "key": ["mediaItem"],
               "value": {
                 "kind": "JessieExpression",
                 "expression": "args.media[args.index]",
@@ -1329,9 +1279,7 @@
           "assignments": [
             {
               "kind": "Assignment",
-              "key": [
-                "uploadPath"
-              ],
+              "key": ["uploadPath"],
               "value": {
                 "kind": "JessieExpression",
                 "expression": "undefined",
@@ -1365,9 +1313,7 @@
             },
             {
               "kind": "Assignment",
-              "key": [
-                "uploadHeaders"
-              ],
+              "key": ["uploadHeaders"],
               "value": {
                 "kind": "JessieExpression",
                 "expression": "{}",
@@ -1401,9 +1347,7 @@
             },
             {
               "kind": "Assignment",
-              "key": [
-                "assetUrn"
-              ],
+              "key": ["assetUrn"],
               "value": {
                 "kind": "JessieExpression",
                 "expression": "undefined",
@@ -1460,9 +1404,7 @@
               "fields": [
                 {
                   "kind": "Assignment",
-                  "key": [
-                    "action"
-                  ],
+                  "key": ["action"],
                   "value": {
                     "kind": "PrimitiveLiteral",
                     "value": "registerUpload",
@@ -1511,9 +1453,7 @@
               "fields": [
                 {
                   "kind": "Assignment",
-                  "key": [
-                    "Authorization"
-                  ],
+                  "key": ["Authorization"],
                   "value": {
                     "kind": "JessieExpression",
                     "expression": "\"Bearer \".concat(args.accessToken)",
@@ -1564,9 +1504,7 @@
               "fields": [
                 {
                   "kind": "Assignment",
-                  "key": [
-                    "registerUploadRequest"
-                  ],
+                  "key": ["registerUploadRequest"],
                   "value": {
                     "kind": "JessieExpression",
                     "expression": "{\n    owner: args.profileId,\n    supportedUploadMechanism: [\"SYNCHRONOUS_UPLOAD\"],\n    recipes: [\n        \"urn:li:digitalmediaRecipe:feedshare-image\",\n    ],\n    serviceRelationships: [\n        {\n            identifier: \"urn:li:userGeneratedContent\",\n            relationshipType: \"OWNER\",\n        },\n    ]\n}",
@@ -1637,9 +1575,7 @@
                   "assignments": [
                     {
                       "kind": "Assignment",
-                      "key": [
-                        "uploadRequest"
-                      ],
+                      "key": ["uploadRequest"],
                       "value": {
                         "kind": "JessieExpression",
                         "expression": "body.value.uploadMechanism['com.linkedin.digitalmedia.uploading.MediaUploadHttpRequest']",
@@ -1690,9 +1626,7 @@
                   "assignments": [
                     {
                       "kind": "Assignment",
-                      "key": [
-                        "uploadPath"
-                      ],
+                      "key": ["uploadPath"],
                       "value": {
                         "kind": "JessieExpression",
                         "expression": "uploadRequest.uploadUrl.replace('https://api.linkedin.com/', '')",
@@ -1743,9 +1677,7 @@
                   "assignments": [
                     {
                       "kind": "Assignment",
-                      "key": [
-                        "uploadHeaders"
-                      ],
+                      "key": ["uploadHeaders"],
                       "value": {
                         "kind": "JessieExpression",
                         "expression": "uploadRequest.headers",
@@ -1796,9 +1728,7 @@
                   "assignments": [
                     {
                       "kind": "Assignment",
-                      "key": [
-                        "assetUrn"
-                      ],
+                      "key": ["assetUrn"],
                       "value": {
                         "kind": "JessieExpression",
                         "expression": "body.value.asset",
@@ -1866,18 +1796,14 @@
                   "assignments": [
                     {
                       "kind": "Assignment",
-                      "key": [
-                        "error"
-                      ],
+                      "key": ["error"],
                       "value": {
                         "kind": "InlineCall",
                         "operationName": "MapError",
                         "arguments": [
                           {
                             "kind": "Assignment",
-                            "key": [
-                              "statusCode"
-                            ],
+                            "key": ["statusCode"],
                             "value": {
                               "kind": "JessieExpression",
                               "expression": "statusCode",
@@ -1911,9 +1837,7 @@
                           },
                           {
                             "kind": "Assignment",
-                            "key": [
-                              "body"
-                            ],
+                            "key": ["body"],
                             "value": {
                               "kind": "JessieExpression",
                               "expression": "body",
@@ -2061,9 +1985,7 @@
               "fields": [
                 {
                   "kind": "Assignment",
-                  "key": [
-                    "Authorization"
-                  ],
+                  "key": ["Authorization"],
                   "value": {
                     "kind": "JessieExpression",
                     "expression": "\"Bearer \".concat(args.accessToken)",
@@ -2155,9 +2077,7 @@
                     "fields": [
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "entity"
-                        ],
+                        "key": ["entity"],
                         "value": {
                           "kind": "JessieExpression",
                           "expression": "assetUrn",
@@ -2243,9 +2163,7 @@
                     "fields": [
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "title"
-                        ],
+                        "key": ["title"],
                         "value": {
                           "kind": "PrimitiveLiteral",
                           "value": "Bad Request",
@@ -2277,9 +2195,7 @@
                       },
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "detail"
-                        ],
+                        "key": ["detail"],
                         "value": {
                           "kind": "PrimitiveLiteral",
                           "value": "Media upload resulted in Bad Request error.",
@@ -2363,9 +2279,7 @@
                     "fields": [
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "title"
-                        ],
+                        "key": ["title"],
                         "value": {
                           "kind": "PrimitiveLiteral",
                           "value": "Unauthorized",
@@ -2397,9 +2311,7 @@
                       },
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "detail"
-                        ],
+                        "key": ["detail"],
                         "value": {
                           "kind": "PrimitiveLiteral",
                           "value": "Media upload resulted in Unauthorized error. The access token is either invalid, or expired.",
@@ -2507,9 +2419,7 @@
           "assignments": [
             {
               "kind": "Assignment",
-              "key": [
-                "statusCode"
-              ],
+              "key": ["statusCode"],
               "value": {
                 "kind": "JessieExpression",
                 "expression": "args.statusCode",
@@ -2560,9 +2470,7 @@
           "assignments": [
             {
               "kind": "Assignment",
-              "key": [
-                "title"
-              ],
+              "key": ["title"],
               "value": {
                 "kind": "JessieExpression",
                 "expression": "\"Unknown response: HTTP \".concat(statusCode)",
@@ -2613,9 +2521,7 @@
           "assignments": [
             {
               "kind": "Assignment",
-              "key": [
-                "body"
-              ],
+              "key": ["body"],
               "value": {
                 "kind": "JessieExpression",
                 "expression": "args.body",
@@ -2666,9 +2572,7 @@
           "assignments": [
             {
               "kind": "Assignment",
-              "key": [
-                "detail"
-              ],
+              "key": ["detail"],
               "value": {
                 "kind": "JessieExpression",
                 "expression": "body.message",
@@ -2752,9 +2656,7 @@
           "assignments": [
             {
               "kind": "Assignment",
-              "key": [
-                "title"
-              ],
+              "key": ["title"],
               "value": {
                 "kind": "PrimitiveLiteral",
                 "value": "Bad Request",
@@ -2836,9 +2738,7 @@
           "assignments": [
             {
               "kind": "Assignment",
-              "key": [
-                "title"
-              ],
+              "key": ["title"],
               "value": {
                 "kind": "PrimitiveLiteral",
                 "value": "Unauthorized",
@@ -2920,9 +2820,7 @@
           "assignments": [
             {
               "kind": "Assignment",
-              "key": [
-                "title"
-              ],
+              "key": ["title"],
               "value": {
                 "kind": "PrimitiveLiteral",
                 "value": "Forbidden",
@@ -3004,9 +2902,7 @@
           "assignments": [
             {
               "kind": "Assignment",
-              "key": [
-                "title"
-              ],
+              "key": ["title"],
               "value": {
                 "kind": "PrimitiveLiteral",
                 "value": "Not Found",
@@ -3088,9 +2984,7 @@
           "assignments": [
             {
               "kind": "Assignment",
-              "key": [
-                "title"
-              ],
+              "key": ["title"],
               "value": {
                 "kind": "PrimitiveLiteral",
                 "value": "Conflict",
@@ -3172,9 +3066,7 @@
           "assignments": [
             {
               "kind": "Assignment",
-              "key": [
-                "title"
-              ],
+              "key": ["title"],
               "value": {
                 "kind": "PrimitiveLiteral",
                 "value": "Too Many Requests",
@@ -3256,9 +3148,7 @@
           "assignments": [
             {
               "kind": "Assignment",
-              "key": [
-                "title"
-              ],
+              "key": ["title"],
               "value": {
                 "kind": "PrimitiveLiteral",
                 "value": "Server Error",
@@ -3311,9 +3201,7 @@
             "fields": [
               {
                 "kind": "Assignment",
-                "key": [
-                  "title"
-                ],
+                "key": ["title"],
                 "value": {
                   "kind": "JessieExpression",
                   "expression": "title",
@@ -3347,9 +3235,7 @@
               },
               {
                 "kind": "Assignment",
-                "key": [
-                  "detail"
-                ],
+                "key": ["detail"],
                 "value": {
                   "kind": "JessieExpression",
                   "expression": "detail",
@@ -3383,9 +3269,7 @@
               },
               {
                 "kind": "Assignment",
-                "key": [
-                  "original"
-                ],
+                "key": ["original"],
                 "value": {
                   "kind": "JessieExpression",
                   "expression": "body",

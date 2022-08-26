@@ -43,9 +43,7 @@
               "fields": [
                 {
                   "kind": "Assignment",
-                  "key": [
-                    "to"
-                  ],
+                  "key": ["to"],
                   "value": {
                     "kind": "JessieExpression",
                     "expression": "input.to",
@@ -79,9 +77,7 @@
                 },
                 {
                   "kind": "Assignment",
-                  "key": [
-                    "channels"
-                  ],
+                  "key": ["channels"],
                   "value": {
                     "kind": "JessieExpression",
                     "expression": "['sms']",
@@ -115,10 +111,7 @@
                 },
                 {
                   "kind": "Assignment",
-                  "key": [
-                    "sms",
-                    "from"
-                  ],
+                  "key": ["sms", "from"],
                   "value": {
                     "kind": "JessieExpression",
                     "expression": "input.from",
@@ -152,10 +145,7 @@
                 },
                 {
                   "kind": "Assignment",
-                  "key": [
-                    "sms",
-                    "contentType"
-                  ],
+                  "key": ["sms", "contentType"],
                   "value": {
                     "kind": "PrimitiveLiteral",
                     "value": "text",
@@ -187,10 +177,7 @@
                 },
                 {
                   "kind": "Assignment",
-                  "key": [
-                    "sms",
-                    "text"
-                  ],
+                  "key": ["sms", "text"],
                   "value": {
                     "kind": "JessieExpression",
                     "expression": "input.text",
@@ -269,9 +256,7 @@
                     "fields": [
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "messageId"
-                        ],
+                        "key": ["messageId"],
                         "value": {
                           "kind": "JessieExpression",
                           "expression": "body.messageId",
@@ -382,9 +367,7 @@
           "assignments": [
             {
               "kind": "Assignment",
-              "key": [
-                "messageId"
-              ],
+              "key": ["messageId"],
               "value": {
                 "kind": "JessieExpression",
                 "expression": "input.messageId",
@@ -502,9 +485,7 @@
                     "fields": [
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "title"
-                        ],
+                        "key": ["title"],
                         "value": {
                           "kind": "PrimitiveLiteral",
                           "value": "History not available",
@@ -566,9 +547,7 @@
                   "assignments": [
                     {
                       "kind": "Assignment",
-                      "key": [
-                        "latestState"
-                      ],
+                      "key": ["latestState"],
                       "value": {
                         "kind": "JessieExpression",
                         "expression": "body.history[body.history.length - 1].state",
@@ -619,9 +598,7 @@
                   "assignments": [
                     {
                       "kind": "Assignment",
-                      "key": [
-                        "latestState"
-                      ],
+                      "key": ["latestState"],
                       "value": {
                         "kind": "JessieExpression",
                         "expression": "(function () {\n    switch (latestState) {\n        case 'message-routing-success':\n        case 'message-accepted':\n            return 'accepted';\n        default:\n            return 'unknown';\n    }\n})()",
@@ -676,9 +653,7 @@
                     "fields": [
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "deliveryStatus"
-                        ],
+                        "key": ["deliveryStatus"],
                         "value": {
                           "kind": "JessieExpression",
                           "expression": "latestState",

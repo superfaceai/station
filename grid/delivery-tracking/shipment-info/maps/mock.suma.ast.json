@@ -36,9 +36,7 @@
           "assignments": [
             {
               "kind": "Assignment",
-              "key": [
-                "trackingNumber"
-              ],
+              "key": ["trackingNumber"],
               "value": {
                 "kind": "JessieExpression",
                 "expression": "input.trackingNumber",
@@ -89,9 +87,7 @@
           "assignments": [
             {
               "kind": "Assignment",
-              "key": [
-                "transitStatus"
-              ],
+              "key": ["transitStatus"],
               "value": {
                 "kind": "PrimitiveLiteral",
                 "value": "transit",
@@ -140,9 +136,7 @@
           "assignments": [
             {
               "kind": "Assignment",
-              "key": [
-                "preTransitStatus"
-              ],
+              "key": ["preTransitStatus"],
               "value": {
                 "kind": "PrimitiveLiteral",
                 "value": "pre_transit",
@@ -191,9 +185,7 @@
           "assignments": [
             {
               "kind": "Assignment",
-              "key": [
-                "shipments"
-              ],
+              "key": ["shipments"],
               "value": {
                 "kind": "JessieExpression",
                 "expression": "[{\n        carrier: 'Mocked carrier',\n        trackingNumber: trackingNumber,\n        origin: {\n            address: {\n                countryCode: 'US',\n                postalCode: '94103',\n                addressLocality: 'San Francisco'\n            }\n        },\n        destination: {\n            address: {\n                countryCode: 'US',\n                postalCode: '60611',\n                addressLocality: 'Chicago'\n            }\n        },\n        status: {\n            timestamp: '2021-05-04T22:49:23.204Z',\n            statusCode: transitStatus,\n            statusText: 'Your shipment has departed from the origin.',\n            location: {\n                address: {\n                    countryCode: 'US',\n                    postalCode: '94103',\n                    addressLocality: 'San Francisco'\n                }\n            }\n        },\n        events: [\n            {\n                timestamp: '2021-05-04T22:49:23.204Z',\n                statusCode: transitStatus,\n                statusText: 'Your shipment has departed from the origin.',\n                location: {\n                    address: {\n                        countryCode: 'US',\n                        postalCode: '94103',\n                        addressLocality: 'San Francisco'\n                    }\n                }\n            },\n            {\n                timestamp: '2021-05-03T18:49:23.204Z',\n                statusCode: preTransitStatus,\n                statusText: 'The carrier has received the electronic shipment information.'\n            }\n        ],\n        estimatedDeliveryDate: '2021-05-11T05:44:01.431Z'\n    }]",

@@ -2,6 +2,7 @@
 
 import { RecordingProcessOptions, SuperfaceTest } from '@superfaceai/testing';
 import * as fs from 'fs/promises';
+
 import { nockConfig } from '../../../test-config';
 
 export const speechToTextRecognitionTest = (

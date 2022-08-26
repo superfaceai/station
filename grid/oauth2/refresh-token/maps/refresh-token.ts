@@ -6,6 +6,7 @@ import {
   SuperfaceTest,
   TestingReturn,
 } from '@superfaceai/testing';
+
 import { nockConfig } from '../../../test-config';
 
 type UseCaseInput = {

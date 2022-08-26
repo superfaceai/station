@@ -42,9 +42,7 @@
               "fields": [
                 {
                   "kind": "Assignment",
-                  "key": [
-                    "template_name"
-                  ],
+                  "key": ["template_name"],
                   "value": {
                     "kind": "JessieExpression",
                     "expression": "input.templateId",
@@ -78,9 +76,7 @@
                 },
                 {
                   "kind": "Assignment",
-                  "key": [
-                    "template_content"
-                  ],
+                  "key": ["template_content"],
                   "value": {
                     "kind": "JessieExpression",
                     "expression": "Object.entries(input.templateData || {}).map(function (_a) {\n    var name = _a[0], content = _a[1];\n    return ({ name: name, content: content });\n})",
@@ -114,9 +110,7 @@
                 },
                 {
                   "kind": "Assignment",
-                  "key": [
-                    "message"
-                  ],
+                  "key": ["message"],
                   "value": {
                     "kind": "JessieExpression",
                     "expression": "{\n    from_email: input.from,\n    to: [\n        {\n            email: input.to,\n            type: \"to\"\n        }\n    ]\n}",
@@ -227,9 +221,7 @@
                     "fields": [
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "messageId"
-                        ],
+                        "key": ["messageId"],
                         "value": {
                           "kind": "JessieExpression",
                           "expression": "body[0]._id",
@@ -330,9 +322,7 @@
                     "fields": [
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "title"
-                        ],
+                        "key": ["title"],
                         "value": {
                           "kind": "PrimitiveLiteral",
                           "value": "Send Email Failed",
@@ -364,9 +354,7 @@
                       },
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "detail"
-                        ],
+                        "key": ["detail"],
                         "value": {
                           "kind": "JessieExpression",
                           "expression": "(\"\".concat(body[0].status, \": \").concat(body[0].reject_reason))",
@@ -485,9 +473,7 @@
                     "fields": [
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "title"
-                        ],
+                        "key": ["title"],
                         "value": {
                           "kind": "PrimitiveLiteral",
                           "value": "Internal server Error",
@@ -586,9 +572,7 @@
                     "fields": [
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "title"
-                        ],
+                        "key": ["title"],
                         "value": {
                           "kind": "PrimitiveLiteral",
                           "value": "Invalid inputs",
@@ -620,9 +604,7 @@
                       },
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "detail"
-                        ],
+                        "key": ["detail"],
                         "value": {
                           "kind": "JessieExpression",
                           "expression": "body.message",
@@ -723,9 +705,7 @@
                     "fields": [
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "title"
-                        ],
+                        "key": ["title"],
                         "value": {
                           "kind": "PrimitiveLiteral",
                           "value": "Unauthorized",
@@ -757,9 +737,7 @@
                       },
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "detail"
-                        ],
+                        "key": ["detail"],
                         "value": {
                           "kind": "PrimitiveLiteral",
                           "value": "Invalid key",

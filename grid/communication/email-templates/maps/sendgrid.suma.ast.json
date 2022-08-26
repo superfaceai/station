@@ -42,9 +42,7 @@
               "fields": [
                 {
                   "kind": "Assignment",
-                  "key": [
-                    "generations"
-                  ],
+                  "key": ["generations"],
                   "value": {
                     "kind": "PrimitiveLiteral",
                     "value": "legacy,dynamic",
@@ -76,9 +74,7 @@
                 },
                 {
                   "kind": "Assignment",
-                  "key": [
-                    "page_size"
-                  ],
+                  "key": ["page_size"],
                   "value": {
                     "kind": "PrimitiveLiteral",
                     "value": 200,
@@ -249,9 +245,7 @@
           "assignments": [
             {
               "kind": "Assignment",
-              "key": [
-                "inputId"
-              ],
+              "key": ["inputId"],
               "value": {
                 "kind": "JessieExpression",
                 "expression": "\"\".concat(input.id)",
@@ -332,9 +326,7 @@
                   "assignments": [
                     {
                       "kind": "Assignment",
-                      "key": [
-                        "activeTemplate"
-                      ],
+                      "key": ["activeTemplate"],
                       "value": {
                         "kind": "JessieExpression",
                         "expression": "body.versions.filter(function (version) { return version.active === 1; })[0]",
@@ -422,9 +414,7 @@
                     "fields": [
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "subject"
-                        ],
+                        "key": ["subject"],
                         "value": {
                           "kind": "JessieExpression",
                           "expression": "activeTemplate.subject",
@@ -458,9 +448,7 @@
                       },
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "text"
-                        ],
+                        "key": ["text"],
                         "value": {
                           "kind": "JessieExpression",
                           "expression": "activeTemplate.plain_content",
@@ -494,9 +482,7 @@
                       },
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "html"
-                        ],
+                        "key": ["html"],
                         "value": {
                           "kind": "JessieExpression",
                           "expression": "activeTemplate.html_content",
@@ -607,18 +593,14 @@
           "assignments": [
             {
               "kind": "Assignment",
-              "key": [
-                "template"
-              ],
+              "key": ["template"],
               "value": {
                 "kind": "InlineCall",
                 "operationName": "CreateTemplateCall",
                 "arguments": [
                   {
                     "kind": "Assignment",
-                    "key": [
-                      "name"
-                    ],
+                    "key": ["name"],
                     "value": {
                       "kind": "JessieExpression",
                       "expression": "input.name",
@@ -696,18 +678,14 @@
           "assignments": [
             {
               "kind": "Assignment",
-              "key": [
-                "templateVersion"
-              ],
+              "key": ["templateVersion"],
               "value": {
                 "kind": "InlineCall",
                 "operationName": "CreateTemplateVersionCall",
                 "arguments": [
                   {
                     "kind": "Assignment",
-                    "key": [
-                      "templateId"
-                    ],
+                    "key": ["templateId"],
                     "value": {
                       "kind": "JessieExpression",
                       "expression": "template.id",
@@ -741,9 +719,7 @@
                   },
                   {
                     "kind": "Assignment",
-                    "key": [
-                      "subject"
-                    ],
+                    "key": ["subject"],
                     "value": {
                       "kind": "JessieExpression",
                       "expression": "input.subject",
@@ -777,9 +753,7 @@
                   },
                   {
                     "kind": "Assignment",
-                    "key": [
-                      "text"
-                    ],
+                    "key": ["text"],
                     "value": {
                       "kind": "JessieExpression",
                       "expression": "input.text",
@@ -813,9 +787,7 @@
                   },
                   {
                     "kind": "Assignment",
-                    "key": [
-                      "html"
-                    ],
+                    "key": ["html"],
                     "value": {
                       "kind": "JessieExpression",
                       "expression": "input.html",
@@ -897,9 +869,7 @@
             "fields": [
               {
                 "kind": "Assignment",
-                "key": [
-                  "id"
-                ],
+                "key": ["id"],
                 "value": {
                   "kind": "JessieExpression",
                   "expression": "template.id",
@@ -933,9 +903,7 @@
               },
               {
                 "kind": "Assignment",
-                "key": [
-                  "name"
-                ],
+                "key": ["name"],
                 "value": {
                   "kind": "JessieExpression",
                   "expression": "template.name",
@@ -1018,18 +986,14 @@
           "assignments": [
             {
               "kind": "Assignment",
-              "key": [
-                "template"
-              ],
+              "key": ["template"],
               "value": {
                 "kind": "InlineCall",
                 "operationName": "FetchTemplateCall",
                 "arguments": [
                   {
                     "kind": "Assignment",
-                    "key": [
-                      "templateId"
-                    ],
+                    "key": ["templateId"],
                     "value": {
                       "kind": "JessieExpression",
                       "expression": "input.id",
@@ -1107,9 +1071,7 @@
           "assignments": [
             {
               "kind": "Assignment",
-              "key": [
-                "template"
-              ],
+              "key": ["template"],
               "value": {
                 "kind": "InlineCall",
                 "condition": {
@@ -1149,9 +1111,7 @@
                 "arguments": [
                   {
                     "kind": "Assignment",
-                    "key": [
-                      "templateId"
-                    ],
+                    "key": ["templateId"],
                     "value": {
                       "kind": "JessieExpression",
                       "expression": "template.id",
@@ -1185,9 +1145,7 @@
                   },
                   {
                     "kind": "Assignment",
-                    "key": [
-                      "name"
-                    ],
+                    "key": ["name"],
                     "value": {
                       "kind": "JessieExpression",
                       "expression": "input.name",
@@ -1265,9 +1223,7 @@
           "assignments": [
             {
               "kind": "Assignment",
-              "key": [
-                "subject"
-              ],
+              "key": ["subject"],
               "value": {
                 "kind": "JessieExpression",
                 "expression": "input.subject || template.subject",
@@ -1318,9 +1274,7 @@
           "assignments": [
             {
               "kind": "Assignment",
-              "key": [
-                "text"
-              ],
+              "key": ["text"],
               "value": {
                 "kind": "JessieExpression",
                 "expression": "input.text || template.text",
@@ -1371,9 +1325,7 @@
           "assignments": [
             {
               "kind": "Assignment",
-              "key": [
-                "html"
-              ],
+              "key": ["html"],
               "value": {
                 "kind": "JessieExpression",
                 "expression": "input.html || template.html",
@@ -1424,9 +1376,7 @@
           "assignments": [
             {
               "kind": "Assignment",
-              "key": [
-                "templateVersion"
-              ],
+              "key": ["templateVersion"],
               "value": {
                 "kind": "InlineCall",
                 "condition": {
@@ -1466,9 +1416,7 @@
                 "arguments": [
                   {
                     "kind": "Assignment",
-                    "key": [
-                      "templateId"
-                    ],
+                    "key": ["templateId"],
                     "value": {
                       "kind": "JessieExpression",
                       "expression": "template.id",
@@ -1502,9 +1450,7 @@
                   },
                   {
                     "kind": "Assignment",
-                    "key": [
-                      "subject"
-                    ],
+                    "key": ["subject"],
                     "value": {
                       "kind": "JessieExpression",
                       "expression": "subject",
@@ -1538,9 +1484,7 @@
                   },
                   {
                     "kind": "Assignment",
-                    "key": [
-                      "text"
-                    ],
+                    "key": ["text"],
                     "value": {
                       "kind": "JessieExpression",
                       "expression": "text",
@@ -1574,9 +1518,7 @@
                   },
                   {
                     "kind": "Assignment",
-                    "key": [
-                      "html"
-                    ],
+                    "key": ["html"],
                     "value": {
                       "kind": "JessieExpression",
                       "expression": "html",
@@ -1658,9 +1600,7 @@
             "fields": [
               {
                 "kind": "Assignment",
-                "key": [
-                  "id"
-                ],
+                "key": ["id"],
                 "value": {
                   "kind": "JessieExpression",
                   "expression": "template.id",
@@ -1694,9 +1634,7 @@
               },
               {
                 "kind": "Assignment",
-                "key": [
-                  "name"
-                ],
+                "key": ["name"],
                 "value": {
                   "kind": "JessieExpression",
                   "expression": "template.name",
@@ -1895,9 +1833,7 @@
               "fields": [
                 {
                   "kind": "Assignment",
-                  "key": [
-                    "name"
-                  ],
+                  "key": ["name"],
                   "value": {
                     "kind": "JessieExpression",
                     "expression": "args.name",
@@ -1931,9 +1867,7 @@
                 },
                 {
                   "kind": "Assignment",
-                  "key": [
-                    "generation"
-                  ],
+                  "key": ["generation"],
                   "value": {
                     "kind": "PrimitiveLiteral",
                     "value": "dynamic",
@@ -2093,9 +2027,7 @@
               "fields": [
                 {
                   "kind": "Assignment",
-                  "key": [
-                    "name"
-                  ],
+                  "key": ["name"],
                   "value": {
                     "kind": "JessieExpression",
                     "expression": "\"v\".concat(Date.now())",
@@ -2129,9 +2061,7 @@
                 },
                 {
                   "kind": "Assignment",
-                  "key": [
-                    "subject"
-                  ],
+                  "key": ["subject"],
                   "value": {
                     "kind": "JessieExpression",
                     "expression": "args.subject",
@@ -2165,9 +2095,7 @@
                 },
                 {
                   "kind": "Assignment",
-                  "key": [
-                    "plain_content"
-                  ],
+                  "key": ["plain_content"],
                   "value": {
                     "kind": "JessieExpression",
                     "expression": "args.text",
@@ -2201,9 +2129,7 @@
                 },
                 {
                   "kind": "Assignment",
-                  "key": [
-                    "html_content"
-                  ],
+                  "key": ["html_content"],
                   "value": {
                     "kind": "JessieExpression",
                     "expression": "args.html",
@@ -2237,9 +2163,7 @@
                 },
                 {
                   "kind": "Assignment",
-                  "key": [
-                    "active"
-                  ],
+                  "key": ["active"],
                   "value": {
                     "kind": "PrimitiveLiteral",
                     "value": 1,
@@ -2399,9 +2323,7 @@
               "fields": [
                 {
                   "kind": "Assignment",
-                  "key": [
-                    "name"
-                  ],
+                  "key": ["name"],
                   "value": {
                     "kind": "JessieExpression",
                     "expression": "args.name",

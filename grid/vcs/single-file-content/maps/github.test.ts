@@ -1,4 +1,5 @@
 import { SuperfaceTest } from '@superfaceai/testing';
+
 import { nockConfig } from '../../../test-config';
 
 describe(`vcs/single-file-content/github`, () => {

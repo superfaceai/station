@@ -43,9 +43,7 @@
               "fields": [
                 {
                   "kind": "Assignment",
-                  "key": [
-                    "src"
-                  ],
+                  "key": ["src"],
                   "value": {
                     "kind": "JessieExpression",
                     "expression": "input.from",
@@ -79,9 +77,7 @@
                 },
                 {
                   "kind": "Assignment",
-                  "key": [
-                    "dst"
-                  ],
+                  "key": ["dst"],
                   "value": {
                     "kind": "JessieExpression",
                     "expression": "input.to",
@@ -115,9 +111,7 @@
                 },
                 {
                   "kind": "Assignment",
-                  "key": [
-                    "text"
-                  ],
+                  "key": ["text"],
                   "value": {
                     "kind": "JessieExpression",
                     "expression": "input.text",
@@ -196,9 +190,7 @@
                     "fields": [
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "messageId"
-                        ],
+                        "key": ["messageId"],
                         "value": {
                           "kind": "JessieExpression",
                           "expression": "body.message_uuid[0]",
@@ -343,9 +335,7 @@
                     "fields": [
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "deliveryStatus"
-                        ],
+                        "key": ["deliveryStatus"],
                         "value": {
                           "kind": "JessieExpression",
                           "expression": "(function () {\n    switch (body.message_state) {\n        case 'sending':\n        case 'sent':\n        case 'accepted':\n            return 'accepted';\n        case 'delivered':\n            return 'delivered';\n        case 'failed':\n            return 'failed';\n        default:\n            return 'unknown';\n    }\n})()",

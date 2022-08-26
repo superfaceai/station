@@ -36,9 +36,7 @@
           "assignments": [
             {
               "kind": "Assignment",
-              "key": [
-                "clientId"
-              ],
+              "key": ["clientId"],
               "value": {
                 "kind": "JessieExpression",
                 "expression": "input.clientId || parameters.clientId",
@@ -72,9 +70,7 @@
             },
             {
               "kind": "Assignment",
-              "key": [
-                "clientSecret"
-              ],
+              "key": ["clientSecret"],
               "value": {
                 "kind": "JessieExpression",
                 "expression": "input.clientSecret || parameters.clientSecret",
@@ -132,9 +128,7 @@
               "fields": [
                 {
                   "kind": "Assignment",
-                  "key": [
-                    "Accept-Encoding"
-                  ],
+                  "key": ["Accept-Encoding"],
                   "value": {
                     "kind": "PrimitiveLiteral",
                     "value": "identity",
@@ -183,9 +177,7 @@
               "fields": [
                 {
                   "kind": "Assignment",
-                  "key": [
-                    "grant_type"
-                  ],
+                  "key": ["grant_type"],
                   "value": {
                     "kind": "PrimitiveLiteral",
                     "value": "refresh_token",
@@ -217,9 +209,7 @@
                 },
                 {
                   "kind": "Assignment",
-                  "key": [
-                    "refresh_token"
-                  ],
+                  "key": ["refresh_token"],
                   "value": {
                     "kind": "JessieExpression",
                     "expression": "input.refreshToken",
@@ -253,9 +243,7 @@
                 },
                 {
                   "kind": "Assignment",
-                  "key": [
-                    "client_id"
-                  ],
+                  "key": ["client_id"],
                   "value": {
                     "kind": "JessieExpression",
                     "expression": "clientId",
@@ -289,9 +277,7 @@
                 },
                 {
                   "kind": "Assignment",
-                  "key": [
-                    "client_secret"
-                  ],
+                  "key": ["client_secret"],
                   "value": {
                     "kind": "JessieExpression",
                     "expression": "clientSecret",
@@ -366,9 +352,7 @@
                     "fields": [
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "accessToken"
-                        ],
+                        "key": ["accessToken"],
                         "value": {
                           "kind": "JessieExpression",
                           "expression": "body.access_token",
@@ -402,9 +386,7 @@
                       },
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "expiresIn"
-                        ],
+                        "key": ["expiresIn"],
                         "value": {
                           "kind": "JessieExpression",
                           "expression": "body.expires_in",
@@ -438,9 +420,7 @@
                       },
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "tokenType"
-                        ],
+                        "key": ["tokenType"],
                         "value": {
                           "kind": "JessieExpression",
                           "expression": "body.token_type",
@@ -474,9 +454,7 @@
                       },
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "scopes"
-                        ],
+                        "key": ["scopes"],
                         "value": {
                           "kind": "JessieExpression",
                           "expression": "body.scope.split(' ')",
@@ -595,9 +573,7 @@
                     "fields": [
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "error"
-                        ],
+                        "key": ["error"],
                         "value": {
                           "kind": "JessieExpression",
                           "expression": "body.error",
@@ -631,9 +607,7 @@
                       },
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "description"
-                        ],
+                        "key": ["description"],
                         "value": {
                           "kind": "JessieExpression",
                           "expression": "body.error_description",
@@ -667,9 +641,7 @@
                       },
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "link"
-                        ],
+                        "key": ["link"],
                         "value": {
                           "kind": "JessieExpression",
                           "expression": "body.error_uri",
@@ -737,9 +709,7 @@
                     "fields": [
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "error"
-                        ],
+                        "key": ["error"],
                         "value": {
                           "kind": "PrimitiveLiteral",
                           "value": "unknown_response",
@@ -771,9 +741,7 @@
                       },
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "description"
-                        ],
+                        "key": ["description"],
                         "value": {
                           "kind": "JessieExpression",
                           "expression": "JSON.stringify(body, null, 2)",

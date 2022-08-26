@@ -42,9 +42,7 @@
               "fields": [
                 {
                   "kind": "Assignment",
-                  "key": [
-                    "q"
-                  ],
+                  "key": ["q"],
                   "value": {
                     "kind": "PrimitiveLiteral",
                     "value": "roleAssignee",
@@ -76,9 +74,7 @@
                 },
                 {
                   "kind": "Assignment",
-                  "key": [
-                    "state"
-                  ],
+                  "key": ["state"],
                   "value": {
                     "kind": "PrimitiveLiteral",
                     "value": "APPROVED",
@@ -110,9 +106,7 @@
                 },
                 {
                   "kind": "Assignment",
-                  "key": [
-                    "role"
-                  ],
+                  "key": ["role"],
                   "value": {
                     "kind": "PrimitiveLiteral",
                     "value": "ADMINISTRATOR",
@@ -144,9 +138,7 @@
                 },
                 {
                   "kind": "Assignment",
-                  "key": [
-                    "projection"
-                  ],
+                  "key": ["projection"],
                   "value": {
                     "kind": "PrimitiveLiteral",
                     "value": "(paging,elements(*(organization~(id,localizedName,vanityName,logoV2(cropped~:playableStreams)))))",
@@ -178,9 +170,7 @@
                 },
                 {
                   "kind": "Assignment",
-                  "key": [
-                    "count"
-                  ],
+                  "key": ["count"],
                   "value": {
                     "kind": "PrimitiveLiteral",
                     "value": 100,
@@ -229,9 +219,7 @@
               "fields": [
                 {
                   "kind": "Assignment",
-                  "key": [
-                    "X-Restli-Protocol-Version"
-                  ],
+                  "key": ["X-Restli-Protocol-Version"],
                   "value": {
                     "kind": "PrimitiveLiteral",
                     "value": "2.0.0",
@@ -263,9 +251,7 @@
                 },
                 {
                   "kind": "Assignment",
-                  "key": [
-                    "Authorization"
-                  ],
+                  "key": ["Authorization"],
                   "value": {
                     "kind": "JessieExpression",
                     "expression": "\"Bearer \".concat(parameters.accessToken)",
@@ -299,9 +285,7 @@
                 },
                 {
                   "kind": "Assignment",
-                  "key": [
-                    "Accept"
-                  ],
+                  "key": ["Accept"],
                   "value": {
                     "kind": "PrimitiveLiteral",
                     "value": "application/json",
@@ -370,9 +354,7 @@
                   "assignments": [
                     {
                       "kind": "Assignment",
-                      "key": [
-                        "profiles"
-                      ],
+                      "key": ["profiles"],
                       "value": {
                         "kind": "InlineCall",
                         "iteration": {
@@ -413,9 +395,7 @@
                         "arguments": [
                           {
                             "kind": "Assignment",
-                            "key": [
-                              "element"
-                            ],
+                            "key": ["element"],
                             "value": {
                               "kind": "JessieExpression",
                               "expression": "element",
@@ -497,9 +477,7 @@
                     "fields": [
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "profiles"
-                        ],
+                        "key": ["profiles"],
                         "value": {
                           "kind": "JessieExpression",
                           "expression": "profiles",
@@ -586,9 +564,7 @@
                     "fields": [
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "title"
-                        ],
+                        "key": ["title"],
                         "value": {
                           "kind": "PrimitiveLiteral",
                           "value": "Bad request",
@@ -620,9 +596,7 @@
                       },
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "detail"
-                        ],
+                        "key": ["detail"],
                         "value": {
                           "kind": "JessieExpression",
                           "expression": "body.message",
@@ -709,9 +683,7 @@
                     "fields": [
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "title"
-                        ],
+                        "key": ["title"],
                         "value": {
                           "kind": "PrimitiveLiteral",
                           "value": "Unauthenticated",
@@ -743,9 +715,7 @@
                       },
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "detail"
-                        ],
+                        "key": ["detail"],
                         "value": {
                           "kind": "JessieExpression",
                           "expression": "body.message",
@@ -832,9 +802,7 @@
                     "fields": [
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "title"
-                        ],
+                        "key": ["title"],
                         "value": {
                           "kind": "PrimitiveLiteral",
                           "value": "Forbidden",
@@ -866,9 +834,7 @@
                       },
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "detail"
-                        ],
+                        "key": ["detail"],
                         "value": {
                           "kind": "JessieExpression",
                           "expression": "body.message",
@@ -994,9 +960,7 @@
           "assignments": [
             {
               "kind": "Assignment",
-              "key": [
-                "org"
-              ],
+              "key": ["org"],
               "value": {
                 "kind": "JessieExpression",
                 "expression": "args.element['organization~']",
@@ -1047,9 +1011,7 @@
           "assignments": [
             {
               "kind": "Assignment",
-              "key": [
-                "orgLogo"
-              ],
+              "key": ["orgLogo"],
               "value": {
                 "kind": "JessieExpression",
                 "expression": "null",
@@ -1100,9 +1062,7 @@
           "assignments": [
             {
               "kind": "Assignment",
-              "key": [
-                "logoElements"
-              ],
+              "key": ["logoElements"],
               "value": {
                 "kind": "JessieExpression",
                 "expression": "null",
@@ -1186,9 +1146,7 @@
           "assignments": [
             {
               "kind": "Assignment",
-              "key": [
-                "logoElements"
-              ],
+              "key": ["logoElements"],
               "value": {
                 "kind": "JessieExpression",
                 "expression": "org.logoV2['cropped~'].elements",
@@ -1272,9 +1230,7 @@
           "assignments": [
             {
               "kind": "Assignment",
-              "key": [
-                "orgLogo"
-              ],
+              "key": ["orgLogo"],
               "value": {
                 "kind": "JessieExpression",
                 "expression": "logoElements[0].identifiers[0].identifier",
@@ -1329,9 +1285,7 @@
             "fields": [
               {
                 "kind": "Assignment",
-                "key": [
-                  "id"
-                ],
+                "key": ["id"],
                 "value": {
                   "kind": "JessieExpression",
                   "expression": "args.element.organization",
@@ -1365,9 +1319,7 @@
               },
               {
                 "kind": "Assignment",
-                "key": [
-                  "name"
-                ],
+                "key": ["name"],
                 "value": {
                   "kind": "JessieExpression",
                   "expression": "org.localizedName",
@@ -1401,9 +1353,7 @@
               },
               {
                 "kind": "Assignment",
-                "key": [
-                  "username"
-                ],
+                "key": ["username"],
                 "value": {
                   "kind": "JessieExpression",
                   "expression": "org.vanityName",
@@ -1437,9 +1387,7 @@
               },
               {
                 "kind": "Assignment",
-                "key": [
-                  "imageUrl"
-                ],
+                "key": ["imageUrl"],
                 "value": {
                   "kind": "JessieExpression",
                   "expression": "orgLogo",

@@ -36,9 +36,7 @@
           "assignments": [
             {
               "kind": "Assignment",
-              "key": [
-                "center"
-              ],
+              "key": ["center"],
               "value": {
                 "kind": "JessieExpression",
                 "expression": "input.center",
@@ -96,18 +94,14 @@
               "fields": [
                 {
                   "kind": "Assignment",
-                  "key": [
-                    "data"
-                  ],
+                  "key": ["data"],
                   "value": {
                     "kind": "InlineCall",
                     "operationName": "BuildQuery",
                     "arguments": [
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "latitude"
-                        ],
+                        "key": ["latitude"],
                         "value": {
                           "kind": "JessieExpression",
                           "expression": "center.latitude",
@@ -141,9 +135,7 @@
                       },
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "longitude"
-                        ],
+                        "key": ["longitude"],
                         "value": {
                           "kind": "JessieExpression",
                           "expression": "center.longitude",
@@ -177,9 +169,7 @@
                       },
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "radius"
-                        ],
+                        "key": ["radius"],
                         "value": {
                           "kind": "JessieExpression",
                           "expression": "input.radius",
@@ -213,9 +203,7 @@
                       },
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "categories"
-                        ],
+                        "key": ["categories"],
                         "value": {
                           "kind": "JessieExpression",
                           "expression": "input.categories || []",
@@ -381,9 +369,7 @@
                   "assignments": [
                     {
                       "kind": "Assignment",
-                      "key": [
-                        "points"
-                      ],
+                      "key": ["points"],
                       "value": {
                         "kind": "InlineCall",
                         "iteration": {
@@ -424,9 +410,7 @@
                         "arguments": [
                           {
                             "kind": "Assignment",
-                            "key": [
-                              "node"
-                            ],
+                            "key": ["node"],
                             "value": {
                               "kind": "JessieExpression",
                               "expression": "node",
@@ -690,18 +674,14 @@
           "assignments": [
             {
               "kind": "Assignment",
-              "key": [
-                "amenities"
-              ],
+              "key": ["amenities"],
               "value": {
                 "kind": "InlineCall",
                 "operationName": "CategoriesToAmenities",
                 "arguments": [
                   {
                     "kind": "Assignment",
-                    "key": [
-                      "categories"
-                    ],
+                    "key": ["categories"],
                     "value": {
                       "kind": "JessieExpression",
                       "expression": "args.categories",
@@ -779,9 +759,7 @@
           "assignments": [
             {
               "kind": "Assignment",
-              "key": [
-                "amenityFilter"
-              ],
+              "key": ["amenityFilter"],
               "value": {
                 "kind": "PrimitiveLiteral",
                 "value": "",
@@ -863,9 +841,7 @@
           "assignments": [
             {
               "kind": "Assignment",
-              "key": [
-                "amenityFilter"
-              ],
+              "key": ["amenityFilter"],
               "value": {
                 "kind": "JessieExpression",
                 "expression": "\"[amenity~\\\"^(\".concat(amenities.join(\"|\"), \")$\\\"]\")",
@@ -916,9 +892,7 @@
           "assignments": [
             {
               "kind": "Assignment",
-              "key": [
-                "query"
-              ],
+              "key": ["query"],
               "value": {
                 "kind": "JessieExpression",
                 "expression": "\"\\n    [out:json][timeout:10];\\n    node(around:\".concat(args.radius, \",\").concat(args.latitude, \",\").concat(args.longitude, \")\").concat(amenityFilter, \";\\n\\n    out;\\n  \")",
@@ -1038,9 +1012,7 @@
           "assignments": [
             {
               "kind": "Assignment",
-              "key": [
-                "nodeTags"
-              ],
+              "key": ["nodeTags"],
               "value": {
                 "kind": "JessieExpression",
                 "expression": "args.node.tags || {}",
@@ -1091,9 +1063,7 @@
           "assignments": [
             {
               "kind": "Assignment",
-              "key": [
-                "categories"
-              ],
+              "key": ["categories"],
               "value": {
                 "kind": "JessieExpression",
                 "expression": "[]",
@@ -1177,18 +1147,14 @@
           "assignments": [
             {
               "kind": "Assignment",
-              "key": [
-                "categories"
-              ],
+              "key": ["categories"],
               "value": {
                 "kind": "InlineCall",
                 "operationName": "AmenitiesToCategories",
                 "arguments": [
                   {
                     "kind": "Assignment",
-                    "key": [
-                      "amenities"
-                    ],
+                    "key": ["amenities"],
                     "value": {
                       "kind": "JessieExpression",
                       "expression": "[nodeTags.amenity]",
@@ -1266,9 +1232,7 @@
           "assignments": [
             {
               "kind": "Assignment",
-              "key": [
-                "point"
-              ],
+              "key": ["point"],
               "value": {
                 "kind": "JessieExpression",
                 "expression": "{\n    coordinates: {\n        latitude: args.node.lat,\n        longitude: args.node.lon,\n    },\n    name: args.node.name || args.node.id.toString(),\n    categories: categories\n}",
@@ -1440,9 +1404,7 @@
           "assignments": [
             {
               "kind": "Assignment",
-              "key": [
-                "categoryAmenityMap"
-              ],
+              "key": ["categoryAmenityMap"],
               "value": {
                 "kind": "JessieExpression",
                 "expression": "{\n    \"RESTAURANT\": [\"restaurant\", \"fast_food\", \"food_court\"],\n    \"CAFE\": [\"cafe\"],\n    \"BAR\": [\"bar\", \"pub\", \"biergarten\"],\n    \"SCHOOL\": [\"school\", \"college\", \"kindergarten\", \"language_school\", \"music_school\", \"university\"],\n    \"TAXI\": [\"taxi\"],\n    \"POST\": [\"post_box\", \"post_depot\", \"post_office\"],\n    \"HEALTHCARE\": [\"clinic\", \"doctors\", \"hospital\"],\n    \"BANK\": [\"bank\"],\n    \"ATM\": [\"atm\"],\n    \"POLICE\": [\"police\"],\n    \"PARKING\": [\"parking\", \"parking_entrance\", \"parking_space\"]\n}",
@@ -1493,9 +1455,7 @@
           "assignments": [
             {
               "kind": "Assignment",
-              "key": [
-                "amenities"
-              ],
+              "key": ["amenities"],
               "value": {
                 "kind": "JessieExpression",
                 "expression": "args.categories.flatMap(function (category) { return categoryAmenityMap[category]; })",
@@ -1682,9 +1642,7 @@
           "assignments": [
             {
               "kind": "Assignment",
-              "key": [
-                "amenityCategoryMap"
-              ],
+              "key": ["amenityCategoryMap"],
               "value": {
                 "kind": "JessieExpression",
                 "expression": "{\n    //Restaurant\n    \"restaurant\": \"RESTAURANT\",\n    \"fast_food\": \"RESTAURANT\",\n    \"food_court\": \"RESTAURANT\",\n    //Cafe\n    \"cafe\": \"CAFE\",\n    //Bar\n    \"bar\": \"BAR\",\n    \"pub\": \"BAR\",\n    \"biergarten\": \"BAR\",\n    //School\n    \"school\": \"SCHOOL\",\n    \"college\": \"SCHOOL\",\n    \"kindergarten\": \"SCHOOL\",\n    \"language_school\": \"SCHOOL\",\n    \"music_school\": \"SCHOOL\",\n    \"university\": \"SCHOOL\",\n    //Taxi\n    \"taxi\": \"TAXI\",\n    //Post\n    \"post_box\": \"POST\",\n    \"post_depot\": \"POST\",\n    \"post_office\": \"POST\",\n    //Police\n    \"police\": \"POLICE\",\n    //Healthcare\n    \"clinic\": \"HEALTHCARE\",\n    \"doctors\": \"HEALTHCARE\",\n    \"hospital\": \"HEALTHCARE\",\n    //Bank\n    \"bank\": \"BANK\",\n    //ATM\n    \"atm\": \"ATM\",\n    //Parking\n    \"parking\": \"PARKING\",\n    \"parking_entrance\": \"PARKING\",\n    \"parking_space\": \"PARKING\"\n}",
@@ -1735,9 +1693,7 @@
           "assignments": [
             {
               "kind": "Assignment",
-              "key": [
-                "categories"
-              ],
+              "key": ["categories"],
               "value": {
                 "kind": "JessieExpression",
                 "expression": "(function () {\n    var categories = [];\n    for (var _i = 0, _a = args.amenities; _i < _a.length; _i++) {\n        var amenity = _a[_i];\n        var category = amenityCategoryMap[amenity];\n        if (category !== undefined && !categories.includes(category)) {\n            categories.push(category);\n        }\n    }\n    return categories;\n})()",
