@@ -36,9 +36,7 @@
           "assignments": [
             {
               "kind": "Assignment",
-              "key": [
-                "INPUTS_MAP"
-              ],
+              "key": ["INPUTS_MAP"],
               "value": {
                 "kind": "JessieExpression",
                 "expression": "{\n    'personalizations.0.to.0.email': 'to',\n    'from.email': 'from',\n    'subject': 'subject',\n}",
@@ -89,9 +87,7 @@
           "assignments": [
             {
               "kind": "Assignment",
-              "key": [
-                "content"
-              ],
+              "key": ["content"],
               "value": {
                 "kind": "JessieExpression",
                 "expression": "[]",
@@ -142,9 +138,7 @@
           "assignments": [
             {
               "kind": "Assignment",
-              "key": [
-                "attachments"
-              ],
+              "key": ["attachments"],
               "value": {
                 "kind": "JessieExpression",
                 "expression": "null",
@@ -228,9 +222,7 @@
           "assignments": [
             {
               "kind": "Assignment",
-              "key": [
-                "content"
-              ],
+              "key": ["content"],
               "value": {
                 "kind": "JessieExpression",
                 "expression": "content.concat([{ type: 'text/plain', value: input.text }])",
@@ -314,9 +306,7 @@
           "assignments": [
             {
               "kind": "Assignment",
-              "key": [
-                "content"
-              ],
+              "key": ["content"],
               "value": {
                 "kind": "JessieExpression",
                 "expression": "content.concat([{ type: 'text/html', value: input.html }])",
@@ -400,9 +390,7 @@
           "assignments": [
             {
               "kind": "Assignment",
-              "key": [
-                "attachments"
-              ],
+              "key": ["attachments"],
               "value": {
                 "kind": "JessieExpression",
                 "expression": "input.attachments.map(function (attachment) {\n    return {\n        content: attachment.content,\n        filename: attachment.filename,\n        type: attachment.type,\n    };\n})",
@@ -504,9 +492,7 @@
                     "fields": [
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "messageId"
-                        ],
+                        "key": ["messageId"],
                         "value": {
                           "kind": "JessieExpression",
                           "expression": "headers['x-message-id']",
@@ -593,9 +579,7 @@
                     "fields": [
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "title"
-                        ],
+                        "key": ["title"],
                         "value": {
                           "kind": "PrimitiveLiteral",
                           "value": "Invalid inputs",
@@ -627,9 +611,7 @@
                       },
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "detail"
-                        ],
+                        "key": ["detail"],
                         "value": {
                           "kind": "JessieExpression",
                           "expression": "body.errors.map(function (err) { return \"Input '\".concat(INPUTS_MAP[err.field] || err.field, \"': \").concat(err.message); }).join(' ')",
@@ -716,9 +698,7 @@
                     "fields": [
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "title"
-                        ],
+                        "key": ["title"],
                         "value": {
                           "kind": "PrimitiveLiteral",
                           "value": "Payload Too Large",
@@ -750,9 +730,7 @@
                       },
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "detail"
-                        ],
+                        "key": ["detail"],
                         "value": {
                           "kind": "JessieExpression",
                           "expression": "body.errors.map(function (err) { return err.message; }).join(' ')",
@@ -839,9 +817,7 @@
                     "fields": [
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "title"
-                        ],
+                        "key": ["title"],
                         "value": {
                           "kind": "PrimitiveLiteral",
                           "value": "Unauthorized",
@@ -873,9 +849,7 @@
                       },
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "detail"
-                        ],
+                        "key": ["detail"],
                         "value": {
                           "kind": "JessieExpression",
                           "expression": "body.errors.map(function (err) { return err.message; }).join(' ')",
@@ -962,9 +936,7 @@
                     "fields": [
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "title"
-                        ],
+                        "key": ["title"],
                         "value": {
                           "kind": "PrimitiveLiteral",
                           "value": "Forbidden",
@@ -996,9 +968,7 @@
                       },
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "detail"
-                        ],
+                        "key": ["detail"],
                         "value": {
                           "kind": "JessieExpression",
                           "expression": "body.errors.map(function (err) { return err.message; }).join(' ')",
@@ -1085,9 +1055,7 @@
                     "fields": [
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "title"
-                        ],
+                        "key": ["title"],
                         "value": {
                           "kind": "PrimitiveLiteral",
                           "value": "Internal server Error",
@@ -1119,9 +1087,7 @@
                       },
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "detail"
-                        ],
+                        "key": ["detail"],
                         "value": {
                           "kind": "JessieExpression",
                           "expression": "body.errors.map(function (err) { return err.message; }).join(' ')",

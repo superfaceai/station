@@ -36,9 +36,7 @@
           "assignments": [
             {
               "kind": "Assignment",
-              "key": [
-                "apiVersion"
-              ],
+              "key": ["apiVersion"],
               "value": {
                 "kind": "PrimitiveLiteral",
                 "value": "v12.0",
@@ -93,9 +91,7 @@
               "fields": [
                 {
                   "kind": "Assignment",
-                  "key": [
-                    "access_token"
-                  ],
+                  "key": ["access_token"],
                   "value": {
                     "kind": "JessieExpression",
                     "expression": "parameters.accessToken",
@@ -129,9 +125,7 @@
                 },
                 {
                   "kind": "Assignment",
-                  "key": [
-                    "fields"
-                  ],
+                  "key": ["fields"],
                   "value": {
                     "kind": "PrimitiveLiteral",
                     "value": "id,instagram_business_account",
@@ -200,9 +194,7 @@
                   "assignments": [
                     {
                       "kind": "Assignment",
-                      "key": [
-                        "pagesWithIgAccounts"
-                      ],
+                      "key": ["pagesWithIgAccounts"],
                       "value": {
                         "kind": "JessieExpression",
                         "expression": "body.data.filter(function (_a) {\n    var instagram_business_account = _a.instagram_business_account;\n    return instagram_business_account && instagram_business_account.id;\n})",
@@ -253,9 +245,7 @@
                   "assignments": [
                     {
                       "kind": "Assignment",
-                      "key": [
-                        "profiles"
-                      ],
+                      "key": ["profiles"],
                       "value": {
                         "kind": "InlineCall",
                         "iteration": {
@@ -296,9 +286,7 @@
                         "arguments": [
                           {
                             "kind": "Assignment",
-                            "key": [
-                              "page"
-                            ],
+                            "key": ["page"],
                             "value": {
                               "kind": "JessieExpression",
                               "expression": "page",
@@ -380,9 +368,7 @@
                     "fields": [
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "profiles"
-                        ],
+                        "key": ["profiles"],
                         "value": {
                           "kind": "JessieExpression",
                           "expression": "profiles",
@@ -469,9 +455,7 @@
                     "fields": [
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "title"
-                        ],
+                        "key": ["title"],
                         "value": {
                           "kind": "PrimitiveLiteral",
                           "value": "Bad request",
@@ -503,9 +487,7 @@
                       },
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "detail"
-                        ],
+                        "key": ["detail"],
                         "value": {
                           "kind": "JessieExpression",
                           "expression": "body.error.message",
@@ -592,9 +574,7 @@
                     "fields": [
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "title"
-                        ],
+                        "key": ["title"],
                         "value": {
                           "kind": "PrimitiveLiteral",
                           "value": "Unauthenticated",
@@ -626,9 +606,7 @@
                       },
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "detail"
-                        ],
+                        "key": ["detail"],
                         "value": {
                           "kind": "JessieExpression",
                           "expression": "body.error.message",
@@ -715,9 +693,7 @@
                     "fields": [
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "title"
-                        ],
+                        "key": ["title"],
                         "value": {
                           "kind": "PrimitiveLiteral",
                           "value": "Forbidden",
@@ -749,9 +725,7 @@
                       },
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "detail"
-                        ],
+                        "key": ["detail"],
                         "value": {
                           "kind": "JessieExpression",
                           "expression": "body.error.message",
@@ -883,9 +857,7 @@
               "fields": [
                 {
                   "kind": "Assignment",
-                  "key": [
-                    "fields"
-                  ],
+                  "key": ["fields"],
                   "value": {
                     "kind": "PrimitiveLiteral",
                     "value": "instagram_business_account{id,name,username,profile_picture_url}",
@@ -917,9 +889,7 @@
                 },
                 {
                   "kind": "Assignment",
-                  "key": [
-                    "access_token"
-                  ],
+                  "key": ["access_token"],
                   "value": {
                     "kind": "JessieExpression",
                     "expression": "parameters.accessToken",
@@ -990,9 +960,7 @@
                   "assignments": [
                     {
                       "kind": "Assignment",
-                      "key": [
-                        "igAccount"
-                      ],
+                      "key": ["igAccount"],
                       "value": {
                         "kind": "JessieExpression",
                         "expression": "body.instagram_business_account",
@@ -1075,9 +1043,7 @@
             "fields": [
               {
                 "kind": "Assignment",
-                "key": [
-                  "id"
-                ],
+                "key": ["id"],
                 "value": {
                   "kind": "JessieExpression",
                   "expression": "igAccount.id",
@@ -1111,9 +1077,7 @@
               },
               {
                 "kind": "Assignment",
-                "key": [
-                  "name"
-                ],
+                "key": ["name"],
                 "value": {
                   "kind": "JessieExpression",
                   "expression": "igAccount.name",
@@ -1147,9 +1111,7 @@
               },
               {
                 "kind": "Assignment",
-                "key": [
-                  "username"
-                ],
+                "key": ["username"],
                 "value": {
                   "kind": "JessieExpression",
                   "expression": "igAccount.username",
@@ -1183,9 +1145,7 @@
               },
               {
                 "kind": "Assignment",
-                "key": [
-                  "imageUrl"
-                ],
+                "key": ["imageUrl"],
                 "value": {
                   "kind": "JessieExpression",
                   "expression": "igAccount.profile_picture_url",

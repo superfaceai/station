@@ -36,9 +36,7 @@
           "assignments": [
             {
               "kind": "Assignment",
-              "key": [
-                "apiVersion"
-              ],
+              "key": ["apiVersion"],
               "value": {
                 "kind": "PrimitiveLiteral",
                 "value": "v14.0",
@@ -87,9 +85,7 @@
           "assignments": [
             {
               "kind": "Assignment",
-              "key": [
-                "businessAccountId"
-              ],
+              "key": ["businessAccountId"],
               "value": {
                 "kind": "JessieExpression",
                 "expression": "input.profileId",
@@ -140,9 +136,7 @@
           "assignments": [
             {
               "kind": "Assignment",
-              "key": [
-                "authorizationHeaderValue"
-              ],
+              "key": ["authorizationHeaderValue"],
               "value": {
                 "kind": "JessieExpression",
                 "expression": "'Bearer ' + parameters.accessToken",
@@ -193,9 +187,7 @@
           "assignments": [
             {
               "kind": "Assignment",
-              "key": [
-                "text"
-              ],
+              "key": ["text"],
               "value": {
                 "kind": "JessieExpression",
                 "expression": "input.text",
@@ -246,9 +238,7 @@
           "assignments": [
             {
               "kind": "Assignment",
-              "key": [
-                "media"
-              ],
+              "key": ["media"],
               "value": {
                 "kind": "JessieExpression",
                 "expression": "input.media || []",
@@ -336,9 +326,7 @@
             "fields": [
               {
                 "kind": "Assignment",
-                "key": [
-                  "title"
-                ],
+                "key": ["title"],
                 "value": {
                   "kind": "PrimitiveLiteral",
                   "value": "Media url required",
@@ -370,9 +358,7 @@
               },
               {
                 "kind": "Assignment",
-                "key": [
-                  "detail"
-                ],
+                "key": ["detail"],
                 "value": {
                   "kind": "PrimitiveLiteral",
                   "value": "You must provide one media with URL for Instagram provider",
@@ -471,9 +457,7 @@
             "fields": [
               {
                 "kind": "Assignment",
-                "key": [
-                  "title"
-                ],
+                "key": ["title"],
                 "value": {
                   "kind": "PrimitiveLiteral",
                   "value": "Too many media items",
@@ -505,9 +489,7 @@
               },
               {
                 "kind": "Assignment",
-                "key": [
-                  "detail"
-                ],
+                "key": ["detail"],
                 "value": {
                   "kind": "PrimitiveLiteral",
                   "value": "Only up to 10 media items can be published with Instagram provider",
@@ -569,9 +551,7 @@
           "assignments": [
             {
               "kind": "Assignment",
-              "key": [
-                "isCarousel"
-              ],
+              "key": ["isCarousel"],
               "value": {
                 "kind": "PrimitiveLiteral",
                 "value": false,
@@ -653,9 +633,7 @@
           "assignments": [
             {
               "kind": "Assignment",
-              "key": [
-                "isCarousel"
-              ],
+              "key": ["isCarousel"],
               "value": {
                 "kind": "PrimitiveLiteral",
                 "value": true,
@@ -704,9 +682,7 @@
           "assignments": [
             {
               "kind": "Assignment",
-              "key": [
-                "mediaIds"
-              ],
+              "key": ["mediaIds"],
               "value": {
                 "kind": "JessieExpression",
                 "expression": "[]",
@@ -792,9 +768,7 @@
           "arguments": [
             {
               "kind": "Assignment",
-              "key": [
-                "businessAccountId"
-              ],
+              "key": ["businessAccountId"],
               "value": {
                 "kind": "JessieExpression",
                 "expression": "businessAccountId",
@@ -828,9 +802,7 @@
             },
             {
               "kind": "Assignment",
-              "key": [
-                "item"
-              ],
+              "key": ["item"],
               "value": {
                 "kind": "JessieExpression",
                 "expression": "item",
@@ -864,9 +836,7 @@
             },
             {
               "kind": "Assignment",
-              "key": [
-                "isCarousel"
-              ],
+              "key": ["isCarousel"],
               "value": {
                 "kind": "JessieExpression",
                 "expression": "isCarousel",
@@ -900,9 +870,7 @@
             },
             {
               "kind": "Assignment",
-              "key": [
-                "caption"
-              ],
+              "key": ["caption"],
               "value": {
                 "kind": "JessieExpression",
                 "expression": "text",
@@ -936,9 +904,7 @@
             },
             {
               "kind": "Assignment",
-              "key": [
-                "authorization"
-              ],
+              "key": ["authorization"],
               "value": {
                 "kind": "JessieExpression",
                 "expression": "authorizationHeaderValue",
@@ -1057,9 +1023,7 @@
               "assignments": [
                 {
                   "kind": "Assignment",
-                  "key": [
-                    "mediaIds"
-                  ],
+                  "key": ["mediaIds"],
                   "value": {
                     "kind": "JessieExpression",
                     "expression": "(function() {\nvar __spreadArray = (this && this.__spreadArray) || function (to, from, pack) {\n    if (pack || arguments.length === 2) for (var i = 0, l = from.length, ar; i < l; i++) {\n        if (ar || !(i in from)) {\n            if (!ar) ar = Array.prototype.slice.call(from, 0, i);\n            ar[i] = from[i];\n        }\n    }\n    return to.concat(ar || Array.prototype.slice.call(from));\n};\nvar __jessieValue = __spreadArray(__spreadArray([], mediaIds, true), [outcome.data], false);\nreturn __jessieValue;\n})()",
@@ -1112,9 +1076,7 @@
           "assignments": [
             {
               "kind": "Assignment",
-              "key": [
-                "containerId"
-              ],
+              "key": ["containerId"],
               "value": {
                 "kind": "InlineCall",
                 "condition": {
@@ -1154,9 +1116,7 @@
                 "arguments": [
                   {
                     "kind": "Assignment",
-                    "key": [
-                      "businessAccountId"
-                    ],
+                    "key": ["businessAccountId"],
                     "value": {
                       "kind": "JessieExpression",
                       "expression": "businessAccountId",
@@ -1190,9 +1150,7 @@
                   },
                   {
                     "kind": "Assignment",
-                    "key": [
-                      "children"
-                    ],
+                    "key": ["children"],
                     "value": {
                       "kind": "JessieExpression",
                       "expression": "mediaIds",
@@ -1226,9 +1184,7 @@
                   },
                   {
                     "kind": "Assignment",
-                    "key": [
-                      "caption"
-                    ],
+                    "key": ["caption"],
                     "value": {
                       "kind": "JessieExpression",
                       "expression": "text",
@@ -1262,9 +1218,7 @@
                   },
                   {
                     "kind": "Assignment",
-                    "key": [
-                      "authorization"
-                    ],
+                    "key": ["authorization"],
                     "value": {
                       "kind": "JessieExpression",
                       "expression": "authorizationHeaderValue",
@@ -1375,9 +1329,7 @@
           "assignments": [
             {
               "kind": "Assignment",
-              "key": [
-                "containerId"
-              ],
+              "key": ["containerId"],
               "value": {
                 "kind": "JessieExpression",
                 "expression": "mediaIds[0]",
@@ -1434,9 +1386,7 @@
               "fields": [
                 {
                   "kind": "Assignment",
-                  "key": [
-                    "creation_id"
-                  ],
+                  "key": ["creation_id"],
                   "value": {
                     "kind": "JessieExpression",
                     "expression": "containerId",
@@ -1487,9 +1437,7 @@
               "fields": [
                 {
                   "kind": "Assignment",
-                  "key": [
-                    "authorization"
-                  ],
+                  "key": ["authorization"],
                   "value": {
                     "kind": "JessieExpression",
                     "expression": "authorizationHeaderValue",
@@ -1560,9 +1508,7 @@
                   "assignments": [
                     {
                       "kind": "Assignment",
-                      "key": [
-                        "postId"
-                      ],
+                      "key": ["postId"],
                       "value": {
                         "kind": "JessieExpression",
                         "expression": "body.id",
@@ -1630,18 +1576,14 @@
                   "assignments": [
                     {
                       "kind": "Assignment",
-                      "key": [
-                        "error"
-                      ],
+                      "key": ["error"],
                       "value": {
                         "kind": "InlineCall",
                         "operationName": "MapApiError",
                         "arguments": [
                           {
                             "kind": "Assignment",
-                            "key": [
-                              "statusCode"
-                            ],
+                            "key": ["statusCode"],
                             "value": {
                               "kind": "JessieExpression",
                               "expression": "statusCode",
@@ -1675,9 +1617,7 @@
                           },
                           {
                             "kind": "Assignment",
-                            "key": [
-                              "body"
-                            ],
+                            "key": ["body"],
                             "value": {
                               "kind": "JessieExpression",
                               "expression": "body",
@@ -1711,9 +1651,7 @@
                           },
                           {
                             "kind": "Assignment",
-                            "key": [
-                              "headers"
-                            ],
+                            "key": ["headers"],
                             "value": {
                               "kind": "JessieExpression",
                               "expression": "headers",
@@ -1860,9 +1798,7 @@
               "fields": [
                 {
                   "kind": "Assignment",
-                  "key": [
-                    "fields"
-                  ],
+                  "key": ["fields"],
                   "value": {
                     "kind": "PrimitiveLiteral",
                     "value": "permalink",
@@ -1911,9 +1847,7 @@
               "fields": [
                 {
                   "kind": "Assignment",
-                  "key": [
-                    "authorization"
-                  ],
+                  "key": ["authorization"],
                   "value": {
                     "kind": "JessieExpression",
                     "expression": "authorizationHeaderValue",
@@ -1988,9 +1922,7 @@
                     "fields": [
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "postId"
-                        ],
+                        "key": ["postId"],
                         "value": {
                           "kind": "JessieExpression",
                           "expression": "postId",
@@ -2024,9 +1956,7 @@
                       },
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "url"
-                        ],
+                        "key": ["url"],
                         "value": {
                           "kind": "JessieExpression",
                           "expression": "body.permalink",
@@ -2107,18 +2037,14 @@
                   "assignments": [
                     {
                       "kind": "Assignment",
-                      "key": [
-                        "error"
-                      ],
+                      "key": ["error"],
                       "value": {
                         "kind": "InlineCall",
                         "operationName": "MapApiError",
                         "arguments": [
                           {
                             "kind": "Assignment",
-                            "key": [
-                              "statusCode"
-                            ],
+                            "key": ["statusCode"],
                             "value": {
                               "kind": "JessieExpression",
                               "expression": "statusCode",
@@ -2152,9 +2078,7 @@
                           },
                           {
                             "kind": "Assignment",
-                            "key": [
-                              "body"
-                            ],
+                            "key": ["body"],
                             "value": {
                               "kind": "JessieExpression",
                               "expression": "body",
@@ -2188,9 +2112,7 @@
                           },
                           {
                             "kind": "Assignment",
-                            "key": [
-                              "headers"
-                            ],
+                            "key": ["headers"],
                             "value": {
                               "kind": "JessieExpression",
                               "expression": "headers",
@@ -2349,9 +2271,7 @@
           "assignments": [
             {
               "kind": "Assignment",
-              "key": [
-                "statusCode"
-              ],
+              "key": ["statusCode"],
               "value": {
                 "kind": "JessieExpression",
                 "expression": "args.statusCode",
@@ -2402,9 +2322,7 @@
           "assignments": [
             {
               "kind": "Assignment",
-              "key": [
-                "headers"
-              ],
+              "key": ["headers"],
               "value": {
                 "kind": "JessieExpression",
                 "expression": "args.headers",
@@ -2455,9 +2373,7 @@
           "assignments": [
             {
               "kind": "Assignment",
-              "key": [
-                "body"
-              ],
+              "key": ["body"],
               "value": {
                 "kind": "JessieExpression",
                 "expression": "args.body",
@@ -2508,9 +2424,7 @@
           "assignments": [
             {
               "kind": "Assignment",
-              "key": [
-                "errorCode"
-              ],
+              "key": ["errorCode"],
               "value": {
                 "kind": "JessieExpression",
                 "expression": "body.error.code",
@@ -2561,9 +2475,7 @@
           "assignments": [
             {
               "kind": "Assignment",
-              "key": [
-                "subcode"
-              ],
+              "key": ["subcode"],
               "value": {
                 "kind": "JessieExpression",
                 "expression": "body.error.error_subcode",
@@ -2614,9 +2526,7 @@
           "assignments": [
             {
               "kind": "Assignment",
-              "key": [
-                "title"
-              ],
+              "key": ["title"],
               "value": {
                 "kind": "JessieExpression",
                 "expression": "body.error.error_user_title || body.error.type || body.error.message || 'Unknown error'",
@@ -2667,9 +2577,7 @@
           "assignments": [
             {
               "kind": "Assignment",
-              "key": [
-                "detail"
-              ],
+              "key": ["detail"],
               "value": {
                 "kind": "JessieExpression",
                 "expression": "body.error.error_user_msg || body.error.message || undefined",
@@ -2724,9 +2632,7 @@
             "fields": [
               {
                 "kind": "Assignment",
-                "key": [
-                  "title"
-                ],
+                "key": ["title"],
                 "value": {
                   "kind": "JessieExpression",
                   "expression": "title",
@@ -2760,9 +2666,7 @@
               },
               {
                 "kind": "Assignment",
-                "key": [
-                  "detail"
-                ],
+                "key": ["detail"],
                 "value": {
                   "kind": "JessieExpression",
                   "expression": "detail",
@@ -2796,9 +2700,7 @@
               },
               {
                 "kind": "Assignment",
-                "key": [
-                  "original"
-                ],
+                "key": ["original"],
                 "value": {
                   "kind": "JessieExpression",
                   "expression": "body.error || body",
@@ -2880,9 +2782,7 @@
           "assignments": [
             {
               "kind": "Assignment",
-              "key": [
-                "apiVersion"
-              ],
+              "key": ["apiVersion"],
               "value": {
                 "kind": "PrimitiveLiteral",
                 "value": "v14.0",
@@ -2931,9 +2831,7 @@
           "assignments": [
             {
               "kind": "Assignment",
-              "key": [
-                "businessAccountId"
-              ],
+              "key": ["businessAccountId"],
               "value": {
                 "kind": "JessieExpression",
                 "expression": "args.businessAccountId",
@@ -2984,9 +2882,7 @@
           "assignments": [
             {
               "kind": "Assignment",
-              "key": [
-                "itemUrl"
-              ],
+              "key": ["itemUrl"],
               "value": {
                 "kind": "JessieExpression",
                 "expression": "args.item ? args.item.url : undefined",
@@ -3037,9 +2933,7 @@
           "assignments": [
             {
               "kind": "Assignment",
-              "key": [
-                "isCarousel"
-              ],
+              "key": ["isCarousel"],
               "value": {
                 "kind": "JessieExpression",
                 "expression": "args.isCarousel || undefined",
@@ -3090,9 +2984,7 @@
           "assignments": [
             {
               "kind": "Assignment",
-              "key": [
-                "children"
-              ],
+              "key": ["children"],
               "value": {
                 "kind": "JessieExpression",
                 "expression": "args.children ? JSON.stringify(args.children) : undefined",
@@ -3143,9 +3035,7 @@
           "assignments": [
             {
               "kind": "Assignment",
-              "key": [
-                "caption"
-              ],
+              "key": ["caption"],
               "value": {
                 "kind": "JessieExpression",
                 "expression": "isCarousel ? undefined : args.caption",
@@ -3196,9 +3086,7 @@
           "assignments": [
             {
               "kind": "Assignment",
-              "key": [
-                "mediaType"
-              ],
+              "key": ["mediaType"],
               "value": {
                 "kind": "JessieExpression",
                 "expression": "children ? 'CAROUSEL' : undefined",
@@ -3249,9 +3137,7 @@
           "assignments": [
             {
               "kind": "Assignment",
-              "key": [
-                "authorizationHeaderValue"
-              ],
+              "key": ["authorizationHeaderValue"],
               "value": {
                 "kind": "JessieExpression",
                 "expression": "args.authorization",
@@ -3308,9 +3194,7 @@
               "fields": [
                 {
                   "kind": "Assignment",
-                  "key": [
-                    "image_url"
-                  ],
+                  "key": ["image_url"],
                   "value": {
                     "kind": "JessieExpression",
                     "expression": "itemUrl",
@@ -3344,9 +3228,7 @@
                 },
                 {
                   "kind": "Assignment",
-                  "key": [
-                    "caption"
-                  ],
+                  "key": ["caption"],
                   "value": {
                     "kind": "JessieExpression",
                     "expression": "caption",
@@ -3380,9 +3262,7 @@
                 },
                 {
                   "kind": "Assignment",
-                  "key": [
-                    "is_carousel_item"
-                  ],
+                  "key": ["is_carousel_item"],
                   "value": {
                     "kind": "JessieExpression",
                     "expression": "isCarousel",
@@ -3416,9 +3296,7 @@
                 },
                 {
                   "kind": "Assignment",
-                  "key": [
-                    "media_type"
-                  ],
+                  "key": ["media_type"],
                   "value": {
                     "kind": "JessieExpression",
                     "expression": "mediaType",
@@ -3452,9 +3330,7 @@
                 },
                 {
                   "kind": "Assignment",
-                  "key": [
-                    "children"
-                  ],
+                  "key": ["children"],
                   "value": {
                     "kind": "JessieExpression",
                     "expression": "children",
@@ -3505,9 +3381,7 @@
               "fields": [
                 {
                   "kind": "Assignment",
-                  "key": [
-                    "authorization"
-                  ],
+                  "key": ["authorization"],
                   "value": {
                     "kind": "JessieExpression",
                     "expression": "authorizationHeaderValue",
@@ -3630,18 +3504,14 @@
                   "assignments": [
                     {
                       "kind": "Assignment",
-                      "key": [
-                        "error"
-                      ],
+                      "key": ["error"],
                       "value": {
                         "kind": "InlineCall",
                         "operationName": "MapApiError",
                         "arguments": [
                           {
                             "kind": "Assignment",
-                            "key": [
-                              "statusCode"
-                            ],
+                            "key": ["statusCode"],
                             "value": {
                               "kind": "JessieExpression",
                               "expression": "statusCode",
@@ -3675,9 +3545,7 @@
                           },
                           {
                             "kind": "Assignment",
-                            "key": [
-                              "body"
-                            ],
+                            "key": ["body"],
                             "value": {
                               "kind": "JessieExpression",
                               "expression": "body",
@@ -3711,9 +3579,7 @@
                           },
                           {
                             "kind": "Assignment",
-                            "key": [
-                              "headers"
-                            ],
+                            "key": ["headers"],
                             "value": {
                               "kind": "JessieExpression",
                               "expression": "headers",

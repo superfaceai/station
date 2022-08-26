@@ -1,4 +1,5 @@
 import { SuperfaceTest } from '@superfaceai/testing';
+
 import { nockConfig } from '../../../test-config';
 
 describe(`computer-vision/face-detection/google-apis-computer-vision`, () => {

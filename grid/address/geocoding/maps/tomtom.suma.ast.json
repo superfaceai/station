@@ -36,9 +36,7 @@
           "assignments": [
             {
               "kind": "Assignment",
-              "key": [
-                "payload"
-              ],
+              "key": ["payload"],
               "value": {
                 "kind": "JessieExpression",
                 "expression": "input.query || \"\".concat(input.streetAddress || \"\", \" \").concat(input.addressLocality || \"\", \" \").concat(input.addressRegion || \"\", \" \").concat(input.postalCode || \"\", \" \").concat(input.addressCountry || \"\")",
@@ -95,9 +93,7 @@
               "fields": [
                 {
                   "kind": "Assignment",
-                  "key": [
-                    "view"
-                  ],
+                  "key": ["view"],
                   "value": {
                     "kind": "PrimitiveLiteral",
                     "value": "Unified",
@@ -207,9 +203,7 @@
                     "fields": [
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "title"
-                        ],
+                        "key": ["title"],
                         "value": {
                           "kind": "JessieExpression",
                           "expression": "\"Unable to find geolocation coordinates for address: \" + payload.trim()",
@@ -277,9 +271,7 @@
                     "fields": [
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "latitude"
-                        ],
+                        "key": ["latitude"],
                         "value": {
                           "kind": "JessieExpression",
                           "expression": "body.results[0].position.lat",
@@ -313,9 +305,7 @@
                       },
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "longitude"
-                        ],
+                        "key": ["longitude"],
                         "value": {
                           "kind": "JessieExpression",
                           "expression": "body.results[0].position.lon",
@@ -402,9 +392,7 @@
                     "fields": [
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "title"
-                        ],
+                        "key": ["title"],
                         "value": {
                           "kind": "PrimitiveLiteral",
                           "value": "Bad request",
@@ -436,9 +424,7 @@
                       },
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "detail"
-                        ],
+                        "key": ["detail"],
                         "value": {
                           "kind": "JessieExpression",
                           "expression": "body.detailedError.message",
@@ -524,9 +510,7 @@
                     "fields": [
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "title"
-                        ],
+                        "key": ["title"],
                         "value": {
                           "kind": "PrimitiveLiteral",
                           "value": "Forbidden",
@@ -558,9 +542,7 @@
                       },
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "detail"
-                        ],
+                        "key": ["detail"],
                         "value": {
                           "kind": "PrimitiveLiteral",
                           "value": "Possible reasons: Service requires SSL, Not authorized, Rate or volume limit exceeded, Unknown referer",
@@ -644,9 +626,7 @@
                     "fields": [
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "title"
-                        ],
+                        "key": ["title"],
                         "value": {
                           "kind": "PrimitiveLiteral",
                           "value": "Not found",
@@ -731,9 +711,7 @@
                     "fields": [
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "title"
-                        ],
+                        "key": ["title"],
                         "value": {
                           "kind": "PrimitiveLiteral",
                           "value": "Too many requests",
@@ -765,9 +743,7 @@
                       },
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "detail"
-                        ],
+                        "key": ["detail"],
                         "value": {
                           "kind": "JessieExpression",
                           "expression": "body.detailedError.message",
@@ -878,9 +854,7 @@
           "assignments": [
             {
               "kind": "Assignment",
-              "key": [
-                "payload"
-              ],
+              "key": ["payload"],
               "value": {
                 "kind": "JessieExpression",
                 "expression": "\"\".concat(input.latitude, \",\").concat(input.longitude)",
@@ -937,9 +911,7 @@
               "fields": [
                 {
                   "kind": "Assignment",
-                  "key": [
-                    "returnRoadUse"
-                  ],
+                  "key": ["returnRoadUse"],
                   "value": {
                     "kind": "PrimitiveLiteral",
                     "value": false,
@@ -971,9 +943,7 @@
                 },
                 {
                   "kind": "Assignment",
-                  "key": [
-                    "returnSpeedLimit"
-                  ],
+                  "key": ["returnSpeedLimit"],
                   "value": {
                     "kind": "PrimitiveLiteral",
                     "value": false,
@@ -1104,9 +1074,7 @@
                     "fields": [
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "title"
-                        ],
+                        "key": ["title"],
                         "value": {
                           "kind": "PrimitiveLiteral",
                           "value": "Bad request",
@@ -1138,9 +1106,7 @@
                       },
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "detail"
-                        ],
+                        "key": ["detail"],
                         "value": {
                           "kind": "JessieExpression",
                           "expression": "body.detailedError.message",
@@ -1226,9 +1192,7 @@
                     "fields": [
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "title"
-                        ],
+                        "key": ["title"],
                         "value": {
                           "kind": "PrimitiveLiteral",
                           "value": "Forbidden",
@@ -1260,9 +1224,7 @@
                       },
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "detail"
-                        ],
+                        "key": ["detail"],
                         "value": {
                           "kind": "PrimitiveLiteral",
                           "value": "Possible reasons: Service requires SSL, Not authorized, Rate or volume limit exceeded, Unknown referer",
@@ -1346,9 +1308,7 @@
                     "fields": [
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "title"
-                        ],
+                        "key": ["title"],
                         "value": {
                           "kind": "PrimitiveLiteral",
                           "value": "Not found",
@@ -1433,9 +1393,7 @@
                     "fields": [
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "title"
-                        ],
+                        "key": ["title"],
                         "value": {
                           "kind": "PrimitiveLiteral",
                           "value": "Too many requests",
@@ -1467,9 +1425,7 @@
                       },
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "detail"
-                        ],
+                        "key": ["detail"],
                         "value": {
                           "kind": "JessieExpression",
                           "expression": "body.detailedError.message",

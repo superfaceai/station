@@ -73,9 +73,7 @@
             "fields": [
               {
                 "kind": "Assignment",
-                "key": [
-                  "title"
-                ],
+                "key": ["title"],
                 "value": {
                   "kind": "PrimitiveLiteral",
                   "value": "Invalid media",
@@ -107,9 +105,7 @@
               },
               {
                 "kind": "Assignment",
-                "key": [
-                  "detail"
-                ],
+                "key": ["detail"],
                 "value": {
                   "kind": "PrimitiveLiteral",
                   "value": "You must provide exactly one media item for Pinterest.",
@@ -171,9 +167,7 @@
           "assignments": [
             {
               "kind": "Assignment",
-              "key": [
-                "origMedia"
-              ],
+              "key": ["origMedia"],
               "value": {
                 "kind": "JessieExpression",
                 "expression": "input.media",
@@ -224,9 +218,7 @@
           "assignments": [
             {
               "kind": "Assignment",
-              "key": [
-                "media"
-              ],
+              "key": ["media"],
               "value": {
                 "kind": "JessieExpression",
                 "expression": "origMedia[0]",
@@ -260,9 +252,7 @@
             },
             {
               "kind": "Assignment",
-              "key": [
-                "mediaSource"
-              ],
+              "key": ["mediaSource"],
               "value": {
                 "kind": "JessieExpression",
                 "expression": "{}",
@@ -346,9 +336,7 @@
           "assignments": [
             {
               "kind": "Assignment",
-              "key": [
-                "mediaSource"
-              ],
+              "key": ["mediaSource"],
               "value": {
                 "kind": "JessieExpression",
                 "expression": "{\n    source_type: 'image_base64',\n    data: Buffer.isBuffer(media.contents) ? media.contents.toString('base64') : media.contents,\n    content_type: undefined,\n}",
@@ -432,10 +420,7 @@
           "assignments": [
             {
               "kind": "Assignment",
-              "key": [
-                "mediaSource",
-                "content_type"
-              ],
+              "key": ["mediaSource", "content_type"],
               "value": {
                 "kind": "PrimitiveLiteral",
                 "value": "image/jpeg",
@@ -517,10 +502,7 @@
           "assignments": [
             {
               "kind": "Assignment",
-              "key": [
-                "mediaSource",
-                "content_type"
-              ],
+              "key": ["mediaSource", "content_type"],
               "value": {
                 "kind": "PrimitiveLiteral",
                 "value": "image/png",
@@ -602,9 +584,7 @@
           "assignments": [
             {
               "kind": "Assignment",
-              "key": [
-                "mediaSource"
-              ],
+              "key": ["mediaSource"],
               "value": {
                 "kind": "JessieExpression",
                 "expression": "{\n    source_type: 'image_url',\n    url: media.url,\n}",
@@ -692,9 +672,7 @@
             "fields": [
               {
                 "kind": "Assignment",
-                "key": [
-                  "title"
-                ],
+                "key": ["title"],
                 "value": {
                   "kind": "PrimitiveLiteral",
                   "value": "Unknown or unsupported media contents type",
@@ -726,9 +704,7 @@
               },
               {
                 "kind": "Assignment",
-                "key": [
-                  "detail"
-                ],
+                "key": ["detail"],
                 "value": {
                   "kind": "PrimitiveLiteral",
                   "value": "Only PNG or JPG images are supported.",
@@ -796,9 +772,7 @@
               "fields": [
                 {
                   "kind": "Assignment",
-                  "key": [
-                    "authorization"
-                  ],
+                  "key": ["authorization"],
                   "value": {
                     "kind": "JessieExpression",
                     "expression": "\"Bearer \" + parameters.accessToken",
@@ -849,9 +823,7 @@
               "fields": [
                 {
                   "kind": "Assignment",
-                  "key": [
-                    "board_id"
-                  ],
+                  "key": ["board_id"],
                   "value": {
                     "kind": "JessieExpression",
                     "expression": "input.profileId",
@@ -885,9 +857,7 @@
                 },
                 {
                   "kind": "Assignment",
-                  "key": [
-                    "link"
-                  ],
+                  "key": ["link"],
                   "value": {
                     "kind": "JessieExpression",
                     "expression": "input.link",
@@ -921,9 +891,7 @@
                 },
                 {
                   "kind": "Assignment",
-                  "key": [
-                    "description"
-                  ],
+                  "key": ["description"],
                   "value": {
                     "kind": "JessieExpression",
                     "expression": "input.text",
@@ -957,9 +925,7 @@
                 },
                 {
                   "kind": "Assignment",
-                  "key": [
-                    "title"
-                  ],
+                  "key": ["title"],
                   "value": {
                     "kind": "JessieExpression",
                     "expression": "input.title",
@@ -993,9 +959,7 @@
                 },
                 {
                   "kind": "Assignment",
-                  "key": [
-                    "alt_text"
-                  ],
+                  "key": ["alt_text"],
                   "value": {
                     "kind": "JessieExpression",
                     "expression": "media.altText",
@@ -1029,9 +993,7 @@
                 },
                 {
                   "kind": "Assignment",
-                  "key": [
-                    "media_source"
-                  ],
+                  "key": ["media_source"],
                   "value": {
                     "kind": "JessieExpression",
                     "expression": "mediaSource",
@@ -1106,9 +1068,7 @@
                     "fields": [
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "postId"
-                        ],
+                        "key": ["postId"],
                         "value": {
                           "kind": "JessieExpression",
                           "expression": "body.id",
@@ -1142,9 +1102,7 @@
                       },
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "url"
-                        ],
+                        "key": ["url"],
                         "value": {
                           "kind": "JessieExpression",
                           "expression": "\"https://www.pinterest.com/pin/\".concat(body.id, \"/\")",
@@ -1231,9 +1189,7 @@
                     "fields": [
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "title"
-                        ],
+                        "key": ["title"],
                         "value": {
                           "kind": "PrimitiveLiteral",
                           "value": "Bad request",
@@ -1265,9 +1221,7 @@
                       },
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "detail"
-                        ],
+                        "key": ["detail"],
                         "value": {
                           "kind": "JessieExpression",
                           "expression": "body.message",
@@ -1301,9 +1255,7 @@
                       },
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "original"
-                        ],
+                        "key": ["original"],
                         "value": {
                           "kind": "JessieExpression",
                           "expression": "body",
@@ -1390,9 +1342,7 @@
                     "fields": [
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "title"
-                        ],
+                        "key": ["title"],
                         "value": {
                           "kind": "PrimitiveLiteral",
                           "value": "Unauthenticated",
@@ -1424,9 +1374,7 @@
                       },
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "detail"
-                        ],
+                        "key": ["detail"],
                         "value": {
                           "kind": "JessieExpression",
                           "expression": "body.message",
@@ -1460,9 +1408,7 @@
                       },
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "original"
-                        ],
+                        "key": ["original"],
                         "value": {
                           "kind": "JessieExpression",
                           "expression": "body",
@@ -1549,9 +1495,7 @@
                     "fields": [
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "title"
-                        ],
+                        "key": ["title"],
                         "value": {
                           "kind": "PrimitiveLiteral",
                           "value": "Forbidden",
@@ -1583,9 +1527,7 @@
                       },
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "detail"
-                        ],
+                        "key": ["detail"],
                         "value": {
                           "kind": "JessieExpression",
                           "expression": "body.message",
@@ -1619,9 +1561,7 @@
                       },
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "original"
-                        ],
+                        "key": ["original"],
                         "value": {
                           "kind": "JessieExpression",
                           "expression": "body",
@@ -1708,9 +1648,7 @@
                     "fields": [
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "title"
-                        ],
+                        "key": ["title"],
                         "value": {
                           "kind": "PrimitiveLiteral",
                           "value": "Not found",
@@ -1742,9 +1680,7 @@
                       },
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "detail"
-                        ],
+                        "key": ["detail"],
                         "value": {
                           "kind": "JessieExpression",
                           "expression": "body.message",
@@ -1778,9 +1714,7 @@
                       },
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "original"
-                        ],
+                        "key": ["original"],
                         "value": {
                           "kind": "JessieExpression",
                           "expression": "body",
@@ -1867,9 +1801,7 @@
                     "fields": [
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "title"
-                        ],
+                        "key": ["title"],
                         "value": {
                           "kind": "PrimitiveLiteral",
                           "value": "Too Many Requests",
@@ -1901,9 +1833,7 @@
                       },
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "detail"
-                        ],
+                        "key": ["detail"],
                         "value": {
                           "kind": "JessieExpression",
                           "expression": "body.message",
@@ -1937,9 +1867,7 @@
                       },
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "original"
-                        ],
+                        "key": ["original"],
                         "value": {
                           "kind": "JessieExpression",
                           "expression": "body",
@@ -2024,9 +1952,7 @@
                     "fields": [
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "title"
-                        ],
+                        "key": ["title"],
                         "value": {
                           "kind": "PrimitiveLiteral",
                           "value": "Unexpected error",
@@ -2058,9 +1984,7 @@
                       },
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "detail"
-                        ],
+                        "key": ["detail"],
                         "value": {
                           "kind": "JessieExpression",
                           "expression": "body.message",
@@ -2094,9 +2018,7 @@
                       },
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "original"
-                        ],
+                        "key": ["original"],
                         "value": {
                           "kind": "JessieExpression",
                           "expression": "body",

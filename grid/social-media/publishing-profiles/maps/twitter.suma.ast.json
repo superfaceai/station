@@ -42,9 +42,7 @@
               "fields": [
                 {
                   "kind": "Assignment",
-                  "key": [
-                    "user.fields"
-                  ],
+                  "key": ["user.fields"],
                   "value": {
                     "kind": "PrimitiveLiteral",
                     "value": "id,name,profile_image_url,username",
@@ -93,9 +91,7 @@
               "fields": [
                 {
                   "kind": "Assignment",
-                  "key": [
-                    "authorization"
-                  ],
+                  "key": ["authorization"],
                   "value": {
                     "kind": "JessieExpression",
                     "expression": "\"Bearer \" + parameters.accessToken",
@@ -166,9 +162,7 @@
                   "assignments": [
                     {
                       "kind": "Assignment",
-                      "key": [
-                        "profile"
-                      ],
+                      "key": ["profile"],
                       "value": {
                         "kind": "JessieExpression",
                         "expression": "body.data",
@@ -223,9 +217,7 @@
                     "fields": [
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "profiles"
-                        ],
+                        "key": ["profiles"],
                         "value": {
                           "kind": "JessieExpression",
                           "expression": "[{\n        id: profile.id,\n        name: profile.name,\n        username: profile.username,\n        imageUrl: profile.profile_image_url,\n    }]",
@@ -312,9 +304,7 @@
                     "fields": [
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "title"
-                        ],
+                        "key": ["title"],
                         "value": {
                           "kind": "JessieExpression",
                           "expression": "body.title || \"Bad request\"",
@@ -348,9 +338,7 @@
                       },
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "detail"
-                        ],
+                        "key": ["detail"],
                         "value": {
                           "kind": "JessieExpression",
                           "expression": "body.detail",
@@ -437,9 +425,7 @@
                     "fields": [
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "title"
-                        ],
+                        "key": ["title"],
                         "value": {
                           "kind": "JessieExpression",
                           "expression": "body.title || \"Unauthorized\"",
@@ -473,9 +459,7 @@
                       },
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "detail"
-                        ],
+                        "key": ["detail"],
                         "value": {
                           "kind": "JessieExpression",
                           "expression": "body.detail",
@@ -562,9 +546,7 @@
                     "fields": [
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "title"
-                        ],
+                        "key": ["title"],
                         "value": {
                           "kind": "JessieExpression",
                           "expression": "body.title || \"Forbidden\"",
@@ -598,9 +580,7 @@
                       },
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "detail"
-                        ],
+                        "key": ["detail"],
                         "value": {
                           "kind": "JessieExpression",
                           "expression": "body.detail",

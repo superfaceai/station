@@ -36,9 +36,7 @@
           "assignments": [
             {
               "kind": "Assignment",
-              "key": [
-                "payload"
-              ],
+              "key": ["payload"],
               "value": {
                 "kind": "JessieExpression",
                 "expression": "input.query || \"\".concat(input.streetAddress || \"\", \" \").concat(input.addressLocality || \"\", \" \").concat(input.addressRegion || \"\", \" \").concat(input.postalCode || \"\", \" \").concat(input.addressCountry || \"\")",
@@ -95,9 +93,7 @@
               "fields": [
                 {
                   "kind": "Assignment",
-                  "key": [
-                    "q"
-                  ],
+                  "key": ["q"],
                   "value": {
                     "kind": "JessieExpression",
                     "expression": "payload",
@@ -209,9 +205,7 @@
                     "fields": [
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "title"
-                        ],
+                        "key": ["title"],
                         "value": {
                           "kind": "PrimitiveLiteral",
                           "value": "Error geocoding address",
@@ -243,9 +237,7 @@
                       },
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "detail"
-                        ],
+                        "key": ["detail"],
                         "value": {
                           "kind": "JessieExpression",
                           "expression": "body.status.message",
@@ -313,9 +305,7 @@
                     "fields": [
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "latitude"
-                        ],
+                        "key": ["latitude"],
                         "value": {
                           "kind": "JessieExpression",
                           "expression": "body.results[0].geometry.lat",
@@ -349,9 +339,7 @@
                       },
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "longitude"
-                        ],
+                        "key": ["longitude"],
                         "value": {
                           "kind": "JessieExpression",
                           "expression": "body.results[0].geometry.lng",
@@ -438,9 +426,7 @@
                     "fields": [
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "title"
-                        ],
+                        "key": ["title"],
                         "value": {
                           "kind": "PrimitiveLiteral",
                           "value": "Bad request",
@@ -472,9 +458,7 @@
                       },
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "detail"
-                        ],
+                        "key": ["detail"],
                         "value": {
                           "kind": "JessieExpression",
                           "expression": "body.status.message",
@@ -561,9 +545,7 @@
                     "fields": [
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "title"
-                        ],
+                        "key": ["title"],
                         "value": {
                           "kind": "PrimitiveLiteral",
                           "value": "Unauthorized",
@@ -595,9 +577,7 @@
                       },
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "detail"
-                        ],
+                        "key": ["detail"],
                         "value": {
                           "kind": "JessieExpression",
                           "expression": "body.status.message",
@@ -684,9 +664,7 @@
                     "fields": [
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "title"
-                        ],
+                        "key": ["title"],
                         "value": {
                           "kind": "PrimitiveLiteral",
                           "value": "Forbidden",
@@ -718,9 +696,7 @@
                       },
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "detail"
-                        ],
+                        "key": ["detail"],
                         "value": {
                           "kind": "JessieExpression",
                           "expression": "body.status.message",
@@ -807,9 +783,7 @@
                     "fields": [
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "title"
-                        ],
+                        "key": ["title"],
                         "value": {
                           "kind": "PrimitiveLiteral",
                           "value": "Internal server Error",
@@ -841,9 +815,7 @@
                       },
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "detail"
-                        ],
+                        "key": ["detail"],
                         "value": {
                           "kind": "JessieExpression",
                           "expression": "body.status.message",
@@ -954,9 +926,7 @@
           "assignments": [
             {
               "kind": "Assignment",
-              "key": [
-                "payload"
-              ],
+              "key": ["payload"],
               "value": {
                 "kind": "JessieExpression",
                 "expression": "\"\".concat(input.latitude, \"+\").concat(input.longitude)",
@@ -1013,9 +983,7 @@
               "fields": [
                 {
                   "kind": "Assignment",
-                  "key": [
-                    "q"
-                  ],
+                  "key": ["q"],
                   "value": {
                     "kind": "JessieExpression",
                     "expression": "payload",
@@ -1127,9 +1095,7 @@
                     "fields": [
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "title"
-                        ],
+                        "key": ["title"],
                         "value": {
                           "kind": "PrimitiveLiteral",
                           "value": "Error reverse geocoding coordinates",
@@ -1161,9 +1127,7 @@
                       },
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "detail"
-                        ],
+                        "key": ["detail"],
                         "value": {
                           "kind": "JessieExpression",
                           "expression": "body.status.message",
@@ -1264,9 +1228,7 @@
                     "fields": [
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "title"
-                        ],
+                        "key": ["title"],
                         "value": {
                           "kind": "PrimitiveLiteral",
                           "value": "Error reverse geocoding coordinates",
@@ -1298,9 +1260,7 @@
                       },
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "detail"
-                        ],
+                        "key": ["detail"],
                         "value": {
                           "kind": "PrimitiveLiteral",
                           "value": "No results returned",
@@ -1420,9 +1380,7 @@
                     "fields": [
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "title"
-                        ],
+                        "key": ["title"],
                         "value": {
                           "kind": "PrimitiveLiteral",
                           "value": "Bad request",
@@ -1454,9 +1412,7 @@
                       },
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "detail"
-                        ],
+                        "key": ["detail"],
                         "value": {
                           "kind": "JessieExpression",
                           "expression": "body.status.message",
@@ -1543,9 +1499,7 @@
                     "fields": [
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "title"
-                        ],
+                        "key": ["title"],
                         "value": {
                           "kind": "PrimitiveLiteral",
                           "value": "Unauthorized",
@@ -1577,9 +1531,7 @@
                       },
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "detail"
-                        ],
+                        "key": ["detail"],
                         "value": {
                           "kind": "JessieExpression",
                           "expression": "body.status.message",
@@ -1666,9 +1618,7 @@
                     "fields": [
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "title"
-                        ],
+                        "key": ["title"],
                         "value": {
                           "kind": "PrimitiveLiteral",
                           "value": "Forbidden",
@@ -1700,9 +1650,7 @@
                       },
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "detail"
-                        ],
+                        "key": ["detail"],
                         "value": {
                           "kind": "JessieExpression",
                           "expression": "body.status.message",
@@ -1789,9 +1737,7 @@
                     "fields": [
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "title"
-                        ],
+                        "key": ["title"],
                         "value": {
                           "kind": "PrimitiveLiteral",
                           "value": "Internal server Error",
@@ -1823,9 +1769,7 @@
                       },
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "detail"
-                        ],
+                        "key": ["detail"],
                         "value": {
                           "kind": "JessieExpression",
                           "expression": "body.status.message",

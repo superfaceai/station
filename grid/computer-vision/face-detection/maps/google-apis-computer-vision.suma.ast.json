@@ -42,9 +42,7 @@
               "fields": [
                 {
                   "kind": "Assignment",
-                  "key": [
-                    "Content-Type"
-                  ],
+                  "key": ["Content-Type"],
                   "value": {
                     "kind": "PrimitiveLiteral",
                     "value": "application/json",
@@ -93,9 +91,7 @@
               "fields": [
                 {
                   "kind": "Assignment",
-                  "key": [
-                    "requests"
-                  ],
+                  "key": ["requests"],
                   "value": {
                     "kind": "JessieExpression",
                     "expression": "[{\n        features: [\n            {\n                maxResults: 1,\n                type: \"FACE_DETECTION\"\n            }\n        ],\n        image: {\n            source: {\n                imageUri: input.imageUrl\n            }\n        }\n    }]",
@@ -205,9 +201,7 @@
                     "fields": [
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "code"
-                        ],
+                        "key": ["code"],
                         "value": {
                           "kind": "JessieExpression",
                           "expression": "body.responses[0].error.code",
@@ -241,9 +235,7 @@
                       },
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "message"
-                        ],
+                        "key": ["message"],
                         "value": {
                           "kind": "JessieExpression",
                           "expression": "body.responses[0].error.message",

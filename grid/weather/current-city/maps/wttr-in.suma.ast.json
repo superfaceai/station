@@ -36,9 +36,7 @@
           "assignments": [
             {
               "kind": "Assignment",
-              "key": [
-                "units"
-              ],
+              "key": ["units"],
               "value": {
                 "kind": "JessieExpression",
                 "expression": "input.units",
@@ -72,9 +70,7 @@
             },
             {
               "kind": "Assignment",
-              "key": [
-                "inputCity"
-              ],
+              "key": ["inputCity"],
               "value": {
                 "kind": "JessieExpression",
                 "expression": "input.city",
@@ -131,9 +127,7 @@
               "fields": [
                 {
                   "kind": "Assignment",
-                  "key": [
-                    "format"
-                  ],
+                  "key": ["format"],
                   "value": {
                     "kind": "PrimitiveLiteral",
                     "value": "j1",
@@ -202,18 +196,14 @@
                   "assignments": [
                     {
                       "kind": "Assignment",
-                      "key": [
-                        "temperatureWrapper"
-                      ],
+                      "key": ["temperatureWrapper"],
                       "value": {
                         "kind": "InlineCall",
                         "operationName": "pickTemperatures",
                         "arguments": [
                           {
                             "kind": "Assignment",
-                            "key": [
-                              "weather"
-                            ],
+                            "key": ["weather"],
                             "value": {
                               "kind": "JessieExpression",
                               "expression": "body.current_condition[0]",
@@ -247,9 +237,7 @@
                           },
                           {
                             "kind": "Assignment",
-                            "key": [
-                              "units"
-                            ],
+                            "key": ["units"],
                             "value": {
                               "kind": "JessieExpression",
                               "expression": "units",
@@ -331,9 +319,7 @@
                     "fields": [
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "temperature"
-                        ],
+                        "key": ["temperature"],
                         "value": {
                           "kind": "JessieExpression",
                           "expression": "temperatureWrapper.temperature",
@@ -367,9 +353,7 @@
                       },
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "feelsLike"
-                        ],
+                        "key": ["feelsLike"],
                         "value": {
                           "kind": "JessieExpression",
                           "expression": "temperatureWrapper.feelsLike",
@@ -403,9 +387,7 @@
                       },
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "description"
-                        ],
+                        "key": ["description"],
                         "value": {
                           "kind": "JessieExpression",
                           "expression": "body.current_condition[0].weatherDesc[0].value",
@@ -552,9 +534,7 @@
             "fields": [
               {
                 "kind": "Assignment",
-                "key": [
-                  "temperature"
-                ],
+                "key": ["temperature"],
                 "value": {
                   "kind": "JessieExpression",
                   "expression": "Number(args.weather.temp_F)",
@@ -588,9 +568,7 @@
               },
               {
                 "kind": "Assignment",
-                "key": [
-                  "feelsLike"
-                ],
+                "key": ["feelsLike"],
                 "value": {
                   "kind": "JessieExpression",
                   "expression": "Number(args.weather.FeelsLikeF)",
@@ -691,9 +669,7 @@
             "fields": [
               {
                 "kind": "Assignment",
-                "key": [
-                  "temperature"
-                ],
+                "key": ["temperature"],
                 "value": {
                   "kind": "JessieExpression",
                   "expression": "Number(args.weather.temp_C) + 273.15",
@@ -727,9 +703,7 @@
               },
               {
                 "kind": "Assignment",
-                "key": [
-                  "feelsLike"
-                ],
+                "key": ["feelsLike"],
                 "value": {
                   "kind": "JessieExpression",
                   "expression": "Number(args.weather.FeelsLikeC) + 273.15",
@@ -797,9 +771,7 @@
             "fields": [
               {
                 "kind": "Assignment",
-                "key": [
-                  "temperature"
-                ],
+                "key": ["temperature"],
                 "value": {
                   "kind": "JessieExpression",
                   "expression": "Number(args.weather.temp_C)",
@@ -833,9 +805,7 @@
               },
               {
                 "kind": "Assignment",
-                "key": [
-                  "feelsLike"
-                ],
+                "key": ["feelsLike"],
                 "value": {
                   "kind": "JessieExpression",
                   "expression": "Number(args.weather.FeelsLikeC)",

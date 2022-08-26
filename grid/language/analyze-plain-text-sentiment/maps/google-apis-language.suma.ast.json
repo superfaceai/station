@@ -42,9 +42,7 @@
               "fields": [
                 {
                   "kind": "Assignment",
-                  "key": [
-                    "encodingType"
-                  ],
+                  "key": ["encodingType"],
                   "value": {
                     "kind": "PrimitiveLiteral",
                     "value": "UTF8",
@@ -76,9 +74,7 @@
                 },
                 {
                   "kind": "Assignment",
-                  "key": [
-                    "document"
-                  ],
+                  "key": ["document"],
                   "value": {
                     "kind": "JessieExpression",
                     "expression": "{\n    type: 'PLAIN_TEXT',\n    language: input.languageCode,\n    content: input.text\n}",
@@ -157,18 +153,14 @@
                     "fields": [
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "sentiment"
-                        ],
+                        "key": ["sentiment"],
                         "value": {
                           "kind": "InlineCall",
                           "operationName": "MapScoreToSentiment",
                           "arguments": [
                             {
                               "kind": "Assignment",
-                              "key": [
-                                "score"
-                              ],
+                              "key": ["score"],
                               "value": {
                                 "kind": "JessieExpression",
                                 "expression": "body.documentSentiment.score",
@@ -229,9 +221,7 @@
                       },
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "score"
-                        ],
+                        "key": ["score"],
                         "value": {
                           "kind": "JessieExpression",
                           "expression": "body.documentSentiment.score",
@@ -318,9 +308,7 @@
                     "fields": [
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "title"
-                        ],
+                        "key": ["title"],
                         "value": {
                           "kind": "JessieExpression",
                           "expression": "(body.error.status === \"INVALID_ARGUMENT\") ? \"Invalid argument\" : \"Bad request\"",
@@ -354,9 +342,7 @@
                       },
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "detail"
-                        ],
+                        "key": ["detail"],
                         "value": {
                           "kind": "JessieExpression",
                           "expression": "body.error.message",
@@ -443,9 +429,7 @@
                     "fields": [
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "title"
-                        ],
+                        "key": ["title"],
                         "value": {
                           "kind": "PrimitiveLiteral",
                           "value": "Unauthorized",
@@ -477,9 +461,7 @@
                       },
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "detail"
-                        ],
+                        "key": ["detail"],
                         "value": {
                           "kind": "JessieExpression",
                           "expression": "body.error.message",
@@ -566,9 +548,7 @@
                     "fields": [
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "title"
-                        ],
+                        "key": ["title"],
                         "value": {
                           "kind": "PrimitiveLiteral",
                           "value": "Forbidden",
@@ -600,9 +580,7 @@
                       },
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "detail"
-                        ],
+                        "key": ["detail"],
                         "value": {
                           "kind": "JessieExpression",
                           "expression": "body.error.message",
@@ -689,9 +667,7 @@
                     "fields": [
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "title"
-                        ],
+                        "key": ["title"],
                         "value": {
                           "kind": "PrimitiveLiteral",
                           "value": "Internal server Error",
@@ -723,9 +699,7 @@
                       },
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "detail"
-                        ],
+                        "key": ["detail"],
                         "value": {
                           "kind": "JessieExpression",
                           "expression": "body.error.message",
@@ -835,9 +809,7 @@
           "assignments": [
             {
               "kind": "Assignment",
-              "key": [
-                "result"
-              ],
+              "key": ["result"],
               "value": {
                 "kind": "PrimitiveLiteral",
                 "value": "neutral",
@@ -919,9 +891,7 @@
           "assignments": [
             {
               "kind": "Assignment",
-              "key": [
-                "result"
-              ],
+              "key": ["result"],
               "value": {
                 "kind": "PrimitiveLiteral",
                 "value": "negative",
@@ -1003,9 +973,7 @@
           "assignments": [
             {
               "kind": "Assignment",
-              "key": [
-                "result"
-              ],
+              "key": ["result"],
               "value": {
                 "kind": "PrimitiveLiteral",
                 "value": "positive",

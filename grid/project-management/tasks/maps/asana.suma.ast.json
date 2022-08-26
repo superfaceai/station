@@ -43,9 +43,7 @@
               "fields": [
                 {
                   "kind": "Assignment",
-                  "key": [
-                    "Authorization"
-                  ],
+                  "key": ["Authorization"],
                   "value": {
                     "kind": "JessieExpression",
                     "expression": "\"Bearer \".concat(parameters.accessToken)",
@@ -96,9 +94,7 @@
               "fields": [
                 {
                   "kind": "Assignment",
-                  "key": [
-                    "data"
-                  ],
+                  "key": ["data"],
                   "value": {
                     "kind": "JessieExpression",
                     "expression": "{\n    name: input.title,\n    notes: input.description,\n    projects: [input.project],\n    parent: input.parent,\n    assignee: input.assignee\n}",
@@ -177,9 +173,7 @@
                     "fields": [
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "id"
-                        ],
+                        "key": ["id"],
                         "value": {
                           "kind": "JessieExpression",
                           "expression": "body.data.gid",
@@ -213,9 +207,7 @@
                       },
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "url"
-                        ],
+                        "key": ["url"],
                         "value": {
                           "kind": "JessieExpression",
                           "expression": "body.data.permalink_url",

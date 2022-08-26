@@ -36,9 +36,7 @@
           "assignments": [
             {
               "kind": "Assignment",
-              "key": [
-                "audio"
-              ],
+              "key": ["audio"],
               "value": {
                 "kind": "JessieExpression",
                 "expression": "input.audio",
@@ -89,9 +87,7 @@
           "assignments": [
             {
               "kind": "Assignment",
-              "key": [
-                "voice"
-              ],
+              "key": ["voice"],
               "value": {
                 "kind": "JessieExpression",
                 "expression": "input.voice",
@@ -142,18 +138,14 @@
           "assignments": [
             {
               "kind": "Assignment",
-              "key": [
-                "encoding"
-              ],
+              "key": ["encoding"],
               "value": {
                 "kind": "InlineCall",
                 "operationName": "MapAudioEncoding",
                 "arguments": [
                   {
                     "kind": "Assignment",
-                    "key": [
-                      "encoding"
-                    ],
+                    "key": ["encoding"],
                     "value": {
                       "kind": "JessieExpression",
                       "expression": "audio.encoding",
@@ -237,9 +229,7 @@
               "fields": [
                 {
                   "kind": "Assignment",
-                  "key": [
-                    "input"
-                  ],
+                  "key": ["input"],
                   "value": {
                     "kind": "JessieExpression",
                     "expression": "{\n    text: input.text\n}",
@@ -273,9 +263,7 @@
                 },
                 {
                   "kind": "Assignment",
-                  "key": [
-                    "voice"
-                  ],
+                  "key": ["voice"],
                   "value": {
                     "kind": "JessieExpression",
                     "expression": "{\n    languageCode: voice.languageCode,\n    name: voice.name\n}",
@@ -309,9 +297,7 @@
                 },
                 {
                   "kind": "Assignment",
-                  "key": [
-                    "audioConfig"
-                  ],
+                  "key": ["audioConfig"],
                   "value": {
                     "kind": "JessieExpression",
                     "expression": "{\n    audioEncoding: encoding,\n    sampleRateHertz: audio.sampleRateHertz\n}",
@@ -390,18 +376,14 @@
                     "fields": [
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "audioContent"
-                        ],
+                        "key": ["audioContent"],
                         "value": {
                           "kind": "InlineCall",
                           "operationName": "Base64StringToBuffer",
                           "arguments": [
                             {
                               "kind": "Assignment",
-                              "key": [
-                                "input"
-                              ],
+                              "key": ["input"],
                               "value": {
                                 "kind": "JessieExpression",
                                 "expression": "body.audioContent",
@@ -515,9 +497,7 @@
                     "fields": [
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "title"
-                        ],
+                        "key": ["title"],
                         "value": {
                           "kind": "JessieExpression",
                           "expression": "(body.error.status === \"INVALID_ARGUMENT\") ? \"Invalid argument\" : \"Bad request\"",
@@ -551,9 +531,7 @@
                       },
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "detail"
-                        ],
+                        "key": ["detail"],
                         "value": {
                           "kind": "JessieExpression",
                           "expression": "body.error.message",
@@ -640,9 +618,7 @@
                     "fields": [
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "title"
-                        ],
+                        "key": ["title"],
                         "value": {
                           "kind": "PrimitiveLiteral",
                           "value": "Unauthorized",
@@ -674,9 +650,7 @@
                       },
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "detail"
-                        ],
+                        "key": ["detail"],
                         "value": {
                           "kind": "JessieExpression",
                           "expression": "body.error.message",
@@ -763,9 +737,7 @@
                     "fields": [
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "title"
-                        ],
+                        "key": ["title"],
                         "value": {
                           "kind": "PrimitiveLiteral",
                           "value": "Forbidden",
@@ -797,9 +769,7 @@
                       },
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "detail"
-                        ],
+                        "key": ["detail"],
                         "value": {
                           "kind": "JessieExpression",
                           "expression": "body.error.message",
@@ -886,9 +856,7 @@
                     "fields": [
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "title"
-                        ],
+                        "key": ["title"],
                         "value": {
                           "kind": "PrimitiveLiteral",
                           "value": "Internal server Error",
@@ -920,9 +888,7 @@
                       },
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "detail"
-                        ],
+                        "key": ["detail"],
                         "value": {
                           "kind": "JessieExpression",
                           "expression": "body.error.message",
@@ -1032,9 +998,7 @@
           "assignments": [
             {
               "kind": "Assignment",
-              "key": [
-                "result"
-              ],
+              "key": ["result"],
               "value": {
                 "kind": "JessieExpression",
                 "expression": "(function () {\n    switch (args.encoding) {\n        case 'mp3':\n            return 'MP3';\n        case 'linear_pcm':\n            return 'LINEAR16';\n        default:\n            return 'unknown';\n    }\n})()",
@@ -1138,9 +1102,7 @@
           "assignments": [
             {
               "kind": "Assignment",
-              "key": [
-                "result"
-              ],
+              "key": ["result"],
               "value": {
                 "kind": "JessieExpression",
                 "expression": "(function () {\n    return Buffer.from(args.input, 'base64');\n})()",

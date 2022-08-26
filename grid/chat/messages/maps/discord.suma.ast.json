@@ -36,9 +36,7 @@
           "assignments": [
             {
               "kind": "Assignment",
-              "key": [
-                "destination"
-              ],
+              "key": ["destination"],
               "value": {
                 "kind": "JessieExpression",
                 "expression": "input.destination",
@@ -89,9 +87,7 @@
           "assignments": [
             {
               "kind": "Assignment",
-              "key": [
-                "afterId"
-              ],
+              "key": ["afterId"],
               "value": {
                 "kind": "JessieExpression",
                 "expression": "undefined",
@@ -142,9 +138,7 @@
           "assignments": [
             {
               "kind": "Assignment",
-              "key": [
-                "beforeId"
-              ],
+              "key": ["beforeId"],
               "value": {
                 "kind": "JessieExpression",
                 "expression": "undefined",
@@ -228,18 +222,14 @@
           "assignments": [
             {
               "kind": "Assignment",
-              "key": [
-                "afterId"
-              ],
+              "key": ["afterId"],
               "value": {
                 "kind": "InlineCall",
                 "operationName": "GetSnowflake",
                 "arguments": [
                   {
                     "kind": "Assignment",
-                    "key": [
-                      "ts"
-                    ],
+                    "key": ["ts"],
                     "value": {
                       "kind": "JessieExpression",
                       "expression": "input.afterTimestamp",
@@ -350,18 +340,14 @@
           "assignments": [
             {
               "kind": "Assignment",
-              "key": [
-                "beforeId"
-              ],
+              "key": ["beforeId"],
               "value": {
                 "kind": "InlineCall",
                 "operationName": "GetSnowflake",
                 "arguments": [
                   {
                     "kind": "Assignment",
-                    "key": [
-                      "ts"
-                    ],
+                    "key": ["ts"],
                     "value": {
                       "kind": "JessieExpression",
                       "expression": "input.beforeTimestamp",
@@ -446,9 +432,7 @@
               "fields": [
                 {
                   "kind": "Assignment",
-                  "key": [
-                    "after"
-                  ],
+                  "key": ["after"],
                   "value": {
                     "kind": "JessieExpression",
                     "expression": "afterId",
@@ -482,9 +466,7 @@
                 },
                 {
                   "kind": "Assignment",
-                  "key": [
-                    "before"
-                  ],
+                  "key": ["before"],
                   "value": {
                     "kind": "JessieExpression",
                     "expression": "input.page || beforeId",
@@ -518,9 +500,7 @@
                 },
                 {
                   "kind": "Assignment",
-                  "key": [
-                    "limit"
-                  ],
+                  "key": ["limit"],
                   "value": {
                     "kind": "JessieExpression",
                     "expression": "input.limit",
@@ -571,9 +551,7 @@
               "fields": [
                 {
                   "kind": "Assignment",
-                  "key": [
-                    "Authorization"
-                  ],
+                  "key": ["Authorization"],
                   "value": {
                     "kind": "JessieExpression",
                     "expression": "\"Bot \".concat(parameters.accessToken)",
@@ -644,18 +622,14 @@
                   "assignments": [
                     {
                       "kind": "Assignment",
-                      "key": [
-                        "messages"
-                      ],
+                      "key": ["messages"],
                       "value": {
                         "kind": "InlineCall",
                         "operationName": "MapMessages",
                         "arguments": [
                           {
                             "kind": "Assignment",
-                            "key": [
-                              "messages"
-                            ],
+                            "key": ["messages"],
                             "value": {
                               "kind": "JessieExpression",
                               "expression": "body",
@@ -733,18 +707,14 @@
                   "assignments": [
                     {
                       "kind": "Assignment",
-                      "key": [
-                        "rateLimit"
-                      ],
+                      "key": ["rateLimit"],
                       "value": {
                         "kind": "InlineCall",
                         "operationName": "MapRateLimitDetails",
                         "arguments": [
                           {
                             "kind": "Assignment",
-                            "key": [
-                              "headers"
-                            ],
+                            "key": ["headers"],
                             "value": {
                               "kind": "JessieExpression",
                               "expression": "headers",
@@ -859,9 +829,7 @@
                     "fields": [
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "messages"
-                        ],
+                        "key": ["messages"],
                         "value": {
                           "kind": "JessieExpression",
                           "expression": "messages",
@@ -895,9 +863,7 @@
                       },
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "rateLimit"
-                        ],
+                        "key": ["rateLimit"],
                         "value": {
                           "kind": "JessieExpression",
                           "expression": "rateLimit",
@@ -961,9 +927,7 @@
                   "assignments": [
                     {
                       "kind": "Assignment",
-                      "key": [
-                        "lastMessage"
-                      ],
+                      "key": ["lastMessage"],
                       "value": {
                         "kind": "JessieExpression",
                         "expression": "messages[messages.length - 1]",
@@ -1018,9 +982,7 @@
                     "fields": [
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "nextPage"
-                        ],
+                        "key": ["nextPage"],
                         "value": {
                           "kind": "JessieExpression",
                           "expression": "lastMessage.id",
@@ -1054,9 +1016,7 @@
                       },
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "messages"
-                        ],
+                        "key": ["messages"],
                         "value": {
                           "kind": "JessieExpression",
                           "expression": "messages",
@@ -1090,9 +1050,7 @@
                       },
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "rateLimit"
-                        ],
+                        "key": ["rateLimit"],
                         "value": {
                           "kind": "JessieExpression",
                           "expression": "rateLimit",
@@ -1173,18 +1131,14 @@
                   "assignments": [
                     {
                       "kind": "Assignment",
-                      "key": [
-                        "error"
-                      ],
+                      "key": ["error"],
                       "value": {
                         "kind": "InlineCall",
                         "operationName": "MapDiscordError",
                         "arguments": [
                           {
                             "kind": "Assignment",
-                            "key": [
-                              "statusCode"
-                            ],
+                            "key": ["statusCode"],
                             "value": {
                               "kind": "JessieExpression",
                               "expression": "statusCode",
@@ -1218,9 +1172,7 @@
                           },
                           {
                             "kind": "Assignment",
-                            "key": [
-                              "error"
-                            ],
+                            "key": ["error"],
                             "value": {
                               "kind": "JessieExpression",
                               "expression": "body",
@@ -1254,9 +1206,7 @@
                           },
                           {
                             "kind": "Assignment",
-                            "key": [
-                              "headers"
-                            ],
+                            "key": ["headers"],
                             "value": {
                               "kind": "JessieExpression",
                               "expression": "headers",
@@ -1430,9 +1380,7 @@
           "assignments": [
             {
               "kind": "Assignment",
-              "key": [
-                "messages"
-              ],
+              "key": ["messages"],
               "value": {
                 "kind": "JessieExpression",
                 "expression": "args.messages.map(function (message) {\n    var resultMessage = {\n        id: message.id,\n        author: {\n            id: message.author.id,\n            username: message.author.username,\n        },\n        createdAt: Date.parse(message.timestamp),\n        text: message.content,\n    };\n    var reactions = [], attachments = [];\n    if (message.edited_timestamp) {\n        resultMessage.updatedAt = Date.parse(message.edited_timestamp);\n    }\n    if (message.thread) {\n        resultMessage.hasThread = true;\n        resultMessage.threadId = message.thread.id;\n    }\n    if (message.reactions && message.reactions.length > 0) {\n        reactions = message.reactions.map(function (reaction) { return ({\n            emoji: reaction.emoji.name,\n            count: reaction.count,\n        }); });\n        resultMessage.reactions = reactions;\n    }\n    if (message.attachments && message.attachments.length > 0) {\n        /**\n         * Returns UNIX timestamp in milliseconds from specified discord snowflake id\n         * More about snowflakes: https://discord.com/developers/docs/reference#snowflakes\n         */\n        var discordEpoch_1 = 1420070400000;\n        var getTimestamp_1 = function (snowflake) { return Number(BigInt(snowflake) >> BigInt(22)) + discordEpoch_1; };\n        attachments = message.attachments.map(function (attachment) {\n            var createdAt = getTimestamp_1(attachment.id);\n            var resultAttachment = {\n                id: attachment.id,\n                createdAt: createdAt,\n                fileName: attachment.filename,\n                url: attachment.url,\n            };\n            if (attachment.content_type) {\n                resultAttachment.mediaType = attachment.content_type;\n            }\n            return resultAttachment;\n        });\n        resultMessage.attachments = attachments;\n    }\n    if (message.message_reference && message.message_reference.message_id) {\n        resultMessage.parentId = message.message_reference.message_id;\n    }\n    // TODO: implement composing URL\n    // BLOCKER: unknown guild id\n    // Format of public URL:          https://discord.com/channels/<guild-id>/<channel-id>/<message-id>\n    // Format of URL poiting to API:  https://discord.com/api/channels/<channel-id>/messages/<message-id>\n    return resultMessage;\n})",
@@ -1552,9 +1500,7 @@
           "assignments": [
             {
               "kind": "Assignment",
-              "key": [
-                "headers"
-              ],
+              "key": ["headers"],
               "value": {
                 "kind": "JessieExpression",
                 "expression": "args.headers",
@@ -1605,9 +1551,7 @@
           "assignments": [
             {
               "kind": "Assignment",
-              "key": [
-                "details"
-              ],
+              "key": ["details"],
               "value": {
                 "kind": "JessieExpression",
                 "expression": "{}",
@@ -1658,9 +1602,7 @@
           "assignments": [
             {
               "kind": "Assignment",
-              "key": [
-                "bucket"
-              ],
+              "key": ["bucket"],
               "value": {
                 "kind": "JessieExpression",
                 "expression": "headers['x-ratelimit-bucket']",
@@ -1711,9 +1653,7 @@
           "assignments": [
             {
               "kind": "Assignment",
-              "key": [
-                "totalRequests"
-              ],
+              "key": ["totalRequests"],
               "value": {
                 "kind": "JessieExpression",
                 "expression": "parseInt(headers['x-ratelimit-limit'])",
@@ -1764,9 +1704,7 @@
           "assignments": [
             {
               "kind": "Assignment",
-              "key": [
-                "remainingRequests"
-              ],
+              "key": ["remainingRequests"],
               "value": {
                 "kind": "JessieExpression",
                 "expression": "parseInt(headers['x-ratelimit-remaining'])",
@@ -1817,9 +1755,7 @@
           "assignments": [
             {
               "kind": "Assignment",
-              "key": [
-                "resetTimestamp"
-              ],
+              "key": ["resetTimestamp"],
               "value": {
                 "kind": "JessieExpression",
                 "expression": "parseFloat(headers['x-ratelimit-reset'])",
@@ -1870,9 +1806,7 @@
           "assignments": [
             {
               "kind": "Assignment",
-              "key": [
-                "resetAfter"
-              ],
+              "key": ["resetAfter"],
               "value": {
                 "kind": "JessieExpression",
                 "expression": "parseInt(headers['x-ratelimit-reset-after'])",
@@ -1923,9 +1857,7 @@
           "assignments": [
             {
               "kind": "Assignment",
-              "key": [
-                "retryAfter"
-              ],
+              "key": ["retryAfter"],
               "value": {
                 "kind": "JessieExpression",
                 "expression": "parseInt(headers['Retry-After'])",
@@ -2009,10 +1941,7 @@
           "assignments": [
             {
               "kind": "Assignment",
-              "key": [
-                "details",
-                "bucket"
-              ],
+              "key": ["details", "bucket"],
               "value": {
                 "kind": "JessieExpression",
                 "expression": "bucket",
@@ -2096,10 +2025,7 @@
           "assignments": [
             {
               "kind": "Assignment",
-              "key": [
-                "details",
-                "totalRequests"
-              ],
+              "key": ["details", "totalRequests"],
               "value": {
                 "kind": "JessieExpression",
                 "expression": "totalRequests",
@@ -2183,10 +2109,7 @@
           "assignments": [
             {
               "kind": "Assignment",
-              "key": [
-                "details",
-                "remainingRequests"
-              ],
+              "key": ["details", "remainingRequests"],
               "value": {
                 "kind": "JessieExpression",
                 "expression": "remainingRequests",
@@ -2270,10 +2193,7 @@
           "assignments": [
             {
               "kind": "Assignment",
-              "key": [
-                "details",
-                "resetAfter"
-              ],
+              "key": ["details", "resetAfter"],
               "value": {
                 "kind": "JessieExpression",
                 "expression": "resetAfter",
@@ -2357,10 +2277,7 @@
           "assignments": [
             {
               "kind": "Assignment",
-              "key": [
-                "details",
-                "resetTimestamp"
-              ],
+              "key": ["details", "resetTimestamp"],
               "value": {
                 "kind": "JessieExpression",
                 "expression": "resetTimestamp * 1000",
@@ -2444,10 +2361,7 @@
           "assignments": [
             {
               "kind": "Assignment",
-              "key": [
-                "details",
-                "retryAfter"
-              ],
+              "key": ["details", "retryAfter"],
               "value": {
                 "kind": "JessieExpression",
                 "expression": "retryAfter",
@@ -2531,10 +2445,7 @@
           "assignments": [
             {
               "kind": "Assignment",
-              "key": [
-                "details",
-                "remainingRequestsPercentage"
-              ],
+              "key": ["details", "remainingRequestsPercentage"],
               "value": {
                 "kind": "JessieExpression",
                 "expression": "(details.remainingRequests / details.totalRequests) * 100",
@@ -2618,9 +2529,7 @@
           "assignments": [
             {
               "kind": "Assignment",
-              "key": [
-                "details"
-              ],
+              "key": ["details"],
               "value": {
                 "kind": "JessieExpression",
                 "expression": "undefined",
@@ -2740,9 +2649,7 @@
           "assignments": [
             {
               "kind": "Assignment",
-              "key": [
-                "discordEpoch"
-              ],
+              "key": ["discordEpoch"],
               "value": {
                 "kind": "PrimitiveLiteral",
                 "value": 1420070400000,
@@ -2791,9 +2698,7 @@
           "assignments": [
             {
               "kind": "Assignment",
-              "key": [
-                "timestamp"
-              ],
+              "key": ["timestamp"],
               "value": {
                 "kind": "JessieExpression",
                 "expression": "args.ts",
@@ -2844,9 +2749,7 @@
           "assignments": [
             {
               "kind": "Assignment",
-              "key": [
-                "processedDate"
-              ],
+              "key": ["processedDate"],
               "value": {
                 "kind": "JessieExpression",
                 "expression": "timestamp - discordEpoch",
@@ -2966,9 +2869,7 @@
           "assignments": [
             {
               "kind": "Assignment",
-              "key": [
-                "statusCode"
-              ],
+              "key": ["statusCode"],
               "value": {
                 "kind": "JessieExpression",
                 "expression": "args.statusCode",
@@ -3019,9 +2920,7 @@
           "assignments": [
             {
               "kind": "Assignment",
-              "key": [
-                "discordError"
-              ],
+              "key": ["discordError"],
               "value": {
                 "kind": "JessieExpression",
                 "expression": "args.error",
@@ -3072,9 +2971,7 @@
           "assignments": [
             {
               "kind": "Assignment",
-              "key": [
-                "headers"
-              ],
+              "key": ["headers"],
               "value": {
                 "kind": "JessieExpression",
                 "expression": "args.headers",
@@ -3125,18 +3022,14 @@
           "assignments": [
             {
               "kind": "Assignment",
-              "key": [
-                "rateLimit"
-              ],
+              "key": ["rateLimit"],
               "value": {
                 "kind": "InlineCall",
                 "operationName": "MapRateLimitDetails",
                 "arguments": [
                   {
                     "kind": "Assignment",
-                    "key": [
-                      "headers"
-                    ],
+                    "key": ["headers"],
                     "value": {
                       "kind": "JessieExpression",
                       "expression": "headers",
@@ -3214,9 +3107,7 @@
           "assignments": [
             {
               "kind": "Assignment",
-              "key": [
-                "detail"
-              ],
+              "key": ["detail"],
               "value": {
                 "kind": "JessieExpression",
                 "expression": "discordError.message",
@@ -3304,9 +3195,7 @@
             "fields": [
               {
                 "kind": "Assignment",
-                "key": [
-                  "title"
-                ],
+                "key": ["title"],
                 "value": {
                   "kind": "PrimitiveLiteral",
                   "value": "Bad request",
@@ -3338,9 +3227,7 @@
               },
               {
                 "kind": "Assignment",
-                "key": [
-                  "detail"
-                ],
+                "key": ["detail"],
                 "value": {
                   "kind": "JessieExpression",
                   "expression": "discordError",
@@ -3374,9 +3261,7 @@
               },
               {
                 "kind": "Assignment",
-                "key": [
-                  "rateLimit"
-                ],
+                "key": ["rateLimit"],
                 "value": {
                   "kind": "JessieExpression",
                   "expression": "rateLimit",
@@ -3477,9 +3362,7 @@
             "fields": [
               {
                 "kind": "Assignment",
-                "key": [
-                  "title"
-                ],
+                "key": ["title"],
                 "value": {
                   "kind": "PrimitiveLiteral",
                   "value": "Unauthorized",
@@ -3511,9 +3394,7 @@
               },
               {
                 "kind": "Assignment",
-                "key": [
-                  "detail"
-                ],
+                "key": ["detail"],
                 "value": {
                   "kind": "JessieExpression",
                   "expression": "detail",
@@ -3547,9 +3428,7 @@
               },
               {
                 "kind": "Assignment",
-                "key": [
-                  "rateLimit"
-                ],
+                "key": ["rateLimit"],
                 "value": {
                   "kind": "JessieExpression",
                   "expression": "rateLimit",
@@ -3650,9 +3529,7 @@
             "fields": [
               {
                 "kind": "Assignment",
-                "key": [
-                  "title"
-                ],
+                "key": ["title"],
                 "value": {
                   "kind": "PrimitiveLiteral",
                   "value": "Forbidden",
@@ -3684,9 +3561,7 @@
               },
               {
                 "kind": "Assignment",
-                "key": [
-                  "detail"
-                ],
+                "key": ["detail"],
                 "value": {
                   "kind": "JessieExpression",
                   "expression": "detail",
@@ -3720,9 +3595,7 @@
               },
               {
                 "kind": "Assignment",
-                "key": [
-                  "rateLimit"
-                ],
+                "key": ["rateLimit"],
                 "value": {
                   "kind": "JessieExpression",
                   "expression": "rateLimit",
@@ -3823,9 +3696,7 @@
             "fields": [
               {
                 "kind": "Assignment",
-                "key": [
-                  "title"
-                ],
+                "key": ["title"],
                 "value": {
                   "kind": "PrimitiveLiteral",
                   "value": "Not found",
@@ -3857,9 +3728,7 @@
               },
               {
                 "kind": "Assignment",
-                "key": [
-                  "detail"
-                ],
+                "key": ["detail"],
                 "value": {
                   "kind": "JessieExpression",
                   "expression": "detail",
@@ -3893,9 +3762,7 @@
               },
               {
                 "kind": "Assignment",
-                "key": [
-                  "rateLimit"
-                ],
+                "key": ["rateLimit"],
                 "value": {
                   "kind": "JessieExpression",
                   "expression": "rateLimit",
@@ -3996,9 +3863,7 @@
             "fields": [
               {
                 "kind": "Assignment",
-                "key": [
-                  "title"
-                ],
+                "key": ["title"],
                 "value": {
                   "kind": "PrimitiveLiteral",
                   "value": "Method not allowed",
@@ -4030,9 +3895,7 @@
               },
               {
                 "kind": "Assignment",
-                "key": [
-                  "detail"
-                ],
+                "key": ["detail"],
                 "value": {
                   "kind": "JessieExpression",
                   "expression": "detail",
@@ -4066,9 +3929,7 @@
               },
               {
                 "kind": "Assignment",
-                "key": [
-                  "rateLimit"
-                ],
+                "key": ["rateLimit"],
                 "value": {
                   "kind": "JessieExpression",
                   "expression": "rateLimit",
@@ -4169,9 +4030,7 @@
             "fields": [
               {
                 "kind": "Assignment",
-                "key": [
-                  "title"
-                ],
+                "key": ["title"],
                 "value": {
                   "kind": "PrimitiveLiteral",
                   "value": "Too Many Requests",
@@ -4203,9 +4062,7 @@
               },
               {
                 "kind": "Assignment",
-                "key": [
-                  "detail"
-                ],
+                "key": ["detail"],
                 "value": {
                   "kind": "JessieExpression",
                   "expression": "\"\".concat(detail, \" Retry after \").concat(discordError.retry_after, \" seconds\")",
@@ -4239,9 +4096,7 @@
               },
               {
                 "kind": "Assignment",
-                "key": [
-                  "rateLimit"
-                ],
+                "key": ["rateLimit"],
                 "value": {
                   "kind": "JessieExpression",
                   "expression": "rateLimit",
@@ -4342,9 +4197,7 @@
             "fields": [
               {
                 "kind": "Assignment",
-                "key": [
-                  "title"
-                ],
+                "key": ["title"],
                 "value": {
                   "kind": "PrimitiveLiteral",
                   "value": "Bad gateway",
@@ -4376,9 +4229,7 @@
               },
               {
                 "kind": "Assignment",
-                "key": [
-                  "detail"
-                ],
+                "key": ["detail"],
                 "value": {
                   "kind": "JessieExpression",
                   "expression": "detail",
@@ -4412,9 +4263,7 @@
               },
               {
                 "kind": "Assignment",
-                "key": [
-                  "rateLimit"
-                ],
+                "key": ["rateLimit"],
                 "value": {
                   "kind": "JessieExpression",
                   "expression": "rateLimit",
@@ -4482,9 +4331,7 @@
             "fields": [
               {
                 "kind": "Assignment",
-                "key": [
-                  "title"
-                ],
+                "key": ["title"],
                 "value": {
                   "kind": "PrimitiveLiteral",
                   "value": "Unknown error",
@@ -4516,9 +4363,7 @@
               },
               {
                 "kind": "Assignment",
-                "key": [
-                  "detail"
-                ],
+                "key": ["detail"],
                 "value": {
                   "kind": "JessieExpression",
                   "expression": "\"Unknown error occurred. Status: \".concat(statusCode, \". Message: \").concat(detail, \".\")",
@@ -4552,9 +4397,7 @@
               },
               {
                 "kind": "Assignment",
-                "key": [
-                  "rateLimit"
-                ],
+                "key": ["rateLimit"],
                 "value": {
                   "kind": "JessieExpression",
                   "expression": "rateLimit",

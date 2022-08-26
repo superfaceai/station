@@ -2,6 +2,7 @@
 /* eslint-disable jest/no-export */
 
 import { RecordingProcessOptions, SuperfaceTest } from '@superfaceai/testing';
+
 import { nockConfig } from '../../../test-config';
 
 declare type Template = {

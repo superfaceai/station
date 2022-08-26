@@ -36,18 +36,14 @@
           "assignments": [
             {
               "kind": "Assignment",
-              "key": [
-                "newProfile"
-              ],
+              "key": ["newProfile"],
               "value": {
                 "kind": "InlineCall",
                 "operationName": "BuildCrispProfile",
                 "arguments": [
                   {
                     "kind": "Assignment",
-                    "key": [
-                      "input"
-                    ],
+                    "key": ["input"],
                     "value": {
                       "kind": "JessieExpression",
                       "expression": "input",
@@ -162,9 +158,7 @@
             "fields": [
               {
                 "kind": "Assignment",
-                "key": [
-                  "title"
-                ],
+                "key": ["title"],
                 "value": {
                   "kind": "PrimitiveLiteral",
                   "value": "Missing fields",
@@ -196,9 +190,7 @@
               },
               {
                 "kind": "Assignment",
-                "key": [
-                  "detail"
-                ],
+                "key": ["detail"],
                 "value": {
                   "kind": "PrimitiveLiteral",
                   "value": "Crisp requires Email and Name to create new contact",
@@ -267,9 +259,7 @@
               "fields": [
                 {
                   "kind": "Assignment",
-                  "key": [
-                    "X-Crisp-Tier"
-                  ],
+                  "key": ["X-Crisp-Tier"],
                   "value": {
                     "kind": "PrimitiveLiteral",
                     "value": "plugin",
@@ -359,18 +349,14 @@
                   "assignments": [
                     {
                       "kind": "Assignment",
-                      "key": [
-                        "customPropsResult"
-                      ],
+                      "key": ["customPropsResult"],
                       "value": {
                         "kind": "InlineCall",
                         "operationName": "PatchCustomProperties",
                         "arguments": [
                           {
                             "kind": "Assignment",
-                            "key": [
-                              "profileId"
-                            ],
+                            "key": ["profileId"],
                             "value": {
                               "kind": "JessieExpression",
                               "expression": "body.data.people_id",
@@ -404,9 +390,7 @@
                           },
                           {
                             "kind": "Assignment",
-                            "key": [
-                              "customProperties"
-                            ],
+                            "key": ["customProperties"],
                             "value": {
                               "kind": "JessieExpression",
                               "expression": "input.customProperties",
@@ -521,9 +505,7 @@
                     "fields": [
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "title"
-                        ],
+                        "key": ["title"],
                         "value": {
                           "kind": "PrimitiveLiteral",
                           "value": "Partially failed",
@@ -555,9 +537,7 @@
                       },
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "detail"
-                        ],
+                        "key": ["detail"],
                         "value": {
                           "kind": "PrimitiveLiteral",
                           "value": "Contact might have been created without custom properties. Please update the contact for consistency",
@@ -623,9 +603,7 @@
                     "fields": [
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "id"
-                        ],
+                        "key": ["id"],
                         "value": {
                           "kind": "JessieExpression",
                           "expression": "body.data.people_id",
@@ -711,9 +689,7 @@
                     "fields": [
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "title"
-                        ],
+                        "key": ["title"],
                         "value": {
                           "kind": "PrimitiveLiteral",
                           "value": "Contact already exists",
@@ -745,9 +721,7 @@
                       },
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "detail"
-                        ],
+                        "key": ["detail"],
                         "value": {
                           "kind": "JessieExpression",
                           "expression": "(\"Contact '\".concat(input.email, \"' already exists. If you wish to update it, use 'Update' use case\"))",
@@ -828,18 +802,14 @@
                   "assignments": [
                     {
                       "kind": "Assignment",
-                      "key": [
-                        "error"
-                      ],
+                      "key": ["error"],
                       "value": {
                         "kind": "InlineCall",
                         "operationName": "HandleCommonErrors",
                         "arguments": [
                           {
                             "kind": "Assignment",
-                            "key": [
-                              "statusCode"
-                            ],
+                            "key": ["statusCode"],
                             "value": {
                               "kind": "JessieExpression",
                               "expression": "statusCode",
@@ -999,9 +969,7 @@
           "assignments": [
             {
               "kind": "Assignment",
-              "key": [
-                "profileId"
-              ],
+              "key": ["profileId"],
               "value": {
                 "kind": "JessieExpression",
                 "expression": "input.id || input.email",
@@ -1035,18 +1003,14 @@
             },
             {
               "kind": "Assignment",
-              "key": [
-                "profileUpdate"
-              ],
+              "key": ["profileUpdate"],
               "value": {
                 "kind": "InlineCall",
                 "operationName": "BuildCrispProfile",
                 "arguments": [
                   {
                     "kind": "Assignment",
-                    "key": [
-                      "input"
-                    ],
+                    "key": ["input"],
                     "value": {
                       "kind": "JessieExpression",
                       "expression": "input",
@@ -1131,9 +1095,7 @@
               "fields": [
                 {
                   "kind": "Assignment",
-                  "key": [
-                    "X-Crisp-Tier"
-                  ],
+                  "key": ["X-Crisp-Tier"],
                   "value": {
                     "kind": "PrimitiveLiteral",
                     "value": "plugin",
@@ -1223,18 +1185,14 @@
                   "assignments": [
                     {
                       "kind": "Assignment",
-                      "key": [
-                        "customPropsResult"
-                      ],
+                      "key": ["customPropsResult"],
                       "value": {
                         "kind": "InlineCall",
                         "operationName": "PatchCustomProperties",
                         "arguments": [
                           {
                             "kind": "Assignment",
-                            "key": [
-                              "profileId"
-                            ],
+                            "key": ["profileId"],
                             "value": {
                               "kind": "JessieExpression",
                               "expression": "profileId",
@@ -1268,9 +1226,7 @@
                           },
                           {
                             "kind": "Assignment",
-                            "key": [
-                              "customProperties"
-                            ],
+                            "key": ["customProperties"],
                             "value": {
                               "kind": "JessieExpression",
                               "expression": "input.customProperties",
@@ -1385,9 +1341,7 @@
                     "fields": [
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "title"
-                        ],
+                        "key": ["title"],
                         "value": {
                           "kind": "PrimitiveLiteral",
                           "value": "Partially failed",
@@ -1419,9 +1373,7 @@
                       },
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "detail"
-                        ],
+                        "key": ["detail"],
                         "value": {
                           "kind": "PrimitiveLiteral",
                           "value": "Contact might be updated without custom properties. Please update the contact for data consistency",
@@ -1487,9 +1439,7 @@
                     "fields": [
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "id"
-                        ],
+                        "key": ["id"],
                         "value": {
                           "kind": "JessieExpression",
                           "expression": "profileId",
@@ -1575,9 +1525,7 @@
                     "fields": [
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "title"
-                        ],
+                        "key": ["title"],
                         "value": {
                           "kind": "PrimitiveLiteral",
                           "value": "Email already exists",
@@ -1609,9 +1557,7 @@
                       },
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "detail"
-                        ],
+                        "key": ["detail"],
                         "value": {
                           "kind": "JessieExpression",
                           "expression": "(\"Email '\".concat(input.email, \"' already exists in another contact\"))",
@@ -1692,18 +1638,14 @@
                   "assignments": [
                     {
                       "kind": "Assignment",
-                      "key": [
-                        "error"
-                      ],
+                      "key": ["error"],
                       "value": {
                         "kind": "InlineCall",
                         "operationName": "HandleCommonErrors",
                         "arguments": [
                           {
                             "kind": "Assignment",
-                            "key": [
-                              "statusCode"
-                            ],
+                            "key": ["statusCode"],
                             "value": {
                               "kind": "JessieExpression",
                               "expression": "statusCode",
@@ -1863,9 +1805,7 @@
           "assignments": [
             {
               "kind": "Assignment",
-              "key": [
-                "OPERATOR_MAP"
-              ],
+              "key": ["OPERATOR_MAP"],
               "value": {
                 "kind": "JessieExpression",
                 "expression": "{\n    \"EQ\": 'eq',\n    \"NEQ\": 'neq'\n}",
@@ -1923,9 +1863,7 @@
               "fields": [
                 {
                   "kind": "Assignment",
-                  "key": [
-                    "search_filter"
-                  ],
+                  "key": ["search_filter"],
                   "value": {
                     "kind": "JessieExpression",
                     "expression": "[{\n        criterion: input.property,\n        query: [input.value],\n        operator: OPERATOR_MAP[input.operator] || input.operator,\n        model: \"people\"\n    }]",
@@ -1976,9 +1914,7 @@
               "fields": [
                 {
                   "kind": "Assignment",
-                  "key": [
-                    "X-Crisp-Tier"
-                  ],
+                  "key": ["X-Crisp-Tier"],
                   "value": {
                     "kind": "PrimitiveLiteral",
                     "value": "plugin",
@@ -2050,9 +1986,7 @@
                   "assignments": [
                     {
                       "kind": "Assignment",
-                      "key": [
-                        "contactsList"
-                      ],
+                      "key": ["contactsList"],
                       "value": {
                         "kind": "InlineCall",
                         "iteration": {
@@ -2093,9 +2027,7 @@
                         "arguments": [
                           {
                             "kind": "Assignment",
-                            "key": [
-                              "profile"
-                            ],
+                            "key": ["profile"],
                             "value": {
                               "kind": "JessieExpression",
                               "expression": "profile",
@@ -2225,18 +2157,14 @@
                   "assignments": [
                     {
                       "kind": "Assignment",
-                      "key": [
-                        "error"
-                      ],
+                      "key": ["error"],
                       "value": {
                         "kind": "InlineCall",
                         "operationName": "HandleCommonErrors",
                         "arguments": [
                           {
                             "kind": "Assignment",
-                            "key": [
-                              "statusCode"
-                            ],
+                            "key": ["statusCode"],
                             "value": {
                               "kind": "JessieExpression",
                               "expression": "statusCode",
@@ -2401,9 +2329,7 @@
               "fields": [
                 {
                   "kind": "Assignment",
-                  "key": [
-                    "X-Crisp-Tier"
-                  ],
+                  "key": ["X-Crisp-Tier"],
                   "value": {
                     "kind": "PrimitiveLiteral",
                     "value": "plugin",
@@ -2527,18 +2453,14 @@
                   "assignments": [
                     {
                       "kind": "Assignment",
-                      "key": [
-                        "error"
-                      ],
+                      "key": ["error"],
                       "value": {
                         "kind": "InlineCall",
                         "operationName": "HandleCommonErrors",
                         "arguments": [
                           {
                             "kind": "Assignment",
-                            "key": [
-                              "statusCode"
-                            ],
+                            "key": ["statusCode"],
                             "value": {
                               "kind": "JessieExpression",
                               "expression": "statusCode",
@@ -2734,9 +2656,7 @@
             "fields": [
               {
                 "kind": "Assignment",
-                "key": [
-                  "id"
-                ],
+                "key": ["id"],
                 "value": {
                   "kind": "JessieExpression",
                   "expression": "args.profileId",
@@ -2806,9 +2726,7 @@
               "fields": [
                 {
                   "kind": "Assignment",
-                  "key": [
-                    "X-Crisp-Tier"
-                  ],
+                  "key": ["X-Crisp-Tier"],
                   "value": {
                     "kind": "PrimitiveLiteral",
                     "value": "plugin",
@@ -2902,9 +2820,7 @@
                     "fields": [
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "id"
-                        ],
+                        "key": ["id"],
                         "value": {
                           "kind": "JessieExpression",
                           "expression": "args.profileId",
@@ -2985,18 +2901,14 @@
                   "assignments": [
                     {
                       "kind": "Assignment",
-                      "key": [
-                        "error"
-                      ],
+                      "key": ["error"],
                       "value": {
                         "kind": "InlineCall",
                         "operationName": "HandleCommonErrors",
                         "arguments": [
                           {
                             "kind": "Assignment",
-                            "key": [
-                              "statusCode"
-                            ],
+                            "key": ["statusCode"],
                             "value": {
                               "kind": "JessieExpression",
                               "expression": "statusCode",
@@ -3155,9 +3067,7 @@
           "assignments": [
             {
               "kind": "Assignment",
-              "key": [
-                "input"
-              ],
+              "key": ["input"],
               "value": {
                 "kind": "JessieExpression",
                 "expression": "args.input",
@@ -3208,9 +3118,7 @@
           "assignments": [
             {
               "kind": "Assignment",
-              "key": [
-                "fullName"
-              ],
+              "key": ["fullName"],
               "value": {
                 "kind": "JessieExpression",
                 "expression": "[input.firstName || \"\", input.lastName || \"\"].join(' ').trim() || undefined",
@@ -3314,9 +3222,7 @@
           "assignments": [
             {
               "kind": "Assignment",
-              "key": [
-                "crispProfile"
-              ],
+              "key": ["crispProfile"],
               "value": {
                 "kind": "JessieExpression",
                 "expression": "args.profile",
@@ -3367,9 +3273,7 @@
           "assignments": [
             {
               "kind": "Assignment",
-              "key": [
-                "crispProfilePerson"
-              ],
+              "key": ["crispProfilePerson"],
               "value": {
                 "kind": "JessieExpression",
                 "expression": "crispProfile.person || {}",
@@ -3420,18 +3324,14 @@
           "assignments": [
             {
               "kind": "Assignment",
-              "key": [
-                "parsedName"
-              ],
+              "key": ["parsedName"],
               "value": {
                 "kind": "InlineCall",
                 "operationName": "ParseCrispName",
                 "arguments": [
                   {
                     "kind": "Assignment",
-                    "key": [
-                      "name"
-                    ],
+                    "key": ["name"],
                     "value": {
                       "kind": "JessieExpression",
                       "expression": "crispProfilePerson.nickname",
@@ -3510,9 +3410,7 @@
           "arguments": [
             {
               "kind": "Assignment",
-              "key": [
-                "profileId"
-              ],
+              "key": ["profileId"],
               "value": {
                 "kind": "JessieExpression",
                 "expression": "crispProfile.people_id",
@@ -3596,9 +3494,7 @@
               "assignments": [
                 {
                   "kind": "Assignment",
-                  "key": [
-                    "customProperties"
-                  ],
+                  "key": ["customProperties"],
                   "value": {
                     "kind": "JessieExpression",
                     "expression": "outcome.data",
@@ -3723,9 +3619,7 @@
             "fields": [
               {
                 "kind": "Assignment",
-                "key": [
-                  "id"
-                ],
+                "key": ["id"],
                 "value": {
                   "kind": "JessieExpression",
                   "expression": "crispProfile.people_id",
@@ -3759,9 +3653,7 @@
               },
               {
                 "kind": "Assignment",
-                "key": [
-                  "email"
-                ],
+                "key": ["email"],
                 "value": {
                   "kind": "JessieExpression",
                   "expression": "crispProfile.email",
@@ -3795,9 +3687,7 @@
               },
               {
                 "kind": "Assignment",
-                "key": [
-                  "phone"
-                ],
+                "key": ["phone"],
                 "value": {
                   "kind": "JessieExpression",
                   "expression": "crispProfilePerson.phone",
@@ -3831,9 +3721,7 @@
               },
               {
                 "kind": "Assignment",
-                "key": [
-                  "firstName"
-                ],
+                "key": ["firstName"],
                 "value": {
                   "kind": "JessieExpression",
                   "expression": "parsedName.firstName",
@@ -3867,9 +3755,7 @@
               },
               {
                 "kind": "Assignment",
-                "key": [
-                  "lastName"
-                ],
+                "key": ["lastName"],
                 "value": {
                   "kind": "JessieExpression",
                   "expression": "parsedName.lastName",
@@ -3903,9 +3789,7 @@
               },
               {
                 "kind": "Assignment",
-                "key": [
-                  "company"
-                ],
+                "key": ["company"],
                 "value": {
                   "kind": "JessieExpression",
                   "expression": "(crispProfile.company || {}).name",
@@ -3939,9 +3823,7 @@
               },
               {
                 "kind": "Assignment",
-                "key": [
-                  "country"
-                ],
+                "key": ["country"],
                 "value": {
                   "kind": "JessieExpression",
                   "expression": "(crispProfilePerson.geolocation || {}).country",
@@ -3975,9 +3857,7 @@
               },
               {
                 "kind": "Assignment",
-                "key": [
-                  "customProperties"
-                ],
+                "key": ["customProperties"],
                 "value": {
                   "kind": "JessieExpression",
                   "expression": "customProperties",
@@ -4059,9 +3939,7 @@
           "assignments": [
             {
               "kind": "Assignment",
-              "key": [
-                "crispName"
-              ],
+              "key": ["crispName"],
               "value": {
                 "kind": "JessieExpression",
                 "expression": "(args.name || '').trim()",
@@ -4112,9 +3990,7 @@
           "assignments": [
             {
               "kind": "Assignment",
-              "key": [
-                "lastNameIx"
-              ],
+              "key": ["lastNameIx"],
               "value": {
                 "kind": "JessieExpression",
                 "expression": "crispName.lastIndexOf(' ')",
@@ -4202,9 +4078,7 @@
             "fields": [
               {
                 "kind": "Assignment",
-                "key": [
-                  "firstName"
-                ],
+                "key": ["firstName"],
                 "value": {
                   "kind": "JessieExpression",
                   "expression": "crispName || undefined",
@@ -4238,9 +4112,7 @@
               },
               {
                 "kind": "Assignment",
-                "key": [
-                  "lastName"
-                ],
+                "key": ["lastName"],
                 "value": {
                   "kind": "JessieExpression",
                   "expression": "undefined",
@@ -4308,9 +4180,7 @@
             "fields": [
               {
                 "kind": "Assignment",
-                "key": [
-                  "firstName"
-                ],
+                "key": ["firstName"],
                 "value": {
                   "kind": "JessieExpression",
                   "expression": "crispName.slice(0, lastNameIx).trim()",
@@ -4344,9 +4214,7 @@
               },
               {
                 "kind": "Assignment",
-                "key": [
-                  "lastName"
-                ],
+                "key": ["lastName"],
                 "value": {
                   "kind": "JessieExpression",
                   "expression": "crispName.slice(lastNameIx).trim()",
@@ -4428,9 +4296,7 @@
           "assignments": [
             {
               "kind": "Assignment",
-              "key": [
-                "statusCode"
-              ],
+              "key": ["statusCode"],
               "value": {
                 "kind": "JessieExpression",
                 "expression": "args.statusCode",
@@ -4518,9 +4384,7 @@
             "fields": [
               {
                 "kind": "Assignment",
-                "key": [
-                  "title"
-                ],
+                "key": ["title"],
                 "value": {
                   "kind": "PrimitiveLiteral",
                   "value": "Invalid data",
@@ -4552,9 +4416,7 @@
               },
               {
                 "kind": "Assignment",
-                "key": [
-                  "detail"
-                ],
+                "key": ["detail"],
                 "value": {
                   "kind": "PrimitiveLiteral",
                   "value": "Invalid data was sent to Crisp server",
@@ -4653,9 +4515,7 @@
             "fields": [
               {
                 "kind": "Assignment",
-                "key": [
-                  "title"
-                ],
+                "key": ["title"],
                 "value": {
                   "kind": "PrimitiveLiteral",
                   "value": "Unauthenticated",
@@ -4687,9 +4547,7 @@
               },
               {
                 "kind": "Assignment",
-                "key": [
-                  "detail"
-                ],
+                "key": ["detail"],
                 "value": {
                   "kind": "PrimitiveLiteral",
                   "value": "Please make sure you're providing a valid Crisp API credentials",
@@ -4788,9 +4646,7 @@
             "fields": [
               {
                 "kind": "Assignment",
-                "key": [
-                  "title"
-                ],
+                "key": ["title"],
                 "value": {
                   "kind": "PrimitiveLiteral",
                   "value": "Crisp subscription upgrade required",
@@ -4889,9 +4745,7 @@
             "fields": [
               {
                 "kind": "Assignment",
-                "key": [
-                  "title"
-                ],
+                "key": ["title"],
                 "value": {
                   "kind": "PrimitiveLiteral",
                   "value": "Not allowed",
@@ -4990,9 +4844,7 @@
             "fields": [
               {
                 "kind": "Assignment",
-                "key": [
-                  "title"
-                ],
+                "key": ["title"],
                 "value": {
                   "kind": "PrimitiveLiteral",
                   "value": "Not found",
@@ -5024,9 +4876,7 @@
               },
               {
                 "kind": "Assignment",
-                "key": [
-                  "detail"
-                ],
+                "key": ["detail"],
                 "value": {
                   "kind": "PrimitiveLiteral",
                   "value": "Contact or website was not found or Crisp plugin is not subscribed. Make sure the Crisp website exists and uses your plugin",
@@ -5125,9 +4975,7 @@
             "fields": [
               {
                 "kind": "Assignment",
-                "key": [
-                  "title"
-                ],
+                "key": ["title"],
                 "value": {
                   "kind": "PrimitiveLiteral",
                   "value": "Quota limit exceeded",
@@ -5226,9 +5074,7 @@
             "fields": [
               {
                 "kind": "Assignment",
-                "key": [
-                  "title"
-                ],
+                "key": ["title"],
                 "value": {
                   "kind": "PrimitiveLiteral",
                   "value": "Error on Crisp's side",
@@ -5260,9 +5106,7 @@
               },
               {
                 "kind": "Assignment",
-                "key": [
-                  "detail"
-                ],
+                "key": ["detail"],
                 "value": {
                   "kind": "PrimitiveLiteral",
                   "value": "It looks like Crisp is temporarily having difficulties processing your request. Please try again or contact Crisp's support",
@@ -5328,9 +5172,7 @@
             "fields": [
               {
                 "kind": "Assignment",
-                "key": [
-                  "title"
-                ],
+                "key": ["title"],
                 "value": {
                   "kind": "PrimitiveLiteral",
                   "value": "Unknown error",
@@ -5362,9 +5204,7 @@
               },
               {
                 "kind": "Assignment",
-                "key": [
-                  "detail"
-                ],
+                "key": ["detail"],
                 "value": {
                   "kind": "JessieExpression",
                   "expression": "(\"Unknown error occurred. Status: \".concat(statusCode))",

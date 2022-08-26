@@ -37,9 +37,7 @@
           "arguments": [
             {
               "kind": "Assignment",
-              "key": [
-                "trackingNumber"
-              ],
+              "key": ["trackingNumber"],
               "value": {
                 "kind": "JessieExpression",
                 "expression": "input.trackingNumber",
@@ -73,9 +71,7 @@
             },
             {
               "kind": "Assignment",
-              "key": [
-                "carrier"
-              ],
+              "key": ["carrier"],
               "value": {
                 "kind": "JessieExpression",
                 "expression": "input.carrier",
@@ -198,9 +194,7 @@
                 "fields": [
                   {
                     "kind": "Assignment",
-                    "key": [
-                      "title"
-                    ],
+                    "key": ["title"],
                     "value": {
                       "kind": "JessieExpression",
                       "expression": "outcome.error.title",
@@ -314,18 +308,14 @@
                   "assignments": [
                     {
                       "kind": "Assignment",
-                      "key": [
-                        "shipment"
-                      ],
+                      "key": ["shipment"],
                       "value": {
                         "kind": "InlineCall",
                         "operationName": "MapShipment",
                         "arguments": [
                           {
                             "kind": "Assignment",
-                            "key": [
-                              "shipment"
-                            ],
+                            "key": ["shipment"],
                             "value": {
                               "kind": "JessieExpression",
                               "expression": "body",
@@ -359,9 +349,7 @@
                           },
                           {
                             "kind": "Assignment",
-                            "key": [
-                              "trackingNumber"
-                            ],
+                            "key": ["trackingNumber"],
                             "value": {
                               "kind": "JessieExpression",
                               "expression": "args.trackingNumber",
@@ -496,9 +484,7 @@
                     "fields": [
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "title"
-                        ],
+                        "key": ["title"],
                         "value": {
                           "kind": "PrimitiveLiteral",
                           "value": "No shipment with given tracking number found",
@@ -582,9 +568,7 @@
                     "fields": [
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "title"
-                        ],
+                        "key": ["title"],
                         "value": {
                           "kind": "PrimitiveLiteral",
                           "value": "Invalid api token",
@@ -668,9 +652,7 @@
                     "fields": [
                       {
                         "kind": "Assignment",
-                        "key": [
-                          "title"
-                        ],
+                        "key": ["title"],
                         "value": {
                           "kind": "PrimitiveLiteral",
                           "value": "Too many requests within defined time period",
@@ -778,9 +760,7 @@
           "assignments": [
             {
               "kind": "Assignment",
-              "key": [
-                "estimatedDeliveryDate"
-              ],
+              "key": ["estimatedDeliveryDate"],
               "value": {
                 "kind": "JessieExpression",
                 "expression": "null",
@@ -831,9 +811,7 @@
           "assignments": [
             {
               "kind": "Assignment",
-              "key": [
-                "shipment"
-              ],
+              "key": ["shipment"],
               "value": {
                 "kind": "JessieExpression",
                 "expression": "args.shipment",
@@ -917,9 +895,7 @@
           "assignments": [
             {
               "kind": "Assignment",
-              "key": [
-                "estimatedDeliveryDate"
-              ],
+              "key": ["estimatedDeliveryDate"],
               "value": {
                 "kind": "JessieExpression",
                 "expression": "shipment.eta",
@@ -970,18 +946,14 @@
           "assignments": [
             {
               "kind": "Assignment",
-              "key": [
-                "status"
-              ],
+              "key": ["status"],
               "value": {
                 "kind": "InlineCall",
                 "operationName": "MapTrackingStatusToEvent",
                 "arguments": [
                   {
                     "kind": "Assignment",
-                    "key": [
-                      "trackingStatus"
-                    ],
+                    "key": ["trackingStatus"],
                     "value": {
                       "kind": "JessieExpression",
                       "expression": "shipment.tracking_status",
@@ -1059,9 +1031,7 @@
           "assignments": [
             {
               "kind": "Assignment",
-              "key": [
-                "events"
-              ],
+              "key": ["events"],
               "value": {
                 "kind": "InlineCall",
                 "iteration": {
@@ -1102,9 +1072,7 @@
                 "arguments": [
                   {
                     "kind": "Assignment",
-                    "key": [
-                      "trackingStatus"
-                    ],
+                    "key": ["trackingStatus"],
                     "value": {
                       "kind": "JessieExpression",
                       "expression": "trackingStatus",
@@ -1186,9 +1154,7 @@
             "fields": [
               {
                 "kind": "Assignment",
-                "key": [
-                  "trackingNumber"
-                ],
+                "key": ["trackingNumber"],
                 "value": {
                   "kind": "JessieExpression",
                   "expression": "args.trackingNumber",
@@ -1222,18 +1188,14 @@
               },
               {
                 "kind": "Assignment",
-                "key": [
-                  "origin"
-                ],
+                "key": ["origin"],
                 "value": {
                   "kind": "InlineCall",
                   "operationName": "MapLocation",
                   "arguments": [
                     {
                       "kind": "Assignment",
-                      "key": [
-                        "address"
-                      ],
+                      "key": ["address"],
                       "value": {
                         "kind": "JessieExpression",
                         "expression": "shipment.address_from",
@@ -1294,18 +1256,14 @@
               },
               {
                 "kind": "Assignment",
-                "key": [
-                  "destination"
-                ],
+                "key": ["destination"],
                 "value": {
                   "kind": "InlineCall",
                   "operationName": "MapLocation",
                   "arguments": [
                     {
                       "kind": "Assignment",
-                      "key": [
-                        "address"
-                      ],
+                      "key": ["address"],
                       "value": {
                         "kind": "JessieExpression",
                         "expression": "shipment.address_to",
@@ -1366,9 +1324,7 @@
               },
               {
                 "kind": "Assignment",
-                "key": [
-                  "status"
-                ],
+                "key": ["status"],
                 "value": {
                   "kind": "JessieExpression",
                   "expression": "status",
@@ -1402,9 +1358,7 @@
               },
               {
                 "kind": "Assignment",
-                "key": [
-                  "events"
-                ],
+                "key": ["events"],
                 "value": {
                   "kind": "JessieExpression",
                   "expression": "events",
@@ -1438,9 +1392,7 @@
               },
               {
                 "kind": "Assignment",
-                "key": [
-                  "estimatedDeliveryDate"
-                ],
+                "key": ["estimatedDeliveryDate"],
                 "value": {
                   "kind": "JessieExpression",
                   "expression": "estimatedDeliveryDate",
@@ -1474,9 +1426,7 @@
               },
               {
                 "kind": "Assignment",
-                "key": [
-                  "carrier"
-                ],
+                "key": ["carrier"],
                 "value": {
                   "kind": "JessieExpression",
                   "expression": "shipment.carrier",
@@ -1611,18 +1561,14 @@
           "assignments": [
             {
               "kind": "Assignment",
-              "key": [
-                "statusCode"
-              ],
+              "key": ["statusCode"],
               "value": {
                 "kind": "InlineCall",
                 "operationName": "MapTrackingStatusCode",
                 "arguments": [
                   {
                     "kind": "Assignment",
-                    "key": [
-                      "status"
-                    ],
+                    "key": ["status"],
                     "value": {
                       "kind": "JessieExpression",
                       "expression": "args.trackingStatus.status",
@@ -1700,9 +1646,7 @@
           "assignments": [
             {
               "kind": "Assignment",
-              "key": [
-                "location"
-              ],
+              "key": ["location"],
               "value": {
                 "kind": "JessieExpression",
                 "expression": "undefined",
@@ -1786,18 +1730,14 @@
           "assignments": [
             {
               "kind": "Assignment",
-              "key": [
-                "location"
-              ],
+              "key": ["location"],
               "value": {
                 "kind": "InlineCall",
                 "operationName": "MapLocation",
                 "arguments": [
                   {
                     "kind": "Assignment",
-                    "key": [
-                      "address"
-                    ],
+                    "key": ["address"],
                     "value": {
                       "kind": "JessieExpression",
                       "expression": "args.trackingStatus.location",
@@ -1879,9 +1819,7 @@
             "fields": [
               {
                 "kind": "Assignment",
-                "key": [
-                  "timestamp"
-                ],
+                "key": ["timestamp"],
                 "value": {
                   "kind": "JessieExpression",
                   "expression": "args.trackingStatus.status_date",
@@ -1915,9 +1853,7 @@
               },
               {
                 "kind": "Assignment",
-                "key": [
-                  "statusCode"
-                ],
+                "key": ["statusCode"],
                 "value": {
                   "kind": "JessieExpression",
                   "expression": "statusCode",
@@ -1951,9 +1887,7 @@
               },
               {
                 "kind": "Assignment",
-                "key": [
-                  "statusText"
-                ],
+                "key": ["statusText"],
                 "value": {
                   "kind": "JessieExpression",
                   "expression": "args.trackingStatus.status_details",
@@ -1987,9 +1921,7 @@
               },
               {
                 "kind": "Assignment",
-                "key": [
-                  "location"
-                ],
+                "key": ["location"],
                 "value": {
                   "kind": "JessieExpression",
                   "expression": "location",
@@ -2071,9 +2003,7 @@
           "assignments": [
             {
               "kind": "Assignment",
-              "key": [
-                "result"
-              ],
+              "key": ["result"],
               "value": {
                 "kind": "JessieExpression",
                 "expression": "(function () {\n    switch (args.status) {\n        case 'PRE_TRANSIT':\n            return 'pre_transit';\n        case 'TRANSIT':\n            return 'transit';\n        case 'DELIVERED':\n            return 'delivered';\n        case 'FAILURE':\n            return 'failure';\n        default:\n            return 'unknown';\n    }\n})()",
