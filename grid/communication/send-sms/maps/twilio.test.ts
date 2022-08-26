@@ -1,14 +1,17 @@
 import { SuperfaceTest } from '@superfaceai/testing';
+import { nockConfig } from '../../../test-config';
 
 describe('communication/send-sms/twilio', () => {
   let superface: SuperfaceTest;
 
   beforeEach(() => {
-    superface = new SuperfaceTest({
-      profile: 'communication/send-sms',
-      provider: 'twilio',
-      testInstance: expect,
-    });
+    superface = new SuperfaceTest(
+      {
+        profile: 'communication/send-sms',
+        provider: 'twilio',
+      },
+      nockConfig
+    );
   });
 
   describe('SendMessage', () => {

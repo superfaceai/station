@@ -1,14 +1,17 @@
 import { SuperfaceTest } from '@superfaceai/testing';
+import { nockConfig } from '../../../test-config';
 
 describe(`vcs/user-repos/bitbucket`, () => {
   let superface: SuperfaceTest;
 
   beforeEach(() => {
-    superface = new SuperfaceTest({
-      profile: 'vcs/user-repos',
-      provider: 'bitbucket',
-      testInstance: expect,
-    });
+    superface = new SuperfaceTest(
+      {
+        profile: 'vcs/user-repos',
+        provider: 'bitbucket',
+      },
+      nockConfig
+    );
   });
 
   describe('UserRepos', () => {

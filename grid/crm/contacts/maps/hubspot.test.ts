@@ -1,14 +1,17 @@
 import { SuperfaceTest } from '@superfaceai/testing';
+import { nockConfig } from '../../../test-config';
 
 describe(`crm/contacts/hubspot`, () => {
   let superface: SuperfaceTest;
 
   beforeEach(() => {
-    superface = new SuperfaceTest({
-      profile: 'crm/contacts',
-      provider: 'hubspot',
-      testInstance: expect,
-    });
+    superface = new SuperfaceTest(
+      {
+        profile: 'crm/contacts',
+        provider: 'hubspot',
+      },
+      nockConfig
+    );
   });
 
   describe('Create', () => {

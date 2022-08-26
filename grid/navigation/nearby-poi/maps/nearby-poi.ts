@@ -1,17 +1,20 @@
 /* eslint-disable jest/no-export */
 
 import { SuperfaceTest } from '@superfaceai/testing';
+import { nockConfig } from '../../../test-config';
 
 export const nearbyPoiTest = (provider: string): void => {
   describe(`navigation/nearby-poi/${provider}`, () => {
     let superface: SuperfaceTest;
 
     beforeEach(() => {
-      superface = new SuperfaceTest({
-        profile: 'navigation/nearby-poi',
-        provider,
-        testInstance: expect,
-      });
+      superface = new SuperfaceTest(
+        {
+          profile: 'navigation/nearby-poi',
+          provider,
+        },
+        nockConfig
+      );
     });
 
     describe('find nearby pois', () => {

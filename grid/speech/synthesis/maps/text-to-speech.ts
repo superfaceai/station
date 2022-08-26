@@ -1,6 +1,7 @@
 /* eslint-disable jest/no-export */
 
 import { RecordingProcessOptions, SuperfaceTest } from '@superfaceai/testing';
+import { nockConfig } from '../../../test-config';
 
 export const textToSpeechTest = (
   provider: string,
@@ -11,11 +12,13 @@ export const textToSpeechTest = (
     let superface: SuperfaceTest;
 
     beforeEach(() => {
-      superface = new SuperfaceTest({
-        profile: 'speech/synthesis',
-        provider,
-        testInstance: expect,
-      });
+      superface = new SuperfaceTest(
+        {
+          profile: 'speech/synthesis',
+          provider,
+        },
+        nockConfig
+      );
     });
 
     describe('TextToSpeechSynthesis', () => {

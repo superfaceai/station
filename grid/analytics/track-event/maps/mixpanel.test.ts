@@ -1,14 +1,17 @@
 import { SuperfaceTest } from '@superfaceai/testing';
+import { nockConfig } from '../../../test-config';
 
 describe(`analytics/track-event/mixpanel`, () => {
   let superface: SuperfaceTest;
 
   beforeEach(() => {
-    superface = new SuperfaceTest({
-      profile: 'analytics/track-event',
-      provider: 'mixpanel',
-      testInstance: expect,
-    });
+    superface = new SuperfaceTest(
+      {
+        profile: 'analytics/track-event',
+        provider: 'mixpanel',
+      },
+      nockConfig
+    );
   });
 
   describe('TrackEvent', () => {

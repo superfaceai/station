@@ -1,6 +1,7 @@
 /* eslint-disable jest/no-export */
 
 import { RecordingProcessOptions, SuperfaceTest } from '@superfaceai/testing';
+import { nockConfig } from '../../../test-config';
 
 export const sendSmsTest = (
   provider: string,
@@ -11,11 +12,13 @@ export const sendSmsTest = (
     let superface: SuperfaceTest;
 
     beforeEach(() => {
-      superface = new SuperfaceTest({
-        profile: 'communication/send-sms',
-        provider,
-        testInstance: expect,
-      });
+      superface = new SuperfaceTest(
+        {
+          profile: 'communication/send-sms',
+          provider,
+        },
+        nockConfig
+      );
     });
 
     describe('SendMessage', () => {

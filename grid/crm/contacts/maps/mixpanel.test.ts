@@ -1,14 +1,17 @@
 import { SuperfaceTest } from '@superfaceai/testing';
+import { nockConfig } from '../../../test-config';
 
 describe(`crm/contacts/mixpanel`, () => {
   let superface: SuperfaceTest;
 
   beforeEach(() => {
-    superface = new SuperfaceTest({
-      profile: 'crm/contacts',
-      provider: 'mixpanel',
-      testInstance: expect,
-    });
+    superface = new SuperfaceTest(
+      {
+        profile: 'crm/contacts',
+        provider: 'mixpanel',
+      },
+      nockConfig
+    );
   });
 
   describe('Create', () => {

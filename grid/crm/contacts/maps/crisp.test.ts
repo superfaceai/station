@@ -1,14 +1,17 @@
 import { SuperfaceTest } from '@superfaceai/testing';
+import { nockConfig } from '../../../test-config';
 
 describe(`crm/contacts/crisp`, () => {
   let superface: SuperfaceTest;
 
   beforeEach(() => {
-    superface = new SuperfaceTest({
-      profile: 'crm/contacts',
-      provider: 'crisp',
-      testInstance: expect,
-    });
+    superface = new SuperfaceTest(
+      {
+        profile: 'crm/contacts',
+        provider: 'crisp',
+      },
+      nockConfig
+    );
   });
 
   describe('Create', () => {
