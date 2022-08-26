@@ -26,7 +26,7 @@ let superJson: SuperJsonDocument;
 
 export async function loadSuperJson(options?: {
   fileSystem?: IFileSystem;
-}): Promise<SuperJsonDocument> {
+}): Promise<{ document: SuperJsonDocument; path: string }> {
   const superJsonPath = await detectSuperJson(
     process.cwd(),
     options?.fileSystem ?? NodeFileSystem,
@@ -45,19 +45,14 @@ export async function loadSuperJson(options?: {
     superJson = superJsonDocument.unwrap();
   }
 
-  return superJson;
+  return { document: superJson, path: superJsonPath };
 }
 
-// TODO:
 export async function normalizePath(
-  path: string,
-  superJson?: SuperJsonDocument
+  superJsonPath: string,
+  path: string
 ): Promise<string> {
-  if (superJson === undefined) {
-    superJson = await loadSuperJson();
-  }
-
-  return resolve(process.cwd(), path);
+  return resolve(superJsonPath, path);
 }
 
 export async function exists(path: string): Promise<boolean> {
@@ -78,20 +73,22 @@ export async function readFile(path: string): Promise<string> {
   return await read(path, { encoding: 'utf8' });
 }
 
-export async function profilesFiles(
-  superJson?: SuperJsonDocument
-): Promise<string[]> {
+export async function profilesFiles(superJson?: {
+  document: SuperJsonDocument;
+  path: string;
+}): Promise<string[]> {
   if (superJson === undefined) {
-    superJson = normalizeSuperJsonDocument(await loadSuperJson());
+    superJson = await loadSuperJson();
   }
+
   const files: string[] = [];
-  const normalizedSuperJson = normalizeSuperJsonDocument(superJson);
+  const normalizedSuperJson = normalizeSuperJsonDocument(superJson.document);
 
   for (const profileId in normalizedSuperJson.profiles) {
     const profileSettings = normalizedSuperJson.profiles[profileId];
 
     if (profileSettings !== undefined && 'file' in profileSettings) {
-      files.push(await normalizePath(profileSettings.file, superJson));
+      files.push(await normalizePath(superJson.path, profileSettings.file));
     } else {
       throw new Error(
         `${profileId} settings must be defined and lead to local file`
@@ -102,14 +99,15 @@ export async function profilesFiles(
   return files;
 }
 
-export async function mapsFiles(
-  superJson?: SuperJsonDocument
-): Promise<string[]> {
+export async function mapsFiles(superJson?: {
+  document: SuperJsonDocument;
+  path: string;
+}): Promise<string[]> {
   if (superJson === undefined) {
     superJson = await loadSuperJson();
   }
   const files: string[] = [];
-  const normalizedSuperJson = normalizeSuperJsonDocument(superJson);
+  const normalizedSuperJson = normalizeSuperJsonDocument(superJson.document);
 
   for (const profileId in normalizedSuperJson.profiles) {
     const profileSettings = normalizedSuperJson.profiles[profileId];
@@ -118,7 +116,7 @@ export async function mapsFiles(
       const map = profileSettings.providers[providerId];
 
       if (map !== undefined && 'file' in map) {
-        files.push(await normalizePath(map.file, superJson));
+        files.push(await normalizePath(superJson.path, map.file));
       } else {
         throw new Error(`Map ${providerId} must lead to local file`);
       }
@@ -128,20 +126,22 @@ export async function mapsFiles(
   return files;
 }
 
-export async function providersFiles(
-  superJson?: SuperJsonDocument
-): Promise<string[]> {
+export async function providersFiles(superJson?: {
+  document: SuperJsonDocument;
+  path: string;
+}): Promise<string[]> {
   if (superJson === undefined) {
     superJson = await loadSuperJson();
   }
+
   const files: string[] = [];
-  const normalizedSuperJson = normalizeSuperJsonDocument(superJson);
+  const normalizedSuperJson = normalizeSuperJsonDocument(superJson.document);
 
   for (const provider in normalizedSuperJson.providers) {
     const providerSettings = normalizedSuperJson.providers[provider];
 
     if (providerSettings !== undefined && !!providerSettings.file) {
-      files.push(await normalizePath(providerSettings.file, superJson));
+      files.push(await normalizePath(superJson.path, providerSettings.file));
     } else {
       throw new Error(
         `${provider} settings must be defined and lead to local file`
@@ -152,51 +152,60 @@ export async function providersFiles(
   return files;
 }
 
-export async function localProviders(
-  superJson: SuperJsonDocument,
-  options?: { fileSystem?: IFileSystem }
-): Promise<string[]> {
+export async function localProviders(options?: {
+  fileSystem?: IFileSystem;
+}): Promise<string[]> {
   const cwd = await detectSuperJson(
     process.cwd(),
     options?.fileSystem ?? NodeFileSystem
   );
+
+  if (cwd === undefined) {
+    throw new Error('Super.json not found');
+  }
 
   return Promise.all(
     glob
       .sync('../providers/*.json', { cwd })
-      .map(async i => await normalizePath(i, superJson))
+      .map(async i => await normalizePath(cwd, i))
   );
 }
 
-export async function localProfiles(
-  superJson: SuperJsonDocument,
-  options?: { fileSystem?: IFileSystem }
-): Promise<string[]> {
+export async function localProfiles(options?: {
+  fileSystem?: IFileSystem;
+}): Promise<string[]> {
   const cwd = await detectSuperJson(
     process.cwd(),
     options?.fileSystem ?? NodeFileSystem
   );
+
+  if (cwd === undefined) {
+    throw new Error('Super.json not found');
+  }
 
   return Promise.all(
     glob
       .sync('../grid/**/*.supr', { cwd })
-      .map(async i => await normalizePath(i, superJson))
+      .map(async i => await normalizePath(cwd, i))
   );
 }
 
-export async function localMaps(
-  superJson: SuperJsonDocument,
-  options?: { fileSystem?: IFileSystem }
-): Promise<string[]> {
+export async function localMaps(options?: {
+  fileSystem?: IFileSystem;
+}): Promise<string[]> {
   const cwd = await detectSuperJson(
     process.cwd(),
     options?.fileSystem ?? NodeFileSystem
   );
 
+  if (cwd === undefined) {
+    throw new Error('Super.json not found');
+  }
+
   return Promise.all(
     glob
       .sync('../grid/**/*.suma', { cwd })
-      .map(async i => await normalizePath(i, superJson))
+      .map(async i => await normalizePath(cwd, i))
   );
 }
 
