@@ -1,6 +1,7 @@
 /* eslint-disable jest/no-export */
 
 import { RecordingProcessOptions, SuperfaceTest } from '@superfaceai/testing';
+import { nockConfig } from '../../../test-config';
 
 export const getThreadsTest = (
   provider: string,
@@ -12,12 +13,14 @@ export const getThreadsTest = (
 
     describe('GetThreads', () => {
       beforeAll(() => {
-        superface = new SuperfaceTest({
-          profile: 'chat/threads',
-          provider,
-          useCase: 'GetThreads',
-          testInstance: expect,
-        });
+        superface = new SuperfaceTest(
+          {
+            profile: 'chat/threads',
+            provider,
+            useCase: 'GetThreads',
+          },
+          nockConfig
+        );
       });
 
       it('performs correctly', async () => {

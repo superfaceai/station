@@ -1,14 +1,17 @@
 import { SuperfaceTest } from '@superfaceai/testing';
+import { nockConfig } from '../../../test-config';
 
 describe(`vcs/single-file-content/bitbucket`, () => {
   let superface: SuperfaceTest;
 
   beforeEach(() => {
-    superface = new SuperfaceTest({
-      profile: 'vcs/single-file-content',
-      provider: 'bitbucket',
-      testInstance: expect,
-    });
+    superface = new SuperfaceTest(
+      {
+        profile: 'vcs/single-file-content',
+        provider: 'bitbucket',
+      },
+      nockConfig
+    );
   });
 
   describe('SingleFileContent', () => {

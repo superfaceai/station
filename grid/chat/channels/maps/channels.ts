@@ -1,6 +1,7 @@
 /* eslint-disable jest/no-export */
 
 import { RecordingProcessOptions, SuperfaceTest } from '@superfaceai/testing';
+import { nockConfig } from '../../../test-config';
 
 export const getChannelsTest = (
   provider: string,
@@ -11,12 +12,14 @@ export const getChannelsTest = (
 
     describe('GetChannels', () => {
       beforeAll(() => {
-        superface = new SuperfaceTest({
-          profile: 'chat/channels',
-          provider,
-          useCase: 'GetChannels',
-          testInstance: expect,
-        });
+        superface = new SuperfaceTest(
+          {
+            profile: 'chat/channels',
+            provider,
+            useCase: 'GetChannels',
+          },
+          nockConfig
+        );
       });
 
       it('performs correctly', async () => {

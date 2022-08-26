@@ -1,14 +1,17 @@
 import { SuperfaceTest } from '@superfaceai/testing';
+import { nockConfig } from '../../../test-config';
 
 describe(`vcs/user-repos/gitlab`, () => {
   let superface: SuperfaceTest;
 
   beforeEach(() => {
-    superface = new SuperfaceTest({
-      profile: 'vcs/user-repos',
-      provider: 'gitlab',
-      testInstance: expect,
-    });
+    superface = new SuperfaceTest(
+      {
+        profile: 'vcs/user-repos',
+        provider: 'gitlab',
+      },
+      nockConfig
+    );
   });
 
   describe('UserRepos', () => {

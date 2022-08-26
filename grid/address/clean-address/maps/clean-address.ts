@@ -1,6 +1,7 @@
 /* eslint-disable jest/no-export */
 
 import { RecordingProcessOptions, SuperfaceTest } from '@superfaceai/testing';
+import { nockConfig } from '../../../test-config';
 
 export const cleanAddressTest = (
   provider: string,
@@ -10,11 +11,13 @@ export const cleanAddressTest = (
     let superface: SuperfaceTest;
 
     beforeEach(() => {
-      superface = new SuperfaceTest({
-        profile: 'address/clean-address',
-        provider,
-        testInstance: expect,
-      });
+      superface = new SuperfaceTest(
+        {
+          profile: 'address/clean-address',
+          provider,
+        },
+        nockConfig
+      );
     });
 
     describe('CleanAddress', () => {

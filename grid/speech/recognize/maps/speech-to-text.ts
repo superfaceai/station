@@ -2,6 +2,7 @@
 
 import { RecordingProcessOptions, SuperfaceTest } from '@superfaceai/testing';
 import * as fs from 'fs/promises';
+import { nockConfig } from '../../../test-config';
 
 export const speechToTextRecognitionTest = (
   provider: string,
@@ -12,11 +13,13 @@ export const speechToTextRecognitionTest = (
     let superface: SuperfaceTest;
 
     beforeEach(() => {
-      superface = new SuperfaceTest({
-        profile: 'speech/recognize',
-        provider,
-        testInstance: expect,
-      });
+      superface = new SuperfaceTest(
+        {
+          profile: 'speech/recognize',
+          provider,
+        },
+        nockConfig
+      );
     });
 
     describe('SpeechToTextRecognition', () => {
