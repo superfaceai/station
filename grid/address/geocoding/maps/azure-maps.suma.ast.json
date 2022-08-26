@@ -1,0 +1,1972 @@
+{
+  "kind": "MapDocument",
+  "header": {
+    "kind": "MapHeader",
+    "profile": {
+      "scope": "address",
+      "name": "geocoding",
+      "version": {
+        "major": 3,
+        "minor": 1,
+        "patch": 0
+      }
+    },
+    "provider": "azure-maps",
+    "location": {
+      "start": {
+        "line": 1,
+        "column": 1,
+        "charIndex": 0
+      },
+      "end": {
+        "line": 2,
+        "column": 24,
+        "charIndex": 57
+      }
+    }
+  },
+  "definitions": [
+    {
+      "kind": "MapDefinition",
+      "name": "Geocode",
+      "usecaseName": "Geocode",
+      "statements": [
+        {
+          "kind": "SetStatement",
+          "assignments": [
+            {
+              "kind": "Assignment",
+              "key": [
+                "payload"
+              ],
+              "value": {
+                "kind": "JessieExpression",
+                "expression": "input.query || \"\".concat(input.streetAddress || \"\", \" \").concat(input.addressLocality || \"\", \" \").concat(input.addressRegion || \"\", \" \").concat(input.postalCode || \"\", \" \").concat(input.addressCountry || \"\")",
+                "source": "input.query || `${input.streetAddress || \"\"} ${input.addressLocality || \"\"} ${input.addressRegion || \"\"} ${input.postalCode || \"\"} ${input.addressCountry || \"\"}`",
+                "sourceMap": "AAAA,IAAI,aAAa,GAAG,KAAK,CAAC,KAAK,IAAI,UAAG,KAAK,CAAC,aAAa,IAAI,EAAE,cAAI,KAAK,CAAC,eAAe,IAAI,EAAE,cAAI,KAAK,CAAC,aAAa,IAAI,EAAE,cAAI,KAAK,CAAC,UAAU,IAAI,EAAE,cAAI,KAAK,CAAC,cAAc,IAAI,EAAE,CAAE,CAAC",
+                "location": {
+                  "start": {
+                    "line": 8,
+                    "column": 13,
+                    "charIndex": 174
+                  },
+                  "end": {
+                    "line": 8,
+                    "column": 174,
+                    "charIndex": 335
+                  }
+                }
+              },
+              "location": {
+                "start": {
+                  "line": 8,
+                  "column": 3,
+                  "charIndex": 164
+                },
+                "end": {
+                  "line": 8,
+                  "column": 174,
+                  "charIndex": 335
+                }
+              }
+            }
+          ],
+          "location": {
+            "start": {
+              "line": 8,
+              "column": 3,
+              "charIndex": 164
+            },
+            "end": {
+              "line": 8,
+              "column": 174,
+              "charIndex": 335
+            }
+          }
+        },
+        {
+          "kind": "HttpCallStatement",
+          "method": "GET",
+          "url": "/search/address/json",
+          "request": {
+            "kind": "HttpRequest",
+            "query": {
+              "kind": "ObjectLiteral",
+              "fields": [
+                {
+                  "kind": "Assignment",
+                  "key": [
+                    "api-version"
+                  ],
+                  "value": {
+                    "kind": "PrimitiveLiteral",
+                    "value": "1.0",
+                    "location": {
+                      "start": {
+                        "line": 14,
+                        "column": 25,
+                        "charIndex": 458
+                      },
+                      "end": {
+                        "line": 14,
+                        "column": 30,
+                        "charIndex": 463
+                      }
+                    }
+                  },
+                  "location": {
+                    "start": {
+                      "line": 14,
+                      "column": 9,
+                      "charIndex": 442
+                    },
+                    "end": {
+                      "line": 14,
+                      "column": 30,
+                      "charIndex": 463
+                    }
+                  }
+                },
+                {
+                  "kind": "Assignment",
+                  "key": [
+                    "query"
+                  ],
+                  "value": {
+                    "kind": "JessieExpression",
+                    "expression": "payload",
+                    "source": "payload",
+                    "sourceMap": "AAAA,IAAI,aAAa,GAAG,OAAO,CAAC",
+                    "location": {
+                      "start": {
+                        "line": 15,
+                        "column": 17,
+                        "charIndex": 480
+                      },
+                      "end": {
+                        "line": 15,
+                        "column": 24,
+                        "charIndex": 487
+                      }
+                    }
+                  },
+                  "location": {
+                    "start": {
+                      "line": 15,
+                      "column": 9,
+                      "charIndex": 472
+                    },
+                    "end": {
+                      "line": 15,
+                      "column": 24,
+                      "charIndex": 487
+                    }
+                  }
+                }
+              ],
+              "location": {
+                "start": {
+                  "line": 13,
+                  "column": 13,
+                  "charIndex": 432
+                },
+                "end": {
+                  "line": 16,
+                  "column": 8,
+                  "charIndex": 495
+                }
+              }
+            },
+            "location": {
+              "start": {
+                "line": 11,
+                "column": 5,
+                "charIndex": 378
+              },
+              "end": {
+                "line": 17,
+                "column": 6,
+                "charIndex": 501
+              }
+            },
+            "security": [
+              {
+                "id": "subscription-key"
+              }
+            ]
+          },
+          "responseHandlers": [
+            {
+              "kind": "HttpResponseHandler",
+              "statusCode": 200,
+              "contentType": "application/json",
+              "statements": [
+                {
+                  "kind": "OutcomeStatement",
+                  "isError": true,
+                  "terminateFlow": true,
+                  "condition": {
+                    "kind": "ConditionAtom",
+                    "expression": {
+                      "kind": "JessieExpression",
+                      "expression": "body.results.length === 0",
+                      "source": "body.results.length === 0",
+                      "sourceMap": "AAAA,IAAI,aAAa,GAAG,IAAI,CAAC,OAAO,CAAC,MAAM,KAAK,CAAC,CAAC",
+                      "location": {
+                        "start": {
+                          "line": 20,
+                          "column": 28,
+                          "charIndex": 568
+                        },
+                        "end": {
+                          "line": 20,
+                          "column": 53,
+                          "charIndex": 593
+                        }
+                      }
+                    },
+                    "location": {
+                      "start": {
+                        "line": 20,
+                        "column": 24,
+                        "charIndex": 564
+                      },
+                      "end": {
+                        "line": 20,
+                        "column": 54,
+                        "charIndex": 594
+                      }
+                    }
+                  },
+                  "value": {
+                    "kind": "ObjectLiteral",
+                    "fields": [
+                      {
+                        "kind": "Assignment",
+                        "key": [
+                          "title"
+                        ],
+                        "value": {
+                          "kind": "JessieExpression",
+                          "expression": "\"Unable to find geolocation coordinates for address: \" + payload.trim()",
+                          "source": "\"Unable to find geolocation coordinates for address: \" + payload.trim()",
+                          "sourceMap": "AAAA,IAAI,aAAa,GAAG,sDAAsD,GAAG,OAAO,CAAC,IAAI,EAAE,CAAC",
+                          "location": {
+                            "start": {
+                              "line": 21,
+                              "column": 17,
+                              "charIndex": 613
+                            },
+                            "end": {
+                              "line": 21,
+                              "column": 88,
+                              "charIndex": 684
+                            }
+                          }
+                        },
+                        "location": {
+                          "start": {
+                            "line": 21,
+                            "column": 9,
+                            "charIndex": 605
+                          },
+                          "end": {
+                            "line": 21,
+                            "column": 88,
+                            "charIndex": 684
+                          }
+                        }
+                      }
+                    ],
+                    "location": {
+                      "start": {
+                        "line": 20,
+                        "column": 55,
+                        "charIndex": 595
+                      },
+                      "end": {
+                        "line": 22,
+                        "column": 8,
+                        "charIndex": 692
+                      }
+                    }
+                  },
+                  "location": {
+                    "start": {
+                      "line": 20,
+                      "column": 7,
+                      "charIndex": 547
+                    },
+                    "end": {
+                      "line": 22,
+                      "column": 8,
+                      "charIndex": 692
+                    }
+                  }
+                },
+                {
+                  "kind": "OutcomeStatement",
+                  "isError": false,
+                  "terminateFlow": false,
+                  "value": {
+                    "kind": "ObjectLiteral",
+                    "fields": [
+                      {
+                        "kind": "Assignment",
+                        "key": [
+                          "latitude"
+                        ],
+                        "value": {
+                          "kind": "JessieExpression",
+                          "expression": "body.results[0].position.lat",
+                          "source": "body.results[0].position.lat",
+                          "sourceMap": "AAAA,IAAI,aAAa,GAAG,IAAI,CAAC,OAAO,CAAC,CAAC,CAAC,CAAC,QAAQ,CAAC,GAAG,CAAC",
+                          "location": {
+                            "start": {
+                              "line": 25,
+                              "column": 20,
+                              "charIndex": 732
+                            },
+                            "end": {
+                              "line": 25,
+                              "column": 48,
+                              "charIndex": 760
+                            }
+                          }
+                        },
+                        "location": {
+                          "start": {
+                            "line": 25,
+                            "column": 9,
+                            "charIndex": 721
+                          },
+                          "end": {
+                            "line": 25,
+                            "column": 48,
+                            "charIndex": 760
+                          }
+                        }
+                      },
+                      {
+                        "kind": "Assignment",
+                        "key": [
+                          "longitude"
+                        ],
+                        "value": {
+                          "kind": "JessieExpression",
+                          "expression": "body.results[0].position.lon",
+                          "source": "body.results[0].position.lon",
+                          "sourceMap": "AAAA,IAAI,aAAa,GAAG,IAAI,CAAC,OAAO,CAAC,CAAC,CAAC,CAAC,QAAQ,CAAC,GAAG,CAAC",
+                          "location": {
+                            "start": {
+                              "line": 26,
+                              "column": 21,
+                              "charIndex": 781
+                            },
+                            "end": {
+                              "line": 26,
+                              "column": 49,
+                              "charIndex": 809
+                            }
+                          }
+                        },
+                        "location": {
+                          "start": {
+                            "line": 26,
+                            "column": 9,
+                            "charIndex": 769
+                          },
+                          "end": {
+                            "line": 26,
+                            "column": 49,
+                            "charIndex": 809
+                          }
+                        }
+                      }
+                    ],
+                    "location": {
+                      "start": {
+                        "line": 24,
+                        "column": 18,
+                        "charIndex": 711
+                      },
+                      "end": {
+                        "line": 27,
+                        "column": 8,
+                        "charIndex": 817
+                      }
+                    }
+                  },
+                  "location": {
+                    "start": {
+                      "line": 24,
+                      "column": 7,
+                      "charIndex": 700
+                    },
+                    "end": {
+                      "line": 27,
+                      "column": 8,
+                      "charIndex": 817
+                    }
+                  }
+                }
+              ],
+              "location": {
+                "start": {
+                  "line": 19,
+                  "column": 5,
+                  "charIndex": 507
+                },
+                "end": {
+                  "line": 28,
+                  "column": 6,
+                  "charIndex": 823
+                }
+              }
+            },
+            {
+              "kind": "HttpResponseHandler",
+              "statusCode": 400,
+              "contentType": "application/json",
+              "statements": [
+                {
+                  "kind": "OutcomeStatement",
+                  "isError": true,
+                  "terminateFlow": false,
+                  "value": {
+                    "kind": "ObjectLiteral",
+                    "fields": [
+                      {
+                        "kind": "Assignment",
+                        "key": [
+                          "title"
+                        ],
+                        "value": {
+                          "kind": "PrimitiveLiteral",
+                          "value": "Bad request",
+                          "location": {
+                            "start": {
+                              "line": 32,
+                              "column": 17,
+                              "charIndex": 897
+                            },
+                            "end": {
+                              "line": 32,
+                              "column": 30,
+                              "charIndex": 910
+                            }
+                          }
+                        },
+                        "location": {
+                          "start": {
+                            "line": 32,
+                            "column": 9,
+                            "charIndex": 889
+                          },
+                          "end": {
+                            "line": 32,
+                            "column": 30,
+                            "charIndex": 910
+                          }
+                        }
+                      },
+                      {
+                        "kind": "Assignment",
+                        "key": [
+                          "detail"
+                        ],
+                        "value": {
+                          "kind": "JessieExpression",
+                          "expression": "body.error.message",
+                          "source": "body.error.message",
+                          "sourceMap": "AAAA,IAAI,aAAa,GAAG,IAAI,CAAC,KAAK,CAAC,OAAO,CAAC",
+                          "location": {
+                            "start": {
+                              "line": 33,
+                              "column": 18,
+                              "charIndex": 928
+                            },
+                            "end": {
+                              "line": 33,
+                              "column": 36,
+                              "charIndex": 946
+                            }
+                          }
+                        },
+                        "location": {
+                          "start": {
+                            "line": 33,
+                            "column": 9,
+                            "charIndex": 919
+                          },
+                          "end": {
+                            "line": 33,
+                            "column": 36,
+                            "charIndex": 946
+                          }
+                        }
+                      }
+                    ],
+                    "location": {
+                      "start": {
+                        "line": 31,
+                        "column": 17,
+                        "charIndex": 879
+                      },
+                      "end": {
+                        "line": 34,
+                        "column": 8,
+                        "charIndex": 954
+                      }
+                    }
+                  },
+                  "location": {
+                    "start": {
+                      "line": 31,
+                      "column": 7,
+                      "charIndex": 869
+                    },
+                    "end": {
+                      "line": 34,
+                      "column": 8,
+                      "charIndex": 954
+                    }
+                  }
+                }
+              ],
+              "location": {
+                "start": {
+                  "line": 30,
+                  "column": 5,
+                  "charIndex": 829
+                },
+                "end": {
+                  "line": 35,
+                  "column": 6,
+                  "charIndex": 960
+                }
+              }
+            },
+            {
+              "kind": "HttpResponseHandler",
+              "statusCode": 401,
+              "contentType": "application/json",
+              "statements": [
+                {
+                  "kind": "OutcomeStatement",
+                  "isError": true,
+                  "terminateFlow": false,
+                  "value": {
+                    "kind": "ObjectLiteral",
+                    "fields": [
+                      {
+                        "kind": "Assignment",
+                        "key": [
+                          "title"
+                        ],
+                        "value": {
+                          "kind": "PrimitiveLiteral",
+                          "value": "Unauthorized",
+                          "location": {
+                            "start": {
+                              "line": 39,
+                              "column": 17,
+                              "charIndex": 1034
+                            },
+                            "end": {
+                              "line": 39,
+                              "column": 31,
+                              "charIndex": 1048
+                            }
+                          }
+                        },
+                        "location": {
+                          "start": {
+                            "line": 39,
+                            "column": 9,
+                            "charIndex": 1026
+                          },
+                          "end": {
+                            "line": 39,
+                            "column": 31,
+                            "charIndex": 1048
+                          }
+                        }
+                      },
+                      {
+                        "kind": "Assignment",
+                        "key": [
+                          "detail"
+                        ],
+                        "value": {
+                          "kind": "JessieExpression",
+                          "expression": "body.error.message",
+                          "source": "body.error.message",
+                          "sourceMap": "AAAA,IAAI,aAAa,GAAG,IAAI,CAAC,KAAK,CAAC,OAAO,CAAC",
+                          "location": {
+                            "start": {
+                              "line": 40,
+                              "column": 18,
+                              "charIndex": 1066
+                            },
+                            "end": {
+                              "line": 40,
+                              "column": 36,
+                              "charIndex": 1084
+                            }
+                          }
+                        },
+                        "location": {
+                          "start": {
+                            "line": 40,
+                            "column": 9,
+                            "charIndex": 1057
+                          },
+                          "end": {
+                            "line": 40,
+                            "column": 36,
+                            "charIndex": 1084
+                          }
+                        }
+                      }
+                    ],
+                    "location": {
+                      "start": {
+                        "line": 38,
+                        "column": 17,
+                        "charIndex": 1016
+                      },
+                      "end": {
+                        "line": 41,
+                        "column": 8,
+                        "charIndex": 1092
+                      }
+                    }
+                  },
+                  "location": {
+                    "start": {
+                      "line": 38,
+                      "column": 7,
+                      "charIndex": 1006
+                    },
+                    "end": {
+                      "line": 41,
+                      "column": 8,
+                      "charIndex": 1092
+                    }
+                  }
+                }
+              ],
+              "location": {
+                "start": {
+                  "line": 37,
+                  "column": 5,
+                  "charIndex": 966
+                },
+                "end": {
+                  "line": 42,
+                  "column": 6,
+                  "charIndex": 1098
+                }
+              }
+            },
+            {
+              "kind": "HttpResponseHandler",
+              "statusCode": 403,
+              "contentType": "application/json",
+              "statements": [
+                {
+                  "kind": "OutcomeStatement",
+                  "isError": true,
+                  "terminateFlow": false,
+                  "value": {
+                    "kind": "ObjectLiteral",
+                    "fields": [
+                      {
+                        "kind": "Assignment",
+                        "key": [
+                          "title"
+                        ],
+                        "value": {
+                          "kind": "PrimitiveLiteral",
+                          "value": "Forbidden",
+                          "location": {
+                            "start": {
+                              "line": 46,
+                              "column": 17,
+                              "charIndex": 1172
+                            },
+                            "end": {
+                              "line": 46,
+                              "column": 28,
+                              "charIndex": 1183
+                            }
+                          }
+                        },
+                        "location": {
+                          "start": {
+                            "line": 46,
+                            "column": 9,
+                            "charIndex": 1164
+                          },
+                          "end": {
+                            "line": 46,
+                            "column": 28,
+                            "charIndex": 1183
+                          }
+                        }
+                      },
+                      {
+                        "kind": "Assignment",
+                        "key": [
+                          "detail"
+                        ],
+                        "value": {
+                          "kind": "JessieExpression",
+                          "expression": "body.error.message",
+                          "source": "body.error.message",
+                          "sourceMap": "AAAA,IAAI,aAAa,GAAG,IAAI,CAAC,KAAK,CAAC,OAAO,CAAC",
+                          "location": {
+                            "start": {
+                              "line": 47,
+                              "column": 18,
+                              "charIndex": 1201
+                            },
+                            "end": {
+                              "line": 47,
+                              "column": 36,
+                              "charIndex": 1219
+                            }
+                          }
+                        },
+                        "location": {
+                          "start": {
+                            "line": 47,
+                            "column": 9,
+                            "charIndex": 1192
+                          },
+                          "end": {
+                            "line": 47,
+                            "column": 36,
+                            "charIndex": 1219
+                          }
+                        }
+                      }
+                    ],
+                    "location": {
+                      "start": {
+                        "line": 45,
+                        "column": 17,
+                        "charIndex": 1154
+                      },
+                      "end": {
+                        "line": 48,
+                        "column": 8,
+                        "charIndex": 1227
+                      }
+                    }
+                  },
+                  "location": {
+                    "start": {
+                      "line": 45,
+                      "column": 7,
+                      "charIndex": 1144
+                    },
+                    "end": {
+                      "line": 48,
+                      "column": 8,
+                      "charIndex": 1227
+                    }
+                  }
+                }
+              ],
+              "location": {
+                "start": {
+                  "line": 44,
+                  "column": 5,
+                  "charIndex": 1104
+                },
+                "end": {
+                  "line": 49,
+                  "column": 6,
+                  "charIndex": 1233
+                }
+              }
+            },
+            {
+              "kind": "HttpResponseHandler",
+              "statusCode": 500,
+              "contentType": "application/json",
+              "statements": [
+                {
+                  "kind": "OutcomeStatement",
+                  "isError": true,
+                  "terminateFlow": false,
+                  "value": {
+                    "kind": "ObjectLiteral",
+                    "fields": [
+                      {
+                        "kind": "Assignment",
+                        "key": [
+                          "title"
+                        ],
+                        "value": {
+                          "kind": "PrimitiveLiteral",
+                          "value": "Internal server Error",
+                          "location": {
+                            "start": {
+                              "line": 53,
+                              "column": 17,
+                              "charIndex": 1307
+                            },
+                            "end": {
+                              "line": 53,
+                              "column": 40,
+                              "charIndex": 1330
+                            }
+                          }
+                        },
+                        "location": {
+                          "start": {
+                            "line": 53,
+                            "column": 9,
+                            "charIndex": 1299
+                          },
+                          "end": {
+                            "line": 53,
+                            "column": 40,
+                            "charIndex": 1330
+                          }
+                        }
+                      },
+                      {
+                        "kind": "Assignment",
+                        "key": [
+                          "detail"
+                        ],
+                        "value": {
+                          "kind": "JessieExpression",
+                          "expression": "body.error.message",
+                          "source": "body.error.message",
+                          "sourceMap": "AAAA,IAAI,aAAa,GAAG,IAAI,CAAC,KAAK,CAAC,OAAO,CAAC",
+                          "location": {
+                            "start": {
+                              "line": 54,
+                              "column": 18,
+                              "charIndex": 1348
+                            },
+                            "end": {
+                              "line": 54,
+                              "column": 36,
+                              "charIndex": 1366
+                            }
+                          }
+                        },
+                        "location": {
+                          "start": {
+                            "line": 54,
+                            "column": 9,
+                            "charIndex": 1339
+                          },
+                          "end": {
+                            "line": 54,
+                            "column": 36,
+                            "charIndex": 1366
+                          }
+                        }
+                      }
+                    ],
+                    "location": {
+                      "start": {
+                        "line": 52,
+                        "column": 17,
+                        "charIndex": 1289
+                      },
+                      "end": {
+                        "line": 55,
+                        "column": 8,
+                        "charIndex": 1374
+                      }
+                    }
+                  },
+                  "location": {
+                    "start": {
+                      "line": 52,
+                      "column": 7,
+                      "charIndex": 1279
+                    },
+                    "end": {
+                      "line": 55,
+                      "column": 8,
+                      "charIndex": 1374
+                    }
+                  }
+                }
+              ],
+              "location": {
+                "start": {
+                  "line": 51,
+                  "column": 5,
+                  "charIndex": 1239
+                },
+                "end": {
+                  "line": 56,
+                  "column": 6,
+                  "charIndex": 1380
+                }
+              }
+            }
+          ],
+          "location": {
+            "start": {
+              "line": 10,
+              "column": 3,
+              "charIndex": 340
+            },
+            "end": {
+              "line": 57,
+              "column": 4,
+              "charIndex": 1384
+            }
+          }
+        }
+      ],
+      "location": {
+        "start": {
+          "line": 7,
+          "column": 1,
+          "charIndex": 148
+        },
+        "end": {
+          "line": 58,
+          "column": 2,
+          "charIndex": 1386
+        }
+      }
+    },
+    {
+      "kind": "MapDefinition",
+      "name": "ReverseGeocode",
+      "usecaseName": "ReverseGeocode",
+      "statements": [
+        {
+          "kind": "SetStatement",
+          "assignments": [
+            {
+              "kind": "Assignment",
+              "key": [
+                "payload"
+              ],
+              "value": {
+                "kind": "JessieExpression",
+                "expression": "\"\".concat(input.latitude, \",\").concat(input.longitude)",
+                "source": "`${input.latitude},${input.longitude}`",
+                "sourceMap": "AAAA,IAAI,aAAa,GAAG,UAAG,KAAK,CAAC,QAAQ,cAAI,KAAK,CAAC,SAAS,CAAE,CAAC",
+                "location": {
+                  "start": {
+                    "line": 61,
+                    "column": 13,
+                    "charIndex": 1421
+                  },
+                  "end": {
+                    "line": 61,
+                    "column": 51,
+                    "charIndex": 1459
+                  }
+                }
+              },
+              "location": {
+                "start": {
+                  "line": 61,
+                  "column": 3,
+                  "charIndex": 1411
+                },
+                "end": {
+                  "line": 61,
+                  "column": 51,
+                  "charIndex": 1459
+                }
+              }
+            }
+          ],
+          "location": {
+            "start": {
+              "line": 61,
+              "column": 3,
+              "charIndex": 1411
+            },
+            "end": {
+              "line": 61,
+              "column": 51,
+              "charIndex": 1459
+            }
+          }
+        },
+        {
+          "kind": "HttpCallStatement",
+          "method": "GET",
+          "url": "/search/address/reverse/json",
+          "request": {
+            "kind": "HttpRequest",
+            "query": {
+              "kind": "ObjectLiteral",
+              "fields": [
+                {
+                  "kind": "Assignment",
+                  "key": [
+                    "api-version"
+                  ],
+                  "value": {
+                    "kind": "PrimitiveLiteral",
+                    "value": "1.0",
+                    "location": {
+                      "start": {
+                        "line": 67,
+                        "column": 25,
+                        "charIndex": 1590
+                      },
+                      "end": {
+                        "line": 67,
+                        "column": 30,
+                        "charIndex": 1595
+                      }
+                    }
+                  },
+                  "location": {
+                    "start": {
+                      "line": 67,
+                      "column": 9,
+                      "charIndex": 1574
+                    },
+                    "end": {
+                      "line": 67,
+                      "column": 30,
+                      "charIndex": 1595
+                    }
+                  }
+                },
+                {
+                  "kind": "Assignment",
+                  "key": [
+                    "query"
+                  ],
+                  "value": {
+                    "kind": "JessieExpression",
+                    "expression": "payload",
+                    "source": "payload",
+                    "sourceMap": "AAAA,IAAI,aAAa,GAAG,OAAO,CAAC",
+                    "location": {
+                      "start": {
+                        "line": 68,
+                        "column": 17,
+                        "charIndex": 1612
+                      },
+                      "end": {
+                        "line": 68,
+                        "column": 24,
+                        "charIndex": 1619
+                      }
+                    }
+                  },
+                  "location": {
+                    "start": {
+                      "line": 68,
+                      "column": 9,
+                      "charIndex": 1604
+                    },
+                    "end": {
+                      "line": 68,
+                      "column": 24,
+                      "charIndex": 1619
+                    }
+                  }
+                }
+              ],
+              "location": {
+                "start": {
+                  "line": 66,
+                  "column": 13,
+                  "charIndex": 1564
+                },
+                "end": {
+                  "line": 69,
+                  "column": 8,
+                  "charIndex": 1627
+                }
+              }
+            },
+            "location": {
+              "start": {
+                "line": 64,
+                "column": 5,
+                "charIndex": 1510
+              },
+              "end": {
+                "line": 70,
+                "column": 6,
+                "charIndex": 1633
+              }
+            },
+            "security": [
+              {
+                "id": "subscription-key"
+              }
+            ]
+          },
+          "responseHandlers": [
+            {
+              "kind": "HttpResponseHandler",
+              "statusCode": 200,
+              "contentType": "application/json",
+              "statements": [
+                {
+                  "kind": "OutcomeStatement",
+                  "isError": true,
+                  "terminateFlow": true,
+                  "condition": {
+                    "kind": "ConditionAtom",
+                    "expression": {
+                      "kind": "JessieExpression",
+                      "expression": "body.addresses.length === 0",
+                      "source": "body.addresses.length === 0",
+                      "sourceMap": "AAAA,IAAI,aAAa,GAAG,IAAI,CAAC,SAAS,CAAC,MAAM,KAAK,CAAC,CAAC",
+                      "location": {
+                        "start": {
+                          "line": 73,
+                          "column": 28,
+                          "charIndex": 1700
+                        },
+                        "end": {
+                          "line": 73,
+                          "column": 55,
+                          "charIndex": 1727
+                        }
+                      }
+                    },
+                    "location": {
+                      "start": {
+                        "line": 73,
+                        "column": 24,
+                        "charIndex": 1696
+                      },
+                      "end": {
+                        "line": 73,
+                        "column": 56,
+                        "charIndex": 1728
+                      }
+                    }
+                  },
+                  "value": {
+                    "kind": "ObjectLiteral",
+                    "fields": [
+                      {
+                        "kind": "Assignment",
+                        "key": [
+                          "title"
+                        ],
+                        "value": {
+                          "kind": "PrimitiveLiteral",
+                          "value": "Error reverse geocoding coordinates",
+                          "location": {
+                            "start": {
+                              "line": 74,
+                              "column": 17,
+                              "charIndex": 1747
+                            },
+                            "end": {
+                              "line": 74,
+                              "column": 54,
+                              "charIndex": 1784
+                            }
+                          }
+                        },
+                        "location": {
+                          "start": {
+                            "line": 74,
+                            "column": 9,
+                            "charIndex": 1739
+                          },
+                          "end": {
+                            "line": 74,
+                            "column": 54,
+                            "charIndex": 1784
+                          }
+                        }
+                      }
+                    ],
+                    "location": {
+                      "start": {
+                        "line": 73,
+                        "column": 57,
+                        "charIndex": 1729
+                      },
+                      "end": {
+                        "line": 75,
+                        "column": 8,
+                        "charIndex": 1792
+                      }
+                    }
+                  },
+                  "location": {
+                    "start": {
+                      "line": 73,
+                      "column": 7,
+                      "charIndex": 1679
+                    },
+                    "end": {
+                      "line": 75,
+                      "column": 8,
+                      "charIndex": 1792
+                    }
+                  }
+                },
+                {
+                  "kind": "SetStatement",
+                  "assignments": [
+                    {
+                      "kind": "Assignment",
+                      "key": [
+                        "addresses"
+                      ],
+                      "value": {
+                        "kind": "JessieExpression",
+                        "expression": "body.addresses.map(function (item) { return item.address; }).filter(function (item) { return item.countryCode || item.freeformAddress; })",
+                        "source": "body.addresses.map(item => item.address).filter(item => item.countryCode || item.freeformAddress)",
+                        "sourceMap": "AAAA,IAAI,aAAa,GAAG,IAAI,CAAC,SAAS,CAAC,GAAG,CAAC,UAAA,IAAI,IAAI,OAAA,IAAI,CAAC,OAAO,EAAZ,CAAY,CAAC,CAAC,MAAM,CAAC,UAAA,IAAI,IAAI,OAAA,IAAI,CAAC,WAAW,IAAI,IAAI,CAAC,eAAe,EAAxC,CAAwC,CAAC,CAAC",
+                        "location": {
+                          "start": {
+                            "line": 77,
+                            "column": 19,
+                            "charIndex": 1812
+                          },
+                          "end": {
+                            "line": 77,
+                            "column": 116,
+                            "charIndex": 1909
+                          }
+                        }
+                      },
+                      "location": {
+                        "start": {
+                          "line": 77,
+                          "column": 7,
+                          "charIndex": 1800
+                        },
+                        "end": {
+                          "line": 77,
+                          "column": 116,
+                          "charIndex": 1909
+                        }
+                      }
+                    }
+                  ],
+                  "location": {
+                    "start": {
+                      "line": 77,
+                      "column": 7,
+                      "charIndex": 1800
+                    },
+                    "end": {
+                      "line": 77,
+                      "column": 116,
+                      "charIndex": 1909
+                    }
+                  }
+                },
+                {
+                  "kind": "OutcomeStatement",
+                  "isError": true,
+                  "terminateFlow": true,
+                  "condition": {
+                    "kind": "ConditionAtom",
+                    "expression": {
+                      "kind": "JessieExpression",
+                      "expression": "addresses.length === 0",
+                      "source": "addresses.length === 0",
+                      "sourceMap": "AAAA,IAAI,aAAa,GAAG,SAAS,CAAC,MAAM,KAAK,CAAC,CAAC",
+                      "location": {
+                        "start": {
+                          "line": 79,
+                          "column": 28,
+                          "charIndex": 1939
+                        },
+                        "end": {
+                          "line": 79,
+                          "column": 50,
+                          "charIndex": 1961
+                        }
+                      }
+                    },
+                    "location": {
+                      "start": {
+                        "line": 79,
+                        "column": 24,
+                        "charIndex": 1935
+                      },
+                      "end": {
+                        "line": 79,
+                        "column": 51,
+                        "charIndex": 1962
+                      }
+                    }
+                  },
+                  "value": {
+                    "kind": "ObjectLiteral",
+                    "fields": [
+                      {
+                        "kind": "Assignment",
+                        "key": [
+                          "title"
+                        ],
+                        "value": {
+                          "kind": "PrimitiveLiteral",
+                          "value": "Could not find any information about address.",
+                          "location": {
+                            "start": {
+                              "line": 80,
+                              "column": 19,
+                              "charIndex": 1983
+                            },
+                            "end": {
+                              "line": 80,
+                              "column": 66,
+                              "charIndex": 2030
+                            }
+                          }
+                        },
+                        "location": {
+                          "start": {
+                            "line": 80,
+                            "column": 11,
+                            "charIndex": 1975
+                          },
+                          "end": {
+                            "line": 80,
+                            "column": 66,
+                            "charIndex": 2030
+                          }
+                        }
+                      }
+                    ],
+                    "location": {
+                      "start": {
+                        "line": 79,
+                        "column": 52,
+                        "charIndex": 1963
+                      },
+                      "end": {
+                        "line": 81,
+                        "column": 8,
+                        "charIndex": 2038
+                      }
+                    }
+                  },
+                  "location": {
+                    "start": {
+                      "line": 79,
+                      "column": 7,
+                      "charIndex": 1918
+                    },
+                    "end": {
+                      "line": 81,
+                      "column": 8,
+                      "charIndex": 2038
+                    }
+                  }
+                },
+                {
+                  "kind": "OutcomeStatement",
+                  "isError": false,
+                  "terminateFlow": false,
+                  "value": {
+                    "kind": "JessieExpression",
+                    "expression": "addresses.map(function (address) {\n    var result = {};\n    // country code\n    if (address.countryCodeISO3 || address.countryCode) {\n        result.addressCountry = address.countryCodeISO3 || address.countryCode;\n    }\n    // region\n    if (address.countrySubdivision) {\n        result.addressRegion =\n            address.countrySecondarySubdivision\n                ? \"\".concat(address.countrySecondarySubdivision, \", \").concat(address.countrySubdivision)\n                : address.countrySubdivision;\n    }\n    // locality\n    if (address.countrySubdivisionName) {\n        result.addressLocality =\n            address.localName\n                ? \"\".concat(address.localName, \", \").concat(address.countrySubdivisionName)\n                : address.countrySubdivisionName;\n    }\n    // street address\n    if (address.streetName || address.streetNameAndNumber) {\n        result.streetAddress = address.streetNameAndNumber || address.streetName;\n    }\n    // postal code\n    if (address.postalCode || address.extendedPostalCode) {\n        result.postalCode = address.postalCode || address.extendedPostalCode;\n    }\n    // formatted address\n    if (address.freeformAddress) {\n        result.formattedAddress =\n            address.country\n                ? \"\".concat(address.freeformAddress, \", \").concat(address.country)\n                : address.freeformAddress;\n    }\n    return result;\n})",
+                    "source": "addresses.map(address => {\n        let result = {}\n        \n        // country code\n        if (address.countryCodeISO3 || address.countryCode) {\n            result.addressCountry = address.countryCodeISO3 || address.countryCode;\n        }\n\n        // region\n        if (address.countrySubdivision) {\n            result.addressRegion = \n              address.countrySecondarySubdivision\n              ? `${address.countrySecondarySubdivision}, ${address.countrySubdivision}`\n              : address.countrySubdivision;\n        }\n\n        // locality\n        if (address.countrySubdivisionName) {\n            result.addressLocality = \n                address.localName \n                ? `${address.localName}, ${address.countrySubdivisionName}` \n                : address.countrySubdivisionName\n        }\n\n        // street address\n        if (address.streetName || address.streetNameAndNumber) {\n            result.streetAddress = address.streetNameAndNumber || address.streetName;\n        }\n\n        // postal code\n        if (address.postalCode || address.extendedPostalCode) {\n            result.postalCode = address.postalCode || address.extendedPostalCode\n        }\n\n        // formatted address\n        if (address.freeformAddress) {\n            result.formattedAddress = \n                address.country \n                ? `${address.freeformAddress}, ${address.country}` \n                : address.freeformAddress\n        }\n\n        return result\n      })",
+                    "sourceMap": "AAAA,IAAI,aAAa,GAAG,SAAS,CAAC,GAAG,CAAC,UAAA,OAAO;IACjC,IAAI,MAAM,GAAG,EAAE,CAAA;IAEf,eAAe;IACf,IAAI,OAAO,CAAC,eAAe,IAAI,OAAO,CAAC,WAAW,EAAE;QAChD,MAAM,CAAC,cAAc,GAAG,OAAO,CAAC,eAAe,IAAI,OAAO,CAAC,WAAW,CAAC;KAC1E;IAED,SAAS;IACT,IAAI,OAAO,CAAC,kBAAkB,EAAE;QAC5B,MAAM,CAAC,aAAa;YAClB,OAAO,CAAC,2BAA2B;gBACnC,CAAC,CAAC,UAAG,OAAO,CAAC,2BAA2B,eAAK,OAAO,CAAC,kBAAkB,CAAE;gBACzE,CAAC,CAAC,OAAO,CAAC,kBAAkB,CAAC;KAClC;IAED,WAAW;IACX,IAAI,OAAO,CAAC,sBAAsB,EAAE;QAChC,MAAM,CAAC,eAAe;YAClB,OAAO,CAAC,SAAS;gBACjB,CAAC,CAAC,UAAG,OAAO,CAAC,SAAS,eAAK,OAAO,CAAC,sBAAsB,CAAE;gBAC3D,CAAC,CAAC,OAAO,CAAC,sBAAsB,CAAA;KACvC;IAED,iBAAiB;IACjB,IAAI,OAAO,CAAC,UAAU,IAAI,OAAO,CAAC,mBAAmB,EAAE;QACnD,MAAM,CAAC,aAAa,GAAG,OAAO,CAAC,mBAAmB,IAAI,OAAO,CAAC,UAAU,CAAC;KAC5E;IAED,cAAc;IACd,IAAI,OAAO,CAAC,UAAU,IAAI,OAAO,CAAC,kBAAkB,EAAE;QAClD,MAAM,CAAC,UAAU,GAAG,OAAO,CAAC,UAAU,IAAI,OAAO,CAAC,kBAAkB,CAAA;KACvE;IAED,oBAAoB;IACpB,IAAI,OAAO,CAAC,eAAe,EAAE;QACzB,MAAM,CAAC,gBAAgB;YACnB,OAAO,CAAC,OAAO;gBACf,CAAC,CAAC,UAAG,OAAO,CAAC,eAAe,eAAK,OAAO,CAAC,OAAO,CAAE;gBAClD,CAAC,CAAC,OAAO,CAAC,eAAe,CAAA;KAChC;IAED,OAAO,MAAM,CAAA;AACf,CAAC,CAAC,CAAC",
+                    "location": {
+                      "start": {
+                        "line": 83,
+                        "column": 18,
+                        "charIndex": 2063
+                      },
+                      "end": {
+                        "line": 126,
+                        "column": 9,
+                        "charIndex": 3527
+                      }
+                    }
+                  },
+                  "location": {
+                    "start": {
+                      "line": 83,
+                      "column": 7,
+                      "charIndex": 2052
+                    },
+                    "end": {
+                      "line": 126,
+                      "column": 9,
+                      "charIndex": 3527
+                    }
+                  }
+                }
+              ],
+              "location": {
+                "start": {
+                  "line": 72,
+                  "column": 5,
+                  "charIndex": 1639
+                },
+                "end": {
+                  "line": 127,
+                  "column": 6,
+                  "charIndex": 3534
+                }
+              }
+            },
+            {
+              "kind": "HttpResponseHandler",
+              "statusCode": 400,
+              "contentType": "application/json",
+              "statements": [
+                {
+                  "kind": "OutcomeStatement",
+                  "isError": true,
+                  "terminateFlow": false,
+                  "value": {
+                    "kind": "ObjectLiteral",
+                    "fields": [
+                      {
+                        "kind": "Assignment",
+                        "key": [
+                          "title"
+                        ],
+                        "value": {
+                          "kind": "PrimitiveLiteral",
+                          "value": "Bad request",
+                          "location": {
+                            "start": {
+                              "line": 131,
+                              "column": 17,
+                              "charIndex": 3608
+                            },
+                            "end": {
+                              "line": 131,
+                              "column": 30,
+                              "charIndex": 3621
+                            }
+                          }
+                        },
+                        "location": {
+                          "start": {
+                            "line": 131,
+                            "column": 9,
+                            "charIndex": 3600
+                          },
+                          "end": {
+                            "line": 131,
+                            "column": 30,
+                            "charIndex": 3621
+                          }
+                        }
+                      },
+                      {
+                        "kind": "Assignment",
+                        "key": [
+                          "detail"
+                        ],
+                        "value": {
+                          "kind": "JessieExpression",
+                          "expression": "body.error.message",
+                          "source": "body.error.message",
+                          "sourceMap": "AAAA,IAAI,aAAa,GAAG,IAAI,CAAC,KAAK,CAAC,OAAO,CAAC",
+                          "location": {
+                            "start": {
+                              "line": 132,
+                              "column": 18,
+                              "charIndex": 3639
+                            },
+                            "end": {
+                              "line": 132,
+                              "column": 36,
+                              "charIndex": 3657
+                            }
+                          }
+                        },
+                        "location": {
+                          "start": {
+                            "line": 132,
+                            "column": 9,
+                            "charIndex": 3630
+                          },
+                          "end": {
+                            "line": 132,
+                            "column": 36,
+                            "charIndex": 3657
+                          }
+                        }
+                      }
+                    ],
+                    "location": {
+                      "start": {
+                        "line": 130,
+                        "column": 17,
+                        "charIndex": 3590
+                      },
+                      "end": {
+                        "line": 133,
+                        "column": 8,
+                        "charIndex": 3665
+                      }
+                    }
+                  },
+                  "location": {
+                    "start": {
+                      "line": 130,
+                      "column": 7,
+                      "charIndex": 3580
+                    },
+                    "end": {
+                      "line": 133,
+                      "column": 8,
+                      "charIndex": 3665
+                    }
+                  }
+                }
+              ],
+              "location": {
+                "start": {
+                  "line": 129,
+                  "column": 5,
+                  "charIndex": 3540
+                },
+                "end": {
+                  "line": 134,
+                  "column": 6,
+                  "charIndex": 3671
+                }
+              }
+            },
+            {
+              "kind": "HttpResponseHandler",
+              "statusCode": 401,
+              "contentType": "application/json",
+              "statements": [
+                {
+                  "kind": "OutcomeStatement",
+                  "isError": true,
+                  "terminateFlow": false,
+                  "value": {
+                    "kind": "ObjectLiteral",
+                    "fields": [
+                      {
+                        "kind": "Assignment",
+                        "key": [
+                          "title"
+                        ],
+                        "value": {
+                          "kind": "PrimitiveLiteral",
+                          "value": "Unauthorized",
+                          "location": {
+                            "start": {
+                              "line": 138,
+                              "column": 17,
+                              "charIndex": 3745
+                            },
+                            "end": {
+                              "line": 138,
+                              "column": 31,
+                              "charIndex": 3759
+                            }
+                          }
+                        },
+                        "location": {
+                          "start": {
+                            "line": 138,
+                            "column": 9,
+                            "charIndex": 3737
+                          },
+                          "end": {
+                            "line": 138,
+                            "column": 31,
+                            "charIndex": 3759
+                          }
+                        }
+                      },
+                      {
+                        "kind": "Assignment",
+                        "key": [
+                          "detail"
+                        ],
+                        "value": {
+                          "kind": "JessieExpression",
+                          "expression": "body.error.message",
+                          "source": "body.error.message",
+                          "sourceMap": "AAAA,IAAI,aAAa,GAAG,IAAI,CAAC,KAAK,CAAC,OAAO,CAAC",
+                          "location": {
+                            "start": {
+                              "line": 139,
+                              "column": 18,
+                              "charIndex": 3777
+                            },
+                            "end": {
+                              "line": 139,
+                              "column": 36,
+                              "charIndex": 3795
+                            }
+                          }
+                        },
+                        "location": {
+                          "start": {
+                            "line": 139,
+                            "column": 9,
+                            "charIndex": 3768
+                          },
+                          "end": {
+                            "line": 139,
+                            "column": 36,
+                            "charIndex": 3795
+                          }
+                        }
+                      }
+                    ],
+                    "location": {
+                      "start": {
+                        "line": 137,
+                        "column": 17,
+                        "charIndex": 3727
+                      },
+                      "end": {
+                        "line": 140,
+                        "column": 8,
+                        "charIndex": 3803
+                      }
+                    }
+                  },
+                  "location": {
+                    "start": {
+                      "line": 137,
+                      "column": 7,
+                      "charIndex": 3717
+                    },
+                    "end": {
+                      "line": 140,
+                      "column": 8,
+                      "charIndex": 3803
+                    }
+                  }
+                }
+              ],
+              "location": {
+                "start": {
+                  "line": 136,
+                  "column": 5,
+                  "charIndex": 3677
+                },
+                "end": {
+                  "line": 141,
+                  "column": 6,
+                  "charIndex": 3809
+                }
+              }
+            },
+            {
+              "kind": "HttpResponseHandler",
+              "statusCode": 403,
+              "contentType": "application/json",
+              "statements": [
+                {
+                  "kind": "OutcomeStatement",
+                  "isError": true,
+                  "terminateFlow": false,
+                  "value": {
+                    "kind": "ObjectLiteral",
+                    "fields": [
+                      {
+                        "kind": "Assignment",
+                        "key": [
+                          "title"
+                        ],
+                        "value": {
+                          "kind": "PrimitiveLiteral",
+                          "value": "Forbidden",
+                          "location": {
+                            "start": {
+                              "line": 145,
+                              "column": 17,
+                              "charIndex": 3883
+                            },
+                            "end": {
+                              "line": 145,
+                              "column": 28,
+                              "charIndex": 3894
+                            }
+                          }
+                        },
+                        "location": {
+                          "start": {
+                            "line": 145,
+                            "column": 9,
+                            "charIndex": 3875
+                          },
+                          "end": {
+                            "line": 145,
+                            "column": 28,
+                            "charIndex": 3894
+                          }
+                        }
+                      },
+                      {
+                        "kind": "Assignment",
+                        "key": [
+                          "detail"
+                        ],
+                        "value": {
+                          "kind": "JessieExpression",
+                          "expression": "body.error.message",
+                          "source": "body.error.message",
+                          "sourceMap": "AAAA,IAAI,aAAa,GAAG,IAAI,CAAC,KAAK,CAAC,OAAO,CAAC",
+                          "location": {
+                            "start": {
+                              "line": 146,
+                              "column": 18,
+                              "charIndex": 3912
+                            },
+                            "end": {
+                              "line": 146,
+                              "column": 36,
+                              "charIndex": 3930
+                            }
+                          }
+                        },
+                        "location": {
+                          "start": {
+                            "line": 146,
+                            "column": 9,
+                            "charIndex": 3903
+                          },
+                          "end": {
+                            "line": 146,
+                            "column": 36,
+                            "charIndex": 3930
+                          }
+                        }
+                      }
+                    ],
+                    "location": {
+                      "start": {
+                        "line": 144,
+                        "column": 17,
+                        "charIndex": 3865
+                      },
+                      "end": {
+                        "line": 147,
+                        "column": 8,
+                        "charIndex": 3938
+                      }
+                    }
+                  },
+                  "location": {
+                    "start": {
+                      "line": 144,
+                      "column": 7,
+                      "charIndex": 3855
+                    },
+                    "end": {
+                      "line": 147,
+                      "column": 8,
+                      "charIndex": 3938
+                    }
+                  }
+                }
+              ],
+              "location": {
+                "start": {
+                  "line": 143,
+                  "column": 5,
+                  "charIndex": 3815
+                },
+                "end": {
+                  "line": 148,
+                  "column": 6,
+                  "charIndex": 3944
+                }
+              }
+            },
+            {
+              "kind": "HttpResponseHandler",
+              "statusCode": 500,
+              "contentType": "application/json",
+              "statements": [
+                {
+                  "kind": "OutcomeStatement",
+                  "isError": true,
+                  "terminateFlow": false,
+                  "value": {
+                    "kind": "ObjectLiteral",
+                    "fields": [
+                      {
+                        "kind": "Assignment",
+                        "key": [
+                          "title"
+                        ],
+                        "value": {
+                          "kind": "PrimitiveLiteral",
+                          "value": "Internal server Error",
+                          "location": {
+                            "start": {
+                              "line": 152,
+                              "column": 17,
+                              "charIndex": 4018
+                            },
+                            "end": {
+                              "line": 152,
+                              "column": 40,
+                              "charIndex": 4041
+                            }
+                          }
+                        },
+                        "location": {
+                          "start": {
+                            "line": 152,
+                            "column": 9,
+                            "charIndex": 4010
+                          },
+                          "end": {
+                            "line": 152,
+                            "column": 40,
+                            "charIndex": 4041
+                          }
+                        }
+                      },
+                      {
+                        "kind": "Assignment",
+                        "key": [
+                          "detail"
+                        ],
+                        "value": {
+                          "kind": "JessieExpression",
+                          "expression": "body.error.message",
+                          "source": "body.error.message",
+                          "sourceMap": "AAAA,IAAI,aAAa,GAAG,IAAI,CAAC,KAAK,CAAC,OAAO,CAAC",
+                          "location": {
+                            "start": {
+                              "line": 153,
+                              "column": 18,
+                              "charIndex": 4059
+                            },
+                            "end": {
+                              "line": 153,
+                              "column": 36,
+                              "charIndex": 4077
+                            }
+                          }
+                        },
+                        "location": {
+                          "start": {
+                            "line": 153,
+                            "column": 9,
+                            "charIndex": 4050
+                          },
+                          "end": {
+                            "line": 153,
+                            "column": 36,
+                            "charIndex": 4077
+                          }
+                        }
+                      }
+                    ],
+                    "location": {
+                      "start": {
+                        "line": 151,
+                        "column": 17,
+                        "charIndex": 4000
+                      },
+                      "end": {
+                        "line": 154,
+                        "column": 8,
+                        "charIndex": 4085
+                      }
+                    }
+                  },
+                  "location": {
+                    "start": {
+                      "line": 151,
+                      "column": 7,
+                      "charIndex": 3990
+                    },
+                    "end": {
+                      "line": 154,
+                      "column": 8,
+                      "charIndex": 4085
+                    }
+                  }
+                }
+              ],
+              "location": {
+                "start": {
+                  "line": 150,
+                  "column": 5,
+                  "charIndex": 3950
+                },
+                "end": {
+                  "line": 155,
+                  "column": 6,
+                  "charIndex": 4091
+                }
+              }
+            }
+          ],
+          "location": {
+            "start": {
+              "line": 63,
+              "column": 3,
+              "charIndex": 1464
+            },
+            "end": {
+              "line": 156,
+              "column": 4,
+              "charIndex": 4095
+            }
+          }
+        }
+      ],
+      "location": {
+        "start": {
+          "line": 60,
+          "column": 1,
+          "charIndex": 1388
+        },
+        "end": {
+          "line": 157,
+          "column": 2,
+          "charIndex": 4097
+        }
+      }
+    }
+  ],
+  "location": {
+    "start": {
+      "line": 1,
+      "column": 1,
+      "charIndex": 0
+    },
+    "end": {
+      "line": 157,
+      "column": 2,
+      "charIndex": 4097
+    }
+  },
+  "astMetadata": {
+    "astVersion": {
+      "major": 1,
+      "minor": 2,
+      "patch": 0
+    },
+    "parserVersion": {
+      "major": 1,
+      "minor": 2,
+      "patch": 0
+    },
+    "sourceChecksum": "2e166da44bf296904458de363769331730c8f5869ba8544d06ef49de21ccd3d4"
+  }
+}

@@ -1,0 +1,178 @@
+{
+  "kind": "MapDocument",
+  "header": {
+    "kind": "MapHeader",
+    "profile": {
+      "scope": "social-media",
+      "name": "posts",
+      "version": {
+        "major": 1,
+        "minor": 0,
+        "patch": 0
+      }
+    },
+    "provider": "mock",
+    "location": {
+      "start": {
+        "line": 1,
+        "column": 1,
+        "charIndex": 0
+      },
+      "end": {
+        "line": 2,
+        "column": 18,
+        "charIndex": 52
+      }
+    }
+  },
+  "definitions": [
+    {
+      "kind": "MapDefinition",
+      "name": "GetProfilePosts",
+      "usecaseName": "GetProfilePosts",
+      "statements": [
+        {
+          "kind": "OutcomeStatement",
+          "isError": false,
+          "terminateFlow": true,
+          "value": {
+            "kind": "ObjectLiteral",
+            "fields": [
+              {
+                "kind": "Assignment",
+                "key": [
+                  "posts"
+                ],
+                "value": {
+                  "kind": "JessieExpression",
+                  "expression": "[\n    {\n        id: '110658944785122_122332100284473',\n        createdAt: '2022-01-07T15:43:27+0000',\n        text: 'Post with attachments',\n        url: 'https://www.facebook.com/sftest7904/photos/a.121467247037625/122332100284473/?type=3',\n        attachments: [\n            {\n                title: 'Photos on timeline',\n                type: 'photo',\n                url: 'https://www.facebook.com/sftest7904/photos/a.121467247037625/122332100284473/?type=3',\n            },\n        ]\n    },\n    {\n        id: '110658944785122_125744069943276',\n        createdAt: '2022-01-20T12:15:45+0000',\n        text: 'Simple text post.',\n        url: 'https://www.facebook.com/110658944785122/posts/125744069943276/',\n        attachments: [],\n    },\n]",
+                  "source": "[\n      {\n        id: '110658944785122_122332100284473',\n        createdAt: '2022-01-07T15:43:27+0000',\n        text: 'Post with attachments',\n        url: 'https://www.facebook.com/sftest7904/photos/a.121467247037625/122332100284473/?type=3',\n        attachments: [\n           {\n            title: 'Photos on timeline',\n            type: 'photo',\n            url: 'https://www.facebook.com/sftest7904/photos/a.121467247037625/122332100284473/?type=3',\n          },\n        ]\n      },\n      {\n        id: '110658944785122_125744069943276',\n        createdAt: '2022-01-20T12:15:45+0000',\n        text: 'Simple text post.',\n        url: 'https://www.facebook.com/110658944785122/posts/125744069943276/',\n        attachments: [],\n      },\n    ]",
+                  "sourceMap": "AAAA,IAAI,aAAa,GAAG;IACd;QACE,EAAE,EAAE,iCAAiC;QACrC,SAAS,EAAE,0BAA0B;QACrC,IAAI,EAAE,uBAAuB;QAC7B,GAAG,EAAE,sFAAsF;QAC3F,WAAW,EAAE;YACV;gBACC,KAAK,EAAE,oBAAoB;gBAC3B,IAAI,EAAE,OAAO;gBACb,GAAG,EAAE,sFAAsF;aAC5F;SACF;KACF;IACD;QACE,EAAE,EAAE,iCAAiC;QACrC,SAAS,EAAE,0BAA0B;QACrC,IAAI,EAAE,mBAAmB;QACzB,GAAG,EAAE,iEAAiE;QACtE,WAAW,EAAE,EAAE;KAChB;CACF,CAAC",
+                  "location": {
+                    "start": {
+                      "line": 6,
+                      "column": 13,
+                      "charIndex": 110
+                    },
+                    "end": {
+                      "line": 27,
+                      "column": 6,
+                      "charIndex": 851
+                    }
+                  }
+                },
+                "location": {
+                  "start": {
+                    "line": 6,
+                    "column": 5,
+                    "charIndex": 102
+                  },
+                  "end": {
+                    "line": 27,
+                    "column": 6,
+                    "charIndex": 851
+                  }
+                }
+              },
+              {
+                "kind": "Assignment",
+                "key": [
+                  "nextPage"
+                ],
+                "value": {
+                  "kind": "PrimitiveLiteral",
+                  "value": "next:QVFIUjc2Y01oQ3F1bHk5WHNzNVVuS2ZAMSEtpdkxmbC1FV09XcGNmTUc4ZAkhrMlBPU19LYkM0dFY4RjZAKY3pYU1VMNll5Y24zcGhWS2pIUUVlSFBuTFI4X3haVmQ2amxtTU83R3JMRDJFd1hhUWJ0RWxfZAjN2ZAE51b2FBckhtZAG04SDN3",
+                  "location": {
+                    "start": {
+                      "line": 28,
+                      "column": 16,
+                      "charIndex": 868
+                    },
+                    "end": {
+                      "line": 28,
+                      "column": 205,
+                      "charIndex": 1057
+                    }
+                  }
+                },
+                "location": {
+                  "start": {
+                    "line": 28,
+                    "column": 5,
+                    "charIndex": 857
+                  },
+                  "end": {
+                    "line": 28,
+                    "column": 205,
+                    "charIndex": 1057
+                  }
+                }
+              }
+            ],
+            "location": {
+              "start": {
+                "line": 5,
+                "column": 21,
+                "charIndex": 96
+              },
+              "end": {
+                "line": 29,
+                "column": 4,
+                "charIndex": 1061
+              }
+            }
+          },
+          "location": {
+            "start": {
+              "line": 5,
+              "column": 3,
+              "charIndex": 78
+            },
+            "end": {
+              "line": 29,
+              "column": 4,
+              "charIndex": 1061
+            }
+          }
+        }
+      ],
+      "location": {
+        "start": {
+          "line": 4,
+          "column": 1,
+          "charIndex": 54
+        },
+        "end": {
+          "line": 30,
+          "column": 2,
+          "charIndex": 1063
+        }
+      }
+    }
+  ],
+  "location": {
+    "start": {
+      "line": 1,
+      "column": 1,
+      "charIndex": 0
+    },
+    "end": {
+      "line": 30,
+      "column": 2,
+      "charIndex": 1063
+    }
+  },
+  "astMetadata": {
+    "astVersion": {
+      "major": 1,
+      "minor": 2,
+      "patch": 0
+    },
+    "parserVersion": {
+      "major": 1,
+      "minor": 2,
+      "patch": 0
+    },
+    "sourceChecksum": "1886172b6d14613944abbc50258e9948f017214626082f4a54e28ddb6c3a3c56"
+  }
+}

@@ -1,0 +1,843 @@
+{
+  "kind": "MapDocument",
+  "header": {
+    "kind": "MapHeader",
+    "profile": {
+      "scope": "speech",
+      "name": "recognize",
+      "version": {
+        "major": 1,
+        "minor": 0,
+        "patch": 0
+      }
+    },
+    "provider": "azure-speech-to-text",
+    "location": {
+      "start": {
+        "line": 1,
+        "column": 1,
+        "charIndex": 0
+      },
+      "end": {
+        "line": 2,
+        "column": 34,
+        "charIndex": 66
+      }
+    }
+  },
+  "definitions": [
+    {
+      "kind": "MapDefinition",
+      "name": "Recognize",
+      "usecaseName": "Recognize",
+      "statements": [
+        {
+          "kind": "SetStatement",
+          "assignments": [
+            {
+              "kind": "Assignment",
+              "key": [
+                "audioEncoding"
+              ],
+              "value": {
+                "kind": "PrimitiveLiteral",
+                "value": "wav",
+                "location": {
+                  "start": {
+                    "line": 5,
+                    "column": 19,
+                    "charIndex": 102
+                  },
+                  "end": {
+                    "line": 5,
+                    "column": 24,
+                    "charIndex": 107
+                  }
+                }
+              },
+              "location": {
+                "start": {
+                  "line": 5,
+                  "column": 3,
+                  "charIndex": 86
+                },
+                "end": {
+                  "line": 5,
+                  "column": 24,
+                  "charIndex": 107
+                }
+              }
+            }
+          ],
+          "location": {
+            "start": {
+              "line": 5,
+              "column": 3,
+              "charIndex": 86
+            },
+            "end": {
+              "line": 5,
+              "column": 24,
+              "charIndex": 107
+            }
+          }
+        },
+        {
+          "kind": "SetStatement",
+          "condition": {
+            "kind": "ConditionAtom",
+            "expression": {
+              "kind": "JessieExpression",
+              "expression": "input.audioEncoding",
+              "source": "input.audioEncoding",
+              "sourceMap": "AAAA,IAAI,aAAa,GAAG,KAAK,CAAC,aAAa,CAAC",
+              "location": {
+                "start": {
+                  "line": 7,
+                  "column": 10,
+                  "charIndex": 118
+                },
+                "end": {
+                  "line": 7,
+                  "column": 29,
+                  "charIndex": 137
+                }
+              }
+            },
+            "location": {
+              "start": {
+                "line": 7,
+                "column": 7,
+                "charIndex": 115
+              },
+              "end": {
+                "line": 7,
+                "column": 30,
+                "charIndex": 138
+              }
+            }
+          },
+          "assignments": [
+            {
+              "kind": "Assignment",
+              "key": [
+                "audioEncoding"
+              ],
+              "value": {
+                "kind": "JessieExpression",
+                "expression": "input.audioEncoding",
+                "source": "input.audioEncoding",
+                "sourceMap": "AAAA,IAAI,aAAa,GAAG,KAAK,CAAC,aAAa,CAAC",
+                "location": {
+                  "start": {
+                    "line": 8,
+                    "column": 21,
+                    "charIndex": 161
+                  },
+                  "end": {
+                    "line": 8,
+                    "column": 40,
+                    "charIndex": 180
+                  }
+                }
+              },
+              "location": {
+                "start": {
+                  "line": 8,
+                  "column": 5,
+                  "charIndex": 145
+                },
+                "end": {
+                  "line": 8,
+                  "column": 40,
+                  "charIndex": 180
+                }
+              }
+            }
+          ],
+          "location": {
+            "start": {
+              "line": 7,
+              "column": 3,
+              "charIndex": 111
+            },
+            "end": {
+              "line": 9,
+              "column": 4,
+              "charIndex": 184
+            }
+          }
+        },
+        {
+          "kind": "OutcomeStatement",
+          "isError": true,
+          "terminateFlow": true,
+          "condition": {
+            "kind": "ConditionAtom",
+            "expression": {
+              "kind": "JessieExpression",
+              "expression": "audioEncoding !== 'wav'",
+              "source": "audioEncoding !== 'wav'",
+              "sourceMap": "AAAA,IAAI,aAAa,GAAG,aAAa,KAAK,KAAK,CAAC",
+              "location": {
+                "start": {
+                  "line": 11,
+                  "column": 23,
+                  "charIndex": 208
+                },
+                "end": {
+                  "line": 11,
+                  "column": 46,
+                  "charIndex": 231
+                }
+              }
+            },
+            "location": {
+              "start": {
+                "line": 11,
+                "column": 20,
+                "charIndex": 205
+              },
+              "end": {
+                "line": 11,
+                "column": 47,
+                "charIndex": 232
+              }
+            }
+          },
+          "value": {
+            "kind": "ObjectLiteral",
+            "fields": [
+              {
+                "kind": "Assignment",
+                "key": [
+                  "title"
+                ],
+                "value": {
+                  "kind": "PrimitiveLiteral",
+                  "value": "Audio encoding not supported",
+                  "location": {
+                    "start": {
+                      "line": 12,
+                      "column": 13,
+                      "charIndex": 247
+                    },
+                    "end": {
+                      "line": 12,
+                      "column": 43,
+                      "charIndex": 277
+                    }
+                  }
+                },
+                "location": {
+                  "start": {
+                    "line": 12,
+                    "column": 5,
+                    "charIndex": 239
+                  },
+                  "end": {
+                    "line": 12,
+                    "column": 43,
+                    "charIndex": 277
+                  }
+                }
+              }
+            ],
+            "location": {
+              "start": {
+                "line": 11,
+                "column": 48,
+                "charIndex": 233
+              },
+              "end": {
+                "line": 13,
+                "column": 4,
+                "charIndex": 281
+              }
+            }
+          },
+          "location": {
+            "start": {
+              "line": 11,
+              "column": 3,
+              "charIndex": 188
+            },
+            "end": {
+              "line": 13,
+              "column": 4,
+              "charIndex": 281
+            }
+          }
+        },
+        {
+          "kind": "HttpCallStatement",
+          "method": "POST",
+          "url": "/speech/recognition/conversation/cognitiveservices/v1",
+          "request": {
+            "kind": "HttpRequest",
+            "contentType": "audio/wav",
+            "query": {
+              "kind": "ObjectLiteral",
+              "fields": [
+                {
+                  "kind": "Assignment",
+                  "key": [
+                    "language"
+                  ],
+                  "value": {
+                    "kind": "JessieExpression",
+                    "expression": "input.languageCode",
+                    "source": "input.languageCode",
+                    "sourceMap": "AAAA,IAAI,aAAa,GAAG,KAAK,CAAC,YAAY,CAAC",
+                    "location": {
+                      "start": {
+                        "line": 20,
+                        "column": 20,
+                        "charIndex": 449
+                      },
+                      "end": {
+                        "line": 20,
+                        "column": 38,
+                        "charIndex": 467
+                      }
+                    }
+                  },
+                  "location": {
+                    "start": {
+                      "line": 20,
+                      "column": 9,
+                      "charIndex": 438
+                    },
+                    "end": {
+                      "line": 20,
+                      "column": 38,
+                      "charIndex": 467
+                    }
+                  }
+                }
+              ],
+              "location": {
+                "start": {
+                  "line": 19,
+                  "column": 13,
+                  "charIndex": 428
+                },
+                "end": {
+                  "line": 21,
+                  "column": 8,
+                  "charIndex": 475
+                }
+              }
+            },
+            "body": {
+              "kind": "JessieExpression",
+              "expression": "Buffer.from(input.audioContent, 'base64')",
+              "source": "Buffer.from(input.audioContent, 'base64')",
+              "sourceMap": "AAAA,IAAI,aAAa,GAAG,MAAM,CAAC,IAAI,CAAC,KAAK,CAAC,YAAY,EAAE,QAAQ,CAAC,CAAC",
+              "location": {
+                "start": {
+                  "line": 23,
+                  "column": 14,
+                  "charIndex": 494
+                },
+                "end": {
+                  "line": 23,
+                  "column": 55,
+                  "charIndex": 535
+                }
+              }
+            },
+            "location": {
+              "start": {
+                "line": 16,
+                "column": 5,
+                "charIndex": 357
+              },
+              "end": {
+                "line": 24,
+                "column": 6,
+                "charIndex": 541
+              }
+            },
+            "security": [
+              {
+                "id": "opc-subscription-key"
+              }
+            ]
+          },
+          "responseHandlers": [
+            {
+              "kind": "HttpResponseHandler",
+              "statusCode": 200,
+              "statements": [
+                {
+                  "kind": "OutcomeStatement",
+                  "isError": false,
+                  "terminateFlow": true,
+                  "value": {
+                    "kind": "ObjectLiteral",
+                    "fields": [
+                      {
+                        "kind": "Assignment",
+                        "key": [
+                          "results"
+                        ],
+                        "value": {
+                          "kind": "JessieExpression",
+                          "expression": "[{\n        alternatives: [{\n                transcript: body.DisplayText\n            }]\n    }]",
+                          "source": "[{\n          alternatives: [{\n            transcript: body.DisplayText\n          }]\n        }]",
+                          "sourceMap": "AAAA,IAAI,aAAa,GAAG,CAAC;QACX,YAAY,EAAE,CAAC;gBACb,UAAU,EAAE,IAAI,CAAC,WAAW;aAC7B,CAAC;KACH,CAAC,CAAC",
+                          "location": {
+                            "start": {
+                              "line": 28,
+                              "column": 19,
+                              "charIndex": 606
+                            },
+                            "end": {
+                              "line": 32,
+                              "column": 11,
+                              "charIndex": 700
+                            }
+                          }
+                        },
+                        "location": {
+                          "start": {
+                            "line": 28,
+                            "column": 9,
+                            "charIndex": 596
+                          },
+                          "end": {
+                            "line": 32,
+                            "column": 11,
+                            "charIndex": 700
+                          }
+                        }
+                      }
+                    ],
+                    "location": {
+                      "start": {
+                        "line": 27,
+                        "column": 25,
+                        "charIndex": 586
+                      },
+                      "end": {
+                        "line": 33,
+                        "column": 8,
+                        "charIndex": 708
+                      }
+                    }
+                  },
+                  "location": {
+                    "start": {
+                      "line": 27,
+                      "column": 7,
+                      "charIndex": 568
+                    },
+                    "end": {
+                      "line": 33,
+                      "column": 8,
+                      "charIndex": 708
+                    }
+                  }
+                }
+              ],
+              "location": {
+                "start": {
+                  "line": 26,
+                  "column": 5,
+                  "charIndex": 547
+                },
+                "end": {
+                  "line": 34,
+                  "column": 6,
+                  "charIndex": 714
+                }
+              }
+            },
+            {
+              "kind": "HttpResponseHandler",
+              "statusCode": 400,
+              "contentType": "text/plain",
+              "statements": [
+                {
+                  "kind": "OutcomeStatement",
+                  "isError": true,
+                  "terminateFlow": false,
+                  "value": {
+                    "kind": "ObjectLiteral",
+                    "fields": [
+                      {
+                        "kind": "Assignment",
+                        "key": [
+                          "title"
+                        ],
+                        "value": {
+                          "kind": "PrimitiveLiteral",
+                          "value": "Bad request",
+                          "location": {
+                            "start": {
+                              "line": 38,
+                              "column": 17,
+                              "charIndex": 782
+                            },
+                            "end": {
+                              "line": 38,
+                              "column": 30,
+                              "charIndex": 795
+                            }
+                          }
+                        },
+                        "location": {
+                          "start": {
+                            "line": 38,
+                            "column": 9,
+                            "charIndex": 774
+                          },
+                          "end": {
+                            "line": 38,
+                            "column": 30,
+                            "charIndex": 795
+                          }
+                        }
+                      },
+                      {
+                        "kind": "Assignment",
+                        "key": [
+                          "detail"
+                        ],
+                        "value": {
+                          "kind": "JessieExpression",
+                          "expression": "body",
+                          "source": "body",
+                          "sourceMap": "AAAA,IAAI,aAAa,GAAG,IAAI,CAAC",
+                          "location": {
+                            "start": {
+                              "line": 39,
+                              "column": 18,
+                              "charIndex": 813
+                            },
+                            "end": {
+                              "line": 39,
+                              "column": 22,
+                              "charIndex": 817
+                            }
+                          }
+                        },
+                        "location": {
+                          "start": {
+                            "line": 39,
+                            "column": 9,
+                            "charIndex": 804
+                          },
+                          "end": {
+                            "line": 39,
+                            "column": 22,
+                            "charIndex": 817
+                          }
+                        }
+                      }
+                    ],
+                    "location": {
+                      "start": {
+                        "line": 37,
+                        "column": 17,
+                        "charIndex": 764
+                      },
+                      "end": {
+                        "line": 40,
+                        "column": 8,
+                        "charIndex": 825
+                      }
+                    }
+                  },
+                  "location": {
+                    "start": {
+                      "line": 37,
+                      "column": 7,
+                      "charIndex": 754
+                    },
+                    "end": {
+                      "line": 40,
+                      "column": 8,
+                      "charIndex": 825
+                    }
+                  }
+                }
+              ],
+              "location": {
+                "start": {
+                  "line": 36,
+                  "column": 5,
+                  "charIndex": 720
+                },
+                "end": {
+                  "line": 41,
+                  "column": 6,
+                  "charIndex": 831
+                }
+              }
+            },
+            {
+              "kind": "HttpResponseHandler",
+              "statusCode": 401,
+              "statements": [
+                {
+                  "kind": "OutcomeStatement",
+                  "isError": true,
+                  "terminateFlow": false,
+                  "value": {
+                    "kind": "ObjectLiteral",
+                    "fields": [
+                      {
+                        "kind": "Assignment",
+                        "key": [
+                          "title"
+                        ],
+                        "value": {
+                          "kind": "PrimitiveLiteral",
+                          "value": "Unauthorized",
+                          "location": {
+                            "start": {
+                              "line": 45,
+                              "column": 17,
+                              "charIndex": 886
+                            },
+                            "end": {
+                              "line": 45,
+                              "column": 31,
+                              "charIndex": 900
+                            }
+                          }
+                        },
+                        "location": {
+                          "start": {
+                            "line": 45,
+                            "column": 9,
+                            "charIndex": 878
+                          },
+                          "end": {
+                            "line": 45,
+                            "column": 31,
+                            "charIndex": 900
+                          }
+                        }
+                      }
+                    ],
+                    "location": {
+                      "start": {
+                        "line": 44,
+                        "column": 17,
+                        "charIndex": 868
+                      },
+                      "end": {
+                        "line": 46,
+                        "column": 8,
+                        "charIndex": 908
+                      }
+                    }
+                  },
+                  "location": {
+                    "start": {
+                      "line": 44,
+                      "column": 7,
+                      "charIndex": 858
+                    },
+                    "end": {
+                      "line": 46,
+                      "column": 8,
+                      "charIndex": 908
+                    }
+                  }
+                }
+              ],
+              "location": {
+                "start": {
+                  "line": 43,
+                  "column": 5,
+                  "charIndex": 837
+                },
+                "end": {
+                  "line": 47,
+                  "column": 6,
+                  "charIndex": 914
+                }
+              }
+            },
+            {
+              "kind": "HttpResponseHandler",
+              "statusCode": 500,
+              "contentType": "text/plain",
+              "statements": [
+                {
+                  "kind": "OutcomeStatement",
+                  "isError": true,
+                  "terminateFlow": false,
+                  "value": {
+                    "kind": "ObjectLiteral",
+                    "fields": [
+                      {
+                        "kind": "Assignment",
+                        "key": [
+                          "title"
+                        ],
+                        "value": {
+                          "kind": "PrimitiveLiteral",
+                          "value": "Internal server Error",
+                          "location": {
+                            "start": {
+                              "line": 51,
+                              "column": 17,
+                              "charIndex": 982
+                            },
+                            "end": {
+                              "line": 51,
+                              "column": 40,
+                              "charIndex": 1005
+                            }
+                          }
+                        },
+                        "location": {
+                          "start": {
+                            "line": 51,
+                            "column": 9,
+                            "charIndex": 974
+                          },
+                          "end": {
+                            "line": 51,
+                            "column": 40,
+                            "charIndex": 1005
+                          }
+                        }
+                      },
+                      {
+                        "kind": "Assignment",
+                        "key": [
+                          "detail"
+                        ],
+                        "value": {
+                          "kind": "JessieExpression",
+                          "expression": "body",
+                          "source": "body",
+                          "sourceMap": "AAAA,IAAI,aAAa,GAAG,IAAI,CAAC",
+                          "location": {
+                            "start": {
+                              "line": 52,
+                              "column": 18,
+                              "charIndex": 1023
+                            },
+                            "end": {
+                              "line": 52,
+                              "column": 22,
+                              "charIndex": 1027
+                            }
+                          }
+                        },
+                        "location": {
+                          "start": {
+                            "line": 52,
+                            "column": 9,
+                            "charIndex": 1014
+                          },
+                          "end": {
+                            "line": 52,
+                            "column": 22,
+                            "charIndex": 1027
+                          }
+                        }
+                      }
+                    ],
+                    "location": {
+                      "start": {
+                        "line": 50,
+                        "column": 17,
+                        "charIndex": 964
+                      },
+                      "end": {
+                        "line": 53,
+                        "column": 8,
+                        "charIndex": 1035
+                      }
+                    }
+                  },
+                  "location": {
+                    "start": {
+                      "line": 50,
+                      "column": 7,
+                      "charIndex": 954
+                    },
+                    "end": {
+                      "line": 53,
+                      "column": 8,
+                      "charIndex": 1035
+                    }
+                  }
+                }
+              ],
+              "location": {
+                "start": {
+                  "line": 49,
+                  "column": 5,
+                  "charIndex": 920
+                },
+                "end": {
+                  "line": 54,
+                  "column": 6,
+                  "charIndex": 1041
+                }
+              }
+            }
+          ],
+          "location": {
+            "start": {
+              "line": 15,
+              "column": 3,
+              "charIndex": 285
+            },
+            "end": {
+              "line": 55,
+              "column": 4,
+              "charIndex": 1045
+            }
+          }
+        }
+      ],
+      "location": {
+        "start": {
+          "line": 4,
+          "column": 1,
+          "charIndex": 68
+        },
+        "end": {
+          "line": 56,
+          "column": 2,
+          "charIndex": 1047
+        }
+      }
+    }
+  ],
+  "location": {
+    "start": {
+      "line": 1,
+      "column": 1,
+      "charIndex": 0
+    },
+    "end": {
+      "line": 56,
+      "column": 2,
+      "charIndex": 1047
+    }
+  },
+  "astMetadata": {
+    "astVersion": {
+      "major": 1,
+      "minor": 2,
+      "patch": 0
+    },
+    "parserVersion": {
+      "major": 1,
+      "minor": 2,
+      "patch": 0
+    },
+    "sourceChecksum": "00bd88898ba803252b959b1080b66f9b399b94a582a0e25aa0e07e112babe199"
+  }
+}
