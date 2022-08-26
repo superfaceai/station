@@ -1,0 +1,665 @@
+{
+  "kind": "ProfileDocument",
+  "header": {
+    "kind": "ProfileHeader",
+    "scope": "project-management",
+    "name": "projects",
+    "version": {
+      "major": 1,
+      "minor": 0,
+      "patch": 1
+    },
+    "location": {
+      "start": {
+        "line": 5,
+        "column": 1,
+        "charIndex": 69
+      },
+      "end": {
+        "line": 6,
+        "column": 18,
+        "charIndex": 123
+      }
+    },
+    "documentation": {
+      "title": "Manage projects",
+      "description": "List projects in project management systems.",
+      "location": {
+        "start": {
+          "line": 1,
+          "column": 1,
+          "charIndex": 0
+        },
+        "end": {
+          "line": 4,
+          "column": 4,
+          "charIndex": 68
+        }
+      }
+    }
+  },
+  "definitions": [
+    {
+      "kind": "UseCaseDefinition",
+      "useCaseName": "ListProjects",
+      "result": {
+        "kind": "UseCaseSlotDefinition",
+        "value": {
+          "kind": "ListDefinition",
+          "elementType": {
+            "kind": "ObjectDefinition",
+            "fields": [
+              {
+                "kind": "FieldDefinition",
+                "fieldName": "id",
+                "required": true,
+                "type": {
+                  "kind": "NonNullDefinition",
+                  "type": {
+                    "kind": "PrimitiveTypeName",
+                    "name": "string",
+                    "location": {
+                      "start": {
+                        "line": 15,
+                        "column": 11,
+                        "charIndex": 223
+                      },
+                      "end": {
+                        "line": 15,
+                        "column": 17,
+                        "charIndex": 229
+                      }
+                    }
+                  },
+                  "location": {
+                    "start": {
+                      "line": 15,
+                      "column": 11,
+                      "charIndex": 223
+                    },
+                    "end": {
+                      "line": 15,
+                      "column": 18,
+                      "charIndex": 230
+                    }
+                  }
+                },
+                "location": {
+                  "start": {
+                    "line": 15,
+                    "column": 7,
+                    "charIndex": 219
+                  },
+                  "end": {
+                    "line": 15,
+                    "column": 18,
+                    "charIndex": 230
+                  }
+                },
+                "documentation": {
+                  "title": "ID of the project.",
+                  "location": {
+                    "start": {
+                      "line": 14,
+                      "column": 7,
+                      "charIndex": 192
+                    },
+                    "end": {
+                      "line": 14,
+                      "column": 27,
+                      "charIndex": 212
+                    }
+                  }
+                }
+              },
+              {
+                "kind": "FieldDefinition",
+                "fieldName": "name",
+                "required": true,
+                "type": {
+                  "kind": "NonNullDefinition",
+                  "type": {
+                    "kind": "PrimitiveTypeName",
+                    "name": "string",
+                    "location": {
+                      "start": {
+                        "line": 18,
+                        "column": 13,
+                        "charIndex": 273
+                      },
+                      "end": {
+                        "line": 18,
+                        "column": 19,
+                        "charIndex": 279
+                      }
+                    }
+                  },
+                  "location": {
+                    "start": {
+                      "line": 18,
+                      "column": 13,
+                      "charIndex": 273
+                    },
+                    "end": {
+                      "line": 18,
+                      "column": 20,
+                      "charIndex": 280
+                    }
+                  }
+                },
+                "location": {
+                  "start": {
+                    "line": 18,
+                    "column": 7,
+                    "charIndex": 267
+                  },
+                  "end": {
+                    "line": 18,
+                    "column": 20,
+                    "charIndex": 280
+                  }
+                },
+                "documentation": {
+                  "title": "Name of the project.",
+                  "location": {
+                    "start": {
+                      "line": 17,
+                      "column": 7,
+                      "charIndex": 238
+                    },
+                    "end": {
+                      "line": 17,
+                      "column": 29,
+                      "charIndex": 260
+                    }
+                  }
+                }
+              }
+            ],
+            "location": {
+              "start": {
+                "line": 13,
+                "column": 5,
+                "charIndex": 184
+              },
+              "end": {
+                "line": 19,
+                "column": 6,
+                "charIndex": 286
+              }
+            }
+          },
+          "location": {
+            "start": {
+              "line": 12,
+              "column": 9,
+              "charIndex": 178
+            },
+            "end": {
+              "line": 20,
+              "column": 4,
+              "charIndex": 290
+            }
+          }
+        },
+        "location": {
+          "start": {
+            "line": 12,
+            "column": 2,
+            "charIndex": 171
+          },
+          "end": {
+            "line": 20,
+            "column": 4,
+            "charIndex": 290
+          }
+        }
+      },
+      "error": {
+        "kind": "UseCaseSlotDefinition",
+        "value": {
+          "kind": "ObjectDefinition",
+          "fields": [
+            {
+              "kind": "FieldDefinition",
+              "fieldName": "message",
+              "required": true,
+              "type": {
+                "kind": "NonNullDefinition",
+                "type": {
+                  "kind": "PrimitiveTypeName",
+                  "name": "string",
+                  "location": {
+                    "start": {
+                      "line": 24,
+                      "column": 12,
+                      "charIndex": 345
+                    },
+                    "end": {
+                      "line": 24,
+                      "column": 18,
+                      "charIndex": 351
+                    }
+                  }
+                },
+                "location": {
+                  "start": {
+                    "line": 24,
+                    "column": 12,
+                    "charIndex": 345
+                  },
+                  "end": {
+                    "line": 24,
+                    "column": 19,
+                    "charIndex": 352
+                  }
+                }
+              },
+              "location": {
+                "start": {
+                  "line": 24,
+                  "column": 3,
+                  "charIndex": 336
+                },
+                "end": {
+                  "line": 24,
+                  "column": 19,
+                  "charIndex": 352
+                }
+              },
+              "documentation": {
+                "title": "Human-readable error message",
+                "location": {
+                  "start": {
+                    "line": 23,
+                    "column": 3,
+                    "charIndex": 303
+                  },
+                  "end": {
+                    "line": 23,
+                    "column": 33,
+                    "charIndex": 333
+                  }
+                }
+              }
+            },
+            {
+              "kind": "FieldDefinition",
+              "fieldName": "description",
+              "required": true,
+              "type": {
+                "kind": "NonNullDefinition",
+                "type": {
+                  "kind": "PrimitiveTypeName",
+                  "name": "string",
+                  "location": {
+                    "start": {
+                      "line": 26,
+                      "column": 16,
+                      "charIndex": 411
+                    },
+                    "end": {
+                      "line": 26,
+                      "column": 22,
+                      "charIndex": 417
+                    }
+                  }
+                },
+                "location": {
+                  "start": {
+                    "line": 26,
+                    "column": 16,
+                    "charIndex": 411
+                  },
+                  "end": {
+                    "line": 26,
+                    "column": 23,
+                    "charIndex": 418
+                  }
+                }
+              },
+              "location": {
+                "start": {
+                  "line": 26,
+                  "column": 3,
+                  "charIndex": 398
+                },
+                "end": {
+                  "line": 26,
+                  "column": 23,
+                  "charIndex": 418
+                }
+              },
+              "documentation": {
+                "title": "Human-readable details about the error",
+                "location": {
+                  "start": {
+                    "line": 25,
+                    "column": 3,
+                    "charIndex": 355
+                  },
+                  "end": {
+                    "line": 25,
+                    "column": 43,
+                    "charIndex": 395
+                  }
+                }
+              }
+            }
+          ],
+          "location": {
+            "start": {
+              "line": 22,
+              "column": 8,
+              "charIndex": 299
+            },
+            "end": {
+              "line": 27,
+              "column": 3,
+              "charIndex": 421
+            }
+          }
+        },
+        "location": {
+          "start": {
+            "line": 22,
+            "column": 2,
+            "charIndex": 293
+          },
+          "end": {
+            "line": 27,
+            "column": 3,
+            "charIndex": 421
+          }
+        }
+      },
+      "examples": [
+        {
+          "kind": "UseCaseSlotDefinition",
+          "value": {
+            "kind": "UseCaseExample",
+            "exampleName": "success",
+            "result": {
+              "kind": "UseCaseSlotDefinition",
+              "value": {
+                "kind": "ComlinkListLiteral",
+                "items": [
+                  {
+                    "kind": "ComlinkObjectLiteral",
+                    "fields": [
+                      {
+                        "kind": "ComlinkAssignment",
+                        "key": [
+                          "id"
+                        ],
+                        "value": {
+                          "kind": "ComlinkPrimitiveLiteral",
+                          "value": "46ebca75-68af-42a1-916d-b228c2082d4f",
+                          "location": {
+                            "start": {
+                              "line": 32,
+                              "column": 14,
+                              "charIndex": 477
+                            },
+                            "end": {
+                              "line": 32,
+                              "column": 52,
+                              "charIndex": 515
+                            }
+                          }
+                        },
+                        "location": {
+                          "start": {
+                            "line": 32,
+                            "column": 9,
+                            "charIndex": 472
+                          },
+                          "end": {
+                            "line": 32,
+                            "column": 52,
+                            "charIndex": 515
+                          }
+                        }
+                      },
+                      {
+                        "kind": "ComlinkAssignment",
+                        "key": [
+                          "name"
+                        ],
+                        "value": {
+                          "kind": "ComlinkPrimitiveLiteral",
+                          "value": "Take over the world!",
+                          "location": {
+                            "start": {
+                              "line": 33,
+                              "column": 16,
+                              "charIndex": 531
+                            },
+                            "end": {
+                              "line": 33,
+                              "column": 38,
+                              "charIndex": 553
+                            }
+                          }
+                        },
+                        "location": {
+                          "start": {
+                            "line": 33,
+                            "column": 9,
+                            "charIndex": 524
+                          },
+                          "end": {
+                            "line": 33,
+                            "column": 38,
+                            "charIndex": 553
+                          }
+                        }
+                      }
+                    ],
+                    "location": {
+                      "start": {
+                        "line": 31,
+                        "column": 7,
+                        "charIndex": 462
+                      },
+                      "end": {
+                        "line": 34,
+                        "column": 8,
+                        "charIndex": 561
+                      }
+                    }
+                  },
+                  {
+                    "kind": "ComlinkObjectLiteral",
+                    "fields": [
+                      {
+                        "kind": "ComlinkAssignment",
+                        "key": [
+                          "id"
+                        ],
+                        "value": {
+                          "kind": "ComlinkPrimitiveLiteral",
+                          "value": "c6c81d2e-b161-4aca-a72b-be9efe50b370",
+                          "location": {
+                            "start": {
+                              "line": 36,
+                              "column": 14,
+                              "charIndex": 584
+                            },
+                            "end": {
+                              "line": 36,
+                              "column": 52,
+                              "charIndex": 622
+                            }
+                          }
+                        },
+                        "location": {
+                          "start": {
+                            "line": 36,
+                            "column": 9,
+                            "charIndex": 579
+                          },
+                          "end": {
+                            "line": 36,
+                            "column": 52,
+                            "charIndex": 622
+                          }
+                        }
+                      },
+                      {
+                        "kind": "ComlinkAssignment",
+                        "key": [
+                          "name"
+                        ],
+                        "value": {
+                          "kind": "ComlinkPrimitiveLiteral",
+                          "value": "Household chores",
+                          "location": {
+                            "start": {
+                              "line": 37,
+                              "column": 16,
+                              "charIndex": 638
+                            },
+                            "end": {
+                              "line": 37,
+                              "column": 34,
+                              "charIndex": 656
+                            }
+                          }
+                        },
+                        "location": {
+                          "start": {
+                            "line": 37,
+                            "column": 9,
+                            "charIndex": 631
+                          },
+                          "end": {
+                            "line": 37,
+                            "column": 34,
+                            "charIndex": 656
+                          }
+                        }
+                      }
+                    ],
+                    "location": {
+                      "start": {
+                        "line": 35,
+                        "column": 7,
+                        "charIndex": 569
+                      },
+                      "end": {
+                        "line": 38,
+                        "column": 8,
+                        "charIndex": 664
+                      }
+                    }
+                  }
+                ],
+                "location": {
+                  "start": {
+                    "line": 30,
+                    "column": 12,
+                    "charIndex": 454
+                  },
+                  "end": {
+                    "line": 39,
+                    "column": 6,
+                    "charIndex": 671
+                  }
+                }
+              },
+              "location": {
+                "start": {
+                  "line": 30,
+                  "column": 5,
+                  "charIndex": 447
+                },
+                "end": {
+                  "line": 39,
+                  "column": 6,
+                  "charIndex": 671
+                }
+              }
+            },
+            "location": {
+              "start": {
+                "line": 29,
+                "column": 11,
+                "charIndex": 433
+              },
+              "end": {
+                "line": 40,
+                "column": 4,
+                "charIndex": 675
+              }
+            }
+          },
+          "location": {
+            "start": {
+              "line": 29,
+              "column": 3,
+              "charIndex": 425
+            },
+            "end": {
+              "line": 40,
+              "column": 4,
+              "charIndex": 675
+            }
+          }
+        }
+      ],
+      "location": {
+        "start": {
+          "line": 11,
+          "column": 1,
+          "charIndex": 147
+        },
+        "end": {
+          "line": 41,
+          "column": 2,
+          "charIndex": 677
+        }
+      },
+      "documentation": {
+        "title": "List Projects",
+        "location": {
+          "start": {
+            "line": 8,
+            "column": 1,
+            "charIndex": 125
+          },
+          "end": {
+            "line": 10,
+            "column": 4,
+            "charIndex": 146
+          }
+        }
+      }
+    }
+  ],
+  "location": {
+    "start": {
+      "line": 5,
+      "column": 1,
+      "charIndex": 69
+    },
+    "end": {
+      "line": 41,
+      "column": 2,
+      "charIndex": 677
+    }
+  },
+  "astMetadata": {
+    "astVersion": {
+      "major": 1,
+      "minor": 2,
+      "patch": 0
+    },
+    "parserVersion": {
+      "major": 1,
+      "minor": 2,
+      "patch": 0
+    },
+    "sourceChecksum": "0af3fed3637f328d75b350e5efa1088c68f6678afaac58cdac832ebad8ecf39f"
+  }
+}

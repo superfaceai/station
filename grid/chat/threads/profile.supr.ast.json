@@ -1,0 +1,1948 @@
+{
+  "kind": "ProfileDocument",
+  "header": {
+    "kind": "ProfileHeader",
+    "scope": "chat",
+    "name": "threads",
+    "version": {
+      "major": 1,
+      "minor": 0,
+      "patch": 0
+    },
+    "location": {
+      "start": {
+        "line": 5,
+        "column": 1,
+        "charIndex": 61
+      },
+      "end": {
+        "line": 6,
+        "column": 18,
+        "charIndex": 100
+      }
+    },
+    "documentation": {
+      "title": "Chat Threads",
+      "description": "Retrieve chat threads in the workspace.",
+      "location": {
+        "start": {
+          "line": 1,
+          "column": 1,
+          "charIndex": 0
+        },
+        "end": {
+          "line": 4,
+          "column": 4,
+          "charIndex": 60
+        }
+      }
+    }
+  },
+  "definitions": [
+    {
+      "kind": "UseCaseDefinition",
+      "useCaseName": "GetThreads",
+      "input": {
+        "kind": "UseCaseSlotDefinition",
+        "value": {
+          "kind": "ObjectDefinition",
+          "fields": [
+            {
+              "kind": "FieldDefinition",
+              "fieldName": "workspace",
+              "required": true,
+              "type": {
+                "kind": "NonNullDefinition",
+                "type": {
+                  "kind": "PrimitiveTypeName",
+                  "name": "string",
+                  "location": {
+                    "start": {
+                      "line": 18,
+                      "column": 16,
+                      "charIndex": 331
+                    },
+                    "end": {
+                      "line": 18,
+                      "column": 22,
+                      "charIndex": 337
+                    }
+                  }
+                },
+                "location": {
+                  "start": {
+                    "line": 18,
+                    "column": 16,
+                    "charIndex": 331
+                  },
+                  "end": {
+                    "line": 18,
+                    "column": 23,
+                    "charIndex": 338
+                  }
+                }
+              },
+              "location": {
+                "start": {
+                  "line": 18,
+                  "column": 5,
+                  "charIndex": 320
+                },
+                "end": {
+                  "line": 18,
+                  "column": 23,
+                  "charIndex": 338
+                }
+              },
+              "documentation": {
+                "title": "Workspace",
+                "description": "Identifier of a workspace, for example a Discord guild or a Slack workspace.",
+                "location": {
+                  "start": {
+                    "line": 14,
+                    "column": 5,
+                    "charIndex": 209
+                  },
+                  "end": {
+                    "line": 17,
+                    "column": 8,
+                    "charIndex": 315
+                  }
+                }
+              }
+            }
+          ],
+          "location": {
+            "start": {
+              "line": 13,
+              "column": 10,
+              "charIndex": 203
+            },
+            "end": {
+              "line": 19,
+              "column": 4,
+              "charIndex": 342
+            }
+          }
+        },
+        "location": {
+          "start": {
+            "line": 13,
+            "column": 3,
+            "charIndex": 196
+          },
+          "end": {
+            "line": 19,
+            "column": 4,
+            "charIndex": 342
+          }
+        }
+      },
+      "result": {
+        "kind": "UseCaseSlotDefinition",
+        "value": {
+          "kind": "ObjectDefinition",
+          "fields": [
+            {
+              "kind": "FieldDefinition",
+              "fieldName": "threads",
+              "required": true,
+              "type": {
+                "kind": "ListDefinition",
+                "elementType": {
+                  "kind": "ModelTypeName",
+                  "name": "Thread",
+                  "location": {
+                    "start": {
+                      "line": 26,
+                      "column": 15,
+                      "charIndex": 427
+                    },
+                    "end": {
+                      "line": 26,
+                      "column": 21,
+                      "charIndex": 433
+                    }
+                  }
+                },
+                "location": {
+                  "start": {
+                    "line": 26,
+                    "column": 14,
+                    "charIndex": 426
+                  },
+                  "end": {
+                    "line": 26,
+                    "column": 22,
+                    "charIndex": 434
+                  }
+                }
+              },
+              "location": {
+                "start": {
+                  "line": 26,
+                  "column": 5,
+                  "charIndex": 417
+                },
+                "end": {
+                  "line": 26,
+                  "column": 22,
+                  "charIndex": 434
+                }
+              },
+              "documentation": {
+                "title": "Threads",
+                "description": "List of retrieved threads",
+                "location": {
+                  "start": {
+                    "line": 22,
+                    "column": 5,
+                    "charIndex": 359
+                  },
+                  "end": {
+                    "line": 25,
+                    "column": 8,
+                    "charIndex": 412
+                  }
+                }
+              }
+            },
+            {
+              "kind": "FieldDefinition",
+              "fieldName": "rateLimit",
+              "required": false,
+              "type": {
+                "kind": "ModelTypeName",
+                "name": "RateLimit",
+                "location": {
+                  "start": {
+                    "line": 32,
+                    "column": 15,
+                    "charIndex": 505
+                  },
+                  "end": {
+                    "line": 32,
+                    "column": 24,
+                    "charIndex": 514
+                  }
+                }
+              },
+              "location": {
+                "start": {
+                  "line": 32,
+                  "column": 5,
+                  "charIndex": 495
+                },
+                "end": {
+                  "line": 32,
+                  "column": 24,
+                  "charIndex": 514
+                }
+              },
+              "documentation": {
+                "title": "Rate Limit",
+                "description": "Rate limit details.",
+                "location": {
+                  "start": {
+                    "line": 28,
+                    "column": 5,
+                    "charIndex": 440
+                  },
+                  "end": {
+                    "line": 31,
+                    "column": 8,
+                    "charIndex": 490
+                  }
+                }
+              }
+            }
+          ],
+          "location": {
+            "start": {
+              "line": 21,
+              "column": 10,
+              "charIndex": 353
+            },
+            "end": {
+              "line": 33,
+              "column": 4,
+              "charIndex": 518
+            }
+          }
+        },
+        "location": {
+          "start": {
+            "line": 21,
+            "column": 3,
+            "charIndex": 346
+          },
+          "end": {
+            "line": 33,
+            "column": 4,
+            "charIndex": 518
+          }
+        }
+      },
+      "error": {
+        "kind": "UseCaseSlotDefinition",
+        "value": {
+          "kind": "ModelTypeName",
+          "name": "Error",
+          "location": {
+            "start": {
+              "line": 35,
+              "column": 9,
+              "charIndex": 528
+            },
+            "end": {
+              "line": 35,
+              "column": 14,
+              "charIndex": 533
+            }
+          }
+        },
+        "location": {
+          "start": {
+            "line": 35,
+            "column": 3,
+            "charIndex": 522
+          },
+          "end": {
+            "line": 35,
+            "column": 14,
+            "charIndex": 533
+          }
+        }
+      },
+      "examples": [
+        {
+          "kind": "UseCaseSlotDefinition",
+          "value": {
+            "kind": "UseCaseExample",
+            "exampleName": "Successful",
+            "input": {
+              "kind": "UseCaseSlotDefinition",
+              "value": {
+                "kind": "ComlinkObjectLiteral",
+                "fields": [
+                  {
+                    "kind": "ComlinkAssignment",
+                    "key": [
+                      "workspace"
+                    ],
+                    "value": {
+                      "kind": "ComlinkPrimitiveLiteral",
+                      "value": "workspace_id",
+                      "location": {
+                        "start": {
+                          "line": 39,
+                          "column": 19,
+                          "charIndex": 588
+                        },
+                        "end": {
+                          "line": 39,
+                          "column": 33,
+                          "charIndex": 602
+                        }
+                      }
+                    },
+                    "location": {
+                      "start": {
+                        "line": 39,
+                        "column": 7,
+                        "charIndex": 576
+                      },
+                      "end": {
+                        "line": 39,
+                        "column": 33,
+                        "charIndex": 602
+                      }
+                    }
+                  }
+                ],
+                "location": {
+                  "start": {
+                    "line": 38,
+                    "column": 11,
+                    "charIndex": 568
+                  },
+                  "end": {
+                    "line": 40,
+                    "column": 6,
+                    "charIndex": 608
+                  }
+                }
+              },
+              "location": {
+                "start": {
+                  "line": 38,
+                  "column": 5,
+                  "charIndex": 562
+                },
+                "end": {
+                  "line": 40,
+                  "column": 6,
+                  "charIndex": 608
+                }
+              }
+            },
+            "result": {
+              "kind": "UseCaseSlotDefinition",
+              "value": {
+                "kind": "ComlinkObjectLiteral",
+                "fields": [
+                  {
+                    "kind": "ComlinkAssignment",
+                    "key": [
+                      "threads"
+                    ],
+                    "value": {
+                      "kind": "ComlinkListLiteral",
+                      "items": [
+                        {
+                          "kind": "ComlinkObjectLiteral",
+                          "fields": [
+                            {
+                              "kind": "ComlinkAssignment",
+                              "key": [
+                                "id"
+                              ],
+                              "value": {
+                                "kind": "ComlinkPrimitiveLiteral",
+                                "value": "1",
+                                "location": {
+                                  "start": {
+                                    "line": 45,
+                                    "column": 16,
+                                    "charIndex": 666
+                                  },
+                                  "end": {
+                                    "line": 45,
+                                    "column": 19,
+                                    "charIndex": 669
+                                  }
+                                }
+                              },
+                              "location": {
+                                "start": {
+                                  "line": 45,
+                                  "column": 11,
+                                  "charIndex": 661
+                                },
+                                "end": {
+                                  "line": 45,
+                                  "column": 19,
+                                  "charIndex": 669
+                                }
+                              }
+                            },
+                            {
+                              "kind": "ComlinkAssignment",
+                              "key": [
+                                "createdAt"
+                              ],
+                              "value": {
+                                "kind": "ComlinkPrimitiveLiteral",
+                                "value": 1546167104000,
+                                "location": {
+                                  "start": {
+                                    "line": 46,
+                                    "column": 23,
+                                    "charIndex": 692
+                                  },
+                                  "end": {
+                                    "line": 46,
+                                    "column": 36,
+                                    "charIndex": 705
+                                  }
+                                }
+                              },
+                              "location": {
+                                "start": {
+                                  "line": 46,
+                                  "column": 11,
+                                  "charIndex": 680
+                                },
+                                "end": {
+                                  "line": 46,
+                                  "column": 36,
+                                  "charIndex": 705
+                                }
+                              }
+                            },
+                            {
+                              "kind": "ComlinkAssignment",
+                              "key": [
+                                "channel"
+                              ],
+                              "value": {
+                                "kind": "ComlinkPrimitiveLiteral",
+                                "value": "random",
+                                "location": {
+                                  "start": {
+                                    "line": 47,
+                                    "column": 21,
+                                    "charIndex": 726
+                                  },
+                                  "end": {
+                                    "line": 47,
+                                    "column": 29,
+                                    "charIndex": 734
+                                  }
+                                }
+                              },
+                              "location": {
+                                "start": {
+                                  "line": 47,
+                                  "column": 11,
+                                  "charIndex": 716
+                                },
+                                "end": {
+                                  "line": 47,
+                                  "column": 29,
+                                  "charIndex": 734
+                                }
+                              }
+                            }
+                          ],
+                          "location": {
+                            "start": {
+                              "line": 44,
+                              "column": 9,
+                              "charIndex": 649
+                            },
+                            "end": {
+                              "line": 48,
+                              "column": 10,
+                              "charIndex": 744
+                            }
+                          }
+                        },
+                        {
+                          "kind": "ComlinkObjectLiteral",
+                          "fields": [
+                            {
+                              "kind": "ComlinkAssignment",
+                              "key": [
+                                "id"
+                              ],
+                              "value": {
+                                "kind": "ComlinkPrimitiveLiteral",
+                                "value": "2",
+                                "location": {
+                                  "start": {
+                                    "line": 50,
+                                    "column": 16,
+                                    "charIndex": 771
+                                  },
+                                  "end": {
+                                    "line": 50,
+                                    "column": 19,
+                                    "charIndex": 774
+                                  }
+                                }
+                              },
+                              "location": {
+                                "start": {
+                                  "line": 50,
+                                  "column": 11,
+                                  "charIndex": 766
+                                },
+                                "end": {
+                                  "line": 50,
+                                  "column": 19,
+                                  "charIndex": 774
+                                }
+                              }
+                            },
+                            {
+                              "kind": "ComlinkAssignment",
+                              "key": [
+                                "createdAt"
+                              ],
+                              "value": {
+                                "kind": "ComlinkPrimitiveLiteral",
+                                "value": 1546167105000,
+                                "location": {
+                                  "start": {
+                                    "line": 51,
+                                    "column": 23,
+                                    "charIndex": 797
+                                  },
+                                  "end": {
+                                    "line": 51,
+                                    "column": 36,
+                                    "charIndex": 810
+                                  }
+                                }
+                              },
+                              "location": {
+                                "start": {
+                                  "line": 51,
+                                  "column": 11,
+                                  "charIndex": 785
+                                },
+                                "end": {
+                                  "line": 51,
+                                  "column": 36,
+                                  "charIndex": 810
+                                }
+                              }
+                            },
+                            {
+                              "kind": "ComlinkAssignment",
+                              "key": [
+                                "channel"
+                              ],
+                              "value": {
+                                "kind": "ComlinkPrimitiveLiteral",
+                                "value": "random",
+                                "location": {
+                                  "start": {
+                                    "line": 52,
+                                    "column": 21,
+                                    "charIndex": 831
+                                  },
+                                  "end": {
+                                    "line": 52,
+                                    "column": 29,
+                                    "charIndex": 839
+                                  }
+                                }
+                              },
+                              "location": {
+                                "start": {
+                                  "line": 52,
+                                  "column": 11,
+                                  "charIndex": 821
+                                },
+                                "end": {
+                                  "line": 52,
+                                  "column": 29,
+                                  "charIndex": 839
+                                }
+                              }
+                            }
+                          ],
+                          "location": {
+                            "start": {
+                              "line": 49,
+                              "column": 9,
+                              "charIndex": 754
+                            },
+                            "end": {
+                              "line": 53,
+                              "column": 10,
+                              "charIndex": 849
+                            }
+                          }
+                        }
+                      ],
+                      "location": {
+                        "start": {
+                          "line": 43,
+                          "column": 17,
+                          "charIndex": 639
+                        },
+                        "end": {
+                          "line": 54,
+                          "column": 8,
+                          "charIndex": 857
+                        }
+                      }
+                    },
+                    "location": {
+                      "start": {
+                        "line": 43,
+                        "column": 7,
+                        "charIndex": 629
+                      },
+                      "end": {
+                        "line": 54,
+                        "column": 8,
+                        "charIndex": 857
+                      }
+                    }
+                  }
+                ],
+                "location": {
+                  "start": {
+                    "line": 42,
+                    "column": 12,
+                    "charIndex": 621
+                  },
+                  "end": {
+                    "line": 55,
+                    "column": 6,
+                    "charIndex": 863
+                  }
+                }
+              },
+              "location": {
+                "start": {
+                  "line": 42,
+                  "column": 5,
+                  "charIndex": 614
+                },
+                "end": {
+                  "line": 55,
+                  "column": 6,
+                  "charIndex": 863
+                }
+              }
+            },
+            "location": {
+              "start": {
+                "line": 37,
+                "column": 11,
+                "charIndex": 545
+              },
+              "end": {
+                "line": 56,
+                "column": 4,
+                "charIndex": 867
+              }
+            }
+          },
+          "location": {
+            "start": {
+              "line": 37,
+              "column": 3,
+              "charIndex": 537
+            },
+            "end": {
+              "line": 56,
+              "column": 4,
+              "charIndex": 867
+            }
+          }
+        },
+        {
+          "kind": "UseCaseSlotDefinition",
+          "value": {
+            "kind": "UseCaseExample",
+            "exampleName": "Failed",
+            "input": {
+              "kind": "UseCaseSlotDefinition",
+              "value": {
+                "kind": "ComlinkObjectLiteral",
+                "fields": [
+                  {
+                    "kind": "ComlinkAssignment",
+                    "key": [
+                      "workspace"
+                    ],
+                    "value": {
+                      "kind": "ComlinkPrimitiveLiteral",
+                      "value": "not-existing-workspace",
+                      "location": {
+                        "start": {
+                          "line": 60,
+                          "column": 19,
+                          "charIndex": 918
+                        },
+                        "end": {
+                          "line": 60,
+                          "column": 43,
+                          "charIndex": 942
+                        }
+                      }
+                    },
+                    "location": {
+                      "start": {
+                        "line": 60,
+                        "column": 7,
+                        "charIndex": 906
+                      },
+                      "end": {
+                        "line": 60,
+                        "column": 43,
+                        "charIndex": 942
+                      }
+                    }
+                  }
+                ],
+                "location": {
+                  "start": {
+                    "line": 59,
+                    "column": 11,
+                    "charIndex": 898
+                  },
+                  "end": {
+                    "line": 61,
+                    "column": 6,
+                    "charIndex": 948
+                  }
+                }
+              },
+              "location": {
+                "start": {
+                  "line": 59,
+                  "column": 5,
+                  "charIndex": 892
+                },
+                "end": {
+                  "line": 61,
+                  "column": 6,
+                  "charIndex": 948
+                }
+              }
+            },
+            "error": {
+              "kind": "UseCaseSlotDefinition",
+              "value": {
+                "kind": "ComlinkObjectLiteral",
+                "fields": [
+                  {
+                    "kind": "ComlinkAssignment",
+                    "key": [
+                      "title"
+                    ],
+                    "value": {
+                      "kind": "ComlinkPrimitiveLiteral",
+                      "value": "workspace_not_found",
+                      "location": {
+                        "start": {
+                          "line": 64,
+                          "column": 15,
+                          "charIndex": 976
+                        },
+                        "end": {
+                          "line": 64,
+                          "column": 36,
+                          "charIndex": 997
+                        }
+                      }
+                    },
+                    "location": {
+                      "start": {
+                        "line": 64,
+                        "column": 7,
+                        "charIndex": 968
+                      },
+                      "end": {
+                        "line": 64,
+                        "column": 36,
+                        "charIndex": 997
+                      }
+                    }
+                  }
+                ],
+                "location": {
+                  "start": {
+                    "line": 63,
+                    "column": 11,
+                    "charIndex": 960
+                  },
+                  "end": {
+                    "line": 65,
+                    "column": 6,
+                    "charIndex": 1003
+                  }
+                }
+              },
+              "location": {
+                "start": {
+                  "line": 63,
+                  "column": 5,
+                  "charIndex": 954
+                },
+                "end": {
+                  "line": 65,
+                  "column": 6,
+                  "charIndex": 1003
+                }
+              }
+            },
+            "location": {
+              "start": {
+                "line": 58,
+                "column": 11,
+                "charIndex": 879
+              },
+              "end": {
+                "line": 66,
+                "column": 4,
+                "charIndex": 1007
+              }
+            }
+          },
+          "location": {
+            "start": {
+              "line": 58,
+              "column": 3,
+              "charIndex": 871
+            },
+            "end": {
+              "line": 66,
+              "column": 4,
+              "charIndex": 1007
+            }
+          }
+        }
+      ],
+      "location": {
+        "start": {
+          "line": 12,
+          "column": 1,
+          "charIndex": 173
+        },
+        "end": {
+          "line": 67,
+          "column": 2,
+          "charIndex": 1009
+        }
+      },
+      "documentation": {
+        "title": "Get Threads",
+        "description": "Retrieve list of threads from the whole workspace.",
+        "location": {
+          "start": {
+            "line": 8,
+            "column": 1,
+            "charIndex": 102
+          },
+          "end": {
+            "line": 11,
+            "column": 4,
+            "charIndex": 172
+          }
+        }
+      }
+    },
+    {
+      "kind": "NamedModelDefinition",
+      "modelName": "Thread",
+      "type": {
+        "kind": "ObjectDefinition",
+        "fields": [
+          {
+            "kind": "FieldDefinition",
+            "fieldName": "id",
+            "required": true,
+            "type": {
+              "kind": "NonNullDefinition",
+              "type": {
+                "kind": "PrimitiveTypeName",
+                "name": "string",
+                "location": {
+                  "start": {
+                    "line": 74,
+                    "column": 7,
+                    "charIndex": 1083
+                  },
+                  "end": {
+                    "line": 74,
+                    "column": 13,
+                    "charIndex": 1089
+                  }
+                }
+              },
+              "location": {
+                "start": {
+                  "line": 74,
+                  "column": 7,
+                  "charIndex": 1083
+                },
+                "end": {
+                  "line": 74,
+                  "column": 14,
+                  "charIndex": 1090
+                }
+              }
+            },
+            "location": {
+              "start": {
+                "line": 74,
+                "column": 3,
+                "charIndex": 1079
+              },
+              "end": {
+                "line": 74,
+                "column": 14,
+                "charIndex": 1090
+              }
+            },
+            "documentation": {
+              "title": "Id",
+              "description": "Unique identifier of the thread",
+              "location": {
+                "start": {
+                  "line": 70,
+                  "column": 3,
+                  "charIndex": 1028
+                },
+                "end": {
+                  "line": 73,
+                  "column": 6,
+                  "charIndex": 1076
+                }
+              }
+            }
+          },
+          {
+            "kind": "FieldDefinition",
+            "fieldName": "createdAt",
+            "required": true,
+            "type": {
+              "kind": "NonNullDefinition",
+              "type": {
+                "kind": "PrimitiveTypeName",
+                "name": "number",
+                "location": {
+                  "start": {
+                    "line": 80,
+                    "column": 14,
+                    "charIndex": 1213
+                  },
+                  "end": {
+                    "line": 80,
+                    "column": 20,
+                    "charIndex": 1219
+                  }
+                }
+              },
+              "location": {
+                "start": {
+                  "line": 80,
+                  "column": 14,
+                  "charIndex": 1213
+                },
+                "end": {
+                  "line": 80,
+                  "column": 21,
+                  "charIndex": 1220
+                }
+              }
+            },
+            "location": {
+              "start": {
+                "line": 80,
+                "column": 3,
+                "charIndex": 1202
+              },
+              "end": {
+                "line": 80,
+                "column": 21,
+                "charIndex": 1220
+              }
+            },
+            "documentation": {
+              "title": "Created At",
+              "description": "UNIX timestamp (in milliseconds, e.g. 1095379198750) when the thread was created",
+              "location": {
+                "start": {
+                  "line": 76,
+                  "column": 3,
+                  "charIndex": 1094
+                },
+                "end": {
+                  "line": 79,
+                  "column": 6,
+                  "charIndex": 1199
+                }
+              }
+            }
+          },
+          {
+            "kind": "FieldDefinition",
+            "fieldName": "channel",
+            "required": true,
+            "type": {
+              "kind": "NonNullDefinition",
+              "type": {
+                "kind": "PrimitiveTypeName",
+                "name": "string",
+                "location": {
+                  "start": {
+                    "line": 86,
+                    "column": 12,
+                    "charIndex": 1318
+                  },
+                  "end": {
+                    "line": 86,
+                    "column": 18,
+                    "charIndex": 1324
+                  }
+                }
+              },
+              "location": {
+                "start": {
+                  "line": 86,
+                  "column": 12,
+                  "charIndex": 1318
+                },
+                "end": {
+                  "line": 86,
+                  "column": 19,
+                  "charIndex": 1325
+                }
+              }
+            },
+            "location": {
+              "start": {
+                "line": 86,
+                "column": 3,
+                "charIndex": 1309
+              },
+              "end": {
+                "line": 86,
+                "column": 19,
+                "charIndex": 1325
+              }
+            },
+            "documentation": {
+              "title": "Channel",
+              "description": "Unique identifier of the channel where the thread is located",
+              "location": {
+                "start": {
+                  "line": 82,
+                  "column": 3,
+                  "charIndex": 1224
+                },
+                "end": {
+                  "line": 85,
+                  "column": 6,
+                  "charIndex": 1306
+                }
+              }
+            }
+          },
+          {
+            "kind": "FieldDefinition",
+            "fieldName": "archiveAt",
+            "required": false,
+            "type": {
+              "kind": "NonNullDefinition",
+              "type": {
+                "kind": "PrimitiveTypeName",
+                "name": "number",
+                "location": {
+                  "start": {
+                    "line": 93,
+                    "column": 13,
+                    "charIndex": 1568
+                  },
+                  "end": {
+                    "line": 93,
+                    "column": 19,
+                    "charIndex": 1574
+                  }
+                }
+              },
+              "location": {
+                "start": {
+                  "line": 93,
+                  "column": 13,
+                  "charIndex": 1568
+                },
+                "end": {
+                  "line": 93,
+                  "column": 20,
+                  "charIndex": 1575
+                }
+              }
+            },
+            "location": {
+              "start": {
+                "line": 93,
+                "column": 3,
+                "charIndex": 1558
+              },
+              "end": {
+                "line": 93,
+                "column": 20,
+                "charIndex": 1575
+              }
+            },
+            "documentation": {
+              "title": "Archive At",
+              "description": "UNIX timestamp (in milliseconds, e.g. 1095379198750) when the thread will be archived\nSome providers limit the lifetime of threads and automatically archive them after some time period of inactivity.",
+              "location": {
+                "start": {
+                  "line": 88,
+                  "column": 3,
+                  "charIndex": 1329
+                },
+                "end": {
+                  "line": 92,
+                  "column": 6,
+                  "charIndex": 1555
+                }
+              }
+            }
+          },
+          {
+            "kind": "FieldDefinition",
+            "fieldName": "name",
+            "required": false,
+            "type": {
+              "kind": "PrimitiveTypeName",
+              "name": "string",
+              "location": {
+                "start": {
+                  "line": 99,
+                  "column": 8,
+                  "charIndex": 1630
+                },
+                "end": {
+                  "line": 99,
+                  "column": 14,
+                  "charIndex": 1636
+                }
+              }
+            },
+            "location": {
+              "start": {
+                "line": 99,
+                "column": 3,
+                "charIndex": 1625
+              },
+              "end": {
+                "line": 99,
+                "column": 14,
+                "charIndex": 1636
+              }
+            },
+            "documentation": {
+              "title": "Name",
+              "description": "Name of retrieved thread",
+              "location": {
+                "start": {
+                  "line": 95,
+                  "column": 3,
+                  "charIndex": 1579
+                },
+                "end": {
+                  "line": 98,
+                  "column": 6,
+                  "charIndex": 1622
+                }
+              }
+            }
+          },
+          {
+            "kind": "FieldDefinition",
+            "fieldName": "membersCount",
+            "required": false,
+            "type": {
+              "kind": "PrimitiveTypeName",
+              "name": "number",
+              "location": {
+                "start": {
+                  "line": 105,
+                  "column": 16,
+                  "charIndex": 1727
+                },
+                "end": {
+                  "line": 105,
+                  "column": 22,
+                  "charIndex": 1733
+                }
+              }
+            },
+            "location": {
+              "start": {
+                "line": 105,
+                "column": 3,
+                "charIndex": 1714
+              },
+              "end": {
+                "line": 105,
+                "column": 22,
+                "charIndex": 1733
+              }
+            },
+            "documentation": {
+              "title": "Members Count",
+              "description": "Number of users participating in the thread",
+              "location": {
+                "start": {
+                  "line": 101,
+                  "column": 3,
+                  "charIndex": 1640
+                },
+                "end": {
+                  "line": 104,
+                  "column": 6,
+                  "charIndex": 1711
+                }
+              }
+            }
+          },
+          {
+            "kind": "FieldDefinition",
+            "fieldName": "messagesCount",
+            "required": false,
+            "type": {
+              "kind": "PrimitiveTypeName",
+              "name": "number",
+              "location": {
+                "start": {
+                  "line": 111,
+                  "column": 17,
+                  "charIndex": 1825
+                },
+                "end": {
+                  "line": 111,
+                  "column": 23,
+                  "charIndex": 1831
+                }
+              }
+            },
+            "location": {
+              "start": {
+                "line": 111,
+                "column": 3,
+                "charIndex": 1811
+              },
+              "end": {
+                "line": 111,
+                "column": 23,
+                "charIndex": 1831
+              }
+            },
+            "documentation": {
+              "title": "Messages Count",
+              "description": "Number of messages in the retrieved thread",
+              "location": {
+                "start": {
+                  "line": 107,
+                  "column": 3,
+                  "charIndex": 1737
+                },
+                "end": {
+                  "line": 110,
+                  "column": 6,
+                  "charIndex": 1808
+                }
+              }
+            }
+          },
+          {
+            "kind": "FieldDefinition",
+            "fieldName": "lastMessageAt",
+            "required": false,
+            "type": {
+              "kind": "PrimitiveTypeName",
+              "name": "number",
+              "location": {
+                "start": {
+                  "line": 117,
+                  "column": 17,
+                  "charIndex": 1976
+                },
+                "end": {
+                  "line": 117,
+                  "column": 23,
+                  "charIndex": 1982
+                }
+              }
+            },
+            "location": {
+              "start": {
+                "line": 117,
+                "column": 3,
+                "charIndex": 1962
+              },
+              "end": {
+                "line": 117,
+                "column": 23,
+                "charIndex": 1982
+              }
+            },
+            "documentation": {
+              "title": "Last Message At",
+              "description": "UNIX timestamp (in milliseconds, e.g. 1095379198750) when was the last message sent to thread.",
+              "location": {
+                "start": {
+                  "line": 113,
+                  "column": 3,
+                  "charIndex": 1835
+                },
+                "end": {
+                  "line": 116,
+                  "column": 6,
+                  "charIndex": 1959
+                }
+              }
+            }
+          }
+        ],
+        "location": {
+          "start": {
+            "line": 69,
+            "column": 14,
+            "charIndex": 1024
+          },
+          "end": {
+            "line": 118,
+            "column": 2,
+            "charIndex": 1984
+          }
+        }
+      },
+      "location": {
+        "start": {
+          "line": 69,
+          "column": 1,
+          "charIndex": 1011
+        },
+        "end": {
+          "line": 118,
+          "column": 2,
+          "charIndex": 1984
+        }
+      }
+    },
+    {
+      "kind": "NamedModelDefinition",
+      "modelName": "Error",
+      "type": {
+        "kind": "ObjectDefinition",
+        "fields": [
+          {
+            "kind": "FieldDefinition",
+            "fieldName": "title",
+            "required": true,
+            "location": {
+              "start": {
+                "line": 125,
+                "column": 3,
+                "charIndex": 2080
+              },
+              "end": {
+                "line": 125,
+                "column": 9,
+                "charIndex": 2086
+              }
+            },
+            "documentation": {
+              "title": "Title",
+              "description": "A short, human-readable summary of the problem type.",
+              "location": {
+                "start": {
+                  "line": 121,
+                  "column": 3,
+                  "charIndex": 2005
+                },
+                "end": {
+                  "line": 124,
+                  "column": 6,
+                  "charIndex": 2077
+                }
+              }
+            }
+          },
+          {
+            "kind": "FieldDefinition",
+            "fieldName": "detail",
+            "required": false,
+            "location": {
+              "start": {
+                "line": 131,
+                "column": 3,
+                "charIndex": 2186
+              },
+              "end": {
+                "line": 131,
+                "column": 9,
+                "charIndex": 2192
+              }
+            },
+            "documentation": {
+              "title": "Detail",
+              "description": "A human-readable explanation specific to this occurrence of the problem.",
+              "location": {
+                "start": {
+                  "line": 127,
+                  "column": 3,
+                  "charIndex": 2090
+                },
+                "end": {
+                  "line": 130,
+                  "column": 6,
+                  "charIndex": 2183
+                }
+              }
+            }
+          },
+          {
+            "kind": "FieldDefinition",
+            "fieldName": "rateLimit",
+            "required": false,
+            "type": {
+              "kind": "ModelTypeName",
+              "name": "RateLimit",
+              "location": {
+                "start": {
+                  "line": 137,
+                  "column": 13,
+                  "charIndex": 2253
+                },
+                "end": {
+                  "line": 137,
+                  "column": 22,
+                  "charIndex": 2262
+                }
+              }
+            },
+            "location": {
+              "start": {
+                "line": 137,
+                "column": 3,
+                "charIndex": 2243
+              },
+              "end": {
+                "line": 137,
+                "column": 22,
+                "charIndex": 2262
+              }
+            },
+            "documentation": {
+              "title": "Rate Limit",
+              "description": "Rate limit details.",
+              "location": {
+                "start": {
+                  "line": 133,
+                  "column": 3,
+                  "charIndex": 2196
+                },
+                "end": {
+                  "line": 136,
+                  "column": 6,
+                  "charIndex": 2240
+                }
+              }
+            }
+          }
+        ],
+        "location": {
+          "start": {
+            "line": 120,
+            "column": 13,
+            "charIndex": 2001
+          },
+          "end": {
+            "line": 138,
+            "column": 2,
+            "charIndex": 2264
+          }
+        }
+      },
+      "location": {
+        "start": {
+          "line": 120,
+          "column": 1,
+          "charIndex": 1989
+        },
+        "end": {
+          "line": 138,
+          "column": 2,
+          "charIndex": 2264
+        }
+      }
+    },
+    {
+      "kind": "NamedModelDefinition",
+      "modelName": "RateLimit",
+      "type": {
+        "kind": "ObjectDefinition",
+        "fields": [
+          {
+            "kind": "FieldDefinition",
+            "fieldName": "bucket",
+            "required": false,
+            "type": {
+              "kind": "PrimitiveTypeName",
+              "name": "string",
+              "location": {
+                "start": {
+                  "line": 146,
+                  "column": 10,
+                  "charIndex": 2435
+                },
+                "end": {
+                  "line": 146,
+                  "column": 16,
+                  "charIndex": 2441
+                }
+              }
+            },
+            "location": {
+              "start": {
+                "line": 146,
+                "column": 3,
+                "charIndex": 2428
+              },
+              "end": {
+                "line": 146,
+                "column": 16,
+                "charIndex": 2441
+              }
+            },
+            "documentation": {
+              "title": "Bucket",
+              "description": "Different parts of API may have different rate limits.\nBucket identifies to which part of API the rate limits apply.",
+              "location": {
+                "start": {
+                  "line": 141,
+                  "column": 3,
+                  "charIndex": 2286
+                },
+                "end": {
+                  "line": 145,
+                  "column": 6,
+                  "charIndex": 2425
+                }
+              }
+            }
+          },
+          {
+            "kind": "FieldDefinition",
+            "fieldName": "totalRequests",
+            "required": false,
+            "type": {
+              "kind": "PrimitiveTypeName",
+              "name": "number",
+              "location": {
+                "start": {
+                  "line": 152,
+                  "column": 17,
+                  "charIndex": 2535
+                },
+                "end": {
+                  "line": 152,
+                  "column": 23,
+                  "charIndex": 2541
+                }
+              }
+            },
+            "location": {
+              "start": {
+                "line": 152,
+                "column": 3,
+                "charIndex": 2521
+              },
+              "end": {
+                "line": 152,
+                "column": 23,
+                "charIndex": 2541
+              }
+            },
+            "documentation": {
+              "title": "Total Requests",
+              "description": "Total requests available in the time window.",
+              "location": {
+                "start": {
+                  "line": 148,
+                  "column": 3,
+                  "charIndex": 2445
+                },
+                "end": {
+                  "line": 151,
+                  "column": 6,
+                  "charIndex": 2518
+                }
+              }
+            }
+          },
+          {
+            "kind": "FieldDefinition",
+            "fieldName": "remainingRequests",
+            "required": false,
+            "type": {
+              "kind": "PrimitiveTypeName",
+              "name": "number",
+              "location": {
+                "start": {
+                  "line": 158,
+                  "column": 21,
+                  "charIndex": 2647
+                },
+                "end": {
+                  "line": 158,
+                  "column": 27,
+                  "charIndex": 2653
+                }
+              }
+            },
+            "location": {
+              "start": {
+                "line": 158,
+                "column": 3,
+                "charIndex": 2629
+              },
+              "end": {
+                "line": 158,
+                "column": 27,
+                "charIndex": 2653
+              }
+            },
+            "documentation": {
+              "title": "Remaining Requests",
+              "description": "Remaining requests available in the time window.",
+              "location": {
+                "start": {
+                  "line": 154,
+                  "column": 3,
+                  "charIndex": 2545
+                },
+                "end": {
+                  "line": 157,
+                  "column": 6,
+                  "charIndex": 2626
+                }
+              }
+            }
+          },
+          {
+            "kind": "FieldDefinition",
+            "fieldName": "remainingRequestsPercentage",
+            "required": false,
+            "type": {
+              "kind": "PrimitiveTypeName",
+              "name": "number",
+              "location": {
+                "start": {
+                  "line": 164,
+                  "column": 31,
+                  "charIndex": 2803
+                },
+                "end": {
+                  "line": 164,
+                  "column": 37,
+                  "charIndex": 2809
+                }
+              }
+            },
+            "location": {
+              "start": {
+                "line": 164,
+                "column": 3,
+                "charIndex": 2775
+              },
+              "end": {
+                "line": 164,
+                "column": 37,
+                "charIndex": 2809
+              }
+            },
+            "documentation": {
+              "title": "Remaining Requests available in percents",
+              "description": "Remaining requests available in the time window in percents.",
+              "location": {
+                "start": {
+                  "line": 160,
+                  "column": 3,
+                  "charIndex": 2657
+                },
+                "end": {
+                  "line": 163,
+                  "column": 6,
+                  "charIndex": 2772
+                }
+              }
+            }
+          },
+          {
+            "kind": "FieldDefinition",
+            "fieldName": "resetTimestamp",
+            "required": false,
+            "type": {
+              "kind": "PrimitiveTypeName",
+              "name": "number",
+              "location": {
+                "start": {
+                  "line": 170,
+                  "column": 18,
+                  "charIndex": 2933
+                },
+                "end": {
+                  "line": 170,
+                  "column": 24,
+                  "charIndex": 2939
+                }
+              }
+            },
+            "location": {
+              "start": {
+                "line": 170,
+                "column": 3,
+                "charIndex": 2918
+              },
+              "end": {
+                "line": 170,
+                "column": 24,
+                "charIndex": 2939
+              }
+            },
+            "documentation": {
+              "title": "Reset Timestamp",
+              "description": "Timestamp when the rate limits will reset (in Unix Timestamp ms format).",
+              "location": {
+                "start": {
+                  "line": 166,
+                  "column": 3,
+                  "charIndex": 2813
+                },
+                "end": {
+                  "line": 169,
+                  "column": 6,
+                  "charIndex": 2915
+                }
+              }
+            }
+          },
+          {
+            "kind": "FieldDefinition",
+            "fieldName": "resetAfter",
+            "required": false,
+            "type": {
+              "kind": "PrimitiveTypeName",
+              "name": "number",
+              "location": {
+                "start": {
+                  "line": 176,
+                  "column": 14,
+                  "charIndex": 3026
+                },
+                "end": {
+                  "line": 176,
+                  "column": 20,
+                  "charIndex": 3032
+                }
+              }
+            },
+            "location": {
+              "start": {
+                "line": 176,
+                "column": 3,
+                "charIndex": 3015
+              },
+              "end": {
+                "line": 176,
+                "column": 20,
+                "charIndex": 3032
+              }
+            },
+            "documentation": {
+              "title": "Reset After",
+              "description": "Number of seconds until reset of rate limit",
+              "location": {
+                "start": {
+                  "line": 172,
+                  "column": 3,
+                  "charIndex": 2943
+                },
+                "end": {
+                  "line": 175,
+                  "column": 6,
+                  "charIndex": 3012
+                }
+              }
+            }
+          },
+          {
+            "kind": "FieldDefinition",
+            "fieldName": "retryAfter",
+            "required": false,
+            "type": {
+              "kind": "PrimitiveTypeName",
+              "name": "number",
+              "location": {
+                "start": {
+                  "line": 182,
+                  "column": 14,
+                  "charIndex": 3126
+                },
+                "end": {
+                  "line": 182,
+                  "column": 20,
+                  "charIndex": 3132
+                }
+              }
+            },
+            "location": {
+              "start": {
+                "line": 182,
+                "column": 3,
+                "charIndex": 3115
+              },
+              "end": {
+                "line": 182,
+                "column": 20,
+                "charIndex": 3132
+              }
+            },
+            "documentation": {
+              "title": "Retry After",
+              "description": "Number of seconds until user can retry the request",
+              "location": {
+                "start": {
+                  "line": 178,
+                  "column": 3,
+                  "charIndex": 3036
+                },
+                "end": {
+                  "line": 181,
+                  "column": 6,
+                  "charIndex": 3112
+                }
+              }
+            }
+          }
+        ],
+        "location": {
+          "start": {
+            "line": 140,
+            "column": 17,
+            "charIndex": 2282
+          },
+          "end": {
+            "line": 183,
+            "column": 2,
+            "charIndex": 3134
+          }
+        }
+      },
+      "location": {
+        "start": {
+          "line": 140,
+          "column": 1,
+          "charIndex": 2266
+        },
+        "end": {
+          "line": 183,
+          "column": 2,
+          "charIndex": 3134
+        }
+      }
+    }
+  ],
+  "location": {
+    "start": {
+      "line": 5,
+      "column": 1,
+      "charIndex": 61
+    },
+    "end": {
+      "line": 183,
+      "column": 2,
+      "charIndex": 3134
+    }
+  },
+  "astMetadata": {
+    "astVersion": {
+      "major": 1,
+      "minor": 2,
+      "patch": 0
+    },
+    "parserVersion": {
+      "major": 1,
+      "minor": 2,
+      "patch": 0
+    },
+    "sourceChecksum": "3051046894f5c6c841b21575dfb6809d077033c869ec6067e2ab57b738c8d458"
+  }
+}

@@ -1,0 +1,1079 @@
+{
+  "kind": "ProfileDocument",
+  "header": {
+    "kind": "ProfileHeader",
+    "scope": "vcs",
+    "name": "user-repos",
+    "version": {
+      "major": 2,
+      "minor": 0,
+      "patch": 1
+    },
+    "location": {
+      "start": {
+        "line": 5,
+        "column": 1,
+        "charIndex": 98
+      },
+      "end": {
+        "line": 6,
+        "column": 18,
+        "charIndex": 139
+      }
+    },
+    "documentation": {
+      "title": "VCS User Repositories",
+      "description": "Retrieve the version control system repositories of specified user.",
+      "location": {
+        "start": {
+          "line": 1,
+          "column": 1,
+          "charIndex": 0
+        },
+        "end": {
+          "line": 4,
+          "column": 4,
+          "charIndex": 97
+        }
+      }
+    }
+  },
+  "definitions": [
+    {
+      "kind": "UseCaseDefinition",
+      "useCaseName": "UserRepos",
+      "safety": "safe",
+      "input": {
+        "kind": "UseCaseSlotDefinition",
+        "value": {
+          "kind": "ObjectDefinition",
+          "fields": [
+            {
+              "kind": "FieldDefinition",
+              "fieldName": "user",
+              "required": true,
+              "type": {
+                "kind": "NonNullDefinition",
+                "type": {
+                  "kind": "PrimitiveTypeName",
+                  "name": "string",
+                  "location": {
+                    "start": {
+                      "line": 18,
+                      "column": 11,
+                      "charIndex": 328
+                    },
+                    "end": {
+                      "line": 18,
+                      "column": 17,
+                      "charIndex": 334
+                    }
+                  }
+                },
+                "location": {
+                  "start": {
+                    "line": 18,
+                    "column": 11,
+                    "charIndex": 328
+                  },
+                  "end": {
+                    "line": 18,
+                    "column": 18,
+                    "charIndex": 335
+                  }
+                }
+              },
+              "location": {
+                "start": {
+                  "line": 18,
+                  "column": 5,
+                  "charIndex": 322
+                },
+                "end": {
+                  "line": 18,
+                  "column": 18,
+                  "charIndex": 335
+                }
+              },
+              "documentation": {
+                "title": "User",
+                "description": "User identifier for whom to list repositories.",
+                "location": {
+                  "start": {
+                    "line": 14,
+                    "column": 5,
+                    "charIndex": 250
+                  },
+                  "end": {
+                    "line": 17,
+                    "column": 6,
+                    "charIndex": 317
+                  }
+                }
+              }
+            }
+          ],
+          "location": {
+            "start": {
+              "line": 13,
+              "column": 9,
+              "charIndex": 244
+            },
+            "end": {
+              "line": 19,
+              "column": 4,
+              "charIndex": 339
+            }
+          }
+        },
+        "location": {
+          "start": {
+            "line": 13,
+            "column": 3,
+            "charIndex": 238
+          },
+          "end": {
+            "line": 19,
+            "column": 4,
+            "charIndex": 339
+          }
+        }
+      },
+      "result": {
+        "kind": "UseCaseSlotDefinition",
+        "value": {
+          "kind": "ObjectDefinition",
+          "fields": [
+            {
+              "kind": "FieldDefinition",
+              "fieldName": "repos",
+              "required": false,
+              "type": {
+                "kind": "ListDefinition",
+                "elementType": {
+                  "kind": "ObjectDefinition",
+                  "fields": [
+                    {
+                      "kind": "FieldDefinition",
+                      "fieldName": "name",
+                      "required": true,
+                      "type": {
+                        "kind": "NonNullDefinition",
+                        "type": {
+                          "kind": "PrimitiveTypeName",
+                          "name": "string",
+                          "location": {
+                            "start": {
+                              "line": 24,
+                              "column": 13,
+                              "charIndex": 408
+                            },
+                            "end": {
+                              "line": 24,
+                              "column": 19,
+                              "charIndex": 414
+                            }
+                          }
+                        },
+                        "location": {
+                          "start": {
+                            "line": 24,
+                            "column": 13,
+                            "charIndex": 408
+                          },
+                          "end": {
+                            "line": 24,
+                            "column": 20,
+                            "charIndex": 415
+                          }
+                        }
+                      },
+                      "location": {
+                        "start": {
+                          "line": 24,
+                          "column": 7,
+                          "charIndex": 402
+                        },
+                        "end": {
+                          "line": 24,
+                          "column": 20,
+                          "charIndex": 415
+                        }
+                      },
+                      "documentation": {
+                        "title": "Name of the repository",
+                        "location": {
+                          "start": {
+                            "line": 23,
+                            "column": 7,
+                            "charIndex": 371
+                          },
+                          "end": {
+                            "line": 23,
+                            "column": 31,
+                            "charIndex": 395
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "kind": "FieldDefinition",
+                      "fieldName": "description",
+                      "required": false,
+                      "type": {
+                        "kind": "NonNullDefinition",
+                        "type": {
+                          "kind": "PrimitiveTypeName",
+                          "name": "string",
+                          "location": {
+                            "start": {
+                              "line": 27,
+                              "column": 19,
+                              "charIndex": 473
+                            },
+                            "end": {
+                              "line": 27,
+                              "column": 25,
+                              "charIndex": 479
+                            }
+                          }
+                        },
+                        "location": {
+                          "start": {
+                            "line": 27,
+                            "column": 19,
+                            "charIndex": 473
+                          },
+                          "end": {
+                            "line": 27,
+                            "column": 26,
+                            "charIndex": 480
+                          }
+                        }
+                      },
+                      "location": {
+                        "start": {
+                          "line": 27,
+                          "column": 7,
+                          "charIndex": 461
+                        },
+                        "end": {
+                          "line": 27,
+                          "column": 26,
+                          "charIndex": 480
+                        }
+                      },
+                      "documentation": {
+                        "title": "Description of the repository",
+                        "location": {
+                          "start": {
+                            "line": 26,
+                            "column": 7,
+                            "charIndex": 423
+                          },
+                          "end": {
+                            "line": 26,
+                            "column": 38,
+                            "charIndex": 454
+                          }
+                        }
+                      }
+                    }
+                  ],
+                  "location": {
+                    "start": {
+                      "line": 22,
+                      "column": 12,
+                      "charIndex": 363
+                    },
+                    "end": {
+                      "line": 28,
+                      "column": 6,
+                      "charIndex": 486
+                    }
+                  }
+                },
+                "location": {
+                  "start": {
+                    "line": 22,
+                    "column": 11,
+                    "charIndex": 362
+                  },
+                  "end": {
+                    "line": 28,
+                    "column": 7,
+                    "charIndex": 487
+                  }
+                }
+              },
+              "location": {
+                "start": {
+                  "line": 22,
+                  "column": 5,
+                  "charIndex": 356
+                },
+                "end": {
+                  "line": 28,
+                  "column": 7,
+                  "charIndex": 487
+                }
+              }
+            }
+          ],
+          "location": {
+            "start": {
+              "line": 21,
+              "column": 10,
+              "charIndex": 350
+            },
+            "end": {
+              "line": 29,
+              "column": 4,
+              "charIndex": 491
+            }
+          }
+        },
+        "location": {
+          "start": {
+            "line": 21,
+            "column": 3,
+            "charIndex": 343
+          },
+          "end": {
+            "line": 29,
+            "column": 4,
+            "charIndex": 491
+          }
+        }
+      },
+      "error": {
+        "kind": "UseCaseSlotDefinition",
+        "value": {
+          "kind": "ObjectDefinition",
+          "fields": [
+            {
+              "kind": "FieldDefinition",
+              "fieldName": "message",
+              "required": true,
+              "type": {
+                "kind": "NonNullDefinition",
+                "type": {
+                  "kind": "PrimitiveTypeName",
+                  "name": "string",
+                  "location": {
+                    "start": {
+                      "line": 36,
+                      "column": 14,
+                      "charIndex": 596
+                    },
+                    "end": {
+                      "line": 36,
+                      "column": 20,
+                      "charIndex": 602
+                    }
+                  }
+                },
+                "location": {
+                  "start": {
+                    "line": 36,
+                    "column": 14,
+                    "charIndex": 596
+                  },
+                  "end": {
+                    "line": 36,
+                    "column": 21,
+                    "charIndex": 603
+                  }
+                }
+              },
+              "location": {
+                "start": {
+                  "line": 36,
+                  "column": 5,
+                  "charIndex": 587
+                },
+                "end": {
+                  "line": 36,
+                  "column": 21,
+                  "charIndex": 603
+                }
+              },
+              "documentation": {
+                "title": "Message",
+                "description": "A short, human-readable summary of the problem.",
+                "location": {
+                  "start": {
+                    "line": 32,
+                    "column": 5,
+                    "charIndex": 507
+                  },
+                  "end": {
+                    "line": 35,
+                    "column": 8,
+                    "charIndex": 582
+                  }
+                }
+              }
+            },
+            {
+              "kind": "FieldDefinition",
+              "fieldName": "statusCode",
+              "required": true,
+              "location": {
+                "start": {
+                  "line": 41,
+                  "column": 5,
+                  "charIndex": 701
+                },
+                "end": {
+                  "line": 41,
+                  "column": 16,
+                  "charIndex": 712
+                }
+              },
+              "documentation": {
+                "title": "Status code",
+                "description": "Usually a HTTP status code connected to occured problem.",
+                "location": {
+                  "start": {
+                    "line": 37,
+                    "column": 5,
+                    "charIndex": 608
+                  },
+                  "end": {
+                    "line": 40,
+                    "column": 8,
+                    "charIndex": 696
+                  }
+                }
+              }
+            },
+            {
+              "kind": "FieldDefinition",
+              "fieldName": "description",
+              "required": false,
+              "type": {
+                "kind": "NonNullDefinition",
+                "type": {
+                  "kind": "PrimitiveTypeName",
+                  "name": "string",
+                  "location": {
+                    "start": {
+                      "line": 46,
+                      "column": 17,
+                      "charIndex": 848
+                    },
+                    "end": {
+                      "line": 46,
+                      "column": 23,
+                      "charIndex": 854
+                    }
+                  }
+                },
+                "location": {
+                  "start": {
+                    "line": 46,
+                    "column": 17,
+                    "charIndex": 848
+                  },
+                  "end": {
+                    "line": 46,
+                    "column": 24,
+                    "charIndex": 855
+                  }
+                }
+              },
+              "location": {
+                "start": {
+                  "line": 46,
+                  "column": 5,
+                  "charIndex": 836
+                },
+                "end": {
+                  "line": 46,
+                  "column": 24,
+                  "charIndex": 855
+                }
+              },
+              "documentation": {
+                "title": "Description",
+                "description": "A optional, human-readable explanation specific to this occurrence of the problem.",
+                "location": {
+                  "start": {
+                    "line": 42,
+                    "column": 5,
+                    "charIndex": 717
+                  },
+                  "end": {
+                    "line": 45,
+                    "column": 8,
+                    "charIndex": 831
+                  }
+                }
+              }
+            }
+          ],
+          "location": {
+            "start": {
+              "line": 31,
+              "column": 9,
+              "charIndex": 501
+            },
+            "end": {
+              "line": 47,
+              "column": 4,
+              "charIndex": 859
+            }
+          }
+        },
+        "location": {
+          "start": {
+            "line": 31,
+            "column": 3,
+            "charIndex": 495
+          },
+          "end": {
+            "line": 47,
+            "column": 4,
+            "charIndex": 859
+          }
+        }
+      },
+      "examples": [
+        {
+          "kind": "UseCaseSlotDefinition",
+          "value": {
+            "kind": "UseCaseExample",
+            "exampleName": "success",
+            "input": {
+              "kind": "UseCaseSlotDefinition",
+              "value": {
+                "kind": "ComlinkObjectLiteral",
+                "fields": [
+                  {
+                    "kind": "ComlinkAssignment",
+                    "key": [
+                      "user"
+                    ],
+                    "value": {
+                      "kind": "ComlinkPrimitiveLiteral",
+                      "value": "superfaceai",
+                      "location": {
+                        "start": {
+                          "line": 51,
+                          "column": 14,
+                          "charIndex": 904
+                        },
+                        "end": {
+                          "line": 51,
+                          "column": 27,
+                          "charIndex": 917
+                        }
+                      }
+                    },
+                    "location": {
+                      "start": {
+                        "line": 51,
+                        "column": 7,
+                        "charIndex": 897
+                      },
+                      "end": {
+                        "line": 51,
+                        "column": 27,
+                        "charIndex": 917
+                      }
+                    }
+                  }
+                ],
+                "location": {
+                  "start": {
+                    "line": 50,
+                    "column": 11,
+                    "charIndex": 889
+                  },
+                  "end": {
+                    "line": 52,
+                    "column": 6,
+                    "charIndex": 923
+                  }
+                }
+              },
+              "location": {
+                "start": {
+                  "line": 50,
+                  "column": 5,
+                  "charIndex": 883
+                },
+                "end": {
+                  "line": 52,
+                  "column": 6,
+                  "charIndex": 923
+                }
+              }
+            },
+            "result": {
+              "kind": "UseCaseSlotDefinition",
+              "value": {
+                "kind": "ComlinkObjectLiteral",
+                "fields": [
+                  {
+                    "kind": "ComlinkAssignment",
+                    "key": [
+                      "repos"
+                    ],
+                    "value": {
+                      "kind": "ComlinkListLiteral",
+                      "items": [
+                        {
+                          "kind": "ComlinkObjectLiteral",
+                          "fields": [
+                            {
+                              "kind": "ComlinkAssignment",
+                              "key": [
+                                "name"
+                              ],
+                              "value": {
+                                "kind": "ComlinkPrimitiveLiteral",
+                                "value": "one-sdk-js",
+                                "location": {
+                                  "start": {
+                                    "line": 56,
+                                    "column": 16,
+                                    "charIndex": 970
+                                  },
+                                  "end": {
+                                    "line": 56,
+                                    "column": 28,
+                                    "charIndex": 982
+                                  }
+                                }
+                              },
+                              "location": {
+                                "start": {
+                                  "line": 56,
+                                  "column": 9,
+                                  "charIndex": 963
+                                },
+                                "end": {
+                                  "line": 56,
+                                  "column": 28,
+                                  "charIndex": 982
+                                }
+                              }
+                            },
+                            {
+                              "kind": "ComlinkAssignment",
+                              "key": [
+                                "description"
+                              ],
+                              "value": {
+                                "kind": "ComlinkPrimitiveLiteral",
+                                "value": "Superface core client library",
+                                "location": {
+                                  "start": {
+                                    "line": 57,
+                                    "column": 23,
+                                    "charIndex": 1006
+                                  },
+                                  "end": {
+                                    "line": 57,
+                                    "column": 54,
+                                    "charIndex": 1037
+                                  }
+                                }
+                              },
+                              "location": {
+                                "start": {
+                                  "line": 57,
+                                  "column": 9,
+                                  "charIndex": 992
+                                },
+                                "end": {
+                                  "line": 57,
+                                  "column": 54,
+                                  "charIndex": 1037
+                                }
+                              }
+                            }
+                          ],
+                          "location": {
+                            "start": {
+                              "line": 55,
+                              "column": 16,
+                              "charIndex": 953
+                            },
+                            "end": {
+                              "line": 58,
+                              "column": 8,
+                              "charIndex": 1045
+                            }
+                          }
+                        }
+                      ],
+                      "location": {
+                        "start": {
+                          "line": 55,
+                          "column": 15,
+                          "charIndex": 952
+                        },
+                        "end": {
+                          "line": 58,
+                          "column": 9,
+                          "charIndex": 1046
+                        }
+                      }
+                    },
+                    "location": {
+                      "start": {
+                        "line": 55,
+                        "column": 7,
+                        "charIndex": 944
+                      },
+                      "end": {
+                        "line": 58,
+                        "column": 9,
+                        "charIndex": 1046
+                      }
+                    }
+                  }
+                ],
+                "location": {
+                  "start": {
+                    "line": 54,
+                    "column": 12,
+                    "charIndex": 936
+                  },
+                  "end": {
+                    "line": 59,
+                    "column": 6,
+                    "charIndex": 1052
+                  }
+                }
+              },
+              "location": {
+                "start": {
+                  "line": 54,
+                  "column": 5,
+                  "charIndex": 929
+                },
+                "end": {
+                  "line": 59,
+                  "column": 6,
+                  "charIndex": 1052
+                }
+              }
+            },
+            "location": {
+              "start": {
+                "line": 49,
+                "column": 9,
+                "charIndex": 869
+              },
+              "end": {
+                "line": 60,
+                "column": 2,
+                "charIndex": 1054
+              }
+            }
+          },
+          "location": {
+            "start": {
+              "line": 49,
+              "column": 1,
+              "charIndex": 861
+            },
+            "end": {
+              "line": 60,
+              "column": 2,
+              "charIndex": 1054
+            }
+          }
+        },
+        {
+          "kind": "UseCaseSlotDefinition",
+          "value": {
+            "kind": "UseCaseExample",
+            "exampleName": "errorNoMatch",
+            "input": {
+              "kind": "UseCaseSlotDefinition",
+              "value": {
+                "kind": "ComlinkObjectLiteral",
+                "fields": [
+                  {
+                    "kind": "ComlinkAssignment",
+                    "key": [
+                      "user"
+                    ],
+                    "value": {
+                      "kind": "ComlinkPrimitiveLiteral",
+                      "value": "wrongName",
+                      "location": {
+                        "start": {
+                          "line": 64,
+                          "column": 14,
+                          "charIndex": 1104
+                        },
+                        "end": {
+                          "line": 64,
+                          "column": 25,
+                          "charIndex": 1115
+                        }
+                      }
+                    },
+                    "location": {
+                      "start": {
+                        "line": 64,
+                        "column": 7,
+                        "charIndex": 1097
+                      },
+                      "end": {
+                        "line": 64,
+                        "column": 25,
+                        "charIndex": 1115
+                      }
+                    }
+                  }
+                ],
+                "location": {
+                  "start": {
+                    "line": 63,
+                    "column": 11,
+                    "charIndex": 1089
+                  },
+                  "end": {
+                    "line": 65,
+                    "column": 6,
+                    "charIndex": 1121
+                  }
+                }
+              },
+              "location": {
+                "start": {
+                  "line": 63,
+                  "column": 5,
+                  "charIndex": 1083
+                },
+                "end": {
+                  "line": 65,
+                  "column": 6,
+                  "charIndex": 1121
+                }
+              }
+            },
+            "error": {
+              "kind": "UseCaseSlotDefinition",
+              "value": {
+                "kind": "ComlinkObjectLiteral",
+                "fields": [
+                  {
+                    "kind": "ComlinkAssignment",
+                    "key": [
+                      "message"
+                    ],
+                    "value": {
+                      "kind": "ComlinkPrimitiveLiteral",
+                      "value": "No repos found for wrongName",
+                      "location": {
+                        "start": {
+                          "line": 68,
+                          "column": 17,
+                          "charIndex": 1155
+                        },
+                        "end": {
+                          "line": 68,
+                          "column": 47,
+                          "charIndex": 1185
+                        }
+                      }
+                    },
+                    "location": {
+                      "start": {
+                        "line": 68,
+                        "column": 7,
+                        "charIndex": 1145
+                      },
+                      "end": {
+                        "line": 68,
+                        "column": 47,
+                        "charIndex": 1185
+                      }
+                    }
+                  },
+                  {
+                    "kind": "ComlinkAssignment",
+                    "key": [
+                      "description"
+                    ],
+                    "value": {
+                      "kind": "ComlinkPrimitiveLiteral",
+                      "value": "https://docs.github.com/v3/repos/contents/",
+                      "location": {
+                        "start": {
+                          "line": 69,
+                          "column": 21,
+                          "charIndex": 1207
+                        },
+                        "end": {
+                          "line": 69,
+                          "column": 65,
+                          "charIndex": 1251
+                        }
+                      }
+                    },
+                    "location": {
+                      "start": {
+                        "line": 69,
+                        "column": 7,
+                        "charIndex": 1193
+                      },
+                      "end": {
+                        "line": 69,
+                        "column": 65,
+                        "charIndex": 1251
+                      }
+                    }
+                  },
+                  {
+                    "kind": "ComlinkAssignment",
+                    "key": [
+                      "statusCode"
+                    ],
+                    "value": {
+                      "kind": "ComlinkPrimitiveLiteral",
+                      "value": 404,
+                      "location": {
+                        "start": {
+                          "line": 70,
+                          "column": 20,
+                          "charIndex": 1272
+                        },
+                        "end": {
+                          "line": 70,
+                          "column": 23,
+                          "charIndex": 1275
+                        }
+                      }
+                    },
+                    "location": {
+                      "start": {
+                        "line": 70,
+                        "column": 7,
+                        "charIndex": 1259
+                      },
+                      "end": {
+                        "line": 70,
+                        "column": 23,
+                        "charIndex": 1275
+                      }
+                    }
+                  }
+                ],
+                "location": {
+                  "start": {
+                    "line": 67,
+                    "column": 11,
+                    "charIndex": 1137
+                  },
+                  "end": {
+                    "line": 71,
+                    "column": 6,
+                    "charIndex": 1281
+                  }
+                }
+              },
+              "location": {
+                "start": {
+                  "line": 67,
+                  "column": 5,
+                  "charIndex": 1131
+                },
+                "end": {
+                  "line": 71,
+                  "column": 6,
+                  "charIndex": 1281
+                }
+              }
+            },
+            "location": {
+              "start": {
+                "line": 62,
+                "column": 9,
+                "charIndex": 1064
+              },
+              "end": {
+                "line": 72,
+                "column": 4,
+                "charIndex": 1285
+              }
+            }
+          },
+          "location": {
+            "start": {
+              "line": 62,
+              "column": 1,
+              "charIndex": 1056
+            },
+            "end": {
+              "line": 72,
+              "column": 4,
+              "charIndex": 1285
+            }
+          }
+        }
+      ],
+      "location": {
+        "start": {
+          "line": 12,
+          "column": 1,
+          "charIndex": 211
+        },
+        "end": {
+          "line": 73,
+          "column": 2,
+          "charIndex": 1287
+        }
+      },
+      "documentation": {
+        "title": "Get User Repositories",
+        "description": "Get repositories of the specified user.",
+        "location": {
+          "start": {
+            "line": 8,
+            "column": 1,
+            "charIndex": 141
+          },
+          "end": {
+            "line": 11,
+            "column": 4,
+            "charIndex": 210
+          }
+        }
+      }
+    }
+  ],
+  "location": {
+    "start": {
+      "line": 5,
+      "column": 1,
+      "charIndex": 98
+    },
+    "end": {
+      "line": 73,
+      "column": 2,
+      "charIndex": 1287
+    }
+  },
+  "astMetadata": {
+    "astVersion": {
+      "major": 1,
+      "minor": 2,
+      "patch": 0
+    },
+    "parserVersion": {
+      "major": 1,
+      "minor": 2,
+      "patch": 0
+    },
+    "sourceChecksum": "ffee926981644843d537d67f4f55d1ad8452ee20a10468e087c49f113a706f7f"
+  }
+}
