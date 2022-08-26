@@ -22,9 +22,9 @@ export async function checkFiles(options?: {
   const superJson = await loadSuperJson(options);
   const localFiles: string[] = [];
 
-  localFiles.push(...(await localProviders(superJson, options)));
-  localFiles.push(...(await localProfiles(superJson, options)));
-  localFiles.push(...(await localMaps(superJson, options)));
+  localFiles.push(...(await localProviders(options)));
+  localFiles.push(...(await localProfiles(options)));
+  localFiles.push(...(await localMaps(options)));
 
   const superJsonFiles: string[] = [];
   superJsonFiles.push(...(await providersFiles(superJson)));
@@ -56,7 +56,8 @@ export async function checkFiles(options?: {
 export async function checkMockMap(options?: {
   fileSystem?: IFileSystem;
 }): Promise<CheckResult[]> {
-  const superJson = normalizeSuperJsonDocument(await loadSuperJson(options));
+  const { document } = await loadSuperJson(options);
+  const superJson = normalizeSuperJsonDocument(document);
   const results: CheckResult[] = [];
 
   for (const profileId in superJson.profiles) {

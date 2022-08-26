@@ -7,7 +7,10 @@ jest.mock('./util');
 
 describe('Station Structure', () => {
   beforeEach(() => {
-    mocked(util.loadSuperJson).mockResolvedValue({});
+    mocked(util.loadSuperJson).mockResolvedValue({
+      document: {},
+      path: './superface',
+    });
     mocked(util.localMaps).mockResolvedValue([]);
     mocked(util.localProfiles).mockResolvedValue([]);
     mocked(util.localProviders).mockResolvedValue([]);
@@ -78,18 +81,21 @@ describe('Station Structure', () => {
       mocked(util.loadSuperJson)
         .mockReset()
         .mockResolvedValue({
-          profiles: {
-            one: {
-              file: './one.supr',
-              providers: {
-                mock: {},
+          document: {
+            profiles: {
+              one: {
+                file: './one.supr',
+                providers: {
+                  mock: {},
+                },
+              },
+              two: {
+                file: './two.supr',
+                providers: {},
               },
             },
-            two: {
-              file: './two.supr',
-              providers: {},
-            },
           },
+          path: './superface',
         });
     });
 

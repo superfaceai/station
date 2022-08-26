@@ -56,7 +56,7 @@ const hostsWithSection = `
 
 describe('hosts', () => {
   beforeEach(() => {
-    mocked(util.providersFiles).mockReturnValue(['./one.json', './two.json']);
+    mocked(util.providersFiles).mockResolvedValue(['./one.json', './two.json']);
   });
 
   describe('#updateHosts', () => {
