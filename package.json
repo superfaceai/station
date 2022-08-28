@@ -18,7 +18,9 @@
     "structure": "ts-node ./src/station_structure.ts",
     "publish_to_registry": "ts-node ./src/publish.ts",
     "hosts:block": "ts-node ./src/hosts.ts block",
-    "hosts:allow": "ts-node ./src/hosts.ts allow"
+    "hosts:allow": "ts-node ./src/hosts.ts allow",
+    "compile": "superface compile",
+    "remove_compilation_files": "rimraf ./grid/**/*.ast.json"
   },
   "devDependencies": {
     "@superfaceai/ast": "^1.2.0",
@@ -41,6 +43,7 @@
     "glob": "^7.1.7",
     "jest": "^26.6.3",
     "prettier": "^2.2.0",
+    "rimraf": "^3.0.2",
     "ts-jest": "^26.4.4",
     "ts-node": "^10.2.1",
     "typescript": "^4.0.5"
