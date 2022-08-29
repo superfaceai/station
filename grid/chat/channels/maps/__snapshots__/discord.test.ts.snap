@@ -1,48 +1,32 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`chat/channels/discord GetChannels performs correctly 1`] = `
-Ok {
-  "value": Object {
-    "channels": Array [
-      Object {
-        "createdAt": 1643221182610,
-        "id": "935962220104396883",
-        "name": "welcome-and-rules",
-      },
-      Object {
-        "createdAt": 1643221182610,
-        "id": "935962220104396884",
-        "name": "announcements",
-      },
-      Object {
-        "createdAt": 1643221182610,
-        "id": "935962220104396885",
-        "name": "resources",
-      },
-      Object {
-        "createdAt": 1643221182610,
-        "id": "935962220104396887",
-        "name": "general",
-      },
-      Object {
-        "createdAt": 1643221182610,
-        "id": "935962220104396888",
-        "name": "meeting-plans",
-      },
-      Object {
-        "createdAt": 1643853592872,
-        "id": "938614740995960844",
-        "name": "random",
+exports[`chat/channels/discord GetChannels when specified destination does exist performs correctly 1`] = `
+Object {
+  "value": ObjectContaining {
+    "channels": ArrayContaining [
+      ObjectContaining {
+        "createdAt": Any<Number>,
+        "id": Any<String>,
+        "name": Any<String>,
       },
     ],
-    "rateLimit": Object {
-      "bucket": "a66d55b18e9649f0915c93ce4c0677af",
-      "remainingRequests": 9,
-      "remainingRequestsPercentage": 90,
-      "resetAfter": 60,
-      "resetTimestamp": 1645522524000,
-      "totalRequests": 10,
+  },
+}
+`;
+
+exports[`chat/channels/discord GetChannels when specified destination does not exist returns error 1`] = `
+Object {
+  "error": ObjectContaining {
+    "kind": StringMatching /HTTPError/,
+    "message": StringMatching /Expected HTTP error/,
+    "properties": ObjectContaining {
+      "detail": "Unknown Guild",
+      "rateLimit": ObjectContaining {
+        "resetTimestamp": Any<Number>,
+      },
+      "title": "Not found",
     },
+    "statusCode": Any<Number>,
   },
 }
 `;
