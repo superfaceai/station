@@ -23,14 +23,34 @@ describe('chat/channels/slack', () => {
         });
 
         expect(result).toMatchSnapshot({
-          value: expect.arrayContaining([
-            expect.objectContaining({
-              createdAt: expect.any(Number),
-              id: expect.any(String),
-              membersCount: expect.any(Number),
-              name: expect.any(String),
-            }),
-          ]),
+          value: {
+            channels: expect.arrayContaining([
+              expect.objectContaining({
+                createdAt: expect.any(Number),
+                id: expect.any(String),
+                membersCount: expect.any(Number),
+                name: 'business-plan',
+              }),
+              expect.objectContaining({
+                createdAt: expect.any(Number),
+                id: expect.any(String),
+                membersCount: expect.any(Number),
+                name: 'random',
+              }),
+              expect.objectContaining({
+                createdAt: expect.any(Number),
+                id: expect.any(String),
+                membersCount: expect.any(Number),
+                name: 'general',
+              }),
+              expect.objectContaining({
+                createdAt: expect.any(Number),
+                id: expect.any(String),
+                membersCount: expect.any(Number),
+                name: 'product',
+              }),
+            ]),
+          },
         });
       });
     });
