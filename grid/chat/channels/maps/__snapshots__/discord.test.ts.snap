@@ -2,14 +2,37 @@
 
 exports[`chat/channels/discord GetChannels when specified destination does exist performs correctly 1`] = `
 Object {
-  "value": ObjectContaining {
+  "value": Object {
     "channels": ArrayContaining [
       ObjectContaining {
         "createdAt": Any<Number>,
         "id": Any<String>,
-        "name": Any<String>,
+        "name": "welcome-and-rules",
+      },
+      ObjectContaining {
+        "createdAt": Any<Number>,
+        "id": Any<String>,
+        "name": "announcements",
+      },
+      ObjectContaining {
+        "createdAt": Any<Number>,
+        "id": Any<String>,
+        "name": "resources",
+      },
+      ObjectContaining {
+        "createdAt": Any<Number>,
+        "id": Any<String>,
+        "name": "general",
       },
     ],
+    "rateLimit": ObjectContaining {
+      "bucket": Any<String>,
+      "remainingRequests": Any<Number>,
+      "remainingRequestsPercentage": Any<Number>,
+      "resetAfter": Any<Number>,
+      "resetTimestamp": Any<Number>,
+      "totalRequests": Any<Number>,
+    },
   },
 }
 `;
@@ -22,7 +45,12 @@ Object {
     "properties": ObjectContaining {
       "detail": "Unknown Guild",
       "rateLimit": ObjectContaining {
+        "bucket": Any<String>,
+        "remainingRequests": Any<Number>,
+        "remainingRequestsPercentage": Any<Number>,
+        "resetAfter": Any<Number>,
         "resetTimestamp": Any<Number>,
+        "totalRequests": Any<Number>,
       },
       "title": "Not found",
     },

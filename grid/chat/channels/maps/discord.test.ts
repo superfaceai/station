@@ -19,20 +19,37 @@ describe('chat/channels/discord', () => {
           input: {
             workspace: '935962220104396881',
             visibility: 'public',
-            limit: 4,
           },
         });
 
         expect(result).toMatchSnapshot({
-          value: expect.objectContaining({
+          value: {
             channels: expect.arrayContaining([
               expect.objectContaining({
                 createdAt: expect.any(Number),
                 id: expect.any(String),
-                name: expect.any(String),
+                name: 'announcements',
+              }),
+              expect.objectContaining({
+                createdAt: expect.any(Number),
+                id: expect.any(String),
+                name: 'resources',
+              }),
+              expect.objectContaining({
+                createdAt: expect.any(Number),
+                id: expect.any(String),
+                name: 'general',
               }),
             ]),
-          }),
+            rateLimit: expect.objectContaining({
+              bucket: expect.any(String),
+              remainingRequests: expect.any(Number),
+              remainingRequestsPercentage: expect.any(Number),
+              resetAfter: expect.any(Number),
+              resetTimestamp: expect.any(Number),
+              totalRequests: expect.any(Number),
+            }),
+          },
         });
       });
     });
@@ -44,7 +61,6 @@ describe('chat/channels/discord', () => {
             input: {
               workspace: '000000000000000000',
               visibility: 'public',
-              limit: 4,
             },
           },
           { fullError: true }
@@ -58,7 +74,12 @@ describe('chat/channels/discord', () => {
               title: 'Not found',
               detail: 'Unknown Guild',
               rateLimit: expect.objectContaining({
+                bucket: expect.any(String),
+                remainingRequests: expect.any(Number),
+                remainingRequestsPercentage: expect.any(Number),
+                resetAfter: expect.any(Number),
                 resetTimestamp: expect.any(Number),
+                totalRequests: expect.any(Number),
               }),
             }),
             statusCode: expect.any(Number),
