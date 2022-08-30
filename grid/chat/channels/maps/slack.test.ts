@@ -1,5 +1,11 @@
 import { SuperfaceTest } from '@superfaceai/testing';
 
+/**
+ * Live tests
+ *
+ * @group live/safe
+ */
+
 describe('chat/channels/slack', () => {
   let superface: SuperfaceTest;
 

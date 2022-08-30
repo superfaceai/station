@@ -12,7 +12,7 @@ Object {
     "kind": StringMatching /HTTPError/,
     "message": StringMatching /Expected HTTP error/,
     "properties": ObjectContaining {
-      "title": Any<String>,
+      "title": "channel_not_found",
     },
     "statusCode": Any<Number>,
   },
@@ -25,7 +25,7 @@ Object {
     "kind": StringMatching /HTTPError/,
     "message": StringMatching /Expected HTTP error/,
     "properties": ObjectContaining {
-      "title": Any<String>,
+      "title": "message_not_found",
     },
     "statusCode": Any<Number>,
   },
