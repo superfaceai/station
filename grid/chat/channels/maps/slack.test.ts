@@ -22,6 +22,13 @@ describe('chat/channels/slack', () => {
           },
         });
 
+        expect(result.isOk()).toBeTruthy();
+        
+        const channels = result.isOk()
+          ? (result.value as any).channels
+          : result.error;
+
+        expect(channels).toHaveLength(4);
         expect(result).toMatchSnapshot({
           value: {
             channels: expect.arrayContaining([
