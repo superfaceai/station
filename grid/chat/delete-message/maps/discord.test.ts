@@ -6,14 +6,14 @@ import { SuperfaceTest } from '@superfaceai/testing';
  * @group live/safe
  */
 
-describe('chat/delete-message/slack', () => {
+describe('chat/delete-message/discord', () => {
   let superface: SuperfaceTest;
 
   describe('DeleteMessage', () => {
     beforeEach(() => {
       superface = new SuperfaceTest({
         profile: 'chat/delete-message',
-        provider: 'slack',
+        provider: 'discord',
         useCase: 'DeleteMessage',
         testInstance: expect,
       });
@@ -26,11 +26,14 @@ describe('chat/delete-message/slack', () => {
         const prepare = new SuperfaceTest({
           profile: 'chat/send-message',
           useCase: 'SendMessage',
-          provider: 'slack',
+          provider: 'discord',
         });
 
         const result = await prepare.run({
-          input: { destination: 'C03UL8E5YMR', text: 'test DeleteMessage' },
+          input: {
+            destination: '935962220104396885',
+            text: 'test DeleteMessage',
+          },
           testName: 'prepare-chat/delete-chat/send',
         });
 
@@ -45,7 +48,7 @@ describe('chat/delete-message/slack', () => {
             profile: 'chat/delete-message',
             useCase: 'DeleteMessage',
             input: {
-              destination: 'C03UL8E5YMR',
+              destination: '935962220104396885',
               messageId,
             },
           },
@@ -54,7 +57,16 @@ describe('chat/delete-message/slack', () => {
 
         expect(result.isOk).toBeTruthy();
         expect(result).toMatchSnapshot({
-          value: {},
+          value: {
+            rateLimit: expect.objectContaining({
+              bucket: expect.any(String),
+              remainingRequests: expect.any(Number),
+              remainingRequestsPercentage: expect.any(Number),
+              resetAfter: expect.any(Number),
+              resetTimestamp: expect.any(Number),
+              totalRequests: expect.any(Number),
+            }),
+          },
         });
       });
     });
@@ -64,8 +76,8 @@ describe('chat/delete-message/slack', () => {
         const result = await superface.run(
           {
             input: {
-              destination: 'not-existing-dest',
-              messageId: '...',
+              destination: '000000000000000000',
+              messageId: '000000000000000000',
             },
           },
           { fullError: true }
@@ -76,7 +88,8 @@ describe('chat/delete-message/slack', () => {
             kind: expect.stringMatching('HTTPError'),
             message: expect.stringMatching('Expected HTTP error'),
             properties: expect.objectContaining({
-              title: 'channel_not_found',
+              title: 'Not found',
+              detail: 'Unknown Channel',
             }),
             statusCode: expect.any(Number),
           }),
@@ -89,8 +102,8 @@ describe('chat/delete-message/slack', () => {
         const result = await superface.run(
           {
             input: {
-              destination: 'C03UL8E5YMR',
-              messageId: 'not-existing-id',
+              destination: '935962220104396885',
+              messageId: '000000000000000000',
             },
           },
           { fullError: true }
@@ -101,7 +114,8 @@ describe('chat/delete-message/slack', () => {
             kind: expect.stringMatching('HTTPError'),
             message: expect.stringMatching('Expected HTTP error'),
             properties: expect.objectContaining({
-              title: 'message_not_found',
+              title: 'Not found',
+              detail: 'Unknown Message',
             }),
             statusCode: expect.any(Number),
           }),

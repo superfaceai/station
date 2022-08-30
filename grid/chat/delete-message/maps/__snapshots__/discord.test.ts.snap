@@ -1,0 +1,44 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`chat/delete-message/discord DeleteMessage when specified destination does exist performs correctly 1`] = `
+Object {
+  "value": Object {
+    "rateLimit": ObjectContaining {
+      "bucket": Any<String>,
+      "remainingRequests": Any<Number>,
+      "remainingRequestsPercentage": Any<Number>,
+      "resetAfter": Any<Number>,
+      "resetTimestamp": Any<Number>,
+      "totalRequests": Any<Number>,
+    },
+  },
+}
+`;
+
+exports[`chat/delete-message/discord DeleteMessage when specified destination does not exist returns error 1`] = `
+Object {
+  "error": ObjectContaining {
+    "kind": StringMatching /HTTPError/,
+    "message": StringMatching /Expected HTTP error/,
+    "properties": ObjectContaining {
+      "detail": "Unknown Channel",
+      "title": "Not found",
+    },
+    "statusCode": Any<Number>,
+  },
+}
+`;
+
+exports[`chat/delete-message/discord DeleteMessage when specified message id does not exist returns error 1`] = `
+Object {
+  "error": ObjectContaining {
+    "kind": StringMatching /HTTPError/,
+    "message": StringMatching /Expected HTTP error/,
+    "properties": ObjectContaining {
+      "detail": "Unknown Message",
+      "title": "Not found",
+    },
+    "statusCode": Any<Number>,
+  },
+}
+`;
