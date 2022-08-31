@@ -6,8 +6,14 @@ import { SuperfaceTest } from '@superfaceai/testing';
  * @group live/safe
  */
 
+const provider = 'discord';
+const destination = '938614740995960844';
+
 describe('chat/messages/discord', () => {
   let superface: SuperfaceTest;
+  let prepare: SuperfaceTest;
+  let teardown: SuperfaceTest;
+  const messageIds: string[] = [];
 
   describe('GetMessages', () => {
     beforeAll(() => {
@@ -17,13 +23,52 @@ describe('chat/messages/discord', () => {
         useCase: 'GetMessages',
         testInstance: expect,
       });
+
+      prepare = new SuperfaceTest({
+        profile: 'chat/send-message',
+        provider,
+        useCase: 'SendMessage',
+      });
+
+      teardown = new SuperfaceTest({
+        profile: 'chat/delete-message',
+        provider,
+        useCase: 'DeleteMessage',
+      });
     });
 
     describe('when specified destination does exist', () => {
+      beforeEach(async () => {
+        for (const i of [1, 2, 3, 4, 5]) {
+          const result = await prepare.run({
+            input: { destination, text: `Test ${i}` },
+            testName: `prepare-chat/messages-chat/send-${i}`,
+          });
+
+          if (result.isOk()) {
+            messageIds.push((result.value as any).messageId);
+          }
+        }
+      });
+
+      afterEach(async () => {
+        for (const i of [0, 1, 2, 3, 4]) {
+          await teardown.run(
+            {
+              input: { destination, messageId: messageIds[i] },
+              testName: `teardown-chat/messages-chat/delete-${i + 1}`,
+            },
+            {
+              hideInput: ['messageId'],
+            }
+          );
+        }
+      });
+
       it('performs correctly', async () => {
         const page1 = await superface.run({
           input: {
-            destination: '938614740995960844',
+            destination,
             limit: 3,
           },
           testName: 'page 1',
@@ -59,8 +104,8 @@ describe('chat/messages/discord', () => {
         const page2 = await superface.run(
           {
             input: {
-              destination: '938614740995960844',
-              limit: 3,
+              destination,
+              limit: 2,
               page: cursor,
             },
             testName: 'page 2',
