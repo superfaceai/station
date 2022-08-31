@@ -39,7 +39,7 @@ describe('chat/messages/slack', () => {
 
     describe('when specified destination does exist', () => {
       beforeEach(async () => {
-        for (const i of [1, 2, 3]) {
+        for (const i of [1, 2, 3, 4, 5]) {
           const result = await prepare.run({
             input: { destination, text: `Test ${i}` },
             testName: `prepare-chat/messages-chat/send-${i}`,
@@ -52,7 +52,7 @@ describe('chat/messages/slack', () => {
       });
 
       afterEach(async () => {
-        for (const i of [0, 1, 2]) {
+        for (const i of [0, 1, 2, 3, 4]) {
           await teardown.run(
             {
               input: { destination, messageId: messageIds[i] },
@@ -69,7 +69,7 @@ describe('chat/messages/slack', () => {
         const page1 = await superface.run({
           input: {
             destination,
-            limit: 2,
+            limit: 3,
           },
           testName: 'page 1',
         });
