@@ -92,7 +92,12 @@ describe('chat/messages/discord', () => {
             ]),
             nextPage: expect.any(String),
             rateLimit: expect.objectContaining({
+              bucket: expect.any(String),
+              remainingRequests: expect.any(Number),
+              remainingRequestsPercentage: expect.any(Number),
+              resetAfter: expect.any(Number),
               resetTimestamp: expect.any(Number),
+              totalRequests: expect.any(Number),
             }),
           }),
         });
@@ -126,7 +131,12 @@ describe('chat/messages/discord', () => {
               }),
             ]),
             rateLimit: expect.objectContaining({
+              bucket: expect.any(String),
+              remainingRequests: expect.any(Number),
+              remainingRequestsPercentage: expect.any(Number),
+              resetAfter: expect.any(Number),
               resetTimestamp: expect.any(Number),
+              totalRequests: expect.any(Number),
             }),
           }),
         });
@@ -151,7 +161,12 @@ describe('chat/messages/discord', () => {
             properties: expect.objectContaining({
               title: expect.any(String),
               rateLimit: expect.objectContaining({
+                bucket: expect.any(String),
+                remainingRequests: expect.any(Number),
+                remainingRequestsPercentage: expect.any(Number),
+                resetAfter: expect.any(Number),
                 resetTimestamp: expect.any(Number),
+                totalRequests: expect.any(Number),
               }),
             }),
             statusCode: expect.any(Number),

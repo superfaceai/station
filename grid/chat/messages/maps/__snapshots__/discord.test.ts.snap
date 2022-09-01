@@ -14,7 +14,12 @@ Object {
     ],
     "nextPage": Any<String>,
     "rateLimit": ObjectContaining {
+      "bucket": Any<String>,
+      "remainingRequests": Any<Number>,
+      "remainingRequestsPercentage": Any<Number>,
+      "resetAfter": Any<Number>,
       "resetTimestamp": Any<Number>,
+      "totalRequests": Any<Number>,
     },
   },
 }
@@ -33,7 +38,12 @@ Object {
       },
     ],
     "rateLimit": ObjectContaining {
+      "bucket": Any<String>,
+      "remainingRequests": Any<Number>,
+      "remainingRequestsPercentage": Any<Number>,
+      "resetAfter": Any<Number>,
       "resetTimestamp": Any<Number>,
+      "totalRequests": Any<Number>,
     },
   },
 }
@@ -46,7 +56,12 @@ Object {
     "message": StringMatching /Expected HTTP error/,
     "properties": ObjectContaining {
       "rateLimit": ObjectContaining {
+        "bucket": Any<String>,
+        "remainingRequests": Any<Number>,
+        "remainingRequestsPercentage": Any<Number>,
+        "resetAfter": Any<Number>,
         "resetTimestamp": Any<Number>,
+        "totalRequests": Any<Number>,
       },
       "title": Any<String>,
     },

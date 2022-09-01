@@ -22,6 +22,14 @@ Object {
     "message": StringMatching /Expected HTTP error/,
     "properties": ObjectContaining {
       "detail": "Unknown Channel",
+      "rateLimit": ObjectContaining {
+        "bucket": Any<String>,
+        "remainingRequests": Any<Number>,
+        "remainingRequestsPercentage": Any<Number>,
+        "resetAfter": Any<Number>,
+        "resetTimestamp": Any<Number>,
+        "totalRequests": Any<Number>,
+      },
       "title": "Not found",
     },
     "statusCode": Any<Number>,
@@ -36,6 +44,14 @@ Object {
     "message": StringMatching /Expected HTTP error/,
     "properties": ObjectContaining {
       "detail": "Unknown Message",
+      "rateLimit": ObjectContaining {
+        "bucket": Any<String>,
+        "remainingRequests": Any<Number>,
+        "remainingRequestsPercentage": Any<Number>,
+        "resetAfter": Any<Number>,
+        "resetTimestamp": Any<Number>,
+        "totalRequests": Any<Number>,
+      },
       "title": "Not found",
     },
     "statusCode": Any<Number>,

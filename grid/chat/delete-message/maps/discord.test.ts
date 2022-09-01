@@ -90,6 +90,14 @@ describe('chat/delete-message/discord', () => {
             properties: expect.objectContaining({
               title: 'Not found',
               detail: 'Unknown Channel',
+              rateLimit: expect.objectContaining({
+                bucket: expect.any(String),
+                remainingRequests: expect.any(Number),
+                remainingRequestsPercentage: expect.any(Number),
+                resetAfter: expect.any(Number),
+                resetTimestamp: expect.any(Number),
+                totalRequests: expect.any(Number),
+              }),
             }),
             statusCode: expect.any(Number),
           }),
@@ -116,6 +124,14 @@ describe('chat/delete-message/discord', () => {
             properties: expect.objectContaining({
               title: 'Not found',
               detail: 'Unknown Message',
+              rateLimit: expect.objectContaining({
+                bucket: expect.any(String),
+                remainingRequests: expect.any(Number),
+                remainingRequestsPercentage: expect.any(Number),
+                resetAfter: expect.any(Number),
+                resetTimestamp: expect.any(Number),
+                totalRequests: expect.any(Number),
+              }),
             }),
             statusCode: expect.any(Number),
           }),
