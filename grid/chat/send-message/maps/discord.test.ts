@@ -1,5 +1,11 @@
 import { SuperfaceTest } from '@superfaceai/testing';
 
+/**
+ * Live tests
+ *
+ * @group live/safe
+ */
+
 const destination = '935962220104396885';
 const provider = 'discord';
 

@@ -1,4 +1,10 @@
-import { SuperfaceTest } from "@superfaceai/testing";
+import { SuperfaceTest } from '@superfaceai/testing';
+
+/**
+ * Live tests
+ *
+ * @group live/safe
+ */
 
 const destination = 'CF3H7S63W';
 const provider = 'slack';
