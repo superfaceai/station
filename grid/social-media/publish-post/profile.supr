@@ -43,6 +43,10 @@ usecase PublishPost unsafe {
     media [
       MediaItem
     ]
+
+    attachments [
+      MediaContainer
+    ]
   }
 
   result {
@@ -108,6 +112,14 @@ usecase PublishPost unsafe {
       title = 'Bad request'
     }
   }
+}
+
+model MediaContainer {
+  """
+  Media Container ID
+  ID of a previously uploaded media item, e.g. a video.
+  """
+  id! string!
 }
 
 model MediaItem {

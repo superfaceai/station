@@ -1,0 +1,220 @@
+
+"""
+Upload Assets to Social Media sites
+Upload images and videos on social media such as Instagram, Facebook, or Twitter.
+"""
+
+name = "social-media/upload-assets"
+version = "1.0.0"
+
+"""
+Upload an Asset
+Register an upload of an asset to a social media profile, in preparation for publishing later.
+"""
+usecase UploadAssetViaUrl unsafe {
+  input {
+    """
+    Profile ID
+    Identifier of a profile to upload to. May be optional with some providers.
+    """
+    profileId string!
+
+    """
+    Caption
+    Caption of the asset
+    """
+    caption string!
+
+    """
+    URL
+    URL of the asset. Must be publically acessible.
+    """
+    url! string!
+
+    """
+    Type
+    Media type of the asset
+    """
+    type enum {
+      video,
+      image
+    }
+  }
+
+  result {
+    """
+    Asset ID
+    Identifier of the asset.
+    """
+    assetId! string!
+  }
+
+  error {
+    """
+    Title
+    A short, human-readable summary of the problem type.
+    """
+    title! string
+
+    """
+    Detail
+    A human-readable explanation specific to this occurrence of the problem.
+    """
+    detail string
+
+    """
+    Code
+    Normalized error code usable across providers
+    """
+    code ErrorCode
+
+    """
+    Original Error
+    Original response from the provider
+    """
+    original
+  }
+
+  example Successful {
+    input {
+      profileId = '110658944785122',
+      text = 'A video of a kitten falling over.',
+      url = 'https://example.com/kitten.mp4',
+    }
+
+    result {
+      assetId = '125682506616099',
+    }
+  }
+
+  example Failed {
+    input {
+      profileId = 'invalid profile ID',
+      caption = 'Caption of the thing.',
+    }
+
+    error {
+      title = 'Bad request'
+    }
+  }
+}
+
+"""
+Get Asset State
+Get the state of a previously registered asset.
+"""
+usecase GetAssetState safe {
+  input {
+    """
+    Asset ID
+    Identifier of the asset.
+    """
+    assetId! string!
+  }
+
+  result {
+    """
+    State
+    State of the asset. Can be one of the following:
+      - Expired (Asset did not get published in time)
+      - Error (Error during processing of asset)
+      - Finished (Asset is ready to be published)
+      - InProgress (Asset is currently being processed)
+      - Published (Asset has been successfuly published)
+    """
+    state enum {
+      Expired,
+      Error,
+      Finished,
+      InProgress,
+      Published
+    }
+  }
+
+error {
+    """
+    Title
+    A short, human-readable summary of the problem type.
+    """
+    title! string
+
+    """
+    Detail
+    A human-readable explanation specific to this occurrence of the problem.
+    """
+    detail string
+
+    """
+    Code
+    Normalized error code usable across providers
+    """
+    code ErrorCode
+
+    """
+    Original Error
+    Original response from the provider
+    """
+    original
+  }
+
+  example Successful {
+    input {
+      assetId = '125682506616099',
+    }
+
+    result {
+      state = 'InProgress',
+    }
+  }
+
+  example Failed {
+    input {
+      profileId = 'invalid asset ID',
+    }
+
+    error {
+      title = 'Bad request'
+    }
+  }
+}
+
+model ErrorCode enum {
+  """
+  Bad request
+  The request was invalid or cannot be otherwise served.
+  """
+  BadRequest
+  """
+  Not found
+  The profileId, container or other input item does not exist.
+  """
+  NotFound
+  """
+  Rate limit reached
+  Returned when a request cannot be served due to the user or app reached max requests quota.
+  """
+  RateLimitReached
+  """
+  Unauthenticated
+  There was a problem authenticating your request. Check that you are passing valid access token.
+  """
+  Unauthenticated
+  """
+  Unauthorized
+  The request is understood, but it has been refused or access is not allowed.
+  """
+  Unauthorized
+
+  Timeout
+  ServerError
+  Spam
+  RestrictedProfile
+  PayloadTooLarge
+  UnsupportedAttachmentFormat
+
+  """
+  Unknown error
+  Returned when an unexpected error occured.
+  """
+  UnknownError
+}

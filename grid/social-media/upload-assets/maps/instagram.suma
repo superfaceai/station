@@ -1,0 +1,123 @@
+// Instagram Graph API Reference: https://developers.facebook.com/docs/instagram-api
+
+profile = "social-media/upload-assets@1.0"
+provider = "instagram"
+
+map UploadAssetViaUrl {
+  apiVersion = 'v14.0'
+  businessAccountId = input.profileId
+  authorizationHeaderValue = 'Bearer ' + parameters.accessToken
+  
+  item = {
+    url: input.url
+  }
+  caption = input.caption
+
+  call UploadMedia(businessAccountId = businessAccountId, item = item, isCarousel = false, caption = caption, authorization = authorizationHeaderValue) {
+    return map result if (!outcome.error) {
+      assetId = outcome.data
+    }
+    return map error error
+  }
+}
+
+// https://developers.facebook.com/docs/instagram-api/reference/ig-container
+map GetAssetState {
+  assetId = input.assetId;
+
+  http GET "/{assetId}" {
+    request {
+      query {
+        fields = "status,status_code",
+        access_token = parameters.accessToken
+      }
+    }
+
+    response 200 "application/json" {
+      state = (() => {
+        switch (body.status_code) {
+          case 'EXPIRED':
+            return 'Expired';
+          case 'ERROR':
+            return 'Error';
+          case 'FINISHED':
+            return 'Finished'
+          case 'IN_PROGRESS':
+            return 'InProgress'
+          case 'PUBLISHED':
+            return 'Published';
+          default:
+            return null;
+        }
+      })()
+
+      map error if (state === null) {
+        title = "Unknown asset state!"
+        detail = "Unknown asset state '" + body.status_code + "'. This is probably a bug in the map."
+        code = 'UnknownError'
+      }
+
+      map result {
+        state = state
+      }
+    }
+
+    response {
+      error = call MapApiError(statusCode = statusCode, body = body, headers = headers)
+      return map error error
+    }
+  }
+}
+
+// https://developers.facebook.com/docs/instagram-api/reference/error-codes/
+operation MapApiError {
+  statusCode = args.statusCode
+  headers = args.headers
+  body = args.body
+
+  errorCode = body.error.code
+  subcode = body.error.error_subcode
+  title = body.error.error_user_title || body.error.type || body.error.message || 'Unknown error'
+  detail = body.error.error_user_msg || body.error.message || undefined
+  // FIXME: Code handling
+  return {
+    title = title
+    detail = detail
+    original = body.error || body
+  }
+}
+
+operation UploadMedia {
+  apiVersion = 'v14.0'
+  businessAccountId = args.businessAccountId
+  itemUrl = args.item ? args.item.url : undefined
+  isCarousel = args.isCarousel || undefined
+  children = args.children ? JSON.stringify(args.children) : undefined
+  caption = isCarousel ? undefined : args.caption // captions are not supported for carousel items
+  authorizationHeaderValue = args.authorization
+
+  http POST "/{apiVersion}/{businessAccountId}/media" {
+    request {
+      query {
+        video_url = itemUrl,
+        caption = caption,
+        is_carousel_item = isCarousel,
+        media_type = 'VIDEO',
+        children = children,
+      }
+
+      headers {
+        authorization = authorizationHeaderValue
+      }
+    }
+
+    response 200 "application/json" {
+      return body.id
+    }
+
+    response {
+      error = call MapApiError(statusCode = statusCode, body = body, headers = headers)
+      fail error
+    }
+  }
+}
