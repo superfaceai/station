@@ -48,10 +48,7 @@ export async function loadSuperJson(options?: {
   return { document: superJson, path: superJsonPath };
 }
 
-export async function normalizePath(
-  superJsonPath: string,
-  path: string
-): Promise<string> {
+export function normalizePath(superJsonPath: string, path: string): string {
   return resolve(superJsonPath, path);
 }
 
@@ -88,7 +85,7 @@ export async function profilesFiles(superJson?: {
     const profileSettings = normalizedSuperJson.profiles[profileId];
 
     if (profileSettings !== undefined && 'file' in profileSettings) {
-      files.push(await normalizePath(superJson.path, profileSettings.file));
+      files.push(normalizePath(superJson.path, profileSettings.file));
     } else {
       throw new Error(
         `${profileId} settings must be defined and lead to local file`
@@ -116,7 +113,7 @@ export async function mapsFiles(superJson?: {
       const map = profileSettings.providers[providerId];
 
       if (map !== undefined && 'file' in map) {
-        files.push(await normalizePath(superJson.path, map.file));
+        files.push(normalizePath(superJson.path, map.file));
       } else {
         throw new Error(`Map ${providerId} must lead to local file`);
       }
@@ -141,7 +138,7 @@ export async function providersFiles(superJson?: {
     const providerSettings = normalizedSuperJson.providers[provider];
 
     if (providerSettings !== undefined && !!providerSettings.file) {
-      files.push(await normalizePath(superJson.path, providerSettings.file));
+      files.push(normalizePath(superJson.path, providerSettings.file));
     } else {
       throw new Error(
         `${provider} settings must be defined and lead to local file`
@@ -167,7 +164,7 @@ export async function localProviders(options?: {
   return Promise.all(
     glob
       .sync('../providers/*.json', { cwd })
-      .map(async i => await normalizePath(cwd, i))
+      .map(async i => normalizePath(cwd, i))
   );
 }
 
@@ -186,7 +183,7 @@ export async function localProfiles(options?: {
   return Promise.all(
     glob
       .sync('../grid/**/*.supr', { cwd })
-      .map(async i => await normalizePath(cwd, i))
+      .map(async i => normalizePath(cwd, i))
   );
 }
 
@@ -205,7 +202,7 @@ export async function localMaps(options?: {
   return Promise.all(
     glob
       .sync('../grid/**/*.suma', { cwd })
-      .map(async i => await normalizePath(cwd, i))
+      .map(async i => normalizePath(cwd, i))
   );
 }
 
