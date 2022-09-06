@@ -78,7 +78,7 @@ usecase UploadAssetViaUrl unsafe {
   example Successful {
     input {
       profileId = '110658944785122',
-      text = 'A video of a kitten falling over.',
+      caption = 'A video of a kitten falling over.',
       url = 'https://example.com/kitten.mp4',
     }
 
@@ -91,6 +91,7 @@ usecase UploadAssetViaUrl unsafe {
     input {
       profileId = 'invalid profile ID',
       caption = 'Caption of the thing.',
+      url = 'https://example.com/kitten.mp4',
     }
 
     error {
@@ -169,7 +170,7 @@ error {
 
   example Failed {
     input {
-      profileId = 'invalid asset ID',
+      assetId = 'invalid asset ID',
     }
 
     error {
