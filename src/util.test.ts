@@ -1,6 +1,7 @@
 import { SuperJsonDocument } from '@superfaceai/ast';
-import { detectSuperJson, loadSuperJson } from '@superfaceai/one-sdk';
+import { detectSuperJson, loadSuperJson, ok } from '@superfaceai/one-sdk';
 import * as glob from 'glob';
+import { join } from 'path';
 import { mocked } from 'ts-jest/utils';
 
 import * as util from './util';
@@ -10,6 +11,7 @@ jest.mock('glob');
 jest.mock('@superfaceai/one-sdk', () => ({
   ...jest.requireActual('@superfaceai/one-sdk'),
   loadSuperJson: jest.fn(),
+  detectSuperJson: jest.fn(),
 }));
 
 const SUPER_JSON_DOCUMENT: SuperJsonDocument = {
@@ -48,7 +50,10 @@ describe('util', () => {
 
   describe('loadSuperJson', () => {
     it('should call loadSync once', async () => {
-      const spy = mocked(loadSuperJson);
+      mocked(detectSuperJson).mockResolvedValue('./superface');
+      const spy = mocked(loadSuperJson).mockResolvedValue(
+        ok(SUPER_JSON_DOCUMENT)
+      );
 
       await util.loadSuperJson();
 
@@ -59,16 +64,17 @@ describe('util', () => {
   });
 
   describe('normalizePath', () => {
-    // TODO: support this in SDK?
-    it.skip('should call resolvePath on SuperJson', async () => {
-      // const spy = jest.spyOn(superJson, 'resolvePath');
-
-      const path = await util.normalizePath(
-        './superface',
-        './grid/profile.supr'
+    it('should call resolvePath on SuperJson', () => {
+      const expectedPath = join(
+        process.cwd(),
+        'superface',
+        'grid/profile.supr'
       );
 
-      expect(path).toBe('./superface/grid/profile.supr');
+      // TODO: support this in SDK?
+      const path = util.normalizePath('./superface', './grid/profile.supr');
+
+      expect(path).toBe(expectedPath);
     });
   });
 
@@ -92,19 +98,19 @@ describe('util', () => {
 
   describe('profilesFiles', () => {
     it('should return all profiles with local file', async () => {
-      expect(
+      await expect(
         util.profilesFiles({
           document: SUPER_JSON_DOCUMENT,
           path: './superface',
         })
-      ).toEqual([
-        await util.normalizePath('./superface', './one.supr'),
-        await util.normalizePath('./superface', './two.supr'),
+      ).resolves.toEqual([
+        util.normalizePath('./superface', './one.supr'),
+        util.normalizePath('./superface', './two.supr'),
       ]);
     });
 
-    it("should throw if profile settings doesn't point to local file", () => {
-      expect(() =>
+    it("should throw if profile settings doesn't point to local file", async () => {
+      await expect(
         util.profilesFiles({
           document: {
             profiles: {
@@ -116,22 +122,22 @@ describe('util', () => {
           },
           path: './superface',
         })
-      ).toThrowError();
+      ).rejects.toThrowError();
     });
   });
 
   describe('mapsFiles', () => {
-    it('should return map with local file', () => {
-      expect(
+    it('should return map with local file', async () => {
+      await expect(
         util.mapsFiles({ document: SUPER_JSON_DOCUMENT, path: './superface' })
-      ).toEqual([
+      ).resolves.toEqual([
         util.normalizePath('./superface', './one.suma'),
         util.normalizePath('./superface', './two.suma'),
       ]);
     });
 
-    it("should throw if map doesn't point to local file", () => {
-      expect(() =>
+    it("should throw if map doesn't point to local file", async () => {
+      await expect(
         util.mapsFiles({
           document: {
             profiles: {
@@ -148,25 +154,25 @@ describe('util', () => {
           },
           path: './superface',
         })
-      ).toThrowError();
+      ).rejects.toThrowError();
     });
   });
 
   describe('providersFiles', () => {
-    it('should return provider with local file', () => {
-      expect(
+    it('should return provider with local file', async () => {
+      await expect(
         util.providersFiles({
           document: SUPER_JSON_DOCUMENT,
           path: './superface',
         })
-      ).toEqual([
+      ).resolves.toEqual([
         util.normalizePath('./superface', './one.json'),
         util.normalizePath('./superface', './two.json'),
       ]);
     });
 
-    it("should throw if provider settings doesn't point to local file", () => {
-      expect(() =>
+    it("should throw if provider settings doesn't point to local file", async () => {
+      await expect(
         util.providersFiles({
           document: {
             providers: {
@@ -175,7 +181,7 @@ describe('util', () => {
           },
           path: './superface',
         })
-      ).toThrowError();
+      ).rejects.toThrowError();
     });
   });
 
@@ -189,7 +195,7 @@ describe('util', () => {
       expect(glob.sync).toBeCalledWith('../providers/*.json', {
         cwd: '/home',
       });
-      expect(result).toEqual(['/providers/one.json']);
+      expect(result).toEqual([join('/home', 'providers/one.json')]);
     });
   });
 
@@ -203,7 +209,7 @@ describe('util', () => {
       expect(glob.sync).toBeCalledWith('../grid/**/*.supr', {
         cwd: '/home',
       });
-      expect(result).toEqual(['/grid/send-email/profile.supr']);
+      expect(result).toEqual([join('/home', 'grid/send-email/profile.supr')]);
     });
   });
 
@@ -217,7 +223,7 @@ describe('util', () => {
       expect(glob.sync).toBeCalledWith('../grid/**/*.suma', {
         cwd: '/home',
       });
-      expect(result).toEqual(['/grid/send-email/provider.suma']);
+      expect(result).toEqual([join('/home', 'grid/send-email/provider.suma')]);
     });
   });
 });

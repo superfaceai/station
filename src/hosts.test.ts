@@ -92,8 +92,8 @@ ${hostsWithoutSection}
         .mockReturnValueOnce(JSON.stringify(providerTwo));
     });
 
-    it('should return all urls from services', () => {
-      expect(hosts.getServiceUrls()).toEqual([
+    it('should return all urls from services', async () => {
+      await expect(hosts.getServiceUrls()).resolves.toEqual([
         'example.com',
         'example.coffee',
         'example.net',
