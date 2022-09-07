@@ -1,17 +1,17 @@
 
 """
-Upload Assets to Social Media sites
-Upload images and videos on social media such as Instagram, Facebook, or Twitter.
+Upload Assets via URL to Social Media sites
+Upload images and videos available via an URL, onto social media such as Instagram, Facebook, or Twitter.
 """
 
-name = "social-media/upload-assets"
+name = "social-media/upload-url"
 version = "1.0.0"
 
 """
 Upload an Asset
 Register an upload of an asset to a social media profile, in preparation for publishing later.
 """
-usecase UploadAssetViaUrl unsafe {
+usecase RegisterUpload unsafe {
   input {
     """
     Profile ID
@@ -36,8 +36,9 @@ usecase UploadAssetViaUrl unsafe {
     Media type of the asset
     """
     type enum {
+      image,
       video,
-      image
+      reel
     }
   }
 
