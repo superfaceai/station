@@ -11,10 +11,14 @@ import * as glob from 'glob';
 import { join as joinPath, resolve } from 'path';
 import { promisify } from 'util';
 
+export type PrintFn = (message: string) => void;
+export interface SuperJsonWithPath {
+  document: SuperJsonDocument;
+  path: string;
+}
+
 export const access = promisify(fs.access);
 const read = promisify(fs.readFile);
-
-export type PrintFn = (message: string) => void;
 
 export const EXTENSIONS = {
   provider: 'json',
@@ -22,11 +26,15 @@ export const EXTENSIONS = {
   map: 'suma',
 };
 
-let superJson: SuperJsonDocument;
+let superJson: SuperJsonWithPath;
 
 export async function loadSuperJson(options?: {
   fileSystem?: IFileSystem;
-}): Promise<{ document: SuperJsonDocument; path: string }> {
+}): Promise<SuperJsonWithPath> {
+  if (superJson !== undefined) {
+    return superJson;
+  }
+
   const superJsonPath = await detectSuperJson(
     process.cwd(),
     options?.fileSystem ?? NodeFileSystem,
@@ -37,15 +45,17 @@ export async function loadSuperJson(options?: {
     throw new Error('Super.json not found');
   }
 
-  if (!superJson) {
-    const superJsonDocument = await loadSuperJsonDocument(
-      joinPath(superJsonPath, 'super.json'),
-      options?.fileSystem ?? NodeFileSystem
-    );
-    superJson = superJsonDocument.unwrap();
-  }
+  const superJsonDocument = await loadSuperJsonDocument(
+    joinPath(superJsonPath, 'super.json'),
+    options?.fileSystem ?? NodeFileSystem
+  );
 
-  return { document: superJson, path: superJsonPath };
+  superJson = {
+    document: superJsonDocument.unwrap(),
+    path: superJsonPath,
+  };
+
+  return superJson;
 }
 
 export function normalizePath(superJsonPath: string, path: string): string {
@@ -70,10 +80,9 @@ export async function readFile(path: string): Promise<string> {
   return await read(path, { encoding: 'utf8' });
 }
 
-export async function profilesFiles(superJson?: {
-  document: SuperJsonDocument;
-  path: string;
-}): Promise<string[]> {
+export async function profilesFiles(
+  superJson?: SuperJsonWithPath
+): Promise<string[]> {
   if (superJson === undefined) {
     superJson = await loadSuperJson();
   }
@@ -96,13 +105,13 @@ export async function profilesFiles(superJson?: {
   return files;
 }
 
-export async function mapsFiles(superJson?: {
-  document: SuperJsonDocument;
-  path: string;
-}): Promise<string[]> {
+export async function mapsFiles(
+  superJson?: SuperJsonWithPath
+): Promise<string[]> {
   if (superJson === undefined) {
     superJson = await loadSuperJson();
   }
+  
   const files: string[] = [];
   const normalizedSuperJson = normalizeSuperJsonDocument(superJson.document);
 
@@ -123,10 +132,9 @@ export async function mapsFiles(superJson?: {
   return files;
 }
 
-export async function providersFiles(superJson?: {
-  document: SuperJsonDocument;
-  path: string;
-}): Promise<string[]> {
+export async function providersFiles(
+  superJson?: SuperJsonWithPath
+): Promise<string[]> {
   if (superJson === undefined) {
     superJson = await loadSuperJson();
   }

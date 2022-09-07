@@ -49,7 +49,7 @@ describe('util', () => {
   });
 
   describe('loadSuperJson', () => {
-    it('should call loadSync once', async () => {
+    it('should call loadSuperJson once', async () => {
       mocked(detectSuperJson).mockResolvedValue('./superface');
       const spy = mocked(loadSuperJson).mockResolvedValue(
         ok(SUPER_JSON_DOCUMENT)
