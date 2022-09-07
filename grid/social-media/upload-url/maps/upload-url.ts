@@ -30,7 +30,7 @@ export const publishVideoTest = (
   hooks?: RecordingProcessOptions
 ): void => {
   describe(`social-media/upload-url/${provider}`, () => {
-    describe(name, () => {
+    describe(`${name}`, () => {
       let superfaceUploadUrl: SuperfaceTest;
       let superfacePublishPost: SuperfaceTest;
 
@@ -72,7 +72,7 @@ export const publishVideoTest = (
 
           expect(result.isOk()).toBe(true);
           expect(result).toMatchSnapshot();
-          // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-explicit-any
           assetId = (result.unwrap() as any).assetId as string;
         });
       });
