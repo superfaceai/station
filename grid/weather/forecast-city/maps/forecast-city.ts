@@ -1,6 +1,7 @@
 /* eslint-disable jest/no-export */
 
 import { RecordingProcessOptions, SuperfaceTest } from '@superfaceai/testing';
+import { nockConfig } from '../../../test-config';
 
 export const forecastCityTest = (
   provider: string,
@@ -10,12 +11,14 @@ export const forecastCityTest = (
     let superface: SuperfaceTest;
 
     beforeEach(() => {
-      superface = new SuperfaceTest({
-        profile: 'weather/forecast-city',
-        provider,
-        useCase: 'GetWeatherForecastInCity',
-        testInstance: expect,
-      });
+      superface = new SuperfaceTest(
+        {
+          profile: 'weather/forecast-city',
+          provider,
+          useCase: 'GetWeatherForecastInCity',
+        },
+        nockConfig
+      );
     });
 
     describe('GetWeatherForecastInCity', () => {
