@@ -84,7 +84,7 @@ jobs:
       - run: yarn structure
       - run: yarn compile
       - run: yarn test
-      - run: yarn remove_compilation_files
+      - run: yarn compile:clear
 
   license_check:
     name: License check
