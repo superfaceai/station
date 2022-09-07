@@ -4,6 +4,7 @@
 
 import { describe, expect } from '@jest/globals';
 import { SuperfaceTest } from '@superfaceai/testing';
+
 import { nockConfig } from '../../../test-config';
 
 export const currentCityTest = (providerName: string): void => {
