@@ -13,7 +13,7 @@ map RegisterUpload {
   }
   caption = input.caption
 
-  call UploadMedia(businessAccountId = businessAccountId, item = item, caption = caption, type = input.type, authorization = authorizationHeaderValue) {
+  call UploadMedia(businessAccountId = businessAccountId, item = item, caption = caption, mediaType = input.mediaType, shortForm = input.shortForm, authorization = authorizationHeaderValue) {
     return map result if (!outcome.error) {
       assetId = outcome.data
     }
@@ -91,20 +91,18 @@ operation UploadMedia {
   apiVersion = 'v14.0'
   businessAccountId = args.businessAccountId
   itemUrl = args.item ? args.item.url : undefined
-  children = args.children ? JSON.stringify(args.children) : undefined
   caption = args.caption
   authorizationHeaderValue = args.authorization
 
-  mediaType = (() => {
-    switch (args.type) {
-      case 'video':
-        return 'VIDEO';
-      case 'reel':
-        return 'REELS';
-      default:
-        return undefined;
-    }
-  })()
+  mediaType = undefined
+
+  set if (args.mediaType === 'video' ) {
+    mediaType = 'VIDEO'
+  }
+
+  set if (args.shortForm ) {
+    mediaType = 'REELS'
+  }
 
   http POST "/{apiVersion}/{businessAccountId}/media" {
     request {
@@ -113,7 +111,6 @@ operation UploadMedia {
         video_url = itemUrl,
         caption = caption,
         media_type = mediaType,
-        children = children,
       }
 
       headers {

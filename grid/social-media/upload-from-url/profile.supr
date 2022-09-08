@@ -32,14 +32,19 @@ usecase RegisterUpload unsafe {
     url! string!
 
     """
-    Type
+    Media Type
     Media type of the asset
     """
-    type enum {
+    mediaType enum {
       image,
       video,
-      reel
     }
+
+    """
+    Short-form Video
+    Indicates a video should be uploaded as a short-form video (e.g. Instagram Reels)
+    """
+    shortForm boolean
   }
 
   result {
@@ -81,6 +86,7 @@ usecase RegisterUpload unsafe {
       profileId = '110658944785122',
       caption = 'A video of a kitten falling over.',
       url = 'https://example.com/kitten.mp4',
+      mediaType = 'video'
     }
 
     result {
