@@ -111,7 +111,7 @@ export async function mapsFiles(
   if (superJson === undefined) {
     superJson = await loadSuperJson();
   }
-  
+
   const files: string[] = [];
   const normalizedSuperJson = normalizeSuperJsonDocument(superJson.document);
 
@@ -169,11 +169,9 @@ export async function localProviders(options?: {
     throw new Error('Super.json not found');
   }
 
-  return Promise.all(
-    glob
-      .sync('../providers/*.json', { cwd })
-      .map(async i => normalizePath(cwd, i))
-  );
+  return glob
+    .sync('../providers/*.json', { cwd })
+    .map(i => normalizePath(cwd, i));
 }
 
 export async function localProfiles(options?: {
@@ -188,11 +186,9 @@ export async function localProfiles(options?: {
     throw new Error('Super.json not found');
   }
 
-  return Promise.all(
-    glob
-      .sync('../grid/**/*.supr', { cwd })
-      .map(async i => normalizePath(cwd, i))
-  );
+  return glob
+    .sync('../grid/**/*.supr', { cwd })
+    .map(i => normalizePath(cwd, i));
 }
 
 export async function localMaps(options?: {
@@ -207,11 +203,9 @@ export async function localMaps(options?: {
     throw new Error('Super.json not found');
   }
 
-  return Promise.all(
-    glob
-      .sync('../grid/**/*.suma', { cwd })
-      .map(async i => normalizePath(cwd, i))
-  );
+  return glob
+    .sync('../grid/**/*.suma', { cwd })
+    .map(i => normalizePath(cwd, i));
 }
 
 export function arrayDiff<T>(a: T[], b: T[]): T[] {
