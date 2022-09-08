@@ -1,6 +1,6 @@
 // Instagram Graph API Reference: https://developers.facebook.com/docs/instagram-api
 
-profile = "social-media/upload-url@1.0"
+profile = "social-media/upload-from-url@1.0"
 provider = "instagram"
 
 map RegisterUpload {
@@ -22,7 +22,7 @@ map RegisterUpload {
 }
 
 // https://developers.facebook.com/docs/instagram-api/reference/ig-container
-map GetAssetState {
+map GetUploadState {
   assetId = input.assetId;
 
   http GET "/{assetId}" {

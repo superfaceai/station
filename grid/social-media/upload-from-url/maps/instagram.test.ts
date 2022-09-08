@@ -1,4 +1,4 @@
-import { publishVideoTest } from './upload-url';
+import { publishVideoTest } from './upload-from-url';
 
 publishVideoTest('instagram', 'single video', {
   caption: 'Single video from Superface Station.',

@@ -45,7 +45,7 @@ usecase PublishPost unsafe {
     ]
 
     attachments [
-      MediaContainer
+      MediaAttachment
     ]
   }
 
@@ -114,7 +114,7 @@ usecase PublishPost unsafe {
   }
 }
 
-model MediaContainer {
+model MediaAttachment {
   """
   Media Container ID
   ID of a previously uploaded media item, e.g. a video.

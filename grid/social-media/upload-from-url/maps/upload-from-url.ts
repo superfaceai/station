@@ -29,7 +29,7 @@ export const publishVideoTest = (
   input: SuperfaceTestRun['input'],
   hooks?: RecordingProcessOptions
 ): void => {
-  describe(`social-media/upload-url/${provider}`, () => {
+  describe(`social-media/upload-from-url/${provider}`, () => {
     describe(`${name}`, () => {
       let superfaceUploadUrl: SuperfaceTest;
       let superfacePublishPost: SuperfaceTest;
@@ -44,7 +44,7 @@ export const publishVideoTest = (
 
       beforeEach(() => {
         superfaceUploadUrl = new SuperfaceTest({
-          profile: 'social-media/upload-url',
+          profile: 'social-media/upload-from-url',
           provider,
         });
         superfacePublishPost = new SuperfaceTest({
@@ -77,14 +77,14 @@ export const publishVideoTest = (
         });
       });
 
-      describe('GetAssetState', () => {
+      describe('GetUploadState', () => {
         test("should eventually return 'FINISHED'", () => {
           return new Promise<void>((resolve, reject) => {
             function checkForFinished() {
               superfaceUploadUrl
                 .run(
                   {
-                    useCase: 'GetAssetState',
+                    useCase: 'GetUploadState',
                     input: { assetId },
                   },
                   hooks

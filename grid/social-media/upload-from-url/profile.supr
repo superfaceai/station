@@ -4,7 +4,7 @@ Upload Assets via URL to Social Media sites
 Upload images and videos available via an URL, onto social media such as Instagram, Facebook, or Twitter.
 """
 
-name = "social-media/upload-url"
+name = "social-media/upload-from-url"
 version = "1.0.0"
 
 """
@@ -105,7 +105,7 @@ usecase RegisterUpload unsafe {
 Get Asset State
 Get the state of a previously registered asset.
 """
-usecase GetAssetState safe {
+usecase GetUploadState safe {
   input {
     """
     Asset ID
