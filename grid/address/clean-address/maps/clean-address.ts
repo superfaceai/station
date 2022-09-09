@@ -2,8 +2,6 @@
 
 import { RecordingProcessOptions, SuperfaceTest } from '@superfaceai/testing';
 
-import { nockConfig } from '../../../test-config';
-
 export const cleanAddressTest = (
   provider: string,
   hooks?: RecordingProcessOptions
@@ -12,13 +10,10 @@ export const cleanAddressTest = (
     let superface: SuperfaceTest;
 
     beforeEach(() => {
-      superface = new SuperfaceTest(
-        {
-          profile: 'address/clean-address',
-          provider,
-        },
-        nockConfig
-      );
+      superface = (global as any).buildSuperfaceTest({
+        profile: 'address/clean-address',
+        provider,
+      });
     });
 
     describe('CleanAddress', () => {
