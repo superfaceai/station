@@ -1,0 +1,228 @@
+
+"""
+Upload a file via URL to Social Media sites
+Upload images and videos available via an URL, onto social media such as Instagram, Facebook, or Twitter.
+"""
+
+name = "social-media/upload-from-url"
+version = "1.0.0"
+
+"""
+Register Upload
+Register an upload of a file to a social media profile, in preparation for publishing later.
+"""
+usecase RegisterUpload unsafe {
+  input {
+    """
+    Profile ID
+    Identifier of a profile to upload to. May be optional with some providers.
+    """
+    profileId string!
+
+    """
+    Caption
+    Caption of the upload
+    """
+    caption string!
+
+    """
+    URL
+    URL of the upload. Must be publically acessible.
+    """
+    url! string!
+
+    """
+    Upload Type
+    Type of the upload (image, video)
+    """
+    uploadType enum {
+      image,
+      video,
+    }
+
+    """
+    Short-form Video
+    Indicates a video should be uploaded as a short-form video (e.g. Instagram Reels). Ignored if unsupported or not applicable.
+    """
+    shortFormVideo boolean
+  }
+
+  result {
+    """
+    Upload ID
+    Identifier of the uploaded file.
+    """
+    uploadId! string!
+  }
+
+  error {
+    """
+    Title
+    A short, human-readable summary of the problem type.
+    """
+    title! string
+
+    """
+    Detail
+    A human-readable explanation specific to this occurrence of the problem.
+    """
+    detail string
+
+    """
+    Code
+    Normalized error code usable across providers
+    """
+    code ErrorCode
+
+    """
+    Original Error
+    Original response from the provider
+    """
+    original
+  }
+
+  example Successful {
+    input {
+      profileId = '110658944785122',
+      caption = 'A video of a kitten falling over.',
+      url = 'https://example.com/kitten.mp4',
+      uploadType = 'video'
+    }
+
+    result {
+      uploadId = '125682506616099',
+    }
+  }
+
+  example Failed {
+    input {
+      profileId = 'invalid profile ID',
+      caption = 'Caption of the thing.',
+      url = 'https://example.com/kitten.mp4',
+    }
+
+    error {
+      title = 'Bad request'
+    }
+  }
+}
+
+"""
+Get Upload State
+Get the state of a previously registered upload.
+"""
+usecase GetUploadState safe {
+  input {
+    """
+    Upload ID
+    Identifier of the upload.
+    """
+    uploadId! string!
+  }
+
+  result {
+    """
+    State
+    State of the upload. Can be one of the following:
+      - expired (Upload did not get published in time)
+      - error (Error during processing of upload)
+      - finished (Upload is ready to be published)
+      - inProgress (Upload is currently being processed)
+      - published (Upload has been successfuly published)
+    """
+    state enum {
+      expired,
+      error,
+      finished,
+      inProgress,
+      published
+    }
+  }
+
+error {
+    """
+    Title
+    A short, human-readable summary of the problem type.
+    """
+    title! string
+
+    """
+    Detail
+    A human-readable explanation specific to this occurrence of the problem.
+    """
+    detail string
+
+    """
+    Code
+    Normalized error code usable across providers
+    """
+    code ErrorCode
+
+    """
+    Original Error
+    Original response from the provider
+    """
+    original
+  }
+
+  example Successful {
+    input {
+      uploadId = '125682506616099',
+    }
+
+    result {
+      state = 'inProgress',
+    }
+  }
+
+  example Failed {
+    input {
+      uploadId = 'invalid upload ID',
+    }
+
+    error {
+      title = 'Bad request'
+    }
+  }
+}
+
+model ErrorCode enum {
+  """
+  Bad request
+  The request was invalid or cannot be otherwise served.
+  """
+  BadRequest
+  """
+  Not found
+  The profileId, container or other input item does not exist.
+  """
+  NotFound
+  """
+  Rate limit reached
+  Returned when a request cannot be served due to the user or app reached max requests quota.
+  """
+  RateLimitReached
+  """
+  Unauthenticated
+  There was a problem authenticating your request. Check that you are passing valid access token.
+  """
+  Unauthenticated
+  """
+  Unauthorized
+  The request is understood, but it has been refused or access is not allowed.
+  """
+  Unauthorized
+
+  Timeout
+  ServerError
+  Spam
+  RestrictedProfile
+  PayloadTooLarge
+  UnsupportedAttachmentFormat
+
+  """
+  Unknown error
+  Returned when an unexpected error occured.
+  """
+  UnknownError
+}

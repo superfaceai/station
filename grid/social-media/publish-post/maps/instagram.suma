@@ -1,6 +1,6 @@
 // Instagram Graph API Reference: https://developers.facebook.com/docs/instagram-api
 
-profile = "social-media/publish-post@1.2"
+profile = "social-media/publish-post@1.3"
 provider = "instagram"
 
 map PublishPost {
@@ -10,8 +10,9 @@ map PublishPost {
   text = input.text
 
   media = input.media || []
+  attachments = input.attachments || []
 
-  return map error if(media.length === 0 || !media[0].url) { 
+  return map error if((media.length === 0 || !media[0].url) && attachments.length === 0) { 
     title = "Media url required"
     detail = "You must provide one media with URL for Instagram provider"
   }
@@ -32,6 +33,8 @@ map PublishPost {
     return map error if (outcome.error) outcome.error
     mediaIds = [...mediaIds, outcome.data]
   }
+
+  mediaIds = [...mediaIds, ...attachments.map((a) => a.id)]
 
   // +1 request if this is a carousel
   // https://developers.facebook.com/docs/instagram-api/guides/content-publishing#carousel-posts
