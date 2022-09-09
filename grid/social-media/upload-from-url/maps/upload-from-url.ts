@@ -53,7 +53,7 @@ export const publishVideoTest = (
         });
       });
 
-      let assetId: string;
+      let uploadId: string;
 
       describe('RegisterUpload', () => {
         it('should return an id', async () => {
@@ -73,7 +73,7 @@ export const publishVideoTest = (
           expect(result.isOk()).toBe(true);
           expect(result).toMatchSnapshot();
           // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-explicit-any
-          assetId = (result.unwrap() as any).assetId as string;
+          uploadId = (result.unwrap() as any).uploadId as string;
         });
       });
 
@@ -85,14 +85,14 @@ export const publishVideoTest = (
                 .run(
                   {
                     useCase: 'GetUploadState',
-                    input: { assetId },
+                    input: { uploadId },
                   },
                   hooks
                 )
                 .then(result => {
                   expect(result.isOk()).toBe(true);
                   // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-explicit-any
-                  if ((result.unwrap() as any).state === 'Finished') {
+                  if ((result.unwrap() as any).state === 'finished') {
                     resolve();
                   } else {
                     setTimeout(checkForFinished, 5 * 1000);
@@ -117,7 +117,7 @@ export const publishVideoTest = (
               useCase: 'PublishPost',
               input: {
                 profileId: profiles[0].id,
-                attachments: [{ id: assetId }],
+                attachments: [{ id: uploadId }],
               },
             },
             hooks

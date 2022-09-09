@@ -1,6 +1,6 @@
 
 """
-Upload Assets via URL to Social Media sites
+Upload a file via URL to Social Media sites
 Upload images and videos available via an URL, onto social media such as Instagram, Facebook, or Twitter.
 """
 
@@ -8,8 +8,8 @@ name = "social-media/upload-from-url"
 version = "1.0.0"
 
 """
-Upload an Asset
-Register an upload of an asset to a social media profile, in preparation for publishing later.
+Register Upload
+Register an upload of a file to a social media profile, in preparation for publishing later.
 """
 usecase RegisterUpload unsafe {
   input {
@@ -21,21 +21,21 @@ usecase RegisterUpload unsafe {
 
     """
     Caption
-    Caption of the asset
+    Caption of the upload
     """
     caption string!
 
     """
     URL
-    URL of the asset. Must be publically acessible.
+    URL of the upload. Must be publically acessible.
     """
     url! string!
 
     """
-    Media Type
-    Media type of the asset
+    Upload Type
+    Type of the upload (image, video)
     """
-    mediaType enum {
+    uploadType enum {
       image,
       video,
     }
@@ -44,15 +44,15 @@ usecase RegisterUpload unsafe {
     Short-form Video
     Indicates a video should be uploaded as a short-form video (e.g. Instagram Reels). Ignored if unsupported or not applicable.
     """
-    shortForm boolean
+    shortFormVideo boolean
   }
 
   result {
     """
-    Asset ID
-    Identifier of the asset.
+    Upload ID
+    Identifier of the uploaded file.
     """
-    assetId! string!
+    uploadId! string!
   }
 
   error {
@@ -86,11 +86,11 @@ usecase RegisterUpload unsafe {
       profileId = '110658944785122',
       caption = 'A video of a kitten falling over.',
       url = 'https://example.com/kitten.mp4',
-      mediaType = 'video'
+      uploadType = 'video'
     }
 
     result {
-      assetId = '125682506616099',
+      uploadId = '125682506616099',
     }
   }
 
@@ -108,34 +108,34 @@ usecase RegisterUpload unsafe {
 }
 
 """
-Get Asset State
-Get the state of a previously registered asset.
+Get Upload State
+Get the state of a previously registered upload.
 """
 usecase GetUploadState safe {
   input {
     """
-    Asset ID
-    Identifier of the asset.
+    Upload ID
+    Identifier of the upload.
     """
-    assetId! string!
+    uploadId! string!
   }
 
   result {
     """
     State
-    State of the asset. Can be one of the following:
-      - Expired (Asset did not get published in time)
-      - Error (Error during processing of asset)
-      - Finished (Asset is ready to be published)
-      - InProgress (Asset is currently being processed)
-      - Published (Asset has been successfuly published)
+    State of the upload. Can be one of the following:
+      - expired (Upload did not get published in time)
+      - error (Error during processing of upload)
+      - finished (Upload is ready to be published)
+      - inProgress (Upload is currently being processed)
+      - published (Upload has been successfuly published)
     """
     state enum {
-      Expired,
-      Error,
-      Finished,
-      InProgress,
-      Published
+      expired,
+      error,
+      finished,
+      inProgress,
+      published
     }
   }
 
@@ -167,7 +167,7 @@ error {
 
   example Successful {
     input {
-      assetId = '125682506616099',
+      uploadId = '125682506616099',
     }
 
     result {
@@ -177,7 +177,7 @@ error {
 
   example Failed {
     input {
-      assetId = 'invalid asset ID',
+      uploadId = 'invalid upload ID',
     }
 
     error {

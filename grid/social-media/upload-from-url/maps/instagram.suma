@@ -13,9 +13,9 @@ map RegisterUpload {
   }
   caption = input.caption
 
-  call UploadMedia(businessAccountId = businessAccountId, item = item, caption = caption, mediaType = input.mediaType, shortForm = input.shortForm, authorization = authorizationHeaderValue) {
+  call UploadMedia(businessAccountId = businessAccountId, item = item, caption = caption, uploadType = input.uploadType, shortFormVideo = input.shortFormVideo, authorization = authorizationHeaderValue) {
     return map result if (!outcome.error) {
-      assetId = outcome.data
+      uploadId = outcome.data
     }
     return map error outcome.error
   }
@@ -23,9 +23,9 @@ map RegisterUpload {
 
 // https://developers.facebook.com/docs/instagram-api/reference/ig-container
 map GetUploadState {
-  assetId = input.assetId;
+  uploadId = input.uploadId;
 
-  http GET "/{assetId}" {
+  http GET "/{uploadId}" {
     request {
       query {
         fields = "status,status_code",
@@ -37,15 +37,15 @@ map GetUploadState {
       state = (() => {
         switch (body.status_code) {
           case 'EXPIRED':
-            return 'Expired';
+            return 'expired';
           case 'ERROR':
-            return 'Error';
+            return 'error';
           case 'FINISHED':
-            return 'Finished'
+            return 'finished'
           case 'IN_PROGRESS':
-            return 'InProgress'
+            return 'inProgress'
           case 'PUBLISHED':
-            return 'Published';
+            return 'published';
           default:
             return null;
         }
@@ -94,14 +94,14 @@ operation UploadMedia {
   caption = args.caption
   authorizationHeaderValue = args.authorization
 
-  mediaType = undefined
+  uploadType = undefined
 
-  set if (args.mediaType === 'video' ) {
-    mediaType = 'VIDEO'
+  set if (args.uploadType === 'video' ) {
+    uploadType = 'VIDEO'
   }
 
-  set if (args.shortForm ) {
-    mediaType = 'REELS'
+  set if (args.shortFormVideo ) {
+    uploadType = 'REELS'
   }
 
   http POST "/{apiVersion}/{businessAccountId}/media" {
@@ -110,7 +110,7 @@ operation UploadMedia {
         image_url = itemUrl,
         video_url = itemUrl,
         caption = caption,
-        media_type = mediaType,
+        media_type = uploadType,
       }
 
       headers {
