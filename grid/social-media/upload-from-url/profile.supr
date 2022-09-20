@@ -5,7 +5,7 @@ Upload images and videos available via an URL, onto social media such as Instagr
 """
 
 name = "social-media/upload-from-url"
-version = "1.0.0"
+version = "1.0.1"
 
 """
 Register Upload
@@ -129,13 +129,15 @@ usecase GetUploadState safe {
       - finished (Upload is ready to be published)
       - inProgress (Upload is currently being processed)
       - published (Upload has been successfuly published)
+      - unknown (Unexpected state, try again later)
     """
     state enum {
       expired,
       error,
       finished,
       inProgress,
-      published
+      published,
+      unknown
     }
   }
 

@@ -9,6 +9,7 @@ Publish post to Facebook profile (page)
 map PublishPost {
   apiVersion = call GetApiVersion()
   profileId = input.profileId
+  attachments = input.attachments || []
   media = input.media || []
 
   return map error if(!profileId) { 
@@ -16,9 +17,14 @@ map PublishPost {
     detail = "Missing or invalid profileId, either page or group ID is expected"
   }
 
-  return map error if(media.length === 0 && !input.text && !input.link) {
-    title = "Missing text or link"
-    detail = "Either text or link fields must be non-empty for text posts"
+  return map error if (media.length === 0 && attachments.length === 0 && !input.text && !input.link) {
+    title = "Missing text, link or attachments"
+    detail = "Either text, link or attachments fields must be non-empty for text posts"
+  }
+
+  return map error if(attachments.length > 1) {
+    title = "Only one attachment is supported by Facebook."
+    detail = "Facebook only supports one attachment per post, please publish multiple posts instead."
   }
 
   call GetPageAccessToken(pageId = profileId, userAccessToken = parameters.accessToken) {
@@ -29,6 +35,14 @@ map PublishPost {
 
   set if(!token) {
     token = parameters.accessToken
+  }
+
+  call PublishVideo(video = attachments[0].id, caption = input.title || input.text, pageAccessToken = token) if (attachments.length > 0) {
+      map error if (outcome.error) outcome.error
+      return map result if (outcome.data) {
+        postId = outcome.data.postId
+        url = outcome.data.link
+      }
   }
 
   call PublishPhotoPost(pageId = profileId, pageAccessToken = token, input = input) if (media.length > 0) {
@@ -174,6 +188,33 @@ operation PublishPhoto {
 
     response 200 "application/json" {
       return body.id
+    }
+
+    response {
+      error = call MapApiError(statusCode = statusCode, body = body, headers = headers)
+      fail error
+    }
+  }
+}
+
+operation PublishVideo {
+  apiVersion = call GetApiVersion()
+
+  http POST "/{apiVersion}/{args.video}" {
+    request {
+      query {
+        access_token = args.pageAccessToken,
+        published = true,
+        description = args.caption
+        fields = "id,permalink_url"
+      }
+    }
+
+    response 200 "application/json" {
+      return {
+        postId = body.id
+        link = body.permalink_url
+      }
     }
 
     response {

@@ -1,0 +1,135 @@
+profile = "social-media/upload-from-url@1.0"
+provider = "facebook"
+
+// https://developers.facebook.com/docs/video-api/guides/reels-publishing
+
+map RegisterUpload {
+  apiVersion = call GetApiVersion()
+
+  call GetPageAccessToken(pageId = input.profileId, userAccessToken = parameters.accessToken) {
+    return map error if (outcome.error) outcome.error
+    
+    token = outcome.data.pageAccessToken
+  }
+
+  http POST "video" "/{apiVersion}/{input.profileId}/videos" {
+    request {
+      body {
+        access_token = token,
+        file_url = input.url,
+        published = false,
+        description = input.caption
+      }
+    }
+
+    response 200 "application/json" {
+      map result {
+        uploadId = body.id
+      }
+    }
+  }
+}
+
+// https://developers.facebook.com/docs/graph-api/reference/video
+map GetUploadState {
+  apiVersion = call GetApiVersion()
+  
+  http GET "/{apiVersion}/{input.uploadId}" {
+    request {
+      query {
+        fields = "status",
+        access_token = parameters.accessToken
+      }
+    }
+
+    response 200 "application/json" {
+      state = (() => {
+        switch (body.status.video_status) {
+          case 'ready':
+            return 'finished';
+          case 'error':
+            return 'error';
+          case 'processing':
+            return 'inProgress'
+          default:
+            return null;
+        }
+      })();
+
+      map error if (state === null) {
+        title = "Unknown asset state!"
+        detail = "Unknown asset state '" + body.status_code + "'. This is probably a bug in the map."
+        code = 'UnknownError'
+      }
+
+      map result {
+        state = state
+      }
+    }
+
+    response 400 "application/json" {
+        // Facebook returns an ID that errors out for some time before it can be queried.
+        return map result if (body.error.code === 100 && body.error.error_subcode === 33) {
+          state = 'unknown'
+        }
+
+        error = call MapApiError(statusCode = statusCode, body = body, headers = headers)
+        return map error error
+    }
+
+    response {
+      error = call MapApiError(statusCode = statusCode, body = body, headers = headers)
+      return map error error
+    }
+  }
+}
+
+operation GetPageAccessToken {
+  return if(!args.pageId) {}
+
+  apiVersion = call GetApiVersion()
+
+  http GET "/{apiVersion}/{args.pageId}" {
+    request {
+      query {
+        fields = 'access_token',
+        access_token = args.userAccessToken
+      }
+    }
+
+    response 200 "application/json" {
+      return {
+        pageAccessToken = body.access_token
+      }
+    }
+
+    response {
+      error = call MapApiError(statusCode = statusCode, body = body, headers = headers)
+      fail error
+    }
+  }
+}
+
+
+// https://developers.facebook.com/docs/graph-api/guides/error-handling/
+operation MapApiError {
+  statusCode = args.statusCode
+  headers = args.headers
+  body = args.body
+
+  subcode = body.error.code
+  title = body.error.error_user_title || body.error.type || body.error.message || 'Unknown error'
+  detail = body.error.error_user_msg || body.error.message || undefined
+
+  // FIXME: Code handling
+  return {
+    title = title
+    detail = detail
+    original = body.error || body
+  }
+}
+
+
+operation GetApiVersion {
+  return 'v15.0'
+}
