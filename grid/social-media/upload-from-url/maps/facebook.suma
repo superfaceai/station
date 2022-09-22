@@ -48,7 +48,8 @@ map GetUploadState {
         error: 'error',
         processing: 'inProgress',
       }
-      state = states[body.status.video_status]
+      // TODO: linter misdetects this as a type error, remove once linter is upgraded
+      state = (() => states[body.status.video_status])();
       
       map error if (!state) {
         title = "Unknown asset state!"
