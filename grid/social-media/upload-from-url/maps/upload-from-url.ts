@@ -23,6 +23,8 @@ export const getPublishingProfiles = async (
   return (result.unwrap() as { profiles: ProfilesResult })?.profiles || [];
 };
 
+const TIMEOUT = 120_000;
+
 export const publishVideoTest = (
   provider: string,
   name: string,
@@ -35,7 +37,7 @@ export const publishVideoTest = (
       let superfacePublishPost: SuperfaceTest;
 
       beforeAll(() => {
-        jest.setTimeout(60000);
+        jest.setTimeout(TIMEOUT);
       });
 
       afterAll(() => {
@@ -70,7 +72,7 @@ export const publishVideoTest = (
             hooks
           );
 
-          expect(result.isOk()).toBe(true);
+          expect(() => result.unwrap()).not.toThrow();
           expect(result).toMatchSnapshot();
           // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-explicit-any
           uploadId = (result.unwrap() as any).uploadId as string;
@@ -78,33 +80,26 @@ export const publishVideoTest = (
       });
 
       describe('GetUploadState', () => {
-        test("should eventually return 'FINISHED'", () => {
-          return new Promise<void>((resolve, reject) => {
-            function checkForFinished() {
-              superfaceUploadUrl
-                .run(
-                  {
-                    useCase: 'GetUploadState',
-                    input: { uploadId },
-                  },
-                  hooks
-                )
-                .then(result => {
-                  expect(result.isOk()).toBe(true);
-                  // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-explicit-any
-                  if ((result.unwrap() as any).state === 'finished') {
-                    resolve();
-                  } else {
-                    setTimeout(checkForFinished, 5 * 1000);
-                  }
-                })
-                .catch(err => {
-                  reject(err);
-                });
+        test("should eventually return 'FINISHED'", async () => {
+          const now = new Date().getTime();
+          let success = false;
+          while (new Date().getTime() - now < TIMEOUT) {
+            const result = await superfaceUploadUrl.run(
+              {
+                useCase: 'GetUploadState',
+                input: { uploadId },
+              },
+              hooks
+            );
+            expect(() => result.unwrap()).not.toThrow();
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-explicit-any
+            if ((result.unwrap() as any).state === 'finished') {
+              success = true;
+              break;
             }
-
-            checkForFinished();
-          });
+            await new Promise(r => setTimeout(r, 5_000));
+          }
+          expect(success).toBe(true);
         });
       });
 
@@ -117,12 +112,12 @@ export const publishVideoTest = (
               useCase: 'PublishPost',
               input: {
                 profileId: profiles[0].id,
-                attachments: [{ id: uploadId }],
+                videos: [uploadId],
               },
             },
             hooks
           );
-          expect(result.isOk()).toBe(true);
+          expect(() => result.unwrap()).not.toThrow();
           expect(result).toMatchSnapshot();
         });
       });
