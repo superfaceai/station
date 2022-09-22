@@ -4,11 +4,11 @@ Publish posts on social media such as Instagram, Facebook, or Twitter.
 """
 
 name = "social-media/publish-post"
-version = "1.3.0"
+version = "2.0.0"
 
 """
 Publish a Post
-Publish a post on a social media profile with optional image attachments.
+Publish a post on a social media profile with optional image or video attachments.
 """
 usecase PublishPost unsafe {
   input {
@@ -44,9 +44,11 @@ usecase PublishPost unsafe {
       MediaItem
     ]
 
-    attachments [
-      MediaAttachment
-    ]
+    """
+    Video IDs
+    IDs of previously uploaded videos (see `social-media/upload-from-url`) to be attached or published.
+    """
+    videos [string]
   }
 
   result {

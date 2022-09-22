@@ -1,6 +1,6 @@
 // Facebook Graph API Reference: https://developers.facebook.com/docs/graph-api/
 
-profile = "social-media/publish-post@1.3"
+profile = "social-media/publish-post@2.0"
 provider = "facebook"
 
 """
@@ -9,7 +9,7 @@ Publish post to Facebook profile (page)
 map PublishPost {
   apiVersion = call GetApiVersion()
   profileId = input.profileId
-  attachments = input.attachments || []
+  videos = input.videos || []
   media = input.media || []
 
   return map error if(!profileId) { 
@@ -17,14 +17,14 @@ map PublishPost {
     detail = "Missing or invalid profileId, either page or group ID is expected"
   }
 
-  return map error if (media.length === 0 && attachments.length === 0 && !input.text && !input.link) {
-    title = "Missing text, link or attachments"
-    detail = "Either text, link or attachments fields must be non-empty"
+  return map error if (media.length === 0 && videos.length === 0 && !input.text && !input.link) {
+    title = "Missing text, link or videos"
+    detail = "Either text, link or videos fields must be non-empty"
   }
 
-  return map error if(attachments.length > 1) {
-    title = "Too many attachments"
-    detail = "Facebook only supports one attachment per post, please publish multiple posts instead."
+  return map error if(videos.length > 1) {
+    title = "Too many videos"
+    detail = "Facebook only supports one video per post, please publish multiple posts instead."
   }
 
   call GetPageAccessToken(pageId = profileId, userAccessToken = parameters.accessToken) {
@@ -37,7 +37,7 @@ map PublishPost {
     token = parameters.accessToken
   }
 
-  call PublishVideo(video = attachments[0].id, caption = input.title || input.text, pageAccessToken = token) if (attachments.length > 0) {
+  call PublishVideo(video = videos[0], caption = input.title || input.text, pageAccessToken = token) if (videos.length > 0) {
       map error if (outcome.error) outcome.error
       return map result if (outcome.data) {
         postId = outcome.data.postId
