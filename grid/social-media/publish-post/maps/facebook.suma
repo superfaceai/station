@@ -19,11 +19,11 @@ map PublishPost {
 
   return map error if (media.length === 0 && attachments.length === 0 && !input.text && !input.link) {
     title = "Missing text, link or attachments"
-    detail = "Either text, link or attachments fields must be non-empty for text posts"
+    detail = "Either text, link or attachments fields must be non-empty"
   }
 
   return map error if(attachments.length > 1) {
-    title = "Only one attachment is supported by Facebook."
+    title = "Too many attachments"
     detail = "Facebook only supports one attachment per post, please publish multiple posts instead."
   }
 

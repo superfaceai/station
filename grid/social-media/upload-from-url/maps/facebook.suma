@@ -43,20 +43,14 @@ map GetUploadState {
     }
 
     response 200 "application/json" {
-      state = (() => {
-        switch (body.status.video_status) {
-          case 'ready':
-            return 'finished';
-          case 'error':
-            return 'error';
-          case 'processing':
-            return 'inProgress'
-          default:
-            return null;
-        }
-      })();
-
-      map error if (state === null) {
+      states = {
+        ready: 'finished',
+        error: 'error',
+        processing: 'inProgress',
+      }
+      state = states[body.status.video_status]
+      
+      map error if (!state) {
         title = "Unknown asset state!"
         detail = "Unknown asset state '" + body.status_code + "'. This is probably a bug in the map."
         code = 'UnknownError'
