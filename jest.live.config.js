@@ -4,4 +4,5 @@ module.exports = {
   rootDir: './grid',
   runner: 'groups',
   reporters: ['default', '../dist/reporter.js'],
+  setupFilesAfterEnv: ['../jest/setup.js'],
 };
