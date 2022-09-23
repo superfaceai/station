@@ -7,4 +7,3 @@ function buildSuperfaceTest(options) {
 }
 
 global.buildSuperfaceTest = buildSuperfaceTest;
-
