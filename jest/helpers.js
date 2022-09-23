@@ -6,6 +6,5 @@ function buildSuperfaceTest(options) {
   });
 }
 
-(() => {
-  global.buildSuperfaceTest = buildSuperfaceTest;
-})();
+global.buildSuperfaceTest = buildSuperfaceTest;
+
