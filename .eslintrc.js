@@ -5,7 +5,7 @@ module.exports = {
     tsconfigRootDir: __dirname,
     project: ['./tsconfig.json'],
   },
-  ignorePatterns: ['*.config.js'],
+  ignorePatterns: ['*.config.js', 'jest/*.js'],
   plugins: ['@typescript-eslint', 'jest', 'simple-import-sort'],
   extends: [
     'eslint:recommended',
