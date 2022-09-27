@@ -1,46 +1,68 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`chat/messages/slack GetMessages when specified destination does exist performs correctly 1`] = `
-Object {
-  "value": ObjectContaining {
-    "messages": ArrayContaining [
-      ObjectContaining {
-        "author": ObjectContaining {
-          "id": Any<String>,
+Ok {
+  "value": Object {
+    "messages": Array [
+      Object {
+        "author": Object {
+          "id": "UF4PRBHL7",
+          "username": undefined,
         },
-        "createdAt": Any<Number>,
-        "id": Any<String>,
+        "createdAt": 1664266293523.849,
+        "id": "1664266293.523849",
+        "text": "Test 4",
+      },
+      Object {
+        "author": Object {
+          "id": "UF4PRBHL7",
+          "username": undefined,
+        },
+        "createdAt": 1664266293254.8489,
+        "id": "1664266293.254849",
+        "text": "Test 3",
       },
     ],
+    "nextPage": "bmV4dF90czoxNjY0MjY2MjkyOTkzMTI5",
   },
 }
 `;
 
 exports[`chat/messages/slack GetMessages when specified destination does exist performs correctly 2`] = `
-Object {
-  "value": ObjectContaining {
-    "messages": ArrayContaining [
-      ObjectContaining {
-        "author": ObjectContaining {
-          "id": Any<String>,
+Ok {
+  "value": Object {
+    "messages": Array [
+      Object {
+        "author": Object {
+          "id": "UF4PRBHL7",
+          "username": undefined,
         },
-        "createdAt": Any<Number>,
-        "id": Any<String>,
+        "createdAt": 1664266292993.129,
+        "id": "1664266292.993129",
+        "text": "Test 2",
+      },
+      Object {
+        "author": Object {
+          "id": "UF4PRBHL7",
+          "username": undefined,
+        },
+        "createdAt": 1664266292646.909,
+        "id": "1664266292.646909",
+        "text": "Test 1",
       },
     ],
+    "nextPage": "bmV4dF90czoxNjY0MjYzNDcyMDUzNzU5",
   },
 }
 `;
 
 exports[`chat/messages/slack GetMessages when specified destination does not exist returns error 1`] = `
-Object {
-  "error": ObjectContaining {
-    "kind": StringMatching /HTTPError/,
-    "message": StringMatching /Expected HTTP error/,
-    "properties": ObjectContaining {
-      "title": Any<String>,
-    },
-    "statusCode": Any<Number>,
-  },
+Err {
+  "error": "HTTPError: Expected HTTP error
+Properties: {
+  \\"title\\": \\"channel_not_found\\"
+}
+AST Path: definitions[0].statements[0].responseHandlers[0].statements[1]
+Original Map Location: Line 30, column 7",
 }
 `;
