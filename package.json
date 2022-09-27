@@ -5,7 +5,7 @@
   "repository": "git@github.com:superfaceai/station.git",
   "author": "Superface Team",
   "scripts": {
-    "build_reporter": "tsc reporter/*.ts --outDir dist",
+    "build_reporter": "tsc src/reporter/*.ts --outDir dist",
     "tools:test": "jest -c jest.tools.config.js",
     "tools:lint": "eslint ./",
     "tools:lint:fix": "yarn tools:lint --fix",
@@ -16,7 +16,7 @@
     "test:with_new_traffic": "USE_NEW_TRAFFIC=true yarn test",
     "test:update_traffic": "UPDATE_TRAFFIC=true yarn test",
     "test:record": "SUPERFACE_LIVE_API='*' dotenv -e .env -e .env.example -- jest -c jest.live.config.js",
-    "test:record:dev": "TEST_ENV='dev' yarn test:record --group=live/safe",
+    "test:record:dev": "TEST_ENV='dev' yarn test:record",
     "test:record:prod": "TEST_ENV='prod' yarn test:record --group=live/safe",
     "test:update_snapshots": "yarn test -u",
     "check": "superface check",

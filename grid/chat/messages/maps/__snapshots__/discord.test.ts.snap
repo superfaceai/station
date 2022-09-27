@@ -1,71 +1,93 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`chat/messages/discord GetMessages when specified destination does exist performs correctly 1`] = `
-Object {
-  "value": ObjectContaining {
-    "messages": ArrayContaining [
-      ObjectContaining {
-        "author": ObjectContaining {
-          "id": Any<String>,
+Ok {
+  "value": Object {
+    "messages": Array [
+      Object {
+        "author": Object {
+          "id": "935958634016419920",
+          "username": "TestApp",
         },
-        "createdAt": Any<Number>,
-        "id": Any<String>,
+        "createdAt": 1664266293446,
+        "id": "1024231812664393818",
+        "text": "Test 4",
+      },
+      Object {
+        "author": Object {
+          "id": "935958634016419920",
+          "username": "TestApp",
+        },
+        "createdAt": 1664266293148,
+        "id": "1024231811414495302",
+        "text": "Test 3",
       },
     ],
-    "nextPage": Any<String>,
-    "rateLimit": ObjectContaining {
-      "bucket": Any<String>,
-      "remainingRequests": Any<Number>,
-      "remainingRequestsPercentage": Any<Number>,
-      "resetAfter": Any<Number>,
-      "resetTimestamp": Any<Number>,
-      "totalRequests": Any<Number>,
+    "nextPage": "1024231811414495302",
+    "rateLimit": Object {
+      "bucket": "fccc1d589e71dd6f0c55fde9faa2838d",
+      "remainingRequests": 4,
+      "remainingRequestsPercentage": 80,
+      "resetAfter": 5,
+      "resetTimestamp": 1664266299000,
+      "totalRequests": 5,
     },
   },
 }
 `;
 
 exports[`chat/messages/discord GetMessages when specified destination does exist performs correctly 2`] = `
-Object {
-  "value": ObjectContaining {
-    "messages": ArrayContaining [
-      ObjectContaining {
-        "author": ObjectContaining {
-          "id": Any<String>,
+Ok {
+  "value": Object {
+    "messages": Array [
+      Object {
+        "author": Object {
+          "id": "935958634016419920",
+          "username": "TestApp",
         },
-        "createdAt": Any<Number>,
-        "id": Any<String>,
+        "createdAt": 1664266292889,
+        "id": "1024231810328174612",
+        "text": "Test 2",
+      },
+      Object {
+        "author": Object {
+          "id": "935958634016419920",
+          "username": "TestApp",
+        },
+        "createdAt": 1664266292605,
+        "id": "1024231809136996372",
+        "text": "Test 1",
       },
     ],
-    "rateLimit": ObjectContaining {
-      "bucket": Any<String>,
-      "remainingRequests": Any<Number>,
-      "remainingRequestsPercentage": Any<Number>,
-      "resetAfter": Any<Number>,
-      "resetTimestamp": Any<Number>,
-      "totalRequests": Any<Number>,
+    "nextPage": "1024231809136996372",
+    "rateLimit": Object {
+      "bucket": "fccc1d589e71dd6f0c55fde9faa2838d",
+      "remainingRequests": 3,
+      "remainingRequestsPercentage": 60,
+      "resetAfter": 5,
+      "resetTimestamp": 1664266299000,
+      "totalRequests": 5,
     },
   },
 }
 `;
 
 exports[`chat/messages/discord GetMessages when specified destination does not exist returns error 1`] = `
-Object {
-  "error": ObjectContaining {
-    "kind": StringMatching /HTTPError/,
-    "message": StringMatching /Expected HTTP error/,
-    "properties": ObjectContaining {
-      "rateLimit": ObjectContaining {
-        "bucket": Any<String>,
-        "remainingRequests": Any<Number>,
-        "remainingRequestsPercentage": Any<Number>,
-        "resetAfter": Any<Number>,
-        "resetTimestamp": Any<Number>,
-        "totalRequests": Any<Number>,
-      },
-      "title": Any<String>,
-    },
-    "statusCode": Any<Number>,
-  },
+Err {
+  "error": "HTTPError: Expected HTTP error
+Properties: {
+  \\"title\\": \\"Not found\\",
+  \\"detail\\": \\"Unknown Channel\\",
+  \\"rateLimit\\": {
+    \\"bucket\\": \\"fccc1d589e71dd6f0c55fde9faa2838d\\",
+    \\"totalRequests\\": 5,
+    \\"remainingRequests\\": 4,
+    \\"resetAfter\\": 5,
+    \\"resetTimestamp\\": 1664266301000,
+    \\"remainingRequestsPercentage\\": 80
+  }
+}
+AST Path: definitions[0].statements[5].responseHandlers[1].statements[1]
+Original Map Location: Line 58, column 7",
 }
 `;
