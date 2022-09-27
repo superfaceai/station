@@ -1,55 +1,68 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`chat/channels/discord GetChannels when specified destination does exist performs correctly 1`] = `
-Object {
+Ok {
   "value": Object {
-    "channels": ArrayContaining [
-      ObjectContaining {
-        "createdAt": Any<Number>,
-        "id": Any<String>,
+    "channels": Array [
+      Object {
+        "createdAt": 1643221182610,
+        "id": "935962220104396883",
+        "name": "welcome-and-rules",
+      },
+      Object {
+        "createdAt": 1643221182610,
+        "id": "935962220104396884",
         "name": "announcements",
       },
-      ObjectContaining {
-        "createdAt": Any<Number>,
-        "id": Any<String>,
+      Object {
+        "createdAt": 1643221182610,
+        "id": "935962220104396885",
         "name": "resources",
       },
-      ObjectContaining {
-        "createdAt": Any<Number>,
-        "id": Any<String>,
+      Object {
+        "createdAt": 1643221182610,
+        "id": "935962220104396887",
         "name": "general",
       },
+      Object {
+        "createdAt": 1643221182610,
+        "id": "935962220104396888",
+        "name": "meeting-plans",
+      },
+      Object {
+        "createdAt": 1643853592872,
+        "id": "938614740995960844",
+        "name": "random",
+      },
     ],
-    "rateLimit": ObjectContaining {
-      "bucket": Any<String>,
-      "remainingRequests": Any<Number>,
-      "remainingRequestsPercentage": Any<Number>,
-      "resetAfter": Any<Number>,
-      "resetTimestamp": Any<Number>,
-      "totalRequests": Any<Number>,
+    "rateLimit": Object {
+      "bucket": "a66d55b18e9649f0915c93ce4c0677af",
+      "remainingRequests": 8,
+      "remainingRequestsPercentage": 80,
+      "resetAfter": 12,
+      "resetTimestamp": 1661759061000,
+      "totalRequests": 10,
     },
   },
 }
 `;
 
 exports[`chat/channels/discord GetChannels when specified destination does not exist returns error 1`] = `
-Object {
-  "error": ObjectContaining {
-    "kind": StringMatching /HTTPError/,
-    "message": StringMatching /Expected HTTP error/,
-    "properties": ObjectContaining {
-      "detail": "Unknown Guild",
-      "rateLimit": ObjectContaining {
-        "bucket": Any<String>,
-        "remainingRequests": Any<Number>,
-        "remainingRequestsPercentage": Any<Number>,
-        "resetAfter": Any<Number>,
-        "resetTimestamp": Any<Number>,
-        "totalRequests": Any<Number>,
-      },
-      "title": "Not found",
-    },
-    "statusCode": Any<Number>,
-  },
+Err {
+  "error": "HTTPError: Expected HTTP error
+Properties: {
+  \\"title\\": \\"Not found\\",
+  \\"detail\\": \\"Unknown Guild\\",
+  \\"rateLimit\\": {
+    \\"bucket\\": \\"a66d55b18e9649f0915c93ce4c0677af\\",
+    \\"totalRequests\\": 10,
+    \\"remainingRequests\\": 8,
+    \\"resetAfter\\": 12,
+    \\"resetTimestamp\\": 1661759061000,
+    \\"remainingRequestsPercentage\\": 80
+  }
+}
+AST Path: definitions[0].statements[1].responseHandlers[1].statements[1]
+Original Map Location: Line 36, column 7",
 }
 `;
