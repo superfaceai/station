@@ -1,23 +1,21 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`chat/send-message/slack SendMessage when specified destination does exist performs correctly 1`] = `
-Object {
-  "value": ObjectContaining {
+Ok {
+  "value": Object {
     "destination": "CF3H7S63W",
-    "messageId": Any<String>,
+    "messageId": "1644567233.535279",
   },
 }
 `;
 
 exports[`chat/send-message/slack SendMessage when specified destination does not exist returns error 1`] = `
-Object {
-  "error": ObjectContaining {
-    "kind": StringMatching /HTTPError/,
-    "message": StringMatching /Expected HTTP error/,
-    "properties": ObjectContaining {
-      "title": "channel_not_found",
-    },
-    "statusCode": Any<Number>,
-  },
+Err {
+  "error": "HTTPError: Expected HTTP error
+Properties: {
+  \\"title\\": \\"channel_not_found\\"
+}
+AST Path: definitions[0].statements[0].responseHandlers[0].statements[1]
+Original Map Location: Line 27, column 7",
 }
 `;
