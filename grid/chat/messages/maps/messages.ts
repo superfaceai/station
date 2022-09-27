@@ -44,6 +44,7 @@ export const getMessagesTest = (
             });
 
             if (result.isOk()) {
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
               messageIds.push((result.value as any).messageId);
             }
           }

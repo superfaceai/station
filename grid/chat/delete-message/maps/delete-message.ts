@@ -1,3 +1,5 @@
+/* eslint-disable jest/no-export */
+
 import { RecordingProcessOptions, SuperfaceTest } from '@superfaceai/testing';
 
 export const deleteMessageTest = (
@@ -39,6 +41,7 @@ export const deleteMessageTest = (
           });
 
           if (result.isOk()) {
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-assignment
             messageId = (result.value as any).messageId;
           }
         });
