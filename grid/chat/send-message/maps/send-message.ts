@@ -31,7 +31,7 @@ export const sendMessageTest = (
         afterEach(async () => {
           await teardown.run(
             {
-              input: { destination, messageId },
+              input: { destination: destination[0], messageId },
               testName: 'teardown-chat/send-chat/delete',
             },
             { hideInput: ['messageId'] }
