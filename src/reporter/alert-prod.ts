@@ -1,7 +1,7 @@
 import { SuperfaceClient } from '@superfaceai/one-sdk';
 import { TestAnalysis, TestReport } from '@superfaceai/testing';
 
-const parseAnalysis = (analysis: TestAnalysis): any => {
+const parseAnalysis = (analysis: TestAnalysis) => {
   const addedErrors = analysis.errors.added.join('\n');
   const removedErrors = analysis.errors.removed.join('\n');
   const changedErrors = analysis.errors.changed.join('\n');
