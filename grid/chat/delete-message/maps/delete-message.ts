@@ -4,7 +4,7 @@ import { RecordingProcessOptions, SuperfaceTest } from '@superfaceai/testing';
 
 export const deleteMessageTest = (
   provider: string,
-  destination: string[],
+  destination: { valid: string; invalid: string },
   invalidMessageId: string,
   options?: RecordingProcessOptions
 ): void => {
@@ -34,7 +34,7 @@ export const deleteMessageTest = (
         beforeEach(async () => {
           const result = await prepare.run({
             input: {
-              destination: destination[0],
+              destination: destination.valid,
               text: 'test DeleteMessage',
             },
             testName: 'prepare-chat/delete-chat/send',
@@ -52,7 +52,7 @@ export const deleteMessageTest = (
               profile: 'chat/delete-message',
               useCase: 'DeleteMessage',
               input: {
-                destination: destination[0],
+                destination: destination.valid,
                 messageId,
               },
             },
@@ -69,7 +69,7 @@ export const deleteMessageTest = (
           const result = await superface.run(
             {
               input: {
-                destination: destination[1],
+                destination: destination.invalid,
                 messageId: invalidMessageId,
               },
             },
@@ -85,7 +85,7 @@ export const deleteMessageTest = (
           const result = await superface.run(
             {
               input: {
-                destination: destination[0],
+                destination: destination.valid,
                 messageId: invalidMessageId,
               },
             },
