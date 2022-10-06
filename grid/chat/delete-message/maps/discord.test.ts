@@ -8,6 +8,9 @@ import { deleteMessageTest } from './delete-message';
 
 deleteMessageTest(
   'discord',
-  ['938614740995960844', '000000000000000000'],
+  {
+    valid: '938614740995960844',
+    invalid: '000000000000000000',
+  },
   '000000000000000000'
 );

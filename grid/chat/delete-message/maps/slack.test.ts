@@ -8,6 +8,9 @@ import { deleteMessageTest } from './delete-message';
 
 deleteMessageTest(
   'slack',
-  ['C03UL8E5YMR', 'not-existing-dest'],
+  {
+    valid: 'C03UL8E5YMR',
+    invalid: 'not-existing-dest',
+  },
   'not-existing-id'
 );
