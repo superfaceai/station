@@ -6,4 +6,4 @@ import { getChannelsTest } from './channels';
  * @group live/safe
  */
 
-getChannelsTest('slack', []);
+getChannelsTest('slack');
