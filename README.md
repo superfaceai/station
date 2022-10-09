@@ -49,9 +49,148 @@ $ yarn lint
 # Run tests
 $ yarn test
 
-# Record new trafic with live API calls
+# Record new trafic with live API calls, more information bellow
 $ yarn test:record grid/path/to/test.ts
 ```
+
+Jest in station is configured to run tests inside `/grid` folder by default, with reporter located in `/jest/reporter` and can use groups to filter which tests to run (mainly used for tagging tests ready to continuous testing).
+
+```javascript
+module.exports = {
+  preset: 'ts-jest',
+  testEnvironment: 'node',
+  rootDir: './grid',
+  runner: 'groups',
+  reporters: ['default', '../dist/reporter.js']
+};
+```
+
+### **Test with mocked traffic**
+
+```shell
+$ yarn test
+```
+
+This command runs tests with mocked traffic and therefore no live traffic is enabled. You can find recordings that this command uses as mocked traffic in `/nock`.
+
+Recordings are categorised similarly as integrations in `/grid` folder:
+`nock/<scope>/<profile-name>/<provider-name>/<usecase-name>/recording-<hash>.json`
+
+- every recording gets hashed based on **input**, **test name** or **custom test name**
+- this hash can be only seen with use of `DEBUG=superface:testing:hash*`
+
+### **Test with live traffic**
+
+```shell
+$ yarn test:record
+```
+
+With this command, live traffic is enabled and therefore maps send requests to the live providers. This command also records this request and response. There are multiple scenarios what can happen:
+
+- use-case does not have recording → records traffic and saves as default one
+- use-case already have recording → records new traffic and compares it to the old one →
+    - if it matches → do not save recording
+    - if it doesn’t match → save new recording next to old one with suffix `-new`
+
+### **Test with new mocked traffic**
+
+```shell
+$ yarn test:with_new_traffic
+```
+
+This command run tests without live traffic, similar as `yarn test`, but uses new recordings instead of default ones (if present). New recordings are always newly recorded traffic that does not match the default old one and are located next to the old one with suffix `-new`.
+
+### **Test and replace old recording with new one**
+
+**⚠️ This command should be run only when you’re sure that tests are passing with new recordings → `yarn test:with_new_traffic`**
+
+```shell
+$ yarn test:update_traffic
+```
+
+This commands run tests with mocked traffic, but also replaces old recording with new one (if present) before loading recordings - this means that tests are run with mocked new traffic already.
+
+### **Test with live traffic with development reporting**
+
+```shell
+$ yarn test:record:dev
+```
+
+This command run tests with live traffic and record it, similar as `yarn test:record`. The script implementation looks like this:
+
+```shell
+$ TEST_ENV='dev' yarn test:record --group=live/safe
+```
+
+`TEST_ENV` sets development environment for reporter - to use local reporter that just logs the provider changes into console
+
+`--group=live/safe` filters what tests to run, thanks to [jest-runner-groups](https://www.npmjs.com/package/jest-runner-groups) 
+
+### **Test with live traffic with production reporting**
+
+```shell
+$ yarn test:record:prod
+```
+
+This command run tests with live traffic and record it, similar as `yarn test:record` or `yarn test:record:dev`. Only difference between `test:record:dev` is that it uses production reporter that reports provider changes to the public slack channel.
+
+Slack channel can be changed with env variable `PROD_REPORTING_DESTINATION`. It expects channel id.
+
+### **Test and update snapshots**
+
+Since lot of tests written in station uses jest snapshots for comparing values from map, we sometime need to update snapshots to modify/add/remove some snapshots. You can do this simply by adding option `-u` or `--updateSnapshot`. For example:
+
+```shell
+$ yarn test -u
+
+$ yarn test:record --updateSnapshot
+```
+
+---
+
+### **Overall filtering of tests**
+
+In each of command described above, there is used jest that enables to use jest CLI options for managing test runs. Most used option that I noticed is specifying tests with test name as argument, for example:
+
+```shell
+$ yarn test chat/messages/maps/slack
+
+$ yarn test:record chat/messages/maps/slack
+
+$ TEST_ENV='dev' yarn test:record chat/messages
+```
+
+This is important mainly in case of testing with live traffic when new recordings are stored and compared with old ones for each test that you run. For example if you want to record new traffic just for slack provider in profile `chat/messages`, you don’t want to record new traffic also for other providers in this profile.
+
+This gets problematic as you want to replace the new recording with old one and you did not specify exactly which recordings you want to replace.
+
+### **Testing library DEBUG**
+
+It also helps when you use `DEBUG` environment variable to see logs during test run.
+
+- log **everything**: `DEBUG=superface:testing*`
+- log **main setup**: `DEBUG=superface:testing`
+    - perform results
+    - start and end of recording/mocking HTTP traffic
+    - start of `beforeRecordingLoad` and `beforeRecordingSave` functions
+- log **setup** of superface components and recordings: `DEBUG=superface:testing:setup*`
+    - setup of recording paths and superface components (profile, provider, usecase)
+    - setup of superjson and local map
+- log **hashing** of recordings: `DEBUG=superface:testing:hash*`
+    - creation of recording hash
+- log **recording/replacing** information: `DEBUG=superface:testing:recordings*`
+- log **matching** information: `DEBUG=superface:testing:matching*`
+- log **reporting** information:  `DEBUG=superface:testing:reporter*`
+
+### **Network errors**
+
+`NetworkError: Fetch failed: reject issue`
+
+`SdkExecutionError: Request ended with network error: reject`
+
+If you get `NetworkError` or `SdkExecutionError` during testing with mocked traffic(`yarn test`), it usually means that request didn’t get through. If nock (used for loading mocked traffic) can’t match recording, request is denied.
+
+You can debug nock matching of recordings with `DEBUG=nock*` to see what went wrong.
 
 ## Security
 
