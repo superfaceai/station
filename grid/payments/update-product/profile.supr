@@ -1,0 +1,37 @@
+name = "payments/update-product"
+version = "1.0.0"
+
+"""
+Update product  usecase
+"""
+
+usecase updateProduct unsafe {
+ input {
+   "ID"
+   id string
+
+   """
+   Name
+   Name of product
+   """
+   name string!
+
+   """
+   Description
+   Descirption for product
+   """
+   description! string
+ }
+
+ result {
+   id! string!
+   name string!
+   description string!
+   type string
+ }
+
+ error {
+   title! string
+   detail string
+ }
+}

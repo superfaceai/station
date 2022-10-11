@@ -1,0 +1,25 @@
+profile = "payments/delete-plan@1.0"
+provider = "paypal"
+
+"""
+Delete Plan map
+"""
+
+map deletePlan {
+  http DELETE "/catalogs/plan/{input.id}" {
+    security "basic"
+
+    response 403 "application/json" {
+      map result {
+          result: "OK"
+      }
+    }
+
+    response "application/json" {
+     map error {
+       title = body.message
+       detail = body.details
+     }
+    }
+  }
+}

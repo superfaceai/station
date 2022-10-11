@@ -1,0 +1,21 @@
+name = "payments/delete-plan"
+version = "1.0.0"
+
+"""
+Delete plan  usecase
+"""
+
+usecase deletePlan unsafe {
+ input {
+    id string
+ }
+
+ result {
+    result string
+ }
+
+ error {
+   title! string
+   detail string
+ }
+}

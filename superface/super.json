@@ -663,6 +663,113 @@
         "linkedin",
         "mock"
       ]
+    },
+    "payments/get-products": {
+      "file": "../grid/payments/get-products/profile.supr",
+      "providers": {
+        "paypal": {
+          "file": "../grid/payments/get-products/maps/get-products.paypal.suma"
+        },
+        "stripe": {
+          "file": "../grid/payments/get-products/maps/get-products.stripe.suma"
+        }
+      }
+    },
+    "payments/create-product": {
+      "file": "../grid/payments/create-product/profile.supr",
+      "providers": {
+        "paypal": {
+          "file": "../grid/payments/create-product/maps/create-product.paypal.suma"
+        },
+        "stripe": {
+          "file": "../grid/payments/create-product/maps/create-product.stripe.suma"
+        }
+      }
+    },
+    "payments/update-product": {
+      "file": "../grid/payments/update-product/profile.supr",
+      "providers": {
+        "paypal": {
+          "file": "../grid/payments/update-product/maps/update-product.paypal.suma"
+        },
+        "stripe": {
+          "file": "../grid/payments/update-product/maps/update-product.stripe.suma"
+        }
+      }
+    },
+    "payments/delete-product": {
+      "file": "../grid/payments/delete-product/profile.supr",
+      "providers": {
+        "paypal": {
+          "file": "../grid/payments/delete-product/maps/delete-product.paypal.suma"
+        },
+        "stripe": {
+          "file": "../grid/payments/delete-product/maps/delete-product.stripe.suma"
+        }
+      }
+    },
+    "payments/get-plans": {
+      "file": "../grid/payments/get-plans/profile.supr",
+      "providers": {
+        "paypal": {
+          "file": "../grid/payments/get-plans/maps/get-plans.paypal.suma"
+        },
+        "stripe": {
+          "file": "../grid/payments/get-plans/maps/get-plans.stripe.suma"
+        }
+      }
+    },
+    "payments/get-plan": {
+      "file": "../grid/payments/get-plan/profile.supr",
+      "providers": {
+        "paypal": {
+          "file": "../grid/payments/get-plan/maps/get-plan.paypal.suma"
+        },
+        "stripe": {
+          "file": "../grid/payments/get-plan/maps/get-plan.stripe.suma"
+        }
+      }
+    },
+    "payments/create-plan": {
+      "file": "../grid/payments/create-plan/profile.supr",
+      "providers": {
+        "paypal": {
+          "file": "../grid/payments/create-plan/maps/create-plan.paypal.suma"
+        },
+        "stripe": {
+          "file": "../grid/payments/create-plan/maps/create-plan.stripe.suma"
+        }
+      }
+    },
+    "payments/delete-plan": {
+      "file": "../grid/payments/delete-plan/profile.supr",
+      "providers": {
+        "paypal": {
+          "file": "../grid/payments/delete-plan/maps/delete-plan.paypal.suma"
+        },
+        "stripe": {
+          "file": "../grid/payments/delete-plan/maps/delete-plan.stripe.suma"
+        }
+      }
+    },
+    "payments/create-subscription": {
+      "file": "../grid/payments/create-subscription/profile.supr",
+      "providers": {
+        "paypal": {
+          "file": "../grid/payments/create-subscription/maps/create-subscription.paypal.suma"
+        },
+        "stripe": {
+          "file": "../grid/payments/create-subscription/maps/create-subscription.stripe.suma"
+        }
+      }
+    },
+    "payments/make-payment": {
+      "file": "../grid/payments/make-payment/profile.supr",
+      "providers": {
+        "adyen": {
+          "file": "../grid/payments/make-payment/maps/make-payment.adyen.suma"
+        }
+      }
     }
   },
   "providers": {
@@ -1180,6 +1287,35 @@
         "clientId": "$PINTEREST_APP_ID",
         "clientSecret": "$PINTEREST_APP_SECRET"
       }
+    },
+    "paypal": {
+      "file": "../providers/paypal.provider.json",
+      "security": [
+        {
+          "id": "basic",
+          "username": "$PAYPAL_CLIENT_ID",
+          "password": "$PAYPAL_SECRET"
+        }
+      ]
+    },
+    "stripe": {
+      "file": "../providers/stripe.provider.json",
+      "security": [
+        {
+          "id": "basic",
+          "username": "$STRIPE_CLIENT_ID",
+          "password": "$STRIPE_SECRET"
+        }
+      ]
+    },
+    "adyen": {
+      "file": "../providers/adyen.provider.json",
+      "security": [
+        {
+          "id": "apikey",
+          "apikey": "$ADYEN_API_KEY"
+        }
+      ]
     }
   }
 }

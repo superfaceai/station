@@ -1,0 +1,59 @@
+name = "payments/create-plan"
+version = "1.0.0"
+
+"""
+Create plan usecase
+"""
+
+usecase createPlan unsafe {
+ input {
+   """
+   Product ID
+   ID of product (needs to be created earlier)
+   """
+   productId! string!
+
+   """
+   Name
+   Name of plan
+   """
+   name! string!
+
+   """
+   Interval
+   Interval of plan (possible values: day, week, month, year)
+   """
+   interval! enum {
+    day, week, month, year
+   }
+
+   """
+   Price
+   Price of product according to interval
+   """
+   price! number!
+
+   """
+   Currency code
+   Currency for current price (possible values: usd)
+   """
+   currency! enum {
+    usd
+   }
+ }
+
+ result {
+   id! string!
+   productId! string!
+   name! string!
+   status! string!
+   interval string
+   price number
+   currency string
+ }
+
+ error {
+   title! string
+   detail string
+ }
+}

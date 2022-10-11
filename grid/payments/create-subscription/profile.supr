@@ -1,0 +1,32 @@
+name = "payments/create-subscription"
+version = "1.0.0"
+
+"""
+Create subscription  usecase
+"""
+
+usecase createSubscription unsafe {
+ input {
+   """
+   Plan ID
+   ID of plan
+   """
+   planId! string!
+
+   """
+   Customer Identificator
+   Unique customer identficator according to payment system(could be email, etc...)
+   """
+   customer! string!
+ }
+
+ result {
+   id! string!
+   status! string!
+ }
+
+ error {
+   title! string
+   detail string
+ }
+}

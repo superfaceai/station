@@ -1,0 +1,35 @@
+profile = "payments/create-product@1.0"
+provider = "paypal"
+
+"""
+Create Product map
+"""
+
+map createProduct {
+  http POST "/catalogs/products" {
+    security "basic"
+
+    request {
+      body {
+        name = input.name
+        description = input.description
+      }
+    }
+
+    response 201 "application/json" {
+      map result {
+        id = body.id
+        name = body.name
+        description = body.description
+        type = body.type
+      }
+    }
+
+    response "application/json" {
+     map error {
+       title = body.message
+       detail = body.details
+     }
+    }
+  }
+}

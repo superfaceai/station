@@ -1,0 +1,28 @@
+name = "payments/get-products"
+version = "1.0.0"
+
+"""
+Create plan  usecase
+"""
+
+usecase getProducts safe {
+ input {
+ }
+
+ result {
+   items [
+     {
+            id string!
+            name string!
+            description string!
+            type string!
+     }
+  ]
+ }
+
+
+ error {
+   title! string
+   detail string
+ }
+}

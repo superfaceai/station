@@ -1,0 +1,35 @@
+name = "payments/create-product"
+version = "1.0.0"
+
+"""
+Create product  usecase
+"""
+
+usecase createProduct unsafe {
+ input {
+
+   """
+   Name
+   Name of product
+   """
+   name! string!
+
+   """
+   Description
+   Description for product
+   """
+   description! string!
+ }
+
+ result {
+   id! string!
+   name string!
+   description string!
+   type string!
+ }
+
+ error {
+   title! string
+   detail string
+ }
+}

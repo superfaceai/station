@@ -1,0 +1,21 @@
+name = "payments/delete-product"
+version = "1.0.0"
+
+"""
+Delete product  usecase
+"""
+
+usecase deleteProduct unsafe {
+ input {
+    id string
+ }
+
+ result {
+    result string
+ }
+
+ error {
+   title! string
+   detail string
+ }
+}

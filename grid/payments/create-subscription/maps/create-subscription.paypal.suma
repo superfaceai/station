@@ -1,0 +1,35 @@
+profile = "payments/create-subscription@1.0"
+provider = "paypal"
+
+"""
+Create subscription map
+"""
+
+map createSubscription {
+  http POST "/billing/subscriptions" {
+    security "basic"
+
+    request {
+      body = {
+            plan_id: input.planId,
+            subscriber: {
+                email_address: input.customer
+            }
+      }
+    }
+
+    response 201 "application/json" {
+      map result {
+        id = body.id
+        status = body.status
+      }
+    }
+
+    response "application/json" {
+     map error {
+       title = body.message
+       detail = body.details
+     }
+    }
+  }
+}

@@ -1,0 +1,43 @@
+profile = "payments/make-payment@1.0"
+provider = "adyen"
+
+"""
+Make Payment map
+"""
+
+map makePayment {
+  http POST "/payments" {
+    security "apikey"
+
+    request {
+      body = {
+               "paymentMethod":{
+                 "type": "scheme",
+                 "encryptedCardNumber": input.paymentMethod.encryptedCardNumber,
+                 "encryptedExpiryMonth": input.paymentMethod.encryptedExpiryMonth,
+                 "encryptedExpiryYear": input.paymentMethod.encryptedExpiryYear,
+                 "encryptedSecurityCode": input.paymentMethod.encryptedSecurityCode
+               },
+               "amount":{
+                 "currency":"EUR",
+                 "value": input.amount
+               },
+               "reference":"YOUR_ORDER_NUMBER",
+               "merchantAccount": "IhorSfECOM"
+             }
+    }
+
+    response 200 "application/json" {
+     map result {
+       reference = body.merchantReference
+     }
+   }
+
+    response "application/json" {
+     map error {
+       title = body.message
+       detail = body.details
+     }
+    }
+  }
+}

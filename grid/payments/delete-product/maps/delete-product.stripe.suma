@@ -1,0 +1,24 @@
+profile = "payments/delete-product@1.0"
+provider = "stripe"
+
+"""
+Delete Product map
+"""
+
+map deleteProduct {
+  http DELETE "/products/{input.id}" {
+    security "basic"
+
+    response 200 "application/json" {
+      map result {
+        result: "OK"
+      }
+    }
+
+     response "application/json" {
+         map error {
+            title = body.error.message
+         }
+     }
+  }
+}

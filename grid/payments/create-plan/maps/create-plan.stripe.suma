@@ -1,0 +1,40 @@
+profile = "payments/create-plan@1.0"
+provider = "stripe"
+
+"""
+Create Plan map
+"""
+
+map createPlan {
+  http POST "/prices" {
+    security "basic"
+    request "application/x-www-form-urlencoded" {
+      body {
+            product = input.productId
+            nickname = input.name
+            unit_amount = (input.price * 100).toString()
+            currency = input.currency.toLowerCase()
+            "recurring[interval]" = input.interval
+      }
+    }
+
+    response 200 "application/json" {
+      map result {
+        id = body.id
+        productId = body.product
+        name = body.nickname
+        status = body.active? 'active': 'notActive'
+        interval = body.recurring && body.recurring.interval
+        price = body.unit_amount/100
+        currency = body.currency
+      }
+    }
+
+     response "application/json" {
+         map error {
+            title = body.error.code
+            detail = body.error.message
+         }
+     }
+  }
+}

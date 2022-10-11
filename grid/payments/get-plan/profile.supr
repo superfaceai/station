@@ -1,0 +1,28 @@
+name = "payments/get-plan"
+version = "1.0.0"
+
+"""
+Create plan  usecase
+"""
+
+usecase getPlan safe {
+ input {
+    id string
+ }
+
+ result {
+        id string!
+        productId string!
+        name string!
+        interval string
+        price number!
+        currency string
+        status string
+ }
+
+
+ error {
+   title! string
+   detail string
+ }
+}

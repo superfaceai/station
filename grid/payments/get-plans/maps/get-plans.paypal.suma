@@ -1,0 +1,43 @@
+profile = "payments/get-plans@1.0"
+provider = "paypal"
+
+"""
+Get Plans map
+"""
+
+map getPlans {
+  http GET "/billing/plans" {
+    security "basic"
+     request {
+      query {
+        page_size = 20
+      }
+    }
+
+    response 200 "application/json" {
+        plans = call foreach(item of body.plans) MapPlan(item = item)
+
+        return map result {
+          items = plans
+        }
+    }
+
+    response "application/json" {
+     map error {
+       title = body.message
+       detail = body.details
+     }
+    }
+  }
+}
+
+operation MapPlan {
+  item = args.item
+
+  return {
+          id = item.id
+          name = item.name
+          description = item.description
+          status = item.status
+    }
+}
