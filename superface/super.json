@@ -95,6 +95,17 @@
         }
       }
     },
+    "vcs/repository-files": {
+      "file": "../grid/vcs/repository-files/profile.supr",
+      "providers": {
+        "github": {
+          "file": "../grid/vcs/repository-files/maps/github.suma"
+        },
+        "mock": {
+          "file": "../grid/vcs/repository-files/maps/mock.suma"
+        }
+      }
+    },
     "address/clean-address": {
       "file": "../grid/address/clean-address/profile.supr",
       "providers": {
@@ -434,6 +445,20 @@
         }
       }
     },
+    "social-media/upload-from-url": {
+      "file": "../grid/social-media/upload-from-url/profile.supr",
+      "providers": {
+        "mock": {
+          "file": "../grid/social-media/upload-from-url/maps/mock.suma"
+        },
+        "instagram": {
+          "file": "../grid/social-media/upload-from-url/maps/instagram.suma"
+        },
+        "facebook": {
+          "file": "../grid/social-media/upload-from-url/maps/facebook.suma"
+        }
+      }
+    },
     "social-media/posts": {
       "file": "../grid/social-media/posts/profile.supr",
       "providers": {
@@ -535,6 +560,17 @@
         }
       }
     },
+    "chat/threads": {
+      "file": "../grid/chat/threads/profile.supr",
+      "providers": {
+        "mock": {
+          "file": "../grid/chat/threads/maps/mock.suma"
+        },
+        "discord": {
+          "file": "../grid/chat/threads/maps/discord.suma"
+        }
+      }
+    },
     "chat/messages": {
       "file": "../grid/chat/messages/profile.supr",
       "providers": {
@@ -577,6 +613,20 @@
         }
       }
     },
+    "chat/members": {
+      "file": "../grid/chat/members/profile.supr",
+      "providers": {
+        "mock": {
+          "file": "../grid/chat/members/maps/mock.suma"
+        },
+        "slack": {
+          "file": "../grid/chat/members/maps/slack.suma"
+        },
+        "discord": {
+          "file": "../grid/chat/members/maps/discord.suma"
+        }
+      }
+    },
     "project-management/tasks": {
       "file": "../grid/project-management/tasks/profile.supr",
       "providers": {
@@ -584,7 +634,7 @@
           "file": "../grid/project-management/tasks/maps/mock.suma"
         },
         "asana": {
-          "file":  "../grid/project-management/tasks/maps/asana.suma"
+          "file": "../grid/project-management/tasks/maps/asana.suma"
         }
       }
     },
@@ -595,9 +645,24 @@
           "file": "../grid/project-management/projects/maps/mock.suma"
         },
         "asana": {
-          "file":  "../grid/project-management/projects/maps/asana.suma"
+          "file": "../grid/project-management/projects/maps/asana.suma"
         }
       }
+    },
+    "social-media/replies": {
+      "file": "../grid/social-media/replies/profile.supr",
+      "providers": {
+        "linkedin": {
+          "file": "../grid/social-media/replies/maps/linkedin.suma"
+        },
+        "mock": {
+          "file": "../grid/social-media/replies/maps/mock.suma"
+        }
+      },
+      "priority": [
+        "linkedin",
+        "mock"
+      ]
     }
   },
   "providers": {
@@ -1096,7 +1161,7 @@
         }
       ],
       "parameters": {
-        "accessToken": "$ASANA_PERSONAL_ACCESS_TOKEN"
+        "personalAccessToken": "$ASANA_PERSONAL_ACCESS_TOKEN"
       }
     },
     "ipbase": {

@@ -5,7 +5,7 @@
 
 <img src="https://github.com/superfaceai/station/blob/main/.github/docs/LogoGreen.png" alt="superface logo" width="150" height="150">
 
-Where use-cases are born. In this repository we build curated use-cases. Examples in this repository are ideal staring point for writing your own.
+Where use-cases are born. In this repository we build curated use-cases. Examples in this repository are an ideal starting point for writing your own.
 
 ## Table of Contents
 
@@ -19,15 +19,15 @@ Where use-cases are born. In this repository we build curated use-cases. Example
 
 ## Background
 
-Superface (super-interface) is a higher-order API, an abstraction on top of the modern APIs like GraphQL and REST. Superface is one interface to discover, connect, and query any use-cases available via conventional APIs.
+Superface (super-interface) is a higher-order API, an abstraction on top of modern APIs like GraphQL and REST. Superface is one interface to discover, connect, and query any use cases available via conventional APIs.
 
-Through its focus on application-level semantics, Superface decouples the clients from servers, enabling fully autonomous evolution. As such it minimizes the code base as well as errors and downtimes while providing unmatched resiliency and redundancy.
+Through its focus on application-level semantics, Superface decouples the clients from servers, enabling fully autonomous evolution. As such, it minimizes the code base size as well as errors and downtimes while providing unmatched resiliency and redundancy.
 
-Superface allows for switching providers without development at a runtime in milliseconds. Furthermore, Superface decentralizes the composition and aggregation, and thus creates an Autonomous Integration Mesh.
+Superface allows for switching providers without development at runtime in milliseconds. Furthermore, Superface decentralizes the composition and aggregation, and thus creates an Autonomous Integration Mesh.
 
 Motivation behind Superface is nicely described in this [video](https://www.youtube.com/watch?v=BCvq3NXFb94) from APIdays conference.
 
-You can get more information at https://superface.ai and https://superface.ai/docs.
+You can learn more at https://superface.ai and https://superface.ai/docs.
 
 ## Install
 
@@ -55,19 +55,19 @@ $ yarn test:record grid/path/to/test.ts
 
 ## Security
 
-Superface is not man-in-the-middle so it does not require any access to secrets that are needed to communicate with provider API. Superface CLI only prepares super.json file with authorization fields in form of environment variable. You just set correct variables and communicate directly with provider API.
+Superface is not a man-in-the-middle so it does not require any access to secrets that are needed to communicate with provider API. Superface CLI only prepares super.json file with authorization fields in the form of environment variables. You just set correct variables and communicate directly with provider API.
 
 You can find more information in [OneSDK repository](https://github.com/superfaceai/one-sdk-js/blob/main/SECURITY.md).
 
 ## Support
 
-If you need any additional support, have any questions or you just want to talk you can do that through our [documentation page](https://superface.ai/docs/support).
+If you need any additional support, have any questions, or you just want to talk you can do that through our [support page](https://superface.ai/docs/support).
 
 ### Adding new use-case
 
-If you are starting with authoring check our [guide](https://superface.ai/docs/guides/how-to-create).
+If you are starting with authoring, check our [guide](https://superface.ai/docs/guides/how-to-create).
 
-Station repository has defined structure, here are commands for [Superface CLI](https://github.com/superfaceai/cli#superface-create) how to create profiles, maps and providers.
+Station repository has a defined structure. Here are the commands [Superface CLI](https://github.com/superfaceai/cli#superface-create) commands for creating profiles, maps and providers.
 
 #### Create new profile
 
@@ -89,7 +89,7 @@ yarn superface create --profileId [scope](optional)/[name] --providerName [provi
 
 #### Test the map
 
-We encourage to use [Superface Testing](https://github.com/superfaceai/testing-lib) to write tests.
+We encourage using the [Superface Testing](https://github.com/superfaceai/testing-lib) to write tests.
 
 **1. Create test file**
 
@@ -126,13 +126,13 @@ describe(`scope/name/provider_name}`, () => {
 
 _All inputs should be written directly to the test file and shouldn't use environment variables._
 
-**2. Do call against live API to record traffic and create snapshot**
+**2. Make a call against live API to record traffic and create a snapshot**
 
 ```shell
 $ yarn test:record grid/[scope]/[name]/maps/[provider].test.ts
 ```
 
-**3. Check result in snapshot**
+**3. Check result in the snapshot**
 
 Snapshot for test run should be created in location:
 
@@ -142,7 +142,7 @@ grid/[scope]/[name]/maps/__snapshots__/[provider].test.ts.snap
 
 **4. Do post processing for traffic recording**
 
-We try to sanitize recordings and remove any sensitive data. But you should still look at the recording and make sure it doesn't contain in sensitive data such as credentials or personal information, that shouldn't be public.
+We try to sanitize recordings and remove any sensitive data. But you should still look at the recording and make sure it doesn't contain sensitive data such as credentials or personal information that shouldn't be public.
 
 **5. Run tests with recorded traffic**
 
@@ -152,7 +152,7 @@ $ yarn test grid/[scope]/[name]/maps/example.test.ts
 
 ### Debugging maps
 
-You can set OneSDK environment variable `DEBUG` to use the logging output from the OneSDK for debugging maps: 
+You can set the OneSDK `DEBUG` environment variable to enable logging for debugging purposes: 
 
 ```
 DEBUG="superface:http*"
@@ -166,11 +166,11 @@ $ DEBUG="superface:http*" yarn test:record grid/[scope]/[name]/maps/[provider].t
 
 ### Enviroment variables
 
-Secretes used for authentication during tests are stored in `.env` and loaded using dotenv. Run `cp .env.example .env` to start from the template.
+Secretes used for authentication during tests are stored in `.env` and loaded using `dotenv`. Run `cp .env.example .env` to start from the template.
 
 ### Automated publishing
 
-Station have Workflow to automate publishing. For details see [CI / CD](https://github.com/superfaceai/station/blob/main/.github/workflows/ci_cd.yml) workflow.
+Station uses Workflow to automate publishing. For details see the [CI / CD](https://github.com/superfaceai/station/blob/main/.github/workflows/ci_cd.yml) workflow.
 
 ## Contributing
 

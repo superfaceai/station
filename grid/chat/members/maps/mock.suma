@@ -1,0 +1,25 @@
+profile = "chat/members@1.0"
+provider = "mock"
+
+"""
+GetMembers map
+"""
+map GetMembers {
+  map result {
+    nextPage = 'XXXXXXXXXXXXXXXXX03',
+    members = [
+      {
+        id: 'U01',
+        username: 'testUser',
+        joinedAt: 1643798532134.069,
+        isBot: true,
+      },
+      {
+        id: 'U02',
+        username: 'user',
+        joinedAt: 1643808532134.069,
+        isBot: false,
+      }
+    ]
+  }
+}

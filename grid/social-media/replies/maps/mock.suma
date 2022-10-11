@@ -1,0 +1,24 @@
+profile = "social-media/replies@1.0"
+provider = "mock"
+
+map GetPostReplies {
+  return map result {
+    replies = [
+          {
+              id: "123",
+              createdAt: "2022-06-09T13:29:11+02:00",
+              authorId: "@alberteinstein",
+              authorName: "Albert Einstein",
+              text: "Hello, World!"
+          },
+          {
+              id: "124",
+              createdAt: "2022-06-09T16:29:11+02:00",
+              authorId: "@newton",
+              authorName: "Isaac Newton",
+              lastModifiedAt: "2022-06-09T16:32:42+02:00",
+              text: "(deleted.)"
+          }
+      ]
+  }
+}
