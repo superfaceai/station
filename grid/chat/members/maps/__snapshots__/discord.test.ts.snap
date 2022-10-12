@@ -1,0 +1,49 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`chat/members/discord GetMembers performs correctly 1`] = `
+Ok {
+  "value": Object {
+    "members": Array [
+      Object {
+        "id": "170231057197563904",
+        "isBot": false,
+        "joinedAt": 1643221182615,
+        "username": "Martin Albert",
+      },
+    ],
+    "nextPage": "170231057197563904",
+    "rateLimit": Object {
+      "bucket": "14bcf0781dad097b39d603c7d772f784",
+      "remainingRequests": 9,
+      "remainingRequestsPercentage": 90,
+      "resetAfter": 10,
+      "resetTimestamp": 1644575566000,
+      "totalRequests": 10,
+    },
+  },
+}
+`;
+
+exports[`chat/members/discord GetMembers performs correctly 2`] = `
+Ok {
+  "value": Object {
+    "members": Array [
+      Object {
+        "id": "935958634016419920",
+        "isBot": true,
+        "joinedAt": 1643716732648,
+        "username": "TestApp",
+      },
+    ],
+    "nextPage": "935958634016419920",
+    "rateLimit": Object {
+      "bucket": "14bcf0781dad097b39d603c7d772f784",
+      "remainingRequests": 8,
+      "remainingRequestsPercentage": 80,
+      "resetAfter": 10,
+      "resetTimestamp": 1644575566000,
+      "totalRequests": 10,
+    },
+  },
+}
+`;

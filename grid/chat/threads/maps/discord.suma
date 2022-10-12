@@ -1,0 +1,216 @@
+profile = "chat/threads@1.0"
+provider = "discord"
+
+"""
+GetThreads map
+"""
+map GetThreads {
+  http GET "/guilds/{input.workspace}/threads/active" {
+    request "application/json" {
+      headers {
+        "Authorization" = `Bot ${parameters.accessToken}`
+      }
+    }
+
+    response 200 "application/json" {
+      threads = call MapThreads(threads = body.threads)
+      rateLimit = call MapRateLimitDetails(headers = headers)
+      result.threads = threads
+
+      set if (rateLimit) {
+        result.rateLimit = rateLimit
+      }
+
+      map result result
+    }
+
+    response {
+      error = call MapDiscordError(
+        statusCode = statusCode,
+        error = body,
+        headers = headers,
+      )
+      
+      map error error
+    }
+  }
+}
+
+"""
+Operation MapThreads
+Returns array mapping threads in received body
+"""
+operation MapThreads {
+  threads = args.threads.reduce((acc, thread) => {
+    /**
+     * Filter only relevant channels 
+     * more about channel types here: https://discord.com/developers/docs/resources/channel#channel-object-channel-types
+     */
+    if ([10, 11, 12].includes(thread.type)) {
+      const resultThread = {
+        id: thread.id,
+      };
+
+      if (thread.name) {
+        resultThread.name = thread.name
+      }
+
+      if (thread.parent_id) {
+        resultThread.channel = thread.parent_id;
+      }
+
+      if (thread.thread_metadata) {
+        const duration = thread.thread_metadata.auto_archive_duration;
+        const ts = Date.parse(thread.thread_metadata.archive_timestamp);
+      
+        resultThread.archiveAt = ts + (duration * 60 * 1000);
+      }
+
+      // only available for threads created after 2022-01-09
+      if (thread.thread_metadata && thread.thread_metadata.create_timestamp) {
+        resultThread.createdAt = Date.parse(thread.thread_metadata.create_timestamp);
+      }
+
+      /**
+       * Returns UNIX timestamp from specified discord snowflake id
+       * More about snowflakes: https://discord.com/developers/docs/reference#snowflakes
+       */
+      const discordEpoch = 1420070400000;
+      const getTimestamp = (snowflake) => Number(BigInt(snowflake) >> BigInt(22)) + discordEpoch;
+
+      // for threads after 2022-01-09 createdAt will be time when parent message was sent
+      if (resultThread.createdAt === undefined) {
+        resultThread.createdAt = getTimestamp(thread.id);
+      }
+
+      if (thread.last_message_id) {
+        resultThread.lastMessageAt = getTimestamp(thread.last_message_id);
+      }
+
+      if (thread.member_count) {
+        resultThread.membersCount = thread.member_count;
+      }
+
+      if (thread.message_count) {
+        resultThread.messagesCount = thread.message_count;
+      }
+
+      acc.push(resultThread);
+    }
+
+    return acc;
+  }, []);
+
+  return threads
+}
+
+"""
+Operation MapRateLimitDetails
+Returns object mapping rate limit details specified in received headers
+"""
+operation MapRateLimitDetails {
+  headers = args.headers
+  details = {}
+
+  bucket = headers['x-ratelimit-bucket']
+  totalRequests = parseInt(headers['x-ratelimit-limit'])
+  remainingRequests = parseInt(headers['x-ratelimit-remaining'])
+  resetTimestamp = parseFloat(headers['x-ratelimit-reset'])
+  resetAfter = parseInt(headers['x-ratelimit-reset-after'])
+  retryAfter = parseInt(headers['Retry-After'])
+
+  set if (bucket) {
+    details.bucket = bucket
+  }
+
+  set if (!isNaN(totalRequests)) {
+    details.totalRequests = totalRequests
+  }
+
+  set if (!isNaN(remainingRequests)) {
+    details.remainingRequests = remainingRequests
+  }
+
+  set if (!isNaN(resetAfter)) {
+    details.resetAfter = resetAfter
+  }
+
+  set if (!isNaN(resetTimestamp)) {
+    details.resetTimestamp = resetTimestamp * 1000
+  }
+
+  set if (!isNaN(retryAfter)) {
+    details.retryAfter = retryAfter
+  }
+
+  set if (details.remainingRequests !== undefined && details.totalRequests) {
+    details.remainingRequestsPercentage = (details.remainingRequests / details.totalRequests) * 100
+  }
+
+  set if (Object.keys(details).length === 0) {
+    details = undefined
+  }
+
+  return details
+}
+
+"""
+Operation Map Discord Error
+Returns error object based on error body, statusCode and headers.
+"""
+operation MapDiscordError {
+  statusCode = args.statusCode
+  discordError = args.error
+  headers = args.headers
+
+  rateLimit = call MapRateLimitDetails(headers = headers)
+  detail = discordError.message
+
+  return if (statusCode === 400) {
+    title = 'Bad request'
+    detail = discordError
+    rateLimit = rateLimit
+  }
+
+  return if (statusCode === 401) {
+    title = 'Unauthorized'
+    detail = detail
+    rateLimit = rateLimit
+  }
+
+  return if (statusCode === 403) {
+    title = 'Forbidden'
+    detail = detail
+    rateLimit = rateLimit
+  }
+
+  return if (statusCode === 404) {
+    title = 'Not found'
+    detail = detail
+    rateLimit = rateLimit
+  }
+
+  return if (statusCode === 405) {
+    title = 'Method not allowed'
+    detail = detail
+    rateLimit = rateLimit
+  }
+
+  return if (statusCode === 429) {
+    title = 'Too Many Requests'
+    detail = `${detail} Retry after ${discordError.retry_after} seconds`
+    rateLimit = rateLimit
+  }
+
+  return if (statusCode === 502) {
+    title = 'Bad gateway'
+    detail = detail
+    rateLimit = rateLimit
+  }
+
+  return {
+    title = 'Unknown error'
+    detail = `Unknown error occurred. Status: ${statusCode}. Message: ${detail}.`
+    rateLimit = rateLimit
+  }
+}

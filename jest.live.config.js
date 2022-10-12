@@ -3,6 +3,6 @@ module.exports = {
   testEnvironment: 'node',
   rootDir: './grid',
   runner: 'groups',
-  reporters: ['default', '../dist/reporter.js'],
-  setupFilesAfterEnv: ['../jest/setup.js'],
+  reporters: ['default', '../jest/reporter.config.js'],
+  setupFilesAfterEnv: ['../jest/setup.config.js'],
 };
