@@ -1,6 +1,9 @@
 import { sendMessageTest } from './send-message';
 
-sendMessageTest('discord', {
-  valid: '935962220104396885',
-  invalid: '000000000000000000',
-});
+/**
+ * Live tests
+ *
+ * @group live/safe
+ */
+
+sendMessageTest('discord', ['935962220104396885', '000000000000000000']);

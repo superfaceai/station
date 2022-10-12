@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`chat/channels/discord GetChannels performs correctly 1`] = `
+exports[`chat/channels/discord GetChannels when specified destination does exist performs correctly 1`] = `
 Ok {
   "value": Object {
     "channels": Array [
@@ -37,12 +37,32 @@ Ok {
     ],
     "rateLimit": Object {
       "bucket": "a66d55b18e9649f0915c93ce4c0677af",
-      "remainingRequests": 9,
-      "remainingRequestsPercentage": 90,
-      "resetAfter": 60,
-      "resetTimestamp": 1645522524000,
+      "remainingRequests": 8,
+      "remainingRequestsPercentage": 80,
+      "resetAfter": 12,
+      "resetTimestamp": 1661759061000,
       "totalRequests": 10,
     },
   },
+}
+`;
+
+exports[`chat/channels/discord GetChannels when specified destination does not exist returns error 1`] = `
+Err {
+  "error": "HTTPError: Expected HTTP error
+Properties: {
+  \\"title\\": \\"Not found\\",
+  \\"detail\\": \\"Unknown Guild\\",
+  \\"rateLimit\\": {
+    \\"bucket\\": \\"a66d55b18e9649f0915c93ce4c0677af\\",
+    \\"totalRequests\\": 10,
+    \\"remainingRequests\\": 8,
+    \\"resetAfter\\": 12,
+    \\"resetTimestamp\\": 1661759061000,
+    \\"remainingRequestsPercentage\\": 80
+  }
+}
+AST Path: definitions[0].statements[1].responseHandlers[1].statements[1]
+Original Map Location: Line 36, column 7",
 }
 `;
