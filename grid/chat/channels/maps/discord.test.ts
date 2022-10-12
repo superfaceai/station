@@ -1,3 +1,12 @@
 import { getChannelsTest } from './channels';
 
-getChannelsTest('discord', { workspace: '935962220104396881' });
+/**
+ * Live tests
+ *
+ * @group live/safe
+ */
+
+getChannelsTest('discord', {
+  valid: '935962220104396881',
+  invalid: '000000000000000000',
+});

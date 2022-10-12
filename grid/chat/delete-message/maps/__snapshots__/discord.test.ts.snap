@@ -1,0 +1,56 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`chat/delete-message/discord DeleteMessage when specified destination does exist performs correctly 1`] = `
+Ok {
+  "value": Object {
+    "rateLimit": Object {
+      "bucket": "da101873bd9ceb21138638aa25f33cb1",
+      "remainingRequests": 4,
+      "remainingRequestsPercentage": 80,
+      "resetAfter": 5,
+      "resetTimestamp": 1664267734000,
+      "totalRequests": 5,
+    },
+  },
+}
+`;
+
+exports[`chat/delete-message/discord DeleteMessage when specified destination does not exist returns error 1`] = `
+Err {
+  "error": "HTTPError: Expected HTTP error
+Properties: {
+  \\"title\\": \\"Not found\\",
+  \\"detail\\": \\"Unknown Channel\\",
+  \\"rateLimit\\": {
+    \\"bucket\\": \\"da101873bd9ceb21138638aa25f33cb1\\",
+    \\"totalRequests\\": 5,
+    \\"remainingRequests\\": 4,
+    \\"resetAfter\\": 5,
+    \\"resetTimestamp\\": 1664267734000,
+    \\"remainingRequestsPercentage\\": 80
+  }
+}
+AST Path: definitions[0].statements[2].responseHandlers[1].statements[1]
+Original Map Location: Line 36, column 7",
+}
+`;
+
+exports[`chat/delete-message/discord DeleteMessage when specified message id does not exist returns error 1`] = `
+Err {
+  "error": "HTTPError: Expected HTTP error
+Properties: {
+  \\"title\\": \\"Not found\\",
+  \\"detail\\": \\"Unknown Message\\",
+  \\"rateLimit\\": {
+    \\"bucket\\": \\"da101873bd9ceb21138638aa25f33cb1\\",
+    \\"totalRequests\\": 5,
+    \\"remainingRequests\\": 3,
+    \\"resetAfter\\": 5,
+    \\"resetTimestamp\\": 1664267734000,
+    \\"remainingRequestsPercentage\\": 60
+  }
+}
+AST Path: definitions[0].statements[2].responseHandlers[1].statements[1]
+Original Map Location: Line 36, column 7",
+}
+`;

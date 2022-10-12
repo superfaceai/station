@@ -1,3 +1,12 @@
 import { getMessagesTest } from './messages';
 
-getMessagesTest('discord', ['938614740995960844', '000000000000000000']);
+/**
+ * Live tests
+ *
+ * @group live/safe
+ */
+
+getMessagesTest('discord', {
+  valid: '938614740995960844',
+  invalid: '000000000000000000',
+});

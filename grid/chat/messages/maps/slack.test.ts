@@ -1,3 +1,12 @@
 import { getMessagesTest } from './messages';
 
-getMessagesTest('slack', ['CF3H7S63W', 'not-existing-dest']);
+/**
+ * Live tests
+ *
+ * @group live/safe
+ */
+
+getMessagesTest('slack', {
+  valid: 'C03UL8E5YMR',
+  invalid: 'not-existing-dest',
+});
