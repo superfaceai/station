@@ -1,17 +1,11 @@
 profile = "payments/delete-plan@1.0"
 provider = "stripe"
 
-map deletePlan {
+map DeletePlan {
   http DELETE "/plans/{input.id}" {
     security "basic"
-    request {
-
-    }
 
     response 200 "application/json" {
-      map result {
-        result: "OK"
-      }
     }
 
     response "application/json" {

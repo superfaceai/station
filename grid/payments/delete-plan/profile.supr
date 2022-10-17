@@ -5,17 +5,26 @@ version = "1.0.0"
 Delete plan  usecase
 """
 
-usecase deletePlan unsafe {
- input {
-    id string
- }
+usecase DeletePlan unsafe {
+  input {
+    """
+    ID
+    Unique identifier of the plan to delete.
+    """
+    id! string!
+  }
 
- result {
-    result string
- }
+  error {
+    """
+    Title
+    A short, human-readable summary of the problem type.
+    """
+    title! string
 
- error {
-   title! string
-   detail string
- }
+    """
+    Detail
+    A human-readable explanation specific to this occurrence of the problem.
+    """
+    detail string
+  }
 }
