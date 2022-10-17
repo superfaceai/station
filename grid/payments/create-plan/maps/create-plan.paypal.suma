@@ -1,7 +1,7 @@
 profile = "payments/create-plan@1.0"
 provider = "paypal"
 
-map createPlan {
+map CreatePlan {
   http POST "/billing/plans" {
     security "basic"
     request {
@@ -35,9 +35,7 @@ map createPlan {
     response 201 "application/json" {
       map result {
         id = body.id
-        productId = body.product_id
-        name = body.name
-        status = body.status
+        state = body.status.toLowerCase()
       }
     }
 

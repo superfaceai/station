@@ -5,55 +5,80 @@ version = "1.0.0"
 Create plan usecase
 """
 
-usecase createPlan unsafe {
- input {
-   """
-   Product ID
-   ID of product (needs to be created earlier)
-   """
-   productId! string!
+usecase CreatePlan unsafe {
+  input {
+    """
+    Product ID
+    The ID of the product to create a subscription plan for.
+    (To be created with `payments/CreateProduct`)
+    """
+    productId! string!
 
-   """
-   Name
-   Name of plan
-   """
-   name! string!
+    """
+    Name
+    Name of the subscription plan
+    """
+    name! string!
 
-   """
-   Interval
-   Interval of plan (possible values: day, week, month, year)
-   """
-   interval! enum {
-    day, week, month, year
-   }
+    """
+    Interval
+    Frequency of the interval at which the customer is charged.
 
-   """
-   Price
-   Price of product according to interval
-   """
-   price! number!
+    Possible values:
+    - `day`
+    - `week`
+    - `month`
+    - `year`
+    """
+    interval! enum {
+      day, week, month, year
+    }
 
-   """
-   Currency code
-   Currency for current price (possible values: usd)
-   """
-   currency! enum {
-    usd
-   }
+    """
+    Price
+    Amount charged each `interval` cycle.
+    """
+    price! number!
+
+    """
+    Currency code
+    Three-letter currency code in which `price` is specified, in ISO 4217 format.
+    """
+    currency! string!
  }
 
- result {
-   id! string!
-   productId! string!
-   name! string!
-   status! string!
-   interval string
-   price number
-   currency string
- }
+  result {
+    """
+    Plan ID
+    ID of plan.
+    """
+    id! string!
+    
+    """
+    State
+    State of the plan.
 
- error {
-   title! string
-   detail string
- }
+    Possible values:
+     - `created` - The plan was just created. It may not be possible to accept new subscriptions yet.
+     - `active` - The plan is active and accepting new subscriptions.
+     - `inactive` - The plan has been deactivated, and cannot accept new subscriptions.
+    """
+    state! enum {
+      created, active, inactive
+    }
+  }
+
+  error {
+    """
+    Title
+    A short, human-readable summary of the problem type.
+    """
+    title! string
+
+    """
+    Detail
+    A human-readable explanation specific to this occurrence of the problem.
+    """
+    detail string
+  }
 }
