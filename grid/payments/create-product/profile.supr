@@ -5,31 +5,60 @@ version = "1.0.0"
 Create product  usecase
 """
 
-usecase createProduct unsafe {
- input {
+usecase CreateProduct unsafe {
+  input {
+    """
+    Name
+    Name of the product to be created.
+    """
+    name! string!
 
-   """
-   Name
-   Name of product
-   """
-   name! string!
+    """
+    Description
+    Description of the product to be created.
+    """
+    description! string!
 
-   """
-   Description
-   Description for product
-   """
-   description! string!
- }
+    """
+    Product type
+    Indicates whether the product is physical or intangible (e.g. a service, or digital goods).
 
- result {
-   id! string!
-   name string!
-   description string!
-   type string!
- }
+    Possible values:
+      - `physical`
+      - `digital`
+      - `service`
+    """
+    type enum {
+      physical,
+      digital,
+      service
+    }
+  }
 
- error {
-   title! string
-   detail string
- }
+  result {
+    """
+    ID
+    Unique identifier of the product.
+    """
+    id! string!
+    """
+    Product URL
+    A URL of the product's publicly-accessible webpage.
+    """
+    url string
+  }
+
+  error {
+    """
+    Title
+    A short, human-readable summary of the problem type.
+    """
+    title! string
+
+    """
+    Detail
+    A human-readable explanation specific to this occurrence of the problem.
+    """
+    detail string
+  }
 }

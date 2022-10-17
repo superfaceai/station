@@ -1,22 +1,21 @@
 profile = "payments/create-product@1.0"
 provider = "paypal"
 
-map createProduct {
+map CreateProduct {
   http POST "/catalogs/products" {
     security "basic"
     request {
       body {
         name = input.name
         description = input.description
+        type = input.type.toUpperCase()
       }
     }
 
     response 201 "application/json" {
       map result {
         id = body.id
-        name = body.name
-        description = body.description
-        type = body.type
+        url = body.home_url
       }
     }
 

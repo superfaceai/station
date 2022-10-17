@@ -1,7 +1,7 @@
 profile = "payments/create-product@1.0"
 provider = "stripe"
 
-map createProduct {
+map CreateProduct {
   http POST "/products" {
     security "basic"
     request "application/x-www-form-urlencoded" {
@@ -14,9 +14,7 @@ map createProduct {
     response 200 "application/json" {
       map result {
         id = body.id
-        name = body.name
-        description = body.description
-        type = body.type
+        url = body.url
       }
     }
 
