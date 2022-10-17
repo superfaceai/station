@@ -1,32 +1,28 @@
 profile = "payments/get-products@1.0"
 provider = "paypal"
 
-"""
-Get Products map
-"""
-
 map getProducts {
   http GET "/catalogs/products" {
     security "basic"
-     request {
+    request {
       query {
         page_size = 100
       }
     }
 
     response 200 "application/json" {
-        products = call foreach(item of body.products) MapProduct(item = item)
+      products = call foreach (item of body.products) MapProduct(item = item)
 
-        return map result {
-          items = products
-        }
+      return map result {
+        items = products
+      }
     }
 
     response "application/json" {
-     map error {
-       title = body.message
-       detail = body.details
-     }
+      map error {
+        title = body.message
+        detail = body.details
+      }
     }
   }
 }
@@ -35,9 +31,9 @@ operation MapProduct {
   item = args.item
 
   return {
-          id = item.id
-          name = item.name
-          description = item.description
-          status = item.status
-    }
+    id = item.id
+    name = item.name
+    description = item.description
+    status = item.status
+  }
 }

@@ -1,14 +1,9 @@
 profile = "payments/create-product@1.0"
 provider = "paypal"
 
-"""
-Create Product map
-"""
-
 map createProduct {
   http POST "/catalogs/products" {
     security "basic"
-
     request {
       body {
         name = input.name
@@ -26,10 +21,10 @@ map createProduct {
     }
 
     response "application/json" {
-     map error {
-       title = body.message
-       detail = body.details
-     }
+      map error {
+        title = body.message
+        detail = body.details
+      }
     }
   }
 }

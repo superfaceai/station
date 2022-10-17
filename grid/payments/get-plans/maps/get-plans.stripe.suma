@@ -1,21 +1,17 @@
 profile = "payments/get-plans@1.0"
 provider = "stripe"
 
-"""
-Get Plans map
-"""
-
 map getPlans {
   http GET "/plans" {
     security "basic"
-     request {
-          query {
-            limit = 100
-          }
-        }
+    request {
+      query {
+        limit = 100
+      }
+    }
 
     response 200 "application/json" {
-      plans = call foreach(item of body.data) MapPlan(item = item)
+      plans = call foreach (item of body.data) MapPlan(item = item)
 
       return map result {
         items = plans
@@ -23,12 +19,13 @@ map getPlans {
     }
   }
 }
+
 operation MapPlan {
   item = args.item
 
   return {
-          id = item.id
-          name = item.nickname
-          status = item.active? 'active': 'notActive'
-    }
+    id = item.id
+    name = item.nickname
+    status = item.active? 'active': 'notActive'
+  }
 }

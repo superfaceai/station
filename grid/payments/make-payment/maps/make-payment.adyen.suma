@@ -1,14 +1,9 @@
 profile = "payments/make-payment@1.0"
 provider = "adyen"
 
-"""
-Make Payment map
-"""
-
 map makePayment {
   http POST "/payments" {
     security "apikey"
-
     request {
       body = {
                "paymentMethod":{
@@ -28,16 +23,16 @@ map makePayment {
     }
 
     response 200 "application/json" {
-     map result {
-       reference = body.merchantReference
-     }
-   }
+      map result {
+        reference = body.merchantReference
+      }
+    }
 
     response "application/json" {
-     map error {
-       title = body.message
-       detail = body.details
-     }
+      map error {
+        title = body.message
+        detail = body.details
+      }
     }
   }
 }

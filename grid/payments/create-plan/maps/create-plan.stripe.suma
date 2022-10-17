@@ -1,20 +1,16 @@
 profile = "payments/create-plan@1.0"
 provider = "stripe"
 
-"""
-Create Plan map
-"""
-
 map createPlan {
   http POST "/prices" {
     security "basic"
     request "application/x-www-form-urlencoded" {
       body {
-            product = input.productId
-            nickname = input.name
-            unit_amount = (input.price * 100).toString()
-            currency = input.currency.toLowerCase()
-            "recurring[interval]" = input.interval
+        product = input.productId
+        nickname = input.name
+        unit_amount = (input.price * 100).toString()
+        currency = input.currency.toLowerCase()
+        "recurring[interval]" = input.interval
       }
     }
 
@@ -30,11 +26,11 @@ map createPlan {
       }
     }
 
-     response "application/json" {
-         map error {
-            title = body.error.code
-            detail = body.error.message
-         }
-     }
+    response "application/json" {
+      map error {
+        title = body.error.code
+        detail = body.error.message
+      }
+    }
   }
 }

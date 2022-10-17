@@ -1,13 +1,12 @@
 profile = "payments/delete-plan@1.0"
 provider = "stripe"
 
-"""
-Delete Plan map
-"""
-
 map deletePlan {
   http DELETE "/plans/{input.id}" {
     security "basic"
+    request {
+
+    }
 
     response 200 "application/json" {
       map result {
@@ -15,10 +14,10 @@ map deletePlan {
       }
     }
 
-     response "application/json" {
-         map error {
-            title = body.error.message
-         }
-     }
+    response "application/json" {
+      map error {
+        title = body.error.message
+      }
+    }
   }
 }

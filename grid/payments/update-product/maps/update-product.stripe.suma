@@ -1,14 +1,9 @@
 profile = "payments/update-product@1.0"
 provider = "stripe"
 
-"""
-Update Product map
-"""
-
 map updateProduct {
   http POST "/products/{input.id}" {
     security "basic"
-
     request "application/x-www-form-urlencoded" {
       body {
         name = input.name
@@ -25,11 +20,11 @@ map updateProduct {
       }
     }
 
-     response "application/json" {
-         map error {
-            title = body.error.code
-            detail = body.error.message
-         }
-     }
+    response "application/json" {
+      map error {
+        title = body.error.code
+        detail = body.error.message
+      }
+    }
   }
 }

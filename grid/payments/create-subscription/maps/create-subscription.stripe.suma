@@ -1,15 +1,10 @@
 profile = "payments/create-subscription@1.0"
 provider = "stripe"
 
-"""
-Create subscription map
-"""
-
 map createSubscription {
   http POST "/subscriptions" {
     security "basic"
-
-    request "application/x-www-form-urlencoded"{
+    request "application/x-www-form-urlencoded" {
       body = {
         customer: input.customer,
         "items[0][price]": input.planId,
@@ -23,11 +18,11 @@ map createSubscription {
       }
     }
 
-     response "application/json" {
-         map error {
-            title = body.error.code
-            detail = body.error.message
-         }
-     }
+    response "application/json" {
+      map error {
+        title = body.error.code
+        detail = body.error.message
+      }
+    }
   }
 }

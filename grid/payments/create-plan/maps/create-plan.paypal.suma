@@ -1,14 +1,9 @@
 profile = "payments/create-plan@1.0"
 provider = "paypal"
 
-"""
-Create Plan map
-"""
-
 map createPlan {
   http POST "/billing/plans" {
     security "basic"
-
     request {
       body = {
                product_id: input.productId,
@@ -39,18 +34,18 @@ map createPlan {
 
     response 201 "application/json" {
       map result {
-       id = body.id
-       productId = body.product_id
-       name = body.name
-       status = body.status
+        id = body.id
+        productId = body.product_id
+        name = body.name
+        status = body.status
       }
     }
 
     response "application/json" {
-     map error {
-       title = body.message
-       detail = body.details
-     }
+      map error {
+        title = body.message
+        detail = body.details
+      }
     }
   }
 }

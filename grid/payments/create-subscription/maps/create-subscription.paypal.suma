@@ -1,14 +1,9 @@
 profile = "payments/create-subscription@1.0"
 provider = "paypal"
 
-"""
-Create subscription map
-"""
-
 map createSubscription {
   http POST "/billing/subscriptions" {
     security "basic"
-
     request {
       body = {
             plan_id: input.planId,
@@ -26,10 +21,10 @@ map createSubscription {
     }
 
     response "application/json" {
-     map error {
-       title = body.message
-       detail = body.details
-     }
+      map error {
+        title = body.message
+        detail = body.details
+      }
     }
   }
 }

@@ -1,13 +1,12 @@
 profile = "payments/delete-plan@1.0"
 provider = "paypal"
 
-"""
-Delete Plan map
-"""
-
 map deletePlan {
   http DELETE "/catalogs/plan/{input.id}" {
     security "basic"
+    request {
+
+    }
 
     response 403 "application/json" {
       map result {
@@ -16,10 +15,10 @@ map deletePlan {
     }
 
     response "application/json" {
-     map error {
-       title = body.message
-       detail = body.details
-     }
+      map error {
+        title = body.message
+        detail = body.details
+      }
     }
   }
 }
