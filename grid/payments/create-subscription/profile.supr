@@ -5,28 +5,66 @@ version = "1.0.0"
 Create subscription  usecase
 """
 
-usecase createSubscription unsafe {
- input {
-   """
-   Plan ID
-   ID of plan
-   """
-   planId! string!
+usecase CreateSubscription unsafe {
+  input {
+    """
+    Plan ID
+    ID of the plan to create a subscription for.
+    """
+    planId! string!
 
-   """
-   Customer Identificator
-   Unique customer identficator according to payment system(could be email, etc...)
-   """
-   customer! string!
- }
+    """
+    Customer Identificator
+    Unique customer identficator specific to payment system (e.g. e-mail)
+    """
+    customer! string!
+  }
 
- result {
-   id! string!
-   status! string!
- }
+  result {
+    """
+    ID
+    Unique identifier of the subscription.
+    """
+    id! string!
 
- error {
-   title! string
-   detail string
- }
+    """
+    Status
+    Status of the subscription.
+
+    Possible values:
+     - `pending` - The subscription has been created, but not yet approved.
+     - `approved` - The subscription has been approved by the buyer.
+     - `active` - The subscription is active.
+     - `trialing` - The subscription is currently in its trial period.
+     - `past_due` - The subscription failed to be paid.
+     - `suspended` - The subscription has been suspended.
+     - `unpaid` - The subscription failed to be paid, and all retry attempts have been exhausted.
+     - `cancelled` - The subscription has been cancelled.
+     - `expired` - The subscription has expired.
+    """
+    status! enum {
+      pending,
+      approved,
+      active,
+      trialing,
+      past_due,
+      suspended,
+      cancelled,
+      expired
+    }
+  }
+
+  error {
+    """
+    Title
+    A short, human-readable summary of the problem type.
+    """
+    title! string
+
+    """
+    Detail
+    A human-readable explanation specific to this occurrence of the problem.
+    """
+    detail string
+  }
 }

@@ -1,7 +1,7 @@
 profile = "payments/create-subscription@1.0"
 provider = "paypal"
 
-map createSubscription {
+map CreateSubscription {
   http POST "/billing/subscriptions" {
     security "basic"
     request {
@@ -16,7 +16,7 @@ map createSubscription {
     response 201 "application/json" {
       map result {
         id = body.id
-        status = body.status
+        status = body.status.toLowerCase()
       }
     }
 
