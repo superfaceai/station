@@ -1,7 +1,7 @@
 profile = "payments/get-plans@1.0"
 provider = "stripe"
 
-map getPlans {
+map GetPlans {
   http GET "/plans" {
     security "basic"
     request {
@@ -12,10 +12,7 @@ map getPlans {
 
     response 200 "application/json" {
       plans = call foreach (item of body.data) MapPlan(item = item)
-
-      return map result {
-        items = plans
-      }
+      return map result plans
     }
   }
 }
@@ -26,6 +23,6 @@ operation MapPlan {
   return {
     id = item.id
     name = item.nickname
-    status = item.active? 'active': 'notActive'
+    status = item.active? 'active': 'inactive'
   }
 }
