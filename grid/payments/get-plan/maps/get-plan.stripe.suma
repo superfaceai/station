@@ -1,21 +1,17 @@
 profile = "payments/get-plan@1.0"
 provider = "stripe"
 
-map getPlan {
+map GetPlan {
   http GET "/plans/{input.id}" {
     security "basic"
-    request {
-
-    }
 
     response 200 "application/json" {
       map result {
-        id = body.id
         productId = body.product
         name = body.nickname
-        status = body.active? 'ACTIVE': 'INACTIVE'
+        state = body.active ? 'active': 'inactive'
         interval = body.interval
-        price = body.amount/100
+        price = body.amount / 100
         currency = body.currency
       }
     }

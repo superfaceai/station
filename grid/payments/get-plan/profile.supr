@@ -5,24 +5,80 @@ version = "1.0.0"
 Create plan  usecase
 """
 
-usecase getPlan safe {
- input {
-    id string
- }
+usecase GetPlan safe {
+  input {
+    """
+    ID
+    Unique identifier of subscription plan.
+    """
+    id! string!
+  }
 
- result {
-        id string!
-        productId string!
-        name string!
-        interval string
-        price number!
-        currency string
-        status string
- }
+  result {
+    """
+    Product ID
+    Unique identifier of the product the plan is for (if applicable).
+    """
+    productId string
+    
+    """
+    Name
+    Name of the subscription plan.
+    """
+    name string!
+
+    """
+    Interval
+    Frequency of the interval at which the customer is charged.
+
+    Possible values:
+    - `day`
+    - `week`
+    - `month`
+    - `year`
+    """
+    interval enum {
+      day, week, month, year
+    }
+
+    """
+    Price
+    Amount charged each `interval` cycle.
+    """
+    price number
+    
+    """
+    Currency code
+    Three-letter currency code in which `price` is specified, in ISO 4217 format.
+    """
+    currency string
+
+    """
+    State
+    State of the plan.
+
+    Possible values:
+     - `created` - The plan was just created. It may not be possible to accept new subscriptions yet.
+     - `active` - The plan is active and accepting new subscriptions.
+     - `inactive` - The plan has been deactivated, and cannot accept new subscriptions.
+    """
+    state enum {
+      created, active, inactive
+    }
+  }
 
 
- error {
-   title! string
-   detail string
- }
+  error {
+    """
+    Title
+    A short, human-readable summary of the problem type.
+    """
+    title! string
+
+    """
+    Detail
+    A human-readable explanation specific to this occurrence of the problem.
+    """
+    detail string
+  }
 }

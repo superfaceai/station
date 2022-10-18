@@ -1,22 +1,18 @@
 profile = "payments/get-plan@1.0"
 provider = "paypal"
 
-map getPlan {
+map GetPlan {
   http GET "/billing/plans/{input.id}" {
     security "basic"
-    request {
-
-    }
 
     response 200 "application/json" {
       map result {
-        id = body.id
         productId = body.product_id
         name = body.name
-        status = body.status
+        state = body.state.toLowerCase()
         interval = body.billing_cycles.length > 0 ? body.billing_cycles[0].frequency.interval_unit.toLowerCase() : ''
         price = body.billing_cycles.length > 0 && body.billing_cycles[0].pricing_scheme.fixed_price.value && parseFloat(body.billing_cycles[0].pricing_scheme.fixed_price.value, 10)
-        currency = body.billing_cycles.length > 0 ? body.billing_cycles[0].pricing_scheme.fixed_price.currency_code : 'USD'
+        currency = body.billing_cycles.length > 0 ? body.billing_cycles[0].pricing_scheme.fixed_price.currency_code : undefined
       }
     }
 
