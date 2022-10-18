@@ -1,7 +1,7 @@
 profile = "payments/delete-product@1.0"
 provider = "paypal"
 
-map deleteProduct {
+map DeleteProduct {
   http DELETE "/catalogs/products/{input.id}" {
     security "basic"
     request {
@@ -9,9 +9,6 @@ map deleteProduct {
     }
 
     response 200 "application/json" {
-      map result {
-          result: "OK"
-      }
     }
 
     response "application/json" {
