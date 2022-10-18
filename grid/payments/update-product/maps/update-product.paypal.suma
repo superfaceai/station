@@ -1,7 +1,7 @@
 profile = "payments/update-product@1.0"
 provider = "paypal"
 
-map updateProduct {
+map UpdateProduct {
   http PATCH "/catalogs/products/{input.id}" {
     security "basic"
     request "application/json" {
@@ -9,11 +9,6 @@ map updateProduct {
     }
 
     response 204 "application/json" {
-      map result {
-        id = input.id
-        name = input.name
-        description = input.description
-      }
     }
 
     response "application/json" {

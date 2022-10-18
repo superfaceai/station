@@ -5,33 +5,38 @@ version = "1.0.0"
 Update product  usecase
 """
 
-usecase updateProduct unsafe {
- input {
-   "ID"
-   id string
+usecase UpdateProduct unsafe {
+    input {
+    """
+    ID
+    Unique identifier of the product.
+    """
+    id string
 
-   """
-   Name
-   Name of product
-   """
-   name string!
+    """
+    Name
+    Name of the product.
+    """
+    name string!
 
-   """
-   Description
-   Descirption for product
-   """
-   description! string
- }
+    """
+    Description
+    Descirption of the product.
+    """
+    description! string
+  }
 
- result {
-   id! string!
-   name string!
-   description string!
-   type string
- }
+  error {
+    """
+    Title
+    A short, human-readable summary of the problem type.
+    """
+    title! string
 
- error {
-   title! string
-   detail string
- }
+    """
+    Detail
+    A human-readable explanation specific to this occurrence of the problem.
+    """
+    detail string
+  }
 }
