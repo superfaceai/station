@@ -1,7 +1,7 @@
 profile = "payments/get-products@1.0"
 provider = "stripe"
 
-map getProducts {
+map GetProducts {
   http GET "/products" {
     security "basic"
     request {
@@ -12,10 +12,7 @@ map getProducts {
 
     response 200 "application/json" {
       products = call foreach (item of body.data) MapProduct(item = item)
-
-      return map result {
-        items = products
-      }
+      return map result products
     }
   }
 }
