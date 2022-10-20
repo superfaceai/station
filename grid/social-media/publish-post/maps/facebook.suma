@@ -37,7 +37,7 @@ map PublishPost {
     token = parameters.accessToken
   }
 
-  call PublishVideo(video = videos[0], caption = input.title || input.text, pageAccessToken = token) if (videos.length > 0) {
+  call PublishVideo(video = videos[0], description = input.text, pageAccessToken = token) if (videos.length > 0) {
       map error if (outcome.error) outcome.error
       return map result if (outcome.data) {
         postId = outcome.data.postId
@@ -205,7 +205,7 @@ operation PublishVideo {
       query {
         access_token = args.pageAccessToken,
         published = true,
-        description = args.caption
+        description = args.description
         fields = "id,permalink_url"
       }
     }
