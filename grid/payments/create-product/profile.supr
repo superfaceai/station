@@ -61,4 +61,16 @@ usecase CreateProduct unsafe {
     """
     detail string
   }
+
+  example Successful {
+    input {
+      name = "Superface milk"
+      description = "Milk that gives you super-powers, delivered to your door."
+    }
+
+    result {
+      id = "PROD-1192810198"
+      url = "https://www.example.com/shop/PROD-1192810198"
+    }
+  }
 }

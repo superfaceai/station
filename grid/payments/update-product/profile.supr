@@ -6,7 +6,7 @@ Update product  usecase
 """
 
 usecase UpdateProduct unsafe {
-    input {
+  input {
     """
     ID
     Unique identifier of the product.
@@ -38,5 +38,13 @@ usecase UpdateProduct unsafe {
     A human-readable explanation specific to this occurrence of the problem.
     """
     detail string
+  }
+
+  example Successful {
+    input {
+      id = "PROD-123909"
+      name = "Superface milk price monitor"
+      description = "Gives you the most up-to-date info on milk prices."  
+    }
   }
 }

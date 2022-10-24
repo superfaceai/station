@@ -81,4 +81,19 @@ usecase CreatePlan unsafe {
     """
     detail string
   }
+
+  example Successful {
+    input {
+      productId = "PROD-1192810198"
+      name = "Monthly subscription to Superface milk delivery"
+      interval = "month"
+      price = 25
+      currency = "USD"
+    }
+
+    result {
+      id = "PLAN-89101829211"
+      state = "active"
+    }
+  }
 }

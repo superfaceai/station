@@ -67,4 +67,16 @@ usecase CreateSubscription unsafe {
     """
     detail string
   }
+
+  example Successful {
+    input {
+      planId = "PLAN-89101829211"
+      customer = "joe@example.com"
+    }
+
+    result {
+      id = "91273981273918273"
+      status = "active"
+    }
+  }
 }

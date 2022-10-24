@@ -81,4 +81,19 @@ usecase GetPlan safe {
     """
     detail string
   }
+
+  example Successful {
+    input {
+      id = "PLAN-89101829211"
+    }
+
+    result {
+      productId = "PROD-1192810198"
+      name = "Monthly subscription to Superface milk delivery"
+      interval = "month"
+      price = 25
+      currency = "USD"
+      state = "active"
+    }
+  }
 }
