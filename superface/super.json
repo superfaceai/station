@@ -786,14 +786,6 @@
           "file": "../grid/payments/create-subscription/maps/create-subscription.stripe.suma"
         }
       }
-    },
-    "payments/make-payment": {
-      "file": "../grid/payments/make-payment/profile.supr",
-      "providers": {
-        "adyen": {
-          "file": "../grid/payments/make-payment/maps/make-payment.adyen.suma"
-        }
-      }
     }
   },
   "providers": {
@@ -1329,15 +1321,6 @@
           "id": "basic",
           "username": "$STRIPE_CLIENT_ID",
           "password": "$STRIPE_SECRET"
-        }
-      ]
-    },
-    "adyen": {
-      "file": "../providers/adyen.provider.json",
-      "security": [
-        {
-          "id": "apikey",
-          "apikey": "$ADYEN_API_KEY"
         }
       ]
     }
