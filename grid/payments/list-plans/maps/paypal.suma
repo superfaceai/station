@@ -1,7 +1,7 @@
-profile = "payments/get-plans@1.0"
+profile = "payments/list-plans@1.0"
 provider = "paypal"
 
-map GetPlans {
+map ListPlans {
   http GET "/billing/plans" {
     security "basic"
     request {
@@ -34,3 +34,4 @@ operation MapPlan {
     status = item.status.toLowerCase()
   }
 }
+  

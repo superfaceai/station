@@ -1,7 +1,7 @@
-profile = "payments/get-plans@1.0"
+profile = "payments/list-plans@1.0"
 provider = "stripe"
 
-map GetPlans {
+map ListPlans {
   http GET "/plans" {
     security "basic"
     request {
