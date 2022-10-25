@@ -3,7 +3,7 @@ provider = "stripe"
 
 map CreateProduct {
   http POST "/products" {
-    security "basic"
+    security "bearer"
     request "application/x-www-form-urlencoded" {
       body {
         name = input.name

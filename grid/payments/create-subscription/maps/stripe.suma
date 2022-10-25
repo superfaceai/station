@@ -3,7 +3,7 @@ provider = "stripe"
 
 map CreateSubscription {
   http POST "/subscriptions" {
-    security "basic"
+    security "bearer"
     request "application/x-www-form-urlencoded" {
       body = {
         customer: input.customer,

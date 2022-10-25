@@ -3,7 +3,7 @@ provider = "stripe"
 
 map DeleteProduct {
   http DELETE "/products/{input.id}" {
-    security "basic"
+    security "bearer"
     
     response 200 "application/json" {
     }

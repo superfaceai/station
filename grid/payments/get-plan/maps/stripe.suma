@@ -3,7 +3,7 @@ provider = "stripe"
 
 map GetPlan {
   http GET "/plans/{input.id}" {
-    security "basic"
+    security "bearer"
 
     response 200 "application/json" {
       map result {

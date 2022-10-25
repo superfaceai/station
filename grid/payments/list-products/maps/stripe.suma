@@ -3,7 +3,7 @@ provider = "stripe"
 
 map ListProducts {
   http GET "/products" {
-    security "basic"
+    security "bearer"
     request {
       query {
         limit = 100

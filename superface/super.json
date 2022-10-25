@@ -1318,9 +1318,8 @@
       "file": "../providers/stripe.provider.json",
       "security": [
         {
-          "id": "basic",
-          "username": "$STRIPE_CLIENT_ID",
-          "password": "$STRIPE_SECRET"
+          "id": "bearer",
+          "token": "$STRIPE_SECRET_KEY"
         }
       ]
     }
