@@ -1,0 +1,69 @@
+[
+  {
+    "scope": "https://PARAMS_SUBDOMAIN.paypal.com:443",
+    "method": "POST",
+    "path": "/v1/billing/subscriptions",
+    "body": {
+      "plan_id": "P-5ED3030358439130WMNL6CRQ",
+      "subscriber": {
+        "email_address": "joe@example.com"
+      }
+    },
+    "status": 201,
+    "response": {
+      "status": "APPROVAL_PENDING",
+      "id": "I-8UXFU61581GN",
+      "create_time": "2022-10-25T13:14:47Z",
+      "links": [
+        {
+          "href": "https://www.sandbox.paypal.com/webapps/billing/subscriptions?ba_token=BA-8PD938020H741551U",
+          "rel": "approve",
+          "method": "GET"
+        },
+        {
+          "href": "https://PARAMS_SUBDOMAIN.paypal.com/v1/billing/subscriptions/I-8UXFU61581GN",
+          "rel": "edit",
+          "method": "PATCH"
+        },
+        {
+          "href": "https://PARAMS_SUBDOMAIN.paypal.com/v1/billing/subscriptions/I-8UXFU61581GN",
+          "rel": "self",
+          "method": "GET"
+        }
+      ]
+    },
+    "rawHeaders": [
+      "Connection",
+      "close",
+      "Content-Length",
+      "457",
+      "Content-Type",
+      "application/json",
+      "Server",
+      "nginx/1.14.0 (Ubuntu)",
+      "Cache-Control",
+      "max-age=0, no-cache, no-store, must-revalidate",
+      "Paypal-Debug-Id",
+      "b983130ee8e2c",
+      "Strict-Transport-Security",
+      "max-age=31536000; includeSubDomains",
+      "Edge-Control",
+      "max-age=0",
+      "Accept-Ranges",
+      "bytes",
+      "Date",
+      "Tue, 25 Oct 2022 13:14:47 GMT",
+      "Via",
+      "1.1 varnish",
+      "X-Served-By",
+      "cache-fra-eddf8230057-FRA",
+      "X-Cache",
+      "MISS",
+      "X-Cache-Hits",
+      "0",
+      "X-Timer",
+      "S1666703687.766254,VS0,VE809"
+    ],
+    "responseIsBinary": false
+  }
+]
