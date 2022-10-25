@@ -14,9 +14,16 @@ map CreateSubscription {
     }
 
     response 201 "application/json" {
+      statusMap = {
+        'APPROVAL_PENDING': 'pending',
+      }
+
+      // TODO: linter misdetects this as a type error, remove once linter is upgraded
+      status = (() => statusMap[body.status] || body.status)().toLowerCase();
+
       map result {
         id = body.id
-        status = body.status.toLowerCase()
+        status = status
       }
     }
 
