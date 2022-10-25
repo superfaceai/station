@@ -4,7 +4,7 @@
     "method": "POST",
     "path": "/v1/billing/subscriptions",
     "body": {
-      "plan_id": "P-5ED3030358439130WMNL6CRQ",
+      "plan_id": "INPUT_planId",
       "subscriber": {
         "email_address": "joe@example.com"
       }
@@ -12,21 +12,21 @@
     "status": 201,
     "response": {
       "status": "APPROVAL_PENDING",
-      "id": "I-8UXFU61581GN",
-      "create_time": "2022-10-25T13:14:47Z",
+      "id": "I-RHEP4PS87T3N",
+      "create_time": "2022-10-25T15:02:12Z",
       "links": [
         {
-          "href": "https://www.sandbox.paypal.com/webapps/billing/subscriptions?ba_token=BA-8PD938020H741551U",
+          "href": "https://www.sandbox.paypal.com/webapps/billing/subscriptions?ba_token=BA-5C875138PC695035X",
           "rel": "approve",
           "method": "GET"
         },
         {
-          "href": "https://PARAMS_SUBDOMAIN.paypal.com/v1/billing/subscriptions/I-8UXFU61581GN",
+          "href": "https://PARAMS_SUBDOMAIN.paypal.com/v1/billing/subscriptions/I-RHEP4PS87T3N",
           "rel": "edit",
           "method": "PATCH"
         },
         {
-          "href": "https://PARAMS_SUBDOMAIN.paypal.com/v1/billing/subscriptions/I-8UXFU61581GN",
+          "href": "https://PARAMS_SUBDOMAIN.paypal.com/v1/billing/subscriptions/I-RHEP4PS87T3N",
           "rel": "self",
           "method": "GET"
         }
@@ -44,7 +44,7 @@
       "Cache-Control",
       "max-age=0, no-cache, no-store, must-revalidate",
       "Paypal-Debug-Id",
-      "b983130ee8e2c",
+      "22ccfc569b5f1",
       "Strict-Transport-Security",
       "max-age=31536000; includeSubDomains",
       "Edge-Control",
@@ -52,17 +52,17 @@
       "Accept-Ranges",
       "bytes",
       "Date",
-      "Tue, 25 Oct 2022 13:14:47 GMT",
+      "Tue, 25 Oct 2022 15:02:12 GMT",
       "Via",
       "1.1 varnish",
       "X-Served-By",
-      "cache-fra-eddf8230057-FRA",
+      "cache-fra-eddf8230069-FRA",
       "X-Cache",
       "MISS",
       "X-Cache-Hits",
       "0",
       "X-Timer",
-      "S1666703687.766254,VS0,VE809"
+      "S1666710132.414763,VS0,VE402"
     ],
     "responseIsBinary": false
   }

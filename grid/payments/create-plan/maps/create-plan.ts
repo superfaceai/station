@@ -12,16 +12,22 @@ export async function createPlan(provider: string): Promise<string> {
     profile: 'payments/create-plan',
     provider,
   });
-  const result = await superfacePublishingProfiles.run({
-    useCase: 'CreatePlan',
-    input: {
-      productId,
-      name: 'Temporary Plan',
-      interval: 'month',
-      price: 1234,
-      currency: 'USD',
+  const result = await superfacePublishingProfiles.run(
+    {
+      useCase: 'CreatePlan',
+      input: {
+        productId,
+        name: 'Temporary Plan',
+        interval: 'month',
+        price: 1234,
+        currency: 'USD',
+      },
+      testName: 'payments/create-plan/temporary',
     },
-  });
+    {
+      hideInput: ['productId'],
+    }
+  );
 
   return (result.unwrap() as { id: string }).id;
 }
@@ -42,16 +48,21 @@ export function createPlanTest(providerName: string): void {
       describe('when all inputs are correct', () => {
         it('creates a plan for a product', async () => {
           const productId = await createProduct(providerName);
-          const result = await superface.run({
-            useCase: 'CreatePlan',
-            input: {
-              productId,
-              name: 'A Man, A Plan, A Canal, Panama',
-              interval: 'month',
-              price: 1234,
-              currency: 'USD',
+          const result = await superface.run(
+            {
+              useCase: 'CreatePlan',
+              input: {
+                productId,
+                name: 'A Man, A Plan, A Canal, Panama',
+                interval: 'month',
+                price: 1234,
+                currency: 'USD',
+              },
             },
-          });
+            {
+              hideInput: ['productId'],
+            }
+          );
           expect(() => result.unwrap()).not.toThrow();
           expect(result.unwrap()).toMatchSnapshot();
         });

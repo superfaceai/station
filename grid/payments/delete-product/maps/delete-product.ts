@@ -21,12 +21,17 @@ export function deleteProductTest(providerName: string): void {
       describe('when all inputs are correct', () => {
         it('deletes a product', async () => {
           const id = await createProduct(providerName);
-          const result = await superface.run({
-            useCase: 'DeleteProduct',
-            input: {
-              id,
+          const result = await superface.run(
+            {
+              useCase: 'DeleteProduct',
+              input: {
+                id,
+              },
             },
-          });
+            {
+              hideInput: ['id'],
+            }
+          );
           expect(() => result.unwrap()).not.toThrow();
           expect(result.unwrap()).toMatchSnapshot();
         });

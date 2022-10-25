@@ -21,14 +21,19 @@ export function updateProductTest(providerName: string): void {
       describe('when all inputs are correct', () => {
         it('updates a product', async () => {
           const id = await createProduct(providerName);
-          const result = await superface.run({
-            useCase: 'UpdateProduct',
-            input: {
-              id,
-              name: 'New name',
-              description: 'New description',
+          const result = await superface.run(
+            {
+              useCase: 'UpdateProduct',
+              input: {
+                id,
+                name: 'New name',
+                description: 'New description',
+              },
             },
-          });
+            {
+              hideInput: ['id'],
+            }
+          );
           expect(() => result.unwrap()).not.toThrow();
           expect(result.unwrap()).toMatchSnapshot();
         });

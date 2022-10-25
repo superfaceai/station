@@ -24,13 +24,18 @@ export function createSubscriptionTest(
       describe('when all inputs are correct', () => {
         it('creates a subscription for a product', async () => {
           const planId = await createPlan(providerName);
-          const result = await superface.run({
-            useCase: 'CreateSubscription',
-            input: {
-              planId,
-              customer,
+          const result = await superface.run(
+            {
+              useCase: 'CreateSubscription',
+              input: {
+                planId,
+                customer,
+              },
             },
-          });
+            {
+              hideInput: ['planId'],
+            }
+          );
           expect(() => result.unwrap()).not.toThrow();
           expect(result.unwrap()).toMatchSnapshot();
         });

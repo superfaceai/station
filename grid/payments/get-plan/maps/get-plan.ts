@@ -21,12 +21,17 @@ export function getPlanTest(providerName: string): void {
       describe('when plan exists', () => {
         it('gets a plan', async () => {
           const id = await createPlan(providerName);
-          const result = await superface.run({
-            useCase: 'GetPlan',
-            input: {
-              id,
+          const result = await superface.run(
+            {
+              useCase: 'GetPlan',
+              input: {
+                id,
+              },
             },
-          });
+            {
+              hideInput: ['id'],
+            }
+          );
           expect(() => result.unwrap()).not.toThrow();
           expect(result.unwrap()).toMatchSnapshot();
         });
