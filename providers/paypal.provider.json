@@ -3,7 +3,14 @@
   "services": [
     {
       "id": "default",
-      "baseUrl": "https://api-m.sandbox.paypal.com/v1"
+      "baseUrl": "https://{SUBDOMAIN}.paypal.com/v1"
+    }
+  ],
+  "parameters": [
+    {
+      "name": "SUBDOMAIN",
+      "default": "api-m",
+      "description": "API subdomain, set to 'api-m' for production, 'api-m.sandbox' for sandbox; defaults to the production API"
     }
   ],
   "securitySchemes": [
