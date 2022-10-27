@@ -1,5 +1,6 @@
 /* eslint-disable jest/no-export */
 import { SuperfaceTest } from '@superfaceai/testing';
+import { nockConfig } from '../../../test-config';
 
 type InputOptions = {
   profileIds?: string[];
@@ -11,10 +12,13 @@ export const profilesTest = (provider: string, input: InputOptions): void => {
     let superfaceProfiles: SuperfaceTest;
 
     beforeEach(() => {
-      superfaceProfiles = new SuperfaceTest({
-        profile: 'social-media/profiles',
-        provider,
-      });
+      superfaceProfiles = new SuperfaceTest(
+        {
+          profile: 'social-media/profiles',
+          provider,
+        },
+        nockConfig
+      );
     });
 
     describe('GetProfiles', () => {

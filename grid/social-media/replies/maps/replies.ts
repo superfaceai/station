@@ -1,16 +1,20 @@
 /* eslint-disable jest/no-export */
 
 import { SuperfaceTest } from '@superfaceai/testing';
+import { nockConfig } from '../../../test-config';
 
 export const getRepliesTest = (provider: string, postId: string): void => {
   describe(`social-media/replies/${provider}`, () => {
     let superface: SuperfaceTest;
 
     beforeEach(() => {
-      superface = new SuperfaceTest({
-        profile: 'social-media/replies',
-        provider,
-      });
+      superface = new SuperfaceTest(
+        {
+          profile: 'social-media/replies',
+          provider,
+        },
+        nockConfig
+      );
     });
 
     describe('GetPostReplies', () => {

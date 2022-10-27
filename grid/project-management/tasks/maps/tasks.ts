@@ -1,6 +1,7 @@
 /* eslint-disable jest/no-export */
 
 import { SuperfaceTest } from '@superfaceai/testing';
+import { nockConfig } from '../../../test-config';
 
 export const createTaskTest = (
   provider: string,
@@ -15,10 +16,13 @@ export const createTaskTest = (
     let superface: SuperfaceTest;
 
     beforeEach(() => {
-      superface = new SuperfaceTest({
-        profile: 'project-management/tasks',
-        provider,
-      });
+      superface = new SuperfaceTest(
+        {
+          profile: 'project-management/tasks',
+          provider,
+        },
+        nockConfig
+      );
     });
 
     describe('CreateTask', () => {

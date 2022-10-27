@@ -1,13 +1,17 @@
 import { SuperfaceTest } from '@superfaceai/testing';
+import { nockConfig } from '../../../test-config';
 
 describe(`vcs/repository-files/mock`, () => {
   let superface: SuperfaceTest;
 
   beforeEach(() => {
-    superface = new SuperfaceTest({
-      profile: 'vcs/repository-files',
-      provider: 'mock',
-    });
+    superface = new SuperfaceTest(
+      {
+        profile: 'vcs/repository-files',
+        provider: 'mock',
+      },
+      nockConfig
+    );
   });
 
   describe('ListDirectory', () => {

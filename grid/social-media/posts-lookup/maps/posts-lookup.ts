@@ -1,5 +1,6 @@
 /* eslint-disable jest/no-export */
 import { RecordingProcessOptions, SuperfaceTest } from '@superfaceai/testing';
+import { nockConfig } from '../../../test-config';
 
 type PartialResult = {
   posts: Array<{ replyId?: string; parentId?: string }>;
@@ -16,10 +17,13 @@ export const postsLookupTest = (
     let superfacePostsLookup: SuperfaceTest;
 
     beforeEach(() => {
-      superfacePostsLookup = new SuperfaceTest({
-        profile: 'social-media/posts-lookup',
-        provider,
-      });
+      superfacePostsLookup = new SuperfaceTest(
+        {
+          profile: 'social-media/posts-lookup',
+          provider,
+        },
+        nockConfig
+      );
     });
 
     describe('FindByHashtag', () => {

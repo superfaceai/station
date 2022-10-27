@@ -1,6 +1,7 @@
 import { SuperfaceTest } from '@superfaceai/testing';
 import { readFile } from 'fs/promises';
 import path from 'path';
+import { nockConfig } from '../../../test-config';
 
 import { publishPostErrorTest } from './publish-post';
 
@@ -28,10 +29,13 @@ describe(`social-media/posts/${provider}`, () => {
   });
 
   beforeEach(() => {
-    superfacePublishPost = new SuperfaceTest({
-      profile: 'social-media/publish-post',
-      provider,
-    });
+    superfacePublishPost = new SuperfaceTest(
+      {
+        profile: 'social-media/publish-post',
+        provider,
+      },
+      nockConfig
+    );
   });
 
   describe('PublishPost', () => {

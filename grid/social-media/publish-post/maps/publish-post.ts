@@ -4,20 +4,27 @@ import {
   SuperfaceTest,
   SuperfaceTestRun,
 } from '@superfaceai/testing';
+import { nockConfig } from '../../../test-config';
 
 type ProfilesResult = Array<{ id: string; name: string }>;
 
 export const getPublishingProfiles = async (
   provider: string
 ): Promise<ProfilesResult> => {
-  const superfacePublishingProfiles = new SuperfaceTest({
-    profile: 'social-media/publishing-profiles',
-    provider,
-  });
-  const result = await superfacePublishingProfiles.run({
-    useCase: 'GetProfilesForPublishing',
-    input: {},
-  });
+  const superfacePublishingProfiles = new SuperfaceTest(
+    {
+      profile: 'social-media/publishing-profiles',
+      provider,
+    },
+    nockConfig
+  );
+  const result = await superfacePublishingProfiles.run(
+    {
+      useCase: 'GetProfilesForPublishing',
+      input: {},
+    },
+    { prepare: true }
+  );
   expect(result.isOk()).toBeTruthy();
 
   return (result.unwrap() as { profiles: ProfilesResult })?.profiles || [];
@@ -32,23 +39,32 @@ export const publishPostTest = (
     let superfacePublisPost: SuperfaceTest;
 
     beforeEach(() => {
-      superfacePublishingProfiles = new SuperfaceTest({
-        profile: 'social-media/publishing-profiles',
-        provider,
-      });
-      superfacePublisPost = new SuperfaceTest({
-        profile: 'social-media/publish-post',
-        provider,
-      });
+      superfacePublishingProfiles = new SuperfaceTest(
+        {
+          profile: 'social-media/publishing-profiles',
+          provider,
+        },
+        nockConfig
+      );
+      superfacePublisPost = new SuperfaceTest(
+        {
+          profile: 'social-media/publish-post',
+          provider,
+        },
+        nockConfig
+      );
     });
 
     describe('PublishPost', () => {
       describe('when publishing text post', () => {
         it('should succeed', async () => {
-          const result = await superfacePublishingProfiles.run({
-            useCase: 'GetProfilesForPublishing',
-            input: {},
-          });
+          const result = await superfacePublishingProfiles.run(
+            {
+              useCase: 'GetProfilesForPublishing',
+              input: {},
+            },
+            { prepare: true }
+          );
 
           expect(result.isOk()).toBeTruthy();
           const resultUnwrapped = result.unwrap();
@@ -95,10 +111,13 @@ export const publishInputCasesTest = (
     });
 
     beforeEach(() => {
-      superfacePublisPost = new SuperfaceTest({
-        profile: 'social-media/publish-post',
-        provider,
-      });
+      superfacePublisPost = new SuperfaceTest(
+        {
+          profile: 'social-media/publish-post',
+          provider,
+        },
+        nockConfig
+      );
     });
 
     const testCases = cases.map(
@@ -143,10 +162,13 @@ export const publishPostErrorTest = (
     let superfacePublisPost: SuperfaceTest;
 
     beforeEach(() => {
-      superfacePublisPost = new SuperfaceTest({
-        profile: 'social-media/publish-post',
-        provider,
-      });
+      superfacePublisPost = new SuperfaceTest(
+        {
+          profile: 'social-media/publish-post',
+          provider,
+        },
+        nockConfig
+      );
     });
 
     const testCases: Array<

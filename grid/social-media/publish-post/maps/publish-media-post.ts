@@ -6,6 +6,7 @@ import {
 } from '@superfaceai/testing';
 import { readFile } from 'fs/promises';
 import path from 'path';
+import { nockConfig } from '../../../test-config';
 
 import { getPublishingProfiles } from './publish-post';
 
@@ -55,7 +56,7 @@ export const publishMediaPostTest = (
       superfacePublisPost = new SuperfaceTest({
         profile: 'social-media/publish-post',
         provider,
-      });
+      }, nockConfig);
     });
 
     describe('PublishPost', () => {
@@ -99,7 +100,7 @@ export const publishMediaUploadTest = (
       superfacePublisPost = new SuperfaceTest({
         profile: 'social-media/publish-post',
         provider,
-      });
+      }, nockConfig);
     });
 
     const testCases = cases.map(

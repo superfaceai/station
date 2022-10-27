@@ -1,16 +1,20 @@
 /* eslint-disable jest/no-export */
 
 import { SuperfaceTest } from '@superfaceai/testing';
+import { nockConfig } from '../../../test-config';
 
 export const createProjectTest = (provider: string): void => {
   describe(`project-management/projects/${provider}`, () => {
     let superface: SuperfaceTest;
 
     beforeEach(() => {
-      superface = new SuperfaceTest({
-        profile: 'project-management/projects',
-        provider,
-      });
+      superface = new SuperfaceTest(
+        {
+          profile: 'project-management/projects',
+          provider,
+        },
+        nockConfig
+      );
     });
 
     describe('ListProject', () => {
