@@ -1,0 +1,284 @@
+{
+  "prepare-social-media/publishing-profiles/facebook/GetProfilesForPublishing": {
+    "135568bf6ee065bdd74eed0f21939c02": [
+      {
+        "scope": "https://graph.facebook.com:443",
+        "method": "GET",
+        "path": "/v12.0/me/accounts?access_token=PARAMS_accessToken&fields=id%2Cname%2Ccan_post%2Clink%2Cusername%2Cpicture%7Burl%7D",
+        "body": "",
+        "status": 200,
+        "response": [
+          "1f8b080000000000000375905d8b9b401486ffcbb9c8951f333aea2848b16d6ab7902c69dc125acba0e368dc4d4671c6e836f8df4bc2de94a577e73d2f3c3cbc57a80a5d40f4eb0a6d0511608c7c8f868404d4c38e0306c8e22c20827d6d6aa13418c00bc9fa4e6988f4300a034ead7c81088e5af72acaeddc9ea6c9aa0b2ecaae7bb17877ceedf7d45189e18dacea1b3808110103fa96eb7110105ddfc4ae300ea77ff08a77520ba9cd7e68b089ad79b6ea9257d29242e7f625b7b51b5a2ea2889a38b71ddff583d0c501bb4b8488508c29211ea38e875d42884309c2ae4f3de23169f5b2f9a0741ff31eb14a69b3970deb3d347b68c52467bcd03146ee8af332c6a67fffa9b68aabb20c45708fdd91c78f25a9b6af5b59672a39d0a7e4e365be77471dbfd75f89ea1c2769f1f59024eb24499255778c116249c67e1e4e6df3f0196dbeeca70a7d4a879d278f6cdeffd8cecfe53e156996667efbedf2fdb25b7522f61d1a84c11ac1b22cbf0de88ba695cd6d433e0eaa1bd4ed2c45dddd06864db69eb6cf4fe431dba1ed9f066fb2875730a0a8b518fe572fcbf217c89d670f32020000"
+        ],
+        "rawHeaders": [
+          "Content-Encoding",
+          "gzip",
+          "ETag",
+          "\"cd6d8635734c992c3c840474800ccffea1138d25\"",
+          "Content-Type",
+          "application/json",
+          "Vary",
+          "Origin",
+          "Vary",
+          "Accept-Encoding",
+          "cross-origin-resource-policy",
+          "cross-origin",
+          "x-app-usage",
+          "{\"call_count\":0,\"total_cputime\":0,\"total_time\":0}",
+          "x-fb-rlafr",
+          "0",
+          "Access-Control-Allow-Origin",
+          "*",
+          "facebook-api-version",
+          "v12.0",
+          "Strict-Transport-Security",
+          "max-age=15552000; preload",
+          "Pragma",
+          "no-cache",
+          "Cache-Control",
+          "private, no-cache, no-store, must-revalidate",
+          "Expires",
+          "Sat, 01 Jan 2000 00:00:00 GMT",
+          "x-fb-request-id",
+          "AWNgWmw5G7Lvs8zcWO1awxL",
+          "x-fb-trace-id",
+          "FTjQUvO7wFm",
+          "x-fb-rev",
+          "1005526400",
+          "X-FB-Debug",
+          "KZijNryYzVIOhWZv44cWQ4FUyotheK8PQ6E2KxyeoRhKKZdEjJRUXng+9nM7EXhF/YOUn68GiFLjqCFSze3oNg==",
+          "Date",
+          "Tue, 17 May 2022 07:16:00 GMT",
+          "Priority",
+          "u=3,i",
+          "Alt-Svc",
+          "h3=\":443\"; ma=86400, h3-29=\":443\"; ma=86400",
+          "Connection",
+          "close",
+          "Content-Length",
+          "420"
+        ],
+        "responseIsBinary": false,
+        "decodedResponse": {
+          "data": [
+            {
+              "id": "110658944785122",
+              "name": "Sf-test",
+              "can_post": true,
+              "link": "https://www.facebook.com/110658944785122",
+              "username": "sftest7904",
+              "picture": {
+                "data": {
+                  "url": "https://scontent-prg1-1.xx.fbcdn.net/v/t39.30808-1/263679317_110659048118445_8251344428401368545_n.png?stp=cp0_dst-png_p50x50&_nc_cat=103&ccb=1-6&_nc_sid=dbb9e7&_nc_ohc=Ob4dNyNnfTsAX8UABvx&_nc_ht=scontent-prg1-1.xx&edm=AGaHXAAEAAAA&oh=00_AT_ZXligID0MFSwd0CGrQ5nh_xSVNxjbSGeGTGT6iJvRvQ&oe=628797E0"
+                }
+              }
+            }
+          ],
+          "paging": {
+            "cursors": {
+              "before": "MTEwNjU4OTQ0Nzg1MTIy",
+              "after": "MTEwNjU4OTQ0Nzg1MTIy"
+            }
+          }
+        }
+      }
+    ]
+  },
+  "social-media/publish-post/facebook/PublishPost": {
+    "135568bf6ee065bdd74eed0f21939c02": [
+      {
+        "scope": "https://graph.facebook.com:443",
+        "method": "GET",
+        "path": "/v12.0/110658944785122?fields=access_token&access_token=PARAMS_accessToken",
+        "body": "",
+        "status": 200,
+        "response": {
+          "access_token": "PAGE_ACCESS_TOKEN_VALUE_REDACTED",
+          "id": "110658944785122"
+        },
+        "rawHeaders": [
+          "ETag",
+          "\"3e528eb8f815dcb6613e128f7c30728fd1f4c6fa\"",
+          "Content-Type",
+          "application/json; charset=UTF-8",
+          "Vary",
+          "Origin",
+          "cross-origin-resource-policy",
+          "cross-origin",
+          "x-app-usage",
+          "{\"call_count\":13,\"total_cputime\":0,\"total_time\":4}",
+          "x-fb-rlafr",
+          "0",
+          "Access-Control-Allow-Origin",
+          "*",
+          "facebook-api-version",
+          "v12.0",
+          "Strict-Transport-Security",
+          "max-age=15552000; preload",
+          "Pragma",
+          "no-cache",
+          "Cache-Control",
+          "private, no-cache, no-store, must-revalidate",
+          "Expires",
+          "Sat, 01 Jan 2000 00:00:00 GMT",
+          "x-fb-request-id",
+          "ALPUrN_nNisbRDJpLXiyoMh",
+          "x-fb-trace-id",
+          "C4ehZVZqGv6",
+          "x-fb-rev",
+          "1005354385",
+          "X-FB-Debug",
+          "y6mA5xaoE5qMb60xOXPRYGYbT+hRlJftOK+iavSoW92WywHnVtF46fQmxiSYebQSAntlZslk0/FmlnflCTkncg==",
+          "Date",
+          "Thu, 14 Apr 2022 15:41:35 GMT",
+          "Alt-Svc",
+          "h3=\":443\"; ma=86400, h3-29=\":443\"; ma=86400",
+          "Connection",
+          "close",
+          "Content-Length",
+          "278"
+        ],
+        "responseIsBinary": false
+      },
+      {
+        "scope": "https://graph.facebook.com:443",
+        "method": "POST",
+        "path": "/v12.0/110658944785122/feed?access_token=PAGE_ACCESS_TOKEN_VALUE_REDACTED&message=Test+from+Superface+Station+7.&fields=id%2Cpermalink_url",
+        "body": "",
+        "status": 400,
+        "response": [
+          "1f8b0800000000000003558ec16a834010865f6598b3044b6aa1de12d24b1b6842d2b3aceea803ba6b77664b25e4dd8b8aa5bdfdfcf3cd7c73430ac107cc6fd893886908733cc4a1e3ca2881a8d128b08e12d4719888f75dd4f6e5bba241d93b4cb0f29630cfd2a7643958482c97eee131cbd2a967293418274c4e31af4d27b4c2512814cadafdb75f16fbc7608d4ef23f702f0de6786d59d61fe34c010bb025a75c990ed483b6049d1105ef08461f61f0a26437700de39cd93520be276da764b9ae2990d3047c004b1de9bc166008f4c5fe57b4c104eb5283a9a8608b39eecaf4f9958bcb69fb763cec4fe7ede75ece7cc4fbfd075785842964010000"
+        ],
+        "rawHeaders": [
+          "Content-Encoding",
+          "gzip",
+          "Vary",
+          "Origin",
+          "Vary",
+          "Accept-Encoding",
+          "x-business-use-case-usage",
+          "{\"110658944785122\":[{\"type\":\"pages\",\"call_count\":1,\"total_cputime\":1,\"total_time\":1,\"estimated_time_to_regain_access\":0}]}",
+          "x-fb-rlafr",
+          "0",
+          "Content-Type",
+          "application/json; charset=UTF-8",
+          "WWW-Authenticate",
+          "OAuth \"Facebook Platform\" \"invalid_request\" \"Duplicate status message\"",
+          "Access-Control-Allow-Origin",
+          "*",
+          "facebook-api-version",
+          "v12.0",
+          "Strict-Transport-Security",
+          "max-age=15552000; preload",
+          "Pragma",
+          "no-cache",
+          "Cache-Control",
+          "no-store",
+          "Expires",
+          "Sat, 01 Jan 2000 00:00:00 GMT",
+          "x-fb-request-id",
+          "Ab09Ji_SP3KLDBPQ3qBsQiL",
+          "x-fb-trace-id",
+          "EbMnwDN4NHd",
+          "x-fb-rev",
+          "1005354385",
+          "X-FB-Debug",
+          "dmjYi/edt+v9+H4wAmGyajT0Of7e1uKZFoK7bTa6zWMNPrqeAcVi0lllxw4Zv0AfciZ8yzrXm9EySCiEZwCXVA==",
+          "Date",
+          "Thu, 14 Apr 2022 15:41:36 GMT",
+          "Priority",
+          "u=3,i",
+          "Alt-Svc",
+          "h3=\":443\"; ma=86400, h3-29=\":443\"; ma=86400",
+          "Connection",
+          "close",
+          "Content-Length",
+          "253"
+        ],
+        "responseIsBinary": false,
+        "decodedResponse": {
+          "error": {
+            "message": "Duplicate status message",
+            "type": "OAuthException",
+            "code": 506,
+            "error_subcode": 1455006,
+            "is_transient": false,
+            "error_user_title": "Duplicate Status Update",
+            "error_user_msg": "This status update is identical to the last one you posted. Try posting something different, or delete your previous update.",
+            "fbtrace_id": "Ab09Ji_SP3KLDBPQ3qBsQiL"
+          }
+        }
+      }
+    ],
+    "f7e55ae1b82795cf20d2b8a7e317465e": [
+      {
+        "scope": "https://graph.facebook.com:443",
+        "method": "GET",
+        "path": "/v12.0/4?fields=access_token&access_token=PARAMS_accessToken",
+        "body": "",
+        "status": 400,
+        "response": [
+          "1f8b08000000000000034590414bc3401085ffca30975e6252694fb9552cd243b188824aa06c76a7c9b6c9ceba33d16ae97f97b482b799c77bdff0e6849412272c4fd8938869084b7c0932c4c849c941430a893e0612cde1b1de9355f8f2dac2ea1e26f309382681c00a74f4a2195813c6ad26e8d83872e0060265e8bd880f0d444a97918364c0e93fff7712b4f5021c2919f51c72d8746484209171a02dc14332b185c566058eedd053d08b118c42ab1aa5ac8aaa70f449dd08917c672cd5cc87dc725f158ead544533326e4cf498a17ec7b1f305bb266dd92d8f96e2c8c40c2d3bc2f2763acdae8fdaca505fb5d92cc35dadc958da7a87252e76af77f37eff7cd8c49ff7f4563f75d4ac1716cfe75f3942acfd65010000"
+        ],
+        "rawHeaders": [
+          "Content-Encoding",
+          "gzip",
+          "Vary",
+          "Origin",
+          "Vary",
+          "Accept-Encoding",
+          "cross-origin-resource-policy",
+          "cross-origin",
+          "x-app-usage",
+          "{\"call_count\":13,\"total_cputime\":0,\"total_time\":4}",
+          "x-fb-rlafr",
+          "0",
+          "Content-Type",
+          "application/json; charset=UTF-8",
+          "WWW-Authenticate",
+          "OAuth \"Facebook Platform\" \"invalid_request\" \"Unsupported get request. Object with ID '4' does not exist, cannot be loaded due to missing permissions, or does not support this operation. Please read the Graph API documentation at https://developers.facebook.com/docs/graph-api\"",
+          "Access-Control-Allow-Origin",
+          "*",
+          "facebook-api-version",
+          "v12.0",
+          "Strict-Transport-Security",
+          "max-age=15552000; preload",
+          "Pragma",
+          "no-cache",
+          "Cache-Control",
+          "no-store",
+          "Expires",
+          "Sat, 01 Jan 2000 00:00:00 GMT",
+          "x-fb-request-id",
+          "AfXB4mjTkPpzZrYbRlegMAc",
+          "x-fb-trace-id",
+          "BYU4YIr/dVN",
+          "x-fb-rev",
+          "1005354385",
+          "X-FB-Debug",
+          "OPzv9fQryXKC4LJsKF7xrXzkJdMINGQDDOGoNg6iuLa3lFLX0c+gK5p1zPaLTmqiNuE2cJS82b/yhNtfiyu6ng==",
+          "Date",
+          "Thu, 14 Apr 2022 15:41:36 GMT",
+          "Priority",
+          "u=3,i",
+          "Alt-Svc",
+          "h3=\":443\"; ma=86400, h3-29=\":443\"; ma=86400",
+          "Connection",
+          "close",
+          "Content-Length",
+          "280"
+        ],
+        "responseIsBinary": false,
+        "decodedResponse": {
+          "error": {
+            "message": "Unsupported get request. Object with ID '4' does not exist, cannot be loaded due to missing permissions, or does not support this operation. Please read the Graph API documentation at https://developers.facebook.com/docs/graph-api",
+            "type": "GraphMethodException",
+            "code": 100,
+            "error_subcode": 33,
+            "fbtrace_id": "AfXB4mjTkPpzZrYbRlegMAc"
+          }
+        }
+      }
+    ]
+  }
+}

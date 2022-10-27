@@ -1,0 +1,208 @@
+{
+  "crm/contacts/sendgrid/Create": {
+    "26fe5a9ef08a5fd952bb44fafcde98a3": [],
+    "38e2b7f7e6bf0d6d0eb13b97c5b984e5": [
+      {
+        "scope": "https://api.sendgrid.com:443",
+        "method": "PUT",
+        "path": "/v3/marketing/contacts",
+        "body": {
+          "contacts": [
+            {
+              "email": "TEST@example.com",
+              "custom_fields": {
+                "e1_T": "value"
+              }
+            }
+          ]
+        },
+        "status": 202,
+        "response": {
+          "job_id": "5fb97ceb-5625-4da5-b857-0f781b718c4c"
+        },
+        "rawHeaders": [
+          "Server",
+          "nginx",
+          "Date",
+          "Mon, 08 Nov 2021 12:42:11 GMT",
+          "Content-Type",
+          "application/json",
+          "Content-Length",
+          "50",
+          "Connection",
+          "close",
+          "x-amzn-requestid",
+          "fc13642a-cf16-4669-8e4e-f56e021ee1a0",
+          "access-control-allow-origin",
+          "*",
+          "access-control-allow-headers",
+          "AUTHORIZATION, Content-Type, On-behalf-of, x-sg-elas-acl, X-Recaptcha, X-Request-Source",
+          "x-amz-apigw-id",
+          "IfEteH5JvHcFwrg=",
+          "access-control-allow-methods",
+          "PUT,OPTIONS,DELETE,OPTIONS",
+          "access-control-expose-headers",
+          "Link, Location",
+          "x-amzn-trace-id",
+          "Root=1-61891b22-0b59b48a79809812014c7933;Sampled=0",
+          "x-envoy-upstream-service-time",
+          "548",
+          "referrer-policy",
+          "strict-origin-when-cross-origin",
+          "x-content-type-options",
+          "nosniff",
+          "x-ratelimit-limit",
+          "200",
+          "x-ratelimit-remaining",
+          "199",
+          "x-ratelimit-reset",
+          "50"
+        ],
+        "responseIsBinary": false
+      }
+    ]
+  },
+  "crm/contacts/sendgrid/Update": {
+    "8ab24a93ad7076f30b67dd3b7a95e121": [],
+    "d6880c17ac0ef43ee5ee29be47cb178f": [
+      {
+        "scope": "https://api.sendgrid.com:443",
+        "method": "PUT",
+        "path": "/v3/marketing/contacts",
+        "body": {
+          "contacts": [
+            {
+              "email": "test@example.com",
+              "first_name": "test"
+            }
+          ]
+        },
+        "status": 202,
+        "response": {
+          "job_id": "8a078d45-45c2-4bec-88d3-1cc25b4c34e9"
+        },
+        "rawHeaders": [
+          "Server",
+          "nginx",
+          "Date",
+          "Mon, 08 Nov 2021 12:42:12 GMT",
+          "Content-Type",
+          "application/json",
+          "Content-Length",
+          "50",
+          "Connection",
+          "close",
+          "x-amzn-requestid",
+          "23f8f79b-acd0-474d-9ea4-bdccebe3b98f",
+          "access-control-allow-origin",
+          "*",
+          "access-control-allow-headers",
+          "AUTHORIZATION, Content-Type, On-behalf-of, x-sg-elas-acl, X-Recaptcha, X-Request-Source",
+          "x-amz-apigw-id",
+          "IfEtrEUJPHcFT1g=",
+          "access-control-allow-methods",
+          "PUT,OPTIONS,DELETE,OPTIONS",
+          "access-control-expose-headers",
+          "Link, Location",
+          "x-amzn-trace-id",
+          "Root=1-61891b24-19c11aa15869b58440cee890;Sampled=0",
+          "x-envoy-upstream-service-time",
+          "460",
+          "referrer-policy",
+          "strict-origin-when-cross-origin",
+          "x-content-type-options",
+          "nosniff",
+          "x-ratelimit-limit",
+          "200",
+          "x-ratelimit-remaining",
+          "198",
+          "x-ratelimit-reset",
+          "48"
+        ],
+        "responseIsBinary": false
+      }
+    ]
+  },
+  "crm/contacts/sendgrid/Search": {
+    "39cc78198cf199a9d370c32d5ad03e4d": [],
+    "e4ce945012c8ad382df8024cb4e9cc64": [
+      {
+        "scope": "https://api.sendgrid.com:443",
+        "method": "POST",
+        "path": "/v3/marketing/contacts/search",
+        "body": {
+          "query": "first_name = \"test\""
+        },
+        "status": 200,
+        "response": {
+          "result": [
+            {
+              "address_line_1": "",
+              "address_line_2": "",
+              "alternate_emails": [],
+              "city": "",
+              "country": "",
+              "email": "test@example.com",
+              "first_name": "test",
+              "id": "ed62c84e-59fe-4bb5-8a96-323b1b5db10b",
+              "last_name": "",
+              "list_ids": [],
+              "postal_code": "",
+              "state_province_region": "",
+              "phone_number": "",
+              "whatsapp": "",
+              "line": "",
+              "facebook": "",
+              "unique_name": "",
+              "_metadata": {
+                "self": "https://api.sendgrid.com/v3/marketing/contacts/ed62c84e-59fe-4bb5-8a96-323b1b5db10b"
+              },
+              "custom_fields": {
+                "test": "value"
+              },
+              "created_at": "2021-11-02T13:25:39Z",
+              "updated_at": "2021-11-02T13:26:10Z"
+            }
+          ],
+          "contact_count": 1,
+          "_metadata": {
+            "self": "https://api.sendgrid.com/v3/marketing/contacts/search"
+          }
+        },
+        "rawHeaders": [
+          "Server",
+          "nginx",
+          "Date",
+          "Mon, 08 Nov 2021 12:42:14 GMT",
+          "Content-Type",
+          "application/json",
+          "Content-Length",
+          "644",
+          "Connection",
+          "close",
+          "x-amzn-requestid",
+          "6d95ad4e-67b5-4573-b17e-867a6bd6aa1a",
+          "x-amz-apigw-id",
+          "IfEt1G2WvHcF7zQ=",
+          "x-amzn-trace-id",
+          "Root=1-61891b25-0f774e5b3e96c2c36a2cf344;Sampled=0",
+          "x-envoy-upstream-service-time",
+          "933",
+          "referrer-policy",
+          "strict-origin-when-cross-origin",
+          "x-content-type-options",
+          "nosniff",
+          "x-ratelimit-limit",
+          "200",
+          "x-ratelimit-remaining",
+          "199",
+          "x-ratelimit-reset",
+          "47",
+          "Powered-By",
+          "SGGateway"
+        ],
+        "responseIsBinary": false
+      }
+    ]
+  }
+}

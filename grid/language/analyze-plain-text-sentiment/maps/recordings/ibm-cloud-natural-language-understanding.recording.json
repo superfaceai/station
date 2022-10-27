@@ -1,0 +1,274 @@
+{
+  "language/analyze-plain-text-sentiment/ibm-cloud-natural-language-understanding/AnalyzePlainTextSentiment": {
+    "a1733ac38a17424ff0c21e73ada8cef5": [
+      {
+        "scope": "https://api.PARAMS_REGION.natural-language-understanding.watson.cloud.ibm.com:443",
+        "method": "POST",
+        "path": "/instances/PARAMS_INSTANCE_ID/v1/analyze?version=2021-08-01",
+        "body": {
+          "text": "Enjoy your stay!",
+          "language": "en",
+          "features": {
+            "sentiment": {
+              "document": true
+            }
+          }
+        },
+        "status": 200,
+        "response": {
+          "usage": {
+            "text_units": 1,
+            "text_characters": 16,
+            "features": 1
+          },
+          "sentiment": {
+            "document": {
+              "score": 0.956482,
+              "label": "positive"
+            }
+          },
+          "language": "en"
+        },
+        "rawHeaders": [
+          "Server",
+          "watson-gateway",
+          "Content-Length",
+          "203",
+          "Content-Type",
+          "application/json; charset=utf-8",
+          "Cache-Control",
+          "no-cache, no-store",
+          "x-dp-watson-tran-id",
+          "97d23618-4b35-402c-9545-5f83d86a3646",
+          "Content-Security-Policy",
+          "default-src 'none'",
+          "Pragma",
+          "no-cache",
+          "x-content-type-options",
+          "nosniff",
+          "x-frame-options",
+          "DENY",
+          "x-xss-protection",
+          "1; mode=block",
+          "strict-transport-security",
+          "max-age=31536000; includeSubDomains;",
+          "x-dp-watson-tran-id",
+          "97d23618-4b35-402c-9545-5f83d86a3646",
+          "x-request-id",
+          "97d23618-4b35-402c-9545-5f83d86a3646",
+          "x-global-transaction-id",
+          "97d23618-4b35-402c-9545-5f83d86a3646",
+          "X-EdgeConnect-MidMile-RTT",
+          "5",
+          "X-EdgeConnect-Origin-MEX-Latency",
+          "181",
+          "Date",
+          "Mon, 08 Nov 2021 15:47:09 GMT",
+          "Connection",
+          "close"
+        ],
+        "responseIsBinary": false
+      }
+    ],
+    "6407645b9ef5c27f82c86c8083dc01c5": [
+      {
+        "scope": "https://api.PARAMS_REGION.natural-language-understanding.watson.cloud.ibm.com:443",
+        "method": "POST",
+        "path": "/instances/PARAMS_INSTANCE_ID/v1/analyze?version=2021-08-01",
+        "body": {
+          "text": "There is a book on the desk.",
+          "language": "en",
+          "features": {
+            "sentiment": {
+              "document": true
+            }
+          }
+        },
+        "status": 200,
+        "response": {
+          "usage": {
+            "text_units": 1,
+            "text_characters": 28,
+            "features": 1
+          },
+          "sentiment": {
+            "document": {
+              "score": 0,
+              "label": "neutral"
+            }
+          },
+          "language": "en"
+        },
+        "rawHeaders": [
+          "Server",
+          "watson-gateway",
+          "Content-Length",
+          "195",
+          "Content-Type",
+          "application/json; charset=utf-8",
+          "Cache-Control",
+          "no-cache, no-store",
+          "x-dp-watson-tran-id",
+          "e1dc026c-c4c9-46ca-8431-df482cb833bb",
+          "Content-Security-Policy",
+          "default-src 'none'",
+          "Pragma",
+          "no-cache",
+          "x-content-type-options",
+          "nosniff",
+          "x-frame-options",
+          "DENY",
+          "x-xss-protection",
+          "1; mode=block",
+          "strict-transport-security",
+          "max-age=31536000; includeSubDomains;",
+          "x-dp-watson-tran-id",
+          "e1dc026c-c4c9-46ca-8431-df482cb833bb",
+          "x-request-id",
+          "e1dc026c-c4c9-46ca-8431-df482cb833bb",
+          "x-global-transaction-id",
+          "e1dc026c-c4c9-46ca-8431-df482cb833bb",
+          "X-EdgeConnect-MidMile-RTT",
+          "5",
+          "X-EdgeConnect-Origin-MEX-Latency",
+          "137",
+          "Date",
+          "Mon, 08 Nov 2021 15:47:09 GMT",
+          "Connection",
+          "close"
+        ],
+        "responseIsBinary": false
+      }
+    ],
+    "9049dae99a33d63216125858136525a0": [
+      {
+        "scope": "https://api.PARAMS_REGION.natural-language-understanding.watson.cloud.ibm.com:443",
+        "method": "POST",
+        "path": "/instances/PARAMS_INSTANCE_ID/v1/analyze?version=2021-08-01",
+        "body": {
+          "text": "I feel tired this morning.",
+          "language": "en",
+          "features": {
+            "sentiment": {
+              "document": true
+            }
+          }
+        },
+        "status": 200,
+        "response": {
+          "usage": {
+            "text_units": 1,
+            "text_characters": 26,
+            "features": 1
+          },
+          "sentiment": {
+            "document": {
+              "score": -0.924742,
+              "label": "negative"
+            }
+          },
+          "language": "en"
+        },
+        "rawHeaders": [
+          "Server",
+          "watson-gateway",
+          "Content-Length",
+          "204",
+          "Content-Type",
+          "application/json; charset=utf-8",
+          "Cache-Control",
+          "no-cache, no-store",
+          "x-dp-watson-tran-id",
+          "edc63ae1-c9ce-427f-bbc1-2059fce3fa51",
+          "Content-Security-Policy",
+          "default-src 'none'",
+          "Pragma",
+          "no-cache",
+          "x-content-type-options",
+          "nosniff",
+          "x-frame-options",
+          "DENY",
+          "x-xss-protection",
+          "1; mode=block",
+          "strict-transport-security",
+          "max-age=31536000; includeSubDomains;",
+          "x-dp-watson-tran-id",
+          "edc63ae1-c9ce-427f-bbc1-2059fce3fa51",
+          "x-request-id",
+          "edc63ae1-c9ce-427f-bbc1-2059fce3fa51",
+          "x-global-transaction-id",
+          "edc63ae1-c9ce-427f-bbc1-2059fce3fa51",
+          "X-EdgeConnect-MidMile-RTT",
+          "5",
+          "X-EdgeConnect-Origin-MEX-Latency",
+          "235",
+          "Date",
+          "Mon, 08 Nov 2021 15:47:10 GMT",
+          "Connection",
+          "close"
+        ],
+        "responseIsBinary": false
+      }
+    ],
+    "18387345146aa90e28fbd449f334a29f": [
+      {
+        "scope": "https://api.PARAMS_REGION.natural-language-understanding.watson.cloud.ibm.com:443",
+        "method": "POST",
+        "path": "/instances/PARAMS_INSTANCE_ID/v1/analyze?version=2021-08-01",
+        "body": {
+          "text": "",
+          "language": "wrong_language_code",
+          "features": {
+            "sentiment": {
+              "document": true
+            }
+          }
+        },
+        "status": 400,
+        "response": {
+          "error": "invalid request: content is empty",
+          "code": 400
+        },
+        "rawHeaders": [
+          "Server",
+          "watson-gateway",
+          "Content-Length",
+          "65",
+          "Content-Type",
+          "application/json; charset=utf-8",
+          "Cache-Control",
+          "no-cache, no-store",
+          "x-dp-watson-tran-id",
+          "2a833db2-6ac1-4097-ada8-527f1938d20d",
+          "Content-Security-Policy",
+          "default-src 'none'",
+          "Pragma",
+          "no-cache",
+          "x-content-type-options",
+          "nosniff",
+          "x-frame-options",
+          "DENY",
+          "x-xss-protection",
+          "1; mode=block",
+          "strict-transport-security",
+          "max-age=31536000; includeSubDomains;",
+          "x-dp-watson-tran-id",
+          "2a833db2-6ac1-4097-ada8-527f1938d20d",
+          "x-request-id",
+          "2a833db2-6ac1-4097-ada8-527f1938d20d",
+          "x-global-transaction-id",
+          "2a833db2-6ac1-4097-ada8-527f1938d20d",
+          "X-EdgeConnect-MidMile-RTT",
+          "5",
+          "X-EdgeConnect-Origin-MEX-Latency",
+          "22",
+          "Date",
+          "Mon, 08 Nov 2021 15:47:10 GMT",
+          "Connection",
+          "close"
+        ],
+        "responseIsBinary": false
+      }
+    ]
+  }
+}

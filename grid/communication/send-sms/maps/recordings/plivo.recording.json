@@ -1,0 +1,160 @@
+{
+  "communication/send-sms/plivo/SendMessage": {
+    "69d006af77bdccd34e956497c7cff718": [
+      {
+        "scope": "https://api.plivo.com:443",
+        "method": "POST",
+        "path": "/v1/Account/PARAMS_authId/Message/",
+        "body": {
+          "src": "Plivo APIs",
+          "dst": "+4915207930698",
+          "text": "Hello World!"
+        },
+        "status": 202,
+        "response": {
+          "api_id": "9a1b87da-3e11-11ec-9e36-0242ac110004",
+          "message": "message(s) queued",
+          "message_uuid": [
+            "9a220a60-3e11-11ec-9e36-0242ac110004"
+          ]
+        },
+        "rawHeaders": [
+          "Date",
+          "Fri, 05 Nov 2021 08:23:06 GMT",
+          "Content-Type",
+          "application/json",
+          "Content-Length",
+          "156",
+          "Connection",
+          "close",
+          "Server",
+          "nginx",
+          "X-Plivo-Signature",
+          "6pdwLX6eD/2d0FEkuliLWwCFAX8=",
+          "X-Plivo-Signature-V2",
+          "MvpNwSBgUc0bOpDeR1KTRkm9lK325x53mm75d9/DgEA=",
+          "X-Plivo-Signature-MA-V2",
+          "MvpNwSBgUc0bOpDeR1KTRkm9lK325x53mm75d9/DgEA=",
+          "X-Plivo-Signature-V2-Nonce",
+          "24542202346300724920"
+        ],
+        "responseIsBinary": false
+      }
+    ],
+    "8e093d1bb722f653570c25c2793803f8": [
+      {
+        "scope": "https://api.plivo.com:443",
+        "method": "POST",
+        "path": "/v1/Account/PARAMS_authId/Message/",
+        "body": {
+          "src": "Plivo APIs 2",
+          "dst": "+4915207930698",
+          "text": "Hello World!"
+        },
+        "status": 202,
+        "response": {
+          "api_id": "9aa44b06-3e11-11ec-9cee-0242ac110003",
+          "message": "message(s) queued",
+          "message_uuid": [
+            "9aa59cf4-3e11-11ec-9cee-0242ac110003"
+          ]
+        },
+        "rawHeaders": [
+          "Date",
+          "Fri, 05 Nov 2021 08:23:07 GMT",
+          "Content-Type",
+          "application/json",
+          "Content-Length",
+          "156",
+          "Connection",
+          "close",
+          "Server",
+          "nginx",
+          "X-Plivo-Signature",
+          "NzZAufjH0oRt8i/kjbPODBqHJPk=",
+          "X-Plivo-Signature-V2",
+          "v3fOytMg/2K4ZDyeHheLUeavtQKc0JMvKovC0AJyLvU=",
+          "X-Plivo-Signature-MA-V2",
+          "v3fOytMg/2K4ZDyeHheLUeavtQKc0JMvKovC0AJyLvU=",
+          "X-Plivo-Signature-V2-Nonce",
+          "21106843516771128026"
+        ],
+        "responseIsBinary": false
+      }
+    ]
+  },
+  "communication/send-sms/plivo/RetrieveMessageStatus": {
+    "8e093d1bb722f653570c25c2793803f8": [
+      {
+        "scope": "https://api.plivo.com:443",
+        "method": "GET",
+        "path": "/v1/Account/PARAMS_authId/Message/9aa59cf4-3e11-11ec-9cee-0242ac110003",
+        "body": "",
+        "status": 301,
+        "response": "",
+        "rawHeaders": [
+          "Date",
+          "Fri, 05 Nov 2021 08:23:07 GMT",
+          "Content-Type",
+          "text/html",
+          "Content-Length",
+          "178",
+          "Connection",
+          "close",
+          "Server",
+          "nginx",
+          "Location",
+          "https://api.plivo.com/v1/Account/PARAMS_authId/Message/9aa59cf4-3e11-11ec-9cee-0242ac110003/"
+        ],
+        "responseIsBinary": false
+      },
+      {
+        "scope": "https://api.plivo.com:443",
+        "method": "GET",
+        "path": "/v1/Account/PARAMS_authId/Message/9aa59cf4-3e11-11ec-9cee-0242ac110003/",
+        "body": "",
+        "status": 200,
+        "response": {
+          "api_id": "9bac63d0-3e11-11ec-88b4-0242ac110003",
+          "carrier_fees": "0.00000",
+          "error_code": "450",
+          "from_number": "PlivoAPIs2",
+          "mcc": "262",
+          "message_direction": "outbound",
+          "message_state": "failed",
+          "message_time": "2021-11-05 09:23:07.155397+01:00",
+          "message_type": "sms",
+          "message_uuid": "9aa59cf4-3e11-11ec-9cee-0242ac110003",
+          "mnc": "002",
+          "powerpack_id": null,
+          "resource_uri": "/v1/Account/PARAMS_authId/Message/9aa59cf4-3e11-11ec-9cee-0242ac110003/",
+          "to_number": "4915207930698",
+          "total_amount": "0.00000",
+          "total_rate": "0.00000",
+          "units": 1
+        },
+        "rawHeaders": [
+          "Date",
+          "Fri, 05 Nov 2021 08:23:08 GMT",
+          "Content-Type",
+          "application/json",
+          "Content-Length",
+          "596",
+          "Connection",
+          "close",
+          "Server",
+          "nginx",
+          "X-Plivo-Signature",
+          "ugA9Nb3F8U+3xzcm+CSSB5eS6iw=",
+          "X-Plivo-Signature-V2",
+          "biZR6zyt3Iy+GKL5KiUPtXfFmVSxdJtB8Z9DexaNuXc=",
+          "X-Plivo-Signature-MA-V2",
+          "biZR6zyt3Iy+GKL5KiUPtXfFmVSxdJtB8Z9DexaNuXc=",
+          "X-Plivo-Signature-V2-Nonce",
+          "09859028426818476325"
+        ],
+        "responseIsBinary": false
+      }
+    ]
+  }
+}

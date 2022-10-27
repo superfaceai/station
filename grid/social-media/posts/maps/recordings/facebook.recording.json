@@ -1,0 +1,490 @@
+{
+  "prepare-social-media/publishing-profiles/facebook/GetProfilesForPublishing": {
+    "e805809eec73d23a7132cf19494c75a7": [
+      {
+        "scope": "https://graph.facebook.com:443",
+        "method": "GET",
+        "path": "/v12.0/me/accounts?access_token=PARAMS_accessToken&fields=id%2Cname%2Ccan_post%2Clink%2Cusername%2Cpicture%7Burl%7D",
+        "body": "",
+        "status": 200,
+        "response": [
+          "1f8b080000000000000375905d8b9b401486ffcbb9c8951f333aea2848b16d6ab7902c69dc125acba0e368dc4d4671c6e836f8df4bc2de94a577e73d2f3c3cbc57a80a5d40f4eb0a6d0511608c7c8f868404d4c38e0306c8e22c20827d6d6aa13418c00bc9fa4e6988f4300a034ead7c81088e5af72acaeddc9ea6c9aa0b2ecaae7bb17877ceedf7d45189e18dacea1b3808110103fa96eb7110105ddfc4ae300ea77ff08a77520ba9cd7e68b089ad79b6ea9257d29242e7f625b7b51b5a2ea2889a38b71ddff583d0c501bb4b8488508c29211ea38e875d42884309c2ae4f3de23169f5b2f9a0741ff31eb14a69b3970deb3d347b68c52467bcd03146ee8af332c6a67fffa9b68aabb20c45708fdd91c78f25a9b6af5b59672a39d0a7e4e365be77471dbfd75f89ea1c2769f1f59024eb24499255778c116249c67e1e4e6df3f0196dbeeca70a7d4a879d278f6cdeffd8cecfe53e156996667efbedf2fdb25b7522f61d1a84c11ac1b22cbf0de88ba695cd6d433e0eaa1bd4ed2c45dddd06864db69eb6cf4fe431dba1ed9f066fb2875730a0a8b518fe572fcbf217c89d670f32020000"
+        ],
+        "rawHeaders": [
+          "Content-Encoding",
+          "gzip",
+          "ETag",
+          "\"cd6d8635734c992c3c840474800ccffea1138d25\"",
+          "Content-Type",
+          "application/json",
+          "Vary",
+          "Origin",
+          "Vary",
+          "Accept-Encoding",
+          "cross-origin-resource-policy",
+          "cross-origin",
+          "x-app-usage",
+          "{\"call_count\":0,\"total_cputime\":0,\"total_time\":0}",
+          "x-fb-rlafr",
+          "0",
+          "Access-Control-Allow-Origin",
+          "*",
+          "facebook-api-version",
+          "v12.0",
+          "Strict-Transport-Security",
+          "max-age=15552000; preload",
+          "Pragma",
+          "no-cache",
+          "Cache-Control",
+          "private, no-cache, no-store, must-revalidate",
+          "Expires",
+          "Sat, 01 Jan 2000 00:00:00 GMT",
+          "x-fb-request-id",
+          "AWNgWmw5G7Lvs8zcWO1awxL",
+          "x-fb-trace-id",
+          "FTjQUvO7wFm",
+          "x-fb-rev",
+          "1005526400",
+          "X-FB-Debug",
+          "KZijNryYzVIOhWZv44cWQ4FUyotheK8PQ6E2KxyeoRhKKZdEjJRUXng+9nM7EXhF/YOUn68GiFLjqCFSze3oNg==",
+          "Date",
+          "Tue, 17 May 2022 07:16:00 GMT",
+          "Priority",
+          "u=3,i",
+          "Alt-Svc",
+          "h3=\":443\"; ma=86400, h3-29=\":443\"; ma=86400",
+          "Connection",
+          "close",
+          "Content-Length",
+          "420"
+        ],
+        "responseIsBinary": false,
+        "decodedResponse": {
+          "data": [
+            {
+              "id": "110658944785122",
+              "name": "Sf-test",
+              "can_post": true,
+              "link": "https://www.facebook.com/110658944785122",
+              "username": "sftest7904",
+              "picture": {
+                "data": {
+                  "url": "https://scontent-prg1-1.xx.fbcdn.net/v/t39.30808-1/263679317_110659048118445_8251344428401368545_n.png?stp=cp0_dst-png_p50x50&_nc_cat=103&ccb=1-6&_nc_sid=dbb9e7&_nc_ohc=Ob4dNyNnfTsAX8UABvx&_nc_ht=scontent-prg1-1.xx&edm=AGaHXAAEAAAA&oh=00_AT_ZXligID0MFSwd0CGrQ5nh_xSVNxjbSGeGTGT6iJvRvQ&oe=628797E0"
+                }
+              }
+            }
+          ],
+          "paging": {
+            "cursors": {
+              "before": "MTEwNjU4OTQ0Nzg1MTIy",
+              "after": "MTEwNjU4OTQ0Nzg1MTIy"
+            }
+          }
+        }
+      }
+    ]
+  },
+  "social-media/posts/facebook/GetProfilePosts": {
+    "e805809eec73d23a7132cf19494c75a7": [
+      {
+        "scope": "https://graph.facebook.com:443",
+        "method": "GET",
+        "path": "/v12.0/110658944785122/feed?access_token=PARAMS_accessToken&limit=25&fields=id%2Cpermalink_url%2Ccreated_time%2Cmessage%2Cattachments%2Cduration%2Cheight%2Cwidth",
+        "body": "",
+        "status": 200,
+        "response": [
+          "1f8b0800000000000003ed5b5b73aa4ab7fd2b1e1ff23d9c98f41568abac5d8877e30d1595935d16020a8a80808aee5afffd144657e2cac5641df73efb210f898238ba47f79c63ceeed9fe9536b4484b67ffe7afb46da4b3690801470546082f5088d018124ec08427840220f0347d9bf6cd60a939b6bb18af03279d4d5b51e487d9c7fbc7fbed767b37d57473e2798b3bdd5b3edeff82f678ef7b61143edeff82fa789fbe4deb81a945a6318eeca599cea6114028034806921ea45902b284fc370000a46fd34b330cb559f250cf0ca3d434f096a9eeda3783a4f15437d222db7353fc5dfac7ed7bac10e509011c6304239ebb16ab73d4f759c10c023d88b209317a55569c8028e038c801c6aec7ea25ea055680cf229685e0caac201192f61180d764f58cfa0956204bf0d758d1cbac1063845192605e91d509f553ac00ff3556e4122b2070180988e1abb27a46bdcc0ad22cfee25ce18f59511e000123460010aec7ea25ea47ac20eb4196a57c167c9115bac08ae304ca7188e7387245562f502fb3c27c967ed1022fb1c23c0018311ec32b2afb4bd44bacf82c40598caecc8a1c6c85e7ae6a812f502fb1e2b244c822ee6bace0255680271c8721ba5e6e718e7a9915e2bfaa1617391198b48eaf3b53cfa89fe044b3f48d18dc5e4f1c3bb452096c2afa6d828871892b08805ed3c15ea07e8220cce23764e3159394ff2be50fb961c4231e00c80081f86adcce503fe4067b806529793f814a303f2280304610002410c27f9540384dc68767803cdefb961779e1e3bd760711241c8f080f30cf219af0396be4f1fe8f68e79bb9a4b5776801fe90c3e32c7a6bcaf4c0f6a3d33cd9ee2c053902290f10a098f0a9e71e8791a62fbc8d194c1d6ffbd4e5d5da0c93690e1fef390a0486920e9e586566",
+          "81e65b19cdb733be363333c9d865b6766465966b27b27dc7cc3cd14cdfa6b528d2746b69ba5198cefef5bc2832ccf0d03fdb73ff357d5d9a86ad25bdb4978721fc2b6d99f6cc8ad2590ac06d3a0cf4b3890e75cf8d4c37caf8c10c66e05d1cdf4d27bae1deb966f478bf79bc8f30bbc3400042867bbc473ca48c22cc8ec60418c72884048c114310109e7218031e110e037eecdecdfdd91f63571feb5a948380bbd1f5490e66b89be45e681b39645083c0c3a567e9b9423841997c06ae1f46e230b113397efa4ccf891d27b427c01736f2de2c794137867a792f2f5682ef480f6a26e6c3285323f5222a8df862258a615553fad2265a1964e21b5052ab07282bcabda67c631acb9c58af93d14358144551bcf1ac1c0063b127547b6a7b819bf39557ddb97b4f33c551cd63d5b5cc918706dec412e71784c90eae779d1bcfcc7148e0450c1369dfda46641d46fdc78fdb74a40533333acccbc1375ff9e2dfef81492fecc849dcaae4458b5dcad552892f3ab66ba66fd3c953e96cfa80fccff4e7cf1f1f6b15c438312ff4e54ced2b3d7b6ee4f35a05b250f8825601c8112e5971ff1f75e427cedfede3843100e1cf49c01ce405018f21603c8102851ce42045100adc2b1fe72ff9385bdbad36eaeb52b5210ec73ecdcfc2df71cc711921dfdc6cf48c3f2bae90ea93d25a1518f2a1965f643a084c83c0d427ab767fb43d3a265782acf829c73c33bcbfdfdcfe3f1df3cdfe5c744c80136fa6c2f516f167a81f65414f2e885916beb139f68eeb708c514c08fab40b5653da321505bb0421f27ea6895a2a09bf4fd962127e53a7f09b7a1ae6d4c6d6529165a64a47d6ff095387d09dd27cfb2e25ad83c0742367f79458270f1a9e1ea634d74869ae175966903ae50129cb0ccc941dfd274c8551320ea9c8d2a2c3778e6d8596b7768cd4c44cad7dc7d30cd34885a6af055a643abb04f3eeeeee43adc0907bad15661c9981ab396f6b45a84dcdf101e8ceb7fc3fb6390cb91bebf07f1d38b903cce31a0044b1f8f48a4aa7d704244cb8d8fa01ec78bb6b47e6f13ba87496189d6e5697b3d35bcd4f729dc85beb56c6d63df7e93e01e8ce778f0fe1d2e6f8a6c06383679ac0268669dce8d330076fcc38ca99cb1978922333c70338e17f4a15e074c41fa50a993978d0327cd4324b0bad9cd8296d061b3eef0a93d8e57de9594e30e4cee5e4576f707ef105e73084eb8f07ed75a678fce0395f3cdef899351eafbf9c3bde5839b107cbd15ed18958f14b839648d140e8b37ad918d475a934ad51295a2fa5b691a98b726c46fd60d4deb2dd02860b45923683fa3233d91bf3cc83df1b8afd6d53e7642f167b863c743b837a66d55b2da5d8f116f97e43b18cc9bc9ad157a2d99bf75a2bb5b643d009ccead45d2cc8be0ba632ae3a857abd7313e6e099421e793d3bd605a77c56d0d0d2824450bf67e68a3373215620811392004384eb6dce9fa15e8e1548c822f685588181406992c17fc78aef58f11d2bde552420387dad518fc4be653cf4eca5ec8420aee3fd64a3783bb9007d3c9ff60567d92408c465210a5ab6664f0a1910eb7bda71e1405234330e96b1af0ebc07b9d89b5577866aef4bd3b8b26f8aa23f503b624b1882f9c3d434ea5325ae3be54a77b38055cc324ea1b52955db1b13ed06922255571c9a7ec78a7ff7cc5c8a153ca589aa5376bd82d319ea276205cec2378e12bc172b04c63039ac12bf63c577acf88e15ef2b521882e176ed9aa4827c7564ea3d5b5d9035e2168df1745fda1784dd482816a4b605e4f6983d0cb683d5ce11566c216e17c56ac7cf4bf5eadeded105331aed85d82e0c5417ac0c2e1422381dca4d82ec81b38e1be17c536083d1801ff2ed0878e5766145caa28e66b22659586c389975bd2e8f45ef3b56fcbb67e642ac00880800093cc1d72b0d9fa15e8a1538399cf05619bf9d8cede5521ce2b8a434c420405fdddefe80c14bd44b0c4016bf7d14e60583f703db07fa7f953de8c3e103701c29f4c48972498559c00c22ca08408860c6d827f6a00580c864f2730fbaddce14e7806bd3f9481cb207b964157e670f5aa8f437c532e7b5fc6d9bb3bdae51360cba",
+          "d90cad361dc97c8bd0d250082096db137176da83c6ec50f73f8a3b7ada830ed793f786f93c7fa8db51645afff571f8fd1efe2f0effeb12c08133e610c142526fb9ec929fdf727f097d5e02f8fbb6f9df6bf377cc8b5cc7bc00e29870342fc2718cf23cc0630278ca388162014386102098bc322f70c9bc382fafb7155e8ecca238cccc3a56bdff3be635ce6b7ed3df04663162f238c095104bf66eb8f36cd3081aad453318c9d52a727ba5f867e997313e29327cc2bc08ffc43979fcca53fd13fa1f34afb7dafcf33dee2fe3dee57e7c3edabdaaa3ed53fee31a40ca9214c934c2c3159c6c16eb54779a49e83d27719a33592fafdda10f9318c8044c21c704cad857cf827d7a72ce1af94c859b4b12834385ed371383734939fbcafbaac2a36ba80a6604b2a46efdc41a73349990310721e638c623024872f69492d3d99430f273461865e6fe6cec1301c444785ac23d490d7a2535bf14b337b42d39435edfe0501c6606e166ce7e476a9844a3a601940d0c91dfd8c73acef80dcd9de212a466b5ab78136f0c687ee035c7a762365fe4a4fcb3d410e16da9f9d5c6fe7ecb7ae584ff5431fbbdfe7cec833c11789e07809183727fc507dfd78133d40fd3709a2c2428cd12f8dadb0e473021001f2d23204f389ec3c9df157f2770867ab9ff44c8d237cec31cfa9f601e77bb4ead1fd6d51f92a2303932c73126c0eb558dce503f24459233a487dfaabc26a58586161a5b036d8df48f3f6fd3be36b3dd59e271fa3a08bde0a0851373ea05c9d31da554ed2f615debb351d35562dd868a2aeee5fe08ab6277505406aa58ee60a5d81c365083769d92dbe9c75e0ff6517350dbeb8b9a32182c22b9cf7aa652f215c78975471e8d8645a839ceb0df17a82acee5a6e228ebee7eb4ed3aacac2d7ca76b43bb3950c56513f8650d414b2be51d55eccdf043dfb2e4a28e1ba5bcd228363563a8f4467b45e99799df9dd7ba8d424d32dcda43abe4347be512d7739aa1de8f3a7ab9d6d47013a9e28251191bd2a8af2c870072c3fd68aff76a56cf69060f83da482e8fb64a4115f7ddb2b2ec17f2c5c9407e30e68ed213d5825a4802c7343283d3e02ca035e83507dda1bf1bb9d66e52a6050376767a19768c811f759621541463d91dd6468ac3a83934cacd5e531bee9d81d9f79b46c5b1e545dc6d164abdd6803ef47b8aa5ec4b5871fd962a0e0da5bb1c216569f5f4822a766557155baaa854e3065045a48ae59ad5593655f16138827a415646a84f47d891ba8b52b1d12fc593122b6b45a5aabbcd7dab3222938221757bb5a12a42abdb2afab12a2acec02cc823b952c3aad86b8e9a7dc79d94fba8d5a7554da9d59a65d96ef516918c1547073e552a966f168cae3114f78db25fd507f2549fabe2833c3b8ccf8fdbb46bc6d199991f36747e31f40d4477e00d7b9f9aa6f187a6eb66188e236f61bab9a228d64a6a7edfada85258cc8bcd62c16c4c0a835a4315e9a6381932aa8a2ba2e6876ce8ad67aa1897235e52f355a5b872f848d3b6126e59466bde692ff0aab3988c669b90929d3c9aa9a2e4e9266b8f24a915789bbc506923322f2f8aeb5ad36fc7db492b2e3ba5b0e00e3676bfe0779d59919155503154099b9d5897d68bf27481a6ce76a27185952ab9d15e37ac8a834bbd6e25eccd70adcaebfdba39a8c83d675757f3e2ba270673abe87631d90f8b1ef024558c0d6931f36b3555acba2044425ca9f093ee623eab350a3753db748c30671bc77d32e94c4e4e375f6ac1e9ded1eb4f972f129ed32d631d1c0e929fae9fd299d3d52136df38f6d28e7288de1cec3ef76df56f5afd8fff057cedd1086c3a0000"
+        ],
+        "rawHeaders": [
+          "Content-Encoding",
+          "gzip",
+          "ETag",
+          "\"77e3dfa30098b5484af3e51e4763323895c3c237\"",
+          "Content-Type",
+          "application/json",
+          "Vary",
+          "Origin",
+          "Vary",
+          "Accept-Encoding",
+          "cross-origin-resource-policy",
+          "cross-origin",
+          "x-app-usage",
+          "{\"call_count\":2,\"total_cputime\":0,\"total_time\":1}",
+          "x-fb-rlafr",
+          "0",
+          "Access-Control-Allow-Origin",
+          "*",
+          "facebook-api-version",
+          "v12.0",
+          "Strict-Transport-Security",
+          "max-age=15552000; preload",
+          "Pragma",
+          "no-cache",
+          "Cache-Control",
+          "private, no-cache, no-store, must-revalidate",
+          "Expires",
+          "Sat, 01 Jan 2000 00:00:00 GMT",
+          "x-fb-request-id",
+          "A2A9uHN2DNzSNAuWFG512dQ",
+          "x-fb-trace-id",
+          "EPNd2cUmBJC",
+          "x-fb-rev",
+          "1005518852",
+          "X-FB-Debug",
+          "Mrg93Cg8YroEj+Ganx6z//qa8BNyaRpogqhSnOFJgnygB3U/wd1rCqoUjHzb9bCXnkjvQCDEsZkXncFJfO4x5w==",
+          "Date",
+          "Mon, 16 May 2022 12:27:25 GMT",
+          "Alt-Svc",
+          "h3=\":443\"; ma=86400, h3-29=\":443\"; ma=86400",
+          "Connection",
+          "close",
+          "Content-Length",
+          "3468"
+        ],
+        "responseIsBinary": false,
+        "decodedResponse": {
+          "data": [
+            {
+              "id": "110658944785122_146834744500875",
+              "permalink_url": "https://www.facebook.com/110658944785122/posts/146834744500875/",
+              "created_time": "2022-04-14T15:40:44+0000",
+              "message": "Test from Superface Station 7."
+            },
+            {
+              "id": "110658944785122_125744069943276",
+              "permalink_url": "https://www.facebook.com/110658944785122/posts/125744069943276/",
+              "created_time": "2022-01-20T12:15:45+0000",
+              "message": "Test from Superface Station 7."
+            },
+            {
+              "id": "110658944785122_125682506616099",
+              "permalink_url": "https://www.facebook.com/110658944785122/posts/125682506616099/",
+              "created_time": "2022-01-20T07:29:10+0000",
+              "message": "Test from Superface Station 7."
+            },
+            {
+              "id": "110658944785122_125681486616201",
+              "permalink_url": "https://www.facebook.com/110658944785122/posts/125681486616201/",
+              "created_time": "2022-01-20T07:20:43+0000",
+              "message": "Test from Superface Station 5."
+            },
+            {
+              "id": "110658944785122_125681429949540",
+              "permalink_url": "https://www.facebook.com/110658944785122/posts/125681429949540/",
+              "created_time": "2022-01-20T07:20:07+0000",
+              "message": "Test from Superface Station 4."
+            },
+            {
+              "id": "110658944785122_125680863282930",
+              "permalink_url": "https://www.facebook.com/110658944785122/posts/125680863282930/",
+              "created_time": "2022-01-20T07:15:33+0000",
+              "message": "Test from Superface Station 3."
+            },
+            {
+              "id": "110658944785122_125570083294008",
+              "permalink_url": "https://www.facebook.com/110658944785122/posts/125570083294008/",
+              "created_time": "2022-01-19T19:57:03+0000",
+              "message": "Test from Superface Station 2."
+            },
+            {
+              "id": "110658944785122_125566856627664",
+              "permalink_url": "https://www.facebook.com/110658944785122/posts/125566856627664/",
+              "created_time": "2022-01-19T19:37:57+0000",
+              "message": "Test from Superface Station 2."
+            },
+            {
+              "id": "110658944785122_125537003297316",
+              "permalink_url": "https://www.facebook.com/110658944785122/posts/125537003297316/",
+              "created_time": "2022-01-19T17:02:32+0000",
+              "message": "Test from Superface Station 2."
+            },
+            {
+              "id": "110658944785122_125534083297608",
+              "permalink_url": "https://www.facebook.com/110658944785122/posts/125534083297608/",
+              "created_time": "2022-01-19T16:48:26+0000",
+              "message": "Test from Superface Station 1."
+            },
+            {
+              "id": "110658944785122_125530746631275",
+              "permalink_url": "https://www.facebook.com/110658944785122/posts/125530746631275/",
+              "created_time": "2022-01-19T16:27:33+0000",
+              "message": "Test from Superface Station."
+            },
+            {
+              "id": "110658944785122_125530416631308",
+              "permalink_url": "https://www.facebook.com/110658944785122/posts/125530416631308/",
+              "created_time": "2022-01-19T16:25:50+0000",
+              "message": "Publish post test from Superface Station."
+            },
+            {
+              "id": "110658944785122_125529603298056",
+              "permalink_url": "https://www.facebook.com/110658944785122/posts/125529603298056/",
+              "created_time": "2022-01-19T16:21:37+0000",
+              "message": "Superface Station publish post test."
+            },
+            {
+              "id": "110658944785122_123272700190413",
+              "permalink_url": "https://www.facebook.com/110658944785122/posts/123272700190413/",
+              "created_time": "2022-01-11T09:54:10+0000",
+              "message": "Test post"
+            },
+            {
+              "id": "110658944785122_122332100284473",
+              "permalink_url": "https://www.facebook.com/sftest7904/photos/a.121467247037625/122332100284473/?type=3",
+              "created_time": "2022-01-07T15:43:27+0000",
+              "message": "Script publishing 1641570205347 https://stackoverflow.com/questions/65089225/facebook-graph-api-page-post-with-multiple-photos",
+              "attachments": {
+                "data": [
+                  {
+                    "description": "Script publishing 1641570205347 https://stackoverflow.com/questions/65089225/facebook-graph-api-page-post-with-multiple-photos",
+                    "media": {
+                      "image": {
+                        "height": 500,
+                        "src": "https://scontent-prg1-1.xx.fbcdn.net/v/t39.30808-6/271595239_122332096951140_2921047563307246307_n.jpg?_nc_cat=106&ccb=1-6&_nc_sid=2d5d41&_nc_ohc=Dsb2-B-1uLYAX_timRx&_nc_oc=AQlsib0p8vRzeForSx1cGzRkq8plCLZ-x7st-J4KE2FY7EHtx1IaVUCvtqd4bpd1CZI&_nc_ht=scontent-prg1-1.xx&edm=AKK4YLsEAAAA&oh=00_AT8ITZPk3NjqoIynzoaeAYJo9IuR64LM3vxC6pD8by1uyQ&oe=6287A318",
+                        "width": 500
+                      }
+                    },
+                    "target": {
+                      "id": "122332100284473",
+                      "url": "https://www.facebook.com/sftest7904/photos/a.121467247037625/122332100284473/?type=3"
+                    },
+                    "title": "Fotky na timeline",
+                    "type": "photo",
+                    "url": "https://www.facebook.com/sftest7904/photos/a.121467247037625/122332100284473/?type=3"
+                  }
+                ]
+              }
+            },
+            {
+              "id": "110658944785122_122331336951216",
+              "permalink_url": "https://www.facebook.com/sftest7904/photos/a.121467247037625/122331336951216/?type=3",
+              "created_time": "2022-01-07T15:40:18+0000",
+              "message": "Script publishing 1641570016469",
+              "attachments": {
+                "data": [
+                  {
+                    "description": "Script publishing 1641570016469",
+                    "media": {
+                      "image": {
+                        "height": 500,
+                        "src": "https://scontent-prg1-1.xx.fbcdn.net/v/t39.30808-6/271499011_122331333617883_1097418516161521186_n.jpg?_nc_cat=107&ccb=1-6&_nc_sid=2d5d41&_nc_ohc=9uiOP2UcCIMAX_p5Bgs&_nc_ht=scontent-prg1-1.xx&edm=AKK4YLsEAAAA&oh=00_AT_G22pevvc-pgEq2Zp4FuZ892p1aBk-Q20frrecbqPUYw&oe=6286F19E",
+                        "width": 500
+                      }
+                    },
+                    "target": {
+                      "id": "122331336951216",
+                      "url": "https://www.facebook.com/sftest7904/photos/a.121467247037625/122331336951216/?type=3"
+                    },
+                    "title": "Fotky na timeline",
+                    "type": "photo",
+                    "url": "https://www.facebook.com/sftest7904/photos/a.121467247037625/122331336951216/?type=3"
+                  }
+                ]
+              }
+            },
+            {
+              "id": "110658944785122_122331030284580",
+              "permalink_url": "https://www.facebook.com/110658944785122/posts/122331030284580/",
+              "created_time": "2022-01-07T15:39:15+0000",
+              "message": "Script publishing 1641569953442",
+              "attachments": {
+                "data": [
+                  {
+                    "description": "I am trying to publish a page post with multiple photos via the Facebook's graph api. Currently from the docs and another question here it's stated that the photos should be uploaded separately and...",
+                    "media": {
+                      "image": {
+                        "height": 316,
+                        "src": "https://external-prg1-1.xx.fbcdn.net/safe_image.php?w=316&h=316&url=https%3A%2F%2Fcdn.sstatic.net%2FSites%2Fstackoverflow%2FImg%2Fapple-touch-icon%402.png%3Fv%3D73d79a89bded&cfs=1&ext=emg0&_nc_oe=701b7&_nc_sid=06c271&_nc_o2e=1&ccb=3-6&_nc_hash=AQFvWv7Bn8bxn7pC",
+                        "width": 316
+                      }
+                    },
+                    "target": {
+                      "url": "https://l.facebook.com/l.php?u=https%3A%2F%2Fstackoverflow.com%2Fquestions%2F65089225%2Ffacebook-graph-api-page-post-with-multiple-photos&h=AT1GtzVc4AHpFWOA52W8U9KGdWKcCFfJ5CtumCPd-KARxetUrYPw9yk1skVCCvWKm-bzdj-LpTXAUwNc6RoxATdRXnQWK-qTqmCxlokBUMVhdbjI-cqAeTjTOqZJy21lreIfnkk4zS0fR3IlDKKQ&s=1"
+                    },
+                    "title": "Facebook graph api page post with multiple photos",
+                    "type": "share",
+                    "url": "https://l.facebook.com/l.php?u=https%3A%2F%2Fstackoverflow.com%2Fquestions%2F65089225%2Ffacebook-graph-api-page-post-with-multiple-photos&h=AT1GtzVc4AHpFWOA52W8U9KGdWKcCFfJ5CtumCPd-KARxetUrYPw9yk1skVCCvWKm-bzdj-LpTXAUwNc6RoxATdRXnQWK-qTqmCxlokBUMVhdbjI-cqAeTjTOqZJy21lreIfnkk4zS0fR3IlDKKQ&s=1"
+                  }
+                ]
+              }
+            },
+            {
+              "id": "110658944785122_122328686951481",
+              "permalink_url": "https://www.facebook.com/110658944785122/posts/122328686951481/",
+              "created_time": "2022-01-07T15:28:29+0000",
+              "message": "Script publishing 1641569308558",
+              "attachments": {
+                "data": [
+                  {
+                    "description": "I am trying to publish a page post with multiple photos via the Facebook's graph api. Currently from the docs and another question here it's stated that the photos should be uploaded separately and...",
+                    "media": {
+                      "image": {
+                        "height": 316,
+                        "src": "https://external-prg1-1.xx.fbcdn.net/safe_image.php?w=316&h=316&url=https%3A%2F%2Fcdn.sstatic.net%2FSites%2Fstackoverflow%2FImg%2Fapple-touch-icon%402.png%3Fv%3D73d79a89bded&cfs=1&ext=emg0&_nc_oe=701b7&_nc_sid=06c271&_nc_o2e=1&ccb=3-6&_nc_hash=AQFvWv7Bn8bxn7pC",
+                        "width": 316
+                      }
+                    },
+                    "target": {
+                      "url": "https://l.facebook.com/l.php?u=https%3A%2F%2Fstackoverflow.com%2Fquestions%2F65089225%2Ffacebook-graph-api-page-post-with-multiple-photos&h=AT08lUaMKtAUhdLTimRls0xK3zbvVoyRD1p3jfU8lmN420xG8trOiaibD-0xcz5Qn1WCVaexrmxpZWoLRETgIydZizFfxHzNAApWZQAO8X0jLfedKfVxKlGHSvk1I39-lDOvFIPve2yWCVCIq62f&s=1"
+                    },
+                    "title": "Facebook graph api page post with multiple photos",
+                    "type": "share",
+                    "url": "https://l.facebook.com/l.php?u=https%3A%2F%2Fstackoverflow.com%2Fquestions%2F65089225%2Ffacebook-graph-api-page-post-with-multiple-photos&h=AT08lUaMKtAUhdLTimRls0xK3zbvVoyRD1p3jfU8lmN420xG8trOiaibD-0xcz5Qn1WCVaexrmxpZWoLRETgIydZizFfxHzNAApWZQAO8X0jLfedKfVxKlGHSvk1I39-lDOvFIPve2yWCVCIq62f&s=1"
+                  }
+                ]
+              }
+            },
+            {
+              "id": "110658944785122_122327556951594",
+              "permalink_url": "https://www.facebook.com/110658944785122/posts/122327556951594/",
+              "created_time": "2022-01-07T15:23:14+0000",
+              "message": "Script publishing 1641568993416",
+              "attachments": {
+                "data": [
+                  {
+                    "description": "I am trying to publish a page post with multiple photos via the Facebook's graph api. Currently from the docs and another question here it's stated that the photos should be uploaded separately and...",
+                    "media": {
+                      "image": {
+                        "height": 316,
+                        "src": "https://external-prg1-1.xx.fbcdn.net/safe_image.php?w=316&h=316&url=https%3A%2F%2Fcdn.sstatic.net%2FSites%2Fstackoverflow%2FImg%2Fapple-touch-icon%402.png%3Fv%3D73d79a89bded&cfs=1&ext=emg0&_nc_oe=701b7&_nc_sid=06c271&_nc_o2e=1&ccb=3-6&_nc_hash=AQFvWv7Bn8bxn7pC",
+                        "width": 316
+                      }
+                    },
+                    "target": {
+                      "url": "https://l.facebook.com/l.php?u=https%3A%2F%2Fstackoverflow.com%2Fquestions%2F65089225%2Ffacebook-graph-api-page-post-with-multiple-photos&h=AT0ss0Xwune4H2pZYecTiZk4u26kM_fzFzD8yY8EDCPh0RP_9LWwWqyl8q9kAwkEIQpBCKIziy5k9dMPkAPDWZn0qd6s8t1fXRN42iWluxMsjvD9WYW7X7Pt0oGPDq4GAc2gRaCh3AMl-uKKR_Ao&s=1"
+                    },
+                    "title": "Facebook graph api page post with multiple photos",
+                    "type": "share",
+                    "url": "https://l.facebook.com/l.php?u=https%3A%2F%2Fstackoverflow.com%2Fquestions%2F65089225%2Ffacebook-graph-api-page-post-with-multiple-photos&h=AT0ss0Xwune4H2pZYecTiZk4u26kM_fzFzD8yY8EDCPh0RP_9LWwWqyl8q9kAwkEIQpBCKIziy5k9dMPkAPDWZn0qd6s8t1fXRN42iWluxMsjvD9WYW7X7Pt0oGPDq4GAc2gRaCh3AMl-uKKR_Ao&s=1"
+                  }
+                ]
+              }
+            },
+            {
+              "id": "110658944785122_122302480287435",
+              "permalink_url": "https://www.facebook.com/110658944785122/posts/122302480287435/",
+              "created_time": "2022-01-07T13:37:32+0000",
+              "message": "Photo post"
+            },
+            {
+              "id": "110658944785122_122266570291026",
+              "permalink_url": "https://www.facebook.com/110658944785122/posts/122266570291026/",
+              "created_time": "2022-01-07T10:35:33+0000",
+              "message": "Photo post",
+              "attachments": {
+                "data": [
+                  {
+                    "media": {
+                      "image": {
+                        "height": 300,
+                        "src": "https://scontent-prg1-1.xx.fbcdn.net/v/t39.30808-6/271534080_122266270291056_1258391259402243999_n.jpg?_nc_cat=107&ccb=1-6&_nc_sid=8024bb&_nc_ohc=PP-Ej06P5jYAX9LRFhD&_nc_ht=scontent-prg1-1.xx&edm=AKK4YLsEAAAA&oh=00_AT8HUvEG6oOpwP6ioSdGdd5vvXhP5YR7O45FX8r13RPbAg&oe=62863908",
+                        "width": 200
+                      }
+                    },
+                    "subattachments": {
+                      "data": [
+                        {
+                          "description": "Kitteh!",
+                          "media": {
+                            "image": {
+                              "height": 300,
+                              "src": "https://scontent-prg1-1.xx.fbcdn.net/v/t39.30808-6/271534080_122266270291056_1258391259402243999_n.jpg?_nc_cat=107&ccb=1-6&_nc_sid=8024bb&_nc_ohc=PP-Ej06P5jYAX9LRFhD&_nc_ht=scontent-prg1-1.xx&edm=AKK4YLsEAAAA&oh=00_AT8HUvEG6oOpwP6ioSdGdd5vvXhP5YR7O45FX8r13RPbAg&oe=62863908",
+                              "width": 200
+                            }
+                          },
+                          "target": {
+                            "id": "122266273624389",
+                            "url": "https://www.facebook.com/sftest7904/photos/a.121467247037625/122266273624389/?type=3"
+                          },
+                          "type": "photo",
+                          "url": "https://www.facebook.com/sftest7904/photos/a.121467247037625/122266273624389/?type=3"
+                        },
+                        {
+                          "description": "Kitteh!",
+                          "media": {
+                            "image": {
+                              "height": 400,
+                              "src": "https://scontent-prg1-1.xx.fbcdn.net/v/t39.30808-6/271502698_122266466957703_4075968538319220434_n.jpg?_nc_cat=100&ccb=1-6&_nc_sid=8024bb&_nc_ohc=6oBcPV7RteEAX-gQhKU&_nc_ht=scontent-prg1-1.xx&edm=AKK4YLsEAAAA&oh=00_AT_BapNpvreEt9R_r3Hs3CiyXyoiedrMOkNrYRII2nTFxQ&oe=62879972",
+                              "width": 200
+                            }
+                          },
+                          "target": {
+                            "id": "122266476957702",
+                            "url": "https://www.facebook.com/sftest7904/photos/a.121467247037625/122266476957702/?type=3"
+                          },
+                          "type": "photo",
+                          "url": "https://www.facebook.com/sftest7904/photos/a.121467247037625/122266476957702/?type=3"
+                        }
+                      ]
+                    },
+                    "target": {
+                      "id": "122266570291026",
+                      "url": "https://www.facebook.com/110658944785122/posts/122266570291026/"
+                    },
+                    "title": "Fotky z příspěvku Sf-test",
+                    "type": "album",
+                    "url": "https://www.facebook.com/110658944785122/posts/122266570291026/"
+                  }
+                ]
+              }
+            },
+            {
+              "id": "110658944785122_121983516985998",
+              "permalink_url": "https://www.facebook.com/sftest7904/photos/a.121467247037625/121983516985998/?type=3",
+              "created_time": "2022-01-06T10:15:39+0000",
+              "message": "Photo post",
+              "attachments": {
+                "data": [
+                  {
+                    "description": "Photo post",
+                    "media": {
+                      "image": {
+                        "height": 720,
+                        "src": "https://scontent-prg1-1.xx.fbcdn.net/v/t39.30808-6/271394191_121983513652665_6113669724045662547_n.jpg?stp=dst-jpg_p480x480&_nc_cat=102&ccb=1-6&_nc_sid=2d5d41&_nc_ohc=v5PClX7cv3sAX-Wsvj9&_nc_ht=scontent-prg1-1.xx&edm=AKK4YLsEAAAA&oh=00_AT9C5tNd0Vv1s2pMzxc3-pManf3F15eISVobo_05BWoN_w&oe=6287E6CB",
+                        "width": 480
+                      }
+                    },
+                    "target": {
+                      "id": "121983516985998",
+                      "url": "https://www.facebook.com/sftest7904/photos/a.121467247037625/121983516985998/?type=3"
+                    },
+                    "title": "Fotky na timeline",
+                    "type": "photo",
+                    "url": "https://www.facebook.com/sftest7904/photos/a.121467247037625/121983516985998/?type=3"
+                  }
+                ]
+              }
+            },
+            {
+              "id": "110658944785122_121748777009472",
+              "permalink_url": "https://www.facebook.com/110658944785122/posts/121748777009472/",
+              "created_time": "2022-01-05T13:55:41+0000",
+              "message": "test 100"
+            },
+            {
+              "id": "110658944785122_121746763676340",
+              "permalink_url": "https://www.facebook.com/110658944785122/posts/121746763676340/",
+              "created_time": "2022-01-05T13:48:58+0000",
+              "message": "test posting to facebook page"
+            },
+            {
+              "id": "110658944785122_121512053699811",
+              "permalink_url": "https://www.facebook.com/110658944785122/posts/121512053699811/",
+              "created_time": "2022-01-04T16:07:29+0000",
+              "message": "asdasdwd2wd"
+            }
+          ],
+          "paging": {
+            "cursors": {
+              "before": "QVFIUm1KaU9YNnVxci1VZAzRUY3ZASWEVWZAGQ3VENXM2M5SlFnQUxoT1U2NWJzckJVWWktRU9TeVFpVllxclRYYXE1allXUU85ZAjRNVlVuSzYwSl9GakplSi1iNWZAmN0pGa21haFBlZATg3LUhhREc3MFBVMENadXVTYzVVUG9pSjJSMDJCdnJLOFlNTGF6TlNscUtQcGJNa3N2ZAk95R3dCYUVmX016XzYzcTJhTlNrLWJYRGYwVDZAzSGVmUDBEbWRLdjlVTAZDZD",
+              "after": "QVFIUk1hWTNWSXpyYnhybG5Dd1QycG1QdWptQms1VVdmSXJYVl95eXdGNTNaXzlWeUpNdHliRkxSNDFTOW5LUTVhVzF3VnpOZAXdVSmY2VmhTcDZASRnZAOZAVIxM0ZA2ZAGJhQmNZALXY1cDRVY2U5Y3lCSkFEMUFxbF9GaEVIcnNzOHY4bDdCSTJXZA1hSOEpxZAVlWeDRYRHJ3ZATNYNUlnbGU2OU5IaVJJNGRiOTktR3Vlc0p5VHhpeDdSdXAzMGpIcWRfcjZALRgZDZD"
+            },
+            "next": "https://graph.facebook.com/v12.0/110658944785122/feed?access_token=EAAJFZBzSHZCsEBANEDeMbDWJMZA5vEbX95ZAq4ZBX9XougZAxGt7CZBIVEql7taawC3OhdOjQPk3qQkbYgvs54yRYgZACoce9PYCCOrovB8HP24jGkEuJNpPxwbOxGlFsDnWviUDpSlgE94qrHdZC3eQxcCukGfk2flwba6DqZCntzcdhHl3FTSHsTg3JI7cUKeWHRTlyKZBAuTArjhEnS34zXEo0oCZAxdCkgpJJZAIn0s28xHH7bSkjgJMD&fields=id%2Cpermalink_url%2Ccreated_time%2Cmessage%2Cattachments%2Cduration%2Cheight%2Cwidth&limit=25&after=QVFIUk1hWTNWSXpyYnhybG5Dd1QycG1QdWptQms1VVdmSXJYVl95eXdGNTNaXzlWeUpNdHliRkxSNDFTOW5LUTVhVzF3VnpOZAXdVSmY2VmhTcDZASRnZAOZAVIxM0ZA2ZAGJhQmNZALXY1cDRVY2U5Y3lCSkFEMUFxbF9GaEVIcnNzOHY4bDdCSTJXZA1hSOEpxZAVlWeDRYRHJ3ZATNYNUlnbGU2OU5IaVJJNGRiOTktR3Vlc0p5VHhpeDdSdXAzMGpIcWRfcjZALRgZDZD"
+          }
+        }
+      }
+    ]
+  }
+}

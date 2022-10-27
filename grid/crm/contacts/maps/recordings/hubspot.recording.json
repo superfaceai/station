@@ -1,0 +1,247 @@
+{
+  "crm/contacts/hubspot/Create": {
+    "35d6caa649241b8d1de772f8f195b456": [
+      {
+        "scope": "https://api.hubapi.com:443",
+        "method": "POST",
+        "path": "/crm/v3/objects/contacts?hapikey=SECURITY_apiKey",
+        "body": {
+          "properties": {
+            "myproperty": "value",
+            "firstname": "Test",
+            "lastname": "User",
+            "email": "test@example.com",
+            "company": "Station Test",
+            "country": "USA"
+          }
+        },
+        "status": 201,
+        "response": [
+          "1f8b08000000000000008d50cb4ec33010fc15e47353250d0f3527fa0d6d2f5ca2c5dea84b1ddbb23781a8eabfb34621a217e060599e19cfecce4591518d7a7ca8d44a85e80346264caab928edfb006e1276cfc0e4dddd01138b4cfbc171ccc471bfcbef88c068e408b4293755515545b93d94dba62e9bfa7e5dd74f2fa2c31ec88a84c5e6193fa00f16d79222544731b1833e3bcc29a7d482b5adf68e41733b9249cba0c27d99b5c6cbe504bfb5139ed2f7d79c18075ce0c1bdfb78467383fbd73794941f65081828a02597879abd5261a9433d698bc5c2ae9485c4bd37d4119abf7bc8ea79d763c228483fcdd5e75247b032d575e975c7bfdb0dc1fc4706519f68cc6b7760135e3f01594131f6fa010000"
+        ],
+        "rawHeaders": [
+          "Date",
+          "Tue, 09 Nov 2021 09:30:34 GMT",
+          "Content-Type",
+          "application/json;charset=utf-8",
+          "Content-Length",
+          "274",
+          "Connection",
+          "close",
+          "Location",
+          "https://api.hubapi.com/crm/v3/objects/contacts/651",
+          "CF-Ray",
+          "6ab605ec4fe4410d-PRG",
+          "Content-Encoding",
+          "gzip",
+          "Strict-Transport-Security",
+          "max-age=31536000; includeSubDomains; preload",
+          "Vary",
+          "Accept-Encoding",
+          "CF-Cache-Status",
+          "DYNAMIC",
+          "Access-Control-Allow-Credentials",
+          "false",
+          "Expect-CT",
+          "max-age=604800, report-uri=\"https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct\"",
+          "X-HubSpot-Correlation-Id",
+          "3a32413c-f8a9-4ada-a236-2c2818f52efc",
+          "X-HubSpot-RateLimit-Daily",
+          "250000",
+          "X-HubSpot-RateLimit-Daily-Remaining",
+          "249996",
+          "X-HubSpot-RateLimit-Interval-Milliseconds",
+          "10000",
+          "X-HubSpot-RateLimit-Max",
+          "100",
+          "X-HubSpot-RateLimit-Remaining",
+          "99",
+          "X-HubSpot-RateLimit-Secondly",
+          "10",
+          "X-HubSpot-RateLimit-Secondly-Remaining",
+          "9",
+          "X-Trace",
+          "2BB208FFA7ABD79B5D4C7C458EC30D17EAC6174215000000000000000000",
+          "Report-To",
+          "{\"endpoints\":[{\"url\":\"https:\\/\\/a.nel.cloudflare.com\\/report\\/v3?s=gf22DEEfedUKuPZudW8xzkvWzxK125ioANh3PCfra6EGRu3K8iP1uWdvoM8J8OinHUiwCKOYH0bdxBfsM3G3SyZ4RaS6C%2FlIn%2Brv25q150SCb2LQQDbMHKP%2BSmwez8ig\"}],\"group\":\"cf-nel\",\"max_age\":604800}",
+          "NEL",
+          "{\"success_fraction\":0,\"report_to\":\"cf-nel\",\"max_age\":604800}",
+          "Server",
+          "cloudflare",
+          "alt-svc",
+          "h3=\":443\"; ma=86400, h3-29=\":443\"; ma=86400, h3-28=\":443\"; ma=86400, h3-27=\":443\"; ma=86400"
+        ],
+        "responseIsBinary": false,
+        "decodedResponse": {
+          "id": "651",
+          "properties": {
+            "company": "Station Test",
+            "country": "USA",
+            "createdate": "2021-11-09T09:30:34.337Z",
+            "email": "test@example.com",
+            "firstname": "Test",
+            "hs_all_contact_vids": "651",
+            "hs_email_domain": "example.com",
+            "hs_is_contact": "true",
+            "hs_is_unworked": "true",
+            "hs_object_id": "651",
+            "hs_pipeline": "contacts-lifecycle-pipeline",
+            "lastmodifieddate": "2021-11-09T09:30:34.337Z",
+            "lastname": "User",
+            "myproperty": "value"
+          },
+          "createdAt": "2021-11-09T09:30:34.337Z",
+          "updatedAt": "2021-11-09T09:30:34.337Z",
+          "archived": false
+        }
+      }
+    ]
+  },
+  "crm/contacts/hubspot/Update": {
+    "4fd09baeccd816b2b14955caf12c81ff": [],
+    "7be892a1b0a2bf3a4017f894cf0e5280": [
+      {
+        "scope": "https://api.hubapi.com:443",
+        "method": "PATCH",
+        "path": "/crm/v3/objects/contacts/401?hapikey=SECURITY_apiKey",
+        "body": {
+          "properties": {
+            "firstname": "Updated first name"
+          }
+        },
+        "status": 200,
+        "response": [
+          "1f8b080000000000000364cbbd0e83201486e15b31df8ce62054c9d9bc8776e946e49892f48700ed62bcf7463b767df2be",
+          "2b6200c3928642caaf24b94629e0154bcca53efd43c0b8a4e0ab84e6b0e6c04d61ceb2eb54c1e8a9d7ada69686b3367cb26c4de78cbb42e1fd9bff32c766604d9d1bc73df379bec58f04f0e2ef45b62f000000ffff030067ee96cf9b000000"
+        ],
+        "rawHeaders": [
+          "Date",
+          "Tue, 09 Nov 2021 09:30:34 GMT",
+          "Content-Type",
+          "application/json;charset=utf-8",
+          "Transfer-Encoding",
+          "chunked",
+          "Connection",
+          "close",
+          "CF-Ray",
+          "6ab605eea8472784-PRG",
+          "Strict-Transport-Security",
+          "max-age=31536000; includeSubDomains; preload",
+          "Vary",
+          "Accept-Encoding",
+          "CF-Cache-Status",
+          "DYNAMIC",
+          "Access-Control-Allow-Credentials",
+          "false",
+          "Expect-CT",
+          "max-age=604800, report-uri=\"https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct\"",
+          "X-HubSpot-Correlation-Id",
+          "98bb7d90-c7b1-4931-872a-69ca775eed92",
+          "X-HubSpot-RateLimit-Daily",
+          "250000",
+          "X-HubSpot-RateLimit-Daily-Remaining",
+          "249995",
+          "X-HubSpot-RateLimit-Interval-Milliseconds",
+          "10000",
+          "X-HubSpot-RateLimit-Max",
+          "100",
+          "X-HubSpot-RateLimit-Remaining",
+          "98",
+          "X-HubSpot-RateLimit-Secondly",
+          "10",
+          "X-HubSpot-RateLimit-Secondly-Remaining",
+          "9",
+          "X-Trace",
+          "2B4956F89ECD8B9090F5D26C491B3BC4C8E39E604A000000000000000000",
+          "Report-To",
+          "{\"endpoints\":[{\"url\":\"https:\\/\\/a.nel.cloudflare.com\\/report\\/v3?s=wlw5jLY8Q%2BBvd%2BvO%2B0auSi68nehNdfTEiaY20r1i3eeGjeS2FbRmfceosBxCGAG9UmVZCvB70B0dWL7VKvXvra2lBxVBH8GY77iML1t6wfT5EjJYg3uJaR%2FsmGSDm8CP\"}],\"group\":\"cf-nel\",\"max_age\":604800}",
+          "NEL",
+          "{\"success_fraction\":0,\"report_to\":\"cf-nel\",\"max_age\":604800}",
+          "Server",
+          "cloudflare",
+          "Content-Encoding",
+          "gzip",
+          "alt-svc",
+          "h3=\":443\"; ma=86400, h3-29=\":443\"; ma=86400, h3-28=\":443\"; ma=86400, h3-27=\":443\"; ma=86400"
+        ],
+        "responseIsBinary": false,
+        "decodedResponse": {
+          "id": "401",
+          "properties": {
+            "firstname": "Updated first name"
+          },
+          "createdAt": "2021-10-06T13:54:43.838Z",
+          "updatedAt": "2021-10-06T18:36:10.877Z",
+          "archived": false
+        }
+      }
+    ]
+  },
+  "crm/contacts/hubspot/Search": {
+    "e4191bb166bd0df2dd21830681401b4d": [],
+    "0fe68cca271b063be5e459936f73da5a": [
+      {
+        "scope": "https://api.hubapi.com:443",
+        "method": "POST",
+        "path": "/crm/v3/objects/contacts/search?hapikey=SECURITY_apiKey",
+        "body": {
+          "filterGroups": [
+            {
+              "filters": [
+                {
+                  "propertyName": "firstname",
+                  "operator": "EQ",
+                  "value": "Test"
+                }
+              ]
+            }
+          ]
+        },
+        "status": 200,
+        "response": {
+          "total": 0,
+          "results": []
+        },
+        "rawHeaders": [
+          "Date",
+          "Tue, 09 Nov 2021 09:30:35 GMT",
+          "Content-Type",
+          "application/json;charset=utf-8",
+          "Content-Length",
+          "24",
+          "Connection",
+          "close",
+          "CF-Ray",
+          "6ab605f048462774-PRG",
+          "Strict-Transport-Security",
+          "max-age=31536000; includeSubDomains; preload",
+          "Vary",
+          "Accept-Encoding",
+          "CF-Cache-Status",
+          "DYNAMIC",
+          "Access-Control-Allow-Credentials",
+          "false",
+          "Expect-CT",
+          "max-age=604800, report-uri=\"https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct\"",
+          "X-HubSpot-Correlation-Id",
+          "2b5ae951-7f25-4042-a12a-fc83e6f4da17",
+          "X-HubSpot-RateLimit-Daily",
+          "250000",
+          "X-HubSpot-RateLimit-Daily-Remaining",
+          "249994",
+          "X-Trace",
+          "2B541F516C41BEBA641C2F4DA56D8408EC2517AF4A000000000000000000",
+          "Report-To",
+          "{\"endpoints\":[{\"url\":\"https:\\/\\/a.nel.cloudflare.com\\/report\\/v3?s=I%2BeMM%2BMyqrA8g8PvMh7H7RRDuGhitD9MTPvJQ81hUdmr7v5NthIpCESHLy%2BOCoo3b8XVDN9ezAz%2Bwzm%2FNuAEhAdok6GOgiwYxad5mHr%2FdS1kvKKXwQXvLuw4FZhn%2FNZ%2B\"}],\"group\":\"cf-nel\",\"max_age\":604800}",
+          "NEL",
+          "{\"success_fraction\":0,\"report_to\":\"cf-nel\",\"max_age\":604800}",
+          "Server",
+          "cloudflare",
+          "alt-svc",
+          "h3=\":443\"; ma=86400, h3-29=\":443\"; ma=86400, h3-28=\":443\"; ma=86400, h3-27=\":443\"; ma=86400"
+        ],
+        "responseIsBinary": false
+      }
+    ]
+  }
+}
