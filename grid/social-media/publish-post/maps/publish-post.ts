@@ -4,6 +4,7 @@ import {
   SuperfaceTest,
   SuperfaceTestRun,
 } from '@superfaceai/testing';
+import { RecordingType } from '@superfaceai/testing/dist/nock/recording.interfaces';
 import { nockConfig } from '../../../test-config';
 
 type ProfilesResult = Array<{ id: string; name: string }>;
@@ -23,7 +24,7 @@ export const getPublishingProfiles = async (
       useCase: 'GetProfilesForPublishing',
       input: {},
     },
-    { prepare: true }
+    { recordingType: RecordingType.PREPARE }
   );
   expect(result.isOk()).toBeTruthy();
 
@@ -63,7 +64,7 @@ export const publishPostTest = (
               useCase: 'GetProfilesForPublishing',
               input: {},
             },
-            { prepare: true }
+            { recordingType: RecordingType.PREPARE }
           );
 
           expect(result.isOk()).toBeTruthy();
