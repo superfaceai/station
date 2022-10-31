@@ -45,6 +45,7 @@ describe(`social-media/posts/${provider}`, () => {
               profileId,
               page,
             },
+            testName: `GetProfilePosts-${i}`,
           });
           expect(result.isOk()).toBe(true);
           const resultUnwrapped = result.unwrap() as any;
