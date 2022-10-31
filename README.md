@@ -138,7 +138,7 @@ Slack channel can be changed with env variable `PROD_REPORTING_DESTINATION`. It 
 
 ### **Test and update snapshots**
 
-Since lot of tests written in station uses jest snapshots for comparing values from map, we sometime need to update snapshots to modify/add/remove some snapshots. You can do this simply by adding option `-u` or `--updateSnapshot`. For example:
+Since lot of tests written in station uses jest snapshots for comparing values from map, you might need to update snapshots to modify/add/remove some of them. You can do this simply by adding option `-u` or `--updateSnapshot`. For example:
 
 ```shell
 $ yarn test -u
@@ -150,7 +150,7 @@ $ yarn test:record --updateSnapshot
 
 ### **Overall filtering of tests**
 
-In each of command described above, there is used jest that enables to use jest CLI options for managing test runs. Most used option that I noticed is specifying tests with test name as argument, for example:
+In each of command described above, you can use argument to specify integration, for example:
 
 ```shell
 $ yarn test chat/messages/maps/slack
@@ -161,8 +161,6 @@ $ TEST_ENV='dev' yarn test:record chat/messages
 ```
 
 This is important mainly in case of testing with live traffic when new recordings are stored and compared with old ones for each test that you run. For example if you want to record new traffic just for slack provider in profile `chat/messages`, you don’t want to record new traffic also for other providers in this profile.
-
-This gets problematic as you want to replace the new recording with old one and you did not specify exactly which recordings you want to replace.
 
 ### **Testing library DEBUG**
 
