@@ -6,8 +6,8 @@ import {
 } from '@superfaceai/testing';
 import { readFile } from 'fs/promises';
 import path from 'path';
-import { nockConfig } from '../../../test-config';
 
+import { nockConfig } from '../../../test-config';
 import { getPublishingProfiles } from './publish-post';
 
 async function fixturesToMedia(
@@ -53,10 +53,13 @@ export const publishMediaPostTest = (
     });
 
     beforeEach(() => {
-      superfacePublisPost = new SuperfaceTest({
-        profile: 'social-media/publish-post',
-        provider,
-      }, nockConfig);
+      superfacePublisPost = new SuperfaceTest(
+        {
+          profile: 'social-media/publish-post',
+          provider,
+        },
+        nockConfig
+      );
     });
 
     describe('PublishPost', () => {
@@ -97,10 +100,13 @@ export const publishMediaUploadTest = (
     let superfacePublisPost: SuperfaceTest;
 
     beforeEach(() => {
-      superfacePublisPost = new SuperfaceTest({
-        profile: 'social-media/publish-post',
-        provider,
-      }, nockConfig);
+      superfacePublisPost = new SuperfaceTest(
+        {
+          profile: 'social-media/publish-post',
+          provider,
+        },
+        nockConfig
+      );
     });
 
     const testCases = cases.map(

@@ -1,8 +1,8 @@
 import { SuperfaceTest } from '@superfaceai/testing';
 import { readFile } from 'fs/promises';
 import path from 'path';
-import { nockConfig } from '../../../test-config';
 
+import { nockConfig } from '../../../test-config';
 import { publishPostErrorTest } from './publish-post';
 
 const provider = 'linkedin';

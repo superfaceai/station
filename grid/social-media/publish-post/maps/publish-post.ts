@@ -5,6 +5,7 @@ import {
   SuperfaceTestRun,
 } from '@superfaceai/testing';
 import { RecordingType } from '@superfaceai/testing/dist/nock/recording.interfaces';
+
 import { nockConfig } from '../../../test-config';
 
 type ProfilesResult = Array<{ id: string; name: string }>;
