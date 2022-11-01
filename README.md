@@ -65,7 +65,7 @@ module.exports = {
 };
 ```
 
-### **Test with mocked traffic**
+### Test with mocked traffic
 
 ```shell
 $ yarn test
@@ -79,7 +79,7 @@ Recordings are categorised similarly as integrations in `/grid` folder:
 - every recording gets hashed based on **input**, **test name** or **custom test name**
 - this hash can be only seen with use of `DEBUG=superface:testing:hash*`
 
-### **Test with live traffic**
+### Test with live traffic
 
 ```shell
 $ yarn test:record
@@ -92,7 +92,7 @@ With this command, live traffic is enabled and therefore maps send requests to t
     - if it matches → do not save recording
     - if it doesn’t match → save new recording next to old one with suffix `-new`
 
-### **Test with new mocked traffic**
+### Test with new mocked traffic
 
 ```shell
 $ yarn test:with_new_traffic
@@ -100,7 +100,7 @@ $ yarn test:with_new_traffic
 
 This command run tests without live traffic, similar as `yarn test`, but uses new recordings instead of default ones (if present). New recordings are always newly recorded traffic that does not match the default old one and are located next to the old one with suffix `-new`.
 
-### **Test and replace old recording with new one**
+### Test and replace old recording with new one
 
 **⚠️ This command should be run only when you’re sure that tests are passing with new recordings → `yarn test:with_new_traffic`**
 
@@ -110,7 +110,7 @@ $ yarn test:update_traffic
 
 This commands run tests with mocked traffic, but also replaces old recording with new one (if present) before loading recordings - this means that tests are run with mocked new traffic already.
 
-### **Test with live traffic with development reporting**
+### Test with live traffic with development reporting
 
 ```shell
 $ yarn test:record:dev
@@ -126,7 +126,7 @@ $ TEST_ENV='dev' yarn test:record --group=live/safe
 
 `--group=live/safe` filters what tests to run, thanks to [jest-runner-groups](https://www.npmjs.com/package/jest-runner-groups) 
 
-### **Test with live traffic with production reporting**
+### Test with live traffic with production reporting
 
 ```shell
 $ yarn test:record:prod
@@ -136,7 +136,7 @@ This command run tests with live traffic and record it, similar as `yarn test:re
 
 Slack channel can be changed with env variable `PROD_REPORTING_DESTINATION`. It expects channel id.
 
-### **Test and update snapshots**
+### Test and update snapshots
 
 Since lot of tests written in station uses jest snapshots for comparing values from map, you might need to update snapshots to modify/add/remove some of them. You can do this simply by adding option `-u` or `--updateSnapshot`. For example:
 
@@ -148,7 +148,7 @@ $ yarn test:record --updateSnapshot
 
 ---
 
-### **Overall filtering of tests**
+### Overall filtering of tests
 
 In each of command described above, you can use argument to specify integration, for example:
 
@@ -162,7 +162,7 @@ $ TEST_ENV='dev' yarn test:record chat/messages
 
 This is important mainly in case of testing with live traffic when new recordings are stored and compared with old ones for each test that you run. For example if you want to record new traffic just for slack provider in profile `chat/messages`, you don’t want to record new traffic also for other providers in this profile.
 
-### **Testing library DEBUG**
+### Testing library DEBUG
 
 It also helps when you use `DEBUG` environment variable to see logs during test run.
 
@@ -180,7 +180,7 @@ It also helps when you use `DEBUG` environment variable to see logs during test 
 - log **matching** information: `DEBUG=superface:testing:matching*`
 - log **reporting** information:  `DEBUG=superface:testing:reporter*`
 
-### **Network errors**
+### Network errors
 
 `NetworkError: Fetch failed: reject issue`
 
