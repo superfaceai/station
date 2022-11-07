@@ -2,20 +2,20 @@ name = "payments/update-product"
 version = "1.0.0"
 
 """
-Update product  usecase
+Update product
 """
 
 usecase UpdateProduct unsafe {
   input {
     """
     ID
-    Unique identifier of the product.
+    Identifier of the product for updating.
     """
     id! string!
 
     """
-    Name
-    Name of the product.
+    New name
+    New name to be set on the product.
     """
     name string!
 

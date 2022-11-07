@@ -10,7 +10,7 @@ usecase CreatePlan unsafe {
     """
     Product ID
     The ID of the product to create a subscription plan for.
-    (To be created with `payments/CreateProduct`)
+    (To be created with `payments/create-product`)
     """
     productId! string!
 
@@ -32,7 +32,7 @@ usecase CreatePlan unsafe {
     """
     interval! enum {
       day, week, month, year
-    }
+    }!
 
     """
     Price
