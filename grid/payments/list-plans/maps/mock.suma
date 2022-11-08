@@ -2,7 +2,8 @@ profile = "payments/list-plans@1.0"
 provider = "mock"
 
 map ListPlans {
-  map result [
+  map result {
+    plans = [
     {
       id: "PLAN-89101829211",
       name: "Monthly subscription to Superface milk delivery",
@@ -18,4 +19,5 @@ map ListPlans {
       currency: "USD"
     }
   ]
+  }
 }

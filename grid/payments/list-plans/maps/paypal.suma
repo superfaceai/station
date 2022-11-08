@@ -12,7 +12,10 @@ map ListPlans {
 
     response 200 "application/json" {
       plans = call foreach (item of body.plans) MapPlan(item = item)
-      return map result plans
+
+      return map result {
+        plans = plans
+      }
     }
 
     response "application/json" {
@@ -34,4 +37,3 @@ operation MapPlan {
     status = item.status.toLowerCase()
   }
 }
-  
