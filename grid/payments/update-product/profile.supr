@@ -1,8 +1,13 @@
+"""
+Update Product
+Updates information about an existing product in a payment system (e.g. PayPal, Stripe...)
+"""
 name = "payments/update-product"
 version = "1.0.0"
 
 """
-Update product
+Update Product
+Updates information about an existing product.
 """
 
 usecase UpdateProduct unsafe {
@@ -21,7 +26,7 @@ usecase UpdateProduct unsafe {
 
     """
     Description
-    Descirption of the product.
+    New description to be set on the product.
     """
     description! string
   }
