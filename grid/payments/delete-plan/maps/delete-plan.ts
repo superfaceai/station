@@ -20,16 +20,16 @@ export function deletePlanTest(providerName: string): void {
     describe('DeletePlan', () => {
       describe('when all inputs are correct', () => {
         it('deletes a plan', async () => {
-          const id = await createPlan(providerName);
+          const planId = await createPlan(providerName);
           const result = await superface.run(
             {
               useCase: 'DeletePlan',
               input: {
-                id,
+                planId,
               },
             },
             {
-              hideInput: ['id'],
+              hideInput: ['planId'],
             }
           );
           expect(() => result.unwrap()).not.toThrow();

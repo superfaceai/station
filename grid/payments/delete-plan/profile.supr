@@ -16,7 +16,7 @@ usecase DeletePlan unsafe {
     ID
     Unique identifier of the plan to delete.
     """
-    id! string!
+    planId! string!
   }
 
   error {
@@ -35,7 +35,7 @@ usecase DeletePlan unsafe {
 
   example Successful {
     input {
-      id = "PLAN-89101829211"
+      planId = "PLAN-89101829211"
     }
   }
 }
