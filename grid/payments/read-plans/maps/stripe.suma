@@ -1,0 +1,48 @@
+profile = "payments/read-plans@1.0"
+provider = "stripe"
+
+map GetPlan {
+  http GET "/v1/plans/{input.id}" {
+    security "bearer"
+
+    response 200 "application/json" {
+      map result {
+        productId = body.product
+        name = body.nickname
+        state = body.active ? 'active': 'inactive'
+        interval = body.interval
+        price = body.amount / 100
+        currency = body.currency
+      }
+    }
+  }
+}
+
+map ListPlans {
+  http GET "/v1/plans" {
+    security "bearer"
+    request {
+      query {
+        limit = 100
+      }
+    }
+
+    response 200 "application/json" {
+      plans = call foreach (item of body.data) MapPlan(item = item)
+
+      return map result {
+        plans = plans
+      }
+    }
+  }
+}
+
+operation MapPlan {
+  item = args.item
+
+  return {
+    id = item.id
+    name = item.nickname
+    status = item.active? 'active': 'inactive'
+  }
+}

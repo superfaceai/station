@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`payments/read-plans/get/mock GetPlan when plan exists gets a plan 1`] = `
+Object {
+  "currency": "USD",
+  "interval": "month",
+  "name": "Monthly subscription to Superface milk delivery",
+  "price": 25,
+  "productId": "PROD-1192810198",
+  "state": "active",
+}
+`;
+
+exports[`payments/read-plans/list/mock ListPlans when all inputs are correct creates a product 1`] = `
+Object {
+  "plans": Array [
+    Object {
+      "currency": "USD",
+      "id": "PLAN-89101829211",
+      "interval": "month",
+      "name": "Monthly subscription to Superface milk delivery",
+      "price": 25,
+    },
+    Object {
+      "currency": "USD",
+      "id": "PLAN-89101829212",
+      "interval": "day",
+      "name": "Daily subscription to Superface pizza delivery",
+      "price": 5,
+    },
+  ],
+}
+`;

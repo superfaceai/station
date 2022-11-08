@@ -1,0 +1,191 @@
+"""
+Get Information About Subscription Plans
+Gets information about subscription plans in a payment system (e.g. PayPal, Stripe...)
+"""
+name = "payments/read-plans"
+version = "1.0.0"
+
+"""
+Get Subscription Plan
+Gets information about a single subscription plan in a payment system.
+"""
+
+usecase GetPlan safe {
+  input {
+    """
+    ID
+    Unique identifier of subscription plan.
+    """
+    id! string!
+  }
+
+  result {
+    """
+    Product ID
+    Unique identifier of the product the plan is for (if applicable).
+    """
+    productId string
+    
+    """
+    Name
+    Name of the subscription plan.
+    """
+    name string!
+
+    """
+    Interval
+    Frequency of the interval at which the customer is charged.
+
+    Possible values:
+    - `day`
+    - `week`
+    - `month`
+    - `year`
+    """
+    interval enum {
+      day, week, month, year
+    }
+
+    """
+    Price
+    Amount charged each `interval` cycle.
+    """
+    price number
+    
+    """
+    Currency code
+    Three-letter currency code in which `price` is specified, in ISO 4217 format.
+    """
+    currency string
+
+    """
+    State
+    State of the plan.
+
+    Possible values:
+     - `created` - The plan was just created. It may not be possible to accept new subscriptions yet.
+     - `active` - The plan is active and accepting new subscriptions.
+     - `inactive` - The plan has been deactivated, and cannot accept new subscriptions.
+    """
+    state enum {
+      created, active, inactive
+    }
+  }
+
+
+  error {
+    """
+    Title
+    A short, human-readable summary of the problem type.
+    """
+    title! string
+
+    """
+    Detail
+    A human-readable explanation specific to this occurrence of the problem.
+    """
+    detail string
+  }
+
+  example Successful {
+    input {
+      id = "PLAN-89101829211"
+    }
+
+    result {
+      productId = "PROD-1192810198"
+      name = "Monthly subscription to Superface milk delivery"
+      interval = "month"
+      price = 25
+      currency = "USD"
+      state = "active"
+    }
+  }
+}
+
+"""
+List Subscription Plans
+Lists existing subscription plans in a payment system.
+"""
+
+usecase ListPlans safe {
+  result {
+    plans [
+      {
+        """
+        ID
+        Unique identifier of the subscription plan.
+        """
+        id string!
+
+        """
+        Name
+        Name of the subscription plan.
+        """
+        name string!
+        
+        """
+        Interval
+        Frequency of the interval at which the customer is charged.
+
+        Possible values:
+        - `day`
+        - `week`
+        - `month`
+        - `year`
+        """
+        interval enum {
+          day, week, month, year
+        }
+
+        """
+        Price
+        Amount charged each `interval` cycle.
+        """
+        price number!
+
+        """
+        Currency code
+        Three-letter currency code in which `price` is specified, in ISO 4217 format.
+        """
+        currency string!
+      }
+    ]
+  }
+  
+
+  error {
+    """
+    Title
+    A short, human-readable summary of the problem type.
+    """
+    title! string
+
+    """
+    Detail
+    A human-readable explanation specific to this occurrence of the problem.
+    """
+    detail string
+  }
+
+  example Successful {
+    result {
+      plans = [
+        {
+          id = "PLAN-89101829211"
+          name = "Monthly subscription to Superface milk delivery"
+          interval = "month"
+          price = 25
+          currency = "USD"
+        },
+        {
+          id = "PLAN-89101829212"
+          name = "Daily subscription to Superface pizza delivery"
+          interval = "day"
+          price = 5
+          currency = "USD"
+        }
+      ]
+    }
+  }
+}
