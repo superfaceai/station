@@ -10,9 +10,9 @@ map GetPlan {
         productId = body.product_id
         name = body.name
         state = body.status.toLowerCase()
-        interval = body.billing_cycles.length > 0 ? body.billing_cycles[0].frequency.interval_unit.toLowerCase() : ''
-        price = body.billing_cycles.length > 0 && body.billing_cycles[0].pricing_scheme.fixed_price.value && parseFloat(body.billing_cycles[0].pricing_scheme.fixed_price.value, 10)
-        currency = body.billing_cycles.length > 0 ? body.billing_cycles[0].pricing_scheme.fixed_price.currency_code : undefined
+        interval = body.billing_cycles.length > 0 ? body.billing_cycles[0].frequency.interval_unit.toLowerCase() : undefined
+        price = body.billing_cycles.length > 0 && body.billing_cycles[0].pricing_scheme && body.billing_cycles[0].pricing_scheme.fixed_price && parseFloat(body.billing_cycles[0].pricing_scheme.fixed_price.value, 10)
+        currency = body.billing_cycles.length > 0 && body.billing_cycles[0].pricing_scheme && body.billing_cycles[0].pricing_scheme.fixed_price && body.billing_cycles[0].pricing_scheme.fixed_price.currency_code
       }
     }
 
@@ -58,6 +58,6 @@ operation MapPlan {
     id = item.id
     name = item.name
     description = item.description
-    status = item.status.toLowerCase()
+    status = item.status && item.status.toLowerCase()
   }
 }
