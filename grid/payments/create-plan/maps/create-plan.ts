@@ -8,11 +8,11 @@ import { createProduct } from '../../create-product/maps/create-product';
 export async function createPlan(provider: string): Promise<string> {
   const productId = await createProduct(provider);
 
-  const superfacePublishingProfiles = new SuperfaceTest({
+  const superfaceCreatePlanProfile = new SuperfaceTest({
     profile: 'payments/create-plan',
     provider,
   });
-  const result = await superfacePublishingProfiles.run(
+  const result = await superfaceCreatePlanProfile.run(
     {
       useCase: 'CreatePlan',
       input: {

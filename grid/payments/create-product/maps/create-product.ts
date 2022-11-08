@@ -4,11 +4,11 @@ import { describe, expect } from '@jest/globals';
 import { SuperfaceTest } from '@superfaceai/testing';
 
 export async function createProduct(provider: string): Promise<string> {
-  const superfacePublishingProfiles = new SuperfaceTest({
+  const superfaceCreateProductProfile = new SuperfaceTest({
     profile: 'payments/create-product',
     provider,
   });
-  const result = await superfacePublishingProfiles.run({
+  const result = await superfaceCreateProductProfile.run({
     useCase: 'CreateProduct',
     input: {
       name: 'Temporary Product',
