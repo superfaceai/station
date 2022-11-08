@@ -2,7 +2,7 @@ profile = "payments/create-product@1.0"
 provider = "paypal"
 
 map CreateProduct {
-  http POST "/catalogs/products" {
+  http POST "/v1/catalogs/products" {
     security "basic"
     request {
       body {

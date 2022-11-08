@@ -2,7 +2,7 @@ profile = "payments/get-plan@1.0"
 provider = "paypal"
 
 map GetPlan {
-  http GET "/billing/plans/{input.id}" {
+  http GET "/v1/billing/plans/{input.id}" {
     security "basic"
 
     response 200 "application/json" {

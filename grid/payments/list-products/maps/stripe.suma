@@ -2,7 +2,7 @@ profile = "payments/list-products@1.0"
 provider = "stripe"
 
 map ListProducts {
-  http GET "/products" {
+  http GET "/v1/products" {
     security "bearer"
     request {
       query {

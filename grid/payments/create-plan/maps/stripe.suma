@@ -2,7 +2,7 @@ profile = "payments/create-plan@1.0"
 provider = "stripe"
 
 map CreatePlan {
-  http POST "/prices" {
+  http POST "/v1/prices" {
     security "bearer"
     request "application/x-www-form-urlencoded" {
       body {

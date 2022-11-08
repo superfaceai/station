@@ -2,7 +2,7 @@ profile = "payments/create-subscription@1.0"
 provider = "stripe"
 
 map CreateSubscription {
-  http POST "/subscriptions" {
+  http POST "/v1/subscriptions" {
     security "bearer"
     request "application/x-www-form-urlencoded" {
       body = {

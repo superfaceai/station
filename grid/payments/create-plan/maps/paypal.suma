@@ -2,7 +2,7 @@ profile = "payments/create-plan@1.0"
 provider = "paypal"
 
 map CreatePlan {
-  http POST "/billing/plans" {
+  http POST "/v1/billing/plans" {
     security "basic"
     request {
       body = {

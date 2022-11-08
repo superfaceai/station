@@ -2,7 +2,7 @@ profile = "payments/delete-product@1.0"
 provider = "stripe"
 
 map DeleteProduct {
-  http DELETE "/products/{input.id}" {
+  http DELETE "/v1/products/{input.id}" {
     security "bearer"
     
     response 200 "application/json" {

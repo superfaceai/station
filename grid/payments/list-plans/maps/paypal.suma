@@ -2,7 +2,7 @@ profile = "payments/list-plans@1.0"
 provider = "paypal"
 
 map ListPlans {
-  http GET "/billing/plans" {
+  http GET "/v1/billing/plans" {
     security "basic"
     request {
       query {
