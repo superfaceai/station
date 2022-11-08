@@ -2,6 +2,12 @@ profile = "payments/create-product@1.0"
 provider = "paypal"
 
 map CreateProduct {
+  map error if (!input.type) {
+    title = "Missing type"
+    detail = "PayPal requires `type` to be specified (one of `physical`, `digital`, `service`)."
+    code = InvalidInput
+  }
+
   http POST "/v1/catalogs/products" {
     security "basic"
     request {
@@ -23,6 +29,7 @@ map CreateProduct {
       map error {
         title = body.message
         detail = body.details
+        code = UnknownError
       }
     }
   }

@@ -65,6 +65,12 @@ usecase CreateProduct unsafe {
     A human-readable explanation specific to this occurrence of the problem.
     """
     detail string
+
+    """
+    Code
+    Machine processable error code.
+    """
+    code! ErrorCode!
   }
 
   example Successful {
@@ -78,4 +84,18 @@ usecase CreateProduct unsafe {
       url = "https://www.example.com/shop/PROD-1192810198"
     }
   }
+}
+
+model ErrorCode enum {
+  """
+  Invalid input
+  Invalid input was provided, see `detail`.
+  """
+  InvalidInput
+
+  """
+  Unknown error
+  Returned when an unexpected error occured.
+  """
+  UnknownError
 }

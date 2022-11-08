@@ -16,10 +16,19 @@ map GetPlan {
       }
     }
 
+    response 404 "application/json" {
+      map error {
+        title = body.message
+        detail = body.details
+        code = NotFound
+      }
+    }
+
     response "application/json" {
       map error {
         title = body.message
         detail = body.details
+        code = UnknownError
       }
     }
   }
@@ -46,6 +55,7 @@ map ListPlans {
       map error {
         title = body.message
         detail = body.details
+        code = UnknownError
       }
     }
   }

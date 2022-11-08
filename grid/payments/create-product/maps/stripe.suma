@@ -22,6 +22,7 @@ map CreateProduct {
       map error {
         title = body.error.code
         detail = body.error.message
+        code = UnknownError
       }
     }
   }

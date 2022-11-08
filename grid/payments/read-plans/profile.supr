@@ -85,6 +85,12 @@ usecase GetPlan safe {
     A human-readable explanation specific to this occurrence of the problem.
     """
     detail string
+
+    """
+    Code
+    Machine processable error code.
+    """
+    code! ErrorCode!
   }
 
   example Successful {
@@ -166,6 +172,12 @@ usecase ListPlans safe {
     A human-readable explanation specific to this occurrence of the problem.
     """
     detail string
+
+    """
+    Code
+    Machine processable error code.
+    """
+    code! ErrorCode!
   }
 
   example Successful {
@@ -188,4 +200,18 @@ usecase ListPlans safe {
       ]
     }
   }
+}
+
+model ErrorCode enum {
+  """
+  Not found
+  The plan does not exist.
+  """
+  NotFound
+
+  """
+  Unknown error
+  Returned when an unexpected error occured.
+  """
+  UnknownError
 }

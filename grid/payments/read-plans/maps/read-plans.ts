@@ -54,7 +54,7 @@ export function listPlansTest(providerName: string): void {
 
     describe('ListPlans', () => {
       describe('when all inputs are correct', () => {
-        it('creates a product', async () => {
+        it('lists all plans', async () => {
           const result = await superface.run({
             useCase: 'ListPlans',
             input: {},
