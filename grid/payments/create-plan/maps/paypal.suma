@@ -34,7 +34,7 @@ map CreatePlan {
 
     response 201 "application/json" {
       map result {
-        id = body.id
+        planId = body.id
         state = body.status.toLowerCase()
       }
     }

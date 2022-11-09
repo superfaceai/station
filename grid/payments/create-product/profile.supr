@@ -45,7 +45,7 @@ usecase CreateProduct unsafe {
     ID
     Unique identifier of the product.
     """
-    id! string!
+    productId! string!
     """
     Product URL
     A URL of the product's publicly-accessible webpage.
@@ -80,7 +80,7 @@ usecase CreateProduct unsafe {
     }
 
     result {
-      id = "PROD-1192810198"
+      productId = "PROD-1192810198"
       url = "https://www.example.com/shop/PROD-1192810198"
     }
   }

@@ -2,7 +2,7 @@ profile = "payments/update-product@1.0"
 provider = "stripe"
 
 map UpdateProduct {
-  http POST "/v1/products/{input.id}" {
+  http POST "/v1/products/{input.productId}" {
     security "bearer"
     request "application/x-www-form-urlencoded" {
       body {

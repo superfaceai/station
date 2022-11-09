@@ -2,7 +2,7 @@ profile = "payments/read-plans@1.0"
 provider = "paypal"
 
 map GetPlan {
-  http GET "/v1/billing/plans/{input.id}" {
+  http GET "/v1/billing/plans/{input.planId}" {
     security "basic"
 
     response 200 "application/json" {
@@ -65,7 +65,7 @@ operation MapPlan {
   item = args.item
 
   return {
-    id = item.id
+    planId = item.id
     name = item.name
     description = item.description
     status = item.status && item.status.toLowerCase()

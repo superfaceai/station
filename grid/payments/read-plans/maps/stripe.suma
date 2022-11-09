@@ -2,7 +2,7 @@ profile = "payments/read-plans@1.0"
 provider = "stripe"
 
 map GetPlan {
-  http GET "/v1/plans/{input.id}" {
+  http GET "/v1/plans/{input.planId}" {
     security "bearer"
 
     response 200 "application/json" {
@@ -41,7 +41,7 @@ operation MapPlan {
   item = args.item
 
   return {
-    id = item.id
+    planId = item.id
     name = item.nickname
     status = item.active? 'active': 'inactive'
   }

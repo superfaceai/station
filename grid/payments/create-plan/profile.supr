@@ -55,9 +55,9 @@ usecase CreatePlan unsafe {
   result {
     """
     Plan ID
-    ID of plan.
+    ID of the plan.
     """
-    id! string!
+    planId! string!
     
     """
     State
@@ -97,7 +97,7 @@ usecase CreatePlan unsafe {
     }
 
     result {
-      id = "PLAN-89101829211"
+      planId = "PLAN-89101829211"
       state = "active"
     }
   }

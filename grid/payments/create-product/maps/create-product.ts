@@ -18,7 +18,7 @@ export async function createProduct(provider: string): Promise<string> {
     testName: 'payments/create-product/temporary',
   });
 
-  return (result.unwrap() as { id: string }).id;
+  return (result.unwrap() as { productId: string }).productId;
 }
 
 export function createProductTest(providerName: string): void {

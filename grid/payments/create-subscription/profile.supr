@@ -30,7 +30,7 @@ usecase CreateSubscription unsafe {
     ID
     Unique identifier of the subscription.
     """
-    id! string!
+    subscriptionId! string!
 
     """
     Status
@@ -80,7 +80,7 @@ usecase CreateSubscription unsafe {
     }
 
     result {
-      id = "91273981273918273"
+      subscriptionId = "91273981273918273"
       status = "active"
     }
   }

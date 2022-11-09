@@ -16,7 +16,7 @@ usecase DeleteProduct unsafe {
     ID
     Unique identifier of the product to be deleted.
     """
-    id! string!
+    productId! string!
   }
 
   error {
@@ -35,7 +35,7 @@ usecase DeleteProduct unsafe {
 
   example Successful {
     input {
-      id = "PROD-1192810198"
+      productId = "PROD-1192810198"
     }
   }
 }

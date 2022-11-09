@@ -20,18 +20,18 @@ export function updateProductTest(providerName: string): void {
     describe('UpdateProduct', () => {
       describe('when all inputs are correct', () => {
         it('updates a product', async () => {
-          const id = await createProduct(providerName);
+          const productId = await createProduct(providerName);
           const result = await superface.run(
             {
               useCase: 'UpdateProduct',
               input: {
-                id,
+                productId,
                 name: 'New name',
                 description: 'New description',
               },
             },
             {
-              hideInput: ['id'],
+              hideInput: ['productId'],
             }
           );
           expect(() => result.unwrap()).not.toThrow();

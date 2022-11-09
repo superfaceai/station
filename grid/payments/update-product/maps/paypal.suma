@@ -2,7 +2,7 @@ profile = "payments/update-product@1.0"
 provider = "paypal"
 
 map UpdateProduct {
-  http PATCH "/v1/catalogs/products/{input.id}" {
+  http PATCH "/v1/catalogs/products/{input.productId}" {
     security "basic"
     request "application/json" {
       body = [{op: "replace", path: "/description", value: input.description}]

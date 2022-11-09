@@ -29,7 +29,7 @@ export async function createPlan(provider: string): Promise<string> {
     }
   );
 
-  return (result.unwrap() as { id: string }).id;
+  return (result.unwrap() as { planId: string }).planId;
 }
 
 export function createPlanTest(providerName: string): void {

@@ -23,7 +23,7 @@ map CreateSubscription {
       status = (() => statusMap[body.status] || body.status)();
 
       map result {
-        id = body.id
+        subscriptionId = body.id
         status = status
       }
     }

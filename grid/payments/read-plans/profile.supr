@@ -16,7 +16,7 @@ usecase GetPlan safe {
     ID
     Unique identifier of subscription plan.
     """
-    id! string!
+    planId! string!
   }
 
   result {
@@ -95,7 +95,7 @@ usecase GetPlan safe {
 
   example Successful {
     input {
-      id = "PLAN-89101829211"
+      planId = "PLAN-89101829211"
     }
 
     result {
@@ -122,7 +122,7 @@ usecase ListPlans safe {
         ID
         Unique identifier of the subscription plan.
         """
-        id string!
+        planId string!
 
         """
         Name
@@ -184,14 +184,14 @@ usecase ListPlans safe {
     result {
       plans = [
         {
-          id = "PLAN-89101829211"
+          planId = "PLAN-89101829211"
           name = "Monthly subscription to Superface milk delivery"
           interval = "month"
           price = 25
           currency = "USD"
         },
         {
-          id = "PLAN-89101829212"
+          planId = "PLAN-89101829212"
           name = "Daily subscription to Superface pizza delivery"
           interval = "day"
           price = 5

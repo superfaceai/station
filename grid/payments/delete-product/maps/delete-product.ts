@@ -20,16 +20,16 @@ export function deleteProductTest(providerName: string): void {
     describe('DeleteProduct', () => {
       describe('when all inputs are correct', () => {
         it('deletes a product', async () => {
-          const id = await createProduct(providerName);
+          const productId = await createProduct(providerName);
           const result = await superface.run(
             {
               useCase: 'DeleteProduct',
               input: {
-                id,
+                productId,
               },
             },
             {
-              hideInput: ['id'],
+              hideInput: ['productId'],
             }
           );
           expect(() => result.unwrap()).not.toThrow();

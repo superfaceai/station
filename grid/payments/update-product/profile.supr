@@ -16,7 +16,7 @@ usecase UpdateProduct unsafe {
     ID
     Identifier of the product for updating.
     """
-    id! string!
+    productId! string!
 
     """
     New name
@@ -47,7 +47,7 @@ usecase UpdateProduct unsafe {
 
   example Successful {
     input {
-      id = "PROD-123909"
+      productId = "PROD-123909"
       name = "Superface milk price monitor"
       description = "Gives you the most up-to-date info on milk prices."  
     }
