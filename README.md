@@ -49,7 +49,7 @@ $ yarn lint
 # Run tests
 $ yarn test
 
-# Record new trafic with live API calls, more information bellow
+# Record new trafic with live API calls, more information below
 $ yarn test:record grid/path/to/test.ts
 ```
 
@@ -85,12 +85,12 @@ Recordings are categorised similarly as integrations in `/grid` folder:
 $ yarn test:record
 ```
 
-With this command, live traffic is enabled and therefore maps send requests to the live providers. This command also records this request and response. There are multiple scenarios what can happen:
+Run tests using live APIs, store requests and responses recordings for each use case. The following cases can happen depending on the existence of previous recordings:
 
-- use-case does not have recording → records traffic and saves as default one
-- use-case already have recording → records new traffic and compares it to the old one →
-    - if it matches → do not save recording
-    - if it doesn’t match → save new recording next to old one with suffix `-new`
+- If a use case doesn't have recording → save it as a default recording
+- If a use case has recording → record new traffic and compare it to the old one →
+    - If the recordings match → don't save the new recording
+    - If the recordings don’t match → save the new recording next to the old one with suffix `-new`
 
 ### Test with new mocked traffic
 
@@ -98,17 +98,18 @@ With this command, live traffic is enabled and therefore maps send requests to t
 $ yarn test:with_new_traffic
 ```
 
-This command run tests without live traffic, similar as `yarn test`, but uses new recordings instead of default ones (if present). New recordings are always newly recorded traffic that does not match the default old one and are located next to the old one with suffix `-new`.
+Similar to `yarn test`, run tests against a mock server with prerecorded traffic, but use any available new recordings instead of default ones. New recordings are created by `yarn test:record` when the newly recorded traffic doesn't match the old one. New recordings are located next to old ones with suffix `new`.
 
 ### Test and replace old recording with new one
 
-**⚠️ This command should be run only when you’re sure that tests are passing with new recordings → `yarn test:with_new_traffic`**
+> **Warning**
+> Run this command only when you're sure the tests pass with the new recordings (using `yarn test:with_new_traffic`).
 
 ```shell
 $ yarn test:update_traffic
 ```
 
-This commands run tests with mocked traffic, but also replaces old recording with new one (if present) before loading recordings - this means that tests are run with mocked new traffic already.
+Replace the old traffic recordings with new ones (if present) and run tests using these new recordings.
 
 ### Test with live traffic with development reporting
 
@@ -132,23 +133,23 @@ $ TEST_ENV='dev' yarn test:record --group=live/safe
 $ yarn test:record:prod
 ```
 
-This command run tests with live traffic and record it, similar as `yarn test:record` or `yarn test:record:dev`. Only difference between `test:record:dev` is that it uses production reporter that reports provider changes to the public slack channel.
+Run tests under `live/safe` group with live traffic, record it and report provider changes to Slack.
 
-Slack channel can be changed with env variable `PROD_REPORTING_DESTINATION`. It expects channel id.
+Set Slack channel ID with env variable `PROD_REPORTING_DESTINATION`.
 
-### Test and update snapshots
+### Updating test snapshots
 
-Since lot of tests written in station uses jest snapshots for comparing values from map, you might need to update snapshots to modify/add/remove some of them. You can do this simply by adding option `-u` or `--updateSnapshot`. For example:
+If you change the map or record a new response, you may need to update Jest snapshots captured during the previous run. Use `-u` parameter to update snapshots:
 
 ```shell
 $ yarn test -u
 
-$ yarn test:record --updateSnapshot
+$ yarn test:record -u
 ```
 
 ---
 
-### Overall filtering of tests
+### Tests filtering
 
 In each of command described above, you can use argument to specify integration, for example:
 
@@ -160,11 +161,13 @@ $ yarn test:record chat/messages/maps/slack
 $ TEST_ENV='dev' yarn test:record chat/messages
 ```
 
-This is important mainly in case of testing with live traffic when new recordings are stored and compared with old ones for each test that you run. For example if you want to record new traffic just for slack provider in profile `chat/messages`, you don’t want to record new traffic also for other providers in this profile.
+This is necessary whenever you record a traffic to limit interaction with live APIs only to the changed maps and tests.
+
+For example, if you want to record new traffic just for the `slack` provider and profile `chat/messages`, and ignore other providers:
 
 ### Testing library DEBUG
 
-It also helps when you use `DEBUG` environment variable to see logs during test run.
+Use `DEBUG` environment variable to check the testing library behavior during a test run.
 
 - log **everything**: `DEBUG=superface:testing*`
 - log **main setup**: `DEBUG=superface:testing`
@@ -180,15 +183,16 @@ It also helps when you use `DEBUG` environment variable to see logs during test 
 - log **matching** information: `DEBUG=superface:testing:matching*`
 - log **reporting** information:  `DEBUG=superface:testing:reporter*`
 
-### Network errors
+### Troubleshooting common errors
 
-`NetworkError: Fetch failed: reject issue`
+You can run into the following errors when running tests:
 
-`SdkExecutionError: Request ended with network error: reject`
+```
+NetworkError: Fetch failed: reject issue
+SdkExecutionError: Request ended with network error: reject
+```
 
-If you get `NetworkError` or `SdkExecutionError` during testing with mocked traffic(`yarn test`), it usually means that request didn’t get through. If nock (used for loading mocked traffic) can’t match recording, request is denied.
-
-You can debug nock matching of recordings with `DEBUG=nock*` to see what went wrong.
+When you are testing with mocked traffic (using `yarn test`), it means that the request didn't match any recordings and was rejected. Try rerecording the traffic using `yarn test:record`. You can also debug the matching behavior with `DEBUG=nock*` env variable, 
 
 ## Security
 
