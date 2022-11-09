@@ -61,7 +61,7 @@ module.exports = {
   testEnvironment: 'node',
   rootDir: './grid',
   runner: 'groups',
-  reporters: ['default', '../dist/reporter.js']
+  reporters: ['default', '../dist/reporter.js'],
 };
 ```
 
@@ -91,8 +91,8 @@ Run tests using live APIs, store requests and responses recordings for each use 
 
 - If a use case doesn't have recording → save it as a default recording
 - If a use case has recording → record new traffic and compare it to the old one →
-    - If the recordings match → don't save the new recording
-    - If the recordings don’t match → save the new recording next to the old one with suffix `-new`
+  - If the recordings match → don't save the new recording
+  - If the recordings don’t match → save the new recording next to the old one with suffix `-new`
 
 ### Test with new mocked traffic
 
@@ -167,17 +167,17 @@ Use `DEBUG` environment variable to check the testing library behavior during a 
 
 - log **everything**: `DEBUG=superface:testing*`
 - log **main setup**: `DEBUG=superface:testing`
-    - perform results
-    - start and end of recording/mocking HTTP traffic
-    - start of `beforeRecordingLoad` and `beforeRecordingSave` functions
+  - perform results
+  - start and end of recording/mocking HTTP traffic
+  - start of `beforeRecordingLoad` and `beforeRecordingSave` functions
 - log **setup** of superface components and recordings: `DEBUG=superface:testing:setup*`
-    - setup of recording paths and superface components (profile, provider, usecase)
-    - setup of superjson and local map
+  - setup of recording paths and superface components (profile, provider, usecase)
+  - setup of superjson and local map
 - log **hashing** of recordings: `DEBUG=superface:testing:hash*`
-    - creation of recording hash
+  - creation of recording hash
 - log **recording/replacing** information: `DEBUG=superface:testing:recordings*`
 - log **matching** information: `DEBUG=superface:testing:matching*`
-- log **reporting** information:  `DEBUG=superface:testing:reporter*`
+- log **reporting** information: `DEBUG=superface:testing:reporter*`
 
 ### Troubleshooting common errors
 
@@ -289,7 +289,7 @@ $ yarn test grid/[scope]/[name]/maps/example.test.ts
 
 ### Debugging maps
 
-You can set the OneSDK `DEBUG` environment variable to enable logging for debugging purposes: 
+You can set the OneSDK `DEBUG` environment variable to enable logging for debugging purposes:
 
 ```
 DEBUG="superface:http*"
