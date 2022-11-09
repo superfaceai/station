@@ -2,4 +2,8 @@ profile = "payments/update-product@1.0"
 provider = "mock"
 
 map UpdateProduct {
+  map result {
+    name = input.name
+    description = input.description
+  }
 }

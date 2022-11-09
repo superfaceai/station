@@ -8,6 +8,7 @@ version = "1.0.0"
 """
 Update Product
 Updates information about an existing product.
+Heads up! Not all providers may support updating all fields. Please be mindful of the `result`.
 """
 
 usecase UpdateProduct unsafe {
@@ -28,7 +29,21 @@ usecase UpdateProduct unsafe {
     Description
     New description to be set on the product.
     """
-    description! string
+    description string
+  }
+
+  result {
+    """
+    Name
+    Name of the product after update (may or may not have changed).
+    """
+    name string!
+
+    """
+    Description
+    Description of the product after update (may or may not have changed).
+    """
+    description string
   }
 
   error {

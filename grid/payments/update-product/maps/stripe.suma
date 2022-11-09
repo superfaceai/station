@@ -12,6 +12,10 @@ map UpdateProduct {
     }
 
     response 200 "application/json" {
+      map result {
+        name = body.name
+        description = body.description
+      }
     }
 
     response "application/json" {
