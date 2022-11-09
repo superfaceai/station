@@ -71,13 +71,15 @@ module.exports = {
 $ yarn test
 ```
 
-This command runs tests with mocked traffic and therefore no live traffic is enabled. You can find recordings that this command uses as mocked traffic in `/nock`.
+Run tests against a mock server with prerecorded traffic. No request will reach a live API so it can be used safely without API credentials.
 
-Recordings are categorised similarly as integrations in `/grid` folder:
-`nock/<scope>/<profile-name>/<provider-name>/<usecase-name>/recording-<hash>.json`
+Traffic recordings are stored in `/nock` folder with the similar structure as tests under `/grid` folder and additional folder for each use case:
 
-- every recording gets hashed based on **input**, **test name** or **custom test name**
-- this hash can be only seen with use of `DEBUG=superface:testing:hash*`
+```
+nock/<scope>/<profile-name>/<provider-name>/<usecase-name>/recording-<hash>.json
+```
+
+The `<hash>` is based either on its _input_ or _test name_ when test instance is specified, or _custom test name_ if provided. You can check the generated hashes when you enable the following environment variable: `DEBUG=superface:testing:hash*`
 
 ### Test with live traffic
 
@@ -117,15 +119,7 @@ Replace the old traffic recordings with new ones (if present) and run tests usin
 $ yarn test:record:dev
 ```
 
-This command run tests with live traffic and record it, similar as `yarn test:record`. The script implementation looks like this:
-
-```shell
-$ TEST_ENV='dev' yarn test:record --group=live/safe
-```
-
-`TEST_ENV` sets development environment for reporter - to use local reporter that just logs the provider changes into console
-
-`--group=live/safe` filters what tests to run, thanks to [jest-runner-groups](https://www.npmjs.com/package/jest-runner-groups) 
+Run tests under `live/safe` tests group with live traffic (similar to `yarn test:record`) and console reporter. This is useful for development of continuous live tests.
 
 ### Test with live traffic with production reporting
 
@@ -151,19 +145,21 @@ $ yarn test:record -u
 
 ### Tests filtering
 
-In each of command described above, you can use argument to specify integration, for example:
+In each of command described above, you can use argument to specify test file or pattern of that test file, for example:
 
 ```shell
-$ yarn test chat/messages/maps/slack
-
-$ yarn test:record chat/messages/maps/slack
-
-$ TEST_ENV='dev' yarn test:record chat/messages
+$ yarn test chat/messages
 ```
 
 This is necessary whenever you record a traffic to limit interaction with live APIs only to the changed maps and tests.
 
 For example, if you want to record new traffic just for the `slack` provider and profile `chat/messages`, and ignore other providers:
+
+```shell
+$ yarn test:record chat/messages/maps/slack
+
+$ TEST_ENV='dev' yarn test:record chat/messages
+```
 
 ### Testing library DEBUG
 
@@ -192,7 +188,7 @@ NetworkError: Fetch failed: reject issue
 SdkExecutionError: Request ended with network error: reject
 ```
 
-When you are testing with mocked traffic (using `yarn test`), it means that the request didn't match any recordings and was rejected. Try rerecording the traffic using `yarn test:record`. You can also debug the matching behavior with `DEBUG=nock*` env variable, 
+When you are testing with mocked traffic (using `yarn test`), it means that the request didn't match any recordings and was rejected. Try rerecording the traffic using `yarn test:record`. You can also debug the matching behavior with `DEBUG=nock*` env variable.
 
 ## Security
 
