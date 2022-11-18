@@ -18,10 +18,17 @@ map CreateTask {
     }
     
     response 201 "application/json" {
-      return map result {
-        id = body.data.gid
-        url = body.data.permalink_url
+      data = {
+        id: body.data.gid,
+        title: body.data.name,
+        description: body.data.notes,
+        projects: body.data.projects.map(project => project.gid),
+        parent: body.data.parent,
+        assignee: body.data.assignee.gid,
+        url: body.data.permalink_url
       }
+
+      return map result data
     }
 
     response {
@@ -43,7 +50,6 @@ map ReadAllTasks {
       data = body.data.map(task => ({
         id: task.gid,
         title: task.name,
-        url: task.permalink_url
       }))
     
       return map result data
