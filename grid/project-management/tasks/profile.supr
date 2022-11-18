@@ -12,7 +12,7 @@ usecase CreateTask {
 	input {
 
     """
-    projects
+    project
     ID of project to create the task in.
     """
     project string
@@ -42,20 +42,9 @@ usecase CreateTask {
     assignee string
 	}
 
-	result {
-    "ID of the created task."
-    id! string!
+	result Task
 
-    "URL of the created task"
-    url string
-  }
-
-	error {
-		"Human-readable error message"
-		message! string!
-		"Human-readable details about the error"
-		description! string!
-	}
+	error Error
 
   example success {
     input {
@@ -69,4 +58,186 @@ usecase CreateTask {
       url = "https://example.com/tasks/ffa18e32-45e6-4b2b-97fa-b8509b3a8c76"
     }
   }
+}
+
+"""
+Reade all tasks in a project
+"""
+usecase ReadAllTasks {
+	input {
+    """
+    Project Id
+    Id of project to read tasks from.
+    """
+		id string
+	}
+
+	result [Task]
+
+	error Error
+
+  example success {
+    input {
+      id = "46ebca75-68af-42a1-916d-b228c2082d4f"
+    }
+
+    result [{
+      id = "ffa18e32-45e6-4b2b-97fa-b8509b3a8c76"
+      title = "Get milk"
+      description = "We ran out of milk :("
+      url = "https://example.com/tasks/ffa18e32-45e6-4b2b-97fa-b8509b3a8c76"
+    }]
+  }
+}
+
+
+"""
+Reade a task in a project
+"""
+usecase ReadTask {
+	input {
+    """
+    Task Id
+    Id of task to read.
+    """
+		id string
+	}
+
+	result Task
+
+	error Error
+
+  example success {
+    input {
+      id = "ffa18e32-45e6-4b2b-97fa-b8509b3a8c76"
+    }
+
+    result {
+      id = "ffa18e32-45e6-4b2b-97fa-b8509b3a8c76"
+      title = "Get milk"
+      description = "We ran out of milk :("
+      url = "https://example.com/tasks/ffa18e32-45e6-4b2b-97fa-b8509b3a8c76"
+    }
+  }
+}
+
+"""
+Update a task in a project
+"""
+usecase UpdateTask {
+	input {
+    """
+    Task Id
+    Id of task to read in specified project.
+    """
+		id string
+
+		"""
+		title
+		Textual title of the task.
+		"""
+		title string
+		
+		"""
+		description
+		Free-form textual description of the task.
+		"""
+		description string
+	}
+
+	result Task
+
+	error Error
+
+  example success {
+    input {
+      id = "ffa18e32-45e6-4b2b-97fa-b8509b3a8c76"
+      title = "Get milk"
+    }
+
+    result {
+      id = "ffa18e32-45e6-4b2b-97fa-b8509b3a8c76"
+      title = "Get milk"
+      description = "Old description"
+      url = "https://example.com/tasks/ffa18e32-45e6-4b2b-97fa-b8509b3a8c76"
+    }
+  }
+}
+
+"""
+Delete a task in a project
+"""
+usecase DeleteTask {
+	input {
+    """
+    Task Id
+    Id of task to read in specified project.
+    """
+		id string
+	}
+
+	result {}
+
+	error Error
+
+  example success {
+    input {
+      id = "ffa18e32-45e6-4b2b-97fa-b8509b3a8c76"
+    }
+
+    result {}
+  }
+}
+
+
+model Task {
+  """
+  Task Id
+  Id of task in project.
+  """
+  id! string!
+
+  """
+  projects
+  ID of projects the task belong to.
+  """
+  projects [string]
+  
+  """
+  title
+  Textual title of the task.
+  """
+  title string
+  
+  """
+  description
+  Free-form textual description of the task.
+  """
+  description string
+
+  """
+  parent
+  ID of the parent task (if applicable).
+  """
+  parent string
+
+  """
+  assignee
+  ID of the user this task should be assigned to.
+  """
+  assignee string
+
+  """
+  url
+  URL of a task
+  """
+  url string
+}
+
+model Error {
+  "Human-readable error message"
+  message! string!
+
+  "Human-readable details about the error"
+  description! string!
 }

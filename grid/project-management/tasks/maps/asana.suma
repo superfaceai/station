@@ -6,10 +6,6 @@ map CreateTask {
     security "personalAccessToken"
     
     request "application/json" {
-      headers {
-        "Authorization" = `Bearer ${parameters.accessToken}`
-      }
-
       body {
         data = {
           name: input.title,
@@ -27,5 +23,178 @@ map CreateTask {
         url = body.data.permalink_url
       }
     }
+
+    response {
+      error = call MapAsanaError(
+        statusCode = statusCode,
+        error = body,
+      )
+      
+      map error error
+    }
+  }
+}
+
+map ReadAllTasks {
+  http GET "/projects/{input.id}/tasks" {
+    security "personalAccessToken"
+    
+    response 200 "application/json" {
+      data = body.data.map(task => ({
+        id: task.gid,
+        title: task.name,
+        url: task.permalink_url
+      }))
+    
+      return map result data
+    }
+
+    response {
+      error = call MapAsanaError(
+        statusCode = statusCode,
+        error = body,
+      )
+      
+      map error error
+    }
+  }
+}
+
+map ReadTask {
+  http GET "/tasks/{input.id}" {
+    security "personalAccessToken"
+    
+    response 200 "application/json" {
+      data = {
+        id: body.data.gid,
+        title: body.data.name,
+        description: body.data.notes,
+        projects: body.data.projects.map(project => project.gid),
+        parent: body.data.parent,
+        assignee: body.data.assignee.gid,
+        url: body.data.permalink_url
+      }
+      
+      return map result data
+    }
+
+    response {
+      error = call MapAsanaError(
+        statusCode = statusCode,
+        error = body,
+      )
+      
+      map error error
+    }
+  }
+}
+
+map UpdateTask {
+  http PUT "/tasks/{input.id}" {
+    security "personalAccessToken"
+    
+    request "application/json" {
+      body {
+        data = {
+          name: input.title,
+          notes: input.description,
+          // projects: [input.project],
+          // parent: input.parent,
+          // assignee: input.assignee
+        }
+      }
+    }
+    
+    response 200 "application/json" {
+      data = {
+        id: body.data.gid,
+        title: body.data.name,
+        description: body.data.notes,
+        projects: body.data.projects.map(project => project.gid),
+        parent: body.data.parent,
+        assignee: body.data.assignee.gid,
+        url: body.data.permalink_url
+      }
+
+      return map result data
+    }
+
+    response {
+      error = call MapAsanaError(
+        statusCode = statusCode,
+        error = body,
+      )
+      
+      map error error
+    }
+  }
+}
+
+map DeleteTask {
+  http DELETE "/tasks/{input.id}" {
+    security "personalAccessToken"
+    
+    response 200 "application/json" {
+      return map result {}
+    }
+
+    response {
+      error = call MapAsanaError(
+        statusCode = statusCode,
+        error = body,
+      )
+      
+      map error error
+    }
+  }
+}
+
+"""
+Operation Map Asana Error
+Returns error object based on error body, statusCode.
+"""
+operation MapAsanaError {
+  statusCode = args.statusCode
+  discordError = args.error
+  detail = discordError.message
+
+  return if (statusCode === 400) {
+    title = 'Bad request'
+    detail = discordError
+  }
+
+  return if (statusCode === 401) {
+    title = 'Unauthorized'
+    detail = detail
+  }
+
+  return if (statusCode === 403) {
+    title = 'Forbidden'
+    detail = detail
+  }
+
+  return if (statusCode === 404) {
+    title = 'Not found'
+    detail = detail
+  }
+
+  return if (statusCode === 405) {
+    title = 'Method not allowed'
+    detail = detail
+  }
+
+  return if (statusCode === 429) {
+    title = 'Too Many Requests'
+    detail = `${detail} Retry after ${discordError.retry_after} seconds`
+  }
+
+  return if (statusCode === 502) {
+    title = 'Bad gateway'
+    detail = detail
+  }
+
+  return {
+    title = 'Unknown error'
+    detail = `Unknown error occurred. Status: ${statusCode}. Message: ${detail}.`
   }
 }
