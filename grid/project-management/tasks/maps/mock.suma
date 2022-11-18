@@ -7,3 +7,28 @@ map CreateTask {
     url = "https://example.com/task/123"
   }
 }
+
+map ReadAllTasks {
+  return map result [{
+    id: "123",
+    url: "https://example.com/task/123",
+  }]
+}
+
+map ReadTask {
+  return map result {
+    id = "123"
+    url = "https://example.com/task/123"
+  }
+}
+
+map UpdateTask {
+  return map result {
+    id = "123"
+    url = "https://example.com/task/123"
+  }
+}
+
+map DeleteTask {
+  return map result null;
+}
