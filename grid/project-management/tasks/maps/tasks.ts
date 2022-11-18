@@ -49,7 +49,10 @@ const deleteTask = async (
     useCase: 'DeleteTask',
   });
 
-  const result = await superface.run({ input, testName });
+  const result = await superface.run(
+    { input, testName },
+    { hideInput: ['id'] }
+  );
 
   return result.unwrap();
 };
@@ -95,9 +98,6 @@ export const taskCrudTest = async (provider: string): Promise<void> => {
 
     describe('ReadAllTasks', () => {
       const ids: string[] = [];
-      // beforeAll(() => {
-      //   jest.setTimeout(10000);
-      // });
 
       beforeEach(async () => {
         for (const i of [1, 2, 3]) {
@@ -156,12 +156,15 @@ export const taskCrudTest = async (provider: string): Promise<void> => {
 
       describe('when all inputs are correct', () => {
         it('should read task specified by id', async () => {
-          const result = await superface.run({
-            useCase: 'ReadTask',
-            input: {
-              id,
+          const result = await superface.run(
+            {
+              useCase: 'ReadTask',
+              input: {
+                id,
+              },
             },
-          });
+            { hideInput: ['id'] }
+          );
 
           expect(result).toMatchSnapshot();
         });
@@ -189,14 +192,17 @@ export const taskCrudTest = async (provider: string): Promise<void> => {
 
       describe('when all inputs are correct', () => {
         it('should update a task', async () => {
-          const result = await superface.run({
-            useCase: 'UpdateTask',
-            input: {
-              id,
-              title: 'Hello, World!',
-              description: 'Description of test task',
+          const result = await superface.run(
+            {
+              useCase: 'UpdateTask',
+              input: {
+                id,
+                title: 'Hello, World!',
+                description: 'Description of test task',
+              },
             },
-          });
+            { hideInput: ['id'] }
+          );
 
           expect(result).toMatchSnapshot();
         });
@@ -220,12 +226,15 @@ export const taskCrudTest = async (provider: string): Promise<void> => {
             throw new Error('Task id is not found');
           }
 
-          const result = await superface.run({
-            useCase: 'DeleteTask',
-            input: {
-              id,
+          const result = await superface.run(
+            {
+              useCase: 'DeleteTask',
+              input: {
+                id,
+              },
             },
-          });
+            { hideInput: ['id'] }
+          );
 
           expect(result).toMatchSnapshot();
         });
