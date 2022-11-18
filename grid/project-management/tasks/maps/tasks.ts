@@ -2,6 +2,11 @@
 
 import { SuperfaceTest } from '@superfaceai/testing';
 
+const demoAccountParams = {
+  projectId: '1203400042224704',
+  profileId: '1203400162064099',
+};
+
 const createTask = async (
   provider: string,
   input: {
@@ -22,8 +27,8 @@ const createTask = async (
   const result = await superface.run({
     input: {
       title: input.title ?? 'Test Title',
-      project: input.project ?? '1203384186840261',
-      assignee: input.assignee ?? '1203384186605863',
+      project: input.project ?? demoAccountParams.projectId,
+      assignee: input.assignee ?? demoAccountParams.profileId,
       parent: input.parent,
       description: input.description ?? 'Task description',
     },
@@ -49,26 +54,15 @@ const deleteTask = async (
   return result.unwrap();
 };
 
-export const createTaskTest = (
-  provider: string,
-  params: {
-    title: string;
-    project: string;
-    parent?: string;
-    assignee?: string;
-    description?: string;
-  }
-): void => {
+export const taskCrudTest = async (provider: string): Promise<void> => {
   describe(`project-management/tasks/${provider}`, () => {
     let superface: SuperfaceTest;
 
     beforeAll(() => {
-      jest.setTimeout(10000);
-
       superface = new SuperfaceTest({
         profile: 'project-management/tasks',
         provider,
-        useCase: 'CreateTask',
+        testInstance: expect,
       });
     });
 
@@ -76,7 +70,13 @@ export const createTaskTest = (
       describe('when all inputs are correct', () => {
         it('should create a task', async () => {
           const result = await superface.run({
-            input: params,
+            useCase: 'CreateTask',
+            input: {
+              title: 'Hello, World!',
+              description: 'Description of test task',
+              project: demoAccountParams.projectId,
+              assignee: demoAccountParams.profileId,
+            },
           });
 
           expect(result).toMatchSnapshot();
@@ -92,100 +92,72 @@ export const createTaskTest = (
         });
       });
     });
-  });
-};
-
-export const readAllTasksTest = (
-  provider: string,
-  params: {
-    projectId: string;
-  }
-): void => {
-  describe(`project-management/tasks/${provider}`, () => {
-    const ids: string[] = [];
-    let superface: SuperfaceTest;
-
-    beforeAll(() => {
-      jest.setTimeout(10000);
-
-      superface = new SuperfaceTest({
-        profile: 'project-management/tasks',
-        provider,
-        useCase: 'ReadAllTasks',
-      });
-    });
-
-    beforeEach(async () => {
-      for (const i of [1, 2, 3]) {
-        ids.push(
-          await createTask(
-            provider,
-            { title: `Test ${i}` },
-            `prepare-ReadAllTasks-CreateTask-${i}`
-          )
-        );
-      }
-    });
-
-    afterEach(async () => {
-      for (const i of [1, 2, 3]) {
-        await deleteTask(
-          provider,
-          { id: ids[i - 1] },
-          `teardown-ReadAllTasks-DeleteTask-${i}`
-        );
-      }
-    });
 
     describe('ReadAllTasks', () => {
+      const ids: string[] = [];
+      // beforeAll(() => {
+      //   jest.setTimeout(10000);
+      // });
+
+      beforeEach(async () => {
+        for (const i of [1, 2, 3]) {
+          ids.push(
+            await createTask(
+              provider,
+              { title: `Test ${i}` },
+              `prepare-ReadAllTasks-CreateTask-${i}`
+            )
+          );
+        }
+      });
+
+      afterEach(async () => {
+        for (const i of [1, 2, 3]) {
+          await deleteTask(
+            provider,
+            { id: ids[i - 1] },
+            `teardown-ReadAllTasks-DeleteTask-${i}`
+          );
+        }
+      });
+
       describe('when all inputs are correct', () => {
         it('should read all tasks for specified project', async () => {
           const result = await superface.run({
+            useCase: 'ReadAllTasks',
             input: {
-              id: params.projectId,
+              id: demoAccountParams.projectId,
             },
           });
 
           expect(result).toMatchSnapshot();
         });
       });
-    });
-  });
-};
-
-export const readTaskTest = (provider: string): void => {
-  describe(`project-management/tasks/${provider}`, () => {
-    let superface: SuperfaceTest;
-    let id: string | undefined;
-
-    beforeAll(() => {
-      superface = new SuperfaceTest({
-        profile: 'project-management/tasks',
-        provider,
-        useCase: 'ReadTask',
-      });
-    });
-
-    beforeEach(async () => {
-      id = await createTask(
-        provider,
-        { title: 'Test' },
-        'prepare-ReadTask-CreateTask'
-      );
-    });
-
-    afterEach(async () => {
-      if (id === undefined) {
-        throw new Error('Task id is not found');
-      }
-
-      await deleteTask(provider, { id }, 'teardown-ReadTask-DeleteTask');
     });
 
     describe('ReadTask', () => {
+      let id: string | undefined;
+
+      beforeEach(async () => {
+        id = await createTask(
+          provider,
+          { title: 'Test' },
+          'prepare-ReadTask-CreateTask'
+        );
+      });
+
+      afterEach(async () => {
+        if (id === undefined) {
+          throw new Error('Task id is undefined');
+        }
+
+        await deleteTask(provider, { id }, 'teardown-ReadTask-DeleteTask');
+      });
+
       describe('when all inputs are correct', () => {
         it('should read task specified by id', async () => {
           const result = await superface.run({
+            useCase: 'ReadTask',
             input: {
               id,
             },
@@ -194,53 +166,35 @@ export const readTaskTest = (provider: string): void => {
           expect(result).toMatchSnapshot();
         });
       });
-    });
-  });
-};
-
-export const updateTaskTest = (
-  provider: string,
-  params: {
-    title: string;
-    description: string;
-  }
-): void => {
-  describe(`project-management/tasks/${provider}`, () => {
-    let superface: SuperfaceTest;
-    let id: string | undefined;
-
-    beforeAll(() => {
-      superface = new SuperfaceTest({
-        profile: 'project-management/tasks',
-        provider,
-        useCase: 'UpdateTask',
-      });
-    });
-
-    beforeEach(async () => {
-      id = await createTask(
-        provider,
-        { title: 'Test' },
-        'prepare-UpdateTask-CreateTask'
-      );
-    });
-
-    afterEach(async () => {
-      if (id === undefined) {
-        throw new Error('Task id is not found');
-      }
-
-      await deleteTask(provider, { id }, 'teardown-UpdateTask-DeleteTask');
     });
 
     describe('UpdateTask', () => {
+      let id: string | undefined;
+
+      beforeEach(async () => {
+        id = await createTask(
+          provider,
+          { title: 'Test' },
+          'prepare-UpdateTask-CreateTask'
+        );
+      });
+
+      afterEach(async () => {
+        if (id === undefined) {
+          throw new Error('Task id is not found');
+        }
+
+        await deleteTask(provider, { id }, 'teardown-UpdateTask-DeleteTask');
+      });
+
       describe('when all inputs are correct', () => {
         it('should update a task', async () => {
           const result = await superface.run({
+            useCase: 'UpdateTask',
             input: {
               id,
-              title: params.title,
-              description: params.description,
+              title: 'Hello, World!',
+              description: 'Description of test task',
             },
           });
 
@@ -248,31 +202,18 @@ export const updateTaskTest = (
         });
       });
     });
-  });
-};
-
-export const deleteTaskTest = (provider: string): void => {
-  describe(`project-management/tasks/${provider}`, () => {
-    let superface: SuperfaceTest;
-    let id: string | undefined;
-
-    beforeAll(() => {
-      superface = new SuperfaceTest({
-        profile: 'project-management/tasks',
-        provider,
-        useCase: 'DeleteTask',
-      });
-    });
-
-    beforeEach(async () => {
-      id = await createTask(
-        provider,
-        { title: 'Test' },
-        'prepare-DeleteTask-CreateTask'
-      );
-    });
 
     describe('DeleteTask', () => {
+      let id: string | undefined;
+
+      beforeEach(async () => {
+        id = await createTask(
+          provider,
+          { title: 'Test' },
+          'prepare-DeleteTask-CreateTask'
+        );
+      });
+
       describe('when all inputs are correct', () => {
         it('should delete a task', async () => {
           if (id === undefined) {
@@ -280,6 +221,7 @@ export const deleteTaskTest = (provider: string): void => {
           }
 
           const result = await superface.run({
+            useCase: 'DeleteTask',
             input: {
               id,
             },
