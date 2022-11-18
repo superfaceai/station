@@ -1,0 +1,211 @@
+[
+  {
+    "scope": "https://app.asana.com:443",
+    "method": "POST",
+    "path": "/api/1.0/tasks",
+    "body": {
+      "data": {
+        "name": "Test",
+        "notes": "Task description",
+        "projects": [
+          "1203384186840261"
+        ],
+        "assignee": "1203384186605863"
+      }
+    },
+    "status": 201,
+    "response": {
+      "data": {
+        "gid": "1203399397001762",
+        "projects": [
+          {
+            "gid": "1203384186840261",
+            "resource_type": "project",
+            "name": "superface-test"
+          }
+        ],
+        "resource_type": "task",
+        "created_at": "2022-11-18T10:58:31.637Z",
+        "modified_at": "2022-11-18T10:58:32.295Z",
+        "name": "Test",
+        "notes": "Task description",
+        "completed": false,
+        "assignee_status": "inbox",
+        "completed_at": null,
+        "due_on": null,
+        "due_at": null,
+        "resource_subtype": "default_task",
+        "start_on": null,
+        "start_at": null,
+        "tags": [],
+        "workspace": {
+          "gid": "1203384186670091",
+          "resource_type": "workspace",
+          "name": "My Workspace"
+        },
+        "num_hearts": 0,
+        "num_likes": 0,
+        "permalink_url": "https://app.asana.com/0/1203384186840261/1203399397001762",
+        "memberships": [
+          {
+            "project": {
+              "gid": "1203384186840261",
+              "resource_type": "project",
+              "name": "superface-test"
+            },
+            "section": {
+              "gid": "1203384186840262",
+              "resource_type": "section",
+              "name": "task section 1"
+            }
+          }
+        ],
+        "assignee": {
+          "gid": "1203384186605863",
+          "resource_type": "user",
+          "name": "Martin Albert"
+        },
+        "parent": null,
+        "hearted": false,
+        "hearts": [],
+        "liked": false,
+        "likes": [],
+        "assignee_section": {
+          "gid": "1203384186720075",
+          "resource_type": "section",
+          "name": "Recently assigned"
+        },
+        "followers": [
+          {
+            "gid": "1203384186605863",
+            "resource_type": "user",
+            "name": "Martin Albert"
+          }
+        ],
+        "custom_fields": [
+          {
+            "gid": "1203384186840266",
+            "resource_type": "custom_field",
+            "created_by": {
+              "gid": "1203384186605863",
+              "resource_type": "user",
+              "name": "Martin Albert"
+            },
+            "resource_subtype": "enum",
+            "type": "enum",
+            "name": "Priority",
+            "enabled": true,
+            "enum_value": null,
+            "display_value": null,
+            "enum_options": [
+              {
+                "gid": "1203384186840267",
+                "resource_type": "enum_option",
+                "enabled": true,
+                "name": "Low",
+                "color": "aqua"
+              },
+              {
+                "gid": "1203384186840268",
+                "resource_type": "enum_option",
+                "enabled": true,
+                "name": "Medium",
+                "color": "yellow-orange"
+              },
+              {
+                "gid": "1203384186840269",
+                "resource_type": "enum_option",
+                "enabled": true,
+                "name": "High",
+                "color": "purple"
+              }
+            ]
+          },
+          {
+            "gid": "1203384186840271",
+            "resource_type": "custom_field",
+            "created_by": {
+              "gid": "1203384186605863",
+              "resource_type": "user",
+              "name": "Martin Albert"
+            },
+            "resource_subtype": "enum",
+            "type": "enum",
+            "name": "Status",
+            "enabled": true,
+            "enum_value": null,
+            "display_value": null,
+            "enum_options": [
+              {
+                "gid": "1203384186840272",
+                "resource_type": "enum_option",
+                "enabled": true,
+                "name": "On track",
+                "color": "blue-green"
+              },
+              {
+                "gid": "1203384186840273",
+                "resource_type": "enum_option",
+                "enabled": true,
+                "name": "At risk",
+                "color": "yellow"
+              },
+              {
+                "gid": "1203384186840274",
+                "resource_type": "enum_option",
+                "enabled": true,
+                "name": "Off track",
+                "color": "red"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "rawHeaders": [
+      "Date",
+      "Fri, 18 Nov 2022 10:58:33 GMT",
+      "Content-Type",
+      "application/json; charset=UTF-8",
+      "Content-Length",
+      "2360",
+      "Connection",
+      "close",
+      "Server",
+      "nginx",
+      "Location",
+      "/api/1.0/tasks/1203399397001762",
+      "Cache-Control",
+      "no-store",
+      "pragma",
+      "no-cache",
+      "Set-Cookie",
+      "TooBusyRedirectCount=0",
+      "X-Frame-Options",
+      "DENY",
+      "X-XSS-Protection",
+      "1; mode=block",
+      "X-Content-Type-Options",
+      "nosniff",
+      "Content-Security-Policy",
+      "report-uri https://app.asana.com/-/csp_report?report_only=false;default-src 'none';frame-src 'none';frame-ancestors 'none'",
+      "X-Asana-Api-Version",
+      "1.0",
+      "Asana-Change",
+      "name=new_user_task_lists;info=https://forum.asana.com/t/update-on-our-planned-api-changes-to-user-task-lists-a-k-a-my-tasks/103828;affected=true",
+      "Asana-Change",
+      "name=external_goal_metrics;info=https://forum.asana.com/t/changes-to-goal-metrics-progress-sources/221257",
+      "Asana-Change",
+      "name=new_project_templates;info=https://forum.asana.com/t/a-new-api-for-project-templates/156432;affected=true",
+      "X-Robots-Tag",
+      "none",
+      "Strict-Transport-Security",
+      "max-age=31536000; includeSubDomains",
+      "Datacenter-Time-End",
+      "1668769113.046",
+      "X-LoadBalancer",
+      "prod-lb000.ec2"
+    ],
+    "responseIsBinary": false
+  }
+]
