@@ -25,7 +25,7 @@ const createTask = async (
       project: input.project ?? '1203384186840261',
       assignee: input.assignee ?? '1203384186605863',
       parent: input.parent,
-      description: input.description ?? 'Task description'
+      description: input.description ?? 'Task description',
     },
     testName,
   });
@@ -63,8 +63,8 @@ export const createTaskTest = (
     let superface: SuperfaceTest;
 
     beforeAll(() => {
-      jest.setTimeout(10000)
-      
+      jest.setTimeout(10000);
+
       superface = new SuperfaceTest({
         profile: 'project-management/tasks',
         provider,
@@ -106,7 +106,7 @@ export const readAllTasksTest = (
     let superface: SuperfaceTest;
 
     beforeAll(() => {
-      jest.setTimeout(10000)
+      jest.setTimeout(10000);
 
       superface = new SuperfaceTest({
         profile: 'project-management/tasks',
@@ -116,7 +116,7 @@ export const readAllTasksTest = (
     });
 
     beforeEach(async () => {
-      for (let i of [1, 2, 3]) {
+      for (const i of [1, 2, 3]) {
         ids.push(
           await createTask(
             provider,
@@ -128,7 +128,7 @@ export const readAllTasksTest = (
     });
 
     afterEach(async () => {
-      for (let i of [1, 2, 3]) {
+      for (const i of [1, 2, 3]) {
         await deleteTask(
           provider,
           { id: ids[i - 1] },
@@ -153,9 +153,7 @@ export const readAllTasksTest = (
   });
 };
 
-export const readTaskTest = (
-  provider: string,
-): void => {
+export const readTaskTest = (provider: string): void => {
   describe(`project-management/tasks/${provider}`, () => {
     let superface: SuperfaceTest;
     let id: string | undefined;
@@ -253,9 +251,7 @@ export const updateTaskTest = (
   });
 };
 
-export const deleteTaskTest = (
-  provider: string,
-): void => {
+export const deleteTaskTest = (provider: string): void => {
   describe(`project-management/tasks/${provider}`, () => {
     let superface: SuperfaceTest;
     let id: string | undefined;

@@ -1,8 +1,8 @@
 import {
   createTaskTest,
+  deleteTaskTest,
   readAllTasksTest,
   readTaskTest,
-  deleteTaskTest,
   updateTaskTest,
 } from './tasks';
 
