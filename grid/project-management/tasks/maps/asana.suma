@@ -1,4 +1,4 @@
-profile = "project-management/tasks@1.0.0"
+profile = "project-management/tasks@1.1"
 provider = "asana"
 
 map CreateTask {
@@ -43,7 +43,7 @@ map CreateTask {
   }
 }
 
-map ReadAllTasks {
+map ListTasks {
   http GET "/projects/{input.id}/tasks" {
     security "personalAccessToken"
     

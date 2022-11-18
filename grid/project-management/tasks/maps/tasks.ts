@@ -96,7 +96,7 @@ export const taskCrudTest = async (provider: string): Promise<void> => {
       });
     });
 
-    describe('ReadAllTasks', () => {
+    describe('ListTasks', () => {
       const ids: string[] = [];
 
       beforeEach(async () => {
@@ -105,7 +105,7 @@ export const taskCrudTest = async (provider: string): Promise<void> => {
             await createTask(
               provider,
               { title: `Test ${i}` },
-              `prepare-ReadAllTasks-CreateTask-${i}`
+              `prepare-ListTasks-CreateTask-${i}`
             )
           );
         }
@@ -116,7 +116,7 @@ export const taskCrudTest = async (provider: string): Promise<void> => {
           await deleteTask(
             provider,
             { id: ids[i - 1] },
-            `teardown-ReadAllTasks-DeleteTask-${i}`
+            `teardown-ListTasks-DeleteTask-${i}`
           );
         }
       });
@@ -124,7 +124,7 @@ export const taskCrudTest = async (provider: string): Promise<void> => {
       describe('when all inputs are correct', () => {
         it('should read all tasks for specified project', async () => {
           const result = await superface.run({
-            useCase: 'ReadAllTasks',
+            useCase: 'ListTasks',
             input: {
               id: demoAccountParams.projectId,
             },
