@@ -57,7 +57,7 @@ const deleteTask = async (
   return result.unwrap();
 };
 
-export const taskCrudTest = async (provider: string): Promise<void> => {
+export const taskCrudTest = (provider: string): void => {
   describe(`project-management/tasks/${provider}`, () => {
     let superface: SuperfaceTest;
 
