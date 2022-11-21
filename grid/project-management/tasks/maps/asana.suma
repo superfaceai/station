@@ -144,9 +144,7 @@ map DeleteTask {
   http DELETE "/tasks/{input.id}" {
     security "personalAccessToken"
     
-    response 200 "application/json" {
-      return map result null
-    }
+    response 200 "application/json" {}
 
     response {
       error = call MapAsanaError(

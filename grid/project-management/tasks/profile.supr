@@ -3,7 +3,7 @@ Manage tasks
 Create new tasks in project management systems.
 """
 name = "project-management/tasks"
-version = "1.1.1"
+version = "1.1.0"
 
 """
 Create a new task in a project
@@ -90,7 +90,6 @@ usecase ListTasks {
   }
 }
 
-
 """
 Read a task in a project
 """
@@ -100,7 +99,7 @@ usecase ReadTask {
     Task Id
     Id of task to read.
     """
-    id string
+    id! string!
   }
 
   result Task
@@ -130,7 +129,7 @@ usecase UpdateTask {
     Task Id
     Id of task to read in specified project.
     """
-    id string
+    id! string!
 
     """
     title
@@ -173,7 +172,7 @@ usecase DeleteTask {
     Task Id
     Id of task to read in specified project.
     """
-    id string
+    id! string!
   }
 
   error Error
@@ -184,7 +183,6 @@ usecase DeleteTask {
     }
   }
 }
-
 
 model Task {
   """
