@@ -1,0 +1,28 @@
+profile = "payments/update-product@1.0"
+provider = "stripe"
+
+map UpdateProduct {
+  http POST "/v1/products/{input.productId}" {
+    security "bearer"
+    request "application/x-www-form-urlencoded" {
+      body {
+        name = input.name
+        description = input.description
+      }
+    }
+
+    response 200 "application/json" {
+      map result {
+        name = body.name
+        description = body.description
+      }
+    }
+
+    response "application/json" {
+      map error {
+        title = body.error.code
+        detail = body.error.message
+      }
+    }
+  }
+}

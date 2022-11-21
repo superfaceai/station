@@ -1,0 +1,41 @@
+"""
+Delete Product
+Deletes a product in a payment system (e.g. PayPal, Stripe...)
+"""
+name = "payments/delete-product"
+version = "1.0.0"
+
+"""
+Delete Product
+Deletes a product in a payment system.
+"""
+
+usecase DeleteProduct unsafe {
+  input {
+    """
+    ID
+    Unique identifier of the product to be deleted.
+    """
+    productId! string!
+  }
+
+  error {
+    """
+    Title
+    A short, human-readable summary of the problem type.
+    """
+    title! string
+
+    """
+    Detail
+    A human-readable explanation specific to this occurrence of the problem.
+    """
+    detail string
+  }
+
+  example Successful {
+    input {
+      productId = "PROD-1192810198"
+    }
+  }
+}

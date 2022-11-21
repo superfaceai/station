@@ -1,0 +1,37 @@
+profile = "payments/create-subscription@1.0"
+provider = "paypal"
+
+map CreateSubscription {
+  http POST "/v1/billing/subscriptions" {
+    security "basic"
+    request {
+      body = {
+            plan_id: input.planId,
+            subscriber: {
+                email_address: input.customer
+            }
+      }
+    }
+
+    response 201 "application/json" {
+      statusMap = {
+        'APPROVAL_PENDING': 'pending',
+      }
+
+      // TODO: linter misdetects this as a type error, remove once linter is upgraded
+      status = (() => statusMap[body.status] || body.status)().toLowerCase();
+
+      map result {
+        subscriptionId = body.id
+        status = status
+      }
+    }
+
+    response "application/json" {
+      map error {
+        title = body.message
+        detail = body.details
+      }
+    }
+  }
+}

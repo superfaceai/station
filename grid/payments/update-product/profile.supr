@@ -1,0 +1,70 @@
+"""
+Update Product
+Updates information about an existing product in a payment system (e.g. PayPal, Stripe...)
+"""
+name = "payments/update-product"
+version = "1.0.0"
+
+"""
+Update Product
+Updates information about an existing product.
+Heads up! Not all providers may support updating all fields. Please be mindful of the `result`.
+"""
+
+usecase UpdateProduct unsafe {
+  input {
+    """
+    ID
+    Identifier of the product for updating.
+    """
+    productId! string!
+
+    """
+    New name
+    New name to be set on the product.
+    """
+    name string!
+
+    """
+    Description
+    New description to be set on the product.
+    """
+    description string
+  }
+
+  result {
+    """
+    Name
+    Name of the product after update (may or may not have changed).
+    """
+    name string!
+
+    """
+    Description
+    Description of the product after update (may or may not have changed).
+    """
+    description string
+  }
+
+  error {
+    """
+    Title
+    A short, human-readable summary of the problem type.
+    """
+    title! string
+
+    """
+    Detail
+    A human-readable explanation specific to this occurrence of the problem.
+    """
+    detail string
+  }
+
+  example Successful {
+    input {
+      productId = "PROD-123909"
+      name = "Superface milk price monitor"
+      description = "Gives you the most up-to-date info on milk prices."  
+    }
+  }
+}

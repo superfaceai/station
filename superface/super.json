@@ -663,6 +663,112 @@
         "linkedin",
         "mock"
       ]
+    },
+    "payments/read-products": {
+      "file": "../grid/payments/read-products/profile.supr",
+      "providers": {
+        "mock": {
+          "file": "../grid/payments/read-products/maps/mock.suma"
+        },
+        "paypal": {
+          "file": "../grid/payments/read-products/maps/paypal.suma"
+        },
+        "stripe": {
+          "file": "../grid/payments/read-products/maps/stripe.suma"
+        }
+      }
+    },
+    "payments/create-product": {
+      "file": "../grid/payments/create-product/profile.supr",
+      "providers": {
+        "mock": {
+          "file": "../grid/payments/create-product/maps/mock.suma"
+        },
+        "paypal": {
+          "file": "../grid/payments/create-product/maps/paypal.suma"
+        },
+        "stripe": {
+          "file": "../grid/payments/create-product/maps/stripe.suma"
+        }
+      }
+    },
+    "payments/update-product": {
+      "file": "../grid/payments/update-product/profile.supr",
+      "providers": {
+        "mock": {
+          "file": "../grid/payments/update-product/maps/mock.suma"
+        },
+        "paypal": {
+          "file": "../grid/payments/update-product/maps/paypal.suma"
+        },
+        "stripe": {
+          "file": "../grid/payments/update-product/maps/stripe.suma"
+        }
+      }
+    },
+    "payments/delete-product": {
+      "file": "../grid/payments/delete-product/profile.supr",
+      "providers": {
+        "mock": {
+          "file": "../grid/payments/delete-product/maps/mock.suma"
+        },
+        "stripe": {
+          "file": "../grid/payments/delete-product/maps/stripe.suma"
+        }
+      }
+    },
+    "payments/read-plans": {
+      "file": "../grid/payments/read-plans/profile.supr",
+      "providers": {
+        "mock": {
+          "file": "../grid/payments/read-plans/maps/mock.suma"
+        },
+        "paypal": {
+          "file": "../grid/payments/read-plans/maps/paypal.suma"
+        },
+        "stripe": {
+          "file": "../grid/payments/read-plans/maps/stripe.suma"
+        }
+      }
+    },
+    "payments/create-plan": {
+      "file": "../grid/payments/create-plan/profile.supr",
+      "providers": {
+        "mock": {
+          "file": "../grid/payments/create-plan/maps/mock.suma"
+        },
+        "paypal": {
+          "file": "../grid/payments/create-plan/maps/paypal.suma"
+        },
+        "stripe": {
+          "file": "../grid/payments/create-plan/maps/stripe.suma"
+        }
+      }
+    },
+    "payments/delete-plan": {
+      "file": "../grid/payments/delete-plan/profile.supr",
+      "providers": {
+        "mock": {
+          "file": "../grid/payments/delete-plan/maps/mock.suma"
+        },
+        "stripe": {
+          "file": "../grid/payments/delete-plan/maps/stripe.suma"
+        }
+      }
+    },
+    "payments/create-subscription": {
+      "file": "../grid/payments/create-subscription/profile.supr",
+      "providers": {
+        "mock": {
+          "file": "../grid/payments/create-subscription/maps/mock.suma"
+        },
+        "paypal": {
+          "file": "../grid/payments/create-subscription/maps/paypal.suma"
+        },
+        "stripe": {
+          "file": "../grid/payments/create-subscription/maps/stripe.suma"
+        }
+      }
     }
   },
   "providers": {
@@ -1180,6 +1286,28 @@
         "clientId": "$PINTEREST_APP_ID",
         "clientSecret": "$PINTEREST_APP_SECRET"
       }
+    },
+    "paypal": {
+      "file": "../providers/paypal.provider.json",
+      "security": [
+        {
+          "id": "basic",
+          "username": "$PAYPAL_CLIENT_ID",
+          "password": "$PAYPAL_SECRET"
+        }
+      ],
+      "parameters": {
+        "SUBDOMAIN": "api-m.sandbox"
+      }
+    },
+    "stripe": {
+      "file": "../providers/stripe.provider.json",
+      "security": [
+        {
+          "id": "bearer",
+          "token": "$STRIPE_SECRET_KEY"
+        }
+      ]
     }
   }
 }

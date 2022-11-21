@@ -1,0 +1,17 @@
+profile = "payments/delete-plan@1.0"
+provider = "stripe"
+
+map DeletePlan {
+  http DELETE "/v1/plans/{input.planId}" {
+    security "bearer"
+
+    response 200 "application/json" {
+    }
+
+    response "application/json" {
+      map error {
+        title = body.error.message
+      }
+    }
+  }
+}
