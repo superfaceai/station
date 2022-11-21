@@ -9,7 +9,7 @@ version = "1.1.1"
 Create a new task in a project
 """
 usecase CreateTask {
-	input {
+  input {
 
     """
     project
@@ -17,18 +17,18 @@ usecase CreateTask {
     """
     project string
 
-		"""
-		title
-		Textual title of the task.
-		"""
-		title string
-		
-		"""
-		description
-		Free-form textual description of the task.
-		"""
-		description string
-	
+    """
+    title
+    Textual title of the task.
+    """
+    title string
+    
+    """
+    description
+    Free-form textual description of the task.
+    """
+    description string
+  
     """
     parent
     ID of the parent task (if applicable).
@@ -40,11 +40,11 @@ usecase CreateTask {
     ID of the user this task should be assigned to.
     """
     assignee string
-	}
+  }
 
-	result Task
+  result Task
 
-	error Error
+  error Error
 
   example success {
     input {
@@ -64,17 +64,17 @@ usecase CreateTask {
 List all tasks in a project
 """
 usecase ListTasks {
-	input {
+  input {
     """
     Project Id
     Id of project to read tasks from.
     """
-		id string
-	}
+    id string
+  }
 
-	result [Task]
+  result [Task]
 
-	error Error
+  error Error
 
   example success {
     input {
@@ -95,17 +95,17 @@ usecase ListTasks {
 Reade a task in a project
 """
 usecase ReadTask {
-	input {
+  input {
     """
     Task Id
     Id of task to read.
     """
-		id string
-	}
+    id string
+  }
 
-	result Task
+  result Task
 
-	error Error
+  error Error
 
   example success {
     input {
@@ -125,29 +125,29 @@ usecase ReadTask {
 Update a task in a project
 """
 usecase UpdateTask {
-	input {
+  input {
     """
     Task Id
     Id of task to read in specified project.
     """
-		id string
+    id string
 
-		"""
-		title
-		Textual title of the task.
-		"""
-		title string
-		
-		"""
-		description
-		Free-form textual description of the task.
-		"""
-		description string
-	}
+    """
+    title
+    Textual title of the task.
+    """
+    title string
+    
+    """
+    description
+    Free-form textual description of the task.
+    """
+    description string
+  }
 
-	result Task
+  result Task
 
-	error Error
+  error Error
 
   example success {
     input {
@@ -168,15 +168,15 @@ usecase UpdateTask {
 Delete a task in a project
 """
 usecase DeleteTask {
-	input {
+  input {
     """
     Task Id
     Id of task to read in specified project.
     """
-		id string
-	}
+    id string
+  }
 
-	error Error
+  error Error
 
   example success {
     input {
