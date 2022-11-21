@@ -19,7 +19,98 @@ usecase GetPlan safe {
     planId! string!
   }
 
+  result Plan
+
+  error {
+    """
+    Title
+    A short, human-readable summary of the problem type.
+    """
+    title! string
+
+    """
+    Detail
+    A human-readable explanation specific to this occurrence of the problem.
+    """
+    detail string
+
+    """
+    Code
+    Machine processable error code.
+    """
+    code! ErrorCode!
+  }
+
+  example Successful {
+    input {
+      planId = "PLAN-89101829211"
+    }
+
+    result {
+      productId = "PROD-1192810198"
+      name = "Monthly subscription to Superface milk delivery"
+      interval = "month"
+      price = 25
+      currency = "USD"
+      state = "active"
+    }
+  }
+}
+
+"""
+List Subscription Plans
+Lists existing subscription plans in a payment system.
+"""
+
+usecase ListPlans safe {
   result {
+    plans [Plan]
+  }
+  
+
+  error {
+    """
+    Title
+    A short, human-readable summary of the problem type.
+    """
+    title! string
+
+    """
+    Detail
+    A human-readable explanation specific to this occurrence of the problem.
+    """
+    detail string
+
+    """
+    Code
+    Machine processable error code.
+    """
+    code! ErrorCode!
+  }
+
+  example Successful {
+    result {
+      plans = [
+        {
+          planId = "PLAN-89101829211"
+          name = "Monthly subscription to Superface milk delivery"
+          interval = "month"
+          price = 25
+          currency = "USD"
+        },
+        {
+          planId = "PLAN-89101829212"
+          name = "Daily subscription to Superface pizza delivery"
+          interval = "day"
+          price = 5
+          currency = "USD"
+        }
+      ]
+    }
+  }
+}
+
+model Plan {
     """
     Product ID
     Unique identifier of the product the plan is for (if applicable).
@@ -70,136 +161,6 @@ usecase GetPlan safe {
     state enum {
       created, active, inactive
     }
-  }
-
-
-  error {
-    """
-    Title
-    A short, human-readable summary of the problem type.
-    """
-    title! string
-
-    """
-    Detail
-    A human-readable explanation specific to this occurrence of the problem.
-    """
-    detail string
-
-    """
-    Code
-    Machine processable error code.
-    """
-    code! ErrorCode!
-  }
-
-  example Successful {
-    input {
-      planId = "PLAN-89101829211"
-    }
-
-    result {
-      productId = "PROD-1192810198"
-      name = "Monthly subscription to Superface milk delivery"
-      interval = "month"
-      price = 25
-      currency = "USD"
-      state = "active"
-    }
-  }
-}
-
-"""
-List Subscription Plans
-Lists existing subscription plans in a payment system.
-"""
-
-usecase ListPlans safe {
-  result {
-    plans [
-      {
-        """
-        ID
-        Unique identifier of the subscription plan.
-        """
-        planId string!
-
-        """
-        Name
-        Name of the subscription plan.
-        """
-        name string!
-        
-        """
-        Interval
-        Frequency of the interval at which the customer is charged.
-
-        Possible values:
-        - `day`
-        - `week`
-        - `month`
-        - `year`
-        """
-        interval enum {
-          day, week, month, year
-        }
-
-        """
-        Price
-        Amount charged each `interval` cycle.
-        """
-        price number!
-
-        """
-        Currency code
-        Three-letter currency code in which `price` is specified, in ISO 4217 format.
-        """
-        currency string!
-      }
-    ]
-  }
-  
-
-  error {
-    """
-    Title
-    A short, human-readable summary of the problem type.
-    """
-    title! string
-
-    """
-    Detail
-    A human-readable explanation specific to this occurrence of the problem.
-    """
-    detail string
-
-    """
-    Code
-    Machine processable error code.
-    """
-    code! ErrorCode!
-  }
-
-  example Successful {
-    result {
-      plans = [
-        {
-          planId = "PLAN-89101829211"
-          name = "Monthly subscription to Superface milk delivery"
-          interval = "month"
-          price = 25
-          currency = "USD"
-        },
-        {
-          planId = "PLAN-89101829212"
-          name = "Daily subscription to Superface pizza delivery"
-          interval = "day"
-          price = 5
-          currency = "USD"
-        }
-      ]
-    }
-  }
 }
 
 model ErrorCode enum {
