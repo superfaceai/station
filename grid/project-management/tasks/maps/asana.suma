@@ -18,15 +18,7 @@ map CreateTask {
     }
     
     response 201 "application/json" {
-      data = {
-        id: body.data.gid,
-        title: body.data.name,
-        description: body.data.notes,
-        projects: body.data.projects.map(project => project.gid),
-        parent: body.data.parent,
-        assignee: body.data.assignee.gid,
-        url: body.data.permalink_url
-      }
+      data = call MapTask(task = body.data)
 
       return map result data
     }
@@ -73,15 +65,7 @@ map ReadTask {
     security "personalAccessToken"
     
     response 200 "application/json" {
-      data = {
-        id: body.data.gid,
-        title: body.data.name,
-        description: body.data.notes,
-        projects: body.data.projects.map(project => project.gid),
-        parent: body.data.parent,
-        assignee: body.data.assignee.gid,
-        url: body.data.permalink_url
-      }
+      data = call MapTask(task = body.data)
       
       return map result data
     }
@@ -107,23 +91,15 @@ map UpdateTask {
         data = {
           name: input.title,
           notes: input.description,
-          // projects: [input.project],
-          // parent: input.parent,
-          // assignee: input.assignee
+          projects: input.projects,
+          parent: input.parent,
+          assignee: input.assignee
         }
       }
     }
     
     response 200 "application/json" {
-      data = {
-        id: body.data.gid,
-        title: body.data.name,
-        description: body.data.notes,
-        projects: body.data.projects.map(project => project.gid),
-        parent: body.data.parent,
-        assignee: body.data.assignee.gid,
-        url: body.data.permalink_url
-      }
+      data = call MapTask(task = body.data)
 
       return map result data
     }
@@ -156,6 +132,37 @@ map DeleteTask {
       map error error
     }
   }
+}
+
+"""
+Operation MapTask
+Returns mapped task from received body
+"""
+operation MapTask {
+  task.id = args.task.gid
+  task.projects = args.task.projects.map(project => project.gid)
+
+  set if (args.task.name) {
+    task.title = args.task.name
+  }
+
+  set if (args.task.notes) {
+    task.description = args.task.notes
+  }
+  
+  set if (args.task.parent) {
+    task.parent = args.task.parent
+  }
+
+  set if (args.task.assignee) {
+    task.assignee = args.task.assignee.gid
+  }
+
+  set if (args.task.permalink_url) {
+    task.url = args.task.permalink_url
+  }
+
+  return task
 }
 
 """

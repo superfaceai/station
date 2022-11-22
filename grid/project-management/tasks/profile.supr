@@ -10,7 +10,6 @@ Create a new task in a project
 """
 usecase CreateTask {
   input {
-
     """
     project
     ID of project to create the task in.
@@ -142,6 +141,24 @@ usecase UpdateTask {
     Free-form textual description of the task.
     """
     description string
+    
+    """
+    projects
+    ID of projects the task belong to.
+    """
+    projects [string]
+
+    """
+    parent
+    ID of the parent task (if applicable).
+    """
+    parent string
+
+    """
+    assignee
+    ID of the user this task should be assigned to.
+    """
+    assignee string
   }
 
   result Task
