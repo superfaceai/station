@@ -1,0 +1,94 @@
+"""
+Keyword Extraction
+Keyword extraction is the process of automatically identifying and extracting
+the most important words or phrases from a text document. The extracted keywords
+can then be used to help summarize the document, or to help identify topics or themes in the text.
+"""
+name = "language/keyword-extraction"
+version = "1.0.0"
+
+"""
+Extract Keywords
+Identify and extract the most important words or phrases from a text document
+"""
+usecase ExtractKeywords safe {
+  input {
+    """
+    Text
+    The text you wish to extract the keywords from. Note that most providers
+    require the text to be less than 1000 characters
+    """
+    text! string!
+
+    """
+    Text Language
+    Optionally specify the exact language of the text. Useful for phrases
+    that might be ambigous.
+    """
+    languageCode string!
+  }
+
+  result [Keyword!]!
+
+  error KeywordExtractionError
+
+  example Successful {
+    input {
+      text = "Artificial Intelligence (AI) is making its way into everyday developer life, but the use of AI along the API lifecycle is yet to be improved"
+    }
+
+    result [
+      {
+        keyword = "Artificial Intelligence",
+        importance = 0.999628
+      },
+      {
+        keyword = "everyday developer life",
+        importance = 0.664127
+      },
+      {
+        keyword = "way",
+        importance = 0.632349
+      },
+      {
+        keyword = "use of AI",
+        importance = 0.29227
+      },
+      {
+        keyword = "API lifecycle",
+        importance = 0.160556
+      },
+    ]
+  }
+
+  example UnsupportedLanguage {
+    input {
+      text = "Je moje auto uzamčeno?"
+      language = "cs"
+    }
+
+    error {
+      title = "Unsupported Language"
+      detail = "Please see supported languages at https://docs.example.com"
+    }
+  }
+}
+
+model Keyword {
+  """
+  Extracted Keyword
+  The keyword or phrase extracted from the given text.
+  """
+  keyword! string!
+
+  """
+  Importance of Keyword
+  A number between 0 and 1 indicating importance of the keyword within the given text.
+  """
+  importance number
+}
+
+model KeywordExtractionError {
+  title! string!
+  detail string!
+}
