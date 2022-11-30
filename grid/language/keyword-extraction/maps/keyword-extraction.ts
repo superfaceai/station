@@ -40,7 +40,7 @@ export const keywordExtractionTest = (provider: string): void => {
         const result = await superface.run({
           useCase: 'ExtractKeywords',
           input: {
-            text: "iuzvahejnfuzubaáýzhj",
+            text: 'iuzvahejnfuzubaáýzhj',
             languageCode: 'nonsense',
           },
         });
