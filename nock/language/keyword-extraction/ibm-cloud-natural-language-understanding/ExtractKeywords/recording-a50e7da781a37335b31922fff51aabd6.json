@@ -1,0 +1,91 @@
+[
+  {
+    "scope": "https://api.PARAMS_REGION.natural-language-understanding.watson.cloud.ibm.com:443",
+    "method": "POST",
+    "path": "/instances/PARAMS_INSTANCE_ID/v1/analyze?version=2022-04-07",
+    "body": {
+      "text": "Artificial Intelligence (AI) is making its way into everyday developer life, but the use of AI along the API lifecycle is yet to be improved",
+      "features": {
+        "keywords": {
+          "sentiment": false,
+          "emotion": false
+        }
+      }
+    },
+    "status": 200,
+    "response": {
+      "usage": {
+        "text_units": 1,
+        "text_characters": 140,
+        "features": 1
+      },
+      "language": "en",
+      "keywords": [
+        {
+          "text": "Artificial Intelligence",
+          "relevance": 0.999628,
+          "count": 1
+        },
+        {
+          "text": "everyday developer life",
+          "relevance": 0.664127,
+          "count": 1
+        },
+        {
+          "text": "way",
+          "relevance": 0.632349,
+          "count": 1
+        },
+        {
+          "text": "use of AI",
+          "relevance": 0.29227,
+          "count": 1
+        },
+        {
+          "text": "API lifecycle",
+          "relevance": 0.160556,
+          "count": 1
+        }
+      ]
+    },
+    "rawHeaders": [
+      "Server",
+      "watson-gateway",
+      "Content-Length",
+      "582",
+      "Content-Type",
+      "application/json; charset=utf-8",
+      "Cache-Control",
+      "no-cache, no-store",
+      "x-dp-watson-tran-id",
+      "1c85d5af-a27b-45ed-afed-5f0281393927",
+      "Content-Security-Policy",
+      "default-src 'none'",
+      "Pragma",
+      "no-cache",
+      "x-content-type-options",
+      "nosniff",
+      "x-frame-options",
+      "DENY",
+      "x-xss-protection",
+      "1; mode=block",
+      "strict-transport-security",
+      "max-age=31536000; includeSubDomains;",
+      "x-dp-watson-tran-id",
+      "1c85d5af-a27b-45ed-afed-5f0281393927",
+      "x-request-id",
+      "1c85d5af-a27b-45ed-afed-5f0281393927",
+      "x-global-transaction-id",
+      "1c85d5af-a27b-45ed-afed-5f0281393927",
+      "X-EdgeConnect-MidMile-RTT",
+      "0",
+      "X-EdgeConnect-Origin-MEX-Latency",
+      "84",
+      "Date",
+      "Wed, 30 Nov 2022 14:20:11 GMT",
+      "Connection",
+      "close"
+    ],
+    "responseIsBinary": false
+  }
+]

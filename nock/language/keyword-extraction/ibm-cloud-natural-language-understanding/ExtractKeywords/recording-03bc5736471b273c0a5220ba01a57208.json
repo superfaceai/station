@@ -1,0 +1,72 @@
+[
+  {
+    "scope": "https://api.PARAMS_REGION.natural-language-understanding.watson.cloud.ibm.com:443",
+    "method": "POST",
+    "path": "/instances/PARAMS_INSTANCE_ID/v1/analyze?version=2022-04-07",
+    "body": {
+      "text": "Je moje auto uzamčeno?",
+      "language": "cs",
+      "features": {
+        "keywords": {
+          "sentiment": false,
+          "emotion": false
+        }
+      }
+    },
+    "status": 200,
+    "response": {
+      "usage": {
+        "text_units": 1,
+        "text_characters": 22,
+        "features": 1
+      },
+      "language": "cs",
+      "keywords": [
+        {
+          "text": "auto",
+          "relevance": 0.5,
+          "count": 1
+        }
+      ]
+    },
+    "rawHeaders": [
+      "Server",
+      "watson-gateway",
+      "Content-Length",
+      "202",
+      "Content-Type",
+      "application/json; charset=utf-8",
+      "Cache-Control",
+      "no-cache, no-store",
+      "x-dp-watson-tran-id",
+      "c4c7bee0-f824-4fe7-9705-e41304a2b658",
+      "Content-Security-Policy",
+      "default-src 'none'",
+      "Pragma",
+      "no-cache",
+      "x-content-type-options",
+      "nosniff",
+      "x-frame-options",
+      "DENY",
+      "x-xss-protection",
+      "1; mode=block",
+      "strict-transport-security",
+      "max-age=31536000; includeSubDomains;",
+      "x-dp-watson-tran-id",
+      "c4c7bee0-f824-4fe7-9705-e41304a2b658",
+      "x-request-id",
+      "c4c7bee0-f824-4fe7-9705-e41304a2b658",
+      "x-global-transaction-id",
+      "c4c7bee0-f824-4fe7-9705-e41304a2b658",
+      "X-EdgeConnect-MidMile-RTT",
+      "1",
+      "X-EdgeConnect-Origin-MEX-Latency",
+      "80",
+      "Date",
+      "Wed, 30 Nov 2022 14:20:11 GMT",
+      "Connection",
+      "close"
+    ],
+    "responseIsBinary": false
+  }
+]

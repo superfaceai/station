@@ -1,0 +1,62 @@
+[
+  {
+    "scope": "https://api.PARAMS_REGION.natural-language-understanding.watson.cloud.ibm.com:443",
+    "method": "POST",
+    "path": "/instances/PARAMS_INSTANCE_ID/v1/analyze?version=2022-04-07",
+    "body": {
+      "text": "iuzvahejnfuzubaáýzhj",
+      "language": "nonsense",
+      "features": {
+        "keywords": {
+          "sentiment": false,
+          "emotion": false
+        }
+      }
+    },
+    "status": 400,
+    "response": {
+      "language": "sq",
+      "error": "unsupported text language: sq",
+      "code": 400
+    },
+    "rawHeaders": [
+      "Server",
+      "watson-gateway",
+      "Content-Length",
+      "81",
+      "Content-Type",
+      "application/json; charset=utf-8",
+      "Cache-Control",
+      "no-cache, no-store",
+      "x-dp-watson-tran-id",
+      "3aa7b9f2-f4b5-4f6d-b570-8bda88fcea53",
+      "Content-Security-Policy",
+      "default-src 'none'",
+      "Pragma",
+      "no-cache",
+      "x-content-type-options",
+      "nosniff",
+      "x-frame-options",
+      "DENY",
+      "x-xss-protection",
+      "1; mode=block",
+      "strict-transport-security",
+      "max-age=31536000; includeSubDomains;",
+      "x-dp-watson-tran-id",
+      "3aa7b9f2-f4b5-4f6d-b570-8bda88fcea53",
+      "x-request-id",
+      "3aa7b9f2-f4b5-4f6d-b570-8bda88fcea53",
+      "x-global-transaction-id",
+      "3aa7b9f2-f4b5-4f6d-b570-8bda88fcea53",
+      "X-EdgeConnect-MidMile-RTT",
+      "2",
+      "X-EdgeConnect-Origin-MEX-Latency",
+      "51",
+      "Date",
+      "Wed, 30 Nov 2022 14:20:12 GMT",
+      "Connection",
+      "close"
+    ],
+    "responseIsBinary": false
+  }
+]
