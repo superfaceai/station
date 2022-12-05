@@ -14,11 +14,14 @@ describe('recruitment/jobs/mock', () => {
       const result = await usecase.perform({}, { provider });
 
       expect(result.isOk() && (result.value as any)).toEqual({
-        jobs: [{
-          id: 'JOB_ID',
-          name: 'Software engineer',
-          description: 'We are looking for a Software Engineer who will assist us with design, development and installation of software solutions. Your duties will include development, writing code, and documenting functionality.'
-        }]
+        jobs: [
+          {
+            id: 'JOB_ID',
+            name: 'Software engineer',
+            description:
+              'We are looking for a Software Engineer who will assist us with design, development and installation of software solutions. Your duties will include development, writing code, and documenting functionality.',
+          },
+        ],
       });
     });
   });
