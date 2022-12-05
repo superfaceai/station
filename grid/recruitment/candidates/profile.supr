@@ -58,7 +58,7 @@ usecase CreateCandidate {
 
     """
     CV (Resume)
-    Object containing either url to a CV or data of a CV.
+    Object containing either URL to a CV or data encoded in Base64 format with CV document and name with the file name.
     """
     cv { url string } | { name string, data string }
 

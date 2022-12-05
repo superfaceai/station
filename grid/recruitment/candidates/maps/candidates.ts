@@ -3,7 +3,7 @@
 import { RecordingProcessOptions, SuperfaceTest } from '@superfaceai/testing';
 
 const sampleCandidate = {
-  name: 'Demo Testing',
+  name: 'John Doe',
   firstName: 'Demo',
   lastName: 'Testing',
 
