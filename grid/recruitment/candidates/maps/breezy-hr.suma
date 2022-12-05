@@ -51,7 +51,7 @@ map CreateCandidate {
 
     response 200 "application/json" {
       map result {
-        id = body.candidate.id
+        id = body._id
         jobId = input.jobId
       }
     }

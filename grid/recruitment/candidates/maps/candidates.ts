@@ -51,7 +51,7 @@ const sampleCandidate = {
   links: [
     {
       name: 'twitter',
-      url: 'https://twitter.com/candidate.username'
+      url: 'https://twitter.com/candidate.username',
     },
     {
       name: 'Portfolio',
