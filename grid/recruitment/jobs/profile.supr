@@ -50,6 +50,36 @@ usecase ListJobs {
 
   error Error
 
+  example Successful {
+    input {
+      state = 'published'
+    }
+
+    result {
+      jobs = [ {
+          id = 'JOB_ID',
+          name = 'Software engineer',
+          description = 'We are looking for a Software Engineer who will assist us with design, development and installation of software solutions. Your duties will include development, writing code, and documenting functionality.',
+        }
+      ]
+    }
+  }
+
+  example Failed {
+    input {
+      limit = -1
+    }
+
+    error {
+      title = 'Bad request'
+      detail = 'Page limit must be a positive integer.'
+      code = 'BadRequest'
+      rateLimit = {
+        bucket = 'workable'
+      }
+    }
+  }
+
 }
 
 model Job {
