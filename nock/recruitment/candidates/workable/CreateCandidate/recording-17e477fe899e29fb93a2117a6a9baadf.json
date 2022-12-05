@@ -1,0 +1,179 @@
+[
+  {
+    "scope": "https://PARAMS_SUBDOMAIN.workable.com:443",
+    "method": "POST",
+    "path": "/spi/v3/jobs/56D021066C/candidates",
+    "body": {
+      "firstname": "Demo",
+      "lastname": "Testing",
+      "email": "demo_testing@fakemail.com",
+      "address": "25772 Gustave Shore, Iowa, USA",
+      "phone": "1-859-557-6573",
+      "education_entries": [
+        {
+          "school": "University of Pennsylvania",
+          "degree": "MBA",
+          "field_of_study": null,
+          "start_date": "2008-03-01",
+          "end_date": "2011-03-30"
+        },
+        {
+          "school": "University of Chicago",
+          "degree": "B.S.",
+          "field_of_study": "Marketing Communication & Economics",
+          "start_date": "2004-09-01",
+          "end_date": "2007-03-30"
+        }
+      ],
+      "experience_entries": [
+        {
+          "title": "Sales Director",
+          "summary": "Summary of a work experience at Test Company",
+          "company": "Test Company",
+          "industry": "Telecommunications",
+          "current": false,
+          "start_date": "2011-03-01",
+          "end_date": "2014-03-30"
+        }
+      ],
+      "social_profiles": [
+        {
+          "type": "Portfolio",
+          "url": "https://url.to.portfolio"
+        }
+      ]
+    },
+    "status": 201,
+    "response": {
+      "status": "created",
+      "candidate": {
+        "id": "d1f9bb1",
+        "name": "Demo Testing",
+        "firstname": "Demo",
+        "lastname": "Testing",
+        "headline": null,
+        "image_url": null,
+        "account": {
+          "subdomain": "PARAMS_SUBDOMAIN",
+          "name": "Superface"
+        },
+        "job": {
+          "shortcode": "56D021066C",
+          "title": "Director of Finance"
+        },
+        "stage": "Sourced",
+        "disqualified": false,
+        "disqualified_at": null,
+        "disqualification_reason": null,
+        "hired_at": null,
+        "sourced": true,
+        "profile_url": "https://PARAMS_SUBDOMAIN.workable.com/backend/jobs/2836860/candidates/220174047",
+        "address": "25772 Gustave Shore, Iowa, USA",
+        "phone": "1-859-557-6573",
+        "email": "demo_testing@fakemail.com",
+        "outbound_mailbox": "4f73bnsduedt@outbound.workablemail.com",
+        "domain": null,
+        "uploader_id": null,
+        "created_at": "2022-12-05T11:36:13Z",
+        "updated_at": "2022-12-05T11:36:13Z",
+        "cover_letter": null,
+        "summary": null,
+        "education_entries": [
+          {
+            "id": "1067ba1f",
+            "degree": "MBA",
+            "school": "University of Pennsylvania",
+            "field_of_study": null,
+            "start_date": "2008-03-01",
+            "end_date": "2011-03-30"
+          },
+          {
+            "id": "1067ba20",
+            "degree": "B.S.",
+            "school": "University of Chicago",
+            "field_of_study": "Marketing Communication & Economics",
+            "start_date": "2004-09-01",
+            "end_date": "2007-03-30"
+          }
+        ],
+        "experience_entries": [
+          {
+            "id": "27cbfe98",
+            "title": "Sales Director",
+            "summary": "Summary of a work experience at Test Company",
+            "start_date": "2011-03-01",
+            "end_date": "2014-03-30",
+            "company": "Test Company",
+            "industry": "Telecommunications",
+            "current": false
+          }
+        ],
+        "skills": [],
+        "answers": [],
+        "resume_url": null,
+        "tags": [],
+        "location": {
+          "location_str": null,
+          "country": null,
+          "country_code": null,
+          "region": null,
+          "region_code": null,
+          "city": null,
+          "zip_code": null
+        },
+        "originating_candidate_id": null
+      }
+    },
+    "rawHeaders": [
+      "Date",
+      "Mon, 05 Dec 2022 11:36:13 GMT",
+      "Content-Type",
+      "application/json; charset=utf-8",
+      "Content-Length",
+      "1581",
+      "Connection",
+      "close",
+      "x-frame-options",
+      "SAMEORIGIN",
+      "x-xss-protection",
+      "1; mode=block",
+      "x-content-type-options",
+      "nosniff",
+      "x-download-options",
+      "noopen",
+      "x-permitted-cross-domain-policies",
+      "none",
+      "referrer-policy",
+      "strict-origin-when-cross-origin",
+      "vary",
+      "User-Agent",
+      "x-rate-limit-limit",
+      "10",
+      "x-rate-limit-remaining",
+      "9",
+      "x-rate-limit-reset",
+      "1670240183",
+      "etag",
+      "W/\"124b3a93937d224539b7288da795fd14\"",
+      "cache-control",
+      "max-age=0, private, must-revalidate",
+      "x-request-id",
+      "ad95dec9-7645-9a55-9fe9-0de8d5fe2fdb",
+      "CF-Cache-Status",
+      "DYNAMIC",
+      "Set-Cookie",
+      "__cf_bm=_NX8em.lX9Nyb6j6gAeY5vMV4AhTDagarvMHYbUa_FM-1670240173-0-AXMbHPeeyjbNWH/UUZguMqN2MJ2SnHdVRZoUe60jkXVFO20NMBXa3QKpYj+D73UN1QKzkVZppSnrVQI2iFI8lE0=; path=/; expires=Mon, 05-Dec-22 12:06:13 GMT; domain=.workable.com; HttpOnly; Secure; SameSite=None",
+      "Strict-Transport-Security",
+      "max-age=15552000; includeSubDomains",
+      "X-KB",
+      "false",
+      "X-TS",
+      "0",
+      "Server",
+      "cloudflare",
+      "CF-RAY",
+      "774c7b990bd4fcad-VIE"
+    ],
+    "responseIsBinary": false
+  }
+]
