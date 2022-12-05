@@ -50,6 +50,10 @@ const sampleCandidate = {
 
   links: [
     {
+      name: 'twitter',
+      url: 'https://twitter.com/candidate.username'
+    },
+    {
       name: 'Portfolio',
       url: 'https://url.to.portfolio',
     },
