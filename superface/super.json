@@ -1308,6 +1308,25 @@
           "token": "$STRIPE_SECRET_KEY"
         }
       ]
+    },
+    "workable": {
+      "file": "../providers/workable.provider.json",
+      "security": [
+        {
+          "id": "bearer_token",
+          "token": "$WORKABLE_ACCESS_TOKEN"
+        }
+      ],
+      "parameters": {
+        "SUBDOMAIN": "$WORKABLE_SUBDOMAIN"
+      }
+    },
+    "breezy-hr": {
+      "file": "../providers/breezy-hr.provider.json",
+      "parameters": {
+        "COMPANY_ID":"$BREEZY_HR_COMPANY_ID",
+        "ACCESS_TOKEN":"$BREEZY_HR_ACCESS_TOKEN"
+      }
     }
   }
 }
