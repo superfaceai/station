@@ -659,10 +659,7 @@
           "file": "../grid/social-media/replies/maps/mock.suma"
         }
       },
-      "priority": [
-        "linkedin",
-        "mock"
-      ]
+      "priority": ["linkedin", "mock"]
     },
     "payments/read-products": {
       "file": "../grid/payments/read-products/profile.supr",
@@ -767,6 +764,17 @@
         },
         "stripe": {
           "file": "../grid/payments/create-subscription/maps/stripe.suma"
+        }
+      }
+    },
+    "recruitment/candidates": {
+      "file": "../grid/recruitment/candidates/profile.supr",
+      "providers": {
+        "mock": {
+          "file": "../grid/recruitment/candidates/maps/mock.suma"
+        },
+        "workable": {
+          "file": "../grid/recruitment/candidates/maps/workable.suma"
         }
       }
     }
@@ -1324,8 +1332,8 @@
     "breezy-hr": {
       "file": "../providers/breezy-hr.provider.json",
       "parameters": {
-        "COMPANY_ID":"$BREEZY_HR_COMPANY_ID",
-        "ACCESS_TOKEN":"$BREEZY_HR_ACCESS_TOKEN"
+        "COMPANY_ID": "$BREEZY_HR_COMPANY_ID",
+        "ACCESS_TOKEN": "$BREEZY_HR_ACCESS_TOKEN"
       }
     }
   }
