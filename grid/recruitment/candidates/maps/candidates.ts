@@ -1,13 +1,14 @@
 /* eslint-disable jest/no-export */
 
 import { RecordingProcessOptions, SuperfaceTest } from '@superfaceai/testing';
+import { readFileSync } from 'fs';
 
 const sampleCandidate = {
   name: 'John Doe',
-  firstName: 'Demo',
-  lastName: 'Testing',
+  firstName: 'John',
+  lastName: 'Doe',
 
-  email: 'demo_testing@fakemail.com',
+  email: 'john.doe@fakemail.com',
   phone: '1-859-557-6573',
   address: '25772 Gustave Shore, Iowa, USA',
 
@@ -41,8 +42,10 @@ const sampleCandidate = {
   ],
 
   cv: {
-    name: 'demo_testing.doc',
-    data: '6622116356e175ed0394b0d==',
+    name: 'cv-sample.pdf',
+    data: readFileSync('./grid/recruitment/candidates/cv-sample.pdf', {
+      encoding: 'base64',
+    }),
   },
 
   links: [
@@ -96,7 +99,9 @@ export const candidatesTest = (
               {
                 input: {
                   jobId: jobIds.invalid,
-                  ...sampleCandidate,
+                  firstName: 'Demo',
+                  lastName: 'Testing',
+                  email: 'demo_testing@fakemail.com',
                 },
               },
               options

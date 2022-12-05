@@ -7,7 +7,7 @@ map CreateCandidate {
 
     request {
       query {
-        stage = input.stageId
+        stage = input.stageId || 'applied'
       }
 
       headers {
@@ -65,6 +65,9 @@ map CreateCandidate {
           type: link.name,
           url: link.url
         })) : undefined
+
+        resumeUrl = input.cv ? input.cv.url ? input.cv.url : undefined : undefined
+        resume = input.cv ? input.cv.data ? input.cv : undefined : undefined
       }
     }
 
