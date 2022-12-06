@@ -23,7 +23,9 @@ map ExtractKeywords {
         keyword = keyword
       )
 
-      map result keywords
+      map result {
+        keywords = keywords
+      }
     }
   
     response 400 "application/json" {
@@ -58,7 +60,7 @@ map ExtractKeywords {
 
 operation MapKeyword {
   return {
-    keyword = args.keyword.text,
+    text = args.keyword.text,
     importance = args.keyword.relevance,
   }
 } 

@@ -2,26 +2,28 @@ profile = "language/keyword-extraction@1.0"
 provider = "mock"
 
 map ExtractKeywords {
-  map result [
-    {
-      keyword: "Artificial Intelligence",
-      importance: 0.999628
-    },
-    {
-      keyword: "everyday developer life",
-      importance: 0.664127
-    },
-    {
-      keyword: "way",
-      importance: 0.632349
-    },
-    {
-      keyword: "use of AI",
-      importance: 0.29227
-    },
-    {
-      keyword: "API lifecycle",
-      importance: 0.160556
-    }
-  ]
+  map result {
+    keywords = [
+      {
+        text: "Artificial Intelligence",
+        importance: 0.999628
+      },
+      {
+        text: "everyday developer life",
+        importance: 0.664127
+      },
+      {
+        text: "way",
+        importance: 0.632349
+      },
+      {
+        text: "use of AI",
+        importance: 0.29227
+      },
+      {
+        text: "API lifecycle",
+        importance: 0.160556
+      }
+    ]
+  }
 }
