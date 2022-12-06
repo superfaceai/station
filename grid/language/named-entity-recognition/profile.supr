@@ -1,0 +1,125 @@
+"""
+Named-Entity Recognition
+Identify and classify named entities such as people, organizations, locations, dates, and other categories of words in a given text.
+"""
+name = "language/named-entity-recognition"
+version = "1.0.0"
+
+"""
+Named-Entity Recognition
+Identify and classify named entities such as people, organizations, locations, dates, and other categories of words in a given text.
+"""
+usecase NamedEntityRecognition safe {
+  input {
+    """
+    Text
+    The text you wish to identify and classify named entities from. Note that
+    most providers require the text to be less than 1000 characters
+    """
+    text! string!
+
+    """
+    Text Language
+    Optionally specify the exact language of the text. Useful for phrases
+    that might be ambigous.
+    """
+    languageCode string!
+  }
+
+  result {
+    entities! [Entity!]!
+  }
+
+  error EntityRecognitionError
+
+  example Successful {
+    input {
+      text = "Houston Natural Gas, run by Kenneth Lay merges with InterNorth, a natural gas company in Omaha, Nebraska, to form an interstate and intrastate natural gas pipeline with approximately 37,000 miles of pipeline."
+    }
+
+    result {
+      entities = [
+        {
+          text = "Houston Natural Gas",
+          category = "Organization",
+          importance = 0.954265
+        },
+        {
+          text = "InterNorth",
+          category = "Organization",
+          importance = 0.777889
+        },
+        {
+          text = "Kenneth Lay",
+          category = "Person",
+          importance = 0.640119
+        },
+        {
+          text = "Omaha, Nebraska",
+          category = "Location",
+          importance = 0.611778
+        }
+      ]
+    }
+  }
+
+  example UnsupportedLanguage {
+    input {
+      text = "Nesmyslná věta v nepodporovaném jazyce"
+      language = "cs"
+    }
+
+    error {
+      title = "Unsupported Language"
+      detail = "Please see supported languages at https://docs.example.com"
+    }
+  }
+}
+
+model Entity {
+  """
+  Named Entity
+  The named entity detected in a given text
+  """
+  text! string!
+
+  """
+  Entity Category
+  """
+  category! EntityCategory!
+
+  """
+  Importance of Entity
+  A number between 0 and 1 indicating importance of the entity within a given text
+  """
+  importance number
+}
+
+model EntityCategory enum {
+  Date,
+  Duration,
+  EmailAddress,
+  Facility,
+  GeographicFeature,
+  Hashtag,
+  IPAddress,
+  JobTitle,
+  Location,
+  Measure,
+  Money,
+  Number,
+  Ordinal,
+  Organization,
+  Percent,
+  Person,
+  PhoneNumber,
+  Time,
+  TwitterHandle,
+  URL,
+  Unknown
+}
+
+model EntityRecognitionError {
+  title! string!
+  detail string!
+}

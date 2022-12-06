@@ -1,0 +1,29 @@
+profile = "language/named-entity-recognition@1.0"
+provider = "mock"
+
+map NamedEntityRecognition {
+  map result {
+    entities = [
+      {
+        text: "Houston Natural Gas",
+        category: "Organization",
+        importance: 0.954265
+      },
+      {
+        text: "InterNorth",
+        category: "Organization",
+        importance: 0.777889
+      },
+      {
+        text: "Kenneth Lay",
+        category: "Person",
+        importance: 0.640119
+      },
+      {
+        text: "Omaha, Nebraska",
+        category: "Location",
+        importance: 0.611778
+      }
+    ]
+  }
+}
