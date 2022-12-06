@@ -5,11 +5,6 @@ map ListProjects {
   http GET "/projects" {
     security "personalAccessToken"
     
-    request "application/json" {
-      headers {
-        "Authorization" = `Bearer ${parameters.accessToken}`
-      }
-    }
     
     response 200 "application/json" {
       return map result body.data.map((project) => {
