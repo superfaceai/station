@@ -2,16 +2,20 @@ profile = "recruitment/candidates@1.0"
 provider = "breezy-hr"
 
 map CreateCandidate {
-  // TODO: transform array to object
-  // links = input.links.map(link => {
-  //   if (link.name === 'linkedin') {
-  //     return { linkedin: link.url }
-  //   }
-     
-  //   if (link.name === 'twitter') { 
-  //     return { twitter: link.url }
-  //   }
-  // })
+  supportedSocialProfiles = [
+    'facebook', 'linkedin', 'twitter', 'dribbble', 'instagram', 'behance', 
+    'angellist', 'flickr', 'github', 'youtube', 'google-plus', 'skype', 'globe'
+  ]
+
+  links = {}
+
+  tmp = (input.links || []).forEach(link => {
+    if (supportedSocialProfiles.includes(link.name)) {
+      links[link.name] = link.url
+    } else {
+      links['globe'] = link.url
+    }
+  })
 
   http POST "/v3/company/{ parameters.COMPANY_ID }/position/{ input.jobId }/candidates" {
     request {
@@ -43,14 +47,14 @@ map CreateCandidate {
 
         })) : undefined
         
-        // social_profiles = input.links ? { ...links }: undefined
+        social_profiles = links
         
         origin = 'applied'
       }
     }
 
     response 200 "application/json" {
-      map result {
+      return map result {
         id = body._id
         jobId = input.jobId
       }
@@ -63,11 +67,11 @@ map CreateCandidate {
         headers = headers
       )
 
-      map error error
+      return map error error
     }
 
     response {
-      map error {
+      return map error {
         title = "Unknown error"
         detail = JSON.stringify(body, null, 2)
         code = 'UnknownError'
