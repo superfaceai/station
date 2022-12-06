@@ -2,39 +2,43 @@
 
 exports[`language/keyword-extraction/ibm-cloud-natural-language-understanding ExtractKeywords extracts all keywords from the phrase 1`] = `
 Ok {
-  "value": Array [
-    Object {
-      "importance": 0.999628,
-      "keyword": "Artificial Intelligence",
-    },
-    Object {
-      "importance": 0.664127,
-      "keyword": "everyday developer life",
-    },
-    Object {
-      "importance": 0.632349,
-      "keyword": "way",
-    },
-    Object {
-      "importance": 0.29227,
-      "keyword": "use of AI",
-    },
-    Object {
-      "importance": 0.160556,
-      "keyword": "API lifecycle",
-    },
-  ],
+  "value": Object {
+    "keywords": Array [
+      Object {
+        "importance": 0.999628,
+        "text": "Artificial Intelligence",
+      },
+      Object {
+        "importance": 0.664127,
+        "text": "everyday developer life",
+      },
+      Object {
+        "importance": 0.632349,
+        "text": "way",
+      },
+      Object {
+        "importance": 0.29227,
+        "text": "use of AI",
+      },
+      Object {
+        "importance": 0.160556,
+        "text": "API lifecycle",
+      },
+    ],
+  },
 }
 `;
 
 exports[`language/keyword-extraction/ibm-cloud-natural-language-understanding ExtractKeywords extracts all keywords from the phrase with language specified 1`] = `
 Ok {
-  "value": Array [
-    Object {
-      "importance": 0.5,
-      "keyword": "auto",
-    },
-  ],
+  "value": Object {
+    "keywords": Array [
+      Object {
+        "importance": 0.5,
+        "text": "auto",
+      },
+    ],
+  },
 }
 `;
 
@@ -46,6 +50,6 @@ Properties: {
   \\"detail\\": \\"unsupported text language: sq\\"
 }
 AST Path: definitions[0].statements[0].responseHandlers[1].statements[0]
-Original Map Location: Line 30, column 7",
+Original Map Location: Line 32, column 7",
 }
 `;
