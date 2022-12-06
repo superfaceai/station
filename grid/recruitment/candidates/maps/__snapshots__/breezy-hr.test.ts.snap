@@ -3,15 +3,22 @@
 exports[`recruitment/candidates/breezy-hr CreateCandidate when specified job does exist performs correctly 1`] = `
 Ok {
   "value": Object {
-    "id": "65f6d1cbde9501",
+    "id": "71a83101bc7501",
     "jobId": "83667ee523c901",
+    "rateLimit": Object {
+      "bucket": "breezy-hr",
+      "remainingRequests": 95,
+      "remainingRequestsPercentage": 95,
+      "resetTimestamp": 1670367645,
+      "totalRequests": 100,
+    },
   },
 }
 `;
 
 exports[`recruitment/candidates/breezy-hr CreateCandidate when specified job does not exist returns error 1`] = `
 Err {
-  "error": "HTTPError: Expected HTTP error
+  "error": "MappedError: Expected error
 Properties: {
   \\"title\\": \\"Unknown error\\",
   \\"detail\\": {
@@ -22,12 +29,12 @@ Properties: {
   \\"rateLimit\\": {
     \\"bucket\\": \\"breezy-hr\\",
     \\"totalRequests\\": 100,
-    \\"remainingRequests\\": 98,
-    \\"remainingRequestsPercentage\\": 98,
-    \\"resetTimestamp\\": 1670319577
+    \\"remainingRequests\\": 93,
+    \\"remainingRequestsPercentage\\": 93,
+    \\"resetTimestamp\\": 1670367645
   }
 }
-AST Path: definitions[0].statements[3].responseHandlers[1].statements[1]
-Original Map Location: Line 70, column 7",
+AST Path: definitions[0].statements[1].statements[0]
+Original Map Location: Line 19, column 5",
 }
 `;

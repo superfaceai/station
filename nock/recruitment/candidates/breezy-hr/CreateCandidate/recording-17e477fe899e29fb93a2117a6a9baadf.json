@@ -1,6 +1,39 @@
 [
   {
     "scope": "https://api.breezy.hr:443",
+    "method": "GET",
+    "path": "/v3/company/PARAMS_COMPANY_ID/candidates/search?email_address=john.doe%40fakemail.com",
+    "body": "",
+    "status": 200,
+    "response": [],
+    "rawHeaders": [
+      "Date",
+      "Tue, 06 Dec 2022 22:59:54 GMT",
+      "Content-Type",
+      "application/json; charset=utf-8",
+      "Content-Length",
+      "2",
+      "Connection",
+      "close",
+      "Server",
+      "nginx/1.22.0",
+      "X-Powered-By",
+      "Redstone",
+      "X-RateLimit-Limit",
+      "100",
+      "X-RateLimit-Remaining",
+      "96",
+      "X-RateLimit-Reset",
+      "1670367645",
+      "ETag",
+      "W/\"2-l9Fw4VUO7kr8CvBlt4zaMCqXZ0w\"",
+      "Vary",
+      "Accept-Encoding"
+    ],
+    "responseIsBinary": false
+  },
+  {
+    "scope": "https://api.breezy.hr:443",
     "method": "POST",
     "path": "/v3/company/PARAMS_COMPANY_ID/position/83667ee523c901/candidates",
     "body": {
@@ -42,11 +75,11 @@
     "status": 200,
     "response": [
       "1f8b0800000000000003",
-      "cd544b6fd43a14fe2b5616ac26993c2699c78a5e40a84820a416218150e4d8271353c727b29d96a19affce7132658022b877773796cff33beffba85632da4555d95632138d846d9966d122eac1f359d4cabc698a6ad56ccb6c1271292d3847a2bc5caf73f672749edf02bbead0c2825de21d5fb0775717a42a2c70afd0d4927b0806699ec7591ea7d575badd159bdd2a4d5655f98154418e62d28d761fef23273a445d1bde07b37746dd8275ca1f18b6ec2d18e30efa961bc5c9b055a0658d6dedfc280fd1ce8c5a1f177f76f1ac5382eff137d6d16b6e6fc02bb367cfb0ef47a3e6a8d813f642a0c15e09171d3f51bc3d57ba3ed7e233762691084f5b7e33c912817d0040adf10e64dd90f78f64d801975a9910d415d7e0d873654178b4ec29bb06e703eec0cd816c95515e714d9aaf883a65f28a80d87304e2a0557b45058bf830680532b0284bae75ed043523dadd47441fea3da29cd1cf3f03a3b7c1792006443bff26fd07f248920e0dd466ec1b205694c59b721b97e53aaeca75418094fed84f48a30d9176de0f6eb75c5248496301be1e92ce12a59662ce6b2936c546f035f02ccbd36c390e1ab974cbb6cddb4d9aafe2222bd378b56e8a78d36cb3b84d61c3b7d52a13902df3863739cd68bc2ab375bcaab222e69b0a6248d745b1cd799e97900cb29d3aabe1a1fbffc18cdefa7f9509f5c0a1a031a8078b2129376d883f0c21337fa7bca7ce2c26c6a57cc47a3357e0fa3bf3e7e44eca615897821ba9c2a626a3033b952e2cd20969afb1811f717e649c50de43432b068f50884a3c26035a4ffba070da2087a315d3e44c77662e714cf53dcffa3f138f5dbcbd9ccae0f9feac7f9ef939c047ec938f8bef0c25c275894272c1dddfe484e6e69d18875015f92faed81dda9bba538ed6f930b5e9342a0f83f8cb827be5f5e3434002daa99e0717d1d5fc0b578bb3e09ec19701ac02238071fff3c9387e3a7e0308fe68ebd2050000"
+      "cd545b6bdb3014fe2bc20f7b8a9dd88ee3244fed2e8c0e36066d19ac14732c9dc45a65c94872bbace4bfefc84e97761dbbbc0d8cd1b97ee77e1f555244eba84c6199a7b3b4e665314ba349d4a28751b411595de78b79bd2ad241044258748e44595196197bdb3b0fb7c8ce1b6371c2cecc1d4cd8e5f929a9728be0a5d195008fc1609665719ac5b3c54596af6733fa92459e7f2655143d1f74a3f5d57de478638caa34b4c1ec52cb5bb44efa1d331bf611b5763b750b5a02196e242a51994de57c2f76d15af74aed27bf77f1aa911cb6e617d6d17bb037e8a5deb257a66d7b2dc7a8d80bf6861b6d5ac95db4bfa6785b90aa3ad6e28b6974220c9e6ce0669025dcb401c02865ee50543579bf22c3064128a94350e7a0d0b1d7d222f7c6b2137681ce07dc0ef48e6ca5965e8222cd77441d32794740ecb541e2182bb7920a1641d7298922b0284b50aa729c9a11adef23a277d5d61831a21f5f1a7b6f83f34074c6d8f135e83f907b92344663a5fbb646624569bc2c56715194f1a2287302a4f4fb7640ea6d88b4f1be73ebe994424a6a8bf86d9734962839e5635e53becc971c4a8434cd66e9b4ef9401e1a69bb45e9602e7b1e06219cfcb55162f4b8ef10cb9e08bd562be48f329f01c56901531d1453ccf05c42b9a420a2a9b23e4d906d279d289cdd059850fddff0733fa57ff5526d40367388d41d559139272c386f85d1732f377d27beacc64609c8967ac0f63052e7e309f2677500ec33ae5a0850c9b9af40eed50bab04807a4ad32353ec679cc38a07cc29a560c9fa11095789374c67ada0769860d72a6b77c989ce1ce8c258ea9bec7597f39f0d8e9c7b3a10c1eb647fde3cc8f013e631f7c9cfe60481eae4b14920beefe24273437ee44df85aa88bfb86277c6de548d74b4cebba14d87517918c49f16dc4baf9e1f0212d04eb5105c44e7e32b5c2d60c13dc3af1d5a899a2303fff464ecaff7df01879e2255d2050000"
     ],
     "rawHeaders": [
       "Date",
-      "Tue, 06 Dec 2022 09:38:40 GMT",
+      "Tue, 06 Dec 2022 23:00:00 GMT",
       "Content-Type",
       "application/json; charset=utf-8",
       "Transfer-Encoding",
@@ -60,11 +93,11 @@
       "X-RateLimit-Limit",
       "100",
       "X-RateLimit-Remaining",
-      "99",
+      "95",
       "X-RateLimit-Reset",
-      "1670319577",
+      "1670367645",
       "ETag",
-      "W/\"5d2-lWd2fW/EaGyWTxXLSzAZAZzTmlc\"",
+      "W/\"5d2-P/+oUwf8HDUozHG6A7mObc/Nrh0\"",
       "Vary",
       "Accept-Encoding",
       "Content-Encoding",

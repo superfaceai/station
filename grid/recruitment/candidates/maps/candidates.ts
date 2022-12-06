@@ -70,6 +70,7 @@ export const candidatesTest = (
 
     describe('CreateCandidate', () => {
       beforeAll(() => {
+        jest.setTimeout(10000);
         superface = new SuperfaceTest({
           profile: 'recruitment/candidates',
           provider,

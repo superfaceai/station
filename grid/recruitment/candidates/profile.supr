@@ -97,6 +97,11 @@ usecase CreateCandidate {
     Unique identifier of a job, newly created candidate applied for.
     """
     jobId! string!
+    """
+    Rate limit
+    Rate limit details.
+    """
+    rateLimit RateLimit
   }!
 
   error Error
@@ -480,4 +485,9 @@ model ErrorCode enum {
   Returned when an unexpected error occured.
   """
   UnknownError
+  """
+  Conflict
+  The request can not be executed, it is in conflict with current state of the target resource.
+  """
+  Conflict
 }

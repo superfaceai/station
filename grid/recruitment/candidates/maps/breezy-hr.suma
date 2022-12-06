@@ -2,81 +2,29 @@ profile = "recruitment/candidates@1.0"
 provider = "breezy-hr"
 
 map CreateCandidate {
-  supportedSocialProfiles = [
-    'facebook', 'linkedin', 'twitter', 'dribbble', 'instagram', 'behance', 
-    'angellist', 'flickr', 'github', 'youtube', 'google-plus', 'skype', 'globe'
-  ]
 
-  links = {}
+  call CheckCandidateByEmail (
+    accessToken = parameters.ACCESS_TOKEN,
+    companyId = parameters.COMPANY_ID,
+    candidate = input
+  ) {
+    return map error if (outcome.error) outcome.error
+  }
 
-  tmp = (input.links || []).forEach(link => {
-    if (supportedSocialProfiles.includes(link.name)) {
-      links[link.name] = link.url
-    } else {
-      links['globe'] = link.url
-    }
-  })
+  call CreateCandidate (
+    accessToken = parameters.ACCESS_TOKEN,
+    companyId = parameters.COMPANY_ID,
+    candidate = input,
+  ) {
+    return map error if (outcome.error) outcome.error
 
-  http POST "/v3/company/{ parameters.COMPANY_ID }/position/{ input.jobId }/candidates" {
-    request {
-      headers {
-        Authorization = parameters.ACCESS_TOKEN
-      }
+    createCandidateOutcome = outcome.data
+  }
 
-      body {
-        name = input.firstName + ' ' + input.lastName
-        
-        email_address = input.email
-        address = input.address
-        phone_number = input.phone
-        
-        education = input.education ? input.education.map(edu => ({
-          school_name: edu.school,
-          degree: edu.degree,
-          field_of_study: edu.fieldOfStudy,
-          start_date: edu.startedAt,
-          end_date: edu.endedAt,
-        })) : undefined
-        
-        work_history = input.workExperience ? input.workExperience.map(work => ({
-          title: work.position,
-          summary: work.summary,
-          company_name: work.company,
-          industry: work.industry,
-          is_current: work.current,
-
-        })) : undefined
-        
-        social_profiles = links
-        
-        origin = 'applied'
-      }
-    }
-
-    response 200 "application/json" {
-      return map result {
-        id = body._id
-        jobId = input.jobId
-      }
-    }
-
-    response "application/json" {
-      error = call MapBreezyHRError(
-        statusCode = statusCode,
-        error = body.error,
-        headers = headers
-      )
-
-      return map error error
-    }
-
-    response {
-      return map error {
-        title = "Unknown error"
-        detail = JSON.stringify(body, null, 2)
-        code = 'UnknownError'
-      }
-    }
+  return map result {
+    id = createCandidateOutcome.candidate.id
+    jobId = createCandidateOutcome.candidate.jobId
+    rateLimit = createCandidateOutcome.rateLimit
   }
 }
 
@@ -158,5 +106,138 @@ operation MapBreezyHRError {
     detail = workableError
     code = 'UnknownError'
     rateLimit = rateLimit
+  }
+}
+
+operation CreateCandidate {
+  supportedSocialProfiles = [
+    'facebook', 'linkedin', 'twitter', 'dribbble', 'instagram', 'behance', 
+    'angellist', 'flickr', 'github', 'youtube', 'google-plus', 'skype', 'globe'
+  ]
+
+  links = {}
+
+  candidate = args.candidate
+
+  tmp = (candidate.links || []).forEach(link => {
+    if (supportedSocialProfiles.includes(link.name)) {
+      links[link.name] = link.url
+    } else {
+      links['globe'] = link.url
+    }
+  })
+
+  http POST "/v3/company/{ parameters.COMPANY_ID }/position/{ candidate.jobId }/candidates" {
+    request "application/json" {
+      headers {
+        Authorization = parameters.ACCESS_TOKEN
+      }
+
+      body {
+        name = candidate.firstName + ' ' + candidate.lastName
+        
+        email_address = candidate.email
+        address = candidate.address
+        phone_number = candidate.phone
+        
+        education = candidate.education ? candidate.education.map(edu => ({
+          school_name: edu.school,
+          degree: edu.degree,
+          field_of_study: edu.fieldOfStudy,
+          start_date: edu.startedAt,
+          end_date: edu.endedAt,
+        })) : undefined
+        
+        work_history = candidate.workExperience ? candidate.workExperience.map(work => ({
+          title: work.position,
+          summary: work.summary,
+          company_name: work.company,
+          industry: work.industry,
+          is_current: work.current,
+
+        })) : undefined
+        
+        social_profiles = links
+        
+        origin = 'applied'
+      }
+    }
+
+    response 200 "application/json" {
+      return {
+          candidate = {
+            id: body._id,
+            jobId: candidate.jobId
+          },
+          rateLimit = call MapRateLimit(headers = headers) 
+        }
+    }
+
+    response "application/json" {
+      error = call MapBreezyHRError(
+        statusCode = statusCode,
+        error = body.error,
+        headers = headers
+      )
+
+      fail error
+    }
+
+    response {
+      fail {
+        title = "Unknown error"
+        detail = JSON.stringify(body, null, 2)
+        code = 'UnknownError'
+      }
+    }
+  }
+}
+
+operation CheckCandidateByEmail {
+  http GET "/v3/company/{ args.companyId }/candidates/search" {
+
+  request {
+      query {
+        email_address = args.candidate.email
+      }
+      headers {
+        Authorization = args.accessToken
+      }
+    }
+
+    response 200 {
+      appliedCandidates = body.filter(candidate => candidate.position._id === args.candidate.jobId )
+
+      fail if(appliedCandidates.length > 0) {
+        title = 'Conflict'
+        detail = 'Candidate with email ' + args.candidate.email + ' already applied for the job.' 
+        code = 'Conflict'
+        rateLimit = call MapRateLimit(headers = headers)
+      }
+
+      return {}
+    }
+
+    response 400 {
+      return {}
+    }
+
+    response "application/json" {
+      error = call MapBreezyHRError(
+        statusCode = statusCode,
+        error = body.error,
+        headers = headers
+      )
+
+      fail error
+    }
+
+    response {
+      fail {
+        title = "Unknown error"
+        detail = JSON.stringify(body, null, 2)
+        code = 'UnknownError'
+      }
+    }
   }
 }
