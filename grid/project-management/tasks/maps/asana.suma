@@ -4,7 +4,6 @@ provider = "asana"
 map CreateTask {
   http POST "/tasks" {
     security "personalAccessToken"
-    
     request "application/json" {
       body {
         data = {
@@ -16,7 +15,7 @@ map CreateTask {
         }
       }
     }
-    
+
     response 201 "application/json" {
       data = call MapTask(task = body.data)
 
@@ -29,7 +28,7 @@ map CreateTask {
         error = body,
         headers = headers
       )
-      
+
       map error error
     }
   }
@@ -44,7 +43,7 @@ map ListTasks {
         id: task.gid,
         title: task.name,
       }))
-    
+
       return map result data
     }
 
@@ -54,7 +53,7 @@ map ListTasks {
         error = body,
         headers = headers
       )
-      
+
       map error error
     }
   }
@@ -66,7 +65,7 @@ map ReadTask {
     
     response 200 "application/json" {
       data = call MapTask(task = body.data)
-      
+
       return map result data
     }
 
@@ -76,7 +75,7 @@ map ReadTask {
         error = body,
         headers = headers
       )
-      
+
       map error error
     }
   }
@@ -85,7 +84,6 @@ map ReadTask {
 map UpdateTask {
   http PUT "/tasks/{input.id}" {
     security "personalAccessToken"
-    
     request "application/json" {
       body {
         data = {
@@ -97,7 +95,7 @@ map UpdateTask {
         }
       }
     }
-    
+
     response 200 "application/json" {
       data = call MapTask(task = body.data)
 
@@ -110,7 +108,7 @@ map UpdateTask {
         error = body,
         headers = headers
       )
-      
+
       map error error
     }
   }
@@ -128,7 +126,7 @@ map DeleteTask {
         error = body,
         headers = headers
       )
-      
+
       map error error
     }
   }
@@ -140,6 +138,7 @@ Returns mapped task from received body
 """
 operation MapTask {
   task.id = args.task.gid
+
   task.projects = args.task.projects.map(project => project.gid)
 
   set if (args.task.name) {
@@ -149,7 +148,7 @@ operation MapTask {
   set if (args.task.notes) {
     task.description = args.task.notes
   }
-  
+
   set if (args.task.parent) {
     task.parent = args.task.parent
   }
@@ -171,47 +170,49 @@ Returns error object based on error body, statusCode.
 """
 operation MapAsanaError {
   statusCode = args.statusCode
+
   detail = args.error.message
+
   headers = args.headers
 
   return if (statusCode === 400) {
-    title = 'Bad request'
+    title = "Bad request"
     detail = detail
   }
 
   return if (statusCode === 401) {
-    title = 'Unauthorized'
+    title = "Unauthorized"
     detail = detail
   }
 
   return if (statusCode === 403) {
-    title = 'Forbidden'
+    title = "Forbidden"
     detail = detail
   }
 
   return if (statusCode === 404) {
-    title = 'Not found'
+    title = "Not found"
     detail = detail
   }
 
   return if (statusCode === 405) {
-    title = 'Method not allowed'
+    title = "Method not allowed"
     detail = detail
   }
 
   return if (statusCode === 429) {
     retryAfter = parseInt(headers['Retry-After'])
-    title = 'Too Many Requests'
+    title = "Too Many Requests"
     detail = `${detail}. Retry after ${retryAfter} seconds`
   }
-  
+
   return if (statusCode === 502) {
-    title = 'Bad gateway'
+    title = "Bad gateway"
     detail = detail
   }
 
   return {
-    title = 'Unknown error'
+    title = "Unknown error"
     detail = `Unknown error occurred. Status: ${statusCode}. Message: ${detail}.`
   }
 }
