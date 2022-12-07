@@ -1,0 +1,28 @@
+profile = "payments/create-product@1.0"
+provider = "stripe"
+
+map CreateProduct {
+  http POST "/v1/products" {
+    security "bearer"
+    request "application/x-www-form-urlencoded" {
+      body {
+        name = input.name
+        description = input.description
+      }
+    }
+
+    response 200 "application/json" {
+      map result {
+        productId = body.id
+      }
+    }
+
+    response "application/json" {
+      map error {
+        title = body.error.code
+        detail = body.error.message
+        code = UnknownError
+      }
+    }
+  }
+}

@@ -12,7 +12,7 @@
     "tools:format:fix": "prettier --write ./",
     "prepush": "yarn tools:lint:fix && yarn tools:format:fix",
     "test": "dotenv -e .env.example -- jest",
-    "test:record": "SUPERFACE_LIVE_API='*' dotenv -e .env -e .env.example -- jest -u",
+    "test:record": "SUPERFACE_LIVE_API='*' dotenv -e .env -e .env.example -- jest",
     "check": "superface check",
     "lint": "superface lint",
     "structure": "ts-node ./src/station_structure.ts",
