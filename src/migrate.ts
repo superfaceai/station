@@ -11,6 +11,7 @@ import { promisify } from 'util';
 
 const readDir = promisify(fs.readdir);
 
+// const writeFile = promisify(fs.writeFile);
 
 
 export async function run(): Promise<void> {
@@ -40,15 +41,14 @@ export async function run(): Promise<void> {
 
     console.log('structire', structure)
 
-    const newRecoring: Record<string, unknown> = {}
+    const newRecoring: Record<string, Record<string, unknown>> = {}
 
     if (structure.provider !== 'mock') {
       for (const usecase of structure.useCaseNames) {
 
         const newRecoringKey = `${structure.scope}/${structure.profileName}/${structure.provider}/${usecase}`
 
-
-
+        newRecoring[newRecoringKey] = {}
 
         const recordingsDir = joinPath(process.cwd(), 'nock', structure.scope, structure.profileName, structure.provider, usecase)
         console.log('rec', recordingsDir)
@@ -59,19 +59,20 @@ export async function run(): Promise<void> {
 
         for (const file of files) {
           const content = await readFile(resolve(joinPath(recordingsDir, file)))
-
-          console.log('contet', content)
-
           const hash = file.split('-')[1].split('.json')[0]
-
-          console.log('has', hash)
-
-
-
-
+          newRecoring[newRecoringKey][hash] = content
         }
 
+
       }
+      const newRecordingPath = joinPath(process.cwd(), 'grid', structure.scope, structure.profileName, 'maps', 'recordings', `${structure.provider}.recording.json`)
+
+      console.log(newRecordingPath, ' = > ', newRecoring)
+
+
+
+
+
     }
 
   }
