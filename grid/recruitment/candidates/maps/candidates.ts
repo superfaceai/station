@@ -50,6 +50,10 @@ const sampleCandidate = {
 
   links: [
     {
+      name: 'twitter',
+      url: 'https://twitter.com/candidate.username',
+    },
+    {
       name: 'Portfolio',
       url: 'https://url.to.portfolio',
     },
@@ -66,6 +70,7 @@ export const candidatesTest = (
 
     describe('CreateCandidate', () => {
       beforeAll(() => {
+        jest.setTimeout(10000);
         superface = new SuperfaceTest({
           profile: 'recruitment/candidates',
           provider,

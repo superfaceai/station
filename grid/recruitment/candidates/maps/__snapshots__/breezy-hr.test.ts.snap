@@ -1,0 +1,40 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`recruitment/candidates/breezy-hr CreateCandidate when specified job does exist performs correctly 1`] = `
+Ok {
+  "value": Object {
+    "id": "b23ca444e77801",
+    "jobId": "f1cfc5572a5701",
+    "rateLimit": Object {
+      "bucket": "breezy-hr",
+      "remainingRequests": 97,
+      "remainingRequestsPercentage": 97,
+      "resetTimestamp": 1670421590,
+      "totalRequests": 100,
+    },
+  },
+}
+`;
+
+exports[`recruitment/candidates/breezy-hr CreateCandidate when specified job does not exist returns error 1`] = `
+Err {
+  "error": "MappedError: Expected error
+Properties: {
+  \\"title\\": \\"Unknown error\\",
+  \\"detail\\": {
+    \\"type\\": \\"addCandidateError\\",
+    \\"message\\": \\"there was an unknown error creating candidate.\\"
+  },
+  \\"code\\": \\"UnknownError\\",
+  \\"rateLimit\\": {
+    \\"bucket\\": \\"breezy-hr\\",
+    \\"totalRequests\\": 100,
+    \\"remainingRequests\\": 95,
+    \\"remainingRequestsPercentage\\": 95,
+    \\"resetTimestamp\\": 1670421590
+  }
+}
+AST Path: definitions[0].statements[1].statements[0]
+Original Map Location: Line 19, column 5",
+}
+`;
