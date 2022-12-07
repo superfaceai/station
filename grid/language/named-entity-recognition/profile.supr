@@ -27,6 +27,10 @@ usecase NamedEntityRecognition safe {
   }
 
   result {
+    """
+    List of Entities
+    Each entity refers to a specific real-world object or a finding, such as a person, place, organization, or product.
+    """
     entities! [Entity!]!
   }
 
@@ -76,6 +80,10 @@ usecase NamedEntityRecognition safe {
   }
 }
 
+"""
+Entity
+Data that refers to a specific real-world object or a finding, such as a person, place, organization, or product.
+"""
 model Entity {
   """
   Named Entity
