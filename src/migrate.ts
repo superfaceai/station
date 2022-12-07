@@ -8,9 +8,10 @@ import { localMaps, readFile } from './util';
 
 const readDir = promisify(fs.readdir);
 const writeFile = promisify(fs.writeFile);
+const mkDir = promisify(fs.mkdir);
 
 export async function run(): Promise<void> {
-  const maps = await localMaps();
+  const maps = await localMaps()
 
   for (const map of maps) {
     // we need parts after the "grid/""
@@ -63,13 +64,20 @@ export async function run(): Promise<void> {
           newRecoring[newRecoringKey][hash] = content;
         }
       }
-      const newRecordingPath = joinPath(
+
+      const newRecordingDir = joinPath(
         process.cwd(),
         'grid',
         structure.scope,
         structure.profileName,
         'maps',
-        'recordings',
+        'recordings'
+      );
+
+      await mkDir(newRecordingDir, { recursive: true });
+
+      const newRecordingPath = joinPath(
+        newRecordingDir,
         `${structure.provider}.recording.json`
       );
 
