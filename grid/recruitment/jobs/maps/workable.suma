@@ -1,0 +1,155 @@
+profile = "recruitment/jobs@1.0"
+provider = "workable"
+
+map ListJobs {
+    http GET "/spi/v3/jobs" {
+      security "bearer_token"
+
+      request {
+         query {
+          state = input.state
+          limit = input.limit
+          since_id = input.page
+          include_fields = 'requirements,description,benefits'
+        }
+
+        headers {
+          'X-WORKABLE-CLIENT-ID' = parameters.CLIENT_ID
+        }
+      }
+
+      response 200 "application/json" {
+          jobs = body.jobs.map(job => {
+            return {
+              id: job.shortcode,
+              name: job.title,
+              description: job.description,
+              requirements: [job.requirements],
+              benefits: [job.benefits],
+              departmentName: job.department
+            }
+          })
+
+          map result {
+            jobs = jobs
+            pagination = call MapPagination(workablePagination = body.paging || {})
+            rateLimit = call MapRateLimit(headers = headers)
+          }
+      }
+
+      response "application/json" {
+        error = call MapWorkableError(
+          statusCode = statusCode,
+          error = body.error,
+          headers = headers
+        )
+        map error error
+      }
+
+      response {
+        map error {
+          title = "Unknown error"
+          detail = JSON.stringify(body, null, 2)
+          code = 'UnknownError'
+        }
+      }
+  }
+}
+
+ //Workable supports just forward pagination
+operation MapPagination {
+  sinceIdToken = 'since_id='
+  nextPageCursor = undefined
+
+  nextUrl = args.workablePagination.next || ''
+  sinceIdIndex = nextUrl.indexOf(sinceIdToken)
+
+  set if(sinceIdIndex !== -1) {
+    nextPageCursor = nextUrl.substring(sinceIdIndex + sinceIdToken.length, nextUrl.length).split('&')[0]
+  }
+
+  return {
+    nextPage =  nextPageCursor
+  }
+}
+
+//Workable rate limits docs: https://workable.readme.io/reference/rate-limits
+operation MapRateLimit {
+  totalRequests = parseInt(args.headers['x-rate-limit-limit'], 10)
+  remainingRequests = parseInt(args.headers['x-rate-limit-remaining'], 10)
+  remainingRequestsPercentage = undefined
+  resetTimestamp = parseInt(args.headers['x-rate-limit-reset'], 10)
+
+  set if(isNaN(totalRequests)) {
+    totalRequests = undefined
+  }
+
+  set if(isNaN(remainingRequests)) {
+    remainingRequests = undefined
+  }
+
+  set if(totalRequests > 0 && remainingRequests !== undefined) {
+    remainingRequestsPercentage = remainingRequests / totalRequests * 100
+  }
+
+  set if(isNaN(resetTimestamp, 10)) {
+    resetTimestamp = undefined
+  }
+
+  return {
+    bucket = 'workable'
+    totalRequests = totalRequests
+    remainingRequests = remainingRequests
+    remainingRequestsPercentage = remainingRequestsPercentage
+    resetTimestamp = resetTimestamp
+  }
+}
+
+operation MapWorkableError {
+  statusCode = args.statusCode
+  workableError = args.error
+
+  rateLimit = call MapRateLimit(headers = args.headers)
+
+  return if (statusCode === 400) {
+    title = 'Bad request'
+    detail = workableError
+    code = 'BadRequest'
+    rateLimit = rateLimit
+  }
+
+  return if (statusCode === 401) {
+    title = 'Unauthenticated'
+    detail = workableError
+    code = 'Unauthenticated'
+    rateLimit = rateLimit
+  }
+
+  return if (statusCode === 403) {
+    title = 'Unauthorized'
+    detail = workableError
+    code = 'Unauthorized'
+    rateLimit = rateLimit
+  }
+
+  return if (statusCode === 404) {
+    title = 'Not found'
+    detail = workableError
+    code = 'NotFound'
+    rateLimit = rateLimit
+  }
+
+  return if (statusCode === 429) {
+    title = 'Rate limit exceeded'
+    detail = 'You reached max requests quota.'
+    code = 'RateLimitReached'
+    rateLimit = rateLimit
+  }
+
+  return {
+    title = "Unknown error"
+    detail = workableError
+    code = 'UnknownError'
+    rateLimit = rateLimit
+  }
+}
