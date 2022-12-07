@@ -24,8 +24,8 @@ map ListJobs {
               id: job.shortcode,
               name: job.title,
               description: job.description,
-              requirements: [job.requirements],
-              benefits: [job.benefits],
+              requirements: job.requirements,
+              benefits: job.benefits,
               departmentName: job.department
             }
           })

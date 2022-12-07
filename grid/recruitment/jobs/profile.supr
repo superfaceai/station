@@ -112,12 +112,12 @@ model Job {
   Requirements
   The requirements of the job for the candidate.
   """
-  requirements [string]
+  requirements string | [string]
   """
   Benefits
   The benefits of the job for the candidate.
   """
-  benefits [string]
+  benefits string | [string]
   """
   Job creation date
   The timestamp when was the job created in ISO8601 format.
