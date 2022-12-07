@@ -1,0 +1,27 @@
+{
+  "name": "workable",
+  "services": [
+    {
+      "id": "default",
+      "baseUrl": "https://{SUBDOMAIN}.workable.com"
+    }
+  ],
+  "defaultService": "default",
+  "securitySchemes": [
+    {
+      "id": "bearer_token",
+      "type": "http",
+      "scheme": "bearer"
+    }
+  ],
+  "parameters": [
+    {
+      "name": "SUBDOMAIN",
+      "description": "Assigned subdomain. You can find it in Workable account settings."
+    },
+    {
+      "name": "CLIENT_ID",
+      "description": "CLIENT_ID parameter is required if using partner token for authentication."
+    }
+  ]
+}
