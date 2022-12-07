@@ -1,6 +1,7 @@
 /* eslint-disable jest/no-export */
 
 import { SuperfaceTest } from '@superfaceai/testing';
+import { RecordingType } from '@superfaceai/testing/dist/nock/recording.interfaces';
 
 import { nockConfig } from '../../../test-config';
 
@@ -40,7 +41,7 @@ const createTask = async (
       },
       testName,
     },
-    { prepare: true }
+    { recordingType: RecordingType.PREPARE }
   );
 
   return (result.unwrap() as { id: string }).id;
@@ -62,7 +63,7 @@ const deleteTask = async (
 
   const result = await superface.run(
     { input, testName },
-    { hideInput: ['id'], teardown: true }
+    { hideInput: ['id'], recordingType: RecordingType.TEARDOWN }
   );
 
   return result.unwrap();

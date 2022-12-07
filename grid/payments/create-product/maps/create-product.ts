@@ -2,6 +2,7 @@
 
 import { describe, expect } from '@jest/globals';
 import { SuperfaceTest } from '@superfaceai/testing';
+import { RecordingType } from '@superfaceai/testing/dist/nock/recording.interfaces';
 
 import { nockConfig } from '../../../test-config';
 
@@ -23,7 +24,7 @@ export async function createProduct(provider: string): Promise<string> {
       },
       testName: 'payments/create-product/temporary',
     },
-    { prepare: true }
+    { recordingType: RecordingType.PREPARE }
   );
 
   return (result.unwrap() as { productId: string }).productId;

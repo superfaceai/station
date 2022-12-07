@@ -2,6 +2,7 @@
 
 import { describe, expect } from '@jest/globals';
 import { SuperfaceTest } from '@superfaceai/testing';
+import { RecordingType } from '@superfaceai/testing/dist/nock/recording.interfaces';
 
 import { nockConfig } from '../../../test-config';
 import { createProduct } from '../../create-product/maps/create-product';
@@ -30,7 +31,7 @@ export async function createPlan(provider: string): Promise<string> {
     },
     {
       hideInput: ['productId'],
-      prepare: true,
+      recordingType: RecordingType.PREPARE,
     }
   );
 
