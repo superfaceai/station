@@ -2,7 +2,7 @@ profile = "recruitment/jobs@1.0"
 provider = "breezy-hr"
 
 map ListJobs {
-    http GET "/v3/company/{ parameters.COMPANY_ID }/positions" {
+  http GET "/v3/company/{ parameters.COMPANY_ID }/positions" {
     request {
       query {
         state = input.state
@@ -13,21 +13,21 @@ map ListJobs {
     }
 
     response 200 "application/json" {
-        jobs = body.map(job => {
-          return {
-            id: job._id,
-            name: job.name,
-            description: job.description,
-            requirements: [],
-            benefits: [],
-            departmentName: job.department,
-          }
-        })
-
-        map result {
-          jobs = jobs
-          rateLimit = call MapRateLimit(headers = headers)
+      jobs = body.map(job => {
+        return {
+          id: job._id,
+          name: job.name,
+          description: job.description,
+          requirements: [],
+          benefits: [],
+          departmentName: job.department,
         }
+      })
+
+      map result {
+        jobs = jobs
+        rateLimit = call MapRateLimit(headers = headers)
+      }
     }
 
     response "application/json" {
@@ -83,34 +83,34 @@ operation MapRateLimit {
 
 operation MapBreezyHRError {
   statusCode = args.statusCode
-  workableError = args.error
+  breezyHrError = args.error
 
   rateLimit = call MapRateLimit(headers = args.headers)
 
   return if (statusCode === 400) {
     title = 'Bad request'
-    detail = workableError
+    detail = breezyHrError
     code = 'BadRequest'
     rateLimit = rateLimit
   }
 
   return if (statusCode === 401) {
     title = 'Unauthenticated'
-    detail = workableError
+    detail = breezyHrError
     code = 'Unauthenticated'
     rateLimit = rateLimit
   }
 
   return if (statusCode === 403) {
     title = 'Unauthorized'
-    detail = workableError
+    detail = breezyHrError
     code = 'Unauthorized'
     rateLimit = rateLimit
   }
 
   return if (statusCode === 404) {
     title = 'Not found'
-    detail = workableError
+    detail = breezyHrError
     code = 'NotFound'
     rateLimit = rateLimit
   }
@@ -124,7 +124,7 @@ operation MapBreezyHRError {
 
   return {
     title = "Unknown error"
-    detail = workableError
+    detail = breezyHrError
     code = 'UnknownError'
     rateLimit = rateLimit
   }
