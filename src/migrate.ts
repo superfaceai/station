@@ -1,10 +1,10 @@
 import { assertMapDocumentNode, EXTENSIONS } from '@superfaceai/ast';
 import { parseMap, Source } from '@superfaceai/parser';
-import { localMaps, readFile } from './util';
-import { join as joinPath, resolve } from 'path';
-
 import * as fs from 'fs';
+import { join as joinPath, resolve } from 'path';
 import { promisify } from 'util';
+
+import { localMaps, readFile } from './util';
 
 const readDir = promisify(fs.readdir);
 const writeFile = promisify(fs.writeFile);
@@ -23,7 +23,7 @@ export async function run(): Promise<void> {
       throw Error(map);
     }
 
-    const [scope, profileName, _, provider] = parts;
+    const [scope, profileName, , provider] = parts;
 
     const ast = assertMapDocumentNode(
       parseMap(new Source(await readFile(map)))
@@ -58,7 +58,7 @@ export async function run(): Promise<void> {
         const files = await readDir(recordingsDir);
 
         for (const file of files) {
-          const content = JSON.parse(
+          const content: unknown = JSON.parse(
             await readFile(resolve(joinPath(recordingsDir, file)))
           );
           const hash = file.split('-')[1].split('.json')[0];
