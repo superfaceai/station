@@ -1,6 +1,5 @@
 /* eslint-disable jest/no-export */
 import { SuperfaceTest } from '@superfaceai/testing';
-import { RecordingType } from '@superfaceai/testing/dist/nock/recording.interfaces';
 
 import { nockConfig } from '../../../test-config';
 
@@ -34,7 +33,7 @@ export const followersTest = (provider: string): void => {
               useCase: 'GetProfilesForPublishing',
               input: {},
             },
-            { recordingType: RecordingType.PREPARE }
+            { prepare: true }
           );
 
           expect(result.isOk()).toBeTruthy();
