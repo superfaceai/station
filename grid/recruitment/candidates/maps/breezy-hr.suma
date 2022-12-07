@@ -116,6 +116,7 @@ operation CreateCandidate {
   ]
 
   links = {}
+  customAttributes = []
 
   candidate = args.candidate
 
@@ -123,7 +124,10 @@ operation CreateCandidate {
     if (supportedSocialProfiles.includes(link.name)) {
       links[link.name] = link.url
     } else {
-      links['globe'] = link.url
+      customAttributes.push({ 
+        name: link.name, 
+        value: link.url
+      })
     }
   })
 
@@ -158,6 +162,7 @@ operation CreateCandidate {
         })) : undefined
         
         social_profiles = links
+        custom_attributes = customAttributes
         
         origin = 'applied'
       }
