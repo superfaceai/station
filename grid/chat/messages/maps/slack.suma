@@ -5,10 +5,22 @@ provider = "slack"
 GetMessages map
 """
 map GetMessages {
-  http GET "/conversations.history" {
+  endpoint = "history"
+
+  set if (input.listThreadMessages) {
+    endpoint = "replies"
+  }
+
+  return map error if (input.listThreadMessages && input.threadId === undefined) {
+    title = "Invalid input"
+    detail = "To list thread messages, specify threadId in input."
+  }
+
+  http GET "/conversations.{endpoint}" {
     request "application/x-www-form-urlencoded" {
       query {
         channel = input.destination
+        ts = input.threadId
         latest = input.beforeTimestamp
         oldest = input.afterTimestamp
         cursor = input.page
@@ -32,6 +44,7 @@ map GetMessages {
       messages = call MapMessages(
         messages = body.messages,
         destination = input.destination,
+        isThreadEndpoint = input.threadId !== undefined
       )
 
       rateLimit = call MapRateLimitDetails(headers = headers)
@@ -68,6 +81,15 @@ operation MapMessages {
         text: message.text,
         createdAt: parseFloat(message.ts) * 1000,
       }
+      
+      if (message.thread_ts) {
+        resultMessage.hasThread = true;
+        resultMessage.threadId = message.thread_ts;
+
+        if (args.isThreadEndpoint && (message.ts === message.thread_ts)) {
+          return acc;
+        }
+      }
   
       let author, reactions = [], attachments = [];
   
@@ -78,11 +100,6 @@ operation MapMessages {
         };
   
         resultMessage.author = author;
-      }
-  
-      if (message.thread_ts) {
-        resultMessage.hasThread = true;
-        resultMessage.threadId = message.thread_ts;
       }
   
       if (message.edited) {
@@ -115,7 +132,9 @@ operation MapMessages {
           return attachAcc;
 		    }, []);
   
-        resultMessage.attachments = attachments;
+        if (attachments.length > 0) {
+          resultMessage.attachments = attachments;
+        }
       }
   
       // TODO: implement composing URL
