@@ -1,0 +1,66 @@
+profile = "language/keyword-extraction@1.0"
+provider = "ibm-cloud-natural-language-understanding"
+
+map ExtractKeywords { 
+  http POST "/instances/{parameters.INSTANCE_ID}/v1/analyze?version=2022-04-07" {
+    security "basic"
+  
+    request "application/json" {
+      body {
+        text = input.text
+        language = input.languageCode
+        features = {
+          "keywords": {
+            "sentiment": false,
+            "emotion": false,
+          }
+        }
+      }
+    }
+  
+    response 200 "application/json" {
+      keywords = call foreach(keyword of body.keywords) MapKeyword(
+        keyword = keyword
+      )
+
+      map result {
+        keywords = keywords
+      }
+    }
+  
+    response 400 "application/json" {
+      map error {
+        title = "Unsuccessful Extraction",
+        detail = body.error,
+      }
+    }
+
+    response 401 "application/json" {
+      map error {
+        title = "Unauthorized",
+        detail = body.error,
+      }
+    }
+
+    response 403 "application/json" {
+      map error {
+        title = "Forbidden Resource",
+        detail = body.error,
+      }
+    }
+
+    response 500 {
+      map error {
+        title = "Problem on IBM's side",
+        detail = "",
+      }
+    }
+  }
+}
+
+operation MapKeyword {
+  return {
+    text = args.keyword.text,
+    importance = args.keyword.relevance,
+  }
+} 
