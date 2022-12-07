@@ -1,0 +1,232 @@
+"""
+Manage jobs
+List, get and manage jobs and job positions of your company.
+"""
+
+name = "recruitment/jobs"
+version = "1.0.0"
+
+"""
+List jobs
+Returns a paginated collection of your company jobs.
+"""
+usecase ListJobs {
+
+  input {
+    """
+    State
+    The state to filter jobs with.
+    """
+    state JobState
+    """
+    Page
+    Pagination cursor (obtained from `previousPage` or `nextPage`).
+    """
+    page string
+    """
+    Page limit
+    Maximum number of jobs returned in single page.
+    """
+    limit number
+  }
+
+  result {
+    """
+    Jobs
+    List of jobs.
+    """
+    jobs [Job!]!
+    """
+    Pagination
+    The pagination state.
+    """
+    pagination Pagination
+    """
+    Rate limit
+    Rate limit details.
+    """
+    rateLimit RateLimit
+  }
+
+  error Error
+
+  example Successful {
+    input {
+      state = 'published'
+    }
+
+    result {
+      jobs = [ {
+          id = 'JOB_ID',
+          name = 'Software engineer',
+          description = 'We are looking for a Software Engineer who will assist us with design, development and installation of software solutions. Your duties will include development, writing code, and documenting functionality.',
+        }
+      ]
+    }
+  }
+
+  example Failed {
+    input {
+      limit = -1
+    }
+
+    error {
+      title = 'Bad request'
+      detail = 'Page limit must be a positive integer.'
+      code = 'BadRequest'
+      rateLimit = {
+        bucket = 'workable'
+      }
+    }
+  }
+
+}
+
+model Job {
+  """
+  Job ID
+  Unique identifier of the job.
+  """
+  id! string!
+  """
+  Job name
+  The name of the job.
+  """
+  name! string!
+  """
+  Job description
+  The description of the job.
+  """
+  description string
+  """
+  Job state
+  The state of the job.
+  """
+  state JobState
+  """
+  Department
+  The name of the department that opened the job.
+  """
+  departmentName string
+  """
+  Requirements
+  The requirements of the job for the candidate.
+  """
+  requirements [string]
+  """
+  Benefits
+  The benefits of the job for the candidate.
+  """
+  benefits [string]
+  """
+  Job creation date
+  The timestamp when was the job created in ISO8601 format.
+  """
+  createdAt string
+}
+
+model JobState enum {
+  DRAFT = 'draft',
+  PUBLISHED = 'published',
+  CLOSED = 'closed',
+  ARCHIVED = 'archived'
+}
+
+model Pagination {
+  """
+  Previous page
+  Previous page cursor.
+  """
+  previousPage
+
+  """
+  Next page
+  Next page cursor.
+  """
+  nextPage
+}
+
+model Error {
+  """
+  Error Title
+  A short, human-readable summary of the problem type.
+  """
+  title!
+  """
+  Error Detail
+  A human-readable explanation specific to this occurrence of the problem.
+  """
+  detail
+  """
+  Code
+  Error code.
+  """
+  code! ErrorCode!
+  """
+  Rate limit
+  Rate limit details.
+  """
+  rateLimit RateLimit
+}
+
+model RateLimit {
+  """
+  Bucket
+  Different parts of API may have different rate limits.
+  Bucket identifies to which part of API the rate limits apply.
+  """
+  bucket string
+  """
+  Total requests
+  Total requests available in the time window.
+  """
+  totalRequests number
+  """
+  Remaining requests
+  Remaining requests available in the time window.
+  """
+  remainingRequests number
+  """
+  Remaining requests available in percents
+  Remaining requests available in the time window in percents.
+  """
+  remainingRequestsPercentage number
+  """
+  Reset timestamp
+  Timestamp when the rate limits will reset (in Unix Timestamp format). Available only for providers without rolling rate limit window.
+  """
+  resetTimestamp number
+}
+
+model ErrorCode enum {
+  """
+  Bad request
+  The request was invalid or cannot be otherwise served.
+  """
+  BadRequest
+  """
+  Not found
+  The jobId does not exist.
+  """
+  NotFound
+  """
+  Rate limit reached
+  Returned when a request cannot be served due to the user or app reached max requests quota.
+  """
+  RateLimitReached
+  """
+  Unauthenticated
+  There was a problem authenticating your request. Check that you are passing valid credentials.
+  """
+  Unauthenticated
+  """
+  Unauthorized
+  The request is understood, but it has been refused or access is not allowed.
+  """
+  Unauthorized
+  """
+  Unknown error
+  Returned when an unexpected error occured.
+  """
+  UnknownError
+}
