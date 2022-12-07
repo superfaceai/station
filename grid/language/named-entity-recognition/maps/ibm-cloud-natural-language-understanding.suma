@@ -1,0 +1,98 @@
+profile = "language/named-entity-recognition@1.0"
+provider = "ibm-cloud-natural-language-understanding"
+
+map NamedEntityRecognition { 
+  http POST "/instances/{parameters.INSTANCE_ID}/v1/analyze?version=2022-04-07" {
+    security "basic"
+  
+    request "application/json" {
+      body {
+        text = input.text
+        language = input.languageCode
+        features = {
+          "entities": {
+            "sentiment": false,
+            "mentions": false,
+            "emotion": false,
+          }
+        }
+      }
+    }
+
+    response 200 "application/json" {
+      entities = call foreach(entity of body.entities) MapEntity(
+        entity = entity
+      )
+
+      map result {
+        entities = entities
+      }
+    }
+
+    response 400 "application/json" {
+      map error {
+        title = "Unsuccessful Recognition",
+        detail = body.error,
+      }
+    }
+
+    response 401 "application/json" {
+      map error {
+        title = "Unauthorized",
+        detail = body.error,
+      }
+    }
+
+    response 403 "application/json" {
+      map error {
+        title = "Forbidden Resource",
+        detail = body.error,
+      }
+    }
+
+    response 500 {
+      map error {
+        title = "Problem on IBM's side",
+        detail = String(body),
+      }
+    }
+  }
+}
+
+operation MapEntity {
+  return {
+    text = args.entity.text,
+    category = call MapEntityCategory(ibmType = args.entity.type),
+    importance = args.entity.relevance,
+  }
+}
+
+
+operation MapEntityCategory {
+  IBM_TO_PROFILE_MAPPING = {
+    "Date": "Date",
+    "Duration": "Duration",
+    "EmailAddress": "EmailAddress",
+    "Facility": "Facility",
+    "GeographicFeature": "GeographicFeature",
+    "Hashtag": "Hashtag",
+    "IPAddress": "IPAddress",
+    "JobTitle": "JobTitle",
+    "Location": "Location",
+    "Measure": "Measure",
+    "Money": "Money",
+    "Number": "Number",
+    "Ordinal": "Ordinal",
+    "Organization": "Organization",
+    "Percent": "Percent",
+    "Person": "Person",
+    "PhoneNumber": "PhoneNumber",
+    "Time": "Time",
+    "TwitterHandle": "TwitterHandle",
+    "URL": "URL"
+  }
+
+  FALLBACK_CATEGORY = "Unknown"
+
+  return IBM_TO_PROFILE_MAPPING[args.ibmType] || FALLBACK_CATEGORY
+}
