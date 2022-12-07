@@ -1,0 +1,180 @@
+profile = "recruitment/candidates@1.0"
+provider = "workable"
+
+map CreateCandidate {
+  http POST "/spi/v3/jobs/{input.jobId}/candidates" {
+    security "bearer_token"
+
+    request {
+      query {
+        stage = input.stageId || 'applied'
+      }
+
+      headers {
+        'X-WORKABLE-CLIENT-ID' = parameters.CLIENT_ID
+      }
+
+      body {
+        firstname = input.firstName
+        lastname = input.lastName
+
+        email = input.email
+        address = input.address
+        phone = input.phone
+
+        education_entries = input.education ? input.education.map(edu => ({
+          school: edu.school,
+          degree: edu.degree,
+          field_of_study: edu.fieldOfStudy,
+          start_date: edu.startedAt,
+          end_date: edu.endedAt,
+        })) : undefined
+        
+        experience_entries = input.workExperience ? input.workExperience.map(work => ({
+          title: work.position,
+          summary: work.summary,
+          company: work.company,
+          industry: work.industry,
+          current: work.current,
+          start_date: work.startedAt,
+          end_date: work.endedAt,
+        })) : undefined
+        
+        answers = input.answers ? input.answers.map(answer => {
+          const question_key = answer.questionId;
+
+          switch (answer.type) {
+            case 'text':
+            case 'textarea':
+              return { question_key: question_key, body: answer.value };
+            case 'number':
+              return { question_key: question_key, value: answer.value };
+            case 'boolean':
+              return { question_key: question_key, checked: answer.value };
+            case 'multiple_choice':
+            case 'multiple_select':
+              return { question_key: question_key, choices: answer.value };
+            case 'date':
+              return { question_key: question_key, date: answer.value };
+            case 'file':
+              return { question_key: question_key, file_url: answer.value };
+          }
+        }) : undefined
+        
+        social_profiles = input.links ? input.links.map(link => ({
+          type: link.name,
+          url: link.url
+        })) : undefined
+
+        resumeUrl = input.cv ? input.cv.url ? input.cv.url : undefined : undefined
+        resume = input.cv ? input.cv.data ? input.cv : undefined : undefined
+      }
+    }
+
+    response 201 "application/json" {
+      map result {
+        id = body.candidate.id
+        jobId = body.candidate.job.shortcode
+      }
+    }
+
+    response "application/json" {
+      error = call MapWorkableError(
+        statusCode = statusCode,
+        error = body.error,
+        headers = headers
+      )
+      
+      map error error
+    }
+
+    response {
+      map error {
+        title = "Unknown error"
+        detail = JSON.stringify(body, null, 2)
+        code = 'UnknownError'
+      }
+    }
+  }
+}
+
+// Workable rate limits docs: https://workable.readme.io/reference/rate-limits
+operation MapRateLimit {
+  totalRequests = parseInt(args.headers['x-rate-limit-limit'], 10)
+  remainingRequests = parseInt(args.headers['x-rate-limit-remaining'], 10)
+  remainingRequestsPercentage = undefined
+  resetTimestamp = parseInt(args.headers['x-rate-limit-reset'], 10)
+
+  set if(isNaN(totalRequests)) {
+    totalRequests = undefined
+  }
+
+  set if(isNaN(remainingRequests)) {
+    remainingRequests = undefined
+  }
+
+  set if(totalRequests > 0 && remainingRequests !== undefined) {
+    remainingRequestsPercentage = remainingRequests / totalRequests * 100
+  }
+
+  set if(isNaN(resetTimestamp, 10)) {
+    resetTimestamp = undefined
+  }
+
+  return {
+    bucket = 'workable'
+    totalRequests = totalRequests
+    remainingRequests = remainingRequests
+    remainingRequestsPercentage = remainingRequestsPercentage
+    resetTimestamp = resetTimestamp
+  }
+}
+
+operation MapWorkableError {
+  statusCode = args.statusCode
+  workableError = args.error
+
+  rateLimit = call MapRateLimit(headers = args.headers)
+
+  return if (statusCode === 400) {
+    title = 'Bad request'
+    detail = workableError
+    code = 'BadRequest'
+    rateLimit = rateLimit
+  }
+
+  return if (statusCode === 401) {
+    title = 'Unauthenticated'
+    detail = workableError
+    code = 'Unauthenticated'
+    rateLimit = rateLimit
+  }
+
+  return if (statusCode === 403) {
+    title = 'Unauthorized'
+    detail = workableError
+    code = 'Unauthorized'
+    rateLimit = rateLimit
+  }
+
+  return if (statusCode === 404) {
+    title = 'Not found'
+    detail = workableError
+    code = 'NotFound'
+    rateLimit = rateLimit
+  }
+
+  return if (statusCode === 429) {
+    title = 'Rate limit exceeded'
+    detail = 'You reached max requests quota.'
+    code = 'RateLimitReached'
+    rateLimit = rateLimit
+  }
+
+  return {
+    title = "Unknown error"
+    detail = workableError
+    code = 'UnknownError'
+    rateLimit = rateLimit
+  }
+}
