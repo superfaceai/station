@@ -2,6 +2,7 @@
 
 import { describe, expect } from '@jest/globals';
 import { SuperfaceTest } from '@superfaceai/testing';
+
 import { nockConfig } from '../../../test-config';
 
 export function listProductsTest(providerName: string): void {

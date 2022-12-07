@@ -4,6 +4,7 @@ import {
   SuperfaceTest,
   SuperfaceTestRun,
 } from '@superfaceai/testing';
+
 import { nockConfig } from '../../../test-config';
 
 type ProfilesResult = Array<{ id: string; name: string }>;
