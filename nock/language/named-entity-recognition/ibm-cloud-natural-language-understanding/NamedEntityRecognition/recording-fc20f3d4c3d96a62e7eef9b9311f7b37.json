@@ -1,0 +1,110 @@
+[
+  {
+    "scope": "https://api.PARAMS_REGION.natural-language-understanding.watson.cloud.ibm.com:443",
+    "method": "POST",
+    "path": "/instances/PARAMS_INSTANCE_ID/v1/analyze?version=2022-04-07",
+    "body": {
+      "text": "Společnost Houston Natural Gas, kterou vede Kenneth Lay, se spojuje se společností InterNorth, plynárenskou společností v Omaze v Nebrasce, za účelem vytvoření mezistátního a vnitrostátního plynovodu na zemní plyn s přibližně 37 000 mil plynovodu.",
+      "language": "cs",
+      "features": {
+        "entities": {
+          "sentiment": false,
+          "mentions": false,
+          "emotion": false
+        }
+      }
+    },
+    "status": 200,
+    "response": {
+      "usage": {
+        "text_units": 1,
+        "text_characters": 247,
+        "features": 1
+      },
+      "language": "cs",
+      "entities": [
+        {
+          "type": "Organization",
+          "text": "Houston Natural Gas",
+          "relevance": 0,
+          "count": 1,
+          "confidence": 0.998291
+        },
+        {
+          "type": "Organization",
+          "text": "InterNorth",
+          "relevance": 0,
+          "count": 1,
+          "confidence": 0.994626
+        },
+        {
+          "type": "Measure",
+          "text": "37 000 mil plynovodu",
+          "relevance": 0,
+          "count": 1,
+          "confidence": 0.990493
+        },
+        {
+          "type": "Person",
+          "text": "Kenneth Lay",
+          "relevance": 0,
+          "count": 1,
+          "confidence": 0.975006
+        },
+        {
+          "type": "Organization",
+          "text": "Omaze",
+          "relevance": 0,
+          "count": 1,
+          "confidence": 0.966288
+        },
+        {
+          "type": "Location",
+          "text": "Nebrasce",
+          "relevance": 0,
+          "count": 1,
+          "confidence": 0.769799
+        }
+      ]
+    },
+    "rawHeaders": [
+      "Server",
+      "watson-gateway",
+      "Content-Length",
+      "965",
+      "Content-Type",
+      "application/json; charset=utf-8",
+      "Cache-Control",
+      "no-cache, no-store",
+      "x-dp-watson-tran-id",
+      "df6cce7b-efc5-4bbb-8b4c-2fa57e0abd58",
+      "Content-Security-Policy",
+      "default-src 'none'",
+      "Pragma",
+      "no-cache",
+      "x-content-type-options",
+      "nosniff",
+      "x-frame-options",
+      "DENY",
+      "x-xss-protection",
+      "1; mode=block",
+      "strict-transport-security",
+      "max-age=31536000; includeSubDomains;",
+      "x-dp-watson-tran-id",
+      "df6cce7b-efc5-4bbb-8b4c-2fa57e0abd58",
+      "x-request-id",
+      "df6cce7b-efc5-4bbb-8b4c-2fa57e0abd58",
+      "x-global-transaction-id",
+      "df6cce7b-efc5-4bbb-8b4c-2fa57e0abd58",
+      "X-EdgeConnect-MidMile-RTT",
+      "10",
+      "X-EdgeConnect-Origin-MEX-Latency",
+      "181",
+      "Date",
+      "Tue, 06 Dec 2022 20:58:46 GMT",
+      "Connection",
+      "close"
+    ],
+    "responseIsBinary": false
+  }
+]
