@@ -2,15 +2,20 @@
 
 import { SuperfaceTest } from '@superfaceai/testing';
 
+import { nockConfig } from '../../../test-config';
+
 export const keywordExtractionTest = (provider: string): void => {
   describe(`language/keyword-extraction/${provider}`, () => {
     let superface: SuperfaceTest;
 
     beforeEach(() => {
-      superface = new SuperfaceTest({
-        profile: 'language/keyword-extraction',
-        provider,
-      });
+      superface = new SuperfaceTest(
+        {
+          profile: 'language/keyword-extraction',
+          provider,
+        },
+        nockConfig
+      );
     });
 
     describe('ExtractKeywords', () => {

@@ -1,0 +1,229 @@
+{
+  "language/keyword-extraction/ibm-cloud-natural-language-understanding/ExtractKeywords": {
+    "ae4f9cabdfd737462f0d58357baca534": [
+      {
+        "scope": "https://api.PARAMS_REGION.natural-language-understanding.watson.cloud.ibm.com:443",
+        "method": "POST",
+        "path": "/instances/PARAMS_INSTANCE_ID/v1/analyze?version=2022-04-07",
+        "body": {
+          "text": "Artificial Intelligence (AI) is making its way into everyday developer life, but the use of AI along the API lifecycle is yet to be improved",
+          "features": {
+            "keywords": {
+              "sentiment": false,
+              "emotion": false
+            }
+          }
+        },
+        "status": 200,
+        "response": {
+          "usage": {
+            "text_units": 1,
+            "text_characters": 140,
+            "features": 1
+          },
+          "language": "en",
+          "keywords": [
+            {
+              "text": "Artificial Intelligence",
+              "relevance": 0.999628,
+              "count": 1
+            },
+            {
+              "text": "everyday developer life",
+              "relevance": 0.664127,
+              "count": 1
+            },
+            {
+              "text": "way",
+              "relevance": 0.632349,
+              "count": 1
+            },
+            {
+              "text": "use of AI",
+              "relevance": 0.29227,
+              "count": 1
+            },
+            {
+              "text": "API lifecycle",
+              "relevance": 0.160556,
+              "count": 1
+            }
+          ]
+        },
+        "rawHeaders": [
+          "Server",
+          "watson-gateway",
+          "Content-Length",
+          "582",
+          "Content-Type",
+          "application/json; charset=utf-8",
+          "Cache-Control",
+          "no-cache, no-store",
+          "x-dp-watson-tran-id",
+          "7376dbf4-12c7-40bb-8777-2824612d8771",
+          "Content-Security-Policy",
+          "default-src 'none'",
+          "Pragma",
+          "no-cache",
+          "x-content-type-options",
+          "nosniff",
+          "x-frame-options",
+          "DENY",
+          "x-xss-protection",
+          "1; mode=block",
+          "strict-transport-security",
+          "max-age=31536000; includeSubDomains;",
+          "x-dp-watson-tran-id",
+          "7376dbf4-12c7-40bb-8777-2824612d8771",
+          "x-request-id",
+          "7376dbf4-12c7-40bb-8777-2824612d8771",
+          "x-global-transaction-id",
+          "7376dbf4-12c7-40bb-8777-2824612d8771",
+          "X-EdgeConnect-MidMile-RTT",
+          "10",
+          "X-EdgeConnect-Origin-MEX-Latency",
+          "76",
+          "Date",
+          "Tue, 06 Dec 2022 21:08:05 GMT",
+          "Connection",
+          "close"
+        ],
+        "responseIsBinary": false
+      }
+    ],
+    "992ebb703de3caeb1e48ef43483e817f": [
+      {
+        "scope": "https://api.PARAMS_REGION.natural-language-understanding.watson.cloud.ibm.com:443",
+        "method": "POST",
+        "path": "/instances/PARAMS_INSTANCE_ID/v1/analyze?version=2022-04-07",
+        "body": {
+          "text": "Je moje auto uzamčeno?",
+          "language": "cs",
+          "features": {
+            "keywords": {
+              "sentiment": false,
+              "emotion": false
+            }
+          }
+        },
+        "status": 200,
+        "response": {
+          "usage": {
+            "text_units": 1,
+            "text_characters": 22,
+            "features": 1
+          },
+          "language": "cs",
+          "keywords": [
+            {
+              "text": "auto",
+              "relevance": 0.5,
+              "count": 1
+            }
+          ]
+        },
+        "rawHeaders": [
+          "Server",
+          "watson-gateway",
+          "Content-Length",
+          "202",
+          "Content-Type",
+          "application/json; charset=utf-8",
+          "Cache-Control",
+          "no-cache, no-store",
+          "x-dp-watson-tran-id",
+          "696b6f5b-5e68-499b-8477-0efe88272983",
+          "Content-Security-Policy",
+          "default-src 'none'",
+          "Pragma",
+          "no-cache",
+          "x-content-type-options",
+          "nosniff",
+          "x-frame-options",
+          "DENY",
+          "x-xss-protection",
+          "1; mode=block",
+          "strict-transport-security",
+          "max-age=31536000; includeSubDomains;",
+          "x-dp-watson-tran-id",
+          "696b6f5b-5e68-499b-8477-0efe88272983",
+          "x-request-id",
+          "696b6f5b-5e68-499b-8477-0efe88272983",
+          "x-global-transaction-id",
+          "696b6f5b-5e68-499b-8477-0efe88272983",
+          "X-EdgeConnect-MidMile-RTT",
+          "10",
+          "X-EdgeConnect-Origin-MEX-Latency",
+          "84",
+          "Date",
+          "Tue, 06 Dec 2022 21:08:06 GMT",
+          "Connection",
+          "close"
+        ],
+        "responseIsBinary": false
+      }
+    ],
+    "87c9e9f13f138efa20366525f63fa0d9": [
+      {
+        "scope": "https://api.PARAMS_REGION.natural-language-understanding.watson.cloud.ibm.com:443",
+        "method": "POST",
+        "path": "/instances/PARAMS_INSTANCE_ID/v1/analyze?version=2022-04-07",
+        "body": {
+          "text": "iuzvahejnfuzubaáýzhj",
+          "language": "nonsense",
+          "features": {
+            "keywords": {
+              "sentiment": false,
+              "emotion": false
+            }
+          }
+        },
+        "status": 400,
+        "response": {
+          "language": "sq",
+          "error": "unsupported text language: sq",
+          "code": 400
+        },
+        "rawHeaders": [
+          "Server",
+          "watson-gateway",
+          "Content-Length",
+          "81",
+          "Content-Type",
+          "application/json; charset=utf-8",
+          "Cache-Control",
+          "no-cache, no-store",
+          "x-dp-watson-tran-id",
+          "c3edddf8-efc3-4bfd-a26f-43a41cdae368",
+          "Content-Security-Policy",
+          "default-src 'none'",
+          "Pragma",
+          "no-cache",
+          "x-content-type-options",
+          "nosniff",
+          "x-frame-options",
+          "DENY",
+          "x-xss-protection",
+          "1; mode=block",
+          "strict-transport-security",
+          "max-age=31536000; includeSubDomains;",
+          "x-dp-watson-tran-id",
+          "c3edddf8-efc3-4bfd-a26f-43a41cdae368",
+          "x-request-id",
+          "c3edddf8-efc3-4bfd-a26f-43a41cdae368",
+          "x-global-transaction-id",
+          "c3edddf8-efc3-4bfd-a26f-43a41cdae368",
+          "X-EdgeConnect-MidMile-RTT",
+          "10",
+          "X-EdgeConnect-Origin-MEX-Latency",
+          "45",
+          "Date",
+          "Tue, 06 Dec 2022 21:08:06 GMT",
+          "Connection",
+          "close"
+        ],
+        "responseIsBinary": false
+      }
+    ]
+  }
+}
