@@ -1,0 +1,493 @@
+"""
+Manage Candidates
+Fetch, list and create candidates in ATS (Applicant Tracking System).
+"""
+name = "recruitment/candidates"
+version = "1.0.0"
+
+"""
+Create Candidate
+Creates an application for specific job. The candidate may (depends on the provider implementation) receive notification that her/his application was successfully accepted by the company.
+"""
+usecase CreateCandidate {
+
+  input {
+    """
+    Job Id
+    Id of a job, to which candidate applies to.
+    """
+    jobId! string!
+
+    """
+    First Name
+    First name of a candidate.
+    """
+    firstName! string!
+
+    """
+    Last Name
+    Last name of a candidate.
+    """
+    lastName! string!
+
+    """
+    Email
+    Email of a candidate.
+    """
+    email! string!
+
+    """
+    Phone
+    Phone number of a candidate.
+    """
+    phone string
+
+    """
+    Address
+    Address of a candidate.
+    """
+    address string	
+
+    """
+    Education
+    Array of education experiences.
+    """
+    education [Education]
+
+    """
+    Work Experience
+    Array of work experiences.
+    """
+    workExperience [WorkExperience]
+
+    """
+    CV (Resume)
+    Object containing either URL to a CV or data encoded in Base64 format with CV document and name with the file name.
+    """
+    cv { url string } | { name string, data string }
+
+    """
+    Links
+    Array of links to different profiles or portfolios of a candidate.
+    """
+    links [Link]
+
+    """
+    Answers
+    Array of answers to questions connected to a job that candidate applies to.
+    """
+    answers [Answer]
+
+    """
+    Stage Id
+    Unique identifier of a stage, in which candidate is in.
+    """
+    stageId string
+  }
+
+  result {
+    """
+    Id
+    Unique identifier of newly created candidate.
+    """
+    id! string!
+
+    """
+    Job Id
+    Unique identifier of a job, newly created candidate applied for.
+    """
+    jobId! string!
+    """
+    Rate limit
+    Rate limit details.
+    """
+    rateLimit RateLimit
+  }!
+
+  error Error
+
+  example Successful {
+    input {
+      jobId = 'JOB_ID'
+      firstName = 'Demo'
+      lastName = 'Testing'
+      email = 'demo_testing@fakemail.com'
+    }
+
+    result {
+      id = 'CANDIDATE_ID'
+      jobId = 'JOB_ID'
+    }
+  }
+
+  example Failed {
+    input {
+      jobId = 'NOT_EXISTING_JOB_ID'
+      firstName = 'Demo'
+      lastName = 'Testing'
+      email = 'demo_testing@fakemail.com'
+    }
+
+    error {
+      title = 'Not found'
+      detail = 'Not found'
+      code = 'NotFound'
+      rateLimit = {
+        bucket = 'workable'
+      }
+    }
+  }
+}
+
+"""
+Education
+Object representing educational experience of a candidate.
+"""
+model Education {
+  """
+  Id
+  Unique identifier of candidate's education experience.
+  """
+  id string
+  
+  """
+  School
+  Name of a school.
+  """
+  school string
+
+  """
+  Degree
+  Degree aquired by finishing candidate's education.
+  """
+  degree string
+
+  """
+  Field of Study
+  Name of a field studied in candidate's education.
+  """
+  fieldOfStudy string
+  
+  """
+  Started At
+  ISO8601 timestamp when the education started.
+  """
+  startedAt string
+
+  """
+  Ended At
+  ISO8601 timestamp when the education ended.
+  """
+  endedAt string
+}
+
+"""
+Work Experience
+Object representing work experience of a candidate.
+"""
+model WorkExperience {
+  """
+  Id
+  Unique identifier of candidate's work experience.
+  """
+  id string
+
+  """
+  Position
+  Name of position, candidate has occupied.
+  """
+  position string
+
+  """
+  Summary
+  Summary of candidate's work experience. 
+  """
+  summary string
+
+  """
+  Company
+  Name of company.
+  """
+  company string
+
+  """
+  Industry
+  Name of industry, the company worked in.
+  """
+  industry string
+
+  """
+  Current
+  Boolean representing whether candidate still work there.
+  """
+  current boolean
+
+  """
+  Started At
+  ISO8601 timestamp when candidate started working.
+  """
+  startedAt string
+
+  """
+  Ended At
+  ISO8601 timestamp when candidate stoped working.
+  """
+  endedAt string
+}
+
+"""
+Answer
+Object representing a answer to specific question from a job.
+"""
+model Answer {
+  """
+  Question Id
+  Unique identifier of a question for this answer.
+  """
+  questionId string
+
+  """
+  Type
+  Enum representing type of possible answer.
+  """
+  type enum {
+    text
+    textarea,
+    number
+    boolean
+    multiple_choice
+    multiple_select
+    date
+    file
+  }
+
+  """
+  Value
+  Value of an answer, is dependent on type of an answer.
+  """
+  value
+}
+
+"""
+Link
+Object representing a link specified by candidate.
+"""
+model Link {
+  """
+  Name
+  Descriptive name of a link to some URL.
+  """
+  name string
+
+  """
+  URL
+  Actual URL destination of the link.
+  """
+  url string
+}
+
+model Candidate {
+  """
+  Id
+  Unique identifier of a candidate
+  """
+  id! string!
+  
+  """
+  Job Id
+  Unique identifier of a job, candidate applied for.
+  """
+  jobId! string!
+
+  """
+  Job Title
+  Title of a job, candidate applied for.
+  """
+  jobTitle string
+
+  """
+  First Name
+  First name of a candidate.
+  """
+  firstName! string!
+
+  """
+  Last Name
+  Last name of a candidate.
+  """
+  lastName! string!
+
+  """
+  Full Name
+  Full name of a candidate.
+  """
+  fullName string
+
+  """
+  Email
+  Email of a candidate.
+  """
+  email! string!
+
+  """
+  Phone
+  Phone number of a candidate.
+  """
+  phone string
+
+  """
+  Address
+  Address of a candidate.
+  """
+  address string	
+
+  """
+  Links
+  Array of links specified by a candidate. Can contain links to social profiles, portfolios or other.
+  """
+  links [Link]
+
+  """
+  Experiences
+  Array of work experiences specified by a candidate.
+  """
+  experiences [WorkExperience]
+  
+  """
+  Education
+  Array of education experiences specified by a candidate.
+  """
+  education [Education]
+
+  """
+  CV (Resume)
+  Object containing either url to a CV or data of a CV.
+  """
+  cv { url string } | { name string, data string }
+
+  """
+  CV Url
+  Url pointing to CV of a candidate.
+  """
+  cvUrl string
+
+  """
+  Answers
+  Array of answers to questions connected to a job that candidate applies to.
+  """
+  answers [Answer]
+
+  """
+  Stage
+  Name of a stage, candidate is currently in.
+  """
+  stage string
+
+  """
+  Stage Changes
+  Array of stages, candidate once was in (except for current one).
+  """
+  stageChanges [string]
+
+  """
+  Created At
+  ISO8601 timestamp when was a candidate created.
+  """
+  createdAt string
+  
+  """
+  Updated At
+  ISO8601 timestamp when was a candidate lastly updated.
+  """
+  updatedAt string
+}
+
+model Error {
+  """
+  Error Title
+  A short, human-readable summary of the problem type.
+  """
+  title!
+  """
+  Error Detail
+  A human-readable explanation specific to this occurrence of the problem.
+  """
+  detail
+  """
+  Code
+  Error code.
+  """
+  code! ErrorCode!
+  """
+  Rate limit
+  Rate limit details.
+  """
+  rateLimit RateLimit
+}
+
+model RateLimit {
+  """
+  Bucket
+  Different parts of API may have different rate limits.
+  Bucket identifies to which part of API the rate limits apply.
+  """
+  bucket string
+  """
+  Total requests
+  Total requests available in the time window.
+  """
+  totalRequests number
+  """
+  Remaining requests
+  Remaining requests available in the time window.
+  """
+  remainingRequests number
+  """
+  Remaining requests available in percents
+  Remaining requests available in the time window in percents.
+  """
+  remainingRequestsPercentage number
+  """
+  Reset timestamp
+  Timestamp when the rate limits will reset (in  Unix Timestamp format). Available only for providers without rolling rate limit window.
+  """
+  resetTimestamp number
+}
+
+model ErrorCode enum {
+  """
+  Bad request
+  The request was invalid or cannot be otherwise served.
+  """
+  BadRequest
+  """
+  Not found
+  The profileId does not exist.
+  """
+  NotFound
+  """
+  Rate limit reached
+  Returned when a request cannot be served due to the user or app reached max requests quota.
+  """
+  RateLimitReached
+  """
+  Unauthenticated
+  There was a problem authenticating your request. Check that you are passing valid credentials.
+  """
+  Unauthenticated
+  """
+  Unauthorized
+  The request is understood, but it has been refused or access is not allowed.
+  """
+  Unauthorized
+  """
+  Unknown error
+  Returned when an unexpected error occured.
+  """
+  UnknownError
+  """
+  Conflict
+  The request can not be executed, it is in conflict with current state of the target resource.
+  """
+  Conflict
+}
