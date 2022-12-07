@@ -1,0 +1,88 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`language/named-entity-recognition/mock NamedEntityRecognition extracts all entities from the phrase 1`] = `
+Ok {
+  "value": Object {
+    "entities": Array [
+      Object {
+        "category": "Organization",
+        "importance": 0.954265,
+        "text": "Houston Natural Gas",
+      },
+      Object {
+        "category": "Organization",
+        "importance": 0.777889,
+        "text": "InterNorth",
+      },
+      Object {
+        "category": "Person",
+        "importance": 0.640119,
+        "text": "Kenneth Lay",
+      },
+      Object {
+        "category": "Location",
+        "importance": 0.611778,
+        "text": "Omaha, Nebraska",
+      },
+    ],
+  },
+}
+`;
+
+exports[`language/named-entity-recognition/mock NamedEntityRecognition extracts all entities from the phrase with language specified 1`] = `
+Ok {
+  "value": Object {
+    "entities": Array [
+      Object {
+        "category": "Organization",
+        "importance": 0.954265,
+        "text": "Houston Natural Gas",
+      },
+      Object {
+        "category": "Organization",
+        "importance": 0.777889,
+        "text": "InterNorth",
+      },
+      Object {
+        "category": "Person",
+        "importance": 0.640119,
+        "text": "Kenneth Lay",
+      },
+      Object {
+        "category": "Location",
+        "importance": 0.611778,
+        "text": "Omaha, Nebraska",
+      },
+    ],
+  },
+}
+`;
+
+exports[`language/named-entity-recognition/mock NamedEntityRecognition fails for unsupported language 1`] = `
+Ok {
+  "value": Object {
+    "entities": Array [
+      Object {
+        "category": "Organization",
+        "importance": 0.954265,
+        "text": "Houston Natural Gas",
+      },
+      Object {
+        "category": "Organization",
+        "importance": 0.777889,
+        "text": "InterNorth",
+      },
+      Object {
+        "category": "Person",
+        "importance": 0.640119,
+        "text": "Kenneth Lay",
+      },
+      Object {
+        "category": "Location",
+        "importance": 0.611778,
+        "text": "Omaha, Nebraska",
+      },
+    ],
+  },
+}
+`;
