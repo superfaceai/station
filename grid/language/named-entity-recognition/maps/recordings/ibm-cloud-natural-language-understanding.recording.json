@@ -1,0 +1,295 @@
+{
+  "language/named-entity-recognition/ibm-cloud-natural-language-understanding/NamedEntityRecognition": {
+    "fb9f00ef6f28036e212a3bb31e8688fd": [
+      {
+        "scope": "https://api.PARAMS_REGION.natural-language-understanding.watson.cloud.ibm.com:443",
+        "method": "POST",
+        "path": "/instances/PARAMS_INSTANCE_ID/v1/analyze?version=2022-04-07",
+        "body": {
+          "text": "Houston Natural Gas, run by Kenneth Lay merges with InterNorth, a natural gas company in Omaha, Nebraska, to form an interstate and intrastate natural gas pipeline with approximately 37,000 miles of pipeline.",
+          "features": {
+            "entities": {
+              "sentiment": false,
+              "mentions": false,
+              "emotion": false
+            }
+          }
+        },
+        "status": 200,
+        "response": {
+          "usage": {
+            "text_units": 1,
+            "text_characters": 208,
+            "features": 1
+          },
+          "language": "en",
+          "entities": [
+            {
+              "type": "Organization",
+              "text": "Houston Natural Gas",
+              "relevance": 0.954265,
+              "disambiguation": {
+                "subtype": [
+                  "Company"
+                ],
+                "name": "Houston_Natural_Gas",
+                "dbpedia_resource": "http://dbpedia.org/resource/Houston_Natural_Gas"
+              },
+              "count": 1,
+              "confidence": 0.575956
+            },
+            {
+              "type": "Organization",
+              "text": "InterNorth",
+              "relevance": 0.777889,
+              "disambiguation": {
+                "subtype": [
+                  "Company"
+                ],
+                "name": "InterNorth",
+                "dbpedia_resource": "http://dbpedia.org/resource/InterNorth"
+              },
+              "count": 1,
+              "confidence": 0.759824
+            },
+            {
+              "type": "Person",
+              "text": "Kenneth Lay",
+              "relevance": 0.640119,
+              "disambiguation": {
+                "subtype": [
+                  "BoardMember",
+                  "Criminal",
+                  "FilmActor"
+                ],
+                "name": "Kenneth_Lay",
+                "dbpedia_resource": "http://dbpedia.org/resource/Kenneth_Lay"
+              },
+              "count": 1,
+              "confidence": 0.493767
+            },
+            {
+              "type": "Location",
+              "text": "Omaha, Nebraska",
+              "relevance": 0.611778,
+              "count": 1,
+              "confidence": 0.88939
+            }
+          ]
+        },
+        "rawHeaders": [
+          "Server",
+          "watson-gateway",
+          "Content-Length",
+          "1346",
+          "Content-Type",
+          "application/json; charset=utf-8",
+          "Cache-Control",
+          "no-cache, no-store",
+          "x-dp-watson-tran-id",
+          "f1b0485b-621a-45be-bdaf-547fd7660127",
+          "Content-Security-Policy",
+          "default-src 'none'",
+          "Pragma",
+          "no-cache",
+          "x-content-type-options",
+          "nosniff",
+          "x-frame-options",
+          "DENY",
+          "x-xss-protection",
+          "1; mode=block",
+          "strict-transport-security",
+          "max-age=31536000; includeSubDomains;",
+          "x-dp-watson-tran-id",
+          "f1b0485b-621a-45be-bdaf-547fd7660127",
+          "x-request-id",
+          "f1b0485b-621a-45be-bdaf-547fd7660127",
+          "x-global-transaction-id",
+          "f1b0485b-621a-45be-bdaf-547fd7660127",
+          "X-EdgeConnect-MidMile-RTT",
+          "10",
+          "X-EdgeConnect-Origin-MEX-Latency",
+          "603",
+          "Date",
+          "Tue, 06 Dec 2022 20:58:45 GMT",
+          "Connection",
+          "close"
+        ],
+        "responseIsBinary": false
+      }
+    ],
+    "3b7c87dc3e90707cd98cede3c7ae5687": [
+      {
+        "scope": "https://api.PARAMS_REGION.natural-language-understanding.watson.cloud.ibm.com:443",
+        "method": "POST",
+        "path": "/instances/PARAMS_INSTANCE_ID/v1/analyze?version=2022-04-07",
+        "body": {
+          "text": "Společnost Houston Natural Gas, kterou vede Kenneth Lay, se spojuje se společností InterNorth, plynárenskou společností v Omaze v Nebrasce, za účelem vytvoření mezistátního a vnitrostátního plynovodu na zemní plyn s přibližně 37 000 mil plynovodu.",
+          "language": "cs",
+          "features": {
+            "entities": {
+              "sentiment": false,
+              "mentions": false,
+              "emotion": false
+            }
+          }
+        },
+        "status": 200,
+        "response": {
+          "usage": {
+            "text_units": 1,
+            "text_characters": 247,
+            "features": 1
+          },
+          "language": "cs",
+          "entities": [
+            {
+              "type": "Organization",
+              "text": "Houston Natural Gas",
+              "relevance": 0,
+              "count": 1,
+              "confidence": 0.998291
+            },
+            {
+              "type": "Organization",
+              "text": "InterNorth",
+              "relevance": 0,
+              "count": 1,
+              "confidence": 0.994626
+            },
+            {
+              "type": "Measure",
+              "text": "37 000 mil plynovodu",
+              "relevance": 0,
+              "count": 1,
+              "confidence": 0.990493
+            },
+            {
+              "type": "Person",
+              "text": "Kenneth Lay",
+              "relevance": 0,
+              "count": 1,
+              "confidence": 0.975006
+            },
+            {
+              "type": "Organization",
+              "text": "Omaze",
+              "relevance": 0,
+              "count": 1,
+              "confidence": 0.966288
+            },
+            {
+              "type": "Location",
+              "text": "Nebrasce",
+              "relevance": 0,
+              "count": 1,
+              "confidence": 0.769799
+            }
+          ]
+        },
+        "rawHeaders": [
+          "Server",
+          "watson-gateway",
+          "Content-Length",
+          "965",
+          "Content-Type",
+          "application/json; charset=utf-8",
+          "Cache-Control",
+          "no-cache, no-store",
+          "x-dp-watson-tran-id",
+          "df6cce7b-efc5-4bbb-8b4c-2fa57e0abd58",
+          "Content-Security-Policy",
+          "default-src 'none'",
+          "Pragma",
+          "no-cache",
+          "x-content-type-options",
+          "nosniff",
+          "x-frame-options",
+          "DENY",
+          "x-xss-protection",
+          "1; mode=block",
+          "strict-transport-security",
+          "max-age=31536000; includeSubDomains;",
+          "x-dp-watson-tran-id",
+          "df6cce7b-efc5-4bbb-8b4c-2fa57e0abd58",
+          "x-request-id",
+          "df6cce7b-efc5-4bbb-8b4c-2fa57e0abd58",
+          "x-global-transaction-id",
+          "df6cce7b-efc5-4bbb-8b4c-2fa57e0abd58",
+          "X-EdgeConnect-MidMile-RTT",
+          "10",
+          "X-EdgeConnect-Origin-MEX-Latency",
+          "181",
+          "Date",
+          "Tue, 06 Dec 2022 20:58:46 GMT",
+          "Connection",
+          "close"
+        ],
+        "responseIsBinary": false
+      }
+    ],
+    "d6eaee8c903845aa8e6f74d3246696d8": [
+      {
+        "scope": "https://api.PARAMS_REGION.natural-language-understanding.watson.cloud.ibm.com:443",
+        "method": "POST",
+        "path": "/instances/PARAMS_INSTANCE_ID/v1/analyze?version=2022-04-07",
+        "body": {
+          "text": "iuzvahejnfuzubaáýzhj",
+          "language": "nonsense",
+          "features": {
+            "entities": {
+              "sentiment": false,
+              "mentions": false,
+              "emotion": false
+            }
+          }
+        },
+        "status": 400,
+        "response": {
+          "language": "sq",
+          "error": "unsupported text language: sq",
+          "code": 400
+        },
+        "rawHeaders": [
+          "Server",
+          "watson-gateway",
+          "Content-Length",
+          "81",
+          "Content-Type",
+          "application/json; charset=utf-8",
+          "Cache-Control",
+          "no-cache, no-store",
+          "x-dp-watson-tran-id",
+          "735fb7c4-87dc-4915-8f40-18707af91dd8",
+          "Content-Security-Policy",
+          "default-src 'none'",
+          "Pragma",
+          "no-cache",
+          "x-content-type-options",
+          "nosniff",
+          "x-frame-options",
+          "DENY",
+          "x-xss-protection",
+          "1; mode=block",
+          "strict-transport-security",
+          "max-age=31536000; includeSubDomains;",
+          "x-dp-watson-tran-id",
+          "735fb7c4-87dc-4915-8f40-18707af91dd8",
+          "x-request-id",
+          "735fb7c4-87dc-4915-8f40-18707af91dd8",
+          "x-global-transaction-id",
+          "735fb7c4-87dc-4915-8f40-18707af91dd8",
+          "X-EdgeConnect-MidMile-RTT",
+          "10",
+          "X-EdgeConnect-Origin-MEX-Latency",
+          "91",
+          "Date",
+          "Tue, 06 Dec 2022 20:58:46 GMT",
+          "Connection",
+          "close"
+        ],
+        "responseIsBinary": false
+      }
+    ]
+  }
+}
