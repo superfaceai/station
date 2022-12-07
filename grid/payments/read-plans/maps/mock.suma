@@ -1,0 +1,34 @@
+profile = "payments/read-plans@1.0"
+provider = "mock"
+
+map GetPlan {
+  map result {
+    productId = "PROD-1192810198"
+    name = "Monthly subscription to Superface milk delivery"
+    interval = "month"
+    price = 25
+    currency = "USD"
+    state = "active"
+  }
+}
+
+map ListPlans {
+  map result {
+    plans = [
+    {
+      planId: "PLAN-89101829211",
+      name: "Monthly subscription to Superface milk delivery",
+      interval: "month",
+      price: 25,
+      currency: "USD"
+    },
+    {
+      planId: "PLAN-89101829212",
+      name: "Daily subscription to Superface pizza delivery",
+      interval: "day",
+      price: 5,
+      currency: "USD"
+    }
+  ]
+  }
+}

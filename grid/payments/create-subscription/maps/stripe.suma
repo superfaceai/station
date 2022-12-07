@@ -1,0 +1,38 @@
+profile = "payments/create-subscription@1.0"
+provider = "stripe"
+
+map CreateSubscription {
+  http POST "/v1/subscriptions" {
+    security "bearer"
+    request "application/x-www-form-urlencoded" {
+      body = {
+        customer: input.customer,
+        "items[0][price]": input.planId,
+      }
+    }
+
+    response 200 "application/json" {
+      // https://stripe.com/docs/api/subscriptions/object#subscription_object-status
+      statusMap = {
+        'incomplete': 'pending',
+        'incomplete_expired': 'expired',
+        'canceled': 'cancelled'
+      }
+
+      // TODO: linter misdetects this as a type error, remove once linter is upgraded
+      status = (() => statusMap[body.status] || body.status)();
+
+      map result {
+        subscriptionId = body.id
+        status = status
+      }
+    }
+
+    response "application/json" {
+      map error {
+        title = body.error.code
+        detail = body.error.message
+      }
+    }
+  }
+}

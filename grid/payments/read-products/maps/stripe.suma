@@ -1,0 +1,29 @@
+profile = "payments/read-products@1.0"
+provider = "stripe"
+
+map ListProducts {
+  http GET "/v1/products" {
+    security "bearer"
+    request {
+      query {
+        limit = 100
+      }
+    }
+
+    response 200 "application/json" {
+      products = call foreach (item of body.data) MapProduct(item = item)
+      return map result products
+    }
+  }
+}
+
+operation MapProduct {
+  item = args.item
+
+  return {
+    productId = item.id
+    name = item.name
+    description = item.description
+    status = item.status
+  }
+}

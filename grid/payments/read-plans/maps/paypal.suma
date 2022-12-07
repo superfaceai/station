@@ -1,0 +1,73 @@
+profile = "payments/read-plans@1.0"
+provider = "paypal"
+
+map GetPlan {
+  http GET "/v1/billing/plans/{input.planId}" {
+    security "basic"
+
+    response 200 "application/json" {
+      map result {
+        productId = body.product_id
+        name = body.name
+        state = body.status.toLowerCase()
+        interval = body.billing_cycles.length > 0 ? body.billing_cycles[0].frequency.interval_unit.toLowerCase() : undefined
+        price = body.billing_cycles.length > 0 && body.billing_cycles[0].pricing_scheme && body.billing_cycles[0].pricing_scheme.fixed_price && parseFloat(body.billing_cycles[0].pricing_scheme.fixed_price.value, 10)
+        currency = (body.billing_cycles.length > 0 && body.billing_cycles[0].pricing_scheme && body.billing_cycles[0].pricing_scheme.fixed_price) ? body.billing_cycles[0].pricing_scheme.fixed_price.currency_code : undefined
+      }
+    }
+
+    response 404 "application/json" {
+      map error {
+        title = body.message
+        detail = body.details
+        code = NotFound
+      }
+    }
+
+    response "application/json" {
+      map error {
+        title = body.message
+        detail = body.details
+        code = UnknownError
+      }
+    }
+  }
+}
+
+map ListPlans {
+  http GET "/v1/billing/plans" {
+    security "basic"
+    request {
+      query {
+        page_size = 20
+      }
+    }
+
+    response 200 "application/json" {
+      plans = call foreach (item of body.plans) MapPlan(item = item)
+
+      return map result {
+        plans = plans
+      }
+    }
+
+    response "application/json" {
+      map error {
+        title = body.message
+        detail = body.details
+        code = UnknownError
+      }
+    }
+  }
+}
+
+operation MapPlan {
+  item = args.item
+
+  return {
+    planId = item.id
+    name = item.name
+    description = item.description
+    status = item.status && item.status.toLowerCase()
+  }
+}

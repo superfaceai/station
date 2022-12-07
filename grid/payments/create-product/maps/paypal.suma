@@ -1,0 +1,35 @@
+profile = "payments/create-product@1.0"
+provider = "paypal"
+
+map CreateProduct {
+  map error if (!input.type) {
+    title = "Missing type"
+    detail = "PayPal requires `type` to be specified (one of `physical`, `digital`, `service`)."
+    code = InvalidInput
+  }
+
+  http POST "/v1/catalogs/products" {
+    security "basic"
+    request {
+      body {
+        name = input.name
+        description = input.description
+        type = input.type.toUpperCase()
+      }
+    }
+
+    response 201 "application/json" {
+      map result {
+        productId = body.id
+      }
+    }
+
+    response "application/json" {
+      map error {
+        title = body.message
+        detail = body.details
+        code = UnknownError
+      }
+    }
+  }
+}

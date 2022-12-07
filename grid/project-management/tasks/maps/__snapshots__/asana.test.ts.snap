@@ -3,8 +3,69 @@
 exports[`project-management/tasks/asana CreateTask when all inputs are correct should create a task 1`] = `
 Ok {
   "value": Object {
-    "id": "1202252122545982",
-    "url": "https://app.asana.com/0/1202159846567214/1202252122545982",
+    "assignee": "1203400160251645",
+    "description": "Description of test task",
+    "id": "1203400536546865",
+    "projects": Array [
+      "1203400042224704",
+    ],
+    "title": "Hello, World!",
+    "url": "https://app.asana.com/0/1203400042224704/1203400536546865",
+  },
+}
+`;
+
+exports[`project-management/tasks/asana DeleteTask when all inputs are correct should delete a task 1`] = `
+Ok {
+  "value": undefined,
+}
+`;
+
+exports[`project-management/tasks/asana ListTasks when all inputs are correct should read all tasks for specified project 1`] = `
+Ok {
+  "value": Array [
+    Object {
+      "id": "1203400665564495",
+      "title": "Test 3",
+    },
+    Object {
+      "id": "1203400665420392",
+      "title": "Test 2",
+    },
+    Object {
+      "id": "1203400665291557",
+      "title": "Test 1",
+    },
+  ],
+}
+`;
+
+exports[`project-management/tasks/asana ReadTask when all inputs are correct should read task specified by id 1`] = `
+Ok {
+  "value": Object {
+    "assignee": "1203400160251645",
+    "description": "Task description",
+    "id": "1203400471290778",
+    "projects": Array [
+      "1203400042224704",
+    ],
+    "title": "Test",
+    "url": "https://app.asana.com/0/1203400042224704/1203400471290778",
+  },
+}
+`;
+
+exports[`project-management/tasks/asana UpdateTask when all inputs are correct should update a task 1`] = `
+Ok {
+  "value": Object {
+    "assignee": "1203400160251645",
+    "description": "Description of test task",
+    "id": "1203400470571756",
+    "projects": Array [
+      "1203400042224704",
+    ],
+    "title": "Hello, World!",
+    "url": "https://app.asana.com/0/1203400042224704/1203400470571756",
   },
 }
 `;

@@ -1,0 +1,87 @@
+"""
+Get Information About Products
+Gets information about products in a payment system (e.g. PayPal, Stripe...)
+"""
+name = "payments/read-products"
+version = "1.0.0"
+
+"""
+List Products
+Lists existing products in a payment system.
+"""
+
+usecase ListProducts safe {
+  result [
+    {
+      """
+      Product ID
+      Unique identifier of the product the plan is for (if applicable).
+      """
+      productId! string!
+
+      """
+      Name
+      Name of the product.
+      """
+      name string!
+
+      """
+      Description
+      Description of the product.
+      """
+      description string!
+
+      """
+      Product type
+      Indicates whether the product is physical or intangible (e.g. a service, or digital goods).
+
+      Possible values:
+        - `physical`
+        - `digital`
+        - `service`
+      """
+      type enum {
+        physical,
+        digital,
+        service
+      }
+    }
+  ]
+  
+  error {
+    """
+    Title
+    A short, human-readable summary of the problem type.
+    """
+    title! string
+
+    """
+    Detail
+    A human-readable explanation specific to this occurrence of the problem.
+    """
+    detail string
+  }
+
+  example Successful {
+    result [
+      {
+        productId = "PROD-123908"
+        name = "Superface milk"
+        description = "Milk that gives you super-powers, delivered to your door."
+        type = "physical"
+      },
+      {
+        productId = "PROD-123909"
+        name = "Superface milk price monitor"
+        description = "Gives you the most up-to-date info on milk prices."
+        type = "service"
+      },
+      {
+        productId = "PROD-123910"
+        name = "Superface theme song"
+        description = "Our theme song in MP3 and FLAC format. (Features laser sharks)"
+        type = "digital"
+      }
+    ]
+  }
+}

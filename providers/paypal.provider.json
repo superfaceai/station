@@ -1,0 +1,24 @@
+{
+  "name": "paypal",
+  "services": [
+    {
+      "id": "default",
+      "baseUrl": "https://{SUBDOMAIN}.paypal.com"
+    }
+  ],
+  "parameters": [
+    {
+      "name": "SUBDOMAIN",
+      "default": "api-m",
+      "description": "API subdomain, set to 'api-m' for production, 'api-m.sandbox' for sandbox; defaults to the production API"
+    }
+  ],
+  "securitySchemes": [
+    {
+      "id": "basic",
+      "type": "http",
+      "scheme": "basic"
+    }
+  ],
+  "defaultService": "default"
+}

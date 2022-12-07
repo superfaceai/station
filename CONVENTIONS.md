@@ -10,6 +10,8 @@ This document gives coding conventions for the Superface use-cases created in [S
 - Profile SHOULD contain one usecase.
 - Usecase MUST have error defined.
 - Usecase MUST have defined safety.
+- Usecase SHOULD contain at least one example of success.
+- Usecase SHOULD contain at least one example of error.
 - Fields MUST use [required](https://superface.ai/docs/comlink/profile#RequiredField) declaration.
 - Named fields and models SHOULD NOT be used, unless they are reused. _(Better Profile rendering)_
 
