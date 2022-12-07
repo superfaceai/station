@@ -218,10 +218,6 @@ operation CheckCandidateByEmail {
       return {}
     }
 
-    response 400 {
-      return {}
-    }
-
     response "application/json" {
       error = call MapBreezyHRError(
         statusCode = statusCode,
