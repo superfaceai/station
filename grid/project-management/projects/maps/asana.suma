@@ -1,15 +1,10 @@
-profile = "project-management/projects@1.0.0"
+profile = "project-management/projects@1.0"
 provider = "asana"
 
 map ListProjects {
   http GET "/projects" {
     security "personalAccessToken"
     
-    request "application/json" {
-      headers {
-        "Authorization" = `Bearer ${parameters.accessToken}`
-      }
-    }
     
     response 200 "application/json" {
       return map result body.data.map((project) => {
