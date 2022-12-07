@@ -1,0 +1,68 @@
+{
+  "payments/create-product/paypal/CreateProduct": {
+    "4873c4e31fdb52ab0b8e5cba7cd9a727": [
+      {
+        "scope": "https://PARAMS_SUBDOMAIN.paypal.com:443",
+        "method": "POST",
+        "path": "/v1/catalogs/products",
+        "body": {
+          "name": "Superface milk",
+          "description": "Milk that gives you super-powers, delivered to your door.",
+          "type": "PHYSICAL"
+        },
+        "status": 201,
+        "response": {
+          "id": "PROD-55N37183YS9341122",
+          "name": "Superface milk",
+          "description": "Milk that gives you super-powers, delivered to your door.",
+          "create_time": "2022-11-10T08:14:46Z",
+          "links": [
+            {
+              "href": "https://api.sandbox.paypal.com/v1/catalogs/products/PROD-55N37183YS9341122",
+              "rel": "self",
+              "method": "GET"
+            },
+            {
+              "href": "https://api.sandbox.paypal.com/v1/catalogs/products/PROD-55N37183YS9341122",
+              "rel": "edit",
+              "method": "PATCH"
+            }
+          ]
+        },
+        "rawHeaders": [
+          "Connection",
+          "close",
+          "Content-Length",
+          "406",
+          "Content-Type",
+          "application/json",
+          "Server",
+          "nginx/1.14.0 (Ubuntu)",
+          "Cache-Control",
+          "max-age=0, no-cache, no-store, must-revalidate",
+          "Paypal-Debug-Id",
+          "933b79ecc041",
+          "Strict-Transport-Security",
+          "max-age=31536000; includeSubDomains",
+          "Edge-Control",
+          "max-age=0",
+          "Accept-Ranges",
+          "bytes",
+          "Date",
+          "Thu, 10 Nov 2022 08:14:46 GMT",
+          "Via",
+          "1.1 varnish",
+          "X-Served-By",
+          "cache-fra-eddf8230074-FRA",
+          "X-Cache",
+          "MISS",
+          "X-Cache-Hits",
+          "0",
+          "X-Timer",
+          "S1668068086.302032,VS0,VE580"
+        ],
+        "responseIsBinary": false
+      }
+    ]
+  }
+}

@@ -2,16 +2,20 @@
 
 import { describe, expect } from '@jest/globals';
 import { SuperfaceTest } from '@superfaceai/testing';
+import { nockConfig } from '../../../test-config';
 
 import { createProduct } from '../../create-product/maps/create-product';
 
 export async function createPlan(provider: string): Promise<string> {
   const productId = await createProduct(provider);
 
-  const superfaceCreatePlanProfile = new SuperfaceTest({
-    profile: 'payments/create-plan',
-    provider,
-  });
+  const superfaceCreatePlanProfile = new SuperfaceTest(
+    {
+      profile: 'payments/create-plan',
+      provider,
+    },
+    nockConfig
+  );
   const result = await superfaceCreatePlanProfile.run(
     {
       useCase: 'CreatePlan',
@@ -26,6 +30,7 @@ export async function createPlan(provider: string): Promise<string> {
     },
     {
       hideInput: ['productId'],
+      prepare: true
     }
   );
 
@@ -37,11 +42,13 @@ export function createPlanTest(providerName: string): void {
     let superface: SuperfaceTest;
 
     beforeEach(() => {
-      superface = new SuperfaceTest({
-        profile: 'payments/create-plan',
-        provider: providerName,
-        testInstance: expect,
-      });
+      superface = new SuperfaceTest(
+        {
+          profile: 'payments/create-plan',
+          provider: providerName,
+        },
+        nockConfig
+      );
     });
 
     describe('CreatePlan', () => {

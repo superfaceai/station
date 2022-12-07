@@ -3,6 +3,7 @@
 import { describe, expect } from '@jest/globals';
 import { SuperfaceTest } from '@superfaceai/testing';
 
+import { nockConfig } from '../../../test-config';
 import { createProduct } from '../../create-product/maps/create-product';
 
 export function deleteProductTest(providerName: string): void {
@@ -10,11 +11,13 @@ export function deleteProductTest(providerName: string): void {
     let superface: SuperfaceTest;
 
     beforeEach(() => {
-      superface = new SuperfaceTest({
-        profile: 'payments/delete-product',
-        provider: providerName,
-        testInstance: expect,
-      });
+      superface = new SuperfaceTest(
+        {
+          profile: 'payments/delete-product',
+          provider: providerName,
+        },
+        nockConfig
+      );
     });
 
     describe('DeleteProduct', () => {
