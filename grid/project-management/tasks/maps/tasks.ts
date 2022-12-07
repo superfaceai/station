@@ -20,22 +20,28 @@ const createTask = async (
   },
   testName: string
 ): Promise<string> => {
-  const superface = new SuperfaceTest({
-    profile: 'project-management/tasks',
-    provider,
-    useCase: 'CreateTask',
-  });
-
-  const result = await superface.run({
-    input: {
-      title: input.title ?? 'Test Title',
-      project: input.project ?? demoAccountParams.projectId,
-      assignee: input.assignee ?? demoAccountParams.profileId,
-      parent: input.parent,
-      description: input.description ?? 'Task description',
+  const superface = new SuperfaceTest(
+    {
+      profile: 'project-management/tasks',
+      provider,
+      useCase: 'CreateTask',
     },
-    testName,
-  });
+    nockConfig
+  );
+
+  const result = await superface.run(
+    {
+      input: {
+        title: input.title ?? 'Test Title',
+        project: input.project ?? demoAccountParams.projectId,
+        assignee: input.assignee ?? demoAccountParams.profileId,
+        parent: input.parent,
+        description: input.description ?? 'Task description',
+      },
+      testName,
+    },
+    { prepare: true }
+  );
 
   return (result.unwrap() as { id: string }).id;
 };
@@ -45,15 +51,18 @@ const deleteTask = async (
   input: { id: string },
   testName: string
 ): Promise<unknown> => {
-  const superface = new SuperfaceTest({
-    profile: 'project-management/tasks',
-    provider,
-    useCase: 'DeleteTask',
-  });
+  const superface = new SuperfaceTest(
+    {
+      profile: 'project-management/tasks',
+      provider,
+      useCase: 'DeleteTask',
+    },
+    nockConfig
+  );
 
   const result = await superface.run(
     { input, testName },
-    { hideInput: ['id'] }
+    { hideInput: ['id'], teardown: true }
   );
 
   return result.unwrap();
