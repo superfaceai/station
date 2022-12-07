@@ -10,9 +10,7 @@ const readDir = promisify(fs.readdir);
 const writeFile = promisify(fs.writeFile);
 
 export async function run(): Promise<void> {
-  const maps = (await localMaps()).filter(m =>
-    m.includes('grid/weather/current-city/maps/wttr-in.suma')
-  );
+  const maps = await localMaps();
 
   for (const map of maps) {
     // we need parts after the "grid/""
