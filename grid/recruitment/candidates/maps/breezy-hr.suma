@@ -28,6 +28,13 @@ map CreateCandidate {
   }
 }
 
+// TODO: implement this
+map GetStageChanges {
+  map result {
+    stages: []
+  }
+}
+
 // Breezy HR rate limits docs: https://developer.breezy.hr/reference/rate-limiting
 operation MapRateLimit {
   totalRequests = parseInt(args.headers['x-ratelimit-limit'], 10)
