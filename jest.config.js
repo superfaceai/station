@@ -2,5 +2,5 @@ module.exports = {
   preset: 'ts-jest',
   testEnvironment: 'node',
   rootDir: './grid',
-  setupFiles: ['<rootDir>/.jest/helpers.js'],
+  setupFiles: ['<rootDir>/../.jest/helpers.js'],
 };
