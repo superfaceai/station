@@ -1,6 +1,7 @@
 /* eslint-disable jest/no-export */
 import { SuperfaceTest } from '@superfaceai/testing';
 import { RecordingType } from '@superfaceai/testing/dist/nock/recording.interfaces';
+
 import { buildSuperfaceTest } from '../../../test-config';
 
 export const followersTest = (provider: string): void => {
