@@ -1,14 +1,15 @@
 import { SuperfaceTest } from '@superfaceai/testing';
 
+import { buildSuperfaceTest } from '../../../test-config';
+
 describe(`crypto/exchange-rate/binance}`, () => {
   let superface: SuperfaceTest;
 
   beforeEach(() => {
-    superface = new SuperfaceTest({
+    superface = buildSuperfaceTest({
       profile: 'crypto/exchange-rate',
       provider: 'binance',
       useCase: 'GetExchangeRate',
-      testInstance: expect,
     });
   });
 

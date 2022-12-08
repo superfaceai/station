@@ -2,12 +2,14 @@
 
 import { SuperfaceTest } from '@superfaceai/testing';
 
+import { buildSuperfaceTest } from '../../../test-config';
+
 export const createProjectTest = (provider: string): void => {
   describe(`project-management/projects/${provider}`, () => {
     let superface: SuperfaceTest;
 
     beforeEach(() => {
-      superface = new SuperfaceTest({
+      superface = buildSuperfaceTest({
         profile: 'project-management/projects',
         provider,
       });

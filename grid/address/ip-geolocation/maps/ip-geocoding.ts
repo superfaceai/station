@@ -1,6 +1,8 @@
 /* eslint-disable jest/no-export */
 import { RecordingProcessOptions, SuperfaceTest } from '@superfaceai/testing';
 
+import { buildSuperfaceTest } from '../../../test-config';
+
 export const ipGeolocationTest = (
   provider: string,
   recordingOptions?: RecordingProcessOptions
@@ -9,7 +11,7 @@ export const ipGeolocationTest = (
     let superfaceTest: SuperfaceTest;
 
     beforeEach(() => {
-      superfaceTest = new SuperfaceTest({
+      superfaceTest = buildSuperfaceTest({
         profile: 'address/ip-geolocation',
         provider,
       });

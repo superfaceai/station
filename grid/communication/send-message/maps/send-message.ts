@@ -2,6 +2,8 @@
 
 import { SuperfaceTest } from '@superfaceai/testing';
 
+import { buildSuperfaceTest } from '../../../test-config';
+
 export const sendMessage = (
   provider: string,
   params: { destination: string }
@@ -9,10 +11,9 @@ export const sendMessage = (
   let superface: SuperfaceTest;
 
   beforeEach(() => {
-    superface = new SuperfaceTest({
+    superface = buildSuperfaceTest({
       profile: 'communication/send-message',
       provider,
-      testInstance: expect,
     });
   });
 

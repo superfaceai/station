@@ -2,16 +2,17 @@
 
 import { SuperfaceTest } from '@superfaceai/testing';
 
+import { buildSuperfaceTest } from '../../../test-config';
+
 export const analyzePlainTextSentimentTests = (provider: string): void => {
   describe(`language/analyze-plain-text-sentiment/${provider}`, () => {
     let superface: SuperfaceTest;
 
     beforeEach(() => {
-      superface = new SuperfaceTest({
+      superface = buildSuperfaceTest({
         profile: 'language/analyze-plain-text-sentiment',
         provider,
         useCase: 'AnalyzePlainTextSentiment',
-        testInstance: expect,
       });
     });
 

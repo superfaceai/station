@@ -2,6 +2,8 @@
 
 import { RecordingProcessOptions, SuperfaceTest } from '@superfaceai/testing';
 
+import { buildSuperfaceTest } from '../../../test-config';
+
 export const textToSpeechTest = (
   provider: string,
   params: { text: string; voice: { languageCode: string } },
@@ -11,10 +13,9 @@ export const textToSpeechTest = (
     let superface: SuperfaceTest;
 
     beforeEach(() => {
-      superface = new SuperfaceTest({
+      superface = buildSuperfaceTest({
         profile: 'speech/synthesis',
         provider,
-        testInstance: expect,
       });
     });
 

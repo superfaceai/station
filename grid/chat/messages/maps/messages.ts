@@ -2,6 +2,8 @@
 
 import { RecordingProcessOptions, SuperfaceTest } from '@superfaceai/testing';
 
+import { buildSuperfaceTest } from '../../../test-config';
+
 export const getMessagesTest = (
   provider: string,
   destination: string[],
@@ -12,11 +14,10 @@ export const getMessagesTest = (
 
     describe('GetMessages', () => {
       beforeAll(() => {
-        superface = new SuperfaceTest({
+        superface = buildSuperfaceTest({
           profile: 'chat/messages',
           provider,
           useCase: 'GetMessages',
-          testInstance: expect,
         });
       });
 

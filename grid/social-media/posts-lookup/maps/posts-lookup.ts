@@ -1,6 +1,8 @@
 /* eslint-disable jest/no-export */
 import { RecordingProcessOptions, SuperfaceTest } from '@superfaceai/testing';
 
+import { buildSuperfaceTest } from '../../../test-config';
+
 type PartialResult = {
   posts: Array<{ replyId?: string; parentId?: string }>;
 };
@@ -16,7 +18,7 @@ export const postsLookupTest = (
     let superfacePostsLookup: SuperfaceTest;
 
     beforeEach(() => {
-      superfacePostsLookup = new SuperfaceTest({
+      superfacePostsLookup = buildSuperfaceTest({
         profile: 'social-media/posts-lookup',
         provider,
       });

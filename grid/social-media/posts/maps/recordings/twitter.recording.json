@@ -1,0 +1,275 @@
+{
+  "prepare-social-media/publishing-profiles/twitter/GetProfilesForPublishing": {
+    "49231c562812595e6ecc53e1f3b7c7f7": [
+      {
+        "scope": "https://api.twitter.com:443",
+        "method": "GET",
+        "path": "/2/users/me?user.fields=id%2Cname%2Cprofile_image_url%2Cusername",
+        "body": "",
+        "status": 200,
+        "response": [
+          "1f8b0800000000000000548ebd0e823014465fc5dcd9d01f4a8b8c26ba6aa27b53e08235149ab6c481f0ee767071fdce979cb3416f92816603db43034c48a94eb2e24c30ae14ab058523ccc661868febe1893161c8930fcb6027d4d69911f51aa6cc5f29f9d810e2db58a48f7563d12d8efc3d236142d525e59c8a924a2a95909c54e74b1be6fb4dcf4b70662ade7ecc8a3562f899e3ea310ca6439d7200ecfb170000ffff0300076327c7b7000000"
+        ],
+        "rawHeaders": [
+          "date",
+          "Mon, 23 May 2022 11:05:09 UTC",
+          "server",
+          "tsa_o",
+          "set-cookie",
+          "guest_id=v1%3A165330390973292749; Max-Age=34214400; Expires=Fri, 23 Jun 2023 11:05:09 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None",
+          "api-version",
+          "2.43",
+          "content-type",
+          "application/json; charset=utf-8",
+          "cache-control",
+          "no-cache, no-store, max-age=0",
+          "content-length",
+          "175",
+          "x-access-level",
+          "read-write",
+          "x-frame-options",
+          "SAMEORIGIN",
+          "content-encoding",
+          "gzip",
+          "x-xss-protection",
+          "0",
+          "x-rate-limit-limit",
+          "75",
+          "x-rate-limit-reset",
+          "1653304618",
+          "content-disposition",
+          "attachment; filename=json.json",
+          "x-content-type-options",
+          "nosniff",
+          "x-rate-limit-remaining",
+          "72",
+          "strict-transport-security",
+          "max-age=631138519",
+          "x-response-time",
+          "144",
+          "x-connection-hash",
+          "72e416b8d3c82f1016499a71ac508cde848fddb8d4118c7aad1b0c0cbc352af0",
+          "connection",
+          "close"
+        ],
+        "responseIsBinary": false,
+        "decodedResponse": {
+          "data": {
+            "id": "1466796521412771840",
+            "name": "SF Tester",
+            "profile_image_url": "https://pbs.twimg.com/profile_images/1478302204306067462/5BEbrnPO_normal.jpg",
+            "username": "superface_test"
+          }
+        }
+      }
+    ]
+  },
+  "social-media/posts/twitter/GetProfilePosts": {
+    "49231c562812595e6ecc53e1f3b7c7f7": [
+      {
+        "scope": "https://api.twitter.com:443",
+        "method": "GET",
+        "path": "/2/users/1466796521412771840/tweets?tweet.fields=id%2Ctext%2Ccreated_at%2Cattachments&expansions=attachments.media_keys&media.fields=duration_ms%2Cheight%2Cmedia_key%2Cpreview_image_url%2Ctype%2Curl%2Cwidth%2Calt_text&max_results=25",
+        "body": "",
+        "status": 200,
+        "response": [
+          "1f8b0800000000000000b497596f224710c7bfca689e7dd4d1f79b1525ab8d364a24f3b09bb585c64cdb101b86cc34c6bb16df3d353e088c39bc510071344c57fdfa5f5dd5358f7959a4220f5f1ff3141f521ef2341fa514ebe3328eab2cc526e547f9a8943f50390b8eb565a7bc7cf108f2d7a08e458a65bf68e712101d031e93eba10e4401ec0900fc992f8e96f61f2fe4db781aeb22cdea7891073ebac8af63bc6b3e8d6edb31cab88ccda01e4dd3a89ac82f17f9eff7b11e144dbac817599132348a91adb64a59bdc2674093432d18c8e82d6ee5d33df4014c407d483e2508ca76f894f3684169a3add9c3a7823ea87eca9066eaf0b152acbc361e58ede5233e289f22c6ae7ea43d393080e0692f1fd021f9d893d15dfd40a352c07209fa3d7c1cf0a0fa31b649b2ce871681b4ecbff6b5870f83c6ff9daf83c30ed10a25cae71e1c08fc0eb9a88303ef948bc0394b76359cda3b724464d17a4fdeede2935c70ef2a77ff9d4f59af2dacf3a13c8c214360ecce700a1f06f487e423ede8a9a6adf0013a36125cde175f15d0067607e543e1e9e8078280cc4ae2cc7bf4133e8083f201585adf7fb2ef1491f1868dd971dc3ef399a0de91ae3fc8b78e2319abb5045538f7a583540f546f707ad25064d77535cece6702755d0c62769e8ad673664f569c2970e03569693a983c6f5f3bf4c00586a0cc8f385b75c5d2cb48e683286cd0306f7385be271a336daada1faabaca86294d9b707a9a4e06d5e9f79f137c563f8dce3facba62297ac6b669a1246fb7ee3894060a02f965c53bca8b948ac1701c27a9c9c3633e8ee5a8e8dfc66f32fa9a73ffd9b8b6ce39b4c6919283fd72d11523cd634ca3c94d366bdaf7de73af97dd5376f6c7c77f39051024def224740ed86ee3047e0a75abca1b49dade31c3957cb306a5afd0726a5a8b6d17b4c1aa2c9d8ec9bfe41bbddd4045535eafbdaecb8e0792c654321dc9994d07f0aa071df4db8a5394cd93e575b30ced81d95610dad877ac980529146fc15b395acd5ffaeb6c5a35a97989c3baf846c421a5159257e868e722588ee84d5de2abb7d708773d58eda4b8682ff9cc6653615e7a20d128e8cdebe1359b92b2a440b4178570536fbbb42927b9dfb665a863137c5b6cda42c83b39c5a66cc3d703ee528c4c067733a96ccb6c79becbf9368d32733aac5225e666f59d8c5e13777ad59c487cc63792c0e3d3a749a7bffcfae5d34ddf7ffeedecece3c3177ff2d7f446e6cd47651ae641f2e4281fc6d1cd50704c3b58e6a598dd9c958bcb457b597bd7f59857774298fa3b163c89f3952b36dd82d5b199dda5fea09a4d8482743be721f553751b273249ee41a01c5d95936aee07f62acdf93bffcd439ed6c387dbfbe943359b4d9a2955f5fdad1be68bc53f000000ffff030070de1de5130e0000"
+        ],
+        "rawHeaders": [
+          "date",
+          "Wed, 16 Feb 2022 13:03:33 UTC",
+          "server",
+          "tsa_o",
+          "set-cookie",
+          "guest_id=v1%3A164501661312249248; Max-Age=34214400; Expires=Sun, 19 Mar 2023 13:03:33 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None",
+          "api-version",
+          "2.36",
+          "content-type",
+          "application/json; charset=utf-8",
+          "cache-control",
+          "no-cache, no-store, max-age=0",
+          "content-length",
+          "1018",
+          "x-access-level",
+          "read-write",
+          "x-frame-options",
+          "SAMEORIGIN",
+          "content-encoding",
+          "gzip",
+          "x-xss-protection",
+          "0",
+          "x-rate-limit-limit",
+          "900",
+          "x-rate-limit-reset",
+          "1645017513",
+          "content-disposition",
+          "attachment; filename=json.json",
+          "x-content-type-options",
+          "nosniff",
+          "x-rate-limit-remaining",
+          "899",
+          "strict-transport-security",
+          "max-age=631138519",
+          "x-response-time",
+          "297",
+          "x-connection-hash",
+          "f88bfe2fe081332e4269afce2b987ee1a23768707144ff430361379d73dd6a4b",
+          "connection",
+          "close"
+        ],
+        "responseIsBinary": false,
+        "decodedResponse": {
+          "data": [
+            {
+              "text": "twitter-demo test",
+              "id": "1487083573849083910",
+              "created_at": "2022-01-28T15:22:07.000Z"
+            },
+            {
+              "text": "{\"temperature\":3,\"feelsLike\":1,\"description\":\"Overcast\"} at 1643137574475",
+              "id": "1486052815202131971",
+              "created_at": "2022-01-25T19:06:15.000Z"
+            },
+            {
+              "text": "{\"temperature\":3,\"feelsLike\":1,\"description\":\"Overcast\"} at 1643137497147",
+              "id": "1486052489170456576",
+              "created_at": "2022-01-25T19:04:57.000Z"
+            },
+            {
+              "text": "{\"temperature\":3,\"feelsLike\":1,\"description\":\"Overcast\"} at 1643137462532",
+              "id": "1486052344349569034",
+              "created_at": "2022-01-25T19:04:23.000Z"
+            },
+            {
+              "text": "{\"temperature\":3,\"feelsLike\":1,\"description\":\"Overcast\"} at 1643137442317",
+              "id": "1486052259280601092",
+              "created_at": "2022-01-25T19:04:02.000Z"
+            },
+            {
+              "text": "{\"temperature\":3,\"feelsLike\":1,\"description\":\"Overcast\"} at 1643137392652",
+              "id": "1486052051440316419",
+              "created_at": "2022-01-25T19:03:13.000Z"
+            },
+            {
+              "text": "{\"temperature\":3,\"feelsLike\":1,\"description\":\"Overcast\"} at 1643137311375",
+              "id": "1486051710250455045",
+              "created_at": "2022-01-25T19:01:51.000Z"
+            },
+            {
+              "text": "{\"temperature\":3,\"feelsLike\":1,\"description\":\"Overcast\"}",
+              "id": "1486051381173751811",
+              "created_at": "2022-01-25T19:00:33.000Z"
+            },
+            {
+              "text": "{\"temperature\":2,\"feelsLike\":0,\"description\":\"Overcast\"} at 1643120887272",
+              "id": "1485982822271799298",
+              "created_at": "2022-01-25T14:28:07.000Z"
+            },
+            {
+              "text": "{\"temperature\":2,\"feelsLike\":0,\"description\":\"Overcast\"} at 1643120479570",
+              "id": "1485981111662620675",
+              "created_at": "2022-01-25T14:21:19.000Z"
+            },
+            {
+              "text": "{\"temperature\":2,\"feelsLike\":0,\"description\":\"Overcast\"} at 1643120258276",
+              "id": "1485980183651831811",
+              "created_at": "2022-01-25T14:17:38.000Z"
+            },
+            {
+              "text": "{\"temperature\":2,\"feelsLike\":0,\"description\":\"Overcast\"} at 1643120219800",
+              "id": "1485980022133428235",
+              "created_at": "2022-01-25T14:17:00.000Z"
+            },
+            {
+              "text": "{\"temperature\":2,\"feelsLike\":0,\"description\":\"Overcast\"} at 1643120200722",
+              "id": "1485979942269636610",
+              "created_at": "2022-01-25T14:16:41.000Z"
+            },
+            {
+              "text": "{\"temperature\":2,\"feelsLike\":0,\"description\":\"Overcast\"}",
+              "id": "1485976055580172298",
+              "created_at": "2022-01-25T14:01:14.000Z"
+            },
+            {
+              "text": "Test from Superface Station 7.",
+              "id": "1484080952548732930",
+              "created_at": "2022-01-20T08:30:46.000Z"
+            },
+            {
+              "text": "Test from Superface Station.",
+              "id": "1483839727061061633",
+              "created_at": "2022-01-19T16:32:13.000Z"
+            },
+            {
+              "text": "Goro https://t.co/zEt0X4CiSG",
+              "id": "1483386067801841665",
+              "created_at": "2022-01-18T10:29:33.000Z",
+              "attachments": {
+                "media_keys": [
+                  "3_1483385788817682432"
+                ]
+              }
+            },
+            {
+              "text": "Test tweeting using Twitter v2 API",
+              "id": "1478004858582188037",
+              "created_at": "2022-01-03T14:06:32.000Z"
+            },
+            {
+              "text": "test 10",
+              "id": "1476195653927718917",
+              "created_at": "2021-12-29T14:17:24.000Z"
+            },
+            {
+              "text": "asdfasdfasdfasdfafd",
+              "id": "1476195291019812869",
+              "created_at": "2021-12-29T14:15:58.000Z"
+            },
+            {
+              "text": "adsfasdf",
+              "id": "1476193050451980292",
+              "created_at": "2021-12-29T14:07:04.000Z"
+            },
+            {
+              "text": "testing twitter posts using API",
+              "id": "1476189245412941829",
+              "created_at": "2021-12-29T13:51:57.000Z"
+            },
+            {
+              "text": "testing Twitter API",
+              "id": "1476175897959055361",
+              "created_at": "2021-12-29T12:58:54.000Z"
+            },
+            {
+              "text": "test3",
+              "id": "1476140824001929216",
+              "created_at": "2021-12-29T10:39:32.000Z"
+            },
+            {
+              "text": "test2",
+              "id": "1476140097229799431",
+              "created_at": "2021-12-29T10:36:39.000Z"
+            }
+          ],
+          "includes": {
+            "media": [
+              {
+                "type": "photo",
+                "url": "https://pbs.twimg.com/media/FJYLg_9XMAAIxY9.jpg",
+                "width": 800,
+                "height": 600,
+                "media_key": "3_1483385788817682432"
+              }
+            ]
+          },
+          "meta": {
+            "oldest_id": "1476140097229799431",
+            "newest_id": "1487083573849083910",
+            "result_count": 25,
+            "next_token": "7140dibdnow9c7btw3z3q3h3prhxkvpxouunsp2orvk8h"
+          }
+        }
+      }
+    ]
+  }
+}

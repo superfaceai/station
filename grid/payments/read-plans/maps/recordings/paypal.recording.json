@@ -1,0 +1,671 @@
+{
+  "payments/read-plans/paypal/GetPlan": {
+    "48091eb506c721679715e2d4b370e9fd": [
+      {
+        "scope": "https://PARAMS_SUBDOMAIN.paypal.com:443",
+        "method": "GET",
+        "path": "/v1/billing/plans/INPUT_planId",
+        "body": "",
+        "status": 200,
+        "response": [
+          "1f8b0800000000000403bd535d8fda3010fc2b959f81c4211c286f884baf481c2008addaea14f99ccde1d6d8397fa08b10fffdd650501faa5e1fda3e7abd9e9d991d1f88a84846965d3a5adda4c3d1a03f1cc674102793fbf9a7d9fbc167d2218dd195e7ae3c77ae16b7dd7893a6717c930c37231af7133ac62ec576804805ec1a6d9869df2d255358b78e396ff1663c29a61f73ac78cb9ea0746d13fa67d3493e5fe7b7587f14520af554f2964bc0175f0f385af050b27c0b01fe40f660acd08a64b4436af10255197a4e57dc1b038ab725d75580deac03ea9e491f4e34e9a7bd981c3b841b600e098813e1244e922ea55d1a17f128a369960ebf04924df5561342d5069e7d9819a809e5c0e0b8d22be170e2fd625e7c40a86b9d6baff082e24307ca9bab09abfc6e331bafb0d79ef19030ea73da21dac50e7a7cc05db07607caa168a821a80d461df099d9a30b175397ab7c399e06f5cc3b5d06634bed1dae42556827c99cf1108639df9435fc817bf1d9baeb8bb2664206058cbbd33ac804d54ee79bb0e00bc94b8fdb1ab05b2d31697dd4feec9972c2b5a5f50d66c501d66b262d32fa5babe9104cd2f7738670788ddbd83ad7d82c8a58237a167d78d42f3d24da30d9e37a17ed69f4237f5183c1b5d16fbf8401899016648d7277e0b63afca2bbbcc0232ea538679b358d149c0583a26f16437bec1cc8bfa30315c6ee273acb713109f9fbdf84a20a422af6f87f70faafad5a2ed66f79f5707c0539ae31af9d040000"
+        ],
+        "rawHeaders": [
+          "Connection",
+          "close",
+          "Content-Type",
+          "application/json",
+          "Server",
+          "nginx/1.14.0 (Ubuntu)",
+          "Cache-Control",
+          "max-age=0, no-cache, no-store, must-revalidate",
+          "Paypal-Debug-Id",
+          "f5e230d443d4c",
+          "Strict-Transport-Security",
+          "max-age=31536000; includeSubDomains",
+          "Edge-Control",
+          "max-age=0",
+          "Accept-Ranges",
+          "none",
+          "Date",
+          "Thu, 10 Nov 2022 08:14:47 GMT",
+          "Via",
+          "1.1 varnish",
+          "X-Served-By",
+          "cache-fra-eddf8230108-FRA",
+          "X-Cache",
+          "MISS",
+          "X-Cache-Hits",
+          "0",
+          "X-Timer",
+          "S1668068088.624475,VS0,VE271",
+          "Vary",
+          "Accept-Encoding",
+          "content-encoding",
+          "gzip",
+          "transfer-encoding",
+          "chunked"
+        ],
+        "responseIsBinary": false,
+        "decodedResponse": {
+          "id": "P-18R6478537701502CMNWLF5Y",
+          "product_id": "PROD-0U4400627U810321A",
+          "name": "Temporary Plan",
+          "status": "ACTIVE",
+          "usage_type": "LICENSED",
+          "billing_cycles": [
+            {
+              "pricing_scheme": {
+                "version": 1,
+                "fixed_price": {
+                  "currency_code": "USD",
+                  "value": "1234.0"
+                },
+                "create_time": "2022-11-10T08:14:47Z",
+                "update_time": "2022-11-10T08:14:47Z"
+              },
+              "frequency": {
+                "interval_unit": "MONTH",
+                "interval_count": 1
+              },
+              "tenure_type": "REGULAR",
+              "sequence": 1,
+              "total_cycles": 1
+            }
+          ],
+          "payment_preferences": {
+            "service_type": "PREPAID",
+            "auto_bill_outstanding": true,
+            "setup_fee": {
+              "currency_code": "USD",
+              "value": "0.0"
+            },
+            "setup_fee_failure_action": "CONTINUE",
+            "payment_failure_threshold": 3
+          },
+          "quantity_supported": false,
+          "create_time": "2022-11-10T08:14:47Z",
+          "update_time": "2022-11-10T08:14:47Z",
+          "links": [
+            {
+              "href": "https://api.sandbox.paypal.com/v1/billing/plans/P-18R6478537701502CMNWLF5Y",
+              "rel": "self",
+              "method": "GET",
+              "encType": "application/json"
+            },
+            {
+              "href": "https://api.sandbox.paypal.com/v1/billing/plans/P-18R6478537701502CMNWLF5Y",
+              "rel": "edit",
+              "method": "PATCH",
+              "encType": "application/json"
+            },
+            {
+              "href": "https://api.sandbox.paypal.com/v1/billing/plans/P-18R6478537701502CMNWLF5Y/deactivate",
+              "rel": "self",
+              "method": "POST",
+              "encType": "application/json"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "payments/read-plans/paypal/ListPlans": {
+    "81f704b6954adb4e9361476314319c41": [
+      {
+        "scope": "https://PARAMS_SUBDOMAIN.paypal.com:443",
+        "method": "GET",
+        "path": "/v1/billing/plans?page_size=20",
+        "body": "",
+        "status": 200,
+        "response": [
+          "1f8b0800000000000403bc965b6fda5810c7bf0af27308672ee7e6372e4e932e4e69319776b5aa5ce23674c158e0548daa7ef71d43b559a984973de4c1b27c3c9ee3ff4fff99333fa26a9597bb28fef347b4bc8be268d4f6d475dea24aaed129ed90d2b4ff269977a38ba8da6eee1e16f5c743e4bb3783364c98c83a9b126af48873892af3752199c657add121be35923db09515bb5a5eefeabc7e901da36e3fbb9926b2f2b0cbbf141febc7aaf96c78d34f6ec7c940d617db22afe5c5729f0f15625bb93652061c23c4603e48d06a59fe7df8fffb6df15912dcd775b58b3b9dbc5a5eeef2f2eed3e6fb65953f56f9ea72b15977be41e7d372255f7de9eca5774e2ade162b49b92b569f65ab7551df6f1a48af924c1e8b72911dfe39afaad57291d7cb4dd9f9badb94d1cfbf7e5efc0b948743b69aec6c4cc6394bfdf476a8dfddbc9514bf03d5d3a1726474bf4f060ca193a85f40bbad342f2f5add3dcee6decfcb7c75d11ac96d9d4bdcff220baa8d3a038cc9c69a03913d213d0459077da7ac273373cab081b4213b1bdd1c25eb2764ad05cd1363d81a357a229b15eb6ab3cdb78f7bb4c148b28f15042279426a089244e00089d2b967628bb62189f6b847d9ceb5841b83ce68e9104dadfef2e899486a17930b44f284d4102439934605e4690a060dab494392f13849d39b12b1f4da3f3c180dc04f245fa4da295652f0c1aafd79e921c8badec891653f98035ae381f664e9bd30fbbd8fe238738a0da7d7a00c019cbbda0f247d208f9e901a82a41a5800edec9526ade5823d493eee519c0d415a03d2add34e23f49f3c7a966adf93640c44f284d41024699859458a95072977a6eb86a4fe709c248f67ce32e8dbf708c848ff1996ce459203f6cde7a58620a95ea71ac48c57561b26a07143d224c7c74e2dd4bd671ebed6449a159edf933a4615ca93cf4b0d41d2655d2323b94dbb568163bd3fcb4d727c2a826922c6b5d053c6809519e04548069b8a9e971a82a4f7098327e8390b7298287df0e4f1ea36d8b38e1da663e5bc0ca39327922f75968b4743f5cd13d24390d5c98014fd030000ffff",
+          "d599c14a03410c86dfc673263399c9148ac8b6b5b4bba5bab5eaa1070f3d08228217117c7733bbe05ea60bd6ec82c7b9251f49fe3f13b0c4ce8a92c3bd90f5c56d9e2c9624bd6ed9d684b242217464079a9bb2603aadedb227550d923e3c3a591465ff26940e86794b32ef8a88bdcc4d037683ccd660350ac9a034377b52d520c9958f0e03ad03353b5052205fd4f9b9197027d649acfe4e808250ed488ed4eda946d5fce6e9d435c8e20c88427441762207400dd9e5365fa33caba5c52dc14a7e4bd256da911da8db9126468b644faa1a24b976c69185e5ce89ff61d8a71a3d493216c91c79ae0844c62879a921f7743bd124d993aa0649ebea00e8b82a6c0cd10336246ff20ac47ed58895dfc99c95c139f6af5c43564ddb7b52d720ebcab58931e2a264f2e29c92b687729d9fa38435a289be4e3f4a06a91eb84665689a89232545ea495583a4f5578122c3c2851899f1ba8fa47998834c047bb7b76293c408fc2b923da96a90f4251bb18e848e44ae19b72dc9bc02d9cdcab07c30cda2d82a27f7908ee428daded6a89a6b3a9dfaf9640f7f3fbc5cbea5abcffbf3e7718a70911e5323a0cf8d49ee2de71d80327124cbd1c6f17afc4837ab5f5c7e34e3b03f71bc3c35b7b35fc471f8fa067fce9bc5dc1b0000"
+        ],
+        "rawHeaders": [
+          "Connection",
+          "close",
+          "Content-Type",
+          "application/json",
+          "Server",
+          "nginx/1.14.0 (Ubuntu)",
+          "Cache-Control",
+          "max-age=0, no-cache, no-store, must-revalidate",
+          "Paypal-Debug-Id",
+          "7684ac386a26e",
+          "Strict-Transport-Security",
+          "max-age=31536000; includeSubDomains",
+          "Edge-Control",
+          "max-age=0",
+          "Accept-Ranges",
+          "none",
+          "Date",
+          "Thu, 10 Nov 2022 08:14:48 GMT",
+          "Via",
+          "1.1 varnish",
+          "X-Served-By",
+          "cache-fra-eddf8230093-FRA",
+          "X-Cache",
+          "MISS",
+          "X-Cache-Hits",
+          "0",
+          "X-Timer",
+          "S1668068088.059048,VS0,VE740",
+          "Vary",
+          "Accept-Encoding",
+          "content-encoding",
+          "gzip",
+          "transfer-encoding",
+          "chunked"
+        ],
+        "responseIsBinary": false,
+        "decodedResponse": {
+          "plans": [
+            {
+              "id": "P-93A89720EH2805823MMCOEXA",
+              "product_id": "PROD-1U433787M3252922X",
+              "name": "SF Product Plan2 Test",
+              "status": "ACTIVE",
+              "usage_type": "LICENSED",
+              "create_time": "2022-08-23T14:21:16Z",
+              "links": [
+                {
+                  "href": "https://api.sandbox.paypal.com/v1/billing/plans/P-93A89720EH2805823MMCOEXA",
+                  "rel": "self",
+                  "method": "GET",
+                  "encType": "application/json"
+                }
+              ]
+            },
+            {
+              "id": "P-4LL47537WS368873CMNL5RIQ",
+              "product_id": "PROD-5VL08365CC3616328",
+              "name": "A Man, A Plan, A Canal, Panama",
+              "status": "ACTIVE",
+              "usage_type": "LICENSED",
+              "create_time": "2022-10-25T12:37:54Z",
+              "links": [
+                {
+                  "href": "https://api.sandbox.paypal.com/v1/billing/plans/P-4LL47537WS368873CMNL5RIQ",
+                  "rel": "self",
+                  "method": "GET",
+                  "encType": "application/json"
+                }
+              ]
+            },
+            {
+              "id": "P-81C807936W806461MMNL5WPI",
+              "product_id": "PROD-9U3777154U664760P",
+              "name": "Temporary Plan",
+              "status": "ACTIVE",
+              "usage_type": "LICENSED",
+              "create_time": "2022-10-25T12:49:01Z",
+              "links": [
+                {
+                  "href": "https://api.sandbox.paypal.com/v1/billing/plans/P-81C807936W806461MMNL5WPI",
+                  "rel": "self",
+                  "method": "GET",
+                  "encType": "application/json"
+                }
+              ]
+            },
+            {
+              "id": "P-33181233MX9434727MNL527Q",
+              "product_id": "PROD-47X5181662865582D",
+              "name": "Temporary Plan",
+              "status": "ACTIVE",
+              "usage_type": "LICENSED",
+              "create_time": "2022-10-25T12:58:38Z",
+              "links": [
+                {
+                  "href": "https://api.sandbox.paypal.com/v1/billing/plans/P-33181233MX9434727MNL527Q",
+                  "rel": "self",
+                  "method": "GET",
+                  "encType": "application/json"
+                }
+              ]
+            },
+            {
+              "id": "P-4T2021393V162640UMNL542Q",
+              "product_id": "PROD-6BV33420EK9165114",
+              "name": "A Man, A Plan, A Canal, Panama",
+              "status": "ACTIVE",
+              "usage_type": "LICENSED",
+              "create_time": "2022-10-25T13:02:34Z",
+              "links": [
+                {
+                  "href": "https://api.sandbox.paypal.com/v1/billing/plans/P-4T2021393V162640UMNL542Q",
+                  "rel": "self",
+                  "method": "GET",
+                  "encType": "application/json"
+                }
+              ]
+            },
+            {
+              "id": "P-8BP83749DX1276913MNL543Y",
+              "product_id": "PROD-2ST80464MH106311P",
+              "name": "Temporary Plan",
+              "status": "ACTIVE",
+              "usage_type": "LICENSED",
+              "create_time": "2022-10-25T13:02:39Z",
+              "links": [
+                {
+                  "href": "https://api.sandbox.paypal.com/v1/billing/plans/P-8BP83749DX1276913MNL543Y",
+                  "rel": "self",
+                  "method": "GET",
+                  "encType": "application/json"
+                }
+              ]
+            },
+            {
+              "id": "P-0D711587F53555351MNL544Q",
+              "product_id": "PROD-2WL112323N858521C",
+              "name": "Temporary Plan",
+              "status": "ACTIVE",
+              "usage_type": "LICENSED",
+              "create_time": "2022-10-25T13:02:42Z",
+              "links": [
+                {
+                  "href": "https://api.sandbox.paypal.com/v1/billing/plans/P-0D711587F53555351MNL544Q",
+                  "rel": "self",
+                  "method": "GET",
+                  "encType": "application/json"
+                }
+              ]
+            },
+            {
+              "id": "P-3LT7030409116243HMNL55ZQ",
+              "product_id": "PROD-4SW87415NY212423X",
+              "name": "Temporary Plan",
+              "status": "ACTIVE",
+              "usage_type": "LICENSED",
+              "create_time": "2022-10-25T13:04:38Z",
+              "links": [
+                {
+                  "href": "https://api.sandbox.paypal.com/v1/billing/plans/P-3LT7030409116243HMNL55ZQ",
+                  "rel": "self",
+                  "method": "GET",
+                  "encType": "application/json"
+                }
+              ]
+            },
+            {
+              "id": "P-0JM51553F7564313SMNL56EA",
+              "product_id": "PROD-5T709944LJ5335402",
+              "name": "Temporary Plan",
+              "status": "ACTIVE",
+              "usage_type": "LICENSED",
+              "create_time": "2022-10-25T13:05:20Z",
+              "links": [
+                {
+                  "href": "https://api.sandbox.paypal.com/v1/billing/plans/P-0JM51553F7564313SMNL56EA",
+                  "rel": "self",
+                  "method": "GET",
+                  "encType": "application/json"
+                }
+              ]
+            },
+            {
+              "id": "P-8TA67877MA7018457MNL56EI",
+              "product_id": "PROD-1VE16271B06617812",
+              "name": "Temporary Plan",
+              "status": "ACTIVE",
+              "usage_type": "LICENSED",
+              "create_time": "2022-10-25T13:05:21Z",
+              "links": [
+                {
+                  "href": "https://api.sandbox.paypal.com/v1/billing/plans/P-8TA67877MA7018457MNL56EI",
+                  "rel": "self",
+                  "method": "GET",
+                  "encType": "application/json"
+                }
+              ]
+            },
+            {
+              "id": "P-99E41931B87104605MNL56EQ",
+              "product_id": "PROD-62B78482MS089461U",
+              "name": "A Man, A Plan, A Canal, Panama",
+              "status": "ACTIVE",
+              "usage_type": "LICENSED",
+              "create_time": "2022-10-25T13:05:22Z",
+              "links": [
+                {
+                  "href": "https://api.sandbox.paypal.com/v1/billing/plans/P-99E41931B87104605MNL56EQ",
+                  "rel": "self",
+                  "method": "GET",
+                  "encType": "application/json"
+                }
+              ]
+            },
+            {
+              "id": "P-5ED3030358439130WMNL6CRQ",
+              "product_id": "PROD-2L5944383S5236820",
+              "name": "Temporary Plan",
+              "status": "ACTIVE",
+              "usage_type": "LICENSED",
+              "create_time": "2022-10-25T13:14:46Z",
+              "links": [
+                {
+                  "href": "https://api.sandbox.paypal.com/v1/billing/plans/P-5ED3030358439130WMNL6CRQ",
+                  "rel": "self",
+                  "method": "GET",
+                  "encType": "application/json"
+                }
+              ]
+            },
+            {
+              "id": "P-67Y4163325526170EMNL6CRY",
+              "product_id": "PROD-586099103N288312M",
+              "name": "Temporary Plan",
+              "status": "ACTIVE",
+              "usage_type": "LICENSED",
+              "create_time": "2022-10-25T13:14:47Z",
+              "links": [
+                {
+                  "href": "https://api.sandbox.paypal.com/v1/billing/plans/P-67Y4163325526170EMNL6CRY",
+                  "rel": "self",
+                  "method": "GET",
+                  "encType": "application/json"
+                }
+              ]
+            },
+            {
+              "id": "P-8M694275K7543472SMNL6CSI",
+              "product_id": "PROD-72T555202T0990609",
+              "name": "A Man, A Plan, A Canal, Panama",
+              "status": "ACTIVE",
+              "usage_type": "LICENSED",
+              "create_time": "2022-10-25T13:14:49Z",
+              "links": [
+                {
+                  "href": "https://api.sandbox.paypal.com/v1/billing/plans/P-8M694275K7543472SMNL6CSI",
+                  "rel": "self",
+                  "method": "GET",
+                  "encType": "application/json"
+                }
+              ]
+            },
+            {
+              "id": "P-2D0557947V164005SMNL6HPY",
+              "product_id": "PROD-8DS820350J6881812",
+              "name": "Temporary Plan",
+              "status": "ACTIVE",
+              "usage_type": "LICENSED",
+              "create_time": "2022-10-25T13:25:19Z",
+              "links": [
+                {
+                  "href": "https://api.sandbox.paypal.com/v1/billing/plans/P-2D0557947V164005SMNL6HPY",
+                  "rel": "self",
+                  "method": "GET",
+                  "encType": "application/json"
+                }
+              ]
+            },
+            {
+              "id": "P-8S414530HT499480VMNL6HPY",
+              "product_id": "PROD-89C354068M501935A",
+              "name": "Temporary Plan",
+              "status": "ACTIVE",
+              "usage_type": "LICENSED",
+              "create_time": "2022-10-25T13:25:19Z",
+              "links": [
+                {
+                  "href": "https://api.sandbox.paypal.com/v1/billing/plans/P-8S414530HT499480VMNL6HPY",
+                  "rel": "self",
+                  "method": "GET",
+                  "encType": "application/json"
+                }
+              ]
+            },
+            {
+              "id": "P-34S70248MC3979602MNL6HQQ",
+              "product_id": "PROD-86J303586T3258318",
+              "name": "A Man, A Plan, A Canal, Panama",
+              "status": "ACTIVE",
+              "usage_type": "LICENSED",
+              "create_time": "2022-10-25T13:25:22Z",
+              "links": [
+                {
+                  "href": "https://api.sandbox.paypal.com/v1/billing/plans/P-34S70248MC3979602MNL6HQQ",
+                  "rel": "self",
+                  "method": "GET",
+                  "encType": "application/json"
+                }
+              ]
+            },
+            {
+              "id": "P-4LK19992FL856871WMNL7LKI",
+              "product_id": "PROD-52S22196S5181125S",
+              "name": "Temporary Plan",
+              "status": "ACTIVE",
+              "usage_type": "LICENSED",
+              "create_time": "2022-10-25T14:41:45Z",
+              "links": [
+                {
+                  "href": "https://api.sandbox.paypal.com/v1/billing/plans/P-4LK19992FL856871WMNL7LKI",
+                  "rel": "self",
+                  "method": "GET",
+                  "encType": "application/json"
+                }
+              ]
+            },
+            {
+              "id": "P-36A75980F4799882GMNL7LKI",
+              "product_id": "PROD-1XE04803UV352370E",
+              "name": "Temporary Plan",
+              "status": "ACTIVE",
+              "usage_type": "LICENSED",
+              "create_time": "2022-10-25T14:41:45Z",
+              "links": [
+                {
+                  "href": "https://api.sandbox.paypal.com/v1/billing/plans/P-36A75980F4799882GMNL7LKI",
+                  "rel": "self",
+                  "method": "GET",
+                  "encType": "application/json"
+                }
+              ]
+            },
+            {
+              "id": "P-6L81368524599082PMNL7LKY",
+              "product_id": "PROD-3NJ18691D9332493A",
+              "name": "A Man, A Plan, A Canal, Panama",
+              "status": "ACTIVE",
+              "usage_type": "LICENSED",
+              "create_time": "2022-10-25T14:41:47Z",
+              "links": [
+                {
+                  "href": "https://api.sandbox.paypal.com/v1/billing/plans/P-6L81368524599082PMNL7LKY",
+                  "rel": "self",
+                  "method": "GET",
+                  "encType": "application/json"
+                }
+              ]
+            }
+          ],
+          "links": [
+            {
+              "href": "https://api.sandbox.paypal.com/v1/billing/plans?page_size=20&page=1",
+              "rel": "self",
+              "method": "GET",
+              "encType": "application/json"
+            },
+            {
+              "href": "https://api.sandbox.paypal.com/v1/billing/plans?page_size=20&page=2",
+              "rel": "next",
+              "method": "GET",
+              "encType": "application/json"
+            },
+            {
+              "href": "https://api.sandbox.paypal.com/v1/billing/plans?page_size=20&page=3",
+              "rel": "last",
+              "method": "GET",
+              "encType": "application/json"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "prepare-payments/create-product/paypal/CreateProduct": {
+    "754061576e347ce571770d85bae0148a": [
+      {
+        "scope": "https://PARAMS_SUBDOMAIN.paypal.com:443",
+        "method": "POST",
+        "path": "/v1/catalogs/products",
+        "body": {
+          "name": "Temporary Product",
+          "description": "Used just for testing.",
+          "type": "PHYSICAL"
+        },
+        "status": 201,
+        "response": {
+          "id": "PROD-5W193301WT0366122",
+          "name": "Temporary Product",
+          "description": "Used just for testing.",
+          "create_time": "2022-11-10T08:14:49Z",
+          "links": [
+            {
+              "href": "https://api.sandbox.paypal.com/v1/catalogs/products/PROD-5W193301WT0366122",
+              "rel": "self",
+              "method": "GET"
+            },
+            {
+              "href": "https://api.sandbox.paypal.com/v1/catalogs/products/PROD-5W193301WT0366122",
+              "rel": "edit",
+              "method": "PATCH"
+            }
+          ]
+        },
+        "rawHeaders": [
+          "Connection",
+          "close",
+          "Content-Length",
+          "374",
+          "Content-Type",
+          "application/json",
+          "Server",
+          "nginx/1.14.0 (Ubuntu)",
+          "Cache-Control",
+          "max-age=0, no-cache, no-store, must-revalidate",
+          "Paypal-Debug-Id",
+          "313917fda7526",
+          "Strict-Transport-Security",
+          "max-age=31536000; includeSubDomains",
+          "Edge-Control",
+          "max-age=0",
+          "Accept-Ranges",
+          "bytes",
+          "Date",
+          "Thu, 10 Nov 2022 08:14:49 GMT",
+          "Via",
+          "1.1 varnish",
+          "X-Served-By",
+          "cache-fra-eddf8230042-FRA",
+          "X-Cache",
+          "MISS",
+          "X-Cache-Hits",
+          "0",
+          "X-Timer",
+          "S1668068089.873627,VS0,VE279"
+        ],
+        "responseIsBinary": false
+      }
+    ]
+  },
+  "prepare-payments/create-plan/paypal/CreatePlan": {
+    "972f9b1ddddd13823a1dbe9cfe8fdf63": [
+      {
+        "scope": "https://PARAMS_SUBDOMAIN.paypal.com:443",
+        "method": "POST",
+        "path": "/v1/billing/plans",
+        "body": {
+          "product_id": "INPUT_productId",
+          "name": "Temporary Plan",
+          "billing_cycles": [
+            {
+              "frequency": {
+                "interval_unit": "MONTH",
+                "interval_count": 1
+              },
+              "tenure_type": "REGULAR",
+              "sequence": 1,
+              "pricing_scheme": {
+                "fixed_price": {
+                  "value": 1234,
+                  "currency_code": "USD"
+                }
+              }
+            }
+          ],
+          "payment_preferences": {
+            "auto_bill_outstanding": true,
+            "setup_fee_failure_action": "CONTINUE",
+            "payment_failure_threshold": 3
+          }
+        },
+        "status": 201,
+        "response": {
+          "id": "P-1XA53690D4338101JMNWLF5Y",
+          "product_id": "INPUT_productId",
+          "name": "Temporary Plan",
+          "status": "ACTIVE",
+          "usage_type": "LICENSED",
+          "create_time": "2022-11-10T08:14:47Z",
+          "links": [
+            {
+              "href": "https://api.sandbox.paypal.com/v1/billing/plans/P-1XA53690D4338101JMNWLF5Y",
+              "rel": "self",
+              "method": "GET",
+              "encType": "application/json"
+            },
+            {
+              "href": "https://api.sandbox.paypal.com/v1/billing/plans/P-1XA53690D4338101JMNWLF5Y",
+              "rel": "edit",
+              "method": "PATCH",
+              "encType": "application/json"
+            },
+            {
+              "href": "https://api.sandbox.paypal.com/v1/billing/plans/P-1XA53690D4338101JMNWLF5Y/deactivate",
+              "rel": "self",
+              "method": "POST",
+              "encType": "application/json"
+            }
+          ]
+        },
+        "rawHeaders": [
+          "Connection",
+          "close",
+          "Content-Length",
+          "629",
+          "Content-Type",
+          "application/json",
+          "Server",
+          "nginx/1.14.0 (Ubuntu)",
+          "Cache-Control",
+          "max-age=0, no-cache, no-store, must-revalidate",
+          "Paypal-Debug-Id",
+          "c7d3a79731b8a",
+          "Strict-Transport-Security",
+          "max-age=31536000; includeSubDomains",
+          "Edge-Control",
+          "max-age=0",
+          "Accept-Ranges",
+          "bytes",
+          "Date",
+          "Thu, 10 Nov 2022 08:14:47 GMT",
+          "Via",
+          "1.1 varnish",
+          "X-Served-By",
+          "cache-fra-eddf8230110-FRA",
+          "X-Cache",
+          "MISS",
+          "X-Cache-Hits",
+          "0",
+          "X-Timer",
+          "S1668068087.134489,VS0,VE585"
+        ],
+        "responseIsBinary": false
+      }
+    ]
+  }
+}

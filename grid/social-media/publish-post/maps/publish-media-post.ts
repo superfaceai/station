@@ -7,6 +7,7 @@ import {
 import { readFile } from 'fs/promises';
 import path from 'path';
 
+import { buildSuperfaceTest } from '../../../test-config';
 import { getPublishingProfiles } from './publish-post';
 
 async function fixturesToMedia(
@@ -52,7 +53,7 @@ export const publishMediaPostTest = (
     });
 
     beforeEach(() => {
-      superfacePublisPost = new SuperfaceTest({
+      superfacePublisPost = buildSuperfaceTest({
         profile: 'social-media/publish-post',
         provider,
       });
@@ -96,7 +97,7 @@ export const publishMediaUploadTest = (
     let superfacePublisPost: SuperfaceTest;
 
     beforeEach(() => {
-      superfacePublisPost = new SuperfaceTest({
+      superfacePublisPost = buildSuperfaceTest({
         profile: 'social-media/publish-post',
         provider,
       });

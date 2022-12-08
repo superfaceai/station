@@ -2,6 +2,8 @@
 
 import { RecordingProcessOptions, SuperfaceTest } from '@superfaceai/testing';
 
+import { buildSuperfaceTest } from '../../../test-config';
+
 export const geocodingTest = (
   provider: string,
   hooks?: RecordingProcessOptions
@@ -10,10 +12,9 @@ export const geocodingTest = (
     let superface: SuperfaceTest;
 
     beforeEach(() => {
-      superface = new SuperfaceTest({
+      superface = buildSuperfaceTest({
         profile: 'address/geocoding',
         provider,
-        testInstance: expect,
       });
     });
 

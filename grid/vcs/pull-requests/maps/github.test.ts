@@ -1,13 +1,14 @@
 import { SuperfaceTest } from '@superfaceai/testing';
 
+import { buildSuperfaceTest } from '../../../test-config';
+
 describe(`vcs/pull-requests/github`, () => {
   let superface: SuperfaceTest;
 
   beforeEach(() => {
-    superface = new SuperfaceTest({
+    superface = buildSuperfaceTest({
       profile: 'vcs/pull-requests',
       provider: 'github',
-      testInstance: expect,
     });
   });
 

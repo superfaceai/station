@@ -1,13 +1,14 @@
 import { SuperfaceTest } from '@superfaceai/testing';
 
+import { buildSuperfaceTest } from '../../../test-config';
+
 describe(`vcs/single-file-content/github`, () => {
   let superface: SuperfaceTest;
 
   beforeEach(() => {
-    superface = new SuperfaceTest({
+    superface = buildSuperfaceTest({
       profile: 'vcs/single-file-content',
       provider: 'github',
-      testInstance: expect,
     });
   });
 

@@ -1,0 +1,144 @@
+{
+  "communication/send-sms/messente/SendMessage": {
+    "afe1415f1c9ff73432da669c0acc22a2": [
+      {
+        "scope": "https://api.messente.com:443",
+        "method": "POST",
+        "path": "/v1/omnimessage",
+        "body": {
+          "to": "+4915207930698",
+          "messages": [
+            {
+              "text": "Hello World!",
+              "sender": "Superface",
+              "channel": "sms"
+            }
+          ]
+        },
+        "status": 201,
+        "response": [
+          "1f8b0800000000000403348dc10ec2201044ef7ec65eed2650e852fa1b1e8d311476b589a5a6e8a9e9bf4ba25e67e6bdd960e652c28d0b0ce70de23de4cc0f18a0cc059a7f799d528db40889f416451983b64f1e3dd91e1d799dc66052125399c239f15af7a7f79357099161bf34b0cc79fa7d7d7524ccda684252a1439bc4635024184d17d3e8826369abeeb554d5d17addb5ca79a3c8f7b01f3e000000ffff",
+          "0300270f11cdb8000000"
+        ],
+        "rawHeaders": [
+          "date",
+          "Thu, 17 Feb 2022 12:26:49 GMT",
+          "content-type",
+          "application/json",
+          "content-encoding",
+          "gzip",
+          "transfer-encoding",
+          "chunked",
+          "vary",
+          "Accept-Encoding",
+          "connection",
+          "close"
+        ],
+        "responseIsBinary": false,
+        "decodedResponse": {
+          "messages": [
+            {
+              "channel": "sms",
+              "message_id": "1ff6ff84-f033-48d9-9648-7691dba3ddf3",
+              "sender": "Superface"
+            }
+          ],
+          "omnimessage_id": "6fee1316-60a5-4df9-a06f-c35cdb7a7ef2",
+          "to": "+4915207930698"
+        }
+      }
+    ],
+    "2fbd80c9ba8806da7bf29478dc5fc726": [
+      {
+        "scope": "https://api.messente.com:443",
+        "method": "POST",
+        "path": "/v1/omnimessage",
+        "body": {
+          "to": "+4915207930698",
+          "messages": [
+            {
+              "text": "Hello World!",
+              "sender": "Superface",
+              "channel": "sms"
+            }
+          ]
+        },
+        "status": 201,
+        "response": [
+          "1f8b0800000000000403348d4b0ec2300c44f71cc35b6a296efebd064b84909bba804453d4c0aaeadd090266399f372b4c520a5fa440775c215d3967b94307652ad0fcc3f36da8d6a8639b7a124c963c1a1d2d320be3609d53c15aefbda99b227990a5f60faf872c232781edd4c03ce5dbefeb8b0bced3a838a0d76cd004228c5612ea1039484f551fdc73aea8bd89645be5a3562e06d8766f000000ffff",
+          "0300281df703b8000000"
+        ],
+        "rawHeaders": [
+          "date",
+          "Thu, 17 Feb 2022 12:26:49 GMT",
+          "content-type",
+          "application/json",
+          "content-encoding",
+          "gzip",
+          "transfer-encoding",
+          "chunked",
+          "vary",
+          "Accept-Encoding",
+          "connection",
+          "close"
+        ],
+        "responseIsBinary": false,
+        "decodedResponse": {
+          "messages": [
+            {
+              "channel": "sms",
+              "message_id": "f392cb1e-c517-4395-aaea-d56608557774",
+              "sender": "Superface"
+            }
+          ],
+          "omnimessage_id": "8671f0a8-73a4-4811-95ec-389a8eb11114",
+          "to": "+4915207930698"
+        }
+      }
+    ]
+  },
+  "communication/send-sms/messente/RetrieveMessageStatus": {
+    "2fbd80c9ba8806da7bf29478dc5fc726": [
+      {
+        "scope": "https://api.messente.com:443",
+        "method": "GET",
+        "path": "/v1/omnimessage/8671f0a8-73a4-4811-95ec-389a8eb11114/status",
+        "body": "",
+        "status": 200,
+        "response": [
+          "1f8b0800000000000003558f3f4fc4300cc5773e86572e287192e6cf7c0c484c80184008f952174e6ad353d34ea7fbee981b90f062ebe7e7f7e433cc533d4edc1a7df1e7b1870cb10b66d01455b0e4948bc6a8e4b9281b13453e1829073b682bad5be306f9fd0ce59b6ae551aedbd464c9cb02595ffb2c53ddc67107ff52069bb01c0cabe24d50ce26af889854efbb4e47ef4308d714ae3d8b033c6f275e062afc172d707ffff8f0fab417b4fefeb0d274128a1a51695426bc18ccd8658f772e2106fd06970fd1ce22ba75c978d42159dda508979b1f285864050a010000"
+        ],
+        "rawHeaders": [
+          "date",
+          "Thu, 17 Feb 2022 12:27:20 GMT",
+          "content-type",
+          "application/json",
+          "transfer-encoding",
+          "chunked",
+          "vary",
+          "Accept-Encoding",
+          "content-encoding",
+          "gzip",
+          "connection",
+          "close"
+        ],
+        "responseIsBinary": false,
+        "decodedResponse": {
+          "omnimessage_id": "8671f0a8-73a4-4811-95ec-389a8eb11114",
+          "statuses": [
+            {
+              "channel": "sms",
+              "err": 0,
+              "error": null,
+              "message_id": "f392cb1e-c517-4395-aaea-d56608557774",
+              "sender": "Superface",
+              "status": "DELIVRD",
+              "timestamp": "2022-02-17T12:26:52.492270Z"
+            }
+          ],
+          "to": "+4915207930698"
+        }
+      }
+    ]
+  }
+}

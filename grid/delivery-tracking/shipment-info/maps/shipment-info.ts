@@ -3,6 +3,8 @@
 
 import { SuperfaceTest } from '@superfaceai/testing';
 
+import { buildSuperfaceTest } from '../../../test-config';
+
 export const shipmentInfoTest = (
   provider: string,
   testVectors: {
@@ -15,10 +17,9 @@ export const shipmentInfoTest = (
     let superface: SuperfaceTest;
 
     beforeEach(() => {
-      superface = new SuperfaceTest({
+      superface = buildSuperfaceTest({
         profile: 'delivery-tracking/shipment-info',
         provider,
-        testInstance: expect,
       });
     });
 

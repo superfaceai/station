@@ -1,0 +1,63 @@
+{
+  "language/translate/deepl/TranslateText": {
+    "bad900cc1d9f2615dbfb50c66944d02c": [
+      {
+        "scope": "https://api-free.deepl.com:443",
+        "method": "GET",
+        "path": "/v2/translate?text=Testovanie&target_lang=EN&auth_key=SECURITY_apikey",
+        "body": "",
+        "status": 200,
+        "response": {
+          "translations": [
+            {
+              "detected_source_language": "SK",
+              "text": "Testing"
+            }
+          ]
+        },
+        "rawHeaders": [
+          "Server",
+          "nginx",
+          "Date",
+          "Fri, 05 Nov 2021 15:30:57 GMT",
+          "Content-Type",
+          "application/json",
+          "Content-Length",
+          "69",
+          "Connection",
+          "close",
+          "Access-Control-Allow-Origin",
+          "*"
+        ],
+        "responseIsBinary": false
+      }
+    ],
+    "1d788d339d646cf2006bd9b0ca39b1e7": [
+      {
+        "scope": "https://api-free.deepl.com:443",
+        "method": "GET",
+        "path": "/v2/translate?target_lang=EN&auth_key=SECURITY_apikey",
+        "body": "",
+        "status": 400,
+        "response": {
+          "message": "\"Parameter 'text' not specified.\""
+        },
+        "rawHeaders": [
+          "Server",
+          "nginx",
+          "Date",
+          "Fri, 05 Nov 2021 15:30:57 GMT",
+          "Content-Type",
+          "application/json",
+          "Content-Length",
+          "49",
+          "Connection",
+          "close",
+          "Access-Control-Allow-Origin",
+          "*"
+        ],
+        "responseIsBinary": false
+      }
+    ]
+  }
+}

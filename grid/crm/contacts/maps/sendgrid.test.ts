@@ -1,13 +1,14 @@
 import { SuperfaceTest } from '@superfaceai/testing';
 
+import { buildSuperfaceTest } from '../../../test-config';
+
 describe(`crm/contacts/sendgrid`, () => {
   let superface: SuperfaceTest;
 
   beforeEach(() => {
-    superface = new SuperfaceTest({
+    superface = buildSuperfaceTest({
       profile: 'crm/contacts',
       provider: 'sendgrid',
-      testInstance: expect,
     });
   });
 

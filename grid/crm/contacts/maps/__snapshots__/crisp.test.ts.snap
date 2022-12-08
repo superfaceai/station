@@ -59,9 +59,7 @@ Ok {
 
 exports[`crm/contacts/crisp Search returns error for unknown operator 1`] = `
 Err {
-  "error": "Input validation failed:
-Path: input.operator
-Error: Invalid enum value: \\"%\\"
+  "error": "InputValidationError: Input validation failed:
 Path: input.operator
 Error: Invalid enum value: \\"%\\"",
 }
@@ -77,7 +75,7 @@ Ok {
 
 exports[`crm/contacts/crisp Update returns error for non existent contact 1`] = `
 Err {
-  "error": "HTTPError: Expected HTTP error
+  "error": "MappedHTTPError: Expected HTTP error
 Properties: {
   \\"title\\": \\"Not found\\",
   \\"detail\\": \\"Contact or website was not found or Crisp plugin is not subscribed. Make sure the Crisp website exists and uses your plugin\\"

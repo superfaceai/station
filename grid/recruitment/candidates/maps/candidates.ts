@@ -3,6 +3,8 @@
 import { RecordingProcessOptions, SuperfaceTest } from '@superfaceai/testing';
 import { readFileSync } from 'fs';
 
+import { buildSuperfaceTest } from '../../../test-config';
+
 const sampleCandidate = {
   name: 'John Doe',
   firstName: 'John',
@@ -71,11 +73,10 @@ export const candidatesTest = (
     describe('CreateCandidate', () => {
       beforeAll(() => {
         jest.setTimeout(10000);
-        superface = new SuperfaceTest({
+        superface = buildSuperfaceTest({
           profile: 'recruitment/candidates',
           provider,
           useCase: 'CreateCandidate',
-          testInstance: expect,
         });
       });
 

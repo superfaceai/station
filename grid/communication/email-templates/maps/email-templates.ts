@@ -3,6 +3,8 @@
 
 import { RecordingProcessOptions, SuperfaceTest } from '@superfaceai/testing';
 
+import { buildSuperfaceTest } from '../../../test-config';
+
 declare type Template = {
   id: string;
   name: string;
@@ -53,10 +55,9 @@ export const emailTemplatestTest = (
     let superface: SuperfaceTest;
 
     beforeEach(() => {
-      superface = new SuperfaceTest({
+      superface = buildSuperfaceTest({
         profile: 'communication/email-templates',
         provider,
-        testInstance: expect,
       });
     });
 

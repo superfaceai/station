@@ -2,12 +2,14 @@
 
 import { SuperfaceTest } from '@superfaceai/testing';
 
+import { buildSuperfaceTest } from '../../../test-config';
+
 export const namedEntityRecognitionTest = (provider: string): void => {
   describe(`language/named-entity-recognition/${provider}`, () => {
     let superface: SuperfaceTest;
 
     beforeEach(() => {
-      superface = new SuperfaceTest({
+      superface = buildSuperfaceTest({
         profile: 'language/named-entity-recognition',
         provider,
       });

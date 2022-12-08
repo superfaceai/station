@@ -10,10 +10,10 @@ export const cleanAddressTest = (
     let superface: SuperfaceTest;
 
     beforeEach(() => {
-      superface = new SuperfaceTest({
+      /* eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call */
+      superface = (global as any).buildSuperfaceTest({
         profile: 'address/clean-address',
         provider,
-        testInstance: expect,
       });
     });
 

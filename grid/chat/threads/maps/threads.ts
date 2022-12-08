@@ -2,6 +2,8 @@
 
 import { RecordingProcessOptions, SuperfaceTest } from '@superfaceai/testing';
 
+import { buildSuperfaceTest } from '../../../test-config';
+
 export const getThreadsTest = (
   provider: string,
   workspaces: [valid: string, invalid: string],
@@ -12,11 +14,10 @@ export const getThreadsTest = (
 
     describe('GetThreads', () => {
       beforeAll(() => {
-        superface = new SuperfaceTest({
+        superface = buildSuperfaceTest({
           profile: 'chat/threads',
           provider,
           useCase: 'GetThreads',
-          testInstance: expect,
         });
       });
 
