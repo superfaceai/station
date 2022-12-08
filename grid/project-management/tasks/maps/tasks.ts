@@ -3,7 +3,7 @@
 import { SuperfaceTest } from '@superfaceai/testing';
 import { RecordingType } from '@superfaceai/testing/dist/nock/recording.interfaces';
 
-import { nockConfig } from '../../../test-config';
+import { buildSuperfaceTest } from '../../../test-config';
 
 const demoAccountParams = {
   projectId: '1203400042224704',
@@ -21,14 +21,11 @@ const createTask = async (
   },
   testName: string
 ): Promise<string> => {
-  const superface = new SuperfaceTest(
-    {
-      profile: 'project-management/tasks',
-      provider,
-      useCase: 'CreateTask',
-    },
-    nockConfig
-  );
+  const superface = buildSuperfaceTest({
+    profile: 'project-management/tasks',
+    provider,
+    useCase: 'CreateTask',
+  });
 
   const result = await superface.run(
     {
@@ -52,14 +49,11 @@ const deleteTask = async (
   input: { id: string },
   testName: string
 ): Promise<unknown> => {
-  const superface = new SuperfaceTest(
-    {
-      profile: 'project-management/tasks',
-      provider,
-      useCase: 'DeleteTask',
-    },
-    nockConfig
-  );
+  const superface = buildSuperfaceTest({
+    profile: 'project-management/tasks',
+    provider,
+    useCase: 'DeleteTask',
+  });
 
   const result = await superface.run(
     { input, testName },
@@ -74,13 +68,10 @@ export const taskCrudTest = (provider: string): void => {
     let superface: SuperfaceTest;
 
     beforeAll(() => {
-      superface = new SuperfaceTest(
-        {
-          profile: 'project-management/tasks',
-          provider,
-        },
-        nockConfig
-      );
+      superface = buildSuperfaceTest({
+        profile: 'project-management/tasks',
+        provider,
+      });
     });
 
     describe('CreateTask', () => {

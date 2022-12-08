@@ -1,18 +1,15 @@
 import { SuperfaceTest } from '@superfaceai/testing';
 
-import { nockConfig } from '../../../test-config';
+import { buildSuperfaceTest } from '../../../test-config';
 
 describe(`crm/track-contact-event/mock`, () => {
   let superface: SuperfaceTest;
 
   beforeEach(() => {
-    superface = new SuperfaceTest(
-      {
-        profile: 'crm/track-contact-event',
-        provider: 'mock',
-      },
-      nockConfig
-    );
+    superface = buildSuperfaceTest({
+      profile: 'crm/track-contact-event',
+      provider: 'mock',
+    });
   });
 
   describe('TrackContactEvent', () => {

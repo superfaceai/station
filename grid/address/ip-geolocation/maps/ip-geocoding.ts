@@ -1,7 +1,7 @@
 /* eslint-disable jest/no-export */
 import { RecordingProcessOptions, SuperfaceTest } from '@superfaceai/testing';
 
-import { nockConfig } from '../../../test-config';
+import { buildSuperfaceTest } from '../../../test-config';
 
 export const ipGeolocationTest = (
   provider: string,
@@ -11,13 +11,10 @@ export const ipGeolocationTest = (
     let superfaceTest: SuperfaceTest;
 
     beforeEach(() => {
-      superfaceTest = new SuperfaceTest(
-        {
-          profile: 'address/ip-geolocation',
-          provider,
-        },
-        nockConfig
-      );
+      superfaceTest = buildSuperfaceTest({
+        profile: 'address/ip-geolocation',
+        provider,
+      });
     });
 
     describe('IpGeolocation', () => {

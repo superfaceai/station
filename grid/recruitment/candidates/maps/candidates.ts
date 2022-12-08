@@ -3,7 +3,7 @@
 import { RecordingProcessOptions, SuperfaceTest } from '@superfaceai/testing';
 import { readFileSync } from 'fs';
 
-import { nockConfig } from '../../../test-config';
+import { buildSuperfaceTest } from '../../../test-config';
 
 const sampleCandidate = {
   name: 'John Doe',
@@ -73,14 +73,11 @@ export const candidatesTest = (
     describe('CreateCandidate', () => {
       beforeAll(() => {
         jest.setTimeout(10000);
-        superface = new SuperfaceTest(
-          {
-            profile: 'recruitment/candidates',
-            provider,
-            useCase: 'CreateCandidate',
-          },
-          nockConfig
-        );
+        superface = buildSuperfaceTest({
+          profile: 'recruitment/candidates',
+          provider,
+          useCase: 'CreateCandidate',
+        });
       });
 
       describe('when specified job does exist', () => {

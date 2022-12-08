@@ -3,7 +3,7 @@
 
 import { SuperfaceTest } from '@superfaceai/testing';
 
-import { nockConfig } from '../../../test-config';
+import { buildSuperfaceTest } from '../../../test-config';
 
 export const shipmentInfoTest = (
   provider: string,
@@ -17,13 +17,10 @@ export const shipmentInfoTest = (
     let superface: SuperfaceTest;
 
     beforeEach(() => {
-      superface = new SuperfaceTest(
-        {
-          profile: 'delivery-tracking/shipment-info',
-          provider,
-        },
-        nockConfig
-      );
+      superface = buildSuperfaceTest({
+        profile: 'delivery-tracking/shipment-info',
+        provider,
+      });
     });
 
     describe('ShipmentInfo', () => {

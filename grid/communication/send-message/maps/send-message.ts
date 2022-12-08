@@ -2,7 +2,7 @@
 
 import { SuperfaceTest } from '@superfaceai/testing';
 
-import { nockConfig } from '../../../test-config';
+import { buildSuperfaceTest } from '../../../test-config';
 
 export const sendMessage = (
   provider: string,
@@ -11,13 +11,10 @@ export const sendMessage = (
   let superface: SuperfaceTest;
 
   beforeEach(() => {
-    superface = new SuperfaceTest(
-      {
-        profile: 'communication/send-message',
-        provider,
-      },
-      nockConfig
-    );
+    superface = buildSuperfaceTest({
+      profile: 'communication/send-message',
+      provider,
+    });
   });
 
   describe(`communication/send-message/${provider}`, () => {

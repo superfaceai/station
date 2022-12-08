@@ -1,8 +1,7 @@
 /* eslint-disable jest/no-export */
 import { SuperfaceTest } from '@superfaceai/testing';
 import { RecordingType } from '@superfaceai/testing/dist/nock/recording.interfaces';
-
-import { nockConfig } from '../../../test-config';
+import { buildSuperfaceTest } from '../../../test-config';
 
 export const followersTest = (provider: string): void => {
   describe(`social-media/followers/${provider}`, () => {
@@ -10,20 +9,14 @@ export const followersTest = (provider: string): void => {
     let superfaceFollowers: SuperfaceTest;
 
     beforeEach(() => {
-      superfacePublishingProfiles = new SuperfaceTest(
-        {
-          profile: 'social-media/publishing-profiles',
-          provider,
-        },
-        nockConfig
-      );
-      superfaceFollowers = new SuperfaceTest(
-        {
-          profile: 'social-media/followers',
-          provider,
-        },
-        nockConfig
-      );
+      superfacePublishingProfiles = buildSuperfaceTest({
+        profile: 'social-media/publishing-profiles',
+        provider,
+      });
+      superfaceFollowers = buildSuperfaceTest({
+        profile: 'social-media/followers',
+        provider,
+      });
     });
 
     describe('GetFollowers', () => {

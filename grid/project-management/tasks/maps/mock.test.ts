@@ -1,18 +1,15 @@
 import { SuperfaceTest } from '@superfaceai/testing';
 
-import { nockConfig } from '../../../test-config';
+import { buildSuperfaceTest } from '../../../test-config';
 
 describe('project-management/tasks/mock', () => {
   let superface: SuperfaceTest;
 
   beforeAll(() => {
-    superface = new SuperfaceTest(
-      {
-        profile: 'project-management/tasks',
-        provider: 'mock',
-      },
-      nockConfig
-    );
+    superface = buildSuperfaceTest({
+      profile: 'project-management/tasks',
+      provider: 'mock',
+    });
   });
 
   describe('CreateTask', () => {

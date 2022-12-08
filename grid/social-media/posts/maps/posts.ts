@@ -2,7 +2,7 @@
 import { RecordingProcessOptions, SuperfaceTest } from '@superfaceai/testing';
 import { RecordingType } from '@superfaceai/testing/dist/nock/recording.interfaces';
 
-import { nockConfig } from '../../../test-config';
+import { buildSuperfaceTest } from '../../../test-config';
 
 export const getProfilePostsTest = (
   provider: string,
@@ -13,20 +13,14 @@ export const getProfilePostsTest = (
     let superfacePosts: SuperfaceTest;
 
     beforeEach(() => {
-      superfacePublishingProfiles = new SuperfaceTest(
-        {
-          profile: 'social-media/publishing-profiles',
-          provider,
-        },
-        nockConfig
-      );
-      superfacePosts = new SuperfaceTest(
-        {
-          profile: 'social-media/posts',
-          provider,
-        },
-        nockConfig
-      );
+      superfacePublishingProfiles = buildSuperfaceTest({
+        profile: 'social-media/publishing-profiles',
+        provider,
+      });
+      superfacePosts = buildSuperfaceTest({
+        profile: 'social-media/posts',
+        provider,
+      });
     });
 
     describe('GetProfilePosts', () => {

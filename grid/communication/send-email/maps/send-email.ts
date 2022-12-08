@@ -2,7 +2,7 @@
 
 import { RecordingProcessOptions, SuperfaceTest } from '@superfaceai/testing';
 
-import { nockConfig } from '../../../test-config';
+import { buildSuperfaceTest } from '../../../test-config';
 
 export const sendEmailTest = (
   provider: string,
@@ -18,13 +18,10 @@ export const sendEmailTest = (
     let superface: SuperfaceTest;
 
     beforeEach(() => {
-      superface = new SuperfaceTest(
-        {
-          profile: 'communication/send-email',
-          provider,
-        },
-        nockConfig
-      );
+      superface = buildSuperfaceTest({
+        profile: 'communication/send-email',
+        provider,
+      });
     });
 
     describe('SendEmail', () => {

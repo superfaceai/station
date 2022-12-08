@@ -1,18 +1,15 @@
 import { SuperfaceTest } from '@superfaceai/testing';
 
-import { nockConfig } from '../../../test-config';
+import { buildSuperfaceTest } from '../../../test-config';
 
 describe('mock', () => {
   let superface: SuperfaceTest;
 
   beforeEach(() => {
-    superface = new SuperfaceTest(
-      {
-        profile: 'language/translate',
-        provider: 'mock',
-      },
-      nockConfig
-    );
+    superface = buildSuperfaceTest({
+      profile: 'language/translate',
+      provider: 'mock',
+    });
   });
 
   describe('TranslateText', () => {

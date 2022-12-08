@@ -1,15 +1,16 @@
 import { SuperfaceTest } from '@superfaceai/testing';
 
-import { nockConfig } from '../../../test-config';
+import { buildSuperfaceTest } from '../../../test-config';
 
 describe('chat/messages/mock', () => {
   let superface: SuperfaceTest;
 
   beforeAll(() => {
-    superface = new SuperfaceTest(
-      { profile: 'chat/messages', provider: 'mock', useCase: 'GetMessages' },
-      nockConfig
-    );
+    superface = buildSuperfaceTest({
+      profile: 'chat/messages',
+      provider: 'mock',
+      useCase: 'GetMessages',
+    });
   });
 
   describe('GetMessages', () => {

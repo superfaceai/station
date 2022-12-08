@@ -7,7 +7,7 @@ import {
   TestingReturn,
 } from '@superfaceai/testing';
 
-import { nockConfig } from '../../../test-config';
+import { buildSuperfaceTest } from '../../../test-config';
 
 type UseCaseInput = {
   refreshToken?: string;
@@ -99,14 +99,11 @@ export const refreshTokenTest = (
     }
 
     beforeEach(() => {
-      superfaceRefreshToken = new SuperfaceTest(
-        {
-          profile: 'oauth2/refresh-token',
-          useCase: 'GetAccessTokenFromRefreshToken',
-          provider,
-        },
-        nockConfig
-      );
+      superfaceRefreshToken = buildSuperfaceTest({
+        profile: 'oauth2/refresh-token',
+        useCase: 'GetAccessTokenFromRefreshToken',
+        provider,
+      });
     });
 
     // sanity check

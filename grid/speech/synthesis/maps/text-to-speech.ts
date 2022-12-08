@@ -2,7 +2,7 @@
 
 import { RecordingProcessOptions, SuperfaceTest } from '@superfaceai/testing';
 
-import { nockConfig } from '../../../test-config';
+import { buildSuperfaceTest } from '../../../test-config';
 
 export const textToSpeechTest = (
   provider: string,
@@ -13,13 +13,10 @@ export const textToSpeechTest = (
     let superface: SuperfaceTest;
 
     beforeEach(() => {
-      superface = new SuperfaceTest(
-        {
-          profile: 'speech/synthesis',
-          provider,
-        },
-        nockConfig
-      );
+      superface = buildSuperfaceTest({
+        profile: 'speech/synthesis',
+        provider,
+      });
     });
 
     describe('TextToSpeechSynthesis', () => {

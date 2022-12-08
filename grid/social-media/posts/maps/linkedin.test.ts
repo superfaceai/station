@@ -1,6 +1,6 @@
 import { SuperfaceTest } from '@superfaceai/testing';
 
-import { nockConfig } from '../../../test-config';
+import { buildSuperfaceTest } from '../../../test-config';
 
 const provider = 'linkedin';
 // DevTestCo - https://docs.microsoft.com/en-us/linkedin/marketing/integrations/community-management/organizations#test-organizations
@@ -15,13 +15,10 @@ describe(`social-media/posts/${provider}`, () => {
   });
 
   beforeEach(() => {
-    superfacePosts = new SuperfaceTest(
-      {
-        profile: 'social-media/posts',
-        provider,
-      },
-      nockConfig
-    );
+    superfacePosts = buildSuperfaceTest({
+      profile: 'social-media/posts',
+      provider,
+    });
   });
 
   describe('GetProfilePosts', () => {

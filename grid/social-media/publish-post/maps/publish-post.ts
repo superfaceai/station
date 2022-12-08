@@ -6,20 +6,17 @@ import {
 } from '@superfaceai/testing';
 import { RecordingType } from '@superfaceai/testing/dist/nock/recording.interfaces';
 
-import { nockConfig } from '../../../test-config';
+import { buildSuperfaceTest } from '../../../test-config';
 
 type ProfilesResult = Array<{ id: string; name: string }>;
 
 export const getPublishingProfiles = async (
   provider: string
 ): Promise<ProfilesResult> => {
-  const superfacePublishingProfiles = new SuperfaceTest(
-    {
-      profile: 'social-media/publishing-profiles',
-      provider,
-    },
-    nockConfig
-  );
+  const superfacePublishingProfiles = buildSuperfaceTest({
+    profile: 'social-media/publishing-profiles',
+    provider,
+  });
   const result = await superfacePublishingProfiles.run(
     {
       useCase: 'GetProfilesForPublishing',
@@ -41,20 +38,14 @@ export const publishPostTest = (
     let superfacePublisPost: SuperfaceTest;
 
     beforeEach(() => {
-      superfacePublishingProfiles = new SuperfaceTest(
-        {
-          profile: 'social-media/publishing-profiles',
-          provider,
-        },
-        nockConfig
-      );
-      superfacePublisPost = new SuperfaceTest(
-        {
-          profile: 'social-media/publish-post',
-          provider,
-        },
-        nockConfig
-      );
+      superfacePublishingProfiles = buildSuperfaceTest({
+        profile: 'social-media/publishing-profiles',
+        provider,
+      });
+      superfacePublisPost = buildSuperfaceTest({
+        profile: 'social-media/publish-post',
+        provider,
+      });
     });
 
     describe('PublishPost', () => {
@@ -113,13 +104,10 @@ export const publishInputCasesTest = (
     });
 
     beforeEach(() => {
-      superfacePublisPost = new SuperfaceTest(
-        {
-          profile: 'social-media/publish-post',
-          provider,
-        },
-        nockConfig
-      );
+      superfacePublisPost = buildSuperfaceTest({
+        profile: 'social-media/publish-post',
+        provider,
+      });
     });
 
     const testCases = cases.map(
@@ -164,13 +152,10 @@ export const publishPostErrorTest = (
     let superfacePublisPost: SuperfaceTest;
 
     beforeEach(() => {
-      superfacePublisPost = new SuperfaceTest(
-        {
-          profile: 'social-media/publish-post',
-          provider,
-        },
-        nockConfig
-      );
+      superfacePublisPost = buildSuperfaceTest({
+        profile: 'social-media/publish-post',
+        provider,
+      });
     });
 
     const testCases: Array<

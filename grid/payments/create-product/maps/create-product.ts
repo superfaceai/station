@@ -4,16 +4,13 @@ import { describe, expect } from '@jest/globals';
 import { SuperfaceTest } from '@superfaceai/testing';
 import { RecordingType } from '@superfaceai/testing/dist/nock/recording.interfaces';
 
-import { nockConfig } from '../../../test-config';
+import { buildSuperfaceTest } from '../../../test-config';
 
 export async function createProduct(provider: string): Promise<string> {
-  const superfaceCreateProductProfile = new SuperfaceTest(
-    {
-      profile: 'payments/create-product',
-      provider,
-    },
-    nockConfig
-  );
+  const superfaceCreateProductProfile = buildSuperfaceTest({
+    profile: 'payments/create-product',
+    provider,
+  });
   const result = await superfaceCreateProductProfile.run(
     {
       useCase: 'CreateProduct',
@@ -35,13 +32,10 @@ export function createProductTest(providerName: string): void {
     let superface: SuperfaceTest;
 
     beforeEach(() => {
-      superface = new SuperfaceTest(
-        {
-          profile: 'payments/create-product',
-          provider: providerName,
-        },
-        nockConfig
-      );
+      superface = buildSuperfaceTest({
+        profile: 'payments/create-product',
+        provider: providerName,
+      });
     });
 
     describe('CreateProduct', () => {

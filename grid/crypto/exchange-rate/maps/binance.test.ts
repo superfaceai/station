@@ -1,19 +1,16 @@
 import { SuperfaceTest } from '@superfaceai/testing';
 
-import { nockConfig } from '../../../test-config';
+import { buildSuperfaceTest } from '../../../test-config';
 
 describe(`crypto/exchange-rate/binance}`, () => {
   let superface: SuperfaceTest;
 
   beforeEach(() => {
-    superface = new SuperfaceTest(
-      {
-        profile: 'crypto/exchange-rate',
-        provider: 'binance',
-        useCase: 'GetExchangeRate',
-      },
-      nockConfig
-    );
+    superface = buildSuperfaceTest({
+      profile: 'crypto/exchange-rate',
+      provider: 'binance',
+      useCase: 'GetExchangeRate',
+    });
   });
 
   describe('GetExchangeRate', () => {

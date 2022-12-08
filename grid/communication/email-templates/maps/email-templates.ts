@@ -3,7 +3,7 @@
 
 import { RecordingProcessOptions, SuperfaceTest } from '@superfaceai/testing';
 
-import { nockConfig } from '../../../test-config';
+import { buildSuperfaceTest } from '../../../test-config';
 
 declare type Template = {
   id: string;
@@ -55,13 +55,10 @@ export const emailTemplatestTest = (
     let superface: SuperfaceTest;
 
     beforeEach(() => {
-      superface = new SuperfaceTest(
-        {
-          profile: 'communication/email-templates',
-          provider,
-        },
-        nockConfig
-      );
+      superface = buildSuperfaceTest({
+        profile: 'communication/email-templates',
+        provider,
+      });
     });
 
     describe('usecase ListTemplates', () => {

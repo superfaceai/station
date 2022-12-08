@@ -1,18 +1,15 @@
 import { SuperfaceTest } from '@superfaceai/testing';
 
-import { nockConfig } from '../../../test-config';
+import { buildSuperfaceTest } from '../../../test-config';
 
 describe(`vcs/single-file-content/gitlab`, () => {
   let superface: SuperfaceTest;
 
   beforeEach(() => {
-    superface = new SuperfaceTest(
-      {
-        profile: 'vcs/single-file-content',
-        provider: 'gitlab',
-      },
-      nockConfig
-    );
+    superface = buildSuperfaceTest({
+      profile: 'vcs/single-file-content',
+      provider: 'gitlab',
+    });
   });
 
   describe('SingleFileContent', () => {

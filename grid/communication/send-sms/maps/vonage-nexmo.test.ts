@@ -1,18 +1,15 @@
 import { SuperfaceTest } from '@superfaceai/testing';
 
-import { nockConfig } from '../../../test-config';
+import { buildSuperfaceTest } from '../../../test-config';
 
 describe('communication/send-sms/vonage-nexmo', () => {
   let superface: SuperfaceTest;
 
   beforeEach(() => {
-    superface = new SuperfaceTest(
-      {
-        profile: 'communication/send-sms',
-        provider: 'vonage-nexmo',
-      },
-      nockConfig
-    );
+    superface = buildSuperfaceTest({
+      profile: 'communication/send-sms',
+      provider: 'vonage-nexmo',
+    });
   });
 
   describe('SendMessage', () => {

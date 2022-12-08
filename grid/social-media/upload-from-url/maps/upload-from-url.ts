@@ -6,20 +6,17 @@ import {
 } from '@superfaceai/testing';
 import { RecordingType } from '@superfaceai/testing/dist/nock/recording.interfaces';
 
-import { nockConfig } from '../../../test-config';
+import { buildSuperfaceTest } from '../../../test-config';
 
 type ProfilesResult = Array<{ id: string; name: string }>;
 
 export const getPublishingProfiles = async (
   provider: string
 ): Promise<ProfilesResult> => {
-  const superfacePublishingProfiles = new SuperfaceTest(
-    {
-      profile: 'social-media/publishing-profiles',
-      provider,
-    },
-    nockConfig
-  );
+  const superfacePublishingProfiles = buildSuperfaceTest({
+    profile: 'social-media/publishing-profiles',
+    provider,
+  });
   const result = await superfacePublishingProfiles.run(
     {
       useCase: 'GetProfilesForPublishing',
@@ -54,20 +51,14 @@ export const publishVideoTest = (
       });
 
       beforeEach(() => {
-        superfaceUploadUrl = new SuperfaceTest(
-          {
-            profile: 'social-media/upload-from-url',
-            provider,
-          },
-          nockConfig
-        );
-        superfacePublishPost = new SuperfaceTest(
-          {
-            profile: 'social-media/publish-post',
-            provider,
-          },
-          nockConfig
-        );
+        superfaceUploadUrl = buildSuperfaceTest({
+          profile: 'social-media/upload-from-url',
+          provider,
+        });
+        superfacePublishPost = buildSuperfaceTest({
+          profile: 'social-media/publish-post',
+          provider,
+        });
       });
 
       let uploadId: string;

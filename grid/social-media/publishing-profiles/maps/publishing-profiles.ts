@@ -1,20 +1,17 @@
 /* eslint-disable jest/no-export */
 import { SuperfaceTest } from '@superfaceai/testing';
 
-import { nockConfig } from '../../../test-config';
+import { buildSuperfaceTest } from '../../../test-config';
 
 export const publishingProfilesTest = (provider: string): void => {
   describe(`social-media/publishing-profiles/${provider}`, () => {
     let superface: SuperfaceTest;
 
     beforeEach(() => {
-      superface = new SuperfaceTest(
-        {
-          profile: 'social-media/publishing-profiles',
-          provider,
-        },
-        nockConfig
-      );
+      superface = buildSuperfaceTest({
+        profile: 'social-media/publishing-profiles',
+        provider,
+      });
     });
 
     describe('GetProfilesForPublishing', () => {

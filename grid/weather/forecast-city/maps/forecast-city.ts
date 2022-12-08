@@ -2,7 +2,7 @@
 
 import { RecordingProcessOptions, SuperfaceTest } from '@superfaceai/testing';
 
-import { nockConfig } from '../../../test-config';
+import { buildSuperfaceTest } from '../../../test-config';
 
 export const forecastCityTest = (
   provider: string,
@@ -12,14 +12,11 @@ export const forecastCityTest = (
     let superface: SuperfaceTest;
 
     beforeEach(() => {
-      superface = new SuperfaceTest(
-        {
-          profile: 'weather/forecast-city',
-          provider,
-          useCase: 'GetWeatherForecastInCity',
-        },
-        nockConfig
-      );
+      superface = buildSuperfaceTest({
+        profile: 'weather/forecast-city',
+        provider,
+        useCase: 'GetWeatherForecastInCity',
+      });
     });
 
     describe('GetWeatherForecastInCity', () => {

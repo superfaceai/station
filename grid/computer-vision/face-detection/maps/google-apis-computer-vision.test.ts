@@ -1,19 +1,16 @@
 import { SuperfaceTest } from '@superfaceai/testing';
 
-import { nockConfig } from '../../../test-config';
+import { buildSuperfaceTest } from '../../../test-config';
 
 describe(`computer-vision/face-detection/google-apis-computer-vision`, () => {
   let superface: SuperfaceTest;
 
   beforeEach(() => {
-    superface = new SuperfaceTest(
-      {
-        profile: 'computer-vision/face-detection',
-        provider: 'google-apis-computer-vision',
-        useCase: 'FaceDetection',
-      },
-      nockConfig
-    );
+    superface = buildSuperfaceTest({
+      profile: 'computer-vision/face-detection',
+      provider: 'google-apis-computer-vision',
+      useCase: 'FaceDetection',
+    });
   });
 
   describe('FaceDetection', () => {

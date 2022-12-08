@@ -1,18 +1,15 @@
 import { SuperfaceTest } from '@superfaceai/testing';
 
-import { nockConfig } from '../../../test-config';
+import { buildSuperfaceTest } from '../../../test-config';
 
 describe('starwars/character-information/swapi', () => {
   let superface: SuperfaceTest;
 
   beforeEach(() => {
-    superface = new SuperfaceTest(
-      {
-        profile: 'starwars/character-information',
-        provider: 'swapi',
-      },
-      nockConfig
-    );
+    superface = buildSuperfaceTest({
+      profile: 'starwars/character-information',
+      provider: 'swapi',
+    });
   });
 
   it('should perform successfully', async () => {

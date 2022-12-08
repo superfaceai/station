@@ -1,18 +1,15 @@
 import { SuperfaceTest } from '@superfaceai/testing';
 
-import { nockConfig } from '../../../test-config';
+import { buildSuperfaceTest } from '../../../test-config';
 
 describe(`vcs/pull-request/gitlab}`, () => {
   let superface: SuperfaceTest;
 
   beforeEach(() => {
-    superface = new SuperfaceTest(
-      {
-        profile: 'vcs/pull-request',
-        provider: 'gitlab',
-      },
-      nockConfig
-    );
+    superface = buildSuperfaceTest({
+      profile: 'vcs/pull-request',
+      provider: 'gitlab',
+    });
   });
 
   describe('PullRequest', () => {

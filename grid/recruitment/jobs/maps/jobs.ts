@@ -1,8 +1,7 @@
 /* eslint-disable jest/no-export */
 
 import { RecordingProcessOptions, SuperfaceTest } from '@superfaceai/testing';
-
-import { nockConfig } from '../../../test-config';
+import { buildSuperfaceTest } from '../../../test-config';
 
 export const jobsTest = (
   provider: string,
@@ -13,14 +12,11 @@ export const jobsTest = (
 
     describe('ListJobs', () => {
       beforeAll(() => {
-        superface = new SuperfaceTest(
-          {
-            profile: 'recruitment/jobs',
-            provider,
-            useCase: 'ListJobs',
-          },
-          nockConfig
-        );
+        superface = buildSuperfaceTest({
+          profile: 'recruitment/jobs',
+          provider,
+          useCase: 'ListJobs',
+        });
       });
 
       describe('when searching for published jobs', () => {

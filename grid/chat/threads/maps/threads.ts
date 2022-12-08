@@ -2,7 +2,7 @@
 
 import { RecordingProcessOptions, SuperfaceTest } from '@superfaceai/testing';
 
-import { nockConfig } from '../../../test-config';
+import { buildSuperfaceTest } from '../../../test-config';
 
 export const getThreadsTest = (
   provider: string,
@@ -14,14 +14,11 @@ export const getThreadsTest = (
 
     describe('GetThreads', () => {
       beforeAll(() => {
-        superface = new SuperfaceTest(
-          {
-            profile: 'chat/threads',
-            provider,
-            useCase: 'GetThreads',
-          },
-          nockConfig
-        );
+        superface = buildSuperfaceTest({
+          profile: 'chat/threads',
+          provider,
+          useCase: 'GetThreads',
+        });
       });
 
       it('performs correctly', async () => {

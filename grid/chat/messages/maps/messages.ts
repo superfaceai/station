@@ -2,7 +2,7 @@
 
 import { RecordingProcessOptions, SuperfaceTest } from '@superfaceai/testing';
 
-import { nockConfig } from '../../../test-config';
+import { buildSuperfaceTest } from '../../../test-config';
 
 export const getMessagesTest = (
   provider: string,
@@ -14,10 +14,11 @@ export const getMessagesTest = (
 
     describe('GetMessages', () => {
       beforeAll(() => {
-        superface = new SuperfaceTest(
-          { profile: 'chat/messages', provider, useCase: 'GetMessages' },
-          nockConfig
-        );
+        superface = buildSuperfaceTest({
+          profile: 'chat/messages',
+          provider,
+          useCase: 'GetMessages',
+        });
       });
 
       describe('when specified destination does exist', () => {

@@ -2,20 +2,17 @@
 
 import { SuperfaceTest } from '@superfaceai/testing';
 
-import { nockConfig } from '../../../test-config';
+import { buildSuperfaceTest } from '../../../test-config';
 
 export const getRepliesTest = (provider: string, postId: string): void => {
   describe(`social-media/replies/${provider}`, () => {
     let superface: SuperfaceTest;
 
     beforeEach(() => {
-      superface = new SuperfaceTest(
-        {
-          profile: 'social-media/replies',
-          provider,
-        },
-        nockConfig
-      );
+      superface = buildSuperfaceTest({
+        profile: 'social-media/replies',
+        provider,
+      });
     });
 
     describe('GetPostReplies', () => {
