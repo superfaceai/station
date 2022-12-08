@@ -1,0 +1,235 @@
+{
+  "payments/create-subscription/paypal/CreateSubscription": {
+    "bf2d51472d104057c0398cc4abbc0132": [
+      {
+        "scope": "https://PARAMS_SUBDOMAIN.paypal.com:443",
+        "method": "POST",
+        "path": "/v1/billing/subscriptions",
+        "body": {
+          "plan_id": "INPUT_planId",
+          "subscriber": {
+            "email_address": "joe@example.com"
+          }
+        },
+        "status": 201,
+        "response": {
+          "status": "APPROVAL_PENDING",
+          "id": "I-0ECJK21H4PEF",
+          "create_time": "2022-11-10T08:14:48Z",
+          "links": [
+            {
+              "href": "https://www.sandbox.paypal.com/webapps/billing/subscriptions?ba_token=BA-92K596489L320315T",
+              "rel": "approve",
+              "method": "GET"
+            },
+            {
+              "href": "https://PARAMS_SUBDOMAIN.paypal.com/v1/billing/subscriptions/I-0ECJK21H4PEF",
+              "rel": "edit",
+              "method": "PATCH"
+            },
+            {
+              "href": "https://PARAMS_SUBDOMAIN.paypal.com/v1/billing/subscriptions/I-0ECJK21H4PEF",
+              "rel": "self",
+              "method": "GET"
+            }
+          ]
+        },
+        "rawHeaders": [
+          "Connection",
+          "close",
+          "Content-Length",
+          "457",
+          "Content-Type",
+          "application/json",
+          "Server",
+          "nginx/1.14.0 (Ubuntu)",
+          "Cache-Control",
+          "max-age=0, no-cache, no-store, must-revalidate",
+          "Paypal-Debug-Id",
+          "c7d3a7fda1daa",
+          "Strict-Transport-Security",
+          "max-age=31536000; includeSubDomains",
+          "Edge-Control",
+          "max-age=0",
+          "Accept-Ranges",
+          "bytes",
+          "Date",
+          "Thu, 10 Nov 2022 08:14:48 GMT",
+          "Via",
+          "1.1 varnish",
+          "X-Served-By",
+          "cache-fra-eddf8230067-FRA",
+          "X-Cache",
+          "MISS",
+          "X-Cache-Hits",
+          "0",
+          "X-Timer",
+          "S1668068088.852472,VS0,VE415"
+        ],
+        "responseIsBinary": false
+      }
+    ]
+  },
+  "prepare-payments/create-product/paypal/CreateProduct": {
+    "754061576e347ce571770d85bae0148a": [
+      {
+        "scope": "https://PARAMS_SUBDOMAIN.paypal.com:443",
+        "method": "POST",
+        "path": "/v1/catalogs/products",
+        "body": {
+          "name": "Temporary Product",
+          "description": "Used just for testing.",
+          "type": "PHYSICAL"
+        },
+        "status": 201,
+        "response": {
+          "id": "PROD-5W193301WT0366122",
+          "name": "Temporary Product",
+          "description": "Used just for testing.",
+          "create_time": "2022-11-10T08:14:49Z",
+          "links": [
+            {
+              "href": "https://api.sandbox.paypal.com/v1/catalogs/products/PROD-5W193301WT0366122",
+              "rel": "self",
+              "method": "GET"
+            },
+            {
+              "href": "https://api.sandbox.paypal.com/v1/catalogs/products/PROD-5W193301WT0366122",
+              "rel": "edit",
+              "method": "PATCH"
+            }
+          ]
+        },
+        "rawHeaders": [
+          "Connection",
+          "close",
+          "Content-Length",
+          "374",
+          "Content-Type",
+          "application/json",
+          "Server",
+          "nginx/1.14.0 (Ubuntu)",
+          "Cache-Control",
+          "max-age=0, no-cache, no-store, must-revalidate",
+          "Paypal-Debug-Id",
+          "313917fda7526",
+          "Strict-Transport-Security",
+          "max-age=31536000; includeSubDomains",
+          "Edge-Control",
+          "max-age=0",
+          "Accept-Ranges",
+          "bytes",
+          "Date",
+          "Thu, 10 Nov 2022 08:14:49 GMT",
+          "Via",
+          "1.1 varnish",
+          "X-Served-By",
+          "cache-fra-eddf8230042-FRA",
+          "X-Cache",
+          "MISS",
+          "X-Cache-Hits",
+          "0",
+          "X-Timer",
+          "S1668068089.873627,VS0,VE279"
+        ],
+        "responseIsBinary": false
+      }
+    ]
+  },
+  "prepare-payments/create-plan/paypal/CreatePlan": {
+    "972f9b1ddddd13823a1dbe9cfe8fdf63": [
+      {
+        "scope": "https://PARAMS_SUBDOMAIN.paypal.com:443",
+        "method": "POST",
+        "path": "/v1/billing/plans",
+        "body": {
+          "product_id": "INPUT_productId",
+          "name": "Temporary Plan",
+          "billing_cycles": [
+            {
+              "frequency": {
+                "interval_unit": "MONTH",
+                "interval_count": 1
+              },
+              "tenure_type": "REGULAR",
+              "sequence": 1,
+              "pricing_scheme": {
+                "fixed_price": {
+                  "value": 1234,
+                  "currency_code": "USD"
+                }
+              }
+            }
+          ],
+          "payment_preferences": {
+            "auto_bill_outstanding": true,
+            "setup_fee_failure_action": "CONTINUE",
+            "payment_failure_threshold": 3
+          }
+        },
+        "status": 201,
+        "response": {
+          "id": "P-1XA53690D4338101JMNWLF5Y",
+          "product_id": "INPUT_productId",
+          "name": "Temporary Plan",
+          "status": "ACTIVE",
+          "usage_type": "LICENSED",
+          "create_time": "2022-11-10T08:14:47Z",
+          "links": [
+            {
+              "href": "https://api.sandbox.paypal.com/v1/billing/plans/P-1XA53690D4338101JMNWLF5Y",
+              "rel": "self",
+              "method": "GET",
+              "encType": "application/json"
+            },
+            {
+              "href": "https://api.sandbox.paypal.com/v1/billing/plans/P-1XA53690D4338101JMNWLF5Y",
+              "rel": "edit",
+              "method": "PATCH",
+              "encType": "application/json"
+            },
+            {
+              "href": "https://api.sandbox.paypal.com/v1/billing/plans/P-1XA53690D4338101JMNWLF5Y/deactivate",
+              "rel": "self",
+              "method": "POST",
+              "encType": "application/json"
+            }
+          ]
+        },
+        "rawHeaders": [
+          "Connection",
+          "close",
+          "Content-Length",
+          "629",
+          "Content-Type",
+          "application/json",
+          "Server",
+          "nginx/1.14.0 (Ubuntu)",
+          "Cache-Control",
+          "max-age=0, no-cache, no-store, must-revalidate",
+          "Paypal-Debug-Id",
+          "c7d3a79731b8a",
+          "Strict-Transport-Security",
+          "max-age=31536000; includeSubDomains",
+          "Edge-Control",
+          "max-age=0",
+          "Accept-Ranges",
+          "bytes",
+          "Date",
+          "Thu, 10 Nov 2022 08:14:47 GMT",
+          "Via",
+          "1.1 varnish",
+          "X-Served-By",
+          "cache-fra-eddf8230110-FRA",
+          "X-Cache",
+          "MISS",
+          "X-Cache-Hits",
+          "0",
+          "X-Timer",
+          "S1668068087.134489,VS0,VE585"
+        ],
+        "responseIsBinary": false
+      }
+    ]
+  }
+}

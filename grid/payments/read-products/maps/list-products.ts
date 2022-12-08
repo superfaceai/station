@@ -3,16 +3,20 @@
 import { describe, expect } from '@jest/globals';
 import { SuperfaceTest } from '@superfaceai/testing';
 
+import { nockConfig } from '../../../test-config';
+
 export function listProductsTest(providerName: string): void {
   describe(`payments/read-products/${providerName}`, () => {
     let superface: SuperfaceTest;
 
     beforeEach(() => {
-      superface = new SuperfaceTest({
-        profile: 'payments/read-products',
-        provider: providerName,
-        testInstance: expect,
-      });
+      superface = new SuperfaceTest(
+        {
+          profile: 'payments/read-products',
+          provider: providerName,
+        },
+        nockConfig
+      );
     });
 
     describe('ListProducts', () => {

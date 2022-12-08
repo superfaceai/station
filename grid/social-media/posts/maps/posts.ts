@@ -1,5 +1,8 @@
 /* eslint-disable jest/no-export */
 import { RecordingProcessOptions, SuperfaceTest } from '@superfaceai/testing';
+import { RecordingType } from '@superfaceai/testing/dist/nock/recording.interfaces';
+
+import { nockConfig } from '../../../test-config';
 
 export const getProfilePostsTest = (
   provider: string,
@@ -10,23 +13,32 @@ export const getProfilePostsTest = (
     let superfacePosts: SuperfaceTest;
 
     beforeEach(() => {
-      superfacePublishingProfiles = new SuperfaceTest({
-        profile: 'social-media/publishing-profiles',
-        provider,
-      });
-      superfacePosts = new SuperfaceTest({
-        profile: 'social-media/posts',
-        provider,
-      });
+      superfacePublishingProfiles = new SuperfaceTest(
+        {
+          profile: 'social-media/publishing-profiles',
+          provider,
+        },
+        nockConfig
+      );
+      superfacePosts = new SuperfaceTest(
+        {
+          profile: 'social-media/posts',
+          provider,
+        },
+        nockConfig
+      );
     });
 
     describe('GetProfilePosts', () => {
       describe('when getting latest posts', () => {
         it('should succeed', async () => {
-          const result = await superfacePublishingProfiles.run({
-            useCase: 'GetProfilesForPublishing',
-            input: {},
-          });
+          const result = await superfacePublishingProfiles.run(
+            {
+              useCase: 'GetProfilesForPublishing',
+              input: {},
+            },
+            { recordingType: RecordingType.PREPARE }
+          );
 
           expect(result.isOk()).toBeTruthy();
           const resultUnwrapped = result.unwrap();

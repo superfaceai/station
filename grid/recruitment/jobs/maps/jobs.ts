@@ -2,6 +2,8 @@
 
 import { RecordingProcessOptions, SuperfaceTest } from '@superfaceai/testing';
 
+import { nockConfig } from '../../../test-config';
+
 export const jobsTest = (
   provider: string,
   options?: RecordingProcessOptions
@@ -11,12 +13,14 @@ export const jobsTest = (
 
     describe('ListJobs', () => {
       beforeAll(() => {
-        superface = new SuperfaceTest({
-          profile: 'recruitment/jobs',
-          provider,
-          useCase: 'ListJobs',
-          testInstance: expect,
-        });
+        superface = new SuperfaceTest(
+          {
+            profile: 'recruitment/jobs',
+            provider,
+            useCase: 'ListJobs',
+          },
+          nockConfig
+        );
       });
 
       describe('when searching for published jobs', () => {
