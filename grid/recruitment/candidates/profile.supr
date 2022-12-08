@@ -97,6 +97,7 @@ usecase CreateCandidate {
     Unique identifier of a job, newly created candidate applied for.
     """
     jobId! string!
+
     """
     Rate limit
     Rate limit details.
@@ -137,6 +138,66 @@ usecase CreateCandidate {
       }
     }
   }
+}
+
+"""
+Get Stage Changes
+Retrieves a list of stages for specific candidate. The candidate does not have to be applied for a job.
+"""
+usecase GetStageChanges {
+  input {
+    """
+    Candidate Id
+    Unique identifier of a candidate.
+    """
+    candidateId! string!
+  }
+
+  result {
+    """
+    Stages
+    List of stages relevant to the candidate.
+    """
+    stages! [Stage!]!
+    
+    """
+    Rate limit
+    Rate limit details.
+    """
+    rateLimit RateLimit
+  }!
+}
+
+model Stage {
+  """
+  Id
+  Unique identifier of a stage
+  """
+	id! string!
+
+  """
+  Name
+  Human readable name of a stage.
+  """
+  name! string!
+
+  """
+  Description
+  Description of a stage.
+  """
+	description string
+
+  """
+  Current
+  Whether candidate is in this stage currently.
+  """
+  current boolean
+
+  """
+  Created At
+  ISO8601 timestamp when candidate moved to this stage.
+  """
+  createdAt string
 }
 
 """
