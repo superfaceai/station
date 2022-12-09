@@ -992,6 +992,18 @@
         }
       ]
     },
+    "openai": {
+      "file": "../providers/openai.json",
+      "security": [
+        {
+          "id": "bearer",
+          "token": "$OPENAI_ACCESS_TOKEN"
+        }
+      ],
+      "parameters": {
+        "organizationId": "$OPENAI_ORGANIZATION_ID"
+      }
+    },
     "postmark": {
       "file": "../providers/postmark.json",
       "security": [
