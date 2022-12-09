@@ -6,6 +6,10 @@ map CompleteText {
     security "bearer"
   
     request "application/json" {
+      headers {
+        "OpenAI-Organization" = parameters.organizationId
+      }
+
       body {
         prompt = input.prompt
         model = call MapCompleteModelSize(model = input.model)
@@ -44,6 +48,10 @@ map EditText {
     security "bearer"
   
     request "application/json" {
+      headers {
+        "OpenAI-Organization" = parameters.organizationId
+      }
+
       body {
         input = input.text
         instruction = input.instructions
@@ -125,6 +133,11 @@ operation HandleErrorWithJson {
   return if (statusCode === 400) {
     title = "Invalid data"
     detail = (`Invalid data was sent to OpenAI server: ${body.error.message}`)
+  }
+
+  return if (statusCode === 401) {
+    title = "Unauthenticated"
+    detail = (`Please make sure you're providing a valid OpenAI API key: ${body.error.message}`)
   }
 
   return if (statusCode === 404) {
