@@ -49,5 +49,43 @@ export const generateTextTest = (provider: string): void => {
         expect(result).toMatchSnapshot();
       });
     });
+
+    describe('EditText', () => {
+      it('edits the text based on the input & instructions (using defaults)', async () => {
+        const result = await superface.run({
+          useCase: 'EditText',
+          input: {
+            text: 'What day of the wek is it?',
+            instructions: 'Fix the spelling mistakes',
+          },
+        });
+        expect(result).toMatchSnapshot();
+      });
+
+      it('edits the text based on the input & instructions (using specific params)', async () => {
+        const result = await superface.run({
+          useCase: 'EditText',
+          input: {
+            text: 'What day of the wek is it?',
+            instructions: 'Fix the spelling mistakes',
+            creativity: 0.2,
+            count: 2,
+          },
+        });
+        expect(result).toMatchSnapshot();
+      });
+
+      it('errors with large request edits count', async () => {
+        const result = await superface.run({
+          useCase: 'EditText',
+          input: {
+            text: 'What day of the wek is it?',
+            instructions: 'Fix the spelling mistakes',
+            count: 1000
+          },
+        });
+        expect(result).toMatchSnapshot();
+      });
+    });
   });
 };

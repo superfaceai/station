@@ -8,7 +8,7 @@ map CompleteText {
     request "application/json" {
       body {
         prompt = input.prompt
-        model = call MapModelSize(model = input.model)
+        model = call MapCompleteModelSize(model = input.model)
         temperature = call MapCreativity(creativity = input.creativity)
         max_tokens = call MapMaxLength(approxMaxWords = input.approxMaxWords)
         n = call MapCount(count = input.count)
@@ -39,7 +39,43 @@ map CompleteText {
   }
 }
 
-operation MapModelSize {
+map EditText { 
+  http POST "/v1/edits" {
+    security "bearer"
+  
+    request "application/json" {
+      body {
+        input = input.text
+        instruction = input.instructions
+        model = "text-davinci-edit-001"
+        temperature = call MapCreativity(creativity = input.creativity)
+        n = call MapCount(count = input.count)
+      }
+    }
+
+    response 200 "application/json" {
+      edits = call foreach(choice of body.choices) MapEdit(
+        choice = choice
+      )
+
+      map result {
+        edits = edits
+      }
+    }
+
+    response "application/json" {
+      error = call HandleErrorWithJson(body = body, statusCode = statusCode)
+      return map error error
+    }
+
+    response {
+      error = call HandleError(body = body, statusCode = statusCode)
+      return map error error
+    }
+  }
+}
+
+operation MapCompleteModelSize {
   MODELSIZE_TO_OPENAI_MODEL = {
     "small": "text-babbage-001",
     "medium": "text-curie-001",
@@ -75,6 +111,10 @@ operation MapCount {
 }
 
 operation MapCompletion {
+  return args.choice.text
+}
+
+operation MapEdit {
   return args.choice.text
 }
 
