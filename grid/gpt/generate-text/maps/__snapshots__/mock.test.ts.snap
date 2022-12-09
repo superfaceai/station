@@ -1,0 +1,61 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`gpt/generate-text/mock CompleteText completes text based on the prompt (using defaults) 1`] = `
+Ok {
+  "value": Object {
+    "completions": Array [
+      "Cool off with something sweet at our ice cream shop!",
+    ],
+  },
+}
+`;
+
+exports[`gpt/generate-text/mock CompleteText completes text based on the prompt (using specific params) 1`] = `
+Ok {
+  "value": Object {
+    "completions": Array [
+      "Cool off with something sweet at our ice cream shop!",
+    ],
+  },
+}
+`;
+
+exports[`gpt/generate-text/mock CompleteText errors with negative max word limit 1`] = `
+Ok {
+  "value": Object {
+    "completions": Array [
+      "Cool off with something sweet at our ice cream shop!",
+    ],
+  },
+}
+`;
+
+exports[`gpt/generate-text/mock EditText edits the text based on the input & instructions (using defaults) 1`] = `
+Ok {
+  "value": Object {
+    "edits": Array [
+      "What day of the week is it?",
+    ],
+  },
+}
+`;
+
+exports[`gpt/generate-text/mock EditText edits the text based on the input & instructions (using specific params) 1`] = `
+Ok {
+  "value": Object {
+    "edits": Array [
+      "What day of the week is it?",
+    ],
+  },
+}
+`;
+
+exports[`gpt/generate-text/mock EditText errors with large request edits count 1`] = `
+Ok {
+  "value": Object {
+    "edits": Array [
+      "What day of the week is it?",
+    ],
+  },
+}
+`;

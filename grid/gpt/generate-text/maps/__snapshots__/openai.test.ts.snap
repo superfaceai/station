@@ -1,0 +1,79 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`gpt/generate-text/openai CompleteText completes text based on the prompt (using defaults) 1`] = `
+Ok {
+  "value": Object {
+    "completions": Array [
+      "
+
+It appears that this is indeed a test.",
+    ],
+  },
+}
+`;
+
+exports[`gpt/generate-text/openai CompleteText completes text based on the prompt (using specific params) 1`] = `
+Ok {
+  "value": Object {
+    "completions": Array [
+      "
+
+\\"Cool off with our delicious treats!\\"",
+      "
+
+\\"Cool off with our creamy creations!\\"",
+      "
+
+\\"Come for the ice cream, stay for the smiles!\\"",
+    ],
+  },
+}
+`;
+
+exports[`gpt/generate-text/openai CompleteText errors with negative max word limit 1`] = `
+Err {
+  "error": "MappedHTTPError: Expected HTTP error
+Properties: {
+  \\"title\\": \\"Invalid data\\",
+  \\"detail\\": \\"Invalid data was sent to OpenAI server: -42 is less than the minimum of 0 - 'max_tokens'\\"
+}
+AST Path: definitions[0].statements[0].responseHandlers[1].statements[1]
+Original Map Location: Line 32, column 7",
+}
+`;
+
+exports[`gpt/generate-text/openai EditText edits the text based on the input & instructions (using defaults) 1`] = `
+Ok {
+  "value": Object {
+    "edits": Array [
+      "What day of the week is it?
+",
+    ],
+  },
+}
+`;
+
+exports[`gpt/generate-text/openai EditText edits the text based on the input & instructions (using specific params) 1`] = `
+Ok {
+  "value": Object {
+    "edits": Array [
+      "What day of the week is it?
+",
+      "What day of the week is it?
+",
+    ],
+  },
+}
+`;
+
+exports[`gpt/generate-text/openai EditText errors with large request edits count 1`] = `
+Err {
+  "error": "MappedHTTPError: Expected HTTP error
+Properties: {
+  \\"title\\": \\"Invalid data\\",
+  \\"detail\\": \\"Invalid data was sent to OpenAI server: 1000 is greater than the maximum of 20 - 'n'\\"
+}
+AST Path: definitions[1].statements[0].responseHandlers[1].statements[1]
+Original Map Location: Line 68, column 7",
+}
+`;
