@@ -63,6 +63,67 @@ usecase CompleteText unsafe {
 }
 
 """
+Edit Text
+Edit a text using the given instructions
+"""
+usecase EditText unsafe {
+  input {
+    """
+    Input Text
+    Starting point text you'd like to edit
+    """
+    text! string!
+
+    """
+    Instructions
+    Instructions for the model how to edit the input text
+    """
+    instructions! string!
+
+    creativity
+    count
+  }
+
+  result {
+    """
+    Generated Edits
+    List of edited texts based on a given text and the instructions.
+    Number of edits can be specified by `count`.
+    """
+    edits! [string!]!
+  }
+
+  error GPTError!
+
+  example BasicEdit {
+    input {
+      text = 'What day of the wek is it?',
+      instructions = 'Fix the spelling mistakes',
+      creativity = 0.2,
+    }
+
+    result {
+      edits = [
+        'What day of the week is it?'
+      ]
+    }
+  }
+
+  example CountFailure {
+    input {
+      text = 'What day of the wek is it?',
+      instructions = 'Fix the spelling mistakes',
+      count = 1000
+    }
+
+    error {
+      title = "Max Count Exceeded",
+      detail = "Maximum supported results count is 20"
+    }
+  }
+}
+
+"""
 Creativity
 Number between 0 and 1 defines how risky the model will be when
 generating the text. Using 1 is suited for creative applications and 0 for
