@@ -3,6 +3,8 @@
 import { RecordingProcessOptions, SuperfaceTest } from '@superfaceai/testing';
 import * as fs from 'fs/promises';
 
+import { buildSuperfaceTest } from '../../../test-config';
+
 export const speechToTextRecognitionTest = (
   provider: string,
   audioFilePath = './grid/speech/recognize/maps/hello_world_24khz.wav',
@@ -12,10 +14,9 @@ export const speechToTextRecognitionTest = (
     let superface: SuperfaceTest;
 
     beforeEach(() => {
-      superface = new SuperfaceTest({
+      superface = buildSuperfaceTest({
         profile: 'speech/recognize',
         provider,
-        testInstance: expect,
       });
     });
 

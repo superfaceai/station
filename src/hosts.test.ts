@@ -56,7 +56,7 @@ const hostsWithSection = `
 
 describe('hosts', () => {
   beforeEach(() => {
-    mocked(util.providersFiles).mockReturnValue(['./one.json', './two.json']);
+    mocked(util.providersFiles).mockResolvedValue(['./one.json', './two.json']);
   });
 
   describe('#updateHosts', () => {
@@ -92,8 +92,8 @@ ${hostsWithoutSection}
         .mockReturnValueOnce(JSON.stringify(providerTwo));
     });
 
-    it('should return all urls from services', () => {
-      expect(hosts.getServiceUrls()).toEqual([
+    it('should return all urls from services', async () => {
+      await expect(hosts.getServiceUrls()).resolves.toEqual([
         'example.com',
         'example.coffee',
         'example.net',

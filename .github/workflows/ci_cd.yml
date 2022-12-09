@@ -82,7 +82,9 @@ jobs:
       - run: yarn run check
       - run: yarn lint
       - run: yarn structure
+      - run: yarn compile
       - run: yarn test
+      - run: yarn compile:clear
 
   license_check:
     name: License check

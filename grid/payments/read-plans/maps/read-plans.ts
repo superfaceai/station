@@ -3,6 +3,7 @@
 import { describe, expect } from '@jest/globals';
 import { SuperfaceTest } from '@superfaceai/testing';
 
+import { buildSuperfaceTest } from '../../../test-config';
 import { createPlan } from '../../create-plan/maps/create-plan';
 
 export function getPlanTest(providerName: string): void {
@@ -10,10 +11,9 @@ export function getPlanTest(providerName: string): void {
     let superface: SuperfaceTest;
 
     beforeEach(() => {
-      superface = new SuperfaceTest({
+      superface = buildSuperfaceTest({
         profile: 'payments/read-plans',
         provider: providerName,
-        testInstance: expect,
       });
     });
 
@@ -45,10 +45,9 @@ export function listPlansTest(providerName: string): void {
     let superface: SuperfaceTest;
 
     beforeEach(() => {
-      superface = new SuperfaceTest({
+      superface = buildSuperfaceTest({
         profile: 'payments/read-plans',
         provider: providerName,
-        testInstance: expect,
       });
     });
 

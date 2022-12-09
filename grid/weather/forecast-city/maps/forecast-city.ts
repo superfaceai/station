@@ -2,6 +2,8 @@
 
 import { RecordingProcessOptions, SuperfaceTest } from '@superfaceai/testing';
 
+import { buildSuperfaceTest } from '../../../test-config';
+
 export const forecastCityTest = (
   provider: string,
   options?: RecordingProcessOptions
@@ -10,11 +12,10 @@ export const forecastCityTest = (
     let superface: SuperfaceTest;
 
     beforeEach(() => {
-      superface = new SuperfaceTest({
+      superface = buildSuperfaceTest({
         profile: 'weather/forecast-city',
         provider,
         useCase: 'GetWeatherForecastInCity',
-        testInstance: expect,
       });
     });
 

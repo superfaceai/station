@@ -2,6 +2,8 @@
 
 import { RecordingProcessOptions, SuperfaceTest } from '@superfaceai/testing';
 
+import { buildSuperfaceTest } from '../../../test-config';
+
 export const getChannelsTest = (
   provider: string,
   options?: { workspace?: string; recordingOptions?: RecordingProcessOptions }
@@ -11,11 +13,10 @@ export const getChannelsTest = (
 
     describe('GetChannels', () => {
       beforeAll(() => {
-        superface = new SuperfaceTest({
+        superface = buildSuperfaceTest({
           profile: 'chat/channels',
           provider,
           useCase: 'GetChannels',
-          testInstance: expect,
         });
       });
 

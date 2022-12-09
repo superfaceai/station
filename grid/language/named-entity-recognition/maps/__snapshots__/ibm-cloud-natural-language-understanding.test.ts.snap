@@ -1,0 +1,81 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`language/named-entity-recognition/ibm-cloud-natural-language-understanding NamedEntityRecognition extracts all entities from the phrase 1`] = `
+Ok {
+  "value": Object {
+    "entities": Array [
+      Object {
+        "category": "Organization",
+        "importance": 0.954265,
+        "text": "Houston Natural Gas",
+      },
+      Object {
+        "category": "Organization",
+        "importance": 0.777889,
+        "text": "InterNorth",
+      },
+      Object {
+        "category": "Person",
+        "importance": 0.640119,
+        "text": "Kenneth Lay",
+      },
+      Object {
+        "category": "Location",
+        "importance": 0.611778,
+        "text": "Omaha, Nebraska",
+      },
+    ],
+  },
+}
+`;
+
+exports[`language/named-entity-recognition/ibm-cloud-natural-language-understanding NamedEntityRecognition extracts all entities from the phrase with language specified 1`] = `
+Ok {
+  "value": Object {
+    "entities": Array [
+      Object {
+        "category": "Organization",
+        "importance": 0,
+        "text": "Houston Natural Gas",
+      },
+      Object {
+        "category": "Organization",
+        "importance": 0,
+        "text": "InterNorth",
+      },
+      Object {
+        "category": "Measure",
+        "importance": 0,
+        "text": "37 000 mil plynovodu",
+      },
+      Object {
+        "category": "Person",
+        "importance": 0,
+        "text": "Kenneth Lay",
+      },
+      Object {
+        "category": "Organization",
+        "importance": 0,
+        "text": "Omaze",
+      },
+      Object {
+        "category": "Location",
+        "importance": 0,
+        "text": "Nebrasce",
+      },
+    ],
+  },
+}
+`;
+
+exports[`language/named-entity-recognition/ibm-cloud-natural-language-understanding NamedEntityRecognition fails for unsupported language 1`] = `
+Err {
+  "error": "MappedHTTPError: Expected HTTP error
+Properties: {
+  \\"title\\": \\"Unsuccessful Recognition\\",
+  \\"detail\\": \\"unsupported text language: sq\\"
+}
+AST Path: definitions[0].statements[0].responseHandlers[1].statements[0]
+Original Map Location: Line 33, column 7",
+}
+`;

@@ -2,6 +2,8 @@
 
 import { RecordingProcessOptions, SuperfaceTest } from '@superfaceai/testing';
 
+import { buildSuperfaceTest } from '../../../test-config';
+
 export const sendTemplatedEmailTest = (
   provider: string,
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -12,10 +14,9 @@ export const sendTemplatedEmailTest = (
     let superface: SuperfaceTest;
 
     beforeEach(async () => {
-      superface = new SuperfaceTest({
+      superface = buildSuperfaceTest({
         profile: 'communication/send-templated-email',
         provider,
-        testInstance: expect,
       });
     });
 

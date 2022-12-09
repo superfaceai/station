@@ -368,6 +368,17 @@
         }
       }
     },
+    "language/named-entity-recognition": {
+      "file": "../grid/language/named-entity-recognition/profile.supr",
+      "providers": {
+        "mock": {
+          "file": "../grid/language/named-entity-recognition/maps/mock.suma"
+        },
+        "ibm-cloud-natural-language-understanding": {
+          "file": "../grid/language/named-entity-recognition/maps/ibm-cloud-natural-language-understanding.suma"
+        }
+      }
+    },
     "language/keyword-extraction": {
       "file": "../grid/language/keyword-extraction/profile.supr",
       "providers": {
@@ -670,10 +681,7 @@
           "file": "../grid/social-media/replies/maps/mock.suma"
         }
       },
-      "priority": [
-        "linkedin",
-        "mock"
-      ]
+      "priority": ["linkedin", "mock"]
     },
     "payments/read-products": {
       "file": "../grid/payments/read-products/profile.supr",
@@ -789,6 +797,34 @@
         },
         "openai": {
           "file": "../grid/gpt/generate-text/maps/openai.suma"
+        }
+      }
+    },
+    "recruitment/candidates": {
+      "file": "../grid/recruitment/candidates/profile.supr",
+      "providers": {
+        "mock": {
+          "file": "../grid/recruitment/candidates/maps/mock.suma"
+        },
+        "workable": {
+          "file": "../grid/recruitment/candidates/maps/workable.suma"
+        },
+        "breezy-hr": {
+          "file": "../grid/recruitment/candidates/maps/breezy-hr.suma"
+        }
+      }
+    },
+    "recruitment/jobs": {
+      "file": "../grid/recruitment/jobs/profile.supr",
+      "providers": {
+        "mock": {
+          "file": "../grid/recruitment/jobs/maps/mock.suma"
+        },
+        "workable": {
+          "file": "../grid/recruitment/jobs/maps/workable.suma"
+        },
+        "breezy-hr": {
+          "file": "../grid/recruitment/jobs/maps/breezy-hr.suma"
         }
       }
     }
@@ -1342,6 +1378,26 @@
           "token": "$STRIPE_SECRET_KEY"
         }
       ]
+    },
+    "workable": {
+      "file": "../providers/workable.provider.json",
+      "security": [
+        {
+          "id": "bearer_token",
+          "token": "$WORKABLE_ACCESS_TOKEN"
+        }
+      ],
+      "parameters": {
+        "SUBDOMAIN": "$WORKABLE_SUBDOMAIN",
+        "CLIENT_ID": "$WORKABLE_CLIENT_ID"
+      }
+    },
+    "breezy-hr": {
+      "file": "../providers/breezy-hr.provider.json",
+      "parameters": {
+        "COMPANY_ID": "$BREEZY_HR_COMPANY_ID",
+        "ACCESS_TOKEN": "$BREEZY_HR_ACCESS_TOKEN"
+      }
     }
   }
 }

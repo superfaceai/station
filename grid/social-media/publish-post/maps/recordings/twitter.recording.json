@@ -1,0 +1,201 @@
+{
+  "prepare-social-media/publishing-profiles/twitter/GetProfilesForPublishing": {
+    "360130dfdf1a05251e6f9497cf009941": [
+      {
+        "scope": "https://api.twitter.com:443",
+        "method": "GET",
+        "path": "/2/users/me?user.fields=id%2Cname%2Cprofile_image_url%2Cusername",
+        "body": "",
+        "status": 200,
+        "response": [
+          "1f8b0800000000000000548ebd0e823014465fc5dcd9d01f4a8b8c26ba6aa27b53e08235149ab6c481f0ee767071fdce979cb3416f92816603db43034c48a94eb2e24c30ae14ab058523ccc661868febe1893161c8930fcb6027d4d69911f51aa6cc5f29f9d810e2db58a48f7563d12d8efc3d236142d525e59c8a924a2a95909c54e74b1be6fb4dcf4b70662ade7ecc8a3562f899e3ea310ca6439d7200ecfb170000ffff0300076327c7b7000000"
+        ],
+        "rawHeaders": [
+          "date",
+          "Mon, 23 May 2022 11:05:09 UTC",
+          "server",
+          "tsa_o",
+          "set-cookie",
+          "guest_id=v1%3A165330390973292749; Max-Age=34214400; Expires=Fri, 23 Jun 2023 11:05:09 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None",
+          "api-version",
+          "2.43",
+          "content-type",
+          "application/json; charset=utf-8",
+          "cache-control",
+          "no-cache, no-store, max-age=0",
+          "content-length",
+          "175",
+          "x-access-level",
+          "read-write",
+          "x-frame-options",
+          "SAMEORIGIN",
+          "content-encoding",
+          "gzip",
+          "x-xss-protection",
+          "0",
+          "x-rate-limit-limit",
+          "75",
+          "x-rate-limit-reset",
+          "1653304618",
+          "content-disposition",
+          "attachment; filename=json.json",
+          "x-content-type-options",
+          "nosniff",
+          "x-rate-limit-remaining",
+          "72",
+          "strict-transport-security",
+          "max-age=631138519",
+          "x-response-time",
+          "144",
+          "x-connection-hash",
+          "72e416b8d3c82f1016499a71ac508cde848fddb8d4118c7aad1b0c0cbc352af0",
+          "connection",
+          "close"
+        ],
+        "responseIsBinary": false,
+        "decodedResponse": {
+          "data": {
+            "id": "1466796521412771840",
+            "name": "SF Tester",
+            "profile_image_url": "https://pbs.twimg.com/profile_images/1478302204306067462/5BEbrnPO_normal.jpg",
+            "username": "superface_test"
+          }
+        }
+      }
+    ]
+  },
+  "social-media/publish-post/twitter/PublishPost": {
+    "360130dfdf1a05251e6f9497cf009941": [
+      {
+        "scope": "https://api.twitter.com:443",
+        "method": "POST",
+        "path": "/2/tweets",
+        "body": {
+          "text": "Test from Superface Station 7."
+        },
+        "status": 201,
+        "response": [
+          "1f8b0800000000000000aa564a492c4954b2aa56ca4c51b252323435b230b33436353431353237b4b434323652d2512a49ad28014a86a4169728a415e5e72a049716a416a52526a72a0497249664e6e72998eb29d5d602000000ffff03002a3583ff4d000000"
+        ],
+        "rawHeaders": [
+          "date",
+          "Mon, 23 May 2022 11:05:10 UTC",
+          "server",
+          "tsa_o",
+          "location",
+          "https://api.twitter.com/2/tweets/1528693514527199232",
+          "set-cookie",
+          "guest_id=v1%3A165330391025291915; Max-Age=34214400; Expires=Fri, 23 Jun 2023 11:05:10 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None",
+          "api-version",
+          "2.43",
+          "content-type",
+          "application/json; charset=utf-8",
+          "cache-control",
+          "no-cache, no-store, max-age=0",
+          "content-length",
+          "102",
+          "x-access-level",
+          "read-write",
+          "x-frame-options",
+          "SAMEORIGIN",
+          "content-encoding",
+          "gzip",
+          "x-xss-protection",
+          "0",
+          "x-rate-limit-limit",
+          "200",
+          "x-rate-limit-reset",
+          "1653304810",
+          "content-disposition",
+          "attachment; filename=json.json",
+          "x-content-type-options",
+          "nosniff",
+          "x-rate-limit-remaining",
+          "199",
+          "strict-transport-security",
+          "max-age=631138519",
+          "x-response-time",
+          "248",
+          "x-connection-hash",
+          "667d2e27cef306dee552e14b038e5d7dfc4cfc3f24ff9c9b3a09c527b9a6f254",
+          "connection",
+          "close"
+        ],
+        "responseIsBinary": false,
+        "decodedResponse": {
+          "data": {
+            "id": "1528693514527199232",
+            "text": "Test from Superface Station 7."
+          }
+        }
+      }
+    ],
+    "35a321dc2603b36ed5ec2aea015fc4bd": [
+      {
+        "scope": "https://api.twitter.com:443",
+        "method": "POST",
+        "path": "/2/tweets",
+        "body": {
+          "text": ""
+        },
+        "status": 400,
+        "response": [
+          "1f8b08000000000000002ccd4b8ec2301084e1abb47acdc412cbdc605620c40eb1684869b064c7a6bb438810771ff35897bebf1e0cd5a2c6fde1c11966f207ee799b20068ae3394d0308d12f5072dc9d8a52c610a58db49449693f03def1f3b8628f9e5efc77bc498a03ed709d60ce2b1ee012539b3623de89a2a02a2a190e35f2f289e947d02cd60ede95ae715feaab7b71afd6872035763e476fb43b971cd6a16a3925640b5ff4f30df1f31f0000ffff03007448fa30e2000000"
+        ],
+        "rawHeaders": [
+          "date",
+          "Mon, 23 May 2022 11:05:10 UTC",
+          "server",
+          "tsa_o",
+          "set-cookie",
+          "guest_id=v1%3A165330391072092550; Max-Age=34214400; Expires=Fri, 23 Jun 2023 11:05:10 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None",
+          "api-version",
+          "2.43",
+          "content-type",
+          "application/json; charset=utf-8",
+          "cache-control",
+          "no-cache, no-store, max-age=0",
+          "content-length",
+          "187",
+          "x-access-level",
+          "read-write",
+          "x-frame-options",
+          "SAMEORIGIN",
+          "content-encoding",
+          "gzip",
+          "x-xss-protection",
+          "0",
+          "x-rate-limit-limit",
+          "200",
+          "x-rate-limit-reset",
+          "1653304810",
+          "content-disposition",
+          "attachment; filename=json.json",
+          "x-content-type-options",
+          "nosniff",
+          "x-rate-limit-remaining",
+          "198",
+          "strict-transport-security",
+          "max-age=631138519",
+          "x-response-time",
+          "149",
+          "x-connection-hash",
+          "b508ffd60e64ff6e9482658fe6c825217f231f9d9a6e0af262fa803c740d9259",
+          "connection",
+          "close"
+        ],
+        "responseIsBinary": false,
+        "decodedResponse": {
+          "errors": [
+            {
+              "message": "Please include either text or media in your Tweet."
+            }
+          ],
+          "title": "Invalid Request",
+          "detail": "One or more parameters to your request was invalid.",
+          "type": "https://api.twitter.com/2/problems/invalid-request"
+        }
+      }
+    ]
+  }
+}

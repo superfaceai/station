@@ -7,6 +7,8 @@ import {
   TestingReturn,
 } from '@superfaceai/testing';
 
+import { buildSuperfaceTest } from '../../../test-config';
+
 type UseCaseInput = {
   refreshToken?: string;
   clientId?: string;
@@ -97,11 +99,10 @@ export const refreshTokenTest = (
     }
 
     beforeEach(() => {
-      superfaceRefreshToken = new SuperfaceTest({
+      superfaceRefreshToken = buildSuperfaceTest({
         profile: 'oauth2/refresh-token',
         useCase: 'GetAccessTokenFromRefreshToken',
         provider,
-        testInstance: expect,
       });
     });
 

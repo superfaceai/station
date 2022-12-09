@@ -2,15 +2,16 @@
 
 import { SuperfaceTest } from '@superfaceai/testing';
 
+import { buildSuperfaceTest } from '../../../test-config';
+
 export const nearbyPoiTest = (provider: string): void => {
   describe(`navigation/nearby-poi/${provider}`, () => {
     let superface: SuperfaceTest;
 
     beforeEach(() => {
-      superface = new SuperfaceTest({
+      superface = buildSuperfaceTest({
         profile: 'navigation/nearby-poi',
         provider,
-        testInstance: expect,
       });
     });
 

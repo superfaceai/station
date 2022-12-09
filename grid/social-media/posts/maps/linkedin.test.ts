@@ -1,5 +1,7 @@
 import { SuperfaceTest } from '@superfaceai/testing';
 
+import { buildSuperfaceTest } from '../../../test-config';
+
 const provider = 'linkedin';
 // DevTestCo - https://docs.microsoft.com/en-us/linkedin/marketing/integrations/community-management/organizations#test-organizations
 const profileId = 'urn:li:organization:2414183';
@@ -13,7 +15,7 @@ describe(`social-media/posts/${provider}`, () => {
   });
 
   beforeEach(() => {
-    superfacePosts = new SuperfaceTest({
+    superfacePosts = buildSuperfaceTest({
       profile: 'social-media/posts',
       provider,
     });
@@ -40,6 +42,7 @@ describe(`social-media/posts/${provider}`, () => {
               profileId,
               page,
             },
+            testName: `GetProfilePosts-${i}`,
           });
           expect(result.isOk()).toBe(true);
           const resultUnwrapped = result.unwrap() as any;

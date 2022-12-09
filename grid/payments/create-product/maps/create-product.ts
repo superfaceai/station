@@ -2,21 +2,27 @@
 
 import { describe, expect } from '@jest/globals';
 import { SuperfaceTest } from '@superfaceai/testing';
+import { RecordingType } from '@superfaceai/testing/dist/nock/recording.interfaces';
+
+import { buildSuperfaceTest } from '../../../test-config';
 
 export async function createProduct(provider: string): Promise<string> {
-  const superfaceCreateProductProfile = new SuperfaceTest({
+  const superfaceCreateProductProfile = buildSuperfaceTest({
     profile: 'payments/create-product',
     provider,
   });
-  const result = await superfaceCreateProductProfile.run({
-    useCase: 'CreateProduct',
-    input: {
-      name: 'Temporary Product',
-      description: 'Used just for testing.',
-      type: 'physical',
+  const result = await superfaceCreateProductProfile.run(
+    {
+      useCase: 'CreateProduct',
+      input: {
+        name: 'Temporary Product',
+        description: 'Used just for testing.',
+        type: 'physical',
+      },
+      testName: 'payments/create-product/temporary',
     },
-    testName: 'payments/create-product/temporary',
-  });
+    { recordingType: RecordingType.PREPARE }
+  );
 
   return (result.unwrap() as { productId: string }).productId;
 }
@@ -26,10 +32,9 @@ export function createProductTest(providerName: string): void {
     let superface: SuperfaceTest;
 
     beforeEach(() => {
-      superface = new SuperfaceTest({
+      superface = buildSuperfaceTest({
         profile: 'payments/create-product',
         provider: providerName,
-        testInstance: expect,
       });
     });
 

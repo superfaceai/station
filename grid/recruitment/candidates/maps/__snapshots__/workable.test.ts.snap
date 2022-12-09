@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`recruitment/candidates/workable CreateCandidate when specified job does exist performs correctly 1`] = `
+Ok {
+  "value": Object {
+    "id": "d20b37b",
+    "jobId": "56D021066C",
+  },
+}
+`;
+
+exports[`recruitment/candidates/workable CreateCandidate when specified job does not exist returns error 1`] = `
+Err {
+  "error": "MappedHTTPError: Expected HTTP error
+Properties: {
+  \\"title\\": \\"Not found\\",
+  \\"detail\\": \\"Not found\\",
+  \\"code\\": \\"NotFound\\",
+  \\"rateLimit\\": {
+    \\"bucket\\": \\"workable\\"
+  }
+}
+AST Path: definitions[0].statements[0].responseHandlers[1].statements[1]
+Original Map Location: Line 88, column 7",
+}
+`;

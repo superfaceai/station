@@ -1,4 +1,3 @@
-import { SuperJson } from '@superfaceai/one-sdk';
 import { mocked } from 'ts-jest/utils';
 
 import * as stationStructure from './station_structure';
@@ -8,13 +7,16 @@ jest.mock('./util');
 
 describe('Station Structure', () => {
   beforeEach(() => {
-    mocked(util.loadSuperJson).mockReturnValue(new SuperJson({}));
+    mocked(util.loadSuperJson).mockResolvedValue({
+      document: {},
+      path: './superface',
+    });
     mocked(util.localMaps).mockResolvedValue([]);
     mocked(util.localProfiles).mockResolvedValue([]);
     mocked(util.localProviders).mockResolvedValue([]);
-    mocked(util.mapsFiles).mockReturnValue([]);
-    mocked(util.profilesFiles).mockReturnValue([]);
-    mocked(util.providersFiles).mockReturnValue([]);
+    mocked(util.mapsFiles).mockResolvedValue([]);
+    mocked(util.profilesFiles).mockResolvedValue([]);
+    mocked(util.providersFiles).mockResolvedValue([]);
     mocked(util.arrayDiff).mockReturnValue([]);
   });
 
@@ -78,8 +80,8 @@ describe('Station Structure', () => {
     beforeEach(() => {
       mocked(util.loadSuperJson)
         .mockReset()
-        .mockReturnValue(
-          new SuperJson({
+        .mockResolvedValue({
+          document: {
             profiles: {
               one: {
                 file: './one.supr',
@@ -92,8 +94,9 @@ describe('Station Structure', () => {
                 providers: {},
               },
             },
-          })
-        );
+          },
+          path: './superface',
+        });
     });
 
     it('should return error check result for missing mock map', async () => {

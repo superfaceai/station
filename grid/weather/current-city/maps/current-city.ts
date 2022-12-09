@@ -5,15 +5,16 @@
 import { describe, expect } from '@jest/globals';
 import { SuperfaceTest } from '@superfaceai/testing';
 
+import { buildSuperfaceTest } from '../../../test-config';
+
 export const currentCityTest = (providerName: string): void => {
   describe(`weather/current-city/${providerName}`, () => {
     let superface: SuperfaceTest;
 
     beforeEach(() => {
-      superface = new SuperfaceTest({
+      superface = buildSuperfaceTest({
         profile: 'weather/current-city',
         provider: providerName,
-        testInstance: expect,
       });
     });
 

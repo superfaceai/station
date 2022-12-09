@@ -1,0 +1,55 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`recruitment/jobs/workable ListJobs when searching for draft jobs performs correctly 1`] = `
+Ok {
+  "value": Object {
+    "jobs": Array [
+      Object {
+        "benefits": "<p>Job benefits</p>",
+        "departmentName": null,
+        "description": "<p>Job description</p>",
+        "id": "09CB2A410F",
+        "name": "QA Tester",
+        "requirements": "<p>Job requirement</p>",
+      },
+    ],
+    "pagination": Object {
+      "nextPage": undefined,
+    },
+    "rateLimit": Object {
+      "bucket": "workable",
+      "remainingRequests": 8,
+      "remainingRequestsPercentage": 80,
+      "resetTimestamp": 1670422127,
+      "totalRequests": 10,
+    },
+  },
+}
+`;
+
+exports[`recruitment/jobs/workable ListJobs when searching for published jobs performs correctly 1`] = `
+Ok {
+  "value": Object {
+    "jobs": Array [
+      Object {
+        "benefits": null,
+        "departmentName": null,
+        "description": "<p>We are looking for a passionate Software Engineer to design, develop and install software solutions. Software Engineer responsibilities include gathering user requirements, defining system functionality and writing code in various languages, like Java, Ruby on Rails or .NET programming languages (e.g. C++ or JScript.NET.) Our ideal candidates are familiar with the software development life cycle (SDLC) from preliminary system analysis to tests and deployment. Ultimately, the role of the Software Engineer is to build high-quality, innovative and fully performing software that complies with coding standards and technical design.</p>",
+        "id": "B6993E7BD5",
+        "name": "Software Engineer",
+        "requirements": "<ul><li>Proven work experience as a Software Engineer or Software Developer</li></ul>",
+      },
+    ],
+    "pagination": Object {
+      "nextPage": undefined,
+    },
+    "rateLimit": Object {
+      "bucket": "workable",
+      "remainingRequests": 9,
+      "remainingRequestsPercentage": 90,
+      "resetTimestamp": 1670422126,
+      "totalRequests": 10,
+    },
+  },
+}
+`;
