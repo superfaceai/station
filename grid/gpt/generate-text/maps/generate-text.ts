@@ -81,7 +81,7 @@ export const generateTextTest = (provider: string): void => {
           input: {
             text: 'What day of the wek is it?',
             instructions: 'Fix the spelling mistakes',
-            count: 1000
+            count: 1000,
           },
         });
         expect(result).toMatchSnapshot();
