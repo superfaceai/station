@@ -1,0 +1,18 @@
+profile = "gpt/generate-text@1.0"
+provider = "mock"
+
+map CompleteText { 
+  map result {
+    completions = [
+      "Cool off with something sweet at our ice cream shop!"
+    ]
+  }
+}
+
+map EditText { 
+  map result {
+    edits = [
+      'What day of the week is it?'
+    ]
+  }
+}
