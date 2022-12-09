@@ -1,0 +1,122 @@
+"""
+Generate Text using GPT
+Generate, complete or manipulate text using LLMs
+"""
+name = "gpt/generate-text"
+version = "1.0.0"
+
+"""
+Complete Text
+Generate a text completion that attempts to match whatever context or pattern
+you give it
+"""
+usecase CompleteText unsafe {
+  input {
+    """
+    Prompt
+    Text prompt to generate completion(s) for.
+    """
+    prompt! string!
+
+    creativity
+    approxMaxWords
+    model
+    count
+  }
+
+  result {
+    """
+    Generated Completions
+    List of generated completions based on a given prompt. Number of completions
+    can be specified by `count`.
+    """
+    completions! [string!]!
+  }
+
+  error GPTError!
+
+  example BasicCompletion {
+    input {
+      prompt = 'Write a tagline for an ice cream shop',
+      creativity = 0.8,
+      approxMaxWords = 30,
+      model = 'large',
+    }
+
+    result {
+      completions = [
+        "Cool off with something sweet at our ice cream shop!"
+      ]
+    }
+  }
+
+  example PromptLengthFailure {
+    input {
+      prompt = 'Write a tagline for an ice cream shop (...)'
+    }
+
+    error {
+      title = "Too long",
+      detail = "The prompt is too long. Maximum supported prompt length is 800 words"
+    }
+  }
+}
+
+"""
+Creativity
+Number between 0 and 1 defines how risky the model will be when
+generating the text. Using 1 is suited for creative applications and 0 for
+tasks with well-defined solutions 
+"""
+field creativity number!
+
+"""
+Model Size
+The model that will be used for generating the text. Various models have
+different capabilities and cost. Most providers will use Large model by default.
+"""
+field model ModelSize!
+
+"""
+Results Count
+Specify how many results you'd like to get from the model
+"""
+field count number!
+
+"""
+Maximum (Approximate) Word Count
+The upper limit for the word count of the generated texts. Since various languages
+are represented (tokenized) differently, this is an approximate number.
+"""
+field approxMaxWords number!
+
+"""
+Model Size
+The model that will be used for generating the text. Various models have
+different capabilities and cost. Most providers will use Large model by default.
+"""
+model ModelSize enum {
+  """
+  Small Model
+  Useful for the most straightforward tasks. Is the fastest and the cheapest.
+  """
+  small
+
+  """
+  Medium Model
+  Usually very capable but lower cost than `large` model
+  """
+  medium
+
+  """
+  Large Model
+  Able to handle the most complex tasks, including contextual understing,
+  creativity and cause & effect. Higher cost.
+  """
+  large
+}
+
+model GPTError {
+  title! string!
+  detail string
+}
