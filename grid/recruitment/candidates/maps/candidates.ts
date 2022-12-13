@@ -65,12 +65,13 @@ const sampleCandidate = {
 export const candidatesTest = (
   provider: string,
   jobIds: { valid: string; invalid: string },
+  candidateIds: { invalid: string },
   options?: RecordingProcessOptions
 ): void => {
   describe(`recruitment/candidates/${provider}`, () => {
-    let superface: SuperfaceTest;
-
     describe('CreateCandidate', () => {
+      let superface: SuperfaceTest;
+
       beforeAll(() => {
         jest.setTimeout(10000);
         superface = buildSuperfaceTest({
@@ -82,19 +83,18 @@ export const candidatesTest = (
 
       describe('when specified job does exist', () => {
         it('performs correctly', async () => {
-          const page1 = await superface.run(
+          const result = await superface.run(
             {
               input: {
                 jobId: jobIds.valid,
                 ...sampleCandidate,
               },
-              testName: 'page 1',
             },
             options
           );
 
-          expect(page1.isOk).toBeTruthy();
-          expect(page1).toMatchSnapshot();
+          expect(result.isOk()).toBeTruthy();
+          expect(result).toMatchSnapshot();
         });
       });
 
@@ -108,6 +108,69 @@ export const candidatesTest = (
                   firstName: 'Demo',
                   lastName: 'Testing',
                   email: 'demo_testing@fakemail.com',
+                },
+              },
+              options
+            )
+          ).resolves.toMatchSnapshot();
+        });
+      });
+    });
+
+    describe.skip('GetStageChanges', () => {
+      let superface: SuperfaceTest, prepare: SuperfaceTest;
+
+      beforeAll(() => {
+        superface = buildSuperfaceTest({
+          profile: 'recruitment/candidates',
+          provider,
+          useCase: 'GetStageChanges',
+        });
+        prepare = buildSuperfaceTest({
+          profile: 'recruitment/candidates',
+          provider,
+          useCase: 'CreateCandidate',
+        });
+      });
+
+      describe('when specified candidate does exist', () => {
+        let candidateId: string | undefined;
+
+        beforeEach(async () => {
+          const prepareResult = await prepare.run({
+            input: {
+              jobId: jobIds.valid,
+              firstName: 'Demo',
+              lastName: 'Testing',
+              email: 'demo_testing@fakemail.com',
+            },
+          });
+
+          candidateId = (prepareResult.unwrap() as any).id;
+        });
+
+        it('performs correctly', async () => {
+          const result = await superface.run(
+            {
+              input: {
+                candidateId: candidateId,
+              },
+            },
+            options
+          );
+
+          expect(result.isOk()).toBeTruthy();
+          expect(result).toMatchSnapshot();
+        });
+      });
+
+      describe('when specified candidate does not exist', () => {
+        it('returns error', async () => {
+          await expect(
+            superface.run(
+              {
+                input: {
+                  candidateId: candidateIds.invalid,
                 },
               },
               options
