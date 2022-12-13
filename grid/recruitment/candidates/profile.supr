@@ -142,7 +142,7 @@ usecase CreateCandidate {
 
 """
 Get Stage Changes
-Retrieves a list of stages for specific candidate. The candidate does not have to be applied for a job.
+Retrieves a list of stages for specific candidate throughout his recruitment process. The candidate does not have to be applied for a job.
 """
 usecase GetStageChanges {
   input {
@@ -166,6 +166,46 @@ usecase GetStageChanges {
     """
     rateLimit RateLimit
   }!
+
+  example Successful {
+    input {
+      candidateId = 'CANDIDATE_ID'
+    }
+
+    result {
+      stages = [
+        {
+          id = 'sourced',
+          name = 'Sourced',
+          description = 'Sourced from LinkedIn',
+          current = false,
+          createdAt = "2022-12-06T15:20:11Z",
+        },
+        {
+          id = 'applied',
+          name = 'Applied',
+          description = 'Applied for job opening of Software Engineer',
+          current = true,
+          createdAt = "2022-12-08T10:20:42Z",
+        }
+      ]
+    }
+  }
+
+  example Failed {
+    input {
+      jobId = 'NOT_EXISTING_CANDIDATE_ID'
+    }
+
+    error {
+      title = 'Not found'
+      detail = 'Not found'
+      code = 'NotFound'
+      rateLimit = {
+        bucket = 'workable'
+      }
+    }
+  }
 }
 
 model Stage {
@@ -173,7 +213,7 @@ model Stage {
   Id
   Unique identifier of a stage
   """
-	id! string!
+  id! string!
 
   """
   Name
@@ -185,7 +225,7 @@ model Stage {
   Description
   Description of a stage.
   """
-	description string
+  description string
 
   """
   Current
@@ -197,7 +237,7 @@ model Stage {
   Created At
   ISO8601 timestamp when candidate moved to this stage.
   """
-  createdAt string
+  createdAt! string!
 }
 
 """
