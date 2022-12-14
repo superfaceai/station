@@ -6,12 +6,12 @@ const sampleLead = {
   email: 'demo_testing@fakemail.com',
 };
 
-describe('recruitment/leads/mock', () => {
+describe('recruitment/create-lead/mock', () => {
   describe('CreateLead', () => {
     describe('when job possibly associated with lead is available', () => {
       it('performs correctly', async () => {
         const client = new SuperfaceClient();
-        const profile = await client.getProfile('recruitment/leads');
+        const profile = await client.getProfile('recruitment/create-lead');
         const provider = await client.getProvider('mock');
         const usecase = profile.getUseCase('CreateLead');
 
@@ -37,7 +37,7 @@ describe('recruitment/leads/mock', () => {
   describe('when job is not available', () => {
     it('performs correctly', async () => {
       const client = new SuperfaceClient();
-      const profile = await client.getProfile('recruitment/leads');
+      const profile = await client.getProfile('recruitment/create-lead');
       const provider = await client.getProvider('mock');
       const usecase = profile.getUseCase('CreateLead');
 
