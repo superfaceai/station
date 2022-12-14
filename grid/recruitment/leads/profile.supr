@@ -14,7 +14,7 @@ usecase CreateLead {
   input {
     """
     Job Id
-    Id of a job, to which lead might apply to.
+    The ID of a job that the lead is a good prospect for.
     """
     jobId string!
 
@@ -124,9 +124,9 @@ usecase CreateLead {
     }
 
     error {
-      title = 'Not found'
-      detail = 'Not found'
-      code = 'NotFound'
+      title = 'Bad Request'
+      detail = 'Job with id NOT_EXISTING_JOB_ID does not exist.'
+      code = 'BadRequest'
       rateLimit = {
         bucket = 'workable'
       }
