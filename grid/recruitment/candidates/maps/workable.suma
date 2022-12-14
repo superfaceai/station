@@ -98,13 +98,6 @@ map CreateCandidate {
   }
 }
 
-// TODO: implement this
-map GetStageChanges {
-  map result {
-    stages: []
-  }
-}
-
 // Workable rate limits docs: https://workable.readme.io/reference/rate-limits
 operation MapRateLimit {
   totalRequests = parseInt(args.headers['x-rate-limit-limit'], 10)
