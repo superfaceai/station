@@ -1,80 +1,28 @@
-profile = "recruitment/candidates@1.0"
+profile = "recruitment/get-stage-changes@1.0"
 provider = "workable"
 
-map CreateCandidate {
-  http POST "/spi/v3/jobs/{input.jobId}/candidates" {
+map GetStageChanges {
+  http POST "/spi/v3/candidates/{input.candidateId}/activities" {
     security "bearer_token"
 
     request {
-      query {
-        stage = input.stageId || 'applied'
-      }
-
       headers {
         'X-WORKABLE-CLIENT-ID' = parameters.CLIENT_ID
-      }
-
-      body {
-        firstname = input.firstName
-        lastname = input.lastName
-
-        email = input.email
-        address = input.address
-        phone = input.phone
-
-        education_entries = input.education ? input.education.map(edu => ({
-          school: edu.school,
-          degree: edu.degree,
-          field_of_study: edu.fieldOfStudy,
-          start_date: edu.startedAt,
-          end_date: edu.endedAt,
-        })) : undefined
-        
-        experience_entries = input.workExperience ? input.workExperience.map(work => ({
-          title: work.position,
-          summary: work.summary,
-          company: work.company,
-          industry: work.industry,
-          current: work.current,
-          start_date: work.startedAt,
-          end_date: work.endedAt,
-        })) : undefined
-        
-        answers = input.answers ? input.answers.map(answer => {
-          const question_key = answer.questionId;
-
-          switch (answer.type) {
-            case 'text':
-            case 'textarea':
-              return { question_key: question_key, body: answer.value };
-            case 'number':
-              return { question_key: question_key, value: answer.value };
-            case 'boolean':
-              return { question_key: question_key, checked: answer.value };
-            case 'multiple_choice':
-            case 'multiple_select':
-              return { question_key: question_key, choices: answer.value };
-            case 'date':
-              return { question_key: question_key, date: answer.value };
-            case 'file':
-              return { question_key: question_key, file_url: answer.value };
-          }
-        }) : undefined
-        
-        social_profiles = input.links ? input.links.map(link => ({
-          type: link.name,
-          url: link.url
-        })) : undefined
-
-        resumeUrl = input.cv ? input.cv.url ? input.cv.url : undefined : undefined
-        resume = input.cv ? input.cv.data ? input.cv : undefined : undefined
       }
     }
 
     response 201 "application/json" {
+      stages = body.activities.filter(activity => activity.stage_name !== null).map(stageActivity => ({
+        id: stageActivity.action,
+        name: stageActivity.stage_name,
+        current: false,
+        createdAt: stageActivity.created_at,
+      }))
+
+      tmp = stages[stages.length - 1].current = true
+
       map result {
-        id = body.candidate.id
-        jobId = body.candidate.job.shortcode
+        stages = stages
       }
     }
 

@@ -65,7 +65,6 @@ const sampleCandidate = {
 export const candidatesTest = (
   provider: string,
   jobIds: { valid: string; invalid: string },
-  candidateIds: { invalid: string },
   options?: RecordingProcessOptions
 ): void => {
   describe(`recruitment/candidates/${provider}`, () => {
@@ -108,70 +107,6 @@ export const candidatesTest = (
                   firstName: 'Demo',
                   lastName: 'Testing',
                   email: 'demo_testing@fakemail.com',
-                },
-              },
-              options
-            )
-          ).resolves.toMatchSnapshot();
-        });
-      });
-    });
-
-    describe.skip('GetStageChanges', () => {
-      let superface: SuperfaceTest, prepare: SuperfaceTest;
-
-      beforeAll(() => {
-        superface = buildSuperfaceTest({
-          profile: 'recruitment/candidates',
-          provider,
-          useCase: 'GetStageChanges',
-        });
-        prepare = buildSuperfaceTest({
-          profile: 'recruitment/candidates',
-          provider,
-          useCase: 'CreateCandidate',
-        });
-      });
-
-      describe('when specified candidate does exist', () => {
-        let candidateId: string | undefined;
-
-        beforeEach(async () => {
-          const prepareResult = await prepare.run({
-            input: {
-              jobId: jobIds.valid,
-              firstName: 'Demo',
-              lastName: 'Testing',
-              email: 'demo_testing@fakemail.com',
-            },
-          });
-
-          /* eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-assignment */
-          candidateId = (prepareResult.unwrap() as any).id;
-        });
-
-        it('performs correctly', async () => {
-          const result = await superface.run(
-            {
-              input: {
-                candidateId: candidateId,
-              },
-            },
-            options
-          );
-
-          expect(result.isOk()).toBeTruthy();
-          expect(result).toMatchSnapshot();
-        });
-      });
-
-      describe('when specified candidate does not exist', () => {
-        it('returns error', async () => {
-          await expect(
-            superface.run(
-              {
-                input: {
-                  candidateId: candidateIds.invalid,
                 },
               },
               options
