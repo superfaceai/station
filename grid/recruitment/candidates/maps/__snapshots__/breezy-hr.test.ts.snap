@@ -38,3 +38,65 @@ AST Path: definitions[0].statements[1].statements[0]
 Original Map Location: Line 19, column 5",
 }
 `;
+
+exports[`recruitment/candidates/breezy-hr GetStageChanges when specified candidate does exist performs correctly 1`] = `
+Ok {
+  "value": Object {
+    "stages": Array [
+      Object {
+        "createdAt": "2022-12-14T11:23:18.812Z",
+        "current": true,
+        "id": "applied",
+        "name": "Applied",
+      },
+      Object {
+        "createdAt": "2022-12-14T11:21:30.696Z",
+        "current": false,
+        "id": "feedback",
+        "name": "Feedback",
+      },
+      Object {
+        "createdAt": "2022-12-14T11:19:32.247Z",
+        "current": false,
+        "id": "feedback",
+        "name": "Feedback",
+      },
+      Object {
+        "createdAt": "2022-12-14T11:15:50.674Z",
+        "current": false,
+        "id": "feedback",
+        "name": "Feedback",
+      },
+      Object {
+        "createdAt": "2022-12-14T11:15:29.811Z",
+        "current": false,
+        "id": "feedback",
+        "name": "Feedback",
+      },
+    ],
+  },
+}
+`;
+
+exports[`recruitment/candidates/breezy-hr GetStageChanges when specified candidate does not exist returns error 1`] = `
+Err {
+  "error": "MappedHTTPError: Expected HTTP error
+Properties: {
+  \\"title\\": \\"Unknown error\\",
+  \\"detail\\": {
+    \\"type\\": \\"getStreamError\\",
+    \\"message\\": \\"there was an unknown error getting candidate stream.\\"
+  },
+  \\"code\\": \\"UnknownError\\",
+  \\"rateLimit\\": {
+    \\"bucket\\": \\"breezy-hr\\",
+    \\"totalRequests\\": 100,
+    \\"remainingRequests\\": 98,
+    \\"remainingRequestsPercentage\\": 98,
+    \\"resetTimestamp\\": 1671018876
+  }
+}
+AST Path: definitions[1].statements[1].responseHandlers[1].statements[1]
+Original Map Location: Line 68, column 7",
+}
+`;
