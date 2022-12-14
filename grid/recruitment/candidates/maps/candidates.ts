@@ -142,7 +142,7 @@ export const candidatesTest = (
 
           const result = await superface.run({ input }, options);
 
-          expect(() => result.unwrap()).not.toThrow()
+          expect(() => result.unwrap()).not.toThrow();
           expect(result).toMatchSnapshot();
         });
       });
