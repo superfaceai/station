@@ -1,0 +1,26 @@
+profile = "recruitment/get-stage-changes@1.0"
+provider = "mock"
+
+"""
+GetStageChanges map
+"""
+map GetStageChanges {
+  return map result {
+    stages = [
+      {
+        id: 'sourced',
+        name: 'Sourced',
+        description: 'Sourced from linkedIn',
+        current: false,
+        createdAt: "2022-12-06T15:20:11Z",
+      },
+      {
+        id: 'applied',
+        name: 'Applied',
+        description: 'Applied for job opening of Software Engineer',
+        current: true,
+        createdAt: "2022-12-08T10:20:42Z",
+      }
+    ]
+  }
+}
