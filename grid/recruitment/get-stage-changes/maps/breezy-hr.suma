@@ -2,11 +2,10 @@ profile = "recruitment/get-stage-changes@1.0"
 provider = "breezy-hr"
 
 map GetStageChanges {
-  // TODO: add this error code to profile or use 'BadRequest'?
   return map error if(!input.jobId) {
-    title = "Job ID is required"
+    title = "Missing required field `jobId`"
     detail = "Job ID is required for provider Breezy HR. Please provide it in the input."
-    code = "JobIdRequired"
+    code = "BadRequest"
   }
 
   http GET "/v3/company/{ parameters.COMPANY_ID }/position/{ input.jobId }/candidate/{ input.candidateId }/stream" {
