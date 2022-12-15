@@ -5,12 +5,12 @@ import { SuperfaceTest } from '@superfaceai/testing';
 import { buildSuperfaceTest } from '../../../test-config';
 
 export const generateTextTest = (provider: string): void => {
-  describe(`gpt/generate-text/${provider}`, () => {
+  describe(`ai/generate-text/${provider}`, () => {
     let superface: SuperfaceTest;
 
     beforeEach(() => {
       superface = buildSuperfaceTest({
-        profile: 'gpt/generate-text',
+        profile: 'ai/generate-text',
         provider,
       });
     });

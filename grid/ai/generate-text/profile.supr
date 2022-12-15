@@ -1,8 +1,8 @@
 """
-Generate Text using GPT
-Generate, complete or manipulate text using LLMs
+Generate Text using AI
+Generate, complete or manipulate text using AI (LLMs, GPT-3)
 """
-name = "gpt/generate-text"
+name = "ai/generate-text"
 version = "1.0.0"
 
 """
@@ -33,7 +33,7 @@ usecase CompleteText unsafe {
     completions! [string!]!
   }
 
-  error GPTError
+  error GenerateTextError
 
   example BasicCompletion {
     input {
@@ -94,7 +94,7 @@ usecase EditText unsafe {
     edits! [string!]!
   }
 
-  error GPTError
+  error GenerateTextError
 
   example BasicEdit {
     input {
@@ -179,7 +179,7 @@ model ModelSize enum {
   large
 }
 
-model GPTError {
+model GenerateTextError {
   """
   Error Code
   A machine-readable code indicating a general error type.

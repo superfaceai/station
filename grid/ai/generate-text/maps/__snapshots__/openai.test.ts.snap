@@ -1,36 +1,36 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`gpt/generate-text/openai CompleteText completes text based on the prompt (using defaults) 1`] = `
+exports[`ai/generate-text/openai CompleteText completes text based on the prompt (using defaults) 1`] = `
 Ok {
   "value": Object {
     "completions": Array [
       "
 
-Yes, this is a test.",
+This indeed is a test.",
     ],
   },
 }
 `;
 
-exports[`gpt/generate-text/openai CompleteText completes text based on the prompt (using specific params) 1`] = `
+exports[`ai/generate-text/openai CompleteText completes text based on the prompt (using specific params) 1`] = `
 Ok {
   "value": Object {
     "completions": Array [
       "
 
-\\"Taste the Chills of Our Thrills!\\"",
+\\"Taste the Sweetness of Our Creamy Delights!\\"",
       "
 
-\\"Cool down with our delicious treats!\\"",
+\\"Bringing you deliciousness, one scoop at a time!\\"",
       "
 
-\\"Cool Treats for the Sweetest of Treats!\\"",
+\\"Taste the cool refreshment of our delicious ice cream!\\"",
     ],
   },
 }
 `;
 
-exports[`gpt/generate-text/openai CompleteText errors with negative max word limit 1`] = `
+exports[`ai/generate-text/openai CompleteText errors with negative max word limit 1`] = `
 Err {
   "error": "MappedHTTPError: Expected HTTP error
 Properties: {
@@ -43,24 +43,10 @@ Original Map Location: Line 36, column 7",
 }
 `;
 
-exports[`gpt/generate-text/openai EditText edits the text based on the input & instructions (using defaults) 1`] = `
+exports[`ai/generate-text/openai EditText edits the text based on the input & instructions (using defaults) 1`] = `
 Ok {
   "value": Object {
     "edits": Array [
-      "What day of the week is it?
-The day is Wednesday :)
-",
-    ],
-  },
-}
-`;
-
-exports[`gpt/generate-text/openai EditText edits the text based on the input & instructions (using specific params) 1`] = `
-Ok {
-  "value": Object {
-    "edits": Array [
-      "What day of the week is it?
-",
       "What day of the week is it?
 ",
     ],
@@ -68,7 +54,20 @@ Ok {
 }
 `;
 
-exports[`gpt/generate-text/openai EditText errors with large request edits count 1`] = `
+exports[`ai/generate-text/openai EditText edits the text based on the input & instructions (using specific params) 1`] = `
+Ok {
+  "value": Object {
+    "edits": Array [
+      "What day of the week is it?
+",
+      "What day of the week is it?
+",
+    ],
+  },
+}
+`;
+
+exports[`ai/generate-text/openai EditText errors with large request edits count 1`] = `
 Err {
   "error": "MappedHTTPError: Expected HTTP error
 Properties: {
