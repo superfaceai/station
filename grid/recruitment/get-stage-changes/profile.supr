@@ -1,6 +1,6 @@
 """
 Retrieve Stage Changes
-Lists stage changes for a candidate.
+Lists stage changes for a candidate or sourced lead in ATS.
 """
 name = "recruitment/get-stage-changes"
 version = "1.0.0"
@@ -13,7 +13,7 @@ usecase GetStageChanges {
   input {
     """
     Candidate Id
-    Unique identifier of a candidate.
+    Unique identifier of a candidate or sourced lead.
     """
     candidateId! string!
   }
@@ -21,7 +21,7 @@ usecase GetStageChanges {
   result {
     """
     Stages
-    List of stages relevant to the candidate.
+    List of stages relevant to the candidate or lead.
     """
     stages! [Stage!]!
     
@@ -61,12 +61,12 @@ usecase GetStageChanges {
 
   example Failed {
     input {
-      candidateId = 'NOT_EXISTING_CANDIDATE_ID'
+      candidateId = 'NOT_EXISTING_ID'
     }
 
     error {
       title = 'Not found'
-      detail = 'Candidate ID "NOT_EXISTING_CANDIDATE_ID" not found.'
+      detail = 'Candidate with ID "NOT_EXISTING_ID" not found.'
       code = 'NotFound'
       rateLimit = {
         bucket = 'workable'
