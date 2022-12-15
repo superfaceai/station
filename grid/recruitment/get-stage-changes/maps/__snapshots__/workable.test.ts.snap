@@ -1,10 +1,38 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`recruitment/get-stage-changes/workable GetStageChanges when specified candidate does exist performs correctly 1`] = `
+Ok {
+  "value": Object {
+    "stages": Array [
+      Object {
+        "createdAt": "2022-08-26T03:36:48.612Z",
+        "current": false,
+        "id": "applied",
+        "name": "Applied",
+      },
+      Object {
+        "createdAt": "2022-08-30T03:37:28.560Z",
+        "current": false,
+        "id": "phone-screen",
+        "name": "Phone Screen",
+      },
+      Object {
+        "createdAt": "2022-09-03T03:39:36.565Z",
+        "current": true,
+        "id": "assessment",
+        "name": "Assessment",
+      },
+    ],
+  },
+}
+`;
+
 exports[`recruitment/get-stage-changes/workable GetStageChanges when specified candidate does not exist returns error 1`] = `
 Err {
   "error": "MappedHTTPError: Expected HTTP error
 Properties: {
   \\"title\\": \\"Not found\\",
+  \\"detail\\": \\"Not found\\",
   \\"code\\": \\"NotFound\\",
   \\"rateLimit\\": {
     \\"bucket\\": \\"workable\\"
