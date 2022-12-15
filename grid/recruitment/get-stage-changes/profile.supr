@@ -7,7 +7,7 @@ version = "1.0.0"
 
 """
 Get Stage Changes
-Retrieves a list of stages for specific candidate throughout his recruitment process. The candidate does not have to be applied for a job.
+Retrieves a list of stages for specific candidate or lead throughout the recruitment process
 """
 usecase GetStageChanges {
   input {
@@ -66,7 +66,7 @@ usecase GetStageChanges {
 
     error {
       title = 'Not found'
-      detail = 'Not found'
+      detail = 'Candidate ID "NOT_EXISTING_CANDIDATE_ID" not found.'
       code = 'NotFound'
       rateLimit = {
         bucket = 'workable'
@@ -167,7 +167,7 @@ model ErrorCode enum {
   BadRequest
   """
   Not found
-  The profileId does not exist.
+  The candidateId does not exist.
   """
   NotFound
   """
