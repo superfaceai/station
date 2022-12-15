@@ -2,7 +2,7 @@ profile = "recruitment/get-stage-changes@1.0"
 provider = "workable"
 
 map GetStageChanges {
-  http POST "/spi/v3/candidates/{input.candidateId}/activities" {
+  http GET "/spi/v3/candidates/{input.candidateId}/activities" {
     security "bearer_token"
 
     request {
@@ -11,10 +11,10 @@ map GetStageChanges {
       }
     }
 
-    response 201 "application/json" {
-      stages = body.activities.filter(activity => activity.stage_name !== null).map(stageActivity => ({
+    response 200 "application/json" {
+      stages = body.activities.filter(activity => activity.stage_name !== null || activity.action === 'applied').map(stageActivity => ({
         id: stageActivity.action,
-        name: stageActivity.stage_name,
+        name: stageActivity.stage_name || 'Applied',
         current: false,
         createdAt: stageActivity.created_at,
       }))
