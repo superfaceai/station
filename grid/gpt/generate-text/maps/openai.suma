@@ -131,21 +131,25 @@ operation HandleErrorWithJson {
   body = args.body
 
   return if (statusCode === 400) {
+    code = "BadRequest"
     title = "Invalid data"
     detail = (`Invalid data was sent to OpenAI server: ${body.error.message}`)
   }
 
   return if (statusCode === 401) {
+    code = "Unauthenticated"
     title = "Unauthenticated"
     detail = (`Please make sure you're providing a valid OpenAI API key: ${body.error.message}`)
   }
 
   return if (statusCode === 404) {
+    code = "NotFound"
     title = "Not Found"
     detail = body.error.message
   }
 
   return {
+    code = "UnknownError"
     title = "Unknown error"
     detail = (`Unknown error occurred. Status: ${statusCode}`)
   }
@@ -156,24 +160,29 @@ operation HandleError {
   body = args.body
 
   return if (statusCode === 401) {
+    code = "Unauthenticated"
     title = "Unauthenticated"
     detail = "Please make sure you're providing a valid OpenAI API key"
   }
 
   return if (statusCode === 403) {
+    code = "NotAllowed"
     title = "Not allowed"
   }
 
   return if (statusCode === 429) {
+    code = "RateLimitReached"
     title = "Quota limit exceeded"
   }
 
   return if (statusCode === 500) {
+    code = "ProviderError"
     title = "Error on OpenAI's side"
     detail = (`It looks like OpenAI is temporarily having difficulties processing your request. Try again or contact OpenAI's support. ${String(body)}`)
   }
 
   return {
+    code = "UnknownError"
     title = "Unknown error"
     detail = (`Unknown error occurred. Status: ${statusCode}`)
   }

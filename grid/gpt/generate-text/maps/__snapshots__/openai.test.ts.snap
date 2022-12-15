@@ -18,13 +18,13 @@ Ok {
     "completions": Array [
       "
 
-\\"Cool off with our delicious flavors!\\"",
+\\"Taste the Chills of Our Thrills!\\"",
       "
 
-\\"Cool treats for a hot summer day!\\"",
+\\"Cool down with our delicious treats!\\"",
       "
 
-\\"Cool off with delicious treats at our ice cream shop!\\"",
+\\"Cool Treats for the Sweetest of Treats!\\"",
     ],
   },
 }
@@ -34,6 +34,7 @@ exports[`gpt/generate-text/openai CompleteText errors with negative max word lim
 Err {
   "error": "MappedHTTPError: Expected HTTP error
 Properties: {
+  \\"code\\": \\"BadRequest\\",
   \\"title\\": \\"Invalid data\\",
   \\"detail\\": \\"Invalid data was sent to OpenAI server: -42 is less than the minimum of 0 - 'max_tokens'\\"
 }
@@ -47,6 +48,7 @@ Ok {
   "value": Object {
     "edits": Array [
       "What day of the week is it?
+The day is Wednesday :)
 ",
     ],
   },
@@ -70,6 +72,7 @@ exports[`gpt/generate-text/openai EditText errors with large request edits count
 Err {
   "error": "MappedHTTPError: Expected HTTP error
 Properties: {
+  \\"code\\": \\"BadRequest\\",
   \\"title\\": \\"Invalid data\\",
   \\"detail\\": \\"Invalid data was sent to OpenAI server: 1000 is greater than the maximum of 20 - 'n'\\"
 }
