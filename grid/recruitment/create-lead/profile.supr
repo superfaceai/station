@@ -7,96 +7,28 @@ version = "1.0.0"
 
 """
 Create Lead
-Creates a possible candidate either for some specific job or just for ATS.
+Creates a sourced prospect candidate either for some specific job or any job within a company.
 """
 usecase CreateLead {
 
   input {
-    """
-    Job Id
-    The ID of a job that the lead is a good prospect for.
-    """
-    jobId string!
-
-    """
-    First Name
-    First name of a lead.
-    """
-    firstName! string!
-
-    """
-    Last Name
-    Last name of a lead.
-    """
-    lastName! string!
-
-    """
-    Email
-    Email of a lead.
-    """
-    email! string!
-
-    """
-    Phone
-    Phone number of a lead.
-    """
-    phone string
-
-    """
-    Address
-    Address of a lead.
-    """
-    address string	
-
-    """
-    Education
-    Array of education experiences.
-    """
-    education [Education]
-
-    """
-    Work Experience
-    Array of work experiences.
-    """
-    workExperience [WorkExperience]
-
-    """
-    CV (Resume)
-    Object containing either URL to a CV or data encoded in Base64 format with CV document and name with the file name.
-    """
-    cv { url string } | { name string, data string }
-
-    """
-    Links
-    Array of links to different profiles or portfolios of a lead.
-    """
-    links [Link]
-
-    """
-    Source
-    Name or array of names, with sources from where this lead comes from.
-    """
-    source string | [string]
+    jobId
+    firstName!
+    lastName!
+    email!
+    phone
+    address 
+    education 
+    workExperience
+    links
+    cv
+    source
   }
 
   result {
-    """
-    Id
-    Unique identifier of newly created lead.
-    """
-    id! string!
-
-    """
-    Job Id
-    Unique identifier of a job, newly created lead might apply for.
-    """
-    jobId string!
-
-    """
-    Rate limit
-    Rate limit details.
-    """
-    rateLimit RateLimit
+    id!
+    jobId
+    rateLimit
   }!
 
   error Error
@@ -132,6 +64,138 @@ usecase CreateLead {
       }
     }
   }
+}
+
+"""
+Id
+Unique identifier of a lead
+"""
+field id string!
+
+"""
+Job Id
+Unique identifier of a job that the lead is a good prospect for.
+"""
+field jobId string!
+
+"""
+Job Title
+Title of a job, lead might apply for.
+"""
+field jobTitle string!
+
+"""
+First Name
+First name of a lead.
+"""
+field firstName string!
+
+"""
+Last Name
+Last name of a lead.
+"""
+field lastName string!
+
+"""
+Full Name
+Full name of a lead.
+"""
+field fullName string
+
+"""
+Email
+Email of a lead.
+"""
+field email string!
+
+"""
+Phone
+Phone number of a lead.
+"""
+field phone string
+
+"""
+Address
+Address of a lead.
+"""
+field address string
+
+"""
+Education
+List of sourced education experiences relevant to lead.
+"""
+field education [Education]
+
+"""
+Work Experience
+List of sourced work experiences relevant to lead.
+"""
+field workExperience [WorkExperience]
+
+"""
+Links
+List of sourced links relevant to lead. Can contain links to social profiles, portfolios or other.
+"""
+field links [Link]
+
+"""
+CV (Resume)
+Object containing either URL to a CV or data encoded in Base64 format with CV document and name with the file name.
+"""
+field cv { url string } | { name string, data string }
+
+"""
+CV Url
+Url pointing to CV of a lead.
+"""
+field cvUrl string
+
+"""
+Source
+Name or list of names, with sources from where this lead comes from.
+"""
+field source string | [string]
+
+"""
+Created At
+ISO8601 timestamp when was a lead created.
+"""
+field createdAt string
+
+"""
+Updated At
+ISO8601 timestamp when was a lead lastly updated.
+"""
+field updatedAt string
+
+"""
+Rate limit
+Rate limit details.
+"""
+field rateLimit RateLimit
+
+model Lead {
+  id!
+  jobId
+  jobTitle
+  
+  firstName!
+  lastName!
+  fullName
+  
+  email!
+  phone
+  address
+  
+  links 
+  experiences
+  education
+  cv 
+  cvUrl 
+
+  source
+  createdAt
+  updatedAt
 }
 
 """
@@ -248,110 +312,6 @@ model Link {
   url string
 }
 
-model Lead {
-  """
-  Id
-  Unique identifier of a lead
-  """
-  id! string!
-  
-  """
-  Job Id
-  Unique identifier of a job, lead might apply for.
-  """
-  jobId string!
-
-  """
-  Job Title
-  Title of a job, lead might apply for.
-  """
-  jobTitle string!
-
-  """
-  First Name
-  First name of a lead.
-  """
-  firstName! string!
-
-  """
-  Last Name
-  Last name of a lead.
-  """
-  lastName! string!
-
-  """
-  Full Name
-  Full name of a lead.
-  """
-  fullName string
-
-  """
-  Email
-  Email of a lead.
-  """
-  email! string!
-
-  """
-  Phone
-  Phone number of a lead.
-  """
-  phone string
-
-  """
-  Address
-  Address of a lead.
-  """
-  address string	
-
-  """
-  Links
-  Array of sourced links relevant to lead. Can contain links to social profiles, portfolios or other.
-  """
-  links [Link]
-
-  """
-  Experiences
-  Array of sourced work experiences relevant to lead.
-  """
-  experiences [WorkExperience]
-  
-  """
-  Education
-  Array of sourced education experiences relevant to lead.
-  """
-  education [Education]
-
-  """
-  CV (Resume)
-  Object containing either url to a CV or data of a CV.
-  """
-  cv { url string } | { name string, data string }
-
-  """
-  CV Url
-  Url pointing to CV of a lead.
-  """
-  cvUrl string
-
-  """
-  Source
-  Name or array of names, with sources from where this lead comes from.
-  """
-  source string | [string]
-
-  """
-  Created At
-  ISO8601 timestamp when was a lead created.
-  """
-  createdAt string
-  
-  """
-  Updated At
-  ISO8601 timestamp when was a lead lastly updated.
-  """
-  updatedAt string
-}
-
 model Error {
   """
   Error Title
@@ -368,11 +328,8 @@ model Error {
   Error code.
   """
   code! ErrorCode!
-  """
-  Rate limit
-  Rate limit details.
-  """
-  rateLimit RateLimit
+  
+  rateLimit 
 }
 
 model RateLimit {
