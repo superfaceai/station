@@ -1,0 +1,275 @@
+{
+  "recruitment/create-lead/breezy-hr/CreateLead": {
+    "70ad4a85e21aa086bf76a82a46aa12c3": [
+      {
+        "scope": "https://api.breezy.hr:443",
+        "method": "GET",
+        "path": "/v3/company/PARAMS_COMPANY_ID/candidates/search?email_address=john.doe%40fakemail.com",
+        "body": "",
+        "status": 200,
+        "response": [],
+        "rawHeaders": [
+          "Date",
+          "Thu, 15 Dec 2022 13:31:48 GMT",
+          "Content-Type",
+          "application/json; charset=utf-8",
+          "Content-Length",
+          "2",
+          "Connection",
+          "close",
+          "Server",
+          "nginx/1.22.0",
+          "X-Powered-By",
+          "Redstone",
+          "X-RateLimit-Limit",
+          "100",
+          "X-RateLimit-Remaining",
+          "99",
+          "X-RateLimit-Reset",
+          "1671111168",
+          "ETag",
+          "W/\"2-l9Fw4VUO7kr8CvBlt4zaMCqXZ0w\"",
+          "Vary",
+          "Accept-Encoding"
+        ],
+        "responseIsBinary": false
+      },
+      {
+        "scope": "https://api.breezy.hr:443",
+        "method": "POST",
+        "path": "/v3/company/PARAMS_COMPANY_ID/position/f1cfc5572a5701/candidates",
+        "body": {
+          "name": "John Doe",
+          "email_address": "john.doe@fakemail.com",
+          "address": "25772 Gustave Shore, Iowa, USA",
+          "phone_number": "1-859-557-6573",
+          "education": [
+            {
+              "school_name": "University of Pennsylvania",
+              "degree": "MBA",
+              "field_of_study": null,
+              "start_date": "2008-03-01",
+              "end_date": "2011-03-30"
+            },
+            {
+              "school_name": "University of Chicago",
+              "degree": "B.S.",
+              "field_of_study": "Marketing Communication & Economics",
+              "start_date": "2004-09-01",
+              "end_date": "2007-03-30"
+            }
+          ],
+          "work_history": [
+            {
+              "title": "Sales Director",
+              "summary": "Summary of a work experience at Test Company",
+              "company_name": "Test Company",
+              "industry": "Telecommunications",
+              "is_current": false
+            }
+          ],
+          "social_profiles": {
+            "twitter": "https://twitter.com/candidate.username"
+          },
+          "custom_attributes": [
+            {
+              "name": "Portfolio",
+              "value": "https://url.to.portfolio"
+            }
+          ],
+          "origin": "sourced",
+          "source": "LinkedIn, Indeed, Glassdoor"
+        },
+        "status": 200,
+        "response": [
+          "1f8b0800000000000003",
+          "8d54db4e1b3110fd15cb0f7d69127265439e405021505b21055e8ad06a62cf66dd78ed95ed4d48a3fc7bc7bb4bc2a56a2b21b19e39733b73263b9e2ac9675c4c87e274314d468b49d21ff00e2f3040e31a4b4c1649928944f66b1748e9d07b720d27493264d7950fb04636cfadc30ebbb11be8b087f90541854308ca9a5442c018d01f0ebb03fa9bdc0f46b3d160363eeb8da7a31f044559891acb678f3bee456ead4e0d1431ecc1a8353aafc296d98cdda1317eabd760145060a650cbd466a90f95dcf299a9b4de77fe9ee232570296f60fd1fc1bb815066596ecd216456554d315fbc4be086b6ca184e7fb27eab700a5d323173f6d6e7ad2e27906abdad713b68805acd67683325d50f6470acc11a456263635078d9e5d29872258c7ced93dfa10eb9660b614ab8c0a0a34216fe9d54e724b85d89545b258a7968a08e3de564ea08c269a12b44ebda065f0d98ed37b9b2ead954df5e397c12ab8983c3e4a6b5df355e35f9e7bf2e4d6606aaa628164e283ee7472d69d4c92eee9241951c1b6743ddeae5593cc044c0680fdd1a938363eaf4a74190864575844ee2b8faef5f9179f6c5cefd98de6cf10fcf901d803f586a1398fd43ea7c2ead83bafff8fc9187ed17a338f818cddd33edfc79e0505a5a5b399a20dd48a0bdb323612362a049ab4531b6ee407d3f7a6e1fb83b172b17c1e42e96727272d382eff4480912a2abf7798342aa7612cb25593455a58a154a6ab8c4494dda506ef655cc081b9af35e4c6d071d5980ebb3e80e2380196c77c50965ad55a6846fa606e935e1c0c4ac4ababd711d3fdcb4fd57ca395aa8cd3c9ffb8ee8d75ab34579e64beade9168dc85fcef39df0830afae38144b55545013105a9a9fe8ad70c2ca667f84cd25068486010de9e52a45dd0cf942d5208c1a94515dab5b7f5efac0b74a92a6a6f0dbac2572ba505f782ed95af201e4515cf2b03edb1d3107cf4ef9ff6bf0187c3e56c58050000"
+        ],
+        "rawHeaders": [
+          "Date",
+          "Thu, 15 Dec 2022 13:31:51 GMT",
+          "Content-Type",
+          "application/json; charset=utf-8",
+          "Transfer-Encoding",
+          "chunked",
+          "Connection",
+          "close",
+          "Server",
+          "nginx/1.22.0",
+          "X-Powered-By",
+          "Redstone",
+          "X-RateLimit-Limit",
+          "100",
+          "X-RateLimit-Remaining",
+          "98",
+          "X-RateLimit-Reset",
+          "1671111168",
+          "ETag",
+          "W/\"558-XMrn6E9k2ovC1GNcPQ8kUI5RZnY\"",
+          "Vary",
+          "Accept-Encoding",
+          "Content-Encoding",
+          "gzip"
+        ],
+        "responseIsBinary": false,
+        "decodedResponse": {
+          "_id": "c82c6b873b5701",
+          "meta_id": "4de7b77fc7d001",
+          "address": "25772 Gustave Shore, Iowa, USA",
+          "creation_date": "2022-12-15T13:31:49.483Z",
+          "education": [
+            {
+              "school_name": "University of Pennsylvania",
+              "field_of_study": null
+            },
+            {
+              "school_name": "University of Chicago",
+              "field_of_study": "Marketing Communication & Economics"
+            }
+          ],
+          "email_address": "john.doe@fakemail.com",
+          "followed_by": [],
+          "headline": "Sales Director @ Test Company",
+          "initial": "J",
+          "name": "John Doe",
+          "origin": "sourced",
+          "overall_score": {
+            "very_good": [],
+            "good": [],
+            "neutral": [],
+            "poor": [],
+            "very_poor": []
+          },
+          "phone_number": "1-859-557-6573",
+          "sourced_by": {
+            "_id": "dfca51ae036c",
+            "name": "Superface Demo",
+            "username": "superfacedemo",
+            "email_address": "demo+ats@superface.ai",
+            "initial": "S",
+            "hex_color": "color4",
+            "tz_offset": "-60"
+          },
+          "social_profiles": [
+            {
+              "type": "twitter",
+              "typeId": "twitter",
+              "typeName": "Twitter",
+              "url": "https://twitter.com/candidate.username"
+            }
+          ],
+          "source": {
+            "id": "linkedin-indeed-glassdoor",
+            "name": "LinkedIn, Indeed, Glassdoor"
+          },
+          "stage": {
+            "id": "applied",
+            "type": {
+              "id": "applied",
+              "name": "Applied",
+              "icon": "user"
+            },
+            "name": "Applied",
+            "icon": "user"
+          },
+          "tags": [],
+          "updated_date": "2022-12-15T13:31:49.483Z",
+          "work_history": [
+            {
+              "company_name": "Test Company",
+              "title": "Sales Director",
+              "summary": "Summary of a work experience at Test Company"
+            }
+          ],
+          "custom_attributes": [
+            {
+              "name": "Portfolio",
+              "value": "https://url.to.portfolio",
+              "secure": false,
+              "id": "portfolio"
+            }
+          ]
+        }
+      }
+    ],
+    "52c7d4a34ed126d5cdb4370ff90b2ae9": [
+      {
+        "scope": "https://api.breezy.hr:443",
+        "method": "GET",
+        "path": "/v3/company/PARAMS_COMPANY_ID/candidates/search?email_address=demo_testing%40fakemail.com",
+        "body": "",
+        "status": 200,
+        "response": [],
+        "rawHeaders": [
+          "Date",
+          "Thu, 15 Dec 2022 13:31:52 GMT",
+          "Content-Type",
+          "application/json; charset=utf-8",
+          "Content-Length",
+          "2",
+          "Connection",
+          "close",
+          "Server",
+          "nginx/1.22.0",
+          "X-Powered-By",
+          "Redstone",
+          "X-RateLimit-Limit",
+          "100",
+          "X-RateLimit-Remaining",
+          "97",
+          "X-RateLimit-Reset",
+          "1671111168",
+          "ETag",
+          "W/\"2-l9Fw4VUO7kr8CvBlt4zaMCqXZ0w\"",
+          "Vary",
+          "Accept-Encoding"
+        ],
+        "responseIsBinary": false
+      },
+      {
+        "scope": "https://api.breezy.hr:443",
+        "method": "POST",
+        "path": "/v3/company/PARAMS_COMPANY_ID/position/12345ab789d1dd/candidates",
+        "body": {
+          "name": "Demo Testing",
+          "email_address": "demo_testing@fakemail.com",
+          "social_profiles": {},
+          "custom_attributes": [],
+          "origin": "sourced"
+        },
+        "status": 500,
+        "response": {
+          "error": {
+            "type": "addCandidateError",
+            "message": "there was an unknown error creating candidate."
+          }
+        },
+        "rawHeaders": [
+          "Date",
+          "Thu, 15 Dec 2022 13:31:53 GMT",
+          "Content-Type",
+          "application/json; charset=utf-8",
+          "Content-Length",
+          "97",
+          "Connection",
+          "close",
+          "Server",
+          "nginx/1.22.0",
+          "X-Powered-By",
+          "Redstone",
+          "X-RateLimit-Limit",
+          "100",
+          "X-RateLimit-Remaining",
+          "96",
+          "X-RateLimit-Reset",
+          "1671111168",
+          "ETag",
+          "W/\"61-VOmYEQW8LNhNin8YPuANSEMH9y8\"",
+          "Vary",
+          "Accept-Encoding"
+        ],
+        "responseIsBinary": false
+      }
+    ]
+  }
+}

@@ -1,0 +1,40 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`recruitment/create-lead/breezy-hr CreateLead should map error 1`] = `
+Err {
+  "error": "MappedError: Expected error
+Properties: {
+  \\"title\\": \\"Unknown error\\",
+  \\"detail\\": {
+    \\"type\\": \\"addCandidateError\\",
+    \\"message\\": \\"there was an unknown error creating candidate.\\"
+  },
+  \\"code\\": \\"UnknownError\\",
+  \\"rateLimit\\": {
+    \\"bucket\\": \\"breezy-hr\\",
+    \\"totalRequests\\": 100,
+    \\"remainingRequests\\": 96,
+    \\"remainingRequestsPercentage\\": 96,
+    \\"resetTimestamp\\": 1671111168
+  }
+}
+AST Path: definitions[0].statements[2].statements[0]
+Original Map Location: Line 24, column 5",
+}
+`;
+
+exports[`recruitment/create-lead/breezy-hr CreateLead should perform successfully 1`] = `
+Ok {
+  "value": Object {
+    "id": "LEAD:c82c6b873b5701",
+    "jobId": "f1cfc5572a5701",
+    "rateLimit": Object {
+      "bucket": "breezy-hr",
+      "remainingRequests": 98,
+      "remainingRequestsPercentage": 98,
+      "resetTimestamp": 1671111168,
+      "totalRequests": 100,
+    },
+  },
+}
+`;
