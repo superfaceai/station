@@ -45,7 +45,7 @@ const sampleCandidate = {
 
   cv: {
     name: 'cv-sample.pdf',
-    data: readFileSync('./grid/recruitment/candidates/cv-sample.pdf', {
+    data: readFileSync('./grid/recruitment/cv-sample.pdf', {
       encoding: 'base64',
     }),
   },
