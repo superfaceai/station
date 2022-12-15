@@ -56,6 +56,7 @@ usecase CompleteText unsafe {
     }
 
     error {
+      code = "BadRequest",
       title = "Too long",
       detail = "The prompt is too long. Maximum supported prompt length is 800 words"
     }
@@ -117,6 +118,7 @@ usecase EditText unsafe {
     }
 
     error {
+      code = "BadRequest",
       title = "Max Count Exceeded",
       detail = "Maximum supported results count is 20"
     }
@@ -178,6 +180,66 @@ model ModelSize enum {
 }
 
 model GPTError {
+  """
+  Error Code
+  A machine-readable code indicating a general error type.
+  """
+  code! ErrorCode!
+
+  """
+  Error Title
+  A short, human-readable summary of the problem type.
+  """
   title! string!
+
+  """
+  Error Detail
+  A human-readable explanation specific to this occurrence of the problem.
+  """
   detail string
+
+}
+
+model ErrorCode enum {
+  """
+  Bad Request
+  Occurrs when the application sends malformed or unsupported data to the provider.
+  """
+  BadRequest
+
+  """
+  Unauthenticated
+  Occurrs when the application provides incorrect authentication credentials.
+  """
+  Unauthenticated
+
+  """
+  Not Allowed
+  Occurrs if you don't have access to the specific data or capability.
+  """
+  NotAllowed
+
+  """
+  Not Found
+  Occurrs when the data or model you're looking for doesn't exist.
+  """
+  NotFound
+
+  """
+  Rate Limit Reached
+  Occurrs when the application performs the use case too often based on the provider's limits.
+  """
+  RateLimitReached
+
+  """
+  Provider's Error
+  Occurrs when there's an unexpected error on the provider side. Try again or contact the provider's support
+  """
+  ProviderError
+
+  """
+  Unknown Error
+  Occurrs when the integration comes across a previously unknown error. More details should be provided with this error.
+  """
+  UnknownError
 }
