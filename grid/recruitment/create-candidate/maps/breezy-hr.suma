@@ -171,7 +171,7 @@ operation CreateCandidate {
     response 200 "application/json" {
       return {
           candidate = {
-            id: body._id,
+            id: 'CANDIDATE:' + body._id,
             jobId: candidate.jobId
           },
           rateLimit = call MapRateLimit(headers = headers) 

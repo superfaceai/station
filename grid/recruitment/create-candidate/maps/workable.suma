@@ -73,7 +73,7 @@ map CreateCandidate {
 
     response 201 "application/json" {
       map result {
-        id = body.candidate.id
+        id = 'CANDIDATE:' + body.candidate.id
         jobId = body.candidate.job.shortcode
       }
     }
