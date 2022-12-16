@@ -3,33 +3,33 @@ provider = "breezy-hr"
 
 map CreateLead {
   return map error if (!input.jobId) {
-    title = "Missing required field jobId"
-    detail = "You need to provide jobId in input to create a lead."
-    code = "MissingJobId"
+    title = "Missing required field"
+    detail = "Field jobId is required. Please provide it in input."
+    code = "BadRequest"
   }
 
-  call CheckCandidateByEmail (
+  call CheckLeadByEmail (
     accessToken = parameters.ACCESS_TOKEN,
     companyId = parameters.COMPANY_ID,
-    candidate = input
+    lead = input
   ) {
     return map error if (outcome.error) outcome.error
   }
 
-  call CreateCandidate (
+  call CreateLead (
     accessToken = parameters.ACCESS_TOKEN,
     companyId = parameters.COMPANY_ID,
-    candidate = input,
+    lead = input,
   ) {
     return map error if (outcome.error) outcome.error
 
-    createCandidateOutcome = outcome.data
+    createLeadOutcome = outcome.data
   }
 
   return map result {
-    id = createCandidateOutcome.candidate.id
-    jobId = createCandidateOutcome.candidate.jobId
-    rateLimit = createCandidateOutcome.rateLimit
+    id = createLeadOutcome.lead.id
+    jobId = createLeadOutcome.lead.jobId
+    rateLimit = createLeadOutcome.rateLimit
   }
 }
 
@@ -114,7 +114,7 @@ operation MapBreezyHRError {
   }
 }
 
-operation CreateCandidate {
+operation CreateLead {
   supportedSocialProfiles = [
     'facebook', 'linkedin', 'twitter', 'dribbble', 'instagram', 'behance', 
     'angellist', 'flickr', 'github', 'youtube', 'google-plus', 'skype', 'globe'
@@ -123,9 +123,9 @@ operation CreateCandidate {
   links = {}
   customAttributes = []
 
-  candidate = args.candidate
+  lead = args.lead
 
-  tmp = (candidate.links || []).forEach(link => {
+  tmp = (lead.links || []).forEach(link => {
     if (supportedSocialProfiles.includes(link.name)) {
       links[link.name] = link.url
     } else {
@@ -136,20 +136,20 @@ operation CreateCandidate {
     }
   })
 
-  http POST "/v3/company/{ parameters.COMPANY_ID }/position/{ candidate.jobId }/candidates" {
+  http POST "/v3/company/{ parameters.COMPANY_ID }/position/{ lead.jobId }/candidates" {
     request "application/json" {
       headers {
         Authorization = parameters.ACCESS_TOKEN
       }
 
       body {
-        name = candidate.firstName + ' ' + candidate.lastName
+        name = lead.firstName + ' ' + lead.lastName
         
-        email_address = candidate.email
-        address = candidate.address
-        phone_number = candidate.phone
+        email_address = lead.email
+        address = lead.address
+        phone_number = lead.phone
         
-        education = candidate.education ? candidate.education.map(edu => ({
+        education = lead.education ? lead.education.map(edu => ({
           school_name: edu.school,
           degree: edu.degree,
           field_of_study: edu.fieldOfStudy,
@@ -157,7 +157,7 @@ operation CreateCandidate {
           end_date: edu.endedAt,
         })) : undefined
         
-        work_history = candidate.workExperience ? candidate.workExperience.map(work => ({
+        work_history = lead.workExperience ? lead.workExperience.map(work => ({
           title: work.position,
           summary: work.summary,
           company_name: work.company,
@@ -176,9 +176,9 @@ operation CreateCandidate {
 
     response 200 "application/json" {
       return {
-          candidate = {
+          lead = {
             id: 'LEAD:' + body._id,
-            jobId: candidate.jobId
+            jobId: lead.jobId
           },
           rateLimit = call MapRateLimit(headers = headers) 
         }
@@ -204,12 +204,12 @@ operation CreateCandidate {
   }
 }
 
-operation CheckCandidateByEmail {
+operation CheckLeadByEmail {
   http GET "/v3/company/{ args.companyId }/candidates/search" {
 
-  request {
+    request {
       query {
-        email_address = args.candidate.email
+        email_address = args.lead.email
       }
       headers {
         Authorization = args.accessToken
@@ -217,11 +217,11 @@ operation CheckCandidateByEmail {
     }
 
     response 200 {
-      appliedCandidates = body.filter(candidate => candidate.position._id === args.candidate.jobId )
+      foundLeads = body.filter(lead => lead.position._id === args.lead.jobId )
 
-      fail if(appliedCandidates.length > 0) {
+      fail if(foundLeads.length > 0) {
         title = 'Conflict'
-        detail = 'Candidate with email ' + args.candidate.email + ' already applied for the job.' 
+        detail = 'Lead with email ' + args.lead.email + ' is already in system.'
         code = 'Conflict'
         rateLimit = call MapRateLimit(headers = headers)
       }
