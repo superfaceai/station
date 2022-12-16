@@ -3,6 +3,13 @@
 exports[`recruitment/get-stage-changes/workable GetStageChanges when specified candidate does exist performs correctly 1`] = `
 Ok {
   "value": Object {
+    "rateLimit": Object {
+      "bucket": "workable",
+      "remainingRequests": 9,
+      "remainingRequestsPercentage": 90,
+      "resetTimestamp": 1671100796,
+      "totalRequests": 10,
+    },
     "stages": Array [
       Object {
         "createdAt": "2022-08-26T03:36:48.612Z",
@@ -39,6 +46,6 @@ Properties: {
   }
 }
 AST Path: definitions[0].statements[0].responseHandlers[1].statements[1]
-Original Map Location: Line 36, column 7",
+Original Map Location: Line 37, column 7",
 }
 `;
