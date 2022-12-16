@@ -14,7 +14,7 @@ map GetStageChanges {
     response 200 "application/json" {
       stages = body.activities.filter(activity => activity.stage_name !== null || activity.action === 'applied').map(stageActivity => ({
         id: stageActivity.action,
-        name: stageActivity.stage_name || 'Applied',
+        name: stageActivity.action === 'applied' ? 'Applied' : stageActivity.stage_name,
         current: false,
         createdAt: stageActivity.created_at,
       }))
