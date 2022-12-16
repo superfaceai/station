@@ -21,7 +21,7 @@ describe('recruitment/create-candidate/mock', () => {
       const result = await usecase.perform(sampleCandidate, { provider });
 
       expect(result.isOk() && (result.value as any)).toEqual({
-        id: 'CANDIDATE_ID',
+        id: 'CANDIDATE:CANDIDATE_ID',
         jobId: 'JOB_ID',
       });
     });
