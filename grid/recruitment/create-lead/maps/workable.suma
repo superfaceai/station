@@ -5,7 +5,7 @@ map CreateLead {
   return map error if (!input.jobId) {
     title = "Missing required field"
     detail = "Field jobId is required. Please provide it in input."
-    code = "MissingRequiredField"
+    code = "BadRequest"
   }
 
   http POST "/spi/v3/jobs/{input.jobId}/candidates" {
@@ -62,6 +62,7 @@ map CreateLead {
       map result {
         id = 'LEAD:' + body.candidate.id
         jobId = body.candidate.job.shortcode
+        rateLimit = call MapRateLimit(headers = headers)
       }
     }
 
