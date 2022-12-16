@@ -45,7 +45,7 @@ const sampleCandidate = {
 
   cv: {
     name: 'cv-sample.pdf',
-    data: readFileSync('./grid/recruitment/candidates/cv-sample.pdf', {
+    data: readFileSync('./grid/recruitment/create-candidate/cv-sample.pdf', {
       encoding: 'base64',
     }),
   },
@@ -62,19 +62,19 @@ const sampleCandidate = {
   ],
 };
 
-export const candidatesTest = (
+export const createCandidateTest = (
   provider: string,
   jobIds: { valid: string; invalid: string },
   options?: RecordingProcessOptions
 ): void => {
-  describe(`recruitment/candidates/${provider}`, () => {
+  describe(`recruitment/create-candidate/${provider}`, () => {
     let superface: SuperfaceTest;
 
     describe('CreateCandidate', () => {
       beforeAll(() => {
         jest.setTimeout(10000);
         superface = buildSuperfaceTest({
-          profile: 'recruitment/candidates',
+          profile: 'recruitment/create-candidate',
           provider,
           useCase: 'CreateCandidate',
         });

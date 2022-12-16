@@ -7,11 +7,11 @@ const sampleCandidate = {
   email: 'demo_testing@fakemail.com',
 };
 
-describe('recruitment/candidates/mock', () => {
+describe('recruitment/create-candidate/mock', () => {
   describe('CreateCandidate', () => {
     it('performs correctly', async () => {
       const client = new SuperfaceClient();
-      const profile = await client.getProfile('recruitment/candidates');
+      const profile = await client.getProfile('recruitment/create-candidate');
       const provider = await client.getProvider('mock');
       const usecase = profile.getUseCase('CreateCandidate');
 
