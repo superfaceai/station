@@ -16,17 +16,26 @@ map GetStageChanges {
     }
 
     response 200 "application/json" {
-      stages = body.filter(event => event.type === 'candidateStatusUpdated').map(stageChange => ({
-        id: stageChange.object.status,
-        name: stageChange.object.stage.name,
-        current: false,
-        createdAt: stageChange.object.entered_stage
-      }))
+      changes = body.filter(event => event.type === 'candidateStatusUpdated').map(stageChange => {
+        const result = {
+          id: stageChange._id,
+          stageId: stageChange.object.status,
+          name: stageChange.object.stage.name,
+          current: false,
+          createdAt: stageChange.object.entered_stage
+        }
 
-      tmp = stages[0].current = true
+        if (stageChange.object.reason) {
+          result.description = stageChange.object.reason;
+        }
+
+        return result;
+      })
+
+      tmp = changes[0].current = true
 
       map result {
-        stages = stages
+        changes = changes
       }
     }
 
