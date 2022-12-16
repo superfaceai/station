@@ -789,6 +789,17 @@
         }
       }
     },
+    "ai/generate-text": {
+      "file": "../grid/ai/generate-text/profile.supr",
+      "providers": {
+        "mock": {
+          "file": "../grid/ai/generate-text/maps/mock.suma"
+        },
+        "openai": {
+          "file": "../grid/ai/generate-text/maps/openai.suma"
+        }
+      }
+    },
     "recruitment/candidates": {
       "file": "../grid/recruitment/candidates/profile.supr",
       "providers": {
@@ -1027,6 +1038,18 @@
           "apikey": "$MANDRILLAPP_API_KEY"
         }
       ]
+    },
+    "openai": {
+      "file": "../providers/openai.json",
+      "security": [
+        {
+          "id": "bearer",
+          "token": "$OPENAI_ACCESS_TOKEN"
+        }
+      ],
+      "parameters": {
+        "organizationId": "$OPENAI_ORGANIZATION_ID"
+      }
     },
     "postmark": {
       "file": "../providers/postmark.json",

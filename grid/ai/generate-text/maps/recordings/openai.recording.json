@@ -1,0 +1,356 @@
+{
+  "ai/generate-text/openai/CompleteText": {
+    "4342124779a015b0d814d92b08df01f1": [
+      {
+        "scope": "https://api.openai.com:443",
+        "method": "POST",
+        "path": "/v1/completions",
+        "body": {
+          "prompt": "Say this is a test",
+          "model": "text-davinci-003",
+          "temperature": 1,
+          "max_tokens": 16,
+          "n": 1,
+          "stream": false,
+          "logprobs": null
+        },
+        "status": 200,
+        "response": {
+          "id": "cmpl-6NkjezBKZNxy1YVoJ3Pb2U9nO8KFR",
+          "object": "text_completion",
+          "created": 1671119214,
+          "model": "text-davinci-003",
+          "choices": [
+            {
+              "text": "\n\nThis indeed is a test.",
+              "index": 0,
+              "logprobs": null,
+              "finish_reason": "stop"
+            }
+          ],
+          "usage": {
+            "prompt_tokens": 5,
+            "completion_tokens": 8,
+            "total_tokens": 13
+          }
+        },
+        "rawHeaders": [
+          "Date",
+          "Thu, 15 Dec 2022 15:46:55 GMT",
+          "Content-Type",
+          "application/json",
+          "Content-Length",
+          "286",
+          "Connection",
+          "close",
+          "Access-Control-Allow-Origin",
+          "*",
+          "Cache-Control",
+          "no-cache, must-revalidate",
+          "Openai-Model",
+          "text-davinci-003",
+          "Openai-Organization",
+          "user-mbiulrmo5dtnrb2brk8zpphr",
+          "Openai-Processing-Ms",
+          "585",
+          "Openai-Version",
+          "2020-10-01",
+          "Strict-Transport-Security",
+          "max-age=15724800; includeSubDomains",
+          "X-Request-Id",
+          "b51a88def81da0e0f5b3b6218720577b"
+        ],
+        "responseIsBinary": false
+      }
+    ],
+    "474cfc39500a1363fefc4de801b71c5b": [
+      {
+        "scope": "https://api.openai.com:443",
+        "method": "POST",
+        "path": "/v1/completions",
+        "body": {
+          "prompt": "Write a tagline for an ice cream shop.",
+          "model": "text-davinci-003",
+          "temperature": 0.8,
+          "max_tokens": 42,
+          "n": 3,
+          "stream": false,
+          "logprobs": null
+        },
+        "status": 200,
+        "response": {
+          "id": "cmpl-6NkjgVBEd9174ZAikkvrI4JAcjeBd",
+          "object": "text_completion",
+          "created": 1671119216,
+          "model": "text-davinci-003",
+          "choices": [
+            {
+              "text": "\n\n\"Taste the Sweetness of Our Creamy Delights!\"",
+              "index": 0,
+              "logprobs": null,
+              "finish_reason": "stop"
+            },
+            {
+              "text": "\n\n\"Bringing you deliciousness, one scoop at a time!\"",
+              "index": 1,
+              "logprobs": null,
+              "finish_reason": "stop"
+            },
+            {
+              "text": "\n\n\"Taste the cool refreshment of our delicious ice cream!\"",
+              "index": 2,
+              "logprobs": null,
+              "finish_reason": "stop"
+            }
+          ],
+          "usage": {
+            "prompt_tokens": 10,
+            "completion_tokens": 45,
+            "total_tokens": 55
+          }
+        },
+        "rawHeaders": [
+          "Date",
+          "Thu, 15 Dec 2022 15:46:56 GMT",
+          "Content-Type",
+          "application/json",
+          "Content-Length",
+          "553",
+          "Connection",
+          "close",
+          "Access-Control-Allow-Origin",
+          "*",
+          "Cache-Control",
+          "no-cache, must-revalidate",
+          "Openai-Model",
+          "text-davinci-003",
+          "Openai-Organization",
+          "user-mbiulrmo5dtnrb2brk8zpphr",
+          "Openai-Processing-Ms",
+          "841",
+          "Openai-Version",
+          "2020-10-01",
+          "Strict-Transport-Security",
+          "max-age=15724800; includeSubDomains",
+          "X-Request-Id",
+          "0b3ee756c5a92ccce9629decbfb27877"
+        ],
+        "responseIsBinary": false
+      }
+    ],
+    "95426aa9738e643c69daac6581240f22": [
+      {
+        "scope": "https://api.openai.com:443",
+        "method": "POST",
+        "path": "/v1/completions",
+        "body": {
+          "prompt": "Say this is a test",
+          "model": "text-davinci-003",
+          "temperature": 1,
+          "max_tokens": -42,
+          "n": 1,
+          "stream": false,
+          "logprobs": null
+        },
+        "status": 400,
+        "response": {
+          "error": {
+            "message": "-42 is less than the minimum of 0 - 'max_tokens'",
+            "type": "invalid_request_error",
+            "param": null,
+            "code": null
+          }
+        },
+        "rawHeaders": [
+          "Date",
+          "Thu, 15 Dec 2022 15:46:57 GMT",
+          "Content-Type",
+          "application/json",
+          "Content-Length",
+          "161",
+          "Connection",
+          "close",
+          "Access-Control-Allow-Origin",
+          "*",
+          "Openai-Organization",
+          "user-mbiulrmo5dtnrb2brk8zpphr",
+          "Openai-Processing-Ms",
+          "3",
+          "Openai-Version",
+          "2020-10-01",
+          "Strict-Transport-Security",
+          "max-age=15724800; includeSubDomains",
+          "X-Request-Id",
+          "eba06e8bbd92933d5fab7fca94b6d3ef"
+        ],
+        "responseIsBinary": false
+      }
+    ]
+  },
+  "ai/generate-text/openai/EditText": {
+    "6dc01db99fa808a89b2c5330b27fbe8a": [
+      {
+        "scope": "https://api.openai.com:443",
+        "method": "POST",
+        "path": "/v1/edits",
+        "body": {
+          "input": "What day of the wek is it?",
+          "instruction": "Fix the spelling mistakes",
+          "model": "text-davinci-edit-001",
+          "temperature": 1,
+          "n": 1
+        },
+        "status": 200,
+        "response": {
+          "object": "edit",
+          "created": 1671119218,
+          "choices": [
+            {
+              "text": "What day of the week is it?\n",
+              "index": 0
+            }
+          ],
+          "usage": {
+            "prompt_tokens": 25,
+            "completion_tokens": 28,
+            "total_tokens": 53
+          }
+        },
+        "rawHeaders": [
+          "Date",
+          "Thu, 15 Dec 2022 15:46:58 GMT",
+          "Content-Type",
+          "application/json",
+          "Content-Length",
+          "172",
+          "Connection",
+          "close",
+          "Access-Control-Allow-Origin",
+          "*",
+          "Cache-Control",
+          "no-cache, must-revalidate",
+          "Openai-Model",
+          "text-davinci-edit:001",
+          "Openai-Organization",
+          "user-mbiulrmo5dtnrb2brk8zpphr",
+          "Openai-Processing-Ms",
+          "796",
+          "Openai-Version",
+          "2020-10-01",
+          "Strict-Transport-Security",
+          "max-age=15724800; includeSubDomains",
+          "X-Request-Id",
+          "201b4dbe682fb12727e764057ef62989"
+        ],
+        "responseIsBinary": false
+      }
+    ],
+    "7c7ef13194cbdb0d9b14297466ddc6fc": [
+      {
+        "scope": "https://api.openai.com:443",
+        "method": "POST",
+        "path": "/v1/edits",
+        "body": {
+          "input": "What day of the wek is it?",
+          "instruction": "Fix the spelling mistakes",
+          "model": "text-davinci-edit-001",
+          "temperature": 0.2,
+          "n": 2
+        },
+        "status": 200,
+        "response": {
+          "object": "edit",
+          "created": 1671119219,
+          "choices": [
+            {
+              "text": "What day of the week is it?\n",
+              "index": 0
+            },
+            {
+              "text": "What day of the week is it?\n",
+              "index": 1
+            }
+          ],
+          "usage": {
+            "prompt_tokens": 25,
+            "completion_tokens": 56,
+            "total_tokens": 81
+          }
+        },
+        "rawHeaders": [
+          "Date",
+          "Thu, 15 Dec 2022 15:47:00 GMT",
+          "Content-Type",
+          "application/json",
+          "Content-Length",
+          "223",
+          "Connection",
+          "close",
+          "Access-Control-Allow-Origin",
+          "*",
+          "Cache-Control",
+          "no-cache, must-revalidate",
+          "Openai-Model",
+          "text-davinci-edit:001",
+          "Openai-Organization",
+          "user-mbiulrmo5dtnrb2brk8zpphr",
+          "Openai-Processing-Ms",
+          "585",
+          "Openai-Version",
+          "2020-10-01",
+          "Strict-Transport-Security",
+          "max-age=15724800; includeSubDomains",
+          "X-Request-Id",
+          "04a5e0a3d0049b9fe39aadb104d37c0f"
+        ],
+        "responseIsBinary": false
+      }
+    ],
+    "316726628b3a90bd766d6ee89151df93": [
+      {
+        "scope": "https://api.openai.com:443",
+        "method": "POST",
+        "path": "/v1/edits",
+        "body": {
+          "input": "What day of the wek is it?",
+          "instruction": "Fix the spelling mistakes",
+          "model": "text-davinci-edit-001",
+          "temperature": 1,
+          "n": 1000
+        },
+        "status": 400,
+        "response": {
+          "error": {
+            "message": "1000 is greater than the maximum of 20 - 'n'",
+            "type": "invalid_request_error",
+            "param": null,
+            "code": null
+          }
+        },
+        "rawHeaders": [
+          "Date",
+          "Thu, 15 Dec 2022 15:47:01 GMT",
+          "Content-Type",
+          "application/json",
+          "Content-Length",
+          "157",
+          "Connection",
+          "close",
+          "Access-Control-Allow-Origin",
+          "*",
+          "Openai-Organization",
+          "user-mbiulrmo5dtnrb2brk8zpphr",
+          "Openai-Processing-Ms",
+          "162",
+          "Openai-Version",
+          "2020-10-01",
+          "Strict-Transport-Security",
+          "max-age=15724800; includeSubDomains",
+          "X-Request-Id",
+          "0c3d008f5595c882f4b8224d6eff4426"
+        ],
+        "responseIsBinary": false
+      }
+    ]
+  }
+}
