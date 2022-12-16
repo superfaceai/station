@@ -36,6 +36,7 @@ map GetStageChanges {
 
       map result {
         changes = changes
+        rateLimit = call MapRateLimit(headers = headers)
       }
     }
 
