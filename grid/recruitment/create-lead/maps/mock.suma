@@ -1,0 +1,17 @@
+profile = "recruitment/create-lead@1.0"
+provider = "mock"
+
+"""
+CreateLead map
+"""
+map CreateLead {
+    
+  return map result if (input.jobId) {
+    id = 'LEAD:LEAD_ID'
+    jobId = 'JOB_ID'
+  }
+
+  return map result {
+    id = 'LEAD:LEAD_ID'
+  }
+}
