@@ -273,9 +273,9 @@ operation CheckJobExists {
     response 500 "application/json" {
       // Breezy HR returns http status code 500 in case that the job ID doesn't exist. It could be caused by other reasons as well, but at least the error helps the client understand the error better.
       fail {
-        title = 'Bad Request'
-        detail = 'Can not get job ID ' + args.jobId + '. Check that the job ID exists.'
-        code = 'BadRequest'
+        title = 'Not Found'
+        detail = 'Unable to get job ID ' + args.jobId + '. Check that the job ID exists.'
+        code = 'NotFound'
         rateLimit = call MapRateLimit(headers = headers)
       }
     }
