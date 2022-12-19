@@ -1,0 +1,301 @@
+profile = "recruitment/create-lead@1.0"
+provider = "breezy-hr"
+
+map CreateLead {
+  return map error if (!input.jobId) {
+    title = "Missing required field"
+    detail = "Field jobId is required. Please provide it in input."
+    code = "BadRequest"
+  }
+
+  call CheckJobExists (
+    accessToken = parameters.ACCESS_TOKEN,
+    companyId = parameters.COMPANY_ID,
+    jobId = input.jobId
+  ) { 
+    return map error if (outcome.error) outcome.error
+  }
+
+  call CheckLeadByEmail (
+    accessToken = parameters.ACCESS_TOKEN,
+    companyId = parameters.COMPANY_ID,
+    lead = input
+  ) {
+    return map error if (outcome.error) outcome.error
+  }
+
+  call CreateLead (
+    accessToken = parameters.ACCESS_TOKEN,
+    companyId = parameters.COMPANY_ID,
+    lead = input,
+  ) {
+    return map error if (outcome.error) outcome.error
+
+    createLeadOutcome = outcome.data
+  }
+
+  return map result {
+    id = createLeadOutcome.lead.id
+    jobId = createLeadOutcome.lead.jobId
+    rateLimit = createLeadOutcome.rateLimit
+  }
+}
+
+// Breezy HR rate limits docs: https://developer.breezy.hr/reference/rate-limiting
+operation MapRateLimit {
+  totalRequests = parseInt(args.headers['x-ratelimit-limit'], 10)
+  remainingRequests = parseInt(args.headers['x-ratelimit-remaining'], 10)
+  remainingRequestsPercentage = undefined
+  resetTimestamp = parseInt(args.headers['x-ratelimit-reset'], 10)
+
+  set if(isNaN(totalRequests)) {
+    totalRequests = undefined
+  }
+
+  set if(isNaN(remainingRequests)) {
+    remainingRequests = undefined
+  }
+
+  set if(totalRequests > 0 && remainingRequests !== undefined) {
+    remainingRequestsPercentage = remainingRequests / totalRequests * 100
+  }
+
+  set if(isNaN(resetTimestamp, 10)) {
+    resetTimestamp = undefined
+  }
+
+  return {
+    bucket = 'breezy-hr'
+    totalRequests = totalRequests
+    remainingRequests = remainingRequests
+    remainingRequestsPercentage = remainingRequestsPercentage
+    resetTimestamp = resetTimestamp
+  }
+}
+
+operation MapBreezyHRError {
+  statusCode = args.statusCode
+  workableError = args.error
+
+  rateLimit = call MapRateLimit(headers = args.headers)
+
+  return if (statusCode === 400) {
+    title = 'Bad request'
+    detail = workableError
+    code = 'BadRequest'
+    rateLimit = rateLimit
+  }
+
+  return if (statusCode === 401) {
+    title = 'Unauthenticated'
+    detail = workableError
+    code = 'Unauthenticated'
+    rateLimit = rateLimit
+  }
+
+  return if (statusCode === 403) {
+    title = 'Unauthorized'
+    detail = workableError
+    code = 'Unauthorized'
+    rateLimit = rateLimit
+  }
+
+  return if (statusCode === 404) {
+    title = 'Not found'
+    detail = workableError
+    code = 'NotFound'
+    rateLimit = rateLimit
+  }
+
+  return if (statusCode === 429) {
+    title = 'Rate limit exceeded'
+    detail = 'You reached max requests quota.'
+    code = 'RateLimitReached'
+    rateLimit = rateLimit
+  }
+
+  return {
+    title = "Unknown error"
+    detail = workableError
+    code = 'UnknownError'
+    rateLimit = rateLimit
+  }
+}
+
+operation CreateLead {
+  supportedSocialProfiles = [
+    'facebook', 'linkedin', 'twitter', 'dribbble', 'instagram', 'behance', 
+    'angellist', 'flickr', 'github', 'youtube', 'google-plus', 'skype', 'globe'
+  ]
+
+  links = {}
+  customAttributes = []
+
+  lead = args.lead
+
+  tmp = (lead.links || []).forEach(link => {
+    if (supportedSocialProfiles.includes(link.name)) {
+      links[link.name] = link.url
+    } else {
+      customAttributes.push({ 
+        name: link.name, 
+        value: link.url
+      })
+    }
+  })
+
+  http POST "/v3/company/{ parameters.COMPANY_ID }/position/{ lead.jobId }/candidates" {
+    request "application/json" {
+      headers {
+        Authorization = parameters.ACCESS_TOKEN
+      }
+
+      body {
+        name = lead.firstName + ' ' + lead.lastName
+        
+        email_address = lead.email
+        address = lead.address
+        phone_number = lead.phone
+        
+        education = lead.education ? lead.education.map(edu => ({
+          school_name: edu.school,
+          degree: edu.degree,
+          field_of_study: edu.fieldOfStudy,
+          start_date: edu.startedAt,
+          end_date: edu.endedAt,
+        })) : undefined
+        
+        work_history = lead.workExperience ? lead.workExperience.map(work => ({
+          title: work.position,
+          summary: work.summary,
+          company_name: work.company,
+          industry: work.industry,
+          is_current: work.current,
+
+        })) : undefined
+        
+        social_profiles = links
+        custom_attributes = customAttributes
+        
+        origin = 'sourced'
+        source = Array.isArray(input.source) ? input.source.join(', ') : input.source
+      }
+    }
+
+    response 200 "application/json" {
+      return {
+          lead = {
+            id: 'LEAD:' + body._id,
+            jobId: lead.jobId
+          },
+          rateLimit = call MapRateLimit(headers = headers) 
+        }
+    }
+
+    response "application/json" {
+      error = call MapBreezyHRError(
+        statusCode = statusCode,
+        error = body.error,
+        headers = headers
+      )
+
+      fail error
+    }
+
+    response {
+      fail {
+        title = "Unknown error"
+        detail = JSON.stringify(body, null, 2)
+        code = 'UnknownError'
+      }
+    }
+  }
+}
+
+operation CheckLeadByEmail {
+  http GET "/v3/company/{ args.companyId }/candidates/search" {
+
+    request {
+      query {
+        email_address = args.lead.email
+      }
+      headers {
+        Authorization = args.accessToken
+      }
+    }
+
+    response 200 {
+      foundLeads = body.filter(lead => lead.position._id === args.lead.jobId )
+
+      fail if(foundLeads.length > 0) {
+        title = 'Conflict'
+        detail = 'Lead with email ' + args.lead.email + ' is already in system.'
+        code = 'Conflict'
+        rateLimit = call MapRateLimit(headers = headers)
+      }
+
+      return {}
+    }
+
+    response "application/json" {
+      error = call MapBreezyHRError(
+        statusCode = statusCode,
+        error = body.error,
+        headers = headers
+      )
+
+      fail error
+    }
+
+    response {
+      fail {
+        title = "Unknown error"
+        detail = JSON.stringify(body, null, 2)
+        code = 'UnknownError'
+      }
+    }
+  }
+}
+
+operation CheckJobExists {
+  http GET "/v3/company/{ args.companyId }/position/{ args.jobId }" {
+
+    request {
+      headers {
+        Authorization = args.accessToken
+      }
+    }
+
+    response 200 {       
+      return {}
+    }
+
+    response 500 "application/json" {
+      // Breezy HR returns http status code 500 in case that the job ID doesn't exist. It could be caused by other reasons as well, but at least the error helps the client understand the error better.
+      fail {
+        title = 'Not Found'
+        detail = 'Unable to get job ID ' + args.jobId + '. Check that the job ID exists.'
+        code = 'NotFound'
+        rateLimit = call MapRateLimit(headers = headers)
+      }
+    }
+
+    response "application/json" {
+      error = call MapBreezyHRError(
+        statusCode = statusCode,
+        error = body.error,
+        headers = headers
+      )
+
+      fail error
+    }
+
+    response {
+      fail {
+        title = "Unknown error"
+        detail = JSON.stringify(body, null, 2)
+        code = 'UnknownError'
+      }
+    }
+  }
+}
