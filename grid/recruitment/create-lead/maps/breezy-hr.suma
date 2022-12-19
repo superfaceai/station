@@ -8,6 +8,14 @@ map CreateLead {
     code = "BadRequest"
   }
 
+  call CheckJobExists (
+    accessToken = parameters.ACCESS_TOKEN,
+    companyId = parameters.COMPANY_ID,
+    jobId = input.jobId
+  ) { 
+    return map error if (outcome.error) outcome.error
+  }
+
   call CheckLeadByEmail (
     accessToken = parameters.ACCESS_TOKEN,
     companyId = parameters.COMPANY_ID,
@@ -227,6 +235,49 @@ operation CheckLeadByEmail {
       }
 
       return {}
+    }
+
+    response "application/json" {
+      error = call MapBreezyHRError(
+        statusCode = statusCode,
+        error = body.error,
+        headers = headers
+      )
+
+      fail error
+    }
+
+    response {
+      fail {
+        title = "Unknown error"
+        detail = JSON.stringify(body, null, 2)
+        code = 'UnknownError'
+      }
+    }
+  }
+}
+
+operation CheckJobExists {
+  http GET "/v3/company/{ args.companyId }/position/{ args.jobId }" {
+
+    request {
+      headers {
+        Authorization = args.accessToken
+      }
+    }
+
+    response 200 {       
+      return {}
+    }
+
+    response 500 "application/json" {
+      // Breezy HR returns http status code 500 in case that the job ID doesn't exist. It could be caused by other reasons as well, but at least the error helps the client understand the error better.
+      fail {
+        title = 'Bad Request'
+        detail = 'Can not get job ID ' + args.jobId + '. Check that the job ID exists.'
+        code = 'BadRequest'
+        rateLimit = call MapRateLimit(headers = headers)
+      }
     }
 
     response "application/json" {
