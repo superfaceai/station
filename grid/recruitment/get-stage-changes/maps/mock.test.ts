@@ -17,16 +17,18 @@ describe('recruitment/get-stage-changes/mock', () => {
       );
 
       expect(result.isOk() && (result.value as any)).toEqual({
-        stages: [
+        changes: [
           {
-            id: 'sourced',
+            id: '1',
+            stageId: 'sourced',
             name: 'Sourced',
-            description: 'Sourced from linkedIn',
+            description: 'Sourced from LinkedIn',
             current: false,
             createdAt: '2022-12-06T15:20:11Z',
           },
           {
-            id: 'applied',
+            id: '2',
+            stageId: 'applied',
             name: 'Applied',
             description: 'Applied for job opening of Software Engineer',
             current: true,

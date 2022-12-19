@@ -68,9 +68,9 @@ export const candidatesTest = (
   options?: RecordingProcessOptions
 ): void => {
   describe(`recruitment/candidates/${provider}`, () => {
-    let superface: SuperfaceTest;
-
     describe('CreateCandidate', () => {
+      let superface: SuperfaceTest;
+
       beforeAll(() => {
         jest.setTimeout(10000);
         superface = buildSuperfaceTest({
@@ -82,19 +82,18 @@ export const candidatesTest = (
 
       describe('when specified job does exist', () => {
         it('performs correctly', async () => {
-          const page1 = await superface.run(
+          const result = await superface.run(
             {
               input: {
                 jobId: jobIds.valid,
                 ...sampleCandidate,
               },
-              testName: 'page 1',
             },
             options
           );
 
-          expect(page1.isOk).toBeTruthy();
-          expect(page1).toMatchSnapshot();
+          expect(result.isOk()).toBeTruthy();
+          expect(result).toMatchSnapshot();
         });
       });
 
