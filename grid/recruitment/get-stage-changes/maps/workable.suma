@@ -12,17 +12,18 @@ map GetStageChanges {
     }
 
     response 200 "application/json" {
-      stages = body.activities.filter(activity => activity.stage_name !== null || activity.action === 'applied').map(stageActivity => ({
-        id: stageActivity.action,
+      changes = body.activities.filter(activity => activity.stage_name !== null || activity.action === 'applied').map(stageActivity => ({
+        id: stageActivity.id,
+        stageId: stageActivity.action,
         name: stageActivity.action === 'applied' ? 'Applied' : stageActivity.stage_name,
         current: false,
         createdAt: stageActivity.created_at,
       }))
 
-      tmp = stages[stages.length - 1].current = true
+      tmp = changes[changes.length - 1].current = true
 
       map result {
-        stages = stages
+        changes = changes
         rateLimit = call MapRateLimit(headers = headers)
       }
     }

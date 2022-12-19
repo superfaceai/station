@@ -3,6 +3,29 @@
 exports[`recruitment/get-stage-changes/workable GetStageChanges when specified candidate does exist performs correctly 1`] = `
 Ok {
   "value": Object {
+    "changes": Array [
+      Object {
+        "createdAt": "2022-08-26T03:36:48.612Z",
+        "current": false,
+        "id": "26e95b86",
+        "name": "Applied",
+        "stageId": "applied",
+      },
+      Object {
+        "createdAt": "2022-08-30T03:37:28.560Z",
+        "current": false,
+        "id": "26e95b9a",
+        "name": "Phone Screen",
+        "stageId": "phone-screen",
+      },
+      Object {
+        "createdAt": "2022-09-03T03:39:36.565Z",
+        "current": true,
+        "id": "26e95bdb",
+        "name": "Assessment",
+        "stageId": "assessment",
+      },
+    ],
     "rateLimit": Object {
       "bucket": "workable",
       "remainingRequests": 9,
@@ -10,26 +33,6 @@ Ok {
       "resetTimestamp": 1671100796,
       "totalRequests": 10,
     },
-    "stages": Array [
-      Object {
-        "createdAt": "2022-08-26T03:36:48.612Z",
-        "current": false,
-        "id": "applied",
-        "name": "Applied",
-      },
-      Object {
-        "createdAt": "2022-08-30T03:37:28.560Z",
-        "current": false,
-        "id": "phone-screen",
-        "name": "Phone Screen",
-      },
-      Object {
-        "createdAt": "2022-09-03T03:39:36.565Z",
-        "current": true,
-        "id": "assessment",
-        "name": "Assessment",
-      },
-    ],
   },
 }
 `;
@@ -46,6 +49,6 @@ Properties: {
   }
 }
 AST Path: definitions[0].statements[0].responseHandlers[1].statements[1]
-Original Map Location: Line 37, column 7",
+Original Map Location: Line 38, column 7",
 }
 `;
