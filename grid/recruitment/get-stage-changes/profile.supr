@@ -1,6 +1,6 @@
 """
 Retrieve Stage Changes
-Lists stage changes for a candidate.
+Lists stage changes for a candidate or sourced lead in ATS.
 """
 name = "recruitment/get-stage-changes"
 version = "1.0.0"
@@ -13,17 +13,23 @@ usecase GetStageChanges {
   input {
     """
     Candidate Id
-    Unique identifier of a candidate.
+    Unique identifier of a candidate or sourced lead.
     """
     candidateId! string!
+
+    """
+    Job Id
+    The unique identifier of a job that the candidate is linked with. 
+    """
+    jobId string!
   }
 
   result {
     """
     Stages
-    List of stages relevant to the candidate.
+    List of stages relevant to the candidate or lead.
     """
-    stages! [Stage!]!
+    changes! [StageChange!]!
     
     """
     Rate limit
@@ -40,16 +46,18 @@ usecase GetStageChanges {
     }
 
     result {
-      stages = [
+      changes = [
         {
-          id = 'sourced',
+          id = '1',
+          stageId = 'sourced',
           name = 'Sourced',
           description = 'Sourced from LinkedIn',
           current = false,
           createdAt = "2022-12-06T15:20:11Z",
         },
         {
-          id = 'applied',
+          id = '2',
+          stageId = 'applied',
           name = 'Applied',
           description = 'Applied for job opening of Software Engineer',
           current = true,
@@ -61,12 +69,12 @@ usecase GetStageChanges {
 
   example Failed {
     input {
-      candidateId = 'NOT_EXISTING_CANDIDATE_ID'
+      candidateId = 'NOT_EXISTING_ID'
     }
 
     error {
       title = 'Not found'
-      detail = 'Candidate ID "NOT_EXISTING_CANDIDATE_ID" not found.'
+      detail = 'Candidate with ID "NOT_EXISTING_ID" not found.'
       code = 'NotFound'
       rateLimit = {
         bucket = 'workable'
@@ -75,12 +83,18 @@ usecase GetStageChanges {
   }
 }
 
-model Stage {
+model StageChange {
   """
   Id
-  Unique identifier of a stage
+  Unique identifier of a stage change
   """
   id! string!
+
+  """
+  Stage Id
+  Identifier of a stage where candidate moved to.
+  """
+  stageId! string!
 
   """
   Name
@@ -90,7 +104,7 @@ model Stage {
 
   """
   Description
-  Description of a stage.
+  Description of a stage change. Can contain reason for moving to this stage.
   """
   description string
 

@@ -6,6 +6,7 @@ import { buildSuperfaceTest } from '../../../test-config';
 
 export const getStageChangesTest = (
   provider: string,
+  jobIds: { valid: string },
   candidateIds: { valid: string; invalid: string },
   options?: RecordingProcessOptions
 ): void => {
@@ -23,14 +24,17 @@ export const getStageChangesTest = (
 
       describe('when specified candidate does exist', () => {
         it('performs correctly', async () => {
-          const result = await superface.run(
-            {
-              input: {
-                candidateId: candidateIds.valid,
-              },
-            },
-            options
-          );
+          const input =
+            provider === 'breezy-hr'
+              ? {
+                  candidateId: candidateIds.valid,
+                  jobId: jobIds.valid,
+                }
+              : {
+                  candidateId: candidateIds.valid,
+                };
+
+          const result = await superface.run({ input }, options);
 
           expect(() => result.unwrap()).not.toThrow();
           expect(result).toMatchSnapshot();
@@ -39,15 +43,18 @@ export const getStageChangesTest = (
 
       describe('when specified candidate does not exist', () => {
         it('returns error', async () => {
-          await expect(
-            superface.run(
-              {
-                input: {
+          const input =
+            provider === 'breezy-hr'
+              ? {
                   candidateId: candidateIds.invalid,
-                },
-              },
-              options
-            )
+                  jobId: jobIds.valid,
+                }
+              : {
+                  candidateId: candidateIds.invalid,
+                };
+
+          await expect(
+            superface.run({ input }, options)
           ).resolves.toMatchSnapshot();
         });
       });
