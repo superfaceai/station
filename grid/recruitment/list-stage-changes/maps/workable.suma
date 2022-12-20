@@ -1,7 +1,7 @@
-profile = "recruitment/get-stage-changes@1.0"
+profile = "recruitment/list-stage-changes@1.0"
 provider = "workable"
 
-map GetStageChanges {
+map ListStageChanges {
   http GET "/spi/v3/candidates/{input.candidateId}/activities" {
     security "bearer_token"
 
