@@ -1,0 +1,81 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ai/generate-text/openai CompleteText completes text based on the prompt (using defaults) 1`] = `
+Ok {
+  "value": Object {
+    "completions": Array [
+      "
+
+This indeed is a test.",
+    ],
+  },
+}
+`;
+
+exports[`ai/generate-text/openai CompleteText completes text based on the prompt (using specific params) 1`] = `
+Ok {
+  "value": Object {
+    "completions": Array [
+      "
+
+\\"Taste the Sweetness of Our Creamy Delights!\\"",
+      "
+
+\\"Bringing you deliciousness, one scoop at a time!\\"",
+      "
+
+\\"Taste the cool refreshment of our delicious ice cream!\\"",
+    ],
+  },
+}
+`;
+
+exports[`ai/generate-text/openai CompleteText errors with negative max word limit 1`] = `
+Err {
+  "error": "MappedHTTPError: Expected HTTP error
+Properties: {
+  \\"code\\": \\"BadRequest\\",
+  \\"title\\": \\"Invalid data\\",
+  \\"detail\\": \\"Invalid data was sent to OpenAI server: -42 is less than the minimum of 0 - 'max_tokens'\\"
+}
+AST Path: definitions[0].statements[0].responseHandlers[1].statements[1]
+Original Map Location: Line 36, column 7",
+}
+`;
+
+exports[`ai/generate-text/openai EditText edits the text based on the input & instructions (using defaults) 1`] = `
+Ok {
+  "value": Object {
+    "edits": Array [
+      "What day of the week is it?
+",
+    ],
+  },
+}
+`;
+
+exports[`ai/generate-text/openai EditText edits the text based on the input & instructions (using specific params) 1`] = `
+Ok {
+  "value": Object {
+    "edits": Array [
+      "What day of the week is it?
+",
+      "What day of the week is it?
+",
+    ],
+  },
+}
+`;
+
+exports[`ai/generate-text/openai EditText errors with large request edits count 1`] = `
+Err {
+  "error": "MappedHTTPError: Expected HTTP error
+Properties: {
+  \\"code\\": \\"BadRequest\\",
+  \\"title\\": \\"Invalid data\\",
+  \\"detail\\": \\"Invalid data was sent to OpenAI server: 1000 is greater than the maximum of 20 - 'n'\\"
+}
+AST Path: definitions[1].statements[0].responseHandlers[1].statements[1]
+Original Map Location: Line 76, column 7",
+}
+`;

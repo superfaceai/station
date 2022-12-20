@@ -1,0 +1,189 @@
+profile = "ai/generate-text@1.0"
+provider = "openai"
+
+map CompleteText { 
+  http POST "/v1/completions" {
+    security "bearer"
+  
+    request "application/json" {
+      headers {
+        "OpenAI-Organization" = parameters.organizationId
+      }
+
+      body {
+        prompt = input.prompt
+        model = call MapCompleteModelSize(model = input.model)
+        temperature = call MapCreativity(creativity = input.creativity)
+        max_tokens = call MapMaxLength(approxMaxWords = input.approxMaxWords)
+        n = call MapCount(count = input.count)
+        stream = false
+        logprobs = null
+      }
+    }
+
+    response 200 "application/json" {
+      completions = call foreach(choice of body.choices) MapCompletion(
+        choice = choice
+      )
+
+      map result {
+        completions = completions
+      }
+    }
+
+    response "application/json" {
+      error = call HandleErrorWithJson(body = body, statusCode = statusCode)
+      return map error error
+    }
+
+    response {
+      error = call HandleError(body = body, statusCode = statusCode)
+      return map error error
+    }
+  }
+}
+
+map EditText { 
+  http POST "/v1/edits" {
+    security "bearer"
+  
+    request "application/json" {
+      headers {
+        "OpenAI-Organization" = parameters.organizationId
+      }
+
+      body {
+        input = input.text
+        instruction = input.instructions
+        model = "text-davinci-edit-001"
+        temperature = call MapCreativity(creativity = input.creativity)
+        n = call MapCount(count = input.count)
+      }
+    }
+
+    response 200 "application/json" {
+      edits = call foreach(choice of body.choices) MapEdit(
+        choice = choice
+      )
+
+      map result {
+        edits = edits
+      }
+    }
+
+    response "application/json" {
+      error = call HandleErrorWithJson(body = body, statusCode = statusCode)
+      return map error error
+    }
+
+    response {
+      error = call HandleError(body = body, statusCode = statusCode)
+      return map error error
+    }
+  }
+}
+
+operation MapCompleteModelSize {
+  MODELSIZE_TO_OPENAI_MODEL = {
+    "small": "text-babbage-001",
+    "medium": "text-curie-001",
+    "large": "text-davinci-003"
+  }
+
+  DEFAULT_MODEL_SIZE = "large"
+
+  return MODELSIZE_TO_OPENAI_MODEL[args.model || DEFAULT_MODEL_SIZE]
+}
+
+operation MapCreativity {
+  DEFAULT_CREATIVITY = 1
+  
+  creativity = args.creativity || DEFAULT_CREATIVITY
+
+  // Clamp `creativity` between 0 and 1
+  return Math.min(Math.max(creativity, 0), 1)
+}
+
+operation MapMaxLength {
+  // About tokens: https://beta.openai.com/tokenizer
+
+  DEFAULT_MAX_WORDS = 12
+
+  return parseInt((args.approxMaxWords || DEFAULT_MAX_WORDS) * 1.4)
+}
+
+operation MapCount {
+  DEFAULT_COUNT = 1
+
+  return parseInt(Math.max(1, args.count || DEFAULT_COUNT))
+}
+
+operation MapCompletion {
+  return args.choice.text
+}
+
+operation MapEdit {
+  return args.choice.text
+}
+
+operation HandleErrorWithJson {
+  statusCode = args.statusCode
+  body = args.body
+
+  return if (statusCode === 400) {
+    code = "BadRequest"
+    title = "Invalid data"
+    detail = (`Invalid data was sent to OpenAI server: ${body.error.message}`)
+  }
+
+  return if (statusCode === 401) {
+    code = "Unauthenticated"
+    title = "Unauthenticated"
+    detail = (`Please make sure you're providing a valid OpenAI API key: ${body.error.message}`)
+  }
+
+  return if (statusCode === 404) {
+    code = "NotFound"
+    title = "Not Found"
+    detail = body.error.message
+  }
+
+  return {
+    code = "UnknownError"
+    title = "Unknown error"
+    detail = (`Unknown error occurred. Status: ${statusCode}`)
+  }
+}
+
+operation HandleError {
+  statusCode = args.statusCode
+  body = args.body
+
+  return if (statusCode === 401) {
+    code = "Unauthenticated"
+    title = "Unauthenticated"
+    detail = "Please make sure you're providing a valid OpenAI API key"
+  }
+
+  return if (statusCode === 403) {
+    code = "NotAllowed"
+    title = "Not allowed"
+  }
+
+  return if (statusCode === 429) {
+    code = "RateLimitReached"
+    title = "Quota limit exceeded"
+  }
+
+  return if (statusCode === 500) {
+    code = "ProviderError"
+    title = "Error on OpenAI's side"
+    detail = (`It looks like OpenAI is temporarily having difficulties processing your request. Try again or contact OpenAI's support. ${String(body)}`)
+  }
+
+  return {
+    code = "UnknownError"
+    title = "Unknown error"
+    detail = (`Unknown error occurred. Status: ${statusCode}`)
+  }
+}

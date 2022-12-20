@@ -1,0 +1,23 @@
+{
+  "name": "openai",
+  "services": [
+    {
+      "id": "default",
+      "baseUrl": "https://api.openai.com"
+    }
+  ],
+  "defaultService": "default",
+  "securitySchemes": [
+    {
+      "id": "bearer",
+      "type": "http",
+      "scheme": "bearer"
+    }
+  ],
+  "parameters": [
+    {
+      "name": "organizationId",
+      "description": "For users who belong to multiple organizations, optional Organization ID can be specified to choose which organization is used for fulfilling the use case"
+    }
+  ]
+}

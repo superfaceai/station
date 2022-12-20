@@ -680,8 +680,7 @@
         "mock": {
           "file": "../grid/social-media/replies/maps/mock.suma"
         }
-      },
-      "priority": ["linkedin", "mock"]
+      }
     },
     "payments/read-products": {
       "file": "../grid/payments/read-products/profile.supr",
@@ -789,17 +788,36 @@
         }
       }
     },
+    "ai/generate-text": {
+      "file": "../grid/ai/generate-text/profile.supr",
+      "providers": {
+        "mock": {
+          "file": "../grid/ai/generate-text/maps/mock.suma"
+        },
+        "openai": {
+          "file": "../grid/ai/generate-text/maps/openai.suma"
+        }
+      }
+    },
     "recruitment/candidates": {
       "file": "../grid/recruitment/candidates/profile.supr",
       "providers": {
         "mock": {
           "file": "../grid/recruitment/candidates/maps/mock.suma"
+        }
+      }
+    },
+    "recruitment/create-candidate": {
+      "file": "../grid/recruitment/create-candidate/profile.supr",
+      "providers": {
+        "mock": {
+          "file": "../grid/recruitment/create-candidate/maps/mock.suma"
         },
         "workable": {
-          "file": "../grid/recruitment/candidates/maps/workable.suma"
+          "file": "../grid/recruitment/create-candidate/maps/workable.suma"
         },
         "breezy-hr": {
-          "file": "../grid/recruitment/candidates/maps/breezy-hr.suma"
+          "file": "../grid/recruitment/create-candidate/maps/breezy-hr.suma"
         }
       }
     },
@@ -1041,6 +1059,18 @@
           "apikey": "$MANDRILLAPP_API_KEY"
         }
       ]
+    },
+    "openai": {
+      "file": "../providers/openai.json",
+      "security": [
+        {
+          "id": "bearer",
+          "token": "$OPENAI_ACCESS_TOKEN"
+        }
+      ],
+      "parameters": {
+        "organizationId": "$OPENAI_ORGANIZATION_ID"
+      }
     },
     "postmark": {
       "file": "../providers/postmark.json",
