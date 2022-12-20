@@ -8,6 +8,13 @@ map CreateLead {
     code = "BadRequest"
   }
 
+  call CheckCompanyExists (
+    accessToken = parameters.ACCESS_TOKEN,
+    companyId = parameters.COMPANY_ID,
+  ) { 
+    return map error if (outcome.error) outcome.error
+  }
+
   call CheckJobExists (
     accessToken = parameters.ACCESS_TOKEN,
     companyId = parameters.COMPANY_ID,
@@ -16,10 +23,11 @@ map CreateLead {
     return map error if (outcome.error) outcome.error
   }
 
-  call CheckLeadByEmail (
+  call CheckLeadExists (
     accessToken = parameters.ACCESS_TOKEN,
     companyId = parameters.COMPANY_ID,
-    lead = input
+    jobId = input.jobId,
+    email = input.email,
   ) {
     return map error if (outcome.error) outcome.error
   }
@@ -212,12 +220,12 @@ operation CreateLead {
   }
 }
 
-operation CheckLeadByEmail {
+operation CheckLeadExists {
   http GET "/v3/company/{ args.companyId }/candidates/search" {
 
     request {
       query {
-        email_address = args.lead.email
+        email_address = args.email
       }
       headers {
         Authorization = args.accessToken
@@ -225,11 +233,11 @@ operation CheckLeadByEmail {
     }
 
     response 200 {
-      foundLeads = body.filter(lead => lead.position._id === args.lead.jobId )
+      foundLeads = body.filter(lead => lead.position._id === args.jobId )
 
       fail if(foundLeads.length > 0) {
         title = 'Conflict'
-        detail = 'Lead with email ' + args.lead.email + ' is already in system.'
+        detail = 'Lead with email ' + args.email + ' is already in system.'
         code = 'Conflict'
         rateLimit = call MapRateLimit(headers = headers)
       }
@@ -274,7 +282,49 @@ operation CheckJobExists {
       // Breezy HR returns http status code 500 in case that the job ID doesn't exist. It could be caused by other reasons as well, but at least the error helps the client understand the error better.
       fail {
         title = 'Not Found'
-        detail = 'Unable to get job ID ' + args.jobId + '. Check that the job ID exists.'
+        detail = 'Unable to get job under ID ' + args.jobId + '. Check that the job with that ID exists.'
+        code = 'NotFound'
+        rateLimit = call MapRateLimit(headers = headers)
+      }
+    }
+
+    response "application/json" {
+      error = call MapBreezyHRError(
+        statusCode = statusCode,
+        error = body.error,
+        headers = headers
+      )
+
+      fail error
+    }
+
+    response {
+      fail {
+        title = "Unknown error"
+        detail = JSON.stringify(body, null, 2)
+        code = 'UnknownError'
+      }
+    }
+  }
+}
+
+operation CheckCompanyExists {
+  http GET "/v3/company/{ args.companyId }" {
+
+    request {
+      headers {
+        Authorization = args.accessToken
+      }
+    }
+
+    response 200 {       
+      return {}
+    }
+
+    response 500 "application/json" {
+      fail {
+        title = 'Not Found'
+        detail = 'Unable to get company under ID ' + args.companyId + '. Check that the company with that ID exists.'
         code = 'NotFound'
         rateLimit = call MapRateLimit(headers = headers)
       }
