@@ -8,13 +8,13 @@ export const jobsTest = (
   provider: string,
   options?: RecordingProcessOptions
 ): void => {
-  describe(`recruitment/jobs/${provider}`, () => {
+  describe(`recruitment/list-jobs/${provider}`, () => {
     let superface: SuperfaceTest;
 
     describe('ListJobs', () => {
       beforeAll(() => {
         superface = buildSuperfaceTest({
-          profile: 'recruitment/jobs',
+          profile: 'recruitment/list-jobs',
           provider,
           useCase: 'ListJobs',
         });
