@@ -27,7 +27,7 @@ describe('recruitment/create-lead/mock', () => {
         );
 
         expect(result.isOk() && (result.value as any)).toEqual({
-          id: 'LEAD:LEAD_ID',
+          id: 'LEAD_ID',
           jobId: 'JOB_ID',
         });
       });
@@ -47,7 +47,7 @@ describe('recruitment/create-lead/mock', () => {
       const result = await usecase.perform(sampleLead, { provider });
 
       expect(result.isOk() && (result.value as any)).toEqual({
-        id: 'LEAD:LEAD_ID',
+        id: 'LEAD_ID',
       });
     });
   });

@@ -60,7 +60,7 @@ map CreateLead {
 
     response 201 "application/json" {
       map result {
-        id = 'LEAD:' + body.candidate.id
+        id = body.candidate.id
         jobId = body.candidate.job.shortcode
         rateLimit = call MapRateLimit(headers = headers)
       }
