@@ -1,0 +1,245 @@
+"""
+Generate Text using AI
+Generate, complete or manipulate text using AI (LLMs, GPT-3)
+"""
+name = "ai/generate-text"
+version = "1.0.0"
+
+"""
+Complete Text
+Generate a text completion that attempts to match whatever context or pattern
+you give it
+"""
+usecase CompleteText unsafe {
+  input {
+    """
+    Prompt
+    Text prompt to generate completion(s) for.
+    """
+    prompt! string!
+
+    creativity
+    approxMaxWords
+    model
+    count
+  }
+
+  result {
+    """
+    Generated Completions
+    List of generated completions based on a given prompt. Number of completions
+    can be specified by `count`.
+    """
+    completions! [string!]!
+  }
+
+  error GenerateTextError
+
+  example BasicCompletion {
+    input {
+      prompt = 'Write a tagline for an ice cream shop',
+      creativity = 0.8,
+      approxMaxWords = 30,
+      model = 'large',
+    }
+
+    result {
+      completions = [
+        "Cool off with something sweet at our ice cream shop!"
+      ]
+    }
+  }
+
+  example PromptLengthFailure {
+    input {
+      prompt = 'Write a tagline for an ice cream shop (...)'
+    }
+
+    error {
+      code = "BadRequest",
+      title = "Too long",
+      detail = "The prompt is too long. Maximum supported prompt length is 800 words"
+    }
+  }
+}
+
+"""
+Edit Text
+Edit a text using the given instructions
+"""
+usecase EditText unsafe {
+  input {
+    """
+    Input Text
+    Starting point text you'd like to edit
+    """
+    text! string!
+
+    """
+    Instructions
+    Instructions for the model how to edit the input text
+    """
+    instructions! string!
+
+    creativity
+    count
+  }
+
+  result {
+    """
+    Generated Edits
+    List of edited texts based on a given text and the instructions.
+    Number of edits can be specified by `count`.
+    """
+    edits! [string!]!
+  }
+
+  error GenerateTextError
+
+  example BasicEdit {
+    input {
+      text = 'What day of the wek is it?',
+      instructions = 'Fix the spelling mistakes',
+      creativity = 0.2,
+    }
+
+    result {
+      edits = [
+        'What day of the week is it?'
+      ]
+    }
+  }
+
+  example CountFailure {
+    input {
+      text = 'What day of the wek is it?',
+      instructions = 'Fix the spelling mistakes',
+      count = 1000
+    }
+
+    error {
+      code = "BadRequest",
+      title = "Max Count Exceeded",
+      detail = "Maximum supported results count is 20"
+    }
+  }
+}
+
+"""
+Creativity
+Number between 0 and 1 defines how risky the model will be when
+generating the text. Using 1 is suited for creative applications and 0 for
+tasks with well-defined solutions 
+"""
+field creativity number!
+
+"""
+Model Size
+The model that will be used for generating the text. Various models have
+different capabilities and cost. Most providers will use Large model by default.
+"""
+field model ModelSize!
+
+"""
+Results Count
+Specify how many results you'd like to get from the model
+"""
+field count number!
+
+"""
+Maximum (Approximate) Word Count
+The upper limit for the word count of the generated texts. Since various languages
+are represented (tokenized) differently, this is an approximate number.
+"""
+field approxMaxWords number!
+
+"""
+Model Size
+The model that will be used for generating the text. Various models have
+different capabilities and cost. Most providers will use Large model by default.
+"""
+model ModelSize enum {
+  """
+  Small Model
+  Useful for the most straightforward tasks. Is the fastest and the cheapest.
+  """
+  small
+
+  """
+  Medium Model
+  Usually very capable but lower cost than `large` model
+  """
+  medium
+
+  """
+  Large Model
+  Able to handle the most complex tasks, including contextual understing,
+  creativity and cause & effect. Higher cost.
+  """
+  large
+}
+
+model GenerateTextError {
+  """
+  Error Code
+  A machine-readable code indicating a general error type.
+  """
+  code! ErrorCode!
+
+  """
+  Error Title
+  A short, human-readable summary of the problem type.
+  """
+  title! string!
+
+  """
+  Error Detail
+  A human-readable explanation specific to this occurrence of the problem.
+  """
+  detail string
+
+}
+
+model ErrorCode enum {
+  """
+  Bad Request
+  Occurrs when the application sends malformed or unsupported data to the provider.
+  """
+  BadRequest
+
+  """
+  Unauthenticated
+  Occurrs when the application provides incorrect authentication credentials.
+  """
+  Unauthenticated
+
+  """
+  Not Allowed
+  Occurrs if you don't have access to the specific data or capability.
+  """
+  NotAllowed
+
+  """
+  Not Found
+  Occurrs when the data or model you're looking for doesn't exist.
+  """
+  NotFound
+
+  """
+  Rate Limit Reached
+  Occurrs when the application performs the use case too often based on the provider's limits.
+  """
+  RateLimitReached
+
+  """
+  Provider's Error
+  Occurrs when there's an unexpected error on the provider side. Try again or contact the provider's support
+  """
+  ProviderError
+
+  """
+  Unknown Error
+  Occurrs when the integration comes across a previously unknown error. More details should be provided with this error.
+  """
+  UnknownError
+}
