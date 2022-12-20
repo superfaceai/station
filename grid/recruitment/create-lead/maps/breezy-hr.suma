@@ -185,7 +185,7 @@ operation CreateLead {
     response 200 "application/json" {
       return {
           lead = {
-            id: 'LEAD:' + body._id,
+            id: body._id,
             jobId: lead.jobId
           },
           rateLimit = call MapRateLimit(headers = headers) 
