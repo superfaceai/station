@@ -17,9 +17,9 @@ describe('recruitment/list-companies/mock', () => {
         companies: [
           {
             id: '1',
-            name: 'Superface 1',
-            memberCount: 10,
-            description: 'Superface 1 description',
+            name: 'Superface',
+            description:
+              'Superface is technology startup, based in Czech Republic, which connects applications through APIs.',
             createdAt: '2021-01-01T00:00:00.000Z',
             updatedAt: '2021-01-01T00:00:00.000Z',
           },

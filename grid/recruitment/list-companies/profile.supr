@@ -31,8 +31,7 @@ usecase ListCompanies {
       companies = [{
         id = '1'
         name = 'Superface'
-        memberCount = 10
-        description = 'Superface description'
+        description = 'Superface is technology startup, based in Czech Republic, which connects applications through APIs.'
         createdAt = '2021-01-01T12:00:00.000Z'
         updatedAt = '2022-10-01T14:00:00.000Z'
       }]
@@ -52,12 +51,6 @@ model Company {
   Name of the company.
   """
   name! string!
-
-  """
-  Member Count
-  Number of members in the company.
-  """
-  memberCount number
 
   """
   Company description
