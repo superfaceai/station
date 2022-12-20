@@ -1,0 +1,54 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`recruitment/list-stage-changes/workable ListStageChanges when specified candidate does exist performs correctly 1`] = `
+Ok {
+  "value": Object {
+    "changes": Array [
+      Object {
+        "createdAt": "2022-08-26T03:36:48.612Z",
+        "current": false,
+        "id": "26e95b86",
+        "name": "Applied",
+        "stageId": "applied",
+      },
+      Object {
+        "createdAt": "2022-08-30T03:37:28.560Z",
+        "current": false,
+        "id": "26e95b9a",
+        "name": "Phone Screen",
+        "stageId": "phone-screen",
+      },
+      Object {
+        "createdAt": "2022-09-03T03:39:36.565Z",
+        "current": true,
+        "id": "26e95bdb",
+        "name": "Assessment",
+        "stageId": "assessment",
+      },
+    ],
+    "rateLimit": Object {
+      "bucket": "workable",
+      "remainingRequests": 9,
+      "remainingRequestsPercentage": 90,
+      "resetTimestamp": 1671100796,
+      "totalRequests": 10,
+    },
+  },
+}
+`;
+
+exports[`recruitment/list-stage-changes/workable ListStageChanges when specified candidate does not exist returns error 1`] = `
+Err {
+  "error": "MappedHTTPError: Expected HTTP error
+Properties: {
+  \\"title\\": \\"Not found\\",
+  \\"detail\\": \\"Not found\\",
+  \\"code\\": \\"NotFound\\",
+  \\"rateLimit\\": {
+    \\"bucket\\": \\"workable\\"
+  }
+}
+AST Path: definitions[0].statements[0].responseHandlers[1].statements[1]
+Original Map Location: Line 38, column 7",
+}
+`;

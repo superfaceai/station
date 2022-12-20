@@ -1,0 +1,332 @@
+{
+  "recruitment/list-stage-changes/breezy-hr/ListStageChanges": {
+    "0c11e77f9f9178aeb667dbbdb35bc7e7": [
+      {
+        "scope": "https://api.breezy.hr:443",
+        "method": "GET",
+        "path": "/v3/company/PARAMS_COMPANY_ID/position/f1cfc5572a5701/candidate/1e5d0dfd2b6501/stream",
+        "body": "",
+        "status": 200,
+        "response": [
+          "1f8b0800000000000003",
+          "ed97db6e9c3010865fa5e2b6e9ca073098ab46aafa02496f1a4568b087955b4ec5265514e5dd6b608f099bdd8ba86d9495f662f57b8cfff9c79f04370f416674900642240a450e0ca42634b808dc7d8b5e57506ba3c1e19503d7db6fedf05ffb75eb3a846ada4c73c1a25c4829d4b4b9c97fa07241fa10b48d35ce34f554585055a8288a1944f158681d2c31fb0d76a89d4a10750eeae7c6c273bd866ab0f675ab18d5d45e59764ddf068f7315a006175eebf0578fd665c5e1dd583bec50676d8777a6e96d36baf4158c30f689fa5f784d69ca68cac94248f17dddc8c62cb46d69c698f67ad8ca2b83971b61e5a1b7d8ed3470707d6df180339ed2649150b672e6073765bc9be2a4efb9f213b5c331755f96fe489b41ef9a6a1c785a406971cab15e66a38f747d7974a120a280840be51f8315983203ad3bb4c3011aabe62338fbd9f62d7605285c80d98670b5563f7cf1855e1f1ebe5adbecd0d392a9fd6d8272d835c450f91cfc587d1046fb936e6ebda6b184fb20253e7b53f94943d51e084892717485e9fc7d688a4c0ffbc63e1f2f36ad7156b02846a57474e6e2242ea84c395bb0307ecec57fd4c4694cbf4cce8ef67ed019138a25398a0ee740388605d5f9199d13d189d2c85fbf387c83e83cc5fe8cce7c423ca447d1c1088b249682277046e7647498f4ef3cf42da2f304fb333af309c5223e8a4ec2a5009e4855e8f09fa2f3d7be010e8241926b4ad248a661b81084bd4d30f6a0de82b18df1bd73e1039264860bd7f5bb2f6361a2682e91c41466b1b8d4fa157178a19f6926732dedded784f26d4bc3acee8c5b3535dbe8ed1f7c1ac126ca100000"
+        ],
+        "rawHeaders": [
+          "Date",
+          "Wed, 14 Dec 2022 11:53:36 GMT",
+          "Content-Type",
+          "application/json; charset=utf-8",
+          "Transfer-Encoding",
+          "chunked",
+          "Connection",
+          "close",
+          "Server",
+          "nginx/1.22.0",
+          "X-Powered-By",
+          "Redstone",
+          "X-RateLimit-Limit",
+          "100",
+          "X-RateLimit-Remaining",
+          "99",
+          "X-RateLimit-Reset",
+          "1671018876",
+          "ETag",
+          "W/\"10ca-GhvoufhOYBAqasal81EmSkGM08M\"",
+          "Vary",
+          "Accept-Encoding",
+          "Content-Encoding",
+          "gzip"
+        ],
+        "responseIsBinary": false,
+        "decodedResponse": [
+          {
+            "_id": "668ce6ba2a9d01",
+            "type": "candidateStatusUpdated",
+            "stream_id": "PARAMS_COMPANY_ID",
+            "object": {
+              "position_id": "f1cfc5572a5701",
+              "stage_was": {
+                "id": "feedback",
+                "type": {
+                  "id": "feedback",
+                  "name": "Feedback",
+                  "icon": "group"
+                },
+                "name": "Feedback",
+                "action": "request_feedback",
+                "icon": "group"
+              },
+              "entered_previous_stage": "2022-12-14T11:21:30.696Z",
+              "stage": {
+                "id": "applied",
+                "type": {
+                  "id": "applied",
+                  "name": "Applied",
+                  "icon": "user"
+                },
+                "name": "Applied",
+                "icon": "user"
+              },
+              "entered_stage": "2022-12-14T11:23:18.812Z",
+              "status_was": "feedback",
+              "status": "applied",
+              "reason": null,
+              "is_automated": false,
+              "acting_user": {
+                "_id": "dfca51ae036c",
+                "email_address": "demo+ats@superface.ai",
+                "name": "Superface Demo",
+                "username": "superfacedemo",
+                "initial": "S"
+              },
+              "mentioned_ids": []
+            },
+            "delay": 0,
+            "timestamp": "2022-12-14T11:23:18.906Z",
+            "first_of_day": false
+          },
+          {
+            "_id": "d32f257eccd501",
+            "type": "candidateStatusUpdated",
+            "stream_id": "PARAMS_COMPANY_ID",
+            "object": {
+              "position_id": "f1cfc5572a5701",
+              "stage_was": {
+                "id": "feedback",
+                "type": {
+                  "id": "feedback",
+                  "name": "Feedback",
+                  "icon": "group"
+                },
+                "name": "Feedback",
+                "action": "request_feedback",
+                "icon": "group"
+              },
+              "entered_previous_stage": "2022-12-14T11:19:32.247Z",
+              "stage": {
+                "id": "feedback",
+                "type": {
+                  "id": "feedback",
+                  "name": "Feedback",
+                  "icon": "group"
+                },
+                "name": "Feedback",
+                "action": "request_feedback",
+                "icon": "group"
+              },
+              "entered_stage": "2022-12-14T11:21:30.696Z",
+              "status_was": "feedback",
+              "status": "feedback",
+              "reason": null,
+              "is_automated": false,
+              "acting_user": {
+                "_id": "dfca51ae036c",
+                "email_address": "demo+ats@superface.ai",
+                "name": "Superface Demo",
+                "username": "superfacedemo",
+                "initial": "S"
+              },
+              "mentioned_ids": []
+            },
+            "delay": 0,
+            "timestamp": "2022-12-14T11:21:30.790Z",
+            "first_of_day": false
+          },
+          {
+            "_id": "33a03e4f1db501",
+            "type": "candidateStatusUpdated",
+            "stream_id": "PARAMS_COMPANY_ID",
+            "object": {
+              "position_id": "f1cfc5572a5701",
+              "stage_was": {
+                "id": "feedback",
+                "type": {
+                  "id": "feedback",
+                  "name": "Feedback",
+                  "icon": "group"
+                },
+                "name": "Feedback",
+                "action": "request_feedback",
+                "icon": "group"
+              },
+              "entered_previous_stage": "2022-12-14T11:15:50.674Z",
+              "stage": {
+                "id": "feedback",
+                "type": {
+                  "id": "feedback",
+                  "name": "Feedback",
+                  "icon": "group"
+                },
+                "name": "Feedback",
+                "action": "request_feedback",
+                "icon": "group"
+              },
+              "entered_stage": "2022-12-14T11:19:32.247Z",
+              "status_was": "feedback",
+              "status": "feedback",
+              "reason": null,
+              "is_automated": false,
+              "acting_user": {
+                "_id": "dfca51ae036c",
+                "email_address": "demo+ats@superface.ai",
+                "name": "Superface Demo",
+                "username": "superfacedemo",
+                "initial": "S"
+              },
+              "mentioned_ids": []
+            },
+            "delay": 0,
+            "timestamp": "2022-12-14T11:19:32.341Z",
+            "first_of_day": false
+          },
+          {
+            "_id": "e5ef879638a501",
+            "type": "candidateStatusUpdated",
+            "stream_id": "PARAMS_COMPANY_ID",
+            "object": {
+              "position_id": "f1cfc5572a5701",
+              "stage_was": {
+                "id": "feedback",
+                "type": {
+                  "id": "feedback",
+                  "name": "Feedback",
+                  "icon": "group"
+                },
+                "name": "Feedback",
+                "action": "request_feedback",
+                "icon": "group"
+              },
+              "entered_previous_stage": "2022-12-14T11:15:29.811Z",
+              "stage": {
+                "id": "feedback",
+                "type": {
+                  "id": "feedback",
+                  "name": "Feedback",
+                  "icon": "group"
+                },
+                "name": "Feedback",
+                "action": "request_feedback",
+                "icon": "group"
+              },
+              "entered_stage": "2022-12-14T11:15:50.674Z",
+              "status_was": "feedback",
+              "status": "feedback",
+              "reason": null,
+              "is_automated": false,
+              "acting_user": {
+                "_id": "dfca51ae036c",
+                "email_address": "demo+ats@superface.ai",
+                "name": "Superface Demo",
+                "username": "superfacedemo",
+                "initial": "S"
+              },
+              "mentioned_ids": []
+            },
+            "delay": 0,
+            "timestamp": "2022-12-14T11:15:50.767Z",
+            "first_of_day": false
+          },
+          {
+            "_id": "8396a389cfd401",
+            "type": "candidateStatusUpdated",
+            "stream_id": "PARAMS_COMPANY_ID",
+            "object": {
+              "position_id": "f1cfc5572a5701",
+              "stage_was": {
+                "id": "applied",
+                "type": {
+                  "id": "applied",
+                  "name": "Applied",
+                  "icon": "user"
+                },
+                "name": "Applied",
+                "icon": "user"
+              },
+              "entered_previous_stage": "2022-12-08T10:59:44.602Z",
+              "stage": {
+                "id": "feedback",
+                "type": {
+                  "id": "feedback",
+                  "name": "Feedback",
+                  "icon": "group"
+                },
+                "name": "Feedback",
+                "action": "request_feedback",
+                "icon": "group"
+              },
+              "entered_stage": "2022-12-14T11:15:29.811Z",
+              "status_was": "applied",
+              "status": "feedback",
+              "reason": null,
+              "is_automated": false,
+              "acting_user": {
+                "_id": "dfca51ae036c",
+                "email_address": "demo+ats@superface.ai",
+                "name": "Superface Demo",
+                "username": "superfacedemo",
+                "initial": "S"
+              },
+              "mentioned_ids": []
+            },
+            "delay": 0,
+            "timestamp": "2022-12-14T11:15:29.907Z",
+            "first_of_day": true
+          },
+          {
+            "_id": "348c1b9e071a01",
+            "type": "candidateAdded",
+            "stream_id": "PARAMS_COMPANY_ID",
+            "object": {
+              "position_id": "f1cfc5572a5701",
+              "mentioned_ids": []
+            },
+            "delay": null,
+            "timestamp": "2022-12-08T10:59:44.813Z",
+            "first_activity": true,
+            "first_of_day": true
+          }
+        ]
+      }
+    ],
+    "4ce1d131ef825e2f539f93c12a24f63e": [
+      {
+        "scope": "https://api.breezy.hr:443",
+        "method": "GET",
+        "path": "/v3/company/PARAMS_COMPANY_ID/position/f1cfc5572a5701/candidate/12345ab789d1dd/stream",
+        "body": "",
+        "status": 500,
+        "response": {
+          "error": {
+            "type": "getStreamError",
+            "message": "there was an unknown error getting candidate stream."
+          }
+        },
+        "rawHeaders": [
+          "Date",
+          "Wed, 14 Dec 2022 11:53:37 GMT",
+          "Content-Type",
+          "application/json; charset=utf-8",
+          "Content-Length",
+          "100",
+          "Connection",
+          "close",
+          "Server",
+          "nginx/1.22.0",
+          "X-Powered-By",
+          "Redstone",
+          "X-RateLimit-Limit",
+          "100",
+          "X-RateLimit-Remaining",
+          "98",
+          "X-RateLimit-Reset",
+          "1671018876",
+          "ETag",
+          "W/\"64-SBFGouu+MNZfL4EBwPDFZ+Ljxyk\"",
+          "Vary",
+          "Accept-Encoding"
+        ],
+        "responseIsBinary": false
+      }
+    ]
+  }
+}
