@@ -13,7 +13,6 @@ map ListCompanies {
       companies = body.map(company => ({
         id: company._id,
         name: company.name,
-        memberCount: company.member_count,
         createdAt: company.creation_date,
         updatedAt: company.updated_date,
       })),
