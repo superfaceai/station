@@ -1,12 +1,12 @@
 import { SuperfaceClient } from '@superfaceai/one-sdk';
 
-describe('recruitment/get-stage-changes/mock', () => {
-  describe('GetStageChanges', () => {
+describe('recruitment/list-stage-changes/mock', () => {
+  describe('ListStageChanges', () => {
     it('performs correctly', async () => {
       const client = new SuperfaceClient();
-      const profile = await client.getProfile('recruitment/get-stage-changes');
+      const profile = await client.getProfile('recruitment/list-stage-changes');
       const provider = await client.getProvider('mock');
-      const usecase = profile.getUseCase('GetStageChanges');
+      const usecase = profile.getUseCase('ListStageChanges');
 
       expect(provider).not.toBeUndefined();
       expect(usecase).not.toBeUndefined();

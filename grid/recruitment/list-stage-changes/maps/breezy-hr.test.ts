@@ -1,6 +1,6 @@
-import { getStageChangesTest } from './get-stage-changes';
+import { listStageChangesTest } from './list-stage-changes';
 
-getStageChangesTest(
+listStageChangesTest(
   'breezy-hr',
   {
     valid: 'f1cfc5572a5701',

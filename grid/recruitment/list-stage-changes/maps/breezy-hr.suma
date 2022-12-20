@@ -1,7 +1,7 @@
-profile = "recruitment/get-stage-changes@1.0"
+profile = "recruitment/list-stage-changes@1.0"
 provider = "breezy-hr"
 
-map GetStageChanges {
+map ListStageChanges {
   return map error if(!input.jobId) {
     title = "Missing required field `jobId`"
     detail = "Job ID is required for provider Breezy HR. Please provide it in the input."

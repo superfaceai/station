@@ -4,21 +4,21 @@ import { RecordingProcessOptions, SuperfaceTest } from '@superfaceai/testing';
 
 import { buildSuperfaceTest } from '../../../test-config';
 
-export const getStageChangesTest = (
+export const listStageChangesTest = (
   provider: string,
   jobIds: { valid: string },
   candidateIds: { valid: string; invalid: string },
   options?: RecordingProcessOptions
 ): void => {
-  describe(`recruitment/get-stage-changes/${provider}`, () => {
-    describe('GetStageChanges', () => {
+  describe(`recruitment/list-stage-changes/${provider}`, () => {
+    describe('ListStageChanges', () => {
       let superface: SuperfaceTest;
 
       beforeAll(() => {
         superface = buildSuperfaceTest({
-          profile: 'recruitment/get-stage-changes',
+          profile: 'recruitment/list-stage-changes',
           provider,
-          useCase: 'GetStageChanges',
+          useCase: 'ListStageChanges',
         });
       });
 
