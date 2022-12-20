@@ -5,7 +5,7 @@ import { readFileSync } from 'fs';
 
 import { buildSuperfaceTest } from '../../../test-config';
 
-const sampleCandidate = {
+const sampleLead = {
   name: 'John Doe',
   firstName: 'John',
   lastName: 'Doe',
@@ -60,59 +60,58 @@ const sampleCandidate = {
       url: 'https://url.to.portfolio',
     },
   ],
+
+  source: ['LinkedIn', 'Indeed', 'Glassdoor'],
 };
 
-export const createCandidateTest = (
+export const createLeadTest = (
   provider: string,
   jobIds: { valid: string; invalid: string },
   options?: RecordingProcessOptions
 ): void => {
-  describe(`recruitment/create-candidate/${provider}`, () => {
-    describe('CreateCandidate', () => {
-      let superface: SuperfaceTest;
+  describe(`recruitment/create-lead/${provider}`, () => {
+    let superface: SuperfaceTest;
 
-      beforeAll(() => {
-        jest.setTimeout(10000);
-        superface = buildSuperfaceTest({
-          profile: 'recruitment/create-candidate',
-          provider,
-          useCase: 'CreateCandidate',
-        });
+    beforeEach(() => {
+      superface = buildSuperfaceTest({
+        profile: 'recruitment/create-lead',
+        provider,
       });
+    });
 
-      describe('when specified job does exist', () => {
-        it('performs correctly', async () => {
-          const result = await superface.run(
-            {
-              input: {
-                jobId: jobIds.valid,
-                ...sampleCandidate,
-              },
+    describe('CreateLead', () => {
+      it('should perform successfully', async () => {
+        const result = await superface.run(
+          {
+            useCase: 'CreateLead',
+            input: {
+              jobId: jobIds.valid,
+              ...sampleLead,
             },
-            options
-          );
+          },
+          options
+        );
 
-          expect(result.isOk()).toBeTruthy();
-          expect(result).toMatchSnapshot();
-        });
+        expect(() => result.unwrap()).not.toThrow();
+        expect(result).toMatchSnapshot();
       });
 
-      describe('when specified job does not exist', () => {
-        it('returns error', async () => {
-          await expect(
-            superface.run(
-              {
-                input: {
-                  jobId: jobIds.invalid,
-                  firstName: 'Demo',
-                  lastName: 'Testing',
-                  email: 'demo_testing@fakemail.com',
-                },
-              },
-              options
-            )
-          ).resolves.toMatchSnapshot();
-        });
+      it('should map error', async () => {
+        const result = await superface.run(
+          {
+            useCase: 'CreateLead',
+            input: {
+              jobId: jobIds.invalid,
+              firstName: 'Demo',
+              lastName: 'Testing',
+              email: 'demo_testing@fakemail.com',
+            },
+          },
+          options
+        );
+
+        expect(() => result.unwrap()).toThrow();
+        expect(result).toMatchSnapshot();
       });
     });
   });
