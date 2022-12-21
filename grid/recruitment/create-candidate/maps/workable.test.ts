@@ -1,6 +1,6 @@
 import { createCandidateTest } from './create-candidate';
 
 createCandidateTest('workable', {
-  valid: '56D021066C',
+  valid: 'FCFA80DF09',
   invalid: 'NOT-EXISTING',
 });
