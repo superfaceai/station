@@ -2,61 +2,30 @@ profile = "recruitment/jobs@1.0"
 provider = "workable"
 
 map ListJobs {
-    http GET "/spi/v3/jobs" {
-      security "bearer_token"
+  call CheckSubdomainExists(
+    clientId = parameters.CLIENT_ID,
+    subdomain = parameters.SUBDOMAIN
+  ) {
+    return map error if (outcome.error) outcome.error
+  }
 
-      request {
-         query {
-          state = input.state
-          limit = input.limit
-          since_id = input.page
-          include_fields = 'requirements,description,benefits'
-        }
+  call ListJobs (
+    clientId = parameters.CLIENT_ID,
+    job = input
+  ) { 
+    return map error if (outcome.error) outcome.error
 
-        headers {
-          'X-WORKABLE-CLIENT-ID' = parameters.CLIENT_ID
-        }
-      }
+    listJobsOutcome = outcome.data
+  }
 
-      response 200 "application/json" {
-          jobs = body.jobs.map(job => {
-            return {
-              id: job.shortcode,
-              name: job.title,
-              description: job.description,
-              requirements: job.requirements,
-              benefits: job.benefits,
-              departmentName: job.department
-            }
-          })
-
-          map result {
-            jobs = jobs
-            pagination = call MapPagination(workablePagination = body.paging || {})
-            rateLimit = call MapRateLimit(headers = headers)
-          }
-      }
-
-      response "application/json" {
-        error = call MapWorkableError(
-          statusCode = statusCode,
-          error = body.error,
-          headers = headers
-        )
-        map error error
-      }
-
-      response {
-        map error {
-          title = "Unknown error"
-          detail = JSON.stringify(body, null, 2)
-          code = 'UnknownError'
-        }
-      }
+  return map result {
+    jobs = listJobsOutcome.jobs
+    pagination = listJobsOutcome.pagination
+    rateLimit = listJobsOutcome.rateLimit
   }
 }
 
- //Workable supports just forward pagination
+// Workable supports just forward pagination
 operation MapPagination {
   sinceIdToken = 'since_id='
   nextPageCursor = undefined
@@ -73,7 +42,7 @@ operation MapPagination {
   }
 }
 
-//Workable rate limits docs: https://workable.readme.io/reference/rate-limits
+// Workable rate limits docs: https://workable.readme.io/reference/rate-limits
 operation MapRateLimit {
   totalRequests = parseInt(args.headers['x-rate-limit-limit'], 10)
   remainingRequests = parseInt(args.headers['x-rate-limit-remaining'], 10)
@@ -139,6 +108,13 @@ operation MapWorkableError {
     rateLimit = rateLimit
   }
 
+  return if (statusCode === 422) {
+    title = 'Conflict'
+    detail = workableError 
+    code = 'Conflict'
+    rateLimit = rateLimit
+  }
+
   return if (statusCode === 429) {
     title = 'Rate limit exceeded'
     detail = 'You reached max requests quota.'
@@ -151,5 +127,104 @@ operation MapWorkableError {
     detail = workableError
     code = 'UnknownError'
     rateLimit = rateLimit
+  }
+}
+
+operation ListJobs {
+  http GET "/spi/v3/jobs" {
+    security "bearer_token"
+
+    request {
+      query {
+        state = args.job.state
+        limit = args.job.limit
+        since_id = args.job.page
+        include_fields = 'requirements,description,benefits'
+      }
+
+      headers {
+        'X-WORKABLE-CLIENT-ID' = args.clientId
+      }
+    }
+
+    response 200 "application/json" {
+      jobs = body.jobs.map(job => {
+        return {
+          id: job.shortcode,
+          name: job.title,
+          description: job.description,
+          requirements: job.requirements,
+          benefits: job.benefits,
+          departmentName: job.department
+        }
+      })
+
+      return {
+        jobs = jobs
+        pagination = call MapPagination(workablePagination = body.paging || {})
+        rateLimit = call MapRateLimit(headers = headers)
+      }
+    }
+
+    response "application/json" {
+      error = call MapWorkableError(
+        statusCode = statusCode,
+        error = body.error,
+        headers = headers
+      )
+
+      fail error
+    }
+
+    response {
+      fail {
+        title = "Unknown error"
+        detail = JSON.stringify(body, null, 2)
+        code = 'UnknownError'
+      }
+    }
+  }
+}
+
+operation CheckSubdomainExists {
+  http GET "/spi/v3/accounts/{ args.subdomain }" {
+    security "bearer_token"
+
+    request {
+      headers {
+        'X-WORKABLE-CLIENT-ID' = args.clientId
+      }
+    }
+
+    response 200 {       
+      return {}
+    }
+
+    response 422 "application/json" {
+      fail {
+        title = 'Not Found'
+        detail = 'Unable to get subdomain by name ' + args.subdomain + '. Check that the subdomain with that name exists.'
+        code = 'NotFound'
+        rateLimit = call MapRateLimit(headers = headers)
+      }
+    }
+
+    response "application/json" {
+      error = call MapWorkableError(
+        statusCode = statusCode,
+        error = body.error,
+        headers = headers
+      )
+
+      fail error
+    }
+
+    response {
+      fail {
+        title = "Unknown error"
+        detail = JSON.stringify(body, null, 2)
+        code = 'UnknownError'
+      }
+    }
   }
 }

@@ -5,12 +5,12 @@ Ok {
   "value": Object {
     "jobs": Array [
       Object {
-        "benefits": "<p>Job benefits</p>",
+        "benefits": "<p>Job Benefits</p>",
         "departmentName": null,
-        "description": "<p>Job description</p>",
-        "id": "09CB2A410F",
+        "description": "<p>Job Description</p>",
+        "id": "26053243E1",
         "name": "QA Tester",
-        "requirements": "<p>Job requirement</p>",
+        "requirements": "<p>Job Requirements</p>",
       },
     ],
     "pagination": Object {
@@ -20,7 +20,7 @@ Ok {
       "bucket": "workable",
       "remainingRequests": 8,
       "remainingRequestsPercentage": 80,
-      "resetTimestamp": 1670422127,
+      "resetTimestamp": 1671628960,
       "totalRequests": 10,
     },
   },
@@ -34,10 +34,18 @@ Ok {
       Object {
         "benefits": null,
         "departmentName": null,
-        "description": "<p>We are looking for a passionate Software Engineer to design, develop and install software solutions. Software Engineer responsibilities include gathering user requirements, defining system functionality and writing code in various languages, like Java, Ruby on Rails or .NET programming languages (e.g. C++ or JScript.NET.) Our ideal candidates are familiar with the software development life cycle (SDLC) from preliminary system analysis to tests and deployment. Ultimately, the role of the Software Engineer is to build high-quality, innovative and fully performing software that complies with coding standards and technical design.</p>",
-        "id": "B6993E7BD5",
-        "name": "Software Engineer",
-        "requirements": "<ul><li>Proven work experience as a Software Engineer or Software Developer</li></ul>",
+        "description": "<p>We are looking for a Senior Software Engineer to produce and implement functional software solutions. You will work with upper management to define software requirements and take the lead on operational and technical projects. In this role, you should be able to work independently with little supervision. You should have excellent organization and problem-solving skills. If you also have hands-on experience in software development and agile methodologies, we’d like to meet you. Your goal will be to develop high-quality software that is aligned with user needs and business goals.</p><p><br></p><h3>Responsibilities</h3><ul> <li>Develop high-quality software design and architecture</li> <li>Identify, prioritize and execute tasks in the software development life cycle</li> <li>Develop tools and applications by producing clean, efficient code</li> <li>Automate tasks through appropriate tools and scripting</li> <li>Review and debug code</li> <li>Perform validation and verification testing</li> <li>Collaborate with internal teams and vendors to fix and improve products</li> </ul>",
+        "id": "FCFA80DF09",
+        "name": "Senior Software Engineer",
+        "requirements": "<ul> <li>Extensive experience in software development, scripting and project management</li> <li>Experience using system monitoring tools (e.g. New Relic) and automated testing frameworks</li> </ul>",
+      },
+      Object {
+        "benefits": null,
+        "departmentName": null,
+        "description": "<p>We are looking for a high-performing Sales Director. The successful candidate will meet our customer acquisition and revenue growth objectives. Sales director responsibilities include developing key growth sales strategies, tactics and action plans. Successful execution of these strategies is required to achieve your financial targets. Sales director duties will include hitting annual targets, building relationships and understanding customer trends.</p><p><br></p><h3>Responsibilities</h3><ul> <li>  Own and hit/exceed annual sales targets within assigned territory and accounts   Develop and execute strategic plan to achieve sales targets and expand our customer base   Build and maintain strong, long-lasting customer relationships   Partner with customers to understand their business needs and objectives   Effectively communicate the value proposition through proposals and presentations   Understand category-specific landscapes and trends   Reporting on forces that shift tactical budgets and strategic direction of accounts              </li> <li>  Develop and execute strategic plan to achieve sales targets and expand our customer base   Build and maintain strong, long-lasting customer relationships   Partner with customers to understand their business needs and objectives   Effectively communicate the value proposition through proposals and presentations   Understand category-specific landscapes and trends   Reporting on forces that shift tactical budgets and strategic direction of accounts            </li> <li>  Build and maintain strong, long-lasting customer relationships   Partner with customers to understand their business needs and objectives   Effectively communicate the value proposition through proposals and presentations   Understand category-specific landscapes and trends   Reporting on forces that shift tactical budgets and strategic direction of accounts          </li> </ul>",
+        "id": "AEA1D940CA",
+        "name": "Sales Director",
+        "requirements": "<ul> <li>Proven sales executive experience, meeting or exceeding targets</li> <li>Previous experience as a sales executive, sales manager or sales and marketing director</li> <li>Ability to communicate, present and influence all levels of the organization, including executive and C-level</li> <li>Proven ability to drive the sales process from plan to close</li> <li>Proven ability to articulate the distinct aspects of products and services</li> </ul>",
       },
     ],
     "pagination": Object {
@@ -45,11 +53,27 @@ Ok {
     },
     "rateLimit": Object {
       "bucket": "workable",
-      "remainingRequests": 9,
-      "remainingRequestsPercentage": 90,
-      "resetTimestamp": 1670422126,
+      "remainingRequests": 8,
+      "remainingRequestsPercentage": 80,
+      "resetTimestamp": 1671628749,
       "totalRequests": 10,
     },
   },
+}
+`;
+
+exports[`recruitment/jobs/workable ListJobs when specified subdomain does not exist returns error 1`] = `
+Err {
+  "error": "MappedError: Expected error
+Properties: {
+  \\"title\\": \\"Not Found\\",
+  \\"detail\\": \\"Unable to get subdomain by name invalid-superface. Check that the subdomain with that name exists.\\",
+  \\"code\\": \\"NotFound\\",
+  \\"rateLimit\\": {
+    \\"bucket\\": \\"workable\\"
+  }
+}
+AST Path: definitions[0].statements[0].statements[0]
+Original Map Location: Line 9, column 5",
 }
 `;
