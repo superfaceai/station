@@ -1,0 +1,152 @@
+"""
+Retrieve Companies
+Lists available companies.
+"""
+name = "recruitment/list-companies"
+version = "1.0.0"
+
+"""
+List Companies
+Returns a list of companies.
+"""
+usecase ListCompanies { 
+  result {
+    """
+    Companies
+    List of companies.
+    """
+    companies! [Company!]!
+
+    """
+    Rate Limit
+    Rate limit details.
+    """
+    rateLimit RateLimit
+  }!
+
+  error Error
+
+  example Success {
+    result {
+      companies = [{
+        id = '1'
+        name = 'Superface'
+        description = 'Superface is technology startup, based in Czech Republic, which connects applications through APIs.'
+        createdAt = '2021-01-01T12:00:00.000Z'
+        updatedAt = '2022-10-01T14:00:00.000Z'
+      }]
+    }
+  }
+}
+
+model Company {
+  """
+  Company ID
+  Unique identifier of the company.
+  """
+  id! string!
+
+  """
+  Company name
+  Name of the company.
+  """
+  name! string!
+
+  """
+  Company description
+  Description of the company.
+  """
+  description string
+
+  """
+  Created At
+  ISO8601 timestamp when was a candidate created.
+  """
+  createdAt string
+  
+  """
+  Updated At
+  ISO8601 timestamp when was a candidate lastly updated.
+  """
+  updatedAt string
+}
+
+model Error {
+  """
+  Error Title
+  A short, human-readable summary of the problem type.
+  """
+  title!
+  """
+  Error Detail
+  A human-readable explanation specific to this occurrence of the problem.
+  """
+  detail
+  """
+  Code
+  Error code.
+  """
+  code! ErrorCode!
+  """
+  Rate limit
+  Rate limit details.
+  """
+  rateLimit RateLimit
+}
+
+model RateLimit {
+  """
+  Bucket
+  Different parts of API may have different rate limits.
+  Bucket identifies to which part of API the rate limits apply.
+  """
+  bucket string
+  """
+  Total requests
+  Total requests available in the time window.
+  """
+  totalRequests number
+  """
+  Remaining requests
+  Remaining requests available in the time window.
+  """
+  remainingRequests number
+  """
+  Remaining requests available in percents
+  Remaining requests available in the time window in percents.
+  """
+  remainingRequestsPercentage number
+  """
+  Reset timestamp
+  Timestamp when the rate limits will reset (in  Unix Timestamp format). Available only for providers without rolling rate limit window.
+  """
+  resetTimestamp number
+}
+
+model ErrorCode enum {
+  """
+  Bad request
+  The request was invalid or cannot be otherwise served.
+  """
+  BadRequest
+  """
+  Rate limit reached
+  Returned when a request cannot be served due to the user or app reached max requests quota.
+  """
+  RateLimitReached
+  """
+  Unauthenticated
+  There was a problem authenticating your request. Check that you are passing valid credentials.
+  """
+  Unauthenticated
+  """
+  Unauthorized
+  The request is understood, but it has been refused or access is not allowed.
+  """
+  Unauthorized
+  """
+  Unknown error
+  Returned when an unexpected error occured.
+  """
+  UnknownError
+}

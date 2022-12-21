@@ -1,0 +1,125 @@
+profile = "recruitment/list-companies@1.0"
+provider = "breezy-hr"
+
+map ListCompanies { 
+  http GET "/v3/companies" {
+    request {
+      headers {
+        Authorization = parameters.ACCESS_TOKEN
+      }
+    }
+  
+    response 200 "application/json" {
+      companies = body.map(company => ({
+        id: company._id,
+        name: company.name,
+        createdAt: company.creation_date,
+        updatedAt: company.updated_date,
+      })),
+      
+      map result {
+        companies = companies,
+        rateLimit = call MapRateLimit(headers = headers)
+      }
+    }
+  
+    response "application/json" {
+      error = call MapBreezyHRError(
+        statusCode = statusCode,
+        error = body.error,
+        headers = headers
+      )
+
+      map error error
+    }
+
+    response {
+      map error {
+        title = "Unknown error"
+        detail = JSON.stringify(body, null, 2)
+        code = 'UnknownError'
+      }
+    }
+  }
+}
+
+//Breezy HR rate limits docs: https://developer.breezy.hr/reference/rate-limiting
+operation MapRateLimit {
+  totalRequests = parseInt(args.headers['x-ratelimit-limit'], 10)
+  remainingRequests = parseInt(args.headers['x-ratelimit-remaining'], 10)
+  remainingRequestsPercentage = undefined
+  resetTimestamp = parseInt(args.headers['x-ratelimit-reset'], 10)
+
+  set if(isNaN(totalRequests)) {
+    totalRequests = undefined
+  }
+
+  set if(isNaN(remainingRequests)) {
+    remainingRequests = undefined
+  }
+
+  set if(totalRequests > 0 && remainingRequests !== undefined) {
+    remainingRequestsPercentage = remainingRequests / totalRequests * 100
+  }
+
+  set if(isNaN(resetTimestamp, 10)) {
+    resetTimestamp = undefined
+  }
+
+  return {
+    bucket = 'breezy-hr'
+    totalRequests = totalRequests
+    remainingRequests = remainingRequests
+    remainingRequestsPercentage = remainingRequestsPercentage
+    resetTimestamp = resetTimestamp
+  }
+}
+
+operation MapBreezyHRError {
+  statusCode = args.statusCode
+  breezyHrError = args.error
+
+  rateLimit = call MapRateLimit(headers = args.headers)
+
+  return if (statusCode === 400) {
+    title = 'Bad request'
+    detail = breezyHrError
+    code = 'BadRequest'
+    rateLimit = rateLimit
+  }
+
+  return if (statusCode === 401) {
+    title = 'Unauthenticated'
+    detail = breezyHrError
+    code = 'Unauthenticated'
+    rateLimit = rateLimit
+  }
+
+  return if (statusCode === 403) {
+    title = 'Unauthorized'
+    detail = breezyHrError
+    code = 'Unauthorized'
+    rateLimit = rateLimit
+  }
+
+  return if (statusCode === 404) {
+    title = 'Not found'
+    detail = breezyHrError
+    code = 'NotFound'
+    rateLimit = rateLimit
+  }
+
+  return if (statusCode === 429) {
+    title = 'Rate limit exceeded'
+    detail = 'You reached max requests quota.'
+    code = 'RateLimitReached'
+    rateLimit = rateLimit
+  }
+
+  return {
+    title = "Unknown error"
+    detail = breezyHrError
+    code = 'UnknownError'
+    rateLimit = rateLimit
+  }
+}
