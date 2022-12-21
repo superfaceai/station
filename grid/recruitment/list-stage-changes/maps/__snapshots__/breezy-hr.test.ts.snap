@@ -56,7 +56,7 @@ Err {
   "error": "MappedError: Expected error
 Properties: {
   \\"title\\": \\"Not Found\\",
-  \\"detail\\": \\"Unable to get candidate under ID f1cfc5572a5701. Check that the candidate with that ID exists.\\",
+  \\"detail\\": \\"Unable to get candidate by ID f1cfc5572a5701. Check that the candidate with that ID exists.\\",
   \\"code\\": \\"NotFound\\",
   \\"rateLimit\\": {
     \\"bucket\\": \\"breezy-hr\\",
@@ -68,5 +68,25 @@ Properties: {
 }
 AST Path: definitions[0].statements[3].statements[0]
 Original Map Location: Line 32, column 5",
+}
+`;
+
+exports[`recruitment/list-stage-changes/breezy-hr ListStageChanges when specified company does not exist returns error 1`] = `
+Err {
+  "error": "MappedError: Expected error
+Properties: {
+  \\"title\\": \\"Not Found\\",
+  \\"detail\\": \\"Unable to get company by ID 1b111c1111ef11. Check that the company with that ID exists.\\",
+  \\"code\\": \\"NotFound\\",
+  \\"rateLimit\\": {
+    \\"bucket\\": \\"breezy-hr\\",
+    \\"totalRequests\\": 100,
+    \\"remainingRequests\\": 98,
+    \\"remainingRequestsPercentage\\": 98,
+    \\"resetTimestamp\\": 1671618827
+  }
+}
+AST Path: definitions[0].statements[1].statements[0]
+Original Map Location: Line 15, column 5",
 }
 `;

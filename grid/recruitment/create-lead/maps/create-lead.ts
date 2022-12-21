@@ -64,6 +64,9 @@ const sampleLead = {
   source: ['LinkedIn', 'Indeed', 'Glassdoor'],
 };
 
+const describeIf = (condition: boolean): jest.Describe =>
+  condition ? describe : describe.skip;
+
 export const createLeadTest = (
   provider: string,
   jobIds: { valid: string; invalid: string },
@@ -80,39 +83,78 @@ export const createLeadTest = (
     });
 
     describe('CreateLead', () => {
-      it('should perform successfully', async () => {
-        const result = await superface.run(
-          {
-            useCase: 'CreateLead',
-            input: {
-              jobId: jobIds.valid,
-              ...sampleLead,
+      describe('when specified job does exist', () => {
+        it('should perform successfully', async () => {
+          const result = await superface.run(
+            {
+              useCase: 'CreateLead',
+              input: {
+                jobId: jobIds.valid,
+                ...sampleLead,
+              },
             },
-          },
-          options
-        );
+            options
+          );
 
-        expect(() => result.unwrap()).not.toThrow();
-        expect(result).toMatchSnapshot();
+          expect(() => result.unwrap()).not.toThrow();
+          expect(result).toMatchSnapshot();
+        });
       });
 
-      it('should map error', async () => {
-        const result = await superface.run(
-          {
-            useCase: 'CreateLead',
-            input: {
-              jobId: jobIds.invalid,
-              firstName: 'Demo',
-              lastName: 'Testing',
-              email: 'demo_testing@fakemail.com',
+      describe('when specified job does not exist', () => {
+        it('should map error', async () => {
+          const result = await superface.run(
+            {
+              useCase: 'CreateLead',
+              input: {
+                jobId: jobIds.invalid,
+                firstName: 'Demo',
+                lastName: 'Testing',
+                email: 'demo_testing@fakemail.com',
+              },
             },
-          },
-          options
-        );
+            options
+          );
 
-        expect(() => result.unwrap()).toThrow();
-        expect(result).toMatchSnapshot();
+          expect(() => result.unwrap()).toThrow();
+          expect(result).toMatchSnapshot();
+        });
       });
+
+      describeIf(provider === 'breezy-hr')(
+        'when specified company does not exist',
+        () => {
+          let companyId: string;
+
+          beforeAll(() => {
+            companyId = process.env.BREEZY_HR_COMPANY_ID!;
+
+            process.env.BREEZY_HR_COMPANY_ID = '1b111c1111ef11';
+          });
+
+          afterAll(() => {
+            process.env.BREEZY_HR_COMPANY_ID = companyId;
+          });
+
+          it('should map error', async () => {
+            const result = await superface.run(
+              {
+                useCase: 'CreateLead',
+                input: {
+                  jobId: jobIds.valid,
+                  firstName: 'Demo',
+                  lastName: 'Testing',
+                  email: 'demo_testing@fakemail.com',
+                },
+              },
+              options
+            );
+
+            expect(() => result.unwrap()).toThrow();
+            expect(result).toMatchSnapshot();
+          });
+        }
+      );
     });
   });
 };

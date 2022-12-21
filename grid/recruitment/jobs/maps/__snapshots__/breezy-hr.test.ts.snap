@@ -105,3 +105,23 @@ Ok {
   },
 }
 `;
+
+exports[`recruitment/jobs/breezy-hr ListJobs when specified company does not exist returns error 1`] = `
+Err {
+  "error": "MappedError: Expected error
+Properties: {
+  \\"title\\": \\"Not Found\\",
+  \\"detail\\": \\"Unable to get company by ID 1b111c1111ef11. Check that the company with that ID exists.\\",
+  \\"code\\": \\"NotFound\\",
+  \\"rateLimit\\": {
+    \\"bucket\\": \\"breezy-hr\\",
+    \\"totalRequests\\": 100,
+    \\"remainingRequests\\": 97,
+    \\"remainingRequestsPercentage\\": 97,
+    \\"resetTimestamp\\": 1671618827
+  }
+}
+AST Path: definitions[0].statements[0].statements[0]
+Original Map Location: Line 9, column 5",
+}
+`;
