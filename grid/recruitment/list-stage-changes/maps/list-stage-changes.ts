@@ -1,4 +1,4 @@
-/* eslint-disable jest/no-export */
+/* eslint-disable jest/no-export, jest/valid-describe, jest/valid-title, jest/no-identical-title */
 
 import { RecordingProcessOptions, SuperfaceTest } from '@superfaceai/testing';
 
@@ -96,7 +96,7 @@ export const listStageChangesTest = (
           });
         }
       );
-      
+
       describeIf(
         provider === 'workable',
         'when specified subdomain does not exist',
