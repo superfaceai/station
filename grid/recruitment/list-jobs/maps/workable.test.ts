@@ -1,3 +1,3 @@
-import { jobsTest } from './jobs';
+import { listJobsTest } from './list-jobs';
 
-jobsTest('workable');
+listJobsTest('workable');
