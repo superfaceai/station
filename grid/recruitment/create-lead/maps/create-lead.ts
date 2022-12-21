@@ -6,11 +6,11 @@ import { readFileSync } from 'fs';
 import { buildSuperfaceTest } from '../../../test-config';
 
 const sampleLead = {
-  name: 'John Doe',
+  name: 'John Lead',
   firstName: 'John',
-  lastName: 'Doe',
+  lastName: 'Lead',
 
-  email: 'john.doe@fakemail.com',
+  email: 'john.lead@fakemail.com',
   phone: '1-859-557-6573',
   address: '25772 Gustave Shore, Iowa, USA',
 

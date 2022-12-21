@@ -185,7 +185,7 @@ operation ListStageChanges {
 }
 
 operation CheckCandidateExists {
-  http GET "/v3/company/{ args.companyId }/position/{ args.jobId }/candidate/args.candidateId" {
+  http GET "/v3/company/{ args.companyId }/position/{ args.jobId }/candidate/{ args.candidateId }" {
 
     request {
       headers {
