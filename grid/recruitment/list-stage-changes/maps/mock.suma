@@ -1,0 +1,28 @@
+profile = "recruitment/list-stage-changes@1.0"
+provider = "mock"
+
+"""
+ListStageChanges map
+"""
+map ListStageChanges {
+  return map result {
+    changes = [
+      {
+        id: '1',
+        stageId: 'sourced',
+        name: 'Sourced',
+        description: 'Sourced from LinkedIn',
+        current: false,
+        createdAt: "2022-12-06T15:20:11Z",
+      },
+      {
+        id: '2',
+        stageId: 'applied',
+        name: 'Applied',
+        description: 'Applied for job opening of Software Engineer',
+        current: true,
+        createdAt: "2022-12-08T10:20:42Z",
+      }
+    ]
+  }
+}

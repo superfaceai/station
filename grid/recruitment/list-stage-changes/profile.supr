@@ -1,0 +1,212 @@
+"""
+Retrieve Stage Changes
+Lists stage changes for a candidate or sourced lead in ATS.
+"""
+name = "recruitment/list-stage-changes"
+version = "1.0.0"
+
+"""
+List Stage Changes
+Retrieves a list of stages for specific candidate or lead throughout the recruitment process
+"""
+usecase ListStageChanges {
+  input {
+    """
+    Candidate Id
+    Unique identifier of a candidate or sourced lead.
+    """
+    candidateId! string!
+
+    """
+    Job Id
+    The unique identifier of a job that the candidate is linked with. 
+    """
+    jobId string!
+  }
+
+  result {
+    """
+    Stages
+    List of stages relevant to the candidate or lead.
+    """
+    changes! [StageChange!]!
+    
+    """
+    Rate limit
+    Rate limit details.
+    """
+    rateLimit RateLimit
+  }!
+
+  error Error
+
+  example Successful {
+    input {
+      candidateId = 'CANDIDATE_ID'
+    }
+
+    result {
+      changes = [
+        {
+          id = '1',
+          stageId = 'sourced',
+          name = 'Sourced',
+          description = 'Sourced from LinkedIn',
+          current = false,
+          createdAt = "2022-12-06T15:20:11Z",
+        },
+        {
+          id = '2',
+          stageId = 'applied',
+          name = 'Applied',
+          description = 'Applied for job opening of Software Engineer',
+          current = true,
+          createdAt = "2022-12-08T10:20:42Z",
+        }
+      ]
+    }
+  }
+
+  example Failed {
+    input {
+      candidateId = 'NOT_EXISTING_ID'
+    }
+
+    error {
+      title = 'Not found'
+      detail = 'Candidate with ID "NOT_EXISTING_ID" not found.'
+      code = 'NotFound'
+      rateLimit = {
+        bucket = 'workable'
+      }
+    }
+  }
+}
+
+model StageChange {
+  """
+  Id
+  Unique identifier of a stage change
+  """
+  id! string!
+
+  """
+  Stage Id
+  Identifier of a stage where candidate moved to.
+  """
+  stageId! string!
+
+  """
+  Name
+  Human readable name of a stage.
+  """
+  name! string!
+
+  """
+  Description
+  Description of a stage change. Can contain reason for moving to this stage.
+  """
+  description string
+
+  """
+  Current
+  Whether candidate is in this stage currently.
+  """
+  current boolean
+
+  """
+  Created At
+  ISO8601 timestamp when candidate moved to this stage.
+  """
+  createdAt! string!
+}
+
+model Error {
+  """
+  Error Title
+  A short, human-readable summary of the problem type.
+  """
+  title!
+  """
+  Error Detail
+  A human-readable explanation specific to this occurrence of the problem.
+  """
+  detail
+  """
+  Code
+  Error code.
+  """
+  code! ErrorCode!
+  """
+  Rate limit
+  Rate limit details.
+  """
+  rateLimit RateLimit
+}
+
+model RateLimit {
+  """
+  Bucket
+  Different parts of API may have different rate limits.
+  Bucket identifies to which part of API the rate limits apply.
+  """
+  bucket string
+  """
+  Total requests
+  Total requests available in the time window.
+  """
+  totalRequests number
+  """
+  Remaining requests
+  Remaining requests available in the time window.
+  """
+  remainingRequests number
+  """
+  Remaining requests available in percents
+  Remaining requests available in the time window in percents.
+  """
+  remainingRequestsPercentage number
+  """
+  Reset timestamp
+  Timestamp when the rate limits will reset (in  Unix Timestamp format). Available only for providers without rolling rate limit window.
+  """
+  resetTimestamp number
+}
+
+model ErrorCode enum {
+  """
+  Bad request
+  The request was invalid or cannot be otherwise served.
+  """
+  BadRequest
+  """
+  Not found
+  The candidateId does not exist.
+  """
+  NotFound
+  """
+  Rate limit reached
+  Returned when a request cannot be served due to the user or app reached max requests quota.
+  """
+  RateLimitReached
+  """
+  Unauthenticated
+  There was a problem authenticating your request. Check that you are passing valid credentials.
+  """
+  Unauthenticated
+  """
+  Unauthorized
+  The request is understood, but it has been refused or access is not allowed.
+  """
+  Unauthorized
+  """
+  Unknown error
+  Returned when an unexpected error occured.
+  """
+  UnknownError
+  """
+  Conflict
+  The request can not be executed, it is in conflict with current state of the target resource.
+  """
+  Conflict
+}

@@ -1,0 +1,400 @@
+"""
+Manage Leads
+Create sourced leads in ATS (Applicant Tracking System).
+"""
+name = "recruitment/create-lead"
+version = "1.0.0"
+
+"""
+Create Lead
+Creates a sourced prospect candidate either for some specific job or any job within a company.
+"""
+usecase CreateLead {
+
+  input {
+    jobId
+    firstName!
+    lastName!
+    email!
+    phone
+    address 
+    education 
+    workExperience
+    links
+    cv
+    source
+  }
+
+  result {
+    id!
+    jobId
+    rateLimit
+  }!
+
+  error Error
+
+  example Successful {
+    input {
+      jobId = 'JOB_ID'
+      firstName = 'Demo'
+      lastName = 'Testing'
+      email = 'demo_testing@fakemail.com'
+    }
+
+    result {
+      id = 'LEAD_ID'
+      jobId = 'JOB_ID'
+    }
+  }
+
+  example Failed {
+    input {
+      jobId = 'NOT_EXISTING_JOB_ID'
+      firstName = 'Demo'
+      lastName = 'Testing'
+      email = 'demo_testing@fakemail.com'
+    }
+
+    error {
+      title = 'Bad Request'
+      detail = 'Job with id NOT_EXISTING_JOB_ID does not exist.'
+      code = 'BadRequest'
+      rateLimit = {
+        bucket = 'workable'
+      }
+    }
+  }
+}
+
+"""
+Id
+Unique identifier of a lead
+"""
+field id string!
+
+"""
+Job Id
+Unique identifier of a job that the lead is a good prospect for.
+"""
+field jobId string!
+
+"""
+Job Title
+Title of a job, lead might apply for.
+"""
+field jobTitle string!
+
+"""
+First Name
+First name of a lead.
+"""
+field firstName string!
+
+"""
+Last Name
+Last name of a lead.
+"""
+field lastName string!
+
+"""
+Full Name
+Full name of a lead.
+"""
+field fullName string
+
+"""
+Email
+Email of a lead.
+"""
+field email string!
+
+"""
+Phone
+Phone number of a lead.
+"""
+field phone string
+
+"""
+Address
+Address of a lead.
+"""
+field address string
+
+"""
+Education
+List of sourced education experiences relevant to lead.
+"""
+field education [Education]
+
+"""
+Work Experience
+List of sourced work experiences relevant to lead.
+"""
+field workExperience [WorkExperience]
+
+"""
+Links
+List of sourced links relevant to lead. Can contain links to social profiles, portfolios or other.
+"""
+field links [Link]
+
+"""
+CV (Resume)
+Object containing either URL to a CV or data encoded in Base64 format with CV document and name with the file name.
+"""
+field cv { url string } | { name string, data string }
+
+"""
+CV Url
+Url pointing to CV of a lead.
+"""
+field cvUrl string
+
+"""
+Source
+Name or list of names, with sources from where this lead comes from.
+"""
+field source string | [string]
+
+"""
+Created At
+ISO8601 timestamp when was a lead created.
+"""
+field createdAt string
+
+"""
+Updated At
+ISO8601 timestamp when was a lead lastly updated.
+"""
+field updatedAt string
+
+"""
+Rate limit
+Rate limit details.
+"""
+field rateLimit RateLimit
+
+model Lead {
+  id!
+  jobId
+  jobTitle
+  
+  firstName!
+  lastName!
+  fullName
+  
+  email!
+  phone
+  address
+  
+  links 
+  experiences
+  education
+  cv 
+  cvUrl 
+
+  source
+  createdAt
+  updatedAt
+}
+
+"""
+Education
+Object representing educational experience of a lead.
+"""
+model Education {
+  """
+  Id
+  Unique identifier of lead's education experience.
+  """
+  id string
+  
+  """
+  School
+  Name of a school.
+  """
+  school string
+
+  """
+  Degree
+  Degree aquired by finishing lead's education.
+  """
+  degree string
+
+  """
+  Field of Study
+  Name of a field studied in lead's education.
+  """
+  fieldOfStudy string
+  
+  """
+  Started At
+  ISO8601 timestamp when the education started.
+  """
+  startedAt string
+
+  """
+  Ended At
+  ISO8601 timestamp when the education ended.
+  """
+  endedAt string
+}
+
+"""
+Work Experience
+Object representing work experience of a lead.
+"""
+model WorkExperience {
+  """
+  Id
+  Unique identifier of lead's work experience.
+  """
+  id string
+
+  """
+  Position
+  Name of position, lead has occupied.
+  """
+  position string
+
+  """
+  Summary
+  Summary of lead's work experience. 
+  """
+  summary string
+
+  """
+  Company
+  Name of company.
+  """
+  company string
+
+  """
+  Industry
+  Name of industry, the company worked in.
+  """
+  industry string
+
+  """
+  Current
+  Boolean representing whether lead still work there.
+  """
+  current boolean
+
+  """
+  Started At
+  ISO8601 timestamp when lead started working.
+  """
+  startedAt string
+
+  """
+  Ended At
+  ISO8601 timestamp when lead stoped working.
+  """
+  endedAt string
+}
+
+"""
+Link
+Object representing a link sourced with lead.
+"""
+model Link {
+  """
+  Name
+  Descriptive name of a link to some URL.
+  """
+  name string
+
+  """
+  URL
+  Actual URL destination of the link.
+  """
+  url string
+}
+
+model Error {
+  """
+  Error Title
+  A short, human-readable summary of the problem type.
+  """
+  title!
+  """
+  Error Detail
+  A human-readable explanation specific to this occurrence of the problem.
+  """
+  detail
+  """
+  Code
+  Error code.
+  """
+  code! ErrorCode!
+  
+  rateLimit 
+}
+
+model RateLimit {
+  """
+  Bucket
+  Different parts of API may have different rate limits.
+  Bucket identifies to which part of API the rate limits apply.
+  """
+  bucket string
+  """
+  Total requests
+  Total requests available in the time window.
+  """
+  totalRequests number
+  """
+  Remaining requests
+  Remaining requests available in the time window.
+  """
+  remainingRequests number
+  """
+  Remaining requests available in percents
+  Remaining requests available in the time window in percents.
+  """
+  remainingRequestsPercentage number
+  """
+  Reset timestamp
+  Timestamp when the rate limits will reset (in  Unix Timestamp format). Available only for providers without rolling rate limit window.
+  """
+  resetTimestamp number
+}
+
+model ErrorCode enum {
+  """
+  Bad request
+  The request was invalid or cannot be otherwise served.
+  """
+  BadRequest
+  """
+  Not found
+  The profileId does not exist.
+  """
+  NotFound
+  """
+  Rate limit reached
+  Returned when a request cannot be served due to the user or app reached max requests quota.
+  """
+  RateLimitReached
+  """
+  Unauthenticated
+  There was a problem authenticating your request. Check that you are passing valid credentials.
+  """
+  Unauthenticated
+  """
+  Unauthorized
+  The request is understood, but it has been refused or access is not allowed.
+  """
+  Unauthorized
+  """
+  Unknown error
+  Returned when an unexpected error occured.
+  """
+  UnknownError
+  """
+  Conflict
+  The request can not be executed, it is in conflict with current state of the target resource.
+  """
+  Conflict
+}
