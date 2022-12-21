@@ -169,7 +169,7 @@ operation CheckCompanyExists {
     response 500 "application/json" {
       fail {
         title = 'Not Found'
-        detail = 'Unable to get company under ID ' + args.companyId + '. Check that the company with that ID exists.'
+        detail = 'Unable to get company by ID ' + args.companyId + '. Check that the company with that ID exists.'
         code = 'NotFound'
         rateLimit = call MapRateLimit(headers = headers)
       }

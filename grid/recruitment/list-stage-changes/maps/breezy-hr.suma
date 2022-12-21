@@ -200,7 +200,7 @@ operation CheckCandidateExists {
     response 500 "application/json" {
       fail {
         title = 'Not Found'
-        detail = 'Unable to get candidate under ID ' + args.jobId + '. Check that the candidate with that ID exists.'
+        detail = 'Unable to get candidate by ID ' + args.jobId + '. Check that the candidate with that ID exists.'
         code = 'NotFound'
         rateLimit = call MapRateLimit(headers = headers)
       }
@@ -242,7 +242,7 @@ operation CheckJobExists {
     response 500 "application/json" {
       fail {
         title = 'Not Found'
-        detail = 'Unable to get job under ID ' + args.jobId + '. Check that the job with that ID exists.'
+        detail = 'Unable to get job by ID ' + args.jobId + '. Check that the job with that ID exists.'
         code = 'NotFound'
         rateLimit = call MapRateLimit(headers = headers)
       }
@@ -284,7 +284,7 @@ operation CheckCompanyExists {
     response 500 "application/json" {
       fail {
         title = 'Not Found'
-        detail = 'Unable to get company under ID ' + args.companyId + '. Check that the company with that ID exists.'
+        detail = 'Unable to get company by ID ' + args.companyId + '. Check that the company with that ID exists.'
         code = 'NotFound'
         rateLimit = call MapRateLimit(headers = headers)
       }
