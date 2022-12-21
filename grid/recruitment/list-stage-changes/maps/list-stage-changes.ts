@@ -83,7 +83,7 @@ export const listStageChangesTest = (
                 input: {
                   candidateId: candidateIds.valid,
                   jobId: jobIds.valid,
-                }
+                },
               },
               options
             );
