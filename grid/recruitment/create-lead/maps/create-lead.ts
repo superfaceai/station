@@ -64,8 +64,10 @@ const sampleLead = {
   source: ['LinkedIn', 'Indeed', 'Glassdoor'],
 };
 
-const describeIf = (condition: boolean): jest.Describe =>
-  condition ? describe : describe.skip;
+const describeIf = (
+  condition: boolean,
+  ...args: Parameters<jest.Describe>
+): void => (condition ? describe(...args) : describe.skip(...args));
 
 export const createLeadTest = (
   provider: string,
@@ -121,7 +123,8 @@ export const createLeadTest = (
         });
       });
 
-      describeIf(provider === 'breezy-hr')(
+      describeIf(
+        provider === 'breezy-hr',
         'when specified company does not exist',
         () => {
           let companyId: string;
@@ -137,6 +140,42 @@ export const createLeadTest = (
           });
 
           it('should map error', async () => {
+            const result = await superface.run(
+              {
+                useCase: 'CreateLead',
+                input: {
+                  jobId: jobIds.valid,
+                  firstName: 'Demo',
+                  lastName: 'Testing',
+                  email: 'demo_testing@fakemail.com',
+                },
+              },
+              options
+            );
+
+            expect(() => result.unwrap()).toThrow();
+            expect(result).toMatchSnapshot();
+          });
+        }
+      );
+
+      describeIf(
+        provider === 'workable',
+        'when specified subdomain does not exist',
+        () => {
+          let subdomain: string;
+
+          beforeAll(() => {
+            subdomain = process.env.WORKABLE_SUBDOMAIN!;
+
+            process.env.WORKABLE_SUBDOMAIN = 'invalid-superface';
+          });
+
+          afterAll(() => {
+            process.env.WORKABLE_SUBDOMAIN = subdomain;
+          });
+
+          it('returns error', async () => {
             const result = await superface.run(
               {
                 useCase: 'CreateLead',
