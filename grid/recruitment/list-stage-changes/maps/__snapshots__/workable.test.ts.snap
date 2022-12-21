@@ -30,7 +30,7 @@ Ok {
       "bucket": "workable",
       "remainingRequests": 9,
       "remainingRequestsPercentage": 90,
-      "resetTimestamp": 1671100796,
+      "resetTimestamp": 1671629750,
       "totalRequests": 10,
     },
   },
@@ -39,16 +39,32 @@ Ok {
 
 exports[`recruitment/list-stage-changes/workable ListStageChanges when specified candidate does not exist returns error 1`] = `
 Err {
-  "error": "MappedHTTPError: Expected HTTP error
+  "error": "MappedError: Expected error
 Properties: {
-  \\"title\\": \\"Not found\\",
-  \\"detail\\": \\"Not found\\",
+  \\"title\\": \\"Not Found\\",
+  \\"detail\\": \\"Unable to get candidate by ID NOT-EXISTING. Check that the candidate with that ID exists.\\",
   \\"code\\": \\"NotFound\\",
   \\"rateLimit\\": {
     \\"bucket\\": \\"workable\\"
   }
 }
-AST Path: definitions[0].statements[0].responseHandlers[1].statements[1]
-Original Map Location: Line 38, column 7",
+AST Path: definitions[0].statements[1].statements[0]
+Original Map Location: Line 16, column 5",
+}
+`;
+
+exports[`recruitment/list-stage-changes/workable ListStageChanges when specified subdomain does not exist returns error 1`] = `
+Err {
+  "error": "MappedError: Expected error
+Properties: {
+  \\"title\\": \\"Not Found\\",
+  \\"detail\\": \\"Unable to get subdomain by name invalid-superface. Check that the subdomain with that name exists.\\",
+  \\"code\\": \\"NotFound\\",
+  \\"rateLimit\\": {
+    \\"bucket\\": \\"workable\\"
+  }
+}
+AST Path: definitions[0].statements[0].statements[0]
+Original Map Location: Line 9, column 5",
 }
 `;

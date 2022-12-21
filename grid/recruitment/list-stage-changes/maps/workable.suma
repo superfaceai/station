@@ -2,49 +2,32 @@ profile = "recruitment/list-stage-changes@1.0"
 provider = "workable"
 
 map ListStageChanges {
-  http GET "/spi/v3/candidates/{input.candidateId}/activities" {
-    security "bearer_token"
+  call CheckSubdomainExists(
+    clientId = parameters.CLIENT_ID,
+    subdomain = parameters.SUBDOMAIN
+  ) {
+    return map error if (outcome.error) outcome.error
+  }
+  
+  call CheckCandidateExists(
+    clientId = parameters.CLIENT_ID,
+    candidateId = input.candidateId
+  ) {
+    return map error if (outcome.error) outcome.error
+  }
 
-    request {
-      headers {
-        'X-WORKABLE-CLIENT-ID' = parameters.CLIENT_ID
-      }
-    }
+  call GetStageChanges(
+    clientId = parameters.CLIENT_ID,
+    candidateId = input.candidateId
+  ) {
+    return map error if (outcome.error) outcome.error
 
-    response 200 "application/json" {
-      changes = body.activities.filter(activity => activity.stage_name !== null || activity.action === 'applied').map(stageActivity => ({
-        id: stageActivity.id,
-        stageId: stageActivity.action,
-        name: stageActivity.action === 'applied' ? 'Applied' : stageActivity.stage_name,
-        current: false,
-        createdAt: stageActivity.created_at,
-      }))
+    getStageChangesOutcome = outcome.data
+  }
 
-      tmp = changes[changes.length - 1].current = true
-
-      map result {
-        changes = changes
-        rateLimit = call MapRateLimit(headers = headers)
-      }
-    }
-
-    response "application/json" {
-      error = call MapWorkableError(
-        statusCode = statusCode,
-        error = body.error,
-        headers = headers
-      )
-      
-      map error error
-    }
-
-    response {
-      map error {
-        title = "Unknown error"
-        detail = JSON.stringify(body, null, 2)
-        code = 'UnknownError'
-      }
-    }
+  return map result {
+    changes = getStageChangesOutcome.changes
+    rateLimit = getStageChangesOutcome.rateLimit
   }
 }
 
@@ -114,6 +97,13 @@ operation MapWorkableError {
     rateLimit = rateLimit
   }
 
+  return if (statusCode === 422) {
+    title = 'Conflict'
+    detail = workableError 
+    code = 'Conflict'
+    rateLimit = rateLimit
+  }
+
   return if (statusCode === 429) {
     title = 'Rate limit exceeded'
     detail = 'You reached max requests quota.'
@@ -126,5 +116,142 @@ operation MapWorkableError {
     detail = workableError
     code = 'UnknownError'
     rateLimit = rateLimit
+  }
+}
+
+operation GetStageChanges {
+  http GET "/spi/v3/candidates/{ args.candidateId }/activities" {
+    security "bearer_token"
+
+    request {
+      headers {
+        'X-WORKABLE-CLIENT-ID' = args.clientId
+      }
+    }
+
+    response 200 "application/json" {
+      changes = (() => {
+        return body.activities
+          .filter(activity => activity.stage_name !== null || activity.action === 'applied')
+          .map(stageActivity => ({
+            id: stageActivity.id,
+            stageId: stageActivity.action,
+            name: stageActivity.action === 'applied' ? 'Applied' : stageActivity.stage_name,
+            current: false,
+            createdAt: stageActivity.created_at,
+          }));
+      })()
+
+      tmp = changes[changes.length - 1].current = true
+
+      return {
+        changes = changes
+        rateLimit = call MapRateLimit(headers = headers)
+      }
+    }
+
+    response "application/json" {
+      error = call MapWorkableError(
+        statusCode = statusCode,
+        error = body.error,
+        headers = headers
+      )
+      
+      fail error
+    }
+
+    response {
+      fail {
+        title = "Unknown error"
+        detail = JSON.stringify(body, null, 2)
+        code = 'UnknownError'
+      }
+    }
+  }
+}
+
+operation CheckSubdomainExists {
+  http GET "/spi/v3/accounts/{ args.subdomain }" {
+    security "bearer_token"
+
+    request {
+      headers {
+        'X-WORKABLE-CLIENT-ID' = args.clientId
+      }
+    }
+
+    response 200 {       
+      return {}
+    }
+
+    response 422 "application/json" {
+      fail {
+        title = 'Not Found'
+        detail = 'Unable to get subdomain by name ' + args.subdomain + '. Check that the subdomain with that name exists.'
+        code = 'NotFound'
+        rateLimit = call MapRateLimit(headers = headers)
+      }
+    }
+
+    response "application/json" {
+      error = call MapWorkableError(
+        statusCode = statusCode,
+        error = body.error,
+        headers = headers
+      )
+
+      fail error
+    }
+
+    response {
+      fail {
+        title = "Unknown error"
+        detail = JSON.stringify(body, null, 2)
+        code = 'UnknownError'
+      }
+    }
+  }
+}
+
+operation CheckCandidateExists {
+  http GET "/spi/v3/candidates/{ args.candidateId }" {
+    security "bearer_token"
+
+    request {
+      headers {
+        'X-WORKABLE-CLIENT-ID' = args.clientId
+      }
+    }
+
+    response 200 {       
+      return {}
+    }
+
+    response 404 "application/json" {
+      fail {
+        title = 'Not Found'
+        detail = 'Unable to get candidate by ID ' + args.candidateId + '. Check that the candidate with that ID exists.'
+        code = 'NotFound'
+        rateLimit = call MapRateLimit(headers = headers)
+      }
+    }
+
+    response "application/json" {
+      error = call MapWorkableError(
+        statusCode = statusCode,
+        error = body.error,
+        headers = headers
+      )
+
+      fail error
+    }
+
+    response {
+      fail {
+        title = "Unknown error"
+        detail = JSON.stringify(body, null, 2)
+        code = 'UnknownError'
+      }
+    }
   }
 }

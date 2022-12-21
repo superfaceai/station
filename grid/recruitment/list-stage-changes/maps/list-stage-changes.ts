@@ -4,8 +4,10 @@ import { RecordingProcessOptions, SuperfaceTest } from '@superfaceai/testing';
 
 import { buildSuperfaceTest } from '../../../test-config';
 
-const describeIf = (condition: boolean): jest.Describe =>
-  condition ? describe : describe.skip;
+const describeIf = (
+  condition: boolean,
+  ...args: Parameters<jest.Describe>
+): void => (condition ? describe(...args) : describe.skip(...args));
 
 export const listStageChangesTest = (
   provider: string,
@@ -62,7 +64,8 @@ export const listStageChangesTest = (
         });
       });
 
-      describeIf(provider === 'breezy-hr')(
+      describeIf(
+        provider === 'breezy-hr',
         'when specified company does not exist',
         () => {
           let companyId: string;
@@ -75,6 +78,39 @@ export const listStageChangesTest = (
 
           afterAll(() => {
             process.env.BREEZY_HR_COMPANY_ID = companyId;
+          });
+
+          it('returns error', async () => {
+            const result = await superface.run(
+              {
+                input: {
+                  candidateId: candidateIds.valid,
+                  jobId: jobIds.valid,
+                },
+              },
+              options
+            );
+
+            expect(() => result.unwrap()).toThrow();
+            expect(result).toMatchSnapshot();
+          });
+        }
+      );
+      
+      describeIf(
+        provider === 'workable',
+        'when specified subdomain does not exist',
+        () => {
+          let subdomain: string;
+
+          beforeAll(() => {
+            subdomain = process.env.WORKABLE_SUBDOMAIN!;
+
+            process.env.WORKABLE_SUBDOMAIN = 'invalid-superface';
+          });
+
+          afterAll(() => {
+            process.env.WORKABLE_SUBDOMAIN = subdomain;
           });
 
           it('returns error', async () => {
