@@ -5,7 +5,6 @@ import { RecordingProcessOptions, SuperfaceTest } from '@superfaceai/testing';
 
 import { buildSuperfaceTest } from '../../../test-config';
 
-// eslint-disable-next-line @typescript-eslint/ban-types
 type Candidate = {
   name: string;
   firstName: string;
