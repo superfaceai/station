@@ -1,7 +1,10 @@
-profile = "recruitment/create-candidate@1.0"
+profile = "recruitment/create-candidate@2.0"
 provider = "workable"
 
 map CreateCandidate {
+  resume = undefined
+  resumeDataBuffer = undefined
+
   call CheckSubdomainExists(
     clientId = parameters.CLIENT_ID,
     subdomain = parameters.SUBDOMAIN
@@ -16,9 +19,25 @@ map CreateCandidate {
     return map error if (outcome.error) outcome.error
   }
 
+  call CheckSupportedFileTypes(cv = input.cv) {
+    return map error if (outcome.error) outcome.error
+  }
+
+  set if(input.cv && input.cv.data) {
+    resumeDataBuffer = input.cv.data.getAllData()
+  }
+
+  set if(resumeDataBuffer) {
+    resume = {
+      name: input.cv.fileName,
+      data: resumeDataBuffer.toString('base64')
+    }
+  }
+
   call CreateCandidate (
     clientId = parameters.CLIENT_ID,
-    candidate = input
+    candidate = input,
+    candidateResume = resume
   ) {
     return map error if (outcome.error) outcome.error
 
@@ -29,6 +48,13 @@ map CreateCandidate {
     id = createCandidateOutcome.id
     jobId = createCandidateOutcome.jobId
     rateLimit = createCandidateOutcome.rateLimit
+  }
+}
+
+map CreateCandidateFeatures {
+  map result {
+    cvMIMETypes = ['application/pdf', 'text/rtf', 'application/msword', 'application/vnd.openxmlformats-officedocument.custom-properties+xml']
+    cvUploadMethods = ['url', 'file']
   }
 }
 
@@ -186,7 +212,7 @@ operation CreateCandidate {
         })) : undefined
 
         resumeUrl = args.candidate.cv ? args.candidate.cv.url ? args.candidate.cv.url : undefined : undefined
-        resume = args.candidate.cv ? args.candidate.cv.data ? args.candidate.cv : undefined : undefined
+        resume = args.candidateResume
       }
     }
 
@@ -302,4 +328,28 @@ operation CheckJobExists {
       }
     }
   }
+}
+
+operation CheckSupportedFileTypes {
+  cv = args.cv || {}
+
+  return if(cv.data === undefined || cv.data === null) {}
+
+  fail if(cv.fileName === undefined || cv.fileName === null) {
+    title = "Missing CV file name"
+    detail = "CV file name is required."
+    code = "CVFileNameRequired"
+  }
+  
+  fail if(
+      !cv.fileName.endsWith('pdf') &&
+      !cv.fileName.endsWith('rtf') &&
+      !cv.fileName.endsWith('doc') &&
+      !cv.fileName.endsWith('docx')) {
+    title = "CV MIME type not supported"
+    detail = `File type ${cv.fileName} is not supported by Workable provider.`
+    code = "CVMIMETypeNotSupported"
+  }
+
+  return {}
 }
