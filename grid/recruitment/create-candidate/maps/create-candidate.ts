@@ -1,65 +1,99 @@
 /* eslint-disable jest/no-export, jest/valid-describe, jest/valid-title, jest/no-identical-title */
 
+import { BinaryData } from '@superfaceai/one-sdk';
 import { RecordingProcessOptions, SuperfaceTest } from '@superfaceai/testing';
-import { readFileSync } from 'fs';
 
 import { buildSuperfaceTest } from '../../../test-config';
 
-const sampleCandidate = {
-  name: 'John Doe',
-  firstName: 'John',
-  lastName: 'Doe',
+// eslint-disable-next-line @typescript-eslint/ban-types
+type Candidate = {
+  name: string,
+  firstName: string,
+  lastName: string,
+  email: string,
+  phone: string,
+  address: string,
+  cv?: {
+    fileName: string,
+    data: BinaryData,
+  }
+  education: {
+    degree: string,
+    school: string,
+    fieldOfStudy: string | null,
+    startedAt: string,
+    endedAt: string
+  }[],
+  workExperience: {
+    position: string,
+    summary: string,
+    company: string,
+    industry: string,
+    current: boolean,
+    startedAt: string,
+    endedAt: string,
+  }[],
+  links?: {
+    name: string,
+    url: string
+  }[]
+};
 
-  email: 'john.doe@fakemail.com',
-  phone: '1-859-557-6573',
-  address: '25772 Gustave Shore, Iowa, USA',
+const buildSampleCandidate = (): Candidate => {
+  return {
+    name: 'John Doe',
+    firstName: 'John',
+    lastName: 'Doe',
 
-  education: [
-    {
-      degree: 'MBA',
-      school: 'University of Pennsylvania',
-      fieldOfStudy: null,
-      startedAt: '2008-03-01',
-      endedAt: '2011-03-30',
-    },
-    {
-      degree: 'B.S.',
-      school: 'University of Chicago',
-      fieldOfStudy: 'Marketing Communication & Economics',
-      startedAt: '2004-09-01',
-      endedAt: '2007-03-30',
-    },
-  ],
+    email: 'john.doe@fakemail.com',
+    phone: '1-859-557-6573',
+    address: '25772 Gustave Shore, Iowa, USA',
 
-  workExperience: [
-    {
-      position: 'Sales Director',
-      summary: 'Summary of a work experience at Test Company',
-      company: 'Test Company',
-      industry: 'Telecommunications',
-      current: false,
-      startedAt: '2011-03-01',
-      endedAt: '2014-03-30',
-    },
-  ],
+    education: [
+      {
+        degree: 'MBA',
+        school: 'University of Pennsylvania',
+        fieldOfStudy: null,
+        startedAt: '2008-03-01',
+        endedAt: '2011-03-30',
+      },
+      {
+        degree: 'B.S.',
+        school: 'University of Chicago',
+        fieldOfStudy: 'Marketing Communication & Economics',
+        startedAt: '2004-09-01',
+        endedAt: '2007-03-30',
+      },
+    ],
 
-  cv: {
-    name: 'cv-sample.pdf',
-    data: readFileSync('./grid/recruitment/cv-sample.pdf', {
-      encoding: 'base64',
-    }),
-  },
+    workExperience: [
+      {
+        position: 'Sales Director',
+        summary: 'Summary of a work experience at Test Company',
+        company: 'Test Company',
+        industry: 'Telecommunications',
+        current: false,
+        startedAt: '2011-03-01',
+        endedAt: '2014-03-30',
+      },
+    ],
 
-  links: [
-    {
-      name: 'twitter',
-      url: 'https://twitter.com/candidate.username',
+    cv: {
+      fileName: 'cv-sample.pdf',
+      data: BinaryData.fromPath('./grid/recruitment/cv-sample.pdf'),
     },
-    {
-      name: 'Portfolio',
-      url: 'https://url.to.portfolio',
-    },
-  ],
+
+    links: [
+      {
+        name: 'twitter',
+        url: 'https://twitter.com/candidate.username',
+      },
+      {
+        name: 'Portfolio',
+        url: 'https://url.to.portfolio',
+      },
+    ],
+  }
 };
 
 const describeIf = (
@@ -75,9 +109,11 @@ export const createCandidateTest = (
   describe(`recruitment/create-candidate/${provider}`, () => {
     describe('CreateCandidate', () => {
       let superface: SuperfaceTest;
+      let sampleCandidate: Candidate;
 
-      beforeAll(() => {
+      beforeEach(() => {
         jest.setTimeout(10000);
+        sampleCandidate = buildSampleCandidate();
         superface = buildSuperfaceTest({
           profile: 'recruitment/create-candidate',
           provider,
@@ -86,21 +122,58 @@ export const createCandidateTest = (
       });
 
       describe('when specified job does exist', () => {
-        it('performs correctly', async () => {
-          const result = await superface.run(
-            {
-              input: {
-                jobId: jobIds.valid,
-                ...sampleCandidate,
+        describe('when unsupported CV file MIME type used', () => {
+          it('returns CVMIMETypeNotSupported error', async () => {
+            await expect(superface.run(
+              {
+                input: {
+                  jobId: jobIds.valid,
+                  ...sampleCandidate,
+                  cv: {
+                    ...sampleCandidate.cv,
+                    fileName: 'cv-sample.xml'
+                  }
+                },
               },
-            },
-            options
-          );
-
-          expect(result.isOk()).toBeTruthy();
-          expect(result).toMatchSnapshot();
+              options
+            )).resolves.toMatchSnapshot();
+          });
         });
-      });
+    
+        describe('when CV file name is missing', () => {
+          it('returns CVFileNameRequired error', async () => {
+            await expect(superface.run(
+              {
+                input: {
+                  jobId: jobIds.valid,
+                  ...sampleCandidate,
+                  cv: {
+                    ...sampleCandidate.cv,
+                    fileName: undefined
+                  }
+                },
+              },
+              options
+            )).resolves.toMatchSnapshot();
+          });
+        });
+
+        describe('when valid inputs passed', () => {
+          it('performs correctly', async () => {
+            const result = await superface.run(
+              {
+                input: {
+                  jobId: jobIds.valid,
+                  ...sampleCandidate,
+                },
+              },
+              options
+            );
+            expect(result.isOk()).toBeTruthy();
+            expect(result).toMatchSnapshot();
+          });
+        });
+     });
 
       describe('when specified job does not exist', () => {
         it('returns error', async () => {
