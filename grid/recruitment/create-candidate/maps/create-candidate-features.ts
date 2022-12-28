@@ -22,7 +22,7 @@ export const createCandidateFeaturesTest = (
       it(`returns valid ${provider} features`, async () => {
         const result = await superface.run(
           {
-            input: {}
+            input: {},
           },
           options
         );

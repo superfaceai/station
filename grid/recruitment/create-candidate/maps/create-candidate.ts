@@ -7,36 +7,36 @@ import { buildSuperfaceTest } from '../../../test-config';
 
 // eslint-disable-next-line @typescript-eslint/ban-types
 type Candidate = {
-  name: string,
-  firstName: string,
-  lastName: string,
-  email: string,
-  phone: string,
-  address: string,
+  name: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  phone: string;
+  address: string;
   cv?: {
-    fileName: string,
-    data: BinaryData,
-  }
+    fileName: string;
+    data: BinaryData;
+  };
   education: {
-    degree: string,
-    school: string,
-    fieldOfStudy: string | null,
-    startedAt: string,
-    endedAt: string
-  }[],
+    degree: string;
+    school: string;
+    fieldOfStudy: string | null;
+    startedAt: string;
+    endedAt: string;
+  }[];
   workExperience: {
-    position: string,
-    summary: string,
-    company: string,
-    industry: string,
-    current: boolean,
-    startedAt: string,
-    endedAt: string,
-  }[],
+    position: string;
+    summary: string;
+    company: string;
+    industry: string;
+    current: boolean;
+    startedAt: string;
+    endedAt: string;
+  }[];
   links?: {
-    name: string,
-    url: string
-  }[]
+    name: string;
+    url: string;
+  }[];
 };
 
 const buildSampleCandidate = (): Candidate => {
@@ -93,7 +93,7 @@ const buildSampleCandidate = (): Candidate => {
         url: 'https://url.to.portfolio',
       },
     ],
-  }
+  };
 };
 
 const describeIf = (
@@ -124,37 +124,41 @@ export const createCandidateTest = (
       describe('when specified job does exist', () => {
         describe('when unsupported CV file MIME type used', () => {
           it('returns CVMIMETypeNotSupported error', async () => {
-            await expect(superface.run(
-              {
-                input: {
-                  jobId: jobIds.valid,
-                  ...sampleCandidate,
-                  cv: {
-                    ...sampleCandidate.cv,
-                    fileName: 'cv-sample.xml'
-                  }
+            await expect(
+              superface.run(
+                {
+                  input: {
+                    jobId: jobIds.valid,
+                    ...sampleCandidate,
+                    cv: {
+                      ...sampleCandidate.cv,
+                      fileName: 'cv-sample.xml',
+                    },
+                  },
                 },
-              },
-              options
-            )).resolves.toMatchSnapshot();
+                options
+              )
+            ).resolves.toMatchSnapshot();
           });
         });
-    
+
         describe('when CV file name is missing', () => {
           it('returns CVFileNameRequired error', async () => {
-            await expect(superface.run(
-              {
-                input: {
-                  jobId: jobIds.valid,
-                  ...sampleCandidate,
-                  cv: {
-                    ...sampleCandidate.cv,
-                    fileName: undefined
-                  }
+            await expect(
+              superface.run(
+                {
+                  input: {
+                    jobId: jobIds.valid,
+                    ...sampleCandidate,
+                    cv: {
+                      ...sampleCandidate.cv,
+                      fileName: undefined,
+                    },
+                  },
                 },
-              },
-              options
-            )).resolves.toMatchSnapshot();
+                options
+              )
+            ).resolves.toMatchSnapshot();
           });
         });
 
@@ -173,7 +177,7 @@ export const createCandidateTest = (
             expect(result).toMatchSnapshot();
           });
         });
-     });
+      });
 
       describe('when specified job does not exist', () => {
         it('returns error', async () => {

@@ -39,9 +39,14 @@ describe('recruitment/create-candidate/mock', () => {
 
       const result = await usecase.perform({}, { provider });
 
-      expect(result.isOk() && (result.value)).toEqual({
-        cvMIMETypes: ['application/pdf', 'text/rtf', 'application/msword', 'application/vnd.openxmlformats-officedocument.custom-properties+xml'],
-        cvUploadMethods: ['url', 'file']
+      expect(result.isOk() && result.value).toEqual({
+        cvMIMETypes: [
+          'application/pdf',
+          'text/rtf',
+          'application/msword',
+          'application/vnd.openxmlformats-officedocument.custom-properties+xml',
+        ],
+        cvUploadMethods: ['url', 'file'],
       });
     });
   });
