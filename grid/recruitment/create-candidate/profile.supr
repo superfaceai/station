@@ -62,7 +62,7 @@ usecase CreateCandidate {
 
     """
     CV (Resume)
-    Object containing either URL to a CV or data with CV document and fileName with the file name.
+    Object containing either URL to a CV or data with CV document (BinaryData type) and fileName with the file name.
     """
     cv { url string } | { fileName string, data }
 
@@ -139,6 +139,10 @@ usecase CreateCandidate {
   }
 }
 
+"""
+Get Create Candidate Fatures
+Get features of CreateCandidate use case supported by the provider.
+"""
 usecase CreateCandidateFeatures {
   result {
   """
@@ -532,7 +536,7 @@ model ErrorCode enum {
   CVFileNameRequired
   """
   CV MIME type not supported
-  CV MIME type is not supported by the provider. To check supported MIME types run GetSupportedFeatures use case.
+  CV MIME type is not supported by the provider. To get supported MIME types run CreateCandidateFeatures use case.
   """
   CVMIMETypeNotSupported
 }
