@@ -2,6 +2,7 @@ profile = "recruitment/create-candidate@2.0"
 provider = "workable"
 
 map CreateCandidate {
+  cv = input.cv
   resume = undefined
   resumeDataBuffer = undefined
 
@@ -19,17 +20,17 @@ map CreateCandidate {
     return map error if (outcome.error) outcome.error
   }
 
-  call CheckSupportedFileTypes(cv = input.cv) {
+  call CheckSupportedFileTypes(cv = cv) {
     return map error if (outcome.error) outcome.error
   }
 
-  set if(input.cv && input.cv.data) {
-    resumeDataBuffer = input.cv.data.getAllData()
+  set if(cv && cv.data) {
+    resumeDataBuffer = cv.data.getAllData()
   }
 
   set if(resumeDataBuffer) {
     resume = {
-      name: input.cv.fileName,
+      name: cv.fileName,
       data: resumeDataBuffer.toString('base64')
     }
   }
