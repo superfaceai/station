@@ -1,12 +1,16 @@
-profile = "recruitment/create-candidate@1.0"
+profile = "recruitment/create-candidate@2.0"
 provider = "mock"
 
-"""
-CreateCandidate map
-"""
 map CreateCandidate {
   return map result {
     id = 'CANDIDATE_ID'
     jobId = 'JOB_ID'
+  }
+}
+
+map CreateCandidateFeatures {
+  map result {
+    cvMIMETypes = ['application/pdf', 'text/rtf', 'application/msword', 'application/vnd.openxmlformats-officedocument.custom-properties+xml']
+    cvUploadMethods = ['url', 'file']
   }
 }
