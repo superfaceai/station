@@ -4,17 +4,17 @@ import { RecordingProcessOptions, SuperfaceTest } from '@superfaceai/testing';
 
 import { buildSuperfaceTest } from '../../../test-config';
 
-export const jobsTest = (
+export const listJobsTest = (
   provider: string,
   options?: RecordingProcessOptions
 ): void => {
-  describe(`recruitment/jobs/${provider}`, () => {
+  describe(`recruitment/list-jobs/${provider}`, () => {
     let superface: SuperfaceTest;
 
     describe('ListJobs', () => {
       beforeAll(() => {
         superface = buildSuperfaceTest({
-          profile: 'recruitment/jobs',
+          profile: 'recruitment/list-jobs',
           provider,
           useCase: 'ListJobs',
         });
