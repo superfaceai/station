@@ -145,29 +145,29 @@ Get features of CreateCandidate use case supported by the provider.
 """
 usecase CreateCandidateFeatures {
   result {
-  """
-  CV MIME Types
-  List of CV MIME types accepted by the provider. MIME types are defined in RFC2045 and registered by https://www.iana.org/.
-  """
-  cvMIMETypes! [string!]!
-  """
-  CV Upload Methods
-  List of supported CV upload methods.
-  """
-  cvUploadMethods! [
-    enum {
-      """
-      URL
-      The cv input contains url field with publicly accessible URL of a CV file.
-      """
-      url = 'url'
-      """
-      File
-      The cv input contains data field with CV file and fileName field with the file name.
-      """
-      file = 'file'
-    }!
-  ]!
+    """
+    CV MIME Types
+    List of CV MIME types accepted by the provider. MIME types are defined in RFC2045 and registered by https://www.iana.org/.
+    """
+    cvMIMETypes! [string!]!
+    """
+    CV Upload Methods
+    List of supported CV upload methods.
+    """
+    cvUploadMethods! [
+      enum {
+        """
+        URL
+        The cv input contains url field with publicly accessible URL of a CV file.
+        """
+        url = 'url'
+        """
+        File
+        The cv input contains data field with CV file and fileName field with the file name.
+        """
+        file = 'file'
+      }!
+    ]!
  }
 
   example Successful {

@@ -376,7 +376,7 @@ operation UploadCV {
 
   http POST "/v3/company/{ args.companyId }/position/{ args.candidate.jobId }/candidate/{ args.candidateId }/resume" {
 
-  request "multipart/form-data" {
+    request "multipart/form-data" {
       headers {
         Authorization = args.accessToken
       }
