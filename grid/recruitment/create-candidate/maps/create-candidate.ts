@@ -62,6 +62,9 @@ const sampleCandidate = {
   ],
 };
 
+const describeIf = (condition: boolean): jest.Describe =>
+  condition ? describe : describe.skip;
+
 export const createCandidateTest = (
   provider: string,
   jobIds: { valid: string; invalid: string },
@@ -99,21 +102,56 @@ export const createCandidateTest = (
 
       describe('when specified job does not exist', () => {
         it('returns error', async () => {
-          await expect(
-            superface.run(
+          const result = await superface.run(
+            {
+              input: {
+                jobId: jobIds.invalid,
+                firstName: 'Demo',
+                lastName: 'Testing',
+                email: 'demo_testing@fakemail.com',
+              },
+            },
+            options
+          );
+
+          expect(() => result.unwrap()).toThrow();
+          expect(result).toMatchSnapshot();
+        });
+      });
+
+      describeIf(provider === 'breezy-hr')(
+        'when specified company does not exist',
+        () => {
+          let companyId: string;
+
+          beforeAll(() => {
+            companyId = process.env.BREEZY_HR_COMPANY_ID!;
+
+            process.env.BREEZY_HR_COMPANY_ID = '1b111c1111ef11';
+          });
+
+          afterAll(() => {
+            process.env.BREEZY_HR_COMPANY_ID = companyId;
+          });
+
+          it('returns error', async () => {
+            const result = await superface.run(
               {
                 input: {
-                  jobId: jobIds.invalid,
+                  jobId: jobIds.valid,
                   firstName: 'Demo',
                   lastName: 'Testing',
                   email: 'demo_testing@fakemail.com',
                 },
               },
               options
-            )
-          ).resolves.toMatchSnapshot();
-        });
-      });
+            );
+
+            expect(() => result.unwrap()).toThrow();
+            expect(result).toMatchSnapshot();
+          });
+        }
+      );
     });
   });
 };

@@ -2,48 +2,26 @@ profile = "recruitment/list-jobs@1.0"
 provider = "breezy-hr"
 
 map ListJobs {
-  http GET "/v3/company/{ parameters.COMPANY_ID }/positions" {
-    request {
-      query {
-        state = input.state
-      }
-      headers {
-        Authorization = parameters.ACCESS_TOKEN
-      }
-    }
+  call CheckCompanyExists (
+    accessToken = parameters.ACCESS_TOKEN,
+    companyId = parameters.COMPANY_ID,
+  ) { 
+    return map error if (outcome.error) outcome.error
+  }
 
-    response 200 "application/json" {
-      jobs = body.map(job => {
-        return {
-          id: job._id,
-          name: job.name,
-          description: job.description,
-          departmentName: job.department,
-        }
-      })
+  call ListJobs (
+    accessToken = parameters.ACCESS_TOKEN,
+    companyId = parameters.COMPANY_ID,
+    state = input.state,
+  ) {
+    return map error if (outcome.error) outcome.error
 
-      map result {
-        jobs = jobs
-        rateLimit = call MapRateLimit(headers = headers)
-      }
-    }
+    jobsList = outcome.data
+  }
 
-    response "application/json" {
-      error = call MapBreezyHRError(
-        statusCode = statusCode,
-        error = body.error,
-        headers = headers
-      )
-      map error error
-    }
-
-    response {
-      map error {
-        title = "Unknown error"
-        detail = JSON.stringify(body, null, 2)
-        code = 'UnknownError'
-      }
-    }
+  return map result {
+    jobs = jobsList.jobs,
+    rateLimit = jobsList.rateLimit
   }
 }
 
@@ -125,5 +103,94 @@ operation MapBreezyHRError {
     detail = breezyHrError
     code = 'UnknownError'
     rateLimit = rateLimit
+  }
+}
+
+operation ListJobs {
+  http GET "/v3/company/{ args.companyId }/positions" {
+    request {
+      query {
+        state = args.state
+      }
+      headers {
+        Authorization = args.accessToken
+      }
+    }
+
+    response 200 "application/json" {
+      jobs = body.map(job => {
+        return {
+          id: job._id,
+          name: job.name,
+          description: job.description,
+          departmentName: job.department,
+        }
+      })
+
+      return {
+        jobs = jobs
+        rateLimit = call MapRateLimit(headers = headers)
+      }
+    }
+
+    response "application/json" {
+      error = call MapBreezyHRError(
+        statusCode = statusCode,
+        error = body.error,
+        headers = headers
+      )
+      
+      fail error
+    }
+
+    response {
+      fail {
+        title = "Unknown error"
+        detail = JSON.stringify(body, null, 2)
+        code = 'UnknownError'
+      }
+    }
+  }
+}
+
+operation CheckCompanyExists {
+  http GET "/v3/company/{ args.companyId }" {
+
+    request {
+      headers {
+        Authorization = args.accessToken
+      }
+    }
+
+    response 200 {       
+      return {}
+    }
+
+    response 500 "application/json" {
+      fail {
+        title = 'Not Found'
+        detail = 'Unable to get company by ID ' + args.companyId + '. Check that the company with that ID exists.'
+        code = 'NotFound'
+        rateLimit = call MapRateLimit(headers = headers)
+      }
+    }
+
+    response "application/json" {
+      error = call MapBreezyHRError(
+        statusCode = statusCode,
+        error = body.error,
+        headers = headers
+      )
+
+      fail error
+    }
+
+    response {
+      fail {
+        title = "Unknown error"
+        detail = JSON.stringify(body, null, 2)
+        code = 'UnknownError'
+      }
+    }
   }
 }

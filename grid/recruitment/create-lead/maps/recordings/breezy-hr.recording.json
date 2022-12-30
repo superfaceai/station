@@ -1,6 +1,47 @@
 {
   "recruitment/create-lead/breezy-hr/CreateLead": {
-    "70ad4a85e21aa086bf76a82a46aa12c3": [
+    "e841a0307afe8e1e8aad08686d2e7ef5": [
+      {
+        "scope": "https://api.breezy.hr:443",
+        "method": "GET",
+        "path": "/v3/company/PARAMS_COMPANY_ID",
+        "body": "",
+        "status": 200,
+        "response": {
+          "_id": "PARAMS_COMPANY_ID",
+          "name": "Superface demo",
+          "friendly_id": "superface2",
+          "creation_date": "2022-12-07T13:43:08.399Z",
+          "updated_date": "2022-12-08T09:41:48.076Z",
+          "member_count": 0,
+          "initial": "SD"
+        },
+        "rawHeaders": [
+          "Date",
+          "Wed, 21 Dec 2022 08:19:26 GMT",
+          "Content-Type",
+          "application/json; charset=utf-8",
+          "Content-Length",
+          "192",
+          "Connection",
+          "close",
+          "Server",
+          "nginx/1.22.0",
+          "X-Powered-By",
+          "Redstone",
+          "X-RateLimit-Limit",
+          "100",
+          "X-RateLimit-Remaining",
+          "93",
+          "X-RateLimit-Reset",
+          "1671610826",
+          "ETag",
+          "W/\"c0-DjNzuI2opLAZ6wp8Dlz5dqGfi18\"",
+          "Vary",
+          "Accept-Encoding"
+        ],
+        "responseIsBinary": false
+      },
       {
         "scope": "https://api.breezy.hr:443",
         "method": "GET",
@@ -13,7 +54,7 @@
         ],
         "rawHeaders": [
           "Date",
-          "Mon, 19 Dec 2022 09:34:54 GMT",
+          "Wed, 21 Dec 2022 08:19:27 GMT",
           "Content-Type",
           "application/json; charset=utf-8",
           "Transfer-Encoding",
@@ -27,9 +68,9 @@
           "X-RateLimit-Limit",
           "100",
           "X-RateLimit-Remaining",
-          "96",
+          "90",
           "X-RateLimit-Reset",
-          "1671442498",
+          "1671610826",
           "ETag",
           "W/\"c5e-84aUzSrIEmkxlSHJKw554piyIuc\"",
           "Vary",
@@ -92,13 +133,13 @@
       {
         "scope": "https://api.breezy.hr:443",
         "method": "GET",
-        "path": "/v3/company/PARAMS_COMPANY_ID/candidates/search?email_address=john.doe%40fakemail.com",
+        "path": "/v3/company/PARAMS_COMPANY_ID/candidates/search?email_address=john.lead%40fakemail.com",
         "body": "",
         "status": 200,
         "response": [],
         "rawHeaders": [
           "Date",
-          "Thu, 15 Dec 2022 13:31:48 GMT",
+          "Wed, 21 Dec 2022 08:19:27 GMT",
           "Content-Type",
           "application/json; charset=utf-8",
           "Content-Length",
@@ -112,9 +153,9 @@
           "X-RateLimit-Limit",
           "100",
           "X-RateLimit-Remaining",
-          "99",
+          "86",
           "X-RateLimit-Reset",
-          "1671111168",
+          "1671610826",
           "ETag",
           "W/\"2-l9Fw4VUO7kr8CvBlt4zaMCqXZ0w\"",
           "Vary",
@@ -127,8 +168,8 @@
         "method": "POST",
         "path": "/v3/company/PARAMS_COMPANY_ID/position/f1cfc5572a5701/candidates",
         "body": {
-          "name": "John Doe",
-          "email_address": "john.doe@fakemail.com",
+          "name": "John Lead",
+          "email_address": "john.lead@fakemail.com",
           "address": "25772 Gustave Shore, Iowa, USA",
           "phone_number": "1-859-557-6573",
           "education": [
@@ -171,11 +212,11 @@
         "status": 200,
         "response": [
           "1f8b0800000000000003",
-          "8d54db4e1b3110fd15cb0f7d69127265439e405021505b21055e8ad06a62cf66dd78ed95ed4d48a3fc7bc7bb4bc2a56a2b21b19e39733b73263b9e2ac9675c4c87e274314d468b49d21ff00e2f3040e31a4b4c1649928944f66b1748e9d07b720d27493264d7950fb04636cfadc30ebbb11be8b087f90541854308ca9a5442c018d01f0ebb03fa9bdc0f46b3d160363eeb8da7a31f044559891acb678f3bee456ead4e0d1431ecc1a8353aafc296d98cdda1317eabd760145060a650cbd466a90f95dcf299a9b4de77fe9ee232570296f60fd1fc1bb815066596ecd216456554d315fbc4be086b6ca184e7fb27eab700a5d323173f6d6e7ad2e27906abdad713b68805acd67683325d50f6470acc11a456263635078d9e5d29872258c7ced93dfa10eb9660b614ab8c0a0a34216fe9d54e724b85d89545b258a7968a08e3de564ea08c269a12b44ebda065f0d98ed37b9b2ead954df5e397c12ab8983c3e4a6b5df355e35f9e7bf2e4d6606aaa628164e283ee7472d69d4c92eee9241951c1b6743ddeae5593cc044c0680fdd1a938363eaf4a74190864575844ee2b8faef5f9179f6c5cefd98de6cf10fcf901d803f586a1398fd43ea7c2ead83bafff8fc9187ed17a338f818cddd33edfc79e0505a5a5b399a20dd48a0bdb323612362a049ab4531b6ee407d3f7a6e1fb83b172b17c1e42e96727272d382eff4480912a2abf7798342aa7612cb25593455a58a154a6ab8c4494dda506ef655cc081b9af35e4c6d071d5980ebb3e80e2380196c77c50965ad55a6846fa606e935e1c0c4ac4ababd711d3fdcb4fd57ca395aa8cd3c9ffb8ee8d75ab34579e64beade9168dc85fcef39df0830afae38144b55545013105a9a9fe8ad70c2ca667f84cd25068486010de9e52a45dd0cf942d5208c1a94515dab5b7f5efac0b74a92a6a6f0dbac2572ba505f782ed95af201e4515cf2b03edb1d3107cf4ef9ff6bf0187c3e56c58050000"
+          "8d54db6e1a3110fd15cb0f7d294b6093e5f69428a9a244695589e4a551b41aec5970f1da2bdb0ba1887fef7897402e55db27d633676e67ceb0e5b9927cc2c7623613e32c1d0bd9ebf579879718a0759da58331f48bde309b8d1b1748e9d07b72a5d97098b2ebda0758219b2eacc30ebbb16be8b087e90541854308ca9a5c42c018d04bd3a49f2669ffbe379af4c79374d41d8c863f088ab2160d964f1eb7dc8b85b53a3750c6b007a356e8bc0a1b660bf61d8df11bbd02a380020b855ae6b6c87da8e5864f4cadf5aef3f714970b25606eff10cdbf825b625066ce2e6d59d646b55db14fec8bb0c6964a78be7ba27e4b503a3f72f1d32e4c5723c8f302968db32b6c192b58aded1a653ea3f48f14b9209056267635058d9e5d29872258c7ced93dfa100b57603614ab8c0a0a34216fe9b51fe5962ab13b4a4226ebd45c1165dcdbda096c4c3427689d7b41ebe0932da7f7269f5b2bdbf2c72f837570317b7c54d6baf6abc1bf3c77e4595883b9a9cb199289f79351364eb26c980cb2e12915dc976ee6dbeef5240b01591fb0773a10c7cea77585ae0081ec0acbc87eedd1ed7dfec5275bd77b7ea3f933047f7e007641bda168ca23b7cfb9b03af6ce9bdf3332865fb4e0c263206332e8f15dec5950505e395b285a41a3b9b0a9622361ad42a0493b8de1467e307d6b1bbe3f186b17cb2f42a8fce4e4640f8edb3f1160a48adaef1e268dda69198b6c356491189628954994918832996bf05ec6051c98bb6b203786ceabc174d8f50114c709303fe683aad2aad1423bd207f33ee9c5c1a044bcbb661d31ddbffc54cdb75aa9ab389dfc8ffb5e5bb7cc17ca93ce370ddda255f9cb81be537e50417fbc90a8b6ba2c21a62035355ff19e81c5f40c9f491a0a0d090cc2db5b8ab40bfaa3b2650e213835abc37eedfbfadfad0b74aa2a6a6f05bac6572ba5057783ed56af201e451dcfab00edb1d3127cf4ef9e76bf017798f2c65a050000"
         ],
         "rawHeaders": [
           "Date",
-          "Thu, 15 Dec 2022 13:31:51 GMT",
+          "Wed, 21 Dec 2022 08:19:29 GMT",
           "Content-Type",
           "application/json; charset=utf-8",
           "Transfer-Encoding",
@@ -189,11 +230,11 @@
           "X-RateLimit-Limit",
           "100",
           "X-RateLimit-Remaining",
-          "98",
+          "83",
           "X-RateLimit-Reset",
-          "1671111168",
+          "1671610826",
           "ETag",
-          "W/\"558-XMrn6E9k2ovC1GNcPQ8kUI5RZnY\"",
+          "W/\"55a-hEvSyrz7aJ9DXAL96kVQ0WCYjGM\"",
           "Vary",
           "Accept-Encoding",
           "Content-Encoding",
@@ -201,10 +242,10 @@
         ],
         "responseIsBinary": false,
         "decodedResponse": {
-          "_id": "c82c6b873b5701",
-          "meta_id": "4de7b77fc7d001",
+          "_id": "9cbbc9529cd001",
+          "meta_id": "4269a1f075b901",
           "address": "25772 Gustave Shore, Iowa, USA",
-          "creation_date": "2022-12-15T13:31:49.483Z",
+          "creation_date": "2022-12-21T08:19:28.687Z",
           "education": [
             {
               "school_name": "University of Pennsylvania",
@@ -215,11 +256,11 @@
               "field_of_study": "Marketing Communication & Economics"
             }
           ],
-          "email_address": "john.doe@fakemail.com",
+          "email_address": "john.lead@fakemail.com",
           "followed_by": [],
           "headline": "Sales Director @ Test Company",
           "initial": "J",
-          "name": "John Doe",
+          "name": "John Lead",
           "origin": "sourced",
           "overall_score": {
             "very_good": [],
@@ -261,7 +302,7 @@
             "icon": "user"
           },
           "tags": [],
-          "updated_date": "2022-12-15T13:31:49.483Z",
+          "updated_date": "2022-12-21T08:19:28.687Z",
           "work_history": [
             {
               "company_name": "Test Company",
@@ -280,7 +321,48 @@
         }
       }
     ],
-    "52c7d4a34ed126d5cdb4370ff90b2ae9": [
+    "2aae3fda617f152cc1ac5392f746d000": [
+      {
+        "scope": "https://api.breezy.hr:443",
+        "method": "GET",
+        "path": "/v3/company/PARAMS_COMPANY_ID",
+        "body": "",
+        "status": 200,
+        "response": {
+          "_id": "PARAMS_COMPANY_ID",
+          "name": "Superface demo",
+          "friendly_id": "superface2",
+          "creation_date": "2022-12-07T13:43:08.399Z",
+          "updated_date": "2022-12-08T09:41:48.076Z",
+          "member_count": 0,
+          "initial": "SD"
+        },
+        "rawHeaders": [
+          "Date",
+          "Wed, 21 Dec 2022 08:19:30 GMT",
+          "Content-Type",
+          "application/json; charset=utf-8",
+          "Content-Length",
+          "192",
+          "Connection",
+          "close",
+          "Server",
+          "nginx/1.22.0",
+          "X-Powered-By",
+          "Redstone",
+          "X-RateLimit-Limit",
+          "100",
+          "X-RateLimit-Remaining",
+          "81",
+          "X-RateLimit-Reset",
+          "1671610826",
+          "ETag",
+          "W/\"c0-DjNzuI2opLAZ6wp8Dlz5dqGfi18\"",
+          "Vary",
+          "Accept-Encoding"
+        ],
+        "responseIsBinary": false
+      },
       {
         "scope": "https://api.breezy.hr:443",
         "method": "GET",
@@ -295,7 +377,7 @@
         },
         "rawHeaders": [
           "Date",
-          "Mon, 19 Dec 2022 09:34:56 GMT",
+          "Wed, 21 Dec 2022 08:19:31 GMT",
           "Content-Type",
           "application/json; charset=utf-8",
           "Content-Length",
@@ -309,11 +391,51 @@
           "X-RateLimit-Limit",
           "100",
           "X-RateLimit-Remaining",
-          "94",
+          "80",
           "X-RateLimit-Reset",
-          "1671442498",
+          "1671610826",
           "ETag",
           "W/\"5e-3ik2KTQWrGkPvEysMKXxAO0v33o\"",
+          "Vary",
+          "Accept-Encoding"
+        ],
+        "responseIsBinary": false
+      }
+    ],
+    "cc04d9c36758af7996111bbb3bc304bc": [
+      {
+        "scope": "https://api.breezy.hr:443",
+        "method": "GET",
+        "path": "/v3/company/PARAMS_COMPANY_ID",
+        "body": "",
+        "status": 500,
+        "response": {
+          "error": {
+            "type": "companyAuthError",
+            "message": "error retrieving company."
+          }
+        },
+        "rawHeaders": [
+          "Date",
+          "Wed, 21 Dec 2022 10:32:46 GMT",
+          "Content-Type",
+          "application/json; charset=utf-8",
+          "Content-Length",
+          "75",
+          "Connection",
+          "close",
+          "Server",
+          "nginx/1.22.0",
+          "X-Powered-By",
+          "Redstone",
+          "X-RateLimit-Limit",
+          "100",
+          "X-RateLimit-Remaining",
+          "99",
+          "X-RateLimit-Reset",
+          "1671618827",
+          "ETag",
+          "W/\"4b-3YBZZPofeYv8BopmHYzOtyeD6PM\"",
           "Vary",
           "Accept-Encoding"
         ],

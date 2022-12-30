@@ -2,61 +2,50 @@ profile = "recruitment/list-stage-changes@1.0"
 provider = "breezy-hr"
 
 map ListStageChanges {
-  return map error if(!input.jobId) {
+  return map error if (!input.jobId) {
     title = "Missing required field `jobId`"
     detail = "Job ID is required for provider Breezy HR. Please provide it in the input."
     code = "BadRequest"
   }
 
-  http GET "/v3/company/{ parameters.COMPANY_ID }/position/{ input.jobId }/candidate/{ input.candidateId }/stream" {
-    request "application/json" {
-      headers {
-        Authorization = parameters.ACCESS_TOKEN
-      }
-    }
+  call CheckCompanyExists (
+    accessToken = parameters.ACCESS_TOKEN,
+    companyId = parameters.COMPANY_ID,
+  ) { 
+    return map error if (outcome.error) outcome.error
+  }
 
-    response 200 "application/json" {
-      changes = body.filter(event => event.type === 'candidateStatusUpdated').map(stageChange => {
-        const result = {
-          id: stageChange._id,
-          stageId: stageChange.object.status,
-          name: stageChange.object.stage.name,
-          current: false,
-          createdAt: stageChange.object.entered_stage
-        }
+  call CheckJobExists (
+    accessToken = parameters.ACCESS_TOKEN,
+    companyId = parameters.COMPANY_ID,
+    jobId = input.jobId,
+  ) { 
+    return map error if (outcome.error) outcome.error
+  }
 
-        if (stageChange.object.reason) {
-          result.description = stageChange.object.reason;
-        }
+  call CheckCandidateExists (
+    accessToken = parameters.ACCESS_TOKEN,
+    companyId = parameters.COMPANY_ID,
+    jobId = input.jobId,
+    candidateId = input.candidateId,
+  ) {
+    return map error if (outcome.error) outcome.error
+  }
 
-        return result;
-      })
+  call ListStageChanges (
+    accessToken = parameters.ACCESS_TOKEN,
+    companyId = parameters.COMPANY_ID,
+    jobId = input.jobId,
+    candidateId = input.candidateId,
+  ) {
+    return map error if (outcome.error) outcome.error
 
-      tmp = changes[0].current = true
+    stageChangesList = outcome.data
+  }
 
-      map result {
-        changes = changes
-        rateLimit = call MapRateLimit(headers = headers)
-      }
-    }
-
-    response "application/json" {
-      error = call MapBreezyHRError(
-        statusCode = statusCode,
-        error = body.error,
-        headers = headers
-      )
-
-      map error error
-    }
-
-    response {
-      map error {
-        title = "Unknown error"
-        detail = JSON.stringify(body, null, 2)
-        code = 'UnknownError'
-      }
-    }
+  return map result {
+    changes = stageChangesList.changes,
+    rateLimit = stageChangesList.rateLimit
   }
 }
 
@@ -138,5 +127,185 @@ operation MapBreezyHRError {
     detail = workableError
     code = 'UnknownError'
     rateLimit = rateLimit
+  }
+}
+
+operation ListStageChanges {
+  http GET "/v3/company/{ args.companyId }/position/{ args.jobId }/candidate/{ args.candidateId }/stream" {
+    
+    request "application/json" {
+      headers {
+        Authorization = args.accessToken
+      }
+    }
+
+    response 200 "application/json" {
+      changes = body.filter(event => event.type === 'candidateStatusUpdated').map(stageChange => {
+        const result = {
+          id: stageChange._id,
+          stageId: stageChange.object.status,
+          name: stageChange.object.stage.name,
+          current: false,
+          createdAt: stageChange.object.entered_stage
+        }
+
+        if (stageChange.object.reason) {
+          result.description = stageChange.object.reason;
+        }
+
+        return result;
+      })
+
+      tmp = changes[0].current = true
+
+      return {
+        changes = changes
+        rateLimit = call MapRateLimit(headers = headers)
+      }
+    }
+
+    response "application/json" {
+      error = call MapBreezyHRError(
+        statusCode = statusCode,
+        error = body.error,
+        headers = headers
+      )
+
+      fail error
+    }
+
+    response {
+      fail {
+        title = "Unknown error"
+        detail = JSON.stringify(body, null, 2)
+        code = 'UnknownError'
+      }
+    }
+  }
+}
+
+operation CheckCandidateExists {
+  http GET "/v3/company/{ args.companyId }/position/{ args.jobId }/candidate/{ args.candidateId }" {
+
+    request {
+      headers {
+        Authorization = args.accessToken
+      }
+    }
+
+    response 200 {
+      return {}
+    }
+
+    response 500 "application/json" {
+      fail {
+        title = 'Not Found'
+        detail = 'Unable to get candidate by ID ' + args.jobId + '. Check that the candidate with that ID exists.'
+        code = 'NotFound'
+        rateLimit = call MapRateLimit(headers = headers)
+      }
+    }
+
+    response "application/json" {
+      error = call MapBreezyHRError(
+        statusCode = statusCode,
+        error = body.error,
+        headers = headers
+      )
+
+      fail error
+    }
+
+    response {
+      fail {
+        title = "Unknown error"
+        detail = JSON.stringify(body, null, 2)
+        code = 'UnknownError'
+      }
+    }
+  }
+}
+
+operation CheckJobExists {
+  http GET "/v3/company/{ args.companyId }/position/{ args.jobId }" {
+
+    request {
+      headers {
+        Authorization = args.accessToken
+      }
+    }
+
+    response 200 {       
+      return {}
+    }
+
+    response 500 "application/json" {
+      fail {
+        title = 'Not Found'
+        detail = 'Unable to get job by ID ' + args.jobId + '. Check that the job with that ID exists.'
+        code = 'NotFound'
+        rateLimit = call MapRateLimit(headers = headers)
+      }
+    }
+
+    response "application/json" {
+      error = call MapBreezyHRError(
+        statusCode = statusCode,
+        error = body.error,
+        headers = headers
+      )
+
+      fail error
+    }
+
+    response {
+      fail {
+        title = "Unknown error"
+        detail = JSON.stringify(body, null, 2)
+        code = 'UnknownError'
+      }
+    }
+  }
+}
+
+operation CheckCompanyExists {
+  http GET "/v3/company/{ args.companyId }" {
+
+    request {
+      headers {
+        Authorization = args.accessToken
+      }
+    }
+
+    response 200 {       
+      return {}
+    }
+
+    response 500 "application/json" {
+      fail {
+        title = 'Not Found'
+        detail = 'Unable to get company by ID ' + args.companyId + '. Check that the company with that ID exists.'
+        code = 'NotFound'
+        rateLimit = call MapRateLimit(headers = headers)
+      }
+    }
+
+    response "application/json" {
+      error = call MapBreezyHRError(
+        statusCode = statusCode,
+        error = body.error,
+        headers = headers
+      )
+
+      fail error
+    }
+
+    response {
+      fail {
+        title = "Unknown error"
+        detail = JSON.stringify(body, null, 2)
+        code = 'UnknownError'
+      }
+    }
   }
 }

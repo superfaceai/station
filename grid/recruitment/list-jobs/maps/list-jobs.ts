@@ -4,6 +4,9 @@ import { RecordingProcessOptions, SuperfaceTest } from '@superfaceai/testing';
 
 import { buildSuperfaceTest } from '../../../test-config';
 
+const describeIf = (condition: boolean): jest.Describe =>
+  condition ? describe : describe.skip;
+
 export const listJobsTest = (
   provider: string,
   options?: RecordingProcessOptions
@@ -32,7 +35,7 @@ export const listJobsTest = (
             options
           );
 
-          expect(result.isOk).toBeTruthy();
+          expect(() => result.unwrap()).not.toThrow();
           expect(result).toMatchSnapshot();
         });
       });
@@ -49,10 +52,41 @@ export const listJobsTest = (
             options
           );
 
-          expect(result.isOk).toBeTruthy();
+          expect(() => result.unwrap()).not.toThrow();
           expect(result).toMatchSnapshot();
         });
       });
+
+      describeIf(provider === 'breezy-hr')(
+        'when specified company does not exist',
+        () => {
+          let companyId: string;
+
+          beforeAll(() => {
+            companyId = process.env.BREEZY_HR_COMPANY_ID!;
+
+            process.env.BREEZY_HR_COMPANY_ID = '1b111c1111ef11';
+          });
+
+          afterAll(() => {
+            process.env.BREEZY_HR_COMPANY_ID = companyId;
+          });
+
+          it('returns error', async () => {
+            const result = await superface.run(
+              {
+                input: {
+                  state: 'published',
+                },
+              },
+              options
+            );
+
+            expect(() => result.unwrap()).toThrow();
+            expect(result).toMatchSnapshot();
+          });
+        }
+      );
     });
   });
 };

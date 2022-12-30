@@ -2,11 +2,26 @@ profile = "recruitment/create-candidate@1.0"
 provider = "breezy-hr"
 
 map CreateCandidate {
-
-  call CheckCandidateByEmail (
+  call CheckCompanyExists (
     accessToken = parameters.ACCESS_TOKEN,
     companyId = parameters.COMPANY_ID,
-    candidate = input
+  ) { 
+    return map error if (outcome.error) outcome.error
+  }
+
+  call CheckJobExists (
+    accessToken = parameters.ACCESS_TOKEN,
+    companyId = parameters.COMPANY_ID,
+    jobId = input.jobId
+  ) { 
+    return map error if (outcome.error) outcome.error
+  }
+
+  call CheckCandidateExist (
+    accessToken = parameters.ACCESS_TOKEN,
+    companyId = parameters.COMPANY_ID,
+    jobId = input.jobId,
+    email = input.email
   ) {
     return map error if (outcome.error) outcome.error
   }
@@ -198,12 +213,12 @@ operation CreateCandidate {
   }
 }
 
-operation CheckCandidateByEmail {
+operation CheckCandidateExist {
   http GET "/v3/company/{ args.companyId }/candidates/search" {
 
   request {
       query {
-        email_address = args.candidate.email
+        email_address = args.email
       }
       headers {
         Authorization = args.accessToken
@@ -211,16 +226,101 @@ operation CheckCandidateByEmail {
     }
 
     response 200 {
-      appliedCandidates = body.filter(candidate => candidate.position._id === args.candidate.jobId )
+      appliedCandidates = body.filter(candidate => candidate.position._id === args.jobId )
 
       fail if(appliedCandidates.length > 0) {
         title = 'Conflict'
-        detail = 'Candidate with email ' + args.candidate.email + ' already applied for the job.' 
+        detail = 'Candidate with email ' + args.email + ' already applied for the job.' 
         code = 'Conflict'
         rateLimit = call MapRateLimit(headers = headers)
       }
 
       return {}
+    }
+
+    response "application/json" {
+      error = call MapBreezyHRError(
+        statusCode = statusCode,
+        error = body.error,
+        headers = headers
+      )
+
+      fail error
+    }
+
+    response {
+      fail {
+        title = "Unknown error"
+        detail = JSON.stringify(body, null, 2)
+        code = 'UnknownError'
+      }
+    }
+  }
+}
+
+operation CheckJobExists {
+  http GET "/v3/company/{ args.companyId }/position/{ args.jobId }" {
+
+    request {
+      headers {
+        Authorization = args.accessToken
+      }
+    }
+
+    response 200 {       
+      return {}
+    }
+
+    response 500 "application/json" {
+      // Breezy HR returns http status code 500 in case that the job ID doesn't exist. It could be caused by other reasons as well, but at least the error helps the client understand the error better.
+      fail {
+        title = 'Not Found'
+        detail = 'Unable to get job by ID ' + args.jobId + '. Check that the job with that ID exists.'
+        code = 'NotFound'
+        rateLimit = call MapRateLimit(headers = headers)
+      }
+    }
+
+    response "application/json" {
+      error = call MapBreezyHRError(
+        statusCode = statusCode,
+        error = body.error,
+        headers = headers
+      )
+
+      fail error
+    }
+
+    response {
+      fail {
+        title = "Unknown error"
+        detail = JSON.stringify(body, null, 2)
+        code = 'UnknownError'
+      }
+    }
+  }
+}
+
+operation CheckCompanyExists {
+  http GET "/v3/company/{ args.companyId }" {
+
+    request {
+      headers {
+        Authorization = args.accessToken
+      }
+    }
+
+    response 200 {       
+      return {}
+    }
+
+    response 500 "application/json" {
+      fail {
+        title = 'Not Found'
+        detail = 'Unable to get company by ID ' + args.companyId + '. Check that the company with that ID exists.'
+        code = 'NotFound'
+        rateLimit = call MapRateLimit(headers = headers)
+      }
     }
 
     response "application/json" {
