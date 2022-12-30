@@ -125,7 +125,7 @@ export const createCandidateTest = (
         provider === 'breezy-hr',
         'when specified company does not exist',
         () => {
-          let companyId: string;
+          let companyId: string | undefined;
 
           beforeAll(() => {
             companyId = process.env.BREEZY_HR_COMPANY_ID!;
@@ -160,7 +160,7 @@ export const createCandidateTest = (
         provider === 'workable',
         'when specified subdomain does not exist',
         () => {
-          let subdomain: string;
+          let subdomain: string | undefined;
 
           beforeAll(() => {
             subdomain = process.env.WORKABLE_SUBDOMAIN!;
