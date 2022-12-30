@@ -7,17 +7,17 @@ import { buildSuperfaceTest } from '../../../test-config';
 const describeIf = (condition: boolean): jest.Describe =>
   condition ? describe : describe.skip;
 
-export const jobsTest = (
+export const listJobsTest = (
   provider: string,
   options?: RecordingProcessOptions
 ): void => {
-  describe(`recruitment/jobs/${provider}`, () => {
+  describe(`recruitment/list-jobs/${provider}`, () => {
     let superface: SuperfaceTest;
 
     describe('ListJobs', () => {
       beforeAll(() => {
         superface = buildSuperfaceTest({
-          profile: 'recruitment/jobs',
+          profile: 'recruitment/list-jobs',
           provider,
           useCase: 'ListJobs',
         });
