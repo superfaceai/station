@@ -1,53 +1,36 @@
-profile = "recruitment/jobs@1.0"
-provider = "workable"
+profile = "recruitment/list-jobs@1.0"
+provider = "breezy-hr"
 
 map ListJobs {
-  call CheckSubdomainExists(
-    clientId = parameters.CLIENT_ID,
-    subdomain = parameters.SUBDOMAIN
-  ) {
+  call CheckCompanyExists (
+    accessToken = parameters.ACCESS_TOKEN,
+    companyId = parameters.COMPANY_ID,
+  ) { 
     return map error if (outcome.error) outcome.error
   }
 
   call ListJobs (
-    clientId = parameters.CLIENT_ID,
-    job = input
-  ) { 
+    accessToken = parameters.ACCESS_TOKEN,
+    companyId = parameters.COMPANY_ID,
+    state = input.state,
+  ) {
     return map error if (outcome.error) outcome.error
 
-    listJobsOutcome = outcome.data
+    jobsList = outcome.data
   }
 
   return map result {
-    jobs = listJobsOutcome.jobs
-    pagination = listJobsOutcome.pagination
-    rateLimit = listJobsOutcome.rateLimit
+    jobs = jobsList.jobs,
+    rateLimit = jobsList.rateLimit
   }
 }
 
-// Workable supports just forward pagination
-operation MapPagination {
-  sinceIdToken = 'since_id='
-  nextPageCursor = undefined
-
-  nextUrl = args.workablePagination.next || ''
-  sinceIdIndex = nextUrl.indexOf(sinceIdToken)
-
-  set if(sinceIdIndex !== -1) {
-    nextPageCursor = nextUrl.substring(sinceIdIndex + sinceIdToken.length, nextUrl.length).split('&')[0]
-  }
-
-  return {
-    nextPage =  nextPageCursor
-  }
-}
-
-// Workable rate limits docs: https://workable.readme.io/reference/rate-limits
+//Breezy HR rate limits docs: https://developer.breezy.hr/reference/rate-limiting
 operation MapRateLimit {
-  totalRequests = parseInt(args.headers['x-rate-limit-limit'], 10)
-  remainingRequests = parseInt(args.headers['x-rate-limit-remaining'], 10)
+  totalRequests = parseInt(args.headers['x-ratelimit-limit'], 10)
+  remainingRequests = parseInt(args.headers['x-ratelimit-remaining'], 10)
   remainingRequestsPercentage = undefined
-  resetTimestamp = parseInt(args.headers['x-rate-limit-reset'], 10)
+  resetTimestamp = parseInt(args.headers['x-ratelimit-reset'], 10)
 
   set if(isNaN(totalRequests)) {
     totalRequests = undefined
@@ -66,7 +49,7 @@ operation MapRateLimit {
   }
 
   return {
-    bucket = 'workable'
+    bucket = 'breezy-hr'
     totalRequests = totalRequests
     remainingRequests = remainingRequests
     remainingRequestsPercentage = remainingRequestsPercentage
@@ -74,44 +57,37 @@ operation MapRateLimit {
   }
 }
 
-operation MapWorkableError {
+operation MapBreezyHRError {
   statusCode = args.statusCode
-  workableError = args.error
+  breezyHrError = args.error
 
   rateLimit = call MapRateLimit(headers = args.headers)
 
   return if (statusCode === 400) {
     title = 'Bad request'
-    detail = workableError
+    detail = breezyHrError
     code = 'BadRequest'
     rateLimit = rateLimit
   }
 
   return if (statusCode === 401) {
     title = 'Unauthenticated'
-    detail = workableError
+    detail = breezyHrError
     code = 'Unauthenticated'
     rateLimit = rateLimit
   }
 
   return if (statusCode === 403) {
     title = 'Unauthorized'
-    detail = workableError
+    detail = breezyHrError
     code = 'Unauthorized'
     rateLimit = rateLimit
   }
 
   return if (statusCode === 404) {
     title = 'Not found'
-    detail = workableError
+    detail = breezyHrError
     code = 'NotFound'
-    rateLimit = rateLimit
-  }
-
-  return if (statusCode === 422) {
-    title = 'Conflict'
-    detail = workableError 
-    code = 'Conflict'
     rateLimit = rateLimit
   }
 
@@ -124,55 +100,46 @@ operation MapWorkableError {
 
   return {
     title = "Unknown error"
-    detail = workableError
+    detail = breezyHrError
     code = 'UnknownError'
     rateLimit = rateLimit
   }
 }
 
 operation ListJobs {
-  http GET "/spi/v3/jobs" {
-    security "bearer_token"
-
+  http GET "/v3/company/{ args.companyId }/positions" {
     request {
       query {
-        state = args.job.state
-        limit = args.job.limit
-        since_id = args.job.page
-        include_fields = 'requirements,description,benefits'
+        state = args.state
       }
-
       headers {
-        'X-WORKABLE-CLIENT-ID' = args.clientId
+        Authorization = args.accessToken
       }
     }
 
     response 200 "application/json" {
-      jobs = body.jobs.map(job => {
+      jobs = body.map(job => {
         return {
-          id: job.shortcode,
-          name: job.title,
+          id: job._id,
+          name: job.name,
           description: job.description,
-          requirements: job.requirements,
-          benefits: job.benefits,
-          departmentName: job.department
+          departmentName: job.department,
         }
       })
 
       return {
         jobs = jobs
-        pagination = call MapPagination(workablePagination = body.paging || {})
         rateLimit = call MapRateLimit(headers = headers)
       }
     }
 
     response "application/json" {
-      error = call MapWorkableError(
+      error = call MapBreezyHRError(
         statusCode = statusCode,
         error = body.error,
         headers = headers
       )
-
+      
       fail error
     }
 
@@ -186,13 +153,12 @@ operation ListJobs {
   }
 }
 
-operation CheckSubdomainExists {
-  http GET "/spi/v3/accounts/{ args.subdomain }" {
-    security "bearer_token"
+operation CheckCompanyExists {
+  http GET "/v3/company/{ args.companyId }" {
 
     request {
       headers {
-        'X-WORKABLE-CLIENT-ID' = args.clientId
+        Authorization = args.accessToken
       }
     }
 
@@ -200,17 +166,17 @@ operation CheckSubdomainExists {
       return {}
     }
 
-    response 422 "application/json" {
+    response 500 "application/json" {
       fail {
         title = 'Not Found'
-        detail = 'Unable to get subdomain by name ' + args.subdomain + '. Check that the subdomain with that name exists.'
+        detail = 'Unable to get company by ID ' + args.companyId + '. Check that the company with that ID exists.'
         code = 'NotFound'
         rateLimit = call MapRateLimit(headers = headers)
       }
     }
 
     response "application/json" {
-      error = call MapWorkableError(
+      error = call MapBreezyHRError(
         statusCode = statusCode,
         error = body.error,
         headers = headers
