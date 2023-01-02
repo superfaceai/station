@@ -130,7 +130,7 @@ export const createLeadTest = (
           let companyId: string | undefined;
 
           beforeAll(() => {
-            companyId = process.env.BREEZY_HR_COMPANY_ID!;
+            companyId = process.env.BREEZY_HR_COMPANY_ID;
 
             process.env.BREEZY_HR_COMPANY_ID = '1b111c1111ef11';
           });
@@ -166,7 +166,7 @@ export const createLeadTest = (
           let subdomain: string | undefined;
 
           beforeAll(() => {
-            subdomain = process.env.WORKABLE_SUBDOMAIN!;
+            subdomain = process.env.WORKABLE_SUBDOMAIN;
 
             process.env.WORKABLE_SUBDOMAIN = 'invalid-superface';
           });
