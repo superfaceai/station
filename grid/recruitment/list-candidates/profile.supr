@@ -1,0 +1,210 @@
+"""
+List candidates
+List candidates that applied to job positions of your company.
+"""
+name = "recruitment/list-candidates"
+version = "1.0.0"
+
+"""
+List candidates
+Returns paginated list of candidates.
+"""
+usecase ListCandidates safe {
+ input {
+    """
+    Job ID
+    Uniquie identifier of the job the candidate is applying for.
+    """
+    jobId! string!
+    """
+    Page
+    Pagination cursor (obtained from `previousPage` or `nextPage`).
+    """
+    page string
+    """
+    Page limit
+    Maximum number of candidates returned in single page.
+    """
+    limit number
+  }
+
+  result {
+    candidates [{
+        """
+        Candidate ID
+        ID of the candidate.
+        """
+        id! string!
+
+        """
+        Job ID
+        ID of a job the candidate is applying for.
+        """
+        jobId! string!
+
+        """
+        Name
+        The name of the candidate.
+        """
+        name! string!
+        
+        """
+        Email
+        Email of the candidate.
+        """
+        email! string!
+
+        """
+        Created At
+        ISO8601 timestamp when was thethe candidate created.
+        """
+        createdAt string
+        
+        """
+        Updated At
+        ISO8601 timestamp when was the candidate lastly updated.
+        """
+        updatedAt string
+      }!
+    ]!
+
+    """
+    Pagination
+    The pagination state.
+    """
+    pagination Pagination
+
+    """
+    Rate limit
+    Rate limit details.
+    """
+    rateLimit RateLimit
+  }
+
+  error Error
+
+  example Success {
+    input {
+      jobId = 'JOB_ID'
+    }
+    result {
+      candidates = [{
+        id = 'CANDIDATE_ID'
+        jobId = 'JOB_ID'
+        firstName = 'John'
+        lastName = 'Doe'
+        email = 'john.doe@acme.com'
+      }]
+    }
+  }
+
+  example Fail {
+    input {
+      jobId = "WRONG_JOB_ID"
+    }
+    error {
+      title = "Not Found"
+      detail = "Job ID \"WRONG_JOB_ID\" do not exist."
+      code = "NotFound"
+    }
+  }
+}
+
+model Pagination {
+  """
+  Previous page
+  Previous page cursor.
+  """
+  previousPage
+
+  """
+  Next page
+  Next page cursor.
+  """
+  nextPage
+}
+
+model Error {
+  """
+  Error Title
+  A short, human-readable summary of the problem type.
+  """
+  title!
+  """
+  Error Detail
+  A human-readable explanation specific to this occurrence of the problem.
+  """
+  detail
+  """
+  Code
+  Error code.
+  """
+  code! ErrorCode!
+  """
+  Rate limit
+  Rate limit details.
+  """
+  rateLimit RateLimit
+}
+
+model RateLimit {
+  """
+  Bucket
+  Different parts of API may have different rate limits.
+  Bucket identifies to which part of API the rate limits apply.
+  """
+  bucket string
+  """
+  Total requests
+  Total requests available in the time window.
+  """
+  totalRequests number
+  """
+  Remaining requests
+  Remaining requests available in the time window.
+  """
+  remainingRequests number
+  """
+  Remaining requests available in percents
+  Remaining requests available in the time window in percents.
+  """
+  remainingRequestsPercentage number
+  """
+  Reset timestamp
+  Timestamp when the rate limits will reset (in  Unix Timestamp format). Available only for providers without rolling rate limit window.
+  """
+  resetTimestamp number
+}
+
+model ErrorCode enum {
+  """
+  Bad request
+  The request was invalid or cannot be otherwise served.
+  """
+  BadRequest
+  """
+  Not found
+  The jobId does not exist.
+  """
+  NotFound
+  """
+  Rate limit reached
+  Returned when a request cannot be served due to the user or app reached max requests quota.
+  """
+  RateLimitReached
+  """
+  Unauthenticated
+  There was a problem authenticating your request. Check that you are passing valid credentials.
+  """
+  Unauthenticated
+  """
+  Unauthorized
+  The request is understood, but it has been refused or access is not allowed.
+  """
+  Unauthorized
+  """
+  Unknown error
+  Returned when an unexpected error occured.
+  """
+  UnknownError
+}
