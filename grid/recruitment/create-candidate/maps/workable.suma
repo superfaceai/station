@@ -2,99 +2,33 @@ profile = "recruitment/create-candidate@1.0"
 provider = "workable"
 
 map CreateCandidate {
-  http POST "/spi/v3/jobs/{input.jobId}/candidates" {
-    security "bearer_token"
+  call CheckSubdomainExists(
+    clientId = parameters.CLIENT_ID,
+    subdomain = parameters.SUBDOMAIN
+  ) {
+    return map error if (outcome.error) outcome.error
+  }
+  
+  call CheckJobExists(
+    clientId = parameters.CLIENT_ID,
+    jobId = input.jobId
+  ) {
+    return map error if (outcome.error) outcome.error
+  }
 
-    request {
-      query {
-        stage = input.stageId || 'applied'
-      }
+  call CreateCandidate (
+    clientId = parameters.CLIENT_ID,
+    candidate = input
+  ) {
+    return map error if (outcome.error) outcome.error
 
-      headers {
-        'X-WORKABLE-CLIENT-ID' = parameters.CLIENT_ID
-      }
+    createCandidateOutcome = outcome.data
+  }
 
-      body {
-        firstname = input.firstName
-        lastname = input.lastName
-
-        email = input.email
-        address = input.address
-        phone = input.phone
-
-        education_entries = input.education ? input.education.map(edu => ({
-          school: edu.school,
-          degree: edu.degree,
-          field_of_study: edu.fieldOfStudy,
-          start_date: edu.startedAt,
-          end_date: edu.endedAt,
-        })) : undefined
-        
-        experience_entries = input.workExperience ? input.workExperience.map(work => ({
-          title: work.position,
-          summary: work.summary,
-          company: work.company,
-          industry: work.industry,
-          current: work.current,
-          start_date: work.startedAt,
-          end_date: work.endedAt,
-        })) : undefined
-        
-        answers = input.answers ? input.answers.map(answer => {
-          const question_key = answer.questionId;
-
-          switch (answer.type) {
-            case 'text':
-            case 'textarea':
-              return { question_key: question_key, body: answer.value };
-            case 'number':
-              return { question_key: question_key, value: answer.value };
-            case 'boolean':
-              return { question_key: question_key, checked: answer.value };
-            case 'multiple_choice':
-            case 'multiple_select':
-              return { question_key: question_key, choices: answer.value };
-            case 'date':
-              return { question_key: question_key, date: answer.value };
-            case 'file':
-              return { question_key: question_key, file_url: answer.value };
-          }
-        }) : undefined
-        
-        social_profiles = input.links ? input.links.map(link => ({
-          type: link.name,
-          url: link.url
-        })) : undefined
-
-        resumeUrl = input.cv ? input.cv.url ? input.cv.url : undefined : undefined
-        resume = input.cv ? input.cv.data ? input.cv : undefined : undefined
-      }
-    }
-
-    response 201 "application/json" {
-      map result {
-        id = body.candidate.id
-        jobId = body.candidate.job.shortcode
-      }
-    }
-
-    response "application/json" {
-      error = call MapWorkableError(
-        statusCode = statusCode,
-        error = body.error,
-        headers = headers
-      )
-      
-      map error error
-    }
-
-    response {
-      map error {
-        title = "Unknown error"
-        detail = JSON.stringify(body, null, 2)
-        code = 'UnknownError'
-      }
-    }
+  return map result {
+    id = createCandidateOutcome.id
+    jobId = createCandidateOutcome.jobId
+    rateLimit = createCandidateOutcome.rateLimit
   }
 }
 
@@ -164,6 +98,13 @@ operation MapWorkableError {
     rateLimit = rateLimit
   }
 
+  return if (statusCode === 422) {
+    title = 'Conflict'
+    detail = workableError 
+    code = 'Conflict'
+    rateLimit = rateLimit
+  }
+
   return if (statusCode === 429) {
     title = 'Rate limit exceeded'
     detail = 'You reached max requests quota.'
@@ -176,5 +117,189 @@ operation MapWorkableError {
     detail = workableError
     code = 'UnknownError'
     rateLimit = rateLimit
+  }
+}
+
+operation CreateCandidate {
+  http POST "/spi/v3/jobs/{ args.candidate.jobId }/candidates" {
+    security "bearer_token"
+
+    request {
+      query {
+        stage = args.candidate.stageId || 'applied'
+      }
+
+      headers {
+        'X-WORKABLE-CLIENT-ID' = args.clientId
+      }
+
+      body {
+        firstname = args.candidate.firstName
+        lastname = args.candidate.lastName
+
+        email = args.candidate.email
+        address = args.candidate.address
+        phone = args.candidate.phone
+
+        education_entries = args.candidate.education ? args.candidate.education.map(edu => ({
+          school: edu.school,
+          degree: edu.degree,
+          field_of_study: edu.fieldOfStudy,
+          start_date: edu.startedAt,
+          end_date: edu.endedAt,
+        })) : undefined
+        
+        experience_entries = args.candidate.workExperience ? args.candidate.workExperience.map(work => ({
+          title: work.position,
+          summary: work.summary,
+          company: work.company,
+          industry: work.industry,
+          current: work.current,
+          start_date: work.startedAt,
+          end_date: work.endedAt,
+        })) : undefined
+        
+        answers = args.candidate.answers ? args.candidate.answers.map(answer => {
+          const question_key = answer.questionId;
+
+          switch (answer.type) {
+            case 'text':
+            case 'textarea':
+              return { question_key: question_key, body: answer.value };
+            case 'number':
+              return { question_key: question_key, value: answer.value };
+            case 'boolean':
+              return { question_key: question_key, checked: answer.value };
+            case 'multiple_choice':
+            case 'multiple_select':
+              return { question_key: question_key, choices: answer.value };
+            case 'date':
+              return { question_key: question_key, date: answer.value };
+            case 'file':
+              return { question_key: question_key, file_url: answer.value };
+          }
+        }) : undefined
+        
+        social_profiles = args.candidate.links ? args.candidate.links.map(link => ({
+          type: link.name,
+          url: link.url
+        })) : undefined
+
+        resumeUrl = args.candidate.cv ? args.candidate.cv.url ? args.candidate.cv.url : undefined : undefined
+        resume = args.candidate.cv ? args.candidate.cv.data ? args.candidate.cv : undefined : undefined
+      }
+    }
+
+    response 201 "application/json" {
+      return {
+        id = body.candidate.id
+        jobId = body.candidate.job.shortcode
+        rateLimit = call MapRateLimit(headers = headers)
+      }
+    }
+
+    response "application/json" {
+      error = call MapWorkableError(
+        statusCode = statusCode,
+        error = body.error,
+        headers = headers
+      )
+      
+      fail error
+    }
+
+    response {
+      fail {
+        title = "Unknown error"
+        detail = JSON.stringify(body, null, 2)
+        code = 'UnknownError'
+      }
+    }
+  }
+}
+
+operation CheckSubdomainExists {
+  http GET "/spi/v3/accounts/{ args.subdomain }" {
+    security "bearer_token"
+
+    request {
+      headers {
+        'X-WORKABLE-CLIENT-ID' = args.clientId
+      }
+    }
+
+    response 200 {       
+      return {}
+    }
+
+    response 422 "application/json" {
+      fail {
+        title = 'Not Found'
+        detail = 'Unable to get subdomain by name ' + args.subdomain + '. Check that the subdomain with that name exists.'
+        code = 'NotFound'
+        rateLimit = call MapRateLimit(headers = headers)
+      }
+    }
+
+    response "application/json" {
+      error = call MapWorkableError(
+        statusCode = statusCode,
+        error = body.error,
+        headers = headers
+      )
+
+      fail error
+    }
+
+    response {
+      fail {
+        title = "Unknown error"
+        detail = JSON.stringify(body, null, 2)
+        code = 'UnknownError'
+      }
+    }
+  }
+}
+
+operation CheckJobExists {
+  http GET "/spi/v3/jobs/{ args.jobId }" {
+    security "bearer_token"
+
+    request {
+      headers {
+        'X-WORKABLE-CLIENT-ID' = args.clientId
+      }
+    }
+
+    response 200 {       
+      return {}
+    }
+
+    response 404 "application/json" {
+      fail {
+        title = 'Not Found'
+        detail = 'Unable to get job by ID ' + args.jobId + '. Check that the job with that ID exists.'
+        code = 'NotFound'
+        rateLimit = call MapRateLimit(headers = headers)
+      }
+    }
+
+    response "application/json" {
+      error = call MapWorkableError(
+        statusCode = statusCode,
+        error = body.error,
+        headers = headers
+      )
+
+      fail error
+    }
+
+    response {
+      fail {
+        title = "Unknown error"
+        detail = JSON.stringify(body, null, 2)
+        code = 'UnknownError'
+      }
+    }
   }
 }

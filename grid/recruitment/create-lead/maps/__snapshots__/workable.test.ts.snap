@@ -3,13 +3,13 @@
 exports[`recruitment/create-lead/workable CreateLead when specified job does exist should perform successfully 1`] = `
 Ok {
   "value": Object {
-    "id": "d4a2404",
+    "id": "d4aa9e4",
     "jobId": "FCFA80DF09",
     "rateLimit": Object {
       "bucket": "workable",
       "remainingRequests": 9,
       "remainingRequestsPercentage": 90,
-      "resetTimestamp": 1671611947,
+      "resetTimestamp": 1671628241,
       "totalRequests": 10,
     },
   },
@@ -18,16 +18,32 @@ Ok {
 
 exports[`recruitment/create-lead/workable CreateLead when specified job does not exist should map error 1`] = `
 Err {
-  "error": "MappedHTTPError: Expected HTTP error
+  "error": "MappedError: Expected error
 Properties: {
-  \\"title\\": \\"Not found\\",
-  \\"detail\\": \\"Not found\\",
+  \\"title\\": \\"Not Found\\",
+  \\"detail\\": \\"Unable to get job by ID NOT-EXISTING. Check that the job with that ID exists.\\",
   \\"code\\": \\"NotFound\\",
   \\"rateLimit\\": {
     \\"bucket\\": \\"workable\\"
   }
 }
-AST Path: definitions[0].statements[1].responseHandlers[1].statements[1]
-Original Map Location: Line 76, column 7",
+AST Path: definitions[0].statements[2].statements[0]
+Original Map Location: Line 22, column 5",
+}
+`;
+
+exports[`recruitment/create-lead/workable CreateLead when specified subdomain does not exist returns error 1`] = `
+Err {
+  "error": "MappedError: Expected error
+Properties: {
+  \\"title\\": \\"Not Found\\",
+  \\"detail\\": \\"Unable to get subdomain by name invalid-superface. Check that the subdomain with that name exists.\\",
+  \\"code\\": \\"NotFound\\",
+  \\"rateLimit\\": {
+    \\"bucket\\": \\"workable\\"
+  }
+}
+AST Path: definitions[0].statements[1].statements[0]
+Original Map Location: Line 15, column 5",
 }
 `;

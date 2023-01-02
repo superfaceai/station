@@ -1,4 +1,4 @@
-/* eslint-disable jest/no-export */
+/* eslint-disable jest/no-export, jest/valid-describe, jest/valid-title, jest/no-identical-title */
 
 import { RecordingProcessOptions, SuperfaceTest } from '@superfaceai/testing';
 import { readFileSync } from 'fs';
@@ -62,8 +62,10 @@ const sampleCandidate = {
   ],
 };
 
-const describeIf = (condition: boolean): jest.Describe =>
-  condition ? describe : describe.skip;
+const describeIf = (
+  condition: boolean,
+  ...args: Parameters<jest.Describe>
+): void => (condition ? describe(...args) : describe.skip(...args));
 
 export const createCandidateTest = (
   provider: string,
@@ -119,19 +121,55 @@ export const createCandidateTest = (
         });
       });
 
-      describeIf(provider === 'breezy-hr')(
+      describeIf(
+        provider === 'breezy-hr',
         'when specified company does not exist',
         () => {
-          let companyId: string;
+          let companyId: string | undefined;
 
           beforeAll(() => {
-            companyId = process.env.BREEZY_HR_COMPANY_ID!;
+            companyId = process.env.BREEZY_HR_COMPANY_ID;
 
             process.env.BREEZY_HR_COMPANY_ID = '1b111c1111ef11';
           });
 
           afterAll(() => {
             process.env.BREEZY_HR_COMPANY_ID = companyId;
+          });
+
+          it('returns error', async () => {
+            const result = await superface.run(
+              {
+                input: {
+                  jobId: jobIds.valid,
+                  firstName: 'Demo',
+                  lastName: 'Testing',
+                  email: 'demo_testing@fakemail.com',
+                },
+              },
+              options
+            );
+
+            expect(() => result.unwrap()).toThrow();
+            expect(result).toMatchSnapshot();
+          });
+        }
+      );
+
+      describeIf(
+        provider === 'workable',
+        'when specified subdomain does not exist',
+        () => {
+          let subdomain: string | undefined;
+
+          beforeAll(() => {
+            subdomain = process.env.WORKABLE_SUBDOMAIN;
+
+            process.env.WORKABLE_SUBDOMAIN = 'invalid-superface';
+          });
+
+          afterAll(() => {
+            process.env.WORKABLE_SUBDOMAIN = subdomain;
           });
 
           it('returns error', async () => {
