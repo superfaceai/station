@@ -6,23 +6,22 @@ describe('recruitment/list-candidates/mock', () => {
   beforeEach(() => {
     superface = new SuperfaceTest({
       profile: 'recruitment/list-candidates',
-      provider: 'mock'
+      provider: 'mock',
     });
   });
 
   describe('ListCandidates', () => {
-    
     // specify test case name
     it('should perform successfully', async () => {
       const result = await superface.run({
         useCase: 'ListCandidates',
         input: {
-          jobId : 'JOB_ID',
-        }
-      })
-      
+          jobId: 'JOB_ID',
+        },
+      });
+
       expect(() => result.unwrap()).not.toThrow();
       expect(result).toMatchSnapshot();
     });
-  });  
+  });
 });
