@@ -11,7 +11,6 @@ describe('recruitment/list-candidates/mock', () => {
   });
 
   describe('ListCandidates', () => {
-    // specify test case name
     it('should perform successfully', async () => {
       const result = await superface.run({
         useCase: 'ListCandidates',
