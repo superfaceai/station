@@ -8,10 +8,10 @@ const describeIf = (condition: boolean): jest.Describe =>
   condition ? describe : describe.skip;
 
 export const listCandidatesTest = (
-  provider: string, 
+  provider: string,
   testInputs: {
-    validJobId: string,
-    invalidJobId: string
+    validJobId: string;
+    invalidJobId: string;
   },
   options?: RecordingProcessOptions
 ): void => {
