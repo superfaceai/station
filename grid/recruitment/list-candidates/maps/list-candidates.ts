@@ -78,7 +78,7 @@ export const listCandidatesBreezyHRSpecificTest = (
         });
       });
 
-    describe('when specified company does not exist', () => {
+      describe('when specified company does not exist', () => {
         let companyId: string | undefined;
 
         beforeAll(() => {
@@ -104,8 +104,7 @@ export const listCandidatesBreezyHRSpecificTest = (
           expect(() => result.unwrap()).toThrow();
           expect(result).toMatchSnapshot();
         });
-      }
-    );
+      });
     });
   });
 };
