@@ -108,3 +108,51 @@ export const listCandidatesBreezyHRSpecificTest = (
     });
   });
 };
+
+export const listCandidatesWorkableSpecificTest = (
+  options?: RecordingProcessOptions
+): void => {
+  const provider = 'workable';
+
+  describe(`recruitment/list-candidates/${provider}`, () => {
+    let superface: SuperfaceTest;
+
+    describe('ListCandidates', () => {
+      beforeAll(() => {
+        superface = buildSuperfaceTest({
+          profile: 'recruitment/list-candidates',
+          provider,
+          useCase: 'ListCandidates',
+        });
+      });
+
+      describe('when specified subdomain does not exist', () => {
+        let subdomain: string | undefined;
+
+        beforeAll(() => {
+          subdomain = process.env.WORKABLE_SUBDOMAIN;
+
+          process.env.WORKABLE_SUBDOMAIN = 'invalid-subdomain';
+        });
+
+        afterAll(() => {
+          process.env.WORKABLE_SUBDOMAIN = subdomain;
+        });
+
+        it('returns error', async () => {
+          const result = await superface.run(
+            {
+              input: {
+                jobId: 'JOB_ID',
+              },
+            },
+            options
+          );
+
+          expect(() => result.unwrap()).toThrow();
+          expect(result).toMatchSnapshot();
+        });
+      });
+    });
+  });
+};

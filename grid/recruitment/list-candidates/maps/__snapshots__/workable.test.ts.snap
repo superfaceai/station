@@ -40,9 +40,25 @@ Ok {
       "bucket": "workable",
       "remainingRequests": 8,
       "remainingRequestsPercentage": 80,
-      "resetTimestamp": 1672922432,
+      "resetTimestamp": 1672923352,
       "totalRequests": 10,
     },
   },
+}
+`;
+
+exports[`recruitment/list-candidates/workable ListCandidates when specified subdomain does not exist returns error 1`] = `
+Err {
+  "error": "MappedError: Expected error
+Properties: {
+  \\"title\\": \\"Not Found\\",
+  \\"detail\\": \\"Unable to get subdomain by name invalid-subdomain. Check that the subdomain with that name exists.\\",
+  \\"code\\": \\"NotFound\\",
+  \\"rateLimit\\": {
+    \\"bucket\\": \\"workable\\"
+  }
+}
+AST Path: definitions[0].statements[0].statements[0]
+Original Map Location: Line 9, column 5",
 }
 `;
