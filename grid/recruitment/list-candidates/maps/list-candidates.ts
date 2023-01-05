@@ -4,9 +4,6 @@ import { RecordingProcessOptions, SuperfaceTest } from '@superfaceai/testing';
 
 import { buildSuperfaceTest } from '../../../test-config';
 
-const describeIf = (condition: boolean): jest.Describe =>
-  condition ? describe : describe.skip;
-
 export const listCandidatesTest = (
   provider: string,
   testInputs: {
@@ -60,38 +57,55 @@ export const listCandidatesTest = (
           expect(result).toMatchSnapshot();
         });
       });
+    });
+  });
+};
 
-      // eslint-disable-next-line jest/no-disabled-tests
-      describeIf(provider === 'breezy-hr')(
-        'when specified company does not exist',
-        () => {
-          let companyId: string | undefined;
+export const listCandidatesBreezyHRSpecificTest = (
+  options?: RecordingProcessOptions
+): void => {
+  const provider = 'breezy-hr';
 
-          beforeAll(() => {
-            companyId = process.env.BREEZY_HR_COMPANY_ID;
+  describe(`recruitment/list-candidates/${provider}`, () => {
+    let superface: SuperfaceTest;
 
-            process.env.BREEZY_HR_COMPANY_ID = '1b111c1111ef11';
-          });
+    describe('ListCandidates', () => {
+      beforeAll(() => {
+        superface = buildSuperfaceTest({
+          profile: 'recruitment/list-candidates',
+          provider,
+          useCase: 'ListCandidates',
+        });
+      });
 
-          afterAll(() => {
-            process.env.BREEZY_HR_COMPANY_ID = companyId;
-          });
+    describe('when specified company does not exist', () => {
+        let companyId: string | undefined;
 
-          it('returns error', async () => {
-            const result = await superface.run(
-              {
-                input: {
-                  jobId: 'JOB_ID',
-                },
+        beforeAll(() => {
+          companyId = process.env.BREEZY_HR_COMPANY_ID;
+
+          process.env.BREEZY_HR_COMPANY_ID = '1b111c1111ef11';
+        });
+
+        afterAll(() => {
+          process.env.BREEZY_HR_COMPANY_ID = companyId;
+        });
+
+        it('returns error', async () => {
+          const result = await superface.run(
+            {
+              input: {
+                jobId: 'JOB_ID',
               },
-              options
-            );
+            },
+            options
+          );
 
-            expect(() => result.unwrap()).toThrow();
-            expect(result).toMatchSnapshot();
-          });
-        }
-      );
+          expect(() => result.unwrap()).toThrow();
+          expect(result).toMatchSnapshot();
+        });
+      }
+    );
     });
   });
 };
