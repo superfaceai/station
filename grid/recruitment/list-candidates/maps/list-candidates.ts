@@ -42,7 +42,7 @@ export const listCandidatesTest = (
       });
 
       describe('when searching for candidates with invalid job ID', () => {
-        it('returns list of candidates', async () => {
+        it('returns not found error', async () => {
           const result = await superface.run(
             {
               input: {
