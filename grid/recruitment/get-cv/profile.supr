@@ -1,0 +1,152 @@
+"""
+Get CV
+Gets candidate CV document.
+"""
+name = "recruitment/get-cv"
+version = "1.0.0"
+
+"""
+Get CV
+Get CV document of the candidate by candidate ID. Returns either URL or binary data of the CV document.
+"""
+usecase GetCV safe {
+  input {
+    """
+    Contact ID
+    Uniquie identifier of the candidate. Use recruitment/list-candidates profile to list candidate IDs.
+    """
+    candidateId! string!
+  }
+
+  result {
+    """
+    Created At
+    ISO8601 timestamp when was the CV uploaded.
+    """
+    createdAt string!
+    """
+    File Name
+    The name of CV document.
+    """
+    fileName string!
+    """
+    File Content
+    The content of the CV document.
+    """
+    fileContent
+    """
+    File URL
+    The URL of the CV document.
+    """
+    fileUrl string!
+  }
+
+  error Error
+
+  example Success {
+    input {
+      candidateId = "CANDIATE_ID"
+    }
+    result {
+      createdAt = "2023-01-05T10:04:58.325Z"
+      fileName = "cv.pdf"
+      fileContent = "<BinaryData>"
+    }
+  }
+
+  example Fail {
+    input {
+      candidateId = "WRONG_CANDIDATE_ID"
+    }
+    error {
+      title = "Not Found"
+      detail = "Candidate ID \"WRONG_CANDIDATE_ID\" do not exist."
+      code = "NotFound"
+    }
+  }
+}
+
+model Error {
+  """
+  Error Title
+  A short, human-readable summary of the problem type.
+  """
+  title!
+  """
+  Error Detail
+  A human-readable explanation specific to this occurrence of the problem.
+  """
+  detail
+  """
+  Code
+  Error code.
+  """
+  code! ErrorCode!
+  """
+  Rate limit
+  Rate limit details.
+  """
+  rateLimit RateLimit
+}
+
+model RateLimit {
+  """
+  Bucket
+  Different parts of API may have different rate limits.
+  Bucket identifies to which part of API the rate limits apply.
+  """
+  bucket string
+  """
+  Total requests
+  Total requests available in the time window.
+  """
+  totalRequests number
+  """
+  Remaining requests
+  Remaining requests available in the time window.
+  """
+  remainingRequests number
+  """
+  Remaining requests available in percents
+  Remaining requests available in the time window in percents.
+  """
+  remainingRequestsPercentage number
+  """
+  Reset timestamp
+  Timestamp when the rate limits will reset (in  Unix Timestamp format). Available only for providers without rolling rate limit window.
+  """
+  resetTimestamp number
+}
+
+model ErrorCode enum {
+  """
+  Bad request
+  The request was invalid or cannot be otherwise served. 
+  """
+  BadRequest
+  """
+  Not found
+  The candidate ID does not exist.
+  """
+  NotFound
+  """
+  Rate limit reached
+  Returned when a request cannot be served due to the user or app reached max requests quota.
+  """
+  RateLimitReached
+  """
+  Unauthenticated
+  There was a problem authenticating your request. Check that you are passing valid credentials.
+  """
+  Unauthenticated
+  """
+  Unauthorized
+  The request is understood, but it has been refused or access is not allowed.
+  """
+  Unauthorized
+  """
+  Unknown error
+  Returned when an unexpected error occured.
+  """
+  UnknownError
+}
