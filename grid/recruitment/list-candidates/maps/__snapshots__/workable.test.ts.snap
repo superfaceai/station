@@ -1,0 +1,64 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`recruitment/list-candidates/workable ListCandidates when searching for candidates with invalid job ID returns not found error 1`] = `
+Err {
+  "error": "MappedError: Expected error
+Properties: {
+  \\"title\\": \\"Not found\\",
+  \\"detail\\": \\"Not found\\",
+  \\"code\\": \\"NotFound\\",
+  \\"rateLimit\\": {
+    \\"bucket\\": \\"workable\\"
+  }
+}
+AST Path: definitions[0].statements[1].statements[0]
+Original Map Location: Line 19, column 5",
+}
+`;
+
+exports[`recruitment/list-candidates/workable ListCandidates when searching for candidates with valid job ID returns list of candidates 1`] = `
+Ok {
+  "value": Object {
+    "candidates": Array [
+      Object {
+        "email": "john.doe@fakemail.com",
+        "id": "d686952",
+        "jobId": "04D2AB5A08",
+        "name": "John Doe",
+      },
+      Object {
+        "email": "christopher.morgan@fakemail.com",
+        "id": "d68a523",
+        "jobId": "04D2AB5A08",
+        "name": "Christopher Morgan",
+      },
+    ],
+    "pagination": Object {
+      "nextPage": undefined,
+    },
+    "rateLimit": Object {
+      "bucket": "workable",
+      "remainingRequests": 8,
+      "remainingRequestsPercentage": 80,
+      "resetTimestamp": 1672923352,
+      "totalRequests": 10,
+    },
+  },
+}
+`;
+
+exports[`recruitment/list-candidates/workable ListCandidates when specified subdomain does not exist returns error 1`] = `
+Err {
+  "error": "MappedError: Expected error
+Properties: {
+  \\"title\\": \\"Not Found\\",
+  \\"detail\\": \\"Unable to get subdomain by name invalid-subdomain. Check that the subdomain with that name exists.\\",
+  \\"code\\": \\"NotFound\\",
+  \\"rateLimit\\": {
+    \\"bucket\\": \\"workable\\"
+  }
+}
+AST Path: definitions[0].statements[0].statements[0]
+Original Map Location: Line 9, column 5",
+}
+`;
