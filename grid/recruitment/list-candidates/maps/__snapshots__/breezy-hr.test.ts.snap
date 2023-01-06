@@ -1,0 +1,66 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`recruitment/list-candidates/breezy-hr ListCandidates when searching for candidates with invalid job ID returns not found error 1`] = `
+Err {
+  "error": "MappedError: Expected error
+Properties: {
+  \\"title\\": \\"Not Found\\",
+  \\"detail\\": \\"Unable to get job by ID 12345ab789d1dd. Check that the job with that ID exists.\\",
+  \\"code\\": \\"NotFound\\",
+  \\"rateLimit\\": {
+    \\"bucket\\": \\"breezy-hr\\",
+    \\"totalRequests\\": 100,
+    \\"remainingRequests\\": 95,
+    \\"remainingRequestsPercentage\\": 95,
+    \\"resetTimestamp\\": 1672922740
+  }
+}
+AST Path: definitions[0].statements[1].statements[0]
+Original Map Location: Line 17, column 5",
+}
+`;
+
+exports[`recruitment/list-candidates/breezy-hr ListCandidates when searching for candidates with valid job ID returns list of candidates 1`] = `
+Ok {
+  "value": Object {
+    "candidates": Array [
+      Object {
+        "createdAt": "2023-01-05T10:04:58.325Z",
+        "email": "john.doe@fakemail.com",
+        "id": "b71d7a8d2e6c01",
+        "jobId": "214429f1ca4c01",
+        "name": "John Doe",
+        "phone": "1-859-557-6573",
+        "updatedAt": "2023-01-05T10:04:58.325Z",
+      },
+    ],
+    "rateLimit": Object {
+      "bucket": "breezy-hr",
+      "remainingRequests": 97,
+      "remainingRequestsPercentage": 97,
+      "resetTimestamp": 1672922740,
+      "totalRequests": 100,
+    },
+  },
+}
+`;
+
+exports[`recruitment/list-candidates/breezy-hr ListCandidates when specified company does not exist returns error 1`] = `
+Err {
+  "error": "MappedError: Expected error
+Properties: {
+  \\"title\\": \\"Not Found\\",
+  \\"detail\\": \\"Unable to get company by ID 1b111c1111ef11. Check that the company with that ID exists.\\",
+  \\"code\\": \\"NotFound\\",
+  \\"rateLimit\\": {
+    \\"bucket\\": \\"breezy-hr\\",
+    \\"totalRequests\\": 100,
+    \\"remainingRequests\\": 94,
+    \\"remainingRequestsPercentage\\": 94,
+    \\"resetTimestamp\\": 1672922740
+  }
+}
+AST Path: definitions[0].statements[0].statements[0]
+Original Map Location: Line 9, column 5",
+}
+`;
