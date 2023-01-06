@@ -18,7 +18,7 @@ usecase ListCandidates safe {
     jobId! string!
     """
     Page
-    Pagination cursor (obtained from `previousPage` or `nextPage`).
+    Pagination cursor. Get the cursor from `pagination` field returned in the use case result. Use either `previousPage` or `nextPage` as cursor value.
     """
     page string
     """
