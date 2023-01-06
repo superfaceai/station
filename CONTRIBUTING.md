@@ -52,7 +52,17 @@ Help us improve Superface documentation, you can report typos, improve examples.
 
 ## Testing
 
-Jest in station is configured to run tests inside `/grid` folder by default, with reporter located in `/jest/reporter` and can use groups to filter which tests to run (mainly used for tagging tests ready to continuous testing).
+Jest in station is configured to run tests inside `/grid` folder by default. Multiple ways of testing are described bellow, but all of them work with either basic jest setup:
+
+```javascript
+module.exports = {
+  preset: 'ts-jest',
+  testEnvironment: 'node',
+  rootDir: './grid',
+};
+```
+
+or with more complex setup containing custom reporter and runner to filter which tests to run (mainly used for tagging tests ready to continuous testing):
 
 ```javascript
 module.exports = {
@@ -60,7 +70,8 @@ module.exports = {
   testEnvironment: 'node',
   rootDir: './grid',
   runner: 'groups',
-  reporters: ['default', '../dist/reporter.js'],
+  reporters: ['default', '../jest/reporter.config.js'],
+  setupFilesAfterEnv: ['../jest/setup.config.js'],
 };
 ```
 
