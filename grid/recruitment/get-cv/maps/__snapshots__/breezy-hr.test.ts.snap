@@ -1,0 +1,54 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`recruitment/get-cv/breezy-hr GetCV when geting CV with invalid candidate ID 214429f1ca4c01:WRONG_CANDITE_ID returns candidate not found error 1`] = `
+Err {
+  "error": "MappedError: Expected error
+Properties: {
+  \\"title\\": \\"Candidate Not Found\\",
+  \\"detail\\": \\"Unable to get candidate with ID 214429f1ca4c01:WRONG_CANDITE_ID. Check that the candidate with that ID exists.\\",
+  \\"code\\": \\"CandidateNotFound\\",
+  \\"rateLimit\\": {
+    \\"bucket\\": \\"breezy-hr\\",
+    \\"totalRequests\\": 100,
+    \\"remainingRequests\\": 73,
+    \\"remainingRequestsPercentage\\": 73,
+    \\"resetTimestamp\\": 1673025104
+  }
+}
+AST Path: definitions[0].statements[3].statements[0]
+Original Map Location: Line 36, column 5",
+}
+`;
+
+exports[`recruitment/get-cv/breezy-hr GetCV when geting CV with invalid candidate ID WRONG_ID_STRUCTURE returns candidate not found error 1`] = `
+Err {
+  "error": "MappedError: Expected error
+Properties: {
+  \\"title\\": \\"Candidate Not Found\\",
+  \\"detail\\": \\"Candidate with id WRONG_ID_STRUCTURE do not exist.\\",
+  \\"code\\": \\"CandidateNotFound\\"
+}
+AST Path: definitions[0].statements[1].statements[0]
+Original Map Location: Line 15, column 5",
+}
+`;
+
+exports[`recruitment/get-cv/breezy-hr GetCV when geting CV with invalid candidate ID WRONG_JOB_ID:WRONG_CANDIDATE_ID returns candidate not found error 1`] = `
+Err {
+  "error": "MappedError: Expected error
+Properties: {
+  \\"title\\": \\"Candidate Not Found\\",
+  \\"detail\\": \\"Unable to get candidate with ID WRONG_JOB_ID:WRONG_CANDIDATE_ID. Check that the candidate with that ID exists.\\",
+  \\"code\\": \\"CandidateNotFound\\",
+  \\"rateLimit\\": {
+    \\"bucket\\": \\"breezy-hr\\",
+    \\"totalRequests\\": 100,
+    \\"remainingRequests\\": 76,
+    \\"remainingRequestsPercentage\\": 76,
+    \\"resetTimestamp\\": 1673025104
+  }
+}
+AST Path: definitions[0].statements[2].statements[0]
+Original Map Location: Line 27, column 5",
+}
+`;

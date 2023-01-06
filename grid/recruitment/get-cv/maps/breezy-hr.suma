@@ -1,0 +1,362 @@
+profile = "recruitment/get-cv@1.0"
+provider = "breezy-hr"
+
+map GetCV {
+  call CheckCompanyExists ( 
+    accessToken = parameters.ACCESS_TOKEN,
+    companyId = parameters.COMPANY_ID,
+  ) { 
+    return map error if (outcome.error) outcome.error
+  }
+
+  call ParseCandidateId (
+    candidateId = input.candidateId
+  ) { 
+    return map error if (outcome.error) outcome.error
+
+    candidateId = outcome.data.candidateId
+    jobId = outcome.data.jobId
+  }
+
+  call CheckJobExists (
+    accessToken = parameters.ACCESS_TOKEN,
+    companyId = parameters.COMPANY_ID,
+    jobId = jobId,
+    candidateId = candidateId,
+  ) { 
+    return map error if (outcome.error) outcome.error
+  }
+
+  call CheckCandidateExists (
+    accessToken = parameters.ACCESS_TOKEN,
+    companyId = parameters.COMPANY_ID,
+    jobId = jobId,
+    candidateId = candidateId,
+  ) {
+    return map error if (outcome.error) outcome.error
+  }
+
+  call GetCandidateCVMetadata(
+      accessToken = parameters.ACCESS_TOKEN,
+      companyId = parameters.COMPANY_ID,
+      jobId = jobId,
+      candidateId = candidateId
+  ) {
+    return map error if (outcome.error) outcome.error
+
+    fileName = outcome.data.fileName
+  }
+
+  call GetCandidateCV(
+      accessToken = parameters.ACCESS_TOKEN,
+      companyId = parameters.COMPANY_ID,
+      jobId = jobId,
+      candidateId = candidateId
+  ) {
+    return map error if (outcome.error) outcome.error
+
+    fileContent = outcome.data
+  }
+
+  return map result {
+    createdAt = cvs[0].createdAt,
+    fileName = cvs[0].fileName,
+    fileContent = fileContent
+  }
+}
+
+// Breezy HR rate limits docs: https://developer.breezy.hr/reference/rate-limiting
+operation MapRateLimit {
+  totalRequests = parseInt(args.headers['x-ratelimit-limit'], 10)
+  remainingRequests = parseInt(args.headers['x-ratelimit-remaining'], 10)
+  remainingRequestsPercentage = undefined
+  resetTimestamp = parseInt(args.headers['x-ratelimit-reset'], 10)
+
+  set if(isNaN(totalRequests)) {
+    totalRequests = undefined
+  }
+
+  set if(isNaN(remainingRequests)) {
+    remainingRequests = undefined
+  }
+
+  set if(totalRequests > 0 && remainingRequests !== undefined) {
+    remainingRequestsPercentage = remainingRequests / totalRequests * 100
+  }
+
+  set if(isNaN(resetTimestamp, 10)) {
+    resetTimestamp = undefined
+  }
+
+  return {
+    bucket = 'breezy-hr'
+    totalRequests = totalRequests
+    remainingRequests = remainingRequests
+    remainingRequestsPercentage = remainingRequestsPercentage
+    resetTimestamp = resetTimestamp
+  }
+}
+
+operation MapBreezyHRError {
+  statusCode = args.statusCode
+  workableError = args.error
+
+  rateLimit = call MapRateLimit(headers = args.headers)
+
+  return if (statusCode === 400) {
+    title = 'Bad request'
+    detail = workableError
+    code = 'BadRequest'
+    rateLimit = rateLimit
+  }
+
+  return if (statusCode === 401) {
+    title = 'Unauthenticated'
+    detail = workableError
+    code = 'Unauthenticated'
+    rateLimit = rateLimit
+  }
+
+  return if (statusCode === 403) {
+    title = 'Unauthorized'
+    detail = workableError
+    code = 'Unauthorized'
+    rateLimit = rateLimit
+  }
+
+  return if (statusCode === 429) {
+    title = 'Rate limit exceeded'
+    detail = 'You reached max requests quota.'
+    code = 'RateLimitReached'
+    rateLimit = rateLimit
+  }
+
+  return {
+    title = "Unknown error"
+    detail = workableError
+    code = 'UnknownError'
+    rateLimit = rateLimit
+  }
+}
+
+operation ParseCandidateId {
+  ids = args.candidateId.split(':')
+  fail if(ids.length < 2) {
+    title = 'Candidate Not Found'
+    detail = 'Candidate with id ' + args.candidateId + ' do not exist.' 
+    code = 'CandidateNotFound'
+  }
+
+  return {
+    jobId = ids[0]
+    candidateId = ids[1]
+  }
+}
+
+operation CheckCandidateExists {
+  http GET "/v3/company/{ args.companyId }/position/{ args.jobId }/candidate/{ args.candidateId }" {
+
+    request {
+      headers {
+        Authorization = args.accessToken
+      }
+    }
+
+    response 200 {
+      return {}
+    }
+
+    response 400 "application/json" {
+      fail {
+        title = 'Candidate Not Found'
+        detail = `Unable to get candidate with ID ${args.jobId}:${args.candidateId}. Check that the candidate with that ID exists.`
+        code = 'CandidateNotFound'
+        rateLimit = call MapRateLimit(headers = headers)
+      }
+    }
+
+    response 500 "application/json" {
+      fail {
+        title = 'Candidate Not Found'
+        detail = `Unable to get candidate with ID ${args.jobId}:${args.candidateId}. Check that the candidate with that ID exists.`
+        code = 'CandidateNotFound'
+        rateLimit = call MapRateLimit(headers = headers)
+      }
+    }
+
+    response "application/json" {
+      error = call MapBreezyHRError(
+        statusCode = statusCode,
+        error = body.error,
+        headers = headers
+      )
+
+      fail error
+    }
+
+    response {
+      fail {
+        title = "Unknown error"
+        detail = JSON.stringify(body, null, 2)
+        code = 'UnknownError'
+      }
+    }
+  }
+}
+
+operation CheckJobExists {
+  http GET "/v3/company/{ args.companyId }/position/{ args.jobId }" {
+
+    request {
+      headers {
+        Authorization = args.accessToken
+      }
+    }
+
+    response 200 {       
+      return {}
+    }
+
+    response 400 "application/json" {
+      fail {
+        title = 'Candidate Not Found'
+        detail = `Unable to get candidate with ID ${args.jobId}:${args.candidateId}. Check that the candidate with that ID exists.`
+        code = 'CandidateNotFound'
+        rateLimit = call MapRateLimit(headers = headers)
+      }
+    }
+
+    response 500 "application/json" {
+      // Breezy HR returns http status code 500 in case that the job ID doesn't exist. It could be caused by other reasons as well, but at least the error helps the client understand the error better.
+      fail {
+        title = 'Candidate Not Found'
+        detail = `Unable to get candidate with ID ${args.jobId}:${args.candidateId}. Check that the candidate with that ID exists.`
+        code = 'CandidateNotFound'
+        rateLimit = call MapRateLimit(headers = headers)
+      }
+    }
+
+    response "application/json" {
+      error = call MapBreezyHRError(
+        statusCode = statusCode,
+        error = body.error,
+        headers = headers
+      )
+
+      fail error
+    }
+
+    response {
+      fail {
+        title = "Unknown error"
+        detail = JSON.stringify(body, null, 2)
+        code = 'UnknownError'
+      }
+    }
+  }
+}
+
+operation CheckCompanyExists {
+  http GET "/v3/company/{ args.companyId }" {
+
+    request {
+      headers {
+        Authorization = args.accessToken
+      }
+    }
+
+    response 200 {       
+      return {}
+    }
+
+    response 500 "application/json" {
+      fail {
+        title = 'Wrong Integration Parameter'
+        detail = 'Unable to get company by ID ' + args.companyId + '. Check that the company with that ID exists.'
+        code = 'WrongIntegrationParameter'
+        rateLimit = call MapRateLimit(headers = headers)
+      }
+    }
+
+    response {
+      fail {
+        title = "Unknown error"
+        detail = JSON.stringify(body, null, 2)
+        code = 'UnknownError'
+      }
+    }
+  }
+}
+
+operation GetCandidateCVMetadata {
+    http GET "/v3/company/{ args.companyId }/position/{ args.jobId }/candidate/{ args.candidateId }" {
+        request {
+            headers {
+                Authorization = args.accessToken
+            }
+        }
+
+        response 200 "application/json" {
+          fail if(!body.resume.file_name) {
+            title = 'Not Found'
+            detail = 'Unable to get CV. Check that CV document has been uploaded.'
+            code = 'NotFound'
+            rateLimit = call MapRateLimit(headers = headers)
+          }
+
+          return {
+              fileName = body.resume.file_name
+          }
+        }
+
+        response "application/json" {
+          error = call MapBreezyHRError(
+            statusCode = statusCode,
+            error = body.error,
+            headers = headers
+          )
+
+          fail error
+        }
+
+        response {
+          fail {
+            title = "Unknown error"
+            detail = JSON.stringify(body, null, 2)
+            code = 'UnknownError'
+          }
+        }
+    }
+}
+
+operation GetCandidateCV {
+  http GET "/v3/company/{ args.companyId }/position/{ args.jobId }/candidate/{ args.candidateId }/resume" {
+    request {
+        headers {
+            Authorization = args.accessToken
+        }
+    }
+
+    response 200 {
+        return body
+    }
+
+    response "application/json" {
+      error = call MapBreezyHRError(
+        statusCode = statusCode,
+        error = body.error,
+        headers = headers
+      )
+
+      fail error
+    }
+
+    response {
+      fail {
+        title = "Unknown error"
+        detail = JSON.stringify(body, null, 2)
+        code = 'UnknownError'
+      }
+    }
+  }
+}
