@@ -125,10 +125,20 @@ model ErrorCode enum {
   """
   BadRequest
   """
-  Not found
+  Candidate not found
   The candidate ID does not exist.
   """
-  NotFound
+  CandidateNotFound
+  """
+  CV not found
+  The CV document has not been found.
+  """
+  CVDocumentNotFound
+  """
+  Wrong integration parameter
+  The integration parameter value has not been accepted.
+  """
+  WrongIntegrationParameter
   """
   Rate limit reached
   Returned when a request cannot be served due to the user or app reached max requests quota.
