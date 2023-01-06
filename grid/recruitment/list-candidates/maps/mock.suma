@@ -1,0 +1,14 @@
+profile = "recruitment/list-candidates@1.0"
+provider = "mock"
+map ListCandidates { 
+  return map result {
+    candidates = [
+      {
+        id : 'CANDIDATE_ID',
+        jobId : 'JOB_ID',
+        name : 'John Doe',
+        email : 'john.doe@acme.com',
+      },
+    ],
+  }
+}
