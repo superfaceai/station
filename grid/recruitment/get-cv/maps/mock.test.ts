@@ -15,7 +15,7 @@ describe('recruitment/get-cv/mock', () => {
       const result = await superface.run({
         useCase: 'GetCV',
         input: {
-          candidateId: 'CANDIATE_ID',
+          candidateId: 'CANDIDATE_ID',
         },
       });
 
