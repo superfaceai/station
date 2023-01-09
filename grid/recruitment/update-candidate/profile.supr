@@ -61,9 +61,26 @@ usecase UpdateCandidate unsafe {
 
     """
     CV (Resume)
-    Object containing either URL to a CV or data with CV document (BinaryData type) and fileName with the file name.
+    Object containing either URL to a CV or data with CV document.
     """
-    cv { url string } | { fileName string, data }
+    cv {
+        """
+        URL
+        Publicly accessible URL of a CV file.
+        """
+        url string 
+      } | { 
+        """
+        File Name
+        The file name of the CV document.
+        """
+        fileName string,
+        """
+        Data
+        Binary content of the CV document.
+        """
+        data 
+      }
 
     """
     Links
