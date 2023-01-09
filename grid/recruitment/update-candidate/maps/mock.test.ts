@@ -27,4 +27,16 @@ describe('recruitment/update-candidate/mock', () => {
       expect(result).toMatchSnapshot();
     });
   });
+
+  describe('UpdateCandidateFeatures', () => {
+    it('should perform successfully', async () => {
+      const result = await superface.run({
+        useCase: 'UpdateCandidateFeatures',
+        input: {},
+      });
+
+      expect(() => result.unwrap()).not.toThrow();
+      expect(result).toMatchSnapshot();
+    });
+  });
 });
