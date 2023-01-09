@@ -1,0 +1,73 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`recruitment/update-candidate/workable UpdateCandidate when specified candidate ID does not exist returns error 1`] = `
+Err {
+  "error": "MappedError: Expected error
+Properties: {
+  \\"title\\": \\"Candidate Not Found\\",
+  \\"detail\\": \\"Candidate ID  INVALID_CANDIDATE_ID does not exist.\\",
+  \\"code\\": \\"CandidateNotFound\\",
+  \\"rateLimit\\": {
+    \\"bucket\\": \\"workable\\"
+  }
+}
+AST Path: definitions[0].statements[7].statements[0]
+Original Map Location: Line 36, column 5",
+}
+`;
+
+exports[`recruitment/update-candidate/workable UpdateCandidate when specified job does exist when CV file name is missing returns CVFileNameRequired error 1`] = `
+Err {
+  "error": "MappedError: Expected error
+Properties: {
+  \\"title\\": \\"Missing CV file name\\",
+  \\"detail\\": \\"CV file name is required.\\",
+  \\"code\\": \\"CVFileNameRequired\\"
+}
+AST Path: definitions[0].statements[4].statements[0]
+Original Map Location: Line 17, column 5",
+}
+`;
+
+exports[`recruitment/update-candidate/workable UpdateCandidate when specified job does exist when CV file with unsupported MIME type used returns CVMIMETypeNotSupported error 1`] = `
+Err {
+  "error": "MappedError: Expected error
+Properties: {
+  \\"title\\": \\"CV MIME type not supported\\",
+  \\"detail\\": \\"File type cv-sample.xml is not supported by Workable provider.\\",
+  \\"code\\": \\"CVMIMETypeNotSupported\\"
+}
+AST Path: definitions[0].statements[4].statements[0]
+Original Map Location: Line 17, column 5",
+}
+`;
+
+exports[`recruitment/update-candidate/workable UpdateCandidate when specified job does exist when valid inputs passed performs correctly 1`] = `
+Ok {
+  "value": Object {
+    "rateLimit": Object {
+      "bucket": "workable",
+      "remainingRequests": 6,
+      "remainingRequestsPercentage": 60,
+      "resetTimestamp": 1673273961,
+      "totalRequests": 10,
+    },
+  },
+}
+`;
+
+exports[`recruitment/update-candidate/workable UpdateCandidate when specified subdomain does not exist returns integration parameter error 1`] = `
+Err {
+  "error": "MappedError: Expected error
+Properties: {
+  \\"title\\": \\"Wrong Integration Parameter\\",
+  \\"detail\\": \\"Subdomain invalid-superface does not exist.\\",
+  \\"code\\": \\"WrongIntegrationParameter\\",
+  \\"rateLimit\\": {
+    \\"bucket\\": \\"workable\\"
+  }
+}
+AST Path: definitions[0].statements[3].statements[0]
+Original Map Location: Line 13, column 5",
+}
+`;
