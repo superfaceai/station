@@ -1,0 +1,189 @@
+profile = "recruitment/get-cv@1.0"
+provider = "workable"
+
+map GetCV { 
+  call CheckSubdomainExists(
+    clientId = parameters.CLIENT_ID,
+    subdomain = parameters.SUBDOMAIN
+  ) {
+    return map error if (outcome.error) outcome.error
+  }
+
+  call GetCV (
+    clientId = parameters.CLIENT_ID,
+    subdomain = parameters.SUBDOMAIN,
+    candidateId = input.candidateId
+  ) { 
+    return map error if (outcome.error) outcome.error
+
+    getCVOutcome = outcome.data
+  }
+
+  return map result {
+    cv = {
+     documentUrl: getCVOutcome.fileUrl
+    }
+    rateLimit = getCVOutcome.rateLimit
+  }
+}
+
+operation GetCV {
+  http GET "/spi/v3/candidates/{ args.candidateId }" {
+    security "bearer_token"
+
+    request {
+      headers {
+        'X-WORKABLE-CLIENT-ID' = args.clientId
+      }
+    }
+
+    response 200 "application/json" {
+      return {
+        fileUrl = body.candidate.resume_url
+        rateLimit = call MapRateLimit(headers = headers)
+      }
+    }
+
+    response 404 "application/json" {
+      title = 'Candidate Not Found'
+      detail = `Candidate ID  ${ args.candidateId } do not exist.`
+      code = 'CandidateNotFound'
+      rateLimit = call MapRateLimit(headers = headers)
+    }
+
+    response "application/json" {
+      error = call MapWorkableError(
+        statusCode = statusCode,
+        error = body.error,
+        headers = headers
+      )
+
+      fail error
+    }
+
+    response {
+      fail {
+        title = "Unknown error"
+        detail = JSON.stringify(body, null, 2)
+        code = 'UnknownError'
+      }
+    }
+  }
+}
+
+operation CheckSubdomainExists {
+  http GET "/spi/v3/accounts/{ args.subdomain }" {
+    security "bearer_token"
+
+    request {
+      headers {
+        'X-WORKABLE-CLIENT-ID' = args.clientId
+      }
+    }
+
+    response 200 {       
+      return {}
+    }
+
+    response 422 "application/json" {
+      fail {
+        title = 'Wrong Integration Parameter'
+        detail = `Subdomain  ${ args.subdomain } do not exist.`
+        code = 'WrongIntegrationParameter'
+        rateLimit = call MapRateLimit(headers = headers)
+      }
+    }
+
+    response "application/json" {
+      error = call MapWorkableError(
+        statusCode = statusCode,
+        error = body.error,
+        headers = headers
+      )
+
+      fail error
+    }
+
+    response {
+      fail {
+        title = "Unknown error"
+        detail = JSON.stringify(body, null, 2)
+        code = 'UnknownError'
+      }
+    }
+  }
+}
+
+// Workable rate limits docs: https://workable.readme.io/reference/rate-limits
+operation MapRateLimit {
+  totalRequests = parseInt(args.headers['x-rate-limit-limit'], 10)
+  remainingRequests = parseInt(args.headers['x-rate-limit-remaining'], 10)
+  remainingRequestsPercentage = undefined
+  resetTimestamp = parseInt(args.headers['x-rate-limit-reset'], 10)
+
+  set if(isNaN(totalRequests)) {
+    totalRequests = undefined
+  }
+
+  set if(isNaN(remainingRequests)) {
+    remainingRequests = undefined
+  }
+
+  set if(totalRequests > 0 && remainingRequests !== undefined) {
+    remainingRequestsPercentage = remainingRequests / totalRequests * 100
+  }
+
+  set if(isNaN(resetTimestamp, 10)) {
+    resetTimestamp = undefined
+  }
+
+  return {
+    bucket = 'workable'
+    totalRequests = totalRequests
+    remainingRequests = remainingRequests
+    remainingRequestsPercentage = remainingRequestsPercentage
+    resetTimestamp = resetTimestamp
+  }
+}
+
+operation MapWorkableError {
+  statusCode = args.statusCode
+  workableError = args.error
+
+  rateLimit = call MapRateLimit(headers = args.headers)
+
+  return if (statusCode === 400) {
+    title = 'Bad request'
+    detail = workableError
+    code = 'BadRequest'
+    rateLimit = rateLimit
+  }
+
+  return if (statusCode === 401) {
+    title = 'Unauthenticated'
+    detail = workableError
+    code = 'Unauthenticated'
+    rateLimit = rateLimit
+  }
+
+  return if (statusCode === 403) {
+    title = 'Unauthorized'
+    detail = workableError
+    code = 'Unauthorized'
+    rateLimit = rateLimit
+  }
+
+  return if (statusCode === 429) {
+    title = 'Rate limit exceeded'
+    detail = 'You reached max requests quota.'
+    code = 'RateLimitReached'
+    rateLimit = rateLimit
+  }
+
+  return {
+    title = "Unknown error"
+    detail = workableError
+    code = 'UnknownError'
+    rateLimit = rateLimit
+  }
+}
