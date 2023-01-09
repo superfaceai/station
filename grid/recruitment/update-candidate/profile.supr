@@ -1,0 +1,200 @@
+"""
+Update Candidate
+Update existing candidate application in ATS (Applicant Tracking System).
+"""
+name = "recruitment/update-candidate"
+version = "1.0.0"
+
+"""
+Update Candidate
+Updates candidate application for company job. Specify candidate fields in the input to be updated.
+"""
+usecase UpdateCandidate unsafe {
+  input {
+    """
+    Candidate ID
+    Id of a candidate to be updated.
+    """
+    candidateId! string!
+
+    """
+    First Name
+    First name of a candidate.
+    """
+    firstName string!
+
+    """
+    Last Name
+    Last name of a candidate.
+    """
+    lastName string!
+
+    """
+    Email
+    Email of a candidate.
+    """
+    email string!
+
+    """
+    Phone
+    Phone number of a candidate.
+    """
+    phone string
+
+    """
+    Address
+    Address of a candidate.
+    """
+    address string	
+
+    """
+    Education
+    Array of education experiences.
+    """
+    education [Education]
+
+    """
+    Work Experience
+    Array of work experiences.
+    """
+    workExperience [WorkExperience]
+
+    """
+    CV (Resume)
+    Object containing either URL to a CV or data with CV document (BinaryData type) and fileName with the file name.
+    """
+    cv { url string } | { fileName string, data }
+
+    """
+    Links
+    Array of links to different profiles or portfolios of a candidate.
+    """
+    links [Link]
+
+    """
+    Answers
+    Array of answers to questions connected to a job that candidate applies to.
+    """
+    answers [Answer]
+
+    """
+    Stage Id
+    Unique identifier of a stage, in which candidate is in.
+    """
+    stageId string
+  }
+
+  result {
+    rateLimit RateLimit
+  }
+
+  error RecruitmentError
+
+  example Successful {
+    input {
+      candidateId = 'CANDIDATE_ID'
+      firstName = 'John'
+      lastName = 'Doe'
+    }
+
+    result {}
+  }
+
+  example Failed {
+    input {
+      candidateId = 'INVALID_CANDIDATE_ID'
+      firstName = 'Jean'
+    }
+
+    error {
+      title = 'Candidate Not Found'
+      detail = 'Candidate with ID INVALID_CANDIDATE_ID not found.'
+      code = 'CandidateNotFound'
+    }
+  }
+}
+
+model Error {
+  """
+  Error Title
+  A short, human-readable summary of the problem type.
+  """
+  title!
+  """
+  Error Detail
+  A human-readable explanation specific to this occurrence of the problem.
+  """
+  detail
+  """
+  Code
+  Error code.
+  """
+  code! ErrorCode!
+  """
+  Rate limit
+  Rate limit details.
+  """
+  rateLimit RateLimit
+}
+
+model RateLimit {
+  """
+  Bucket
+  Different parts of API may have different rate limits.
+  Bucket identifies to which part of API the rate limits apply.
+  """
+  bucket string
+  """
+  Total requests
+  Total requests available in the time window.
+  """
+  totalRequests number
+  """
+  Remaining requests
+  Remaining requests available in the time window.
+  """
+  remainingRequests number
+  """
+  Remaining requests available in percents
+  Remaining requests available in the time window in percents.
+  """
+  remainingRequestsPercentage number
+  """
+  Reset timestamp
+  Timestamp when the rate limits will reset (in  Unix Timestamp format). Available only for providers without rolling rate limit window.
+  """
+  resetTimestamp number
+}
+
+model ErrorCode enum {
+  """
+  Candidate not found
+  The candidate ID does not exist.
+  """
+  CandidateNotFound
+  """
+  Wrong integration parameter
+  The integration parameter value has not been accepted.
+  """
+  WrongIntegrationParameter
+  """
+  Rate limit reached
+  Returned when a request cannot be served due to the user or app reached max requests quota.
+  """
+  RateLimitReached
+  """
+  Unauthenticated
+  There was a problem authenticating your request. Check that you are passing valid credentials.
+  """
+  Unauthenticated
+  """
+  Unauthorized
+  The request is understood, but it has been refused or access is not allowed.
+  """
+  Unauthorized
+  """
+  Unknown error
+  Returned when an unexpected error occured.
+  """
+  UnknownError
+}
