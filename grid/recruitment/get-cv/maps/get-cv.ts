@@ -25,7 +25,7 @@ export const getCVTest = (
       });
 
       describe('when geting CV with valid candidate ID', () => {
-        it.only('returns list of candidates', async () => {
+        it('returns list of candidates', async () => {
           const result = await superface.run(
             {
               input: {
