@@ -3,7 +3,7 @@ import { RecordingProcessOptions, SuperfaceTest } from '@superfaceai/testing';
 
 import { buildSuperfaceTest } from '../../../test-config';
 
-export const createCandidateFeaturesTest = (
+export const updateCandidateFeaturesTest = (
   provider: string,
   options?: RecordingProcessOptions
 ): void => {

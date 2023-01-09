@@ -49,7 +49,7 @@ Ok {
       "bucket": "workable",
       "remainingRequests": 6,
       "remainingRequestsPercentage": 60,
-      "resetTimestamp": 1673273961,
+      "resetTimestamp": 1673279485,
       "totalRequests": 10,
     },
   },
@@ -69,5 +69,22 @@ Properties: {
 }
 AST Path: definitions[0].statements[3].statements[0]
 Original Map Location: Line 13, column 5",
+}
+`;
+
+exports[`recruitment/update-candidate/workable UpdateCandidateFeatures returns valid workable features 1`] = `
+Ok {
+  "value": Object {
+    "cvMIMETypes": Array [
+      "application/pdf",
+      "text/rtf",
+      "application/msword",
+      "application/vnd.openxmlformats-officedocument.custom-properties+xml",
+    ],
+    "cvUploadMethods": Array [
+      "url",
+      "file",
+    ],
+  },
 }
 `;
