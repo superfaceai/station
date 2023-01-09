@@ -237,3 +237,151 @@ usecase UpdateCandidateFeatures {
     }
   }
 }
+
+
+"""
+Education
+Object representing educational experience of a candidate.
+"""
+model Education {
+  """
+  Id
+  Unique identifier of candidate's education experience.
+  """
+  id string
+  
+  """
+  School
+  Name of a school.
+  """
+  school string
+
+  """
+  Degree
+  Degree aquired by finishing candidate's education.
+  """
+  degree string
+
+  """
+  Field of Study
+  Name of a field studied in candidate's education.
+  """
+  fieldOfStudy string
+  
+  """
+  Started At
+  ISO8601 timestamp when the education started.
+  """
+  startedAt string
+
+  """
+  Ended At
+  ISO8601 timestamp when the education ended.
+  """
+  endedAt string
+}
+
+"""
+Work Experience
+Object representing work experience of a candidate.
+"""
+model WorkExperience {
+  """
+  Id
+  Unique identifier of candidate's work experience.
+  """
+  id string
+
+  """
+  Position
+  Name of position, candidate has occupied.
+  """
+  position string
+
+  """
+  Summary
+  Summary of candidate's work experience. 
+  """
+  summary string
+
+  """
+  Company
+  Name of company.
+  """
+  company string
+
+  """
+  Industry
+  Name of industry, the company worked in.
+  """
+  industry string
+
+  """
+  Current
+  Boolean representing whether candidate still work there.
+  """
+  current boolean
+
+  """
+  Started At
+  ISO8601 timestamp when candidate started working.
+  """
+  startedAt string
+
+  """
+  Ended At
+  ISO8601 timestamp when candidate stoped working.
+  """
+  endedAt string
+}
+
+"""
+Answer
+Object representing a answer to specific question from a job.
+"""
+model Answer {
+  """
+  Question Id
+  Unique identifier of a question for this answer.
+  """
+  questionId string
+
+  """
+  Type
+  Enum representing type of possible answer.
+  """
+  type enum {
+    text
+    textarea,
+    number
+    boolean
+    multiple_choice
+    multiple_select
+    date
+    file
+  }
+
+  """
+  Value
+  Value of an answer, is dependent on type of an answer.
+  """
+  value
+}
+
+"""
+Link
+Object representing a link specified by candidate.
+"""
+model Link {
+  """
+  Name
+  Descriptive name of a link to some URL.
+  """
+  name string
+
+  """
+  URL
+  Actual URL destination of the link.
+  """
+  url string
+}
