@@ -178,6 +178,16 @@ model ErrorCode enum {
   """
   WrongIntegrationParameter
   """
+  CV file name required
+  Missing cv.fileName input. CV file name is required when cv.data input field is defined.
+  """
+  CVFileNameRequired
+  """
+  CV MIME type not supported
+  CV MIME type is not supported by the provider. To get supported MIME types run CreateCandidateFeatures use case.
+  """
+  CVMIMETypeNotSupported
+  """
   Rate limit reached
   Returned when a request cannot be served due to the user or app reached max requests quota.
   """
