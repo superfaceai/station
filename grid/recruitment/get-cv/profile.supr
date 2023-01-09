@@ -39,6 +39,11 @@ usecase GetCV safe {
     The URL of the CV document.
     """
     fileUrl string!
+    """
+    Rate limit
+    Rate limit details.
+    """
+    rateLimit RateLimit
   }
 
   error Error
