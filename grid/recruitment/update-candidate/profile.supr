@@ -117,6 +117,18 @@ usecase UpdateCandidate unsafe {
     result {}
   }
 
+  example SuccessfulCVUpdate {
+    input {
+      candidateId = 'CANDIDATE_ID'
+      cv = {
+        fileName = 'john-doe-cv.pdf'
+        data = '<BinaryData>'
+      }
+    }
+
+    result {}
+  }
+
   example Failed {
     input {
       candidateId = 'INVALID_CANDIDATE_ID'
