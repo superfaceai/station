@@ -20,25 +20,37 @@ usecase GetCV safe {
 
   result {
     """
-    Created At
-    ISO8601 timestamp when was the CV uploaded.
+    Curriculum Vitae
+    The CV of the candidate.
     """
-    createdAt string!
-    """
-    File Name
-    The name of CV document.
-    """
-    fileName string!
-    """
-    File Content
-    The content of the CV document.
-    """
-    fileContent
-    """
-    File URL
-    The URL of the CV document.
-    """
-    fileUrl string!
+    cv {
+      """
+      Created At
+      ISO8601 timestamp when was the CV uploaded.
+      """
+      createdAt string!
+      """
+      Document
+      Either binary content of the document or dowload URL of the document.
+      """
+      document {
+        """
+        File Name
+        The file name of CV document.
+        """
+        fileName string!
+        """
+        Content
+        The content of the CV document.
+        """
+        content
+      }!
+      """
+      Document URL
+      The URL of the CV document.
+      """
+      documentUrl string!
+    }
     """
     Rate limit
     Rate limit details.
@@ -53,9 +65,13 @@ usecase GetCV safe {
       candidateId = "CANDIATE_ID"
     }
     result {
-      createdAt = "2023-01-05T10:04:58.325Z"
-      fileName = "cv.pdf"
-      fileContent = "<BinaryData>"
+      cv = {
+       createdAt = "2023-01-05T10:04:58.325Z"
+       document = {
+        fileName = "cv.pdf"
+        content = "<BinaryData>"
+       }
+      }
     }
   }
 
