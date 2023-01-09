@@ -45,10 +45,12 @@ operation GetCV {
     }
 
     response 404 "application/json" {
-      title = 'Candidate Not Found'
-      detail = `Candidate ID  ${ args.candidateId } do not exist.`
-      code = 'CandidateNotFound'
-      rateLimit = call MapRateLimit(headers = headers)
+      fail {
+        title = 'Candidate Not Found'
+        detail = `Candidate ID  ${ args.candidateId } does not exist.`
+        code = 'CandidateNotFound'
+        rateLimit = call MapRateLimit(headers = headers)
+      }
     }
 
     response "application/json" {

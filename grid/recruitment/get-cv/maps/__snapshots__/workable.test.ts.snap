@@ -2,10 +2,17 @@
 
 exports[`recruitment/get-cv/workable GetCV when geting CV with invalid candidate ID INVALID_CANDIDATE_ID returns candidate not found error 1`] = `
 Err {
-  "error": "JessieError: Error in Jessie script
-TypeError: Cannot read properties of undefined (reading 'fileUrl')
-AST Path: definitions[0].statements[2].value.fields[0].value
-Original Map Location: Line 23, column 10",
+  "error": "MappedError: Expected error
+Properties: {
+  \\"title\\": \\"Candidate Not Found\\",
+  \\"detail\\": \\"Candidate ID  INVALID_CANDIDATE_ID does not exist.\\",
+  \\"code\\": \\"CandidateNotFound\\",
+  \\"rateLimit\\": {
+    \\"bucket\\": \\"workable\\"
+  }
+}
+AST Path: definitions[0].statements[1].statements[0]
+Original Map Location: Line 17, column 5",
 }
 `;
 
@@ -13,13 +20,13 @@ exports[`recruitment/get-cv/workable GetCV when geting CV with valid candidate I
 Ok {
   "value": Object {
     "cv": Object {
-      "documentUrl": "https://workablehr.s3.amazonaws.com/uploads/587179/2887832/224945280/download/cv-sample.pdf?X-Amz-Expires=60000&X-Amz-Date=20230109T094538Z&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAIR2MIE33PRKXR4CA%2F20230109%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-SignedHeaders=host&X-Amz-Signature=50f85c7c719a758570f4b13d3c2eb18c3bf7177d2c3a10ddae55725d7d03a94b",
+      "documentUrl": "https://workablehr.s3.amazonaws.com/uploads/587179/2887832/224945280/download/cv-sample.pdf?X-Amz-Expires=60000&X-Amz-Date=20230109T100107Z&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAIR2MIE33PRKXR4CA%2F20230109%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-SignedHeaders=host&X-Amz-Signature=a0b441fac833d018b12990913f37c964ee67b86adfb4b27c1101d399bcb0dac4",
     },
     "rateLimit": Object {
       "bucket": "workable",
       "remainingRequests": 8,
       "remainingRequestsPercentage": 80,
-      "resetTimestamp": 1673257548,
+      "resetTimestamp": 1673258477,
       "totalRequests": 10,
     },
   },
