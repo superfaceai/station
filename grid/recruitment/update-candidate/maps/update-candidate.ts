@@ -86,7 +86,7 @@ const buildSampleCandidate = (): Candidate => {
       {
         name: 'twitter',
         url: 'https://twitter.com/acme-candidate',
-      }
+      },
     ],
   };
 };
@@ -161,7 +161,7 @@ export const updateCandidateTest = (
             console.debug(input);
             const result = await superface.run(
               {
-                input
+                input,
               },
               options
             );
@@ -190,9 +190,9 @@ export const updateCandidateTest = (
           expect(result).toMatchSnapshot();
         });
       });
+    });
   });
-});
-}
+};
 
 export const updateCandidateWorkableSpecificTest = (
   options?: RecordingProcessOptions
@@ -211,37 +211,34 @@ export const updateCandidateWorkableSpecificTest = (
         });
       });
 
-      describe(
-        'when specified subdomain does not exist',
-        () => {
-          let subdomain: string | undefined;
+      describe('when specified subdomain does not exist', () => {
+        let subdomain: string | undefined;
 
-          beforeAll(() => {
-            subdomain = process.env.WORKABLE_SUBDOMAIN;
+        beforeAll(() => {
+          subdomain = process.env.WORKABLE_SUBDOMAIN;
 
-            process.env.WORKABLE_SUBDOMAIN = 'invalid-superface';
-          });
+          process.env.WORKABLE_SUBDOMAIN = 'invalid-superface';
+        });
 
-          afterAll(() => {
-            process.env.WORKABLE_SUBDOMAIN = subdomain;
-          });
+        afterAll(() => {
+          process.env.WORKABLE_SUBDOMAIN = subdomain;
+        });
 
-          it('returns integration parameter error', async () => {
-            const result = await superface.run(
-              {
-                input: {
-                  candidateId: 'CANDIDATE_ID',
-                  firstName: 'John',
-                },
+        it('returns integration parameter error', async () => {
+          const result = await superface.run(
+            {
+              input: {
+                candidateId: 'CANDIDATE_ID',
+                firstName: 'John',
               },
-              options
-            );
+            },
+            options
+          );
 
-            expect(() => result.unwrap()).toThrow();
-            expect(result).toMatchSnapshot();
-          });
-        }
-      );
+          expect(() => result.unwrap()).toThrow();
+          expect(result).toMatchSnapshot();
+        });
+      });
     });
   });
-}
+};
