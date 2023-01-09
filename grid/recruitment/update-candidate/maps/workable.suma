@@ -1,0 +1,286 @@
+profile = "recruitment/update-candidate@1.0"
+provider = "workable"
+
+map UpdateCandidate {
+  cv = input.cv
+  resume = undefined
+  resumeDataBuffer = undefined
+
+  call CheckSubdomainExists(
+    clientId = parameters.CLIENT_ID,
+    subdomain = parameters.SUBDOMAIN
+  ) {
+    return map error if (outcome.error) outcome.error
+  }
+
+  call CheckSupportedFileTypes(cv = cv) {
+    return map error if (outcome.error) outcome.error
+  }
+
+  set if(cv && cv.data) {
+    resumeDataBuffer = cv.data.getAllData()
+  }
+
+  set if(resumeDataBuffer) {
+    resume = {
+      name: cv.fileName,
+      data: resumeDataBuffer.toString('base64')
+    }
+  }
+
+  call UpdateCandidate (
+    clientId = parameters.CLIENT_ID,
+    candidate = input,
+    candidateResume = resume
+  ) {
+    return map error if (outcome.error) outcome.error
+
+    createCandidateOutcome = outcome.data
+  }
+
+  return map result {
+    rateLimit = createCandidateOutcome.rateLimit
+  }
+}
+
+map UpdateCandidateFeatures {
+  map result {
+    cvMIMETypes = ['application/pdf', 'text/rtf', 'application/msword', 'application/vnd.openxmlformats-officedocument.custom-properties+xml']
+    cvUploadMethods = ['url', 'file']
+  }
+}
+
+// Workable rate limits docs: https://workable.readme.io/reference/rate-limits
+operation MapRateLimit {
+  totalRequests = parseInt(args.headers['x-rate-limit-limit'], 10)
+  remainingRequests = parseInt(args.headers['x-rate-limit-remaining'], 10)
+  remainingRequestsPercentage = undefined
+  resetTimestamp = parseInt(args.headers['x-rate-limit-reset'], 10)
+
+  set if(isNaN(totalRequests)) {
+    totalRequests = undefined
+  }
+
+  set if(isNaN(remainingRequests)) {
+    remainingRequests = undefined
+  }
+
+  set if(totalRequests > 0 && remainingRequests !== undefined) {
+    remainingRequestsPercentage = remainingRequests / totalRequests * 100
+  }
+
+  set if(isNaN(resetTimestamp, 10)) {
+    resetTimestamp = undefined
+  }
+
+  return {
+    bucket = 'workable'
+    totalRequests = totalRequests
+    remainingRequests = remainingRequests
+    remainingRequestsPercentage = remainingRequestsPercentage
+    resetTimestamp = resetTimestamp
+  }
+}
+
+operation MapWorkableError {
+  statusCode = args.statusCode
+  workableError = args.error
+
+  rateLimit = call MapRateLimit(headers = args.headers)
+
+  return if (statusCode === 401) {
+    title = 'Unauthenticated'
+    detail = workableError
+    code = 'Unauthenticated'
+    rateLimit = rateLimit
+  }
+
+  return if (statusCode === 403) {
+    title = 'Unauthorized'
+    detail = workableError
+    code = 'Unauthorized'
+    rateLimit = rateLimit
+  }
+
+  return if (statusCode === 429) {
+    title = 'Rate limit exceeded'
+    detail = 'You reached max requests quota.'
+    code = 'RateLimitReached'
+    rateLimit = rateLimit
+  }
+
+  return {
+    title = "Unknown error"
+    detail = workableError
+    code = 'UnknownError'
+    rateLimit = rateLimit
+  }
+}
+
+operation UpdateCandidate {
+  http PATCH "/spi/v3/candidates/{ args.candidate.candidateId }" {
+    security "bearer_token"
+
+    request {
+      headers {
+        'X-WORKABLE-CLIENT-ID' = args.clientId
+      }
+
+      body {
+        firstname = args.candidate.firstName
+        lastname = args.candidate.lastName
+
+        email = args.candidate.email
+        address = args.candidate.address
+        phone = args.candidate.phone
+
+        education_entries = args.candidate.education ? args.candidate.education.map(edu => ({
+          school: edu.school,
+          degree: edu.degree,
+          field_of_study: edu.fieldOfStudy,
+          start_date: edu.startedAt,
+          end_date: edu.endedAt,
+        })) : undefined
+        
+        experience_entries = args.candidate.workExperience ? args.candidate.workExperience.map(work => ({
+          title: work.position,
+          summary: work.summary,
+          company: work.company,
+          industry: work.industry,
+          current: work.current,
+          start_date: work.startedAt,
+          end_date: work.endedAt,
+        })) : undefined
+        
+        answers = args.candidate.answers ? args.candidate.answers.map(answer => {
+          const question_key = answer.questionId;
+
+          switch (answer.type) {
+            case 'text':
+            case 'textarea':
+              return { question_key: question_key, body: answer.value };
+            case 'number':
+              return { question_key: question_key, value: answer.value };
+            case 'boolean':
+              return { question_key: question_key, checked: answer.value };
+            case 'multiple_choice':
+            case 'multiple_select':
+              return { question_key: question_key, choices: answer.value };
+            case 'date':
+              return { question_key: question_key, date: answer.value };
+            case 'file':
+              return { question_key: question_key, file_url: answer.value };
+          }
+        }) : undefined
+        
+        social_profiles = args.candidate.links ? args.candidate.links.map(link => ({
+          type: link.name,
+          url: link.url
+        })) : undefined
+
+        resumeUrl = args.candidate.cv ? args.candidate.cv.url ? args.candidate.cv.url : undefined : undefined
+        resume = args.candidateResume
+      }
+    }
+
+    response 200 "application/json" {
+      return {
+        rateLimit = call MapRateLimit(headers = headers)
+      }
+    }
+
+    response 404 "application/json" {
+      fail {
+        title = 'Candidate Not Found'
+        detail = `Candidate ID  ${ args.candidate.candidateId } does not exist.`
+        code = 'CandidateNotFound'
+        rateLimit = call MapRateLimit(headers = headers)
+      }
+    }
+
+    response "application/json" {
+      error = call MapWorkableError(
+        statusCode = statusCode,
+        error = body.error,
+        headers = headers
+      )
+      
+      fail error
+    }
+
+    response {
+      fail {
+        title = "Unknown error"
+        detail = JSON.stringify(body, null, 2)
+        code = 'UnknownError'
+      }
+    }
+  }
+}
+
+operation CheckSubdomainExists {
+  http GET "/spi/v3/accounts/{ args.subdomain }" {
+    security "bearer_token"
+
+    request {
+      headers {
+        'X-WORKABLE-CLIENT-ID' = args.clientId
+      }
+    }
+
+    response 200 {       
+      return {}
+    }
+
+    response 422 "application/json" {
+      fail {
+        title = 'Wrong Integration Parameter'
+        detail = 'Subdomain ' + args.subdomain + ' does not exist.'
+        code = 'WrongIntegrationParameter'
+        rateLimit = call MapRateLimit(headers = headers)
+      }
+    }
+
+    response "application/json" {
+      error = call MapWorkableError(
+        statusCode = statusCode,
+        error = body.error,
+        headers = headers
+      )
+
+      fail error
+    }
+
+    response {
+      fail {
+        title = "Unknown error"
+        detail = JSON.stringify(body, null, 2)
+        code = 'UnknownError'
+      }
+    }
+  }
+}
+
+operation CheckSupportedFileTypes {
+  cv = args.cv || {}
+
+  return if(cv.data === undefined || cv.data === null) {}
+
+  fail if(cv.fileName === undefined || cv.fileName === null) {
+    title = "Missing CV file name"
+    detail = "CV file name is required."
+    code = "CVFileNameRequired"
+  }
+  
+  fail if(
+      !cv.fileName.endsWith('pdf') &&
+      !cv.fileName.endsWith('rtf') &&
+      !cv.fileName.endsWith('doc') &&
+      !cv.fileName.endsWith('docx')) {
+    title = "CV MIME type not supported"
+    detail = `File type ${cv.fileName} is not supported by Workable provider.`
+    code = "CVMIMETypeNotSupported"
+  }
+
+  return {}
+}
