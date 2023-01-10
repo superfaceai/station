@@ -1,3 +1,3 @@
-import { docToTextTest } from "./doc-to-text";
+import { docToTextTest } from './doc-to-text';
 
-docToTextTest('cloudmersive')
+docToTextTest('cloudmersive');

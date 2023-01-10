@@ -4,9 +4,7 @@ import { SuperfaceTest } from '@superfaceai/testing';
 
 import { buildSuperfaceTest } from '../../../test-config';
 
-export const docToTextTest = (
-  provider: string
-): void => {
+export const docToTextTest = (provider: string): void => {
   describe(`conversion/doc-to-text/${provider}`, () => {
     let superface: SuperfaceTest;
 
@@ -14,7 +12,7 @@ export const docToTextTest = (
       jest.setTimeout(20000);
       superface = buildSuperfaceTest({
         profile: 'conversion/doc-to-text',
-        provider
+        provider,
       });
     });
 
@@ -23,27 +21,31 @@ export const docToTextTest = (
         const result = await superface.run({
           useCase: 'ConvertDocumentToText',
           input: {
-            fileName : 'empty-file.pdf',
-            content : BinaryData.fromPath('grid/conversion/doc-to-text/maps/test-files/empty-file.pdf'),
-          }
-        })
-        
+            fileName: 'empty-file.pdf',
+            content: BinaryData.fromPath(
+              'grid/conversion/doc-to-text/maps/test-files/empty-file.pdf'
+            ),
+          },
+        });
+
         expect(() => result.unwrap()).toThrow();
         expect(result).toMatchSnapshot();
       });
-    
+
       it('should perform successfully', async () => {
         const result = await superface.run({
           useCase: 'ConvertDocumentToText',
           input: {
-            fileName : 'big-bang.pdf',
-            content : BinaryData.fromPath('grid/conversion/doc-to-text/maps/test-files/big-bang.pdf'),
-          }
-        })
-        
+            fileName: 'big-bang.pdf',
+            content: BinaryData.fromPath(
+              'grid/conversion/doc-to-text/maps/test-files/big-bang.pdf'
+            ),
+          },
+        });
+
         expect(() => result.unwrap()).not.toThrow();
         expect(result).toMatchSnapshot();
       });
-    });  
+    });
   });
 };

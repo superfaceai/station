@@ -8,24 +8,23 @@ describe('conversion/doc-to-text/mock', () => {
   beforeEach(() => {
     superface = buildSuperfaceTest({
       profile: 'conversion/doc-to-text',
-      provider: 'mock'
-});
+      provider: 'mock',
+    });
   });
 
   describe('DocToText', () => {
-    
     // specify test case name
     it('should perform successfully', async () => {
       const result = await superface.run({
         useCase: 'ConvertDocumentToText',
         input: {
-          fileName : 'big-bang.pdf',
-          content : '<BinaryData>',
-        }
-      })
-      
+          fileName: 'big-bang.pdf',
+          content: '<BinaryData>',
+        },
+      });
+
       expect(() => result.unwrap()).not.toThrow();
       expect(result).toMatchSnapshot();
     });
-  });  
+  });
 });
