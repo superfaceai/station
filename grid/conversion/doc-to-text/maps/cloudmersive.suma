@@ -41,7 +41,7 @@ map ConvertDocumentToText {
     response {
       error = call MapCloudMersiveError(
         statusCode = statusCode,
-        error = body.error
+        body = body
       )
       
       return map error error
