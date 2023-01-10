@@ -1,0 +1,105 @@
+"""
+Convert document to text
+Convert's document to plain text.
+"""
+name = "conversion/doc-to-text"
+version = "1.0.0"
+
+"""
+Convert Document to Text
+Convert document's in various formats (pdf, doc, rtf) to plain text.
+"""
+usecase ConvertDocumentToText unsafe {
+  input {
+    """
+    File Name
+    File name of the document
+    """
+    fileName! string!
+    """
+    Content
+    Binary content of the document
+    """
+    content!
+  }
+
+  result {
+    text! string!
+  }
+
+  error ConversionError
+
+  example Success {
+    input {
+      fileName = "big-bang.pdf"
+      content = "<BinaryData>"
+    }
+    result {
+      text = "The Big Bang event is a physical theory that describes how the universe expanded from an initial state of high density and temperature. Various cosmological models of the Big Bang explain the evolution of the observable universe from the earliest known periods through its subsequent large-scale form. These models offer a comprehensive explanation for a broad range of observed phenomena, including the abundance of light elements, the cosmic microwave background (CMB) radiation, and large-scale structure. The overall uniformity of the Universe, known as the flatness problem, is explained through cosmic inflation: a sudden and very rapid expansion of space during the earliest moments. However, physics currently lacks a widely accepted theory of quantum gravity that can successfully model the earliest conditions of the Big Bang."
+    }
+  }
+
+  example Fail {
+    input {
+      fileName = "big-bang.jpg"
+      content = "<BinaryData>"
+    }
+    error {
+      title = "Not Supported"
+      detail = "Conversion of documents in jpg format is not supported."
+      code = "NotSupported"
+    }
+  }
+}
+
+model ConversionError {
+  """
+  Title
+  A short, human-readable summary of the problem type.
+  """
+  title! string!
+
+  """
+  Detail
+  A human-readable explanation specific to this occurrence of the problem.
+  """
+  detail string! 
+  """
+  Code
+  Error code.
+  """
+  code ConversionErrorCode
+}
+
+model ConversionErrorCode enum {
+  """
+  Not Supported
+  The format of document beeing converted is not supported by selected provider.
+  """
+  NotSupported
+  """
+  Conversion Failed
+  There was an error converting the document to text. This can be caused by corrupted document data.
+  """
+  ConversionFailed
+  """
+  Rate limit reached
+  Returned when a request cannot be served due to the user or app reached max requests quota.
+  """
+  RateLimitReached
+  """
+  Unauthenticated
+  There was a problem authenticating your request. Check that you are passing valid credentials.
+  """
+  Unauthenticated
+  """
+  Unauthorized
+  The request is understood, but it has been refused or access is not allowed.
+  """
+  Unauthorized
+  """
+  Unknown error
+  Returned when an unexpected error occured.
+  """
+  UnknownError
+}
