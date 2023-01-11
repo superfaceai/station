@@ -4,7 +4,6 @@ export const replaceBoundaryInMultipartFormDataBody = (
   newBoundary: string,
   body?: nock.RequestBodyMatcher
 ): string | undefined => {
-
   if (typeof body !== 'string') {
     return undefined;
   }
