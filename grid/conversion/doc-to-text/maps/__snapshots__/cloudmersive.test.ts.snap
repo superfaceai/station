@@ -1,18 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`conversion/doc-to-text/cloudmersive ConvertDocumentToText should map error when empty file passed 1`] = `
-Err {
-  "error": "MappedHTTPError: Expected HTTP error
-Properties: {
-  \\"title\\": \\"Conversion Failed\\",
-  \\"code\\": \\"ConversionFailed\\",
-  \\"detail\\": \\"Invalid input: Input file was empty.\\"
-}
-AST Path: definitions[0].statements[2].responseHandlers[1].statements[0]
-Original Map Location: Line 34, column 7",
-}
-`;
-
 exports[`conversion/doc-to-text/cloudmersive ConvertDocumentToText should perform successfully 1`] = `
 Ok {
   "value": Object {
@@ -31,5 +18,18 @@ and very rapid expansion of space during the earliest moments. However, physics 
 lacks a widely accepted theory of quantum gravity that can successfully model the earliest
 conditions of the Big Bang.",
   },
+}
+`;
+
+exports[`conversion/doc-to-text/cloudmersive ConvertDocumentToText should return error when converting empty file 1`] = `
+Err {
+  "error": "MappedHTTPError: Expected HTTP error
+Properties: {
+  \\"title\\": \\"Conversion Failed\\",
+  \\"code\\": \\"ConversionFailed\\",
+  \\"detail\\": \\"Invalid input: Input file was empty.\\"
+}
+AST Path: definitions[0].statements[2].responseHandlers[1].statements[0]
+Original Map Location: Line 34, column 7",
 }
 `;
