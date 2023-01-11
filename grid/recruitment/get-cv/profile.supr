@@ -1,19 +1,19 @@
 """
 Get CV
-Gets candidate CV document.
+Gets a candidate's CV document.
 """
 name = "recruitment/get-cv"
 version = "1.0.0"
 
 """
 Get CV
-Get CV document of the candidate by candidate ID. Returns either URL or binary data of the CV document.
+Get a candidate's CV document, by candidate ID. Returns either a URL, or binary data of the CV document.
 """
 usecase GetCV safe {
   input {
     """
     Contact ID
-    Uniquie identifier of the candidate. Use recruitment/list-candidates profile to get candidate IDs.
+    Unique identifier of the candidate. Use the `recruitment/list-candidates` profile to get candidate IDs.
     """
     candidateId! string!
   }
@@ -26,7 +26,7 @@ usecase GetCV safe {
     cv {
       """
       Created At
-      ISO8601 timestamp when was the CV uploaded.
+      ISO8601 timestamp of when the CV was uploaded.
       """
       createdAt string!
       """
@@ -36,7 +36,7 @@ usecase GetCV safe {
       document {
         """
         File Name
-        The file name of CV document.
+        The file name of the CV document.
         """
         fileName string!
         """
@@ -113,8 +113,8 @@ model Error {
 model RateLimit {
   """
   Bucket
-  Different parts of API may have different rate limits.
-  Bucket identifies to which part of API the rate limits apply.
+  Different parts of the API may have different rate limits.
+  Bucket identifies which part of API the rate limits apply to.
   """
   bucket string
   """
