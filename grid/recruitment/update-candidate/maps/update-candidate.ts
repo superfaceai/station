@@ -158,14 +158,12 @@ export const updateCandidateTest = (
               candidateId: candidateIds.validCandidateId,
               ...sampleCandidate,
             };
-            console.debug(input);
             const result = await superface.run(
               {
                 input,
               },
               options
             );
-            console.debug(result.unwrap());
             expect(result.isOk()).toBeTruthy();
             expect(result).toMatchSnapshot();
           });
