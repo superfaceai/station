@@ -154,13 +154,6 @@ operation MapWorkableError {
 
   rateLimit = call MapRateLimit(headers = args.headers)
 
-  return if (statusCode === 400) {
-    title = 'Bad request'
-    detail = workableError
-    code = 'BadRequest'
-    rateLimit = rateLimit
-  }
-
   return if (statusCode === 401) {
     title = 'Unauthenticated'
     detail = workableError
