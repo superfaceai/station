@@ -8,8 +8,7 @@ publishVideoTest('instagram', 'single video', {
 
 publishVideoTest('instagram', 'single reel', {
   caption: 'Single reel from Superface Station.',
-  url:
-    'https://assets.mixkit.co/videos/download/mixkit-waves-in-the-water-1164.mp4',
+  url: 'https://assets.mixkit.co/videos/download/mixkit-waves-in-the-water-1164.mp4',
   uploadType: 'video',
   shortFormVideo: true,
 });

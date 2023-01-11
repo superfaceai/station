@@ -24,7 +24,7 @@ createCandidateTest(
             boundaryReplacement,
             recording.body
           );
-          recording.body = body => {
+          recording.body = (body: nock.RequestBodyMatcher) => {
             const requestBody = replaceBoundaryInMultipartFormDataBody(
               boundaryReplacement,
               body
