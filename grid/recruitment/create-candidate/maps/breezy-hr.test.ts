@@ -1,5 +1,4 @@
-import nock from 'nock';
-
+import { replaceBoundaryInMultipartFormDataBody } from '../../../../test/helpers/replace_boundary';
 import { createCandidateTest } from './create-candidate';
 import { createCandidateFeaturesTest } from './create-candidate-features';
 
@@ -39,15 +38,3 @@ createCandidateTest(
 );
 
 createCandidateFeaturesTest('breezy-hr');
-
-const replaceBoundaryInMultipartFormDataBody = (
-  newBoundary: string,
-  body?: nock.RequestBodyMatcher
-): string | undefined => {
-  if (typeof body !== 'string') {
-    return undefined;
-  }
-  const bodyString = Buffer.from(body, 'hex').toString();
-
-  return bodyString.replace(/^(-*[0-9]+)/gm, newBoundary);
-};

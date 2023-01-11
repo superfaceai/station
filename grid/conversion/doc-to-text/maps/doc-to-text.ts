@@ -1,10 +1,13 @@
 /* eslint-disable jest/no-export */
 import { BinaryData } from '@superfaceai/one-sdk';
-import { SuperfaceTest } from '@superfaceai/testing';
+import { RecordingProcessOptions, SuperfaceTest } from '@superfaceai/testing';
 
 import { buildSuperfaceTest } from '../../../test-config';
 
-export const docToTextTest = (provider: string): void => {
+export const docToTextTest = (
+  provider: string,
+  options?: RecordingProcessOptions
+): void => {
   describe(`conversion/doc-to-text/${provider}`, () => {
     let superface: SuperfaceTest;
 
@@ -17,31 +20,37 @@ export const docToTextTest = (provider: string): void => {
     });
 
     describe('ConvertDocumentToText', () => {
-      it('should map error when empty file passed', async () => {
-        const result = await superface.run({
-          useCase: 'ConvertDocumentToText',
-          input: {
-            fileName: 'empty-file.pdf',
-            content: BinaryData.fromPath(
-              'grid/conversion/doc-to-text/maps/test-files/empty-file.pdf'
-            ),
+      it('should return error when converting empty file', async () => {
+        const result = await superface.run(
+          {
+            useCase: 'ConvertDocumentToText',
+            input: {
+              fileName: 'empty-file.pdf',
+              content: BinaryData.fromPath(
+                'grid/conversion/doc-to-text/maps/test-files/empty-file.pdf'
+              ),
+            },
           },
-        });
+          options
+        );
 
         expect(() => result.unwrap()).toThrow();
         expect(result).toMatchSnapshot();
       });
 
       it('should perform successfully', async () => {
-        const result = await superface.run({
-          useCase: 'ConvertDocumentToText',
-          input: {
-            fileName: 'big-bang.pdf',
-            content: BinaryData.fromPath(
-              'grid/conversion/doc-to-text/maps/test-files/big-bang.pdf'
-            ),
+        const result = await superface.run(
+          {
+            useCase: 'ConvertDocumentToText',
+            input: {
+              fileName: 'big-bang.pdf',
+              content: BinaryData.fromPath(
+                'grid/conversion/doc-to-text/maps/test-files/big-bang.pdf'
+              ),
+            },
           },
-        });
+          options
+        );
 
         expect(() => result.unwrap()).not.toThrow();
         expect(result).toMatchSnapshot();
