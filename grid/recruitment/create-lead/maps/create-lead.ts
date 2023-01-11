@@ -1,4 +1,4 @@
-/* eslint-disable jest/no-export, jest/valid-describe, jest/valid-title, jest/no-identical-title */
+/* eslint-disable jest/no-export, jest/valid-describe-callback, jest/valid-title, jest/no-identical-title */
 
 import { RecordingProcessOptions, SuperfaceTest } from '@superfaceai/testing';
 import { readFileSync } from 'fs';
