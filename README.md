@@ -152,7 +152,7 @@ $ yarn test grid/[scope]/[name]/maps/example.test.ts
 
 ### Debugging maps
 
-You can set the OneSDK `DEBUG` environment variable to enable logging for debugging purposes: 
+You can set the OneSDK `DEBUG` environment variable to enable logging for debugging purposes:
 
 ```
 DEBUG="superface:http*"

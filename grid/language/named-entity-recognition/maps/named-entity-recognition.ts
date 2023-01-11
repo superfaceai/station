@@ -20,8 +20,7 @@ export const namedEntityRecognitionTest = (provider: string): void => {
         const result = await superface.run({
           useCase: 'NamedEntityRecognition',
           input: {
-            text:
-              'Houston Natural Gas, run by Kenneth Lay merges with InterNorth, a natural gas company in Omaha, Nebraska, to form an interstate and intrastate natural gas pipeline with approximately 37,000 miles of pipeline.',
+            text: 'Houston Natural Gas, run by Kenneth Lay merges with InterNorth, a natural gas company in Omaha, Nebraska, to form an interstate and intrastate natural gas pipeline with approximately 37,000 miles of pipeline.',
           },
         });
         expect(result).toMatchSnapshot();
@@ -31,8 +30,7 @@ export const namedEntityRecognitionTest = (provider: string): void => {
         const result = await superface.run({
           useCase: 'NamedEntityRecognition',
           input: {
-            text:
-              'Společnost Houston Natural Gas, kterou vede Kenneth Lay, se spojuje se společností InterNorth, plynárenskou společností v Omaze v Nebrasce, za účelem vytvoření mezistátního a vnitrostátního plynovodu na zemní plyn s přibližně 37 000 mil plynovodu.',
+            text: 'Společnost Houston Natural Gas, kterou vede Kenneth Lay, se spojuje se společností InterNorth, plynárenskou společností v Omaze v Nebrasce, za účelem vytvoření mezistátního a vnitrostátního plynovodu na zemní plyn s přibližně 37 000 mil plynovodu.',
             languageCode: 'cs',
           },
         });

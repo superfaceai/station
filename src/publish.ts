@@ -75,9 +75,7 @@ export async function publish(
   }
 }
 
-export async function publishAll(
-  options?: PublishOptions
-): Promise<{
+export async function publishAll(options?: PublishOptions): Promise<{
   errors: { path: string; error: Error | ServiceApiError }[];
   localFiles: string[];
 }> {
