@@ -1,3 +1,4 @@
+import { ProcessingFunction } from '@superfaceai/testing';
 import { RequestBodyMatcher } from 'nock/types';
 
 import { replaceBoundaryInMultipartFormDataBody } from './replace_boundary';
@@ -9,7 +10,7 @@ type RecordingMatcher = (recording: {
 
 export const multipartFormDataBoundaryMatcherHook = (
   recordingMatcher: RecordingMatcher
-) => {
+): ProcessingFunction => {
   return (
     recordings: {
       path: string;
