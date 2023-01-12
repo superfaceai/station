@@ -1,0 +1,50 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`recruitment/get-cv/workable GetCV when getting a CV with a valid candidate ID returns the CV document 1`] = `
+Ok {
+  "value": Object {
+    "cv": Object {
+      "documentUrl": "https://workablehr.s3.amazonaws.com/uploads/587179/2887832/224945280/download/cv-sample.pdf?X-Amz-Expires=60000&X-Amz-Date=20230109T102635Z&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAIR2MIE33PRKXR4CA%2F20230109%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-SignedHeaders=host&X-Amz-Signature=6127e0742410ae84ea90e5d90ddf3d19b6522d36eb41fb354b55eceb99ac6dba",
+    },
+    "rateLimit": Object {
+      "bucket": "workable",
+      "remainingRequests": 8,
+      "remainingRequestsPercentage": 80,
+      "resetTimestamp": 1673260005,
+      "totalRequests": 10,
+    },
+  },
+}
+`;
+
+exports[`recruitment/get-cv/workable GetCV when getting a CV with an invalid candidate ID INVALID_CANDIDATE_ID returns candidate not found error 1`] = `
+Err {
+  "error": "MappedError: Expected error
+Properties: {
+  \\"title\\": \\"Candidate Not Found\\",
+  \\"detail\\": \\"Candidate ID  INVALID_CANDIDATE_ID does not exist.\\",
+  \\"code\\": \\"CandidateNotFound\\",
+  \\"rateLimit\\": {
+    \\"bucket\\": \\"workable\\"
+  }
+}
+AST Path: definitions[0].statements[1].statements[0]
+Original Map Location: Line 17, column 5",
+}
+`;
+
+exports[`recruitment/get-cv/workable GetCV when specified subdomain does not exist returns error 1`] = `
+Err {
+  "error": "MappedError: Expected error
+Properties: {
+  \\"title\\": \\"Wrong Integration Parameter\\",
+  \\"detail\\": \\"Subdomain invalid-subdomain does not exist.\\",
+  \\"code\\": \\"WrongIntegrationParameter\\",
+  \\"rateLimit\\": {
+    \\"bucket\\": \\"workable\\"
+  }
+}
+AST Path: definitions[0].statements[0].statements[0]
+Original Map Location: Line 9, column 5",
+}
+`;
