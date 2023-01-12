@@ -2,7 +2,10 @@ import { multipartFormDataBoundaryMatcherHook } from '../../../../test/helpers/m
 import { docToTextTest } from './doc-to-text';
 
 docToTextTest('cloudmersive', {
-  beforeRecordingLoad: multipartFormDataBoundaryMatcherHook((recording) => {
-    return recording.method === 'POST' && recording.path === '/convert/autodetect/to/txt';
-  })
+  beforeRecordingLoad: multipartFormDataBoundaryMatcherHook(recording => {
+    return (
+      recording.method === 'POST' &&
+      recording.path === '/convert/autodetect/to/txt'
+    );
+  }),
 });

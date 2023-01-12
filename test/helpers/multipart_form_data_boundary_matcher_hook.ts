@@ -1,14 +1,15 @@
 import { RequestBodyMatcher } from 'nock/types';
 
-import { replaceBoundaryInMultipartFormDataBody } from "./replace_boundary";
+import { replaceBoundaryInMultipartFormDataBody } from './replace_boundary';
 
 type RecordingMatcher = (recording: {
   path: string;
   method?: string | undefined;
 }) => boolean;
 
-export const multipartFormDataBoundaryMatcherHook = (recordingMatcher: RecordingMatcher) => {
-
+export const multipartFormDataBoundaryMatcherHook = (
+  recordingMatcher: RecordingMatcher
+) => {
   return (
     recordings: {
       path: string;
@@ -40,5 +41,5 @@ export const multipartFormDataBoundaryMatcherHook = (recordingMatcher: Recording
         }
       }
     );
-  }
-}
+  };
+};

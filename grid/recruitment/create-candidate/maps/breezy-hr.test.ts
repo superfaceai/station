@@ -9,11 +9,14 @@ createCandidateTest(
     invalid: '12345ab789d1dd',
   },
   {
-    beforeRecordingLoad: multipartFormDataBoundaryMatcherHook((recording) => {
-      return recording.method === 'POST' && /^\/v3\/company\/.+\/position\/.+\/candidate\/.+\/resume$/m.test(
-        recording.path
+    beforeRecordingLoad: multipartFormDataBoundaryMatcherHook(recording => {
+      return (
+        recording.method === 'POST' &&
+        /^\/v3\/company\/.+\/position\/.+\/candidate\/.+\/resume$/m.test(
+          recording.path
+        )
       );
-    })
+    }),
   }
 );
 
