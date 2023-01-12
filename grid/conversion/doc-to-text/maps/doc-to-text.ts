@@ -1,6 +1,7 @@
 /* eslint-disable jest/no-export */
 import { BinaryData } from '@superfaceai/one-sdk';
 import { RecordingProcessOptions, SuperfaceTest } from '@superfaceai/testing';
+import { resolve } from 'path';
 
 import { buildSuperfaceTest } from '../../../test-config';
 
@@ -27,7 +28,7 @@ export const docToTextTest = (
             input: {
               fileName: 'empty-file.pdf',
               content: BinaryData.fromPath(
-                'grid/conversion/doc-to-text/maps/test-files/empty-file.pdf'
+                resolve(__dirname, 'test-files/empty-file.pdf')
               ),
             },
           },
@@ -45,7 +46,7 @@ export const docToTextTest = (
             input: {
               fileName: 'big-bang.pdf',
               content: BinaryData.fromPath(
-                'grid/conversion/doc-to-text/maps/test-files/big-bang.pdf'
+                resolve(__dirname, 'test-files/big-bang.pdf')
               ),
             },
           },
