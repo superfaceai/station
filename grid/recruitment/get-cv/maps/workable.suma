@@ -90,7 +90,7 @@ operation CheckSubdomainExists {
     response 422 "application/json" {
       fail {
         title = 'Wrong Integration Parameter'
-        detail = `Subdomain ${ args.subdomain } do not exist.`
+        detail = `Subdomain ${ args.subdomain } does not exist.`
         code = 'WrongIntegrationParameter'
         rateLimit = call MapRateLimit(headers = headers)
       }
