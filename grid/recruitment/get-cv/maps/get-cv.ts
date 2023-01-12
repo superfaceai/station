@@ -24,8 +24,8 @@ export const getCVTest = (
         });
       });
 
-      describe('when geting CV with valid candidate ID', () => {
-        it('returns CV document', async () => {
+      describe('when getting a CV with a valid candidate ID', () => {
+        it('returns the CV document', async () => {
           const result = await superface.run(
             {
               input: {
@@ -42,7 +42,7 @@ export const getCVTest = (
       });
 
       testInputs.invalidCandidateIds.forEach(invalidCandidateId => {
-        describe(`when geting CV with invalid candidate ID ${invalidCandidateId}`, () => {
+        describe(`when getting a CV with an invalid candidate ID ${invalidCandidateId}`, () => {
           it('returns candidate not found error', async () => {
             const result = await superface.run(
               {
