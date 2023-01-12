@@ -2,12 +2,12 @@ import { SuperfaceTest } from '@superfaceai/testing';
 
 import { buildSuperfaceTest } from '../../../test-config';
 
-describe('conversion/doc-to-text/mock', () => {
+describe('file-conversion/doc-to-text/mock', () => {
   let superface: SuperfaceTest;
 
   beforeEach(() => {
     superface = buildSuperfaceTest({
-      profile: 'conversion/doc-to-text',
+      profile: 'file-conversion/doc-to-text',
       provider: 'mock',
     });
   });

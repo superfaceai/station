@@ -9,13 +9,13 @@ export const docToTextTest = (
   provider: string,
   options?: RecordingProcessOptions
 ): void => {
-  describe(`conversion/doc-to-text/${provider}`, () => {
+  describe(`file-conversion/doc-to-text/${provider}`, () => {
     let superface: SuperfaceTest;
 
     beforeEach(() => {
       jest.setTimeout(20000);
       superface = buildSuperfaceTest({
-        profile: 'conversion/doc-to-text',
+        profile: 'file-conversion/doc-to-text',
         provider,
       });
     });
