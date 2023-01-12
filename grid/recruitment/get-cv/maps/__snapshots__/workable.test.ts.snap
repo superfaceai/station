@@ -1,22 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`recruitment/get-cv/workable GetCV when geting CV with invalid candidate ID INVALID_CANDIDATE_ID returns candidate not found error 1`] = `
-Err {
-  "error": "MappedError: Expected error
-Properties: {
-  \\"title\\": \\"Candidate Not Found\\",
-  \\"detail\\": \\"Candidate ID  INVALID_CANDIDATE_ID does not exist.\\",
-  \\"code\\": \\"CandidateNotFound\\",
-  \\"rateLimit\\": {
-    \\"bucket\\": \\"workable\\"
-  }
-}
-AST Path: definitions[0].statements[1].statements[0]
-Original Map Location: Line 17, column 5",
-}
-`;
-
-exports[`recruitment/get-cv/workable GetCV when geting CV with valid candidate ID returns CV document 1`] = `
+exports[`recruitment/get-cv/workable GetCV when getting a CV with a valid candidate ID returns the CV document 1`] = `
 Ok {
   "value": Object {
     "cv": Object {
@@ -30,6 +14,22 @@ Ok {
       "totalRequests": 10,
     },
   },
+}
+`;
+
+exports[`recruitment/get-cv/workable GetCV when getting a CV with an invalid candidate ID INVALID_CANDIDATE_ID returns candidate not found error 1`] = `
+Err {
+  "error": "MappedError: Expected error
+Properties: {
+  \\"title\\": \\"Candidate Not Found\\",
+  \\"detail\\": \\"Candidate ID  INVALID_CANDIDATE_ID does not exist.\\",
+  \\"code\\": \\"CandidateNotFound\\",
+  \\"rateLimit\\": {
+    \\"bucket\\": \\"workable\\"
+  }
+}
+AST Path: definitions[0].statements[1].statements[0]
+Original Map Location: Line 17, column 5",
 }
 `;
 
