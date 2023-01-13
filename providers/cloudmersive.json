@@ -1,0 +1,24 @@
+{
+  "name": "cloudmersive",
+  "services": [
+    {
+      "id": "default",
+      "baseUrl": "https://{API_INSTANCE}.cloudmersive.com"
+    }
+  ],
+  "defaultService": "default",
+  "securitySchemes": [
+    {
+      "id": "apikey",
+      "in": "header",
+      "type": "apiKey",
+      "name": "apikey"
+    }
+  ],
+  "parameters": [
+    {
+      "name": "API_INSTANCE",
+      "description": "Either production \"api\" ot test \"testapi\" instance of the Cloudmersive service."
+    }
+  ]
+}

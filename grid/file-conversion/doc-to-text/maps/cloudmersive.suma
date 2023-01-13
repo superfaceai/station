@@ -1,0 +1,79 @@
+profile = "file-conversion/doc-to-text@1.0"
+provider = "cloudmersive"
+
+map ConvertDocumentToText {
+  content = input.content
+
+  tmp = (content.name = input.fileName)
+    
+  http POST "/convert/autodetect/to/txt" {
+    security "apikey"
+
+    request 'multipart/form-data' {
+      headers {
+        textFormattingMode = 'minimizeWhitespace'
+      }
+      body {
+        inputFile = content
+      }
+    }
+
+    response 200 "application/json" {
+      return map error if (!body.Successful) {
+        title = 'Conversion Failed'
+        code = 'ConversionFailed'
+        detail = 'Unable to convert document to plain text.'
+      }
+
+      return map result {
+        text = body.TextResult.trim()
+      }
+    }
+
+    response 400 {
+      return map  error {
+        title = 'Conversion Failed'
+        code = 'ConversionFailed'
+        detail = body
+      }
+    }
+
+    response {
+      error = call MapCloudMersiveError(
+        statusCode = statusCode,
+        body = body
+      )
+      
+      return map error error
+    }
+  }
+}
+
+operation MapCloudMersiveError {
+  statusCode = args.statusCode
+  body = args.body
+
+  return if (statusCode === 401) {
+    title = 'Unauthenticated'
+    detail = body
+    code = 'Unauthenticated'
+  }
+
+  return if (statusCode === 403) {
+    title = 'Unauthorized'
+    detail = body
+    code = 'Unauthorized'
+  }
+
+  return if (statusCode === 429) {
+    title = 'Rate limit exceeded'
+    detail = 'You reached max requests quota.'
+    code = 'RateLimitReached'
+  }
+
+  return {
+    title = "Unknown error"
+    detail = `Request failed with status code: ${statusCode}. Request body: ` + body
+    code = 'UnknownError'
+  }
+}

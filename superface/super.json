@@ -925,6 +925,21 @@
         "mock",
         "workable"
       ]
+    },
+    "file-conversion/doc-to-text": {
+      "file": "../grid/file-conversion/doc-to-text/profile.supr",
+      "providers": {
+        "mock": {
+          "file": "../grid/file-conversion/doc-to-text/maps/mock.suma"
+        },
+        "cloudmersive": {
+          "file": "../grid/file-conversion/doc-to-text/maps/cloudmersive.suma"
+        }
+      },
+      "priority": [
+        "mock",
+        "cloudmersive"
+      ]
     }
   },
   "providers": {
@@ -1495,6 +1510,18 @@
       "parameters": {
         "COMPANY_ID": "$BREEZY_HR_COMPANY_ID",
         "ACCESS_TOKEN": "$BREEZY_HR_ACCESS_TOKEN"
+      }
+    },
+    "cloudmersive": {
+      "file": "../providers/cloudmersive.json",
+      "security": [
+        {
+          "id": "apikey",
+          "apikey": "$CLOUDMERSIVE_API_KEY"
+        }
+      ],
+      "parameters": {
+        "API_INSTANCE": "$CLOUDMERSIVE_API_INSTANCE"
       }
     }
   }
