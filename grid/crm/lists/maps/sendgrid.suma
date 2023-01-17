@@ -1,0 +1,52 @@
+profile = "crm/lists@1.0"
+provider = "sendgrid"
+
+map GetLists {
+    http GET "/v3/marketing/lists" {
+        security "bearer_token"
+
+        request {
+            query {
+                page_token = input.page,
+            }
+        }
+
+        response 200 "application/json" {
+            map result {
+                lists = body.result.map((list) => {
+                    return {
+                        listId: list.id,
+                        name: list.name,
+                        length: list.contact_count
+                    }
+                })
+                nextPage = body._metadata.next ? body._metadata.next.match('page_token=([a-z0-9-]+)')[1] : null
+            }
+        }
+    } 
+}
+
+// If the contact already exists in the system, any entries submitted via this endpoint
+// will update the existing contact. The contact to update will be determined only by the
+// email field and any fields omitted from the request will remain as they were. A 
+// contact's ID cannot be used to update the contact.
+//
+// https://docs.sendgrid.com/api-reference/contacts/add-or-update-a-contact
+map AddContactsToList {
+  http PUT "/v3/marketing/contacts" {
+    security "bearer_token"
+
+    request {
+      body = {
+        list_ids: [input.listId],
+        contacts: input.emails.map((email) => {
+            return {
+                email: email
+            }
+        })
+      }
+    }
+
+    response 202 {}
+  }
+}

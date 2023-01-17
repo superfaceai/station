@@ -1,0 +1,96 @@
+"""
+Lists
+Manage contact lists in Customer Relation Management systems.
+"""
+
+name = "crm/lists"
+version = "1.0.0"
+
+"""
+Get All Lists
+Get all available contact lists
+"""
+usecase GetLists safe {
+  input {
+    """
+    Page
+    Pagination cursor (obtained from `nextPage`).
+    """
+    page string
+  }
+
+  result {
+    lists [
+      {
+        """
+        ID
+        Unique ID of the contact list.
+        """
+        listId! string!
+        """
+        Name
+        Name or description of the contact list.
+        """
+        name string
+        """
+        Length
+        Amount of contacts in the contact list.
+        """
+        length number
+      }
+    ]
+    """
+    Next page
+    Next page cursor.
+    """
+    nextPage string
+  }
+
+  error {
+    """
+    Title
+    A short, human-readable summary of the problem type.
+    """
+    title! string
+
+    """
+    Detail
+    A human-readable explanation specific to this occurrence of the problem.
+    """
+    detail string
+  }
+}
+
+"""
+Add Contacts to List
+Adds existing contacts to an existing list.
+"""
+usecase AddContactsToList unsafe {
+  input {
+    """
+    List ID
+    Unique ID of the list to add a contact to.
+    """
+    listId! string!
+
+    """
+    Contact e-mail
+    E-mail address of the contact to add to the list.
+    """
+    emails! [string!]!
+  }
+
+  error {
+    """
+    Title
+    A short, human-readable summary of the problem type.
+    """
+    title! string
+
+    """
+    Detail
+    A human-readable explanation specific to this occurrence of the problem.
+    """
+    detail string
+  }
+}
