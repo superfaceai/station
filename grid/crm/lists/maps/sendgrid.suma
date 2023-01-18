@@ -1,0 +1,62 @@
+profile = "crm/lists@1.0"
+provider = "sendgrid"
+
+map GetLists {
+    http GET "/v3/marketing/lists" {
+        security "bearer_token"
+
+        request {
+            query {
+                page_token = input.page,
+            }
+        }
+
+        response 200 "application/json" {
+            map result {
+                lists = body.result.map((list) => {
+                    return {
+                        listId: list.id,
+                        name: list.name,
+                        length: list.contact_count
+                    }
+                })
+                nextPage = body._metadata.next ? body._metadata.next.match('page_token=([a-z0-9-]+)')[1] : null
+            }
+        }
+
+        response 400 "application/json" {
+            map error {
+                title = "Invalid inputs"
+                detail = body.errors.map((err) => `${err.field}: ${err.message}`).join(' ')
+            }
+        }
+
+        response 413 "application/json" {
+            map error {
+                title = "Payload Too Large"
+                detail = body.errors.map((err) => err.message).join(' ')
+            }
+        }
+
+        response 401 "application/json" {
+            map error {
+                title = "Unauthorized"
+                detail = body.errors.map((err) => err.message).join(' ')
+            }
+        }
+
+        response 403 "application/json" {
+            map error {
+                title = "Forbidden"
+                detail = body.errors.map((err) => err.message).join(' ')
+            }
+        }
+
+        response 500 "application/json" {
+            map error {
+                title = "Internal server Error"
+                detail = body.errors.map((err) => err.message).join(' ')
+            }
+        }
+    } 
+}

@@ -1,0 +1,43 @@
+"""
+Add Contacts to List
+Adds contacts to an existing contact list.
+"""
+
+name = "crm/add-contacts-to-list"
+version = "1.0.0"
+
+"""
+Add Contacts to List
+Adds contacts to an existing contact list. Use the `crm/lists` profile to get the list ID.
+"""
+usecase AddContactsToList unsafe {
+  input {
+    """
+    List ID
+    Unique ID of the list to add a contact to.
+    """
+    listId! string!
+
+    """
+    Contact e-mails
+    E-mail addresses of the contacts to add to the list.
+    """
+    emails! [string!]!
+  }
+
+  error Error
+}
+
+model Error {
+  """
+  Title
+  A short, human-readable summary of the problem type.
+  """
+  title! string
+
+  """
+  Detail
+  A human-readable explanation specific to this occurrence of the problem.
+  """
+  detail string
+}

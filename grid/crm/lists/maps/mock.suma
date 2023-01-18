@@ -1,0 +1,20 @@
+profile = "crm/lists@1.0"
+provider = "mock"
+
+map GetLists {
+    map result {
+        lists = [
+            {
+                listId: "foo-bar-1",
+                name: "The first list",
+                length: 42
+            },
+            {
+                listId: "foo-bar-2",
+                name: "Second list",
+                length: 8
+            }
+        ],
+        nextPage = "opaquenextpagetoken"
+    }
+}
