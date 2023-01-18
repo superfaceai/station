@@ -4,7 +4,7 @@ Adds contacts to an existing contact list.
 """
 
 name = "crm/add-contacts-to-list"
-version = "1.0.0"
+version = "1.0.1"
 
 """
 Add Contacts to List
@@ -26,6 +26,16 @@ usecase AddContactsToList unsafe {
   }
 
   error Error
+
+  example Successful {
+    input {
+      listId = "123e4567-e89b-12d3-a456-426614174000"
+      emails = [
+        "alice@example.com",
+        "bob@example.com"
+      ]
+    }
+  }
 }
 
 model Error {
