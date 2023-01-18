@@ -49,28 +49,6 @@ usecase GetLists safe {
   error Error
 }
 
-"""
-Add Contacts to List
-Adds existing contacts to an existing list.
-"""
-usecase AddContactsToList unsafe {
-  input {
-    """
-    List ID
-    Unique ID of the list to add a contact to.
-    """
-    listId! string!
-
-    """
-    Contact e-mails
-    E-mail addresses of the contacts to add to the list.
-    """
-    emails! [string!]!
-  }
-
-  error Error
-}
-
 model Error {
   """
   Title

@@ -1,71 +1,5 @@
 {
   "crm/lists/sendgrid/GetLists": {
-    "eb1386702fb9a34bf3d070f436b17057": [
-      {
-        "scope": "https://api.sendgrid.com:443",
-        "method": "GET",
-        "path": "/v3/marketing/lists",
-        "body": "",
-        "status": 200,
-        "response": {
-          "result": [
-            {
-              "name": "test list",
-              "id": "17a9df8c-9003-4c60-8e27-8492aebdacce",
-              "contact_count": 2,
-              "_metadata": {
-                "self": "https://api.sendgrid.com/v3/marketing/lists/17a9df8c-9003-4c60-8e27-8492aebdacce"
-              }
-            },
-            {
-              "name": "test list two",
-              "id": "761dc899-a2d6-40e2-82c6-312a3db2566c",
-              "contact_count": 0,
-              "_metadata": {
-                "self": "https://api.sendgrid.com/v3/marketing/lists/761dc899-a2d6-40e2-82c6-312a3db2566c"
-              }
-            }
-          ],
-          "_metadata": {
-            "self": "https://api.sendgrid.com/v3/marketing/lists?page_size=100&page_token=",
-            "count": 2
-          }
-        },
-        "rawHeaders": [
-          "Server",
-          "nginx",
-          "Date",
-          "Tue, 17 Jan 2023 15:54:24 GMT",
-          "Content-Type",
-          "application/json",
-          "Content-Length",
-          "494",
-          "Connection",
-          "close",
-          "x-amzn-requestid",
-          "68e693d1-44e1-429d-affc-f73ad16814a2",
-          "x-amz-apigw-id",
-          "e5OrhFMQvHcFuJA=",
-          "x-amzn-trace-id",
-          "Root=1-63c6c4af-0feb281600eeb34d0c3d6291;Sampled=0",
-          "x-envoy-upstream-service-time",
-          "125",
-          "referrer-policy",
-          "strict-origin-when-cross-origin",
-          "x-content-type-options",
-          "nosniff",
-          "x-ratelimit-limit",
-          "600",
-          "x-ratelimit-remaining",
-          "599",
-          "x-ratelimit-reset",
-          "37",
-          "Powered-By",
-          "SGGateway"
-        ],
-        "responseIsBinary": false
-      }
-    ],
     "790a1e221266fa9dd66e8bba804c6fb8": [
       {
         "scope": "https://api.sendgrid.com:443",
@@ -101,7 +35,7 @@
           "Server",
           "nginx",
           "Date",
-          "Wed, 18 Jan 2023 10:44:58 GMT",
+          "Wed, 18 Jan 2023 11:00:23 GMT",
           "Content-Type",
           "application/json",
           "Content-Length",
@@ -109,13 +43,13 @@
           "Connection",
           "close",
           "x-amzn-requestid",
-          "516a9e88-dceb-4eaf-9360-ab7a901ff850",
+          "ed84e741-5ca6-4619-86e2-8620e39b2e61",
           "x-amz-apigw-id",
-          "e70SmGk8vHcFo1A=",
+          "e72jMHUJvHcFxIA=",
           "x-amzn-trace-id",
-          "Root=1-63c7cda9-591b37c9121f10e101afc7e1;Sampled=0",
+          "Root=1-63c7d147-249375246a0bbc0775f0dade;Sampled=0",
           "x-envoy-upstream-service-time",
-          "99",
+          "148",
           "referrer-policy",
           "strict-origin-when-cross-origin",
           "x-content-type-options",
@@ -123,139 +57,11 @@
           "x-ratelimit-limit",
           "600",
           "x-ratelimit-remaining",
-          "598",
+          "599",
           "x-ratelimit-reset",
-          "3",
+          "37",
           "Powered-By",
           "SGGateway"
-        ],
-        "responseIsBinary": false
-      }
-    ]
-  },
-  "crm/lists/sendgrid/AddContactsToList": {
-    "2ba4184f4c18645dace95da87e26b692": [
-      {
-        "scope": "https://api.sendgrid.com:443",
-        "method": "PUT",
-        "path": "/v3/marketing/contacts",
-        "body": {
-          "list_ids": [
-            "17a9df8c-9003-4c60-8e27-8492aebdacce"
-          ],
-          "contacts": [
-            {
-              "email": "demo+added_one@superface.ai"
-            },
-            {
-              "email": "demo+added_two@superface.ai"
-            }
-          ]
-        },
-        "status": 202,
-        "response": {
-          "job_id": "d0a7a15f-5aad-4d69-8098-6d6239343a3b"
-        },
-        "rawHeaders": [
-          "Server",
-          "nginx",
-          "Date",
-          "Tue, 17 Jan 2023 15:54:24 GMT",
-          "Content-Type",
-          "application/json",
-          "Content-Length",
-          "50",
-          "Connection",
-          "close",
-          "x-amzn-requestid",
-          "688f4132-6b78-48b3-ba61-251a236038c8",
-          "access-control-allow-origin",
-          "*",
-          "access-control-allow-headers",
-          "AUTHORIZATION, Content-Type, On-behalf-of, x-sg-elas-acl, X-Recaptcha, X-Request-Source",
-          "x-amz-apigw-id",
-          "e5OroHngvHcFebQ=",
-          "access-control-allow-methods",
-          "PUT,OPTIONS,DELETE,OPTIONS",
-          "access-control-expose-headers",
-          "Link, Location",
-          "x-amzn-trace-id",
-          "Root=1-63c6c4b0-38375e7e1faf04ee0b9b8ac1;Sampled=0",
-          "x-envoy-upstream-service-time",
-          "295",
-          "referrer-policy",
-          "strict-origin-when-cross-origin",
-          "x-content-type-options",
-          "nosniff",
-          "x-ratelimit-limit",
-          "200",
-          "x-ratelimit-remaining",
-          "199",
-          "x-ratelimit-reset",
-          "36"
-        ],
-        "responseIsBinary": false
-      }
-    ],
-    "b2e17388d0f0ee218b8569d6405547ee": [
-      {
-        "scope": "https://api.sendgrid.com:443",
-        "method": "PUT",
-        "path": "/v3/marketing/contacts",
-        "body": {
-          "list_ids": [
-            "17a9df8c-9003-4c60-8e27-8492aebdacce"
-          ],
-          "contacts": [
-            {
-              "email": "demo+added_one@superface.ai"
-            },
-            {
-              "email": "demo+added_two@superface.ai"
-            }
-          ]
-        },
-        "status": 202,
-        "response": {
-          "job_id": "1ccf00e4-7501-4457-b051-efb992b3f11e"
-        },
-        "rawHeaders": [
-          "Server",
-          "nginx",
-          "Date",
-          "Wed, 18 Jan 2023 10:44:59 GMT",
-          "Content-Type",
-          "application/json",
-          "Content-Length",
-          "50",
-          "Connection",
-          "close",
-          "x-amzn-requestid",
-          "c725704e-8e2f-491b-93a7-888b9475c3f1",
-          "access-control-allow-origin",
-          "*",
-          "access-control-allow-headers",
-          "AUTHORIZATION, Content-Type, On-behalf-of, x-sg-elas-acl, X-Recaptcha, X-Request-Source",
-          "x-amz-apigw-id",
-          "e70StHWyPHcFeNA=",
-          "access-control-allow-methods",
-          "PUT,OPTIONS,DELETE,OPTIONS",
-          "access-control-expose-headers",
-          "Link, Location",
-          "x-amzn-trace-id",
-          "Root=1-63c7cdaa-5be0cbc9362b5a0876481fce;Sampled=0",
-          "x-envoy-upstream-service-time",
-          "415",
-          "referrer-policy",
-          "strict-origin-when-cross-origin",
-          "x-content-type-options",
-          "nosniff",
-          "x-ratelimit-limit",
-          "200",
-          "x-ratelimit-remaining",
-          "198",
-          "x-ratelimit-reset",
-          "2"
         ],
         "responseIsBinary": false
       }
