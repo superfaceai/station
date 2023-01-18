@@ -8,29 +8,31 @@ import { SuperfaceTest } from '@superfaceai/testing';
 import { buildSuperfaceTest } from '../../../test-config';
 
 export function getListsTest(providerName: string): void {
-  describe(`crm/lists/get-lists/${providerName}`, () => {
-    let superface: SuperfaceTest;
-
-    beforeEach(() => {
-      superface = buildSuperfaceTest({
-        profile: 'crm/lists',
-        provider: providerName,
-      });
-    });
-
+  describe(`crm/lists/${providerName}`, () => {
     describe('GetLists', () => {
-      it('returns all lists', async () => {
-        const result = await superface.run({
-          useCase: 'GetLists',
-          input: {},
-        });
+      let superface: SuperfaceTest;
 
-        expect(() => result.unwrap()).not.toThrow();
-        const data = result.unwrap();
-        expect(data).toMatchSnapshot();
+      beforeEach(() => {
+        superface = buildSuperfaceTest({
+          profile: 'crm/lists',
+          provider: providerName,
+        });
       });
+
+      describe('GetLists', () => {
+        it('returns all lists', async () => {
+          const result = await superface.run({
+            useCase: 'GetLists',
+            input: {},
+          });
+
+          expect(() => result.unwrap()).not.toThrow();
+          const data = result.unwrap();
+          expect(data).toMatchSnapshot();
+        });
+      });
+      // TODO: test pagination?
     });
-    // TODO: test pagination?
   });
 }
 
@@ -39,33 +41,35 @@ export function addContactsToListTest(
   emails: string[],
   listId: string
 ): void {
-  describe(`crm/lists/addContacts/${providerName}`, () => {
-    let superface: SuperfaceTest;
-
-    beforeEach(() => {
-      superface = buildSuperfaceTest({
-        profile: 'crm/lists',
-        provider: providerName,
-      });
-    });
-
+  describe(`crm/lists/${providerName}`, () => {
     describe('AddContactsToList', () => {
-      describe('when all inputs are correct', () => {
-        it('adds all contacts to a list', async () => {
-          const result = await superface.run({
-            useCase: 'AddContactsToList',
-            input: {
-              emails,
-              listId,
-            },
-          });
+      let superface: SuperfaceTest;
 
-          expect(() => result.unwrap()).not.toThrow();
-          const data = result.unwrap();
-          expect(data).toMatchSnapshot();
+      beforeEach(() => {
+        superface = buildSuperfaceTest({
+          profile: 'crm/lists',
+          provider: providerName,
         });
-        // TODO: ensure contacts were actually added
-        // TODO: clean up after test
+      });
+
+      describe('AddContactsToList', () => {
+        describe('when all inputs are correct', () => {
+          it('adds all contacts to a list', async () => {
+            const result = await superface.run({
+              useCase: 'AddContactsToList',
+              input: {
+                emails,
+                listId,
+              },
+            });
+
+            expect(() => result.unwrap()).not.toThrow();
+            const data = result.unwrap();
+            expect(data).toMatchSnapshot();
+          });
+          // TODO: ensure contacts were actually added
+          // TODO: clean up after test
+        });
       });
     });
   });
