@@ -4,7 +4,7 @@ Manage contact lists in Customer Relation Management systems.
 """
 
 name = "crm/lists"
-version = "1.0.0"
+version = "1.0.1"
 
 """
 Get All Lists
@@ -47,6 +47,25 @@ usecase GetLists safe {
   }
 
   error Error
+
+  example Successful {
+    input {}
+    result {
+      lists = [
+            {
+                listId = "foo-bar-1",
+                name = "The first list",
+                length = 42
+            },
+            {
+                listId = "foo-bar-2",
+                name = "Second list",
+                length = 8
+            }
+        ],
+        nextPage = "opaquenextpagetoken"
+    }    
+  }
 }
 
 model Error {
