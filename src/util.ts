@@ -6,6 +6,7 @@ import {
   NodeFileSystem,
   normalizeSuperJsonDocument,
 } from '@superfaceai/one-sdk';
+import { exec } from 'child_process';
 import * as fs from 'fs';
 import * as glob from 'glob';
 import { join as joinPath, resolve } from 'path';
@@ -210,4 +211,35 @@ export async function localMaps(options?: {
 
 export function arrayDiff<T>(a: T[], b: T[]): T[] {
   return a.filter(x => !b.includes(x));
+}
+
+export async function gitDiff(
+  branch1: string,
+  branch2: string
+): Promise<string[]> {
+  return new Promise((resolve, reject) => {
+    exec(
+      `git diff --name-status ${branch1}..${branch2}`,
+      (error, stdout, stderr) => {
+        if (error) {
+          reject(new Error(error.message));
+        }
+        if (stderr) {
+          reject(new Error('StdErr: ' + stderr));
+        }
+
+        const regexpFile = /^[A,M]\s*(.*)$/;
+        const lines = stdout.split('\n');
+        const files = lines
+          .map(line => {
+            const match = regexpFile.exec(line);
+
+            return match && match.length > 1 ? match[1] : undefined;
+          })
+          .filter(file => file !== undefined) as string[];
+
+        resolve(files);
+      }
+    );
+  });
 }

@@ -1,5 +1,6 @@
 import { SuperJsonDocument } from '@superfaceai/ast';
 import { detectSuperJson, loadSuperJson, ok } from '@superfaceai/one-sdk';
+import cp, { ChildProcess, ExecException } from 'child_process';
 import * as glob from 'glob';
 import { join } from 'path';
 import { mocked } from 'ts-jest/utils';
@@ -225,6 +226,124 @@ describe('util', () => {
         cwd: '/home',
       });
       expect(result).toEqual([join('/home', 'grid/send-email/provider.suma')]);
+    });
+  });
+
+  describe('gitDiff', () => {
+    let execCommand: string;
+
+    type ExecSpy = (
+      command: string,
+      callback?: (
+        error: ExecException | null,
+        stdout: string,
+        stderr: string
+      ) => void
+    ) => ChildProcess;
+
+    describe('when branch names are valid', () => {
+      let execSpy: jest.SpyInstance;
+
+      beforeEach(() => {
+        execSpy = (jest.spyOn(
+          cp,
+          'exec'
+        ) as unknown) as jest.MockedFunction<ExecSpy>;
+        execSpy.mockImplementation(function (
+          command: string,
+          callback?: (
+            error: ExecException | null,
+            stdout: string,
+            stderr: string
+          ) => void
+        ): ChildProcess {
+          execCommand = command;
+          if (callback) {
+            callback(
+              null,
+              `A   grid/starwars/character-information/profile.supr\nA   grid/starwars/character-information/maps/mock.suma`,
+              ''
+            );
+          }
+
+          return new ChildProcess();
+        });
+      });
+
+      it('should call exec with valid params', async () => {
+        await util.gitDiff('main', 'feat/add_mock_map');
+
+        expect(execCommand).toEqual(
+          'git diff --name-status main..feat/add_mock_map'
+        );
+      });
+
+      it('should return files', async () => {
+        const result = await util.gitDiff('main', 'feat/add_mock_map');
+
+        expect(result).toEqual([
+          'grid/starwars/character-information/profile.supr',
+          'grid/starwars/character-information/maps/mock.suma',
+        ]);
+      });
+    });
+
+    describe("when branch name does't exist", () => {
+      it('should throw error', async () => {
+        const execSpy = (jest.spyOn(
+          cp,
+          'exec'
+        ) as unknown) as jest.MockedFunction<ExecSpy>;
+        execSpy.mockImplementation(function (
+          command: string,
+          callback?: (
+            error: ExecException | null,
+            stdout: string,
+            stderr: string
+          ) => void
+        ): ChildProcess {
+          execCommand = command;
+          if (callback) {
+            callback(
+              null,
+              '',
+              "fatal: ambiguous argument 'main..wrong_branch_name': unknown revision or path not in the working tree."
+            );
+          }
+
+          return new ChildProcess();
+        });
+
+        await expect(
+          util.gitDiff('main', 'wrong_branch_name')
+        ).rejects.toThrowError();
+      });
+    });
+
+    describe('when exec callback error returned', () => {
+      it('should throw error', async () => {
+        const execSpy = (jest.spyOn(
+          cp,
+          'exec'
+        ) as unknown) as jest.MockedFunction<ExecSpy>;
+        execSpy.mockImplementation(function (
+          command: string,
+          callback?: (
+            error: ExecException | null,
+            stdout: string,
+            stderr: string
+          ) => void
+        ): ChildProcess {
+          execCommand = command;
+          if (callback) {
+            callback(new Error(), '', '');
+          }
+
+          return new ChildProcess();
+        });
+
+        await expect(util.gitDiff('main', 'feat')).rejects.toThrowError();
+      });
     });
   });
 });
