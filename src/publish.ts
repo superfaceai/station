@@ -10,6 +10,7 @@ import { promisify } from 'util';
 import {
   exists,
   EXTENSIONS,
+  gitDiff,
   localMaps,
   localProfiles,
   localProviders,
@@ -23,6 +24,8 @@ export type PublishOptions = {
   print?: PrintFn;
   baseUrl?: string;
   refreshToken?: string;
+  beforePushCommitSHA?: string;
+  afterPushCommitSHA?: string;
 };
 
 export async function publish(
@@ -75,14 +78,27 @@ export async function publish(
   }
 }
 
-export async function publishAll(options?: PublishOptions): Promise<{
+export async function publishAll(
+  options?: PublishOptions
+): Promise<{
   errors: { path: string; error: Error | ServiceApiError }[];
   localFiles: string[];
 }> {
-  const localFiles: string[] = [];
+  let localFiles: string[] = [];
   localFiles.push(...(await localProviders()));
   localFiles.push(...(await localProfiles()));
   localFiles.push(...(await localMaps()));
+
+  if (options && options.beforePushCommitSHA && options.afterPushCommitSHA) {
+    //TODO: catch errors, move filtering into separate function, add test
+    const changedFiles = await gitDiff(
+      options.beforePushCommitSHA,
+      options.afterPushCommitSHA
+    );
+    localFiles = localFiles.filter(localFile => {
+      return changedFiles.filter(changedFile => localFile.endsWith(changedFile)).length > 0;
+    });
+  }
 
   const errors: { path: string; error: Error | ServiceApiError }[] = [];
 
@@ -125,6 +141,8 @@ export async function run(): Promise<void> {
     print: console.log,
     baseUrl: process.env.SUPERFACE_API_URL,
     refreshToken: process.env.SUPERFACE_REFRESH_TOKEN,
+    beforePushCommitSHA: process.env.COMMIT_BEFORE_PUSH,
+    afterPushCommitSHA: process.env.COMMIT_AFTER_PUSH,
   };
 
   const { localFiles, errors } = await publishAll(options);
