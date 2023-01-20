@@ -346,4 +346,11 @@ describe('util', () => {
       });
     });
   });
+
+  describe('Test', () => {
+    it.only('should work', async () => {
+      console.debug(await util.gitDiff('88282d0d7087e198823e408acf5275189ba5140a', 'f14c59cf0e8725f3fb8519268a9c4044691fe9c3'));
+      expect(true).toBe(true);
+    });
+  });
 });
