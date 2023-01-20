@@ -214,12 +214,12 @@ export function arrayDiff<T>(a: T[], b: T[]): T[] {
 }
 
 export async function gitDiff(
-  branch1: string,
-  branch2: string
+  commit1: string,
+  commit2: string
 ): Promise<string[]> {
   return new Promise((resolve, reject) => {
     exec(
-      `git diff --name-status ${branch1}..${branch2}`,
+      `git diff --name-status ${commit1}..${commit2}`,
       (error, stdout, stderr) => {
         if (error) {
           reject(new Error(error.message));

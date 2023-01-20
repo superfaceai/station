@@ -241,7 +241,7 @@ describe('util', () => {
       ) => void
     ) => ChildProcess;
 
-    describe('when branch names are valid', () => {
+    describe('when commit hashes are valid', () => {
       let execSpy: jest.SpyInstance;
 
       beforeEach(() => {
@@ -271,15 +271,15 @@ describe('util', () => {
       });
 
       it('should call exec with valid params', async () => {
-        await util.gitDiff('main', 'feat/add_mock_map');
+        await util.gitDiff('a00dc1a2', '88282d0d');
 
         expect(execCommand).toEqual(
-          'git diff --name-status main..feat/add_mock_map'
+          'git diff --name-status a00dc1a2..88282d0d'
         );
       });
 
       it('should return files', async () => {
-        const result = await util.gitDiff('main', 'feat/add_mock_map');
+        const result = await util.gitDiff('a00dc1a2', '88282d0d');
 
         expect(result).toEqual([
           'grid/starwars/character-information/profile.supr',
@@ -288,7 +288,7 @@ describe('util', () => {
       });
     });
 
-    describe("when branch name does't exist", () => {
+    describe("when commit hash does't exist", () => {
       it('should throw error', async () => {
         const execSpy = (jest.spyOn(
           cp,
@@ -307,7 +307,7 @@ describe('util', () => {
             callback(
               null,
               '',
-              "fatal: ambiguous argument 'main..wrong_branch_name': unknown revision or path not in the working tree."
+              "fatal: ambiguous argument 'a00dc1a2..wrong_branch_name': unknown revision or path not in the working tree."
             );
           }
 
@@ -315,7 +315,7 @@ describe('util', () => {
         });
 
         await expect(
-          util.gitDiff('main', 'wrong_branch_name')
+          util.gitDiff('a00dc1a2', 'wrong_commit_hash')
         ).rejects.toThrowError();
       });
     });
