@@ -228,7 +228,7 @@ export async function gitDiff(
           reject(new Error('StdErr: ' + stderr));
         }
         
-        resolve(stdout.split('\n'));
+        resolve(stdout.split('\n').filter(file => file && file.length > 0));
       }
     );
   });

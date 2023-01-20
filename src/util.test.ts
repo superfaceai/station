@@ -261,7 +261,7 @@ describe('util', () => {
           if (callback) {
             callback(
               null,
-              `grid/starwars/character-information/profile.supr\ngrid/starwars/character-information/maps/mock.suma`,
+              `grid/starwars/character-information/profile.supr\ngrid/starwars/character-information/maps/mock.suma\n`,
               ''
             );
           }
