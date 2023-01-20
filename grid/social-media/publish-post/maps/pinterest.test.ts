@@ -9,7 +9,8 @@ publishMediaPostTest('pinterest', {
   text: `Test media publishing from Superface Station.`,
   media: [
     {
-      url: 'https://upload.wikimedia.org/wikipedia/commons/0/09/Sitta-carolinensis-001.jpg',
+      url:
+        'https://upload.wikimedia.org/wikipedia/commons/0/09/Sitta-carolinensis-001.jpg',
     },
   ],
 });
@@ -25,7 +26,8 @@ publishPostErrorTest('pinterest', [
       text: `Test media publishing from Superface Station.`,
       media: [
         {
-          url: 'https://upload.wikimedia.org/wikipedia/commons/0/09/Sitta-carolinensis-001.jpg',
+          url:
+            'https://upload.wikimedia.org/wikipedia/commons/0/09/Sitta-carolinensis-001.jpg',
         },
       ],
     },

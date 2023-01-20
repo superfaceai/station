@@ -7,7 +7,8 @@ publishInputCasesTest('instagram', [
       text: 'Single post from Superface Station.',
       media: [
         {
-          url: 'https://upload.wikimedia.org/wikipedia/commons/0/09/Sitta-carolinensis-001.jpg',
+          url:
+            'https://upload.wikimedia.org/wikipedia/commons/0/09/Sitta-carolinensis-001.jpg',
         },
       ],
     },
@@ -18,10 +19,12 @@ publishInputCasesTest('instagram', [
       text: 'Carousel post from Superface Station.',
       media: [
         {
-          url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/Bloem_van_een_Astrantia_major_%27Roma%27._24-06-2021_%28actm.%29_01.jpg/960px-Bloem_van_een_Astrantia_major_%27Roma%27._24-06-2021_%28actm.%29_01.jpg',
+          url:
+            'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/Bloem_van_een_Astrantia_major_%27Roma%27._24-06-2021_%28actm.%29_01.jpg/960px-Bloem_van_een_Astrantia_major_%27Roma%27._24-06-2021_%28actm.%29_01.jpg',
         },
         {
-          url: 'https://upload.wikimedia.org/wikipedia/commons/0/09/Sitta-carolinensis-001.jpg',
+          url:
+            'https://upload.wikimedia.org/wikipedia/commons/0/09/Sitta-carolinensis-001.jpg',
         },
       ],
     },
@@ -40,7 +43,8 @@ publishPostErrorTest('instagram', [
       text: `Test media publishing from Superface Station.`,
       media: [
         {
-          url: 'https://upload.wikimedia.org/wikipedia/commons/0/09/Sitta-carolinensis-001.jpg',
+          url:
+            'https://upload.wikimedia.org/wikipedia/commons/0/09/Sitta-carolinensis-001.jpg',
         },
       ],
     },

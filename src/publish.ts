@@ -96,7 +96,10 @@ export async function publishAll(
       options.afterPushCommitSHA
     );
     localFiles = localFiles.filter(localFile => {
-      return changedFiles.filter(changedFile => localFile.endsWith(changedFile)).length > 0;
+      return (
+        changedFiles.filter(changedFile => localFile.endsWith(changedFile))
+          .length > 0
+      );
     });
   }
 

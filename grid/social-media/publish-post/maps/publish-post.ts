@@ -158,9 +158,9 @@ export const publishPostErrorTest = (
       });
     });
 
-    const testCases: Array<[string, ErrorCase['input']]> = cases.map(
-      ({ name, input }) => [name, input]
-    );
+    const testCases: Array<
+      [string, ErrorCase['input']]
+    > = cases.map(({ name, input }) => [name, input]);
 
     describe('PublishPost', () => {
       describe('error cases', () => {

@@ -271,7 +271,10 @@ describe('util', () => {
       });
 
       it('should call exec with valid params', async () => {
-        await util.gitDiff('9b133c68b5d88b82dbaaa5046174a9a629f38a41', '3d4622addaf8c894ab4ba5c012d7dba90f0f3a73');
+        await util.gitDiff(
+          '9b133c68b5d88b82dbaaa5046174a9a629f38a41',
+          '3d4622addaf8c894ab4ba5c012d7dba90f0f3a73'
+        );
 
         expect(execCommand).toEqual(
           'git diff --name-only 9b133c68b5d88b82dbaaa5046174a9a629f38a41..3d4622addaf8c894ab4ba5c012d7dba90f0f3a73'
@@ -279,7 +282,10 @@ describe('util', () => {
       });
 
       it('should return files', async () => {
-        const result = await util.gitDiff('9b133c68b5d88b82dbaaa5046174a9a629f38a41', '3d4622addaf8c894ab4ba5c012d7dba90f0f3a73');
+        const result = await util.gitDiff(
+          '9b133c68b5d88b82dbaaa5046174a9a629f38a41',
+          '3d4622addaf8c894ab4ba5c012d7dba90f0f3a73'
+        );
 
         expect(result).toEqual([
           'grid/starwars/character-information/profile.supr',
@@ -315,7 +321,10 @@ describe('util', () => {
         });
 
         await expect(
-          util.gitDiff('9b133c68b5d88b82dbaaa5046174a9a629f38a41', 'wrong_commit_hash')
+          util.gitDiff(
+            '9b133c68b5d88b82dbaaa5046174a9a629f38a41',
+            'wrong_commit_hash'
+          )
         ).rejects.toThrowError();
       });
     });
@@ -342,7 +351,12 @@ describe('util', () => {
           return new ChildProcess();
         });
 
-        await expect(util.gitDiff('9b133c68b5d88b82dbaaa5046174a9a629f38a41', '3d4622addaf8c894ab4ba5c012d7dba90f0f3a73')).rejects.toThrowError();
+        await expect(
+          util.gitDiff(
+            '9b133c68b5d88b82dbaaa5046174a9a629f38a41',
+            '3d4622addaf8c894ab4ba5c012d7dba90f0f3a73'
+          )
+        ).rejects.toThrowError();
       });
     });
   });
