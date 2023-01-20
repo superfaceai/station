@@ -219,7 +219,7 @@ export async function gitDiff(
 ): Promise<string[]> {
   return new Promise((resolve, reject) => {
     exec(
-      `git diff --name-status ${commit1}..${commit2}`,
+      `git diff --name-only ${commit1}..${commit2}`,
       (error, stdout, stderr) => {
         if (error) {
           reject(new Error(error.message));
@@ -227,18 +227,8 @@ export async function gitDiff(
         if (stderr) {
           reject(new Error('StdErr: ' + stderr));
         }
-
-        const regexpFile = /^[A,M]\s*(.*)$/;
-        const lines = stdout.split('\n');
-        const files = lines
-          .map(line => {
-            const match = regexpFile.exec(line);
-
-            return match && match.length > 1 ? match[1] : undefined;
-          })
-          .filter(file => file !== undefined) as string[];
-
-        resolve(files);
+        
+        resolve(stdout.split('\n'));
       }
     );
   });

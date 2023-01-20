@@ -261,7 +261,7 @@ describe('util', () => {
           if (callback) {
             callback(
               null,
-              `A   grid/starwars/character-information/profile.supr\nA   grid/starwars/character-information/maps/mock.suma`,
+              `grid/starwars/character-information/profile.supr\ngrid/starwars/character-information/maps/mock.suma`,
               ''
             );
           }
@@ -271,15 +271,15 @@ describe('util', () => {
       });
 
       it('should call exec with valid params', async () => {
-        await util.gitDiff('a00dc1a2', '88282d0d');
+        await util.gitDiff('9b133c68b5d88b82dbaaa5046174a9a629f38a41', '3d4622addaf8c894ab4ba5c012d7dba90f0f3a73');
 
         expect(execCommand).toEqual(
-          'git diff --name-status a00dc1a2..88282d0d'
+          'git diff --name-only 9b133c68b5d88b82dbaaa5046174a9a629f38a41..3d4622addaf8c894ab4ba5c012d7dba90f0f3a73'
         );
       });
 
       it('should return files', async () => {
-        const result = await util.gitDiff('a00dc1a2', '88282d0d');
+        const result = await util.gitDiff('9b133c68b5d88b82dbaaa5046174a9a629f38a41', '3d4622addaf8c894ab4ba5c012d7dba90f0f3a73');
 
         expect(result).toEqual([
           'grid/starwars/character-information/profile.supr',
@@ -307,7 +307,7 @@ describe('util', () => {
             callback(
               null,
               '',
-              "fatal: ambiguous argument 'a00dc1a2..wrong_branch_name': unknown revision or path not in the working tree."
+              "fatal: ambiguous argument '9b133c68b5d88b82dbaaa5046174a9a629f38a41..wrong_branch_name': unknown revision or path not in the working tree."
             );
           }
 
@@ -315,7 +315,7 @@ describe('util', () => {
         });
 
         await expect(
-          util.gitDiff('a00dc1a2', 'wrong_commit_hash')
+          util.gitDiff('9b133c68b5d88b82dbaaa5046174a9a629f38a41', 'wrong_commit_hash')
         ).rejects.toThrowError();
       });
     });
@@ -342,15 +342,8 @@ describe('util', () => {
           return new ChildProcess();
         });
 
-        await expect(util.gitDiff('main', 'feat')).rejects.toThrowError();
+        await expect(util.gitDiff('9b133c68b5d88b82dbaaa5046174a9a629f38a41', '3d4622addaf8c894ab4ba5c012d7dba90f0f3a73')).rejects.toThrowError();
       });
-    });
-  });
-
-  describe('Test', () => {
-    it.only('should work', async () => {
-      console.debug(await util.gitDiff('88282d0d7087e198823e408acf5275189ba5140a', 'f14c59cf0e8725f3fb8519268a9c4044691fe9c3'));
-      expect(true).toBe(true);
     });
   });
 });

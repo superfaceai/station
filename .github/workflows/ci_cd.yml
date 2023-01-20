@@ -125,6 +125,8 @@ jobs:
     env:
       SUPERFACE_REFRESH_TOKEN: ${{ secrets.SUPERFACE_REFRESH_TOKEN }}
       PUBLISH_DELAY_MS: ${{ secrets.PUBLISH_DELAY_MS }}
+      COMMIT_BEFORE_PUSH: ${{ github.event.before }}
+      COMMIT_AFTER_PUSH: ${{ github.event.after }}
     steps:
       - name: Setup Node.js
         uses: actions/setup-node@v2
