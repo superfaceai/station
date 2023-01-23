@@ -313,7 +313,7 @@ describe('util', () => {
             callback(
               null,
               '',
-              "fatal: ambiguous argument '9b133c68b5d88b82dbaaa5046174a9a629f38a41..wrong_branch_name': unknown revision or path not in the working tree."
+              "fatal: ambiguous argument '9b133c68b5d88b82dbaaa5046174a9a629f38a41..wrong_commit_hash': unknown revision or path not in the working tree."
             );
           }
 
