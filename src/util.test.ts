@@ -329,7 +329,7 @@ describe('util', () => {
       });
     });
 
-    describe('when exec callback error returned', () => {
+    describe('when exec callback is called with error', () => {
       it('should throw error', async () => {
         const execSpy = jest.spyOn(
           cp,
