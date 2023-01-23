@@ -233,3 +233,15 @@ export async function gitDiff(
     );
   });
 }
+
+export function getChangedLocalFiles(
+  localFiles: string[],
+  gitChanges: string[]
+): string[] {
+  return localFiles.filter(localFile => {
+    return (
+      gitChanges.filter(changedFile => localFile.endsWith(changedFile)).length >
+      0
+    );
+  });
+}

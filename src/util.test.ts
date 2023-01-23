@@ -361,3 +361,21 @@ describe('util', () => {
     });
   });
 });
+
+describe('getChangedLocalFiles', () => {
+  it('filters local files containing Git changes', () => {
+    const changeLocalFiles = util.getChangedLocalFiles(
+      [
+        '/home/runner/work/station/station/providers/asana.json',
+        '/home/runner/work/station/station/providers/assemblyai.json',
+      ],
+      [
+        'providers/asana.json',
+        'grid/starwars/character-information/profile.supr',
+      ]
+    );
+    expect(changeLocalFiles).toEqual([
+      '/home/runner/work/station/station/providers/asana.json',
+    ]);
+  });
+});

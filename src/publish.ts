@@ -10,6 +10,7 @@ import { promisify } from 'util';
 import {
   exists,
   EXTENSIONS,
+  getChangedLocalFiles,
   gitDiff,
   localMaps,
   localProfiles,
@@ -90,17 +91,27 @@ export async function publishAll(
   localFiles.push(...(await localMaps()));
 
   if (options && options.beforePushCommitSHA && options.afterPushCommitSHA) {
-    //TODO: catch errors, move filtering into separate function, add test
-    const changedFiles = await gitDiff(
-      options.beforePushCommitSHA,
-      options.afterPushCommitSHA
-    );
-    localFiles = localFiles.filter(localFile => {
-      return (
-        changedFiles.filter(changedFile => localFile.endsWith(changedFile))
-          .length > 0
+    try {
+      const gitChanges = await gitDiff(
+        options.beforePushCommitSHA,
+        options.afterPushCommitSHA
       );
-    });
+      localFiles = getChangedLocalFiles(localFiles, gitChanges);
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        options?.print?.(
+          `WARNING: Failed to get git changes, publishing all local files, error: ${error.message}.`
+        );
+      } else {
+        options?.print?.(
+          `WARNING: Failed to get git changes, publishing all local files, unknown error.`
+        );
+      }
+    }
+  } else {
+    options?.print?.(
+      `WARNING: 'COMMIT_BEFORE_PUSH' or 'COMMIT_AFTER_PUSH' env variables not defined, publishing all local files.`
+    );
   }
 
   const errors: { path: string; error: Error | ServiceApiError }[] = [];
