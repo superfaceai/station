@@ -245,10 +245,10 @@ describe('util', () => {
       let execSpy: jest.SpyInstance;
 
       beforeEach(() => {
-        execSpy = (jest.spyOn(
+        execSpy = jest.spyOn(
           cp,
           'exec'
-        ) as unknown) as jest.MockedFunction<ExecSpy>;
+        ) as unknown as jest.MockedFunction<ExecSpy>;
         execSpy.mockImplementation(function (
           command: string,
           callback?: (
@@ -296,10 +296,10 @@ describe('util', () => {
 
     describe("when commit hash does't exist", () => {
       it('should throw error', async () => {
-        const execSpy = (jest.spyOn(
+        const execSpy = jest.spyOn(
           cp,
           'exec'
-        ) as unknown) as jest.MockedFunction<ExecSpy>;
+        ) as unknown as jest.MockedFunction<ExecSpy>;
         execSpy.mockImplementation(function (
           command: string,
           callback?: (
@@ -331,10 +331,10 @@ describe('util', () => {
 
     describe('when exec callback error returned', () => {
       it('should throw error', async () => {
-        const execSpy = (jest.spyOn(
+        const execSpy = jest.spyOn(
           cp,
           'exec'
-        ) as unknown) as jest.MockedFunction<ExecSpy>;
+        ) as unknown as jest.MockedFunction<ExecSpy>;
         execSpy.mockImplementation(function (
           command: string,
           callback?: (
