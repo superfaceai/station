@@ -220,9 +220,9 @@ export async function gitDiff(
   return new Promise((resolve, reject) => {
     exec(
       `git diff --name-only ${commit1}..${commit2}`,
-      (error, stdout, stderr) => {
-        if (error) {
-          reject(new Error(error.message));
+      (execException, stdout, stderr) => {
+        if (execException) {
+          reject(new Error(execException.message));
         }
         if (stderr) {
           reject(new Error('StdErr: ' + stderr));
