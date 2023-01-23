@@ -97,7 +97,9 @@ export async function publishAll(options?: PublishOptions): Promise<{
       localFiles = getChangedLocalFiles(localFiles, gitChanges);
     } catch (error: unknown) {
       options?.print?.(
-        `WARNING: Failed to get git changes, publishing all local files, error: ${error instanceof Error ? error.message : String(error)}`
+        `WARNING: Failed to get git changes, publishing all local files, error: ${
+          error instanceof Error ? error.message : String(error)
+        }`
       );
     }
   } else {
