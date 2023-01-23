@@ -10,6 +10,8 @@ import { promisify } from 'util';
 import {
   exists,
   EXTENSIONS,
+  getChangedLocalFiles,
+  gitDiff,
   localMaps,
   localProfiles,
   localProviders,
@@ -23,6 +25,8 @@ export type PublishOptions = {
   print?: PrintFn;
   baseUrl?: string;
   refreshToken?: string;
+  beforePushCommitSHA?: string;
+  afterPushCommitSHA?: string;
 };
 
 export async function publish(
@@ -79,10 +83,30 @@ export async function publishAll(options?: PublishOptions): Promise<{
   errors: { path: string; error: Error | ServiceApiError }[];
   localFiles: string[];
 }> {
-  const localFiles: string[] = [];
+  let localFiles: string[] = [];
   localFiles.push(...(await localProviders()));
   localFiles.push(...(await localProfiles()));
   localFiles.push(...(await localMaps()));
+
+  if (options && options.beforePushCommitSHA && options.afterPushCommitSHA) {
+    try {
+      const gitChanges = await gitDiff(
+        options.beforePushCommitSHA,
+        options.afterPushCommitSHA
+      );
+      localFiles = getChangedLocalFiles(localFiles, gitChanges);
+    } catch (error: unknown) {
+      options?.print?.(
+        `WARNING: Failed to get git changes, publishing all local files, error: ${
+          error instanceof Error ? error.message : String(error)
+        }`
+      );
+    }
+  } else {
+    options?.print?.(
+      `WARNING: 'COMMIT_BEFORE_PUSH' or 'COMMIT_AFTER_PUSH' env variables not defined, publishing all local files.`
+    );
+  }
 
   const errors: { path: string; error: Error | ServiceApiError }[] = [];
 
@@ -125,6 +149,8 @@ export async function run(): Promise<void> {
     print: console.log,
     baseUrl: process.env.SUPERFACE_API_URL,
     refreshToken: process.env.SUPERFACE_REFRESH_TOKEN,
+    beforePushCommitSHA: process.env.COMMIT_BEFORE_PUSH,
+    afterPushCommitSHA: process.env.COMMIT_AFTER_PUSH,
   };
 
   const { localFiles, errors } = await publishAll(options);

@@ -6,6 +6,7 @@ import {
   NodeFileSystem,
   normalizeSuperJsonDocument,
 } from '@superfaceai/one-sdk';
+import { exec } from 'child_process';
 import * as fs from 'fs';
 import * as glob from 'glob';
 import { join as joinPath, resolve } from 'path';
@@ -210,4 +211,37 @@ export async function localMaps(options?: {
 
 export function arrayDiff<T>(a: T[], b: T[]): T[] {
   return a.filter(x => !b.includes(x));
+}
+
+export async function gitDiff(
+  commit1: string,
+  commit2: string
+): Promise<string[]> {
+  return new Promise((resolve, reject) => {
+    exec(
+      `git diff --name-only ${commit1}..${commit2}`,
+      (execException, stdout, stderr) => {
+        if (execException) {
+          reject(execException);
+        }
+        if (stderr) {
+          reject(new Error('StdErr: ' + stderr));
+        }
+
+        resolve(stdout.split('\n').filter(file => file && file.length > 0));
+      }
+    );
+  });
+}
+
+export function getChangedLocalFiles(
+  localFiles: string[],
+  gitChanges: string[]
+): string[] {
+  return localFiles.filter(localFile => {
+    return (
+      gitChanges.filter(changedFile => localFile.endsWith(changedFile)).length >
+      0
+    );
+  });
 }

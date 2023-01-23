@@ -1,5 +1,6 @@
 import { SuperJsonDocument } from '@superfaceai/ast';
 import { detectSuperJson, loadSuperJson, ok } from '@superfaceai/one-sdk';
+import cp, { ChildProcess, ExecException } from 'child_process';
 import * as glob from 'glob';
 import { join } from 'path';
 import { mocked } from 'ts-jest/utils';
@@ -226,5 +227,153 @@ describe('util', () => {
       });
       expect(result).toEqual([join('/home', 'grid/send-email/provider.suma')]);
     });
+  });
+
+  describe('gitDiff', () => {
+    let execCommand: string;
+
+    describe('when commit hashes are valid', () => {
+      beforeEach(() => {
+        const execSpy = jest.spyOn(cp, 'exec');
+        execSpy.mockImplementation(function (
+          command: string,
+          options?: any,
+          callback?: (
+            error: ExecException | null,
+            stdout: string,
+            stderr: string
+          ) => void
+        ): ChildProcess {
+          execCommand = command;
+
+          if (typeof options === 'function') {
+            callback = options;
+          }
+
+          if (callback) {
+            callback(
+              null,
+              `grid/starwars/character-information/profile.supr\ngrid/starwars/character-information/maps/mock.suma\n`,
+              ''
+            );
+          }
+
+          return new ChildProcess();
+        });
+      });
+
+      it('should call exec with valid params', async () => {
+        await util.gitDiff(
+          '9b133c68b5d88b82dbaaa5046174a9a629f38a41',
+          '3d4622addaf8c894ab4ba5c012d7dba90f0f3a73'
+        );
+
+        expect(execCommand).toEqual(
+          'git diff --name-only 9b133c68b5d88b82dbaaa5046174a9a629f38a41..3d4622addaf8c894ab4ba5c012d7dba90f0f3a73'
+        );
+      });
+
+      it('should return files', async () => {
+        const result = await util.gitDiff(
+          '9b133c68b5d88b82dbaaa5046174a9a629f38a41',
+          '3d4622addaf8c894ab4ba5c012d7dba90f0f3a73'
+        );
+
+        expect(result).toEqual([
+          'grid/starwars/character-information/profile.supr',
+          'grid/starwars/character-information/maps/mock.suma',
+        ]);
+      });
+    });
+
+    describe("when commit hash does't exist", () => {
+      it('should throw error', async () => {
+        const execSpy = jest.spyOn(cp, 'exec');
+        execSpy.mockImplementation(function (
+          command: string,
+          options?: any,
+          callback?: (
+            error: ExecException | null,
+            stdout: string,
+            stderr: string
+          ) => void
+        ): ChildProcess {
+          execCommand = command;
+
+          if (typeof options === 'function') {
+            callback = options;
+          }
+
+          if (callback) {
+            callback(
+              null,
+              '',
+              "fatal: ambiguous argument '9b133c68b5d88b82dbaaa5046174a9a629f38a41..wrong_commit_hash': unknown revision or path not in the working tree."
+            );
+          }
+
+          return new ChildProcess();
+        });
+
+        await expect(
+          util.gitDiff(
+            '9b133c68b5d88b82dbaaa5046174a9a629f38a41',
+            'wrong_commit_hash'
+          )
+        ).rejects.toThrowError();
+      });
+    });
+
+    describe('when exec callback is called with error', () => {
+      it('should throw error', async () => {
+        const execSpy = jest.spyOn(cp, 'exec');
+        execSpy.mockImplementation(function (
+          command: string,
+          options?: any,
+          callback?: (
+            error: ExecException | null,
+            stdout: string,
+            stderr: string
+          ) => void
+        ): ChildProcess {
+          execCommand = command;
+
+          if (typeof options === 'function') {
+            callback = options;
+          }
+
+          if (callback) {
+            callback(new Error(), '', '');
+          }
+
+          return new ChildProcess();
+        });
+
+        await expect(
+          util.gitDiff(
+            '9b133c68b5d88b82dbaaa5046174a9a629f38a41',
+            '3d4622addaf8c894ab4ba5c012d7dba90f0f3a73'
+          )
+        ).rejects.toThrowError();
+      });
+    });
+  });
+});
+
+describe('getChangedLocalFiles', () => {
+  it('filters local files containing Git changes', () => {
+    const changeLocalFiles = util.getChangedLocalFiles(
+      [
+        '/home/runner/work/station/station/providers/asana.json',
+        '/home/runner/work/station/station/providers/assemblyai.json',
+      ],
+      [
+        'providers/asana.json',
+        'grid/starwars/character-information/profile.supr',
+      ]
+    );
+    expect(changeLocalFiles).toEqual([
+      '/home/runner/work/station/station/providers/asana.json',
+    ]);
   });
 });
