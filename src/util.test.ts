@@ -232,25 +232,12 @@ describe('util', () => {
   describe('gitDiff', () => {
     let execCommand: string;
 
-    type ExecSpy = (
-      command: string,
-      callback?: (
-        error: ExecException | null,
-        stdout: string,
-        stderr: string
-      ) => void
-    ) => ChildProcess;
-
     describe('when commit hashes are valid', () => {
-      let execSpy: jest.SpyInstance;
-
       beforeEach(() => {
-        execSpy = jest.spyOn(
-          cp,
-          'exec'
-        ) as unknown as jest.MockedFunction<ExecSpy>;
+        const execSpy = jest.spyOn(cp, 'exec');
         execSpy.mockImplementation(function (
           command: string,
+          options?: any,
           callback?: (
             error: ExecException | null,
             stdout: string,
@@ -258,6 +245,11 @@ describe('util', () => {
           ) => void
         ): ChildProcess {
           execCommand = command;
+
+          if (typeof options === 'function') {
+            callback = options;
+          }
+
           if (callback) {
             callback(
               null,
@@ -296,12 +288,10 @@ describe('util', () => {
 
     describe("when commit hash does't exist", () => {
       it('should throw error', async () => {
-        const execSpy = jest.spyOn(
-          cp,
-          'exec'
-        ) as unknown as jest.MockedFunction<ExecSpy>;
+        const execSpy = jest.spyOn(cp, 'exec');
         execSpy.mockImplementation(function (
           command: string,
+          options?: any,
           callback?: (
             error: ExecException | null,
             stdout: string,
@@ -309,6 +299,11 @@ describe('util', () => {
           ) => void
         ): ChildProcess {
           execCommand = command;
+
+          if (typeof options === 'function') {
+            callback = options;
+          }
+
           if (callback) {
             callback(
               null,
@@ -331,12 +326,10 @@ describe('util', () => {
 
     describe('when exec callback is called with error', () => {
       it('should throw error', async () => {
-        const execSpy = jest.spyOn(
-          cp,
-          'exec'
-        ) as unknown as jest.MockedFunction<ExecSpy>;
+        const execSpy = jest.spyOn(cp, 'exec');
         execSpy.mockImplementation(function (
           command: string,
+          options?: any,
           callback?: (
             error: ExecException | null,
             stdout: string,
@@ -344,6 +337,11 @@ describe('util', () => {
           ) => void
         ): ChildProcess {
           execCommand = command;
+
+          if (typeof options === 'function') {
+            callback = options;
+          }
+
           if (callback) {
             callback(new Error(), '', '');
           }
