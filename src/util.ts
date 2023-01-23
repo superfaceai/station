@@ -222,7 +222,7 @@ export async function gitDiff(
       `git diff --name-only ${commit1}..${commit2}`,
       (execException, stdout, stderr) => {
         if (execException) {
-          reject(new Error(execException.message));
+          reject(execException);
         }
         if (stderr) {
           reject(new Error('StdErr: ' + stderr));
