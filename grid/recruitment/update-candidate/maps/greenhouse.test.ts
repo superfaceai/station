@@ -1,6 +1,4 @@
-import {
-  updateCandidateTest,
-} from './update-candidate';
+import { updateCandidateTest } from './update-candidate';
 import { updateCandidateFeaturesTest } from './update-candidate-features';
 
 updateCandidateTest('greenhouse', {
