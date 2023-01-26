@@ -38,7 +38,7 @@ type Candidate = {
   }[];
 };
 
-type Error = {
+type RecruitmentError = {
   title: string;
   detail?: unknown;
   code: string;
@@ -156,7 +156,7 @@ export const createCandidateTest = (
             result.match(
               () => {},
               err => {
-                expect((err as IMappedError<Error>).properties?.code).toBe(
+                expect((err as IMappedError<RecruitmentError>).properties?.code).toBe(
                   'CVMIMETypeNotSupported'
                 );
               }
@@ -186,7 +186,7 @@ export const createCandidateTest = (
             result.match(
               () => {},
               err => {
-                expect((err as IMappedError<Error>).properties?.code).toBe(
+                expect((err as IMappedError<RecruitmentError>).properties?.code).toBe(
                   'CVFileNameRequired'
                 );
               }
