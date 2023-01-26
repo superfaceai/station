@@ -1,6 +1,6 @@
 /* eslint-disable jest/no-export, jest/valid-describe-callback, jest/valid-title, jest/no-identical-title */
 
-import { BinaryData } from '@superfaceai/one-sdk';
+import { BinaryData, IMappedError } from '@superfaceai/one-sdk';
 import { RecordingProcessOptions, SuperfaceTest } from '@superfaceai/testing';
 
 import { buildSuperfaceTest } from '../../../test-config';
@@ -36,6 +36,19 @@ type Candidate = {
     name: string;
     url: string;
   }[];
+};
+
+type Error = {
+  title: string;
+  detail?: unknown;
+  code: string;
+  rateLimit?: {
+    bucket?: string;
+    totalRequests?: number;
+    remainingRequests?: number;
+    remainingRequestsPercentage?: number;
+    resetTimestam?: number;
+  };
 };
 
 const buildSampleCandidate = (): Candidate => {
@@ -114,41 +127,58 @@ export const updateCandidateTest = (
       describe('when specified job does exist', () => {
         describe('when CV file with unsupported MIME type used', () => {
           it('returns CVMIMETypeNotSupported error', async () => {
-            await expect(
-              superface.run(
-                {
-                  input: {
-                    candidateId: candidateIds.validCandidateId,
-                    ...sampleCandidate,
-                    cv: {
-                      ...sampleCandidate.cv,
-                      fileName: 'cv-sample.xml',
-                    },
+            const result = await superface.run(
+              {
+                input: {
+                  candidateId: candidateIds.validCandidateId,
+                  ...sampleCandidate,
+                  cv: {
+                    ...sampleCandidate.cv,
+                    fileName: 'cv-sample.xml',
                   },
                 },
-                options
-              )
-            ).resolves.toMatchSnapshot();
+              },
+              { fullError: true, ...options }
+            );
+            expect(() => result.unwrap()).toThrow();
+            result.match(
+              () => {},
+              err => {
+                expect((err as IMappedError<Error>).properties?.code).toBe(
+                  'CVMIMETypeNotSupported'
+                );
+              }
+            );
           });
         });
 
         describe('when CV file name is missing', () => {
           it('returns CVFileNameRequired error', async () => {
-            await expect(
-              superface.run(
-                {
-                  input: {
-                    candidateId: candidateIds.validCandidateId,
-                    ...sampleCandidate,
-                    cv: {
-                      ...sampleCandidate.cv,
-                      fileName: undefined,
-                    },
+            const result = await superface.run(
+              {
+                input: {
+                  candidateId: candidateIds.validCandidateId,
+                  ...sampleCandidate,
+                  cv: {
+                    ...sampleCandidate.cv,
+                    fileName: undefined,
                   },
                 },
-                options
-              )
-            ).resolves.toMatchSnapshot();
+              },
+              {
+                fullError: true,
+                ...options,
+              }
+            );
+            expect(() => result.unwrap()).toThrow();
+            result.match(
+              () => {},
+              err => {
+                expect((err as IMappedError<Error>).properties?.code).toBe(
+                  'CVFileNameRequired'
+                );
+              }
+            );
           });
         });
 
@@ -164,7 +194,7 @@ export const updateCandidateTest = (
               },
               options
             );
-            expect(result.isOk()).toBeTruthy();
+            expect(() => result.unwrap()).not.toThrow();
             expect(result).toMatchSnapshot();
           });
         });
