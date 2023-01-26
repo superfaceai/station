@@ -144,9 +144,9 @@ export const updateCandidateTest = (
             result.match(
               () => {},
               err => {
-                expect((err as IMappedError<RecruitmentError>).properties?.code).toBe(
-                  'CVMIMETypeNotSupported'
-                );
+                expect(
+                  (err as IMappedError<RecruitmentError>).properties?.code
+                ).toBe('CVMIMETypeNotSupported');
               }
             );
           });
@@ -174,9 +174,9 @@ export const updateCandidateTest = (
             result.match(
               () => {},
               err => {
-                expect((err as IMappedError<RecruitmentError>).properties?.code).toBe(
-                  'CVFileNameRequired'
-                );
+                expect(
+                  (err as IMappedError<RecruitmentError>).properties?.code
+                ).toBe('CVFileNameRequired');
               }
             );
           });
