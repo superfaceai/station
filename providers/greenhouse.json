@@ -1,0 +1,23 @@
+{
+  "name": "greenhouse",
+  "services": [
+    {
+      "id": "harvest",
+      "baseUrl": "https://harvest.greenhouse.io"
+    }
+  ],
+  "securitySchemes": [
+    {
+      "id": "apiKeyBasicAuth",
+      "type": "http",
+      "scheme": "basic"
+    }
+  ],
+  "defaultService": "harvest",
+  "parameters": [
+    {
+      "name": "ON_BEHALF_OF",
+      "description": "ID of the user issuing a request. Required for auditing purposes."
+    }
+  ]
+}

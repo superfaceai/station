@@ -840,6 +840,9 @@
         },
         "breezy-hr": {
           "file": "../grid/recruitment/create-candidate/maps/breezy-hr.suma"
+        },
+        "greenhouse": {
+          "file": "../grid/recruitment/create-candidate/maps/greenhouse.suma"
         }
       }
     },
@@ -1544,6 +1547,19 @@
       ],
       "parameters": {
         "API_INSTANCE": "$CLOUDMERSIVE_API_INSTANCE"
+      }
+    },
+    "greenhouse": {
+      "file": "../providers/greenhouse.json",
+      "security": [
+        {
+          "id": "apiKeyBasicAuth",
+          "username": "$GREENHOUSE_API_TOKEN",
+          "password": ""
+        }
+      ],
+      "parameters": {
+        "ON_BEHALF_OF": "$GREENHOUSE_USER_ID"
       }
     }
   }

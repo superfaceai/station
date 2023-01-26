@@ -3,7 +3,7 @@ Create Candidate
 Create new candidate in ATS (Applicant Tracking System).
 """
 name = "recruitment/create-candidate"
-version = "2.0.0"
+version = "2.1.0"
 
 """
 Create Candidate
@@ -62,9 +62,9 @@ usecase CreateCandidate {
 
     """
     CV (Resume)
-    Object containing either URL to a CV or data with CV document (BinaryData type) and fileName with the file name.
+    Object containing either URL to a CV or data with CV document (BinaryData type), fileName with the file name and the mime type in mimeType.
     """
-    cv { url string } | { fileName string, data }
+    cv { url string, fileName string, mimeType string, data }
 
     """
     Links
