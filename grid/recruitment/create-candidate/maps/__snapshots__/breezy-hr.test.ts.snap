@@ -20,32 +20,6 @@ Original Map Location: Line 13, column 5",
 }
 `;
 
-exports[`recruitment/create-candidate/breezy-hr CreateCandidate when specified job does exist when CV file name is missing returns CVFileNameRequired error 1`] = `
-Err {
-  "error": "MappedError: Expected error
-Properties: {
-  \\"title\\": \\"Missing CV file name\\",
-  \\"detail\\": \\"CV file name is required.\\",
-  \\"code\\": \\"CVFileNameRequired\\"
-}
-AST Path: definitions[0].statements[0].statements[0]
-Original Map Location: Line 6, column 5",
-}
-`;
-
-exports[`recruitment/create-candidate/breezy-hr CreateCandidate when specified job does exist when unsupported CV file MIME type used returns CVMIMETypeNotSupported error 1`] = `
-Err {
-  "error": "MappedError: Expected error
-Properties: {
-  \\"title\\": \\"CV MIME type not supported\\",
-  \\"detail\\": \\"File type cv-sample.xml is not supported by Breezy HR provider.\\",
-  \\"code\\": \\"CVMIMETypeNotSupported\\"
-}
-AST Path: definitions[0].statements[0].statements[0]
-Original Map Location: Line 6, column 5",
-}
-`;
-
 exports[`recruitment/create-candidate/breezy-hr CreateCandidate when specified job does exist when valid inputs passed performs correctly 1`] = `
 Ok {
   "value": Object {
