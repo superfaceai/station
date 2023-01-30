@@ -110,12 +110,12 @@ map Search {
 
     request "application/json" {
       query {
-        search_filter = [{
+        search_filter = JSON.stringify([{
           criterion : input.property,
           query : [input.value],
           operator : OPERATOR_MAP[input.operator] || input.operator,
           model: "people"
-        }] 
+        }])
       }
 
       headers { "X-Crisp-Tier" = "plugin" }
