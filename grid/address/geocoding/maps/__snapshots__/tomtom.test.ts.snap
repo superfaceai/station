@@ -37,12 +37,10 @@ Ok {
 
 exports[`address/geocoding/tomtom ReverseGeocode when inputs are invalid should throw an exception 1`] = `
 Err {
-  "error": "MappedHTTPError: Expected HTTP error
-Properties: {
-  \\"title\\": \\"Bad request\\",
-  \\"detail\\": \\"Invalid request: invalid position: cannot parse position.\\"
-}
-AST Path: definitions[1].statements[1].responseHandlers[1].statements[0]
-Original Map Location: Line 109, column 7",
+  "error": "InputValidationError: Input validation failed:
+Path: input.latitude
+Error: Missing required field
+Path: input.longitude
+Error: Missing required field",
 }
 `;
