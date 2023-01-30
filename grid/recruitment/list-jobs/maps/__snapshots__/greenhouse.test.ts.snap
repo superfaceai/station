@@ -1,0 +1,43 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`recruitment/list-jobs/greenhouse ListJobs when searching for draft jobs performs correctly 1`] = `
+Ok {
+  "value": Object {
+    "jobs": Array [
+      Object {
+        "createdAt": "2023-01-30T11:08:40.663Z",
+        "departmentName": "Ministry of Silly Walks",
+        "description": null,
+        "id": "4034044006",
+        "name": "Draft Job",
+        "state": "draft",
+      },
+    ],
+    "pagination": Object {
+      "nextPage": 2,
+      "previousPage": 0,
+    },
+  },
+}
+`;
+
+exports[`recruitment/list-jobs/greenhouse ListJobs when searching for published jobs performs correctly 1`] = `
+Ok {
+  "value": Object {
+    "jobs": Array [
+      Object {
+        "createdAt": "2023-01-25T15:25:16.490Z",
+        "departmentName": "Ministry of Silly Walks",
+        "description": null,
+        "id": "4031896006",
+        "name": "Test Job One",
+        "state": "published",
+      },
+    ],
+    "pagination": Object {
+      "nextPage": 2,
+      "previousPage": 0,
+    },
+  },
+}
+`;

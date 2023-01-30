@@ -1,0 +1,61 @@
+profile = "recruitment/list-jobs@1.0"
+provider = "greenhouse"
+
+map ListJobs {
+  // Greenhouse to Superface
+  JOB_STATES_G2S = {
+    "open": "published",
+    "closed": "closed",
+    "draft": "draft"
+  }
+
+  // Superface to Greenhouse
+  JOB_STATES_S2G = {
+    "published": "open",
+    "closed": "closed",
+    "draft": "draft"
+  }
+
+  page = input.page || 1
+  limit = input.limit || 100
+  status = input.state && JOB_STATES_S2G[input.state]
+  
+  http GET "/v1/jobs" {
+    security "apiKeyBasicAuth"
+  
+    request {
+      query {
+        page = page
+        per_page = limit
+        status = status
+      }
+    }
+  
+    response 200 "application/json" {
+      return map result {
+        jobs = body.map((job) => {
+          return {
+            id: String(job.id),
+            name: job.name,
+            description: job.notes,
+            state: JOB_STATES_G2S[job.status],
+            departmentName: job.departments.map((dept) => dept.name).join(", "),
+            createdAt: job.created_at
+          };
+        })
+        pagination = {
+          previousPage: Math.max(page - 1, 0),
+          nextPage: page + 1
+        }
+      }
+    }
+
+    response 401 "application/json" {
+      map error {
+        title = 'Unauthenticated'
+        detail = body.message
+        code = 'Unauthenticated'
+      }
+    }
+  }
+}
