@@ -3,7 +3,7 @@ Create Candidate
 Create new candidate in ATS (Applicant Tracking System).
 """
 name = "recruitment/create-candidate"
-version = "2.0.0"
+version = "2.1.0"
 
 """
 Create Candidate
@@ -60,11 +60,32 @@ usecase CreateCandidate {
     """
     workExperience [WorkExperience]
 
-    """
+   """
     CV (Resume)
-    Object containing either URL to a CV or data with CV document (BinaryData type) and fileName with the file name.
+    Object containing either URL to a CV or data with CV document.
     """
-    cv { url string } | { fileName string, data }
+    cv {
+        """
+        URL
+        Publicly accessible URL of a CV file.
+        """
+        url string 
+        """
+        File Name
+        The file name of the CV document.
+        """
+        fileName string
+        """
+        MIME Type
+        MIME type of the CV document.
+        """
+        mimeType string
+        """
+        Data
+        Binary content of the CV document.
+        """
+        data
+    }
 
     """
     Links
@@ -323,122 +344,6 @@ model Link {
   Actual URL destination of the link.
   """
   url string
-}
-
-model Candidate {
-  """
-  Id
-  Unique identifier of a candidate
-  """
-  id! string!
-  
-  """
-  Job Id
-  Unique identifier of a job, candidate applied for.
-  """
-  jobId! string!
-
-  """
-  Job Title
-  Title of a job, candidate applied for.
-  """
-  jobTitle string
-
-  """
-  First Name
-  First name of a candidate.
-  """
-  firstName! string!
-
-  """
-  Last Name
-  Last name of a candidate.
-  """
-  lastName! string!
-
-  """
-  Full Name
-  Full name of a candidate.
-  """
-  fullName string
-
-  """
-  Email
-  Email of a candidate.
-  """
-  email! string!
-
-  """
-  Phone
-  Phone number of a candidate.
-  """
-  phone string
-
-  """
-  Address
-  Address of a candidate.
-  """
-  address string	
-
-  """
-  Links
-  Array of links specified by a candidate. Can contain links to social profiles, portfolios or other.
-  """
-  links [Link]
-
-  """
-  Experiences
-  Array of work experiences specified by a candidate.
-  """
-  experiences [WorkExperience]
-  
-  """
-  Education
-  Array of education experiences specified by a candidate.
-  """
-  education [Education]
-
-  """
-  CV (Resume)
-  Object containing either url to a CV or data of a CV.
-  """
-  cv { url string } | { name string, data string }
-
-  """
-  CV Url
-  Url pointing to CV of a candidate.
-  """
-  cvUrl string
-
-  """
-  Answers
-  Array of answers to questions connected to a job that candidate applies to.
-  """
-  answers [Answer]
-
-  """
-  Stage
-  Name of a stage, candidate is currently in.
-  """
-  stage string
-
-  """
-  Stage Changes
-  Array of stages, candidate once was in (except for current one).
-  """
-  stageChanges [string]
-
-  """
-  Created At
-  ISO8601 timestamp when was a candidate created.
-  """
-  createdAt string
-  
-  """
-  Updated At
-  ISO8601 timestamp when was a candidate lastly updated.
-  """
-  updatedAt string
 }
 
 model Error {

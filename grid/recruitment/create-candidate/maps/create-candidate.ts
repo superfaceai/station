@@ -14,6 +14,7 @@ type Candidate = {
   address: string;
   cv?: {
     fileName: string;
+    mimeType: string;
     data: BinaryData;
   };
   education: {
@@ -92,6 +93,7 @@ const buildSampleCandidate = (): Candidate => {
 
     cv: {
       fileName: 'cv-sample.pdf',
+      mimeType: 'application/pdf',
       data: BinaryData.fromPath('./grid/recruitment/cv-sample.pdf'),
     },
 
@@ -143,7 +145,8 @@ export const createCandidateTest = (
                   ...sampleCandidate,
                   cv: {
                     ...sampleCandidate.cv,
-                    fileName: 'cv-sample.xml',
+                    fileName: 'cv-sample.xyz',
+                    mimeType: 'unsupported/type',
                   },
                 },
               },

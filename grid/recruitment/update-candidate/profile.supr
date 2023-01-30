@@ -3,7 +3,7 @@ Update Candidate
 Update existing candidate application in ATS (Applicant Tracking System).
 """
 name = "recruitment/update-candidate"
-version = "1.0.0"
+version = "1.1.0"
 
 """
 Update Candidate
@@ -69,18 +69,22 @@ usecase UpdateCandidate unsafe {
         Publicly accessible URL of a CV file.
         """
         url string 
-      } | { 
         """
         File Name
         The file name of the CV document.
         """
-        fileName string,
+        fileName string
+        """
+        MIME Type
+        MIME type of the CV document.
+        """
+        mimeType string
         """
         Data
         Binary content of the CV document.
         """
-        data 
-      }
+        data
+    }
 
     """
     Links
