@@ -21,12 +21,17 @@ export const getMembersTest = (
       });
 
       it('performs correctly', async () => {
+        const input: Record<string, number | string> = {
+          limit: 1,
+        };
+
+        if (typeof options?.workspace === 'string') {
+          input.workspace = options?.workspace;
+        }
+
         const page1 = await superface.run(
           {
-            input: {
-              workspace: options?.workspace,
-              limit: 1,
-            },
+            input,
             testName: 'page 1',
           },
           options?.recordingOptions
@@ -42,13 +47,11 @@ export const getMembersTest = (
           return;
         }
 
+        input.page = cursor;
+
         const page2 = await superface.run(
           {
-            input: {
-              workspace: options?.workspace,
-              limit: 1,
-              page: cursor,
-            },
+            input,
             testName: 'page 2',
           },
           options?.recordingOptions
