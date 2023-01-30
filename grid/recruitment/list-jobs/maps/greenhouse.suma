@@ -18,6 +18,7 @@ map ListJobs {
 
   page = input.page || 1
   limit = input.limit || 100
+  status = input.state && JOB_STATES_S2G[input.state]
   
   http GET "/v1/jobs" {
     security "apiKeyBasicAuth"
@@ -26,7 +27,7 @@ map ListJobs {
       query {
         page = page
         per_page = limit
-        status = JOB_STATES_S2G[input.state]
+        status = status
       }
     }
   
