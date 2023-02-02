@@ -1,0 +1,46 @@
+profile = "crm/lists@1.0"
+provider = "hubspot"
+
+map GetLists { 
+  count = 20
+  offset = input.page || 0
+
+  http GET "/contacts/v1/lists" {
+    security "privateAppToken"
+  
+    // 3) Pass input values to the HTTP request
+    request {
+      query {
+        count = count
+        offset = offset
+      }
+    }
+  
+    // 4) Map successful HTTP response to the result. The content type is optional
+    response 200 "application/json" {
+      return map result {
+        lists = body.lists.map((list) => {
+          return {
+            listId: String(list.listId),
+            name: list.name,
+            length: list.metaData.size
+          }
+        })
+        nextPage = body["has-more"] ? body.offset : undefined
+      }
+    
+    }
+
+    response 401 "application/json" {
+      map error {
+        title = "Authentication error"
+        detail = body.message
+      }
+    }
+
+    response {
+      title = "Unknown error"
+      detail = JSON.stringify(body, null, 2)
+    }
+  }
+}

@@ -1,0 +1,33 @@
+profile = "crm/add-contacts-to-list@1.0"
+provider = "hubspot"
+
+map AddContactsToList {
+  http POST "/contacts/v1/lists/{input.listId}/add" {
+    security "privateAppToken"
+  
+    request {
+      body {
+        emails = input.emails
+      }
+    }
+  
+    response 200 "application/json" {
+      map error if (body.invalidEmails.length) {
+        title = "Failed to add e-mails"
+        detail = `The following e-mails are invalid: ${body.invalidEmails}`
+      }
+    }
+
+    response 401 "application/json" {
+      map error {
+        title = "Authentication error"
+        detail = body.message
+      }
+    }
+
+    response {
+      title = "Unknown error"
+      detail = JSON.stringify(body, null, 2)
+    }
+  }
+}
