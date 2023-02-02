@@ -24,5 +24,10 @@ map AddContactsToList {
         detail = body.message
       }
     }
+
+    response {
+      title = "Unknown error"
+      detail = JSON.stringify(body, null, 2)
+    }
   }
 }
