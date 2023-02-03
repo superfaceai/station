@@ -74,8 +74,11 @@ operation MapMessages {
       if (message.user || message.bot_id) {
         author = {
           id: message.user || message.bot_id,
-          username: message.username
         };
+
+        if (message.username) {
+          author.username = message.username;
+        }
   
         resultMessage.author = author;
       }
