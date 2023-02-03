@@ -49,10 +49,11 @@ operation FetchRepos {
       }
       return {
         repositories: body.map((r) => {
-          return {
-            name: r.name,
-            description: r.description === null ? undefined : r.description
+          const repo = { name: r.name };
+          if (r.description) {
+            repo.description = r.description;
           }
+          return repo;
         }),
         statusCode: statusCode
       }
