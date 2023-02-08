@@ -38,12 +38,10 @@ Ok {
 
 exports[`address/geocoding/opencage ReverseGeocode when inputs are invalid should throw an exception 1`] = `
 Err {
-  "error": "MappedHTTPError: Expected HTTP error
-Properties: {
-  \\"title\\": \\"Error reverse geocoding coordinates\\",
-  \\"detail\\": \\"No results returned\\"
-}
-AST Path: definitions[1].statements[1].responseHandlers[0].statements[1]
-Original Map Location: Line 78, column 7",
+  "error": "InputValidationError: Input validation failed:
+Path: input.latitude
+Error: Missing required field
+Path: input.longitude
+Error: Missing required field",
 }
 `;
