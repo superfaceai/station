@@ -1,0 +1,99 @@
+profile = "booking/list-activities@1.0"
+provider = "bokun"
+
+map ListActivities {
+  LIMIT = 25
+
+  // https://bokun.helpkit.so/api/uzi4nXgs2wN1DhxkkLHves/graphql-reference/vR2B5njQj3zPmZkSsHU8D8
+  http POST "/api/graphql" {
+    security "accessToken"
+  
+    request "application/json" {
+      body {
+        query = "
+          query Experiences($nextPage: String, $limit: Int!) {
+            experiences(after: $nextPage, first: $limit) {
+              edges {
+                node {
+                  id
+                  name
+                  briefDescription
+                  description
+                  categories
+                  keywords
+                  themes
+                  images {
+                    caption
+                    originalUrl
+                    thumbnailUrl
+                    previewUrl
+                  }
+                  videos {
+                    name
+                    sourceUrl
+                    thumbnailUrl
+                    previewUrl
+                  }
+                }
+              }
+              pageInfo {
+                endCursor
+                hasPreviousPage
+              }
+              totalCount
+            }
+          }
+        "
+
+        variables = {
+          nextPage: input.nextPage,
+          limit: LIMIT
+        }
+      }
+    }
+  
+    response 200 "application/json" {
+      return map result {
+        activities = body.data.experiences.edges.map((edge) => {
+          const activity = edge.node;
+          return {
+            id: activity.id,
+            name: activity.name,
+            description: activity.description,
+            shortDescription: activity.briefDescription,
+            images: activity.images.map((image) => {
+              return {
+                url: image.originalUrl,
+                thumbnailUrl: image.previewUrl || image.thumbnailUrl,
+                caption: image.caption
+              }
+            }),
+            videos: activity.videos.map((video) => {
+              return {
+                url: video.sourceUrl,
+                thumbnailUrl: video.previewUrl || video.thumbnailUrl,
+                caption: video.name
+              }
+            }),
+            tags: [].concat(activity.categories, activity.themes, activity.keywords),
+            customFields: []
+          }
+        }),
+        nextPage = body.data.experiences.pageInfo.endCursor
+        total = body.data.experiences.totalCount
+      }
+    }
+  
+    response 401 {
+      map error {
+        title = "Authentication error"
+        detail = body
+      }
+    }
+
+    response {
+      title = "Unknown error"
+      detail = JSON.stringify(body, null, 2)
+    }
+  }
+}
