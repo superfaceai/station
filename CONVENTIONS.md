@@ -52,6 +52,7 @@ We want first gather more content to understand how Comlink maps are written to 
 ### Error handling
 
 #### Handling domain-specific errors
+
 The profile error model should define domain-specific error codes. Domain-specific error codes are contract of the profile, and help with harmonization of multiple providers.
 
 Example of error model:
@@ -91,9 +92,6 @@ model Error {
   }!
 }
 ```
-
-
-
 
 #### Handling unknown responses
 
@@ -136,6 +134,7 @@ map YourUseCase {
 ```
 
 Example of unknown response error output when mapped:
+
 ```
 Err {
   "error": "MappedHTTPError: Expected HTTP error
@@ -150,7 +149,6 @@ Original Map Location: Line 64, column 7",
 ```
 
 Be aware that handling HTTP 500 status codes will prevent OneSDK to failover to backup provider. HTTP 500 status codes handling is not recommended for commodity use cases like sending e-mails, sms messages, getting weather forecast,...
-
 
 ## Example Use-case
 
