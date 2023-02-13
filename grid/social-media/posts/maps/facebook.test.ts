@@ -1,3 +1,3 @@
 import { getProfilePostsTest } from './posts';
 
-getProfilePostsTest('facebook');
+getProfilePostsTest('facebook', 'Sf-test');
