@@ -39,15 +39,17 @@ export const getProfilePostsTest = (
           const resultUnwrapped = result.unwrap() as {
             profiles: [
               {
-                id: string,
-                name: string
+                id: string;
+                name: string;
               }
-            ]
+            ];
           };
 
           let profile;
-          if(profileName) {
-            profile = resultUnwrapped.profiles.find(profile => profile.name === profileName)
+          if (profileName) {
+            profile = resultUnwrapped.profiles.find(
+              profile => profile.name === profileName
+            );
           } else {
             profile = resultUnwrapped.profiles[0];
           }
