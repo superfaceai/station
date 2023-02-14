@@ -20,7 +20,13 @@
     "hosts:block": "ts-node ./src/hosts.ts block",
     "hosts:allow": "ts-node ./src/hosts.ts allow",
     "compile": "superface compile",
-    "compile:clear": "rimraf ./grid/**/*.ast.json"
+    "compile:clear": "rimraf ./grid/**/*.ast.json",
+    "create:profile": "superface create:profile --station",
+    "create:provider": "superface create:provider --station",
+    "create:map": "superface create:map --station",
+    "create:mock-map": "superface create:mock-map --station",
+    "create:mock-map-test": "superface create:mock-map-test --station",
+    "create:test": "superface create:test --station"
   },
   "devDependencies": {
     "@superfaceai/ast": "^1.3.0",

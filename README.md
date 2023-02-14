@@ -67,42 +67,64 @@ If you need any additional support, have any questions, or you just want to talk
 
 If you are starting with authoring, check our [guide](https://superface.ai/docs/guides/how-to-create).
 
-Station repository has a defined structure. Here are the commands [Superface CLI](https://github.com/superfaceai/cli#superface-create) commands for creating profiles, maps and providers.
+Station repository has a defined structure. Here are the [Superface CLI](https://github.com/superfaceai/cli#usage) commands for creating boilerplate code for profiles, maps, mock map and providers.
 
 #### Create new profile
 
 ```shell
-yarn superface create --profileId [scope](optional)/[name] --profile --profileFileName grid/[scope]/[name]/profile.supr
+yarn create:profile [scope](optional)/[name]
 ```
 
 #### Create new provider
 
 ```shell
-yarn superface create --providerName [provider_name] --provider --providerFileName providers/[provider_name].json
+yarn create:provider [provider_name]
 ```
 
 #### Create map for profile and provider
 
 ```shell
-yarn superface create --profileId [scope](optional)/[name] --providerName [provider_name] --map --mapFileName grid/[scope]/[name]/maps/[provider_name].suma
+yarn create:map [scope](optional)/[name] [provider_name]
+```
+
+#### Create mock map
+
+```shell
+yarn create:mock-map [scope](optional)/[name]
 ```
 
 #### Test the map
 
 We encourage using the [Superface Testing](https://github.com/superfaceai/testing-lib) to write tests.
 
-**1. Create test file**
+**1. Generate test boilerplate code**
 
-Alongside `.suma` file create `.test.ts` and use this template.
+For mock provider call command:
+
+```shell
+yarn create:mock-map-test [scope](optional)/[name]
+```
+
+For real provider call command:
+
+```shell
+yarn create:test [scope](optional)/[name] [provider_name]
+```
+
+The `create:test` command creates test file alongside map `.suma` file. The test inputs and expected result will be pregenerated from profile examples.
+
+The created code looks like this:
 
 ```ts
 import { SuperfaceTest } from '@superfaceai/testing';
+
+import { buildSuperfaceTest } from '../../../test-config';
 
 describe(`scope/name/provider_name}`, () => {
   let superface: SuperfaceTest;
 
   beforeEach(() => {
-    superface = new SuperfaceTest({
+    superface = buildSuperfaceTest({
       profile: 'scope/name',
       provider: 'provider_name',
     });
@@ -110,15 +132,16 @@ describe(`scope/name/provider_name}`, () => {
 
   describe('UseCase', () => {
     it('performs successfully', async () => {
-      await expect(
-        superface.run({
-          useCase: 'UseCase',
-          input: {
-            field1: '',
-            field2: '',
-          },
-        })
-      ).resolves.toMatchSnapshot();
+      const result = await superface.run({
+        useCase: 'UseCase',
+        input: {
+          field1: '',
+          field2: '',
+        },
+      });
+
+      expect(() => result.unwrap()).not.toThrow();
+      expect(result).toMatchSnapshot();
     });
   });
 });
