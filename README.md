@@ -111,7 +111,6 @@ For real provider call command:
 yarn create:test [scope](optional)/[name] [provider_name]
 ```
 
-
 The `create:test` command creates test file alongside map `.suma` file. The test inputs and expected result will be pregenerated from profile examples.
 
 The created code looks like this:
@@ -134,13 +133,13 @@ describe(`scope/name/provider_name}`, () => {
   describe('UseCase', () => {
     it('performs successfully', async () => {
       const result = await superface.run({
-          useCase: 'UseCase',
-          input: {
-            field1: '',
-            field2: '',
-          },
-        })
-      
+        useCase: 'UseCase',
+        input: {
+          field1: '',
+          field2: '',
+        },
+      });
+
       expect(() => result.unwrap()).not.toThrow();
       expect(result).toMatchSnapshot();
     });
