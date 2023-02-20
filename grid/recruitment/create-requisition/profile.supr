@@ -1,0 +1,190 @@
+"""
+Create Requisition
+Create new requisition in ATS (Applicant Tracking System).
+"""
+name = "recruitment/create-requisition"
+version = "1.0.0"
+
+"""
+Create Requisition
+Creates job requisition to fill job vacancy in your company.
+"""
+usecase CreateRequisition {
+
+  input {
+    """
+    Requisition Code
+    The unique HRIS requisition code.
+    """
+    requisitionCode! string!
+    """
+    Name
+    The human-readable name for the requisition.
+    """
+    name! string!
+    """
+    Headcount Total
+    Total headcount on the requisition.
+    """
+    headcountTotal! number!
+    """
+    Location
+    The location associated with the requisition.
+    """
+    location string
+    """
+    Employment Status
+    The classification of the employment. Can be one of: FullTime, PartTime, Contractor, or TempWorker.
+    """
+    employmentStatus EmploymentStatus
+    """
+    Status
+    The status of the requisition. Can be one of: Draft, Open, Closed, or OnHold.
+    """
+    status RequisitionStatus
+    """
+    Team
+    The team associated with the requisition.
+    """
+    team string
+  }
+
+  result {
+    """
+    Id
+    Unique identifier of newly created requisition.
+    """
+    id! string!
+
+  }!
+
+  error Error
+
+  example Successful {
+    input {
+      requisitionCode = 'REQ-5'
+      name = 'Software Developer, Platform'
+      headcountTotal = 2
+      status = 'Open'
+      location = 'Prague'
+    }
+
+    result {
+      id = '33b3cdf8-baef-4b17-b9d5-04c3b7e5eeb2'
+    }
+  }
+
+  example Failed {
+    input {
+      requisitionCode = 'REQ-5'
+      name = 'Software Developer, Platform'
+      headcountTotal = -1
+    }
+
+    error {
+      title = 'Invalid Input'
+      detail = 'Input headCount is invalid.'
+      code = 'InvalidInput'
+    }
+  }
+
+}
+
+model Error {
+  """
+  Error Title
+  A short, human-readable summary of the problem type.
+  """
+  title!
+  """
+  Error Detail
+  A human-readable explanation specific to this occurrence of the problem.
+  """
+  detail
+  """
+  Code
+  Error code.
+  """
+  code! ErrorCode!
+}
+
+model ErrorCode enum {
+  """
+  Rate limit reached
+  Returned when a request cannot be served due to the user or app reached max requests quota.
+  """
+  RateLimitReached
+  """
+  Unauthenticated
+  There was a problem authenticating your request. Check that you are passing valid credentials.
+  """
+  Unauthenticated
+  """
+  Unauthorized
+  The request is understood, but it has been refused or access is not allowed.
+  """
+  Unauthorized
+  """
+  Invalid input
+  Invalid input passed.
+  """
+  InvalidInput
+  """
+  Unknown error
+  Returned when an unexpected error occured.
+  """
+  UnknownError
+}
+
+"""
+Requisition status
+"""
+model RequisitionStatus enum {
+   """
+   Drafted job requisition
+   The job requirement is drafted. The requisition is waiting for approval.
+   """
+   Draft
+   """
+   Open job requisition
+   Recruiters are actively searching for the right candidate to fill the vacancy.
+   """
+   Open
+   """
+   Closed job requisition
+   The job requisition is closed, the job position has either been filled or rejected, recruiters are no more looking to fill the position.
+   """
+   Closed
+   """
+   On hold job requisition
+   Pending requisitions are deferred, recruiters are not actively looking to fill the position.
+   """
+   OnHold
+}
+
+"""
+Employment Status
+The employment classification.
+"""
+model EmploymentStatus enum {
+   """
+   Full-time
+   An employee engaged to work the minimum number of hours a week that your organisation defines as full time. Each organisation has different definition of full-time hours. Often this will be 37.5, 38 or 40 hours a week.
+   """
+   FullTime
+   """
+   Part-time
+   An employee engaged to work less than the minimum number of hours a week that your organisation defines as full time.
+   """
+   PartTime
+   """
+   Contractor
+   A self-employed worker who operates independently on a contract basis.
+   """
+   Contractor
+   """
+   Temporary worker
+   An employee who usually works irregular hours, has no guaranteed hours.
+   """
+   TempWorker
+}
