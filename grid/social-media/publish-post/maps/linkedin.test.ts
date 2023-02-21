@@ -10,6 +10,9 @@ const provider = 'linkedin';
 const profileId = 'urn:li:organization:2414183';
 const fixtures = ['horizontal.jpg', 'vertical.jpg'];
 
+// LinkedIn API tends to be sluggish
+jest.setTimeout(20 * 1000);
+
 async function loadFixtures(fixtureNames: string[]): Promise<Buffer[]> {
   return Promise.all(
     fixtureNames.map(fixture => {
@@ -22,11 +25,6 @@ async function loadFixtures(fixtureNames: string[]): Promise<Buffer[]> {
 
 describe(`social-media/posts/${provider}`, () => {
   let superfacePublishPost: SuperfaceTest;
-
-  beforeAll(() => {
-    // LinkedIn API tends to be sluggish
-    jest.setTimeout(20 * 1000);
-  });
 
   beforeEach(() => {
     superfacePublishPost = buildSuperfaceTest({
@@ -42,7 +40,7 @@ describe(`social-media/posts/${provider}`, () => {
           useCase: 'PublishPost',
           input: {
             profileId,
-            text: `Test from Superface Station 7`,
+            text: `Test from Superface Station 10`,
           },
         });
         expect(result.isOk()).toBe(true);
@@ -56,8 +54,9 @@ describe(`social-media/posts/${provider}`, () => {
           useCase: 'PublishPost',
           input: {
             profileId,
-            text: 'This is a post with a link to an example domain.',
-            link: 'https://example.com',
+            text: 'This is a post with a link to an example domain...',
+            title: 'Example Domain',
+            link: 'https://www.example.com',
           },
         });
         expect(result.isOk()).toBe(true);

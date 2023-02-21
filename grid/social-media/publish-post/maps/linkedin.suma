@@ -8,9 +8,9 @@ For text-only posts, links, and images (up to 200MB per image).
 map PublishPost {
 
   set {
-    contentEntities = input.link ? [
-      { entityLocation: input.link }
-    ] : []
+    // FIXME: New posts API doesn't support content scraping: https://learn.microsoft.com/en-us/linkedin/marketing/integrations/community-management/shares/posts-api?view=li-lms-2023-02&tabs=curl#article-post-creation-sample-request
+    // AND title is required, so this is a poor attempt to provide at least something
+    content = input.link ? {article: { source: input.link, title: input.title || input.link }} : undefined
     media = Array.isArray(input.media) ? input.media : []
     text = input.text
     shareMediaCategory = undefined
@@ -28,19 +28,27 @@ map PublishPost {
     shareMediaCategory = "IMAGE"
   }
 
-  // https://docs.microsoft.com/en-us/linkedin/marketing/integrations/community-management/shares/share-api#post-shares
-  http POST "/v2/shares" {
+  // https://learn.microsoft.com/en-us/linkedin/marketing/integrations/community-management/shares/posts-api?view=li-lms-2023-02&tabs=http#create-a-post
+  http POST "/rest/posts" {
     request "application/json" {
-
       headers {
         "Authorization" = `Bearer ${parameters.accessToken}`,
+        "LinkedIn-Version" = "202302",
+        "X-Restli-Protocol-Version" = "2.0.0",
+        "Accept" = "application/json",
       }
 
       body {
-        owner = input.profileId,
-        text = text ? {text: text} : undefined,
-        distribution = {linkedInDistributionTarget: {}}, // Required to set the share as publicly visible. For sponsored content where the targeting is defined when it is sponsored, distribution should be null.
-        content = contentEntities.length > 0 ? {contentEntities: contentEntities, shareMediaCategory: shareMediaCategory} : undefined,
+        author = input.profileId,
+        commentary = text || "",
+        visibility = "PUBLIC",
+        lifecycleState = "PUBLISHED",
+        distribution = {
+          feedDistribution: "MAIN_FEED",
+          targetEntities: [],
+          thirdPartyDistributionChannels: []
+        },
+        content = content,
       }
 
     }
