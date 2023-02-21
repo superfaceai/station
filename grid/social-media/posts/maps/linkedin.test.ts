@@ -6,13 +6,11 @@ const provider = 'linkedin';
 // DevTestCo - https://docs.microsoft.com/en-us/linkedin/marketing/integrations/community-management/organizations#test-organizations
 const profileId = 'urn:li:organization:2414183';
 
+// LinkedIn API tends to be sluggish
+jest.setTimeout(20 * 1000);
+
 describe(`social-media/posts/${provider}`, () => {
   let superfacePosts: SuperfaceTest;
-
-  beforeAll(() => {
-    // LinkedIn API tends to be sluggish
-    jest.setTimeout(20 * 1000);
-  });
 
   beforeEach(() => {
     superfacePosts = buildSuperfaceTest({
