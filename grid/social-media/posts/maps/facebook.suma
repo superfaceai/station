@@ -25,7 +25,7 @@ map GetProfilePosts {
     token = outcome.data.pageAccessToken
   }
 
-  map error if(!token) {
+  return map error if(!token) {
     title = "Unable to get page access token"
   }
 
