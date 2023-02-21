@@ -4,11 +4,11 @@ exports[`social-media/posts/linkedin GetProfilePosts error states expects error 
 Err {
   "error": "MappedHTTPError: Expected HTTP error
 Properties: {
-  \\"title\\": \\"Forbidden\\",
-  \\"detail\\": \\"Field Value validation failed in PARAMETER: Data Processing Exception while processing fields [/authors/authors]\\"
+  \\"title\\": \\"Bad Request\\",
+  \\"detail\\": \\"Member permissions must be used when using member as author\\"
 }
-AST Path: definitions[0].statements[5].responseHandlers[3].statements[0]
-Original Map Location: Line 118, column 7",
+AST Path: definitions[0].statements[4].responseHandlers[1].statements[0]
+Original Map Location: Line 107, column 7",
 }
 `;
 
@@ -20,48 +20,46 @@ Ok {
       Object {
         "attachments": Array [
           Object {
-            "altText": undefined,
             "description": undefined,
-            "duration": undefined,
-            "height": undefined,
-            "preview": undefined,
             "title": "Example Domain",
             "type": "link",
             "url": "https://example.com",
-            "width": undefined,
           },
         ],
+        "createdAt": "2023-02-21T21:45:45.054Z",
         "id": "urn:li:share:7033914686077030401",
+        "lastModifiedAt": "2023-02-21T21:45:45.154Z",
         "text": "This is a post with a link to an example domain.",
         "url": "https://www.linkedin.com/feed/update/urn:li:share:7033914686077030401",
       },
       Object {
         "attachments": Array [],
+        "createdAt": "2023-02-21T21:45:43.721Z",
         "id": "urn:li:share:7033914680574111745",
+        "lastModifiedAt": "2023-02-21T21:45:43.770Z",
         "text": "Test from Superface Station 7",
         "url": "https://www.linkedin.com/feed/update/urn:li:share:7033914680574111745",
       },
       Object {
         "attachments": Array [
           Object {
-            "altText": undefined,
             "description": "SMB Group&rsquo;s new study, SMB Directions for the Future of Work, outlines how successful SMBs are adapting to the shifting terrain. We take a look at the findings.",
-            "duration": undefined,
-            "height": undefined,
-            "preview": undefined,
             "title": "It's Time for SMBs to Seize New Future of Work Opportunities",
             "type": "link",
             "url": "https://www.mitel.com/blog/its-time-for-smbs-to-seize-new-future-of-work-opportunities",
-            "width": undefined,
           },
         ],
+        "createdAt": "2023-02-21T19:56:58.914Z",
         "id": "urn:li:share:7033887313344499712",
-        "text": "Sending through Sprout: https://lnkd.in/eJU_8_Ab",
+        "lastModifiedAt": "2023-02-21T19:56:59.024Z",
+        "text": "Sending through Sprout: https://lnkd.in/eJU\\\\_8\\\\_Ab",
         "url": "https://www.linkedin.com/feed/update/urn:li:share:7033887313344499712",
       },
       Object {
         "attachments": Array [],
+        "createdAt": "2023-02-21T19:49:05.944Z",
         "id": "urn:li:ugcPost:7033885329476509696",
+        "lastModifiedAt": "2023-02-21T19:49:05.944Z",
         "text": "",
         "url": "https://www.linkedin.com/feed/update/urn:li:ugcPost:7033885329476509696",
       },
@@ -69,32 +67,32 @@ Ok {
         "attachments": Array [
           Object {
             "altText": undefined,
-            "description": undefined,
-            "duration": 682.2834,
-            "height": 540,
-            "preview": undefined,
             "title": undefined,
             "type": "video",
-            "url": "https://dms.licdn.com/playlist/C5610AQES9koZnXb88Q/hls-540p-30fp-crf28/0/1676992808627?e=1677621600&v=beta&t=qjMlS-ifc0rXVjbTM5M24nJqsc_PweoHcnl8XkVFq2w",
-            "width": 960,
           },
         ],
+        "createdAt": "2023-02-21T15:20:33.556Z",
         "id": "urn:li:ugcPost:7033817749244039168",
+        "lastModifiedAt": "2023-02-21T15:22:03.917Z",
         "text": "Post to multiple pages
 
-#English 
-Orange Smm Pagee Orange Team Testt EPAM Anywheree ",
+{hashtag|\\\\#|English} 
+@[Orange Smm Page](urn:li:organization:13066257)e @[Orange Team Test](urn:li:organization:11541170)t @[EPAM Anywhere](urn:li:organization:75005848)e ",
         "url": "https://www.linkedin.com/feed/update/urn:li:ugcPost:7033817749244039168",
       },
       Object {
         "attachments": Array [],
+        "createdAt": "2023-02-21T14:45:08.450Z",
         "id": "urn:li:share:7033808836134064128",
+        "lastModifiedAt": "2023-02-21T14:45:08.560Z",
         "text": "THIS IS A COMMENTARY",
         "url": "https://www.linkedin.com/feed/update/urn:li:share:7033808836134064128",
       },
       Object {
         "attachments": Array [],
+        "createdAt": "2023-02-21T14:34:35.809Z",
         "id": "urn:li:share:7033806182607683584",
+        "lastModifiedAt": "2023-02-21T14:34:35.859Z",
         "text": "Sample text Post",
         "url": "https://www.linkedin.com/feed/update/urn:li:share:7033806182607683584",
       },
@@ -102,17 +100,13 @@ Orange Smm Pagee Orange Team Testt EPAM Anywheree ",
         "attachments": Array [
           Object {
             "altText": undefined,
-            "description": undefined,
-            "duration": undefined,
-            "height": undefined,
-            "preview": undefined,
             "title": undefined,
             "type": "image",
-            "url": undefined,
-            "width": undefined,
           },
         ],
+        "createdAt": "2023-02-21T14:24:07.642Z",
         "id": "urn:li:share:7033803547762675712",
+        "lastModifiedAt": "2023-02-21T14:24:07.693Z",
         "text": "TEXT TEXT TEXT",
         "url": "https://www.linkedin.com/feed/update/urn:li:share:7033803547762675712",
       },
@@ -120,17 +114,13 @@ Orange Smm Pagee Orange Team Testt EPAM Anywheree ",
         "attachments": Array [
           Object {
             "altText": undefined,
-            "description": undefined,
-            "duration": undefined,
-            "height": undefined,
-            "preview": undefined,
             "title": undefined,
             "type": "image",
-            "url": undefined,
-            "width": undefined,
           },
         ],
+        "createdAt": "2023-02-21T14:20:53.219Z",
         "id": "urn:li:share:7033802732033474560",
+        "lastModifiedAt": "2023-02-21T14:20:53.268Z",
         "text": "TEXT TEXT TEXT",
         "url": "https://www.linkedin.com/feed/update/urn:li:share:7033802732033474560",
       },
@@ -138,17 +128,13 @@ Orange Smm Pagee Orange Team Testt EPAM Anywheree ",
         "attachments": Array [
           Object {
             "altText": undefined,
-            "description": undefined,
-            "duration": undefined,
-            "height": undefined,
-            "preview": undefined,
             "title": undefined,
             "type": "image",
-            "url": undefined,
-            "width": undefined,
           },
         ],
+        "createdAt": "2023-02-21T14:15:07.970Z",
         "id": "urn:li:share:7033801284117786624",
+        "lastModifiedAt": "2023-02-21T14:15:08.046Z",
         "text": "TEXT TEXT TEXT",
         "url": "https://www.linkedin.com/feed/update/urn:li:share:7033801284117786624",
       },
