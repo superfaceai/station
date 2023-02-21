@@ -6,6 +6,7 @@ import { buildSuperfaceTest } from '../../../test-config';
 
 export const getProfilePostsTest = (
   provider: string,
+  profileName?: string,
   hooks?: RecordingProcessOptions
 ): void => {
   describe(`social-media/posts/${provider}`, () => {
@@ -35,15 +36,32 @@ export const getProfilePostsTest = (
           );
 
           expect(result.isOk()).toBeTruthy();
-          const resultUnwrapped = result.unwrap();
+          const resultUnwrapped = result.unwrap() as {
+            profiles: [
+              {
+                id: string;
+                name: string;
+              }
+            ];
+          };
+
+          let profile;
+          if (profileName) {
+            profile = resultUnwrapped.profiles.find(
+              profile => profile.name === profileName
+            );
+          } else {
+            profile = resultUnwrapped.profiles[0];
+          }
+
+          expect(profile).toBeDefined();
 
           await expect(
             superfacePosts.run(
               {
                 useCase: 'GetProfilePosts',
                 input: {
-                  // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-explicit-any
-                  profileId: (resultUnwrapped as any).profiles[0].id,
+                  profileId: profile?.id,
                 },
               },
               hooks

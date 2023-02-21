@@ -4,7 +4,7 @@ profile = "social-media/posts@1.0"
 provider = "facebook"
 
 map GetProfilePosts {
-  apiVersion = 'v12.0'
+  apiVersion = call GetApiVersion()
   profileId = input.profileId
   after = undefined
   before = undefined
@@ -19,11 +19,21 @@ map GetProfilePosts {
     before = input.page.replace('previous:','')
   }
 
+  call GetPageAccessToken(pageId = profileId, userAccessToken = parameters.accessToken) {
+    return map error if (outcome.error) outcome.error
+    
+    token = outcome.data.pageAccessToken
+  }
+
+  return map error if(!token) {
+    title = "Unable to get page access token"
+  }
+
   http GET "/{apiVersion}/{profileId}/feed" {
 
     request {
       query {
-          access_token = parameters.accessToken
+          access_token = token
           after = after
           before = before
           limit = 25
@@ -104,4 +114,34 @@ operation MapAttachment {
     width = attachment.width
     duration = attachment.duration
   }
+}
+
+operation GetPageAccessToken {
+  return if(!args.pageId) {}
+
+  apiVersion = call GetApiVersion()
+
+  http GET "/{apiVersion}/{args.pageId}" {
+    request {
+      query {
+        fields = 'access_token',
+        access_token = args.userAccessToken
+      }
+    }
+
+    response 200 "application/json" {
+      return {
+        pageAccessToken = body.access_token
+      }
+    }
+
+    response {
+      error = call MapApiError(statusCode = statusCode, body = body, headers = headers)
+      fail error
+    }
+  }
+}
+
+operation GetApiVersion {
+  return 'v12.0'
 }
