@@ -1,0 +1,24 @@
+{
+  "name": "lever",
+  "services": [
+    {
+      "id": "default",
+      "baseUrl": "https://{DOMAIN}.lever.co"
+    }
+  ],
+  "securitySchemes": [
+    {
+      "id": "bearer_token",
+      "type": "http",
+      "scheme": "bearer"
+    }
+  ],
+  "parameters": [
+    {
+      "name": "DOMAIN",
+      "description": "Use `api.sandbox` for sandbox environment, `api` for production (default)",
+      "default": "api"
+    }
+  ],
+  "defaultService": "default"
+}

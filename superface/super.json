@@ -1003,10 +1003,14 @@
       "providers": {
         "mock": {
           "file": "../grid/recruitment/create-requisition/maps/mock.suma"
+        },
+        "lever": {
+          "file": "../grid/recruitment/create-requisition/maps/lever.suma"
         }
       },
       "priority": [
-        "mock"
+        "mock",
+        "lever"
       ]
     }
   },
@@ -1622,6 +1626,18 @@
       ],
       "parameters": {
         "SUBDOMAIN": "demo"
+      }
+    },
+    "lever": {
+      "file": "../providers/lever.json",
+      "security": [
+        {
+          "id": "bearer_token",
+          "token": "$LEVER_ACCESS_TOKEN"
+        }
+      ],
+      "parameters": {
+        "DOMAIN": "$LEVER_DOMAIN"
       }
     }
   }

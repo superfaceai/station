@@ -1,0 +1,166 @@
+profile = "recruitment/create-requisition@1.0"
+provider = "lever"
+
+map CreateRequisition {
+
+  return map error if(input.headcountTotal <= 0) {
+    title = 'Invalid input'
+    detail = 'Input headCountTotal is invalid. The value must be greater than zero.'
+    code = 'InvalidInput'
+  }
+
+  call CheckRequisitionDoNotExist (
+    code = input.requisitionCode
+  ) { 
+    return map error if (outcome.error) outcome.error
+  }
+
+  http POST "/v1/requisitions" {
+    security "bearer_token"
+
+    request {
+
+      body {
+        requisitionCode = input.requisitionCode
+        name  = input.name
+        headcountTotal = input.headcountTotal
+        location = input.location
+        employmentStatus = call MapEmploymentStatus(status = input.employmentStatus)
+        status = call MapRequisitionStatus(status = input.status)
+        team = input.team
+      }
+    }
+
+    response 201 "application/json" {
+      map result {
+        id = body.data.id
+      }
+    }
+
+    response "application/json" {
+      error = call MapLeverError(
+        statusCode = statusCode,
+        error = body,
+        headers = headers
+      )
+
+      map error error
+    }
+
+    response {
+      map error {
+        title = 'Unknown error'
+        detail = JSON.stringify(body, null, 2)
+        code = 'UnknownError'
+      }
+    }
+  }
+}
+
+operation MapLeverError {
+  statusCode = args.statusCode
+  leverError = args.error
+
+  return if (statusCode === 401) {
+    title = 'Unauthenticated'
+    detail = leverError.message
+    code = 'Unauthenticated'
+  }
+
+  return if (statusCode === 403) {
+    title = 'Unauthorized'
+    detail = leverError.message
+    code = 'Unauthorized'
+  }
+
+  return if (statusCode === 429) {
+    title = 'Rate limit exceeded'
+    detail = 'You reached max requests quota.'
+    code = 'RateLimitReached'
+  }
+
+  return {
+    title = 'Unknown error'
+    detail = leverError.message
+    code = 'UnknownError'
+  }
+}
+
+operation CheckRequisitionDoNotExist {
+  http GET "/v1/requisitions" {
+    security "bearer_token"
+
+    request {
+      query {
+        requisition_code = args.code
+      }
+    }
+
+    response 200 {       
+      fail if (body.data.length > 0) {
+        title = 'Requisition code conflict'
+        detail = 'Requisition with requisitionCode ' + args.code + ' already exists.'
+        code = 'RequisitionCodeConflict'
+      }
+
+      return {}
+    }
+
+    response "application/json" {
+      error = call MapLeverError(
+        statusCode = statusCode,
+        error = body.error,
+        headers = headers
+      )
+
+      fail error
+    }
+
+    response {
+      fail {
+        title = "Unknown error"
+        detail = JSON.stringify(body, null, 2)
+        code = 'UnknownError'
+      }
+    }
+  }
+}
+
+operation MapEmploymentStatus {
+  result = (() => {
+      switch (args.status) {
+        case 'FullTime':
+          return 'full-time';
+        case 'PartTime':
+          return 'part-time';
+        case 'contractor':
+          return 'contractor';
+        case 'TempWorker':
+          return 'temp-worker'
+        default:
+          return 'full-time';
+      }
+    })()
+
+  return result
+}
+
+operation MapRequisitionStatus {
+  result = (() => {
+      switch (args.status) {
+        case 'Open':
+          return 'open';
+        case 'Draft':
+          return 'draft';
+        case 'OnHold':
+          return 'onHold';
+        case 'Closed':
+          return 'closed'
+        default:
+          return 'draft';
+      }
+    })()
+
+  return result
+}
+
