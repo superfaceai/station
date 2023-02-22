@@ -53,6 +53,23 @@ map ListActivities {
     }
   
     response 200 "application/json" {
+      unauthorized_error = (() => { 
+        let err = (body.errors || []).find((err) => err.extensions && err.extensions.classification && err.extensions.classification === 'UnauthorizedError');
+        if (err) {
+          return err.message;
+        }
+      })();
+
+      return map error if (unauthorized_error) {
+        title = "Unauthorized Error"
+        detail = unauthorized_error
+      }
+
+      return map error if (body.errors) {
+        title = "Unknown error"
+        detail = JSON.stringify(body.errors, 2)
+      }
+
       return map result {
         activities = body.data.experiences.edges.map((edge) => {
           const activity = edge.node;
@@ -82,18 +99,6 @@ map ListActivities {
         nextPage = body.data.experiences.pageInfo.endCursor
         total = body.data.experiences.totalCount
       }
-    }
-  
-    response 401 {
-      map error {
-        title = "Authentication error"
-        detail = body
-      }
-    }
-
-    response {
-      title = "Unknown error"
-      detail = JSON.stringify(body, null, 2)
     }
   }
 }
