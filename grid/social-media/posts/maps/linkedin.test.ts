@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-call */
 import { SuperfaceTest } from '@superfaceai/testing';
 
 import { buildSuperfaceTest } from '../../../test-config';
@@ -30,6 +31,24 @@ describe(`social-media/posts/${provider}`, () => {
             },
           })
         ).resolves.toMatchSnapshot();
+      });
+
+      it('resolves attachments URLs', async () => {
+        const result = await superfacePosts.run({
+          useCase: 'GetProfilePosts',
+          input: {
+            profileId,
+          },
+        });
+        expect(result.isOk()).toBe(true);
+        const data = result.unwrap() as any;
+        const imagePost = data.posts.find(
+          (p: {
+            attachments: undefined | Array<{ type: string; url?: string }>;
+          }) => p.attachments?.some((a: { type: string }) => a.type === 'image')
+        );
+        expect(imagePost).toBeTruthy();
+        expect(imagePost.attachments[0].url).toBeTruthy();
       });
 
       it('correctly paginates', async () => {

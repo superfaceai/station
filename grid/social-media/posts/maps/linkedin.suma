@@ -16,14 +16,14 @@ map GetProfilePosts {
   // projection = '(paging,elements*(id,created,specificContent(com.linkedin.ugc.ShareContent(shareMediaCategory,shareCommentary,media(*(media~:playableStreams,originalUrl,description,title,thumbnails))))))'
 
   // We need tight control over parameters encoding, which isn't the case with query construct
-  queryParams = `?q=author&sortBy=LAST_MODIFIED&author=${encodeURIComponent(input.profileId)}&count=${count}&start=${start}`
+  queryParams = `?q=author&author=${encodeURIComponent(input.profileId)}&count=${count}&start=${start}`
   
   // https://learn.microsoft.com/en-us/linkedin/marketing/integrations/community-management/shares/posts-api?view=li-lms-2023-02&tabs=http#find-posts-by-authors
   http GET "/rest/posts{queryParams}" {
     request {
       headers {
         "X-Restli-Protocol-Version" = "2.0.0",
-        "LinkedIn-Version" = "202301", // Funny thing: 202302 fails with sortBy
+        "LinkedIn-Version" = "202302", // Funny thing: 202302 fails with sortBy
         "Authorization" = `Bearer ${parameters.accessToken}`,
       }
     }
