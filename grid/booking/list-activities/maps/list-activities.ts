@@ -26,12 +26,13 @@ export function listActivitiesTest(provider: string) {
       });
 
       it('should paginate', async () => {
-        const result = await superface.run({
+        const firstResult = await superface.run({
           useCase: 'ListActivities',
           input: {},
           testName: 'paginate-initial',
         });
-        const nextPage = (result.unwrap() as { nextPage: string }).nextPage;
+        const nextPage = (firstResult.unwrap() as { nextPage: string })
+          .nextPage;
 
         if (!nextPage) {
           console.warn('No `nextPage` token returned, cannot test.');
@@ -47,7 +48,7 @@ export function listActivitiesTest(provider: string) {
         });
 
         expect(() => secondResult.unwrap()).not.toThrow();
-        expect(result.unwrap()).not.toEqual(secondResult.unwrap());
+        expect(firstResult.unwrap()).not.toEqual(secondResult.unwrap());
         expect(secondResult).toMatchSnapshot();
       });
     });
