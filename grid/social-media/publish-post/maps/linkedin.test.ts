@@ -68,11 +68,25 @@ describe(`social-media/posts/${provider}`, () => {
       let media: Array<{ contents: Buffer }>;
       beforeAll(async () => {
         media = (await loadFixtures(fixtures)).map(contents => {
-          return { contents };
+          return { contents, altText: 'Some alt text' };
         });
       });
 
-      it('uploads and posts media', async () => {
+      it.only('uploads and posts single image', async () => {
+        const result = await superfacePublishPost.run({
+          useCase: 'PublishPost',
+          input: {
+            profileId,
+            text: 'This is a post with one image',
+            media: [media[0]],
+          },
+        });
+
+        expect(result.isOk()).toBe(true);
+        expect(result).toMatchSnapshot();
+      });
+
+      it('uploads and posts multiple images', async () => {
         const result = await superfacePublishPost.run({
           useCase: 'PublishPost',
           input: {

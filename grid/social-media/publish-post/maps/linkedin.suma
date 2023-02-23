@@ -13,19 +13,16 @@ map PublishPost {
     content = input.link ? {article: { source: input.link, title: input.title || input.link }} : undefined
     media = Array.isArray(input.media) ? input.media : []
     text = input.text
-    shareMediaCategory = undefined
   }
 
   // FIXME: Workaround for https://github.com/superfaceai/one-sdk-js/issues/215
-  assets = call foreach(index of Array(media.length).fill().map((_, i) => i)) UploadImage(media = input.media, index = index, accessToken = parameters.accessToken, profileId = input.profileId)
+  images = call foreach(index of Array(media.length).fill().map((_, i) => i)) UploadImage(media = input.media, index = index, accessToken = parameters.accessToken, profileId = input.profileId)
 
-  set if (Array.isArray(assets) && assets.length > 0) {
+  set if (Array.isArray(images) && images.length > 0) {
     // override contentEntities since we can't combine the link with image
-    contentEntities = assets
+    content = {media: images[0]}
     // instead append the link to the post
     text = input.link ? `${text || ''} ${input.link}`.trim() : text
-    // https://docs.microsoft.com/en-us/linkedin/marketing/integrations/community-management/shares/share-api#using-images-for-shares
-    shareMediaCategory = "IMAGE"
   }
 
   // https://learn.microsoft.com/en-us/linkedin/marketing/integrations/community-management/shares/posts-api?view=li-lms-2023-02&tabs=http#create-a-post
@@ -54,12 +51,11 @@ map PublishPost {
     }
   
     response 201 "application/json" {
-      urn = `urn:li:share:${body.id}`
-      activityId = body.activity,
+      urn = headers["x-restli-id"]
 
       return map result {
         postId = urn,
-        url = `https://www.linkedin.com/feed/update/${activityId}`,
+        url = `https://www.linkedin.com/feed/update/${urn}`,
       }
     }
 
@@ -70,48 +66,37 @@ map PublishPost {
   }
 }
 
-// https://docs.microsoft.com/en-us/linkedin/marketing/integrations/community-management/shares/vector-asset-api
+// https://learn.microsoft.com/en-us/linkedin/marketing/integrations/community-management/shares/images-api?view=li-lms-2023-02&tabs=http#uploading-an-image
 operation UploadImage {
   mediaItem = args.media[args.index]
 
   set {
     uploadPath = undefined
-    uploadHeaders = {}
     assetUrn = undefined
   }
   // 1. register upload
-  http POST "/v2/assets" {
+  http POST "/rest/images" {
     security none
-  
     request {
       query {
-        action = "registerUpload",
+        action = "initializeUpload",
       }
       headers {
+        "X-RestLi-Protocol-Version" = "2.0.0",
         "Authorization" = `Bearer ${args.accessToken}`,
+        "LinkedIn-Version" = "202302",
+        "Accept" = "application/json",
       }
       body {
-        registerUploadRequest = {
+        initializeUploadRequest = {
           owner: args.profileId,
-          supportedUploadMechanism: ["SYNCHRONOUS_UPLOAD"],
-          recipes: [
-            "urn:li:digitalmediaRecipe:feedshare-image",
-          ],
-          serviceRelationships: [
-            {
-              identifier: "urn:li:userGeneratedContent",
-              relationshipType: "OWNER",
-            },
-          ]
         }
       }
     }
   
     response 200 "application/json" {
-      uploadRequest = body.value.uploadMechanism['com.linkedin.digitalmedia.uploading.MediaUploadHttpRequest']
-      uploadPath = uploadRequest.uploadUrl.replace('https://api.linkedin.com/', '') // no URL parsing for you
-      uploadHeaders = uploadRequest.headers
-      assetUrn = body.value.asset
+      uploadPath = body.value.uploadUrl.replace('https://www.linkedin.com/', '') // no URL parsing for you
+      assetUrn = body.value.image
     }
 
     response {
@@ -121,7 +106,8 @@ operation UploadImage {
   }
 
   // 2. upload the image
-  http PUT "/{uploadPath}" {
+  // https://learn.microsoft.com/en-us/linkedin/marketing/integrations/community-management/shares/vector-asset-api?view=li-lms-2023-02&tabs=http#upload-the-image
+  http PUT "www" "/{uploadPath}" {
     request "application/octet-stream" {
       headers {
         "Authorization" = `Bearer ${args.accessToken}`,
@@ -132,7 +118,8 @@ operation UploadImage {
 
     response 201 {
       return {
-        entity = assetUrn,
+        id = assetUrn,
+        altText = mediaItem.altText,
       }
     }
 
