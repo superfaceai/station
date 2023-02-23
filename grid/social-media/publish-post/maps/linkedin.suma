@@ -19,12 +19,22 @@ map PublishPost {
   images = call foreach(index of Array(media.length).fill().map((_, i) => i)) UploadImage(media = input.media, index = index, accessToken = parameters.accessToken, profileId = input.profileId)
 
   set if (Array.isArray(images) && images.length > 0) {
-    // override contentEntities since we can't combine the link with image
-    content = {media: images[0]}
-    // instead append the link to the post
+    // append the link to the post
     text = input.link ? `${text || ''} ${input.link}`.trim() : text
+    content = undefined // FIXME: Avoid SDK's "fun" feature of merging objects implicitly
   }
-
+  set if (Array.isArray(images) && images.length === 1) {
+    content = {media: images[0]}
+  }
+  // multiple images are special case
+  // https://learn.microsoft.com/en-us/linkedin/marketing/integrations/community-management/shares/multiimage-post-api?view=li-lms-2023-02&tabs=http#create-multiimage-content
+  set if (Array.isArray(images) && images.length > 1) {
+    content = {
+      multiImage: {
+        images: images,
+      }
+    }
+  }
   // https://learn.microsoft.com/en-us/linkedin/marketing/integrations/community-management/shares/posts-api?view=li-lms-2023-02&tabs=http#create-a-post
   http POST "/rest/posts" {
     request "application/json" {

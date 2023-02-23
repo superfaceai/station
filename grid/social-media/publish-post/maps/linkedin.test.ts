@@ -72,7 +72,7 @@ describe(`social-media/posts/${provider}`, () => {
         });
       });
 
-      it.only('uploads and posts single image', async () => {
+      it('uploads and posts single image', async () => {
         const result = await superfacePublishPost.run({
           useCase: 'PublishPost',
           input: {
