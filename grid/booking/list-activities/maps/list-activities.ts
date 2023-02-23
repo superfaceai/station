@@ -29,6 +29,7 @@ export function listActivitiesTest(provider: string) {
         const result = await superface.run({
           useCase: 'ListActivities',
           input: {},
+          testName: 'paginate-initial',
         });
         const nextPage = (result.unwrap() as { nextPage: string }).nextPage;
 
