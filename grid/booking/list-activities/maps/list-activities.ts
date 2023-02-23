@@ -24,6 +24,31 @@ export function listActivitiesTest(provider: string) {
         expect(() => result.unwrap()).not.toThrow();
         expect(result).toMatchSnapshot();
       });
+
+      it('should paginate', async () => {
+        const result = await superface.run({
+          useCase: 'ListActivities',
+          input: {},
+        });
+        const nextPage = (result.unwrap() as { nextPage: string }).nextPage;
+
+        if (!nextPage) {
+          console.warn('No `nextPage` token returned, cannot test.');
+
+          return;
+        }
+
+        const secondResult = await superface.run({
+          useCase: 'ListActivities',
+          input: {
+            page: nextPage,
+          },
+        });
+
+        expect(() => secondResult.unwrap()).not.toThrow();
+        expect(result.unwrap()).not.toEqual(secondResult.unwrap());
+        expect(secondResult).toMatchSnapshot();
+      });
     });
   });
 }
