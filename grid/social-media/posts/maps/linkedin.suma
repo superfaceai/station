@@ -58,32 +58,41 @@ map GetProfilePosts {
             const id = c.media.id;
             let attachmentType = undefined;
             // urn:li:image:C4E10AQGEOVxaD7kt6Q or urn:li:video:C5610AQES9koZnXb88Q
-            if (c.media.id.includes(':video:')) {
+            if (id.includes(':video:')) {
               attachments.push({
                 type: 'video',
                 title: c.media.title,
                 altText: c.media.altText,
               });
-            } else if (c.media.id.includes(':image:')) {
-              const a = {
-                type: 'image',
-                title: c.media.title,
-                altText: c.media.altText,
-              };
-              attachments.push(a);
-              imagesToResolve[c.media.id] = a;
+            } else if (id.includes(':image:')) {
+              // Keep the same reference
+              if(imagesToResolve[id]) {
+                attachments.push(imagesToResolve[id]);
+              } else {
+                const a = {
+                  type: 'image',
+                  title: c.media.title,
+                  altText: c.media.altText,
+                };
+                attachments.push(a);
+                imagesToResolve[id] = a;
+              }
             }
           }
           if (c.multiImage) {
             // https://learn.microsoft.com/en-us/linkedin/marketing/integrations/community-management/shares/multiimage-post-api?view=li-lms-2023-02&tabs=http
             c.multiImage.images.forEach(img => {
-              const a = {
-                type: 'image',
-                title: img.title,
-                altText: img.altText,
-              };
-              attachments.push(a);
-              imagesToResolve[img.id] = a
+              if(imagesToResolve[img.id]) {
+                attachments.push(imagesToResolve[img.id]);
+              } else {
+                const a = {
+                  type: 'image',
+                  title: img.title,
+                  altText: img.altText,
+                };
+                attachments.push(a);
+                imagesToResolve[img.id] = a;
+              }
             })
           }
           // FIXME: polls, carousels
