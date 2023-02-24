@@ -12,8 +12,8 @@ map GetProfilePosts {
   inputPage = parseInt(input.page, 10)
   start = isNaN(inputPage) ? 0 : inputPage
 
-  // FIXME: Projection is not supported as of Feb 2023?
-  // projection = '(paging,elements*(id,created,specificContent(com.linkedin.ugc.ShareContent(shareMediaCategory,shareCommentary,media(*(media~:playableStreams,originalUrl,description,title,thumbnails))))))'
+  imagesToResolve = {}
+  result = undefined
 
   // We need tight control over parameters encoding, which isn't the case with query construct
   queryParams = `?q=author&author=${encodeURIComponent(input.profileId)}&count=${count}&start=${start}`
@@ -23,26 +23,25 @@ map GetProfilePosts {
     request {
       headers {
         "X-Restli-Protocol-Version" = "2.0.0",
-        "LinkedIn-Version" = "202302", // Funny thing: 202302 fails with sortBy
+        "LinkedIn-Version" = "202302",
         "Authorization" = `Bearer ${parameters.accessToken}`,
       }
     }
+
+
   
     response 200 "application/json" {
       // LinkedIn returns paging.links but it seems they have a bug with double encoding projection parameter: https://stackoverflow.com/q/71250137/240963
       // Instead we will just calculate next and previous pages' URLs ourselves
       paging = body.paging
-      result = {
-        previousPage: (paging.start > 0) ? `${Math.max(0, paging.start - paging.count)}` : undefined,
-        // count is passed value, not the real count of items
-        nextPage: (paging.start + paging.count) < paging.total ? `${paging.start + paging.count}` : undefined,
-      }
-      // FIXME: urnsToDownload = {}
-      result.posts = body.elements.map((element) => {
-
+      previousPage = (paging.start > 0) ? `${Math.max(0, paging.start - paging.count)}` : undefined,
+      // count is passed value, not the real count of items
+      nextPage = (paging.start + paging.count) < paging.total ? `${paging.start + paging.count}` : undefined,
+  
+      posts = body.elements.map((element) => {
         const attachments = [];
         if (element.content) {
-          const c = element.content
+          const c = element.content;
           if (c.article) {
             // https://learn.microsoft.com/en-us/linkedin/marketing/integrations/ads/advertising-targeting/version/article-ads-integrations?view=li-lms-2023-02&tabs=http
             attachments.push({
@@ -64,24 +63,27 @@ map GetProfilePosts {
                 type: 'video',
                 title: c.media.title,
                 altText: c.media.altText,
-              })
+              });
             } else if (c.media.id.includes(':image:')) {
-              attachments.push({
+              const a = {
                 type: 'image',
                 title: c.media.title,
                 altText: c.media.altText,
-              })
+              };
+              attachments.push(a);
+              imagesToResolve[c.media.id] = a;
             }
           }
           if (c.multiImage) {
             // https://learn.microsoft.com/en-us/linkedin/marketing/integrations/community-management/shares/multiimage-post-api?view=li-lms-2023-02&tabs=http
-            // TODO: fetch URLs
             c.multiImage.images.forEach(img => {
-              attachments.push({
+              const a = {
                 type: 'image',
                 title: img.title,
                 altText: img.altText,
-              })
+              };
+              attachments.push(a);
+              imagesToResolve[img.id] = a
             })
           }
           // FIXME: polls, carousels
@@ -98,8 +100,11 @@ map GetProfilePosts {
         return post;
       });
 
-
-      return map result result
+      result = {
+        nextPage: nextPage,
+        previousPage: previousPage,
+        posts: posts,
+      }
     }
 
     response 400 "application/json" {
@@ -127,4 +132,62 @@ map GetProfilePosts {
       }
     }
   }
+
+  set {
+    imagesIds = Object.keys(imagesToResolve)
+  }
+  return map result if (imagesIds.length === 0) result
+
+  // Avoid encoding List()
+  queryParams = `?ids=List(${imagesIds.map(encodeURIComponent).join(',')})`
+  http GET "/rest/images{queryParams}" {
+    security none
+  
+    request {
+      headers {
+        "X-Restli-Protocol-Version" = "2.0.0",
+        "LinkedIn-Version" = "202302",
+        "Authorization" = `Bearer ${parameters.accessToken}`,
+      }
+    }
+  
+    response 200 "application/json" {
+      dummy = Object.entries(body.results).forEach(([imageId, img]) => {
+        if (!img.downloadUrl) {
+          return;
+        }
+        imagesToResolve[imageId].url = img.downloadUrl;
+      })
+
+      return map result result
+    }
+  
+    response 400 "application/json" {
+      return map error {
+        title = body.code || "Bad Request",
+        detail = body.message,
+      }
+    }
+    response 401 "application/json" {
+      return map error {
+        title = body.code || "Unauthorized",
+        detail = body.message,
+      }
+    }
+    response 403 "application/json" {
+      return map error {
+        title = body.code || "Forbidden",
+        detail = body.message,
+      }
+    }
+    response 404 "application/json" {
+      return map error {
+        title = body.code || "Resource Not Found",
+        detail = body.message,
+      }
+    }
+  }
+
+  
+
 }
