@@ -13,6 +13,7 @@ map GetProfilePosts {
   start = isNaN(inputPage) ? 0 : inputPage
 
   imagesToResolve = {}
+  videosToResolve = {}
   result = undefined
 
   // We need tight control over parameters encoding, which isn't the case with query construct
@@ -27,8 +28,6 @@ map GetProfilePosts {
         "Authorization" = `Bearer ${parameters.accessToken}`,
       }
     }
-
-
   
     response 200 "application/json" {
       // LinkedIn returns paging.links but it seems they have a bug with double encoding projection parameter: https://stackoverflow.com/q/71250137/240963
@@ -59,11 +58,17 @@ map GetProfilePosts {
             let attachmentType = undefined;
             // urn:li:image:C4E10AQGEOVxaD7kt6Q or urn:li:video:C5610AQES9koZnXb88Q
             if (id.includes(':video:')) {
-              attachments.push({
-                type: 'video',
-                title: c.media.title,
-                altText: c.media.altText,
-              });
+              if (videosToResolve[id]) {
+                videosToResolve[id]
+              } else {
+                const a = {
+                  type: 'video',
+                  title: c.media.title,
+                  altText: c.media.altText,
+                }
+                attachments.push(a);
+                videosToResolve[id] = a;
+              }
             } else if (id.includes(':image:')) {
               // Keep the same reference
               if(imagesToResolve[id]) {
@@ -71,7 +76,6 @@ map GetProfilePosts {
               } else {
                 const a = {
                   type: 'image',
-                  title: c.media.title,
                   altText: c.media.altText,
                 };
                 attachments.push(a);
@@ -87,7 +91,6 @@ map GetProfilePosts {
               } else {
                 const a = {
                   type: 'image',
-                  title: img.title,
                   altText: img.altText,
                 };
                 attachments.push(a);
@@ -144,59 +147,81 @@ map GetProfilePosts {
 
   set {
     imagesIds = Object.keys(imagesToResolve)
+    videoIds = Object.keys(videosToResolve)
   }
-  return map result if (imagesIds.length === 0) result
+  return map result if (imagesIds.length === 0 && videoIds.length === 0) result
 
-  // Avoid encoding List()
-  queryParams = `?ids=List(${imagesIds.map(encodeURIComponent).join(',')})`
-  http GET "/rest/images{queryParams}" {
+  call ResolveMedia(type = "images", accessToken = parameters.accessToken, mediaIds = imagesIds) if (imagesIds.length > 0) {
+    // Just bail out without resolution
+    return map result if (outcome.error) result
+
+    dummy = Object.entries(outcome.data).forEach(([id, img]) => {
+      if (!img.downloadUrl) {
+        return;
+      }
+      imagesToResolve[id].url = img.downloadUrl;
+    })
+  }
+
+  call ResolveMedia(type = "videos", accessToken = parameters.accessToken, mediaIds = videoIds) if (videoIds.length > 0) {
+    // Just bail out without resolution
+    return map result if (outcome.error) result
+
+    dummy = Object.entries(outcome.data).forEach(([id, vid]) => {
+      if (!vid.downloadUrl) {
+        return;
+      }
+      const attachment = videosToResolve[id];
+      attachment.url = vid.downloadUrl;
+      attachment.preview = vid.thumbnail;
+      attachment.duration = vid.duration;
+    })
+  }
+
+  map result result
+}
+
+operation ResolveMedia {
+  queryParams = `?ids=List(${args.mediaIds.map(encodeURIComponent).join(',')})`
+  pathName = args.type === 'videos' ? 'rest/videos' : 'rest/images'
+  http GET "/{pathName}{queryParams}" {
     security none
   
     request {
       headers {
         "X-Restli-Protocol-Version" = "2.0.0",
         "LinkedIn-Version" = "202302",
-        "Authorization" = `Bearer ${parameters.accessToken}`,
+        "Authorization" = `Bearer ${args.accessToken}`,
       }
     }
   
     response 200 "application/json" {
-      dummy = Object.entries(body.results).forEach(([imageId, img]) => {
-        if (!img.downloadUrl) {
-          return;
-        }
-        imagesToResolve[imageId].url = img.downloadUrl;
-      })
-
-      return map result result
+      return body.results
     }
   
     response 400 "application/json" {
-      return map error {
+      fail {
         title = body.code || "Bad Request",
         detail = body.message,
       }
     }
     response 401 "application/json" {
-      return map error {
+      fail {
         title = body.code || "Unauthorized",
         detail = body.message,
       }
     }
     response 403 "application/json" {
-      return map error {
+      fail {
         title = body.code || "Forbidden",
         detail = body.message,
       }
     }
     response 404 "application/json" {
-      return map error {
+      fail {
         title = body.code || "Resource Not Found",
         detail = body.message,
       }
     }
   }
-
-  
-
 }
