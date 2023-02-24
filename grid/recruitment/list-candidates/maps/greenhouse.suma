@@ -1,0 +1,53 @@
+profile = "recruitment/list-candidates@1.0"
+provider = "greenhouse"
+
+map ListCandidates {
+  http GET "/v1/candidates" {
+    security "apiKeyBasicAuth"
+    
+
+    request {
+      query {
+        jobId = input.jobId
+        page = input.page
+        limit = input.limit
+      }
+    }
+
+      response 200 "application/json" {
+      return map result {
+
+      }
+
+    }
+
+    response 200 "application/json" {
+      return map result {
+        candidates = body.map(candidate => {
+        const name = candidate.name;
+        if (!name) {
+          if (candidate.first_name & candidate.last_name) {
+            name = `${candidate.first_name} ${candidate.last_name}`
+          } else {
+            name = candidate.last_name || candidate.first_name
+          }
+        }
+        return {
+          id: candidate.id,
+          jobId: input.jobId,
+          name: name,
+          email: candidate.email_addresses[0].value
+        }
+        })
+      }
+    }
+
+    response 401 "application/json" {
+      map error {
+        title = 'Unauthenticated'
+        detail = body.message
+        code = 'Unauthenticated'
+      }
+    }
+  }
+}
