@@ -3,6 +3,8 @@ on:
   push:
   pull_request:
     types: [opened, reopened]
+concurrency:
+  group: ${{ github.ref }}
 jobs:
   lint_tools:
     name: Tools Lint and Format
