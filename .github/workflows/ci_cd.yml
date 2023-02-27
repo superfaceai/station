@@ -1,5 +1,8 @@
 name: CI / CD
-on: push
+on:
+  push:
+  pull_request:
+    types: [opened, reopened]
 jobs:
   lint_tools:
     name: Tools Lint and Format
