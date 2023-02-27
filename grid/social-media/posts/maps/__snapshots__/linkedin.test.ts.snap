@@ -4,11 +4,11 @@ exports[`social-media/posts/linkedin GetProfilePosts error states expects error 
 Err {
   "error": "MappedHTTPError: Expected HTTP error
 Properties: {
-  \\"title\\": \\"Forbidden\\",
-  \\"detail\\": \\"Field Value validation failed in PARAMETER: Data Processing Exception while processing fields [/authors/authors]\\"
+  \\"title\\": \\"Bad Request\\",
+  \\"detail\\": \\"Member permissions must be used when using member as author\\"
 }
-AST Path: definitions[0].statements[5].responseHandlers[3].statements[0]
-Original Map Location: Line 118, column 7",
+AST Path: definitions[0].statements[7].responseHandlers[1].statements[0]
+Original Map Location: Line 123, column 7",
 }
 `;
 
@@ -18,171 +18,116 @@ Ok {
     "nextPage": "10",
     "posts": Array [
       Object {
-        "attachments": Array [
-          Object {
-            "altText": undefined,
-            "description": undefined,
-            "duration": undefined,
-            "height": undefined,
-            "preview": "http://jrs-stage.int.railwaymen.org/rails/active_storage/blobs/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBa3U2IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--edd7dcfe90f218434c9f632d5767e04a96531f4d/PI-PNL-02-0.jpg",
-            "title": "1 test estates link 1",
-            "type": "link",
-            "url": "http://jrs-stage.int.railwaymen.org/content/8f36d0af-bcc8-4294-8708-bd6baab80424",
-            "width": undefined,
-          },
-        ],
-        "id": "urn:li:share:6902553714066808832",
-        "text": "
-  
-  1 test estates link 1 PI-PNL-02.pdf prezentacja",
-        "url": "https://www.linkedin.com/feed/update/urn:li:share:6902553714066808832",
-      },
-      Object {
-        "attachments": Array [
-          Object {
-            "altText": undefined,
-            "description": undefined,
-            "duration": undefined,
-            "height": undefined,
-            "preview": "http://jrs-stage.int.railwaymen.org/rails/active_storage/blobs/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBb3lnIiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--1e94028f734a026a14db3d38e596f069b5b46755/RM-VID%20(1)-0.jpg",
-            "title": "2 test dui link v2",
-            "type": "link",
-            "url": "http://jrs-stage.int.railwaymen.org/content/774ac55c-ea18-4622-a0c5-1d5eaed844f0",
-            "width": undefined,
-          },
-        ],
-        "id": "urn:li:share:6902518986865463296",
-        "text": "
-  
-  2 test dui link v2",
-        "url": "https://www.linkedin.com/feed/update/urn:li:share:6902518986865463296",
-      },
-      Object {
-        "attachments": Array [
-          Object {
-            "altText": undefined,
-            "description": undefined,
-            "duration": 6.533333,
-            "height": 540,
-            "preview": undefined,
-            "title": "title of the video",
-            "type": "video",
-            "url": "https://dms.licdn.com/playlist/C5610AQGkH2If4C2AoQ/hls-540p-30fp-crf28/0/1645681854322?e=1645786800&v=beta&t=Z4W3L2s4qW-Koz0qWIgjCaCO_yCGS5u6c2BqWlPiWjw",
-            "width": 960,
-          },
-        ],
-        "id": "urn:li:ugcPost:6902490744620232704",
-        "text": "Hello LinkedIn",
-        "url": "https://www.linkedin.com/feed/update/urn:li:ugcPost:6902490744620232704",
-      },
-      Object {
-        "attachments": Array [
-          Object {
-            "altText": undefined,
-            "description": undefined,
-            "duration": 6.533333,
-            "height": 540,
-            "preview": undefined,
-            "title": "title of the video",
-            "type": "video",
-            "url": "https://dms.licdn.com/playlist/C5610AQGHDaySba4R7A/hls-540p-30fp-crf28/0/1645681260429?e=1645786800&v=beta&t=Jqo5dVvTsa0njo6EWzY9hYHK3mLCiSdyQpQSxr8aW1I",
-            "width": 960,
-          },
-        ],
-        "id": "urn:li:ugcPost:6902487781059252224",
-        "text": "Hello Devtestco",
-        "url": "https://www.linkedin.com/feed/update/urn:li:ugcPost:6902487781059252224",
-      },
-      Object {
-        "attachments": Array [
-          Object {
-            "altText": undefined,
-            "description": undefined,
-            "duration": undefined,
-            "height": undefined,
-            "preview": "http://jrs-stage.int.railwaymen.org/rails/active_storage/blobs/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBb3lnIiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--1e94028f734a026a14db3d38e596f069b5b46755/RM-VID%20(1)-0.jpg",
-            "title": "2 test dui link v2",
-            "type": "link",
-            "url": "http://jrs-stage.int.railwaymen.org/content/e1723b33-f64d-468e-b35d-12bfbaecfec6",
-            "width": undefined,
-          },
-        ],
-        "id": "urn:li:share:6902431907846381568",
-        "text": "
-  
-  2 test dui link v2",
-        "url": "https://www.linkedin.com/feed/update/urn:li:share:6902431907846381568",
+        "attachments": Array [],
+        "createdAt": "2023-02-24T13:05:58.829Z",
+        "id": "urn:li:share:7034871045106847744",
+        "lastModifiedAt": "2023-02-24T13:05:58.880Z",
+        "text": "Testing",
+        "url": "https://www.linkedin.com/feed/update/urn:li:share:7034871045106847744",
       },
       Object {
         "attachments": Array [],
-        "id": "urn:li:share:6902369647795036160",
-        "text": "Lorem tempor elit, eiusmod et aliqua adipiscing dolore magna amet sed @ 1645653163721",
-        "url": "https://www.linkedin.com/feed/update/urn:li:share:6902369647795036160",
+        "createdAt": "2023-02-24T06:16:19.173Z",
+        "id": "urn:li:share:7034767950653853696",
+        "lastModifiedAt": "2023-02-24T06:16:19.227Z",
+        "text": "Test Share!",
+        "url": "https://www.linkedin.com/feed/update/urn:li:share:7034767950653853696",
       },
       Object {
         "attachments": Array [],
-        "id": "urn:li:share:6902325999292293120",
-        "text": "adipiscing magna tempor dolore sed eiusmod amet Lorem aliqua et elit, @ 1645642757123",
-        "url": "https://www.linkedin.com/feed/update/urn:li:share:6902325999292293120",
+        "createdAt": "2023-02-24T04:26:36.365Z",
+        "id": "urn:li:share:7034740321250889728",
+        "lastModifiedAt": "2023-02-24T04:26:36.417Z",
+        "text": "Linkedin post with restrictions",
+        "url": "https://www.linkedin.com/feed/update/urn:li:share:7034740321250889728",
       },
       Object {
         "attachments": Array [
           Object {
             "altText": undefined,
-            "description": undefined,
-            "duration": undefined,
-            "height": undefined,
-            "preview": "http://jrs-stage.int.railwaymen.org/rails/active_storage/blobs/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBbCs5IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--f06d87cabc6cd8f9aba70faca72d5bb03bf3d369/postpreview.png",
-            "title": "Post Title",
-            "type": "link",
-            "url": "http://jrs-stage.int.railwaymen.org/content/1bb7ed00-2ac9-487a-b3fd-67359916a853",
-            "width": undefined,
+            "duration": 5570,
+            "preview": "https://media.licdn.com/dms/image/C4E10AQG0s_7_7jYtJg/videocover-high/0/1677211567667?e=1677855600&v=beta&t=OkhsZgwzmR1Di0OQQU3zYSgQIARKNDrNYQA9ZGFFOuM",
+            "title": "",
+            "type": "video",
+            "url": "https://dms.licdn.com/playlist/C4E10AQG0s_7_7jYtJg/mp4-640p-30fp-crf28/0/1677211568162?e=1677855600&v=beta&t=HWHilSVDs6DBOmrcBLzfZ3vt3sGfabl4hHFplBOLH78",
           },
         ],
-        "id": "urn:li:share:6902265825319809024",
-        "text": "
-  
-  Post content text",
-        "url": "https://www.linkedin.com/feed/update/urn:li:share:6902265825319809024",
+        "createdAt": "2023-02-24T04:06:11.383Z",
+        "id": "urn:li:ugcPost:7034735182234443776",
+        "lastModifiedAt": "2023-02-24T04:06:11.432Z",
+        "text": "a great video post here!",
+        "url": "https://www.linkedin.com/feed/update/urn:li:ugcPost:7034735182234443776",
+      },
+      Object {
+        "attachments": Array [],
+        "createdAt": "2023-02-24T00:35:46.110Z",
+        "id": "urn:li:ugcPost:7034682247848853504",
+        "lastModifiedAt": "2023-02-24T00:35:46.110Z",
+        "text": "",
+        "url": "https://www.linkedin.com/feed/update/urn:li:ugcPost:7034682247848853504",
+      },
+      Object {
+        "attachments": Array [],
+        "createdAt": "2023-02-23T23:50:26.983Z",
+        "id": "urn:li:share:7034670843116879873",
+        "lastModifiedAt": "2023-02-24T00:32:47.362Z",
+        "text": "eiusmod magna dolore sed et Lorem adipiscing aliqua elit, tempor amet \\\\@ 1677196226720",
+        "url": "https://www.linkedin.com/feed/update/urn:li:share:7034670843116879873",
+      },
+      Object {
+        "attachments": Array [],
+        "createdAt": "2023-02-23T21:43:18.091Z",
+        "id": "urn:li:share:7034638827763757056",
+        "lastModifiedAt": "2023-02-23T23:52:04.467Z",
+        "text": "et dolore magna tempor Lorem eiusmod amet aliqua adipiscing sed elit, \\\\@ 1677188593670",
+        "url": "https://www.linkedin.com/feed/update/urn:li:share:7034638827763757056",
       },
       Object {
         "attachments": Array [
           Object {
-            "altText": undefined,
-            "description": undefined,
-            "duration": undefined,
-            "height": undefined,
-            "preview": "http://jrs-stage.int.railwaymen.org/rails/active_storage/blobs/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBcUthIiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--714d48c3cc856afa4492c4a3f61d1ecd07c63e6e/sample-0.jpg",
-            "title": "2 test estates link 1",
-            "type": "link",
-            "url": "http://jrs-stage.int.railwaymen.org/content/e3c8cb42-2e34-4b5c-affc-734a57e57037",
-            "width": undefined,
+            "altText": "Some alt text",
+            "type": "image",
+            "url": "https://media.licdn.com/dms/image/C4E10AQHWQ0aaJmFOsw/image-shrink_1280/0/1677193450043?e=1677855600&v=beta&t=VuX2DYvlE30OVuRRvCPbANV48SDYlyPnGhQMVfuRJjg",
           },
         ],
-        "id": "urn:li:share:6902186793995702272",
-        "text": "
-  
-  2 test estates link 1",
-        "url": "https://www.linkedin.com/feed/update/urn:li:share:6902186793995702272",
+        "createdAt": "2023-02-23T23:05:51.070Z",
+        "id": "urn:li:share:7034659197531095040",
+        "lastModifiedAt": "2023-02-23T23:05:51.120Z",
+        "text": "This is a post with one image",
+        "url": "https://www.linkedin.com/feed/update/urn:li:share:7034659197531095040",
       },
       Object {
         "attachments": Array [
           Object {
-            "altText": undefined,
-            "description": undefined,
-            "duration": undefined,
-            "height": undefined,
-            "preview": "http://jrs-stage.int.railwaymen.org/rails/active_storage/blobs/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBbGU2IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--e27548b72ecdfc4139504bb24139690a19fbc004/preview.png",
-            "title": "00244826288262882628",
-            "type": "link",
-            "url": "https://vimeo.com/540045535",
-            "width": undefined,
+            "altText": "Some alt text",
+            "type": "image",
+            "url": "https://media.licdn.com/dms/image/C4E10AQHoxmClzXuCrw/image-shrink_1280/0/1677193455808?e=1677855600&v=beta&t=6NmUJc5YEiIYJYRa0vbdmk3RddQ2rM_x-8sunRe4cfQ",
           },
         ],
-        "id": "urn:li:share:6902183529258508288",
-        "text": "
-  00244826288262882628",
-        "url": "https://www.linkedin.com/feed/update/urn:li:share:6902183529258508288",
+        "createdAt": "2023-02-23T23:04:16.216Z",
+        "id": "urn:li:share:7034659221623177216",
+        "lastModifiedAt": "2023-02-23T23:04:16.266Z",
+        "text": "This is a post with an image and a link. https://example.com",
+        "url": "https://www.linkedin.com/feed/update/urn:li:share:7034659221623177216",
+      },
+      Object {
+        "attachments": Array [
+          Object {
+            "altText": "Some alt text",
+            "type": "image",
+            "url": "https://media.licdn.com/dms/image/C4E10AQFp6V8ffUxnTw/image-shrink_1280/0/1677193452557?e=1677855600&v=beta&t=nle9qQx4X3OtTe2UAVbUOiBPwYfvRxKsCZTJGHS3wtU",
+          },
+          Object {
+            "altText": "Some alt text",
+            "type": "image",
+            "url": "https://media.licdn.com/dms/image/C4E10AQGnbMuf1-EpHQ/image-shrink_1280/0/1677193453623?e=1677855600&v=beta&t=RXniZm_i5MLIqAa1FDq0PILhIgi7olcIy_aFMju1XAk",
+          },
+        ],
+        "createdAt": "2023-02-23T23:04:14.072Z",
+        "id": "urn:li:ugcPost:7034659212542496768",
+        "lastModifiedAt": "2023-02-23T23:04:14.119Z",
+        "text": "This is a post with two images",
+        "url": "https://www.linkedin.com/feed/update/urn:li:ugcPost:7034659212542496768",
       },
     ],
     "previousPage": undefined,

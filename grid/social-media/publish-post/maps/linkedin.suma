@@ -8,50 +8,64 @@ For text-only posts, links, and images (up to 200MB per image).
 map PublishPost {
 
   set {
-    contentEntities = input.link ? [
-      { entityLocation: input.link }
-    ] : []
+    // FIXME: New posts API doesn't support content scraping: https://learn.microsoft.com/en-us/linkedin/marketing/integrations/community-management/shares/posts-api?view=li-lms-2023-02&tabs=curl#article-post-creation-sample-request
+    // AND title is required, so this is a poor attempt to provide at least something
+    content = input.link ? {article: { source: input.link, title: input.title || input.link }} : undefined
     media = Array.isArray(input.media) ? input.media : []
     text = input.text
-    shareMediaCategory = undefined
   }
 
   // FIXME: Workaround for https://github.com/superfaceai/one-sdk-js/issues/215
-  assets = call foreach(index of Array(media.length).fill().map((_, i) => i)) UploadImage(media = input.media, index = index, accessToken = parameters.accessToken, profileId = input.profileId)
+  images = call foreach(index of Array(media.length).fill().map((_, i) => i)) UploadImage(media = input.media, index = index, accessToken = parameters.accessToken, profileId = input.profileId)
 
-  set if (Array.isArray(assets) && assets.length > 0) {
-    // override contentEntities since we can't combine the link with image
-    contentEntities = assets
-    // instead append the link to the post
+  set if (Array.isArray(images) && images.length > 0) {
+    // append the link to the post
     text = input.link ? `${text || ''} ${input.link}`.trim() : text
-    // https://docs.microsoft.com/en-us/linkedin/marketing/integrations/community-management/shares/share-api#using-images-for-shares
-    shareMediaCategory = "IMAGE"
+    content = undefined // FIXME: Avoid SDK's "fun" feature of merging objects implicitly
   }
-
-  // https://docs.microsoft.com/en-us/linkedin/marketing/integrations/community-management/shares/share-api#post-shares
-  http POST "/v2/shares" {
+  set if (Array.isArray(images) && images.length === 1) {
+    content = {media: images[0]}
+  }
+  // multiple images are special case
+  // https://learn.microsoft.com/en-us/linkedin/marketing/integrations/community-management/shares/multiimage-post-api?view=li-lms-2023-02&tabs=http#create-multiimage-content
+  set if (Array.isArray(images) && images.length > 1) {
+    content = {
+      multiImage: {
+        images: images,
+      }
+    }
+  }
+  // https://learn.microsoft.com/en-us/linkedin/marketing/integrations/community-management/shares/posts-api?view=li-lms-2023-02&tabs=http#create-a-post
+  http POST "/rest/posts" {
     request "application/json" {
-
       headers {
         "Authorization" = `Bearer ${parameters.accessToken}`,
+        "LinkedIn-Version" = "202302",
+        "X-Restli-Protocol-Version" = "2.0.0",
+        "Accept" = "application/json",
       }
 
       body {
-        owner = input.profileId,
-        text = text ? {text: text} : undefined,
-        distribution = {linkedInDistributionTarget: {}}, // Required to set the share as publicly visible. For sponsored content where the targeting is defined when it is sponsored, distribution should be null.
-        content = contentEntities.length > 0 ? {contentEntities: contentEntities, shareMediaCategory: shareMediaCategory} : undefined,
+        author = input.profileId,
+        commentary = text || "",
+        visibility = "PUBLIC",
+        lifecycleState = "PUBLISHED",
+        distribution = {
+          feedDistribution: "MAIN_FEED",
+          targetEntities: [],
+          thirdPartyDistributionChannels: []
+        },
+        content = content,
       }
 
     }
   
     response 201 "application/json" {
-      urn = `urn:li:share:${body.id}`
-      activityId = body.activity,
+      urn = headers["x-restli-id"]
 
       return map result {
         postId = urn,
-        url = `https://www.linkedin.com/feed/update/${activityId}`,
+        url = `https://www.linkedin.com/feed/update/${urn}`,
       }
     }
 
@@ -62,48 +76,37 @@ map PublishPost {
   }
 }
 
-// https://docs.microsoft.com/en-us/linkedin/marketing/integrations/community-management/shares/vector-asset-api
+// https://learn.microsoft.com/en-us/linkedin/marketing/integrations/community-management/shares/images-api?view=li-lms-2023-02&tabs=http#uploading-an-image
 operation UploadImage {
   mediaItem = args.media[args.index]
 
   set {
     uploadPath = undefined
-    uploadHeaders = {}
     assetUrn = undefined
   }
   // 1. register upload
-  http POST "/v2/assets" {
+  http POST "/rest/images" {
     security none
-  
     request {
       query {
-        action = "registerUpload",
+        action = "initializeUpload",
       }
       headers {
+        "X-RestLi-Protocol-Version" = "2.0.0",
         "Authorization" = `Bearer ${args.accessToken}`,
+        "LinkedIn-Version" = "202302",
+        "Accept" = "application/json",
       }
       body {
-        registerUploadRequest = {
+        initializeUploadRequest = {
           owner: args.profileId,
-          supportedUploadMechanism: ["SYNCHRONOUS_UPLOAD"],
-          recipes: [
-            "urn:li:digitalmediaRecipe:feedshare-image",
-          ],
-          serviceRelationships: [
-            {
-              identifier: "urn:li:userGeneratedContent",
-              relationshipType: "OWNER",
-            },
-          ]
         }
       }
     }
   
     response 200 "application/json" {
-      uploadRequest = body.value.uploadMechanism['com.linkedin.digitalmedia.uploading.MediaUploadHttpRequest']
-      uploadPath = uploadRequest.uploadUrl.replace('https://api.linkedin.com/', '') // no URL parsing for you
-      uploadHeaders = uploadRequest.headers
-      assetUrn = body.value.asset
+      uploadPath = body.value.uploadUrl.replace('https://www.linkedin.com/', '') // no URL parsing for you
+      assetUrn = body.value.image
     }
 
     response {
@@ -113,7 +116,8 @@ operation UploadImage {
   }
 
   // 2. upload the image
-  http PUT "/{uploadPath}" {
+  // https://learn.microsoft.com/en-us/linkedin/marketing/integrations/community-management/shares/vector-asset-api?view=li-lms-2023-02&tabs=http#upload-the-image
+  http PUT "www" "/{uploadPath}" {
     request "application/octet-stream" {
       headers {
         "Authorization" = `Bearer ${args.accessToken}`,
@@ -124,7 +128,8 @@ operation UploadImage {
 
     response 201 {
       return {
-        entity = assetUrn,
+        id = assetUrn,
+        altText = mediaItem.altText,
       }
     }
 

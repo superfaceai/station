@@ -3,8 +3,8 @@
 exports[`social-media/posts/linkedin PublishPost post with a link works 1`] = `
 Ok {
   "value": Object {
-    "postId": "urn:li:share:6920392040602091520",
-    "url": "https://www.linkedin.com/feed/update/urn:li:activity:6920392041046704129",
+    "postId": "urn:li:share:7034659186114228224",
+    "url": "https://www.linkedin.com/feed/update/urn:li:share:7034659186114228224",
   },
 }
 `;
@@ -12,17 +12,26 @@ Ok {
 exports[`social-media/posts/linkedin PublishPost post with images keeps the link if media is present 1`] = `
 Ok {
   "value": Object {
-    "postId": "urn:li:share:6920392081903415296",
-    "url": "https://www.linkedin.com/feed/update/urn:li:activity:6920392082507403264",
+    "postId": "urn:li:share:7034659221623177216",
+    "url": "https://www.linkedin.com/feed/update/urn:li:share:7034659221623177216",
   },
 }
 `;
 
-exports[`social-media/posts/linkedin PublishPost post with images uploads and posts media 1`] = `
+exports[`social-media/posts/linkedin PublishPost post with images uploads and posts multiple images 1`] = `
 Ok {
   "value": Object {
-    "postId": "urn:li:share:6920392067227541505",
-    "url": "https://www.linkedin.com/feed/update/urn:li:activity:6920392067865071616",
+    "postId": "urn:li:ugcPost:7034659212542496768",
+    "url": "https://www.linkedin.com/feed/update/urn:li:ugcPost:7034659212542496768",
+  },
+}
+`;
+
+exports[`social-media/posts/linkedin PublishPost post with images uploads and posts single image 1`] = `
+Ok {
+  "value": Object {
+    "postId": "urn:li:share:7034659197531095040",
+    "url": "https://www.linkedin.com/feed/update/urn:li:share:7034659197531095040",
   },
 }
 `;
@@ -30,8 +39,8 @@ Ok {
 exports[`social-media/posts/linkedin PublishPost text-only post works 1`] = `
 Ok {
   "value": Object {
-    "postId": "urn:li:share:6920392037481541632",
-    "url": "https://www.linkedin.com/feed/update/urn:li:activity:6920392037846437888",
+    "postId": "urn:li:share:7034659181546627072",
+    "url": "https://www.linkedin.com/feed/update/urn:li:share:7034659181546627072",
   },
 }
 `;
@@ -40,15 +49,14 @@ exports[`social-media/publish-post/linkedin PublishPost error cases invalid prof
 Err {
   "error": "MappedHTTPError: Expected HTTP error
 Properties: {
-  \\"title\\": \\"Forbidden\\",
-  \\"detail\\": \\"Field Value validation failed in REQUEST_BODY: Data Processing Exception while processing fields [/owner]\\",
+  \\"title\\": \\"Conflict\\",
+  \\"detail\\": \\"ERROR :: /author :: Urn doesn't start with 'urn:'. Urn: 4 at index 0: 4\\\\nERROR :: /author :: Urn doesn't start with 'urn:'. Urn: 4 at index 0: 4\\\\n\\",
   \\"original\\": {
-    \\"serviceErrorCode\\": 100,
-    \\"message\\": \\"Field Value validation failed in REQUEST_BODY: Data Processing Exception while processing fields [/owner]\\",
-    \\"status\\": 403
+    \\"message\\": \\"ERROR :: /author :: Urn doesn't start with 'urn:'. Urn: 4 at index 0: 4\\\\nERROR :: /author :: Urn doesn't start with 'urn:'. Urn: 4 at index 0: 4\\\\n\\",
+    \\"status\\": 422
   }
 }
-AST Path: definitions[0].statements[3].responseHandlers[1].statements[1]
-Original Map Location: Line 60, column 7",
+AST Path: definitions[0].statements[5].responseHandlers[1].statements[1]
+Original Map Location: Line 74, column 7",
 }
 `;

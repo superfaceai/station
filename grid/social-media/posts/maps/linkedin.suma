@@ -1,8 +1,7 @@
 profile = "social-media/posts@1.0"
 provider = "linkedin"
 
-// Uses LinkedIn's UGC Posts API: https://docs.microsoft.com/en-us/linkedin/marketing/integrations/community-management/shares/ugc-post-api#find-ugc-posts-by-authors
-// There's a posts API beta but currently it seems broken for even basic retrieval: https://docs.microsoft.com/en-us/linkedin/marketing/integrations/community-management/shares/posts-api-beta
+// Uses LinkedIn's Posts API: https://learn.microsoft.com/en-us/linkedin/marketing/integrations/community-management/shares/posts-api
 
 """
 Retrieve posts from LinkedIn profile
@@ -13,16 +12,19 @@ map GetProfilePosts {
   inputPage = parseInt(input.page, 10)
   start = isNaN(inputPage) ? 0 : inputPage
 
-  // https://stackoverflow.com/a/60450805/240963
-  projection = '(paging,elements*(id,created,specificContent(com.linkedin.ugc.ShareContent(shareMediaCategory,shareCommentary,media(*(media~:playableStreams,originalUrl,description,title,thumbnails))))))'
+  imagesToResolve = {}
+  videosToResolve = {}
+  result = undefined
 
   // We need tight control over parameters encoding, which isn't the case with query construct
-  queryParams = `?q=authors&sortBy=LAST_MODIFIED&authors=List(${encodeURIComponent(input.profileId)})&count=${count}&start=${start}&projection=${projection}`
+  queryParams = `?q=author&author=${encodeURIComponent(input.profileId)}&count=${count}&start=${start}`
   
-  http GET "/v2/ugcPosts{queryParams}" {
+  // https://learn.microsoft.com/en-us/linkedin/marketing/integrations/community-management/shares/posts-api?view=li-lms-2023-02&tabs=http#find-posts-by-authors
+  http GET "/rest/posts{queryParams}" {
     request {
       headers {
         "X-Restli-Protocol-Version" = "2.0.0",
+        "LinkedIn-Version" = "202302",
         "Authorization" = `Bearer ${parameters.accessToken}`,
       }
     }
@@ -31,98 +33,193 @@ map GetProfilePosts {
       // LinkedIn returns paging.links but it seems they have a bug with double encoding projection parameter: https://stackoverflow.com/q/71250137/240963
       // Instead we will just calculate next and previous pages' URLs ourselves
       paging = body.paging
-      result = {
-        previousPage: (paging.start > 0) ? `${Math.max(0, paging.start - paging.count)}` : undefined,
-        // count is passed value, not the real count of items
-        nextPage: (paging.start + paging.count) < paging.total ? `${paging.start + paging.count}` : undefined,
-      }
-
-      result.posts = body.elements.map((element) => {
-        const content = element.specificContent['com.linkedin.ugc.ShareContent'] || {shareCommentary: {}, media: []};
-        let attachmentType = undefined;
-        switch (content.shareMediaCategory) {
-          case 'IMAGE':
-            attachmentType = 'image';
-            break;
-          case 'VIDEO':
-            attachmentType = 'video';
-            break;
-          case 'ARTICLE':
-            attachmentType = 'link';
-            break;
-          case 'NONE': // text-only posts; reshared posts?
-          case 'URN_REFERENCE': // polls?
-          case 'NATIVE_DOCUMENT': // document attachment (PDF)
-            break;
-        }
-        let attachments = [];
-        if (attachmentType) {
-          attachments = content.media.map((media) => {
-            const thumbnail = media.thumbnails && media.thumbnails[0] || {};
-            let videoUrl, duration, width, height;
-            if (attachmentType === 'video') {
-              const mediaElement = media['media~'] && media['media~'].elements.find((mediaEl) => {
-                return mediaEl.data['com.linkedin.digitalmedia.mediaartifact.AdaptiveStreamVideoWithAudio'] || mediaEl.data['com.linkedin.digitalmedia.mediaartifact.AdaptiveStreamVideo']
-              });
-              if (mediaElement) {
-                const artifact = mediaElement.data['com.linkedin.digitalmedia.mediaartifact.AdaptiveStreamVideoWithAudio'] || mediaElement.data['com.linkedin.digitalmedia.mediaartifact.AdaptiveStreamVideo']
-                width = artifact.videoStream.displaySize.width;
-                height = artifact.videoStream.displaySize.height;
-                duration = artifact.durationInMicroseconds / (1000 * 1000);
-                videoUrl = mediaElement.identifiers[0].identifier;
+      previousPage = (paging.start > 0) ? `${Math.max(0, paging.start - paging.count)}` : undefined,
+      // count is passed value, not the real count of items
+      nextPage = (paging.start + paging.count) < paging.total ? `${paging.start + paging.count}` : undefined,
+  
+      posts = body.elements.map((element) => {
+        const attachments = [];
+        if (element.content) {
+          const c = element.content;
+          if (c.article) {
+            // https://learn.microsoft.com/en-us/linkedin/marketing/integrations/ads/advertising-targeting/version/article-ads-integrations?view=li-lms-2023-02&tabs=http
+            attachments.push({
+              type: 'link',
+              url: c.article.source,
+              title: c.article.title,
+              description: c.article.description,
+              // TODO preview: c.article.thumbnail -> need to fetch its URL
+            })
+          }
+          if (c.media) {
+            // https://learn.microsoft.com/en-us/linkedin/marketing/integrations/community-management/shares/posts-api?view=li-lms-2023-02&tabs=http#media
+            // TODO: fetch URLs
+            const id = c.media.id;
+            let attachmentType = undefined;
+            // urn:li:image:C4E10AQGEOVxaD7kt6Q or urn:li:video:C5610AQES9koZnXb88Q
+            if (id.includes(':video:')) {
+              if (videosToResolve[id]) {
+                videosToResolve[id]
+              } else {
+                const a = {
+                  type: 'video',
+                  title: c.media.title,
+                  altText: c.media.altText,
+                }
+                attachments.push(a);
+                videosToResolve[id] = a;
+              }
+            } else if (id.includes(':image:')) {
+              // Keep the same reference
+              if(imagesToResolve[id]) {
+                attachments.push(imagesToResolve[id]);
+              } else {
+                const a = {
+                  type: 'image',
+                  altText: c.media.altText,
+                };
+                attachments.push(a);
+                imagesToResolve[id] = a;
               }
             }
-            const description = media.description && media.description.text;
-            const altText = (attachmentType === 'image') ? description : undefined;
-            return {
-              type: attachmentType,
-              url: videoUrl || media.originalUrl,
-              preview: thumbnail.url,
-              duration: duration,
-              width: width || thumbnail.width,
-              height: height || thumbnail.height,
-              title: media.title && media.title.text,
-              altText: altText,
-              description: description,
-            };
-          });
+          }
+          if (c.multiImage) {
+            // https://learn.microsoft.com/en-us/linkedin/marketing/integrations/community-management/shares/multiimage-post-api?view=li-lms-2023-02&tabs=http
+            c.multiImage.images.forEach(img => {
+              if(imagesToResolve[img.id]) {
+                attachments.push(imagesToResolve[img.id]);
+              } else {
+                const a = {
+                  type: 'image',
+                  altText: img.altText,
+                };
+                attachments.push(a);
+                imagesToResolve[img.id] = a;
+              }
+            })
+          }
+          // FIXME: polls, carousels
         }
+
         const post = {
           id: element.id,
-          // FIXME: timestamp to ISO date
-          // createdAt: `${element.created.time}`,
+          text: element.commentary || '',
+          createdAt: std.unstable.time.unixTimestampToIsoDate(element.publishedAt || element.createdAt),
+          lastModifiedAt: std.unstable.time.unixTimestampToIsoDate(element.lastModifiedAt),
           url: `https://www.linkedin.com/feed/update/${element.id}`,
-          text: content.shareCommentary.text,
           attachments: attachments,
         }
         return post;
       });
 
-
-      return map result result
+      result = {
+        nextPage: nextPage,
+        previousPage: previousPage,
+        posts: posts,
+      }
     }
 
     response 400 "application/json" {
       return map error {
-        title = "Bad Request",
+        title = body.code || "Bad Request",
         detail = body.message,
       }
     }
     response 401 "application/json" {
       return map error {
-        title = "Unauthorized",
+        title = body.code || "Unauthorized",
         detail = body.message,
       }
     }
     response 403 "application/json" {
       return map error {
-        title = "Forbidden",
+        title = body.code || "Forbidden",
         detail = body.message,
       }
     }
     response 404 "application/json" {
       return map error {
-        title = "Resource Not Found",
+        title = body.code || "Resource Not Found",
+        detail = body.message,
+      }
+    }
+  }
+
+  set {
+    imagesIds = Object.keys(imagesToResolve)
+    videoIds = Object.keys(videosToResolve)
+  }
+  return map result if (imagesIds.length === 0 && videoIds.length === 0) result
+
+  call ResolveMedia(type = "images", accessToken = parameters.accessToken, mediaIds = imagesIds) if (imagesIds.length > 0) {
+    // Just bail out without resolution
+    return map result if (outcome.error) result
+
+    dummy = Object.entries(outcome.data).forEach(([id, img]) => {
+      if (!img.downloadUrl) {
+        return;
+      }
+      imagesToResolve[id].url = img.downloadUrl;
+    })
+  }
+
+  call ResolveMedia(type = "videos", accessToken = parameters.accessToken, mediaIds = videoIds) if (videoIds.length > 0) {
+    // Just bail out without resolution
+    return map result if (outcome.error) result
+
+    dummy = Object.entries(outcome.data).forEach(([id, vid]) => {
+      if (!vid.downloadUrl) {
+        return;
+      }
+      const attachment = videosToResolve[id];
+      attachment.url = vid.downloadUrl;
+      attachment.preview = vid.thumbnail;
+      attachment.duration = vid.duration;
+    })
+  }
+
+  map result result
+}
+
+operation ResolveMedia {
+  queryParams = `?ids=List(${args.mediaIds.map(encodeURIComponent).join(',')})`
+  pathName = args.type === 'videos' ? 'rest/videos' : 'rest/images'
+  http GET "/{pathName}{queryParams}" {
+    security none
+  
+    request {
+      headers {
+        "X-Restli-Protocol-Version" = "2.0.0",
+        "LinkedIn-Version" = "202302",
+        "Authorization" = `Bearer ${args.accessToken}`,
+      }
+    }
+  
+    response 200 "application/json" {
+      return body.results
+    }
+  
+    response 400 "application/json" {
+      fail {
+        title = body.code || "Bad Request",
+        detail = body.message,
+      }
+    }
+    response 401 "application/json" {
+      fail {
+        title = body.code || "Unauthorized",
+        detail = body.message,
+      }
+    }
+    response 403 "application/json" {
+      fail {
+        title = body.code || "Forbidden",
+        detail = body.message,
+      }
+    }
+    response 404 "application/json" {
+      fail {
+        title = body.code || "Resource Not Found",
         detail = body.message,
       }
     }
