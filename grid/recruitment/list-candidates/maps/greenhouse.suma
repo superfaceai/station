@@ -8,9 +8,9 @@ map ListCandidates {
 
     request {
       query {
-        jobId = input.jobId
+        job_id = input.jobId
         page = input.page
-        limit = input.limit
+        per_page = input.limit
       }
     }
 
@@ -38,7 +38,7 @@ map ListCandidates {
       }
     }
 
-    response 403 "application/json" {
+    response 404 "application/json" {
       map error {
         title = 'Not Found'
         detail = body.message
