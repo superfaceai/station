@@ -1,0 +1,24 @@
+{
+  "name": "bokun",
+  "services": [
+    {
+      "id": "default",
+      "baseUrl": "https://{SUBDOMAIN}.bokun.io/"
+    }
+  ],
+  "defaultService": "default",
+  "securitySchemes": [
+    {
+      "id": "accessToken",
+      "type": "apiKey",
+      "in": "header",
+      "name": "X-Bokun-App-Access-Token"
+    }
+  ],
+  "parameters": [
+    {
+      "name": "SUBDOMAIN",
+      "description": "API subdomain; obtain from vendor, or use `demo` for sandbox."
+    }
+  ]
+}

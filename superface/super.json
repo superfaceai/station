@@ -983,6 +983,17 @@
         "mock",
         "cloudmersive"
       ]
+    },
+    "booking/list-activities": {
+      "file": "../grid/booking/list-activities/profile.supr",
+      "providers": {
+        "mock": {
+          "file": "../grid/booking/list-activities/maps/mock.suma"
+        },
+        "bokun": {
+          "file": "../grid/booking/list-activities/maps/bokun.suma"
+        }
+      }
     }
   },
   "providers": {
@@ -1582,6 +1593,18 @@
       ],
       "parameters": {
         "ON_BEHALF_OF": "$GREENHOUSE_USER_ID"
+      }
+    },
+    "bokun": {
+      "file": "../providers/bokun.json",
+      "security": [
+        {
+          "id": "accessToken",
+          "apikey": "$BOKUN_ACCESS_TOKEN"
+        }
+      ],
+      "parameters": {
+        "SUBDOMAIN": "demo"
       }
     }
   }

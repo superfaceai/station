@@ -1,0 +1,185 @@
+"""
+List Activities
+Lists activities for which a booking can be created.
+"""
+name = "booking/list-activities"
+version = "1.0.0"
+
+"""
+List Activities
+Lists activities for which a booking can be created.
+"""
+usecase ListActivities safe {
+  input {
+    """
+    Page
+    Pagination cursor (obtained from `nextPage`).
+    """
+    page string!
+  }
+
+  result {
+    """
+    Activities
+    A list of available activities.
+    May be incomplete, check `nextPage` and repeat the request if necessary. 
+    """
+    activities! [Activity]
+
+    """
+    Next Page
+    Cursor of the next page of the listing.
+    """
+    nextPage string
+
+    """
+    Total count
+    Number of activities in total.
+    """
+    total number
+  }
+
+  error BookingError
+
+  example Success {
+    result {
+      activities = [{
+        id = "ACT-1",
+        name = "Fly to the moon!",
+        description =
+          "Take a flight to outer space and experience the beauty of the moon from a different perspective.",
+        shortDescription =
+          "Experience the beauty of the moon from a different perspective.",
+        images = [
+          {
+            url = "https://example.com/moon.jpg",
+            thumbnailUrl = "https://example.com/moon-thumb.jpg",
+            caption = "A flight to the moon.",
+          },
+        ],
+        videos = [
+          {
+            url = "https://example.com/moon-vid.mp4",
+            thumbnailUrl = "https://example.com/moon-vid-thumb.jpg",
+            caption = "A video of a flight to the moon.",
+          },
+        ],
+        tags = ["SPACE", "TRAVEL"],
+        customFields = []
+      }]
+    }
+  }
+}
+
+model Activity {
+  """
+  ID
+  Unique identifier of the activity.
+  """
+  id! string!
+
+  """
+  Name
+  Name of the activity.
+  """
+  name string
+
+  """
+  Description
+  Full description of the activity.
+  """
+  description string
+
+  """
+  Short description
+  May contain the abridged version of the description of the activity, or a different short summary.
+  """
+  shortDescription string
+
+  """
+  Images
+  Images pertaining to the activity.
+  """
+  images [{
+    """
+    URL
+    URL of the image.
+    """
+    url! string!
+
+    """
+    Thumbnail URL
+    URL of the thumbnail of the image.
+    """
+    thumbnailUrl string
+
+    """
+    Caption
+    Optional caption of the image.
+    """
+    caption string
+  }]
+
+  """
+  Videos
+  Videos pertaining to the activity.
+  """
+  videos [{
+    """
+    URL
+    URL of the video.
+    """
+    url! string!
+
+    """
+    Thumbnail URL
+    URL of the thumbnail of the video.
+    """
+    thumbnailUrl string
+
+    """
+    Caption
+    Optional caption of the video.
+    """
+    caption string
+  }]
+
+
+  """
+  Tags
+  Provider-specific tags describing the activity. (e.g. SPORT, FAMILY_FRIENDLY, BUS_TOUR, etc.)
+  """
+  tags [string]
+
+
+  """
+  Custom fields
+  Provider-specific fields relating to the activity.
+  """
+  customFields [{
+    """
+    Key
+    Key of the field.
+    """
+    key string
+    """
+    Value
+    Value of the field.
+    """
+    value
+  }]
+}
+
+model BookingError {
+  """
+  Title
+  A short, human-readable summary of the problem type.
+  """
+  title! string!
+
+  """
+  Detail
+  A human-readable explanation specific to this occurrence of the problem.
+  """
+  detail string! 
+}
