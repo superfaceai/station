@@ -1,10 +1,9 @@
 name: CI / CD
 on:
-  push:
   pull_request:
-    types: [opened, reopened]
-concurrency:
-  group: ${{ github.ref }}
+  push:
+    branches:
+      - main
 jobs:
   lint_tools:
     name: Tools Lint and Format
