@@ -2,10 +2,9 @@
 
 exports[`recruitment/list-candidates/greenhouse ListCandidates when searching for candidates with invalid job ID returns not found error 1`] = `
 Err {
-  "error": "JessieError: Error in Jessie script
-TypeError: Cannot read properties of undefined (reading 'length')
-AST Path: definitions[0].statements[0].responseHandlers[0].statements[0].condition.expression
-Original Map Location: Line 19, column 23",
+  "error": "HTTPError: HTTP Error
+AST Path: definitions[1].statements[0]
+Original Map Location: Line 59, column 3",
 }
 `;
 
@@ -50,6 +49,10 @@ Ok {
         "name": "Mark Twain",
       },
     ],
+    "pagination": Object {
+      "nextPage": 2,
+      "previousPage": 0,
+    },
   },
 }
 `;
