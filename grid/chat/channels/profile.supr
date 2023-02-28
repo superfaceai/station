@@ -3,13 +3,13 @@ Chat Channels
 Retrieve chat channels (rooms) in the workspace. 
 """
 name = "chat/channels"
-version = "1.0.1"
+version = "1.0.2"
 
 """
 Get Channels
 Retrieve paginated list of channels, e.g. text channels in slack or discord
 """
-usecase GetChannels {
+usecase GetChannels safe {
   input {
     """
     Workspace

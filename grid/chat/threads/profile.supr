@@ -3,13 +3,13 @@ Chat Threads
 Retrieve chat threads in the workspace.
 """
 name = "chat/threads"
-version = "1.0.0"
+version = "1.0.2"
 
 """
 Get Threads
 Retrieve list of threads from the whole workspace.
 """
-usecase GetThreads {
+usecase GetThreads safe {
   input  {
     """
     Workspace
