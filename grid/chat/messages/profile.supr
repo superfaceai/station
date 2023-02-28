@@ -3,13 +3,13 @@ Chat Messages
 Retrieve chat messages.
 """
 name = "chat/messages"
-version = "1.0.1"
+version = "1.0.2"
 
 """
 Get chat messages
 Retrieve paginated list of messages
 """
-usecase GetMessages {
+usecase GetMessages safe {
   input {
     """
     Destination

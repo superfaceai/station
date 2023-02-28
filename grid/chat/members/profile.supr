@@ -3,13 +3,13 @@ Chat Members
 Retrieve members of the workspace.
 """
 name = "chat/members"
-version = "1.0.0"
+version = "1.0.1"
 
 """
 Get workspace members
 Retrieve paginated list of members
 """
-usecase GetMembers {
+usecase GetMembers safe {
   input {
     """
     Workspace
