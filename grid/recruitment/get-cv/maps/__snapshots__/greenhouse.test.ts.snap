@@ -1,0 +1,54 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`recruitment/get-cv/greenhouse GetCV when getting a CV with a valid candidate ID returns the CV document 1`] = `
+Ok {
+  "value": Object {
+    "cv": Object {
+      "createdAt": "2023-03-01T10:21:59.893Z",
+      "documentUrl": "https://grnhse-use1-prod-s6-ghr.s3.amazonaws.com/person_attachments/data/778/674/500/original/sample.pdf?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAVQGOLGY35N4A6KQK%2F20230301%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20230301T114620Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=484125f074f3f1306b8542f2850a662e4c6e55577ee62df5970edfc9939a8b1a",
+    },
+    "rateLimit": Object {
+      "bucket": "greenhouse",
+      "remainingRequests": 49,
+      "remainingRequestsPercentage": 98,
+      "totalRequests": 50,
+    },
+  },
+}
+`;
+
+exports[`recruitment/get-cv/greenhouse GetCV when getting a CV with an invalid candidate ID -1 returns candidate not found error 1`] = `
+Err {
+  "error": "MappedHTTPError: Expected HTTP error
+Properties: {
+  \\"title\\": \\"Resource not found\\",
+  \\"code\\": \\"CandidateNotFound\\",
+  \\"rateLimit\\": {
+    \\"bucket\\": \\"greenhouse\\",
+    \\"totalRequests\\": 50,
+    \\"remainingRequests\\": 47,
+    \\"remainingRequestsPercentage\\": 94
+  }
+}
+AST Path: definitions[0].statements[0].responseHandlers[3].statements[0]
+Original Map Location: Line 52, column 13",
+}
+`;
+
+exports[`recruitment/get-cv/greenhouse GetCV when getting a CV with an invalid candidate ID 7413692006 returns candidate not found error 1`] = `
+Err {
+  "error": "MappedHTTPError: Expected HTTP error
+Properties: {
+  \\"title\\": \\"Candidate is missing attachment of type: resume\\",
+  \\"code\\": \\"CVDocumentNotFound\\",
+  \\"rateLimit\\": {
+    \\"bucket\\": \\"greenhouse\\",
+    \\"totalRequests\\": 50,
+    \\"remainingRequests\\": 48,
+    \\"remainingRequestsPercentage\\": 96
+  }
+}
+AST Path: definitions[0].statements[0].responseHandlers[0].statements[1]
+Original Map Location: Line 20, column 13",
+}
+`;
