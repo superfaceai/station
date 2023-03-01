@@ -64,7 +64,7 @@ operation CheckJobExists {
     }
 
     response 404 "application/json" {
-      //Greenhouse returns http code 403 in case that the job ID doesn't exist.
+      // Greenhouse returns http code 403 in case that the job ID doesn't exist.
       fail {
         title = `Job ID "${input.jobId}" not found`,
         detail = body.message,
