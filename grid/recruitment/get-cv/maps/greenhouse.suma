@@ -32,44 +32,12 @@ map GetCV {
             }
         }
 
-        response 401 "application/json" {
-            map error {
-                title = "Unauthorized"
-                code = "Unauthorized"
-                rateLimit = call MapRateLimit(headers=headers)
-            }
-        }
-
-        response 403 "application/json" {
-            map error {
-                title = "You do not have access to that record"
-                code = "Unauthorized"
-                rateLimit = call MapRateLimit(headers=headers)
-            }
-        }
-
-        response 404 "application/json" {
-            map error {
-                title = "Resource not found"
-                code = "CandidateNotFound"
-                rateLimit = call MapRateLimit(headers=headers)
-            }
-        }
-
-        response 429 "application/json" {
-            map error {
-                title = "Rate limit exceeded"
-                detail = "Wait until the limit is reset or send requests less frequently."
-                code = "RateLimitReached"
-            }
-        }
-
-        response 500 "application/json" {
-            map error {
-                title = "Internal server error"
-                code = "UnknownError"
-                rateLimit = call MapRateLimit(headers=headers)
-            }
+        response "application/json" {
+            error = call MapError(
+                statusCode = statusCode, 
+                headers = headers
+            )
+            return map error error
         }
     }
 }
@@ -80,10 +48,10 @@ map GetCV {
 operation MapRateLimit {
 
   totalRequests = parseInt(args.headers["x-ratelimit-limit"]) || undefined,
-  remainingRequests= parseInt(args.headers["x-ratelimit-remaining"]) || undefined
+  remainingRequests = parseInt(args.headers["x-ratelimit-remaining"]) || undefined
   remainingRequestsPercentage = undefined
 
-  set if(totalRequests > 0 && remainingRequests !== undefined) {
+  set if (totalRequests > 0 && remainingRequests !== undefined) {
     remainingRequestsPercentage = remainingRequests / totalRequests * 100
   }
 
@@ -93,4 +61,39 @@ operation MapRateLimit {
     remainingRequests = remainingRequests
     remainingRequestsPercentage = remainingRequestsPercentage
   }
+}
+
+operation MapError {
+
+   statusCode = args.statusCode 
+   rateLimit = call MapRateLimit(headers=args.headers)
+
+   return if (statusCode === 401) {
+        title = "Unauthorized"
+        code = "Unauthorized"
+        rateLimit = rateLimit
+        
+   }
+   return if (statusCode === 403) {
+        title = "You do not have access to that record"
+        code = "Unauthorized"
+        rateLimit = rateLimit
+   }
+   return if (statusCode === 404) {
+        title = "Resource not found"
+        code = "CandidateNotFound"
+        rateLimit = rateLimit
+   }
+
+    return if (statusCode === 429) {
+        title = "Rate limit exceeded"
+        detail = "Wait until the limit is reset or send requests less frequently."
+        code = "RateLimitReached"
+    }
+
+    return {
+        title = "Internal server error"
+        code = "UnknownError"
+        rateLimit = rateLimit
+    }
 }
