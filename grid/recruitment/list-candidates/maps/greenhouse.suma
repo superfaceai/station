@@ -3,7 +3,6 @@ provider = "greenhouse"
 
 map ListCandidates {
 
-
   call CheckJobExists (
     jobId = input.jobId
   ) {
@@ -16,7 +15,6 @@ map ListCandidates {
   http GET "/v1/candidates" {
     security "apiKeyBasicAuth"
     
-
     request {
       query {
         job_id = input.jobId
@@ -24,7 +22,6 @@ map ListCandidates {
         per_page = limit
       }
     }
-
 
     response 200 "application/json" {
       map result {
