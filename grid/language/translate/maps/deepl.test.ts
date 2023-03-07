@@ -14,26 +14,27 @@ describe('DeepL', () => {
 
   describe('TranslateText', () => {
     it('performs correctly', async () => {
-      await expect(
-        superface.run({
-          useCase: 'TranslateText',
-          input: {
-            text: 'Testovanie',
-            targetLanguage: 'EN',
-          },
-        })
-      ).resolves.toMatchSnapshot();
+      const result = await superface.run({
+        useCase: 'TranslateText',
+        input: {
+          text: 'Hello, world!',
+          sourceLanguage: 'EN',
+          targetLanguage: 'DE',
+        },
+      });
+      expect(result.isOk()).toBe(true);
+      expect(result).toMatchSnapshot();
     });
 
-    it('failes - Bad Request', async () => {
-      await expect(
-        superface.run({
-          useCase: 'TranslateText',
-          input: {
-            targetLanguage: 'EN',
-          },
-        })
-      ).resolves.toMatchSnapshot();
+    it('fails with Bad Request', async () => {
+      const result = await superface.run({
+        useCase: 'TranslateText',
+        input: {
+          targetLanguage: 'DE',
+        },
+      });
+      expect(result.isErr()).toBe(true);
+      expect(result).toMatchSnapshot();
     });
   });
 });
