@@ -5,11 +5,11 @@ provider = "deepl"
 Translate text
 """
 map TranslateText {
-    http GET "/v2/translate" {
-        security 'apikey'
+    http POST "/v2/translate" {
+        security 'authkey'
 
         request {
-            query {
+            body {
                 text = input.text
                 source_lang = input.sourceLanguage
                 target_lang = input.targetLanguage
