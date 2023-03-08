@@ -5,11 +5,15 @@ provider = "deepl"
 Translate text
 """
 map TranslateText {
-    http GET "/v2/translate" {
-        security 'apikey'
+    // https://www.deepl.com/docs-api/translate-text/translate-text/
+    http POST "/v2/translate" {
+        security "apikey"
 
-        request {
-            query {
+        request "application/x-www-form-urlencoded" {
+            headers {
+              "accept" = "application/json"
+            }
+            body {
                 text = input.text
                 source_lang = input.sourceLanguage
                 target_lang = input.targetLanguage
@@ -23,6 +27,7 @@ map TranslateText {
             }
         }
 
+        // https://www.deepl.com/docs-api/api-access/error-handling/
         response 400 {
             map error {
                 title = "Bad request"

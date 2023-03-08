@@ -2,14 +2,11 @@
   "name": "deepl",
   "services": [
     {
-      "id": "free",
-      "baseUrl": "https://api-free.deepl.com"
-    },
-    {
-      "id": "pro",
-      "baseUrl": "https://api.deepl.com"
+      "id": "default",
+      "baseUrl": "https://{SUBDOMAIN}.deepl.com"
     }
   ],
+  "defaultService": "default",
   "securitySchemes": [
     {
       "id": "apikey",
@@ -18,5 +15,11 @@
       "name": "auth_key"
     }
   ],
-  "defaultService": "free"
+  "parameters": [
+    {
+      "name": "SUBDOMAIN",
+      "default": "api-free",
+      "description": "API subdomain; set to 'api' for DeepL API Pro, or 'api-free' for DeepL API Free (default)."
+    }
+  ]
 }

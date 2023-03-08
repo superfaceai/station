@@ -2,59 +2,77 @@
   "language/translate/deepl/TranslateText": {
     "bad900cc1d9f2615dbfb50c66944d02c": [
       {
-        "scope": "https://api-free.deepl.com:443",
-        "method": "GET",
-        "path": "/v2/translate?text=Testovanie&target_lang=EN&auth_key=SECURITY_apikey",
-        "body": "",
+        "scope": "https://PARAMS_SUBDOMAIN.deepl.com:443",
+        "method": "POST",
+        "path": "/v2/translate?auth_key=SECURITY_apikey",
+        "body": "text=Hello%2C+world%21&source_lang=EN&target_lang=DE",
         "status": 200,
-        "response": {
+        "response": [
+          "1f8b0800000000000403ab562a294acc2bce492cc9cccf2b56b28aae564a492d494d2e494d892fce2f2d4a4e8dcf49cc4b2f4d4c4f55b25272f553d2512a49ad2801b23d127372f27514c253734a14956a636b013a912b364a000000"
+        ],
+        "rawHeaders": [
+          "server",
+          "nginx",
+          "date",
+          "Tue, 07 Mar 2023 22:33:50 GMT",
+          "content-type",
+          "application/json",
+          "transfer-encoding",
+          "chunked",
+          "access-control-allow-origin",
+          "*",
+          "content-encoding",
+          "gzip",
+          "strict-transport-security",
+          "max-age=63072000; includeSubDomains; preload",
+          "server-timing",
+          "l7_lb_tls;dur=109, l7_lb_idle;dur=0, l7_lb_receive;dur=0, l7_lb_total;dur=175",
+          "access-control-expose-headers",
+          "Server-Timing",
+          "connection",
+          "close"
+        ],
+        "responseIsBinary": false,
+        "decodedResponse": {
           "translations": [
             {
-              "detected_source_language": "SK",
-              "text": "Testing"
+              "detected_source_language": "EN",
+              "text": "Hallo, Welt!"
             }
           ]
-        },
-        "rawHeaders": [
-          "Server",
-          "nginx",
-          "Date",
-          "Fri, 05 Nov 2021 15:30:57 GMT",
-          "Content-Type",
-          "application/json",
-          "Content-Length",
-          "69",
-          "Connection",
-          "close",
-          "Access-Control-Allow-Origin",
-          "*"
-        ],
-        "responseIsBinary": false
+        }
       }
     ],
-    "1d788d339d646cf2006bd9b0ca39b1e7": [
+    "1d788d339d646cf2006bd9b0ca39b1e7": [],
+    "c4232f55500a85bed12c6dcb3bbf1316": [
       {
-        "scope": "https://api-free.deepl.com:443",
-        "method": "GET",
-        "path": "/v2/translate?target_lang=EN&auth_key=SECURITY_apikey",
-        "body": "",
+        "scope": "https://PARAMS_SUBDOMAIN.deepl.com:443",
+        "method": "POST",
+        "path": "/v2/translate?auth_key=SECURITY_apikey",
+        "body": "target_lang=DE",
         "status": 400,
         "response": {
-          "message": "\"Parameter 'text' not specified.\""
+          "message": "Parameter 'text' not specified."
         },
         "rawHeaders": [
-          "Server",
+          "server",
           "nginx",
-          "Date",
-          "Fri, 05 Nov 2021 15:30:57 GMT",
-          "Content-Type",
+          "date",
+          "Tue, 07 Mar 2023 22:33:50 GMT",
+          "content-type",
           "application/json",
-          "Content-Length",
-          "49",
-          "Connection",
-          "close",
-          "Access-Control-Allow-Origin",
-          "*"
+          "content-length",
+          "45",
+          "access-control-allow-origin",
+          "*",
+          "strict-transport-security",
+          "max-age=63072000; includeSubDomains; preload",
+          "server-timing",
+          "l7_lb_tls;dur=105, l7_lb_idle;dur=0, l7_lb_receive;dur=0, l7_lb_total;dur=108",
+          "access-control-expose-headers",
+          "Server-Timing",
+          "connection",
+          "close"
         ],
         "responseIsBinary": false
       }
