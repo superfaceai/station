@@ -1,0 +1,71 @@
+profile = "recruitment/create-lead@1.0"
+provider = "greenhouse"
+// Complete map specification: https://superface.ai/docs/comlink/reference/map
+
+map CreateLead { 
+  // Available input fields:
+  // `input.jobId` - optional string
+  // `input.firstName` - required string
+  // `input.lastName` - required string
+  // `input.email` - required string
+  // `input.phone` - optional string
+  // `input.address` - optional string
+  // `input.education` - optional string
+  // `input.workExperience` - optional string
+  // `input.links` - optional string
+  // `input.cv` - optional string
+  // `input.source` - optional string
+  
+  // Available integration parameters:
+  // `parameters.ON_BEHALF_OF`
+  // -----------------------
+
+  // 1) Change HTTP method and path to make an HTTP call
+  // provider base URL https://harvest.greenhouse.io
+  http POST "/endpoint/api/{ input.jobId }" {
+    // 2) Specify security scheme id from Provider JSON definition
+    security "apiKeyBasicAuth"
+  
+    // 3) Pass input values to the HTTP request
+    request {
+      query {
+        // param_name = input.fieldName
+      }
+      headers {}
+      body {}
+    }
+  
+    // 4) Map successful HTTP response to the result. The content type is optional
+    response 200 "application/json" {
+      return map result {
+        id = "", // required string
+        jobId = "", // optional string
+        rateLimit = {
+          bucket: "", // optional nulllable string
+          totalRequests: 0, // optional nulllable number
+          remainingRequests: 0, // optional nulllable number
+          remainingRequestsPercentage: 0, // optional nulllable number
+          resetTimestamp: 0, // optional nulllable number
+        },
+      }
+    
+    }
+  
+    // 5) Optionally map unsuccessful HTTP response to the use case error
+    response 500 {
+      return map error {
+        title = "", // required unknown type
+        detail = "", // optional unknown type
+        code = `BadRequest`, // required enum (`BadRequest` or `NotFound` or `RateLimitReached` or `Unauthenticated` or `Unauthorized` or `UnknownError` or `Conflict` )
+        rateLimit = {
+          bucket: "", // optional nulllable string
+          totalRequests: 0, // optional nulllable number
+          remainingRequests: 0, // optional nulllable number
+          remainingRequestsPercentage: 0, // optional nulllable number
+          resetTimestamp: 0, // optional nulllable number
+        },
+      }
+    
+    }
+  }
+}
