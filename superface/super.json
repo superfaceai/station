@@ -326,6 +326,9 @@
         },
         "crisp": {
           "file": "../grid/crm/contacts/maps/crisp.suma"
+        },
+        "pipedrive": {
+          "file": "../grid/crm/contacts/maps/pipedrive.suma"
         }
       }
     },
@@ -1326,6 +1329,18 @@
           "token": "$HUBSPOT_PRIVATE_APP_TOKEN"
         }
       ]
+    },
+    "pipedrive": {
+      "file": "../providers/pipedrive.json",
+      "security": [
+        {
+          "id": "api-key",
+          "apikey": "$PIPEDRIVE_API_KEY"
+        }
+      ],
+      "parameters": {
+        "COMPANY_DOMAIN": "$PIPEDRIVE_COMPANY_DOMAIN"
+      }
     },
     "deepl": {
       "file": "../providers/deepl.json",

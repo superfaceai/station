@@ -1,0 +1,57 @@
+profile = "crm/contacts@1.0"
+provider = "pipedrive"
+
+map Create {
+    // todo
+}
+
+map Update {
+    // todo
+}
+map Search {
+
+    set {
+        FIELD_MAP = {
+            firstName: 'name',
+            lastName: 'name'
+        }
+    }
+
+    // https://developers.pipedrive.com/docs/api/v1/Persons#searchPersons
+    http GET "/persons/search" {
+
+        security "api-key"
+
+        request "application/json" {
+            query {
+                // operator does not exist
+                term = input.value,
+                fields = [FIELD_MAP[input.property] || input.property]
+            }
+        }
+
+
+        response 200 "application/json" {
+            map result body.data.items.map(({item}) => 
+                ({
+                    id: item.id,
+                    email: item.primary_email,
+                    phone: item.phones[0],
+                    // todo replace first name and lastname with name
+                    company: item.organization && item.organization.name,
+                    country: null,
+                    customProperties: item.custom_fields,
+                })
+            )
+        }
+
+        response 400 "application/json" {
+            map error {
+                title = "Bad request",
+                detail = body.error
+            }
+        }
+    }
+}
+
+

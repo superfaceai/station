@@ -1,0 +1,164 @@
+{
+  "crm/contacts/pipedrive/Search": {
+    "369e5c05b0e5fad800191d5db4231cf5": [
+      {
+        "scope": "https://PARAMS_COMPANY_DOMAIN.pipedrive.com:443",
+        "method": "GET",
+        "path": "/v1/persons/search?term=Benj&fields=name&api_token=SECURITY_api-key",
+        "body": "",
+        "status": 200,
+        "response": [
+          "1f8b0800000000000003000000ffff",
+          "7491bd6ec3300c845fc5e02c07b2e3d48ea6a273b78e8121303693b2d08f21c92952c3ef5e584dbb7524ee3bdc915c20cec34031824a612601232604b50027b211d4698140713649c7c107022577f278ec0e2203191c415502d27d2250305188de810087769b4f6f6827437df142ee032dbbe295b23ebd7b475b00b4dda1ac655db65ddd402f802cb2c9caf9e1d919f2eef96a19cd6ef07683a6c016c35d6718d4bfa8801b473e1bd2c983da0bf09f8ec25fefa66eabaa3dae027cb8a2e32f4cec1d28371b23609863f2565f98cc980bddd0cc545c7c28b6bcad87f3296fd10b98a71113e9c479f15ad6fb52eecbaa29e451359daa9e605dfb55008e236f2968f4efb127bcb27b442f101386044a0a306c3981aaa414607d209dbfa2d9e9c11b43c38fe38226d2baaedf000000ffff030086ee1c69cc010000"
+        ],
+        "rawHeaders": [
+          "Date",
+          "Tue, 14 Mar 2023 14:18:52 GMT",
+          "Content-Type",
+          "application/json; charset=utf-8",
+          "Transfer-Encoding",
+          "chunked",
+          "Connection",
+          "close",
+          "CF-Ray",
+          "7a7d25fa8ad8b30c-BEG",
+          "Cache-Control",
+          "no-cache",
+          "Strict-Transport-Security",
+          "max-age=31536000; includeSubDomains",
+          "CF-Cache-Status",
+          "DYNAMIC",
+          "Access-Control-Expose-Headers",
+          "X-RateLimit-Remaining, X-RateLimit-Limit, X-RateLimit-Reset",
+          "badi",
+          "Routing: lon-1=>lon-1; Version: c17f; Host: 6488bf7966-9r7d2;",
+          "X-Content-Type-Options",
+          "nosniff",
+          "x-correlation-id",
+          "f28c9835-80b6-4004-9a19-2153ffc30c57",
+          "X-RateLimit-Limit",
+          "10",
+          "X-RateLimit-Remaining",
+          "9",
+          "X-RateLimit-Reset",
+          "2",
+          "X-XSS-Protection",
+          "1; mode=block",
+          "Set-Cookie",
+          "__cf_bm=0S9eCNEx1PinlrgAavI.yo09mv.pyLAI3UnbXVGiQVM-1678803532-0-ATCG2pJpApsg6qEHPWHKGk64l+02zWplWAjeLX/JI7fRIoo+iRJ6r5ZOWSfsAdkmifSHbC9Ir761QJh3/6q+9y8=; path=/; expires=Tue, 14-Mar-23 14:48:52 GMT; domain=.pipedrive.com; HttpOnly; Secure; SameSite=None",
+          "Vary",
+          "Accept-Encoding",
+          "Server",
+          "cloudflare",
+          "Content-Encoding",
+          "gzip",
+          "alt-svc",
+          "h3=\":443\"; ma=86400, h3-29=\":443\"; ma=86400"
+        ],
+        "responseIsBinary": false,
+        "decodedResponse": {
+          "success": true,
+          "data": {
+            "items": [
+              {
+                "result_score": 0.09985,
+                "item": {
+                  "id": 1,
+                  "type": "person",
+                  "name": "[Sample] Benjamin Leon",
+                  "phones": [
+                    "785-202-7824"
+                  ],
+                  "emails": [
+                    "benjamin.leon@gmial.com"
+                  ],
+                  "primary_email": "benjamin.leon@gmial.com",
+                  "visible_to": 3,
+                  "owner": {
+                    "id": 14271179
+                  },
+                  "organization": null,
+                  "custom_fields": [
+                    "value for benj"
+                  ],
+                  "notes": [],
+                  "update_time": "2023-03-14 09:48:16"
+                }
+              }
+            ]
+          },
+          "additional_data": {
+            "pagination": {
+              "start": 0,
+              "limit": 100,
+              "more_items_in_collection": false
+            }
+          }
+        }
+      }
+    ],
+    "4ebf01c8d0ddfd83d354dc7e8e63f3cf": [
+      {
+        "scope": "https://PARAMS_COMPANY_DOMAIN.pipedrive.com:443",
+        "method": "GET",
+        "path": "/v1/persons/search?term=Benj&fields=randomField&api_token=SECURITY_api-key",
+        "body": "",
+        "status": 400,
+        "response": {
+          "success": false,
+          "error": "ServerError [ERR_INVALID_INPUT]: Invalid input: \"fields[0]\" must be one of [custom_fields, notes, name, email, phone]",
+          "error_info": null,
+          "data": null,
+          "additional_data": {
+            "failed_fields": [
+              "fields.0"
+            ]
+          }
+        },
+        "rawHeaders": [
+          "Date",
+          "Tue, 14 Mar 2023 14:18:52 GMT",
+          "Content-Type",
+          "application/json; charset=utf-8",
+          "Content-Length",
+          "226",
+          "Connection",
+          "close",
+          "CF-Ray",
+          "7a7d25ff2a05b01d-BEG",
+          "Cache-Control",
+          "no-cache",
+          "Strict-Transport-Security",
+          "max-age=31536000; includeSubDomains",
+          "CF-Cache-Status",
+          "DYNAMIC",
+          "Access-Control-Expose-Headers",
+          "X-RateLimit-Remaining, X-RateLimit-Limit, X-RateLimit-Reset",
+          "badi",
+          "Routing: lon-1=>lon-1; Version: c17f; Host: 6488bf7966-6wvmj;",
+          "X-Content-Type-Options",
+          "nosniff",
+          "x-correlation-id",
+          "c1411397-a1ac-4d02-8af4-4c3287fe82be",
+          "X-RateLimit-Limit",
+          "10",
+          "X-RateLimit-Remaining",
+          "8",
+          "X-RateLimit-Reset",
+          "2",
+          "X-XSS-Protection",
+          "1; mode=block",
+          "Set-Cookie",
+          "__cf_bm=sa.0fkq0ZOc_2kE4hddhF9snRvZ7_jCp.kDo0wrw5uc-1678803532-0-ARJsL8nsccxcfzDYwtT8JYLAsP7OqduJ+L0GrduUS2M/DnwZ296aVWkGTRNvK12uSYrtZ4J86om9TlvkacdA5sM=; path=/; expires=Tue, 14-Mar-23 14:48:52 GMT; domain=.pipedrive.com; HttpOnly; Secure; SameSite=None",
+          "Vary",
+          "Accept-Encoding",
+          "Server",
+          "cloudflare",
+          "alt-svc",
+          "h3=\":443\"; ma=86400, h3-29=\":443\"; ma=86400"
+        ],
+        "responseIsBinary": false
+      }
+    ]
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "name": "pipedrive",
+  "defaultService": "default",
+  "services": [
+    {
+      "id": "default",
+      "baseUrl": "https://{COMPANY_DOMAIN}.pipedrive.com/v1"
+    }
+  ],
+  "securitySchemes": [
+    {
+      "id": "api-key",
+      "type": "apiKey",
+      "in": "query",
+      "name": "api_token"
+    }
+  ],
+  "parameters": [
+    {
+      "name": "COMPANY_DOMAIN",
+      "description": "Company domain or use 'api' instead; obtain from Pipedrive's dashboard for faster requests as it helps determine which data center to request from"
+    }
+  ]
+}
