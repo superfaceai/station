@@ -1,0 +1,99 @@
+profile = "recruitment/get-cv@1.0"
+provider = "greenhouse"
+
+map GetCV {
+
+    http GET "/v1/candidates/{input.candidateId}" {
+
+        security "apiKeyBasicAuth"
+
+        request {
+            headers {
+                "On-Behalf-Of" = parameters.ON_BEHALF_OF
+            }
+        }
+
+        response 200 "application/json" {
+
+            document = body.attachments.find(item => item.type === "resume")
+
+            return map error if (!document) {
+                title = "Candidate is missing attachment of type: resume"
+                code = "CVDocumentNotFound"
+                rateLimit = call MapRateLimit(headers=headers)
+            }
+
+            map result {
+                cv = {
+                    createdAt: document.created_at,
+                    documentUrl: document.url
+                }
+                rateLimit = call MapRateLimit(headers=headers)
+            }
+        }
+
+        response "application/json" {
+            error = call MapError(
+                statusCode = statusCode, 
+                headers = headers
+            )
+            return map error error
+        }
+    }
+}
+
+// Greenhouse rate limits docs: https://developers.greenhouse.io/harvest.html#throttling
+//
+// Last checked 1st March 2023 - it was 50 request every 10sec
+operation MapRateLimit {
+
+  totalRequests = parseInt(args.headers["x-ratelimit-limit"]) || undefined,
+  remainingRequests = parseInt(args.headers["x-ratelimit-remaining"]) || undefined
+  remainingRequestsPercentage = undefined
+
+  set if (totalRequests > 0 && remainingRequests !== undefined) {
+    remainingRequestsPercentage = remainingRequests / totalRequests * 100
+  }
+
+  return {
+    bucket = "greenhouse"
+    totalRequests = totalRequests
+    remainingRequests = remainingRequests
+    remainingRequestsPercentage = remainingRequestsPercentage
+  }
+}
+
+operation MapError {
+
+   statusCode = args.statusCode 
+   rateLimit = call MapRateLimit(headers=args.headers)
+
+   return if (statusCode === 401) {
+        title = "Unauthorized"
+        code = "Unauthorized"
+        rateLimit = rateLimit
+        
+   }
+   return if (statusCode === 403) {
+        title = "You do not have access to that record"
+        code = "Unauthorized"
+        rateLimit = rateLimit
+   }
+   return if (statusCode === 404) {
+        title = "Resource not found"
+        code = "CandidateNotFound"
+        rateLimit = rateLimit
+   }
+
+    return if (statusCode === 429) {
+        title = "Rate limit exceeded"
+        detail = "Wait until the limit is reset or send requests less frequently."
+        code = "RateLimitReached"
+    }
+
+    return {
+        title = "Internal server error"
+        code = "UnknownError"
+        rateLimit = rateLimit
+    }
+}
