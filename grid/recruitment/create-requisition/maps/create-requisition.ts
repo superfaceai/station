@@ -42,6 +42,7 @@ export const createRequisitionTest = (
             requisitionCode: testInputs.validRequisitionCode,
             name: 'Software Developer, Platform',
             headcountTotal: 2,
+            employmentStatus: 'FullTime',
             status: 'Open',
             location: 'Prague',
           },
@@ -58,6 +59,7 @@ export const createRequisitionTest = (
             requisitionCode: testInputs.existingRequisitionCode,
             name: 'Software Developer, Platform',
             headcountTotal: 2,
+            employmentStatus: 'FullTime',
             status: 'Open',
             location: 'Prague',
           }
@@ -84,6 +86,7 @@ export const createRequisitionTest = (
           requisitionCode: 'REQ-5',
           name: 'Software Developer, Platform',
           headcountTotal: -1,
+          employmentStatus: 'FullTime',
         },
       },{
         fullError: true

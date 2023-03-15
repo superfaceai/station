@@ -28,15 +28,15 @@ usecase CreateRequisition {
     """
     headcountTotal! number!
     """
+    Employment Status
+    The classification of the employment. Can be one of: FullTime, PartTime, Contractor, or TempWorker.
+    """
+    employmentStatus! EmploymentStatus!
+    """
     Location
     The location associated with the requisition.
     """
     location string
-    """
-    Employment Status
-    The classification of the employment. Can be one of: FullTime, PartTime, Contractor, or TempWorker.
-    """
-    employmentStatus EmploymentStatus
     """
     Status
     The status of the requisition. Can be one of: Draft, Open, Closed, or OnHold.

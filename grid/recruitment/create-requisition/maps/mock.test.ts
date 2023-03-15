@@ -21,6 +21,7 @@ describe('recruitment/create-requisition/mock', () => {
           requisitionCode: 'REQ-5',
           name: 'Software Developer, Platform',
           headcountTotal: 2,
+          employmentStatus: 'FullTime',
           status: 'Open',
           location: 'Prague',
         },

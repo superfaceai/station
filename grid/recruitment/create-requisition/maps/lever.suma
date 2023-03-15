@@ -15,6 +15,14 @@ map CreateRequisition {
     return map error if (outcome.error) outcome.error
   }
 
+  call MapEmploymentStatus (
+    status = input.employmentStatus
+  ) {
+    return map error if (outcome.error) outcome.error
+    
+    employmentStatus = outcome.data
+  }
+
   http POST "/v1/requisitions" {
     security "bearer_token"
 
@@ -25,7 +33,7 @@ map CreateRequisition {
         name  = input.name
         headcountTotal = input.headcountTotal
         location = input.location
-        employmentStatus = call MapEmploymentStatus(status = input.employmentStatus)
+        employmentStatus = employmentStatus
         status = call MapRequisitionStatus(status = input.status)
         team = input.team
       }
@@ -133,14 +141,20 @@ operation MapEmploymentStatus {
           return 'full-time';
         case 'PartTime':
           return 'part-time';
-        case 'contractor':
+        case 'Contractor':
           return 'contractor';
         case 'TempWorker':
           return 'temp-worker'
         default:
-          return 'full-time';
+          return null;
       }
     })()
+
+  fail if(!result) {
+    title = 'Invalid input'
+    detail = 'Input employmentStatus is invalid. Supported values are: FullTime, PartTime, Contractor, TempWorker.'
+    code = 'InvalidInput'
+  }
 
   return result
 }
