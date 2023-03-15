@@ -1,7 +1,21 @@
 /* eslint-disable jest/no-export */
+import { IMappedError } from '@superfaceai/one-sdk';
 import { SuperfaceTest } from '@superfaceai/testing';
 
 import { buildSuperfaceTest } from '../../../test-config';
+
+type RecruitmentError = {
+  title: string;
+  detail?: unknown;
+  code: string;
+  rateLimit?: {
+    bucket?: string;
+    totalRequests?: number;
+    remainingRequests?: number;
+    remainingRequestsPercentage?: number;
+    resetTimestam?: number;
+  };
+};
 
 export const createRequisitionTest = (
   provider: string,
@@ -46,11 +60,20 @@ export const createRequisitionTest = (
             headcountTotal: 2,
             status: 'Open',
             location: 'Prague',
-          },
+          }
+        },{
+          fullError: true
         });
 
         expect(() => result.unwrap()).toThrow();
-        expect(result).toMatchSnapshot();
+        result.match(
+          () => {},
+          err => {
+            expect(
+              (err as IMappedError<RecruitmentError>).properties?.code
+            ).toBe('RequisitionCodeConflict');
+          }
+        );
       });
     });
 
@@ -62,10 +85,19 @@ export const createRequisitionTest = (
           name: 'Software Developer, Platform',
           headcountTotal: -1,
         },
+      },{
+        fullError: true
       });
 
       expect(() => result.unwrap()).toThrow();
-      expect(result).toMatchSnapshot();
+      result.match(
+        () => {},
+        err => {
+          expect(
+            (err as IMappedError<RecruitmentError>).properties?.code
+          ).toBe('InvalidInput');
+        }
+      );
     });
   });
 };

@@ -7,29 +7,3 @@ Ok {
   },
 }
 `;
-
-exports[`recruitment/create-requisition/lever CreateRequisition should return RequisitionCodeConflict error 1`] = `
-Err {
-  "error": "MappedError: Expected error
-Properties: {
-  \\"title\\": \\"Requisition code conflict\\",
-  \\"detail\\": \\"Requisition with requisitionCode REQ-6 already exists.\\",
-  \\"code\\": \\"RequisitionCodeConflict\\"
-}
-AST Path: definitions[0].statements[1].statements[0]
-Original Map Location: Line 15, column 5",
-}
-`;
-
-exports[`recruitment/create-requisition/lever should map error 1`] = `
-Err {
-  "error": "MappedError: Expected error
-Properties: {
-  \\"title\\": \\"Invalid input\\",
-  \\"detail\\": \\"Input headCountTotal is invalid. The value must be greater than zero.\\",
-  \\"code\\": \\"InvalidInput\\"
-}
-AST Path: definitions[0].statements[0]
-Original Map Location: Line 6, column 3",
-}
-`;
