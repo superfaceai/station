@@ -1,13 +1,13 @@
 """
 Create Requisition
-Create new requisition in ATS (Applicant Tracking System).
+Create a new requisition in an ATS (Applicant Tracking System).
 """
 name = "recruitment/create-requisition"
 version = "1.0.0"
 
 """
 Create Requisition
-Creates job requisition to fill job vacancy in your company.
+Creates a job requisition to fill a job vacancy in a company.
 """
 usecase CreateRequisition {
 
@@ -143,6 +143,7 @@ model ErrorCode enum {
 
 """
 Requisition status
+The status of a requsition, indicating whether it is open, closed, published, etc.
 """
 model RequisitionStatus enum {
    """
@@ -169,7 +170,7 @@ model RequisitionStatus enum {
 
 """
 Employment Status
-The employment classification.
+The employment status of a worker, such as part-time, full-time, contractor, etc.
 """
 model EmploymentStatus enum {
    """
