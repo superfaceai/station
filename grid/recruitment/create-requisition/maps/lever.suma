@@ -109,7 +109,7 @@ operation CheckRequisitionDoNotExist {
     response "application/json" {
       error = call MapLeverError(
         statusCode = statusCode,
-        error = body.error,
+        error = body,
         headers = headers
       )
 
