@@ -53,19 +53,22 @@ export const createRequisitionTest = (
       });
 
       it('should return RequisitionCodeConflict error', async () => {
-        const result = await superface.run({
-          useCase: 'CreateRequisition',
-          input: {
-            requisitionCode: testInputs.existingRequisitionCode,
-            name: 'Software Developer, Platform',
-            headcountTotal: 2,
-            employmentStatus: 'FullTime',
-            status: 'Open',
-            location: 'Prague',
+        const result = await superface.run(
+          {
+            useCase: 'CreateRequisition',
+            input: {
+              requisitionCode: testInputs.existingRequisitionCode,
+              name: 'Software Developer, Platform',
+              headcountTotal: 2,
+              employmentStatus: 'FullTime',
+              status: 'Open',
+              location: 'Prague',
+            },
+          },
+          {
+            fullError: true,
           }
-        },{
-          fullError: true
-        });
+        );
 
         expect(() => result.unwrap()).toThrow();
         result.match(
@@ -80,25 +83,28 @@ export const createRequisitionTest = (
     });
 
     it('should map error', async () => {
-      const result = await superface.run({
-        useCase: 'CreateRequisition',
-        input: {
-          requisitionCode: 'REQ-5',
-          name: 'Software Developer, Platform',
-          headcountTotal: -1,
-          employmentStatus: 'FullTime',
+      const result = await superface.run(
+        {
+          useCase: 'CreateRequisition',
+          input: {
+            requisitionCode: 'REQ-5',
+            name: 'Software Developer, Platform',
+            headcountTotal: -1,
+            employmentStatus: 'FullTime',
+          },
         },
-      },{
-        fullError: true
-      });
+        {
+          fullError: true,
+        }
+      );
 
       expect(() => result.unwrap()).toThrow();
       result.match(
         () => {},
         err => {
-          expect(
-            (err as IMappedError<RecruitmentError>).properties?.code
-          ).toBe('InvalidInput');
+          expect((err as IMappedError<RecruitmentError>).properties?.code).toBe(
+            'InvalidInput'
+          );
         }
       );
     });
