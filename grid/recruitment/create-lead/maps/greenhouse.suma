@@ -67,14 +67,6 @@ map CreateLead {
         code = 'Unauthenticated'
       }
     }
-
-    response 422 "application/json" {
-      map error {
-        title = 'Unprocessable Entity'
-        detail = body
-        code = 'BadRequest'
-      }
-    }
   }
 }
 
