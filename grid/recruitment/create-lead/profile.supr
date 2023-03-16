@@ -3,7 +3,7 @@ Create Lead
 Create sourced lead in ATS (Applicant Tracking System).
 """
 name = "recruitment/create-lead"
-version = "1.0.1"
+version = "2.0.0"
 
 """
 Create Lead
@@ -58,10 +58,49 @@ usecase CreateLead {
     error {
       title = 'Bad Request'
       detail = 'Job with id NOT_EXISTING_JOB_ID does not exist.'
-      code = 'BadRequest'
+      code = 'JobNotFound'
       rateLimit = {
         bucket = 'workable'
       }
+    }
+  }
+}
+
+"""
+Get Create Lead Features
+Get features of CreateLead use case supported by the provider.
+"""
+usecase CreateLeadFeatures {
+  result {
+    """
+    CV MIME Types
+    List of CV MIME types accepted by the provider. MIME types are defined in RFC2045 and registered by https://www.iana.org/.
+    """
+    cvMIMETypes! [string!]!
+    """
+    CV Upload Methods
+    List of supported CV upload methods.
+    """
+    cvUploadMethods! [
+      enum {
+        """
+        URL
+        The cv input contains url field with publicly accessible URL of a CV file.
+        """
+        url = 'url'
+        """
+        File
+        The cv input contains data field with CV file and fileName field with the file name.
+        """
+        file = 'file'
+      }!
+    ]!
+ }
+
+  example Successful {
+    result {
+      cvMIMETypes = ['application/pdf', 'text/rtf']
+      cvUploadMethods = ['url', 'file']
     }
   }
 }
@@ -140,15 +179,30 @@ field links [Link]
 
 """
 CV (Resume)
-Object containing either URL to a CV or data encoded in Base64 format with CV document and name with the file name.
+Object containing either URL to a CV or data with CV document.
 """
-field cv { url string } | { name string, data string }
-
-"""
-CV Url
-Url pointing to CV of a lead.
-"""
-field cvUrl string
+field cv {
+  """
+  URL
+  Publicly accessible URL of a CV file.
+  """
+  url string 
+  """
+  File Name
+  The file name of the CV document.
+  """
+  fileName string
+  """
+  MIME Type
+  MIME type of the CV document.
+  """
+  mimeType string
+  """
+  Data
+  Binary content of the CV document.
+  """
+  data
+}
 
 """
 Source
@@ -173,30 +227,6 @@ Rate limit
 Rate limit details.
 """
 field rateLimit RateLimit
-
-model Lead {
-  id!
-  jobId
-  jobTitle
-  
-  firstName!
-  lastName!
-  fullName
-  
-  email!
-  phone
-  address
-  
-  links 
-  experiences
-  education
-  cv 
-  cvUrl 
-
-  source
-  createdAt
-  updatedAt
-}
 
 """
 Education
@@ -363,16 +393,6 @@ model RateLimit {
 
 model ErrorCode enum {
   """
-  Bad request
-  The request was invalid or cannot be otherwise served.
-  """
-  BadRequest
-  """
-  Not found
-  The profileId does not exist.
-  """
-  NotFound
-  """
   Rate limit reached
   Returned when a request cannot be served due to the user or app reached max requests quota.
   """
@@ -393,8 +413,23 @@ model ErrorCode enum {
   """
   UnknownError
   """
-  Conflict
-  The request can not be executed, it is in conflict with current state of the target resource.
+  CV file name required
+  Missing cv.fileName input. CV file name is required when cv.data input field is defined.
   """
-  Conflict
+  CVFileNameRequired
+  """
+  CV MIME type not supported
+  CV MIME type is not supported by the provider. To get supported MIME types run CreateLeadFeatures use case.
+  """
+  CVMIMETypeNotSupported
+  """
+  Wrong integration parameter
+  The integration parameter value has not been accepted.
+  """
+  WrongIntegrationParameter
+  """
+  Job not found
+  The job ID does not exist.
+  """
+  JobNotFound
 }

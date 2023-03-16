@@ -52,3 +52,27 @@ describe('recruitment/create-lead/mock', () => {
     });
   });
 });
+
+describe('CreateLeadFeatures', () => {
+  it('performs correctly', async () => {
+    const client = new SuperfaceClient();
+    const profile = await client.getProfile('recruitment/create-lead');
+    const provider = await client.getProvider('mock');
+    const usecase = profile.getUseCase('CreateLeadFeatures');
+
+    expect(provider).not.toBeUndefined();
+    expect(usecase).not.toBeUndefined();
+
+    const result = await usecase.perform({}, { provider });
+
+    expect(result.isOk() && result.value).toEqual({
+      cvMIMETypes: [
+        'application/pdf',
+        'text/rtf',
+        'application/msword',
+        'application/vnd.openxmlformats-officedocument.custom-properties+xml',
+      ],
+      cvUploadMethods: ['url', 'file'],
+    });
+  });
+});

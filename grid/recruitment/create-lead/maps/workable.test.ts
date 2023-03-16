@@ -1,3 +1,13 @@
-import { createLeadTest } from './create-lead';
+import { createLeadTest, createLeadWorkableSpecificTest } from './create-lead';
+import { createLeadFeaturesTest } from './create-lead-features';
 
-createLeadTest('workable', { valid: 'FCFA80DF09', invalid: 'NOT-EXISTING' });
+const workableProviderName = 'workable';
+
+createLeadTest(workableProviderName, {
+  valid: 'EEF7355636',
+  invalid: 'NOT-EXISTING',
+});
+
+createLeadWorkableSpecificTest();
+
+createLeadFeaturesTest(workableProviderName);

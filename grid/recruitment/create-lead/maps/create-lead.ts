@@ -1,7 +1,7 @@
 /* eslint-disable jest/no-export, jest/valid-describe-callback, jest/valid-title, jest/no-identical-title */
 
+import { BinaryData, IMappedError } from '@superfaceai/one-sdk';
 import { RecordingProcessOptions, SuperfaceTest } from '@superfaceai/testing';
-import { readFileSync } from 'fs';
 
 import { buildSuperfaceTest } from '../../../test-config';
 
@@ -44,10 +44,9 @@ const sampleLead = {
   ],
 
   cv: {
-    name: 'cv-sample.pdf',
-    data: readFileSync('./grid/recruitment/cv-sample.pdf', {
-      encoding: 'base64',
-    }),
+    fileName: 'cv-sample.pdf',
+    mimeType: 'application/pdf',
+    data: BinaryData.fromPath('./grid/recruitment/cv-sample.pdf'),
   },
 
   links: [
@@ -64,10 +63,18 @@ const sampleLead = {
   source: ['LinkedIn', 'Indeed', 'Glassdoor'],
 };
 
-const describeIf = (
-  condition: boolean,
-  ...args: Parameters<jest.Describe>
-): void => (condition ? describe(...args) : describe.skip(...args));
+type Error = {
+  title: string;
+  detail?: unknown;
+  code: string;
+  rateLimit?: {
+    bucket?: string;
+    totalRequests?: number;
+    remainingRequests?: number;
+    remainingRequestsPercentage?: number;
+    resetTimestam?: number;
+  };
+};
 
 export const createLeadTest = (
   provider: string,
@@ -76,6 +83,7 @@ export const createLeadTest = (
 ): void => {
   describe(`recruitment/create-lead/${provider}`, () => {
     let superface: SuperfaceTest;
+    const JEST_TIMEOUT = 20 * 1000;
 
     beforeEach(() => {
       superface = buildSuperfaceTest({
@@ -86,21 +94,25 @@ export const createLeadTest = (
 
     describe('CreateLead', () => {
       describe('when specified job does exist', () => {
-        it('should perform successfully', async () => {
-          const result = await superface.run(
-            {
-              useCase: 'CreateLead',
-              input: {
-                jobId: jobIds.valid,
-                ...sampleLead,
+        it(
+          'should perform successfully',
+          async () => {
+            const result = await superface.run(
+              {
+                useCase: 'CreateLead',
+                input: {
+                  jobId: jobIds.valid,
+                  ...sampleLead,
+                },
               },
-            },
-            options
-          );
+              options
+            );
 
-          expect(() => result.unwrap()).not.toThrow();
-          expect(result).toMatchSnapshot();
-        });
+            expect(() => result.unwrap()).not.toThrow();
+            expect(result).toMatchSnapshot();
+          },
+          JEST_TIMEOUT
+        );
       });
 
       describe('when specified job does not exist', () => {
@@ -115,85 +127,147 @@ export const createLeadTest = (
                 email: 'demo_testing@fakemail.com',
               },
             },
-            options
+            {
+              fullError: true,
+              ...options,
+            }
           );
 
           expect(() => result.unwrap()).toThrow();
-          expect(result).toMatchSnapshot();
+          result.match(
+            () => {},
+            err => {
+              expect(
+                (err as unknown as IMappedError<Error>).properties?.code
+              ).toBe('JobNotFound');
+            }
+          );
+        });
+      });
+    });
+  });
+};
+
+export const createLeadBreezyHRSpecificTest = (
+  options?: RecordingProcessOptions
+): void => {
+  const provider = 'breezy-hr';
+
+  describe(`recruitment/create-lead/${provider}`, () => {
+    let superface: SuperfaceTest;
+
+    describe('CreateLead', () => {
+      beforeAll(() => {
+        superface = buildSuperfaceTest({
+          profile: 'recruitment/create-lead',
+          provider,
+          useCase: 'CreateLead',
         });
       });
 
-      describeIf(
-        provider === 'breezy-hr',
-        'when specified company does not exist',
-        () => {
-          let companyId: string | undefined;
+      describe('when specified company does not exist', () => {
+        let companyId: string | undefined;
 
-          beforeAll(() => {
-            companyId = process.env.BREEZY_HR_COMPANY_ID;
+        beforeAll(() => {
+          companyId = process.env.BREEZY_HR_COMPANY_ID;
 
-            process.env.BREEZY_HR_COMPANY_ID = '1b111c1111ef11';
-          });
+          process.env.BREEZY_HR_COMPANY_ID = '1b111c1111ef11';
+        });
 
-          afterAll(() => {
-            process.env.BREEZY_HR_COMPANY_ID = companyId;
-          });
+        afterAll(() => {
+          process.env.BREEZY_HR_COMPANY_ID = companyId;
+        });
 
-          it('should map error', async () => {
-            const result = await superface.run(
-              {
-                useCase: 'CreateLead',
-                input: {
-                  jobId: jobIds.valid,
-                  firstName: 'Demo',
-                  lastName: 'Testing',
-                  email: 'demo_testing@fakemail.com',
-                },
+        it('should map error', async () => {
+          const result = await superface.run(
+            {
+              useCase: 'CreateLead',
+              input: {
+                jobId: 'JOB_ID',
+                firstName: 'Demo',
+                lastName: 'Testing',
+                email: 'demo_testing@fakemail.com',
               },
-              options
-            );
+            },
+            {
+              fullError: true,
+              ...options,
+            }
+          );
 
-            expect(() => result.unwrap()).toThrow();
-            expect(result).toMatchSnapshot();
-          });
-        }
-      );
+          expect(() => result.unwrap()).toThrow();
+          result.match(
+            () => {},
+            err => {
+              expect((err as IMappedError<Error>).properties?.code).toBe(
+                'WrongIntegrationParameter'
+              );
+            }
+          );
+        });
+      });
+    });
+  });
+};
 
-      describeIf(
-        provider === 'workable',
-        'when specified subdomain does not exist',
-        () => {
-          let subdomain: string | undefined;
+export const createLeadWorkableSpecificTest = (
+  options?: RecordingProcessOptions
+): void => {
+  const provider = 'workable';
 
-          beforeAll(() => {
-            subdomain = process.env.WORKABLE_SUBDOMAIN;
+  describe(`recruitment/create-lead/${provider}`, () => {
+    let superface: SuperfaceTest;
 
-            process.env.WORKABLE_SUBDOMAIN = 'invalid-superface';
-          });
+    describe('CreateLead', () => {
+      beforeAll(() => {
+        superface = buildSuperfaceTest({
+          profile: 'recruitment/create-lead',
+          provider,
+          useCase: 'CreateLead',
+        });
+      });
 
-          afterAll(() => {
-            process.env.WORKABLE_SUBDOMAIN = subdomain;
-          });
+      describe('when specified subdomain does not exist', () => {
+        let subdomain: string | undefined;
 
-          it('returns error', async () => {
-            const result = await superface.run(
-              {
-                useCase: 'CreateLead',
-                input: {
-                  jobId: jobIds.valid,
-                  firstName: 'Demo',
-                  lastName: 'Testing',
-                  email: 'demo_testing@fakemail.com',
-                },
+        beforeAll(() => {
+          subdomain = process.env.WORKABLE_SUBDOMAIN;
+
+          process.env.WORKABLE_SUBDOMAIN = 'invalid-subdomain';
+        });
+
+        afterAll(() => {
+          process.env.WORKABLE_SUBDOMAIN = subdomain;
+        });
+
+        it('returns error', async () => {
+          const result = await superface.run(
+            {
+              useCase: 'CreateLead',
+              input: {
+                jobId: 'JOB_ID',
+                firstName: 'Demo',
+                lastName: 'Testing',
+                email: 'demo_testing@fakemail.com',
               },
-              options
-            );
+            },
+            {
+              fullError: true,
+              ...options,
+            }
+          );
 
-            expect(() => result.unwrap()).toThrow();
-            expect(result).toMatchSnapshot();
-          });
-        }
-      );
+          expect(() => result.unwrap()).toThrow();
+          result.match(
+            () => {},
+            err => {
+              expect((err as IMappedError<Error>).properties?.code).toBe(
+                'WrongIntegrationParameter'
+              );
+            }
+          );
+        });
+      });
     });
   });
 };

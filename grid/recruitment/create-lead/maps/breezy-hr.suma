@@ -1,11 +1,15 @@
-profile = "recruitment/create-lead@1.0"
+profile = "recruitment/create-lead@2.0"
 provider = "breezy-hr"
 
 map CreateLead {
   return map error if (!input.jobId) {
     title = "Missing required field"
     detail = "Field jobId is required. Please provide it in input."
-    code = "BadRequest"
+    code = "JobNotFound"
+  }
+
+  call CheckSupportedFileTypes(cv = input.cv) {
+   return map error if (outcome.error) outcome.error
   }
 
   call CheckCompanyExists (
@@ -42,10 +46,26 @@ map CreateLead {
     createLeadOutcome = outcome.data
   }
 
+  call UploadCV (
+    accessToken = parameters.ACCESS_TOKEN,
+    companyId = parameters.COMPANY_ID,
+    leadId = createLeadOutcome.lead.id,
+    lead = input
+  ) {
+    return map error if (outcome.error) outcome.error
+  }
+
   return map result {
     id = createLeadOutcome.lead.id
     jobId = createLeadOutcome.lead.jobId
     rateLimit = createLeadOutcome.rateLimit
+  }
+}
+
+map CreateLeadFeatures {
+  map result {
+    cvMIMETypes = ['application/pdf']
+    cvUploadMethods = ['file']
   }
 }
 
@@ -87,13 +107,6 @@ operation MapBreezyHRError {
 
   rateLimit = call MapRateLimit(headers = args.headers)
 
-  return if (statusCode === 400) {
-    title = 'Bad request'
-    detail = workableError
-    code = 'BadRequest'
-    rateLimit = rateLimit
-  }
-
   return if (statusCode === 401) {
     title = 'Unauthenticated'
     detail = workableError
@@ -105,13 +118,6 @@ operation MapBreezyHRError {
     title = 'Unauthorized'
     detail = workableError
     code = 'Unauthorized'
-    rateLimit = rateLimit
-  }
-
-  return if (statusCode === 404) {
-    title = 'Not found'
-    detail = workableError
-    code = 'NotFound'
     rateLimit = rateLimit
   }
 
@@ -128,6 +134,32 @@ operation MapBreezyHRError {
     code = 'UnknownError'
     rateLimit = rateLimit
   }
+}
+
+operation CheckSupportedFileTypes {
+  cv = args.cv || {}
+
+  return if(cv.data === undefined || cv.data === null) {}
+
+  fail if(cv.fileName === undefined || cv.fileName === null) {
+    title = "Missing CV file name"
+    detail = "CV file name is required."
+    code = "CVFileNameRequired"
+  }
+  
+  fail if(!cv.fileName.endsWith('pdf')) {
+    title = "CV MIME type not supported"
+    detail = `File type ${cv.fileName} is not supported by Breezy HR provider.`
+    code = "CVMIMETypeNotSupported"
+  }
+
+  fail if(cv.mimeType && !(cv.mimeType === 'application/pdf')) {
+    title = "CV MIME type not supported"
+    detail = `MIME type ${cv.mimeType} is not supported by Breezy HR provider.`
+    code = "CVMIMETypeNotSupported"
+  }
+
+  return {}
 }
 
 operation CreateLead {
@@ -281,9 +313,9 @@ operation CheckJobExists {
     response 500 "application/json" {
       // Breezy HR returns http status code 500 in case that the job ID doesn't exist. It could be caused by other reasons as well, but at least the error helps the client understand the error better.
       fail {
-        title = 'Not Found'
-        detail = 'Unable to get job by ID ' + args.jobId + '. Check that the job with that ID exists.'
-        code = 'NotFound'
+        title = 'Job Not Found'
+        detail = 'Unable to get job by ID ' + args.jobId + '. Check that the job ID exists.'
+        code = 'JobNotFound'
         rateLimit = call MapRateLimit(headers = headers)
       }
     }
@@ -322,10 +354,10 @@ operation CheckCompanyExists {
     }
 
     response 500 "application/json" {
-      fail {
-        title = 'Not Found'
-        detail = 'Unable to get company by ID ' + args.companyId + '. Check that the company with that ID exists.'
-        code = 'NotFound'
+     fail {
+        title = 'Wrong Integration Parameter'
+        detail = 'Company ID ' + args.companyId + ' does not exist.'
+        code = 'WrongIntegrationParameter'
         rateLimit = call MapRateLimit(headers = headers)
       }
     }
@@ -349,3 +381,49 @@ operation CheckCompanyExists {
     }
   }
 }
+
+operation UploadCV {
+  cv = args.lead.cv || {}
+
+  return if(cv.data === undefined || cv.data === null) {}
+
+  tmp = (cv.data.name = cv.fileName)
+  tmp = (cv.data.mimetype = cv.mimeType)
+
+  http POST "/v3/company/{ args.companyId }/position/{ args.lead.jobId }/candidate/{ args.leadId }/resume" {
+
+    request "multipart/form-data" {
+      headers {
+        Authorization = args.accessToken
+      }
+
+      body = {
+        data: cv.data
+      }
+    }
+
+    response 204 {
+      return {}
+    }
+
+    response "application/json" {
+      error = call MapBreezyHRError(
+        statusCode = statusCode,
+        error = body.error,
+        headers = headers
+      )
+
+      fail error
+    }
+
+    response {
+      fail {
+        title = "Unknown error"
+        detail = JSON.stringify(body, null, 2)
+        code = 'UnknownError'
+      }
+    }
+  }
+}
+
+
