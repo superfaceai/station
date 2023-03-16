@@ -1,0 +1,72 @@
+profile = "recruitment/list-candidates@1.0"
+provider = "greenhouse"
+
+map ListCandidates {
+
+  call CheckJobExists (
+    jobId = input.jobId
+  ) {
+    return map error if (outcome.error) outcome.error
+  }
+
+  page = input.page || 1
+  limit = input.limit || 100
+
+  http GET "/v1/candidates" {
+    security "apiKeyBasicAuth"
+    
+    request {
+      query {
+        job_id = input.jobId
+        page = page
+        per_page = limit
+      }
+    }
+
+    response 200 "application/json" {
+      map result {
+        candidates = body.map(candidate => {
+          const name = `${candidate.first_name} ${candidate.last_name}`
+          const email = candidate.email_addresses[0] ? candidate.email_addresses[0].value : ''
+          return {
+              id: JSON.stringify(candidate.id),
+              jobId: input.jobId,
+              name: name,
+              email: email
+            }
+        })
+        pagination = {
+          previousPage: Math.max(page - 1, 0),
+          nextPage: page + 1
+        }
+      }
+    }
+
+    response 401 "application/json" {
+      map error {
+        title = 'Unauthenticated'
+        detail = body.message
+        code = 'Unauthenticated'
+      }
+    }
+  }
+}
+
+operation CheckJobExists {
+  http GET "/v1/jobs/{ args.jobId }" {
+    security "apiKeyBasicAuth"
+
+    response 200 {
+      return {}
+    }
+
+    response 404 "application/json" {
+      // Greenhouse returns http code 403 in case that the job ID doesn't exist.
+      fail {
+        title = `Job ID "${input.jobId}" not found`,
+        detail = body.message,
+        code = 'NotFound'
+      }
+    }
+  }
+}

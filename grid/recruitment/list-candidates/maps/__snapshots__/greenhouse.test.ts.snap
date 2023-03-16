@@ -1,0 +1,63 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`recruitment/list-candidates/greenhouse ListCandidates when searching for candidates with invalid job ID returns not found error 1`] = `
+Err {
+  "error": "MappedError: Expected error
+Properties: {
+  \\"title\\": \\"Job ID \\\\\\"INVALID\\\\\\" not found\\",
+  \\"detail\\": \\"Resource not found\\",
+  \\"code\\": \\"NotFound\\"
+}
+AST Path: definitions[0].statements[0].statements[0]
+Original Map Location: Line 9, column 5",
+}
+`;
+
+exports[`recruitment/list-candidates/greenhouse ListCandidates when searching for candidates with valid job ID returns list of candidates 1`] = `
+Ok {
+  "value": Object {
+    "candidates": Array [
+      Object {
+        "email": "john.doe@fakemail.com",
+        "id": "5883861006",
+        "jobId": "4031896006",
+        "name": "John Doe",
+      },
+      Object {
+        "email": "john.doe@fakemail.com",
+        "id": "5884628006",
+        "jobId": "4031896006",
+        "name": "John Doe",
+      },
+      Object {
+        "email": "john.doe@fakemail.com",
+        "id": "5884644006",
+        "jobId": "4031896006",
+        "name": "John Doe",
+      },
+      Object {
+        "email": "john.doe@fakemail.com",
+        "id": "5884675006",
+        "jobId": "4031896006",
+        "name": "John Doe",
+      },
+      Object {
+        "email": "joan.d@fakemail.com",
+        "id": "5884696006",
+        "jobId": "4031896006",
+        "name": "Joan D",
+      },
+      Object {
+        "email": "",
+        "id": "5885871006",
+        "jobId": "4031896006",
+        "name": "Mark Twain",
+      },
+    ],
+    "pagination": Object {
+      "nextPage": 2,
+      "previousPage": 0,
+    },
+  },
+}
+`;
