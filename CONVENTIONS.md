@@ -53,9 +53,9 @@ We want first gather more content to understand how Comlink maps are written to 
 
 #### Handling domain-specific errors
 
-The profile error model should define domain-specific error codes. Domain-specific error codes are contract of the profile, and help with harmonization of multiple providers.
+The profile error model should define domain-specific error codes. Domain-specific error codes are a part of the contract of the profile, and help with harmonization of the API of multiple providers.
 
-Example of error model:
+Example of an error model:
 
 ```
 model Error {
@@ -95,7 +95,7 @@ model Error {
 
 #### Handling unknown responses
 
-Unhandled http responses in Comlink maps provides little information about the error to OneSDK client. Example of such error output:
+Unhandled HTTP responses in Comlink maps provide little information about the error to the OneSDK client. Example of such error output:
 
 ```
 Err {
@@ -105,9 +105,9 @@ Original Map Location: Line 44, column 3",
 }
 ```
 
-The error output lacks information about status code and body of the response.
+The error output lacks information about the status code and the body of the response.
 
-You should handle unknown responses in map and map them to error model with HTTP status code and body of the request.
+You should handle unknown responses in the map, and map them to the error model, including the HTTP status code and the body of the response in the use case return value.
 
 Map example:
 
@@ -148,7 +148,7 @@ Original Map Location: Line 64, column 7",
 }
 ```
 
-Be aware that handling HTTP 500 status codes will prevent OneSDK to failover to backup provider. HTTP 500 status codes handling is not recommended for commodity use cases like sending e-mails, sms messages, getting weather forecast,...
+Be aware that **handling HTTP 500 status codes will prevent OneSDK failover** to a backup provider. Handling HTTP 500 status codes is not recommended for commodity use cases like sending e-mails, SMS messages, getting weather forecast, etc.
 
 ## Example Use-case
 
