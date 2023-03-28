@@ -4,7 +4,7 @@ Publish posts on social media such as Instagram, Facebook, or Twitter.
 """
 
 name = "social-media/publish-post"
-version = "2.0.0"
+version = "2.0.1"
 
 """
 Publish a Post
@@ -16,25 +16,25 @@ usecase PublishPost unsafe {
     Profile ID
     Identifier of a profile to publish to. May be optional with some providers.
     """
-    profileId string!
+    profileId string
 
     """
     Text
     Text of the post
     """
-    text string!
+    text string
 
     """
     Link
     URL to attach to the post
     """
-    link string!
+    link string
 
     """
     Title
     Title of the post, if supported by the provider (e.g. Pinterest). Ignored otherwise.
     """
-    title string!
+    title string
 
     """
     Media attachments
