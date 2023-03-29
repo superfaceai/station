@@ -3,7 +3,7 @@ Clean Address
 Normalize postal address from user input.
 """
 name = "address/clean-address"
-version = "1.1.1"
+version = "1.1.2"
 
 """
 Clean Address
@@ -15,7 +15,7 @@ It will take an address like
 and converts it to
 '3301 S Greenfield Rd, Gilbert, AZ 85297'.
 """
-usecase CleanAddress {
+usecase CleanAddress safe {
   input {
     street
     city
