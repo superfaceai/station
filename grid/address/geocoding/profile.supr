@@ -3,14 +3,14 @@ Geocoding
 Code or decode a postal address to or from geographical coordinates.
 """
 name = "address/geocoding"
-version = "3.1.2"
+version = "3.1.3"
 
 """
 Geocode address
 
 Geocode a postal address into geographical coordinates (latitude and longitude).
 """
-usecase Geocode {
+usecase Geocode safe {
   input {
     query
     streetAddress
@@ -74,7 +74,7 @@ Reverse geocode
 
 Decodes geographical coordinates (latitude and longitude) into a postal address.
 """
-usecase ReverseGeocode {
+usecase ReverseGeocode safe {
   input {
     latitude!
     longitude!
