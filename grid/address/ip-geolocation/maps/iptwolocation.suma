@@ -1,0 +1,36 @@
+profile = "address/ip-geolocation@1.0"
+provider = "iptwolocation"
+
+map IpGeolocation {   
+  http GET "/" {
+    security "apiKey"
+  
+    request {
+      query {
+        ip = input.ipAddress
+        format = "json"
+      }
+    }
+  
+    response 200 "application/json" {
+      return map result {
+        ipAddress = body.ip,
+        addressCountryCode = body.country_code,
+        addressCountry = body.country_name,
+        addressRegion = body.region_name,
+        addressLocality = body.city_name,
+        postalCode = body.zip_code,
+        timeZone = body.time_zone,
+        latitude = body.latitude,
+        longitude = body.longitude
+      }
+    
+    }
+  
+    response "application/json" {
+      return map error {
+        title = body.error.error_message
+      }
+    }
+  }
+}

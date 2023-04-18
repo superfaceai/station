@@ -1,0 +1,44 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`address/ip-geolocation/iptwolocation IpGeolocation when api key is valid should return bad request error when IP address format is wrong 1`] = `
+Err {
+  "error": "MappedHTTPError: Expected HTTP error
+Properties: {
+  \\"title\\": \\"Invalid IP address.\\"
+}
+AST Path: definitions[0].statements[0].responseHandlers[1].statements[0]
+Original Map Location: Line 31, column 7",
+}
+`;
+
+exports[`address/ip-geolocation/iptwolocation IpGeolocation when api key is valid should return client IP geolocation coordinates when no IP address specified in input 1`] = `
+Ok {
+  "value": Object {
+    "addressCountry": "Netherlands",
+    "addressCountryCode": "NL",
+    "addressLocality": "Oosterhout",
+    "addressRegion": "Noord-Brabant",
+    "ipAddress": "185.107.56.135",
+    "latitude": 51.644972,
+    "longitude": 4.85973,
+    "postalCode": "4908",
+    "timeZone": "+02:00",
+  },
+}
+`;
+
+exports[`address/ip-geolocation/iptwolocation IpGeolocation when api key is valid should return geolocation coordinates and address for valid IP address 1`] = `
+Ok {
+  "value": Object {
+    "addressCountry": "United States of America",
+    "addressCountryCode": "US",
+    "addressLocality": "Mountain View",
+    "addressRegion": "California",
+    "ipAddress": "8.8.8.8",
+    "latitude": 37.405992,
+    "longitude": -122.078515,
+    "postalCode": "94043",
+    "timeZone": "-07:00",
+  },
+}
+`;

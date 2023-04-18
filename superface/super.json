@@ -610,8 +610,14 @@
         },
         "ipbase": {
           "file": "../grid/address/ip-geolocation/maps/ipbase.suma"
+        },
+        "iptwolocation": {
+          "file": "../grid/address/ip-geolocation/maps/iptwolocation.suma"
         }
-      }
+      },
+      "priority": [
+        "iptwolocation"
+      ]
     },
     "chat/threads": {
       "file": "../grid/chat/threads/profile.supr",
@@ -1618,6 +1624,15 @@
       "parameters": {
         "SUBDOMAIN": "demo"
       }
+    },
+    "iptwolocation": {
+      "file": "../providers/iptwolocation.json",
+      "security": [
+        {
+          "id": "apiKey",
+          "apikey": "$IP2LOCATION_API_KEY"
+        }
+      ]
     }
   }
 }
