@@ -1,7 +1,7 @@
 // SendGrid API Reference: https://sendgrid.com/docs/api-reference/"
 // Errors: https://sendgrid.api-docs.io/v3.0/mail-send/mail-send-errors
 
-profile = "communication/send-email@2.1"
+profile = "communication/send-email@2.2"
 provider = "sendgrid"
 
 map SendEmail {
@@ -9,10 +9,12 @@ map SendEmail {
     'personalizations.0.to.0.email': 'to',
     'from.email': 'from',
     'subject': 'subject',
+    'reply_to.email': 'replyTo'
   }
 
   content = []
   attachments = null
+  reply_to = null;
 
   set if (input.text) {
     content = content.concat([{ type: 'text/plain', value: input.text }])
@@ -32,6 +34,12 @@ map SendEmail {
     })
   }
 
+  set if (input.replyTo) {
+    reply_to = {
+      email: input.replyTo
+    }
+  }
+
   http POST "/v3/mail/send" {
     security "bearer_token"
     
@@ -44,6 +52,7 @@ map SendEmail {
           to: [{ email: input.to }], 
         }],
         attachments: attachments,
+        reply_to: reply_to
       }
     }
     
