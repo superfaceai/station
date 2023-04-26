@@ -5,9 +5,17 @@ import { RecordingType } from '@superfaceai/testing/dist/nock/recording.interfac
 
 import { buildSuperfaceTest } from '../../../test-config';
 
-const demoAccountParams = {
-  projectId: '1203400042224704',
-  profileId: '1203400162064099',
+const demoAccountParams: {
+  [key: string]: { projectId: string; assigneeId: string };
+} = {
+  asana: {
+    projectId: '1203400042224704',
+    assigneeId: '1203400162064099',
+  },
+  'atlassian-cloud': {
+    projectId: '10000',
+    assigneeId: '6270f8636a38370069dd2345',
+  },
 };
 
 const createTask = async (
@@ -31,8 +39,8 @@ const createTask = async (
     {
       input: {
         title: input.title ?? 'Test Title',
-        project: input.project ?? demoAccountParams.projectId,
-        assignee: input.assignee ?? demoAccountParams.profileId,
+        project: input.project ?? demoAccountParams[provider]?.projectId,
+        assignee: input.assignee ?? demoAccountParams[provider]?.assigneeId,
         parent: input.parent,
         description: input.description ?? 'Task description',
       },
@@ -82,8 +90,8 @@ export const taskCrudTest = (provider: string): void => {
             input: {
               title: 'Hello, World!',
               description: 'Description of test task',
-              project: demoAccountParams.projectId,
-              assignee: demoAccountParams.profileId,
+              project: demoAccountParams[provider].projectId,
+              assignee: demoAccountParams[provider].assigneeId,
             },
           });
 
@@ -131,7 +139,7 @@ export const taskCrudTest = (provider: string): void => {
           const result = await superface.run({
             useCase: 'ListTasks',
             input: {
-              id: demoAccountParams.projectId,
+              id: demoAccountParams[provider].projectId,
             },
           });
 

@@ -1,0 +1,344 @@
+profile = "project-management/tasks@1.1"
+provider = "atlassian-cloud"
+
+map CreateTask { 
+  http POST "/ex/jira/{parameters.CLOUD_ID}/rest/api/3/issue" {
+    security "bearerToken"
+  
+    request "application/json" {
+      body {
+        fields = {
+          issuetype: {
+            name: "Task"
+          },
+          project: {
+            id: input.project
+          },
+          summary: input.title,
+          // https://developer.atlassian.com/cloud/jira/platform/apis/document/structure/
+          description: input.description ? {
+            "version": 1,
+            "type": "doc",
+            "content": [
+              {
+                "type": "paragraph",
+                "content": [
+                  {
+                    "type": "text",
+                    "text": input.description
+                  }
+                ]
+              }
+            ]
+          } : undefined,
+          parent: input.parent ? {
+            key: input.parent
+          } : undefined,
+          assignee: input.assignee ? {
+            id: input.assignee
+          } : undefined
+        }
+      }
+    }
+  
+    response 201 "application/json" {
+      return map result {
+        id = body.id
+        url = body.self
+      }
+    }
+
+    response 400 "application/json" {
+      return map error {
+        message = "Invalid input."
+        description = JSON.stringify(body)
+      }
+    }
+  
+    response 401 "application/json" {
+      return map error {
+        message = "Unauthorized"
+        description = "Invalid or expired access token supplied."
+      }
+    }
+  
+    response "application/json" {
+      return map error {
+        message = "Unknown error",
+        description = JSON.stringify(body)
+      }
+    }
+  }
+}
+
+map ListTasks {
+  http GET "/ex/jira/{parameters.CLOUD_ID}/rest/api/3/search" {
+    security "bearerToken"
+  
+    request {
+      query {
+        jql = `project=${input.id}`
+        maxResults = 9999 // TODO
+      }
+    }
+  
+    response 200 "application/json" {
+      processed = call ProcessIssues(issues=body.issues)
+      return map result processed.tasks
+    }
+  
+    response 400 "application/json" {
+      return map error {
+        message = "Invalid input."
+        description = JSON.stringify(body)
+      }
+    }
+  
+    response 401 "application/json" {
+      return map error {
+        message = "Unauthorized"
+        description = "Invalid or expired access token supplied."
+      }
+    }
+  
+    response "application/json" {
+      return map error {
+        message = "Unknown error",
+        description = JSON.stringify(body)
+      }
+    }
+  }
+}
+
+map ReadTask { 
+  http GET "/ex/jira/{parameters.CLOUD_ID}/rest/api/3/issue/{input.id}" {
+    security "bearerToken"
+  
+    response 200 "application/json" {
+      processed = call ProcessIssues(issues=[body])
+      return map result processed.tasks[0]
+    }
+  
+    response 400 "application/json" {
+      return map error {
+        message = "Invalid input."
+        description = JSON.stringify(body)
+      }
+    }
+  
+    response 401 "application/json" {
+      return map error {
+        message = "Unauthorized"
+        description = "Invalid or expired access token supplied."
+      }
+    }
+  
+    response "application/json" {
+      return map error {
+        message = "Unknown error",
+        description = JSON.stringify(body)
+      }
+    }
+  }
+}
+
+map UpdateTask { 
+   http PUT "/ex/jira/{parameters.CLOUD_ID}/rest/api/3/issue/{input.id}" {
+    security "bearerToken"
+  
+    request "application/json" {
+      body {
+        fields = {
+          project: {
+            id: input.project
+          },
+          summary: input.title,
+          // https://developer.atlassian.com/cloud/jira/platform/apis/document/structure/
+          description: input.description ? {
+            "version": 1,
+            "type": "doc",
+            "content": [
+              {
+                "type": "paragraph",
+                "content": [
+                  {
+                    "type": "text",
+                    "text": input.description
+                  }
+                ]
+              }
+            ]
+          } : undefined,
+          parent: input.parent ? {
+            key: input.parent
+          } : undefined,
+          assignee: input.assignee ? {
+            id: input.assignee
+          } : undefined
+        }
+      }
+    }
+  
+   response 204 "application/json" {
+      return map result {
+        id = input.id
+      }
+    }
+
+    response 400 "application/json" {
+      return map error {
+        message = "Invalid input."
+        description = JSON.stringify(body)
+      }
+    }
+  
+    response 401 "application/json" {
+      return map error {
+        message = "Unauthorized"
+        description = "Invalid or expired access token supplied."
+      }
+    }
+  
+    response "application/json" {
+      return map error {
+        message = "Unknown error",
+        description = JSON.stringify(body)
+      }
+    }
+  }
+}
+
+map DeleteTask {
+  http DELETE "/ex/jira/{parameters.CLOUD_ID}/rest/api/3/issue/{input.id}" {
+    security "bearerToken"
+
+    request {
+      query {
+        deleteSubtasks = "true"
+      }
+    }
+
+    response 204  {
+      // noop
+    }
+  
+    response 400 "application/json" {
+      return map error {
+        message = "Invalid input."
+        description = JSON.stringify(body)
+      }
+    }
+  
+    response 401 "application/json" {
+      return map error {
+        message = "Unauthorized"
+        description = "Invalid or expired access token supplied."
+      }
+    }
+  
+    response "application/json" {
+      return map error {
+        message = "Unknown error",
+        description = JSON.stringify(body)
+      }
+    }
+  }
+}
+
+operation ProcessIssues {
+  result = (() => {
+    // https://developer.atlassian.com/cloud/jira/platform/apis/document/structure/
+    const adfToMarkdown = (json) => {
+      let result = "";
+
+      const processNode = (node, parentType) => {
+        if (node.type === "text") {
+          let text = node.text;
+          if (node.marks) {
+            node.marks.forEach((mark) => {
+              if (mark.type === "strong") {
+                text = `**${text}**`;
+              } else if (mark.type === "em") {
+                text = `_${text}_`;
+              } else if (mark.type === "link") {
+                text = `[${text}](${mark.attrs.href})`;
+              } else if (mark.type === "underline") {
+                text = `__${text}__`;
+              } else if (mark.type === "strike") {
+                text = `~~${text}~~`;
+              } else if (mark.type === "code") {
+                text = `\`${text}\``;
+              }
+            });
+          }
+          return text;
+        } else if (node.type === "paragraph") {
+          return (
+            node.content.map((child) => processNode(child, node.type)).join("") +
+            "\n\n"
+          );
+        } else if (node.type === "orderedList") {
+          return node.content
+            .map((child) => processNode(child, node.type))
+            .join("");
+        } else if (node.type === "bulletList") {
+          return node.content
+            .map((child) => processNode(child, node.type))
+            .join("");
+        } else if (node.type === "listItem") {
+          const prefix = parentType === "orderedList" ? "1. " : "* ";
+          return (
+            prefix +
+            node.content.map((child) => processNode(child, node.type)).join("") +
+            "\n"
+          );
+        } else if (node.type === "mediaSingle") {
+          return `![media](${node.content[0].attrs.id})\n\n`;
+        } else if (node.type === "codeBlock") {
+          return (
+            "```\n" +
+            node.content.map((child) => processNode(child, node.type)).join("") +
+            "\n```\n\n"
+          );
+        } else if (node.type === "mention") {
+          return node.attrs.text;
+        } else if (node.type === "blockquote") {
+          return (
+            "> " +
+            node.content.map((child) => processNode(child, node.type)).join("") +
+            "\n"
+          );
+        } else if (node.type === "rule") {
+          return "---\n";
+        }
+
+        return "???\n";
+      }
+
+      json.content.forEach((node) => {
+        result += processNode(node);
+      });
+
+      return result;
+    }
+
+    return args.issues.map((issue) => {
+      return {
+        id: issue.id,
+        projects: [
+          issue.fields.project.id
+        ],
+        title: issue.fields.summary,
+        description: issue.fields.description ? adfToMarkdown(issue.fields.description) : undefined,
+        parent: issue.fields.parent ? issue.fields.parent.id : undefined,
+        assignee: issue.assignee ? issue.assignee.accountId : undefined,
+        url: issue.self
+      };
+    })
+
+  })();
+
+  return {
+    tasks = result
+  }
+}

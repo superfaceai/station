@@ -1,0 +1,20 @@
+profile = "atlassian/accessible-resources@1.0"
+provider = "mock"
+
+map ListAccessibleResources { 
+  map result {
+    resources: [
+      {
+        id: "1324a887-45db-1bf4-1e99-ef0ff456d421",
+        name: "Site name",
+        url: "https://your-domain.atlassian.net",
+        scopes: [
+          "write:jira-work",
+          "read:jira-user",
+          "manage:jira-configuration"
+        ],
+        avatarUrl: "https://site-admin-avatar-cdn.prod.public.atl-paas.net/avatars/240/flag.png"
+      }
+    ]
+  }
+}

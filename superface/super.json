@@ -694,6 +694,9 @@
         },
         "asana": {
           "file": "../grid/project-management/tasks/maps/asana.suma"
+        },
+        "atlassian-cloud": {
+          "file": "../grid/project-management/tasks/maps/atlassian-cloud.suma"
         }
       }
     },
@@ -705,6 +708,9 @@
         },
         "asana": {
           "file": "../grid/project-management/projects/maps/asana.suma"
+        },
+        "atlassian-cloud": {
+          "file": "../grid/project-management/projects/maps/atlassian-cloud.suma"
         }
       }
     },
@@ -1009,6 +1015,20 @@
           "file": "../grid/booking/list-activities/maps/bokun.suma"
         }
       }
+    },
+    "atlassian/accessible-resources": {
+      "file": "../grid/atlassian/accessible-resources/profile.supr",
+      "providers": {
+        "atlassian-cloud": {
+          "file": "../grid/atlassian/accessible-resources/maps/atlassian-cloud.suma"
+        },
+        "mock": {
+          "file": "../grid/atlassian/accessible-resources/maps/mock.suma"
+        }
+      },
+      "priority": [
+        "mock"
+      ]
     }
   },
   "providers": {
@@ -1633,6 +1653,18 @@
           "apikey": "$IP2LOCATION_API_KEY"
         }
       ]
+    },
+    "atlassian-cloud": {
+      "file": "../providers/atlassian-cloud.json",
+      "security": [
+        {
+          "id": "bearerToken",
+          "token": "$ATLASSIAN_CLOUD_TOKEN"
+        }
+      ],
+      "parameters": {
+        "CLOUD_ID": "$ATLASSIAN_CLOUD_ID"
+      }
     }
   }
 }

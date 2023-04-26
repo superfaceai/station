@@ -1,0 +1,85 @@
+"""
+Atlassian Accessible Resources
+List currently accessible Atlassian resources.
+"""
+name = "atlassian/accessible-resources"
+version = "1.0.0"
+
+"""
+List Accessible Resources
+List currently accessible Atlassian resources (e.g. Jira sites, Confluence sites...) along with their information.
+"""
+usecase ListAccessibleResources safe {
+  input {
+  }
+
+  result {
+    resources [
+      {
+        """
+        ID
+        Unique ID of the resource (also known as `cloudId`).
+        """
+        id string
+
+        """
+        Name
+        Name of the resource.
+        """
+        name string
+
+        """
+        URL
+        URL of the resource.
+        """
+        url string
+
+        """
+        Scope
+        List of scopes associated with the resource.
+        """
+        scopes [string]
+
+        """
+        Avatar URL
+        URL of the avatar associated with the resource.
+        """
+        avatarUrl string
+      }
+    ]
+  }
+
+  error AtlassianError
+
+  example Success {
+    result {
+      resources = [
+        {
+          id = "1324a887-45db-1bf4-1e99-ef0ff456d421",
+          name = "Site name",
+          url = "https://your-domain.atlassian.net",
+          scopes = [
+            "write:jira-work",
+            "read:jira-user",
+            "manage:jira-configuration"
+          ]
+          avatarUrl = "https://site-admin-avatar-cdn.prod.public.atl-paas.net/avatars/240/flag.png"
+        }
+      ]
+    }
+  }
+}
+
+model AtlassianError {
+  """
+  Title
+  A short, human-readable summary of the problem type.
+  """
+  title! string!
+
+  """
+  Detail
+  A human-readable explanation specific to this occurrence of the problem.
+  """
+  detail string!
+}
