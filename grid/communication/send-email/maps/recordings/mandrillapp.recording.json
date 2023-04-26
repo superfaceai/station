@@ -15,19 +15,24 @@
               }
             ],
             "subject": "Station test",
-            "text": "Station test - mandrillapp"
+            "text": "Station test - mandrillapp",
+            "headers": [
+              {
+                "reply-to": "hello+replyto@demo.superface.org"
+              }
+            ]
           },
           "key": "SECURITY_api_key"
         },
         "status": 200,
         "response": [
-          "1f8b08000000000000030cca4d0ac2301006d0bbcc5a4a33fd51baf21e2265927e6a659a482659897737cb07eff6251cb22b2df4826aba6e385267f583fc90802ee5279dc88a946aed1862695ef7ad817b80394ce13cbad1312ec3e4fccc83f7339cf8bec58c37425933c452a42556d5dffd0f0000ffff030049e5246b74000000"
+          "1f8b080000000000000354ca410ec2201046e1bbccba692a9660bbf21ec63403fcd51a0a958195f1eeb275f9bdbcdb87b0f31668a6274248578f3df5520fe4951dfa941fd491142e55da2388a579d97c83b36e5a598fca6b3f9ecef6a28d1994c23458c39ad1c68c175c59325852a439d6103a7a5754f8bff8bdff000000ffff03007246bf3e89000000"
         ],
         "rawHeaders": [
           "server",
           "nginx/1.12.2",
           "date",
-          "Fri, 27 May 2022 12:03:27 GMT",
+          "Wed, 26 Apr 2023 15:19:58 GMT",
           "content-type",
           "application/json; charset=utf-8",
           "transfer-encoding",
@@ -52,8 +57,9 @@
           {
             "email": "hello@demo.superface.org",
             "status": "sent",
-            "_id": "20ee22c5c741412e8351b623bb6e1ab0",
-            "reject_reason": null
+            "_id": "cbc9fa542d5d413b8577022e90b7a5ae",
+            "reject_reason": null,
+            "queued_reason": null
           }
         ]
       }
@@ -85,19 +91,24 @@
                 "name": "test2.json",
                 "type": "application/json"
               }
+            ],
+            "headers": [
+              {
+                "reply-to": "hello+replyto@demo.superface.org"
+              }
             ]
           },
           "key": "SECURITY_api_key"
         },
         "status": 200,
         "response": [
-          "1f8b08000000000000030cca410a80201040d1bbcc3a22340b5b758f88189db104c5ca5c4577cfe57ffce5058ee8034c70700869268ea9cde5e4dba1e536dd3b34901f7c4aaecf55b83055d93cd57472740a07d311512ff468b4155a48232c6a4552c1b7fe000000ffff030084f4663e61000000"
+          "1f8b0800000000000003248acd0ac2301006df65cf528ab6a17af23d44ca36fbf5079246b3c9a9f8ee2ef436cccceb2044de023d684508e92988a9d1fa419ed9a34979a10b69e152d59e6f4585983961cc604dbb052e85fd1ab117b53a6e62cec139b9755719eebeeba779987c2bcea865f8de09fdde7f000000ffff030047206c9f7f000000"
         ],
         "rawHeaders": [
           "server",
           "nginx/1.4.6 (Ubuntu)",
           "date",
-          "Fri, 27 May 2022 12:03:28 GMT",
+          "Wed, 26 Apr 2023 15:19:58 GMT",
           "content-type",
           "application/json; charset=utf-8",
           "transfer-encoding",
@@ -122,7 +133,8 @@
           {
             "email": "hello@demo.superface.org",
             "status": "queued",
-            "_id": "f37f5a6b0ddd4297b9c2923b2ca95d35"
+            "queued_reason": "attachments",
+            "_id": "6e66d342d89c45bf8bc0d645b0aec56d"
           }
         ]
       }
@@ -141,7 +153,12 @@
                 "type": "to"
               }
             ],
-            "subject": ""
+            "subject": "",
+            "headers": [
+              {
+                "reply-to": "hello+replyto@demo.superface.org"
+              }
+            ]
           },
           "key": "SECURITY_api_key"
         },
@@ -151,9 +168,9 @@
         ],
         "rawHeaders": [
           "server",
-          "nginx/1.12.2",
+          "nginx/1.4.6 (Ubuntu)",
           "date",
-          "Fri, 27 May 2022 12:03:28 GMT",
+          "Wed, 26 Apr 2023 15:19:59 GMT",
           "content-type",
           "application/json; charset=utf-8",
           "transfer-encoding",

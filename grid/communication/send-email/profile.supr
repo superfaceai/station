@@ -4,7 +4,7 @@ Send transactional email.
 """
 
 name = "communication/send-email"
-version = "2.1.0"
+version = "2.2.0"
 
 """
 Send Email
@@ -42,6 +42,12 @@ usecase SendEmail unsafe {
     The HTML email message.
     """
     html
+
+    """
+    Reply-To
+    The Reply-To email address.
+    """
+    replyTo
 
     """
     Attachments

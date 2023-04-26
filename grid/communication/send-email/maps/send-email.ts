@@ -9,6 +9,7 @@ export const sendEmailTest = (
   params: {
     from: string;
     to: string;
+    replyTo?: string;
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     [key: string]: any;
   },

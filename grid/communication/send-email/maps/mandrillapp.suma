@@ -1,7 +1,7 @@
 // Transactional API Quick Start: https://mailchimp.com/developer/transactional/guides/quick-start/
 // API Reference: https://mailchimp.com/developer/transactional/api/messages/send-new-message/
 
-profile = "communication/send-email@2.1"
+profile = "communication/send-email@2.2"
 provider = "mandrillapp"
 
 map SendEmail {
@@ -34,6 +34,14 @@ map SendEmail {
         type: attachment.type,
       }
     })
+  }
+
+  set if (input.replyTo) {
+    message.headers = [
+      {
+        'reply-to': input.replyTo
+      }
+    ]
   }
 
   http POST "/api/1.0/messages/send" {
