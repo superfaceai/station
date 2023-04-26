@@ -22,6 +22,7 @@ export const createProjectTest = (provider: string): void => {
             useCase: 'ListProjects',
             input: {},
           });
+          expect(() => result.unwrap()).not.toThrow();
           expect(result).toMatchSnapshot();
         });
       });

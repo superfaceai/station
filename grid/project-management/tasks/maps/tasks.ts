@@ -87,8 +87,8 @@ export const taskCrudTest = (provider: string): void => {
             },
           });
 
+          expect(() => result.unwrap()).not.toThrow();
           expect(result).toMatchSnapshot();
-          expect(result.isOk()).toBeTruthy();
 
           await deleteTask(
             provider,
@@ -135,6 +135,7 @@ export const taskCrudTest = (provider: string): void => {
             },
           });
 
+          expect(() => result.unwrap()).not.toThrow();
           expect(result).toMatchSnapshot();
         });
       });
@@ -171,6 +172,7 @@ export const taskCrudTest = (provider: string): void => {
             { hideInput: ['id'] }
           );
 
+          expect(() => result.unwrap()).not.toThrow();
           expect(result).toMatchSnapshot();
         });
       });
@@ -209,6 +211,7 @@ export const taskCrudTest = (provider: string): void => {
             { hideInput: ['id'] }
           );
 
+          expect(() => result.unwrap()).not.toThrow();
           expect(result).toMatchSnapshot();
         });
       });
@@ -241,6 +244,7 @@ export const taskCrudTest = (provider: string): void => {
             { hideInput: ['id'] }
           );
 
+          expect(() => result.unwrap()).not.toThrow();
           expect(result).toMatchSnapshot();
         });
       });
