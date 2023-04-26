@@ -1,6 +1,6 @@
 // API Reference: https://postmarkapp.com/developer/api/overview
 
-profile = "communication/send-email@2.1"
+profile = "communication/send-email@2.2"
 provider = "postmark"
 
 map SendEmail {
@@ -26,6 +26,7 @@ map SendEmail {
         TextBody = input.text
         HtmlBody = input.html
         Attachments = Attachments
+        ReplyTo = input.replyTo
       }
     }
     
