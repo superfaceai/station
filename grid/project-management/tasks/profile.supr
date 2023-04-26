@@ -8,7 +8,7 @@ version = "1.1.0"
 """
 Create a new task in a project
 """
-usecase CreateTask {
+usecase CreateTask unsafe {
   input {
     """
     project
@@ -62,7 +62,7 @@ usecase CreateTask {
 """
 List all tasks in a project
 """
-usecase ListTasks {
+usecase ListTasks safe {
   input {
     """
     Project Id
@@ -92,7 +92,7 @@ usecase ListTasks {
 """
 Read a task in a project
 """
-usecase ReadTask {
+usecase ReadTask safe {
   input {
     """
     Task Id
@@ -122,7 +122,7 @@ usecase ReadTask {
 """
 Update a task in a project
 """
-usecase UpdateTask {
+usecase UpdateTask idempotent {
   input {
     """
     Task Id
@@ -183,7 +183,7 @@ usecase UpdateTask {
 """
 Delete a task in a project
 """
-usecase DeleteTask {
+usecase DeleteTask unsafe {
   input {
     """
     Task Id
