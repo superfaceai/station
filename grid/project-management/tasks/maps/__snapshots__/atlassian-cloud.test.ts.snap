@@ -1,0 +1,120 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`project-management/tasks/atlassian-cloud CreateTask when all inputs are correct should create a task 1`] = `
+Ok {
+  "value": Object {
+    "taskId": "10195",
+    "url": "https://api.atlassian.com/ex/jira/0cfe1fef-1394-4fc0-862b-e636007ca0e0/rest/api/3/issue/10195",
+  },
+}
+`;
+
+exports[`project-management/tasks/atlassian-cloud DeleteTask when all inputs are correct should delete a task 1`] = `
+Ok {
+  "value": undefined,
+}
+`;
+
+exports[`project-management/tasks/atlassian-cloud ListTasks when all inputs are correct should read all tasks for specified project 1`] = `
+Ok {
+  "value": Object {
+    "nextPage": "4",
+    "tasks": Array [
+      Object {
+        "assignee": undefined,
+        "description": "Task description
+",
+        "parent": undefined,
+        "projectIds": Array [
+          "10000",
+        ],
+        "taskId": "10198",
+        "title": "Test 3",
+        "url": "https://api.atlassian.com/ex/jira/0cfe1fef-1394-4fc0-862b-e636007ca0e0/rest/api/3/issue/10198",
+      },
+      Object {
+        "assignee": undefined,
+        "description": "Task description
+",
+        "parent": undefined,
+        "projectIds": Array [
+          "10000",
+        ],
+        "taskId": "10197",
+        "title": "Test 2",
+        "url": "https://api.atlassian.com/ex/jira/0cfe1fef-1394-4fc0-862b-e636007ca0e0/rest/api/3/issue/10197",
+      },
+      Object {
+        "assignee": undefined,
+        "description": "Task description
+",
+        "parent": undefined,
+        "projectIds": Array [
+          "10000",
+        ],
+        "taskId": "10196",
+        "title": "Test 1",
+        "url": "https://api.atlassian.com/ex/jira/0cfe1fef-1394-4fc0-862b-e636007ca0e0/rest/api/3/issue/10196",
+      },
+      Object {
+        "assignee": undefined,
+        "description": "hello
+world
+
+what
+
+
+unordered
+
+list
+
+
+underlined
+strikethrough
+code
+code block
+@Tomáš Mládek  mention
+
+superface
+
+quote
+
+
+",
+        "parent": undefined,
+        "projectIds": Array [
+          "10000",
+        ],
+        "taskId": "10052",
+        "title": "rich text",
+        "url": "https://api.atlassian.com/ex/jira/0cfe1fef-1394-4fc0-862b-e636007ca0e0/rest/api/3/issue/10052",
+      },
+    ],
+  },
+}
+`;
+
+exports[`project-management/tasks/atlassian-cloud ReadTask when all inputs are correct should read task specified by id 1`] = `
+Ok {
+  "value": Object {
+    "assignee": undefined,
+    "description": "Task description
+",
+    "parent": undefined,
+    "projectIds": Array [
+      "10000",
+    ],
+    "taskId": "10199",
+    "title": "Test",
+    "url": "https://api.atlassian.com/ex/jira/0cfe1fef-1394-4fc0-862b-e636007ca0e0/rest/api/3/issue/10199",
+  },
+}
+`;
+
+exports[`project-management/tasks/atlassian-cloud UpdateTask when all inputs are correct should update a task 1`] = `
+Ok {
+  "value": Object {
+    "taskId": "10200",
+  },
+}
+`;

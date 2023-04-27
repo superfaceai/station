@@ -5,16 +5,11 @@ import { RecordingType } from '@superfaceai/testing/dist/nock/recording.interfac
 
 import { buildSuperfaceTest } from '../../../test-config';
 
-const demoAccountParams = {
-  projectId: '1203400042224704',
-  profileId: '1203400162064099',
-};
-
 const createTask = async (
   provider: string,
   input: {
     title?: string;
-    project?: string;
+    projectIds?: string[];
     parent?: string;
     assignee?: string;
     description?: string;
@@ -31,8 +26,8 @@ const createTask = async (
     {
       input: {
         title: input.title ?? 'Test Title',
-        project: input.project ?? demoAccountParams.projectId,
-        assignee: input.assignee ?? demoAccountParams.profileId,
+        projectIds: input.projectIds,
+        assignee: input.assignee,
         parent: input.parent,
         description: input.description ?? 'Task description',
       },
@@ -41,12 +36,12 @@ const createTask = async (
     { recordingType: RecordingType.PREPARE }
   );
 
-  return (result.unwrap() as { id: string }).id;
+  return (result.unwrap() as { taskId: string }).taskId;
 };
 
 const deleteTask = async (
   provider: string,
-  input: { id: string },
+  input: { taskId: string },
   testName: string
 ): Promise<unknown> => {
   const superface = buildSuperfaceTest({
@@ -57,13 +52,16 @@ const deleteTask = async (
 
   const result = await superface.run(
     { input, testName },
-    { hideInput: ['id'], recordingType: RecordingType.TEARDOWN }
+    { hideInput: ['taskId'], recordingType: RecordingType.TEARDOWN }
   );
 
   return result.unwrap();
 };
 
-export const taskCrudTest = (provider: string): void => {
+export const taskCrudTest = (
+  provider: string,
+  globals: { projectIds: string[]; assignee: string }
+): void => {
   describe(`project-management/tasks/${provider}`, () => {
     let superface: SuperfaceTest;
 
@@ -82,18 +80,17 @@ export const taskCrudTest = (provider: string): void => {
             input: {
               title: 'Hello, World!',
               description: 'Description of test task',
-              project: demoAccountParams.projectId,
-              assignee: demoAccountParams.profileId,
+              ...globals,
             },
           });
 
+          expect(() => result.unwrap()).not.toThrow();
           expect(result).toMatchSnapshot();
-          expect(result.isOk()).toBeTruthy();
 
           await deleteTask(
             provider,
             {
-              id: (result.unwrap() as { id: string }).id,
+              taskId: (result.unwrap() as { taskId: string }).taskId,
             },
             'teardown-CreateTask-DeleteTask'
           );
@@ -109,7 +106,7 @@ export const taskCrudTest = (provider: string): void => {
           ids.push(
             await createTask(
               provider,
-              { title: `Test ${i}` },
+              { title: `Test ${i}`, ...globals },
               `prepare-ListTasks-CreateTask-${i}`
             )
           );
@@ -120,7 +117,7 @@ export const taskCrudTest = (provider: string): void => {
         for (const i of [1, 2, 3]) {
           await deleteTask(
             provider,
-            { id: ids[i - 1] },
+            { taskId: ids[i - 1] },
             `teardown-ListTasks-DeleteTask-${i}`
           );
         }
@@ -128,35 +125,38 @@ export const taskCrudTest = (provider: string): void => {
 
       describe('when all inputs are correct', () => {
         it('should read all tasks for specified project', async () => {
-          const result = await superface.run({
-            useCase: 'ListTasks',
-            input: {
-              id: demoAccountParams.projectId,
-            },
-          });
+          for (const projectId of globals.projectIds) {
+            const result = await superface.run({
+              useCase: 'ListTasks',
+              input: {
+                projectId,
+              },
+            });
 
-          expect(result).toMatchSnapshot();
+            expect(() => result.unwrap()).not.toThrow();
+            expect(result).toMatchSnapshot();
+          }
         });
       });
     });
 
     describe('ReadTask', () => {
-      let id: string | undefined;
+      let taskId: string | undefined;
 
       beforeEach(async () => {
-        id = await createTask(
+        taskId = await createTask(
           provider,
-          { title: 'Test' },
+          { title: 'Test', ...globals },
           'prepare-ReadTask-CreateTask'
         );
       });
 
       afterEach(async () => {
-        if (id === undefined) {
+        if (taskId === undefined) {
           throw new Error('Task id is undefined');
         }
 
-        await deleteTask(provider, { id }, 'teardown-ReadTask-DeleteTask');
+        await deleteTask(provider, { taskId }, 'teardown-ReadTask-DeleteTask');
       });
 
       describe('when all inputs are correct', () => {
@@ -165,34 +165,39 @@ export const taskCrudTest = (provider: string): void => {
             {
               useCase: 'ReadTask',
               input: {
-                id,
+                taskId,
               },
             },
-            { hideInput: ['id'] }
+            { hideInput: ['taskId'] }
           );
 
+          expect(() => result.unwrap()).not.toThrow();
           expect(result).toMatchSnapshot();
         });
       });
     });
 
     describe('UpdateTask', () => {
-      let id: string | undefined;
+      let taskId: string | undefined;
 
       beforeEach(async () => {
-        id = await createTask(
+        taskId = await createTask(
           provider,
-          { title: 'Test' },
+          { title: 'Test', ...globals },
           'prepare-UpdateTask-CreateTask'
         );
       });
 
       afterEach(async () => {
-        if (id === undefined) {
+        if (taskId === undefined) {
           throw new Error('Task id is not found');
         }
 
-        await deleteTask(provider, { id }, 'teardown-UpdateTask-DeleteTask');
+        await deleteTask(
+          provider,
+          { taskId },
+          'teardown-UpdateTask-DeleteTask'
+        );
       });
 
       describe('when all inputs are correct', () => {
@@ -201,33 +206,34 @@ export const taskCrudTest = (provider: string): void => {
             {
               useCase: 'UpdateTask',
               input: {
-                id,
+                taskId,
                 title: 'Hello, World!',
                 description: 'Description of test task',
               },
             },
-            { hideInput: ['id'] }
+            { hideInput: ['taskId'] }
           );
 
+          expect(() => result.unwrap()).not.toThrow();
           expect(result).toMatchSnapshot();
         });
       });
     });
 
     describe('DeleteTask', () => {
-      let id: string | undefined;
+      let taskId: string | undefined;
 
       beforeEach(async () => {
-        id = await createTask(
+        taskId = await createTask(
           provider,
-          { title: 'Test' },
+          { title: 'Test', ...globals },
           'prepare-DeleteTask-CreateTask'
         );
       });
 
       describe('when all inputs are correct', () => {
         it('should delete a task', async () => {
-          if (id === undefined) {
+          if (taskId === undefined) {
             throw new Error('Task id is not found');
           }
 
@@ -235,12 +241,13 @@ export const taskCrudTest = (provider: string): void => {
             {
               useCase: 'DeleteTask',
               input: {
-                id,
+                taskId,
               },
             },
-            { hideInput: ['id'] }
+            { hideInput: ['taskId'] }
           );
 
+          expect(() => result.unwrap()).not.toThrow();
           expect(result).toMatchSnapshot();
         });
       });

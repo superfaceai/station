@@ -1,0 +1,304 @@
+profile = "project-management/tasks@2.0"
+provider = "atlassian-cloud"
+
+map CreateTask { 
+  return map error if ((input.projectIds || []).length !== 1) {
+    kind = "InvalidInput"
+    title = "Missing Project ID"
+    detail = "Jira requires that a tasks belongs to a single project, please set a project ID."
+  }
+
+  http POST "/ex/jira/{parameters.CLOUD_ID}/rest/api/3/issue" {
+    security "bearerToken"
+  
+    request "application/json" {
+      body {
+        fields = {
+          issuetype: {
+            name: "Task"
+          },
+          project: {
+            id: input.projectIds[0]
+          },
+          summary: input.title,
+          // https://developer.atlassian.com/cloud/jira/platform/apis/document/structure/
+          description: input.description ? {
+            "version": 1,
+            "type": "doc",
+            "content": input.description.split("\n").map((line) => {
+              return {
+                "type": "paragraph",
+                "content": [
+                  {
+                    "type": "text",
+                    "text": input.description
+                  }
+                ]
+              }
+            })
+          } : undefined,
+          parent: input.parent ? {
+            key: input.parent
+          } : undefined,
+          assignee: input.assignee ? {
+            id: input.assignee
+          } : undefined
+        }
+      }
+    }
+  
+    response 201 "application/json" {
+      return map result {
+        taskId = body.id
+        url = body.self
+      }
+    }
+
+    response "application/json" {
+      error = call HandleError(body = body, statusCode = statusCode)
+      return map error error
+    }
+  
+    response {
+      return map error {
+        kind = "UnknownError",
+        title = "Unknown Error",
+        detail = `Status code: ${statusCode}, Received body: ${JSON.stringify(body)}`
+      }
+    }
+  }
+}
+
+map ListTasks {
+  http GET "/ex/jira/{parameters.CLOUD_ID}/rest/api/3/search" {
+    security "bearerToken"
+  
+    request {
+      query {
+        jql = `project=${input.projectId}`
+        startAt = input.page
+      }
+    }
+  
+    response 200 "application/json" {
+      processed = call ProcessIssues(issues=body.issues)
+      return map result {
+        tasks = processed.tasks
+        nextPage = String((parseInt(input.page || "0")) + processed.tasks.length)
+      }
+    }
+  
+    response "application/json" {
+      error = call HandleError(body = body, statusCode = statusCode)
+      return map error error
+    }
+  
+    response {
+      return map error {
+        kind = "UnknownError",
+        title = "Unknown Error",
+        detail = `Status code: ${statusCode}, Received body: ${JSON.stringify(body)}`
+      }
+    }
+  }
+}
+
+map ReadTask { 
+  http GET "/ex/jira/{parameters.CLOUD_ID}/rest/api/3/issue/{input.taskId}" {
+    security "bearerToken"
+  
+    response 200 "application/json" {
+      processed = call ProcessIssues(issues=[body])
+      return map result processed.tasks[0]
+    }
+  
+    response "application/json" {
+      error = call HandleError(body = body, statusCode = statusCode)
+      return map error error
+    }
+  
+    response {
+      return map error {
+        kind = "UnknownError",
+        title = "Unknown Error",
+        detail = `Status code: ${statusCode}, Received body: ${JSON.stringify(body)}`
+      }
+    }
+  }
+}
+
+map UpdateTask { 
+  return map error if ((input.projectIds || []).length > 1) {
+    kind = "InvalidInput"
+    title = "Multiple Project IDs"
+    detail = "Jira requires that a tasks belongs to a single project, please set a single project ID."
+  }
+  
+  http PUT "/ex/jira/{parameters.CLOUD_ID}/rest/api/3/issue/{input.taskId}" {
+    security "bearerToken"
+  
+    request "application/json" {
+      body {
+        fields = {
+          project: (input.projectIds || []).length ? {
+            id: input.projectIds[0]
+          } : undefined,
+          summary: input.title,
+          // https://developer.atlassian.com/cloud/jira/platform/apis/document/structure/
+          description: input.description ? {
+            "version": 1,
+            "type": "doc",
+            "content": input.description.split("\n").map((line) => {
+              return {
+                "type": "paragraph",
+                "content": [
+                  {
+                    "type": "text",
+                    "text": input.description
+                  }
+                ]
+              }
+            })
+          } : undefined,
+          parent: input.parent ? {
+            key: input.parent
+          } : undefined,
+          assignee: input.assignee ? {
+            id: input.assignee
+          } : undefined
+        }
+      }
+    }
+  
+   response 204 "application/json" {
+      return map result {
+        taskId = input.taskId
+      }
+    }
+
+    response "application/json" {
+      error = call HandleError(body = body, statusCode = statusCode)
+      return map error error
+    }
+  
+    response {
+      return map error {
+        kind = "UnknownError",
+        title = "Unknown Error",
+        detail = `Status code: ${statusCode}, Received body: ${JSON.stringify(body)}`
+      }
+    }
+  }
+}
+
+map DeleteTask {
+  http DELETE "/ex/jira/{parameters.CLOUD_ID}/rest/api/3/issue/{input.taskId}" {
+    security "bearerToken"
+
+    request {
+      query {
+        deleteSubtasks = "true"
+      }
+    }
+
+    response 204  {
+      // noop
+    }
+  
+    response "application/json" {
+      error = call HandleError(body = body, statusCode = statusCode)
+      return map error error
+    }
+  
+    response {
+      return map error {
+        kind = "UnknownError",
+        title = "Unknown Error",
+        detail = `Status code: ${statusCode}, Received body: ${JSON.stringify(body)}`
+      }
+    }
+  }
+}
+
+operation ProcessIssues {
+  result = (() => {
+    // https://developer.atlassian.com/cloud/jira/platform/apis/document/structure/
+    const adfToText = (json) => {
+      let result = "";
+      
+      const processNode = (node) => {
+        switch (node.type) {
+          case "text":
+            return node.text;
+          case "paragraph":
+          case "orderedList":
+          case "bulletList":
+          case "listItem":
+          case "codeBlock":
+          case "blockquote":
+            return node.content.map(processNode).join("") + "\n";
+          case "mention":
+            return node.attrs.text;
+          case "rule":
+            return "\n";
+          default:
+            return "";
+        }
+      }
+
+      json.content.forEach((node) => {
+        result += processNode(node);
+      });
+
+      return result;
+    }
+
+    return args.issues.map((issue) => {
+      return {
+        taskId: issue.id,
+        projectIds: [
+          issue.fields.project.id
+        ],
+        title: issue.fields.summary,
+        description: issue.fields.description ? adfToText(issue.fields.description) : undefined,
+        parent: issue.fields.parent ? issue.fields.parent.id : undefined,
+        assignee: issue.assignee ? issue.assignee.accountId : undefined,
+        url: issue.self
+      };
+    })
+
+  })();
+
+  return {
+    tasks = result
+  }
+}
+
+operation HandleError {
+  statusCode = args.statusCode
+  body = args.body
+
+  return if (statusCode === 400) {
+    kind = "InvalidInput"
+    title = "Invalid input."
+    detail = body.errorMessages.concat(Object.values(body.errors)).join(", ")
+  }
+
+  return if (statusCode === 401) {
+    kind = "Unauthenticated"
+    title = "Unauthenticated"
+    detail =  "Invalid or expired access token supplied."
+  }
+
+  return if (statusCode === 403) {
+    kind = "NotAllowed"
+    title = "Not Allowed"
+    detail =  "You do not have permissions for this action."
+  }
+
+  return {
+    kind = "UnknownError"
+    title = "Unknown Error"
+    detail = `Unknown error occurred. Status: ${statusCode}, Body: ${JSON.stringify(body)}`
+  }
+}

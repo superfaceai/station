@@ -1,41 +1,42 @@
 """
 Manage tasks
-Create new tasks in project management systems.
+Create, update, list, read and delete tasks in project management systems.
 """
 name = "project-management/tasks"
-version = "1.1.0"
+version = "2.0.0"
 
 """
-Create a new task in a project
+Create Task
+Create a new task in project management systems.
 """
-usecase CreateTask {
+usecase CreateTask unsafe {
   input {
     """
-    project
-    ID of project to create the task in.
+    Project IDs
+    ID of the project(s) to create the task in.
     """
-    project string
+    projectIds [string]
 
     """
-    title
+    Title
     Textual title of the task.
     """
     title string
     
     """
-    description
+    Description
     Free-form textual description of the task.
     """
     description string
   
     """
-    parent
+    Parent
     ID of the parent task (if applicable).
     """
     parent string
 
     """
-    assignee
+    Assignee
     ID of the user this task should be assigned to.
     """
     assignee string
@@ -47,58 +48,80 @@ usecase CreateTask {
 
   example success {
     input {
-      project = "46ebca75-68af-42a1-916d-b228c2082d4f"
+      projectIds = ["46ebca75-68af-42a1-916d-b228c2082d4f"]
       title = "Get milk"
       description = "We ran out of milk :("
     }
 
     result {
-      id = "ffa18e32-45e6-4b2b-97fa-b8509b3a8c76"
+      taskId = "ffa18e32-45e6-4b2b-97fa-b8509b3a8c76"
       url = "https://example.com/tasks/ffa18e32-45e6-4b2b-97fa-b8509b3a8c76"
     }
   }
 }
 
 """
-List all tasks in a project
+List tasks
+List all tasks in a project.
 """
-usecase ListTasks {
+usecase ListTasks safe {
   input {
     """
-    Project Id
-    Id of project to read tasks from.
+    Project ID
+    ID of the project to read tasks from.
     """
-    id string
+    projectId string
+
+    """
+    Page
+    Pagination cursor (obtained from `nextPage`).
+    """
+    page string
   }
 
-  result [Task]
+  result {
+    """
+    Tasks
+    Tasks of a project.
+    """
+    tasks! [Task]
+    
+    """
+    Next page
+    Cursor to the next page of the results, if any.
+    """
+    nextPage string
+  }
 
   error Error
 
   example success {
     input {
-      id = "46ebca75-68af-42a1-916d-b228c2082d4f"
+      projectId = "46ebca75-68af-42a1-916d-b228c2082d4f"
     }
 
-    result [{
-      id = "ffa18e32-45e6-4b2b-97fa-b8509b3a8c76"
-      title = "Get milk"
-      description = "We ran out of milk :("
-      url = "https://example.com/tasks/ffa18e32-45e6-4b2b-97fa-b8509b3a8c76"
-    }]
+    result {
+      tasks = [{
+        taskId = "ffa18e32-45e6-4b2b-97fa-b8509b3a8c76"
+        title = "Get milk"
+        description = "We ran out of milk :("
+        url = "https://example.com/tasks/ffa18e32-45e6-4b2b-97fa-b8509b3a8c76"
+      }]
+    }
   }
 }
 
 """
-Read a task in a project
+Read Task
+Get details of a task in project management systems.
 """
-usecase ReadTask {
+usecase ReadTask safe {
   input {
     """
-    Task Id
-    Id of task to read.
+    Task ID
+    ID of the task to read.
     """
-    id! string!
+    taskId! string!
   }
 
   result Task
@@ -107,11 +130,11 @@ usecase ReadTask {
 
   example success {
     input {
-      id = "ffa18e32-45e6-4b2b-97fa-b8509b3a8c76"
+      taskId = "ffa18e32-45e6-4b2b-97fa-b8509b3a8c76"
     }
 
     result {
-      id = "ffa18e32-45e6-4b2b-97fa-b8509b3a8c76"
+      taskId = "ffa18e32-45e6-4b2b-97fa-b8509b3a8c76"
       title = "Get milk"
       description = "We ran out of milk :("
       url = "https://example.com/tasks/ffa18e32-45e6-4b2b-97fa-b8509b3a8c76"
@@ -120,42 +143,43 @@ usecase ReadTask {
 }
 
 """
-Update a task in a project
+Update Task
+Update a task in project management systems.
 """
-usecase UpdateTask {
+usecase UpdateTask idempotent {
   input {
     """
-    Task Id
-    Id of task to read in specified project.
+    Task ID
+    ID of the task to update.
     """
-    id! string!
+    taskId! string!
 
     """
-    title
+    Title
     Textual title of the task.
     """
     title string
     
     """
-    description
+    Description
     Free-form textual description of the task.
     """
     description string
     
     """
-    projects
-    ID of projects the task belong to.
+    Project IDs
+    IDs of projects the task belongs to.
     """
-    projects [string]
+    projectIds [string]
 
     """
-    parent
+    Parent ID
     ID of the parent task (if applicable).
     """
     parent string
 
     """
-    assignee
+    Assignee
     ID of the user this task should be assigned to.
     """
     assignee string
@@ -167,12 +191,12 @@ usecase UpdateTask {
 
   example success {
     input {
-      id = "ffa18e32-45e6-4b2b-97fa-b8509b3a8c76"
+      taskId = "ffa18e32-45e6-4b2b-97fa-b8509b3a8c76"
       title = "Get milk"
     }
 
     result {
-      id = "ffa18e32-45e6-4b2b-97fa-b8509b3a8c76"
+      taskId = "ffa18e32-45e6-4b2b-97fa-b8509b3a8c76"
       title = "Get milk"
       description = "Old description"
       url = "https://example.com/tasks/ffa18e32-45e6-4b2b-97fa-b8509b3a8c76"
@@ -181,74 +205,120 @@ usecase UpdateTask {
 }
 
 """
-Delete a task in a project
+Delete Task
+Delete a task in project management systems.
 """
-usecase DeleteTask {
+usecase DeleteTask unsafe {
   input {
     """
-    Task Id
-    Id of task to read in specified project.
+    Task ID
+    ID of the task to delete.
     """
-    id! string!
+    taskId! string!
   }
 
   error Error
 
   example success {
     input {
-      id = "ffa18e32-45e6-4b2b-97fa-b8509b3a8c76"
+      taskId = "ffa18e32-45e6-4b2b-97fa-b8509b3a8c76"
     }
   }
 }
 
 model Task {
   """
-  Task Id
-  Id of task in project.
+  Task ID
+  ID of the task.
   """
-  id! string!
+  taskId! string!
 
   """
-  projects
-  ID of projects the task belong to.
+  Project IDs
+  IDs of projects the task belongs to.
   """
-  projects [string]
+  projectIds [string]
   
   """
-  title
+  Title
   Textual title of the task.
   """
   title string
   
   """
-  description
+  Description
   Free-form textual description of the task.
   """
   description string
 
   """
-  parent
+  Parent
   ID of the parent task (if applicable).
   """
   parent string
 
   """
-  assignee
+  Assignee
   ID of the user this task should be assigned to.
   """
   assignee string
 
   """
-  url
+  URL
   URL of a task
   """
   url string
 }
 
-model Error {
-  "Human-readable error message"
-  message! string!
 
-  "Human-readable details about the error"
-  description! string!
+model Error {
+  """
+  Error Kind
+  A machine-readable error type.
+  """
+  kind! ErrorKind!
+
+  """
+  Error Title
+  A short, human-readable summary of the problem type.
+  """
+  title! string!
+
+  """
+  Error Detail
+  A human-readable explanation specific to this occurrence of the problem.
+  """
+  detail string
+}
+
+model ErrorKind enum {
+  """
+  Invalid Input
+  Occurrs when the application sends malformed or unsupported data to the provider.
+  """
+  InvalidInput
+
+  """
+  Unauthenticated
+  Occurrs when the application provides incorrect authentication credentials.
+  """
+  Unauthenticated
+
+  """
+  Not Allowed
+  Occurrs if you don't have access to the specific data or capability.
+  """
+  NotAllowed
+
+  """
+  Rate Limit Reached
+  Occurrs when the application performs the use case too often based on the provider's limits.
+  """
+  RateLimitReached
+
+  """
+  Unknown Error
+  Occurrs when the integration comes across a previously unknown error. More details should be provided with this error.
+  """
+  UnknownError
 }

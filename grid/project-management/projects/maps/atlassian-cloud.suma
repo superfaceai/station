@@ -1,0 +1,34 @@
+profile = "project-management/projects@2.0"
+provider = "atlassian-cloud"
+
+map ListProjects { 
+  http GET "/ex/jira/{parameters.CLOUD_ID}/rest/api/3/project" {
+    security "bearerToken"
+  
+    request "application/json" {
+    }
+  
+    response 200 "application/json" {
+      return map result body.map((project) => {
+        return {
+          id: project.id,
+          name: project.name
+        }
+      })
+    }
+  
+    response 401 "application/json" {
+      return map error {
+        message = "Unauthorized"
+        description = "Invalid or expired access token supplied."
+      }
+    }
+  
+    response "application/json" {
+      return map error {
+        message = "Unknown error",
+        description = body.message
+      }
+    }
+  }
+}

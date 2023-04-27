@@ -1,0 +1,31 @@
+profile = "atlassian/accessible-resources@1.0"
+provider = "atlassian-cloud"
+
+map ListAccessibleResources { 
+  http GET "/oauth/token/accessible-resources" {
+    security "bearerToken"
+  
+    request "application/json" {
+    }
+  
+    response 200 "application/json" {
+      return map result {
+        resources = body
+      }
+    }
+
+    response 400 "application/json" {
+      return map error {
+        title = "Unauthorized"
+        detail = "Invalid or expired access token supplied."
+      }
+    }
+  
+    response "application/json" {
+      return map error {
+        title = "Unknown error",
+        detail = body.message
+      }
+    }
+  }
+}

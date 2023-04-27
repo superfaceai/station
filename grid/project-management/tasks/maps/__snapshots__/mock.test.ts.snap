@@ -3,7 +3,7 @@
 exports[`project-management/tasks/mock CreateTask when all inputs are correct should create a task 1`] = `
 Ok {
   "value": Object {
-    "id": "123",
+    "taskId": "123",
     "url": "https://example.com/task/123",
   },
 }
@@ -17,19 +17,21 @@ Ok {
 
 exports[`project-management/tasks/mock ListTasks when all inputs are correct should read all tasks for specified project 1`] = `
 Ok {
-  "value": Array [
-    Object {
-      "id": "123",
-      "url": "https://example.com/task/123",
-    },
-  ],
+  "value": Object {
+    "tasks": Array [
+      Object {
+        "taskId": "123",
+        "url": "https://example.com/task/123",
+      },
+    ],
+  },
 }
 `;
 
 exports[`project-management/tasks/mock ReadTask when all inputs are correct should read task specified by id 1`] = `
 Ok {
   "value": Object {
-    "id": "123",
+    "taskId": "123",
     "url": "https://example.com/task/123",
   },
 }
@@ -38,7 +40,7 @@ Ok {
 exports[`project-management/tasks/mock UpdateTask when all inputs are correct should update a task 1`] = `
 Ok {
   "value": Object {
-    "id": "123",
+    "taskId": "123",
     "url": "https://example.com/task/123",
   },
 }

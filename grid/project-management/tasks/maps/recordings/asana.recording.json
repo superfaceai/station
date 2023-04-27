@@ -10,7 +10,7 @@
             "name": "Hello, World!",
             "notes": "Description of test task",
             "projects": [
-              "1203400042224704"
+              "1204486079660998"
             ],
             "assignee": "1203400162064099"
           }
@@ -18,19 +18,21 @@
         "status": 201,
         "response": {
           "data": {
-            "gid": "1203400536546865",
+            "gid": "1204486403194398",
             "projects": [
               {
-                "gid": "1203400042224704",
+                "gid": "1204486079660998",
                 "resource_type": "project",
-                "name": "superface-test"
+                "name": "Cross-functional project plan"
               }
             ],
             "resource_type": "task",
-            "created_at": "2022-11-18T14:27:03.133Z",
-            "modified_at": "2022-11-18T14:27:03.969Z",
+            "created_at": "2023-04-27T09:34:33.536Z",
+            "modified_at": "2023-04-27T09:34:34.141Z",
             "name": "Hello, World!",
             "notes": "Description of test task",
+            "parent": null,
+            "actual_time_minutes": 0,
             "completed": false,
             "assignee_status": "inbox",
             "completed_at": null,
@@ -47,37 +49,36 @@
             },
             "num_hearts": 0,
             "num_likes": 0,
-            "permalink_url": "https://app.asana.com/0/1203400042224704/1203400536546865",
+            "permalink_url": "https://app.asana.com/0/1204486079660998/1204486403194398",
             "memberships": [
               {
                 "project": {
-                  "gid": "1203400042224704",
+                  "gid": "1204486079660998",
                   "resource_type": "project",
-                  "name": "superface-test"
+                  "name": "Cross-functional project plan"
                 },
                 "section": {
-                  "gid": "1203400042224705",
+                  "gid": "1204486079660999",
                   "resource_type": "section",
                   "name": "To do"
                 }
               }
             ],
+            "hearted": false,
+            "hearts": [],
+            "liked": false,
+            "likes": [],
             "assignee": {
               "gid": "1203400160251645",
               "resource_type": "user",
               "name": "Demo"
             },
-            "parent": null,
-            "hearted": false,
-            "hearts": [],
-            "liked": false,
-            "likes": [],
-            "assignee_section": {
-              "gid": "1203400162064124",
-              "resource_type": "section",
-              "name": "Recently assigned"
-            },
             "followers": [
+              {
+                "gid": "1204486011707558",
+                "resource_type": "user",
+                "name": "Super face"
+              },
               {
                 "gid": "1203400160251645",
                 "resource_type": "user",
@@ -86,9 +87,13 @@
             ],
             "custom_fields": [
               {
-                "gid": "1203400042224709",
+                "gid": "1204486079661003",
                 "resource_type": "custom_field",
-                "created_by": null,
+                "created_by": {
+                  "gid": "1204486011707558",
+                  "resource_type": "user",
+                  "name": "Super face"
+                },
                 "resource_subtype": "enum",
                 "type": "enum",
                 "name": "Priority",
@@ -97,25 +102,63 @@
                 "display_value": null,
                 "enum_options": [
                   {
-                    "gid": "1203400042224710",
-                    "resource_type": "enum_option",
-                    "enabled": true,
-                    "name": "High",
-                    "color": "red"
-                  },
-                  {
-                    "gid": "1203400042224711",
-                    "resource_type": "enum_option",
-                    "enabled": true,
-                    "name": "Medium",
-                    "color": "orange"
-                  },
-                  {
-                    "gid": "1203400042224712",
+                    "gid": "1204486079661004",
                     "resource_type": "enum_option",
                     "enabled": true,
                     "name": "Low",
+                    "color": "aqua"
+                  },
+                  {
+                    "gid": "1204486079661005",
+                    "resource_type": "enum_option",
+                    "enabled": true,
+                    "name": "Medium",
                     "color": "yellow-orange"
+                  },
+                  {
+                    "gid": "1204486079661006",
+                    "resource_type": "enum_option",
+                    "enabled": true,
+                    "name": "High",
+                    "color": "purple"
+                  }
+                ]
+              },
+              {
+                "gid": "1204486079661008",
+                "resource_type": "custom_field",
+                "created_by": {
+                  "gid": "1204486011707558",
+                  "resource_type": "user",
+                  "name": "Super face"
+                },
+                "resource_subtype": "enum",
+                "type": "enum",
+                "name": "Status",
+                "enabled": true,
+                "enum_value": null,
+                "display_value": null,
+                "enum_options": [
+                  {
+                    "gid": "1204486079661009",
+                    "resource_type": "enum_option",
+                    "enabled": true,
+                    "name": "On track",
+                    "color": "blue-green"
+                  },
+                  {
+                    "gid": "1204486079661010",
+                    "resource_type": "enum_option",
+                    "enabled": true,
+                    "name": "At risk",
+                    "color": "yellow"
+                  },
+                  {
+                    "gid": "1204486079661011",
+                    "resource_type": "enum_option",
+                    "enabled": true,
+                    "name": "Off track",
+                    "color": "red"
                   }
                 ]
               }
@@ -124,23 +167,21 @@
         },
         "rawHeaders": [
           "Date",
-          "Fri, 18 Nov 2022 14:27:04 GMT",
+          "Thu, 27 Apr 2023 09:34:34 GMT",
           "Content-Type",
           "application/json; charset=UTF-8",
           "Content-Length",
-          "1688",
+          "2369",
           "Connection",
           "close",
           "Server",
           "nginx",
           "Location",
-          "/api/1.0/tasks/1203400536546865",
+          "/api/1.0/tasks/1204486403194398",
           "Cache-Control",
           "no-store",
           "pragma",
           "no-cache",
-          "Set-Cookie",
-          "TooBusyRedirectCount=0",
           "X-Frame-Options",
           "DENY",
           "X-XSS-Protection",
@@ -154,17 +195,15 @@
           "Asana-Change",
           "name=new_user_task_lists;info=https://forum.asana.com/t/update-on-our-planned-api-changes-to-user-task-lists-a-k-a-my-tasks/103828;affected=true",
           "Asana-Change",
-          "name=external_goal_metrics;info=https://forum.asana.com/t/changes-to-goal-metrics-progress-sources/221257",
-          "Asana-Change",
-          "name=new_project_templates;info=https://forum.asana.com/t/a-new-api-for-project-templates/156432;affected=true",
+          "name=new_goal_memberships;info=https://forum.asana.com/t/launched-team-sharing-for-goals/378601;affected=true",
           "X-Robots-Tag",
           "none",
           "Strict-Transport-Security",
           "max-age=31536000; includeSubDomains",
           "Datacenter-Time-End",
-          "1668781624.718",
+          "1682588074.541",
           "X-LoadBalancer",
-          "prod-lb017.ec2"
+          "prod-lb000.ec2"
         ],
         "responseIsBinary": false
       }
@@ -175,7 +214,7 @@
       {
         "scope": "https://app.asana.com:443",
         "method": "DELETE",
-        "path": "/api/1.0/tasks/INPUT_id",
+        "path": "/api/1.0/tasks/INPUT_taskId",
         "body": "",
         "status": 200,
         "response": {
@@ -183,7 +222,7 @@
         },
         "rawHeaders": [
           "Date",
-          "Fri, 18 Nov 2022 14:27:06 GMT",
+          "Thu, 27 Apr 2023 09:34:35 GMT",
           "Content-Type",
           "application/json; charset=UTF-8",
           "Content-Length",
@@ -196,8 +235,6 @@
           "no-store",
           "pragma",
           "no-cache",
-          "Set-Cookie",
-          "TooBusyRedirectCount=0",
           "X-Frame-Options",
           "DENY",
           "X-XSS-Protection",
@@ -209,19 +246,17 @@
           "X-Asana-Api-Version",
           "1.0",
           "Asana-Change",
-          "name=external_goal_metrics;info=https://forum.asana.com/t/changes-to-goal-metrics-progress-sources/221257",
-          "Asana-Change",
           "name=new_user_task_lists;info=https://forum.asana.com/t/update-on-our-planned-api-changes-to-user-task-lists-a-k-a-my-tasks/103828",
           "Asana-Change",
-          "name=new_project_templates;info=https://forum.asana.com/t/a-new-api-for-project-templates/156432",
+          "name=new_goal_memberships;info=https://forum.asana.com/t/launched-team-sharing-for-goals/378601;affected=true",
           "X-Robots-Tag",
           "none",
           "Strict-Transport-Security",
           "max-age=31536000; includeSubDomains",
           "Datacenter-Time-End",
-          "1668781626.339",
+          "1682588075.855",
           "X-LoadBalancer",
-          "prod-lb002.ec2"
+          "prod-lb016.ec2"
         ],
         "responseIsBinary": false
       }
@@ -230,7 +265,7 @@
       {
         "scope": "https://app.asana.com:443",
         "method": "DELETE",
-        "path": "/api/1.0/tasks/INPUT_id",
+        "path": "/api/1.0/tasks/INPUT_taskId",
         "body": "",
         "status": 200,
         "response": {
@@ -238,7 +273,7 @@
         },
         "rawHeaders": [
           "Date",
-          "Fri, 18 Nov 2022 14:50:35 GMT",
+          "Thu, 27 Apr 2023 09:34:42 GMT",
           "Content-Type",
           "application/json; charset=UTF-8",
           "Content-Length",
@@ -251,8 +286,6 @@
           "no-store",
           "pragma",
           "no-cache",
-          "Set-Cookie",
-          "TooBusyRedirectCount=0",
           "X-Frame-Options",
           "DENY",
           "X-XSS-Protection",
@@ -264,19 +297,17 @@
           "X-Asana-Api-Version",
           "1.0",
           "Asana-Change",
-          "name=external_goal_metrics;info=https://forum.asana.com/t/changes-to-goal-metrics-progress-sources/221257",
-          "Asana-Change",
           "name=new_user_task_lists;info=https://forum.asana.com/t/update-on-our-planned-api-changes-to-user-task-lists-a-k-a-my-tasks/103828",
           "Asana-Change",
-          "name=new_project_templates;info=https://forum.asana.com/t/a-new-api-for-project-templates/156432",
+          "name=new_goal_memberships;info=https://forum.asana.com/t/launched-team-sharing-for-goals/378601;affected=true",
           "X-Robots-Tag",
           "none",
           "Strict-Transport-Security",
           "max-age=31536000; includeSubDomains",
           "Datacenter-Time-End",
-          "1668783035.005",
+          "1682588082.583",
           "X-LoadBalancer",
-          "prod-lb002.ec2"
+          "prod-lb001.ec2"
         ],
         "responseIsBinary": false
       }
@@ -285,7 +316,7 @@
       {
         "scope": "https://app.asana.com:443",
         "method": "DELETE",
-        "path": "/api/1.0/tasks/INPUT_id",
+        "path": "/api/1.0/tasks/INPUT_taskId",
         "body": "",
         "status": 200,
         "response": {
@@ -293,7 +324,7 @@
         },
         "rawHeaders": [
           "Date",
-          "Fri, 18 Nov 2022 14:50:36 GMT",
+          "Thu, 27 Apr 2023 09:34:43 GMT",
           "Content-Type",
           "application/json; charset=UTF-8",
           "Content-Length",
@@ -306,8 +337,6 @@
           "no-store",
           "pragma",
           "no-cache",
-          "Set-Cookie",
-          "TooBusyRedirectCount=0",
           "X-Frame-Options",
           "DENY",
           "X-XSS-Protection",
@@ -319,19 +348,17 @@
           "X-Asana-Api-Version",
           "1.0",
           "Asana-Change",
-          "name=external_goal_metrics;info=https://forum.asana.com/t/changes-to-goal-metrics-progress-sources/221257",
-          "Asana-Change",
           "name=new_user_task_lists;info=https://forum.asana.com/t/update-on-our-planned-api-changes-to-user-task-lists-a-k-a-my-tasks/103828",
           "Asana-Change",
-          "name=new_project_templates;info=https://forum.asana.com/t/a-new-api-for-project-templates/156432",
+          "name=new_goal_memberships;info=https://forum.asana.com/t/launched-team-sharing-for-goals/378601;affected=true",
           "X-Robots-Tag",
           "none",
           "Strict-Transport-Security",
           "max-age=31536000; includeSubDomains",
           "Datacenter-Time-End",
-          "1668783036.120",
+          "1682588083.796",
           "X-LoadBalancer",
-          "prod-lb003.ec2"
+          "prod-lb016.ec2"
         ],
         "responseIsBinary": false
       }
@@ -340,7 +367,7 @@
       {
         "scope": "https://app.asana.com:443",
         "method": "DELETE",
-        "path": "/api/1.0/tasks/INPUT_id",
+        "path": "/api/1.0/tasks/INPUT_taskId",
         "body": "",
         "status": 200,
         "response": {
@@ -348,7 +375,7 @@
         },
         "rawHeaders": [
           "Date",
-          "Fri, 18 Nov 2022 14:50:37 GMT",
+          "Thu, 27 Apr 2023 09:34:44 GMT",
           "Content-Type",
           "application/json; charset=UTF-8",
           "Content-Length",
@@ -361,8 +388,6 @@
           "no-store",
           "pragma",
           "no-cache",
-          "Set-Cookie",
-          "TooBusyRedirectCount=0",
           "X-Frame-Options",
           "DENY",
           "X-XSS-Protection",
@@ -374,19 +399,17 @@
           "X-Asana-Api-Version",
           "1.0",
           "Asana-Change",
-          "name=external_goal_metrics;info=https://forum.asana.com/t/changes-to-goal-metrics-progress-sources/221257",
-          "Asana-Change",
           "name=new_user_task_lists;info=https://forum.asana.com/t/update-on-our-planned-api-changes-to-user-task-lists-a-k-a-my-tasks/103828",
           "Asana-Change",
-          "name=new_project_templates;info=https://forum.asana.com/t/a-new-api-for-project-templates/156432",
+          "name=new_goal_memberships;info=https://forum.asana.com/t/launched-team-sharing-for-goals/378601;affected=true",
           "X-Robots-Tag",
           "none",
           "Strict-Transport-Security",
           "max-age=31536000; includeSubDomains",
           "Datacenter-Time-End",
-          "1668783037.504",
+          "1682588084.696",
           "X-LoadBalancer",
-          "prod-lb002.ec2"
+          "prod-lb001.ec2"
         ],
         "responseIsBinary": false
       }
@@ -395,7 +418,7 @@
       {
         "scope": "https://app.asana.com:443",
         "method": "DELETE",
-        "path": "/api/1.0/tasks/INPUT_id",
+        "path": "/api/1.0/tasks/INPUT_taskId",
         "body": "",
         "status": 200,
         "response": {
@@ -403,7 +426,7 @@
         },
         "rawHeaders": [
           "Date",
-          "Fri, 18 Nov 2022 14:27:24 GMT",
+          "Thu, 27 Apr 2023 09:34:48 GMT",
           "Content-Type",
           "application/json; charset=UTF-8",
           "Content-Length",
@@ -416,8 +439,6 @@
           "no-store",
           "pragma",
           "no-cache",
-          "Set-Cookie",
-          "TooBusyRedirectCount=0",
           "X-Frame-Options",
           "DENY",
           "X-XSS-Protection",
@@ -429,19 +450,17 @@
           "X-Asana-Api-Version",
           "1.0",
           "Asana-Change",
-          "name=external_goal_metrics;info=https://forum.asana.com/t/changes-to-goal-metrics-progress-sources/221257",
-          "Asana-Change",
           "name=new_user_task_lists;info=https://forum.asana.com/t/update-on-our-planned-api-changes-to-user-task-lists-a-k-a-my-tasks/103828",
           "Asana-Change",
-          "name=new_project_templates;info=https://forum.asana.com/t/a-new-api-for-project-templates/156432",
+          "name=new_goal_memberships;info=https://forum.asana.com/t/launched-team-sharing-for-goals/378601;affected=true",
           "X-Robots-Tag",
           "none",
           "Strict-Transport-Security",
           "max-age=31536000; includeSubDomains",
           "Datacenter-Time-End",
-          "1668781644.875",
+          "1682588088.171",
           "X-LoadBalancer",
-          "prod-lb002.ec2"
+          "prod-lb016.ec2"
         ],
         "responseIsBinary": false
       }
@@ -450,7 +469,7 @@
       {
         "scope": "https://app.asana.com:443",
         "method": "DELETE",
-        "path": "/api/1.0/tasks/INPUT_id",
+        "path": "/api/1.0/tasks/INPUT_taskId",
         "body": "",
         "status": 200,
         "response": {
@@ -458,7 +477,7 @@
         },
         "rawHeaders": [
           "Date",
-          "Fri, 18 Nov 2022 14:27:30 GMT",
+          "Thu, 27 Apr 2023 09:34:51 GMT",
           "Content-Type",
           "application/json; charset=UTF-8",
           "Content-Length",
@@ -471,8 +490,6 @@
           "no-store",
           "pragma",
           "no-cache",
-          "Set-Cookie",
-          "TooBusyRedirectCount=0",
           "X-Frame-Options",
           "DENY",
           "X-XSS-Protection",
@@ -484,19 +501,17 @@
           "X-Asana-Api-Version",
           "1.0",
           "Asana-Change",
-          "name=external_goal_metrics;info=https://forum.asana.com/t/changes-to-goal-metrics-progress-sources/221257",
-          "Asana-Change",
           "name=new_user_task_lists;info=https://forum.asana.com/t/update-on-our-planned-api-changes-to-user-task-lists-a-k-a-my-tasks/103828",
           "Asana-Change",
-          "name=new_project_templates;info=https://forum.asana.com/t/a-new-api-for-project-templates/156432",
+          "name=new_goal_memberships;info=https://forum.asana.com/t/launched-team-sharing-for-goals/378601;affected=true",
           "X-Robots-Tag",
           "none",
           "Strict-Transport-Security",
           "max-age=31536000; includeSubDomains",
           "Datacenter-Time-End",
-          "1668781650.289",
+          "1682588091.824",
           "X-LoadBalancer",
-          "prod-lb000.ec2"
+          "prod-lb002.ec2"
         ],
         "responseIsBinary": false
       }
@@ -513,7 +528,7 @@
             "name": "Test 1",
             "notes": "Task description",
             "projects": [
-              "1203400042224704"
+              "1204486079660998"
             ],
             "assignee": "1203400162064099"
           }
@@ -521,19 +536,21 @@
         "status": 201,
         "response": {
           "data": {
-            "gid": "1203400665291557",
+            "gid": "1204486202399277",
             "projects": [
               {
-                "gid": "1203400042224704",
+                "gid": "1204486079660998",
                 "resource_type": "project",
-                "name": "superface-test"
+                "name": "Cross-functional project plan"
               }
             ],
             "resource_type": "task",
-            "created_at": "2022-11-18T14:50:25.323Z",
-            "modified_at": "2022-11-18T14:50:26.029Z",
+            "created_at": "2023-04-27T09:34:36.467Z",
+            "modified_at": "2023-04-27T09:34:37.082Z",
             "name": "Test 1",
             "notes": "Task description",
+            "parent": null,
+            "actual_time_minutes": 0,
             "completed": false,
             "assignee_status": "inbox",
             "completed_at": null,
@@ -550,37 +567,36 @@
             },
             "num_hearts": 0,
             "num_likes": 0,
-            "permalink_url": "https://app.asana.com/0/1203400042224704/1203400665291557",
+            "permalink_url": "https://app.asana.com/0/1204486079660998/1204486202399277",
             "memberships": [
               {
                 "project": {
-                  "gid": "1203400042224704",
+                  "gid": "1204486079660998",
                   "resource_type": "project",
-                  "name": "superface-test"
+                  "name": "Cross-functional project plan"
                 },
                 "section": {
-                  "gid": "1203400042224705",
+                  "gid": "1204486079660999",
                   "resource_type": "section",
                   "name": "To do"
                 }
               }
             ],
+            "hearted": false,
+            "hearts": [],
+            "liked": false,
+            "likes": [],
             "assignee": {
               "gid": "1203400160251645",
               "resource_type": "user",
               "name": "Demo"
             },
-            "parent": null,
-            "hearted": false,
-            "hearts": [],
-            "liked": false,
-            "likes": [],
-            "assignee_section": {
-              "gid": "1203400162064124",
-              "resource_type": "section",
-              "name": "Recently assigned"
-            },
             "followers": [
+              {
+                "gid": "1204486011707558",
+                "resource_type": "user",
+                "name": "Super face"
+              },
               {
                 "gid": "1203400160251645",
                 "resource_type": "user",
@@ -589,9 +605,13 @@
             ],
             "custom_fields": [
               {
-                "gid": "1203400042224709",
+                "gid": "1204486079661003",
                 "resource_type": "custom_field",
-                "created_by": null,
+                "created_by": {
+                  "gid": "1204486011707558",
+                  "resource_type": "user",
+                  "name": "Super face"
+                },
                 "resource_subtype": "enum",
                 "type": "enum",
                 "name": "Priority",
@@ -600,25 +620,63 @@
                 "display_value": null,
                 "enum_options": [
                   {
-                    "gid": "1203400042224710",
-                    "resource_type": "enum_option",
-                    "enabled": true,
-                    "name": "High",
-                    "color": "red"
-                  },
-                  {
-                    "gid": "1203400042224711",
-                    "resource_type": "enum_option",
-                    "enabled": true,
-                    "name": "Medium",
-                    "color": "orange"
-                  },
-                  {
-                    "gid": "1203400042224712",
+                    "gid": "1204486079661004",
                     "resource_type": "enum_option",
                     "enabled": true,
                     "name": "Low",
+                    "color": "aqua"
+                  },
+                  {
+                    "gid": "1204486079661005",
+                    "resource_type": "enum_option",
+                    "enabled": true,
+                    "name": "Medium",
                     "color": "yellow-orange"
+                  },
+                  {
+                    "gid": "1204486079661006",
+                    "resource_type": "enum_option",
+                    "enabled": true,
+                    "name": "High",
+                    "color": "purple"
+                  }
+                ]
+              },
+              {
+                "gid": "1204486079661008",
+                "resource_type": "custom_field",
+                "created_by": {
+                  "gid": "1204486011707558",
+                  "resource_type": "user",
+                  "name": "Super face"
+                },
+                "resource_subtype": "enum",
+                "type": "enum",
+                "name": "Status",
+                "enabled": true,
+                "enum_value": null,
+                "display_value": null,
+                "enum_options": [
+                  {
+                    "gid": "1204486079661009",
+                    "resource_type": "enum_option",
+                    "enabled": true,
+                    "name": "On track",
+                    "color": "blue-green"
+                  },
+                  {
+                    "gid": "1204486079661010",
+                    "resource_type": "enum_option",
+                    "enabled": true,
+                    "name": "At risk",
+                    "color": "yellow"
+                  },
+                  {
+                    "gid": "1204486079661011",
+                    "resource_type": "enum_option",
+                    "enabled": true,
+                    "name": "Off track",
+                    "color": "red"
                   }
                 ]
               }
@@ -627,23 +685,21 @@
         },
         "rawHeaders": [
           "Date",
-          "Fri, 18 Nov 2022 14:50:26 GMT",
+          "Thu, 27 Apr 2023 09:34:37 GMT",
           "Content-Type",
           "application/json; charset=UTF-8",
           "Content-Length",
-          "1673",
+          "2354",
           "Connection",
           "close",
           "Server",
           "nginx",
           "Location",
-          "/api/1.0/tasks/1203400665291557",
+          "/api/1.0/tasks/1204486202399277",
           "Cache-Control",
           "no-store",
           "pragma",
           "no-cache",
-          "Set-Cookie",
-          "TooBusyRedirectCount=0",
           "X-Frame-Options",
           "DENY",
           "X-XSS-Protection",
@@ -657,17 +713,15 @@
           "Asana-Change",
           "name=new_user_task_lists;info=https://forum.asana.com/t/update-on-our-planned-api-changes-to-user-task-lists-a-k-a-my-tasks/103828;affected=true",
           "Asana-Change",
-          "name=external_goal_metrics;info=https://forum.asana.com/t/changes-to-goal-metrics-progress-sources/221257",
-          "Asana-Change",
-          "name=new_project_templates;info=https://forum.asana.com/t/a-new-api-for-project-templates/156432;affected=true",
+          "name=new_goal_memberships;info=https://forum.asana.com/t/launched-team-sharing-for-goals/378601;affected=true",
           "X-Robots-Tag",
           "none",
           "Strict-Transport-Security",
           "max-age=31536000; includeSubDomains",
           "Datacenter-Time-End",
-          "1668783026.866",
+          "1682588077.545",
           "X-LoadBalancer",
-          "prod-lb017.ec2"
+          "prod-lb003.ec2"
         ],
         "responseIsBinary": false
       }
@@ -682,7 +736,7 @@
             "name": "Test 2",
             "notes": "Task description",
             "projects": [
-              "1203400042224704"
+              "1204486079660998"
             ],
             "assignee": "1203400162064099"
           }
@@ -690,19 +744,21 @@
         "status": 201,
         "response": {
           "data": {
-            "gid": "1203400665420392",
+            "gid": "1204486145720593",
             "projects": [
               {
-                "gid": "1203400042224704",
+                "gid": "1204486079660998",
                 "resource_type": "project",
-                "name": "superface-test"
+                "name": "Cross-functional project plan"
               }
             ],
             "resource_type": "task",
-            "created_at": "2022-11-18T14:50:28.037Z",
-            "modified_at": "2022-11-18T14:50:28.801Z",
+            "created_at": "2023-04-27T09:34:38.258Z",
+            "modified_at": "2023-04-27T09:34:38.789Z",
             "name": "Test 2",
             "notes": "Task description",
+            "parent": null,
+            "actual_time_minutes": 0,
             "completed": false,
             "assignee_status": "inbox",
             "completed_at": null,
@@ -719,37 +775,36 @@
             },
             "num_hearts": 0,
             "num_likes": 0,
-            "permalink_url": "https://app.asana.com/0/1203400042224704/1203400665420392",
+            "permalink_url": "https://app.asana.com/0/1204486079660998/1204486145720593",
             "memberships": [
               {
                 "project": {
-                  "gid": "1203400042224704",
+                  "gid": "1204486079660998",
                   "resource_type": "project",
-                  "name": "superface-test"
+                  "name": "Cross-functional project plan"
                 },
                 "section": {
-                  "gid": "1203400042224705",
+                  "gid": "1204486079660999",
                   "resource_type": "section",
                   "name": "To do"
                 }
               }
             ],
+            "hearted": false,
+            "hearts": [],
+            "liked": false,
+            "likes": [],
             "assignee": {
               "gid": "1203400160251645",
               "resource_type": "user",
               "name": "Demo"
             },
-            "parent": null,
-            "hearted": false,
-            "hearts": [],
-            "liked": false,
-            "likes": [],
-            "assignee_section": {
-              "gid": "1203400162064124",
-              "resource_type": "section",
-              "name": "Recently assigned"
-            },
             "followers": [
+              {
+                "gid": "1204486011707558",
+                "resource_type": "user",
+                "name": "Super face"
+              },
               {
                 "gid": "1203400160251645",
                 "resource_type": "user",
@@ -758,9 +813,13 @@
             ],
             "custom_fields": [
               {
-                "gid": "1203400042224709",
+                "gid": "1204486079661003",
                 "resource_type": "custom_field",
-                "created_by": null,
+                "created_by": {
+                  "gid": "1204486011707558",
+                  "resource_type": "user",
+                  "name": "Super face"
+                },
                 "resource_subtype": "enum",
                 "type": "enum",
                 "name": "Priority",
@@ -769,25 +828,63 @@
                 "display_value": null,
                 "enum_options": [
                   {
-                    "gid": "1203400042224710",
-                    "resource_type": "enum_option",
-                    "enabled": true,
-                    "name": "High",
-                    "color": "red"
-                  },
-                  {
-                    "gid": "1203400042224711",
-                    "resource_type": "enum_option",
-                    "enabled": true,
-                    "name": "Medium",
-                    "color": "orange"
-                  },
-                  {
-                    "gid": "1203400042224712",
+                    "gid": "1204486079661004",
                     "resource_type": "enum_option",
                     "enabled": true,
                     "name": "Low",
+                    "color": "aqua"
+                  },
+                  {
+                    "gid": "1204486079661005",
+                    "resource_type": "enum_option",
+                    "enabled": true,
+                    "name": "Medium",
                     "color": "yellow-orange"
+                  },
+                  {
+                    "gid": "1204486079661006",
+                    "resource_type": "enum_option",
+                    "enabled": true,
+                    "name": "High",
+                    "color": "purple"
+                  }
+                ]
+              },
+              {
+                "gid": "1204486079661008",
+                "resource_type": "custom_field",
+                "created_by": {
+                  "gid": "1204486011707558",
+                  "resource_type": "user",
+                  "name": "Super face"
+                },
+                "resource_subtype": "enum",
+                "type": "enum",
+                "name": "Status",
+                "enabled": true,
+                "enum_value": null,
+                "display_value": null,
+                "enum_options": [
+                  {
+                    "gid": "1204486079661009",
+                    "resource_type": "enum_option",
+                    "enabled": true,
+                    "name": "On track",
+                    "color": "blue-green"
+                  },
+                  {
+                    "gid": "1204486079661010",
+                    "resource_type": "enum_option",
+                    "enabled": true,
+                    "name": "At risk",
+                    "color": "yellow"
+                  },
+                  {
+                    "gid": "1204486079661011",
+                    "resource_type": "enum_option",
+                    "enabled": true,
+                    "name": "Off track",
+                    "color": "red"
                   }
                 ]
               }
@@ -796,23 +893,21 @@
         },
         "rawHeaders": [
           "Date",
-          "Fri, 18 Nov 2022 14:50:29 GMT",
+          "Thu, 27 Apr 2023 09:34:39 GMT",
           "Content-Type",
           "application/json; charset=UTF-8",
           "Content-Length",
-          "1673",
+          "2354",
           "Connection",
           "close",
           "Server",
           "nginx",
           "Location",
-          "/api/1.0/tasks/1203400665420392",
+          "/api/1.0/tasks/1204486145720593",
           "Cache-Control",
           "no-store",
           "pragma",
           "no-cache",
-          "Set-Cookie",
-          "TooBusyRedirectCount=0",
           "X-Frame-Options",
           "DENY",
           "X-XSS-Protection",
@@ -826,17 +921,15 @@
           "Asana-Change",
           "name=new_user_task_lists;info=https://forum.asana.com/t/update-on-our-planned-api-changes-to-user-task-lists-a-k-a-my-tasks/103828;affected=true",
           "Asana-Change",
-          "name=external_goal_metrics;info=https://forum.asana.com/t/changes-to-goal-metrics-progress-sources/221257",
-          "Asana-Change",
-          "name=new_project_templates;info=https://forum.asana.com/t/a-new-api-for-project-templates/156432;affected=true",
+          "name=new_goal_memberships;info=https://forum.asana.com/t/launched-team-sharing-for-goals/378601;affected=true",
           "X-Robots-Tag",
           "none",
           "Strict-Transport-Security",
           "max-age=31536000; includeSubDomains",
           "Datacenter-Time-End",
-          "1668783029.586",
+          "1682588079.143",
           "X-LoadBalancer",
-          "prod-lb003.ec2"
+          "prod-lb000.ec2"
         ],
         "responseIsBinary": false
       }
@@ -851,7 +944,7 @@
             "name": "Test 3",
             "notes": "Task description",
             "projects": [
-              "1203400042224704"
+              "1204486079660998"
             ],
             "assignee": "1203400162064099"
           }
@@ -859,19 +952,21 @@
         "status": 201,
         "response": {
           "data": {
-            "gid": "1203400665564495",
+            "gid": "1204486406194351",
             "projects": [
               {
-                "gid": "1203400042224704",
+                "gid": "1204486079660998",
                 "resource_type": "project",
-                "name": "superface-test"
+                "name": "Cross-functional project plan"
               }
             ],
             "resource_type": "task",
-            "created_at": "2022-11-18T14:50:30.776Z",
-            "modified_at": "2022-11-18T14:50:31.663Z",
+            "created_at": "2023-04-27T09:34:39.889Z",
+            "modified_at": "2023-04-27T09:34:40.495Z",
             "name": "Test 3",
             "notes": "Task description",
+            "parent": null,
+            "actual_time_minutes": 0,
             "completed": false,
             "assignee_status": "inbox",
             "completed_at": null,
@@ -888,37 +983,36 @@
             },
             "num_hearts": 0,
             "num_likes": 0,
-            "permalink_url": "https://app.asana.com/0/1203400042224704/1203400665564495",
+            "permalink_url": "https://app.asana.com/0/1204486079660998/1204486406194351",
             "memberships": [
               {
                 "project": {
-                  "gid": "1203400042224704",
+                  "gid": "1204486079660998",
                   "resource_type": "project",
-                  "name": "superface-test"
+                  "name": "Cross-functional project plan"
                 },
                 "section": {
-                  "gid": "1203400042224705",
+                  "gid": "1204486079660999",
                   "resource_type": "section",
                   "name": "To do"
                 }
               }
             ],
+            "hearted": false,
+            "hearts": [],
+            "liked": false,
+            "likes": [],
             "assignee": {
               "gid": "1203400160251645",
               "resource_type": "user",
               "name": "Demo"
             },
-            "parent": null,
-            "hearted": false,
-            "hearts": [],
-            "liked": false,
-            "likes": [],
-            "assignee_section": {
-              "gid": "1203400162064124",
-              "resource_type": "section",
-              "name": "Recently assigned"
-            },
             "followers": [
+              {
+                "gid": "1204486011707558",
+                "resource_type": "user",
+                "name": "Super face"
+              },
               {
                 "gid": "1203400160251645",
                 "resource_type": "user",
@@ -927,9 +1021,13 @@
             ],
             "custom_fields": [
               {
-                "gid": "1203400042224709",
+                "gid": "1204486079661003",
                 "resource_type": "custom_field",
-                "created_by": null,
+                "created_by": {
+                  "gid": "1204486011707558",
+                  "resource_type": "user",
+                  "name": "Super face"
+                },
                 "resource_subtype": "enum",
                 "type": "enum",
                 "name": "Priority",
@@ -938,25 +1036,63 @@
                 "display_value": null,
                 "enum_options": [
                   {
-                    "gid": "1203400042224710",
-                    "resource_type": "enum_option",
-                    "enabled": true,
-                    "name": "High",
-                    "color": "red"
-                  },
-                  {
-                    "gid": "1203400042224711",
-                    "resource_type": "enum_option",
-                    "enabled": true,
-                    "name": "Medium",
-                    "color": "orange"
-                  },
-                  {
-                    "gid": "1203400042224712",
+                    "gid": "1204486079661004",
                     "resource_type": "enum_option",
                     "enabled": true,
                     "name": "Low",
+                    "color": "aqua"
+                  },
+                  {
+                    "gid": "1204486079661005",
+                    "resource_type": "enum_option",
+                    "enabled": true,
+                    "name": "Medium",
                     "color": "yellow-orange"
+                  },
+                  {
+                    "gid": "1204486079661006",
+                    "resource_type": "enum_option",
+                    "enabled": true,
+                    "name": "High",
+                    "color": "purple"
+                  }
+                ]
+              },
+              {
+                "gid": "1204486079661008",
+                "resource_type": "custom_field",
+                "created_by": {
+                  "gid": "1204486011707558",
+                  "resource_type": "user",
+                  "name": "Super face"
+                },
+                "resource_subtype": "enum",
+                "type": "enum",
+                "name": "Status",
+                "enabled": true,
+                "enum_value": null,
+                "display_value": null,
+                "enum_options": [
+                  {
+                    "gid": "1204486079661009",
+                    "resource_type": "enum_option",
+                    "enabled": true,
+                    "name": "On track",
+                    "color": "blue-green"
+                  },
+                  {
+                    "gid": "1204486079661010",
+                    "resource_type": "enum_option",
+                    "enabled": true,
+                    "name": "At risk",
+                    "color": "yellow"
+                  },
+                  {
+                    "gid": "1204486079661011",
+                    "resource_type": "enum_option",
+                    "enabled": true,
+                    "name": "Off track",
+                    "color": "red"
                   }
                 ]
               }
@@ -965,23 +1101,21 @@
         },
         "rawHeaders": [
           "Date",
-          "Fri, 18 Nov 2022 14:50:32 GMT",
+          "Thu, 27 Apr 2023 09:34:40 GMT",
           "Content-Type",
           "application/json; charset=UTF-8",
           "Content-Length",
-          "1673",
+          "2354",
           "Connection",
           "close",
           "Server",
           "nginx",
           "Location",
-          "/api/1.0/tasks/1203400665564495",
+          "/api/1.0/tasks/1204486406194351",
           "Cache-Control",
           "no-store",
           "pragma",
           "no-cache",
-          "Set-Cookie",
-          "TooBusyRedirectCount=0",
           "X-Frame-Options",
           "DENY",
           "X-XSS-Protection",
@@ -995,17 +1129,15 @@
           "Asana-Change",
           "name=new_user_task_lists;info=https://forum.asana.com/t/update-on-our-planned-api-changes-to-user-task-lists-a-k-a-my-tasks/103828;affected=true",
           "Asana-Change",
-          "name=external_goal_metrics;info=https://forum.asana.com/t/changes-to-goal-metrics-progress-sources/221257",
-          "Asana-Change",
-          "name=new_project_templates;info=https://forum.asana.com/t/a-new-api-for-project-templates/156432;affected=true",
+          "name=new_goal_memberships;info=https://forum.asana.com/t/launched-team-sharing-for-goals/378601;affected=true",
           "X-Robots-Tag",
           "none",
           "Strict-Transport-Security",
           "max-age=31536000; includeSubDomains",
           "Datacenter-Time-End",
-          "1668783032.531",
+          "1682588080.905",
           "X-LoadBalancer",
-          "prod-lb002.ec2"
+          "prod-lb005.ec2"
         ],
         "responseIsBinary": false
       }
@@ -1020,7 +1152,7 @@
             "name": "Test",
             "notes": "Task description",
             "projects": [
-              "1203400042224704"
+              "1204486079660998"
             ],
             "assignee": "1203400162064099"
           }
@@ -1028,19 +1160,21 @@
         "status": 201,
         "response": {
           "data": {
-            "gid": "1203400471290778",
+            "gid": "1204486144283576",
             "projects": [
               {
-                "gid": "1203400042224704",
+                "gid": "1204486079660998",
                 "resource_type": "project",
-                "name": "superface-test"
+                "name": "Cross-functional project plan"
               }
             ],
             "resource_type": "task",
-            "created_at": "2022-11-18T14:27:21.277Z",
-            "modified_at": "2022-11-18T14:27:22.098Z",
+            "created_at": "2023-04-27T09:34:45.289Z",
+            "modified_at": "2023-04-27T09:34:45.764Z",
             "name": "Test",
             "notes": "Task description",
+            "parent": null,
+            "actual_time_minutes": 0,
             "completed": false,
             "assignee_status": "inbox",
             "completed_at": null,
@@ -1057,37 +1191,36 @@
             },
             "num_hearts": 0,
             "num_likes": 0,
-            "permalink_url": "https://app.asana.com/0/1203400042224704/1203400471290778",
+            "permalink_url": "https://app.asana.com/0/1204486079660998/1204486144283576",
             "memberships": [
               {
                 "project": {
-                  "gid": "1203400042224704",
+                  "gid": "1204486079660998",
                   "resource_type": "project",
-                  "name": "superface-test"
+                  "name": "Cross-functional project plan"
                 },
                 "section": {
-                  "gid": "1203400042224705",
+                  "gid": "1204486079660999",
                   "resource_type": "section",
                   "name": "To do"
                 }
               }
             ],
+            "hearted": false,
+            "hearts": [],
+            "liked": false,
+            "likes": [],
             "assignee": {
               "gid": "1203400160251645",
               "resource_type": "user",
               "name": "Demo"
             },
-            "parent": null,
-            "hearted": false,
-            "hearts": [],
-            "liked": false,
-            "likes": [],
-            "assignee_section": {
-              "gid": "1203400162064124",
-              "resource_type": "section",
-              "name": "Recently assigned"
-            },
             "followers": [
+              {
+                "gid": "1204486011707558",
+                "resource_type": "user",
+                "name": "Super face"
+              },
               {
                 "gid": "1203400160251645",
                 "resource_type": "user",
@@ -1096,9 +1229,13 @@
             ],
             "custom_fields": [
               {
-                "gid": "1203400042224709",
+                "gid": "1204486079661003",
                 "resource_type": "custom_field",
-                "created_by": null,
+                "created_by": {
+                  "gid": "1204486011707558",
+                  "resource_type": "user",
+                  "name": "Super face"
+                },
                 "resource_subtype": "enum",
                 "type": "enum",
                 "name": "Priority",
@@ -1107,25 +1244,63 @@
                 "display_value": null,
                 "enum_options": [
                   {
-                    "gid": "1203400042224710",
-                    "resource_type": "enum_option",
-                    "enabled": true,
-                    "name": "High",
-                    "color": "red"
-                  },
-                  {
-                    "gid": "1203400042224711",
-                    "resource_type": "enum_option",
-                    "enabled": true,
-                    "name": "Medium",
-                    "color": "orange"
-                  },
-                  {
-                    "gid": "1203400042224712",
+                    "gid": "1204486079661004",
                     "resource_type": "enum_option",
                     "enabled": true,
                     "name": "Low",
+                    "color": "aqua"
+                  },
+                  {
+                    "gid": "1204486079661005",
+                    "resource_type": "enum_option",
+                    "enabled": true,
+                    "name": "Medium",
                     "color": "yellow-orange"
+                  },
+                  {
+                    "gid": "1204486079661006",
+                    "resource_type": "enum_option",
+                    "enabled": true,
+                    "name": "High",
+                    "color": "purple"
+                  }
+                ]
+              },
+              {
+                "gid": "1204486079661008",
+                "resource_type": "custom_field",
+                "created_by": {
+                  "gid": "1204486011707558",
+                  "resource_type": "user",
+                  "name": "Super face"
+                },
+                "resource_subtype": "enum",
+                "type": "enum",
+                "name": "Status",
+                "enabled": true,
+                "enum_value": null,
+                "display_value": null,
+                "enum_options": [
+                  {
+                    "gid": "1204486079661009",
+                    "resource_type": "enum_option",
+                    "enabled": true,
+                    "name": "On track",
+                    "color": "blue-green"
+                  },
+                  {
+                    "gid": "1204486079661010",
+                    "resource_type": "enum_option",
+                    "enabled": true,
+                    "name": "At risk",
+                    "color": "yellow"
+                  },
+                  {
+                    "gid": "1204486079661011",
+                    "resource_type": "enum_option",
+                    "enabled": true,
+                    "name": "Off track",
+                    "color": "red"
                   }
                 ]
               }
@@ -1134,23 +1309,21 @@
         },
         "rawHeaders": [
           "Date",
-          "Fri, 18 Nov 2022 14:27:22 GMT",
+          "Thu, 27 Apr 2023 09:34:46 GMT",
           "Content-Type",
           "application/json; charset=UTF-8",
           "Content-Length",
-          "1671",
+          "2352",
           "Connection",
           "close",
           "Server",
           "nginx",
           "Location",
-          "/api/1.0/tasks/1203400471290778",
+          "/api/1.0/tasks/1204486144283576",
           "Cache-Control",
           "no-store",
           "pragma",
           "no-cache",
-          "Set-Cookie",
-          "TooBusyRedirectCount=0",
           "X-Frame-Options",
           "DENY",
           "X-XSS-Protection",
@@ -1164,17 +1337,15 @@
           "Asana-Change",
           "name=new_user_task_lists;info=https://forum.asana.com/t/update-on-our-planned-api-changes-to-user-task-lists-a-k-a-my-tasks/103828;affected=true",
           "Asana-Change",
-          "name=external_goal_metrics;info=https://forum.asana.com/t/changes-to-goal-metrics-progress-sources/221257",
-          "Asana-Change",
-          "name=new_project_templates;info=https://forum.asana.com/t/a-new-api-for-project-templates/156432;affected=true",
+          "name=new_goal_memberships;info=https://forum.asana.com/t/launched-team-sharing-for-goals/378601;affected=true",
           "X-Robots-Tag",
           "none",
           "Strict-Transport-Security",
           "max-age=31536000; includeSubDomains",
           "Datacenter-Time-End",
-          "1668781642.864",
+          "1682588086.088",
           "X-LoadBalancer",
-          "prod-lb016.ec2"
+          "prod-lb002.ec2"
         ],
         "responseIsBinary": false
       }
@@ -1189,7 +1360,7 @@
             "name": "Test",
             "notes": "Task description",
             "projects": [
-              "1203400042224704"
+              "1204486079660998"
             ],
             "assignee": "1203400162064099"
           }
@@ -1197,19 +1368,21 @@
         "status": 201,
         "response": {
           "data": {
-            "gid": "1203400470571756",
+            "gid": "1204486406443644",
             "projects": [
               {
-                "gid": "1203400042224704",
+                "gid": "1204486079660998",
                 "resource_type": "project",
-                "name": "superface-test"
+                "name": "Cross-functional project plan"
               }
             ],
             "resource_type": "task",
-            "created_at": "2022-11-18T14:27:26.044Z",
-            "modified_at": "2022-11-18T14:27:26.655Z",
+            "created_at": "2023-04-27T09:34:48.765Z",
+            "modified_at": "2023-04-27T09:34:49.271Z",
             "name": "Test",
             "notes": "Task description",
+            "parent": null,
+            "actual_time_minutes": 0,
             "completed": false,
             "assignee_status": "inbox",
             "completed_at": null,
@@ -1226,37 +1399,36 @@
             },
             "num_hearts": 0,
             "num_likes": 0,
-            "permalink_url": "https://app.asana.com/0/1203400042224704/1203400470571756",
+            "permalink_url": "https://app.asana.com/0/1204486079660998/1204486406443644",
             "memberships": [
               {
                 "project": {
-                  "gid": "1203400042224704",
+                  "gid": "1204486079660998",
                   "resource_type": "project",
-                  "name": "superface-test"
+                  "name": "Cross-functional project plan"
                 },
                 "section": {
-                  "gid": "1203400042224705",
+                  "gid": "1204486079660999",
                   "resource_type": "section",
                   "name": "To do"
                 }
               }
             ],
+            "hearted": false,
+            "hearts": [],
+            "liked": false,
+            "likes": [],
             "assignee": {
               "gid": "1203400160251645",
               "resource_type": "user",
               "name": "Demo"
             },
-            "parent": null,
-            "hearted": false,
-            "hearts": [],
-            "liked": false,
-            "likes": [],
-            "assignee_section": {
-              "gid": "1203400162064124",
-              "resource_type": "section",
-              "name": "Recently assigned"
-            },
             "followers": [
+              {
+                "gid": "1204486011707558",
+                "resource_type": "user",
+                "name": "Super face"
+              },
               {
                 "gid": "1203400160251645",
                 "resource_type": "user",
@@ -1265,9 +1437,13 @@
             ],
             "custom_fields": [
               {
-                "gid": "1203400042224709",
+                "gid": "1204486079661003",
                 "resource_type": "custom_field",
-                "created_by": null,
+                "created_by": {
+                  "gid": "1204486011707558",
+                  "resource_type": "user",
+                  "name": "Super face"
+                },
                 "resource_subtype": "enum",
                 "type": "enum",
                 "name": "Priority",
@@ -1276,25 +1452,63 @@
                 "display_value": null,
                 "enum_options": [
                   {
-                    "gid": "1203400042224710",
-                    "resource_type": "enum_option",
-                    "enabled": true,
-                    "name": "High",
-                    "color": "red"
-                  },
-                  {
-                    "gid": "1203400042224711",
-                    "resource_type": "enum_option",
-                    "enabled": true,
-                    "name": "Medium",
-                    "color": "orange"
-                  },
-                  {
-                    "gid": "1203400042224712",
+                    "gid": "1204486079661004",
                     "resource_type": "enum_option",
                     "enabled": true,
                     "name": "Low",
+                    "color": "aqua"
+                  },
+                  {
+                    "gid": "1204486079661005",
+                    "resource_type": "enum_option",
+                    "enabled": true,
+                    "name": "Medium",
                     "color": "yellow-orange"
+                  },
+                  {
+                    "gid": "1204486079661006",
+                    "resource_type": "enum_option",
+                    "enabled": true,
+                    "name": "High",
+                    "color": "purple"
+                  }
+                ]
+              },
+              {
+                "gid": "1204486079661008",
+                "resource_type": "custom_field",
+                "created_by": {
+                  "gid": "1204486011707558",
+                  "resource_type": "user",
+                  "name": "Super face"
+                },
+                "resource_subtype": "enum",
+                "type": "enum",
+                "name": "Status",
+                "enabled": true,
+                "enum_value": null,
+                "display_value": null,
+                "enum_options": [
+                  {
+                    "gid": "1204486079661009",
+                    "resource_type": "enum_option",
+                    "enabled": true,
+                    "name": "On track",
+                    "color": "blue-green"
+                  },
+                  {
+                    "gid": "1204486079661010",
+                    "resource_type": "enum_option",
+                    "enabled": true,
+                    "name": "At risk",
+                    "color": "yellow"
+                  },
+                  {
+                    "gid": "1204486079661011",
+                    "resource_type": "enum_option",
+                    "enabled": true,
+                    "name": "Off track",
+                    "color": "red"
                   }
                 ]
               }
@@ -1303,23 +1517,21 @@
         },
         "rawHeaders": [
           "Date",
-          "Fri, 18 Nov 2022 14:27:27 GMT",
+          "Thu, 27 Apr 2023 09:34:49 GMT",
           "Content-Type",
           "application/json; charset=UTF-8",
           "Content-Length",
-          "1671",
+          "2352",
           "Connection",
           "close",
           "Server",
           "nginx",
           "Location",
-          "/api/1.0/tasks/1203400470571756",
+          "/api/1.0/tasks/1204486406443644",
           "Cache-Control",
           "no-store",
           "pragma",
           "no-cache",
-          "Set-Cookie",
-          "TooBusyRedirectCount=0",
           "X-Frame-Options",
           "DENY",
           "X-XSS-Protection",
@@ -1333,17 +1545,15 @@
           "Asana-Change",
           "name=new_user_task_lists;info=https://forum.asana.com/t/update-on-our-planned-api-changes-to-user-task-lists-a-k-a-my-tasks/103828;affected=true",
           "Asana-Change",
-          "name=external_goal_metrics;info=https://forum.asana.com/t/changes-to-goal-metrics-progress-sources/221257",
-          "Asana-Change",
-          "name=new_project_templates;info=https://forum.asana.com/t/a-new-api-for-project-templates/156432;affected=true",
+          "name=new_goal_memberships;info=https://forum.asana.com/t/launched-team-sharing-for-goals/378601;affected=true",
           "X-Robots-Tag",
           "none",
           "Strict-Transport-Security",
           "max-age=31536000; includeSubDomains",
           "Datacenter-Time-End",
-          "1668781647.298",
+          "1682588089.642",
           "X-LoadBalancer",
-          "prod-lb002.ec2"
+          "prod-lb000.ec2"
         ],
         "responseIsBinary": false
       }
@@ -1358,7 +1568,7 @@
             "name": "Test",
             "notes": "Task description",
             "projects": [
-              "1203400042224704"
+              "1204486079660998"
             ],
             "assignee": "1203400162064099"
           }
@@ -1366,19 +1576,21 @@
         "status": 201,
         "response": {
           "data": {
-            "gid": "1203400471768340",
+            "gid": "1204486192771873",
             "projects": [
               {
-                "gid": "1203400042224704",
+                "gid": "1204486079660998",
                 "resource_type": "project",
-                "name": "superface-test"
+                "name": "Cross-functional project plan"
               }
             ],
             "resource_type": "task",
-            "created_at": "2022-11-18T14:27:31.318Z",
-            "modified_at": "2022-11-18T14:27:31.956Z",
+            "created_at": "2023-04-27T09:34:52.511Z",
+            "modified_at": "2023-04-27T09:34:53.181Z",
             "name": "Test",
             "notes": "Task description",
+            "parent": null,
+            "actual_time_minutes": 0,
             "completed": false,
             "assignee_status": "inbox",
             "completed_at": null,
@@ -1395,37 +1607,36 @@
             },
             "num_hearts": 0,
             "num_likes": 0,
-            "permalink_url": "https://app.asana.com/0/1203400042224704/1203400471768340",
+            "permalink_url": "https://app.asana.com/0/1204486079660998/1204486192771873",
             "memberships": [
               {
                 "project": {
-                  "gid": "1203400042224704",
+                  "gid": "1204486079660998",
                   "resource_type": "project",
-                  "name": "superface-test"
+                  "name": "Cross-functional project plan"
                 },
                 "section": {
-                  "gid": "1203400042224705",
+                  "gid": "1204486079660999",
                   "resource_type": "section",
                   "name": "To do"
                 }
               }
             ],
+            "hearted": false,
+            "hearts": [],
+            "liked": false,
+            "likes": [],
             "assignee": {
               "gid": "1203400160251645",
               "resource_type": "user",
               "name": "Demo"
             },
-            "parent": null,
-            "hearted": false,
-            "hearts": [],
-            "liked": false,
-            "likes": [],
-            "assignee_section": {
-              "gid": "1203400162064124",
-              "resource_type": "section",
-              "name": "Recently assigned"
-            },
             "followers": [
+              {
+                "gid": "1204486011707558",
+                "resource_type": "user",
+                "name": "Super face"
+              },
               {
                 "gid": "1203400160251645",
                 "resource_type": "user",
@@ -1434,9 +1645,13 @@
             ],
             "custom_fields": [
               {
-                "gid": "1203400042224709",
+                "gid": "1204486079661003",
                 "resource_type": "custom_field",
-                "created_by": null,
+                "created_by": {
+                  "gid": "1204486011707558",
+                  "resource_type": "user",
+                  "name": "Super face"
+                },
                 "resource_subtype": "enum",
                 "type": "enum",
                 "name": "Priority",
@@ -1445,25 +1660,63 @@
                 "display_value": null,
                 "enum_options": [
                   {
-                    "gid": "1203400042224710",
-                    "resource_type": "enum_option",
-                    "enabled": true,
-                    "name": "High",
-                    "color": "red"
-                  },
-                  {
-                    "gid": "1203400042224711",
-                    "resource_type": "enum_option",
-                    "enabled": true,
-                    "name": "Medium",
-                    "color": "orange"
-                  },
-                  {
-                    "gid": "1203400042224712",
+                    "gid": "1204486079661004",
                     "resource_type": "enum_option",
                     "enabled": true,
                     "name": "Low",
+                    "color": "aqua"
+                  },
+                  {
+                    "gid": "1204486079661005",
+                    "resource_type": "enum_option",
+                    "enabled": true,
+                    "name": "Medium",
                     "color": "yellow-orange"
+                  },
+                  {
+                    "gid": "1204486079661006",
+                    "resource_type": "enum_option",
+                    "enabled": true,
+                    "name": "High",
+                    "color": "purple"
+                  }
+                ]
+              },
+              {
+                "gid": "1204486079661008",
+                "resource_type": "custom_field",
+                "created_by": {
+                  "gid": "1204486011707558",
+                  "resource_type": "user",
+                  "name": "Super face"
+                },
+                "resource_subtype": "enum",
+                "type": "enum",
+                "name": "Status",
+                "enabled": true,
+                "enum_value": null,
+                "display_value": null,
+                "enum_options": [
+                  {
+                    "gid": "1204486079661009",
+                    "resource_type": "enum_option",
+                    "enabled": true,
+                    "name": "On track",
+                    "color": "blue-green"
+                  },
+                  {
+                    "gid": "1204486079661010",
+                    "resource_type": "enum_option",
+                    "enabled": true,
+                    "name": "At risk",
+                    "color": "yellow"
+                  },
+                  {
+                    "gid": "1204486079661011",
+                    "resource_type": "enum_option",
+                    "enabled": true,
+                    "name": "Off track",
+                    "color": "red"
                   }
                 ]
               }
@@ -1472,23 +1725,21 @@
         },
         "rawHeaders": [
           "Date",
-          "Fri, 18 Nov 2022 14:27:32 GMT",
+          "Thu, 27 Apr 2023 09:34:53 GMT",
           "Content-Type",
           "application/json; charset=UTF-8",
           "Content-Length",
-          "1671",
+          "2352",
           "Connection",
           "close",
           "Server",
           "nginx",
           "Location",
-          "/api/1.0/tasks/1203400471768340",
+          "/api/1.0/tasks/1204486192771873",
           "Cache-Control",
           "no-store",
           "pragma",
           "no-cache",
-          "Set-Cookie",
-          "TooBusyRedirectCount=0",
           "X-Frame-Options",
           "DENY",
           "X-XSS-Protection",
@@ -1502,15 +1753,13 @@
           "Asana-Change",
           "name=new_user_task_lists;info=https://forum.asana.com/t/update-on-our-planned-api-changes-to-user-task-lists-a-k-a-my-tasks/103828;affected=true",
           "Asana-Change",
-          "name=external_goal_metrics;info=https://forum.asana.com/t/changes-to-goal-metrics-progress-sources/221257",
-          "Asana-Change",
-          "name=new_project_templates;info=https://forum.asana.com/t/a-new-api-for-project-templates/156432;affected=true",
+          "name=new_goal_memberships;info=https://forum.asana.com/t/launched-team-sharing-for-goals/378601;affected=true",
           "X-Robots-Tag",
           "none",
           "Strict-Transport-Security",
           "max-age=31536000; includeSubDomains",
           "Datacenter-Time-End",
-          "1668781652.760",
+          "1682588093.568",
           "X-LoadBalancer",
           "prod-lb003.ec2"
         ],
@@ -1523,16 +1772,16 @@
       {
         "scope": "https://app.asana.com:443",
         "method": "GET",
-        "path": "/api/1.0/projects/1203400042224704/tasks",
+        "path": "/api/1.0/projects/1204486079660998/tasks",
         "body": "",
         "status": 200,
         "response": [
-          "1f8b0800000000000003aa564a492c4954b28aae564acf4c51b2523234323036313030333335353331b13455d251ca4bcc4d05ca84a41697281803f945a9c5f9a545c9a9f1259505208992c4e26c64e1e2d224a84c4a6a5a62694e493c5845ad0ea61d2640db2c8dd0ec00f1a9688791a5a1a9a9399a1d8614d8115b0b000000ffff",
-          "03001a63217b36010000"
+          "1f8b0800000000000003b4cf4d0e82301005e0ab345dbb684bf973ed0d74678c19612a150aa41d620ce1ee8a3191b85597336ff2beccc84b20e0ebfdc8cfb6e46b2e95d03a4bb44864aea358f2156fc1e123d96120163d668fa11b7c8147baf5734010eae53a0ca75752a281a1a1e3f3625a7d1852c7a912713e772e0db52cfbd250424579aed2f4c398fffad51f229332162ad56f63e3c110eb7d77c182d8c95b347f009337b82d2a2c8706596d8bba33863944b2edf90f6ab6502bf0c8c83a6c6c8bec6aa96284e01c10862fe8c374070000ffff",
+          "0300f2d730bf98020000"
         ],
         "rawHeaders": [
           "Date",
-          "Fri, 18 Nov 2022 14:50:33 GMT",
+          "Thu, 27 Apr 2023 09:34:41 GMT",
           "Content-Type",
           "application/json; charset=UTF-8",
           "Transfer-Encoding",
@@ -1552,19 +1801,17 @@
           "X-Asana-Api-Version",
           "1.1",
           "Asana-Change",
-          "name=external_goal_metrics;info=https://forum.asana.com/t/changes-to-goal-metrics-progress-sources/221257",
-          "Asana-Change",
           "name=new_user_task_lists;info=https://forum.asana.com/t/update-on-our-planned-api-changes-to-user-task-lists-a-k-a-my-tasks/103828",
           "Asana-Change",
-          "name=new_project_templates;info=https://forum.asana.com/t/a-new-api-for-project-templates/156432",
+          "name=new_goal_memberships;info=https://forum.asana.com/t/launched-team-sharing-for-goals/378601;affected=true",
           "X-Robots-Tag",
           "none",
           "Strict-Transport-Security",
           "max-age=31536000; includeSubDomains",
           "Datacenter-Time-End",
-          "1668783033.520",
+          "1682588081.690",
           "X-LoadBalancer",
-          "prod-lb021.ec2",
+          "prod-lb002.ec2",
           "Content-Encoding",
           "gzip"
         ],
@@ -1572,20 +1819,38 @@
         "decodedResponse": {
           "data": [
             {
-              "gid": "1203400665564495",
+              "gid": "1204486406194351",
               "name": "Test 3",
               "resource_type": "task",
               "resource_subtype": "default_task"
             },
             {
-              "gid": "1203400665420392",
+              "gid": "1204486145720593",
               "name": "Test 2",
               "resource_type": "task",
               "resource_subtype": "default_task"
             },
             {
-              "gid": "1203400665291557",
+              "gid": "1204486202399277",
               "name": "Test 1",
+              "resource_type": "task",
+              "resource_subtype": "default_task"
+            },
+            {
+              "gid": "1204486081150274",
+              "name": "Draft project brief",
+              "resource_type": "task",
+              "resource_subtype": "default_task"
+            },
+            {
+              "gid": "1204486081150276",
+              "name": "Schedule kickoff meeting",
+              "resource_type": "task",
+              "resource_subtype": "default_task"
+            },
+            {
+              "gid": "1204486081150278",
+              "name": "Share timeline with teammates",
               "resource_type": "task",
               "resource_subtype": "default_task"
             }
@@ -1599,16 +1864,16 @@
       {
         "scope": "https://app.asana.com:443",
         "method": "GET",
-        "path": "/api/1.0/tasks/INPUT_id",
+        "path": "/api/1.0/tasks/INPUT_taskId",
         "body": "",
         "status": 200,
         "response": [
-          "1f8b08000000000000039c544d6fdb300cfd2b86cf8d63a94e9ce43660871d36601872da30188acd245a644bd0c7b2a0f07f1f55cb89dabae8ba23258a8f7c7a8f0f69c32c4b370fe98137e9262534bf2ff2bc28095de765b94aef52660c3f74002f92c832a70bb22c1698d4b11613d28fd04a8c3418e9740d95bd287fec0ce8b4bf95aa8c65d619bce1dd4efe89402a03b5e5b29b00a3f9b220b4b8817d831a3a2b2e49e8b099401ecb21782d5b25c0028eb967c2407452319b6e3a27049e696098f37892d29cd2192133b2da926243cb0d25192dcbef08543b63655bed39880607f9f18cc0bca0941665bec654e8d84e7858ab1da242e7da4a2a3fe5eb0f49ee31a4901a49d2f8f84599c0f8277e38e2e573c62310247eba3942220ca95977805761be40c35dfbbf403402ba8010f23c7b03efb33cbf05f63350f99b0987221bbe2fb0f25573a9b9bd608d064cadf923dd48e507c33a360b9f9c255bcdea53628f90a8f02291fb04587d4c2c33a7ccf71d04b1bb8c180d374ab04bf504f8fa01c6ed82eafd1f4c0c112b07afe3e41e676a1c4472f49177c330dd5e7aee404fe8e6bd6644a423301ddbe131f6a5f14ef05364141f858b16da1d3670e46a684269f90b2dfbc2afa30122bf1aa740ef590d330bc64e3033d6eaefd2d1b7cf17d35836da395b9934534b672cd17b565bd970f4eaabbea659be5e795f07016d870e3b89ada26cb6288624561226a28b47c6f2210c3461a498c6d5347e1b8edd32c1bb53e5b4c06a476b95d9cce74ca98c794166b89be6f93c2cdf71c6623c88b771e06820ffc9cebe3ebb4df1ef8c2345570507457a0360295cd5da468a1ce29b262d3b04695c0bdc2cd0c09e3961ab50eb2cf5c92854c013b950b25897ebfb72b1c2753bd17cc6389e5eab87f66eb5fabeff0b0000ffff",
-          "0300a8f808c0c7060000"
+          "1f8b0800000000000003d4564d8fd33010fd2b51cedbd64993a6e90dc1810308a4dd1308456e32694d9d38f883a55af5bf334e9dd6db6d165471e1e8783c6fe6f9f94d9ec28a6a1aae9ec20dabc25518c52449968b2849e2e53ccd16e15d484b6d282f346ba068586b34a870d51ace714b29b669019e9d9f2784440b12a7d12249f17c4b1b0c08df412370254109234b28f4beb39f8d02191ecea90aa5a9368810b2762d7ee18952341d070d585e4db902ef4b41f5504a2981624cff258c493c9f906412670f245fcd9355924ee365fec566334a8ba6a819f00a51be5e344eb27cb18808996328b474cd2dac960651a1354d213acd44fbcac1a4af980b891dd01f86becce3f8f8201e71ef920e0f04591929ceb25a8a23c61e38178f132169bb8151b08f5031d3dc8a675530e07546e26d8c02bd679bed9f60be392e7f526e5002472939563e4b2624d37bcc51812a25ebf9462e1f242d7781de42d0b99040d401d0721b68aa76535ba293c07aff4c8f56cf248a3292a5e912c31cd2bde94006352d6d3397d730a8b262aae3745f3c2bf514acccdaa9d85edb9534bed870db0f1ebd5c5be24dcacbf1e0704b6b6476b29100edcb6caeff4f6da02da718706ac82bd0297d548411f1e08e221c857aa303c9d4cd48918724f13dbee067e8a8aeffaea5d704787fb49f71f91dfde93f171f325019f0ecd3ae443b3cc65a58530179cde76e7b499e93dd321fb0de2d50e90f817e6d0bc43dce76de78b02bb7d140b3c636b6ac3bb6d249f11d4a1c1a5e3dbd3f58db2779eef9c35b29949ad4a62dade3538ebed39f0dd010ecabba7c3443eac35da81002cf8ca2d897ea34fb2082eada581c521c0ed85e232a8603eb95e1962d123bdc86a4a0b45d897e54870fe88f81efa6b885a36c20901c978e355c7554427b1aace8920de5acdd15467234e2add69d5acd66b4eba654d1964e7140cfc8ccfd39f403d432397cf07f251c47d764f50f2f0019bbbc1c3b2290117cbb527baa3faecfbad774e384734a70f6f80a6a6ab82e5cae472177aab3e3c317531ca57996cfb37449e2f87c23ca0e1b3b6ba694e1d7537667b8e75c87c3e137000000ffff",
+          "03006f05745293090000"
         ],
         "rawHeaders": [
           "Date",
-          "Fri, 18 Nov 2022 14:27:23 GMT",
+          "Thu, 27 Apr 2023 09:34:46 GMT",
           "Content-Type",
           "application/json; charset=UTF-8",
           "Transfer-Encoding",
@@ -1630,69 +1895,106 @@
           "Asana-Change",
           "name=new_user_task_lists;info=https://forum.asana.com/t/update-on-our-planned-api-changes-to-user-task-lists-a-k-a-my-tasks/103828;affected=true",
           "Asana-Change",
-          "name=external_goal_metrics;info=https://forum.asana.com/t/changes-to-goal-metrics-progress-sources/221257",
-          "Asana-Change",
-          "name=new_project_templates;info=https://forum.asana.com/t/a-new-api-for-project-templates/156432",
+          "name=new_goal_memberships;info=https://forum.asana.com/t/launched-team-sharing-for-goals/378601;affected=true",
           "X-Robots-Tag",
           "none",
           "Strict-Transport-Security",
           "max-age=31536000; includeSubDomains",
           "Datacenter-Time-End",
-          "1668781643.595",
+          "1682588086.682",
           "X-LoadBalancer",
-          "prod-lb007.ec2",
+          "prod-lb004.ec2",
           "Content-Encoding",
           "gzip"
         ],
         "responseIsBinary": false,
         "decodedResponse": {
           "data": {
-            "gid": "1203400471290778",
+            "gid": "INPUT_taskId",
+            "actual_time_minutes": null,
             "assignee": {
               "gid": "1203400160251645",
               "name": "Demo",
               "resource_type": "user"
             },
             "assignee_status": "inbox",
-            "assignee_section": {
-              "gid": "1203400162064124",
-              "name": "Recently assigned",
-              "resource_type": "section"
-            },
             "completed": false,
             "completed_at": null,
-            "created_at": "2022-11-18T14:27:21.277Z",
+            "created_at": "2023-04-27T09:34:45.289Z",
             "custom_fields": [
               {
-                "gid": "1203400042224709",
+                "gid": "1204486079661003",
                 "enabled": true,
                 "enum_options": [
                   {
-                    "gid": "1203400042224710",
-                    "color": "red",
+                    "gid": "1204486079661004",
+                    "color": "aqua",
                     "enabled": true,
-                    "name": "High",
+                    "name": "Low",
                     "resource_type": "enum_option"
                   },
                   {
-                    "gid": "1203400042224711",
-                    "color": "orange",
+                    "gid": "1204486079661005",
+                    "color": "yellow-orange",
                     "enabled": true,
                     "name": "Medium",
                     "resource_type": "enum_option"
                   },
                   {
-                    "gid": "1203400042224712",
-                    "color": "yellow-orange",
+                    "gid": "1204486079661006",
+                    "color": "purple",
                     "enabled": true,
-                    "name": "Low",
+                    "name": "High",
                     "resource_type": "enum_option"
                   }
                 ],
                 "enum_value": null,
                 "name": "Priority",
-                "description": "Asana-created. Track the priority of each task.",
-                "created_by": null,
+                "description": "Track the priority of each task.",
+                "created_by": {
+                  "gid": "1204486011707558",
+                  "name": "Super face",
+                  "resource_type": "user"
+                },
+                "display_value": null,
+                "resource_subtype": "enum",
+                "resource_type": "custom_field",
+                "type": "enum"
+              },
+              {
+                "gid": "1204486079661008",
+                "enabled": true,
+                "enum_options": [
+                  {
+                    "gid": "1204486079661009",
+                    "color": "blue-green",
+                    "enabled": true,
+                    "name": "On track",
+                    "resource_type": "enum_option"
+                  },
+                  {
+                    "gid": "1204486079661010",
+                    "color": "yellow",
+                    "enabled": true,
+                    "name": "At risk",
+                    "resource_type": "enum_option"
+                  },
+                  {
+                    "gid": "1204486079661011",
+                    "color": "red",
+                    "enabled": true,
+                    "name": "Off track",
+                    "resource_type": "enum_option"
+                  }
+                ],
+                "enum_value": null,
+                "name": "Status",
+                "description": "Track the status of each task.",
+                "created_by": {
+                  "gid": "1204486011707558",
+                  "name": "Super face",
+                  "resource_type": "user"
+                },
                 "display_value": null,
                 "resource_subtype": "enum",
                 "resource_type": "custom_field",
@@ -1702,6 +2004,11 @@
             "due_at": null,
             "due_on": null,
             "followers": [
+              {
+                "gid": "1204486011707558",
+                "name": "Super face",
+                "resource_type": "user"
+              },
               {
                 "gid": "1203400160251645",
                 "name": "Demo",
@@ -1715,28 +2022,28 @@
             "memberships": [
               {
                 "project": {
-                  "gid": "1203400042224704",
-                  "name": "superface-test",
+                  "gid": "1204486079660998",
+                  "name": "Cross-functional project plan",
                   "resource_type": "project"
                 },
                 "section": {
-                  "gid": "1203400042224705",
+                  "gid": "1204486079660999",
                   "name": "To do",
                   "resource_type": "section"
                 }
               }
             ],
-            "modified_at": "2022-11-18T14:27:22.098Z",
+            "modified_at": "2023-04-27T09:34:45.764Z",
             "name": "Test",
             "notes": "Task description",
             "num_hearts": 0,
             "num_likes": 0,
             "parent": null,
-            "permalink_url": "https://app.asana.com/0/1203400042224704/1203400471290778",
+            "permalink_url": "https://app.asana.com/0/1204486079660998/INPUT_taskId",
             "projects": [
               {
-                "gid": "1203400042224704",
-                "name": "superface-test",
+                "gid": "1204486079660998",
+                "name": "Cross-functional project plan",
                 "resource_type": "project"
               }
             ],
@@ -1760,7 +2067,7 @@
       {
         "scope": "https://app.asana.com:443",
         "method": "PUT",
-        "path": "/api/1.0/tasks/INPUT_id",
+        "path": "/api/1.0/tasks/INPUT_taskId",
         "body": {
           "data": {
             "name": "Hello, World!",
@@ -1769,12 +2076,12 @@
         },
         "status": 200,
         "response": [
-          "1f8b08000000000000039c54c96edb3010fd1597672f22234b8ece39f4d0024511a0408b40a0a5b1cd9a12052e758dc0ffdea14dca9b12b43dce7096376fdef095d4dc7252bc92b5a84941284b1ed22449f3649ed37c9e9131e9b4fa099535a4f8711395a48c310c4d314a83514e5750da7d07582864e14bcb1bef30ae03bde2154c2c184b0e2ff739969b2d26541ab885bae416d358c2d884d2095d3cd3b46079c1b26992a6df31ae51b55889b7031753f690f9c080e02348a9c6a36f4acbfa83772b44822d9ec0545a7456a876a456230f6f14a1a8a693806048b1e2d2c0987063c4ba05288de5d6f974d12ed56f0f3bc61e81b74eca31a91d94aa25c5d9f2439dac9e31e39681b41a56dc495b86eed842db8bfc937dae60f9da6f0599dc29bd351d927bb54946e78ff9e3433e5f208988b0ef18da9db37a8efa2d4db9200774bba6dc00c2c046c9c99462eb69430b17da7029da6de9b4442636d676a698cd78d74db9e12d9f2227b3641644d5cb253a2e551679bd1ac04b9166099bd32c9d0f0ce00c68bfc893c29ea0511e73c735b43dcd47f4170b8cd378dafc28e7d586c1fcc34aa15476a03dbd37a2ff573c58ad816689b536a23bd58bb7717b753d4103a3c69c7eda7e53e19ec6c4e095a286ef188c6587188c397dd96735aa91457f9e7125650cbac54b339664296543f71f73fac25fa1c2adc8fd2894adfdaa2a67ac6a4abc62590f701d913f0e1072998acff1d358eedfb92f4039636c907fb0827abe68a1b4b07b7c87962fa51786d50ebc8947f08b4b87d7150e59984ef2fdb5f318a68edfc8dba3d06460948bccfbeef1f312eb0d3e564a2a8da7a611de617c23cd4017a5ffd9e333d4e24850eca2346fd7f076a3a14fe56f86f9a47617b3ecfdbfbc9bc4662f8797c3e10f000000ffff",
-          "03002ffb5beb98060000"
+          "1f8b0800000000000003cc56cb6edb3010fc159567dba164497edc8ae690438b144880022d028196289b3545aa7cd43502ff7b973225cb8e52a4060af4e003c9e5ceee7066e567541043d0f219ad598196288c701ccfd318a7713c851f1aa15ac9ef34371a2dbf5d44e1d9224df16231872845b5b42aa799d9d71412f95b702248e5363e28a9f5b8b422374c0ac2031f11d49c0874787a99c210bd85fbb9a2c4d0222306b244389a8e713c8e668f78b19cc6cb783e99a5c95788ab64c14af66a60822771845da02fe88e722e47c117a978f1ce6d4b43a149744b75ae58edaa0c6419c0a6097c293551544019c2723e42243796f0ccb08a661513b6b98ea16059d59c42c9685912ae29446acdd682d24c1b62ac036162257fb9e6dad8a6bd63dec2d24c8a16c5ad5cebc7b38e666d579ee98296c47293f91a014299defde3fa94c190b57b4ae07b27d556d72487d7e93d6c14268bd9623a4be6388aa0c20ed1c39d6e754c6a5b535542a20961e800dbb6ca3614ca0020e0c32d39db3a726105a115e14c6c33ab3830b131a6d6cb9b1b52d713a2892013e0e406df7825761a6b37fad26c407a3cb7a0ae3b87787a018fef0e2a5aada8d21b563b1e9e3ba5f649701ee8900748f85b758f90060b81a2cea8eea32c0650da3b1dd18f3228243a38b3b4923a4b388d310e531c25611a270309ada60ab6bd016e6905c946a89460841d5032e0f0309ce159920c39fc3cd983d340e04400297b72baa624682fb7dac82a033ff362a82e3779428ca7034df6afc2713b3e56fb33aa1aeeafebee6489930929881cc0bc47fccaf3fc5931a998d9c3391564c59d2c8db230175c5cf693700b16f4de671ae6e1fe7cb30993cd44fa03176e565f9ab577f325ba2fefa3dcc1592eb9546047f2c392f317ec540a7c0f89ea2d189f68c11a825a98bd1bbebbb15444ac2f14d3c74bafece98ead37bda66aab6022c347e64c9a7da02181ff77427a387e3dfead8c8606d15b9ef85e044691bcf9627b2dad40d8e3b5a214beeffd99d0233ec457bef07b132876fc7fe0d18e927a1d29bc12e9be843f01179d29f030a8e9e970f80d0000ffff",
+          "03006b28d25741090000"
         ],
         "rawHeaders": [
           "Date",
-          "Fri, 18 Nov 2022 14:27:28 GMT",
+          "Thu, 27 Apr 2023 09:34:50 GMT",
           "Content-Type",
           "application/json; charset=UTF-8",
           "Transfer-Encoding",
@@ -1787,8 +2094,6 @@
           "no-store",
           "pragma",
           "no-cache",
-          "Set-Cookie",
-          "TooBusyRedirectCount=0",
           "X-Frame-Options",
           "DENY",
           "X-XSS-Protection",
@@ -1802,36 +2107,36 @@
           "Asana-Change",
           "name=new_user_task_lists;info=https://forum.asana.com/t/update-on-our-planned-api-changes-to-user-task-lists-a-k-a-my-tasks/103828;affected=true",
           "Asana-Change",
-          "name=external_goal_metrics;info=https://forum.asana.com/t/changes-to-goal-metrics-progress-sources/221257",
-          "Asana-Change",
-          "name=new_project_templates;info=https://forum.asana.com/t/a-new-api-for-project-templates/156432;affected=true",
+          "name=new_goal_memberships;info=https://forum.asana.com/t/launched-team-sharing-for-goals/378601;affected=true",
           "X-Robots-Tag",
           "none",
           "Strict-Transport-Security",
           "max-age=31536000; includeSubDomains",
           "Datacenter-Time-End",
-          "1668781648.789",
+          "1682588090.786",
           "X-LoadBalancer",
-          "prod-lb007.ec2",
+          "prod-lb005.ec2",
           "Content-Encoding",
           "gzip"
         ],
         "responseIsBinary": false,
         "decodedResponse": {
           "data": {
-            "gid": "1203400470571756",
+            "gid": "INPUT_taskId",
             "projects": [
               {
-                "gid": "1203400042224704",
+                "gid": "1204486079660998",
                 "resource_type": "project",
-                "name": "superface-test"
+                "name": "Cross-functional project plan"
               }
             ],
             "resource_type": "task",
-            "created_at": "2022-11-18T14:27:26.044Z",
-            "modified_at": "2022-11-18T14:27:28.236Z",
+            "created_at": "2023-04-27T09:34:48.765Z",
+            "modified_at": "2023-04-27T09:34:50.420Z",
             "name": "Hello, World!",
             "notes": "Description of test task",
+            "parent": null,
+            "actual_time_minutes": 0,
             "completed": false,
             "assignee_status": "inbox",
             "completed_at": null,
@@ -1848,48 +2153,51 @@
             },
             "num_hearts": 0,
             "num_likes": 0,
-            "permalink_url": "https://app.asana.com/0/1203400042224704/1203400470571756",
+            "permalink_url": "https://app.asana.com/0/1204486079660998/INPUT_taskId",
+            "hearted": false,
+            "hearts": [],
+            "liked": false,
+            "likes": [],
+            "memberships": [
+              {
+                "project": {
+                  "gid": "1204486079660998",
+                  "resource_type": "project",
+                  "name": "Cross-functional project plan"
+                },
+                "section": {
+                  "gid": "1204486079660999",
+                  "resource_type": "section",
+                  "name": "To do"
+                }
+              }
+            ],
             "assignee": {
               "gid": "1203400160251645",
               "resource_type": "user",
               "name": "Demo"
             },
-            "parent": null,
-            "hearted": false,
-            "hearts": [],
-            "liked": false,
-            "likes": [],
             "followers": [
+              {
+                "gid": "1204486011707558",
+                "resource_type": "user",
+                "name": "Super face"
+              },
               {
                 "gid": "1203400160251645",
                 "resource_type": "user",
                 "name": "Demo"
               }
             ],
-            "memberships": [
-              {
-                "project": {
-                  "gid": "1203400042224704",
-                  "resource_type": "project",
-                  "name": "superface-test"
-                },
-                "section": {
-                  "gid": "1203400042224705",
-                  "resource_type": "section",
-                  "name": "To do"
-                }
-              }
-            ],
-            "assignee_section": {
-              "gid": "1203400162064124",
-              "resource_type": "section",
-              "name": "Recently assigned"
-            },
             "custom_fields": [
               {
-                "gid": "1203400042224709",
+                "gid": "1204486079661003",
                 "resource_type": "custom_field",
-                "created_by": null,
+                "created_by": {
+                  "gid": "1204486011707558",
+                  "resource_type": "user",
+                  "name": "Super face"
+                },
                 "resource_subtype": "enum",
                 "type": "enum",
                 "name": "Priority",
@@ -1898,25 +2206,63 @@
                 "display_value": null,
                 "enum_options": [
                   {
-                    "gid": "1203400042224710",
-                    "resource_type": "enum_option",
-                    "enabled": true,
-                    "name": "High",
-                    "color": "red"
-                  },
-                  {
-                    "gid": "1203400042224711",
-                    "resource_type": "enum_option",
-                    "enabled": true,
-                    "name": "Medium",
-                    "color": "orange"
-                  },
-                  {
-                    "gid": "1203400042224712",
+                    "gid": "1204486079661004",
                     "resource_type": "enum_option",
                     "enabled": true,
                     "name": "Low",
+                    "color": "aqua"
+                  },
+                  {
+                    "gid": "1204486079661005",
+                    "resource_type": "enum_option",
+                    "enabled": true,
+                    "name": "Medium",
                     "color": "yellow-orange"
+                  },
+                  {
+                    "gid": "1204486079661006",
+                    "resource_type": "enum_option",
+                    "enabled": true,
+                    "name": "High",
+                    "color": "purple"
+                  }
+                ]
+              },
+              {
+                "gid": "1204486079661008",
+                "resource_type": "custom_field",
+                "created_by": {
+                  "gid": "1204486011707558",
+                  "resource_type": "user",
+                  "name": "Super face"
+                },
+                "resource_subtype": "enum",
+                "type": "enum",
+                "name": "Status",
+                "enabled": true,
+                "enum_value": null,
+                "display_value": null,
+                "enum_options": [
+                  {
+                    "gid": "1204486079661009",
+                    "resource_type": "enum_option",
+                    "enabled": true,
+                    "name": "On track",
+                    "color": "blue-green"
+                  },
+                  {
+                    "gid": "1204486079661010",
+                    "resource_type": "enum_option",
+                    "enabled": true,
+                    "name": "At risk",
+                    "color": "yellow"
+                  },
+                  {
+                    "gid": "1204486079661011",
+                    "resource_type": "enum_option",
+                    "enabled": true,
+                    "name": "Off track",
+                    "color": "red"
                   }
                 ]
               }
@@ -1931,7 +2277,7 @@
       {
         "scope": "https://app.asana.com:443",
         "method": "DELETE",
-        "path": "/api/1.0/tasks/INPUT_id",
+        "path": "/api/1.0/tasks/INPUT_taskId",
         "body": "",
         "status": 200,
         "response": {
@@ -1939,7 +2285,7 @@
         },
         "rawHeaders": [
           "Date",
-          "Fri, 18 Nov 2022 14:27:33 GMT",
+          "Thu, 27 Apr 2023 09:34:54 GMT",
           "Content-Type",
           "application/json; charset=UTF-8",
           "Content-Length",
@@ -1952,8 +2298,6 @@
           "no-store",
           "pragma",
           "no-cache",
-          "Set-Cookie",
-          "TooBusyRedirectCount=0",
           "X-Frame-Options",
           "DENY",
           "X-XSS-Protection",
@@ -1965,19 +2309,17 @@
           "X-Asana-Api-Version",
           "1.0",
           "Asana-Change",
-          "name=external_goal_metrics;info=https://forum.asana.com/t/changes-to-goal-metrics-progress-sources/221257",
-          "Asana-Change",
           "name=new_user_task_lists;info=https://forum.asana.com/t/update-on-our-planned-api-changes-to-user-task-lists-a-k-a-my-tasks/103828",
           "Asana-Change",
-          "name=new_project_templates;info=https://forum.asana.com/t/a-new-api-for-project-templates/156432",
+          "name=new_goal_memberships;info=https://forum.asana.com/t/launched-team-sharing-for-goals/378601;affected=true",
           "X-Robots-Tag",
           "none",
           "Strict-Transport-Security",
           "max-age=31536000; includeSubDomains",
           "Datacenter-Time-End",
-          "1668781653.973",
+          "1682588094.582",
           "X-LoadBalancer",
-          "prod-lb016.ec2"
+          "prod-lb002.ec2"
         ],
         "responseIsBinary": false
       }

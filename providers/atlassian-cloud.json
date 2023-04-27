@@ -1,0 +1,23 @@
+{
+  "name": "atlassian-cloud",
+  "services": [
+    {
+      "id": "default",
+      "baseUrl": "https://api.atlassian.com/"
+    }
+  ],
+  "securitySchemes": [
+    {
+      "id": "bearerToken",
+      "type": "http",
+      "scheme": "bearer"
+    }
+  ],
+  "parameters": [
+    {
+      "name": "CLOUD_ID",
+      "description": "Cloud ID of the Atlassian site to make requests to."
+    }
+  ],
+  "defaultService": "default"
+}

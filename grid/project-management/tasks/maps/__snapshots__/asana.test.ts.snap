@@ -5,12 +5,12 @@ Ok {
   "value": Object {
     "assignee": "1203400160251645",
     "description": "Description of test task",
-    "id": "1203400536546865",
-    "projects": Array [
-      "1203400042224704",
+    "projectIds": Array [
+      "1204486079660998",
     ],
+    "taskId": "1204486403194398",
     "title": "Hello, World!",
-    "url": "https://app.asana.com/0/1203400042224704/1203400536546865",
+    "url": "https://app.asana.com/0/1204486079660998/1204486403194398",
   },
 }
 `;
@@ -23,20 +23,34 @@ Ok {
 
 exports[`project-management/tasks/asana ListTasks when all inputs are correct should read all tasks for specified project 1`] = `
 Ok {
-  "value": Array [
-    Object {
-      "id": "1203400665564495",
-      "title": "Test 3",
-    },
-    Object {
-      "id": "1203400665420392",
-      "title": "Test 2",
-    },
-    Object {
-      "id": "1203400665291557",
-      "title": "Test 1",
-    },
-  ],
+  "value": Object {
+    "tasks": Array [
+      Object {
+        "taskId": "1204486406194351",
+        "title": "Test 3",
+      },
+      Object {
+        "taskId": "1204486145720593",
+        "title": "Test 2",
+      },
+      Object {
+        "taskId": "1204486202399277",
+        "title": "Test 1",
+      },
+      Object {
+        "taskId": "1204486081150274",
+        "title": "Draft project brief",
+      },
+      Object {
+        "taskId": "1204486081150276",
+        "title": "Schedule kickoff meeting",
+      },
+      Object {
+        "taskId": "1204486081150278",
+        "title": "Share timeline with teammates",
+      },
+    ],
+  },
 }
 `;
 
@@ -45,12 +59,12 @@ Ok {
   "value": Object {
     "assignee": "1203400160251645",
     "description": "Task description",
-    "id": "1203400471290778",
-    "projects": Array [
-      "1203400042224704",
+    "projectIds": Array [
+      "1204486079660998",
     ],
+    "taskId": "1204486144283576",
     "title": "Test",
-    "url": "https://app.asana.com/0/1203400042224704/1203400471290778",
+    "url": "https://app.asana.com/0/1204486079660998/1204486144283576",
   },
 }
 `;
@@ -60,12 +74,12 @@ Ok {
   "value": Object {
     "assignee": "1203400160251645",
     "description": "Description of test task",
-    "id": "1203400470571756",
-    "projects": Array [
-      "1203400042224704",
+    "projectIds": Array [
+      "1204486079660998",
     ],
+    "taskId": "1204486406443644",
     "title": "Hello, World!",
-    "url": "https://app.asana.com/0/1203400042224704/1203400470571756",
+    "url": "https://app.asana.com/0/1204486079660998/1204486406443644",
   },
 }
 `;
