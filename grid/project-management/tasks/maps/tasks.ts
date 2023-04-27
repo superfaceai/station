@@ -5,19 +5,6 @@ import { RecordingType } from '@superfaceai/testing/dist/nock/recording.interfac
 
 import { buildSuperfaceTest } from '../../../test-config';
 
-const demoAccountParams: {
-  [key: string]: { projectIds: string[]; assigneeId: string };
-} = {
-  asana: {
-    projectIds: ['1204486079660998'],
-    assigneeId: '1203400162064099',
-  },
-  'atlassian-cloud': {
-    projectIds: ['10000'],
-    assigneeId: '6270f8636a38370069dd2345',
-  },
-};
-
 const createTask = async (
   provider: string,
   input: {
@@ -39,8 +26,8 @@ const createTask = async (
     {
       input: {
         title: input.title ?? 'Test Title',
-        projectIds: input.projectIds ?? demoAccountParams[provider]?.projectIds,
-        assignee: input.assignee ?? demoAccountParams[provider]?.assigneeId,
+        projectIds: input.projectIds,
+        assignee: input.assignee,
         parent: input.parent,
         description: input.description ?? 'Task description',
       },
@@ -71,7 +58,10 @@ const deleteTask = async (
   return result.unwrap();
 };
 
-export const taskCrudTest = (provider: string): void => {
+export const taskCrudTest = (
+  provider: string,
+  globals: { projectIds: string[]; assignee: string }
+): void => {
   describe(`project-management/tasks/${provider}`, () => {
     let superface: SuperfaceTest;
 
@@ -90,8 +80,7 @@ export const taskCrudTest = (provider: string): void => {
             input: {
               title: 'Hello, World!',
               description: 'Description of test task',
-              projectIds: demoAccountParams[provider].projectIds,
-              assignee: demoAccountParams[provider].assigneeId,
+              ...globals,
             },
           });
 
@@ -117,7 +106,7 @@ export const taskCrudTest = (provider: string): void => {
           ids.push(
             await createTask(
               provider,
-              { title: `Test ${i}` },
+              { title: `Test ${i}`, ...globals },
               `prepare-ListTasks-CreateTask-${i}`
             )
           );
@@ -136,7 +125,7 @@ export const taskCrudTest = (provider: string): void => {
 
       describe('when all inputs are correct', () => {
         it('should read all tasks for specified project', async () => {
-          for (const projectId of demoAccountParams[provider].projectIds) {
+          for (const projectId of globals.projectIds) {
             const result = await superface.run({
               useCase: 'ListTasks',
               input: {
@@ -157,7 +146,7 @@ export const taskCrudTest = (provider: string): void => {
       beforeEach(async () => {
         taskId = await createTask(
           provider,
-          { title: 'Test' },
+          { title: 'Test', ...globals },
           'prepare-ReadTask-CreateTask'
         );
       });
@@ -194,7 +183,7 @@ export const taskCrudTest = (provider: string): void => {
       beforeEach(async () => {
         taskId = await createTask(
           provider,
-          { title: 'Test' },
+          { title: 'Test', ...globals },
           'prepare-UpdateTask-CreateTask'
         );
       });
@@ -237,7 +226,7 @@ export const taskCrudTest = (provider: string): void => {
       beforeEach(async () => {
         taskId = await createTask(
           provider,
-          { title: 'Test' },
+          { title: 'Test', ...globals },
           'prepare-DeleteTask-CreateTask'
         );
       });
