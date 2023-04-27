@@ -36,7 +36,7 @@ describe('project-management/tasks/mock', () => {
         const result = await superface.run({
           useCase: 'ListTasks',
           input: {
-            id: 'PROJECT_ID',
+            projectId: 'PROJECT_ID',
           },
         });
 
@@ -51,7 +51,7 @@ describe('project-management/tasks/mock', () => {
         const result = await superface.run({
           useCase: 'ReadTask',
           input: {
-            id: 'TASK_ID',
+            taskId: 'TASK_ID',
           },
         });
 
@@ -66,7 +66,7 @@ describe('project-management/tasks/mock', () => {
         const result = await superface.run({
           useCase: 'UpdateTask',
           input: {
-            id: 'TASK_ID',
+            taskId: 'TASK_ID',
             title: 'Hello, World!',
             description: 'Description of test task',
           },
@@ -83,7 +83,7 @@ describe('project-management/tasks/mock', () => {
         const result = await superface.run({
           useCase: 'DeleteTask',
           input: {
-            id: 'TASK_ID',
+            taskId: 'TASK_ID',
           },
         });
 

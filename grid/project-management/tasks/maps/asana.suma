@@ -1,4 +1,4 @@
-profile = "project-management/tasks@1.1"
+profile = "project-management/tasks@2.0"
 provider = "asana"
 
 map CreateTask {
@@ -9,7 +9,7 @@ map CreateTask {
         data = {
           name: input.title,
           notes: input.description,
-          projects: [input.project],
+          projects: input.projectIds,
           parent: input.parent,
           assignee: input.assignee
         }
@@ -35,16 +35,18 @@ map CreateTask {
 }
 
 map ListTasks {
-  http GET "/projects/{input.id}/tasks" {
+  http GET "/projects/{input.projectId}/tasks" {
     security "personalAccessToken"
     
     response 200 "application/json" {
       data = body.data.map(task => ({
-        id: task.gid,
+        taskId: task.gid,
         title: task.name,
       }))
 
-      return map result data
+      return map result {
+        tasks = data
+      }
     }
 
     response {
@@ -60,7 +62,7 @@ map ListTasks {
 }
 
 map ReadTask {
-  http GET "/tasks/{input.id}" {
+  http GET "/tasks/{input.taskId}" {
     security "personalAccessToken"
     
     response 200 "application/json" {
@@ -82,7 +84,7 @@ map ReadTask {
 }
 
 map UpdateTask {
-  http PUT "/tasks/{input.id}" {
+  http PUT "/tasks/{input.taskId}" {
     security "personalAccessToken"
     request "application/json" {
       body {
@@ -115,7 +117,7 @@ map UpdateTask {
 }
 
 map DeleteTask {
-  http DELETE "/tasks/{input.id}" {
+  http DELETE "/tasks/{input.taskId}" {
     security "personalAccessToken"
     
     response 200 "application/json" {}
@@ -137,9 +139,9 @@ Operation MapTask
 Returns mapped task from received body
 """
 operation MapTask {
-  task.id = args.task.gid
+  task.taskId = args.task.gid
 
-  task.projects = args.task.projects.map(project => project.gid)
+  task.projectIds = args.task.projects.map(project => project.gid)
 
   set if (args.task.name) {
     task.title = args.task.name
@@ -176,42 +178,38 @@ operation MapAsanaError {
   headers = args.headers
 
   return if (statusCode === 400) {
+    kind = "InvalidInput"
     title = "Bad request"
     detail = detail
   }
 
   return if (statusCode === 401) {
+    kind = "Unauthenticated"
     title = "Unauthorized"
     detail = detail
   }
 
   return if (statusCode === 403) {
+    kind = "NotAllowed"
     title = "Forbidden"
     detail = detail
   }
 
   return if (statusCode === 404) {
+    kind = "InvalidInput"
     title = "Not found"
     detail = detail
   }
 
-  return if (statusCode === 405) {
-    title = "Method not allowed"
-    detail = detail
-  }
-
   return if (statusCode === 429) {
+    kind = "RateLimitReached"
     retryAfter = parseInt(headers['Retry-After'])
     title = "Too Many Requests"
     detail = `${detail}. Retry after ${retryAfter} seconds`
   }
 
-  return if (statusCode === 502) {
-    title = "Bad gateway"
-    detail = detail
-  }
-
   return {
+    kind = "UnknownError"
     title = "Unknown error"
     detail = `Unknown error occurred. Status: ${statusCode}. Message: ${detail}.`
   }

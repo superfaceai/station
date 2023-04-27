@@ -1,7 +1,13 @@
-profile = "project-management/tasks@1.1"
+profile = "project-management/tasks@2.0"
 provider = "atlassian-cloud"
 
 map CreateTask { 
+  return map error if ((input.projectIds || []).length !== 1) {
+    kind = "InvalidInput"
+    title = "Missing Project ID"
+    detail = "Jira requires that a tasks belongs to a single project, please set a project ID."
+  }
+
   http POST "/ex/jira/{parameters.CLOUD_ID}/rest/api/3/issue" {
     security "bearerToken"
   
@@ -12,7 +18,7 @@ map CreateTask {
             name: "Task"
           },
           project: {
-            id: input.project
+            id: input.projectIds[0]
           },
           summary: input.title,
           // https://developer.atlassian.com/cloud/jira/platform/apis/document/structure/
@@ -43,7 +49,7 @@ map CreateTask {
   
     response 201 "application/json" {
       return map result {
-        id = body.id
+        taskId = body.id
         url = body.self
       }
     }
@@ -55,8 +61,9 @@ map CreateTask {
   
     response {
       return map error {
-        message = "Unknown error",
-        description = JSON.stringify(body)
+        kind = "UnknownError",
+        title = "Unknown Error",
+        detail = `Status code: ${statusCode}, Received body: ${JSON.stringify(body)}`
       }
     }
   }
@@ -68,14 +75,17 @@ map ListTasks {
   
     request {
       query {
-        jql = `project=${input.id}`
-        maxResults = 9999 // TODO
+        jql = `project=${input.projectId}`
+        startAt = input.page
       }
     }
   
     response 200 "application/json" {
       processed = call ProcessIssues(issues=body.issues)
-      return map result processed.tasks
+      return map result {
+        tasks = processed.tasks
+        nextPage = String((parseInt(input.page || "0")) + processed.tasks.length)
+      }
     }
   
     response "application/json" {
@@ -85,15 +95,16 @@ map ListTasks {
   
     response {
       return map error {
-        message = "Unknown error",
-        description = JSON.stringify(body)
+        kind = "UnknownError",
+        title = "Unknown Error",
+        detail = `Status code: ${statusCode}, Received body: ${JSON.stringify(body)}`
       }
     }
   }
 }
 
 map ReadTask { 
-  http GET "/ex/jira/{parameters.CLOUD_ID}/rest/api/3/issue/{input.id}" {
+  http GET "/ex/jira/{parameters.CLOUD_ID}/rest/api/3/issue/{input.taskId}" {
     security "bearerToken"
   
     response 200 "application/json" {
@@ -108,23 +119,30 @@ map ReadTask {
   
     response {
       return map error {
-        message = "Unknown error",
-        description = JSON.stringify(body)
+        kind = "UnknownError",
+        title = "Unknown Error",
+        detail = `Status code: ${statusCode}, Received body: ${JSON.stringify(body)}`
       }
     }
   }
 }
 
 map UpdateTask { 
-   http PUT "/ex/jira/{parameters.CLOUD_ID}/rest/api/3/issue/{input.id}" {
+  return map error if ((input.projectIds || []).length > 1) {
+    kind = "InvalidInput"
+    title = "Multiple Project IDs"
+    detail = "Jira requires that a tasks belongs to a single project, please set a single project ID."
+  }
+  
+  http PUT "/ex/jira/{parameters.CLOUD_ID}/rest/api/3/issue/{input.taskId}" {
     security "bearerToken"
   
     request "application/json" {
       body {
         fields = {
-          project: {
-            id: input.project
-          },
+          project: (input.projectIds || []).length ? {
+            id: input.projectIds[0]
+          } : undefined,
           summary: input.title,
           // https://developer.atlassian.com/cloud/jira/platform/apis/document/structure/
           description: input.description ? {
@@ -154,7 +172,7 @@ map UpdateTask {
   
    response 204 "application/json" {
       return map result {
-        id = input.id
+        taskId = input.taskId
       }
     }
 
@@ -165,15 +183,16 @@ map UpdateTask {
   
     response {
       return map error {
-        message = "Unknown error",
-        description = JSON.stringify(body)
+        kind = "UnknownError",
+        title = "Unknown Error",
+        detail = `Status code: ${statusCode}, Received body: ${JSON.stringify(body)}`
       }
     }
   }
 }
 
 map DeleteTask {
-  http DELETE "/ex/jira/{parameters.CLOUD_ID}/rest/api/3/issue/{input.id}" {
+  http DELETE "/ex/jira/{parameters.CLOUD_ID}/rest/api/3/issue/{input.taskId}" {
     security "bearerToken"
 
     request {
@@ -193,8 +212,9 @@ map DeleteTask {
   
     response {
       return map error {
-        message = "Unknown error",
-        description = JSON.stringify(body)
+        kind = "UnknownError",
+        title = "Unknown Error",
+        detail = `Status code: ${statusCode}, Received body: ${JSON.stringify(body)}`
       }
     }
   }
@@ -279,8 +299,8 @@ operation ProcessIssues {
 
     return args.issues.map((issue) => {
       return {
-        id: issue.id,
-        projects: [
+        taskId: issue.id,
+        projectIds: [
           issue.fields.project.id
         ],
         title: issue.fields.summary,
@@ -303,22 +323,26 @@ operation HandleError {
   body = args.body
 
   return if (statusCode === 400) {
-    message = "Invalid input."
-    description = body.errorMessages.concat(Object.values(body.errors)).join(", ")
+    kind = "InvalidInput"
+    title = "Invalid input."
+    detail = body.errorMessages.concat(Object.values(body.errors)).join(", ")
   }
 
   return if (statusCode === 401) {
-    message = "Unauthenticated"
-    description =  "Invalid or expired access token supplied."
+    kind = "Unauthenticated"
+    title = "Unauthenticated"
+    detail =  "Invalid or expired access token supplied."
   }
 
   return if (statusCode === 403) {
-    message = "Unauthorized"
-    description =  "You do not have permissions for this action."
+    kind = "NotAllowed"
+    title = "Not Allowed"
+    detail =  "You do not have permissions for this action."
   }
 
   return {
-    message = "Unknown error"
-    description = `Unknown error occurred. Status: ${statusCode}, Body: ${JSON.stringify(body)}`
+    kind = "UnknownError"
+    title = "Unknown Error"
+    detail = `Unknown error occurred. Status: ${statusCode}, Body: ${JSON.stringify(body)}`
   }
 }

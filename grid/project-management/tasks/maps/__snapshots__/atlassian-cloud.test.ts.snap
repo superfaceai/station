@@ -3,8 +3,8 @@
 exports[`project-management/tasks/atlassian-cloud CreateTask when all inputs are correct should create a task 1`] = `
 Ok {
   "value": Object {
-    "id": "10053",
-    "url": "https://api.atlassian.com/ex/jira/0cfe1fef-1394-4fc0-862b-e636007ca0e0/rest/api/3/issue/10053",
+    "taskId": "10188",
+    "url": "https://api.atlassian.com/ex/jira/0cfe1fef-1394-4fc0-862b-e636007ca0e0/rest/api/3/issue/10188",
   },
 }
 `;
@@ -17,49 +17,51 @@ Ok {
 
 exports[`project-management/tasks/atlassian-cloud ListTasks when all inputs are correct should read all tasks for specified project 1`] = `
 Ok {
-  "value": Array [
-    Object {
-      "assignee": undefined,
-      "description": "Task description
+  "value": Object {
+    "nextPage": "4",
+    "tasks": Array [
+      Object {
+        "assignee": undefined,
+        "description": "Task description
 
 ",
-      "id": "10056",
-      "parent": undefined,
-      "projects": Array [
-        "10000",
-      ],
-      "title": "Test 3",
-      "url": "https://api.atlassian.com/ex/jira/0cfe1fef-1394-4fc0-862b-e636007ca0e0/rest/api/3/issue/10056",
-    },
-    Object {
-      "assignee": undefined,
-      "description": "Task description
+        "parent": undefined,
+        "projectIds": Array [
+          "10000",
+        ],
+        "taskId": "10191",
+        "title": "Test 3",
+        "url": "https://api.atlassian.com/ex/jira/0cfe1fef-1394-4fc0-862b-e636007ca0e0/rest/api/3/issue/10191",
+      },
+      Object {
+        "assignee": undefined,
+        "description": "Task description
 
 ",
-      "id": "10055",
-      "parent": undefined,
-      "projects": Array [
-        "10000",
-      ],
-      "title": "Test 2",
-      "url": "https://api.atlassian.com/ex/jira/0cfe1fef-1394-4fc0-862b-e636007ca0e0/rest/api/3/issue/10055",
-    },
-    Object {
-      "assignee": undefined,
-      "description": "Task description
+        "parent": undefined,
+        "projectIds": Array [
+          "10000",
+        ],
+        "taskId": "10190",
+        "title": "Test 2",
+        "url": "https://api.atlassian.com/ex/jira/0cfe1fef-1394-4fc0-862b-e636007ca0e0/rest/api/3/issue/10190",
+      },
+      Object {
+        "assignee": undefined,
+        "description": "Task description
 
 ",
-      "id": "10054",
-      "parent": undefined,
-      "projects": Array [
-        "10000",
-      ],
-      "title": "Test 1",
-      "url": "https://api.atlassian.com/ex/jira/0cfe1fef-1394-4fc0-862b-e636007ca0e0/rest/api/3/issue/10054",
-    },
-    Object {
-      "assignee": undefined,
-      "description": "hello
+        "parent": undefined,
+        "projectIds": Array [
+          "10000",
+        ],
+        "taskId": "10189",
+        "title": "Test 1",
+        "url": "https://api.atlassian.com/ex/jira/0cfe1fef-1394-4fc0-862b-e636007ca0e0/rest/api/3/issue/10189",
+      },
+      Object {
+        "assignee": undefined,
+        "description": "hello
 
 1. w**o**rld
 
@@ -98,15 +100,16 @@ super[face](https://superface.ai)
 
 ---
 ",
-      "id": "10052",
-      "parent": undefined,
-      "projects": Array [
-        "10000",
-      ],
-      "title": "rich text",
-      "url": "https://api.atlassian.com/ex/jira/0cfe1fef-1394-4fc0-862b-e636007ca0e0/rest/api/3/issue/10052",
-    },
-  ],
+        "parent": undefined,
+        "projectIds": Array [
+          "10000",
+        ],
+        "taskId": "10052",
+        "title": "rich text",
+        "url": "https://api.atlassian.com/ex/jira/0cfe1fef-1394-4fc0-862b-e636007ca0e0/rest/api/3/issue/10052",
+      },
+    ],
+  },
 }
 `;
 
@@ -117,13 +120,13 @@ Ok {
     "description": "Task description
 
 ",
-    "id": "10057",
     "parent": undefined,
-    "projects": Array [
+    "projectIds": Array [
       "10000",
     ],
+    "taskId": "10192",
     "title": "Test",
-    "url": "https://api.atlassian.com/ex/jira/0cfe1fef-1394-4fc0-862b-e636007ca0e0/rest/api/3/issue/10057",
+    "url": "https://api.atlassian.com/ex/jira/0cfe1fef-1394-4fc0-862b-e636007ca0e0/rest/api/3/issue/10192",
   },
 }
 `;
@@ -131,7 +134,7 @@ Ok {
 exports[`project-management/tasks/atlassian-cloud UpdateTask when all inputs are correct should update a task 1`] = `
 Ok {
   "value": Object {
-    "id": "10058",
+    "taskId": "10193",
   },
 }
 `;
