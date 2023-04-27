@@ -48,21 +48,12 @@ map CreateTask {
       }
     }
 
-    response 400 "application/json" {
-      return map error {
-        message = "Invalid input."
-        description = JSON.stringify(body)
-      }
-    }
-  
-    response 401 "application/json" {
-      return map error {
-        message = "Unauthorized"
-        description = "Invalid or expired access token supplied."
-      }
-    }
-  
     response "application/json" {
+      error = call HandleError(body = body, statusCode = statusCode)
+      return map error error
+    }
+  
+    response {
       return map error {
         message = "Unknown error",
         description = JSON.stringify(body)
@@ -87,21 +78,12 @@ map ListTasks {
       return map result processed.tasks
     }
   
-    response 400 "application/json" {
-      return map error {
-        message = "Invalid input."
-        description = JSON.stringify(body)
-      }
-    }
-  
-    response 401 "application/json" {
-      return map error {
-        message = "Unauthorized"
-        description = "Invalid or expired access token supplied."
-      }
-    }
-  
     response "application/json" {
+      error = call HandleError(body = body, statusCode = statusCode)
+      return map error error
+    }
+  
+    response {
       return map error {
         message = "Unknown error",
         description = JSON.stringify(body)
@@ -119,21 +101,12 @@ map ReadTask {
       return map result processed.tasks[0]
     }
   
-    response 400 "application/json" {
-      return map error {
-        message = "Invalid input."
-        description = JSON.stringify(body)
-      }
-    }
-  
-    response 401 "application/json" {
-      return map error {
-        message = "Unauthorized"
-        description = "Invalid or expired access token supplied."
-      }
-    }
-  
     response "application/json" {
+      error = call HandleError(body = body, statusCode = statusCode)
+      return map error error
+    }
+  
+    response {
       return map error {
         message = "Unknown error",
         description = JSON.stringify(body)
@@ -185,21 +158,12 @@ map UpdateTask {
       }
     }
 
-    response 400 "application/json" {
-      return map error {
-        message = "Invalid input."
-        description = JSON.stringify(body)
-      }
-    }
-  
-    response 401 "application/json" {
-      return map error {
-        message = "Unauthorized"
-        description = "Invalid or expired access token supplied."
-      }
-    }
-  
     response "application/json" {
+      error = call HandleError(body = body, statusCode = statusCode)
+      return map error error
+    }
+  
+    response {
       return map error {
         message = "Unknown error",
         description = JSON.stringify(body)
@@ -222,21 +186,12 @@ map DeleteTask {
       // noop
     }
   
-    response 400 "application/json" {
-      return map error {
-        message = "Invalid input."
-        description = JSON.stringify(body)
-      }
-    }
-  
-    response 401 "application/json" {
-      return map error {
-        message = "Unauthorized"
-        description = "Invalid or expired access token supplied."
-      }
-    }
-  
     response "application/json" {
+      error = call HandleError(body = body, statusCode = statusCode)
+      return map error error
+    }
+  
+    response {
       return map error {
         message = "Unknown error",
         description = JSON.stringify(body)
@@ -340,5 +295,30 @@ operation ProcessIssues {
 
   return {
     tasks = result
+  }
+}
+
+operation HandleError {
+  statusCode = args.statusCode
+  body = args.body
+
+  return if (statusCode === 400) {
+    message = "Invalid input."
+    description = body.errorMessages.concat(Object.values(body.errors)).join(", ")
+  }
+
+  return if (statusCode === 401) {
+    message = "Unauthenticated"
+    description =  "Invalid or expired access token supplied."
+  }
+
+  return if (statusCode === 403) {
+    message = "Unauthorized"
+    description =  "You do not have permissions for this action."
+  }
+
+  return {
+    message = "Unknown error"
+    description = `Unknown error occurred. Status: ${statusCode}, Body: ${JSON.stringify(body)}`
   }
 }
