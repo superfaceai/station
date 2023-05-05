@@ -1,0 +1,166 @@
+name = "customer-management/get-customer"
+version = "0.0.0"
+
+"Retrieves a single customer by their ID."
+usecase RetrieveCustomer safe  {
+  input {
+    "The unique identifier of the customer being retrieved."
+    customer_id! string!
+  
+    "Show only certain fields, specified by a comma-separated list of field names."
+    fields string!
+  }
+  result {
+    customer! {
+      id! number!
+    
+      email! string!
+    
+      accepts_marketing! boolean!
+    
+      created_at! string!
+    
+      updated_at! string!
+    
+      first_name! string!
+    
+      last_name! string!
+    
+      orders_count! number!
+    
+      state! string!
+    
+      total_spent! string!
+    
+      last_order_id! number!
+    
+      note! string
+    
+      verified_email! boolean!
+    
+      multipass_identifier! string
+    
+      tax_exempt! boolean!
+    
+      tags! string!
+    
+      last_order_name! string!
+    
+      currency! string!
+    
+      phone! string!
+    
+      addresses! [{
+        id! number!
+      
+        customer_id! number!
+      
+        first_name string
+      
+        last_name string
+      
+        company string
+      
+        address1! string!
+      
+        address2! string!
+      
+        city! string!
+      
+        province! string!
+      
+        country! string!
+      
+        zip! string!
+      
+        phone! string!
+      
+        name! string!
+      
+        province_code! string!
+      
+        country_code! string!
+      
+        country_name! string!
+      
+        default! boolean!
+      }!]!
+    
+      accepts_marketing_updated_at! string!
+    
+      marketing_opt_in_level! string
+    
+      tax_exemptions! [string!]!
+    
+      email_marketing_consent! {
+        state! string!
+      
+        opt_in_level! string
+      
+        consent_updated_at! string!
+      }!
+    
+      sms_marketing_consent! {
+        state! string!
+      
+        opt_in_level! string!
+      
+        consent_updated_at! string!
+      
+        consent_collected_from! string!
+      }!
+    
+      admin_graphql_api_id! string!
+    
+      default_address! {
+        id! number!
+      
+        customer_id! number!
+      
+        first_name string
+      
+        last_name string
+      
+        company string
+      
+        address1! string!
+      
+        address2! string!
+      
+        city! string!
+      
+        province! string!
+      
+        country! string!
+      
+        zip! string!
+      
+        phone! string!
+      
+        name! string!
+      
+        province_code! string!
+      
+        country_code! string!
+      
+        country_name! string!
+      
+        default! boolean!
+      }!
+    }!
+  }!
+  error {
+    errors! [{
+      message string!
+    
+      code string!
+    }!]!
+  }!
+  example InputExample {
+    input {
+      customer_id = '207119551',
+      fields = 'id,email,first_name,last_name',
+    }
+  }
+}
+

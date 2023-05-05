@@ -1,0 +1,58 @@
+name = "webhook-management/subscribe-webhook"
+version = "0.0.0"
+
+"Create a new webhook subscription by specifying an address and a topic."
+usecase WebhookSubscription safe  {
+  input {
+    webhook! {
+      "The address where the webhook should send the HTTP request."
+      address! string!
+    
+      "The event that triggers the webhook."
+      topic! string!
+    
+      "The format of the data that the webhook should send."
+      format! string!
+    }!
+  }
+  result {
+    webhook! {
+      id! number!
+    
+      address! string!
+    
+      topic! string!
+    
+      created_at! string!
+    
+      updated_at! string!
+    
+      format! string!
+    
+      fields! [string!]!
+    
+      metafield_namespaces! [string!]!
+    
+      api_version! string!
+    
+      private_metafield_namespaces! [string!]!
+    }!
+  }!
+  error {
+    error! {
+      message! string!
+    
+      code! number!
+    }!
+  }!
+  example InputExample {
+    input {
+      webhook = {
+        address = 'https://example.com/webhook',
+        topic = 'customers/update',
+        format = 'json',
+      },
+    }
+  }
+}
+
