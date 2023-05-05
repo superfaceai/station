@@ -7,6 +7,8 @@
 
 Where use-cases are born. In this repository we build curated use-cases. Examples in this repository are an ideal starting point for writing your own.
 
+# WARNING: THIS BRANCH IS EXPERIMANTAL AND SOME THINGS MIGHT BE BROKEN USE main BRANCH INSTEAD!
+
 ## Table of Contents
 
 - [Background](#background)
