@@ -1,11 +1,5 @@
 function RetrieveCustomer({ input, parameters, services }) {
-  const getCustomerResult = getCustomer(input, services, parameters);
-
-  return getCustomerResult;
-}
-
-function getCustomer(input, services, parameters) {
-  const url = `${services.default}/admin/api/${parameters.api_version}/customers/${input.customer_id}.json`;
+  const url = `${services.default}/admin/api/2023-04/customers/${input.customer_id}.json`;
   const options = {
     method: 'GET',
     query: {

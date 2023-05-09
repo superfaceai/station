@@ -1,11 +1,5 @@
 function WebhookSubscription({ input, parameters, services }) {
-  const createWebhookResult = createWebhook(input, services, parameters);
-
-  return createWebhookResult;
-}
-
-function createWebhook(input, services, parameters) {
-  const url = `${services.default}admin/api/${parameters.api_version}/webhooks.json`;
+  const url = `${services.default}/admin/api/2023-04/webhooks.json`;
   const options = {
     method: 'POST',
     body: input,
@@ -24,7 +18,6 @@ function createWebhook(input, services, parameters) {
         {
           code: response.status.toString(),
           message: 'Failed to create webhook',
-          options: body,
         },
       ],
     });

@@ -1,11 +1,5 @@
 function CreateCustomer({ input, parameters, services }) {
-  const createCustomerResult = createCustomer(input, services, parameters);
-
-  return createCustomerResult;
-}
-
-function createCustomer(input, services, parameters) {
-  const url = `${services.default}/admin/api/${parameters.api_version}/customers.json`;
+  const url = `${services.default}/admin/api/2023-04/customers.json`;
   const options = {
     method: 'POST',
     body: input.customer,

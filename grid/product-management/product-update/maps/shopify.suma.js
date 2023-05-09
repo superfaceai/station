@@ -1,11 +1,5 @@
 function UpdateProduct({ input, parameters, services }) {
-  const updateProductResult = updateProduct(input, services, parameters);
-
-  return updateProductResult;
-}
-
-function updateProduct(input, services, parameters) {
-  const url = `${services.default}/admin/api/${parameters.api_version}/products/${input.product.id}.json`;
+  const url = `${services.default}/admin/api/2023-04/products/${input.product.id}.json`;
   const options = {
     method: 'PUT',
     body: {
@@ -25,7 +19,6 @@ function updateProduct(input, services, parameters) {
       errors: [
         {
           code: response.status.toString(),
-          field: 'HTTP',
           message: 'HTTP call failed',
         },
       ],
