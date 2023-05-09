@@ -8,7 +8,7 @@ function createWebhook(input, services, parameters) {
   const url = `${services.default}admin/api/${parameters.api_version}/webhooks.json`;
   const options = {
     method: 'POST',
-    body: input.webhook,
+    body: input,
     headers: {
       'Content-Type': 'application/json',
     },
@@ -20,8 +20,13 @@ function createWebhook(input, services, parameters) {
 
   if (response.status !== 201) {
     throw new std.unstable.MapError({
-      code: response.status,
-      message: 'HTTP call failed',
+      errors: [
+        {
+          code: response.status.toString(),
+          message: 'Failed to create webhook',
+          options: body,
+        },
+      ],
     });
   }
 

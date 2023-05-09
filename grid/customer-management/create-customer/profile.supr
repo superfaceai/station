@@ -1,0 +1,234 @@
+name = "customer-management/create-customer"
+version = "0.0.0"
+
+"Creates a new customer with the provided information."
+usecase CreateCustomer unsafe  {
+  input {
+    customer! {
+      "The customer's first name."
+      first_name! string!
+    
+      "The customer's last name."
+      last_name! string!
+    
+      "The unique email address of the customer."
+      email! string!
+    
+      "The unique phone number (E.164 format) for this customer."
+      phone! string!
+    
+      "Whether the customer has verified their email address."
+      verified_email! boolean!
+    
+      addresses! [{
+        "The first line of the address."
+        address1! string!
+      
+        "The city of the address."
+        city! string!
+      
+        "The province or state of the address."
+        province! string!
+      
+        "The phone number associated with the address."
+        phone! string!
+      
+        "The postal or zip code of the address."
+        zip! string!
+      
+        "The last name of the person associated with the address."
+        last_name! string!
+      
+        "The first name of the person associated with the address."
+        first_name! string!
+      
+        "The country of the address."
+        country! string!
+      }!]!
+    
+      "The customer's password."
+      password! string!
+    
+      "The customer's password that's confirmed."
+      password_confirmation! string!
+    
+      "Whether to send a welcome email to the customer."
+      send_email_welcome! boolean!
+    }!
+  }
+  result {
+    customer {
+      id number!
+    
+      email string!
+    
+      accepts_marketing boolean!
+    
+      created_at string!
+    
+      updated_at string!
+    
+      first_name string!
+    
+      last_name string!
+    
+      orders_count number!
+    
+      state string!
+    
+      total_spent string!
+    
+      last_order_id number!
+    
+      note string
+    
+      verified_email boolean!
+    
+      multipass_identifier string
+    
+      tax_exempt boolean!
+    
+      tags string!
+    
+      last_order_name string!
+    
+      currency string!
+    
+      phone string!
+    
+      addresses [{
+        id number!
+      
+        customer_id number!
+      
+        first_name string
+      
+        last_name string
+      
+        company string
+      
+        address1 string!
+      
+        address2 string!
+      
+        city string!
+      
+        province string!
+      
+        country string!
+      
+        zip string!
+      
+        phone string!
+      
+        name string!
+      
+        province_code string!
+      
+        country_code string!
+      
+        country_name string!
+      
+        default boolean!
+      }!]!
+    
+      accepts_marketing_updated_at string!
+    
+      marketing_opt_in_level string
+    
+      tax_exemptions [string!]!
+    
+      email_marketing_consent {
+        state string!
+      
+        opt_in_level string
+      
+        consent_updated_at string!
+      }!
+    
+      sms_marketing_consent {
+        state string!
+      
+        opt_in_level string!
+      
+        consent_updated_at string!
+      
+        consent_collected_from string!
+      }!
+    
+      admin_graphql_api_id string!
+    
+      default_address {
+        id number!
+      
+        customer_id number!
+      
+        first_name string
+      
+        last_name string
+      
+        company string
+      
+        address1 string!
+      
+        address2 string!
+      
+        city string!
+      
+        province string!
+      
+        country string!
+      
+        zip string!
+      
+        phone string!
+      
+        name string!
+      
+        province_code string!
+      
+        country_code string!
+      
+        country_name string!
+      
+        default boolean!
+      }!
+    }!
+  }!
+  error {
+    errors! [{
+      message! string!
+    
+      field string!
+    
+      code string!
+    }!]!
+  }!
+  example InputExample {
+    input {
+      customer = {
+        first_name = 'Steve',
+        last_name = 'Lastnameson',
+        email = 'steve.lastnameson@example.com',
+        phone = '+15142546011',
+        verified_email = true,
+        addresses = [
+          {
+          address1 = '123 Oak St',
+          city = 'Ottawa',
+          province = 'ON',
+          phone = '555-1212',
+          zip = '123 ABC',
+          last_name = 'Lastnameson',
+          first_name = 'Mother',
+          country = 'CA',
+        }
+        ],
+        password = 'newpass',
+        password_confirmation = 'newpass',
+        send_email_welcome = false,
+      },
+    }
+  }
+}
+

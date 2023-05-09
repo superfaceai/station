@@ -22,8 +22,12 @@ function getCustomer(input, services, parameters) {
 
   if (response.status !== 200) {
     throw new std.unstable.MapError({
-      code: response.status,
-      message: 'HTTP call failed',
+      errors: [
+        {
+          message: 'Failed to fetch customer data',
+          code: response.status.toString(),
+        },
+      ],
     });
   }
 

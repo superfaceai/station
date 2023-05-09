@@ -4,10 +4,10 @@ version = "0.0.0"
 "Retrieves a single customer by their ID."
 usecase RetrieveCustomer safe  {
   input {
-    "The unique identifier of the customer being retrieved."
+    "The unique identifier of the customer."
     customer_id! string!
   
-    "Show only certain fields, specified by a comma-separated list of field names."
+    "Comma-separated list of field names to show in the response."
     fields string!
   }
   result {

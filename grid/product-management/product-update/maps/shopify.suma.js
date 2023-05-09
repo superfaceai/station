@@ -22,8 +22,13 @@ function updateProduct(input, services, parameters) {
 
   if (response.status !== 200) {
     throw new std.unstable.MapError({
-      code: response.status,
-      message: 'HTTP call failed',
+      errors: [
+        {
+          code: response.status.toString(),
+          field: 'HTTP',
+          message: 'HTTP call failed',
+        },
+      ],
     });
   }
 
