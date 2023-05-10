@@ -1,0 +1,24 @@
+{
+  "name": "shopify",
+  "defaultService": "default",
+  "services": [
+    {
+      "id": "default",
+      "baseUrl": "https://{SHOP}.myshopify.com"
+    }
+  ],
+  "securitySchemes": [
+    {
+      "id": "apiKey",
+      "type": "apiKey",
+      "in": "header",
+      "name": "X-Shopify-Access-Token"
+    }
+  ],
+  "parameters": [
+    {
+      "name": "SHOP",
+      "description": "Your shop. You can find it in Shopify account settings."
+    }
+  ]
+}
