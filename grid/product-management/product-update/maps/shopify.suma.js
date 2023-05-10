@@ -15,7 +15,7 @@ function UpdateProduct({ input, services }) {
   const body = response.bodyAuto() ?? {};
 
   if (response.status >= 400) {
-    let errorMessage = 'An error occurred while retrieving the customer.';
+    let errorMessage = 'An error occurred while updating a product.';
     if (response.status === 401) {
       errorMessage = '[API] Invalid API key or access token (unrecognized login or wrong password)';
     } else if (response.status === 402) {
