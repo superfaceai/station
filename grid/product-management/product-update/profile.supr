@@ -193,11 +193,17 @@ usecase UpdateProduct idempotent  {
     }!
   }!
   error {
-    errors! [{
-      code! string!
-        
-      message! string!
-    }!]!
+    "An array of error messages."
+    errors! [string!]!
+  
+    "HTTP status code of the error."
+    status number
+  
+    "The number of requests made and the total number allowed per minute."
+    xShopifyShopApiCallLimit string
+  
+    "The number of seconds to wait until retrying the query."
+    retryAfter number
   }!
   example InputExample {
     input {
