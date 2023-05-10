@@ -11,15 +11,16 @@ usecase CreateCustomer unsafe  {
       "The customer's last name."
       last_name! string!
     
-      "The unique email address of the customer."
+      "The customer's email address."
       email! string!
     
-      "The unique phone number (E.164 format) for this customer."
+      "The customer's phone number."
       phone! string!
     
       "Whether the customer has verified their email address."
       verified_email! boolean!
     
+      "A list of the customer's addresses."
       addresses! [{
         "The first line of the address."
         address1! string!
@@ -49,7 +50,7 @@ usecase CreateCustomer unsafe  {
       "The customer's password."
       password! string!
     
-      "The customer's password that's confirmed."
+      "The confirmation of the customer's password."
       password_confirmation! string!
     
       "Whether to send a welcome email to the customer."
@@ -57,49 +58,61 @@ usecase CreateCustomer unsafe  {
     }!
   }
   result {
+    "The new customer object."
     customer {
-      id number!
+      "The customer's ID."
+      id! number!
     
-      email string!
+      "The unique email address of the customer. Attempting to assign the same email address to multiple customers returns an error."
+      email! string!
     
-      accepts_marketing boolean!
+      "The date and time (ISO 8601 format) when the customer was created."
+      created_at! string!
     
-      created_at string!
+      "The date and time (ISO 8601 format) when the customer information was last updated."
+      updated_at! string!
     
-      updated_at string!
+      first_name! string!
     
-      first_name string!
+      last_name! string!
     
-      last_name string!
+      orders_count! number!
     
-      orders_count number!
+      state! string!
+
+      "The total amount of money that the customer has spent across their order history."
+      total_spent! string!
     
-      state string!
+      last_order_id! number!
     
-      total_spent string!
-    
-      last_order_id number!
-    
+     "A note about the customer."
       note string
-    
-      verified_email boolean!
-    
+
+      "Whether the customer has verified their email address."
+      verified_email! boolean!
+
+      "A unique identifier for the customer that's used with Multipass login."
       multipass_identifier string
     
-      tax_exempt boolean!
+      "Whether the customer is exempt from paying taxes on their order. If true, then taxes won't be applied to an order at checkout. If false, then taxes will be applied at checkout."
+      tax_exempt! boolean!
+
+      "Tags that the shop owner has attached to the customer, formatted as a string of comma-separated values. A customer can have up to 250 tags. Each tag can have up to 255 characters."
+      tags! string!
     
-      tags string!
+      "The name of the customer's last order. This is directly related to the name field on the Order resource."
+      last_order_name! string!
     
-      last_order_name string!
+      "The three-letter code (ISO 4217 format) for the currency that the customer used when they paid for their last order. Defaults to the shop currency. Returns the shop currency for test orders."
+      currency! string!
     
-      currency string!
+      "The unique phone number (E.164 format) for this customer. Attempting to assign the same phone number to multiple customers returns an error."
+      phone! string!
     
-      phone string!
-    
-      addresses [{
-        id number!
+      addresses! [{
+        id! number!
       
-        customer_id number!
+        customer_id! number!
       
         first_name string
       
@@ -107,61 +120,60 @@ usecase CreateCustomer unsafe  {
       
         company string
       
-        address1 string!
+        address1! string!
       
         address2 string!
       
-        city string!
+        city! string!
       
-        province string!
+        province! string!
       
-        country string!
+        country! string!
       
-        zip string!
+        zip! string!
       
-        phone string!
+        phone! string!
       
-        name string!
+        name! string!
       
-        province_code string!
+        province_code! string!
       
-        country_code string!
+        country_code! string!
       
-        country_name string!
+        country_name! string!
       
-        default boolean!
+        default! boolean!
       }!]!
-    
-      accepts_marketing_updated_at string!
-    
-      marketing_opt_in_level string
-    
+        
       tax_exemptions [string!]!
     
-      email_marketing_consent {
-        state string!
+      "The marketing consent information when the customer consented to receiving marketing material by email. The email property is required to create a customer with email consent information and to update a customer for email consent that doesn't have an email recorded. The customer must have a unique email address associated to the record. The email marketing consent has the following properties:"
+      email_marketing_consent! {
+        state! string!
       
         opt_in_level string
       
-        consent_updated_at string!
+        consent_updated_at! string!
       }!
     
-      sms_marketing_consent {
-        state string!
+      "The marketing consent information when the customer consented to receiving marketing material by SMS. The phone property is required to create a customer with SMS consent information and to perform an SMS update on a customer that doesn't have a phone number recorded. The customer must have a unique phone number associated to the record. The SMS marketing consent has the following properties:"
+      sms_marketing_consent! {
+        state! string!
       
-        opt_in_level string!
+        opt_in_level! string!
       
-        consent_updated_at string!
+        consent_updated_at! string!
       
-        consent_collected_from string!
+        consent_collected_from! string!
       }!
     
-      admin_graphql_api_id string!
+      admin_graphql_api_id! string!
     
-      default_address {
-        id number!
+      "The default address for the customer."
+      default_address! {
+        id! number!
       
-        customer_id number!
+        customer_id! number!
       
         first_name string
       
@@ -169,37 +181,44 @@ usecase CreateCustomer unsafe  {
       
         company string
       
-        address1 string!
+        address1! string!
       
         address2 string!
       
-        city string!
+        city! string!
       
-        province string!
+        province! string!
       
-        country string!
+        country! string!
       
-        zip string!
+        zip! string!
       
-        phone string!
+        phone! string!
       
-        name string!
+        name! string!
       
-        province_code string!
+        province_code! string!
       
-        country_code string!
+        country_code! string!
       
-        country_name string!
+        country_name! string!
       
-        default boolean!
+        default! boolean!
       }!
     }!
   }!
   error {
-    errors! [{
-      message! string!
-      code string!
-    }!]!
+    "Error message describing the reason for the failed operation."
+    errors! string!
+  
+    "HTTP status code associated with the error."
+    status! number!
+  
+    "The number of seconds to wait before retrying the query. This property is only present in case of a 429 Too Many Requests error."
+    retryAfter number
+  
+    "The header showing the number of requests made by the client and the total number of requests allowed per minute. This property is only present in the response headers."
+    xShopifyShopApiCallLimit string
   }!
   example InputExample {
     input {
