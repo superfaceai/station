@@ -1,0 +1,64 @@
+name = "captcha/verify-token"
+version = "1.0.0"
+
+"Validates the CAPTCHA provider response from the website's backend."
+usecase ValidateCaptchaResponse idempotent  {
+  input {
+    "The user response token to be verified, provided by CAPTCHA provider's client-side integration on your site."
+    response! string!
+  
+    "A key to be used for idempotency in case of retrying failed requests."
+    idempotencyKey string!
+
+    "The user's IP address."
+    remoteIp string!
+
+    "The site key you expect to see."
+    siteKey string!
+  }
+
+  result {
+    "Timestamp of the challenge."
+    challengeTimeStamp! string!
+  
+    "Hostname of the site where the CAPTCHA was solved."
+    hostname! string!
+  }
+
+  error {
+    "List of error codes related to the failed token validation."
+    errorCodes! [string!]!
+  
+    "Timestamp of the challenge."
+    challengeTimeStamp! string!
+  
+    "Hostname of the site where the CAPTCHA was solved."
+    hostname! string!
+  
+    "The rate limit error, if applicable."
+    rateLimit number
+  }
+
+  example SuccessExample {
+    input {
+      response = 'valid token',
+      idempotencyKey = '123e4567-e89b-12d3-a456-426614174000',
+    }
+    result {
+      challengeTimeStamp = '2022-02-28T15:14:30.096Z',
+      hostname = 'example.com'
+    }
+  }
+
+  example ErrorExample {
+    input {
+      response = 'invalid token',
+      idempotencyKey = '123e4567-e89b-12d3-a456-426614174000',
+    }
+    error {
+      errorCodes = ["invalid-input-response"]
+      challengeTimeStamp = '2022-02-28T15:14:30.096Z',
+      hostname = 'example.com'
+    }
+  }
+}
