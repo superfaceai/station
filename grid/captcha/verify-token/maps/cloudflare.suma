@@ -1,0 +1,46 @@
+profile = "captcha/verify-token@1.0"
+provider = "cloudflare"
+
+map ValidateCaptchaResponse {
+
+  http POST "/turnstile/v0/siteverify" {
+    security "secretChallengesKey"
+  
+    request 'application/x-www-form-urlencoded' {
+      body {
+        response = input.response,
+	      idempotency_key = input.idempotencyKey,
+      }
+    }
+  
+    response 200 "application/json" {
+      return map result if (body.success) {
+        challengeTimeStamp = body.challenge_ts,
+        hostname= body.hostname,
+      }
+
+      errorCodes = body['error-codes'] || []
+
+      return map error {
+        errorCodes = errorCodes,
+        challengeTimeStamp = body.challenge_ts,
+        hostname = body.hostname,
+        rateLimit = body.rateLimit,
+        detail = `Challenge verification failed with error code(s) ${errorCodes.join(', ')}.`
+	    }
+    }
+  
+    response {
+      return map error {
+        errorCodes = [
+          "invalid-provider-response",
+        ],
+        detail = `Invalid provider response. Response body: ${JSON.stringify(body, null, 2)}`,
+        challengeTimeStamp = body.challenge_ts,
+        hostname = body.hostname,
+        rateLimit = body.rateLimit
+      }
+    
+    }
+  }
+}

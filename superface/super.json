@@ -1035,10 +1035,13 @@
       "providers": {
         "mock": {
           "file": "../grid/captcha/verify-token/maps/mock.suma"
+        },
+        "cloudflare": {
+          "file": "../grid/captcha/verify-token/maps/cloudflare.suma"
         }
       },
       "priority": [
-        "mock"
+        "cloudflare"
       ]
     }
   },
@@ -1676,6 +1679,15 @@
       "parameters": {
         "CLOUD_ID": "$ATLASSIAN_CLOUD_ID"
       }
+    },
+    "cloudflare": {
+      "file": "../providers/cloudflare.json",
+      "security": [
+        {
+          "id": "secretChallengesKey",
+          "apikey": "$CLOUDFLARE_SECRET_CHALLENGES_KEY"
+        }
+      ]
     }
   }
 }

@@ -26,17 +26,20 @@ usecase ValidateCaptchaResponse idempotent  {
   }
 
   error {
-    "List of error codes related to the failed token validation."
+    "List of error codes related to the failed token validation. Refer to your CAPTCHA provider error code list. In case of invalid provider response `invalid-provider-response` code is returned."
     errorCodes! [string!]!
   
     "Timestamp of the challenge."
-    challengeTimeStamp! string!
+    challengeTimeStamp string!
   
     "Hostname of the site where the CAPTCHA was solved."
-    hostname! string!
+    hostname string!
   
     "The rate limit error, if applicable."
     rateLimit number
+
+    "A human-readable explanation specific to this occurrence of the problem."
+    detail string
   }
 
   example SuccessExample {
