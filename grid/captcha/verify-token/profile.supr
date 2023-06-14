@@ -1,0 +1,135 @@
+name = "captcha/verify-token"
+version = "1.0.0"
+
+"Validates the CAPTCHA provider response from the website's backend."
+usecase ValidateCaptchaResponse idempotent  {
+  input {
+    "The user response token to be verified, provided by CAPTCHA provider's client-side integration on your site."
+    response! string!
+  
+    "Unique key identifying a repeated request in case of connection issue."
+    idempotencyKey string!
+
+    "The user's IP address."
+    remoteIp string!
+
+    "The site key you expect to see."
+    siteKey string!
+  }
+
+  result {
+    "Timestamp of the challenge."
+    challengeTimeStamp! string!
+  
+    "Hostname of the site where the CAPTCHA was solved."
+    hostname! string!
+  }
+
+  error {
+    "List of error codes related to the failed token validation."
+    errorCodes! [ErrorCode!]!
+  
+    "Timestamp of the challenge."
+    challengeTimeStamp string!
+  
+    "Hostname of the site where the CAPTCHA was solved."
+    hostname string!
+  
+    "The rate limit error, if applicable."
+    rateLimit number
+
+    "A human-readable explanation specific to this occurrence of the problem."
+    detail string
+  }
+
+  example SuccessExample {
+    input {
+      response = 'valid token',
+      idempotencyKey = '123e4567-e89b-12d3-a456-426614174000',
+    }
+    result {
+      challengeTimeStamp = '2022-02-28T15:14:30.096Z',
+      hostname = 'example.com'
+    }
+  }
+
+  example ErrorExample {
+    input {
+      response = 'invalid token',
+      idempotencyKey = '123e4567-e89b-12d3-a456-426614174000',
+    }
+    error {
+      errorCodes = ["invalid-input-response"]
+      challengeTimeStamp = '2022-02-28T15:14:30.096Z',
+      hostname = 'example.com'
+    }
+  }
+}
+
+model ErrorCode enum {
+  """
+  Missing input secret
+  The secret parameter was not passed.
+  """
+  MissingInputSecret = 'missing-input-secret',
+  """
+  Invalid input secret
+  The secret parameter was invalid or did not exist.
+  """
+  InvalidInputSecret = 'invalid-input-secret',
+  """
+  Missing input response
+  The response parameter was not passed.
+  """
+  MissingInputResponse = 'missing-input-response',
+  """
+  Invalid input response
+  The response parameter is invalid or has expired.
+  """
+  InvalidInputResponse = 'invalid-input-response',
+  """
+  Invalid widget ID
+  The widget ID extracted from the parsed site secret key was invalid or did not exist.
+  """
+  InvalidWidgetId = 'invalid-widget-id',
+  """
+  Invalid parsed secret
+  The secret extracted from the parsed site secret key was invalid.
+  """
+  InvalidParsedSecret = 'invalid-parsed-secret',
+  """
+  Bad request
+  The request was rejected because it was malformed.
+  """
+  BadRequest = 'bad-request',
+  """
+  Timeout or duplicate
+  The response parameter has already been validated before.
+  """
+  TimeoutOrDuplicate = 'timeout-or-duplicate',
+  """
+  Internal error
+  An internal error happened while validating the response. The request can be retried.
+  """
+  InternalError = 'internal-error'
+  """
+  Invalid provider response
+  The response received from your CAPTCHA is invalid and could not be processed.
+  """
+  InvalidProviderResponse = 'invalid-provider-response'
+  """
+  Invalid or already seen response
+  The response parameter has already been checked, or has another issue.
+  """
+  InvalidOrAlreadySeenResponse = 'invalid-or-already-seen-response'
+  """
+  Not using dummy passcode
+  You have used a testing sitekey but have not used its matching secret.
+  """
+  NotUsingDummyPasscode = 'not-using-dummy-passcode'
+  """
+  Sitekey secret mismatch
+  The sitekey is not registered with the provided secret.
+  """
+  SiteKeySecretMissmatch = 'sitekey-secret-mismatch'
+}
