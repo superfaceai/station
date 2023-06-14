@@ -26,8 +26,8 @@ usecase ValidateCaptchaResponse idempotent  {
   }
 
   error {
-    "List of error codes related to the failed token validation. Refer to your CAPTCHA provider error code list. In case of invalid provider response `invalid-provider-response` code is returned."
-    errorCodes! [string!]!
+    "List of error codes related to the failed token validation."
+    errorCodes! [ErrorCode!]!
   
     "Timestamp of the challenge."
     challengeTimeStamp string!
@@ -64,4 +64,72 @@ usecase ValidateCaptchaResponse idempotent  {
       hostname = 'example.com'
     }
   }
+}
+
+model ErrorCode enum {
+  """
+  Missing input secret
+  The secret parameter was not passed.
+  """
+  MissingInputSecret = 'missing-input-secret',
+  """
+  Invalid input secret
+  The secret parameter was invalid or did not exist.
+  """
+  InvalidInputSecret = 'invalid-input-secret',
+  """
+  Missing input response
+  The response parameter was not passed.
+  """
+  MissingInputResponse = 'missing-input-response',
+  """
+  Invalid input response
+  The response parameter is invalid or has expired.
+  """
+  InvalidInputResponse = 'invalid-input-response',
+  """
+  Invalid widget ID
+  The widget ID extracted from the parsed site secret key was invalid or did not exist.
+  """
+  InvalidWidgetId = 'invalid-widget-id',
+  """
+  Invalid parsed secret
+  The secret extracted from the parsed site secret key was invalid.
+  """
+  InvalidParsedSecret = 'invalid-parsed-secret',
+  """
+  Bad request
+  The request was rejected because it was malformed.
+  """
+  BadRequest = 'bad-request',
+  """
+  Timeout or duplicate
+  The response parameter has already been validated before.
+  """
+  TimeoutOrDuplicate = 'timeout-or-duplicate',
+  """
+  Internal error
+  An internal error happened while validating the response. The request can be retried.
+  """
+  InternalError = 'internal-error'
+  """
+  Invalid provider response
+  The response received from your CAPTCHA is invalid and could not be processed.
+  """
+  InvalidProviderResponse = 'invalid-provider-response'
+  """
+  Invalid or already seen response
+  The response parameter has already been checked, or has another issue.
+  """
+  InvalidOrAlreadySeenResponse = 'invalid-or-already-seen-response'
+  """
+  Not using dummy passcode
+  You have used a testing sitekey but have not used its matching secret.
+  """
+  NotUsingDummyPasscode = 'not-using-dummy-passcode'
+  """
+  Sitekey secret mismatch
+  The sitekey is not registered with the provided secret.
+  """
+  SiteKeySecretMissmatch = 'sitekey-secret-mismatch'
 }
