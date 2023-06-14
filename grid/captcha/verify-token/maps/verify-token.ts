@@ -38,8 +38,6 @@ export const verifyTokenTest = (provider: string, validResponse: string) => {
           },
         });
 
-        console.debug(result);
-
         expect(() => result.unwrap()).not.toThrow();
         expect(result).toMatchSnapshot();
       });
