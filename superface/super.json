@@ -1036,13 +1036,10 @@
         "mock": {
           "file": "../grid/captcha/verify-token/maps/mock.suma"
         },
-        "cloudflare": {
-          "file": "../grid/captcha/verify-token/maps/cloudflare.suma"
+        "cloudflare-turnstile": {
+          "file": "../grid/captcha/verify-token/maps/cloudflare-turnstile.suma"
         }
-      },
-      "priority": [
-        "cloudflare"
-      ]
+      }
     }
   },
   "providers": {
@@ -1680,12 +1677,12 @@
         "CLOUD_ID": "$ATLASSIAN_CLOUD_ID"
       }
     },
-    "cloudflare": {
-      "file": "../providers/cloudflare.json",
+    "cloudflare-turnstile": {
+      "file": "../providers/cloudflare-turnstile.json",
       "security": [
         {
           "id": "secretChallengesKey",
-          "apikey": "$CLOUDFLARE_SECRET_CHALLENGES_KEY"
+          "apikey": "$CLOUDFLARE_TURNSTILE_SECRET_CHALLENGES_KEY"
         }
       ]
     }
