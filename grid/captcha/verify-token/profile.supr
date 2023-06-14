@@ -7,7 +7,7 @@ usecase ValidateCaptchaResponse idempotent  {
     "The user response token to be verified, provided by CAPTCHA provider's client-side integration on your site."
     response! string!
   
-    "A key to be used for idempotency in case of retrying failed requests."
+    "Unique key identifying a repeated request in case of connection issue."
     idempotencyKey string!
 
     "The user's IP address."
