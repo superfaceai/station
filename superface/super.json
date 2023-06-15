@@ -1038,6 +1038,9 @@
         },
         "cloudflare-turnstile": {
           "file": "../grid/captcha/verify-token/maps/cloudflare-turnstile.suma"
+        },
+        "google-recaptcha": {
+          "file": "../grid/captcha/verify-token/maps/google-recaptcha.suma"
         }
       }
     }
@@ -1686,12 +1689,12 @@
         }
       ]
     },
-    "google": {
+    "google-recaptcha": {
       "file": "../providers/google-recaptcha.json",
       "security": [
         {
-          "id": "apiKey",
-          "apikey": "$GOOGLE_RECAPTCHA_API_KEY"
+          "id": "secretKey",
+          "apikey": "$GOOGLE_RECAPTCHA_SECRET_KEY"
         }
       ]
     }

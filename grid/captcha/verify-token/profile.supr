@@ -1,5 +1,5 @@
 name = "captcha/verify-token"
-version = "1.0.0"
+version = "1.1.0"
 
 "Validates the CAPTCHA provider response from the website's backend."
 usecase ValidateCaptchaResponse idempotent  {
@@ -23,6 +23,12 @@ usecase ValidateCaptchaResponse idempotent  {
   
     "Hostname of the site where the CAPTCHA was solved."
     hostname! string!
+
+    "The action name for the request."
+    action string!
+
+    "The score for the request (0.0 - 1.0). Returned only in case score based CAPTCHA providers like Google reCAPTCHA v3."
+    score number!
   }
 
   error {
