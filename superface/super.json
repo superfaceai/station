@@ -205,6 +205,9 @@
         },
         "here": {
           "file": "../grid/address/geocoding/maps/here.suma"
+        },
+        "locationiq": {
+          "file": "../grid/address/geocoding/maps/locationiq.suma"
         }
       }
     },
@@ -1683,6 +1686,15 @@
         {
           "id": "secretChallengesKey",
           "apikey": "$CLOUDFLARE_TURNSTILE_SECRET_CHALLENGES_KEY"
+        }
+      ]
+    },
+    "locationiq": {
+      "file": "../providers/locationiq.json",
+      "security": [
+        {
+          "id": "apikey",
+          "apikey": "$LOCATIONIQ_API_KEY"
         }
       ]
     }

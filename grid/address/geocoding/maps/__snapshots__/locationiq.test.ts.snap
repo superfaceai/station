@@ -1,0 +1,46 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`address/geocoding/locationiq Geocode when all inputs are correct should geocode address to geographical coordinates 1`] = `
+Ok {
+  "value": Object {
+    "latitude": "50.0874654",
+    "longitude": "14.4212535",
+  },
+}
+`;
+
+exports[`address/geocoding/locationiq Geocode when inputs are invalid should throw an exception 1`] = `
+Err {
+  "error": "MappedHTTPError: Expected HTTP error
+Properties: {
+  \\"title\\": \\"Bad request\\"
+}
+AST Path: definitions[0].statements[1].responseHandlers[1].statements[0]
+Original Map Location: Line 36, column 7",
+}
+`;
+
+exports[`address/geocoding/locationiq ReverseGeocode when all inputs are correct should reverse geocode geographical coordinates 1`] = `
+Ok {
+  "value": Array [
+    Object {
+      "addressCountry": "us",
+      "addressLocality": "New York",
+      "addressRegion": "undefined, Kings County, New York",
+      "formattedAddress": "279, Bedford Avenue, Williamsburg, New York, Kings County, New York, 11211, USA",
+      "postalCode": "11211",
+      "streetAddress": "279 Bedford Avenue",
+    },
+  ],
+}
+`;
+
+exports[`address/geocoding/locationiq ReverseGeocode when inputs are invalid should throw an exception 1`] = `
+Err {
+  "error": "InputValidationError: Input validation failed:
+Path: input.latitude
+Error: Missing required field
+Path: input.longitude
+Error: Missing required field",
+}
+`;
