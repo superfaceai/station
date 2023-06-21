@@ -22,7 +22,7 @@ map Geocode {
     }
 
     response 200 "application/json" {
-      return map error if (statusCode !== 200 || !body.length) {
+      return map error if (!body.length) {
         title = "Unable to find geolocation coordinates for address: " + address.trim()
       }
 
@@ -76,8 +76,8 @@ map ReverseGeocode {
     }
 
     response 200 "application/json" {
-      return map error if (statusCode !== 200) {
-        title = "Error reverse geocoding coordinates"
+      return map error if (!body.address) {
+        title = "Unable to find address for coordinates."
       }
 
       mappedAddress = {};
@@ -88,14 +88,15 @@ map ReverseGeocode {
       }
 
       // region
-      set if (body.address.city_district) {
-        mappedAddress.addressRegion = body.address.city_district;
-      }
+      addressRegion = body.address.city_district || ''
       set if (body.address.county) {
-        mappedAddress.addressRegion = `${mappedAddress.addressRegion}, ${body.address.county}`;
+        addressRegion = addressRegion ? `${addressRegion}, ${body.address.county}` : body.address.county;
       }
       set if (body.address.state) {
-        mappedAddress.addressRegion = `${mappedAddress.addressRegion}, ${body.address.state}`
+        addressRegion = addressRegion ? `${addressRegion}, ${body.address.state}` : body.address.state;
+      }
+      set if (addressRegion) {
+        mappedAddress.addressRegion = addressRegion;
       }
 
       // locality - city
