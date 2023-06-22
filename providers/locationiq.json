@@ -1,0 +1,25 @@
+{
+  "name": "locationiq",
+  "services": [
+    {
+      "id": "default",
+      "baseUrl": "https://{REGION}.locationiq.com/"
+    }
+  ],
+  "securitySchemes": [
+    {
+      "id": "apikey",
+      "type": "apiKey",
+      "in": "query",
+      "name": "key"
+    }
+  ],
+  "parameters": [
+    {
+      "name": "REGION",
+      "description": "Choose between US (us1) and EU (eu1) region. Defaults to EU.",
+      "default": "eu1"
+    }
+  ],
+  "defaultService": "default"
+}

@@ -1,0 +1,169 @@
+profile = "address/geocoding@3.1"
+provider = "locationiq"
+
+// https://locationiq.com/docs
+
+map Geocode {
+  address = input.query || `${input.streetAddress || ""} ${input.addressLocality || ""} ${input.addressRegion || ""} ${input.postalCode || ""} ${input.addressCountry || ""}`
+
+  http GET "/v1/search" {
+    security "apikey"
+    
+    request {
+      query {
+        format = 'json'
+        q = input.query
+        street = input.streetAddress
+        city = input.addressLocality
+        state = input.addressRegion
+        country = input.addressCountry
+        postalcode = input.postalCode
+      }
+    }
+
+    response 200 "application/json" {
+      return map error if (!body.length) {
+        title = "Unable to find geolocation coordinates for address: " + address.trim()
+      }
+
+      map result {
+        latitude = body[0].lat
+        longitude = body[0].lon
+      }
+    }
+
+    response 400 "application/json" {
+      map error {
+        title = "Bad request"
+        detail = body.error.message
+      }
+    }
+
+    response 401 "application/json" {
+      map error {
+        title = "Unauthorized"
+        detail = body.error.message
+      }
+    }
+
+    response 403 "application/json" {
+      map error {
+        title = "Forbidden"
+        detail = body.error.message
+      }
+    }
+
+    response 500 "application/json" {
+      map error {
+        title = "Internal server Error"
+        detail = body.error.message
+      }
+    }
+  }
+}
+
+map ReverseGeocode {
+  
+  http GET "/v1/reverse" {
+    security "apikey"
+
+    request {
+      query {
+        format = 'json'
+        lat = input.latitude
+        lon = input.longitude
+      }
+    }
+
+    response 200 "application/json" {
+      return map error if (!body.address) {
+        title = "Unable to find address for coordinates."
+      }
+
+      mappedAddress = {};
+
+      // country code
+      set if (body.address.country_code) {
+        mappedAddress.addressCountry = body.address.country_code;
+      }
+
+      // region
+      addressRegion = body.address.city_district || ''
+      set if (body.address.county) {
+        addressRegion = addressRegion ? `${addressRegion}, ${body.address.county}` : body.address.county;
+      }
+      set if (body.address.state) {
+        addressRegion = addressRegion ? `${addressRegion}, ${body.address.state}` : body.address.state;
+      }
+      set if (addressRegion) {
+        mappedAddress.addressRegion = addressRegion;
+      }
+
+      // locality - city
+      set if (body.address.city) {
+        mappedAddress.addressLocality = body.address.city;
+      }
+      set if (body.address.city && body.address.borough) {
+        mappedAddress.addressLocality = `${body.address.borough}, ${body.address.city}`;
+      }
+
+      // locality - town
+      set if (!body.address.city && body.address.town) {
+        mappedAddress.addressLocality = body.address.town;
+      }
+
+      // locality - village
+      set if (!body.address.town && body.address.village) {
+        mappedAddress.addressLocality = body.address.village;
+      }
+
+      // street address
+      set if (body.address.road) {
+        mappedAddress.streetAddress = body.address.road;
+      }
+      set if (body.address.house_number) {
+        mappedAddress.streetAddress = `${body.address.house_number} ${mappedAddress.streetAddress}`;
+      }
+
+      // postal code
+      set if (body.address.postcode) {
+        mappedAddress.postalCode = body.address.postcode;
+      }
+        
+      // formatted address
+      set if (body.display_name) {
+        mappedAddress.formattedAddress = body.display_name;
+      }
+
+      map result [mappedAddress] 
+    }
+
+    response 400 "application/json" {
+      map error {
+        title = "Bad request"
+        detail = body.error.message
+      }
+    }
+
+    response 401 "application/json" {
+      map error {
+        title = "Unauthorized"
+        detail = body.error.message
+      }
+    }
+
+    response 403 "application/json" {
+      map error {
+        title = "Forbidden"
+        detail = body.error.message
+      }
+    }
+
+    response 500 "application/json" {
+      map error {
+        title = "Internal server Error"
+        detail = body.error.message
+      }
+    }
+  }
+}
