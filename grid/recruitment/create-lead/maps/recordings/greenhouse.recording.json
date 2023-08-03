@@ -1,0 +1,314 @@
+{
+  "recruitment/create-lead/greenhouse/CreateLead": {
+    "4fc6163140ecda16ce40185f340a6b69": [
+      {
+        "scope": "https://harvest.greenhouse.io:443",
+        "method": "GET",
+        "path": "/v1/jobs/4031896006",
+        "body": "",
+        "status": 200,
+        "response": [
+          "1f8b08000000000000038c53c96edb3010fd158167b9d01279d1bd97026d0e3150a045214ca951320845aa24155430fcef1d5ab423d4a9d3e3ccbcf7663f086a457d9795f976b7ceb2752a34f4286ab147e7934fe66772af51a4c2e2af911c7932ba090c51b0531b8f4ed47a542a15d2e88e5ad49e4089ba03e53015e41a8ffda0c0e3c527cd40d8369d35fd496aa63b0f7e64316106d4ac2d2d32a96dc087645951aeb27c5554fbbcaa8baaced71fee76d937c605f82dd8aedc049854c645d89c6f1cdadbfabb721b882d0e607dcf7d7171df0f715c79bedd66cb717d264dcedb29315df2404a4dc95750cf8e0598cee445a7d1f12adce06f8f56835a80e413a996ed90f4c7d97c9b1221572247769aae2389cbcab375114a7fadfc01783f98dc9f905caf3212c29a457d3843bee00b5a05ba15472edf520f766a78df1ea46f4687b68947b4d944ed7f353dd7f3df0d5fc36f35fb4496f4231f1cf4a1f868f6a0e1116d245a9476247fb1a531b6250dde9c3dce8c56c6f871be2f96598eb02aaa2a3fb51983f12356b9b8bee3f7eeb32a8b37ef138641d1bc89e59402ace1d7706141e7c6e5e83c3f5347a8c2800e22bc9c994e87e2a7617ee77e3096f71656f88c13e77a9f7539808f9748b20f91544459c7dd2b6c1c2a949edd2fa0c6bfd21d8f7f000000ffff",
+          "0300f8b295ff64040000"
+        ],
+        "rawHeaders": [
+          "Date",
+          "Thu, 16 Mar 2023 13:34:24 GMT",
+          "Content-Type",
+          "application/json;charset=utf-8",
+          "Transfer-Encoding",
+          "chunked",
+          "Connection",
+          "close",
+          "Vary",
+          "Accept-Encoding",
+          "status",
+          "200 OK",
+          "x-ratelimit-limit",
+          "50",
+          "x-ratelimit-remaining",
+          "49",
+          "x-content-type-options",
+          "nosniff",
+          "x-request-id",
+          "ed000ed380efb451e2a725a463821a17",
+          "Strict-Transport-Security",
+          "max-age=15724800; includeSubDomains",
+          "Content-Encoding",
+          "gzip"
+        ],
+        "responseIsBinary": false,
+        "decodedResponse": {
+          "id": 4031896006,
+          "name": "Test Job One",
+          "requisition_id": "2",
+          "notes": null,
+          "confidential": false,
+          "is_template": false,
+          "copied_from_id": null,
+          "status": "open",
+          "created_at": "2023-01-25T15:25:16.490Z",
+          "opened_at": "2023-01-25T15:25:16.937Z",
+          "closed_at": null,
+          "updated_at": "2023-01-25T15:25:16.938Z",
+          "departments": [
+            {
+              "id": 4011880006,
+              "name": "Ministry of Silly Walks",
+              "parent_id": null,
+              "parent_department_external_id": null,
+              "child_ids": [],
+              "child_department_external_ids": [],
+              "external_id": null
+            }
+          ],
+          "offices": [
+            {
+              "id": 4006288006,
+              "name": "Sample Office",
+              "location": {
+                "name": "Neverland"
+              },
+              "primary_contact_user_id": 4037788006,
+              "parent_id": null,
+              "parent_office_external_id": null,
+              "child_ids": [],
+              "child_office_external_ids": [],
+              "external_id": null
+            }
+          ],
+          "hiring_team": {
+            "hiring_managers": [],
+            "recruiters": [],
+            "coordinators": [],
+            "sourcers": []
+          },
+          "openings": [
+            {
+              "id": 4052551006,
+              "opening_id": "2-1",
+              "status": "open",
+              "opened_at": "2023-01-25T15:25:16.532Z",
+              "closed_at": null,
+              "application_id": null,
+              "close_reason": null
+            }
+          ],
+          "custom_fields": {
+            "employment_type": "Temporary"
+          },
+          "keyed_custom_fields": {
+            "employment_type": {
+              "name": "Employment Type",
+              "type": "single_select",
+              "value": "Temporary"
+            }
+          }
+        }
+      },
+      {
+        "scope": "https://harvest.greenhouse.io:443",
+        "method": "POST",
+        "path": "/v1/prospects",
+        "body": {
+          "first_name": "John",
+          "last_name": "Lead",
+          "email_addresses": [
+            {
+              "type": "work",
+              "value": "john.lead@fakemail.com"
+            }
+          ],
+          "website_addresses": [
+            {
+              "value": "https://twitter.com/candidate.username",
+              "type": "other"
+            },
+            {
+              "value": "https://url.to.portfolio",
+              "type": "other"
+            }
+          ],
+          "phone_numbers": [
+            {
+              "type": "work",
+              "value": "1-859-557-6573"
+            }
+          ],
+          "addresses": [
+            {
+              "type": "work",
+              "value": "25772 Gustave Shore, Iowa, USA"
+            }
+          ],
+          "employments": [
+            {
+              "company_name": "Test Company",
+              "title": "Sales Director",
+              "start_date": "2011-03-01",
+              "end_date": "2014-03-30"
+            }
+          ],
+          "application": {
+            "prospect": true,
+            "job_ids": [
+              "4031896006"
+            ]
+          }
+        },
+        "status": 201,
+        "response": {
+          "id": 8092888006,
+          "first_name": "John",
+          "last_name": "Lead",
+          "company": null,
+          "title": null,
+          "created_at": "2023-03-16T13:34:25.313Z",
+          "updated_at": "2023-03-16T13:34:25.398Z",
+          "last_activity": "2023-03-16T13:34:25.396Z",
+          "is_private": false,
+          "photo_url": null,
+          "attachments": [],
+          "application_ids": [
+            8683961006
+          ],
+          "phone_numbers": [
+            {
+              "value": "1-859-557-6573",
+              "type": "work"
+            }
+          ],
+          "addresses": [
+            {
+              "value": "25772 Gustave Shore, Iowa, USA",
+              "type": "work"
+            }
+          ],
+          "email_addresses": [
+            {
+              "value": "john.lead@fakemail.com",
+              "type": "work"
+            }
+          ],
+          "website_addresses": [
+            {
+              "value": "https://twitter.com/candidate.username",
+              "type": "other"
+            },
+            {
+              "value": "https://url.to.portfolio",
+              "type": "other"
+            }
+          ],
+          "social_media_addresses": [],
+          "recruiter": null,
+          "coordinator": null,
+          "can_email": true,
+          "tags": [],
+          "applications": [
+            {
+              "id": 8683961006,
+              "candidate_id": 8092888006,
+              "prospect": true,
+              "applied_at": "2023-03-16T13:34:25.390Z",
+              "rejected_at": null,
+              "last_activity_at": "2023-03-16T13:34:25.396Z",
+              "location": null,
+              "attachments": [],
+              "source": null,
+              "credited_to": null,
+              "rejection_reason": null,
+              "rejection_details": null,
+              "jobs": [
+                {
+                  "id": 4031896006,
+                  "name": "Test Job One"
+                }
+              ],
+              "job_post_id": null,
+              "status": "active",
+              "current_stage": null,
+              "answers": [],
+              "prospective_department": null,
+              "prospective_office": null,
+              "prospect_detail": {
+                "prospect_pool": null,
+                "prospect_stage": null,
+                "prospect_owner": null
+              }
+            }
+          ],
+          "educations": [],
+          "employments": [
+            {
+              "id": 4101845006,
+              "company_name": "Test Company",
+              "title": "Sales Director",
+              "start_date": "2011-03-01",
+              "end_date": "2014-03-30"
+            }
+          ],
+          "linked_user_ids": []
+        },
+        "rawHeaders": [
+          "Date",
+          "Thu, 16 Mar 2023 13:34:25 GMT",
+          "Content-Type",
+          "application/json;charset=utf-8",
+          "Content-Length",
+          "1455",
+          "Connection",
+          "close",
+          "status",
+          "201 Created",
+          "x-ratelimit-limit",
+          "50",
+          "x-ratelimit-remaining",
+          "48",
+          "x-content-type-options",
+          "nosniff",
+          "x-request-id",
+          "b51f5aac89dbf2fe892813fecf470ae5",
+          "Strict-Transport-Security",
+          "max-age=15724800; includeSubDomains"
+        ],
+        "responseIsBinary": false
+      }
+    ],
+    "ca6860c4f9288f9c3cccccb70addcb7a": [
+      {
+        "scope": "https://harvest.greenhouse.io:443",
+        "method": "GET",
+        "path": "/v1/jobs/-1",
+        "body": "",
+        "status": 404,
+        "response": {
+          "message": "Resource not found"
+        },
+        "rawHeaders": [
+          "Date",
+          "Thu, 16 Mar 2023 13:34:26 GMT",
+          "Content-Type",
+          "application/json;charset=utf-8",
+          "Content-Length",
+          "32",
+          "Connection",
+          "close",
+          "status",
+          "404 Not Found",
+          "x-ratelimit-limit",
+          "50",
+          "x-ratelimit-remaining",
+          "47",
+          "x-content-type-options",
+          "nosniff",
+          "x-request-id",
+          "cf3090d56d917914c0e84a1b3ec351a6",
+          "Strict-Transport-Security",
+          "max-age=15724800; includeSubDomains"
+        ],
+        "responseIsBinary": false
+      }
+    ]
+  }
+}

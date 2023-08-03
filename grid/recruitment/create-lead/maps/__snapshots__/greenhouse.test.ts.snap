@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`recruitment/create-lead/greenhouse CreateLead when specified job does exist should perform successfully 1`] = `
+Ok {
+  "value": Object {
+    "id": "8092888006",
+    "jobId": "4031896006",
+  },
+}
+`;
+
+exports[`recruitment/create-lead/greenhouse CreateLead when specified job does not exist should map error 1`] = `
+Err {
+  "error": "MappedError: Expected error
+Properties: {
+  \\"title\\": \\"Job ID \\\\\\"-1\\\\\\" not found\\",
+  \\"detail\\": \\"Resource not found\\",
+  \\"code\\": \\"NotFound\\"
+}
+AST Path: definitions[0].statements[0].statements[0]
+Original Map Location: Line 9, column 5",
+}
+`;

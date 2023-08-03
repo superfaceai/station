@@ -1,0 +1,90 @@
+profile = "recruitment/create-lead@1.0"
+provider = "greenhouse"
+
+map CreateLead {
+
+  call CheckJobExists (
+    jobId = input.jobId
+  ) {
+    return map error if (outcome.error) outcome.error
+  }
+ 
+  http POST "/v1/prospects" {
+    security "apiKeyBasicAuth"
+
+    request "application/json" {
+      headers {
+        "On-Behalf-Of" = parameters.ON_BEHALF_OF
+      }
+
+      body {
+        first_name = input.firstName
+        last_name = input.lastName
+        email_addresses = [{
+          type: "work",
+          value: input.email
+        }]
+        website_addresses = (input.links || []).map((link) => {
+          return {
+            value: link.url,
+            type: "other"
+          }
+        })
+        phone_numbers = input.phone ? [{
+          type: "work",
+          value: input.phone
+        }] : []
+        addresses = input.address ? [{
+          type: "work",
+          value: input.address
+        }] : []
+        employments = (input.workExperience || []).map((experience) => {
+          return {
+            company_name: experience.company,
+            title: experience.position,
+            start_date: experience.startedAt,
+            end_date: experience.endedAt
+          }
+        })
+        application = {
+          prospect: true,
+          job_ids: [input.jobId],
+        }
+      }
+    }
+
+    response 201 "application/json" {
+      map result {
+        id = String(body.id)
+        jobId = input.jobId
+      }
+    }
+
+    response 401 "application/json" {
+      map error {
+        title = 'Unauthenticated'
+        detail = body.message
+        code = 'Unauthenticated'
+      }
+    }
+  }
+}
+
+operation CheckJobExists {
+  http GET "/v1/jobs/{ args.jobId }" {
+    security "apiKeyBasicAuth"
+
+    response 200 {
+      return {}
+    }
+
+    response 404 "application/json" {
+      // Greenhouse returns http code 404 in case that the job ID doesn't exist.
+      fail {
+        title = `Job ID "${input.jobId}" not found`,
+        detail = body.message,
+        code = 'NotFound'
+      }
+    }
+  }
+}
