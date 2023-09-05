@@ -1,0 +1,197 @@
+profile = "crm/contacts@1.0"
+provider = "pipedrive"
+
+map Create {
+
+    set {
+        body = {
+            name: [input.firstName, input.lastName].join(" "),
+            email: [{
+                label: "",
+                value: input.email,
+                primary: true,
+
+            }],
+            phone: [{
+                label: "",
+                value: input.phone,
+                primary: true,
+
+            }]
+        }
+    }
+
+    organization = call GetOrCreateOrganizatio(input = input)
+    set if(organization){
+        body.org_id = organization.id
+    }
+
+    http POST "/persons" {
+        security "api-key"
+
+        request "application/json" {
+            body = body
+        }
+
+        response 201 "application/json" {
+            map result {
+                id = body.data.id
+            }
+        }
+
+        response {
+            error = call MapError(statusCode = statusCode, body = body)
+            map error error
+        }
+    }
+}
+
+map Update {
+    // todo
+}
+map Search {
+
+    set {
+        FIELD_MAP = {
+            firstName: 'name',
+            lastName: 'name'
+        }
+    }
+
+    // https://developers.pipedrive.com/docs/api/v1/Persons#searchPersons
+    http GET "/persons/search" {
+        security "api-key"
+
+        request "application/json" {
+            query {
+                // operator does not exist
+                term = input.value,
+                fields = [FIELD_MAP[input.property] || input.property]
+            }
+        }
+
+
+        response 200 "application/json" {
+            map result body.data.items.map(({item}) =>
+                ({
+                    id: item.id,
+                    email: item.primary_email,
+                    phone: item.phones[0],
+                    // todo replace first name and lastname with name
+                    company: item.organization && item.organization.name,
+                    country: null,
+                    customProperties: item.custom_fields,
+                })
+            )
+        }
+
+        response {
+            error = call MapError(statusCode = statusCode, body = body)
+            map error error
+        }
+    }
+}
+
+operation GetOrCreateOrganizatio {
+
+    data = call GetOrganizationByName(input = args.input)
+
+    return if(data) data
+
+    http POST "/organizations" {
+
+        security "api-key"
+
+        request "application/json" {
+            body {
+                // todo add custom fields
+                name = args.input.company
+            }
+        }
+
+        response 201 "application/json" {
+            return {
+                id: body.data.id
+            }
+        }
+    }
+}
+
+operation GetOrganizationByName {
+
+    http GET "/organizations/search" {
+        security "api-key"
+
+        request "application/json" {
+            query {
+                term = args.input.company
+                fields = ["name"]
+                exact_match  = true
+            }
+        }
+
+        response 200 "application/json" {
+
+            data = body.data.items;
+
+            return if(data.items > 0) {
+                id = data[0].item.id
+            }
+
+            return null
+        }
+
+         response {
+            error = call MapError(statusCode = statusCode, body = body)
+            return error
+        }
+
+    }
+}
+
+// Pipedrive rate limits docs: https://pipedrive.readme.io/docs/core-api-concepts-rate-limiting
+//
+// Last checked 14th March 2023
+// Essential - Enterprise plans - between 20 - 120 requests per 2 seconds per api_token
+
+//
+// Status codes docs: https://pipedrive.readme.io/docs/core-api-concepts-http-status-codes
+operation MapError {
+  statusCode = args.statusCode
+  detail = args.body.error
+
+  return if (statusCode === 400) {
+    title = "Bad request"
+    detail = detail
+  }
+
+  return if (statusCode === 401) {
+    title = "Unauthenticated"
+    detail = detail
+  }
+
+  return if (statusCode === 402) {
+    title = "Payment required"
+    detail = detail
+  }
+
+  return if (statusCode === 403) {
+    title = "Unauthorized"
+    detail = detail
+  }
+
+  return if (statusCode === 404) {
+    title = "Not found"
+    detail = detail
+  }
+
+  return if (statusCode === 429) {
+    title = "Too many requests"
+    detail = detail
+  }
+
+  return {
+    title = "Unknown error"
+    detail = `Unknown error occurred. Status: ${statusCode}. IPData provider error info: ${detail}.`
+  }
+}

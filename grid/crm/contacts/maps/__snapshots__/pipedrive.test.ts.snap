@@ -1,0 +1,38 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`crm/contracts/pipedrive Create should perform successfully 1`] = `
+Ok {
+  "value": Object {
+    "id": 34,
+  },
+}
+`;
+
+exports[`crm/contracts/pipedrive Search should perform successfully 1`] = `
+Ok {
+  "value": Array [
+    Object {
+      "company": null,
+      "country": null,
+      "customProperties": Array [
+        "value for benj",
+      ],
+      "email": "benjamin.leon@gmial.com",
+      "id": 1,
+      "phone": "785-202-7824",
+    },
+  ],
+}
+`;
+
+exports[`crm/contracts/pipedrive Search should perform unsuccessfully 1`] = `
+Err {
+  "error": "MappedHTTPError: Expected HTTP error
+Properties: {
+  \\"title\\": \\"Bad request\\",
+  \\"detail\\": \\"ServerError [ERR_INVALID_INPUT]: Invalid input: \\\\\\"fields[0]\\\\\\" must be one of [custom_fields, notes, name, email, phone]\\"
+}
+AST Path: definitions[2].statements[1].responseHandlers[1].statements[1]
+Original Map Location: Line 90, column 13",
+}
+`;
